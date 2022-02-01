@@ -1,0 +1,10 @@
+<page>
+
+<property name="usemap">true</property>
+
+	<path-action name="DataEditModule.loadData" >
+			<pageval>library</pageval>
+			<idname>libraryid</idname>
+			<searchtype>library</searchtype>
+    </path-action>
+</page>
