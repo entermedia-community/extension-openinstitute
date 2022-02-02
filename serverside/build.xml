@@ -151,16 +151,11 @@
 	<target name="publish" depends=" zip">
 		  
 			<!-- publish results to anthill -->
-		 	<copy file="${deployDir}/builds/extension-openinstitute.zip" overwrite="true"
-		        tofile="${deployDir}/extension-openinstitute.zip"/>
-			<copy overwrite="true"  file="${etc}/install.js" 
-				    tofile="${deployDir}/install.js">
-				 		 <filterset>
-				 		      <filter token="BRANCH" value="${branch}"/>
-				 		    </filterset>
-		 	</copy>	
-		 	<copy file="${etc}/sitemanager.xml" overwrite="true"
-					        tofile="${deployDir}/sitemanager.xml">
+		 	<copy file="${deployDir}/builds/${ant.project.name}.zip" overwrite="true"
+		        tofile="${deployDir}/${ant.project.name}.zip"/>
+			
+		 	<copy file="${etc}/${ant.project.name}.xml" overwrite="true"
+					        tofile="${deployDir}/${ant.project.name}.xml">
 					 <filterset>
 					      <filter token="BRANCH" value="${branch}"/>
 				    </filterset>
