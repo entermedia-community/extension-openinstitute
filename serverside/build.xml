@@ -151,8 +151,8 @@
 	<target name="publish" depends=" zip">
 		  
 			<!-- publish results to anthill -->
-		 	<copy file="${deployDir}/builds/app-site-manager.zip" overwrite="true"
-		        tofile="${deployDir}/app-site-manager.zip"/>
+		 	<copy file="${deployDir}/builds/extension-openinstitute.zip" overwrite="true"
+		        tofile="${deployDir}/extension-openinstitute.zip"/>
 			<copy overwrite="true"  file="${etc}/install.js" 
 				    tofile="${deployDir}/install.js">
 				 		 <filterset>
