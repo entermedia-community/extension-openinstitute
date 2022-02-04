@@ -1,8 +1,8 @@
 package org.openinstitute.server;
 
-import org.openedit.modules.BaseModule;
+import org.entermediadb.asset.modules.BaseMediaModule;
 
-public class OpenInstituteModule extends BaseModule
+public class OpenInstituteModule extends BaseMediaModule
 {
 
 }
