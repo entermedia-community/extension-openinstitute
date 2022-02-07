@@ -24,6 +24,5 @@
 		<property name="parentparameterid">library</property>
 	</path-action>   
 	   
-	<path-action name="ProjectModule.redirectToCollectionRoot">
-	</path-action>
+	
 </page>
