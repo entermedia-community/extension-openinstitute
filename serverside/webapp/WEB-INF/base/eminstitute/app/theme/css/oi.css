@@ -621,7 +621,7 @@ h1.navcommunity
 .collectivesettings-menu h3 {
 	margin:0 0 0px 0;
 	padding:10px 15px;
-	background-color: #bbb;
+	background-color: #ddd;
 }
 
 .collectivesettings-menu ul {
@@ -637,10 +637,12 @@ h1.navcommunity
 	display: block;
 	padding:5px 15px;
 	background-color: #fff;
+	color:#666;
 }
 
 .collectivesettings-menu li.current a,
 .collectivesettings-menu li a:hover {
 	text-decoration: none;
-	background-color: #eee;
+	background-color: #f4f7f0;
+	color:#000;
 }

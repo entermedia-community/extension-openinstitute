@@ -1,7 +1,5 @@
-<div class="container">
-			<div class="contentcolumn">
-               
-<h1>[[Donations]]</h1>
+<div style="padding:10px 20px">
+<h2>[[Donations Report]]</h2>
 #set( $searcher = $mediaarchive.getSearcher("transaction") )
 #set( $donations = $searcher.query().exact("collectionid",$librarycol.getId()).sort("paymentdateDown").search($context))
 #if( $donations.isEmpty()) 
@@ -64,9 +62,4 @@
   #end
   </table>
 #end
-
-
-
- </div>
 </div>
-

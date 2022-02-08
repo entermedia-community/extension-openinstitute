@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col" >
-		<div class="contentcolumn" style="width:100%;">
+		<div  style="width:100%;">
 		    <h1>[[Profit and Loss]]</h1>
 			<h3>Net Income</h3>
 			
@@ -16,7 +16,8 @@
 				</li>
 			#end
 			</ul>
-				<h3>Income</h3> <a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
+				<h3>Income</h3> 
+				##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
 			
 			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange) )
 			<ul>
@@ -24,7 +25,8 @@
 				<li>$bytype.getCurrency() = $bytype.getIncomeType() $bytype.getAmount()</li>
 			#end
 			</ul>
-							<h3>Expense</h3>   <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
+							<h3>Expense</h3>  
+							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
 			<ul>
 			#foreach( $bytype in $expensebytype)
