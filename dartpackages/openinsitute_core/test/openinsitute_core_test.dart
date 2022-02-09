@@ -1,12 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:get/get.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+
+
+  TestWidgetsFlutterBinding.ensureInitialized(); //Nasty!
+  final oi = OpenI();
+  Get.put<OpenI>(oi);
+  oi.initialize();
+
+  test('Load Settings', () async {
+    Map? settings = await oi.loadAppSettings();
+    expect(settings!.isNotEmpty, true);
+
+    //var url = "${settings!['websocket_config']?['websocket_dev_url']}";
+    //expect(url.isNotEmpty, true);
   });
+
+
+
+
+
 }
