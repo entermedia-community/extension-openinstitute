@@ -1,25 +1,30 @@
 ##Exising ones 
 ##No existing programs found.
 
+#set($collectionid = $context.getRequestParameter("collectionid"))
  <div style="padding:20px;">
 	
 	#set( $xmledithome  = "$apphome/components/xml")
+	#set( $searchtype = "collectiveexpense" )
+	#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 	$context.putPageValue("searcher",$searcher)
-	<form name="saveproject" id="saveproject" action="addsave.html" method="post">
+	<form name="saveproject" 
+			id="saveproject" 
+			action="$apphome/collective/services/expenses/addsave.html" 
+			method="post">
 	
 	
 	<input type="hidden" name="save" value="true" />
-	<input type="hidden" name="searchtype" value="collectiveproduct" />
+	<input type="hidden" name="searchtype" value="$searchtype" />
 	
 	<input type="hidden" name="field" value="owner" />
 	<input type="hidden" name="owner.value" value="$user.getId()" />
 	
 	<input type="hidden" name="field" value="collectionid" />
-	<input type="hidden" name="collectionid.value" value="$librarycol.getId()" />
-	<input type="hidden" name="collectionid" value="$librarycol.getId()" />
+	<input type="hidden" name="collectionid.value" value="$collectionid" />
+	<input type="hidden" name="collectionid" value="$collectionid" />
 	
-	#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
-	$context.putPageValue("searcher",$searcher)
+	
 	$context.putPageValue("view", "collectiveexpense/addnew")
 	$context.putPageValue("data", $data)
 	 
