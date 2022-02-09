@@ -16,49 +16,29 @@
                       class="emdialog btn btn-sm btn-primary mb-4">[[Add Expenses]]</a>
               #end
 
-              #set( $expenses = $mediaarchive.query("collectiveexpense").match("collectionid",$collectionid).sort("createdonDown").search())
+              #set( $expenses = $mediaarchive.query("collectiveexpense").match("collectionid",$collectionid).sort("date").search())
               #if ($expenses)
                   <h3>[[Expenses]]</h3>
                   <div class="emdata">
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  <th>[[Invoice Number]]</th>
-                                  <th>[[Due Date]]</th>
-                                  <th>[[Paid On]]</th>
-                                  <th>[[Name]]</th>
+                                  <th>[[Date]]</th>
+                                  <th>[[Type]]</th>
                                   <th>[[Description]]</th>
-                                  <th>[[Total Price]]</th>
-                                  <th>[[Status]]</th>
+                                  <th>[[Currency]]</th>
+                                  <th>[[Total]]</th>
+                                  
                                   <th></th>
                               </tr>
                           </thead>
                           #foreach($hit in $expenses)
-                              #if ($hit.instance_status == "active")
-                                  #set($instancescount = $instancescount+1)
-                              #end
                               <tr>
-                                  <td>$hit.invoicenumber</td>
-                                  <td>$!context.getDate($hit.duedate)</td>
-                                  <td>$!context.getDate($hit.invoicepaidon)</td>
-                                  <td>
-                                      #set($prods = $hit.getValue("productlist"))
-                                      #foreach($pr in $prods)
-                                          #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                          $prod<br>
-                                      #end
-                                  </td>
-                                  <td>
-                                      #foreach($pr in $prods)
-                                          #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                          $!mediaarchive.text($prod.productdescription, $hit.id)<br>
-                                      #end
-                                  </td>
-                                  <td style="text-align: center;">$ $!context.roundDouble($!hit.totalprice, 2)</td>
-                        <td>
-                            #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
-                            $status
-                        </td>
+                                  <td>$!context.getDate($hit.date)</td>
+                                  <td>$!mediaarchive.getData("expensetype", $hit.expensetype)</td>
+                                  <td>$!mediaarchive.text($hit.expensedescription, $hit.id)</td>
+                                  <td>$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
                         <td>
                             #if( $canviewsettings )
                                 <a
