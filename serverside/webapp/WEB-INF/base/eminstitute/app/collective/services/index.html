@@ -4,20 +4,18 @@
 #if ( $catalagDB )
 #set( $db = "$catalagDB.value" ) 
 #end
-<div class="collectivecontent">
-    <div class="row no-gutters h-100">
-        <div class="col">
-            <div class="collectivemaincol h-100">
-                <div class="content">
+
+                <div style="padding:10px 20px;">
                     #if( $canviewsettings )
                     	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
 						<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
 						#end
-                        <h3>[[Recurring Subscriptions]]</h3>
+                        
                         ##Search instances in these organizations
                         #set($products = $mediaarchive.query("collectiveproduct").match("collectionid",
                         $collectionid).search())
                         #if ($products)
+                        <h3>[[Recurring Subscriptions]]</h3>
                             <div class="emdata">
                                 <table class="table table-striped">
                                     <thead>
@@ -164,13 +162,4 @@
                     #end
                 </div>
 
-            </div>
-        </div>
-        <div class="col-lg-3 ">
-            <div class="collective-sidebar">
-                $pages.include("$apphome/collective/channel/subscribers/index.html", $context)
-            </div>
-        </div>
-
-    </div>
-</div>
+    

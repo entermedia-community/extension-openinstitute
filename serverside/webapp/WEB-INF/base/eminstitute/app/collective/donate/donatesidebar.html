@@ -25,13 +25,6 @@
 				<strong>[[No goals yet]]!</strong>
 				#end
 				</div>	
-		#if( $caneditcollection)
-			<div style=" padding:6px; color:#888">
-				<i class="fas fa-info-circle"></i> [[Configure Goals on Project Settings]]<br>
-				<i class="fas fa-cog"></i>  <a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations"
-				class="emdialog" data-cancelsubmit="true" data-hidefooter="true" style="text-decoration: underline">[[Configure Donation Receipt Email]]</a>
-				</div>
-		#end
 
 	</div>
 	<div style="" class="text-center">
@@ -43,7 +36,7 @@
 	<div class="sidebarbox" >
 	
 	<h4>
-		<div class="float-right ">$${currentTotal}</div>
+		<div class="float-right">$${currentTotal}</div>
 		<i class="fas fa-hand-holding-usd"></i> [[Donations]]
 		
 	</h4>	
@@ -60,12 +53,7 @@
 						 <br>[[on]] $!context.getDateTime($transaction.paymentdate) 
 					</div>	
 				#end
-				#if( $caneditcollection)
-			<a style="text-decoration:underline;" 
-			title="[[View All Donations]]" 
-			href="$applink/collective/services/donations/index.html?collectionid=$librarycol.getId()"><i class="fas fa-cog"></i> [[View All]]
-		</a>
-		#end
+			
 			#end
 	</div>
 

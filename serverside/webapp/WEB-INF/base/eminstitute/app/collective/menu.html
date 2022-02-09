@@ -29,12 +29,12 @@
 			[[Files]] </a>
 		</li>
 		#end
-		#if($caneditcollection)
-		<li id="finances"  class="nav-item  #if($collectivesection == "finances") active #end">
-			<a class="nav-link" href="$applink/collective/finances/dashboard.html?collectionid=${librarycol.id}" >
-			[[Finances]] </a>
-		</li>
-		#end
+##		#if($caneditcollection)
+##		<li id="finances"  class="nav-item  #if($collectivesection == "finances") active #end">
+##			<a class="nav-link" href="$applink/collective/finances/dashboard.html?collectionid=${librarycol.id}" >
+##			[[Finances]] </a>
+##		</li>
+##		#end
 		
 		
 ##		<li id="menudonations"  class="nav-item #if($collectivesection == "donate") active #end">
@@ -42,10 +42,10 @@
 ##			[[Donations]] </a>
 ##		</li>
 
-##		<li id="menustore"  class="nav-item #if($collectivesection == "store") active #end">
-##			<a class="nav-link" href="$applink/collective/store/gallerylayout.html?collectionid=${librarycol.id}" >		
-##			[[Store]] </a>
-##		</li>
+		<li id="menustore"  class="nav-item #if($collectivesection == "store") active #end">
+			<a class="nav-link" href="$applink/collective/store/gallerylayout.html?collectionid=${librarycol.id}" >		
+			[[Store]] </a>
+		</li>
 
 
 		<li id="contact"  class="nav-item #if($collectivesection == "contact") active #end">
@@ -55,12 +55,11 @@
 		
 		 	#if( $caneditcollection)
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
-		<a class="emdialog nav-link"
+		<a class="nav-link"
 			data-allwaysloadpage="true"
-			data-cancelsubmit="true" 
-			data-hidefooter="true" 
-			href="$applink/collective/edit/editcollective.html?collectionid=$librarycol.getId()" 
-			title="[[Project Settings]]"><i class="fas fa-cog d-inline-block"></i> <span class="d-none d-sm-inline-block">[[Settings]]</span></a>
+			href="$applink/collective/admin/index.html?collectionid=$librarycol.getId()" 
+			title="[[Project Settings]]">
+			<i class="fas fa-cog d-inline-block"></i> <span class="d-none d-sm-inline-block">[[Admin]]</span></a>
 		</li>
 	#end
 	</ul>

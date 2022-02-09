@@ -616,3 +616,33 @@ h1.navcommunity
 .htmlintro {
 	padding:20px;
 }
+
+
+.collectivesettings-menu h3 {
+	margin:0 0 0px 0;
+	padding:10px 15px;
+	background-color: #ddd;
+}
+
+.collectivesettings-menu ul {
+	margin:0;
+	padding:0;
+}
+.collectivesettings-menu li {
+	list-style: none;
+	border-bottom:1px solid #eee;
+}
+
+.collectivesettings-menu li a {
+	display: block;
+	padding:5px 15px;
+	background-color: #fff;
+	color:#666;
+}
+
+.collectivesettings-menu li.current a,
+.collectivesettings-menu li a:hover {
+	text-decoration: none;
+	background-color: #f4f7f0;
+	color:#000;
+}

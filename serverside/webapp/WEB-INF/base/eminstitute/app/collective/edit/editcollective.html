@@ -1,4 +1,4 @@
-  <div class="card-block" style="padding:20px;">
+<div class="card-block" style="padding:20px;">
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
@@ -13,21 +13,25 @@ $context.putPageValue("searcher",$searcher)
 #end
 $context.putPageValue("view", "librarycollection/$view")
 $context.putPageValue("data", $librarycol)
-<form name="saveproject" 
+<form name="savecollective" 
 	enctype="multipart/form-data" 
-	id="saveproject"
+	id="savecollective"
 	action="$applink/collective/edit/save.html"
+	class="ajaxform"
+	data-targetdivinner="collectivesettingscontent"
+	data-oemaxlevel="1"
 	method="post">
-
 <input type="hidden" name="save" value="true" />
 <input type="hidden" name="searchtype" value="librarycollection" />
 <input type="hidden" name="id" value="$librarycol.id" />
 <input type="hidden" name="collectionid" value="$librarycol.id" />
+<input type="hidden" name="view" value="$!view" />
 
  
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 
 	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
+	
   #if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
     <a class="btn btn-sm btn-danger confirm"
     style="margin: 0px 0 0 10px;" 
@@ -44,16 +48,5 @@ $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 </form>
 </div>
 
-    
-<script type="text/javascript">
 
-jQuery(document).ready(function()
-{ 
-	lQuery("#list-country").livequery("blur", function()
-	{
-		
-	});
-});
-
-</script>
   

@@ -11,7 +11,4 @@
   <property id="facebooklink" />
   <property id="instagramlink" /> 
   <property id="websitelink" />
-  <property id="goaldate"/>
-  <property id="goalamount"/>
-  <property id="distributedtotal"/>
 </properties>

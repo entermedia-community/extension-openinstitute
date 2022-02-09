@@ -1,0 +1,33 @@
+#set($collectionid = $context.getRequestParameter("collectionid"))
+
+<div class="container">
+<div class="contentcolumn" style="padding:0;">
+	<div class="row no-gutters">
+		<div class="col-md-2" style="background-color: #fbfbfb;">
+			<div class="collectivesettings-menu">
+			<h3> [[Settings]]</h3>
+					<ul class="auto-active-container">
+						<li class="current"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Project]]</a></li>
+						
+						
+					</ul>
+				<h3> [[Store]]</h3>
+				<ul class="auto-active-container">
+						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Financial Goals]]</a></li>
+						<li><a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a></li>
+						<li><a href="$applink/collective/services/donations/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a></li>
+						<li><a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a></li>
+						<li><a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Balances]]</a></li>
+						</ul>
+				
+				
+			</div>
+		</div>
+		<div class="col-md-10" >
+			<div id="collectivesettingscontent" style="padding:10px; border-left:1px solid #eee;">
+			$pages.includeContent()	
+			</div>
+		</div>
+	</div>
+</div>
+</div>
