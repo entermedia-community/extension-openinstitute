@@ -1,55 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
-<properties> 
-  <property id="redirecturi" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[redirecturi]]></language> 
-    </name> 
-  </property>  
-  <property id="clientid" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[clientid]]></language> 
-    </name> 
-  </property>  
-  <property id="clientsecret" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[clientsecret]]></language> 
-    </name> 
-  </property>  
-  <property id="name" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="de"><![CDATA[Kategoriename]]></language>  
-      <language id="en"><![CDATA[Category Name]]></language>  
-      <language id="es"><![CDATA[Nombre]]></language>  
-      <language id="fr"><![CDATA[Catégorie]]></language> 
-    </name> 
-  </property>  
-  <property id="id" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="de"><![CDATA[Kategorie ID]]></language>  
-      <language id="en"><![CDATA[Category Id]]></language>  
-      <language id="es"><![CDATA[Categoria ID]]></language>  
-      <language id="fr"><![CDATA[Id catégorie]]></language> 
-    </name> 
-  </property>  
-  <property id="newusersettingsgroup" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[newusersettingsgroup]]></language> 
-    </name> 
-  </property>  
-  <property id="autocreateusers" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[autocreateusers]]></language> 
-    </name> 
-  </property>  
-  <property id="enabled" index="true" deleted="false" editable="true" stored="true">New 
-    <name> 
-      <language id="en"><![CDATA[enabled]]></language> 
-    </name> 
-  </property>  
-  <property id="remoteroot" index="true" deleted="false" editable="true" stored="true">New
+<properties>
+  <property id="newusersettingsgroup" index="true" deleted="false" editable="true" stored="true">New
     <name>
-      <language id="en"><![CDATA[remoteroot]]></language>
+      <language id="en"><![CDATA[newusersettingsgroup]]></language>
     </name>
   </property>
 </properties>
