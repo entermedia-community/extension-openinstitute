@@ -19,9 +19,14 @@
       <language id="fr"><![CDATA[Opération]]></language> 
     </name> 
   </property>  
-  <property id="userid" index="true" listid="user" filter="false" deleted="false" editable="false" stored="true" viewtype="asset" sortable="true" keyword="false" datatype="list">New
+  <property id="userid" index="true" listid="user" filter="false" deleted="false" editable="false" stored="true" viewtype="asset" sortable="true" keyword="false" datatype="list">New 
+    <name> 
+      <language id="en"><![CDATA[User Making Change]]></language> 
+    </name> 
+  </property>  
+  <property id="user" index="true" deleted="false" stored="true" keyword="true" datatype="list">New
     <name>
-      <language id="en"><![CDATA[User Making Change]]></language>
+      <language id="en"><![CDATA[User]]></language>
     </name>
   </property>
 </properties>

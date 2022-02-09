@@ -1,3 +1,4 @@
 /hs*.log
 /bin/
 /logs/
+/serverside/webapp/WEB-INF/data/repos/

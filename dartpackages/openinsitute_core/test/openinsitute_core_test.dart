@@ -14,8 +14,10 @@ void main() {
     Map? settings = await oi.loadAppSettings();
     expect(settings!.isNotEmpty, true);
 
-    //var url = "${settings!['websocket_config']?['websocket_dev_url']}";
-    //expect(url.isNotEmpty, true);
+    var url = "${settings!['websocket_config']?['websocket_dev_url']}";
+    print(url);
+
+    expect(url.isNotEmpty, true);
   });
 
 
