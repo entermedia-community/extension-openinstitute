@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="viewsettings" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[viewsettings]]></language> 
+    </name> 
+  </property>  
+  <property id="uploadpermission" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[uploadpermission]]></language> 
+    </name> 
+  </property>  
+  <property id="ldap_postfix" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[ldap_postfix]]></language> 
+    </name> 
+  </property>  
+  <property id="ldap_prefix" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[ldap_prefix]]></language> 
+    </name> 
+  </property>  
+  <property id="ldapserver" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[ldapserver]]></language>
+    </name>
+  </property>
+</properties>
