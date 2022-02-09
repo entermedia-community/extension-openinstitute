@@ -3,10 +3,9 @@
 <properties beanname="dataSearcher">
 	<property id="expensetype" />
 	<property id="name" />
-	<property id="date" />
 	<property id="expensedescription" />
 	<property id="currencytype" />
 	<property id="total" />
 	<property id="date" />
-	<property id="productattachment" />
+	<property id="receiptattachment" />
 </properties>
