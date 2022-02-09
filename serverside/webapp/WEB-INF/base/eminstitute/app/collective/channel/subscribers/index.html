@@ -1,11 +1,7 @@
 #set($collectionid = $librarycol.getId())
 <div id="subscriberssidebar">
 
-
-
 $pages.include("$apphome/collective/donate/donatesidebar.html",$context)
-
-
 
 
 #if(1==2 && $librarycol.collectivedescription)
@@ -62,7 +58,7 @@ $team.size()</a>
 			</div>
 		  	<div style="margin-left:40px; height:34px; position:relative;">
 		    <div style="position:relative; top:50%; transform: translateY(-50%);">
-		    	<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">$!followeruser.getAnonNickName()</a></div> 
+		    	<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())">$!followeruser.getAnonNickName()</a></div> 
 		   	<div>
 		        </div>
 			<i></i>
@@ -78,13 +74,13 @@ $team.size()</a>
 	#if( $caneditcollection)
 	<div class="text-right">
 	<a href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}" 
-		class="emdialog btn btn-secondary btn-sm" title="[[Search Users]]">
-	<i class="fas fa-search"></i> [[Add Team Member]]
+		class="emdialog btn btn-secondary btn-xs" title="[[Search Users]]">
+		<i class="fas fa-search"></i> [[Add Team Member]]
 	</a>
-		 	<a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}" 
-		 	class="emdialog btn btn-secondary btn-sm" title="[[Add New User to Project]]" 
+	<a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}" 
+		class="emdialog btn btn-secondary btn-xs" title="[[Add New User to Project]]" 
 		 	>
-	<i class="fas fa-plus"></i> [[New User]]
+		<i class="fas fa-plus"></i> [[New User]]
 	</a> 
 	
 	</div>
