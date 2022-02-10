@@ -3,42 +3,17 @@
 #set($invoice = $mediaarchive.getInvoiceById($id))
 #set($products = $mediaarchive.getInvoiceProductList($id))
 #set($workspace = $mediaarchive.getWorkspaceById($invoice.collectionid))
-<div style="padding:20px">
-<div class="card" >
-	<div class="card-body" style="padding: 0.5rem 0.5rem;">
-		<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}">Go Back to Billing</a>
-	</div>
-</div>
+<div style="padding:10px 20px">
 
-<h1>[[Check Out]]</h1>
+<h3>[[Check Out]]</h3>
+
 #if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
 <div class="alert alert-warning">Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to
     catalog settings and switch to production mode to take credit cards.</div>
 #end
 
 
-
-<div class="card">
-    <div class="card-header">
-        <div class="row" style="border-bottom:1px solidc ">
-            <div class="col-sm-10">
-                <h5>
-                    <i class="fas fa-credit-card mr-4" style="font-size: 1.4em"></i>
-                    [[All major Credit Cards Accepted]]
-                </h5>
-            </div>
-
-
-        </div>
-    </div>
-    <div class="card-body" style="padding:20px 21px;">
-    
-    
-        <div class="row">
-
-            <div class="col-sm-8">
-                <div class="card-body" style="padding: 20px;">
-                    <h4>Products</h4>
+                <div >
                     <div class="table-responsive">
                         <table class="table">
                             <col span="1" style="width: 20%;">
@@ -46,13 +21,13 @@
                             <col span="1" style="width: 20%;">
                             <tr>
                                 <th class="purchase_heading" align="left">
-                                    <p class="f-fallback">Quantity</p>
+                                    <p class="f-fallback">[[Quantity]]</p>
                                 </th>
                                 <th class="purchase_heading" align="left">
-                                    <p class="f-fallback">Description</p>
+                                    <p class="f-fallback">[[Description]]</p>
                                 </th>
                                 <th class="purchase_heading" style="text-align: right">
-                                    <p class="f-fallback">Amount</p>
+                                    <p class="f-fallback">[[Amount]]</p>
                                 </th>
                             </tr>
 
@@ -68,17 +43,15 @@
                             #set($lastproduct = $mediaarchive.getProductById($product.productid))
                             #end
                             <tr>
-                                <td class="text-right" colspan="2"><b>Total</b></td>
+                                <td class="text-right" colspan="2"><b>[[Total]]</b></td>
                                 <td  style="text-align: right"><b>$currency $!context.roundDouble($invoice.getValue("totalprice"), 2)</b></td>
                             </tr>
                         </table>
                     </div>
-                </div>
 
-            </div>
             
             #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
-	            <div class="col-sm-4">
+
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="$applink/collective/services/payfinish.html" method="post" id="payment-form"
@@ -90,7 +63,7 @@
 	                                <div class="col-md-12 mb-3">
 	                                    <label>[[Card Options]]:</label>
 		                            	<select id="creditcardselect" class="form-control">
-		                            		<option value="0">New Credit Card</option>
+		                            		<option value="0">[[New Credit Card]]</option>
 		                            		#foreach ($s in $customer.sources.data)
 		                            		<option value="$s.id">$s.brand (****-$s.last4)</option>
 		                            		#set( $custsource = $s.id )
@@ -182,36 +155,34 @@
 	
 	                    </div>
 	                </div>
-	            </div>
+
 	          #elseif ($invoice.paymentstatus == 'paid')
-	          <div class="col-sm-4">
+	          
 	          	<div class="card">
 		          	<div class="card-header alert-success">
-		          	   Invoice already paid
+		          	   [[Invoice already paid]]
 		          	</div>
 		          	<div class="card-body">
-		          		Thank you for your preference
+		          		[[Thank you for your preference]]
 		          	</div>
 	          	</div>
-	          </div>
+	          
 	          #elseif ($invoice.paymentstatus == 'canceled')
-	          <div class="col-sm-4">
+	          
 	          	<div class="card">
 		          	<div class="card-header alert-danger">
-		          	   This invoice was canceled
+		          	  [[This invoice was canceled]]
 		          	</div>
 		          	<div class="card-body">
-		          		Please contact support or reach us via chat
+		          		[[Please contact support or reach us via chat]]
 		          	</div>
 	          	</div>
-	          </div>          
+	                    
 	          #end
 	          
         </div>
     </div>
-</div>
 
-</div>
 
 
 <script type="text/javascript">

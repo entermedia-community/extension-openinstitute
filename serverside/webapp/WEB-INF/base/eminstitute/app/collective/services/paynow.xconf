@@ -1,4 +1,7 @@
 <page>
     <script id="stripe" src="https://js.stripe.com/v3/"/>
 	<path-action name="PaymentModule.getStripeUser"/>
+	
+	<property name="collectivesection">settings</property>
+	<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
 </page>

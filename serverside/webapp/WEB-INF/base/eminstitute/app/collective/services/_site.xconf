@@ -1,7 +1,8 @@
 <page>
 		
 	<property name="fullwidth">true</property>
-	<property name="collectivesection">billing</property>
+	<property name="collectivesection">settings</property>
+	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
 	
 	

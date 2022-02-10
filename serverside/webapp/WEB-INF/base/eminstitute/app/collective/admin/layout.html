@@ -1,5 +1,8 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
-
+#set($collectiveadminsection = $content.collectiveadminsection)
+#if(!$collectiveadminsection)
+	#set($collectiveadminsection = "general")
+#end
 <div class="container">
 <div class="contentcolumn" style="padding:0;">
 	<div class="row no-gutters">
@@ -7,15 +10,23 @@
 			<div class="collectivesettings-menu">
 			<h3> [[Settings]]</h3>
 					<ul class="auto-active-container">
-						<li class="current"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Project]]</a></li>
+						<li  class="#if($collectiveadminsection == "general") current #end"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Project]]</a></li>
 						
 						<li class="menu-subheader">[[Store]]</li>		
 				
 						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Financial Goals]]</a></li>
-						<li><a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a></li>
-						<li><a href="$applink/collective/services/donations/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a></li>
-						<li><a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a></li>
-						<li><a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Balances]]</a></li>
+						<li class="#if($collectiveadminsection == "invoices") current #end">
+							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
+						</li>
+						<li class="#if($collectiveadminsection == "incomes") current #end">
+							<a href="$applink/collective/services/donations/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a>
+						</li>
+						<li class="#if($collectiveadminsection == "expenses") current #end">
+							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
+						</li>
+						<li class="#if($collectiveadminsection == "finances") current #end">
+							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Balances]]</a>
+						</li>
 						</ul>
 				
 				
