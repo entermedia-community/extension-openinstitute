@@ -1,6 +1,6 @@
 #set($collectionid = $librarycol.getId())
 #set( $catalagDB = $mediaarchive.query("catalogsettings").exact("id", "events_billing_notify_invoice_appid").searchOne() ) 
-#set( $db = "entermediadb" ) 
+#set( $db = "site" ) 
 #if ( $catalagDB )
 #set( $db = "$catalagDB.value" ) 
 #end
@@ -8,12 +8,13 @@
                 <div style="padding:10px 20px;">
                     #if( $canviewsettings )
                     	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
-						<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+						<div class="alert alert-warning">
+							<b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b>
+						</div>
 						#end
                         
                         ##Search instances in these organizations
-                        #set($products = $mediaarchive.query("collectiveproduct").match("collectionid",
-                        $collectionid).search())
+                        #set($products = $mediaarchive.query("collectiveproduct").match("collectionid", $collectionid).search())
                         #if ($products)
                         <h3>[[Recurring Subscriptions]]</h3>
                             <div class="emdata">

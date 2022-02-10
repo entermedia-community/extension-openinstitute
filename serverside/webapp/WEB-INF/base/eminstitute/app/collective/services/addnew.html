@@ -10,7 +10,13 @@
 #set( $searcher = $mediaarchive.getSearcher("collectiveproduct") )
 #set( $xmledithome  = "$apphome/components/xml")
 $context.putPageValue("searcher",$searcher)
-<form name="saveproject" id="saveproject" action="addsave.html" method="post">
+<form name="saveproject" 
+		id="saveproject" 
+		action="$apphome/collective/services/addsave.html" 
+		method="post"
+		class="ajaxform autocloseform"
+			data-targetdivinner="collectivesettingscontent"
+			data-oemaxlevel="1">
 
 
 <input type="hidden" name="save" value="true" />
