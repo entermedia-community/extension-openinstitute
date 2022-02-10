@@ -10,7 +10,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/openedit-money-5.626.jar"/>
-	<classpathentry kind="lib" path="lib/stripe-java-5.25.0.jar"/>
+	<classpathentry kind="lib" path="serverside/lib/openedit-money-5.626.jar"/>
+	<classpathentry kind="lib" path="serverside/lib/stripe-java-5.25.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
