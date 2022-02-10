@@ -8,8 +8,7 @@
 		
 	</bean>
 
-<bean id="PaymentModule" class="org.entermedia.sitemanager.PaymentModule">
-</bean>
+
 <bean id="SiteModule" class="org.entermedia.sitemanager.SiteModule">
 </bean>
 <bean id="siteManager" class="org.entermedia.sitemanager.SiteManager" scope="prototype">
@@ -41,6 +40,10 @@
 </bean>
 <bean id="TransactionModule" class="org.entermedia.transactions.TransactionModule">
 </bean>
+
+<bean id="PaymentModule" class="org.entermedia.stripe.PaymentModule">
+</bean>
+
 <bean id="transactionManager" class="org.entermedia.transactions.TransactionManager"> 
 <property name="moduleManager"><ref bean="moduleManager"/></property>
 </bean>
