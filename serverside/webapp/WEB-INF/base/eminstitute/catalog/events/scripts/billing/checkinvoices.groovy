@@ -1,6 +1,6 @@
 package billing;
 
-import org.entermedia.sitemanager.StripePaymentProcessor
+import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
 import org.openedit.*
