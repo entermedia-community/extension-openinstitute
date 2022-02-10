@@ -11,7 +11,10 @@
 	<form name="saveproject" 
 			id="saveproject" 
 			action="$apphome/collective/services/expenses/addsave.html" 
-			method="post">
+			method="post"
+			class="ajaxform autocloseform"
+			data-targetdivinner="collectivesettingscontent"
+			data-oemaxlevel="1">
 	
 	
 	<input type="hidden" name="save" value="true" />
@@ -29,7 +32,6 @@
 	$context.putPageValue("data", $data)
 	 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
-  <button type="submit" class="btn btn-primary" hidden>[[Submit]]</button>
 </form>
 
 </div>

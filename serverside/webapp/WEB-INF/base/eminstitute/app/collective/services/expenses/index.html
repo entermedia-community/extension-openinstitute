@@ -39,32 +39,12 @@
                                   <td>$!mediaarchive.text($hit.expensedescription, $hit.id)</td>
                                   <td>$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
                                   <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
-                        <td>
+                        <td style="text-align: center">
                             #if( $canviewsettings )
                                 <a
-                                    href="$siteroot/$db/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
-                                    class="btn btn-sm btn-secondary"
-                                    target="_blank">
-                                    <i class="fa fa-database"></i>
-                                </a>
-                            #end
-                            #if ($hit.getValue("paymentstatus") == "invoiced")
-                                <a
-                                    href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                    class="btn btn-sm btn-primary">[[Pay Now]]</a>
-                                #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") ==
-                                "error")
-                                <a
-                                    href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                    class="btn btn-sm btn-primary">[[Pay Now]]</a>
-                                #if ($hit.paymentstatusreason != "")
-                                    <div class="alert alert-danger">$hit.paymentstatusreason</div>
-                                #end
-                            #elseif ($hit.getValue("paymentstatus") == "paid")
-                                <a
-                                    href="$applink/collective/services/viewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                    target="_blank"
-                                    class="btn btn-sm btn-secondary">[[View]]</a>
+                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense"
+                                    class="btn btn-xs btn-secondary emdialog"
+                                    ><i class="fa fa-edit"></i></a>
                             #end
                         </td>
                     </tr>
