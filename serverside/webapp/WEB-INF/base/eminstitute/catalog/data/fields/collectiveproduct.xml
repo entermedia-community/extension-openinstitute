@@ -64,7 +64,7 @@
 	</property>
 
 	<property id="nextbillon" editable="true" stored="true"
-		type="date" index="true">Next Bill Date	
+		type="date" index="true">Next Bill Date
 	</property>
 
 	<!-- <property id="featured" index="true" type="boolean" keyword="false" 
@@ -75,9 +75,9 @@
 		editable="true" type="list">Product Type</property>
 
 	<property id="recurring" index="true" stored="true"
-		editable="true" type="boolean">Recurring Payment?</property>
+		editable="true" type="boolean">Is Recurring Payment</property>
 
-	<property id="recurringperiud" index="true" stored="true"
+	<property id="recurringperiod" index="true" stored="true"
 		editable="true" type="number">Recurring Period (months)</property>
 
 
@@ -88,7 +88,6 @@
 	<property id="owner" index="true" listid="user" filter="true"
 		deleted="false" editable="true" stored="true" listcatalogid="system"
 		viewtype="user" keyword="true" datatype="list">
-		New
 		<name>
 			<language id="de"><![CDATA[Owner]]></language>
 			<language id="en"><![CDATA[Owner]]></language>
@@ -96,5 +95,24 @@
 			<language id="fr"><![CDATA[Propriétaire]]></language>
 		</name>
 	</property>
+
+	<property id="lastgeneratedinvoicedate" editable="true"
+		stored="true" type="date" index="true">Last Generated Invoice Date
+	</property>
+
+	<property id="billingstatus" index="true"
+		internalfield="false" isbadge="false" required="false"
+		listid="product_billing_status" multilanguage="false"
+		highlight="false" deleted="false" stored="true"
+		autocreatefromexif="false" writenametoexif="false"
+		searchcomponent="list" editable="true" datatype="list" filter="false"
+		keyword="false">
+		<name>
+			<language id="en"><![CDATA[Billing Status]]></language>
+		</name>
+	</property>
+
+	<property id="isautopaid" index="true" stored="true"
+		editable="true" type="boolean">Automatic Payments</property>
 
 </properties>
