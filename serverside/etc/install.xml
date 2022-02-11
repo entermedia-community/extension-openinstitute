@@ -85,13 +85,15 @@
        <fileset dir="${basedir}/base/eminstitute"/>
      </copy>
     <delete>
+    	<fileset file="${dockerlib}/extension-openinstitute**.jar"/>
       <fileset file="${dockerlib}/openedit-money**.jar"/>
       <fileset file="${dockerlib}/stripe-java**.jar"/>
     </delete>
   	
     <copy todir="${dockerlib}" overwrite="false" preservelastmodified="true">
-      <fileset file="${basedir}/lib/openedit-money**.jar"/>
-      <fileset file="${basedir}/lib/stripe-java**.jar"/>
+        <fileset file="${basedir}/lib/extension-openinstitute**.jar"/>
+    	<fileset file="${basedir}/lib/openedit-money**.jar"/>
+        <fileset file="${basedir}/lib/stripe-java**.jar"/>
     </copy>
   </target>
 </project>
