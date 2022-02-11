@@ -41,6 +41,14 @@
         	 		#else
 						[[Add to team]]        	 		
         	 		#end</a></span>
+        	 		
+        	 		 <a class="ajax btn btn-info btn-sm " data-targetdiv="teamusermembers" data-oemaxlevel="1"
+        	 		href="$applink/collective/channel/subscribers/billingtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+        	 		#if( $hit.getBoolean("isbillingcontact"))
+        	 			[[Remove Billing Contact]]
+        	 		#else
+						[[Add Billing Contact]]        	 		
+        	 		#end</a>
         		#elseif( $hit.getBoolean("ontheteam"))
         	   	 <span class="whatsapp">(On The Team)</span>
         		#end

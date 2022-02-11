@@ -4,24 +4,24 @@
 #set($products = $mediaarchive.getInvoiceProductList($id))
 
 <div class="card"
-	style="margin: 40px; max-width: 800px; text-align: left;">
+	style="margin: 40px auto; max-width: 800px; text-align: left;">
 	<div class="card-header">
-	<a href="https://entermediadb.org" target="_blank">
-		<img src="https://emediafinder.com/theme/img/logo.png">
+	<a href="https://openinstitute.org/" target="_blank">
+		<img src="https://openinstitute.org/app/theme/images/OI_flower.png" style="height: 100px;">
 	</a>
 	</div>
 	<div class="card-header">
 		<div class="row">
 			<div class="col-sm-6">
-					Invoice Number: $invoice.getValue("invoicenumber")
+					[[Invoice Number]]: $invoice.getValue("invoicenumber")
 			</div>
 			<div class="col-sm-6 text-right">
-					Created on: $!context.getDate($invoice.getValue("createdon"))
+					[[Created on]]: $!context.getDate($invoice.getValue("createdon"))
 			</div>
 		</div>
 	</div>
 	<div class="card-body" style="padding: 20px;">		
-		<h4>Products</h4>
+		<h4>[[Products]]</h4>
 		<div class="table-responsive">
 			<table class="table">
 				<col span="1" style="width: 20%;">
@@ -29,13 +29,13 @@
 		       	<col span="1" style="width: 20%;">
 				<tr>
 					<th class="purchase_heading" align="left">
-						<p class="f-fallback">Quantity</p>
+						<p class="f-fallback">[[Quantity]]</p>
 					</th>
 					<th class="purchase_heading" align="left">
-						<p class="f-fallback">Description</p>
+						<p class="f-fallback">[[Description]]</p>
 					</th>
 					<th class="purchase_heading" align="right">
-						<p class="f-fallback">Amount</p>
+						<p class="f-fallback">[[Amount]]</p>
 					</th>
 				</tr>
 	
