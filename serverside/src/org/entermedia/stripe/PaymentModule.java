@@ -86,8 +86,8 @@ public class PaymentModule extends BaseMediaModule
 		
 		Searcher workspaceSearcher = archive.getSearcher("librarycollection");
 		Data workspace = archive.getWorkspaceById((String) invoice.getValue("collectionid"));
-		if ((Boolean) workspace.getValue("savestripecreditcard") != Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard"))) {
-			workspace.setValue("savestripecreditcard", Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard")));
+		if (Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard"))) {
+			workspace.setValue("savestripecreditcard", "true");
 			workspaceSearcher.saveData(workspace);
 		}
 		
