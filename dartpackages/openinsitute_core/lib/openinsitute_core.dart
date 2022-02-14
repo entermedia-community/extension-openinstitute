@@ -34,7 +34,7 @@ class OpenI {
   }
 
 
-  void initialize() async {
+  Future<void> initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this);
   }
