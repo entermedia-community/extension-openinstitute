@@ -1,39 +1,35 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:em_mobile_flutter/Helper/customException.dart';
-import 'package:em_mobile_flutter/models/createTeamModel.dart';
-import 'package:em_mobile_flutter/models/createUserResponseModel.dart';
-import 'package:em_mobile_flutter/models/eventAssetModel.dart';
-import 'package:em_mobile_flutter/models/mediaAssetModel.dart';
-import 'package:em_mobile_flutter/models/createWorkspaceModel.dart';
-import 'package:em_mobile_flutter/models/emUser.dart';
-import 'package:em_mobile_flutter/models/getWorkspacesModel.dart';
-import 'package:em_mobile_flutter/models/moduleAssetModel.dart';
-import 'package:em_mobile_flutter/models/moduleListModel.dart';
-import 'package:em_mobile_flutter/models/projectAssetModel.dart';
-import 'package:em_mobile_flutter/models/updateDataModulesModel.dart';
-import 'package:em_mobile_flutter/models/uploadMediaModel.dart';
-import 'package:em_mobile_flutter/models/workspaceAssetsModel.dart';
+
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as parser;
-import 'dart:convert';
+import 'package:openinsitute_core/Helper/customException.dart';
+import 'package:openinsitute_core/models/createTeamModel.dart';
+import 'package:openinsitute_core/models/createWorkspaceModel.dart';
+import 'package:openinsitute_core/models/emUser.dart';
+
 
 class EnterMedia {
-  final String EM = 'https://entermediadb.org/entermediadb/app';
-  final String MEDIADB = 'https://entermediadb.org/entermediadb/mediadb';
-  final String EMFinder = 'https://emediafinder.com/entermediadb/mediadb';
-  final String EMImage = "/finder/mediadb/services/module/asset/downloads/originals/";
+  // final String EM = 'https://entermediadb.org/entermediadb/app';
+  // final String MEDIADB = 'https://entermediadb.org/entermediadb/mediadb';
+  // final String EMFinder = 'https://emediafinder.com/entermediadb/mediadb';
+  // final String EMImage = "/finder/mediadb/services/module/asset/downloads/originals/";
 
 //  final String MEDIADB = 'http://cburkey.entermediadb.org:8080/entermediadb/mediadb';
   var client = http.Client();
   var emUser;
   var tempKey;
 
+
   //Generic post method to entermedias server
-  Future<Map> postEntermedia(String url, dynamic jsonBody, BuildContext context, {String customError}) async {
+  Future<Map?> postEntermedia(String url, dynamic jsonBody, {String customError ="An Error Occured"}) async {
+
+    Map? settings = await oi.loadAppSettings();
+
+
     //Set headers
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
@@ -45,7 +41,6 @@ class EnterMedia {
     //make API post
     final response = await httpRequest(
       requestUrl: url,
-      context: context,
       body: json.encode(jsonBody),
       headers: headers,
       customError: customError,
@@ -60,7 +55,7 @@ class EnterMedia {
   }
 
 //Generic post to client specific 'EMFinder' server.
-  Future<Map> postFinder(String url, dynamic jsonBody, BuildContext context, {String customError, bool isPutMethod}) async {
+  Future<Map?> postFinder(String url, dynamic jsonBody, {String customError ="Error", bool isPutMethod = false }) async {
     var headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     if (this.emUser != null) {
@@ -72,7 +67,6 @@ class EnterMedia {
     //make API post
     final response = await httpRequest(
       requestUrl: url,
-      context: context,
       body: json.encode(jsonBody),
       headers: headers,
       customError: customError,
@@ -94,8 +88,9 @@ class EnterMedia {
   }
 
   //This gets the Entermedia user information called when logging in. - Mando Oct 14th 2020
-  Future<EmUser> emLogin(BuildContext context, String email, String password) async {
-    final resMap = await postEntermedia(MEDIADB + '/services/authentication/firebaselogin.json', {"email": email, "password": password}, context,
+  Future<EmUser?> emLogin( String email, String password) async {
+
+    final resMap = await postEntermedia(MEDIADB + '/services/authentication/firebaselogin.json', {"email": email, "password": password},
         customError: "Invalid credentials. Please try again!");
     print("Logging in");
     if (resMap != null) {
@@ -191,7 +186,7 @@ class EnterMedia {
   }
 
   // this creates a new workspace for people who have an account already
-  Future<CreateWorkspaceModel> createNewWorkspaces(String emkey, BuildContext context) async {
+  Future<CreateWorkspaceModel?> createNewWorkspaces(String emkey, BuildContext context) async {
     final resMap = await postEntermedia(
       'https://emediafinder.com/entermediadb/app/services/createworkspace.json?',
       {"entermediakey": "$emkey"},
@@ -205,7 +200,7 @@ class EnterMedia {
     }
   }
 
-  Future<Map> renameWorkspaces(String newname, String colId, BuildContext context) async {
+  Future<Map?> renameWorkspaces(String newname, String colId, BuildContext context) async {
     final resMap = await postEntermedia(
       'https://emediafinder.com/entermediadb/app/services/relabelworkspace.json?newname=$newname&collectionid=$colId',
       null,
@@ -219,7 +214,7 @@ class EnterMedia {
     }
   }
 
-  Future<Map> deleteWorkspaces(String colId, BuildContext context) async {
+  Future<Map?> deleteWorkspaces(String colId, BuildContext context) async {
     final resMap = await postEntermedia('https://emediafinder.com/entermediadb/app/services/removeworkspace.json?collectionid=$colId', null, context);
     if (resMap != null) {
       String response = json.encode(resMap);
@@ -476,7 +471,7 @@ class EnterMedia {
     return UploadMediaModel.fromJson(json.decode(response.body));
   }
 
-  Future<ModuleListModel> getAllModulesList(BuildContext context, String url) async {
+  Future<ModuleListModel> getAllModulesList() async {
     final resMap = await postFinder(url + '/finder/mediadb/services/settings/modules/list', null, context);
     if (resMap != null) {
       String response = json.encode(resMap);
@@ -491,13 +486,12 @@ class EnterMedia {
     this.emUser = null;
   }
 
-  Future<http.Response> httpRequest({
-    @required String requestUrl,
-    @required context,
-    @required dynamic body,
-    @required Map<String, String> headers,
-    bool isPutMethod,
-    String customError,
+  Future<http.Response?> httpRequest({
+    required String requestUrl,
+    required dynamic body,
+    required Map<String, String> headers,
+    bool isPutMethod=false,
+    String customError="Some Error",
   }) async {
     String url = requestUrl;
     print(url);
@@ -521,19 +515,21 @@ class EnterMedia {
       }
       print(responseJson.statusCode);
       response = await handleException(responseJson);
+      return response;
     } on BadRequestException catch (error) {
-      showErrorFlushbar(context, "Bad request! Please try again later.");
+      //showErrorFlushbar( "Bad request! Please try again later.");
     } on UnauthorisedException catch (error) {
-      showErrorFlushbar(context, "Unauthorized user. Please try again.");
+      //showErrorFlushbar( "Unauthorized user. Please try again.");
     } on TimeoutException catch (error) {
-      showErrorFlushbar(context, "Request timed out. Please try again!");
+      //showErrorFlushbar(context, "Request timed out. Please try again!");
     } on SocketException catch (error) {
-      showErrorFlushbar(context, "Unable to connect to server. Please try again!");
+     // showErrorFlushbar(context, "Unable to connect to server. Please try again!");
     } on HttpException catch (error) {
-      showErrorFlushbar(
-          context, customError != null ? customError : "Error occurred while communication with server. Please try again after some time.");
+     // showErrorFlushbar(
+        //  context, customError != null ? customError : "Error occurred while communication with server. Please try again after some time.");
     }
-    return response;
+    return null;
+
   }
 
   dynamic handleException(http.Response response) {
@@ -567,15 +563,5 @@ class EnterMedia {
     }
   }
 
-  void showErrorFlushbar(BuildContext context, String message) {
-    Fluttertoast.showToast(
-      msg: "$message",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 10,
-      backgroundColor: Colors.orange.withOpacity(0.8),
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
+
 }

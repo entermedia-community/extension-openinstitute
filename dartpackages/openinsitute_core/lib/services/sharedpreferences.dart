@@ -9,7 +9,7 @@ class sharedPref {
   getEMKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
-    String stringValue = prefs.getString('entermediakey');
+    String? stringValue = prefs.getString('entermediakey');
     return stringValue;
   }
 
@@ -21,7 +21,7 @@ class sharedPref {
   getWorkspaceKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
-    String stringValue = prefs.getString('workspacekey');
+    String? stringValue = prefs.getString('workspacekey');
     return stringValue;
   }
 
@@ -38,7 +38,7 @@ class sharedPref {
   getRecentWorkspace() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return index of workspace
-    int intValue = prefs.getInt('recent');
+    int? intValue = prefs.getInt('recent');
     return intValue;
   }
 
@@ -50,7 +50,7 @@ class sharedPref {
   getRecentEntity() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
-    String stringValue = prefs.getString('recentEntity');
+    String? stringValue = prefs.getString('recentEntity');
     return stringValue;
   }
 
