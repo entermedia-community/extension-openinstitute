@@ -26,6 +26,14 @@ class OpenI {
     }
   }
 
+  Map? get settings{
+    if (_settings == null) {
+      loadAppSettings();
+    }
+    return _settings;
+  }
+
+
   void initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this);
