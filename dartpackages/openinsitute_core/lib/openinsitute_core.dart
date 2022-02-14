@@ -1,33 +1,28 @@
 library openinsitute_core;
 
-import 'dart:_http';
 import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart' as parser;
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 
-
 class OpenI {
   Map? _settings;
-  late EmUser emUser;
-  var client = http.Client();
+  EmUser? emUser;
 
   Map? get app {
-    if(_settings == null){
+    if (_settings == null) {
       loadAppSettings();
     }
     String appmode = _settings!["devmode"];
-    if("dev" == appmode){
+    if ("dev" == appmode) {
       return _settings!["dev"];
-    } else{
+    } else {
       return _settings!["prod"];
-
     }
   }
 
@@ -59,7 +54,7 @@ class OpenI {
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
     if (this.emUser != null) {
-      String tokenKey = handleTokenKey(this.emUser.results.entermediakey);
+      String tokenKey = handleTokenKey(this.emUser!.results.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
     //make API post
@@ -70,7 +65,7 @@ class OpenI {
       customError: customError,
     );
     if (response != null && response.statusCode == 200) {
-      log("Success user info is:" + response.body);
+      print("Success user info is:" + response.body);
       final String responseString = response.body;
       return json.decode(responseString);
     } else {
@@ -93,13 +88,13 @@ class OpenI {
       print("isPutMethod: $isPutMethod");
       if (isPutMethod != null && isPutMethod == true) {
         print("isPutMethod: $isPutMethod");
-        responseJson = await client.put(
+        responseJson = await http.put(
           Uri.parse(url),
           body: body,
           headers: headers,
         );
       } else {
-        responseJson = await client.post(
+        responseJson = await http.post(
           Uri.parse(url),
           body: body,
           headers: headers,
@@ -122,6 +117,7 @@ class OpenI {
     }
     return null;
   }
+
   dynamic handleException(http.Response response) {
     print("Response code: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -148,10 +144,11 @@ class OpenI {
         throw HttpException(response.body.toString());
         break;
       default:
-      // throw FetchDataException('Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
+        // throw FetchDataException('Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
         break;
     }
   }
+
 //This gets the Entermedia user information called when logging in. - Mando Oct 14th 2020
   Future<EmUser?> firebaseLogin(String email, String password) async {
     final resMap = await postEntermedia(
@@ -168,10 +165,10 @@ class OpenI {
     }
   }
 
-  Future<EmUser?> login(String email, String password) async {
+  Future<EmUser?> login(String id, String password) async {
     final resMap = await postEntermedia(
-        MEDIADB + '/services/authentication/login.json',
-        {"email": email, "password": password},
+        app!["mediadb"] + '/services/authentication/login.json',
+        {"id": id, "password": password},
         customError: "Invalid credentials. Please try again!");
     print("Logging in");
     if (resMap != null) {

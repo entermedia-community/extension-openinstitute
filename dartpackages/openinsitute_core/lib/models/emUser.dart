@@ -51,7 +51,7 @@ class Results {
     required this.firstname,
     required this.lastname,
     required  this.email,
-    required  this.firebasepassword,
+    this.firebasepassword,
     required this.userid,
     required this.screenname,
   });
@@ -60,7 +60,7 @@ class Results {
   String firstname;
   String lastname;
   String email;
-  String firebasepassword;
+  String? firebasepassword;
   String userid;
   String screenname;
 
