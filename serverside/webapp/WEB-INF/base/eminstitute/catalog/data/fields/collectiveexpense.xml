@@ -12,7 +12,7 @@
     </name> 
   </property> 
   
-    <property id="collectionid" index="true" filter="false" editable="false" stored="true" sortable="true" type="list" keyword="false">
+    <property id="collectionid" index="true" filter="false" editable="false" stored="true" sortable="true" type="list" keyword="false" listid="librarycollection">
     <name>
       <language id="de"><![CDATA[Sammlung ID]]></language>
       <language id="en"><![CDATA[Collection Id]]></language>
