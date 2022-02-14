@@ -22,15 +22,16 @@
 			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange) )
 			<ul>
 			#foreach( $bytype in $incomebytype)
-				<li>$bytype.getCurrency() = $bytype.getIncomeType() $bytype.getAmount()</li>
+				<li>$bytype.getCurrency() -> $bytype.getExpenseType() $bytype.getTotal()</li>
 			#end
 			</ul>
-							<h3>Expense</h3>  
+			<h3>Expense</h3>  
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
 			<ul>
 			#foreach( $bytype in $expensebytype)
-				<li>$bytype.getCurrency() = $bytype.getExpenseType() $bytype.getAmount()</li>
+				
+				<li>$mediaarchive.getData("currencytype", $bytype.currencytype) -> $mediaarchive.getData("expensetype", $bytype.expensetype) $ $!context.roundDouble($bytype.getValue("total"),2)</li>
 			#end
 			</ul>
 		</div>

@@ -12,7 +12,9 @@ import org.entermediadb.asset.MediaArchive;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
 import org.openedit.ModuleManager;
+import org.openedit.data.QueryBuilder;
 import org.openedit.data.Searcher;
+import org.openedit.hittracker.HitTracker;
 
 public class FinanceManager  implements CatalogEnabled
 {
@@ -82,6 +84,17 @@ public class FinanceManager  implements CatalogEnabled
 		return null;
 	}
 	
+	public HitTracker   getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange) 
+	{
+		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		QueryBuilder query = expensesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		HitTracker hits = expensesSearcher.search(query.getQuery());
+		
+		return hits;
+	}
+	
+		
 	public ArrayList<Map<String, Object>>   getTotalExpensesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
 		Searcher expenseSearcher = getMediaArchive().getSearcher("expense");
