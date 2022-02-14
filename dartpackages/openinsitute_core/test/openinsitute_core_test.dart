@@ -10,18 +10,23 @@ void main() {
   Get.put<OpenI>(oi);
   oi.initialize();
 
+
+
+
   test('Load Settings', () async {
     Map? settings = await oi.loadAppSettings();
     expect(settings!.isNotEmpty, true);
 
-    var url = "${settings!['websocket_config']?['websocket_dev_url']}";
+    var url = "${settings!['dev']?['websocket_url']}";
     print(url);
 
     expect(url.isNotEmpty, true);
   });
 
 
+  test('Login to OpenInstitute', () async {
 
+  });
 
 
 }

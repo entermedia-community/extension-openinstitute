@@ -10,7 +10,7 @@ class CustomException implements Exception {
 }
 
 class FetchDataException extends CustomException {
-  FetchDataException([String message]) : super(message, "Error During Communication: ");
+  FetchDataException([String message = "Unknown Comm Err0r"]) : super(message, "Error During Communication: ");
 }
 
 class BadRequestException extends CustomException {
