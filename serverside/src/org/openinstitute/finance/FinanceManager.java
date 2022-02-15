@@ -97,7 +97,8 @@ public class FinanceManager  implements CatalogEnabled
 		
 	public ArrayList<Map<String, Object>>   getTotalExpensesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
-		Searcher expenseSearcher = getMediaArchive().getSearcher("expense");
+		Searcher expenseSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		
 		//TODO: Group by currency and return array/Collection?
 		
 		return null;
