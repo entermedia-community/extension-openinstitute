@@ -2,16 +2,20 @@
 	<div class="contentcolumn">
 	
 	
+	<h2>Support Our Project</h2>
+	#set( $collectionid = ${librarycol.id})
 	
-	<h2>Store Project Coming Soon</h2>
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("collectionid",$collectionid).not("producttype","0").sort("name").search($context) )
+#if( $hits.isEmpty())
+
+	<div style="" class="text-center">
+		<a href="$applink/collective/donate/$collectionid/donate.html" class="btn subscribe-btn">[[Donate]]</a>
+	</div>
 	
-	
-	
-	
-	
-	
-#set( $hits = $mediaarchive.query("collectionproduct").hitsPerPage(20).exact("collectionid",${librarycol.id}).sort("name").search($context) )
-$hits.size()
+
+
+#end
+
 <div class="masonry-grid" 
 data-maxheightX="$!mediaarchive.getCatalogSettingValue('stacked_gallery_imagesize')"
 data-maxheight="180" 
@@ -26,7 +30,7 @@ data-singlepage="true"  >
 #foreach( $aflora in $hits.getPageOfHits())
 	
 	#set( $hit = false)
-	#set( $hit = $mediaarchive.getAsset( $aflora.primaryimage).searchOne($context) )
+	#set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage).searchOne($context) )
 	#if( !$hit )
 		#set( $hit = $mediaarchive.getAsset( "AXrj_8u2To2Y34J739re") )
 	#end
@@ -81,5 +85,16 @@ data-singlepage="true"  >
 	#end
 
 	</div>
+
+	
+	#if( $caneditcollection)
+		<div style="" class="text-right">
+	
+	                        <a
+                            href="$applink/collective/store/addnew.html?collectionid=${collectionid}"
+                            class="emdialog btn btn-sm btn-primary mb-4" title="$library.name [[Product]]">[[Add A Product]]</a>
+        </div>          
+	#end
+	
 	
 	</div>
