@@ -28,12 +28,32 @@
 			<h3>Expense</h3>  
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
-			<ul>
-			#foreach( $bytype in $expensebytype)
-				
-				<li>$mediaarchive.getData("currencytype", $bytype.currencytype) -> $mediaarchive.getData("expensetype", $bytype.expensetype) $ $!context.roundDouble($bytype.getValue("total"),2)</li>
+			
+			
+			<table class="table" >
+			#set($currency = "0")
+			#foreach( $type in $expensebytype.keySet())
+				#set($current = $expensebytype.get($type))
+				#foreach($row as $current)
+					#if($row.currencytype != $currency)
+						#set($currency = $row.currencytype)
+						<tr>
+						<td style="width:10%">$mediaarchive.getData("currencytype", $row.currencytype)</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						</tr>
+					#end 
+					<tr>
+					<td style="width:10%"></td>
+					<td>$mediaarchive.getData("expensetype", $row.expensetype)</td>
+					<td style="width:10%; text-align: right;">$ $!context.roundDouble($row.getValue("total"),2)</td>
+					<td style="width:10%"></td>
+					</tr>
+					
+				#end
 			#end
-			</ul>
+			</table>
 		</div>
 		</div>
 	</div>
