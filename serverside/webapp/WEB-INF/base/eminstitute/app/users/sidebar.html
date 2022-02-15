@@ -63,6 +63,7 @@
 	    		<li class="#if($content.appsection == "createorg") current #end" ><a href="$applink/organization/create.html">[[Create New Organization]]</a></li>
 					#set($mylibraries = $mediaarchive.query("library").or().exact("owner",$user.getId()).exact("viewuers",$user.getId()).sort("name").search($context) )
 					#foreach( $alibrary in $mylibraries )
+					#if ($alibrary.getId() && $alibrary.getName())
 					<li class="#if($library.id==$alibrary.id) current #end">
 						#if( $alibrary.communitysubdomain)
 							#set($link = "//${alibrary.communitysubdomain}$applink/")
@@ -71,6 +72,7 @@
 						#end
 						<a href="$link"><i class="fas fa-sitemap"></i> $alibrary.getName()</a>
 					</li>
+					#end
 				#end
 			</ul>
 			

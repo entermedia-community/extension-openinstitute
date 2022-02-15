@@ -347,6 +347,10 @@ background-color: #fff;
 	color: white;
 }
 
+#mainOINav .currentlibrary {
+	background-color: #efefef;
+}
+
 .profile-sidebar {
 	background-color: #fff;
 	padding:20px 10px;

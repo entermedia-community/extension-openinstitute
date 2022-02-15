@@ -30,7 +30,7 @@
 
 			<div class="collectiveheaderlogo">
 			<a  href="$homelink" title="$!librarycol.name">
-				<div class="project-thumb" style="background-image: url('$logourl');"></div>
+				<div class="project-thumb" #if($logourl) style="background-image: url('$logourl');" #end></div>
 			</a>
 			</div>
 		
@@ -42,7 +42,8 @@
 			
 			$pages.include("$apphome/collective/likeoptions.html", $context)
 			</div>
-				$pages.include("$apphome/collective/menu.html", $context)
+			
+			$pages.include("$apphome/collective/menu.html", $context)
 		</div>	
 	
 	</div>
