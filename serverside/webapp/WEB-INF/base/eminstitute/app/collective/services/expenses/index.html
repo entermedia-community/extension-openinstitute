@@ -16,7 +16,7 @@
                       class="emdialog btn btn-sm btn-primary mb-4">[[Add Expenses]]</a>
               #end
 
-              #set( $expenses = $mediaarchive.query("collectiveexpense").match("collectionid",$collectionid).sort("date").search())
+              #set( $expenses = $mediaarchive.query("collectiveexpense").match("collectionid",$collectionid).sort("dateDown").search())
               #if ($expenses)
                   <h3>[[Expenses]]</h3>
                   <div class="emdata">
