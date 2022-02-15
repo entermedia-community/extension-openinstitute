@@ -123,6 +123,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","false")
 			.exact("billingstatus", "active")
+			.exact("producttype","0")
 			.missing("lastgeneratedinvoicedate").search();
 
 	log.info("Checking invoice for " + pendingProducts.size() + " none-recurring Products");
