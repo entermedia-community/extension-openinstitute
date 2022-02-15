@@ -24,10 +24,11 @@ public class FinanceModule extends BaseMediaModule
 		inReq.putSessionValue("daterange", range);
 		
 	}
-	public void loadFinanceManager(WebPageRequest inReq)
+	public FinanceManager loadFinanceManager(WebPageRequest inReq)
 	{
 		String catalogid = inReq.findValue("catalogid");
 		FinanceManager manager = (FinanceManager)getModuleManager().getBean(catalogid, "financeManager");
 		inReq.putPageValue("financeManager",manager);
+		return manager;
 	}
 }
