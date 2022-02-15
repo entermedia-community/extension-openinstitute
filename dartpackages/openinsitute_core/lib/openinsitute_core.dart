@@ -26,7 +26,15 @@ class OpenI {
     }
   }
 
-  void initialize() async {
+  Map? get settings{
+    if (_settings == null) {
+      loadAppSettings();
+    }
+    return _settings;
+  }
+
+
+  Future<void> initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this);
   }
