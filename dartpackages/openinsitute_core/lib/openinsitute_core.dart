@@ -194,7 +194,7 @@ class OpenI {
     // tempKey = null;
     // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
     final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/emailonlysendmagiclinkfinish.json', {"to": email},);
-    print("Sending email...");
+    print("Sending email to..." + email);
     if (resMap != null) {
       var loggedin = true;
       return loggedin;
