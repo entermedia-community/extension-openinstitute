@@ -187,4 +187,19 @@ class OpenI {
       return null;
     }
   }
+
+  //Entermedia Login with key pasted in
+  Future<bool?> emEmailKey(String email) async {
+    this.emUser = null;
+    // tempKey = null;
+    // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
+    final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/emailonlysendmagiclinkfinish.json', {"to": email},);
+    print("Sending email...");
+    if (resMap != null) {
+      var loggedin = true;
+      return loggedin;
+    } else {
+      return null;
+    }
+  }
 }
