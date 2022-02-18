@@ -68,27 +68,69 @@ public class FinanceManager  implements CatalogEnabled
 
 	//get expenses from expenses db
 	
-	public ArrayList<Map<String, Object>>   getTotalIncomesByDateRange(String inCollectionId, DateRange inDateRange)
+	public Map  getTotalIncomesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
 		Searcher incomesSearcher = getMediaArchive().getSearcher("transaction");
-		Collection<Data> incomes = incomesSearcher.query().exact("collectionid", inCollectionId).search();
-		//inDateRange
+		QueryBuilder query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		HitTracker hits = incomesSearcher.search(query.getQuery());
+		Collection pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
 		
-		ArrayList<Map<String, Object>>  incomesbyCurrency = null;
 		
-		//TODO: Group by currency and return array/Collection?
-
-		return incomesbyCurrency;
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+	
+			}
+			currencytotal = currencytotal + (Double)data.getValue("totalprice");
+			bycurrency.replace(currency, currencytotal);
+		}
+		
+		return bycurrency;
 		
 	}
 	
-	public ArrayList<Map<String, Object>>   getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange)
+	public Map getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
 		Searcher incomesSearcher = getMediaArchive().getSearcher("transaction");
-		return null;
+		QueryBuilder query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		HitTracker hits = incomesSearcher.search(query.getQuery());
+		Collection pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
+		
+		
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Collection values = (Collection) bycurrency.get(currency);
+			if( values == null)
+			{
+				values = new ListHitTracker();
+				//values.add(data);
+				bycurrency.put(currency, values);
+			}
+			values.add(data);
+			
+		}
+		
+		return bycurrency;
 	}
 	
-	public Map   getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange) 
+	
+	public Map getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange) 
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
@@ -152,10 +194,36 @@ public class FinanceManager  implements CatalogEnabled
 		return null;
 	}
 	
-	public String getTotalExpenseByCurrency(String inCollectionId, String inCurrencyId, DateRange inDateRange) 
+	
+	public Map  getTotalExpenseByCurrency(String inCollectionId, DateRange inDateRange)
 	{
-		Searcher expenseSearcher = getMediaArchive().getSearcher("expense");
-		return "";
+		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		QueryBuilder query = expensesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		HitTracker hits = expensesSearcher.search(query.getQuery());
+		Collection pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
+		
+		
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+	
+			}
+			currencytotal = currencytotal + (Double)data.getValue("total");
+			bycurrency.replace(currency, currencytotal);
+		}
+		
+		return bycurrency;
+		
 	}
 	
 	

@@ -106,6 +106,14 @@
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
     </name> 
+  </property>
+  
+  <property id="incometype" index="true" editable="true" stored="true"  datatype="list" listid="incometype">
+    <name> 
+      <language id="en"><![CDATA[Income Type]]></language> 
+    </name> 
   </property>   
+  
+  
   
 </properties>

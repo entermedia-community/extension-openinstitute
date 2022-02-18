@@ -7,25 +7,71 @@
 		    <h1>[[Profit and Loss]]</h1>
 			<h3>Net Income</h3>
 			
-			#set( $totals = $financeManager.getTotalIncomesByDateRange($collectionid, $daterange) )
-			<ul>
-			#foreach( $total in $totals)
-				$total
-				<li>$total.getCurrency() :  $financeManager.getTotalExpenseByCurrency($collectionid, $total.getCurrency(), $daterange) - $total.getAmount() 
-						=  $financeManager.getNetIncomeByCurrency($collectionid, $total.getCurrency(),$daterange)
-				</li>
+			#set( $totalincome = $financeManager.getTotalIncomesByDateRange($collectionid, $daterange) )
+			#set( $totalexpenses = $financeManager.getTotalExpenseByCurrency($collectionid, $daterange) )
+			<table class="table" >
+			#foreach($currencytype as $totalincome.keySet())
+				#set($totalincome = $totalincome.get($currencytype))
+				
+				#set($nettotal = $totalincome - $totalexpenses[$currencytype])
+				
+				<tr>
+				<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
+				<td>$ $!context.roundDouble($nettotal,2)</td>
+				<td></td>
+				<td></td>
+				</tr>
 			#end
-			</ul>
-				<h3>Income</h3> 
-				##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
+			</table>
 			
+			
+			<h3>[[Income]]</h3> 
+			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
+		
 			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange) )
-			<ul>
-			#foreach( $bytype in $incomebytype)
-				<li>$bytype.getCurrency() -> $bytype.getExpenseType() $bytype.getTotal()</li>
+		
+			<table class="table" >
+			#set($thecurrency = "0")
+			#set($totalbycurrency = 0)
+			
+			#foreach( $currencytype in $incomebytype.keySet())
+				#set($current = $incomebytype.get($currencytype))
+	
+				#foreach($type as $current)
+					#if($type.currencytype != $thecurrency)
+						#set($thecurrency = $type.currencytype)
+						<tr>
+						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						</tr>
+					#end 
+					<tr>
+						<td style="width:10%"></td>
+						<td>$mediaarchive.getData("incometype", $type.incometype)</td>
+						<td style="width:10%; text-align: right;">$ $!context.roundDouble($type.getValue("totalprice"),2)</td>
+						<td style="width:10%"></td>
+					</tr>
+					#set($totalbycurrency = $totalbycurrency + $type.getValue("totalprice"))
+					
+				#end
+					<tr>
+					<td></td>
+					<td style="text-align: right;">[[Total]]:</td>
+					<td style="width:10%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
+					<td></td>
+					</tr>
+					#set($totalbycurrency = 0)
+				
 			#end
-			</ul>
-			<h3>Expense</h3>  
+			</table>
+			
+
+
+
+			
+			<h3>[[Expenses]]</h3>  
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
 			
