@@ -126,6 +126,32 @@ public class FinanceManager  implements CatalogEnabled
 			
 		}
 		
+		//summarize by INcomeTypr
+		String currentcurrency = "";
+		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
+			Collection data = (Collection) set.getValue();
+			HashMap<String, Object> currenttype = new HashMap<String, Object>();
+			String currenttypeid = "";
+			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
+				SearchHitData row = (SearchHitData) iterator.next();
+				currenttypeid = (String) row.getValue("incometype");
+				
+				SearchHitData values = (SearchHitData)currenttype.get(currenttypeid);
+				if (values == null) {
+					values = new SearchHitData();
+					currenttype.put(currenttypeid, values);
+					values.setValue("totalprice", 0.0);
+				}
+				
+				values.setValue("totalprice", (Double) values.getValue("totalprice") + (Double) row.getValue("totalprice"));
+				values.setValue("currencytype", (String) row.getValue("currencytype"));
+				values.setValue("incometype", currenttypeid);
+
+			}
+			bycurrency.replace(set.getKey(), currenttype);
+			
+		}
+		
 		return bycurrency;
 	}
 	
