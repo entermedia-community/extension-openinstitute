@@ -187,7 +187,6 @@ class OpenI {
       return null;
     }
   }
-
   //Entermedia Login with key pasted in
   Future<bool?> emEmailKey(String email) async {
     this.emUser = null;
