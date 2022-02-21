@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="from_email_address" index="true" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[from_email_address]]></language> 
+    </name> 
+  </property>  
+  <property id="collectionid" index="true" internalfield="false" editable="true" isbadge="false" sortable="true" required="false" multilanguage="false" highlight="false" deleted="false" datatype="list" stored="true" autocreatefromexif="false" writenametoexif="false" filter="false" listid="librarycollection" keyword="false">New 
+    <name>
+      <language id="de"><![CDATA[Sammlung ID]]></language>
+      <language id="en"><![CDATA[Collection Id]]></language>
+      <language id="es"><![CDATA[colección Id]]></language>
+      <language id="fr"><![CDATA[Id Collection]]></language>
+    </name>
+  </property> 
+</properties>

@@ -74,6 +74,7 @@ public class FinanceManager  implements CatalogEnabled
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits);
 		
@@ -105,6 +106,7 @@ public class FinanceManager  implements CatalogEnabled
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits);
 		
@@ -162,6 +164,7 @@ public class FinanceManager  implements CatalogEnabled
 		QueryBuilder query = expensesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = expensesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits); 
 		
@@ -227,6 +230,7 @@ public class FinanceManager  implements CatalogEnabled
 		QueryBuilder query = expensesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = expensesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits);
 		

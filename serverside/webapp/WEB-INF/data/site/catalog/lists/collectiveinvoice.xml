@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<collectiveinvoices> 
+  <collectiveinvoice id="AX7ksnN62S_OxHE-Q667" owner="admin" totalprice="45.0" duedate="2022-02-17 11:33:27 -0600" notificationsent="true" paymentstatus="invoiced" collectionid="AX7f2qU7LXbxvz1udSzG" createdon="2022-02-10 11:33:27 -0600" productlist="{productid=AX7ksnMM2S_OxHE-Q666, productquantity=1, productprice=45.0}"> 
+    <name><![CDATA[]]></name>  
+    <invoicedescription><![CDATA[<p>The Description</p>]]></invoicedescription> 
+  </collectiveinvoice>  
+  <collectiveinvoice id="AX7ks-IC2S_OxHE-Q67A" owner="admin" totalprice="15.0" duedate="2022-02-17 11:35:01 -0600" notificationsent="true" paymentstatus="invoiced" collectionid="AX7f2qU7LXbxvz1udSzG" createdon="2022-02-10 11:35:01 -0600" productlist="{productid=AX7ks-Hd2S_OxHE-Q66_, productquantity=1, productprice=15.0}">
+    <name><![CDATA[]]></name>
+  </collectiveinvoice> 
+</collectiveinvoices>
