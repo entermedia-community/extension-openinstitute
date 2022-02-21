@@ -9,6 +9,7 @@
 			
 			#set( $totalincome = $financeManager.getTotalIncomesByDateRange($collectionid, $daterange) )
 			#set( $totalexpenses = $financeManager.getTotalExpenseByCurrency($collectionid, $daterange) )
+			#if($totalincome)
 			<table class="table" >
 			#foreach($currencytype as $totalincome.keySet())
 				#set($totalincome = $totalincome.get($currencytype))
@@ -23,7 +24,23 @@
 				</tr>
 			#end
 			</table>
-			
+			#else
+				##No Incomes, verify if only expenses:
+				<table class="table" >
+				#foreach($currencytype as $totalexpenses.keySet())
+					#set($totalincome = 0)
+					
+					#set($nettotal = $totalincome - $totalexpenses[$currencytype])
+					
+					<tr>
+					<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
+					<td>$ $!context.roundDouble($nettotal,2)</td>
+					<td></td>
+					<td></td>
+					</tr>
+				#end
+				</table>
+			#end
 			
 			<h3>[[Income]]</h3> 
 			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
@@ -50,7 +67,7 @@
 					<tr>
 						<td style="width:10%"></td>
 						<td>$mediaarchive.getData("incometype", $type.incometype)</td>
-						<td style="width:10%; text-align: right;">$ $!context.roundDouble($type.getValue("totalprice"),2)</td>
+						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("totalprice"),2)</td>
 						<td style="width:10%"></td>
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("totalprice"))
@@ -59,7 +76,7 @@
 					<tr>
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:10%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
+					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
 					<td></td>
 					</tr>
 					#set($totalbycurrency = 0)
@@ -96,8 +113,8 @@
 					<tr>
 						<td style="width:10%"></td>
 						<td>$mediaarchive.getData("expensetype", $type.expensetype)</td>
-						<td style="width:10%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
-						<td style="width:10%"></td>
+						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
+						<td></td>
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
 					
@@ -105,7 +122,7 @@
 					<tr>
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:10%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
+					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
 					<td></td>
 					</tr>
 					#set($totalbycurrency = 0)
