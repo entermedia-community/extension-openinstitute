@@ -5,49 +5,32 @@
 		<div class="col" >
 		<div  style="width:100%;">
 		    <h1>[[Profit and Loss]]</h1>
-			<h3>Net Income</h3>
+			<h3>[[Net Income]]</h3>
 			
-			#set( $totalincome = $financeManager.getTotalIncomesByDateRange($collectionid, $daterange) )
-			#set( $totalexpenses = $financeManager.getTotalExpenseByCurrency($collectionid, $daterange) )
-			#if($totalincome)
-			<table class="table" >
-			#foreach($currencytype as $totalincome.keySet())
-				#set($totalincome = $totalincome.get($currencytype))
-				
-				#set($nettotal = $totalincome - $totalexpenses[$currencytype])
-				
+			
+			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange) )
+			
+
+			<table class="table tablefinances" >
+			#foreach( $currencytype in $netincome.keySet())
+				#set($net = $netincome.get($currencytype))
 				<tr>
+				
 				<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
-				<td>$ $!context.roundDouble($nettotal,2)</td>
+				<td style="width:20%; text-align: right;">$ $!context.roundDouble($net,2)</td>
 				<td></td>
-				<td></td>
+				<td style="width:10%"></td>
 				</tr>
 			#end
 			</table>
-			#else
-				##No Incomes, verify if only expenses:
-				<table class="table" >
-				#foreach($currencytype as $totalexpenses.keySet())
-					#set($totalincome = 0)
-					
-					#set($nettotal = $totalincome - $totalexpenses[$currencytype])
-					
-					<tr>
-					<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
-					<td>$ $!context.roundDouble($nettotal,2)</td>
-					<td></td>
-					<td></td>
-					</tr>
-				#end
-				</table>
-			#end
 			
+
 			<h3>[[Income]]</h3> 
 			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
 		
 			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange) )
 		
-			<table class="table" >
+			<table class="table tablefinances" >
 			#set($thecurrency = "0")
 			#set($totalbycurrency = 0)
 			
@@ -57,7 +40,7 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr>
+						<tr class="tablefinances-header">
 						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
@@ -93,7 +76,7 @@
 			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
 			
 			
-			<table class="table" >
+			<table class="table tablefinances" >
 			#set($thecurrency = "0")
 			#set($totalbycurrency = 0)
 			
@@ -103,7 +86,7 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr>
+						<tr class="tablefinances-header">
 						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
@@ -123,7 +106,7 @@
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
 					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
-					<td></td>
+					<td style="width:10%"></td>
 					</tr>
 					#set($totalbycurrency = 0)
 				

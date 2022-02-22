@@ -257,6 +257,35 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
+	public Map  getNetIncomeByCurrency(String inCollectionId, DateRange inDateRange)
+	{
+		Map incomebycurrency = getTotalIncomesByDateRange(inCollectionId, inDateRange);
+		Map expensesbycurrency = getTotalExpenseByCurrency(inCollectionId, inDateRange);
+		
+		HashMap<String, Object> netIncome = new HashMap<String, Object>();
+		
+		Iterator<Map.Entry<String, Object>> it = incomebycurrency.entrySet().iterator();
+		while (it.hasNext()) {
+		    Map.Entry<String, Object> pair = it.next();
+		    netIncome.putIfAbsent(pair.getKey(), pair.getValue());
+		}
+		
+		Iterator<Map.Entry<String, Object>> it2 = expensesbycurrency.entrySet().iterator();
+		while (it2.hasNext()) {
+		    Map.Entry<String, Object> pair = it2.next();
+		    Double current = (Double) netIncome.get(pair.getKey());
+		    if (current == null) {
+		    	current = 0.0;
+		    	netIncome.putIfAbsent(pair.getKey(), current - (Double)pair.getValue());
+		    }
+		    else {
+		    	netIncome.replace(pair.getKey(), current - (Double)pair.getValue());
+		    }
+		}
+		
+		return netIncome;
+	}
+	
 
 	
 }
