@@ -3,12 +3,16 @@ library openinsitute_core;
 import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
+import 'package:openinsitute_core/models/taskList.dart';
+
+import 'models/emData.dart';
 
 class OpenI {
   Map? _settings;
@@ -80,6 +84,37 @@ class OpenI {
       return null;
     }
   }
+
+
+  //Generic post method to entermedias server
+  Future<String> getEmResponse(String url, dynamic jsonBody,
+      {String customError = "An Error Occured"}) async {
+    //Set headers
+    Map<String, String> headers = <String, String>{};
+    headers.addAll({"X-tokentype": "entermedia"});
+    headers.addAll({"Content-type": "application/json"});
+    if (this.emUser != null) {
+      String tokenKey = handleTokenKey(this.emUser!.results.entermediakey);
+      headers.addAll({"X-token": tokenKey});
+    }
+    //make API post
+    final response = await httpRequest(
+      requestUrl: url,
+      body: json.encode(jsonBody),
+      headers: headers,
+      customError: customError,
+    );
+    if (response != null && response.statusCode == 200) {
+      print("Success user info is:" + response.body);
+      final String responseString = response.body;
+      return responseString;
+    } else {
+      return "{}";
+    }
+  }
+
+
+
 
   Future<http.Response?> httpRequest({
     required String requestUrl,
@@ -187,6 +222,11 @@ class OpenI {
       return null;
     }
   }
+
+
+
+
+
   //Entermedia Login with key pasted in
   Future<bool?> emEmailKey(String email) async {
     this.emUser = null;
@@ -198,7 +238,32 @@ class OpenI {
       var loggedin = true;
       return loggedin;
     } else {
-      return null;
+      return false;
     }
   }
+
+
+
+  Future<List<emData>> getEmData(String inSearchType, Map inQuery) async {
+
+    final responsestring = await getEmResponse(app!["mediadb"] + '/services/lists/search/${inSearchType}/', inQuery,);
+    return compute(parseData, responsestring);
+
+  }
+
+   List<emData> parseData(String responseBody) {
+     final Map<String, dynamic> parsed = json.decode(responseBody);
+      return parsed["results"].map<emData>((json) => emData.fromJson(json)).toList();
+  }
+
+  Future<List<TaskList>> getOpenTasks() async {
+    final responsestring = await getEmResponse(app!["mediadb"] + '/services/users/tasks/mytasks.json', {"goaltrackerstaff": "admin"},);
+    Map<String, dynamic> results = json.decode(responsestring);
+
+    return results["tickets"].map<TaskList>((json) => TaskList.fromJson(json)).toList();
+  }
+
+
+
+
 }
