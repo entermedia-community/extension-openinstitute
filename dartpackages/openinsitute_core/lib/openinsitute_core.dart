@@ -66,7 +66,7 @@ class OpenI {
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
     if (this.emUser != null) {
-      String tokenKey = handleTokenKey(this.emUser!.results.entermediakey);
+      String tokenKey = handleTokenKey(this.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
     //make API post
@@ -94,7 +94,7 @@ class OpenI {
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
     if (this.emUser != null) {
-      String tokenKey = handleTokenKey(this.emUser!.results.entermediakey);
+      String tokenKey = handleTokenKey(this.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
     //make API post
@@ -200,8 +200,9 @@ class OpenI {
         customError: "Invalid credentials. Please try again!");
     print("Logging in");
     if (resMap != null) {
-      //save local emUser from response object
-      this.emUser = emUserFromJson(json.encode(resMap));
+      Map<String, dynamic> results = resMap["results"];
+      this.emUser = EmUser.fromJson(results);
+
       return this.emUser;
     } else {
       return null;
@@ -215,8 +216,8 @@ class OpenI {
         customError: "Invalid credentials. Please try again!");
     print("Logging in");
     if (resMap != null) {
-      //save local emUser from response object
-      this.emUser = emUserFromJson(json.encode(resMap));
+      Map<String, dynamic> results = resMap["results"];
+      this.emUser = EmUser.fromJson(results);
       return this.emUser;
     } else {
       return null;

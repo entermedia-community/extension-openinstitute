@@ -24,7 +24,7 @@ class TaskList {
         _tasks = taskjson.map<emData>((json) => emData.fromJson(json)).toList();
       }
     }
-    return tasks;
+    return _tasks;
   }
 
 
