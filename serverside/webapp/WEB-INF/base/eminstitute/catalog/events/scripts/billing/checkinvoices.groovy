@@ -216,7 +216,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 					if (email) {
 						switch (iteratorType) {
 							case "notificationsent":
-								String actionUrl = getSiteRoot() + "/" + appid + "/app/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+								String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 								sendEmail(mediaArchive, contact, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
 								break;
 							case "notificationoverduesent":
@@ -247,7 +247,7 @@ private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, St
 	if (actionUrl == null) {
 		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 	}
-	String supportUrl = getSiteRoot() + "/" + appid + "/app/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
