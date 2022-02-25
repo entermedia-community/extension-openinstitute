@@ -112,7 +112,6 @@
 		editable="true" type="boolean">Automatic Payments</property>
 
 
-   <property id="producttype" index="true" stored="true" editable="true" type="list"  >Payment Type</property>  
   
  
 </properties>
