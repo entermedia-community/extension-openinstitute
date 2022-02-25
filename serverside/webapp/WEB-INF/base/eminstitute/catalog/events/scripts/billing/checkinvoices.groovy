@@ -131,7 +131,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 		Data product = productSearcher.loadData(productIterator.next());
 
 		Date nextBillOn = product.getValue("nextbillon");
-		Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
+		Date lastbilldate = product.getValue("	");
 		if (lastbilldate < nextBillOn) { // otherwise assume it's already created
 			Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
 			Data invoice = invoiceSearcher.createNewData();
@@ -192,6 +192,9 @@ private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher in
 }
 
 private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
+
+	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
+	
 	for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) {
 		Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 
@@ -213,7 +216,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 					if (email) {
 						switch (iteratorType) {
 							case "notificationsent":
-								String actionUrl = getSiteRoot() + "/entermediadb/app/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+								String actionUrl = getSiteRoot() + "/" + appid + "/app/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 								sendEmail(mediaArchive, contact, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
 								break;
 							case "notificationoverduesent":
@@ -242,9 +245,9 @@ private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, St
 	String template = "/" + appid + "/theme/emails/" + htmlTemplate;
 
 	if (actionUrl == null) {
-		actionUrl = getSiteRoot() + "/entermediadb/app/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 	}
-	String supportUrl = getSiteRoot() + "/entermediadb/app/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	String supportUrl = getSiteRoot() + "/" + appid + "/app/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
