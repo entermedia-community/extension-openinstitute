@@ -17,15 +17,24 @@
 							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Balances]]</a>
 						</li>
 						
-						<li class="#if($collectiveadminsection == "invoices") current #end">
-							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
-						</li>
+
 						<li class="#if($collectiveadminsection == "incomes") current #end">
-							<a href="$applink/collective/services/donations/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a>
+							##<a href="$applink/collective/services/donations/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a>
 						</li>
+						
+						
+						<li class="#if($collectiveadminsection == "incomes") current #end">
+							<a href="$applink/collective/services/income/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Incomes]]</a>
+						</li>
+					
 						<li class="#if($collectiveadminsection == "expenses") current #end">
 							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
 						</li>
+						
+						<li class="#if($collectiveadminsection == "invoices") current #end">
+							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
+						</li>
+						
 						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Financial Goals]]</a></li>
 						</ul>
 				

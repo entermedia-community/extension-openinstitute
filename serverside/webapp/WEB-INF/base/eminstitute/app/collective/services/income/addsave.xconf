@@ -1,0 +1,12 @@
+<page>
+
+<path-action name="DataEditModule.saveData"/>
+
+<!--<path-action name="PaymentModule.createProductService"/ -->
+<!--
+  <path-action name="Script.run">
+    <script>/${catalogid}/events/scripts/billing/checkinvoices.groovy</script>
+  </path-action>
+  
+ -->
+</page>

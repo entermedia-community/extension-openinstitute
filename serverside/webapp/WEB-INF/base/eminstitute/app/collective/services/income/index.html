@@ -1,0 +1,58 @@
+#set($collectionid = $librarycol.getId())
+#set( $catalagDB = $mediaarchive.query("catalogsettings").exact("id", "events_billing_notify_invoice_appid").searchOne() ) 
+#set( $db = "entermediadb" ) 
+#if ( $catalagDB )
+#set( $db = "$catalagDB.value" ) 
+#end
+
+<div style="padding:10px 20px;">
+              #if( $canviewsettings )
+              	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
+<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+#end
+                  
+                                                   <a
+                      href="$applink/collective/services/income/addnew.html?collectionid=${collectionid}"
+                      class="emdialog btn btn-sm btn-primary mb-4">[[Add Income]]</a>
+              #end
+
+              #set( $income = $mediaarchive.query("collectiveincome").match("collectionid",$collectionid).sort("dateDown").search())
+              #if ($income)
+                  <h3>[[Income]]</h3>
+                  <div class="emdata">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr class="tableheader">
+                                  <th>[[Date]]</th>
+                                  <th>[[Type]]</th>
+                                  <th>[[Description]]</th>
+                                  <th>[[Currency]]</th>
+                                  <th>[[Total]]</th>
+                                  
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          #foreach($hit in $income)
+                              <tr>
+                                  <td>$!context.getDate($hit.date)</td>
+                                  <td>$!mediaarchive.getData("incometype", $hit.incometype)</td>
+                                  <td>$!mediaarchive.text($hit.incomedescription, $hit.id)</td>
+                                  <td>$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
+                        <td style="text-align: center">
+                            #if( $canviewsettings )
+                                <a
+                                    href="$applink/collective/services/income/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$!collectionid"
+                                    class="btn btn-xs btn-secondary emdialog"
+                                    data-hidefooter="true"
+                                    ><i class="fa fa-edit"></i></a>
+                                    
+                            #end
+                        </td>
+                    </tr>
+                #end
+            </table>
+        </div>
+    #end
+</div>
+
