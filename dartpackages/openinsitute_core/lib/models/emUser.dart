@@ -1,7 +1,6 @@
 class EmUser {
 
   late Map <String, dynamic> properties;
-
   late String entermediakey;
   String? firstname;
   String? lastname;
@@ -19,7 +18,6 @@ class EmUser {
     screenname = json["screenname"];
     properties = json;
   }
-
 
 
 

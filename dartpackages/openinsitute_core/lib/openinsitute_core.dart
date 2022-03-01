@@ -8,10 +8,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:isar/isar.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
+
+import 'contact.dart';
 import 'models/emData.dart';
 
 class OpenI {
@@ -265,6 +270,43 @@ class OpenI {
   }
 
 
+  void registerBinaries() {
+      final dartToolDir = path.join(Directory.current.path, '.dart_tool');
+      try {
+        Isar.initializeLibraries(
+          libraries: {
+            'windows': path.join(dartToolDir, 'libisar_windows_x64.dll'),
+            'macos': path.join(dartToolDir, 'libisar_macos_x64.dylib'),
+            'linux': path.join(dartToolDir, 'libisar_linux_x64.so'),
+          },
+        );
+      } catch (e) {
+        // ignore. maybe this is an instrumentation test
+      }
+
+  }
+
+  Future<List<Contact>> saveSomeStuff() async {
+    registerBinaries();
+    final dir = await getApplicationSupportDirectory();
+
+    final isar = await Isar.open(
+      schemas: [ContactSchema],
+      directory: dir.path,
+    );
+
+    final contact = Contact()
+      ..name = "My first contact";
+
+    await isar.writeTxn((isar) async {
+      contact.id = await isar.contacts.put(contact) ;
+    });
+
+    final allContacts = await isar.contacts.where().findAll();
+    print(allContacts);
+    return allContacts;
+
+  }
 
 
 }

@@ -12,6 +12,7 @@ class TaskList {
     properties = json;
   }
 
+
   Map<String, dynamic> toJson() {
     properties[id] = id;
     return properties;
@@ -26,6 +27,9 @@ class TaskList {
     }
     return _tasks;
   }
+
+
+
 
 
 }
