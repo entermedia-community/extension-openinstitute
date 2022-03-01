@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:http/http.dart' as http;
+import 'package:openinsitute_core/contact.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
@@ -23,6 +24,12 @@ void main() {
   test('Load Settings', () async {
     Map? settings = await oi.loadAppSettings();
     expect(settings!.isNotEmpty, true);
+
+    List<Contact> contacts  = await oi.saveSomeStuff();
+
+
+    expect(contacts.isNotEmpty, true);
+
 
     var url = "${settings!['dev']?['websocket_url']}";
     print(url);
@@ -58,7 +65,6 @@ void main() {
     expect(tasks.length > 0, true);
     TaskList list = tasks.first;
     expect(list.tasks!.isNotEmpty,true);
-
 
 
 
