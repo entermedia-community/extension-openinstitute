@@ -45,13 +45,13 @@
     </name>
   </property> 
   
-    <property id="user" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
+    <property id="user"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
-      <language id="en"><![CDATA[Entered By]]></language> 
+      <language id="en"><![CDATA[Approved By]]></language> 
     </name> 
   </property>  
 
-    <property id="reimburseuser" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
+    <property id="reimburseuser"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
       <language id="en"><![CDATA[Reimbursed to]]></language> 
     </name> 
