@@ -222,6 +222,8 @@ $(document).ready(function() {
     
     //$("#paypalpayment-form").validate();
     //ok?
+    if (typeof paypal != "undefined") 
+    {
 	 paypal.Buttons({
 		    createOrder: function(data, actions) 
 		    {
@@ -280,6 +282,7 @@ $(document).ready(function() {
 		    }
 		  }).render('#paypal-button-container');
 	
+    }
 	
   
 	  	// This identifies your website in the createToken call below
@@ -324,6 +327,7 @@ $(document).ready(function() {
 	   }
 	 });
 
+	 
 	 var form = document.getElementById('payment-form');
 	 $(form).validate({
 		  rules: {
