@@ -32,7 +32,7 @@ public void init() {
 		emailbody = mediaarchive.getCatalogSettingValue("donation_email_body");
 	}
 	if (emailbody.equals("")) {
-		emailbody = "Thank you for your Donation.";
+		emailbody = "Thank you for your Donation";
 	}
 	if (subject.equals("")) {
 		subject =  "Donation Receipt at " + collection.getName(); 
@@ -44,13 +44,17 @@ public void init() {
 	objects.put("donor", (String) user.getName());
 	objects.put("amount", (String) payment.getValue("totalprice"));
 	objects.put("mediaarchive", mediaArchive);
-	objects.put("payment", payment);
-	objects.put("organization", collection.getName());
+	objects.put("payment", payment); //Old?
+	objects.put("receipt", payment);
+	
+	objects.put("organization", collection);
 
 	WebEmail templateEmail = mediaArchive.createSystemEmailBody(user);
 	templateEmail.setSubject(subject);
 	templateEmail.loadSettings(context);
-	templateEmail.send(emailbody, objects);
+	
+	String body = mediaArchive.getReplacer().replace(emailbody, objects);
+	templateEmail.send(body, objects);
 	
 	log.info("Email sent to: "+user.getEmail());
 }
