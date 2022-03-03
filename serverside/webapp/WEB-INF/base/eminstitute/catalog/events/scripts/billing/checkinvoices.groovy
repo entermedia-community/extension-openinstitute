@@ -6,6 +6,7 @@ import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
+import org.openedit.util.URLUtilities
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -217,6 +218,10 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 						switch (iteratorType) {
 							case "notificationsent":
 								String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+								
+								String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
+								actionUrl = actionUrl + "&entermedia.key=" + actionUrl;
+								actionUrl = URLUtilities.urlEscape(actionUrl);
 								sendEmail(mediaArchive, contact, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
 								break;
 							case "notificationoverduesent":
@@ -246,6 +251,12 @@ private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, St
 
 	if (actionUrl == null) {
 		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+		
+		String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
+		actionUrl = actionUrl + "&entermedia.key=" + actionUrl;
+		actionUrl = URLUtilities.urlEscape(actionUrl);
+
+		
 	}
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 
