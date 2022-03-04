@@ -23,13 +23,13 @@
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  <th>[[Date]]</th>
+                                  <th style="width: 110px">[[Date]]</th>
                                   <th>[[Type]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Currency]]</th>
-                                  <th>[[Total]]</th>
+                                  <th style="width: 150px">[[Total]]</th>
                                   
-                                  <th></th>
+                                 <th style="width: 50px"></th>
                               </tr>
                           </thead>
                           #foreach($hit in $expenses)
@@ -37,8 +37,8 @@
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getData("expensetype", $hit.expensetype)</td>
                                   <td>$!mediaarchive.text($hit.expensedescription, $hit.id)</td>
-                                  <td>$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
-                                  <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
+                                  <td style="text-align: center">$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: right;">$ $!context.roundDouble($!hit.total, 2)</td>
                         <td style="text-align: center">
                             #if( $canviewsettings )
                                 <a
