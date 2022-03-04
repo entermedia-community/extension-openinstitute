@@ -878,6 +878,8 @@ height: 40px;
 
 .chatterbox-messages {
 	height: calc(100% - 39px);
+	min-height: 300px;
+	
 }
 .chat-icon {
 	position:absolute;
