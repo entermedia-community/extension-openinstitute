@@ -112,13 +112,13 @@ class Searcher {
     return results;
   }
 
-  List<emData> getAllHits() async {
-     box.keys.forEach((key) {
-      if (key != "lastsync") {
-
-
-
-      }
-    });
-  }
+  // List<emData> getAllHits() async {
+  //    box.keys.forEach((key) {
+  //     if (key != "lastsync") {
+  //
+  //
+  //
+  //     }
+  //   });
+  // }
 }

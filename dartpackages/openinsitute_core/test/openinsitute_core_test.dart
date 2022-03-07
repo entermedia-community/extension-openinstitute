@@ -84,11 +84,11 @@ void main() {
   });
 
 
-  test('Test Loading and Syncing Data', () async {
-    Searcher searcher = await oi.datamanager.getSearcher("purpose");
-    List<emData> checkcache = searcher.getAllHits();
-
-  });
+  // test('Test Loading and Syncing Data', () async {
+  //   Searcher searcher = await oi.datamanager.getSearcher("purpose");
+  //   List<emData> checkcache = searcher.getAllHits();
+  //
+  // });
 
 }
 
