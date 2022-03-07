@@ -23,13 +23,30 @@
 	    </div>
 	    <div class="sidebar-box-content" style="padding:0;">
 	    	<ul class="sidebar-list">
-			<li class="#if($content.appsection == "profile") current #end"><a href="$applink/users/$user.getId()/index.html"><i class="fa fa-user"></i> [[Profile]]</a></li>
-			#set( $pendingmessages = $chatManager.loadChatTopicLastChecked("${user.getId()}-messages",$user.getId() ) )
-			<li class="#if($content.appsection == "messages") current #end">
-				<a href="$applink/messages/index.html">
-				<i class="fa fa-comment"></i> [[Messages]] #if($pendingmessages && !$pendingmessages.isEmpty()) * #end
-				</a>
+			<li class="#if($content.appsection == "profile") current #end">
+				<a href="$applink/users/$user.getId()/index.html"
+					title="[[You are]]: $user.getAnonNickName()"><i class="fa fa-user"></i> [[Profile]]</a>
 			</li>
+			
+			<li class="#if($appsection == "activity") current #end" style="width:110px; float:left;">
+				<a href="$sitelink/app/activity/index.html"  >
+				<i class="fa fa-comments"></i> [[All Chats]]</a>
+			</li>
+			#if($canviewsettings)
+				#set( $pendingmessages = $chatManager.loadChatTopicLastChecked("${user.getId()}-messages",$user.getId() ) )
+				<li  class="#if($appsection == "messages") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
+					<a href="$sitelink/app/messages/index.html" >
+					#if($pendingmessages && !$pendingmessages.isEmpty())
+					<i class="fa fa-comment"></i> [[Direct Chat]] <i class="fas fa-bell fa-xs" style="color:orange"></i>
+					#else
+					<i class="fa fa-comment"></i> [[Direct Chat]]
+					#end
+					</a>
+				</li>
+			#end
+			<div class="clearfix"></div>
+			
+			
 			#if($userprojectsids.size() && $userticketsids.size())
 			<li class="#if($content.appsection == "tasks") current #end">
 				#if ($canviewsettings)
