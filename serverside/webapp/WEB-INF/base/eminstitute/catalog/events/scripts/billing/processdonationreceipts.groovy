@@ -60,15 +60,19 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			objects.put("receipt", receipt);
 			//objects.put("receiptuser", user);
 			objects.put("donor", (String) receipt.getValue("name"));
-			objects.put("amount", (String) receipt.getValue("totalprice"));
+			
+			Object price = receipt.getValue("totalprice");
+			
+			objects.put("amount", "$" + price );
 			if (collection != null) {
-				objects.put("organization", collection.getName());
+				objects.put("organization", collection);
 			}
 		
 			WebEmail templateEmail = mediaArchive.createSystemEmailBody(receiptemail);
 			templateEmail.setSubject(subject);
 			templateEmail.loadSettings(context);
-			templateEmail.send(emailbody, objects);
+			String body = mediaArchive.getReplacer().replace(emailbody, objects);
+			templateEmail.send(body);
 			
 			receipt.setValue("receiptstatus", "sent");
 			transactionSearcher.saveData(receipt);

@@ -43,15 +43,17 @@
 					#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
 					#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 				#end
-				<div class="project-item" style='#if($link) background-image: url("$link");background-size: cover; #end'>
-				<div class="project-item-box">
 				<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
-					class="project-title #if($selectedproject==$ohit.id) active #end">
-				$ohit.name
-				#if( $modcollections.contains($ohit.getId())) * #end
+					class=" #if($selectedproject==$ohit.id) active #end">
+				<div class="project-item" 
+					style='#if($link) background-image: url("$link");background-size: cover; #end'>
+					<div class="project-item-box">
+						<span>$ohit.name
+						#if( $modcollections.contains($ohit.getId())) * #end
+						</span>
+					</div>
+				</div>
 				</a>
-				</div>
-				</div>
 			#end
 		#end
 		

@@ -1,65 +1,80 @@
 <div style="padding:10px 20px">
-<h2>[[Donations Report]]</h2>
+
 #set( $searcher = $mediaarchive.getSearcher("transaction") )
 #set( $donations = $searcher.query().exact("collectionid",$librarycol.getId()).sort("paymentdateDown").search($context))
 #if( $donations.isEmpty()) 
 	<p>[[No Donations yet]]</p>
 #else
-
-<table class="table table-striped table-hover table-subscribers">
-   		<thead>
-		<tr class="tableheader">
+<h3>[[Open Institute Donations]]</h3>
+<div class="emdata">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr class="tableheader">
+		
+		<th style="width: 110px">[[Date]]</th>
+		
+		
 		<th>[[User]]</th>
-		<th>[[Total]]</th>
-		<th>[[Date]]</th>
-		<th>[[Type]]</th>
-		#if( $caneditcollection )
 		<th>[[Email]]</th>
+		<th>[[Total]]</th>
 		<th></th>
-		#end
 		</tr>
    		</thead>
   #foreach( $transaction in $donations)
         <tr>
+             <td>
+        		$!context.getDate($transaction.paymentdate)
+			</td> 
+			
+			
+			
+			
         	<td>
 	        	#set( $followeruser = $mediaarchive.getUser($transaction.userid) )
 			    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-				#set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
-				#if(!$userimageurl)
-					#set( $userimageurl = "$applink/theme/images/user.svg" )
-				#end
+				###set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
+				###if(!$userimageurl)
+				##	#set( $userimageurl = "$applink/theme/images/user.svg" )
+				###end
 				#if( $followeruser )
-			<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">
-			<img src="${userimageurl}"  title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> <span class="username">$followeruser.getAnonNickName()</span>
-			</a>
+					<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">
+					$followeruser.getAnonNickName()
+					##<img src="${userimageurl}"  title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> <span class="username">$followeruser.getAnonNickName()</span>
+					</a>
 				#end
 			</td> 
-        	<td style="font-size:1rem" class="text-right"><strong>$$transaction.totalprice</strong></span></td>
-        	<td>
-        		$!context.getDateTime($transaction.paymentdate)
-			</td>        	
-        	<td style="font-size:1rem" class="text-center">$mediaarchive.getCachedData("paymenttype",$transaction.paymenttype)</span></td>
-			#if( $caneditcollection )
+        	
+       	
+			
         	<td >
+        	#if( $caneditcollection )
         		$!transaction.name
         	
 		      #if( $transaction.paymentemail ) &lt;$transaction.paymentemail&gt;
 		      #else ($followeruser)
 		      	&lt;$!followeruser.getEmail()&gt;
 		      #end
+		      #end
         	</td>
-       	 	#end	
-       	 #if( $caneditcollection )
-        	<td class="text-center">
-	        	 	<a class="btn btn-primary btn-sm emdialog" 
+       	 		
+       	 	
+       	 	<td  style="width: 150px" class="text-right">$$!context.roundDouble($transaction.totalprice,2)</td>
+       	 	
+       	 	
+       	 
+        	<td class="text-center"  style="width: 50px">
+        	#if( $caneditcollection )
+	        	 	<a class="btn btn-xs btn-secondary emdialog" 
         	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=false"
         	 		title="[[Donation Details]]">
-        	 		Details
+        	 		<i class="fa fa-edit"></i>
         	 		</a>
+        	#end
         	</td>        	
-       		#end
+       		
         </tr>
   #end
   </table>
+  </div>
 #end
 </div>

@@ -3,16 +3,9 @@
 <properties beanname="dataSearcher">
 	<property id="date"  />
 	<property id="collectiveproject" />
-	<property id="expensetype" />
-	<property id="expensedescription" />
+	<property id="incometype" />
+	<property id="incomedescription" />
 	<property id="currencytype" />
 	<property id="total" />
 	<property id="receiptattachment" />
-	
-	<property id="user" />
-    <property id="hasreimbursed" />
-	<property id="reimburseuser" />  
-    <property id="reimbursedate" /> 
-  
-  
 </properties>

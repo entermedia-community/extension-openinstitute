@@ -27,9 +27,9 @@
     </name> 
   </property>  
  
-    <property id="expensetype" index="true" editable="true" stored="true"  datatype="list" listid="expensetype">
+    <property id="incometype" index="true" editable="true" stored="true"  datatype="list" listid="incometype">
     <name> 
-      <language id="en"><![CDATA[Expense Type]]></language> 
+      <language id="en"><![CDATA[Income Type]]></language> 
     </name> 
   </property>    
   
@@ -41,17 +41,17 @@
   
     <property id="date" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name>
-      <language id="en"><![CDATA[Expense Date]]></language>
+      <language id="en"><![CDATA[Income Date]]></language>
     </name>
   </property> 
   
-    <property id="user"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
+    <property id="user" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name> 
-      <language id="en"><![CDATA[Approved By]]></language> 
+      <language id="en"><![CDATA[Entered By]]></language> 
     </name> 
   </property>  
 
-    <property id="reimburseuser"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
+    <property id="reimburseuser" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name> 
       <language id="en"><![CDATA[Reimbursed to]]></language> 
     </name> 
@@ -73,13 +73,13 @@
   
   	<property id="receiptattachment" listid="asset" index="true"
 		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="/uploads/${year}/${collectiveid}/expenses/${id}">
+		sourcepath="/uploads/${year}/${collectiveid}/income/${id}">
 		<name>
 			<language id="en"><![CDATA[Receipt Photo]]></language>
 		</name>
 	</property>
   
-    <property id="expensedescription" index="true" editable="true" stored="true" viewtype="textarea">
+    <property id="incomedescription" index="true" editable="true" stored="true" viewtype="textarea">
     <name> 
       <language id="en"><![CDATA[Details]]></language> 
     </name> 

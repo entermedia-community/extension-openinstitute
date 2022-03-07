@@ -70,7 +70,10 @@ public class FinanceManager  implements CatalogEnabled
 	
 	public Map  getTotalIncomesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
-		Searcher incomesSearcher = getMediaArchive().getSearcher("transaction");
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		
+		//Regular Income
+		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
@@ -79,7 +82,30 @@ public class FinanceManager  implements CatalogEnabled
 		pageOfHits = new ArrayList(pageOfHits);
 		
 		
-		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+	
+			}
+			currencytotal = currencytotal + (Double)data.getValue("total");
+			bycurrency.replace(currency, currencytotal);
+		}
+		
+		//OI Donations (transaction table)
+		incomesSearcher = getMediaArchive().getSearcher("transaction");
+		query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
+		pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
+		
 		
 		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
@@ -95,6 +121,7 @@ public class FinanceManager  implements CatalogEnabled
 			currencytotal = currencytotal + (Double)data.getValue("totalprice");
 			bycurrency.replace(currency, currencytotal);
 		}
+
 		
 		return bycurrency;
 		
@@ -102,7 +129,10 @@ public class FinanceManager  implements CatalogEnabled
 	
 	public Map getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
-		Searcher incomesSearcher = getMediaArchive().getSearcher("transaction");
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		
+		//Regular Income
+		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
@@ -110,8 +140,30 @@ public class FinanceManager  implements CatalogEnabled
 		Collection pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits);
 		
+	
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Collection values = (Collection) bycurrency.get(currency);
+			if( values == null)
+			{
+				values = new ListHitTracker();
+				//values.add(data);
+				bycurrency.put(currency, values);
+			}
+			values.add(data);
+			
+		}
 		
-		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		//OI Donations (transaction table)
+		incomesSearcher = getMediaArchive().getSearcher("transaction");
+		query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
+		pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
 		
 		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
@@ -128,7 +180,7 @@ public class FinanceManager  implements CatalogEnabled
 			
 		}
 		
-		//summarize by INcomeTypr
+		//summarize by IncomeType
 		String currentcurrency = "";
 		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
 			Collection data = (Collection) set.getValue();
@@ -142,10 +194,18 @@ public class FinanceManager  implements CatalogEnabled
 				if (values == null) {
 					values = new SearchHitData();
 					currenttype.put(currenttypeid, values);
-					values.setValue("totalprice", 0.0);
+					values.setValue("total", 0.0);
+				}
+				Double currenttotal = 0.0;
+				if (row.getValue("incometype").equals("1")) {
+					//OI Donation different total field
+					currenttotal = (Double) row.getValue("totalprice");
+				}
+				else {
+					currenttotal = (Double) row.getValue("total");
 				}
 				
-				values.setValue("totalprice", (Double) values.getValue("totalprice") + (Double) row.getValue("totalprice"));
+				values.setValue("total", (Double) values.getValue("total") + currenttotal);
 				values.setValue("currencytype", (String) row.getValue("currencytype"));
 				values.setValue("incometype", currenttypeid);
 
