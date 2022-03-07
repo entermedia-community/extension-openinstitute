@@ -1,12 +1,12 @@
 import 'package:openinsitute_core/models/emData.dart';
 
-class TaskList {
+class ToDo {
   late String id;
   String? name;
   late Map<String, dynamic> properties;
   List<emData>? _tasks;
 
-  TaskList.fromJson(Map<String, dynamic> json) {
+  ToDo.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
     properties = json;

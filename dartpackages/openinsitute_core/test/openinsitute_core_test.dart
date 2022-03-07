@@ -9,6 +9,7 @@ import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
+import 'package:openinsitute_core/services/emDataManager.dart';
 
 void main() {
 
@@ -17,18 +18,19 @@ void main() {
   final oi = OpenI();
   Get.put<OpenI>(oi);
   oi.initialize();
-
   HttpOverrides.global = _MyHttpOverrides(); // Setting a customer override that'll use an unmocked HTTP client
-
 
   test('Load Settings', () async {
     Map? settings = await oi.loadAppSettings();
     expect(settings!.isNotEmpty, true);
 
-    List<Contact> contacts  = await oi.saveSomeStuff();
-
-
+    List<Contact> contacts  = await oi.testIstarSave();
     expect(contacts.isNotEmpty, true);
+
+    // Map<String, dynamic> datatest  = await oi.hiveTest();;
+    // expect(datatest.isNotEmpty, true);
+
+
 
 
     var url = "${settings!['dev']?['websocket_url']}";
@@ -39,7 +41,6 @@ void main() {
     expect(user != null, true);
 
     bool? emailed = await oi.emEmailKey("support@openedit.org");
-
     expect(emailed, true);
 
     Map simplesearch = {
@@ -57,15 +58,24 @@ void main() {
     };
 
 
-    List<emData> listsearch = await oi.getEmData("purpose", simplesearch);
+    List<emData> listsearch = await (await oi.datamanager.getSearcher("purpose")).getRemoteData(simplesearch);
     expect(listsearch.length > 0, true);
+
+    //List<emData> checkcache = await oi.datamanager.getSearcher("purpose").getAllHits();
+
+
+
+
     expect(user != null, true);
 
-    List<TaskList> tasks = await oi.getOpenTasks();
+    List<ToDo> tasks = await oi.getOpenTasks();
     expect(tasks.length > 0, true);
-    TaskList list = tasks.first;
+    ToDo list = tasks.first;
     expect(list.tasks!.isNotEmpty,true);
 
+
+
+    
 
 
 //    List<Task> tasks = oi.getOpenTasks();
@@ -74,7 +84,11 @@ void main() {
   });
 
 
+  test('Test Loading and Syncing Data', () async {
+    Searcher searcher = await oi.datamanager.getSearcher("purpose");
+    List<emData> checkcache = searcher.getAllHits();
 
+  });
 
 }
 

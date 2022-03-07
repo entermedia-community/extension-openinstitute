@@ -19,6 +19,7 @@ dependencies:
   json_annotation: ^4.4.0
   firebase_auth: ^3.3.6
   hive: ^2.0.6
+  hive_flutter: ^1.1.0
   isar: ^2.2.1
   isar_flutter_libs: ^2.2.1 # contains the binaries (not required for web)
   path_provider: ^2.0.9
@@ -32,6 +33,7 @@ dev_dependencies:
   build_runner: ^2.0.0
   json_serializable: ^6.0.0
   isar_generator: ^2.2.1
+  hive_generator: ^1.1.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
