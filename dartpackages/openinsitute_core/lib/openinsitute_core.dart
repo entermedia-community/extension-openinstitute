@@ -5,16 +5,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:path/path.dart' as path;
-
+import 'package:path_provider/path_provider.dart';
 
 import 'contact.dart';
 import 'models/emData.dart';
@@ -42,10 +46,15 @@ class OpenI {
     return _settings;
   }
 
+  DataManager get datamanager => Get.find();
+
 
   Future<void> initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this);
+    Get.put<DataManager>(DataManager());
+    await Hive.initFlutter();
+
   }
 
   Future<Map?> loadAppSettings() async {
@@ -250,23 +259,14 @@ class OpenI {
 
 
 
-  Future<List<emData>> getEmData(String inSearchType, Map inQuery) async {
 
-    final responsestring = await getEmResponse(app!["mediadb"] + '/services/lists/search/${inSearchType}/', inQuery,);
-    return compute(parseData, responsestring);
 
-  }
 
-   List<emData> parseData(String responseBody) {
-     final Map<String, dynamic> parsed = json.decode(responseBody);
-      return parsed["results"].map<emData>((json) => emData.fromJson(json)).toList();
-  }
-
-  Future<List<TaskList>> getOpenTasks() async {
+  Future<List<ToDo>> getOpenTasks() async {
     final responsestring = await getEmResponse(app!["mediadb"] + '/services/users/tasks/mytasks.json', {"goaltrackerstaff": "admin"},);
     Map<String, dynamic> results = json.decode(responsestring);
+    return results["tickets"].map<ToDo>((json) => ToDo.fromJson(json)).toList();
 
-    return results["tickets"].map<TaskList>((json) => TaskList.fromJson(json)).toList();
   }
 
 
@@ -286,7 +286,7 @@ class OpenI {
 
   }
 
-  Future<List<Contact>> saveSomeStuff() async {
+  Future<List<Contact>> testIstarSave() async {
     registerBinaries();
     final dir = await getApplicationSupportDirectory();
 
