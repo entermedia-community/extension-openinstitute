@@ -2,6 +2,8 @@
 #set( $topicid = $context.getRequestParameter("topic"))
 #set( $searcher = $mediaarchive.getSearcher("collectiveproject") )
 
+#if($collectionid)
+
 #if($caneditcollection)
 	#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).sort("name").search($context) )
 #else
@@ -10,9 +12,12 @@
 
 #if($topicid)
 	#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).exact("id",$topicid).searchOne() )
-#else
+#end
+
+#if( !$currenttopic)
 	#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).sort("name").searchOne() )
 #end
+
 
 #if( !$currenttopic)
 	##No topics found
@@ -24,10 +29,7 @@
 $context.putPageValue("currenttopic", $currenttopic)
 
 #if($currenttopic)
-$context.putPageValue("currenttopic", $currenttopic)
-
-
-
+	$context.putPageValue("currenttopic", $currenttopic)
 		<div class="collectivemaincol h-100">
 			<div class="row no-gutters h-100">
 				#if(!$browser.inApp())
@@ -89,7 +91,7 @@ $context.putPageValue("currenttopic", $currenttopic)
 			</div>	
 		</div>
 
-
+#end
 
 #end
 
