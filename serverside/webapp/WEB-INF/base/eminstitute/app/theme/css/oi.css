@@ -601,17 +601,7 @@ h1.navcommunity
 	width:calc(100% - 60px);
 
 	}
-	
-	
-.project-item-box {
-    height: 40px;
-}
-
-.project-item-box span {
-    padding: 0 15px;
-    line-height: 40px;
-}
-    
+		
 .subscribe-headline-content {
 	margin:10px 0;
 }
