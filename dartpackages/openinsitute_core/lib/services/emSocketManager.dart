@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -15,22 +14,35 @@ class EmSocketManager {
 
 
   connect() async {
-    String url = oi.app!["websocket"];
+    String url = "${oi.app!["websocket_url"]}?entermedia.key=${oi.emUser!.entermediakey}";
     channel = WebSocketChannel.connect(Uri.parse(url));
-    handleMessages(channel!.stream);
+
+    channel!.stream.listen((data) {
+      print("!!!!new msg: $data");
+
+    });
+
+    //handleMessages(channel!.stream);
 
   }
 
 
-  sendMessage(Map inMessage){
+  sendMessage(Map inMessage) async{
+      if(channel == null ){
+        await connect();
+      }
+      channel!.sink.add(inMessage);
 
   }
-
-
-
-  Future<dynamic> handleMessages(Stream<dynamic> stream) async {
-    await for (var value in stream) {
-      print(value);
+  sendString(String inString) async{
+    if(channel == null ){
+      await connect();
     }
+    channel!.sink.add(inString);
+
   }
+
+
+
+
 }

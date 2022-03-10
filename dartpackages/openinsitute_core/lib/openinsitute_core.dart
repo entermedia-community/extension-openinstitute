@@ -17,6 +17,7 @@ import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
+import 'package:openinsitute_core/services/emSocketManager.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -47,12 +48,13 @@ class OpenI {
   }
 
   DataManager get datamanager => Get.find();
-
+  EmSocketManager get emSocketManager => Get.find();
 
   Future<void> initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this);
     Get.put<DataManager>(DataManager());
+    Get.put<EmSocketManager>(EmSocketManager());
     await Hive.initFlutter();
 
   }

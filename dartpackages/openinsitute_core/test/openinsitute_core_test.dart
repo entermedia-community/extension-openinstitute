@@ -40,8 +40,8 @@ void main() {
     EmUser? user = await oi.login("admin", "admin");
     expect(user != null, true);
 
-    bool? emailed = await oi.emEmailKey("support@openedit.org");
-    expect(emailed, true);
+    // bool? emailed = await oi.emEmailKey("support@openedit.org");
+    // expect(emailed, true);
 
     Map simplesearch = {
       "page": "1",
@@ -82,6 +82,23 @@ void main() {
 
 
   });
+
+
+  test('Test Websocket Connection', () async {
+
+    EmUser? user = await oi.login("admin", "admin");
+    expect(user != null, true);
+
+    oi.emSocketManager.connect();
+    oi.emSocketManager.sendString("keepalive");
+    oi.emSocketManager.sendMessage({"keepalive":"true"});
+
+    await Future.delayed(const Duration(seconds: 20), (){});
+
+
+
+  });
+
 
 
   // test('Test Loading and Syncing Data', () async {
