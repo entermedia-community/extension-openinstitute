@@ -1,0 +1,11 @@
+
+<properties>
+  <property id="comment" index="true" filter="false" deleted="false" editable="false" stored="true" sortable="true" keyword="false">New
+    <name>
+      <language id="de"><![CDATA[Kommentar]]></language>
+      <language id="en"><![CDATA[Comment]]></language>
+      <language id="es"><![CDATA[Comentario]]></language>
+      <language id="fr"><![CDATA[Commentaire]]></language>
+    </name>
+  </property>
+</properties>

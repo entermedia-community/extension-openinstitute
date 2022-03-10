@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="order" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[order]]></language> 
+    </name> 
+  </property>  
+  <property id="port" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[port]]></language>
+    </name>
+  </property>
+</properties>
