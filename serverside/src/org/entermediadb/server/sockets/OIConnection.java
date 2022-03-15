@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 import javax.websocket.CloseReason;
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
@@ -41,6 +40,14 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 	protected String fieldSessionID;
 	protected String fieldUserId;
 	protected String fieldCatalogId;
+
+	public User getUser() {
+		return fieldUser;
+	}
+
+	public void setUser(User inUser) {
+		fieldUser = inUser;
+	}
 
 	protected Date fieldConnectionTime;
 	protected User fieldUser;
@@ -192,15 +199,8 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 		log.info(session.getId());
 		Map props = endpointConfig.getUserProperties();
-		HttpSession current = (HttpSession) session.getUserProperties().get(HttpSession.class.getName());
-		User user = (User) current.getServletContext().getAttribute("user");
-		if (user == null) {
-			user = (User) http.getAttribute("chatuser");
-		}
+		User user = getUser();
 		
-		if (user == null) {
-			user = (User) http.getAttribute("systemuser");
-		}
 		if (user == null) {
 			String entermediakey = (String) params.get("entermedia.key");
 			log.info("Entermedia key was " + entermediakey);
@@ -228,6 +228,7 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 		if (user != null) {
 			setUserId(user.getId());
+			setUser(user);
 		}
 
 		remoteEndpointBasic = session.getBasicRemote();

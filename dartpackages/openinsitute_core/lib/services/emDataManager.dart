@@ -29,10 +29,14 @@ class DataManager {
     //https://stackoverflow.com/questions/53886304/understanding-factory-constructor-code-example-dart do this?
     return searcher;
   }
+
+
+
+
+
 }
 
 class Searcher {
-
   //https://stackoverflow.com/questions/54549235/dart-await-on-constructor
 
   late String searchtype;
@@ -41,13 +45,12 @@ class Searcher {
 
   Searcher._();
 
-  static Future<Searcher> createSearcher(String inSearchType) async{
+  static Future<Searcher> createSearcher(String inSearchType) async {
     var searcher = Searcher._();
     searcher.searchtype = inSearchType;
     searcher.box = await searcher.getBox(inSearchType);
     return searcher;
   }
-
 
   Searcher(this.searchtype);
 
@@ -78,7 +81,6 @@ class Searcher {
         box.put(element.id, element.properties);
       });
     } else {
-
       DateTime lastsync = box.get("lastsync"); //dunno if this works!
       List<emData> tosave =
           await getRemoteData({"emrecorddate???? neeed to chec": "*"});
@@ -88,7 +90,6 @@ class Searcher {
   }
 
   Future<List<emData>> getRemoteData(Map inQuery) async {
-
     final responsestring = await oi.getEmResponse(
       oi.app!["mediadb"] + '/services/lists/search/${searchtype}/',
       inQuery,
@@ -112,13 +113,14 @@ class Searcher {
     return results;
   }
 
-  // List<emData> getAllHits() async {
-  //    box.keys.forEach((key) {
-  //     if (key != "lastsync") {
-  //
-  //
-  //
-  //     }
-  //   });
-  // }
+
+  Stream<emData> updates() async * {
+
+    Stream<dynamic> stream = oi.emSocketManager.stream;
+    await for (final data in stream){
+          json.decode(data);
+    }
+
+  }
+
 }

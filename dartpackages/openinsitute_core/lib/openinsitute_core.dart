@@ -26,7 +26,7 @@ import 'models/emData.dart';
 
 class OpenI {
   Map? _settings;
-  EmUser? emUser;
+  EmUser? emUser; 
 
   Map? get app {
     if (_settings == null) {
@@ -234,8 +234,12 @@ class OpenI {
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
       this.emUser = EmUser.fromJson(results);
+      print("complete");
+
       return this.emUser;
     } else {
+      print("login failed");
+
       return null;
     }
   }
