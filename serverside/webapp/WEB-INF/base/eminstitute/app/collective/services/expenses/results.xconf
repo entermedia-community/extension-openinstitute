@@ -1,0 +1,9 @@
+<page>
+
+  <path-action name="DataEditModule.searchFields" >
+		<property name="searchtype">collectiveexpense</property>
+		<property name="hitsname">expenses</property>
+		
+  </path-action>
+
+</page>

@@ -1,9 +1,4 @@
 #set($collectionid = $librarycol.getId())
-#set( $catalagDB = $mediaarchive.query("catalogsettings").exact("id", "events_billing_notify_invoice_appid").searchOne() ) 
-#set( $db = "entermediadb" ) 
-#if ( $catalagDB )
-#set( $db = "$catalagDB.value" ) 
-#end
 
 <div style="padding:10px 20px;">
               #if( $canviewsettings )
@@ -15,44 +10,59 @@
                       href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
                       class="emdialog btn btn-sm btn-primary mb-4">[[Add Expenses]]</a>
               #end
+		<A href="#" onclick="$('#searchform').toggle()"><i class="fa fa-search"></i></A>
 
-              #set( $expenses = $mediaarchive.query("collectiveexpense").match("collectionid",$collectionid).sort("dateDown").search())
-              #if ($expenses)
-                  <h3>[[Expenses]]</h3>
-                  <div class="emdata">
-                      <table class="table table-striped">
-                          <thead>
-                              <tr class="tableheader">
-                                  <th style="width: 110px">[[Date]]</th>
-                                  <th>[[Type]]</th>
-                                  <th>[[Description]]</th>
-                                  <th>[[Currency]]</th>
-                                  <th style="width: 150px">[[Total]]</th>
-                                  
-                                 <th style="width: 50px"></th>
-                              </tr>
-                          </thead>
-                          #foreach($hit in $expenses)
-                              <tr>
-                                  <td>$!context.getDate($hit.date)</td>
-                                  <td>$!mediaarchive.getData("expensetype", $hit.expensetype)</td>
-                                  <td>$!mediaarchive.text($hit.expensedescription, $hit.id)</td>
-                                  <td style="text-align: center">$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
-                                  <td style="text-align: right;">$ $!context.roundDouble($!hit.total, 2)</td>
-                        <td style="text-align: center">
-                            #if( $canviewsettings )
-                                <a
-                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$!collectionid"
-                                    class="btn btn-xs btn-secondary emdialog"
-                                    data-hidefooter="true"
-                                    ><i class="fa fa-edit"></i></a>
-                                    
-                            #end
-                        </td>
-                    </tr>
-                #end
-            </table>
-        </div>
-    #end
+	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/expenses/results.html">
+	
+		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
+		$context.putPageValue("searcher",$searcher)
+		#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
+	
+		<input type="hidden" name="searchtype" value="collectiveexpense" />
+		
+		<input type="hidden" name="field" value="collectionid" />
+		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
+		<input type="hidden" name="operation" value="exact" />
+		<input type="hidden" name="oemaxlevel" value="1" />
+		
+		<table>
+		<tr>
+		<td width="100%">
+		<div  id="searchform" class="row inlinesearch" style="display:none" >
+		$context.putPageValue("autocomplete","off")
+			#foreach( $detail in $details)
+			<div class="col-md-3">
+					$context.putPageValue("detail", $detail)
+					$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+			</div>
+			#if( $counter == 4)
+				</div>
+				<div  class="row" >
+			#end	
+			#end
+		</div>	
+		</td>
+		</tr>
+		</table>
+
+		<div style="height:30px;width:100%">
+		<div style="float:right">
+		[[Sort by]]
+		<select class="select2" name="sortby" >
+			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
+		#foreach( $detail in $details)
+			<option value="$detail.getId()Down">$context.getText($detail)</option>
+			<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+		#end
+		</select>
+		</div>
+		</div>
+
+	</form>
+	#ifnull( $expenses)
+              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
+              $context.putPageValue("expenses",$expenses)
+	#end
+	$pages.include("./results.html",$context)
 </div>
 

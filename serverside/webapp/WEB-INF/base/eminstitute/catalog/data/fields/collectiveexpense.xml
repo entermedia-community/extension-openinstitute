@@ -21,6 +21,12 @@
     </name>
   </property> 
   
+   <property id="expensedescription" index="true" editable="true" stored="true" viewtype="textarea">
+    <name> 
+      <language id="en"><![CDATA[Details]]></language> 
+    </name> 
+  </property>  
+  
       <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
@@ -44,12 +50,30 @@
       <language id="en"><![CDATA[Expense Date]]></language>
     </name>
   </property> 
-  
+
     <property id="user"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
-      <language id="en"><![CDATA[Approved By]]></language> 
+      <language id="en"><![CDATA[Expense Approval]]></language> 
     </name> 
   </property>  
+
+	<property id="ispaid" index="true" stored="true" type="boolean" >
+	 <name>
+	 <language id="en" > <![CDATA[Is Paid]]> </language>
+	 </name>
+	</property>
+  
+    <property id="paymentdate" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
+    <name>
+      <language id="en"><![CDATA[Paid Date]]></language>
+    </name>
+  </property> 
+   <property id="paymentdescription" index="true" editable="true" stored="true" viewtype="textarea">
+    <name> 
+      <language id="en"><![CDATA[How Paid]]></language> 
+    </name> 
+  </property>  
+
 
     <property id="reimburseuser"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
@@ -57,18 +81,18 @@
     </name> 
   </property>  
 
+  	<property id="hasreimbursed" index="true" stored="true" type="boolean" >
+	 <name>
+	 <language id="en" > <![CDATA[Was Reimbursed]]> </language>
+	 </name>
+	</property>
+  
       <property id="reimbursedate" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="false" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name>
       <language id="en"><![CDATA[Reimbursed Date]]></language>
     </name>
   </property> 
   
-  
-  	<property id="hasreimbursed" index="true" stored="true" type="boolean" >
-	 <name>
-	 <language id="en" > <![CDATA[Was Reimbursed]]> </language>
-	 </name>
-	</property>
   
   
   	<property id="receiptattachment" listid="asset" index="true"
@@ -78,12 +102,6 @@
 			<language id="en"><![CDATA[Receipt Photo]]></language>
 		</name>
 	</property>
-  
-    <property id="expensedescription" index="true" editable="true" stored="true" viewtype="textarea">
-    <name> 
-      <language id="en"><![CDATA[Details]]></language> 
-    </name> 
-  </property>  
   
     <property id="collectiveproject" required="true" 
  	index="true" stored="true" editable="true"  type="list"  datatype="list"
