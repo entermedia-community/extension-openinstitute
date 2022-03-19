@@ -264,6 +264,43 @@ class OpenI {
   }
 
 
+  // todo; Change end points for both calls below. - Mando
+  //Entermedia send 6 digit code to email.
+  Future<bool?> emEmailLoginCode(String email) async {
+    this.emUser = null;
+    // tempKey = null;
+    // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
+    final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/emailonlysendmagiclinkfinish.json', {"to": email},);
+    print("Sending email with login code to..." + email);
+    if (resMap != null) {
+      var loggedin = true;
+      return loggedin;
+    } else {
+      return false;
+    }
+  }
+
+  //Entermedia login with 6 digit code from email. Returns EM User.
+  Future<EmUser?> loginCode(String id, String password) async {
+    final resMap = await postEntermedia(
+        app!["mediadb"] + '/services/authentication/login.json',
+        {"id": id, "password": password},
+        customError: "Invalid credentials. Please try again!");
+    print("Logging in");
+    if (resMap != null) {
+      Map<String, dynamic> results = resMap["results"];
+      this.emUser = EmUser.fromJson(results);
+      print("complete");
+
+      return this.emUser;
+    } else {
+      print("login failed");
+
+      return null;
+    }
+  }
+
+
 
 
 
