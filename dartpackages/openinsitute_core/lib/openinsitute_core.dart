@@ -270,7 +270,7 @@ class OpenI {
     this.emUser = null;
     // tempKey = null;
     // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
-    final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/emailonlysendmagiclinkfinish.json', {"to": email},);
+    final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/sendmagiclink.json', {"to": email},);
     print("Sending email with login code to..." + email);
     if (resMap != null) {
       var loggedin = true;
@@ -281,10 +281,10 @@ class OpenI {
   }
 
   //Entermedia login with 6 digit code from email. Returns EM User.
-  Future<EmUser?> loginCode(String id, String password) async {
+  Future<EmUser?> loginCode(String logincode) async {
     final resMap = await postEntermedia(
         app!["mediadb"] + '/services/authentication/login.json',
-        {"id": id, "password": password},
+        {"templogincode": logincode},
         customError: "Invalid credentials. Please try again!");
     print("Logging in");
     if (resMap != null) {
