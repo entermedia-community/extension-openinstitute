@@ -286,7 +286,7 @@ class OpenI {
         app!["mediadb"] + '/services/authentication/login.json',
         {"templogincode": logincode},
         customError: "Invalid credentials. Please try again!");
-    print("Logging in");
+    print("Logging in with code: " + logincode);
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
       this.emUser = EmUser.fromJson(results);
