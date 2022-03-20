@@ -65,7 +65,11 @@
 						#if ($libraryhit.getId() && $libraryhit.getName())
 						<li class="dropdown-item #if($library.id==$libraryhit.getId()) currentlibrary #end">
 							<a class="subnav-link "
-							 	href="$applink/organization/projects/$libraryhit.getId()/#dash($libraryhit.name).html"
+							#if( $libraryhit.communitysubdomain)
+								href="//${libraryhit.communitysubdomain}$applink/"
+							#else
+							 	href="${context.siteRoot}$applink/organization/projects/$libraryhit.getId()/#dash($libraryhit.name).html"
+							#end	 
 							>#esc($libraryhit.name)</a>			                    	
 				       	</li>
 				       	#end
