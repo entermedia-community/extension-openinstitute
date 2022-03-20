@@ -197,15 +197,25 @@ public class FinanceManager  implements CatalogEnabled
 					values.setValue("total", 0.0);
 				}
 				Double currenttotal = 0.0;
-				if (row.getValue("incometype").equals("1")) {
+				String income = row.get("incometype");
+				if (income != null && income.equals("1")) 
+				{
 					//OI Donation different total field
 					currenttotal = (Double) row.getValue("totalprice");
 				}
 				else {
 					currenttotal = (Double) row.getValue("total");
 				}
-				
-				values.setValue("total", (Double) values.getValue("total") + currenttotal);
+				Double subtotal = (Double)values.getValue("total");
+				if( subtotal == null)
+				{
+					subtotal = 0D;
+				}
+				if( currenttotal == null)
+				{
+					currenttotal = 0D;
+				}
+				values.setValue("total",  subtotal + currenttotal);
 				values.setValue("currencytype", (String) row.getValue("currencytype"));
 				values.setValue("incometype", currenttypeid);
 

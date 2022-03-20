@@ -22,9 +22,9 @@
                                   <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
                                   <td>#if($hit.ispaid)[[paid]]#end</td>
                         <td style="text-align: center">
-                            #if( $canviewsettings )
+                            #if( $caneditcollection )
                                 <a
-                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$!collectionid"
+                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
                                     class="btn btn-xs btn-secondary emdialog"
                                     data-hidefooter="true"
                                     ><i class="fa fa-edit"></i></a>

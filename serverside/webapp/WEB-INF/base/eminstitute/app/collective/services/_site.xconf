@@ -4,6 +4,7 @@
 	<property name="collectivesection">settings</property>
 	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
+	<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
 	
 	
 </page>

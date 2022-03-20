@@ -2,7 +2,7 @@
 
 <div class="stations-grid ">
 	<div class="project-grid">
-		#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).sort("isonteam").search() )
+		#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).search($context) )
 		#set( $collections = $mediaarchive.query("librarycollection").ids($ids).sort("name").search($context) )
 		#set( $modcollections = $chatManager.loadCollectionsModified($collections,$user.getId() ) )
 	
