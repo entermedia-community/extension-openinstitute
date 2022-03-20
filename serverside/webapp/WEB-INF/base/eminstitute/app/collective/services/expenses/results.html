@@ -9,7 +9,7 @@
                                   <th>[[Description]]</th>
                                   <th>[[Currency]]</th>
                                   <th>[[Total]]</th>
-                                  <th>[[Is Paid]]</th>
+                                  <th>[[Reimbursed]]</th>
                                   <th></th>
                               </tr>
                           </thead>
@@ -20,11 +20,11 @@
                                   <td>#esc($hit.expensedescription)</td>
                                   <td>$!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
                                   <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
-                                  <td>#if($hit.ispaid)[[paid]]#end</td>
+                                  <td>#if($hit.hasreimbursed == true)[[true]]#end</td>
                         <td style="text-align: center">
-                            #if( $canviewsettings )
+                            #if( $caneditcollection )
                                 <a
-                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$!collectionid"
+                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
                                     class="btn btn-xs btn-secondary emdialog"
                                     data-hidefooter="true"
                                     ><i class="fa fa-edit"></i></a>
