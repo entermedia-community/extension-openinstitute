@@ -271,7 +271,7 @@ public class FinanceManager  implements CatalogEnabled
 					values.setValue("total", 0.0);
 				}
 				
-				values.setValue("total", (Double) values.getValue("total") + (Double) row.getValue("total"));
+				values.setValue("total", addUp((Double) values.getValue("total") , (Double) row.getValue("total")));
 				values.setValue("currencytype", (String) row.getValue("currencytype"));
 				values.setValue("expensetype", currenttypeid);
 
@@ -284,6 +284,21 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 		
+	private Double addUp(Double inValue, Double inValue2)
+	{
+		if(inValue == null)
+		{
+			inValue = 0D;
+		}
+		if(inValue2 == null)
+		{
+			inValue2 = 0D;
+		}
+		
+		return inValue + inValue2;
+	}
+
+
 	public ArrayList<Map<String, Object>>   getTotalExpensesByDateRange(String inCollectionId, DateRange inDateRange)
 	{
 		Searcher expenseSearcher = getMediaArchive().getSearcher("collectiveexpense");
@@ -319,11 +334,7 @@ public class FinanceManager  implements CatalogEnabled
 	
 			}
 			Double total = (Double)data.getValue("total");
-			if( total == null)
-			{
-				total = 0D;
-			}
-			currencytotal = currencytotal + total;
+			currencytotal = addUp(currencytotal , total);
 			bycurrency.put(currency, currencytotal);
 		}
 		
