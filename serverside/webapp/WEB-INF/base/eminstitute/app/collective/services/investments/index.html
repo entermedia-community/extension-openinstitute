@@ -1,26 +1,21 @@
 #set($collectionid = $librarycol.getId())
 
 <div style="padding:10px 20px;">
-              #if( $canviewsettings )
-              	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
-<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
-#end
-              #end    
-                 #if( $caneditcollection )
-                                                   <a
-                      href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-                      class="emdialog btn btn-sm btn-primary mb-4">[[Add Expenses]]</a>
-                #end      
-              
+            
+            #if( $caneditcollection )    
+           <a
+                      href="$applink/collective/services/investments/addnew.html?collectionid=${collectionid}"
+                      class="emdialog btn btn-sm btn-primary mb-4">[[Add Investment Or Disbursement]]</a>
+              #end
 		<A href="#" onclick="$('#searchform').toggle()"><i class="fa fa-search"></i></A>
 
-	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/expenses/results.html">
+	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/investments/results.html">
 	
-		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
+		#set( $searcher = $mediaarchive.getSearcher("collectiveinvestment") )
 		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
+		#set ($details = $searcher.getDetailsForView("collectiveinvestment/search", $userprofile))
 	
-		<input type="hidden" name="searchtype" value="collectiveexpense" />
+		<input type="hidden" name="searchtype" value="collectiveinvestment" />
 		
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
@@ -51,7 +46,7 @@
 		<div style="float:right">
 		[[Sort by]]
 		<select class="select2" name="sortby" >
-			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
+			#set ($details = $searcher.getDetailsForView("collectiveinvestment/edit", $userprofile))
 		#foreach( $detail in $details)
 			<option value="$detail.getId()Down">$context.getText($detail)</option>
 			<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
@@ -61,9 +56,9 @@
 		</div>
 
 	</form>
-	#ifnull( $expenses)
-              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("expenses",$expenses)
+	#ifnull( $investments)
+              #set( $investments = $mediaarchive.query("collectiveinvestment").exact("collectionid",$collectionid).sort("dateDown").search($context))
+              $context.putPageValue("investments",$investments)
 	#end
 	$pages.include("./results.html",$context)
 </div>

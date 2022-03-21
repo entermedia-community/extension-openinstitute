@@ -17,16 +17,21 @@
 						</li>
 						
 
-						<li class="#if($collectiveadminsection == "incomes") current #end">
+						<li class="#if($collectiveadminsection == "income") current #end">
 							<a href="$applink/collective/services/income/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Income]]</a>
+						</li>
+
+						
+						<li class="#if($collectiveadminsection == "invoices") current #end">
+							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
 						</li>
 					
 						<li class="#if($collectiveadminsection == "expenses") current #end">
 							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
 						</li>
-						
-						<li class="#if($collectiveadminsection == "invoices") current #end">
-							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
+
+						<li class="#if($collectiveadminsection == "investments") current #end">
+							<a href="$applink/collective/services/investments/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Investments]]</a>
 						</li>
 						
 

@@ -318,8 +318,13 @@ public class FinanceManager  implements CatalogEnabled
 				bycurrency.put(currency, currencytotal);
 	
 			}
-			currencytotal = currencytotal + (Double)data.getValue("total");
-			bycurrency.replace(currency, currencytotal);
+			Double total = (Double)data.getValue("total");
+			if( total == null)
+			{
+				total = 0D;
+			}
+			currencytotal = currencytotal + total;
+			bycurrency.put(currency, currencytotal);
 		}
 		
 		return bycurrency;
