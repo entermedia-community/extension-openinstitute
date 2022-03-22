@@ -7,6 +7,7 @@
   <property name="themeprefix">/${applicationid}/theme</property>
   
   <property name="section">eminstituteapp</property>
+  <property name="allowguestregistration">true</property>
   
   <inner-layout>/${applicationid}/theme/layouts/application-collective.html</inner-layout>
   <property name="editable">true</property>

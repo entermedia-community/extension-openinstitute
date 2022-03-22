@@ -6,6 +6,7 @@
   <property name="fallbackdirectory">/WEB-INF/base/mediadb</property>
   <property name="appmodule">asset</property>
   <property name="applicationid">site/mediadb</property>
+  <property name="allowguestregistration">true</property>
   <property name="title">Site Manager</property>
   <permission name="view">
   	<group id="administrators"/>
