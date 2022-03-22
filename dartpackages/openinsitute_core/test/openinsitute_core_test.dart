@@ -57,11 +57,10 @@ void main() {
       }
     };
 
-
     List<emData> listsearch = await (await oi.datamanager.getSearcher("purpose")).getRemoteData(simplesearch);
     expect(listsearch.length > 0, true);
 
-    //List<emData> checkcache = await oi.datamanager.getSearcher("purpose").getAllHits();
+    List<emData> checkcache = (await oi.datamanager.getSearcher("purpose")).getAllHits();
 
 
 
@@ -75,7 +74,7 @@ void main() {
 
 
 
-    
+
 
 
 //    List<Task> tasks = oi.getOpenTasks();

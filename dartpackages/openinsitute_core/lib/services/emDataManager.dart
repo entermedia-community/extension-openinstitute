@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -73,10 +72,37 @@ class Searcher {
     return box.get("test");
   }
 
+  List<emData> getAllHits(){
+    List<emData> list = [];
+    // List list = List.generate(box.keys.length, ,{"growable":true});
+     box.keys.forEach((element) {
+       emData newdata = emData.fromJson(box.get(element));
+       list.add(newdata);
+     });
+     return list;
+
+  }
+
+
   Future<bool> syncData(bool full) async {
     if (full) {
       await box.clear();
-      List<emData> tosave = await getRemoteData({"id": "*"});
+
+      Map simplesearch = {
+        "page": "1",
+        "hitsperpage": "20",
+        "query": {
+          "terms": [
+            {
+              "field": "id",
+              "operation": "matches",
+              "value": "*"
+            }
+          ]
+        }
+      };
+
+      List<emData> tosave = await getRemoteData(simplesearch);
       tosave.forEach((element) {
         box.put(element.id, element.properties);
       });
@@ -85,7 +111,7 @@ class Searcher {
       List<emData> tosave =
           await getRemoteData({"emrecorddate???? neeed to chec": "*"});
     }
-    box.put("lastsync", DateTime.now());
+    //box.put("lastsync", DateTime.now());
     return true;
   }
 

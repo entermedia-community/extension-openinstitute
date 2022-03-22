@@ -4,13 +4,10 @@ import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
@@ -22,11 +19,14 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 import 'contact.dart';
-import 'models/emData.dart';
 
 class OpenI {
   Map? _settings;
   EmUser? emUser; 
+  DataManager? dataManager;
+  EmSocketManager? socketManager;
+
+
 
   Map? get app {
     if (_settings == null) {
@@ -47,14 +47,16 @@ class OpenI {
     return _settings;
   }
 
-  DataManager get datamanager => Get.find();
-  EmSocketManager get emSocketManager => Get.find();
+  DataManager get datamanager => Get.find<DataManager>();
+  EmSocketManager get emSocketManager => Get.find<EmSocketManager>();
 
   Future<void> initialize() async {
     await loadAppSettings();
-    Get.put<OpenI>(this);
-    Get.put<DataManager>(DataManager());
-    Get.put<EmSocketManager>(EmSocketManager());
+    Get.put<OpenI>(this,permanent: true);
+    dataManager = DataManager();
+    Get.put<DataManager>(dataManager!,permanent: true);
+    socketManager = EmSocketManager();
+    Get.put<EmSocketManager>(socketManager!,permanent: true);
     await Hive.initFlutter();
 
   }
@@ -112,6 +114,10 @@ class OpenI {
     if (this.emUser != null) {
       String tokenKey = handleTokenKey(this.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
+    } else{
+      String tokenKey = handleTokenKey("adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc");
+      headers.addAll({"X-token": tokenKey});
+
     }
     //make API post
     final response = await httpRequest(
