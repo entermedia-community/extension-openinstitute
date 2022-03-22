@@ -5,4 +5,7 @@
   
   <property name="siteid">site</property>
 
+  <property name="allowguestregistration">true</property>
+  <property name="autologingroup">users</property>
+
 </page>

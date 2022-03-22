@@ -3,7 +3,7 @@
 <page>
 	<property name="encoding">UTF-8</property>
 
-	<property name="autologingroup">guest</property>
+	<property name="autologingroup">users</property>
 	<property name="referredgroup">media</property>
 	<!--
 	<property name="systemfromemail">noreply@entermediasoftware.com</property>
