@@ -2,19 +2,15 @@
 <div class="contentcolumn">
 	<h1>[[Donate to ]] $librarycol</h1>
 	#if(!$user)
-		<div style="padding:20px 0">
-		#set($loginok =	"$applink/collective/donate/$!librarycol.id/donate.html")
-		<i class="fas fa-credit-card"></i> [[Please Login to Donate with Credit Card]] 
-		<div style="padding:20px 0 10px;">
-	  		<a href="$applink/authentication/logon.html?loginokpage=$!loginok"	class="btn btn-success">[[Login to Donate With Credit Card]]</a>
+		<div style="padding:20px ">
+	
+			#set($loginok =	"$applink/collective/donate/$!librarycol.id/donate.html")
+			<i class="fas fa-credit-card"></i> [[Please Login to Donate with Credit Card]] 
+			<div style="padding:20px 0 10px;">
+		  		<a href="$applink/authentication/logon.html?loginokpage=$!loginok"	class="btn btn-success">[[Login to Donate With Credit Card]]</a>
+		  	</div>
 	  	</div>
-	  	<div class="float-right">
-	  		<img src="$applink/theme/icons/PayPal.svg" style="margin-right: 10px; height: 28px;" />
-	  		<img src="$applink/theme/icons/creditcard.png" />
-	  		
-	  		</div>
-	  	<div class="clearfix"></div>
-	  	</div>
+		<p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
 	  	$pages.include("$apphome/collective/donate/paypalform.html",$context)
 	#else
 	  	$pages.include("$apphome/collective/donate/creditcardform.html",$context)
