@@ -11,11 +11,10 @@
 #end
 #set( $target = "tasklist#eid($goal.id)")
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
-<div id="editgoal">
+<div id="editgoal-${goal.id}">
 <div id="$target">
 <div  class="goalstaskcontainer" id="${goal.id}container">
 
-<div>
 	#set($points = 0)
 	#foreach($task in $tasks)
 		#set( $tree =  $mediaarchive.getCategory($task.projectdepartment))
@@ -27,9 +26,9 @@
 			#set($points = $points + $c)
 		#end
 		#set($collectionid = $goal.collectionid)
-		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$goal.collectionid&onlyopen=$!onlyopen&targetdiv=$target")
+		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
-			<div id="taskrow$task.getId()" class="goaltaskrow" >
+			<div id="taskrow${task.id}" class="goaltaskrow" >
 				<div class="taskage">$task.getAge()</div>
 				<div class="taskowner">$!mediaarchive.getUser($task.completedby).getAnonNickName()</div>
 				<div class="tasktype">
@@ -38,22 +37,17 @@
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
 				#if($!task.comment.length() > 300)
-				$!task.comment.substring(0, 300) ...
+					$!task.comment.substring(0, 300) ...
 				#else
-				$!task.comment
+					$!task.comment
 				#end
 				</div>
 	
 				
-				
-				
-	
 				<div class="taskstatus goalstatus-$!task.taskstatus">
-					
 					<a 
-					
 					#if($caneditcollection)
-						id="task$task.getId()"
+						id="task${task.id}"
 						href="$edittask"
 						title="[[Edit Task]]"
 					#else
@@ -63,7 +57,7 @@
 					data-focuson="$task.id"
 					data-width="900"
 					class=" taskedit taskedit-$!{task.taskstatus} #if($caneditcollection) ajax #end " 
-					data-targetdiv="taskrow$task.getId()" 
+					data-targetdiv="taskrow${task.id}" 
 					data-oemaxlevel="1" 
 					 >
 					##<i class="fas fa-pencil-alt"></i>
@@ -75,10 +69,9 @@
 				<div class="clearfix"></div>
 			</div>
 	#end
-</div>
 
 	<div class="clearfix"></div>	
-						
+
 	#if($user && ( $canviewsettings || $caneditcollection)  && $goal.collectionid)
 
 	<a class="appendgoalbutton"
@@ -91,7 +84,7 @@
 		data-hitssessionid="$!{goalhits.getSessionId()}"
 		data-goalfolder="$!goalfolder" ##tabs
 		data-pickone="true"
-		data-goalid="$goal.id"
+		data-goalid="${goal.id}"
 		data-dialogid="picktask"
 		href="$applink/collective/goals/task/noteedit.html"
 		 ><i class="fas fa-sticky-note"></i> 
