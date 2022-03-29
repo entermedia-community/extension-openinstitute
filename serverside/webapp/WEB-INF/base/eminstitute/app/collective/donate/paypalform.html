@@ -10,6 +10,10 @@
 							<input type="hidden" name="paymentemail.value" id="paypalemail"/>
 							<input type="hidden" name="field" value="name" />
 							<input type="hidden" name="name.value" id="paypalname"/>
+							
+							<input type="hidden" name="firstName.value" id="firstname"/>
+							<input type="hidden" name="lastName.value" id="lastname"/>
+
 							<input type="hidden" name="field" value="authorizationid" />
 							<input type="hidden" name="authorizationid.value" id="paypalauthorization"/>
 						
@@ -148,6 +152,8 @@ $(document).ready(function() {
 		        var first = authorization.payer.name.given_name;
 		        var last = authorization.payer.name.surname;
 		        $("#paypalname").val(first + " " + last);
+		        $("#firstname").val(first);
+		        $("#lastname").val(last);
 		        
 		        var email = authorization.payer.email_address;
 		        $("#paypalemail").val(email);
