@@ -2,6 +2,7 @@
 
 <div class="stations-grid ">
 	<div class="project-grid">
+
 		#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).search($context) )
 		#set($oids = [])
 		#foreach( $ohit in $ids )
@@ -9,6 +10,7 @@
 		#end
 		
 		#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
+
 		#set( $modcollections = $chatManager.loadCollectionsModified($collections,$user.getId() ) )
 	
 		#foreach( $ohit in $collections )

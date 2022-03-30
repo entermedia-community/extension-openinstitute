@@ -270,12 +270,11 @@ class OpenI {
   }
 
 
-  // todo; Change end points for both calls below. - Mando
-  //Entermedia send 6 digit code to email.
+
+  // todo; Entermedia send 6 digit code to email.
   Future<bool?> emEmailLoginCode(String email) async {
     this.emUser = null;
     // tempKey = null;
-    // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
     final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/sendmagiclink.json', {"to": email},);
     print("Sending email with login code to..." + email);
     if (resMap != null) {
@@ -286,11 +285,35 @@ class OpenI {
     }
   }
 
-  //Entermedia login with 6 digit code from email. Returns EM User.
-  Future<EmUser?> loginCode(String logincode) async {
+  //todo; Create NEW user and send 6 digit temp code to email.
+  Future<bool?> emCreateNewUser(String email, String firstName, String lastName) async {
+    this.emUser = null;
+
+    final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/sendnewuseremail.json',
+      {
+      "email": email,
+      "firstName": firstName,
+      "lastName": lastName
+      },
+    );
+    print("Creating new user " + firstName + " with email: " + email);
+    if (resMap != null) {
+      var loggedin = true;
+      return loggedin;
+    } else {
+      return false;
+    }
+  }
+
+  //todo; Entermedia login with 6 digit code from email. Returns EM User.
+  Future<EmUser?> loginCode(String email, String logincode) async {
     final resMap = await postEntermedia(
         app!["mediadb"] + '/services/authentication/login.json',
-        {"templogincode": logincode},
+        {
+          "email": email,
+          "templogincode": logincode
+
+        },
         customError: "Invalid credentials. Please try again!");
     print("Logging in with code: " + logincode);
     if (resMap != null) {
@@ -305,6 +328,7 @@ class OpenI {
       return null;
     }
   }
+
 
 
 
