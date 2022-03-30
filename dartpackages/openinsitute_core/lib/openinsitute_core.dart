@@ -357,5 +357,10 @@ class OpenI {
 
   }
 
+  bool isAuthenticated(){
+    return emUser == null;
+  }
+
+
 
 }
