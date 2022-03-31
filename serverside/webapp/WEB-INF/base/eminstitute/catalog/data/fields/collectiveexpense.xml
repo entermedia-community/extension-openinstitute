@@ -57,6 +57,18 @@
     </name> 
   </property>  
 
+   <property id="ispaid" index="true" stored="true" type="boolean" >
+	 <name>
+	 <language id="en" > <![CDATA[Payment Is Sent]]> </language>
+	 </name>
+	</property>
+  
+    <property id="paymentdate" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
+    <name>
+      <language id="en"><![CDATA[Paid Date]]></language>
+    </name>
+  </property> 
+  
    <property id="paymentdescription" index="true" editable="true" stored="true" viewtype="textarea">
     <name> 
       <language id="en"><![CDATA[How Paid]]></language> 

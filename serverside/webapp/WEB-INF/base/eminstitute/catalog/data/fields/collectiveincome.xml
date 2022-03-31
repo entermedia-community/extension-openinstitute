@@ -93,6 +93,23 @@
     </name> 
   </property> 
 
+   <property id="paymenttype" index="true" filter="false" editable="false" stored="true" sortable="true" keyword="false" type="list">
+    <name>
+      <language id="en"><![CDATA[Payment Type]]></language>
+    </name>
+  </property>
+
+  <property id="paymentemail" index="true" editable="true" stored="true">
+    <name> 
+      <language id="en"><![CDATA[Payment Email]]></language> 
+    </name> 
+  </property>     
+
+    <property id="isdonation" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[isdonation]]></language> 
+    </name> 
+  </property>  
   
   
 </properties>

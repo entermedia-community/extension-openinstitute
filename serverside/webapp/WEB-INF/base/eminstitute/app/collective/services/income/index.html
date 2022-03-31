@@ -6,7 +6,7 @@
 #end
 
 <div style="padding:10px 20px;">
-              #if( $canviewsettings )
+              #if( $caneditcollection )
               	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
 <div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
 #end
@@ -40,7 +40,7 @@
                                   <td style="text-align: center">$!mediaarchive.getData("currencytype", $hit.currencytype)</td>
                                   <td style="text-align: right;">$$!context.roundDouble($!hit.total, 2)</td>
                         <td style="text-align: center">
-                            #if( $canviewsettings )
+                            #if( $caneditcollection )
                                 <a
                                     href="$applink/collective/services/income/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$!collectionid"
                                     class="btn btn-xs btn-secondary emdialog"
