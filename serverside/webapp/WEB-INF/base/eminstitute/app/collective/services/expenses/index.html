@@ -6,15 +6,19 @@
 <div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
 #end
               #end    
-                 #if( $caneditcollection )
-                                                   <a
-                      href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-                      class="emdialog btn btn-sm btn-primary mb-4">[[Add Expenses]]</a>
-                #end      
+     #if( $caneditcollection )
+                                       <a
+          href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
+          class="emdialog btn btn-sm btn-primary float-right">[[Add Expenses]]</a>
+    #end      
               
-		<A href="#" onclick="$('#searchform').toggle()"><i class="fa fa-search"></i></A>
+	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
-	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/expenses/results.html">
+	<form  id="expensessearchform" 
+		class="autosubmit" 
+		data-targetdivinner="expensereport" 
+		method="post" 
+		action="$home$applink/collective/services/expenses/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
 		$context.putPageValue("searcher",$searcher)
@@ -23,21 +27,21 @@
 		<input type="hidden" name="searchtype" value="collectiveexpense" />
 		
 		<input type="hidden" name="field" value="collectionid" />
-		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
+		<input type="hidden" name="collectionid.value" value="$collectionid" />
 		<input type="hidden" name="operation" value="exact" />
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
 		<table>
 		<tr>
 		<td width="100%">
-		<div  id="searchform" class="row inlinesearch" style="display:none" >
+		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
 		$context.putPageValue("autocomplete","off")
 			#foreach( $detail in $details)
-			<div class="col-md-3">
+			<div class="col-md-4">
 					$context.putPageValue("detail", $detail)
 					$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
 			</div>
-			#if( $counter == 4)
+			#if( $counter == 3)
 				</div>
 				<div  class="row" >
 			#end	
@@ -47,24 +51,30 @@
 		</tr>
 		</table>
 
-		<div style="height:30px;width:100%">
-		<div style="float:right">
-		[[Sort by]]
-		<select class="select2" name="sortby" >
+	
+	#ifnull( $results)
+              #set( $results = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
+              $context.putPageValue("results",$results)
+	#end
+   <div style="padding-top:20px;">
+   		<h2 class="float-left" style="margin:10px 0;">[[Expenses]]</h2>
+   		<div style="float:right; width:260px; margin:10px 0;">
+		<label>[[Sort by]]</label>
+		<div style="width:200px; display:inline-block;">
+		<select class="select2 	form-control-sm" name="sortby" >
 			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
-		#foreach( $detail in $details)
-			<option value="$detail.getId()Down">$context.getText($detail)</option>
-			<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
-		#end
+			#foreach( $detail in $details)
+				<option value="$detail.getId()Down">$context.getText($detail)</option>
+				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+			#end
 		</select>
 		</div>
 		</div>
-
-	</form>
-	#ifnull( $expenses)
-              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("expenses",$expenses)
-	#end
+		<div class="clearfix"></div>
+   </div>
+   </form>
+   
+   
 	$pages.include("./results.html",$context)
 </div>
 

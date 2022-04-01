@@ -1,0 +1,42 @@
+<div id="incomereport">
+                 
+         <div class="emdata">
+             <table class="table table-striped">
+                 <thead>
+                     <tr class="tableheader">
+                         <th>[[Date]]</th>
+                         <th>[[Topic]]</th>
+                         <th>[[Type]]</th>
+                         <th>[[Description]]</th>
+                         <th>[[Total]]</th>
+                         
+                         <th></th>
+                     </tr>
+                 </thead>
+                 #foreach($hit in $results.getPageOfHits())
+                     <tr>
+                         <td>$!context.getDate($hit.date)</td>
+                         <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
+                         <td>$!mediaarchive.getCachedData("incometype", $hit.incometype)</td>
+                         <td>#esc($hit.incomedescription)</td>
+                         <td style="text-align: center;">$!context.roundDouble($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  
+                        <td style="text-align: center">
+                            #if( $caneditcollection )
+                                <a
+                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
+                                    class="btn btn-xs btn-secondary emdialog"
+                                    data-hidefooter="true"
+                                    ><i class="fa fa-edit"></i></a>
+                                    
+                            #end
+                        </td>
+                    </tr>
+                #end
+            </table>
+            $!results.size() hits
+        </div>
+##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
+##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        
+</div>

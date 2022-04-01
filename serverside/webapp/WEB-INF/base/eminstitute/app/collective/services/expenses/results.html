@@ -1,5 +1,5 @@
 <div id="expensereport">
-                  <h3>[[Expenses]]</h3>
+                 
                   <div class="emdata">
                       <table class="table table-striped">
                           <thead>
@@ -13,7 +13,7 @@
                                   <th></th>
                               </tr>
                           </thead>
-                          #foreach($hit in $expenses.getPageOfHits())
+                          #foreach($hit in $results.getPageOfHits())
                               <tr>
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
@@ -34,7 +34,7 @@
                     </tr>
                 #end
             </table>
-            $expenses.size() hits
+            $results.size() hits
         </div>
         <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>
