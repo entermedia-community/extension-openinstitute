@@ -13,7 +13,7 @@
                                   <th></th>
                               </tr>
                           </thead>
-                          #foreach($hit in $results.getPageOfHits())
+                          #foreach($hit in $expenses.getPageOfHits())
                               <tr>
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
@@ -34,7 +34,7 @@
                     </tr>
                 #end
             </table>
-            $results.size() hits
+            $expenses.size() hits
         </div>
         <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>

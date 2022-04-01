@@ -2,7 +2,7 @@
 
   <path-action name="DataEditModule.searchFields" >
 		<property name="searchtype">collectiveincome</property>
-		<property name="hitsname">results</property>
+		<property name="hitsname">income</property>
 		
   </path-action>
 

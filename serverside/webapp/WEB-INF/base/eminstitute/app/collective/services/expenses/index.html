@@ -14,11 +14,11 @@
               
 	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
-	<form  id="expensessearchform" 
+	<form  id="incomesearchform" 
 		class="autosubmit" 
-		data-targetdivinner="expensereport" 
+		data-targetdiv="expensereport" 
 		method="post" 
-		action="$home$applink/collective/services/expenses/results.html">
+		action="$!siteroot$applink/collective/services/expenses/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
 		$context.putPageValue("searcher",$searcher)
@@ -29,6 +29,7 @@
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$collectionid" />
 		<input type="hidden" name="operation" value="exact" />
+		<input type="hidden" name="collectionid" value="$collectionid" />
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
 		<table>
@@ -52,9 +53,9 @@
 		</table>
 
 	
-	#ifnull( $results)
-              #set( $results = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("results",$results)
+	#ifnull( $expenses)
+              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
+              $context.putPageValue("expenses",$expenses)
 	#end
    <div style="padding-top:20px;">
    		<h2 class="float-left" style="margin:10px 0;">[[Expenses]]</h2>
