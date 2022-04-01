@@ -2,7 +2,7 @@
 
 <div id="subscriberssidebar" style="position:relative; ">
 
-	#set($currentTotal = $transactionManager.getTransactionTotal($librarycol.getId()))
+	#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
 
 ##	#if( $caneditcollection)
 	
@@ -32,13 +32,12 @@
 	</div>
 	
 	#set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).sort("paymentdateDown").search($context) )
-	#set( $n = $donations.setHitsPerPage(5))
+	#set( $n = $donations.setHitsPerPage(6))
 	<div class="sidebarbox" >
 	
 	<h4>
 		<div class="float-right">$${currentTotal}</div>
-		<i class="fas fa-hand-holding-usd"></i> [[Donations]]
-		
+		<i class="fas fa-hand-holding-usd"></i> [[Recent Donations]]
 	</h4>	
 			#if( !$donations.isEmpty() )
 			<strong>[[Recent Donations]]</strong>
@@ -53,8 +52,26 @@
 						 <br>[[on]] $!context.getDateTime($transaction.paymentdate) 
 					</div>	
 				#end
-			
 			#end
+
+			#set( $other = $mediaarchive.query("collectiveincome").exact("collectionid",$collectionid).sort("dateDown").search($context) )
+			#if( !$other.isEmpty() )
+				#set( $n = $other.setHitsPerPage(6))
+			<strong>[[Other Donations]]</strong>
+				#foreach($transaction in $other.getPageOfHits())
+				 	#set( $selecteduser = $mediaarchive.getUser($transaction.paidfrom) )
+					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
+						<span style="font-size:1rem"><strong>$transaction.total</strong> $mediaarchive.getCachedData("currencytype", $transaction.currencytype)</span> [[from]]
+						#if( $transaction.paymenttype =="paypal" && $transaction.name) 
+							 $transaction.name
+						#elseif($selecteduser)$!selecteduser.getAnonNickName()
+						#end
+						 <br>[[on]] $!context.getDateTime($transaction.date) 
+					</div>	
+				#end
+			#end
+
+
 	</div>
 
 </div>

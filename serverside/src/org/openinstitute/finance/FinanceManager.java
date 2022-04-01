@@ -325,7 +325,10 @@ public class FinanceManager  implements CatalogEnabled
 		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
-			
+			if(currency == null)
+			{
+				currency = "1";
+			}
 			Double currencytotal = (Double) bycurrency.get(currency);
 			if( currencytotal == null || currencytotal == 0.0)
 			{

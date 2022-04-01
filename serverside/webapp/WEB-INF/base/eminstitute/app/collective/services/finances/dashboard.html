@@ -16,8 +16,8 @@
 				#set($net = $netincome.get($currencytype))
 				<tr>
 				
-				<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
-				<td style="width:20%; text-align: right;">$ $!context.roundDouble($net,2)</td>
+				<td style="width:10%">$!mediaarchive.getData("currencytype", $currencytype)</td>
+				<td style="width:20%; text-align: right;">$net</td>
 				<td></td>
 				<td style="width:10%"></td>
 				</tr>

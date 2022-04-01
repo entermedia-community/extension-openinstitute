@@ -5,7 +5,7 @@
 #if( $donations.isEmpty()) 
 	<p>[[No Donations yet]]</p>
 #else
-<h3>[[Open Institute Donations]]</h3>
+<h3>[[Online Donations]]</h3>
 <div class="emdata">
                       <table class="table table-striped">
                           <thead>
@@ -43,9 +43,6 @@
 					</a>
 				#end
 			</td> 
-        	
-       	
-			
         	<td >
         	#if( $caneditcollection )
         		$!transaction.name
@@ -58,17 +55,22 @@
         	</td>
        	 		
        	 	
-       	 	<td  style="width: 150px" class="text-right">$$!context.roundDouble($transaction.totalprice,2)</td>
+       	 	<td  style="width: 150px" class="text-right">$transaction.totalprice  $!mediaarchive.getData("currencytype", $transaction.currencytype)</td>
        	 	
        	 	
        	 
         	<td class="text-center"  style="width: 50px">
-        	#if( $caneditcollection )
 	        	 	<a class="btn btn-xs btn-secondary emdialog" 
-        	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=false"
+        	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
         	 		title="[[Donation Details]]">
-        	 		<i class="fa fa-edit"></i>
+        	 		<i class="fa fa-eye"></i>
         	 		</a>
+        	#if( $canviewsettings )
+	        	 	<a class="btn btn-xs btn-secondary" target="_blank"
+        	 		href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$transaction.id&searchtype=transaction"
+        	 		title="[[Edit Data]]">
+        	 		<i class="fa fa-edit"></i>
+        	 		</a>        	
         	#end
         	</td>        	
        		

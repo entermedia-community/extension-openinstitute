@@ -19,4 +19,11 @@
     </name> 
   </property>  
    
+   <property id="exchangetousd" index="true" editable="true" stored="true" type="double">
+    <name> 
+      <language id="en"><![CDATA[Exchange To USD]]></language> 
+    </name> 
+  </property> 
+   
+   
 </properties>
