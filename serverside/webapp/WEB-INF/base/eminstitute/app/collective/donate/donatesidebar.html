@@ -40,7 +40,7 @@
 		<i class="fas fa-hand-holding-usd"></i> [[Recent Donations]]
 	</h4>	
 			#if( !$donations.isEmpty() )
-			<strong>[[Recent Donations]]</strong>
+			<strong>[[Recent Donations]] ($donations.size())</strong>
 				#foreach($transaction in $donations.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.userid) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
@@ -57,7 +57,7 @@
 			#set( $other = $mediaarchive.query("collectiveincome").exact("collectionid",$collectionid).sort("dateDown").search($context) )
 			#if( !$other.isEmpty() )
 				#set( $n = $other.setHitsPerPage(6))
-			<strong>[[Other Income]]</strong>
+			<strong>[[Other Income]] ($other.size())</strong>
 				#foreach($transaction in $other.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.paidfrom) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
