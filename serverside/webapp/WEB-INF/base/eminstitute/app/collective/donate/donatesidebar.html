@@ -57,14 +57,14 @@
 			#set( $other = $mediaarchive.query("collectiveincome").exact("collectionid",$collectionid).sort("dateDown").search($context) )
 			#if( !$other.isEmpty() )
 				#set( $n = $other.setHitsPerPage(6))
-			<strong>[[Other Donations]]</strong>
+			<strong>[[Other Income]]</strong>
 				#foreach($transaction in $other.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.paidfrom) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
-						<span style="font-size:1rem"><strong>$transaction.total</strong> $mediaarchive.getCachedData("currencytype", $transaction.currencytype)</span> [[from]]
-						#if( $transaction.paymenttype =="paypal" && $transaction.name) 
-							 $transaction.name
-						#elseif($selecteduser)$!selecteduser.getAnonNickName()
+						<span style="font-size:1rem"><strong>$transaction.total</strong> $mediaarchive.getCachedData("currencytype", $transaction.currencytype)</span> 
+						#if($selecteduser)[[from]] $!selecteduser.getAnonNickName()
+						#else
+						$transaction.incomedescription
 						#end
 						 <br>[[on]] $!context.getDateTime($transaction.date) 
 					</div>	
