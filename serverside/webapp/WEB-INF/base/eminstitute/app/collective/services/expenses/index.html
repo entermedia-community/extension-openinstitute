@@ -24,6 +24,7 @@
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
 	
+		$context.putPageValue("view","collectiveexpense/search")
 		<input type="hidden" name="searchtype" value="collectiveexpense" />
 		
 		<input type="hidden" name="field" value="collectionid" />
