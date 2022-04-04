@@ -22,7 +22,12 @@
 		<div class="card-block" style="padding: 20px 21px;">
 
 			<form action="$applink/collective/donate/donatefinish.html"
-				method="post" id="payment-form" class="form">
+				method="post" 
+				id="payment-form" 
+				class="form ajaxform" 
+				data-targetdiv="application">
+				
+				<input type="hidden" name="oemaxlevel" value="3" />
 				<input type="hidden" name="collectionid" value="$!librarycol.id" />
 
 				
@@ -77,7 +82,9 @@
 							</div>
 							<div class="col-md-6">
 									<div style=" margin: 0px auto;">
-									<a href="#" onclick='$("#payment-form").submit()' class="btn btn-success"><i class="fas fa-credit-card"></i> [[Check Out]]</a> 
+									<a href="#" 
+										class="btn btn-success"
+										id="donatecheckout"><i class="fas fa-credit-card"></i> [[Check Out]]</a> 
 									</div>
 							</div>
 						</div>
@@ -105,8 +112,14 @@
  
 	$(document).ready(function() {
 	  
-    // This function sets up the details of the transaction, including the amount and line item details.
+    	// This function sets up the details of the transaction, including the amount and line item details.
 	  	// This identifies your website in the createToken call below
+	  	
+	  	lQuery("#donatecheckout").livequery("click", function(e) {
+	  		e.preventDefault();
+	  		$("#payment-form").submit();
+	  	});
+	  	
 	  	  #if($mediaarchive.isCatalogSettingTrue("productionmode"))
 	  		console.log('Production');
 	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
@@ -158,6 +171,7 @@
 		    }
 		  },
 		  submitHandler: function(form) {
+		  	$("#donatecheckout").addClass('disabled');
 		    stripe.createToken(card).then(function(result) {
 		     if (result.error) {
 		       // Inform the user if there was an error
@@ -182,10 +196,7 @@
 
 	  	
 	 stripeResponseHandler = function( response){
-		  
-		 
-		 
-		 var form = document.getElementById('payment-form');
+		  var form = document.getElementById('payment-form');
 		  var hiddenInput = document.createElement('input');
 		  hiddenInput.setAttribute('type', 'hidden');
 		  hiddenInput.setAttribute('name', 'stripeToken');
@@ -193,13 +204,12 @@
 		  form.appendChild(hiddenInput);
 
 		  // Submit the form
-		  form.submit();
-		 
-		
+		  //form.submit();
+		  form.trigger("submit");
+		  $("#donatecheckout").removeClass('disabled');
 		  
 	  }
-  
-}); //ready
+});
 
   
 </script>
