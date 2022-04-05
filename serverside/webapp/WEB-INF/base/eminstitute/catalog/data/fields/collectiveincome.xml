@@ -91,11 +91,5 @@
     </name> 
   </property>     
 
-  <property id="isdonation" index="true" deleted="false" editable="true" stored="true">
-    <name> 
-      <language id="en"><![CDATA[Is Donation]]></language> 
-    </name> 
-  </property>  
-  
   
 </properties>

@@ -59,7 +59,7 @@
 
    <property id="ispaid" index="true" stored="true" type="boolean" >
 	 <name>
-	 <language id="en" > <![CDATA[Payment Is Sent]]> </language>
+	 <language id="en" > <![CDATA[Payment Issued]]> </language>
 	 </name>
 	</property>
   
