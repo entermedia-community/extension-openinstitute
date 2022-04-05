@@ -18,10 +18,11 @@
 			#end
 			
 				#if( $communitytag.domain)
-					#set( $href="//${communitytag.domain}$applink/")
+					#set( $href="${communitytag.domain}$applink/")
 				#end
-			
-				<a  class="nav-link"  href="$href">						
+				#if($href)
+				<a  class="nav-link"  href="$href" title="#esc($communitytag.name)">
+				#end						
 				#if($thumbnail)
 					<h1 class="navcommunity" style="">
 							<img height="50px" src="/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${thumbnail.sourcepath}/image200x200.png')" />
@@ -32,8 +33,9 @@
 						#esc($communitytag.name)
 						</h1> 
 				#end	
-				 
+				 #if($href)
 				</a>
+				#end
 			</li>	
 			</ul>
 		#end	 
