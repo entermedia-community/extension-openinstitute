@@ -1,4 +1,4 @@
-<h3>[[Team Projects]]</h3>
+<h2>[[Team Projects]]</h2>
 
 <div class="stations-grid ">
 	<div class="project-grid">
@@ -38,7 +38,7 @@
 
 <div class="stations-grid ">
 	<div class="project-grid ">
-	  	 <h3 	> [[Likes]]</h3>
+	  	 
 	
 		#set( $organizationsuser = $mediaarchive.query("librarycollectionlikes").exact("followeruser",$selecteduser.getId()).search($context) )
 		#set($oids = [])
@@ -46,6 +46,7 @@
 			#set($x = $oids.add($ohit.collectionid))
 		#end
 		#if($oids)
+		<h2> [[Following]]</h2>
 			#set( $organizations = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
 			#set( $modcollections = $chatManager.loadCollectionsModified($organizations,$user.getId() ) )
 			#foreach( $ohit in $organizations )
