@@ -4,8 +4,14 @@
 					<div class="card-block" style="padding: 00px 21px;margin-top: 25px">
 
 						<form	action="$applink/collective/donate/paypaldonatefinish.html"
-							method="post" id="paypalpayment-form" class="form">
+								method="post" 
+								id="paypalpayment-form" 
+								class="form ajaxform"
+								data-targetdiv="application">
+								
+							<input type="hidden" name="oemaxlevel" value="3" />
 							<input type="hidden" name="collectionid" value="$!librarycol.id" />
+							
 							<input type="hidden" name="field" value="paymentemail" />
 							<input type="hidden" name="paymentemail.value" id="paypalemail"/>
 							<input type="hidden" name="field" value="name" />
@@ -157,7 +163,8 @@ $(document).ready(function() {
 		        var email = authorization.payer.email_address;
 		        $("#paypalemail").val(email);
 		        
-		        $("#paypalpayment-form").submit();
+		        //$("#paypalpayment-form").submit();
+		        $("#paypalpayment-form").trigger("submit");
 		        // Call your server to validate and capture the transaction
 //		        console.log("Got data back");
 //		        console.log(authorization);
