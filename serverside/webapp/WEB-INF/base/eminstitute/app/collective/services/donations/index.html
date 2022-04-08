@@ -1,10 +1,11 @@
 #set($collectionid = $librarycol.getId())
+<hr>
+<div style="padding-top:30px">
+<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
-<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
-
-	<form  id="incomesearchform" 
+	<form  id="donationsform" 
 		class="autosubmit" 
-		data-targetdiv="incomereport" 
+		data-targetdiv="donationsreport" 
 		method="post" 
 		action="$home$applink/collective/services/donations/results.html">
 	
@@ -66,4 +67,6 @@
 	$pages.include("/$applicationid/collective/services/donations/results.html",$context)
 	
 	
-	
+</div>
+
+
