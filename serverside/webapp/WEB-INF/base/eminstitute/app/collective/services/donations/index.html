@@ -1,85 +1,67 @@
-<div style="padding:10px 20px">
+<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
-#set( $searcher = $mediaarchive.getSearcher("transaction") )
-#set( $donations = $searcher.query().exact("collectionid",$librarycol.getId()).sort("paymentdateDown").search($context))
-#if( $donations.isEmpty()) 
-	<p>[[No Donations yet]]</p>
-#else
-<h3>[[Online Donations]]</h3>
-<div class="emdata">
-                      <table class="table table-striped">
-                          <thead>
-                              <tr class="tableheader">
+	<form  id="incomesearchform" 
+		class="autosubmit" 
+		data-targetdiv="incomereport" 
+		method="post" 
+		action="$home$applink/collective/services/donations/results.html">
+	
+		#set( $searcher = $mediaarchive.getSearcher("transaction") )
+		$context.putPageValue("searcher",$searcher)
+		#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsearch", $userprofile))
+	
+		<input type="hidden" name="searchtype" value="transaction" />
 		
-		<th style="width: 110px">[[Date]]</th>
+		<input type="hidden" name="field" value="collectionid" />
+		<input type="hidden" name="collectionid.value" value="$collectionid" />
+		<input type="hidden" name="operation" value="exact" />
+		<input type="hidden" name="collectionid" value="$collectionid" />
+		<input type="hidden" name="oemaxlevel" value="1" />
 		
-		
-		<th>[[User]]</th>
-		<th>[[Email]]</th>
-		<th>[[Platform]]</th>
-		<th>[[Total]]</th>
-		<th></th>
+		<table>
+		<tr>
+		<td width="100%">
+		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
+			$context.putPageValue("autocomplete","off")
+			#foreach( $detail in $details)
+				<div class="col-md-4">
+						$context.putPageValue("detail", $detail)
+						$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+				</div>
+				#if( $counter == 3)
+					</div>
+					<div  class="row" >
+				#end	
+			#end
+		</div>	
+		</td>
 		</tr>
-   		</thead>
-  		#foreach( $transaction in $donations)
-        <tr>
-             <td>
-        		$!context.getDate($transaction.paymentdate)
-			</td> 
-			
-			
-			
-			
-        	<td>
-	        	#set( $followeruser = $mediaarchive.getUser($transaction.userid) )
-			    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-				###set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
-				###if(!$userimageurl)
-				##	#set( $userimageurl = "$applink/theme/images/user.svg" )
-				###end
-				#if( $followeruser )
-					<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">
-					$followeruser.getAnonNickName()
-					##<img src="${userimageurl}"  title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> <span class="username">$followeruser.getAnonNickName()</span>
-					</a>
-				#end
-			</td> 
-        	<td >
-        	#if( $caneditcollection )
-        		$!transaction.name
-        	
-		      #if( $transaction.paymentemail ) &lt;$transaction.paymentemail&gt;
-		      #else ($followeruser)
-		      	&lt;$!followeruser.getEmail()&gt;
-		      #end
-		      #end
-        	</td>
-       	 	<td  style="width: 80px" class="text-center">
-       	 	$transaction.paymenttype
-       	 	</td>
-       	 	
-       	 	<td  style="width: 150px" class="text-right">$transaction.totalprice  $!mediaarchive.getData("currencytype", $transaction.currencytype)</td>
-       	 	
-       	 	
-       	 
-        	<td class="text-center"  style="width: 80px">
-	        	 	<a class="btn btn-xs btn-secondary emdialog" 
-        	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
-        	 		title="[[Donation Details]]">
-        	 		<i class="fa fa-eye"></i>
-        	 		</a>
-        	#if( $canviewsettings )
-	        	 	<a class="btn btn-xs btn-secondary" target="_blank"
-        	 		href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$transaction.id&searchtype=transaction"
-        	 		title="[[Edit Data]]">
-        	 		<i class="fa fa-edit"></i>
-        	 		</a>        	
-        	#end
-        	</td>        	
-       		
-        </tr>
-  #end
-  </table>
-  </div>
-#end
-</div>
+		</table>
+
+	
+	#ifnull( $donations)
+              #set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).sort("dateDown").search($context))
+              $context.putPageValue("donations",$donations)
+	#end
+   <div style="padding-top:20px;">
+   		<h2 class="float-left" style="margin:10px 0;">[[Online Donation]]</h2>
+   		<div style="float:right; width:260px; margin:10px 0;">
+		<label>[[Sort by]]</label>
+		<div style="width:200px; display:inline-block;">
+		<select class="select2 	form-control-sm" name="sortby" >
+			#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsort", $userprofile))
+			#foreach( $detail in $details)
+				<option value="$detail.getId()Down">$context.getText($detail)</option>
+				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+			#end
+		</select>
+		</div>
+		</div>
+		<div class="clearfix"></div>
+   </div>
+   </form>
+   
+	$pages.include("/$applicationid/collective/services/donations/results.html",$context)
+	
+	
+	

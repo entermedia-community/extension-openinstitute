@@ -1,0 +1,9 @@
+<page>
+
+  <path-action name="DataEditModule.searchFields" >
+		<property name="searchtype">transaction</property>
+		<property name="hitsname">donations</property>
+		
+  </path-action>
+
+</page>

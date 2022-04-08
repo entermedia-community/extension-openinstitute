@@ -1,0 +1,81 @@
+<div id="incomereport">
+                 
+         <div class="emdata">
+             <table class="table table-striped">
+                 <thead>
+                     <tr class="tableheader">
+						<th style="width: 110px">[[Date]]</th>
+						
+						
+						<th>[[User]]</th>
+						<th>[[Email]]</th>
+						<th>[[Platform]]</th>
+						<th>[[Total]]</th>
+                         
+                         <th></th>
+                     </tr>
+                 </thead>
+                 #foreach($hit in $donations.getPageOfHits())
+                     <tr>
+                        <td>
+			        		$!context.getDate($hit.paymentdate)
+						</td> 
+						
+						
+						
+						
+			        	<td>
+				        	#set( $followeruser = $mediaarchive.getUser($hit.userid) )
+						    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
+							###set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
+							###if(!$userimageurl)
+							##	#set( $userimageurl = "$applink/theme/images/user.svg" )
+							###end
+							#if( $followeruser )
+								<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">
+								$followeruser.getAnonNickName()
+								##<img src="${userimageurl}"  title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> <span class="username">$followeruser.getAnonNickName()</span>
+								</a>
+							#end
+						</td> 
+			        	<td >
+			        	#if( $caneditcollection )
+			        		$!transaction.name
+			        	
+					      #if( $hit.paymentemail ) &lt;$hit.paymentemail&gt;
+					      #else ($followeruser)
+					      	&lt;$!followeruser.getEmail()&gt;
+					      #end
+					      #end
+			        	</td>
+			       	 	<td  style="width: 80px" class="text-center">
+			       	 	$hit.paymenttype
+			       	 	</td>
+			       	 	
+			       	 	<td  style="width: 150px" class="text-right">$hit.totalprice  $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+			       	 	
+			       	 	
+			       	 
+			        	<td class="text-center"  style="width: 80px">
+				        	 	<a class="btn btn-xs btn-secondary emdialog" 
+			        	 		href="$applink/collective/services/donations/detail.html?id=$hit.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
+			        	 		title="[[Donation Details]]">
+			        	 		<i class="fa fa-eye"></i>
+			        	 		</a>
+			        	#if( $canviewsettings )
+				        	 	<a class="btn btn-xs btn-secondary" target="_blank"
+			        	 		href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=transaction"
+			        	 		title="[[Edit Data]]">
+			        	 		<i class="fa fa-edit"></i>
+			        	 		</a>        	
+			        	#end
+			        	</td>    
+                    </tr>
+                #end
+            </table>
+            $!income.size() hits
+        </div>
+##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
+##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        
+</div>
