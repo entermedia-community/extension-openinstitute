@@ -16,11 +16,12 @@
 		
 		<th>[[User]]</th>
 		<th>[[Email]]</th>
+		<th>[[Platform]]</th>
 		<th>[[Total]]</th>
 		<th></th>
 		</tr>
    		</thead>
-  #foreach( $transaction in $donations)
+  		#foreach( $transaction in $donations)
         <tr>
              <td>
         		$!context.getDate($transaction.paymentdate)
@@ -53,13 +54,15 @@
 		      #end
 		      #end
         	</td>
-       	 		
+       	 	<td  style="width: 150px" class="text-center">
+       	 	$transaction.paymenttype
+       	 	</td>
        	 	
        	 	<td  style="width: 150px" class="text-right">$transaction.totalprice  $!mediaarchive.getData("currencytype", $transaction.currencytype)</td>
        	 	
        	 	
        	 
-        	<td class="text-center"  style="width: 50px">
+        	<td class="text-center"  style="width: 80px">
 	        	 	<a class="btn btn-xs btn-secondary emdialog" 
         	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
         	 		title="[[Donation Details]]">
