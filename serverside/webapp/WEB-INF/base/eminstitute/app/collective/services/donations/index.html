@@ -1,7 +1,7 @@
 #set($collectionid = $librarycol.getId())
 <hr>
 <div style="padding-top:30px">
-<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
+<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
 	<form  id="donationsform" 
 		class="autosubmit" 
@@ -12,7 +12,7 @@
 		#set( $searcher = $mediaarchive.getSearcher("transaction") )
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsearch", $userprofile))
-	
+		$context.putPageValue("view","transaction/onlinedonationsearch")
 		<input type="hidden" name="searchtype" value="transaction" />
 		
 		<input type="hidden" name="field" value="collectionid" />
@@ -24,7 +24,7 @@
 		<table>
 		<tr>
 		<td width="100%">
-		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
+		<div  id="donationsearchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
 			$context.putPageValue("autocomplete","off")
 			#foreach( $detail in $details)
 				<div class="col-md-4">
