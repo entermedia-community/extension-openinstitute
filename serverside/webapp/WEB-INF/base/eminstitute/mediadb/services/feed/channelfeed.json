@@ -49,7 +49,7 @@
 				#if( $preset.getId() == "0")#set( $url = "$home$apphome/services/module/asset/downloads/originals/${hit.sourcepath}/$hit.getMediaName()")
 					"url":"#urlencode($url)"
 				#else#set( $url = $mediaarchive.asLinkToPreview($hit, $preset.get("generatedoutputfile") ) )
-					"url":"#urlencode($url)"
+					"url":"$url"
 				#end			
 			}
 			#end
