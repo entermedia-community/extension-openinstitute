@@ -37,6 +37,13 @@ class EmSocketManager {
     return channel!.stream;
   }
 
+  sendChatMessage(Map inMessage) async{
+    if(chat == null){
+      await connect();
+    }
+    chat!.sink.add(inMessage);
+  }
+
 
   sendMessage(Map inMessage) async{
       if(channel == null ){
