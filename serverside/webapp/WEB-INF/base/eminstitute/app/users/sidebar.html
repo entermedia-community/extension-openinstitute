@@ -1,13 +1,13 @@
 ##Search collections this user is teammeber
 
 #if($user)
-	#set( $organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search() )
+	#set( $organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search($context) )
 	#set($userprojectsids = [])
 	#set($userticketsids = [])
 	#foreach( $ohit in $organizationsuser )
 		#set($x = $userprojectsids.add($ohit.collectionid))
 		##Search for Tickets in Collection
-		#set($goalsuser = $mediaarchive.query("projectgoal").exact("collectionid",$ohit.collectionid).enduser(true).search())
+		#set($goalsuser = $mediaarchive.query("projectgoal").exact("collectionid",$ohit.collectionid).enduser(true).search($context))
 		#if ($goalsuser)
 		#set($x = $userticketsids.add($goalsuser))
 		#end
@@ -79,7 +79,7 @@
 	    	<ul class="sidebar-list">
 	    		<li class="#if($content.appsection == "createorg") current #end" ><a href="$applink/organization/create.html">[[Create New Organization]]</a></li>
 	    		
-	    			#set($collections = $mediaarchive.query("librarycollection").ids($userprojectsids).enduser(true).search())
+	    			#set($collections = $mediaarchive.query("librarycollection").ids($userprojectsids).enduser(true).search($context))
 	    			#set($libraryids = [])
 					#foreach( $collection in $collections )
 						#set($x = $libraryids.add($collection.library))
