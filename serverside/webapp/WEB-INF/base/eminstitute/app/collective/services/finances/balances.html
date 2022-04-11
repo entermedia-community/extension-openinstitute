@@ -9,7 +9,7 @@
 				#set($net = $netincome.get($currencytype))
 				<tr>
 				
-				<td style="width:10%">$!mediaarchive.getData("currencytype", $currencytype)</td>
+				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
 				<td style="width:20%; text-align: right;">$net</td>
 				<td></td>
 				<td style="width:10%"></td>
@@ -34,7 +34,7 @@
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
 						<tr class="tablefinances-header">
-						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
+						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -47,7 +47,7 @@
 							##OI Donation
 							[[Open Institute Donation]]
 						#else
-							$mediaarchive.getData("incometype", $type.incometype)
+							$mediaarchive.getCachedData("incometype", $type.incometype)
 						#end
 						</td>
 						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
@@ -87,7 +87,7 @@
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
 						<tr class="tablefinances-header">
-						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
+						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -95,7 +95,7 @@
 					#end 
 					<tr>
 						<td style="width:10%"></td>
-						<td>$mediaarchive.getData("expensetype", $type.expensetype)</td>
+						<td>$mediaarchive.getCachedData("expensetype", $type.expensetype)</td>
 						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
 						<td></td>
 					</tr>
