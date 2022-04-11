@@ -13,13 +13,18 @@
                                   <th></th>
                               </tr>
                           </thead>
+                          #set($totalarray = {})
                           #foreach($hit in $expenses.getPageOfHits())
+                               	#if(!$totalarray.get($hit.currencytype))
+			                 		#set($totalarray[$hit.currencytype] = [])
+			                 	#end
+			                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
                               <tr>
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                                   <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
                                   <td>#esc($hit.expensedescription)</td>
-                                  <td style="text-align: center;">$!context.roundDouble($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: right;">$!context.roundDouble($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
                                   <td>#if($hit.hasreimbursed == true)[[true]]#end</td>
                         <td style="text-align: center">
                             #if( $caneditcollection )
@@ -32,6 +37,24 @@
                             #end
                         </td>
                     </tr>
+                #end
+                #if($totalarray.size())
+                	#foreach( $total_ in $totalarray.keySet())
+						#set($total = $totalarray.get($total_))
+	                	<tr>
+	                		<td colspan="3"></td>
+	                		<td class="text-right">[[Total]]:</td>
+	                		<td class="text-right">
+	                			#set($totaltotal = 0)
+	                			#foreach($t in $total)
+	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
+	                			#end
+	                			$!context.roundDouble($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
+	                		</td>
+	                		<td></td>
+	                		<td></td>
+	                	</tr>
+                	#end
                 #end
             </table>
             $expenses.size() hits
