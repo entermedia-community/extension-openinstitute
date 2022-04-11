@@ -1,0 +1,119 @@
+#set( $topic = $context.getRequestParameter("collectiveproject"))		
+#set($collectionid = $context.getRequestParameter("collectionid"))
+			<h3>[[Balances]]</h3>
+			
+			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
+
+			<table class="table tablefinances" >
+			#foreach( $currencytype in $netincome.keySet())
+				#set($net = $netincome.get($currencytype))
+				<tr>
+				
+				<td style="width:10%">$!mediaarchive.getData("currencytype", $currencytype)</td>
+				<td style="width:20%; text-align: right;">$net</td>
+				<td></td>
+				<td style="width:10%"></td>
+				</tr>
+			#end
+			</table>
+			
+
+			<h3>[[Income]]</h3> 
+			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
+		
+			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange, $topic) )
+		
+			<table class="table tablefinances" >
+			#set($thecurrency = "0")
+			#set($totalbycurrency = 0)
+			
+			#foreach( $currencytype in $incomebytype.keySet())
+				#set($current = $incomebytype.get($currencytype))
+	
+				#foreach($type as $current)
+					#if($type.currencytype != $thecurrency)
+						#set($thecurrency = $type.currencytype)
+						<tr class="tablefinances-header">
+						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						</tr>
+					#end 
+					<tr>
+						<td style="width:10%"></td>
+						<td>
+						#if($type.incometype=="1")
+							##OI Donation
+							[[Open Institute Donation]]
+						#else
+							$mediaarchive.getData("incometype", $type.incometype)
+						#end
+						</td>
+						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
+						<td style="width:10%"></td>
+					</tr>
+					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
+					
+				#end
+					<tr>
+					<td></td>
+					<td style="text-align: right;">[[Total]]:</td>
+					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
+					<td></td>
+					</tr>
+					#set($totalbycurrency = 0)
+				
+			#end
+			</table>
+			
+
+
+
+			
+			<h3>[[Expenses]]</h3>  
+							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
+			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange,$topic) )
+			
+			
+			<table class="table tablefinances" >
+			#set($thecurrency = "0")
+			#set($totalbycurrency = 0)
+			
+			#foreach( $currencytype in $expensebytype.keySet())
+				#set($current = $expensebytype.get($currencytype))
+	
+				#foreach($type as $current)
+					#if($type.currencytype != $thecurrency)
+						#set($thecurrency = $type.currencytype)
+						<tr class="tablefinances-header">
+						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						</tr>
+					#end 
+					<tr>
+						<td style="width:10%"></td>
+						<td>$mediaarchive.getData("expensetype", $type.expensetype)</td>
+						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
+						<td></td>
+					</tr>
+					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
+					
+				#end
+					<tr>
+					<td></td>
+					<td style="text-align: right;">[[Total]]:</td>
+					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
+					<td style="width:10%"></td>
+					</tr>
+					#set($totalbycurrency = 0)
+				
+			#end
+			</table>
+		</div>
+		</div>
+	</div>
+</div>
+			
