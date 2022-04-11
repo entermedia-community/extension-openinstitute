@@ -1,7 +1,5 @@
 package org.openinstitute.finance;
 
-import java.util.Calendar;
-
 import org.entermediadb.asset.modules.BaseMediaModule;
 import org.openedit.WebPageRequest;
 
@@ -11,15 +9,34 @@ public class FinanceModule extends BaseMediaModule
 	public void loadDateRange(WebPageRequest inReq)
 	{
 		DateRange range = (DateRange)inReq.getSessionValue("daterange");
-		String newrange = inReq.getRequestParameter("daterangestart");
-		if( newrange != null)
+		String year = inReq.getRequestParameter("year");
+		if( year != null)
 		{
-			//parse dates
+			range = new DateRange();
+			int intyear = Integer.parseInt(year);
+			if( intyear == -1)
+			{
+				range.setAllTime(true);
+				range.setYearPicked(-1);
+			}
+			else
+			{
+				String month = inReq.getRequestParameter("month");
+				if( month != null && !month.equals("0"))
+				{
+					range.setYearAndMonth(intyear, Integer.parseInt(month));
+				}
+				else
+				{
+					range.setYearToDate(intyear);
+				}		
+			}
 		}
 		if( range == null)
 		{
-			range = new DateRange();
-			range.setMonthOfYear(Calendar.getInstance().get(Calendar.MONTH));
+			range  = new DateRange();
+			range.setAllTime(true);
+			range.setYearPicked(-1);
 		}
 		inReq.putSessionValue("daterange", range);
 		
