@@ -15,12 +15,7 @@
                          <th></th>
                      </tr>
                  </thead>
-                 #set($totalarray = {})
                  #foreach($hit in $donations.getPageOfHits())
-                    #if(!$totalarray.get($hit.currencytype))
-                 		#set($totalarray[$hit.currencytype] = [])
-                 	#end
-                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.totalprice))
                      <tr>
                         <td>
 			        		$!context.getDate($hit.paymentdate)
@@ -76,23 +71,6 @@
 			        	#end
 			        	</td>    
                     </tr>
-                #end
-                #if($totalarray.size())
-                	#foreach( $total_ in $totalarray.keySet())
-						#set($total = $totalarray.get($total_))
-	                	<tr>
-	                		<td colspan="3"></td>
-	                		<td class="text-right">[[Total]]:</td>
-	                		<td class="text-right">
-	                			#set($totaltotal = 0)
-	                			#foreach($t in $total)
-	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
-	                			#end
-	                			$!context.roundDouble($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
-	                		</td>
-	                		<td></td>
-	                	</tr>
-                	#end
                 #end
             </table>
             $!donations.size() hits
