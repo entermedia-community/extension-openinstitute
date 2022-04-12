@@ -33,5 +33,18 @@
 	 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 </form>
-
+<script type="text/javascript">
+var form = document.getElementById('saveproject');
+	 $(form).validate({
+		  rules: {
+		    "currencytype.value": {
+		      required: true
+		    },
+		    "total.value": {
+			      required: true,
+			      number: true
+			    }
+		  }
+	 });
+</script>
 </div>

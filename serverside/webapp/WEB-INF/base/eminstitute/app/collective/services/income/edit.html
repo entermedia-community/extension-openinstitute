@@ -42,5 +42,18 @@
 	<a class="closemodal btn btn-sm btn-secondary" style="margin-left:10px;">[[Cancel]]</a> 
 	</div>
 </form>
-
+<script type="text/javascript">
+var form = document.getElementById('saveproject');
+	 $(form).validate({
+		  rules: {
+		    "currencytype.value": {
+		      required: true
+		    },
+		    "total.value": {
+			      required: true,
+			      number: true
+			    }
+		  }
+	 });
+</script>
 </div>
