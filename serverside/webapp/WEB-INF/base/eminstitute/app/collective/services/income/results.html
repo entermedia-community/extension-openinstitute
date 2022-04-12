@@ -24,7 +24,7 @@
                          <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                          <td>$!mediaarchive.getCachedData("incometype", $hit.incometype)</td>
                          <td>#esc($hit.incomedescription)</td>
-                         <td style="text-align: right;">$!context.roundDouble($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                         <td style="text-align: right;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
                                   
                         <td style="text-align: center">
                             #if( $caneditcollection )
@@ -49,7 +49,7 @@
 	                			#foreach($t in $total)
 	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
 	                			#end
-	                			$!context.roundDouble($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
+	                			$!context.doubleToMoney($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
 	                		</td>
 	                		<td></td>
 	                	</tr>

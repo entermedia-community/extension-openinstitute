@@ -25,10 +25,6 @@
                         <td>
 			        		$!context.getDate($hit.paymentdate)
 						</td> 
-						
-						
-						
-						
 			        	<td>
 				        	#set( $followeruser = $mediaarchive.getUser($hit.userid) )
 						    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
@@ -88,7 +84,7 @@
 	                			#foreach($t in $total)
 	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
 	                			#end
-	                			$!context.roundDouble($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
+	                			$!context.doubleToMoney($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
 	                		</td>
 	                		<td></td>
 	                	</tr>
