@@ -7,7 +7,7 @@
 				#set($caneditlibrary = false )
 
 				#set($users = $library.getValues("viewusers"))
-				#if( $canviewsettings || ($users && $users.contains($user.getId()) ) )
+				#if( $canviewsettings || ($users && $users.contains($user.getId()) ) || $library.get("owner")  == $user.id )
 					#set($caneditlibrary = true )
 				#end
 				

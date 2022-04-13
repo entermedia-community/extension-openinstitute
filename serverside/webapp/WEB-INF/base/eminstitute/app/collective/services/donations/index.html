@@ -1,80 +1,70 @@
-<div style="padding:10px 20px">
+#set($collectionid = $librarycol.getId())
+<hr>
+<div style="padding-top:30px">
+<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
-#set( $searcher = $mediaarchive.getSearcher("transaction") )
-#set( $donations = $searcher.query().exact("collectionid",$librarycol.getId()).sort("paymentdateDown").search($context))
-#if( $donations.isEmpty()) 
-	<p>[[No Donations yet]]</p>
-#else
-<h3>[[Open Institute Donations]]</h3>
-<div class="emdata">
-                      <table class="table table-striped">
-                          <thead>
-                              <tr class="tableheader">
+	<form  id="donationsform" 
+		class="autosubmit" 
+		data-targetdiv="donationsreport" 
+		method="post" 
+		action="$home$applink/collective/services/donations/results.html">
+		<input type="hidden" name="oemaxlevel" value="1" />
 		
-		<th style="width: 110px">[[Date]]</th>
+		#set( $searcher = $mediaarchive.getSearcher("transaction") )
+		$context.putPageValue("searcher",$searcher)
+		#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsearch", $userprofile))
+		$context.putPageValue("view","transaction/onlinedonationsearch")
+		<input type="hidden" name="searchtype" value="transaction" />
+
+		<input type="hidden" name="collectionid" value="$collectionid" />
 		
+		<input type="hidden" name="field" value="collectionid" />
+		<input type="hidden" name="collectionid.value" value="$collectionid" />
+		<input type="hidden" name="operation" value="exact" />
 		
-		<th>[[User]]</th>
-		<th>[[Email]]</th>
-		<th>[[Total]]</th>
-		<th></th>
-		</tr>
-   		</thead>
-  #foreach( $transaction in $donations)
-        <tr>
-             <td>
-        		$!context.getDate($transaction.paymentdate)
-			</td> 
-			
-			
-			
-			
-        	<td>
-	        	#set( $followeruser = $mediaarchive.getUser($transaction.userid) )
-			    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-				###set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
-				###if(!$userimageurl)
-				##	#set( $userimageurl = "$applink/theme/images/user.svg" )
-				###end
-				#if( $followeruser )
-					<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()">
-					$followeruser.getAnonNickName()
-					##<img src="${userimageurl}"  title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> <span class="username">$followeruser.getAnonNickName()</span>
-					</a>
+		<input type="hidden" name="field" value="isdonation" />
+		<input type="hidden" name="isdonation.value" value="true" />
+		<input type="hidden" name="operation" value="exact" />
+
+		<div  id="donationsearchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
+			$context.putPageValue("autocomplete","off")
+			#foreach( $detail in $details)
+				<div class="col-md-4">
+						$context.putPageValue("detail", $detail)
+						$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+				</div>
+				#if( $counter == 3)
+					</div>
+					<div  class="row" >
+				#end	
+			#end
+		</div>	
+
+		#ifnull( $donations)
+		    #set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).exact("isdonation","true").sort("paymentdateDown").search($context))
+		    $context.putPageValue("donations",$donations)
+		#end
+	   <div style="padding-top:20px;">
+	   		<h2 class="float-left" style="margin:10px 0;">[[Online Donation]]</h2>
+	   		<div style="float:right; width:260px; margin:10px 0;">
+			<label>[[Sort by]]</label>
+			<div style="width:200px; display:inline-block;">
+			<select class="select2 	form-control-sm" name="sortby" >
+				#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsort", $userprofile))
+				#foreach( $detail in $details)
+					<option value="$detail.getId()Down">$context.getText($detail)</option>
+					<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
 				#end
-			</td> 
-        	
-       	
-			
-        	<td >
-        	#if( $caneditcollection )
-        		$!transaction.name
-        	
-		      #if( $transaction.paymentemail ) &lt;$transaction.paymentemail&gt;
-		      #else ($followeruser)
-		      	&lt;$!followeruser.getEmail()&gt;
-		      #end
-		      #end
-        	</td>
-       	 		
-       	 	
-       	 	<td  style="width: 150px" class="text-right">$$!context.roundDouble($transaction.totalprice,2)</td>
-       	 	
-       	 	
-       	 
-        	<td class="text-center"  style="width: 50px">
-        	#if( $caneditcollection )
-	        	 	<a class="btn btn-xs btn-secondary emdialog" 
-        	 		href="$applink/collective/services/donations/detail.html?id=$transaction.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=false"
-        	 		title="[[Donation Details]]">
-        	 		<i class="fa fa-edit"></i>
-        	 		</a>
-        	#end
-        	</td>        	
-       		
-        </tr>
-  #end
-  </table>
-  </div>
-#end
+			</select>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+	   </div>
+   </form>
+   
+	$pages.include("/$applicationid/collective/services/donations/results.html",$context)
+	
+	
 </div>
+
+

@@ -20,8 +20,61 @@ public class TransactionManager implements CatalogEnabled
 	protected ModuleManager fieldModuleManager;
 	protected DecimalFormat df = new DecimalFormat("#.00"); 
 
+	public String getCombinedTotalIncome(String inCollectionId, String currency)
+	{
+		double total = getTransactionTotal(inCollectionId);
+		double other = getOtherDonationTotal(inCollectionId);
+		double combined = total + other;
+		return formatCurrency(combined,currency);
+	}
 	
-	public String getTransactionTotal(String inCollectionId)
+	private String formatCurrency(double inCombined, String inCurrency)
+	{
+		double combined = inCombined;
+		//Convert to local currency
+		if( inCurrency == null || inCurrency.equals("1") )
+		{
+			
+		}
+		else
+		{
+			MultiValued currencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", inCurrency);
+			double extchange = currencyType.getFloat("exchangetousd");
+			
+			combined = combined * extchange;
+			
+		}
+		return df.format(combined); //TODO Handle Qs
+	}
+
+	private double getOtherDonationTotal(String inCollectionId)
+	{
+		Searcher invoiceSearcher = getMediaArchive().getSearcher("collectiveincome");
+		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
+		double amount = 0;
+
+		for (Data it : clientinvoices)
+		{
+			MultiValued real = (MultiValued) invoiceSearcher.loadData(it);
+			String type = real.get("currencytype");
+			if( type == null ||  type.equals("1"))
+			{
+				amount = amount + real.getFloat("total");
+			}
+			else
+			{
+				MultiValued othercurrencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", type);
+				double extchange = othercurrencyType.getFloat("exchangetousd");
+				//Convert to dollars first
+				double inusd = real.getFloat("total") / extchange;
+				amount = amount + inusd;
+			}
+			
+		}
+		return amount;
+	}
+
+	public double getTransactionTotal(String inCollectionId)
 	{
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("transaction");
 		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
@@ -33,7 +86,20 @@ public class TransactionManager implements CatalogEnabled
 
 			try
 			{
-				amount = amount + real.getFloat("totalprice");
+				String type = real.get("currencytype");
+				if( type == null ||  type.equals("1"))
+				{
+					amount = amount + real.getFloat("totalprice");
+				}
+				else
+				{
+					MultiValued othercurrencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", type);
+					double extchange = othercurrencyType.getFloat("exchangetousd");
+					//Convert to dollars first
+					double inusd = real.getFloat("totalprice") / extchange;
+					amount = amount + inusd;
+				}
+				
 			}
 			catch (Exception e)
 			{
@@ -41,7 +107,7 @@ public class TransactionManager implements CatalogEnabled
 			}
 		}
 		
-		return df.format(amount);
+		return amount;
 		
 	}
 

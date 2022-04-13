@@ -4,14 +4,14 @@
   <data id="1"> 
     USD
   </data>  
-  <data id="2"> 
+  <data id="2" exchangetousd="-1"> 
   OI Points
   </data>  
-  <data id="3"> 
+  <data id="3" exchangetousd="-1"> 
   Seeds
   </data>  
-  <data id="4"> 
-  Quetzales
+  <data id="4" exchangetousd="7.5"> 
+  GTQ
   </data>  
  
 </root>

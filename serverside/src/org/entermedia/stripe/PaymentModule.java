@@ -212,6 +212,11 @@ public class PaymentModule extends BaseMediaModule
 	public void processPayment(WebPageRequest inReq)
 	{
 		String token = inReq.getRequestParameter("stripeToken");
+		if( token == null)
+		{
+			log.error("No token found");
+			return;
+		}
 		String username =  inReq.getUserName();
 		User user = inReq.getUser();
 		String collectionid = inReq.findValue("collectionid");

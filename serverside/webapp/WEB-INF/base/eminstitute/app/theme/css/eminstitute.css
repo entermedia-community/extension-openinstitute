@@ -425,7 +425,8 @@ margin-top:.6rem;
 
 
 .profile-username {
-	padding-top:25px;
+	padding:10px;
+
 }
 .profile-username h4 {
 	margin-bottom:1px;
@@ -433,7 +434,6 @@ margin-top:.6rem;
 	}
 
 .profile-imagecontainer {
-	margin-bottom:20px;
 	text-align:center;
 	position:relative;
 }
@@ -441,7 +441,6 @@ margin-top:.6rem;
 	border-radius: 50%;
 	width:120px;
 	height:120px;
-	border:3px solid #adb5bd;
 	padding:2px;
 }
 .profile-editimage {

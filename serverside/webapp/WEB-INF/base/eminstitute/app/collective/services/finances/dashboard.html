@@ -5,124 +5,66 @@
 		<div class="col" >
 		<div  style="width:100%;">
 		    <h1>[[Profit and Loss]]</h1>
-			<h3>[[Balances]]</h3>
-			
-			
-			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange) )
-			
-
-			<table class="table tablefinances" >
-			#foreach( $currencytype in $netincome.keySet())
-				#set($net = $netincome.get($currencytype))
-				<tr>
-				
-				<td style="width:10%">$mediaarchive.getData("currencytype", $currencytype)</td>
-				<td style="width:20%; text-align: right;">$ $!context.roundDouble($net,2)</td>
-				<td></td>
-				<td style="width:10%"></td>
-				</tr>
-			#end
-			</table>
-			
-
-			<h3>[[Income]]</h3> 
-			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
-		
-			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange) )
-		
-			<table class="table tablefinances" >
-			#set($thecurrency = "0")
-			#set($totalbycurrency = 0)
-			
-			#foreach( $currencytype in $incomebytype.keySet())
-				#set($current = $incomebytype.get($currencytype))
+		    
+		    
+	<form  id="searchform" 
+		class="autosubmit" 
+		data-targetdiv="report" 
+		method="post" 
+		action="$home$applink/collective/services/finances/balances.html">
 	
-				#foreach($type as $current)
-					#if($type.currencytype != $thecurrency)
-						#set($thecurrency = $type.currencytype)
-						<tr class="tablefinances-header">
-						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						</tr>
-					#end 
-					<tr>
-						<td style="width:10%"></td>
-						<td>
-						#if($type.incometype=="1")
-							##OI Donation
-							[[Open Institute Donation]]
-						#else
-							$mediaarchive.getData("incometype", $type.incometype)
-						#end
-						</td>
-						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
-						<td style="width:10%"></td>
-					</tr>
-					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
-					
-				#end
-					<tr>
-					<td></td>
-					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
-					<td></td>
-					</tr>
-					#set($totalbycurrency = 0)
-				
-			#end
-			</table>
-			
+		<input type="hidden" name="oemaxlevel" value="1" />
+		<input type="hidden" name="collectionid" value="$collectionid" />
+		
+		<div  id="dashsearchform" class="row inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
+			$context.putPageValue("autocomplete","off")
+			<div class="col-md-2">
+			[[Filter by]]:
+			</div>
+			<div class="col-md-3">
+				<select name="year" class="form-control-sm">
+					<option value="-1" #if($daterange.getYearPicked() == -1) selected #end>[[All]]</option>
+					<option value="0"  #if($daterange.getYearPicked() == 0) selected #end>[[YTD]]</option>
+					<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
+					<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+				<select name="month" class="form-control-sm">
+					<option value="0">[[Month]]</option>
+					<option value="1">[[Jan]]</option>
+					<option value="2">[[Feb]]</option>
+					<option value="3">[[March]]</option>
+					<option value="4">[[April]]</option>
+					<option value="5">[[May]]</option>
+					<option value="6">[[June]]</option>
+					<option value="7">[[July]]</option>
+					<option value="8">[[Aug]]</option>
+					<option value="9">[[Sep]]</option>
+					<option value="10">[[Oct]]</option>
+					<option value="11">[[Nov]]</option>
+					<option value="12">[[Dec]]</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+			#set( $allprojects = $mediaarchive.getSearcher("collectiveproject").query().match("parentcollectionid",$librarycol.getId()).sort("name").search($context) )
+#if( $allprojects.size() > 1)
 
-
-
-			
-			<h3>[[Expenses]]</h3>  
-							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
-			#set( $expensebytype = $financeManager.getExpenseTypesByDateRange($collectionid, $daterange) )
-			
-			
-			<table class="table tablefinances" >
-			#set($thecurrency = "0")
-			#set($totalbycurrency = 0)
-			
-			#foreach( $currencytype in $expensebytype.keySet())
-				#set($current = $expensebytype.get($currencytype))
-	
-				#foreach($type as $current)
-					#if($type.currencytype != $thecurrency)
-						#set($thecurrency = $type.currencytype)
-						<tr class="tablefinances-header">
-						<td style="width:10%">$mediaarchive.getData("currencytype", $type.currencytype)</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						</tr>
-					#end 
-					<tr>
-						<td style="width:10%"></td>
-						<td>$mediaarchive.getData("expensetype", $type.expensetype)</td>
-						<td style="width:15%; text-align: right;">$ $!context.roundDouble($type.getValue("total"),2)</td>
-						<td></td>
-					</tr>
-					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
-					
-				#end
-					<tr>
-					<td></td>
-					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">$ $!context.roundDouble($totalbycurrency,2)</td>
-					<td style="width:10%"></td>
-					</tr>
-					#set($totalbycurrency = 0)
-				
-			#end
-			</table>
-		</div>
-		</div>
-	</div>
-</div>
+#set($projectid = $context.getRequestParameter("collectiveproject") )
+<select name="collectiveproject"  class="form-control-sm" style="min-width:200px;">
+<option value="">By Topic</option>
+#foreach( $project in $allprojects )
+	<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>$project</option>
+#end
+</select>
+#end				
+			</div>				
 			
 			
+		</div>	
+		    </form>
+	<div id="report">
+		    
+$pages.include("./balances.html",$context)
 			
+			</div>	    

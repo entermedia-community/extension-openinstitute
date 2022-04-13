@@ -68,7 +68,7 @@ public class FinanceManager  implements CatalogEnabled
 
 	//get expenses from expenses db
 	
-	public Map  getTotalIncomesByDateRange(String inCollectionId, DateRange inDateRange)
+	public Map  getTotalIncomesByDateRange(String inCollectionId, DateRange inDateRange, String topicid)
 	{
 		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
 		
@@ -76,6 +76,12 @@ public class FinanceManager  implements CatalogEnabled
 		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+		
+		addDateRange(query,"date",inDateRange);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
@@ -101,6 +107,13 @@ public class FinanceManager  implements CatalogEnabled
 		incomesSearcher = getMediaArchive().getSearcher("transaction");
 		query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+		addDateRange(query,"paymentdate",inDateRange);
+
+		
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		pageOfHits = hits.getPageOfHits();
@@ -127,7 +140,7 @@ public class FinanceManager  implements CatalogEnabled
 		
 	}
 	
-	public Map getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange)
+	public Map getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid)
 	{
 		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
 		
@@ -135,6 +148,13 @@ public class FinanceManager  implements CatalogEnabled
 		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+
+		addDateRange(query,"date",inDateRange);
+
 		HitTracker hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
@@ -160,6 +180,13 @@ public class FinanceManager  implements CatalogEnabled
 		incomesSearcher = getMediaArchive().getSearcher("transaction");
 		query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+
+		addDateRange(query,"paymentdate",inDateRange);
+
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		pageOfHits = hits.getPageOfHits();
@@ -228,11 +255,18 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	public Map getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange) 
+	public Map getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+		addDateRange(query,"date",inDateRange);
+
+		
 		HitTracker hits = expensesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		Collection pageOfHits = hits.getPageOfHits();
@@ -309,25 +343,31 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	public Map  getTotalExpenseByCurrency(String inCollectionId, DateRange inDateRange)
+	public Map  getTotalExpenseByCurrency(String inCollectionId, DateRange inDateRange, String topicid)
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+		addDateRange(query,"date",inDateRange);
+
 		HitTracker hits = expensesSearcher.search(query.getQuery());
-		hits.setHitsPerPage(1000);
-		Collection pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
-		
+		hits.enableBulkOperations();
 		
 		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
 		
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
-			
+			if(currency == null)
+			{
+				currency = "1";
+			}
 			Double currencytotal = (Double) bycurrency.get(currency);
-			if( currencytotal == null || currencytotal == 0.0)
+			if( currencytotal == null)
 			{
 				currencytotal = 0.0;
 				bycurrency.put(currency, currencytotal);
@@ -343,10 +383,20 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	public Map  getNetIncomeByCurrency(String inCollectionId, DateRange inDateRange)
+	protected void addDateRange(QueryBuilder inQuery, String inField ,DateRange inDateRange)
 	{
-		Map incomebycurrency = getTotalIncomesByDateRange(inCollectionId, inDateRange);
-		Map expensesbycurrency = getTotalExpenseByCurrency(inCollectionId, inDateRange);
+		if( inDateRange == null || inDateRange.isAllTime())
+		{
+			return;
+		}
+		inQuery.between(inField, inDateRange.getStartDate(), inDateRange.getEndDate());
+	}
+
+
+	public Map  getNetIncomeByCurrency(String inCollectionId, DateRange inDateRange, String topicid)
+	{
+		Map incomebycurrency = getTotalIncomesByDateRange(inCollectionId, inDateRange, topicid);
+		Map expensesbycurrency = getTotalExpenseByCurrency(inCollectionId, inDateRange, topicid);
 		
 		HashMap<String, Object> netIncome = new HashMap<String, Object>();
 		

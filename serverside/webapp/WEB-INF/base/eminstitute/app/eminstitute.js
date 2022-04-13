@@ -327,7 +327,9 @@ jQuery(document).ready(function()
 	
 	});	
 
-
+/*
+ * Managed on chatterbox.js!
+ * 
 lQuery(".chatter-send").livequery("click", function(){
 		var button = jQuery(this);
 		var chatter = button.closest(".chatterbox");
@@ -339,12 +341,11 @@ lQuery(".chatter-send").livequery("click", function(){
 	    content.value="";
 
 		var nextpage = data.notifylink;
-		$.get(nextpage, data, function(data) {
-			
-		});
+		//	$.get(nextpage, data, function(data) {
+		//});
 	    	
 	});
-
+*/
 
 lQuery("#adduserpicker .rowclick").livequery("click", function(e) {
 	e.preventDefault();

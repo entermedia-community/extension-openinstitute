@@ -9,6 +9,8 @@
 	<property id="total" />
 	<property id="receiptattachment" />
 	<property id="user" />
+   	<property id="ispaid" />
+   	<property id="paymentdate" />  
    	<property id="paymentdescription" />  
 
   

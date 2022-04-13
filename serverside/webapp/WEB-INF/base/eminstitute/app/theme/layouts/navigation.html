@@ -18,10 +18,11 @@
 			#end
 			
 				#if( $communitytag.domain)
-					#set( $href="//${communitytag.domain}$applink/")
+					#set( $href="${communitytag.domain}$applink/")
 				#end
-			
-				<a  class="nav-link"  href="$href">						
+				#if($href)
+				<a  class="nav-link"  href="$href" title="#esc($communitytag.name)">
+				#end						
 				#if($thumbnail)
 					<h1 class="navcommunity" style="">
 							<img height="50px" src="/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${thumbnail.sourcepath}/image200x200.png')" />
@@ -32,8 +33,9 @@
 						#esc($communitytag.name)
 						</h1> 
 				#end	
-				 
+				 #if($href)
 				</a>
+				#end
 			</li>	
 			</ul>
 		#end	 
@@ -45,7 +47,7 @@
 			<ul class="navbar-nav ml-auto">
 		   
 		   #if( $selecteduser.getId() == $user.getId())
-		   	#set($oisection = "account")
+		   		##set($oisection = "account")
 		   #end
 		   
 			#if( $library )
@@ -59,6 +61,13 @@
             <li class="nav-item dropdown">
 	              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown">[[Organizations]]</a>
 	              <ul class="dropdown-menu">
+	    	      	#if($user)
+	    	      		<li class="dropdown-item" style="border-bottom:1px solid #999">
+							<a class="subnav-link "
+							 	href="$applink/browse/usercollectives.html" 
+							>[[My Projects]]</a>			                    	
+				       	</li>
+		   			#end
 	    	        	
         			#set( $libraries = $mediaarchive.query("library").sort("name").all().search($context) )
 					#foreach( $libraryhit in $libraries )

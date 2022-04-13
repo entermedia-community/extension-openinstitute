@@ -1,0 +1,64 @@
+<div id="incomereport">
+                 
+         <div class="emdata">
+             <table class="table table-striped">
+                 <thead>
+                     <tr class="tableheader">
+                         <th>[[Date]]</th>
+                         <th>[[Topic]]</th>
+                         <th>[[Type]]</th>
+                         <th>[[Description]]</th>
+                         <th>[[Total]]</th>
+                         
+                         <th></th>
+                     </tr>
+                 </thead>
+                 #set($totalarray = {})
+                 #foreach($hit in $income.getPageOfHits())
+                 	#if(!$totalarray.get($hit.currencytype))
+                 		#set($totalarray[$hit.currencytype] = [])
+                 	#end
+                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
+                     <tr>
+                         <td>$!context.getDate($hit.date)</td>
+                         <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
+                         <td>$!mediaarchive.getCachedData("incometype", $hit.incometype)</td>
+                         <td>#esc($hit.incomedescription)</td>
+                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  
+                        <td style="text-align: center">
+                            #if( $caneditcollection )
+                                <a
+                                    href="$applink/collective/services/income/edit.html?id=$hit.id&searchtype=collectiveincome&collectionid=$librarycol.id&librarycol=$librarycol.id"
+                                    class="btn btn-xs btn-secondary emdialog"
+                                    data-hidefooter="true"
+                                    ><i class="fa fa-edit"></i></a>
+                                    
+                            #end
+                        </td>
+                    </tr>
+                #end
+                #if($totalarray.size())
+                	#foreach( $total_ in $totalarray.keySet())
+						#set($total = $totalarray.get($total_))
+	                	<tr>
+	                		<td colspan="3"></td>
+	                		<td class="text-right">[[Total]]:</td>
+	                		<td class="text-right">
+	                			#set($totaltotal = 0)
+	                			#foreach($t in $total)
+	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
+	                			#end
+	                			$!context.doubleToMoney($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
+	                		</td>
+	                		<td></td>
+	                	</tr>
+                	#end
+                #end
+            </table>
+            $!income.size() [[hits]]
+        </div>
+##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
+##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        
+</div>
