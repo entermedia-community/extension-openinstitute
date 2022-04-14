@@ -11,10 +11,13 @@
 			<table class="striped" style="width:100%">
   			<tr><th>Tickets and Tasks</th><th style="width:280px;">[[Closed On]]</th><th style="width:80px;">[[Points]]</th></tr>
 			#set( $totalpoints = 0)  			
+			#set( $totalcritical = 0)  	
   		#foreach( $week in $weeks)
 			#set( $counted = 0)
 			#set( $weekpoints = 0)  	
 			#set($tasks = $completed.getTasksForWeek($person, $week))
+			#set( $criticalpoints = 0)  	
+			
   		    #foreach($task in $tasks)
   				#set( $selectedcat = $mediaarchive.getCategory($task.projectdepartment))
 				#set( $points = $selectedcat.getValue("goalpoints"))
@@ -27,12 +30,25 @@
   				<tr><td><a class="emdialog" data-width="900"
 		 	 	title="Ticket Details" 
 		 	 		href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
-		 	 		#set($collection = $!mediaarchive.getData("librarycollection",$task.collectionid) )
+		 	 		#set($collection = $!mediaarchive.getCachedData("librarycollection",$task.collectionid) )
+		 	 		#set($ticket = $!mediaarchive.getCachedData("projectgoal",$task.projectgoal) )
+		 	 		#if( $ticket.get("projectstatus") == "critical" && $ticket  != $prevticket)
+						[Critical]		 	 		
+		 	 		#end
 		 	 		###Task: 
-		 	 		#set($taskname = $!mediaarchive.getData("category",$task.projectdepartment) )
+		 	 		#set($taskname = $!mediaarchive.getCachedData("category",$task.projectdepartment) )
 		 	 		$collection - $!taskname - $!task.comment</a>
 		 	 		</td>
-  					<td>$context.getDateTime($task.getDate("completedon"))</td><td>$points</td>
+  					<td>$context.getDateTime($task.getDate("completedon"))</td><td>$points
+  					
+  					#if( $ticket.get("projectstatus") == "critical" && $ticket  != $prevticket)
+						#set( $weekpoints = $$weekpoints + 10)
+						#set( $totalpoints = $totalpoints + 10)
+						+ 10
+		 	 		#end
+  					
+  					</td>
+		 	 		#set($prevticket =  $ticket )
   				</tr>
   		    #end
   		    
@@ -46,11 +62,11 @@
 	  		   		#set( $points = $ticket.getValue("points"))
 	  		    	<tr><td>
 	  		    	#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${ticket.id}&collectionid=$ticket.collectionid&goalfolder=search")
-	  		    	#set($collection = $!mediaarchive.getData("librarycollection",$ticket.collectionid) )
+	  		    	#set($collection = $!mediaarchive.getCachedData("librarycollection",$ticket.collectionid) )
 	  		    	  <a href="$goallink"
 			    	title="$ticket.name" class="emdialog editgoalshow" 
 			    	data-urlbar="$applink/collective/goals/search/index.html?collectionid=$ticket.collectionid&opengoalid=${ticket.id}" data-width="900" >
-	  			Ticket: $collection - $mediaarchive.getData("collectiveproject",$ticket.goaltrackercolumn) - "$ticket.name" </a></td><td>$!context.getDateTime($ticket.getDate("resolveddate"))</td><td>$points</td></tr>
+	  			Ticket: $collection - $mediaarchive.getCachedData("collectiveproject",$ticket.goaltrackercolumn) - "$ticket.name" </a></td><td>$!context.getDateTime($ticket.getDate("resolveddate"))</td><td>$points</td></tr>
 					#set( $counted = $counted +1)
 					#set( $weekpoints = $weekpoints + $points)
 					#set( $totalpoints = $totalpoints + $points)
@@ -59,11 +75,16 @@
   		    #end
   		    
   		    #if( $weekpoints > 0)
-  			<tr><td colspan="2" style="padding-left: 50px;"> </td><td style="text-align:right;">$weekpoints</td></tr>
+  			<tr><td colspan="2" style="padding-left: 0px;"> </td><td style="text-align:left;">$weekpoints 
+  			</td></tr>
   			#end
 		#end
  		    #if( $totalpoints > 0)
- 			<tr><td colspan="2" style="padding-left: 50px;"> </td><td style="text-align:right;">$totalpoints</td></tr>
+ 			<tr>
+ 			<td colspan="2" style="text-align:right;"><b>Total:</b></td>
+ 			<td style="text-align:left;"><b>
+  			$totalpoints	</b>
+ 			</td></tr>
  			#end
   			</table>
   		</div>
