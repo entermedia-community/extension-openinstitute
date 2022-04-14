@@ -74,9 +74,10 @@
                     </tr>
                 #end
                 #if($totalarray.size())
+                	#set($firstrow = true)
                 	#foreach( $total_ in $totalarray.keySet())
 						#set($total = $totalarray.get($total_))
-	                	<tr>
+	                	<tr class="table-totals #if($firstrow)table-totalfirst #set($firstrow=false) #end">
 	                		<td colspan="3"></td>
 	                		<td class="text-right">[[Total]]:</td>
 	                		<td class="text-right">

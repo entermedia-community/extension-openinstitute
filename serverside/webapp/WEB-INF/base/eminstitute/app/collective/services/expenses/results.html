@@ -26,22 +26,23 @@
                                   <td>#esc($hit.expensedescription)</td>
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
                                   <td>#if($hit.hasreimbursed == true)[[true]]#end</td>
-                        <td style="text-align: center">
-                            #if( $caneditcollection )
-                                <a
-                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
-                                    class="btn btn-xs btn-secondary emdialog"
-                                    data-hidefooter="true"
-                                    ><i class="fa fa-edit"></i></a>
-                                    
-                            #end
-                        </td>
+			                      <td style="text-align: center">
+			                            #if( $caneditcollection )
+			                                <a
+			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
+			                                    class="btn btn-xs btn-secondary emdialog"
+			                                    data-hidefooter="true"
+			                                    ><i class="fa fa-edit"></i></a>
+			                                    
+			                            #end
+			                      </td>
                     </tr>
                 #end
                 #if($totalarray.size())
+                	#set($firstrow = true)
                 	#foreach( $total_ in $totalarray.keySet())
 						#set($total = $totalarray.get($total_))
-	                	<tr>
+	                	<tr class="table-totals #if($firstrow)table-totalfirst #set($firstrow=false) #end">
 	                		<td colspan="3"></td>
 	                		<td class="text-right">[[Total]]:</td>
 	                		<td class="text-right">

@@ -1710,4 +1710,14 @@ ul.inlinelist   li
    	border:1px dashed #aaa;
 }
 
+.table-striped tbody tr.table-totalfirst td {
+	border-top: 2px solid #333!important;
+}
+
+
+.table-striped tbody tr:nth-of-type(odd).table-totals  {
+	background-color: #fff;
+}
+
+
 
