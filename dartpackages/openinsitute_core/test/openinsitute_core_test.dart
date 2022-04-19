@@ -33,7 +33,7 @@ void main() {
 
 
 
-    var url = "${settings!['dev']?['websocket_url']}";
+    var url = "${settings['dev']?['websocket_url']}";
     print(url);
 
     expect(url.isNotEmpty, true);
