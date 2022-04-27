@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:openinsitute_core/models/emData.dart';
+import 'package:openinsitute_core/models/emFeeds.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 
 OpenI get oi {
@@ -13,6 +13,7 @@ OpenI get oi {
 class DataManager {
   bool initalized = false;
   Map<String, Searcher> searchers = {};
+  Feeds? feeds;
 
   DataManager() {
     //TODO:  Figure out best way to do this without an async race condition
@@ -29,8 +30,82 @@ class DataManager {
     return searcher;
   }
 
+  Future<Feeds> getFeeds() async {
+    feeds ??= await Feeds.getFeeds();
+    return feeds!;
+  }
+}
 
+class Feeds {
+  static const String feedString = "feeds";
+  late Box box;
+  bool cache = true;
 
+  Feeds._();
+
+  static Future<Feeds> getFeeds() async {
+    var feeds = Feeds._();
+    feeds.box = await feeds.getBox(feedString);
+    return feeds;
+  } 
+
+  Future<Box> getBox(String inType) async {
+    if (!Hive.isBoxOpen(inType)) {
+      return await Hive.openBox(inType);
+    } else {
+      return Hive.box(inType);
+    }
+  }
+
+  List<emFeed> getAllHits(){
+    List<emFeed> list = [];
+     box.keys.forEach((element) {
+      if(element != "lastsync"){
+          emFeed newdata = emFeed.fromJson(box.get(element));
+       list.add(newdata);
+      }
+     });
+     return list;
+  }
+    Future<List<emFeed>> getRemoteData(Map? inQuery,) async {
+    final responsestring = await oi.getEmResponse(
+      oi.app!["mediadb"] + "/services/feed/channelfeed.json",
+      inQuery,
+    );
+    List<emFeed> results = parseData(responsestring);
+    results.forEach((element) {
+      box.put(element.id, element.properties);
+    });
+
+    return results;
+
+    //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
+  }
+
+  List<emFeed> parseData(String responseBody) {
+    final Map<String, dynamic> parsed = json.decode(responseBody);
+    List<emFeed> results =
+        parsed["uploads"].map<emFeed>((json) => emFeed.fromJson(json)).toList();
+    return results;
+  }
+    Future<bool> syncData(bool full) async {
+    if (full) {
+      await box.clear();
+      List<emFeed> tosave = await getRemoteData(null);
+      for (var element in tosave) {
+        box.put(element.id, element.properties);
+      }
+    } else {
+      DateTime lastsync = box.get("lastsync"); 
+      List<emFeed> tosave =
+          await getRemoteData(null);
+      for (var element in tosave) {
+        box.put(element.id, element.properties);
+      }
+    }
+    box.put("lastsync", DateTime.now());
+    return true;
+  }
 
 
 }
@@ -115,7 +190,7 @@ class Searcher {
     return true;
   }
 
-  Future<List<emData>> getRemoteData(Map inQuery) async {
+  Future<List<emData>> getRemoteData(Map inQuery, ) async {
     final responsestring = await oi.getEmResponse(
       oi.app!["mediadb"] + '/services/lists/search/${searchtype}/',
       inQuery,

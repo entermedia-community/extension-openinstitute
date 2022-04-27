@@ -8,8 +8,13 @@ public class FinanceModule extends BaseMediaModule
 
 	public void loadDateRange(WebPageRequest inReq)
 	{
-		DateRange range = (DateRange)inReq.getSessionValue("daterange");
-		String year = inReq.getRequestParameter("year");
+		DateRange range = null;
+		String year = null;
+		String clearfilters = inReq.getRequestParameter("clearfilters");
+		if (!Boolean.parseBoolean(clearfilters)) {
+			range = (DateRange)inReq.getSessionValue("daterange");
+			year = inReq.getRequestParameter("year");
+		}
 		if( year != null)
 		{
 			range = new DateRange();

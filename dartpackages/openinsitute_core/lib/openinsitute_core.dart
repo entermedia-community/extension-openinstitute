@@ -28,9 +28,9 @@ class OpenI {
 
 
 
-  Map? get app {
+  Map? get app  {
     if (_settings == null) {
-      loadAppSettings();
+       loadAppSettings();
     }
     String appmode = _settings!["devmode"];
     if ("dev" == appmode) {
@@ -40,7 +40,7 @@ class OpenI {
     }
   }
 
-  Map? get settings{
+  Map? get settings {
     if (_settings == null) {
       loadAppSettings();
     }

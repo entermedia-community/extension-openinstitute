@@ -103,7 +103,7 @@ $context.putPageValue("searcher",$searcher)
 ##TODO Get this values from catalogsettings
 <div class="float-right">
 <span>
-<input class="btn btn-sm btn-warning" style="margin:10px" type="submit" value="Save & Close"></input>
+<input class="btn btn-sm btn-warning" style="margin:10px 0 0 " type="submit" value="[[Save & Close]]"></input>
 </span>
 </div>
 </form>
@@ -111,7 +111,9 @@ $context.putPageValue("searcher",$searcher)
 <!-- add task if data? -->
 #if( $data)
 	<div class="clearfix"></div>
+	<hr>
 	$context.putPageValue("goal",$data)
+	$context.putPageValue("container","editgoalpanel")
 	<div class="goal-body">
 			<div class="goal-footerX"> 
 				$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true",$context)

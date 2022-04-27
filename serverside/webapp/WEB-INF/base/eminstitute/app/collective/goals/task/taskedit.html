@@ -1,8 +1,8 @@
 #if(!$task)
-#set( $taskid = $context.getRequestParameter("taskid"))
-#if( $taskid)
-#set( $task = $mediaarchive.getData("goaltask",$taskid) )
-#end
+	#set( $taskid = $context.getRequestParameter("taskid"))
+	#if( $taskid)
+		#set( $task = $mediaarchive.getData("goaltask",$taskid) )
+	#end
 #end
 
 #set($target = $context.getRequestParameter("targetdiv"))
@@ -25,10 +25,10 @@
   			<textarea id="commenttext" class="form-control grabfocus" style="" name="comment">$!task.comment</textarea>
   			</div>
 
-#set( $selectedstatus = $task.taskstatus)
-#if( !$selectedstatus )
-#set( $selectedstatus = "0")	
-#end
+		#set( $selectedstatus = $task.taskstatus)
+		#if( !$selectedstatus )
+			#set( $selectedstatus = "0")	
+		#end
 		<div style="padding:5px 0 10px;">
 			<div style="width:25px; float:left;"><i class="fas fa-check-square" style="color:#07172C"></i></div>
   			<select  name="taskstatus" class="form-control form-control-sm" >
@@ -43,10 +43,10 @@
 
 			<div style="padding:5px 0 10px;">
 			## change completedby field to staff field? 
-#set( $completedby = $task.completedby)
-#if( !$completedby )
-#set( $completedby = $user.id)	
-#end
+			#set( $completedby = $task.completedby)
+			#if( !$completedby )
+				#set( $completedby = $user.id)	
+			#end
   			<div style="width:25px; float:left;"><i class="fas fa-user" style="color:#07172C"></i></div> 
   			<select class="form-control form-control-sm"  name="completedby"  >
 			  <option value="" ></option>
@@ -90,11 +90,17 @@
     			href="$applink/collective/goals/taskdelete.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">[[Delete]]</a> 
     		#end
     		<!-- Cancel Button  -->
-    		#set( $targetdiv = "tasklist#eid($selectedgoal.id)")
+    		##set( $targetdiv = "tasklist#eid($selectedgoal.id)")
 			#set( $cancellink = "$applink/collective/goals/search/goaltasks.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id")
-			<a href="$cancellink" data-focuson="$task.id" id="task$task.getId()" class="btn btn-xs btn-secondary float-right taskedit-$!{task.taskstatus} ajax" data-targetdiv="$targetdiv" data-oemaxlevel="1" title="$tree.getCategoryPath()" >
+			<a href="$cancellink" 
+				data-focuson="$task.id" 
+				id="task$task.getId()" 
+				class="btn btn-xs btn-secondary float-right taskedit-$!{task.taskstatus} ajax" 
+				data-targetdiv="$target" 
+				data-oemaxlevel="1" 
+				title="[[Cancel]] $!tree.getCategoryPath()" >
 			[[Cancel]]</a>
-			<!-- removed taskedit class from "a" tag above  -->
+			
 			</div>
 		
 	<div class="taskstatus goalstatus-$!task.taskstatus">
