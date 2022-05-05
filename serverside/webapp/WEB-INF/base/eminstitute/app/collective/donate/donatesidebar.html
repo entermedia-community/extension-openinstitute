@@ -19,7 +19,7 @@
 				<div class="" style="padding-left:6px;">		
 				#if($librarycol.goaldate)
 				<strong>[[Our Goal Is:]] $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong><br>
-				#if($librarycol.distributedtotal) [[We have raised]]: $${currentTotal} USD<br> 
+				#if($librarycol.distributedtotal) [[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD<br> 
 				Spent: $${librarycol.distributedtotal} <br>[[Remaining]]: $$mathutil.subtract($currentTotal,$librarycol.distributedtotal) #end
 				#else
 				<strong>[[No goals yet]]!</strong>
@@ -36,7 +36,7 @@
 	<div class="sidebarbox" >
 	
 	<h4>
-		<div class="float-right">$${currentTotal}</div>
+		<div class="float-right" style="font-size:0.9em;">$$!context.doubleToMoney($currentTotal, 0)</div>
 		<i class="fas fa-hand-holding-usd"></i> [[Recent Donations]]
 	</h4>	
 			#if( !$donations.isEmpty() )
