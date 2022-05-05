@@ -18,7 +18,7 @@
 		<iframe style="width:100%; max-width:560px; margin:0 auto; height:315px;" src="$hit.linkurl" frameborder="0" allowfullscreen></iframe>'
 		</div>
 	#else
-   	 <div class="center-cropped">
+   	 <div class="center-cropped" style="background-color: #fff; padding:0; text-align:center;">
    	 		#set($asset = $mediaarchive.getSearcher("asset").loadData($hit) )
    	 		$context.putPageValue("asset", $asset )
 	        $pages.include("$apphome/components/results/thumbnails/${type}.html", $context)
@@ -26,8 +26,12 @@
 	#end
 
  
-     <div class="float-right" style="padding-right:10px;">
-     <a href="/${mediaarchive.getMediaDbId()}/services/module/librarycollection/downloads/originals/${librarycol.getId()}/${hit.sourcepath}/${hit.name}" title="[[Download]]" ><i class="fas fa-cloud-download-alt"></i></a>
+     <div class="float-right" style="padding:5px 10px;">
+     <a href="/${mediaarchive.getMediaDbId()}/services/module/librarycollection/downloads/originals/${librarycol.getId()}/${hit.sourcepath}/${hit.name}" 
+     title="[[Download Media]]"
+     class="btn btn-xs btn-light"
+     style="padding-left:15px; padding-right:15px;" >
+     <i class="fas fa-download"></i></a>
      </div>
  #else
  	$pages.include("./images-loading.html", $context)

@@ -17,10 +17,16 @@
 				</div>
 				#end
 				
-				<h2>$library [[News Feed]]</h2>
+				<h2><strong>$library</strong> [[News Feed]]</h2>
 				
 				#if( $caneditlibrary)	
-				<a class="oe-dataedit showeditonright" data-target="#edithtmlintro-$library.id" title="[[Edit Library Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i></a>
+				<div class="text-right">
+				<a class="oe-dataedit showeditonright" 
+					data-target="#edithtmlintro-$library.id"
+					data-width="500" 
+					title="[[Edit Library Intro]]" 
+					href="#"><i class="fas fa-edit"></i></a>
+				</div>
 				#end
 				<div class="oe-editable seemore" id="edithtmlintro-$library.id" data-dataid="$library.id" data-field="librarydescription" data-searchtype="library">
 				   		#if($library.librarydescription) $!library.librarydescription #end
@@ -32,7 +38,7 @@
 				    </div>
 				#end
 
-				<div class="feedupload-container">
+				<div class="feedupload-container organization-feed">
 
 					<div id="channelcontainer"  style="min-height: 100%;">
 					 

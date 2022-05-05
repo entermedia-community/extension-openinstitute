@@ -1025,8 +1025,8 @@ a.btn-toolbar.topicselected {
 }
 
 .feedcard {
-	padding:0 0 10px;
-	border-bottom:1px solid #ddd;
+	padding:0 0 20px;
+	border-bottom:1px solid #eee;
 	margin-bottom:20px;
 	background-color: white;
 }
@@ -1038,7 +1038,6 @@ a.btn-toolbar.topicselected {
 .feedcard-title {
 	font-size:1.5rem;
 	line-height: 1.1;
-	margin-right:180px;
 	margin-bottom:0;
 	min-height: 32px;
 	font-weight: bold;
@@ -1061,11 +1060,6 @@ a.btn-toolbar.topicselected {
 }
 .feedcard .feedcard-collective {
 	padding:0;
-	position:absolute;
-	width:175px;
-	top:25px;
-	right:0;
-	padding-right:10px;
 }
 .feedcollective .feedcard-collective {
 	padding:0;
@@ -1073,18 +1067,18 @@ a.btn-toolbar.topicselected {
 	right:10px;
 }
 a.collectivetag {
-	font-size:.8em;
+	font-size:.9em;
 	text-align:center;
 	
     color: #333;
-    text-decoration: none;
+    text-decoration: underline;
 	display: inline-block;
     padding: 3px 3px;
 
     float:right;
 }
 a.collectivetag:hover {
-	text-decoration: none;
+	text-decoration: underline;
 	}
 .feedcard-author {
 	font-size:.85rem;
@@ -1095,7 +1089,7 @@ a.collectivetag:hover {
 }
 .feedcard-body {
 	padding-top:10px;
-	margin: 0 10px;
+	margin: 0 15px;
 	font-size:1rem;
 }
 .feedcard-media {
@@ -1146,6 +1140,13 @@ a.collectivetag:hover {
 	border-radius: 100%;
 }
 
+.organization-feed .feedcard-body {
+	margin:0;
+}
+.organization-feed .feedcard {
+	padding-bottom:30px;
+	margin-bottom:30px;
+}
 
 .channel-feed .feedcard-header {
 	padding:15px;
