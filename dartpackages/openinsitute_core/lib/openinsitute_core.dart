@@ -18,13 +18,14 @@ import 'package:openinsitute_core/services/emSocketManager.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
-import 'contact.dart';
+//import 'contact.dart';
 
 class OpenI {
   Map? _settings;
   EmUser? emUser; 
   DataManager? dataManager;
   EmSocketManager? socketManager;
+  String? email;
 
 
 
@@ -274,6 +275,7 @@ class OpenI {
   // todo; Entermedia send 6 digit code to email.
   Future<bool?> emEmailLoginCode(String email) async {
     this.emUser = null;
+    this.email = email;
     // tempKey = null;
     final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/sendmagiclink.json', {"to": email},);
     print("Sending email with login code to..." + email);
@@ -306,7 +308,9 @@ class OpenI {
   }
 
   //todo; Entermedia login with 6 digit code from email. Returns EM User.
-  Future<EmUser?> loginCode(String email, String logincode) async {
+  Future<EmUser?> loginCode( String logincode) async {
+
+
     final resMap = await postEntermedia(
         app!["mediadb"] + '/services/authentication/login.json',
         {
@@ -343,43 +347,43 @@ class OpenI {
   }
 
 
-  void registerBinaries() {
-      final dartToolDir = path.join(Directory.current.path, '.dart_tool');
-      try {
-        Isar.initializeLibraries(
-          libraries: {
-            'windows': path.join(dartToolDir, 'libisar_windows_x64.dll'),
-            'macos': path.join(dartToolDir, 'libisar_macos_x64.dylib'),
-            'linux': path.join(dartToolDir, 'libisar_linux_x64.so'),
-          },
-        );
-      } catch (e) {
-        // ignore. maybe this is an instrumentation test
-      }
+  // void registerBinaries() {
+  //     final dartToolDir = path.join(Directory.current.path, '.dart_tool');
+  //     try {
+  //       Isar.initializeLibraries(
+  //         libraries: {
+  //           'windows': path.join(dartToolDir, 'libisar_windows_x64.dll'),
+  //           'macos': path.join(dartToolDir, 'libisar_macos_x64.dylib'),
+  //           'linux': path.join(dartToolDir, 'libisar_linux_x64.so'),
+  //         },
+  //       );
+  //     } catch (e) {
+  //       // ignore. maybe this is an instrumentation test
+  //     }
+  //
+  // }
 
-  }
-
-  Future<List<Contact>> testIstarSave() async {
-    registerBinaries();
-    final dir = await getApplicationSupportDirectory();
-
-    final isar = await Isar.open(
-      schemas: [ContactSchema],
-      directory: dir.path,
-    );
-
-    final contact = Contact()
-      ..name = "My first contact";
-
-    await isar.writeTxn((isar) async {
-      contact.id = await isar.contacts.put(contact) ;
-    });
-
-    final allContacts = await isar.contacts.where().findAll();
-    print(allContacts);
-    return allContacts;
-
-  }
+  // Future<List<Contact>> testIstarSave() async {
+  //   registerBinaries();
+  //   final dir = await getApplicationSupportDirectory();
+  //
+  //   final isar = await Isar.open(
+  //     schemas: [ContactSchema],
+  //     directory: dir.path,
+  //   );
+  //
+  //   final contact = Contact()
+  //     ..name = "My first contact";
+  //
+  //   await isar.writeTxn((isar) async {
+  //     contact.id = await isar.contacts.put(contact) ;
+  //   });
+  //
+  //   final allContacts = await isar.contacts.where().findAll();
+  //   print(allContacts);
+  //   return allContacts;
+  //
+  // }
 
   bool isAuthenticated(){
     return emUser == null;
