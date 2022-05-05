@@ -347,54 +347,88 @@ lQuery(".chatter-send").livequery("click", function(){
 	});
 */
 
-lQuery("#adduserpicker .rowclick").livequery("click", function(e) {
-	e.preventDefault();
-	$(this).closest(".modal").modal("hide");
-	var picker = $("#adduserpicker");
-	var row = $(this);
-	var rowid = row.attr("rowid");
+	lQuery("#adduserpicker .rowclick").livequery("click", function(e) {
+		e.preventDefault();
+		$(this).closest(".modal").modal("hide");
+		var picker = $("#adduserpicker");
+		var row = $(this);
+		var rowid = row.attr("rowid");
+		
+		var targetdiv = picker.data("targetdiv");
+		var targetdiv = $("#" + targetdiv);
+		var nextpage = home + '/collective/channel/subscribers/addsave.html';
+		var options = picker.data();
+		options.teamuserid = rowid;
+		options.addtoteam = "true";
+		$.get(nextpage, options, function(data) {
+			targetdiv.replaceWith(data);
+		});
 	
-	var targetdiv = picker.data("targetdiv");
-	var targetdiv = $("#" + targetdiv);
-	var nextpage = home + '/collective/channel/subscribers/addsave.html';
-	var options = picker.data();
-	options.teamuserid = rowid;
-	options.addtoteam = "true";
-	$.get(nextpage, options, function(data) {
-		targetdiv.replaceWith(data);
 	});
 
+
+	$("#saveproject").validate({
+		  rules: {
+			"name\.value": {
+			  required: true,
+			  minlength: 3,
+			  maxlength: 20,
+			  remote: home+"/site/sitedeployer/add/verifyproject.html"
+			}
+		  },
+		  messages: {
+			"name\.value": {
+			  remote: "That Project Name is already taken, please try different one."
+			}
+		  },
+		  errorElement: "div",
+		  errorClass: "errormsg",
+		  errorPlacement: function(error, element) {
+			  error.appendTo( element.closest(".form-group").parent() );
+			},
+		  submitHandler: function(form) {
+			   $("#loadingresult").show();
+			   form.submit();
+			   
+			  }
+	});
+	
+	
+	initcomments();
+
+
 });
 
 
-$("#saveproject").validate({
-	  rules: {
-		"name\.value": {
-		  required: true,
-		  minlength: 3,
-		  maxlength: 20,
-		  remote: home+"/site/sitedeployer/add/verifyproject.html"
-		}
-	  },
-	  messages: {
-		"name\.value": {
-		  remote: "That Project Name is already taken, please try different one."
-		}
-	  },
-	  errorElement: "div",
-	  errorClass: "errormsg",
-	  errorPlacement: function(error, element) {
-		  error.appendTo( element.closest(".form-group").parent() );
-		},
-	  submitHandler: function(form) {
-		   $("#loadingresult").show();
-		   form.submit();
-		   
-		  }
-});
+initcomments = function()
+{
+	var app = $("#application");
+	var home = app.data('home') + app.data('apphome');
 
-
-});
-
+	lQuery('input.commentadder').livequery("keyup",function(e) 
+	{
+		//Listen for enter
+		var input = $(this);
+		var div = input.closest(".feedcard-comments");
+		var code = e.which; // recommended to use e.which, it's normalized across browsers
+	    if(code==13)e.preventDefault();
+	    if(code==13)
+	    {
+	     	//Submit repaint
+	     	var options = input.data();
+	     	options.oemaxlevel = 1;
+	     	options.commenttext = input.val();
+	     	var link = home + "/collective/channel/comments/addcomment.html";
+			jQuery.get(link,options,
+				function(data) 
+				{
+					div.replaceWith(data);
+				}
+	        );	     	
+	    } 
+		
+	});
+		
+}
 
 

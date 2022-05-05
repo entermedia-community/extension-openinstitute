@@ -1,7 +1,10 @@
+//MOVED TO eminstitute.js
+//Pending Delete
+
 initcomments = function()
 {
 	var app = $("#application");
-	var applink = app.data("home") + app.data("applink");
+	var applink = app.data("siteroot") + app.data("applink");
 
 	lQuery('input.commentadder').livequery("keyup",function(e) 
 	{

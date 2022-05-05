@@ -10,10 +10,12 @@
 		#if(!$userimageurl)
 			#set( $userimageurl = "$applink/theme/images/user.svg" )
 		#end
-	  <img src="$userimageurl" class="usericon">
+	  <img src="$userimageurl" class="usericon" alt="${comment.getUserLabel()}"/>
 	  </a>
 	  <div class="comment-content">
-		  <a class="comment-poster" href="#urlescape($userlink)" title="${comment.getUserLabel()}"><strong>${comment.getUserLabel()}</strong></a>
+		  <div>
+		  	<a class="comment-poster" href="#urlescape($userlink)" title="${comment.getUserLabel()}"><strong>${comment.getUserLabel()}</strong></a>
+		  </div>
 		  <span class="comment-body">#esc($comment.commenttext)</span> 
 		  <div class="comment-timestamp">$comment.getShortDate($context)</div>
 			#if( $comment.canEdit($user) )
@@ -38,8 +40,13 @@
 		#set( $userimageurl = "$applink/theme/images/user.svg" )
 	#end
 
-	<img src="$userimageurl" class="usericon">
-	<input type="text"  name="commenttext" data-useruploadid="$upload.id" data-collectionid="$librarycol.id" class="commentadder form-control feed-comments-textinput" placeholder="[[Write a comment]]">
+	##<img src="$userimageurl" class="usericon" alt="[[Comment as]] $user" />
+	<input type="text"  name="commenttext" 
+			data-useruploadid="$upload.id" 
+			data-collectionid="$librarycol.id" 
+			class="commentadder form-control feed-comments-textinput" 
+			placeholder="[[Write a comment]]"
+			autoComplete="off">
 #else
 	#set($loginok = "$applink/collective/channel/${librarycol.id}/${librarycol.name}.html")
 	<a href="$applink/authentication/login.html?loginokpage=$!loginok" class="btn btn-sm btn-primary" >

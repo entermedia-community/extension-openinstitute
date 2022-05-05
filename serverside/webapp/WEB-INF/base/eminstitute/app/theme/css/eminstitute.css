@@ -949,7 +949,8 @@ height: 40px;
 	}
 	
 .loadingspinner {
-	padding:8px 5px;
+	padding:30px 35px;
+	text-align:center;
 	font-size:1.2rem;
 	color:#666;
 }
@@ -1122,8 +1123,8 @@ a.collectivetag:hover {
 	position:relative;
 }
 .feed-comments-textinput {
-	margin-left:40px;
-	width:calc(100% - 40px);
+	
+	width:calc(100% - 1px);
 }
 .feedcard-comments .usericon {
 	width:32px;
@@ -1224,7 +1225,8 @@ div.errormsg {
 
 .feedcard-comment {
 	margin-bottom:15px;
-	padding-bottom:10px;
+	padding:5px 5px 10px;
+	background-color: #fafafa;
 	
 }
 .comment-poster {
@@ -1235,8 +1237,8 @@ div.errormsg {
 }
 
 .comment-timestamp {
-	font-size:.9em;
-	color:#666;
+	font-size:.8em;
+	color:#888;
 }
 
 .teammember {
