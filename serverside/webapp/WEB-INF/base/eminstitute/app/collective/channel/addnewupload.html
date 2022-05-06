@@ -18,7 +18,11 @@ $context.putPageValue("searcher",$searcher)
 		<div class="card-uploader">
 				<div class="feedupload">
 					<div class="attachtext">				 	
-						<input class="attachtext-textbox uploaddescription"  autocomplete="off" name="uploadtitle"  id="uploadtitle" placeholder="[[Post Title]]"  />
+						<input class="attachtext-textbox uploaddescription"  
+							autocomplete="off" 
+							name="uploadtitle"  
+							id="uploadtitle" 
+							placeholder="[[Post Title]]"  />
 
 						<div style="display:none;" class="showonfocus">
 						<div style="width:100%;min-height:300px;margin-top:36px;border: 1px solid #cbd3d5;background:white;" class="  oehtmlinput attachtext-textbox" 
@@ -43,16 +47,20 @@ $context.putPageValue("searcher",$searcher)
 					
 					<input type="hidden" name="sourcepath" id="customsourcepath" value="${librarycol.getCategory().getCategoryPath()}/${formatteddate}/" />
 				</div>	
+				
+				<input type="hidden" name="skipasset" value="true" />
+				
+				
 				<div id="feeduploadmediacontaier" class="feedupload-uploader showonfocus" style="padding: 20px;display:none;">
 				 	<div class="container">
 				 	<div class="row">
 					    <div class="col-sm-4">
 					    
 							<div class="uploadinstructions">	  
-												<div style="text-align:center;">
-								<a class="btn btn-primary" style="width:100%;" href="#" id="filePicker">[[Choose Files]]</a>
-							</div>
-									<div class="hints">[[Or drag files here]]...</div>
+								<div style="text-align:center;">
+									<a class="btn btn-primary" style="width:100%;" href="#" id="filePicker">[[Choose Files]]</a>
+								</div>
+								<div class="hints">[[Or drag files here]]...</div>
 							
 					             <div id="drop-area">
 									<div class="drop-over"></div>
@@ -98,16 +106,12 @@ $context.putPageValue("searcher",$searcher)
 				           <a class="btn btn-primary btn-sm" id="startbutton" data-complete="[[Upload Complete]]" href="#">[[Post]]</a>
 					    </div>
 				</div>
-				<div class="float-right" style="padding-right:20px">
+					<div class="float-right" style="padding-right:20px">
 				 		<a class="btn btn-secondary btn-sm cancel" href="$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.name).html" >[[Cancel]]</a>
 				 	</div>
 					<div class="clearfix"></div>
 				</div> 
 						 	
-				 <div >
-				 	
-		
-				</div>
 		</div>	
 		</form>
 	</div>

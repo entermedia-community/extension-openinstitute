@@ -31,19 +31,12 @@
 				<div class="oe-editable seemore" id="edithtmlintro-$library.id" data-dataid="$library.id" data-field="librarydescription" data-searchtype="library">
 				   		#if($library.librarydescription) $!library.librarydescription #end
 				</div>
-				
-				#if( $caneditlibrary)
-					<div style="padding:20px 0;">
-						<a href="$applink/browse/add/addnew.html?libraryid=$library.getId()" title="[[Start New Project]]" class="btn btn-primary">Add Project</a>	
-				    </div>
-				#end
 
 				<div class="feedupload-container organization-feed">
 
 					<div id="channelcontainer"  style="min-height: 100%;">
 					 
-					$context.putPageValue("showchannel",true)
-						
+						$context.putPageValue("showchannel",true)
 						
 						#set($resultsPage = "$content.getPath()?hitssessionid=$topuploads.sessionId&useruploadpageposition")
 					
@@ -89,11 +82,17 @@
 			<div class="collective-sidebar">
 				#set($collectivehits = $mediaarchive.query("librarycollection").exact("library",$library.id).sort("creationdate").search($context))
 				<h2>$library Projects</h2>
-				#foreach( $collective in $collectivehits.getPageOfHits() )
-					$context.putPageValue("collective",$collective)
-					$pages.include("$apphome/browse/collectivelist.html",$context)
-	
-				#end
+					#if( $caneditlibrary)
+					<div style="padding:10px 0 30px; text-align:center">
+						<a href="$applink/browse/add/addnew.html?libraryid=$library.getId()" title="[[Start New Project]]" class="btn btn-primary">[[Add a Project]]</a>	
+				    </div>
+					#end
+					
+					#foreach( $collective in $collectivehits.getPageOfHits() )
+						$context.putPageValue("collective",$collective)
+						$pages.include("$apphome/browse/collectivelist.html",$context)
+		
+					#end
 			</div>		
 		</div>
 	</div>
