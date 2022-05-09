@@ -1435,6 +1435,9 @@ a.pick-item:hover .project-item {
 	 width: 200px; 
 	 height: 100px;
 	 }
+	 .goal-tabs {
+		margin:15px 10px 10px;
+	}
 }
 
 

@@ -49,7 +49,7 @@
 	<table width="100%" class="table table-striped table-hover">
 	<thead>
 	<tr class="tableheader">
-		<th style="width:130px;">[[Project]]</th>
+		##<th style="width:130px;">[[Project]]</th>
 		<th style="width:130px;">[[Ticket]]</th>
 		<th>[[Details]]</th>
 		<th style="width:180px">[[Status]]</th>		
@@ -60,15 +60,16 @@
 		#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($goal))
 		$context.putPageValue("goal",$goal)
 		<tr class="goalstatus$!{goal.projectstatus}" >
-		<td >
-		#set( $project= $!mediaarchive.getData("librarycollection",$goal.collectionid) )
-		<a href="$sitelink/app/collective/goals/priorities/index.html?collectionid=$goal.collectionid"
-		style="text-decoration:underline;" >
-		$!project
-		</a>
-		</td>
+
+##		<td >
+##		#set( $project= $!mediaarchive.getData("librarycollection",$goal.collectionid) )
+##		<a href="$sitelink/app/collective/goals/priorities/index.html?collectionid=$goal.collectionid"	style="text-decoration:underline;" >
+##		$!project
+##		</a>
+##		</td>
 	
 		<td>
+		<div class="goal-title">
 		<a href="$sitelink/app/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$goal.collectionid&goalfolder=agent" 
 			title="[[Edit Goal]]" 
 			class="emdialog editgoalshow" 
@@ -76,11 +77,13 @@
 			data-hidefooter="true"
 			data-urlbar="$applink/collective/goals/$goalfolder/index.html?collectionid=$goal.collectionid&opengoalid=$goal.id"
 			data-width="900">#if( $goal.ticketnumber ) #$goal.ticketnumber #end$goal.name</a>
+			</div>
 		</td>
 	
-		<td >
+		<td class="goal-description" >
+			<div class="goal-details">
 			#esc( $!goal.details ) 	
-			
+			</div>
 			#if( $goal.response)
 				<hr><i>
 				#esc($goal.response)

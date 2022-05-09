@@ -92,7 +92,7 @@ $context.putPageValue("searcher",$searcher)
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 	#set( $fullscreen = $context.getRequestParameter("fullscreen"))
 	#if( $fullscreen == "true")
-		<input class="btn" type="submit" value="Save"></input><br><br>
+		<input class="btn" type="submit" value="[[Save]]"></input><br><br>
 	#end
 
 #else

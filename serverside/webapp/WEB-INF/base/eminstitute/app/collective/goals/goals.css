@@ -370,15 +370,42 @@ ul.projectgoals {
 .table-goaltaskstable tr {
 	background-color: #bbb!important;
 }
-.goaltaskrow {background-color: #dfdfdf; border-bottom:1px solid #c4c4c4;}
+.goaltaskrow {background-color: #dfdfdf; border-bottom:1px solid #c4c4c4; margin-bottom:1px;}
 .goaltaskrow:hover {background-color: #cfcfcf;}
 
 .taskage { width:100px; padding-left:5px; float:left; line-height: 30px; font-size:0.9rem;}
 .taskowner { width:110px;float:left; line-height: 30px; font-size:0.9rem;}
 .tasktype { width:100%;float:left; padding-left:5px; display:block; line-height: 30px;}
 .taskstatus { width:100%; height:100%; float:right; display:block; padding:0!important;}
-.taskdetails { float:left; padding:5px 0 0 5px; display:block;}
+.taskdetails { 
+	float:left; 
+	padding:5px; display:block; 
 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+.goal-details {
+	margin-bottom:10px;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	
+}
+.goal-title {
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	
+}
 
 @media (min-width: 992px) {
 	.tasktype {
@@ -426,11 +453,16 @@ ul.projectgoals {
 }
 
 .taskgoaledit {
-	padding: 10px 15px;
+	padding: 10px 10px;
 	margin-bottom:10px;
 	background-color: #d5d5d5;
 }
 
+
+.taskgoaledit textarea {
+	min-height: 110px;
+	font-size:0.9rem;
+}
 
 #advsearchpanel { padding: 10px;}
 .advancedsearch-table {

@@ -13,8 +13,7 @@
 <td colspan="4"> 
   	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="$applink/collective/goals/task/tasksave.html" >
 
-  		<!-- EDITING BOX STARTS HERE -->
-  		
+ 		
 	    	<input type="hidden" name="goalid" value="$selectedgoal.id" />
 	    	<input type="hidden" name="onlyopen" value="false" />
 	    	<input type="hidden" name="taskid" value="$!task.id" />
@@ -45,7 +44,7 @@
 			#set( $cancellink = "$applink/collective/goals/search/goaltasks.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id")
 			<a href="$cancellink" data-focuson="$task.id" id="task$task.getId()" class="btn btn-xs btn-warning float-left taskedit-$!{task.taskstatus} ajax" data-targetdiv="$targetdiv" data-oemaxlevel="1" title="$tree.getCategoryPath()" >
 			[[Cancel]]</a>
-			<!-- removed taskedit class from "a" tag above  -->
+			
 		
 	<div class="taskstatus goalstatus-$!task.taskstatus">
 

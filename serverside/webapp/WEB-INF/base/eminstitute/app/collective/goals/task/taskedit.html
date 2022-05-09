@@ -14,7 +14,6 @@
   	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="$applink/collective/goals/task/tasksave.html" >
 
   		<div class="card-task-body changetaskstatus" data-taskid="$!task.id"  >
-  		<!-- EDITING BOX STARTS HERE -->
   		
 	    	<input type="hidden" name="goalid" value="$selectedgoal.id" />
 	    	<input type="hidden" name="onlyopen" value="false" />
@@ -78,18 +77,18 @@
 			#end
 			</select>
 			</div>
+	<div class="clearfix"></div>
 </div>	
-<!-- END TYPE -->	
-<div class="clearfix"></div>
-  			
-			<input id="submitbutton" type="submit" form="someform" value="[[Save]]" name="submitbutton" class="btn btn-xs btn-primary float-right">
-			<!-- Delete Button -->
+
+		<div>
+  			<input id="submitbutton" type="submit" form="someform" value="[[Save]]" name="submitbutton" class="btn btn-xs btn-primary float-right">
+		
 			#if( $caneditcollection )
     		<a class="btn btn-xs btn-danger float-right ajax" style="margin:0 10px;" data-confirm="[[Are you sure?]]"
     			 targetdiv="editgoal" title="[[Remove task]]"
     			href="$applink/collective/goals/taskdelete.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">[[Delete]]</a> 
     		#end
-    		<!-- Cancel Button  -->
+    	
     		##set( $targetdiv = "tasklist#eid($selectedgoal.id)")
 			#set( $cancellink = "$applink/collective/goals/search/goaltasks.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id")
 			<a href="$cancellink" 
@@ -101,8 +100,8 @@
 				title="[[Cancel]] $!tree.getCategoryPath()" >
 			[[Cancel]]</a>
 			
-			</div>
-		
+		</div>
+</div>		
 	<div class="taskstatus goalstatus-$!task.taskstatus">
 	
 		
