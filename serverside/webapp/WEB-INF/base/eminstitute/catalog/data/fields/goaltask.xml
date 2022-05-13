@@ -88,6 +88,11 @@
       <language id="fr"><![CDATA[Date de création]]></language>
     </name>
   </property>
+  <property id="completedurgent" index="true" stored="true" editable="true"  type="boolean" > 
+    <name> 
+      <language id="en"><![CDATA[Completed Urgent]]></language>  
+    </name> 
+  </property>  
 
 
 </properties>

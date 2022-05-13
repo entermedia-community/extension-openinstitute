@@ -31,9 +31,9 @@
 		 	 	title="Ticket Details" 
 		 	 		href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
 		 	 		#set($collection = $!mediaarchive.getCachedData("librarycollection",$task.collectionid) )
-		 	 		#set($ticket = $!mediaarchive.getCachedData("projectgoal",$task.projectgoal) )
-		 	 		#if( $ticket.get("projectstatus") == "critical" && $ticket  != $prevticket)
-						[Critical]		 	 		
+
+		 	 		#if( $task.get("completedurgent") == "true")
+						[Urgent]		 	 		
 		 	 		#end
 		 	 		###Task: 
 		 	 		#set($taskname = $!mediaarchive.getCachedData("category",$task.projectdepartment) )
@@ -41,7 +41,7 @@
 		 	 		</td>
   					<td>$context.getDateTime($task.getDate("completedon"))</td><td>$points
   					
-  					#if( $ticket.get("projectstatus") == "critical" && $ticket  != $prevticket)
+					#if( $task.get("completedurgent") == "true")
 						#set( $weekpoints = $$weekpoints + 10)
 						#set( $totalpoints = $totalpoints + 10)
 						+ 10
