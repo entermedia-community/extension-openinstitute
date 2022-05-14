@@ -1,5 +1,9 @@
 #set($collectionid = $librarycol.getId())
 
+#ifnull( $collectionid )
+	#set($collectionid = $context.getRequestParameter("collectionid"))
+#end
+
 <div style="padding:10px 20px;">
             
             #if( $caneditcollection )    
