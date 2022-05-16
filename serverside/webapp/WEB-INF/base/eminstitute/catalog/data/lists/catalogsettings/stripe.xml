@@ -3,13 +3,13 @@
     <name><![CDATA[Stripe Test Access Token]]></name> 
   </data>  
   <data id="stripe_test_publishable_key" value="pk_test_GpsVQwEDnxZ7GSpDdmJSddkM"> 
-    <name><![CDATA[Stripe Publishable Test Key]]></name> 
+    <name><![CDATA[Stripe Test Publishable Key]]></name> 
   </data>  
-  <data id="productionmode" value="test"> 
-    <name><![CDATA[Stripe Mode (test/production)]]></name> 
+  <data id="productionmode" value="false"> 
+    <name><![CDATA[Production Stripe Mode (true/false)]]></name> 
   </data>  
   <data id="stripe_access_token" value=""> 
-    <name><![CDATA[Strip Access Token]]></name> 
+    <name><![CDATA[Strip Live Access Token]]></name> 
   </data>  
   <data id="stripe_publishable_key" value=" ">
     <name><![CDATA[Stripe Live Publishable Key]]></name>
