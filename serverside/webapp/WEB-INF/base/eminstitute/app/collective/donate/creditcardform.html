@@ -125,25 +125,31 @@
 
 	  	lQuery("#donatecheckout").livequery("click", function(e) {
  		  	$("#donatecheckout").addClass('disabled');
- 		  	
+ 		  	$("#donatecheckout").text("[[Processing...]]");
  		  	//$("#donatecheckout").css("cursor:wait");
 	  		e.preventDefault();
 	  		if( $("#payment-form").valid() )
 	  		{
 	  			 var form = document.getElementById('payment-form');	  			 
-			    stripe.createToken(card).then(function(result) {
+			     stripe.createToken(card).then(function(result) {
 			     if (result.error) {
 			       // Inform the user if there was an error
 			       var errorElement = document.getElementById('card-errors');
 			       $(errorElement).html('<div class="errormsg">'+result.error.message+'</div>');
+			       $("#donatecheckout").removeClass('disabled');		
+			  		$("#donatecheckout").text("[[Check Out]]");
 			     } else {
 			       // Send the token to your server
 			       stripeResponseHandler(result);
-			  		 $(form).trigger("submit");
+			  	   $(form).trigger("submit");
 			     }
 			   });
 	  		}
-		  	 $("#donatecheckout").removeClass('disabled');			
+	  		else 
+	  		{
+		  	 	$("#donatecheckout").removeClass('disabled');		
+		  		$("#donatecheckout").text("[[Check Out]]");
+	  		}
 	  	});
 	  	
 	   	var elements = stripe.elements();
