@@ -114,24 +114,38 @@
 	  
     	// This function sets up the details of the transaction, including the amount and line item details.
 	  	// This identifies your website in the createToken call below
-	  	
+	  	  #if($mediaarchive.getCatalogSettingValue("productionmode") == "production")
+	  		//console.log('Production');
+	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
+	  	 #else
+			//console.log('Test Publishkey');
+	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
+	  	 #end
+		  	var stripe = Stripe("$publishkey");
+
 	  	lQuery("#donatecheckout").livequery("click", function(e) {
+ 		  	$("#donatecheckout").addClass('disabled');
+ 		  	
+ 		  	//$("#donatecheckout").css("cursor:wait");
 	  		e.preventDefault();
-	  		$("#payment-form").submit();
+	  		if( $("#payment-form").valid() )
+	  		{
+	  			 var form = document.getElementById('payment-form');	  			 
+			    stripe.createToken(card).then(function(result) {
+			     if (result.error) {
+			       // Inform the user if there was an error
+			       var errorElement = document.getElementById('card-errors');
+			       $(errorElement).html('<div class="errormsg">'+result.error.message+'</div>');
+			     } else {
+			       // Send the token to your server
+			       stripeResponseHandler(result);
+			  		 $(form).trigger("submit");
+			     }
+			   });
+	  		}
+		  	 $("#donatecheckout").removeClass('disabled');			
 	  	});
 	  	
-	  	  #if($mediaarchive.isCatalogSettingTrue("productionmode"))
-	  		console.log('Production');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
-	  	  	
-	  	  	
-	  	 #else
-			console.log('Test Publishkey');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
-	  	  	 
-	  	  		 
-	  	 #end
-	  	var stripe = Stripe("$publishkey");
 	   	var elements = stripe.elements();
 
 
@@ -170,20 +184,6 @@
 		      number: true
 		    }
 		  },
-		  submitHandler: function(form) {
-		  	$("#donatecheckout").addClass('disabled');
-		    stripe.createToken(card).then(function(result) {
-		     if (result.error) {
-		       // Inform the user if there was an error
-		       var errorElement = document.getElementById('card-errors');
-		       $(errorElement).html('<div class="errormsg">'+result.error.message+'</div>');
-		     } else {
-		       // Send the token to your server
-		       stripeResponseHandler(result);
-	
-		     }
-		   });
-		  },
 		  errorElement: "div",
 		  errorClass: "errormsg",
 		  errorPlacement: function(error, element) {
@@ -202,11 +202,6 @@
 		  hiddenInput.setAttribute('name', 'stripeToken');
 		  hiddenInput.setAttribute('value', response.token.id);
 		  form.appendChild(hiddenInput);
-
-		  // Submit the form
-		  //form.submit();
-		  form.trigger("submit");
-		  $("#donatecheckout").removeClass('disabled');
 		  
 	  }
 });
