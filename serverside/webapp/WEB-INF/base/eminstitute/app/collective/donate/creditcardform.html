@@ -114,7 +114,7 @@
 	  
     	// This function sets up the details of the transaction, including the amount and line item details.
 	  	// This identifies your website in the createToken call below
-	  	  #if($mediaarchive.getCatalogSettingValue("productionmode") == "production")
+	  	  #if($mediaarchive.isCatalogSettingTrue("productionmode"))
 	  		//console.log('Production');
 	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
 	  	 #else
