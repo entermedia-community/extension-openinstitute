@@ -309,13 +309,20 @@ public class StripePaymentProcessor {
 		populateMetadata(payment, inUser, initialMetadata);
 		chargeParams.put("description", payment.getId());
 		chargeParams.put("metadata", initialMetadata);
-		try {
+		try 
+		{
 			String customerid = inUser.get("stripeid"); // This might fail with the admin user
 			// No such customer: cus_C9JdWVqvhQ16Uq; a similar object exists in test mode,
 			// but a live mode key was used to make this request.
-			if (customerid == null) {
+			if (customerid == null) 
+			{
 				customerid = createCustomer(inArchive, inUser, inToken);
 			}
+			else 
+			{
+				updateSource(inArchive, inUser,customerid, inToken);
+			}
+			
 			chargeParams.put("customer", customerid); // obtained via https://stripe.com/docs/saving-cards
 
 			Charge c = null;
@@ -361,11 +368,20 @@ public class StripePaymentProcessor {
 				return false;
 			}
 		}
-
 		catch (Exception e) {
-			throw new OpenEditException(e);
+			throw new OpenEditException("Could not process" , e);
 		}
 
+	}
+
+	private void updateSource(MediaArchive inArchive, User inUser, String inStripeId, String inToken) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException
+	{
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		Customer customer =	Customer.retrieve(inStripeId);
+		customerParams.put("email", inUser.getEmail());
+		customerParams.put("source", inToken);
+		Customer updatedCustomer =  customer.update(customerParams);
+		
 	}
 
 	protected String createCustomer(MediaArchive inArchive, User inUser, String inToken) throws AuthenticationException,
