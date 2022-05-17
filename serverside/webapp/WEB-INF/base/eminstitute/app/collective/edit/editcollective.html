@@ -27,6 +27,14 @@ $context.putPageValue("data", $librarycol)
 <input type="hidden" name="collectionid" value="$librarycol.id" />
 <input type="hidden" name="view" value="$!view" />
 
+##Set Default Donation Template
+#if(!$librarycol.get("donationemailtemplate"))
+	#set($defaultdonationtemplate = $mediaarchive.getCatalogSettingValue("donation_email_body"))
+	#if($defaultdonationtemplate)
+		$!context.setRequestParameter("donationemailtemplate.value",$defaultdonationtemplate)
+	#end
+#end
+
  
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 
