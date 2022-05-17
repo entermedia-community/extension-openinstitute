@@ -278,7 +278,8 @@ public class StripePaymentProcessor {
 		return response.getStatusLine().getStatusCode() == 200;
 	}
 
-	protected boolean process(MediaArchive inArchive, User inUser, Data payment, String inToken) {
+	protected boolean process(MediaArchive inArchive, User inUser, Data payment, String inToken) 
+	{
 		log.info("Payment: Processing order with Stripe");
 
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
@@ -362,6 +363,12 @@ public class StripePaymentProcessor {
 				payment.setProperty("net", String.valueOf(net));
 				payment.setProperty("stripechargeid", c.getId());
 				log.info("Payment: Stripe payment validated Id:"+c.getId());
+				
+				if( 2 == 2 )
+				{
+				//	throw new OpenEditException("Test error ammount");
+				}
+				
 				return true;
 			} else {
 				log.info("Payment: Stripe payment failed.");
@@ -371,6 +378,7 @@ public class StripePaymentProcessor {
 		catch (Exception e) {
 			throw new OpenEditException("Could not process" , e);
 		}
+		
 
 	}
 
