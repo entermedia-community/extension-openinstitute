@@ -2,17 +2,21 @@
 	<div class="row">
 		<div class="col">
 			<div class="contentcolumn">
-			<h2>[[Donation received]]</h2>
-			<p>[[You will get an email with your receipt. Thank you]]</p>
-			</div>
-			</div>
-			
-			 <div class="col col-lg-4 ">
-			<div class="collective-sidebar" style="margin: 0px;">
-				$pages.include("$apphome/collective/donate/donatesidebar.html")
-			</div>
-			 </div>
-			
+				#set($error = $context.getRequestParameter("paymenterror"))
+				#if($error)
+					<div style="padding:20px;">$error</div>
+				#else
+					<h2>[[Donation received]]</h2>
+					<p>[[You will get an email with your receipt. Thank you]]</p>
+					</div>
+					</div>
+					
+					<div class="col col-lg-4 ">
+						<div class="collective-sidebar" style="margin: 0px;">
+							$pages.include("$apphome/collective/donate/donatesidebar.html")
+						</div>
+				 	</div>
+			 	#end
 		</div>
 	</div>
 

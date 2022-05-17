@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="chatterboxsort" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[chatterboxsort]]></language> 
+    </name> 
+  </property>  
+  <property id="assetopentab" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[assetopentab]]></language> 
+    </name> 
+  </property>  
+  <property id="usersidebarhidden" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[usersidebarhidden]]></language> 
+    </name> 
+  </property>  
+  <property id="colleftwidth" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[colleftwidth]]></language> 
+    </name> 
+  </property>  
+  <property id="lastselectedcollection" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[lastselectedcollection]]></language>
+    </name>
+  </property>
+</properties>

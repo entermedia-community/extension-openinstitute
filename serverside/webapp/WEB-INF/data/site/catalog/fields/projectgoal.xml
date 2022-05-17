@@ -1,0 +1,8 @@
+
+<properties>
+  <property id="chatparentid" index="true" listid="chatterbox" deleted="false" stored="true" datatype="list">New
+    <name>
+      <language id="en"><![CDATA[Chat Parent]]></language>
+    </name>
+  </property>
+</properties>
