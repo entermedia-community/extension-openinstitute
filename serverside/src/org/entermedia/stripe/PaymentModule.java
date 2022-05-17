@@ -235,75 +235,83 @@ public class PaymentModule extends BaseMediaModule
 		Boolean isdonation = Boolean.parseBoolean(inReq.getRequestParameter("isdonation"));
 		payment.setValue("isdonation", isdonation );
 		
-		boolean success = getOrderProcessor().process(archive, user, payment, token);
-		if (success)
-		{
-			Date paymentdate = new Date();
-			payment.setValue("paymentdate", paymentdate);
-			payment.setValue("userid", username);
-			
-			String frequency = inReq.findValue("frequency");
-			if (frequency != null && frequency != "")
+		try {
+			boolean success = getOrderProcessor().process(archive, user, payment, token);
+			if (success)
 			{
-				Searcher plans = archive.getSearcher("paymentplan");
-				Data plan = plans.createNewData();
-				plan.setValue("userid", inReq.getUserName());
-				plan.setValue("frequency", frequency);
-				plan.setValue("amount", payment.getValue("totalprice"));
-				plan.setValue("lastprocessed", new Date());
-				plan.setValue("planstatus", "active");
-				plans.saveData(plan);
+				Date paymentdate = new Date();
+				payment.setValue("paymentdate", paymentdate);
+				payment.setValue("userid", username);
 				
-				payment.setValue("paymentplan", plan.getId());
-			}
-			
-			payment.setValue("receiptstatus", "new");
-			
-			payments.saveData(payment);
-			inReq.putPageValue("payment", payment);
-			
+				String frequency = inReq.findValue("frequency");
+				if (frequency != null && frequency != "")
+				{
+					Searcher plans = archive.getSearcher("paymentplan");
+					Data plan = plans.createNewData();
+					plan.setValue("userid", inReq.getUserName());
+					plan.setValue("frequency", frequency);
+					plan.setValue("amount", payment.getValue("totalprice"));
+					plan.setValue("lastprocessed", new Date());
+					plan.setValue("planstatus", "active");
+					plans.saveData(plan);
+					
+					payment.setValue("paymentplan", plan.getId());
+				}
+				
+				payment.setValue("receiptstatus", "new");
+				
+				payments.saveData(payment);
+				inReq.putPageValue("payment", payment);
+				
 
-			/*
-			//TODO: in case different receipt required.
-			//Donation Receipt
-			if (isdonation) {
-				Searcher donationreceipt = archive.getSearcher("donationreceipt");
-				Data receipt = donationreceipt.createNewData();
-				receipt.setValue("paymentid", payment.getId());
-				receipt.setValue("amount", payment.getValue("totalprice"));
-				receipt.setValue("donor", user.getName());
-				receipt.setValue("donoremail", user.getEmail());
-				receipt.setValue("collectionid", collectionid);
-				//receipt.setValue("paymentdate", paymentdate);
-				receipt.setValue("receiptstatus", "new");
+				/*
+				//TODO: in case different receipt required.
+				//Donation Receipt
+				if (isdonation) {
+					Searcher donationreceipt = archive.getSearcher("donationreceipt");
+					Data receipt = donationreceipt.createNewData();
+					receipt.setValue("paymentid", payment.getId());
+					receipt.setValue("amount", payment.getValue("totalprice"));
+					receipt.setValue("donor", user.getName());
+					receipt.setValue("donoremail", user.getEmail());
+					receipt.setValue("collectionid", collectionid);
+					//receipt.setValue("paymentdate", paymentdate);
+					receipt.setValue("receiptstatus", "new");
+					
+					donationreceipt.saveData(receipt);
+					
+					inReq.putPageValue("receipt", receipt);
+				}
+				*/
 				
-				donationreceipt.saveData(receipt);
 				
-				inReq.putPageValue("receipt", receipt);
-			}
-			*/
-			
-			
-			String invoicepayment = inReq.findValue("invoicepayment");
-			if ("true".equals(invoicepayment))
-			{
-				Data invoice = loadCurrentCart(inReq);
-				invoice.setValue("paymentstatus", "paid");
-				invoice.setValue("paymentdate", new Date());
-				invoice.setValue("owner", inReq.getUserName());
-				invoice.setValue("transaction", payment.getId());
-				
-				invoice.setValue("collectionid", collectionid);
-				
-				archive.saveData("collectioninvoice", invoice);
-				inReq.removeSessionValue("current-cart");
-			}
+				String invoicepayment = inReq.findValue("invoicepayment");
+				if ("true".equals(invoicepayment))
+				{
+					Data invoice = loadCurrentCart(inReq);
+					invoice.setValue("paymentstatus", "paid");
+					invoice.setValue("paymentdate", new Date());
+					invoice.setValue("owner", inReq.getUserName());
+					invoice.setValue("transaction", payment.getId());
+					
+					invoice.setValue("collectionid", collectionid);
+					
+					archive.saveData("collectioninvoice", invoice);
+					inReq.removeSessionValue("current-cart");
+				}
 
-			
+				
+			}
+			else {
+				log.debug("Payment: failed.");
+			}
 		}
-		else {
-			log.debug("Payment: failed.");
+		catch (Exception e) {
+			// TODO: handle exception
+			log.error(e.getMessage(), e);
+			inReq.putPageValue("paymenterror", e.getMessage());
 		}
+		
 
 	}
 
