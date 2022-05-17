@@ -1,6 +1,9 @@
 <div class="container" id="donationcontainer">
 <div class="contentcolumn">
 	<h1>[[Donate to ]] $librarycol</h1>
+	#if($paymenterror)
+		<div style="padding:20px;" class="errormsg">$paymenterror <br>[[Please use another card]]</div>
+	#end
 	#if(!$user)
 		<div style="padding:20px ">
 	

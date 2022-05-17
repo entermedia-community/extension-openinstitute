@@ -1,11 +1,10 @@
+#if($paymenterror)
+	$pages.include("$apphome/collective/donate/donate.html")
+#else
 <div class="container">
 	<div class="row">
 		<div class="col">
 			<div class="contentcolumn">
-				#set($error = $context.getRequestParameter("paymenterror"))
-				#if($error)
-					<div style="padding:20px;">$error</div>
-				#else
 					<h2>[[Donation received]]</h2>
 					<p>[[You will get an email with your receipt. Thank you]]</p>
 					</div>
@@ -16,7 +15,7 @@
 							$pages.include("$apphome/collective/donate/donatesidebar.html")
 						</div>
 				 	</div>
-			 	#end
 		</div>
 	</div>
+#end
 

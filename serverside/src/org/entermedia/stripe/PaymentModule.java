@@ -306,7 +306,7 @@ public class PaymentModule extends BaseMediaModule
 				log.debug("Payment: failed.");
 			}
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			// TODO: handle exception
 			log.error(e.getMessage(), e);
 			inReq.putPageValue("paymenterror", e.getMessage());
