@@ -9,10 +9,14 @@
   
   <data id="donation_email_body">
     <value><![CDATA[
-    <p>Dear [donor],</p>
-	<p>Thank you for your generous contribution of [amount] to Open Institute on [date] that provides essential funding for the development the open-source mobile app for Open Institute.</p>
+    <p>Dear ${donor},</p>
+	<p>Thank you for your generous contribution of ${amount} to <strong>${organization}</strong> on ${date} that provides essential funding for the development the open-source mobile app for Open Institute.</p>
 	<p>Through your generosity, we are able to continue advancing the purpose of Open Institute, as a platform and launchpad serving to create more accountability and transparency in the world of fundraising for non-profit initiatives.</p>
 	<p>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</p>
+	
+	<p><strong>Open Institute<strong> - <a href="https://openinstitute.org/">OpenInstitute.org</a><br>
+		<a href="https://openinstitute.org/app/collective/channel/AX8yX__pn9QuEXtw3O22/index.html?showupload=AYDNwNU8zh8LvcHkYANM">OI Fundraising</a>
+	</p>
 	    
     ]]></value>
   </data>
