@@ -1043,6 +1043,12 @@ a.btn-toolbar.topicselected {
 	min-height: 32px;
 	font-weight: bold;
 }
+
+.feed-showpost-dialog .feedcard-header {
+	padding:15px;
+}
+	
+	
 @media (max-width: 640px) {
 	.feedcard-title {
 		font-size:1.5rem;
