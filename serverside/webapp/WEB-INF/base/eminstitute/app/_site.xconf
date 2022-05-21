@@ -407,4 +407,9 @@
   	<permission name="viewclosedcaptions">
 		<userprofile property="viewclosedcaptions" equals="true" />
 	</permission>
+	
+		<permission name="showcollectionpicker">
+		<userprofile property="showcollectionpicker" equals="true" />
+	</permission>
+	
 </page>

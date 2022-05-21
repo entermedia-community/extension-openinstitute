@@ -1,107 +1,138 @@
 ##Search collections this user is teammeber
+#set( $organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search() )
+#set($userprojectsids = [])
 
-#if($user)
-	#set( $organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search($context) )
-	#set($userprojectsids = [])
-	#set($userticketsids = [])
-	#foreach( $ohit in $organizationsuser )
-		#set($x = $userprojectsids.add($ohit.collectionid))
-		##Search for Tickets in Collection
-		#set($goalsuser = $mediaarchive.query("projectgoal").exact("collectionid",$ohit.collectionid).enduser(true).search($context))
-		#if ($goalsuser)
-		#set($x = $userticketsids.add($goalsuser))
+##set($userticketsids = [])
+#foreach( $ohit in $organizationsuser )
+	#set($x = $userprojectsids.add($ohit.collectionid))
+##	##Search for Tickets in Collection
+##	#set($goalsuser = $mediaarchive.query("projectgoal").exact("collectionid",$ohit.collectionid).enduser(true).search())
+##	#if ($goalsuser)
+##	#set($x = $userticketsids.add($goalsuser))
+	##end
+#end
+
+#set( $pendingmessages = $chatManager.loadChatTopicLastChecked("${user.getId()}-messages",$user.getId() ) )
+
+#set( $appsection = $context.getRequestParameter("appsection"))
+#if( !$appsection)
+	#set( $appsection = $content.appsection )
+#end
+
+<div id="usersidebarstatus" class="ajaxstatusX" data-reloadspeed="60000" data-ajaxpath="$applink/users/sidebar.html?appsection=$appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+
+<div class="sidebar-box" style="height:auto;"> 
+    <div class="sidebar-box-header">
+        [[Your Projects]]        
+        <a href="#" class="sidebar-toggler" data-action="hide" data-targetdiv="usersidebar"
+        title="[[Hide User Sidebar]]">
+        <i class="fas fa-angle-double-left"></i>
+        </a>
+    </div>
+
+#set( $collectives = $mediaarchive.query("librarycollection").ids($userprojectsids).sort("name").search($context) )
+
+
+    <div class="sidebar-box-content" style="padding:0;" id="sidebarboxprojects">
+    	#if( $collectives.size() >= 10)
+    		<div style="padding:5px 15px;">
+			<select  id="collectivesearch2" 
+						name="collectionid" 
+						class="form-control autosubmitlink" 
+						data-placeholder="[[Search Projects]]"
+						data-url="$sitelink/app/collective/community/index.html?goaltrackerstaff=*&collectionid="
+						data-dropdownparent="sidebarboxprojects"
+					>
+					<option></option>
+					#foreach( $collective in $collectives )
+						<option value="$collective.getId()">#esc($collective.name)</option>
+					#end
+			</select>
+			</div>
 		#end
-	#end
+	
+	#set($selectedproject = $librarycol.getId())
 
-	<div class="sidebar-box">
-	    <div class="sidebar-box-header">
-	        [[Account]]        
-	        <a href="#" class="sidebar-toggler" data-action="hide" data-targetdiv="usersidebar"
-	        title="[[Hide User Sidebar]]">
-	        <i class="fas fa-angle-double-left"></i>
-	        </a>
-	    </div>
-	    <div class="sidebar-box-content" style="padding:0;">
-	    	<ul class="sidebar-list">
-			<li class="#if($content.appsection == "profile") current #end">
-				<a href="$applink/users/$user.getId()/index.html"
-					title="[[You are]]: $user.getAnonNickName()"><i class="fa fa-user"></i> [[Profile]]</a>
-			</li>
-			
-			<li class="#if($appsection == "activity") current #end" style="width:110px; float:left;">
-				<a href="$sitelink/app/activity/index.html"  >
-				<i class="fa fa-comments"></i> [[All Chats]]</a>
-			</li>
-			#if($canviewsettings)
-				#set( $pendingmessages = $chatManager.loadChatTopicLastChecked("${user.getId()}-messages",$user.getId() ) )
-				<li  class="#if($appsection == "messages") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
-					<a href="$sitelink/app/messages/index.html" >
-					#if($pendingmessages && !$pendingmessages.isEmpty())
-					<i class="fa fa-comment"></i> [[Direct Chat]] <i class="fas fa-bell fa-xs" style="color:orange"></i>
-					#else
-					<i class="fa fa-comment"></i> [[Direct Chat]]
-					#end
-					</a>
-				</li>
-			#end
-			<div class="clearfix"></div>
-			
-			
-			#if($userprojectsids.size() && $userticketsids.size())
-			<li class="#if($content.appsection == "tasks") current #end">
-				#if ($canviewsettings)
-					#set($args = "goaltrackerstaff=*")
-				#end
-				<a href="$applink/users/tasks/index.html?$!{args}"><i class="fa fa-clipboard-check"></i> [[Open Tasks]]</a>
-				<div style="padding:2px 20px 9px;">
-				<a href="$applink/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success"> [[Level 1]]</a>
-				<a href="$applink/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Level 2]]</a>
-				<a href="$applink/users/tasks/search.html?ticketlevel=3&$!{args}" class="badge badge-success">[[Level 3]]</a>
-				</div>
-			</li>
-			#end
-			#if($canviewsettings)
-			<li class="#if($content.appsection == "mytasks") current #end"><a href="$applink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Open Tasks]]</a></li>
-			#end
-			#if($canviewsettings)
-			<li class="#if($content.appsection == "completed") current #end"><a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="far fa-file-alt"></i> [[Completed Tasks]]</a></li>
-			#end
-			</ul>
-	    </div>
+	<div style="#if($collectives.size() > 4) height: 200px; overflow-y:auto; #end ">
+	#set( $modcollections = $chatManager.loadCollectionsModified($collectives,$user.getId() ) )
+	<ul class="sidebar-list" >
+		#foreach( $collective in $collectives )
+					<li class="#if($selectedproject==$collective.id) current #end">
+						<a  href="$applink/collective/channel/${collective.id}/#dash($collective.getName()).html"  title="[[Project]] $collective.name" >
+						<i class="fas fa-sitemap"></i> $collective.name <i class="fas fa-bell fa-xs" style="color:orange"></i>
+						</a>
+					</li>
+		#end
+	</ul>
 	</div>
 	
 	
-		<div class="sidebar-box" id="sidebarboxprojects">
-	    <div class="sidebar-box-header">
-	        [[Organizations]]         
-	    </div>
-	    <div class="sidebar-box-content" style="padding:0;">
-	    	<ul class="sidebar-list">
-	    		<li class="#if($content.appsection == "createorg") current #end" ><a href="$applink/organization/create.html">[[Create New Organization]]</a></li>
-	    		
-	    			#set($collections = $mediaarchive.query("librarycollection").ids($userprojectsids).enduser(true).search($context))
-	    			#set($libraryids = [])
-					#foreach( $collection in $collections )
-						#set($x = $libraryids.add($collection.library))
-					#end	    		
-					#set($mylibraries = $mediaarchive.query("library").ids($libraryids).sort("name").search($context) )
-					#foreach( $alibrary in $mylibraries )
-						#if ($alibrary.getId() && $alibrary.getName())
-						<li class="#if($library.id==$alibrary.id) current #end">
-							#set($link = "${context.siteRoot}$applink/organization/projects/${alibrary.id}/#dash($alibrary.name).html")
-							<a href="$link"><i class="fas fa-sitemap"></i> $alibrary.getName()</a>
-						</li>
-						#end
-					#end
-			</ul>
-			
-		</div>
+	<div style="padding:10px 0 0; text-align:center;">
+		<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Add a Project]]</a>
 	</div>
-	
-	
-
-#end  
+    
+    </div>
+   <div class="sidebar-box-header" style="margin-top:20px;">[[Profile]]
+   <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right"><i class="fas fa-users-cog"></i></a>
+   </div>
+   <div class="sidebar-box-content" style="padding:0;">
+    	<ul class="sidebar-list">
+		<li class="#if($appsection == "activity") current #end" style="width:110px; float:left;">
+			<a href="$sitelink/app/activity/index.html"  >
+			<i class="fa fa-comments"></i> [[All Chats]]</a>
+		</li>
+		#if($canviewsettings)
+		<li  class="#if($appsection == "messages") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
+			<a href="$sitelink/app/messages/index.html" >
+			#if($pendingmessages && !$pendingmessages.isEmpty())
+			<i class="fa fa-comment"></i> [[Direct Chat]] <i class="fas fa-bell fa-xs" style="color:orange"></i>
+			#else
+			<i class="fa fa-comment"></i> [[Direct Chat]]
+			#end
+			</a>
+		</li>
+		#end
 		
+		
+		#if($canviewsettings)
+		<li class="#if($appsection == "mytasks") current #end" style="width:110px; float:left;">
+			<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
+		</li>
+		<li class="#if($appsection == "completed") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
+		<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[Completed]]</a>
+		</li>
+		#end
+		</ul>
+		<div class="clearfix"></div>
+		##if($userprojectsids.size() )
+		#if($canviewsettings)
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Tickets]]</div>
+			#if ($canviewsettings)
+				#set($args = "goaltrackerstaff=*")
+			#end
+			
+			<div style="padding:4px 10px 4px;">
+			<a href="$sitelink/app/users/tasks/index.html?$!{args}" class="badge badge-success">[[All]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success">[[Level 1]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Level 2]]</a>
+			</div>
+		#end
+		##end
+		
+		#if($canviewsettings)
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin]]</div>
+		<ul class="sidebar-list" style="margin-bottom:10px;">
+		
+		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
+			<a href="$sitelink/app/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
+		</li>
+		</ul>
+		#end
+		
+    </div> 
+    
+</div>
 
+</div>
 
 

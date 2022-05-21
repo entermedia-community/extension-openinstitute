@@ -21,15 +21,26 @@
 				$tag.getName()
 			#end
 			</h3>  
-						
+			<div style="background-color:#EEE; padding:20px;">
+			$!tag.funddescription
+			
+			
+				 #set( $donations = $mediaarchive.query("transaction").orgroup("collectionid",$projects).exact("isdonation","true").sort("paymentdateDown").search($context))
+			 #if( !$donations.isEmpty() )<h4>$donations.size() donations received so far!</h4>#end
+			
 				<div style="padding-left:10px;">
+			 		   
+
 				#foreach( $project in $projects.getPageOfHits() )
 					$context.putPageValue("collective",$project)
 					$pages.include("$apphome/browse/collectivelist.html",$context)
 				#end
 				</div>
 				<div style="clear:both"></div>
+				
+				
 			</div>	
+			</div>		
 			#end	
 	#end
 	

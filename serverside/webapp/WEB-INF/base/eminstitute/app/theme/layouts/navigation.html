@@ -54,39 +54,16 @@
            ## <li class="nav-item #if($oisection == "feed")active#end" >
            ##   <a class="nav-link js-scroll-trigger" href="$applink/news/$library.getId()/${library.name.replaceAll(" ","-")}.html">[[News Feed]]</a>
            ## </li>
-            <li class="nav-item #if($oisection == "profiles")active#end" >
-              <a class="nav-link js-scroll-trigger" href="$applink/profiles/$library.getId()/${library.name.replaceAll(" ","-")}.html">[[People]]</a>
-            </li>
+           ## <li class="nav-item #if($oisection == "profiles")active#end" >
+           ##   <a class="nav-link js-scroll-trigger" href="$applink/profiles/$library.getId()/${library.name.replaceAll(" ","-")}.html">[[People]]</a>
+           ## </li>
             #end
-            <li class="nav-item dropdown">
-	              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown">[[Organizations]]</a>
-	              <ul class="dropdown-menu">
-	    	      	#if($user)
-	    	      		<li class="dropdown-item" style="border-bottom:1px solid #999">
-							<a class="subnav-link "
-							 	href="$applink/browse/usercollectives.html" 
-							>[[My Projects]]</a>			                    	
-				       	</li>
-		   			#end
-	    	        	
-        			#set( $libraries = $mediaarchive.query("library").sort("name").all().search($context) )
-					#foreach( $libraryhit in $libraries )
-						#if ($libraryhit.getId() && $libraryhit.getName())
-						<li class="dropdown-item #if($library.id==$libraryhit.getId()) currentlibrary #end">
-							<a class="subnav-link "
-							#if( $libraryhit.communitysubdomain)
-								href="//${libraryhit.communitysubdomain}$applink/"
-							#else
-							 	href="${context.siteRoot}$applink/organization/projects/$libraryhit.getId()/#dash($libraryhit.name).html"
-							#end	 
-							>#esc($libraryhit.name)</a>			                    	
-				       	</li>
-				       	#end
-					#end
-	            </ul>
-            </li>
-            <li class="nav-item #if($oisection == "stations")active#end" >
-              <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/browse/stations/index.html">[[Search]]</a>
+	    	        <li style="margin-right:20px">	
+	    	        	$pages.include("$apphome/components/libraries/pickcollection.html")
+	    	        </li>	
+       
+            <li class="nav-item #if($oisection == "search")active#end" >
+              <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/browse/search/index.html">[[Search]]</a>
             </li>
             <li class="nav-item #if($oisection == "contact")active#end" >
               <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/contact/contact.html">[[Contact]]</a>

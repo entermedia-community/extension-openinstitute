@@ -1,0 +1,35 @@
+#if( $canshowcollectionpicker)
+<div id="collectionpicker" class="nav-form" style="margin-top:6px;">
+
+	<div id="collectionpickerinner" class="librarycollectionpicker">
+		#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+		$context.putPageValue("searcher",$searcher)
+		
+		
+		<div class="collectionpicker" style="min-width:200px">
+					<form  action="$home$applink/collective/channel/index.html" class="form-inline autosubmitform">
+						#set( $detail = $searcher.getDetail("name"))
+						#set( $text = $detail.getText($context))
+						#if( $librarycol )
+							#set( $text = "$librarycol.getName()" )
+						#else
+							#set( $text = "[[All Projects]]" )
+						#end
+						#set( $namedetail = $searcher.getDetail("name"))
+						
+						<select name="collectionid" id="collectionid" 
+							class="listautocomplete selectautosubmit #if($canaddnewcollectionXX) selectaddnew #end" 
+							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
+							data-searchfield="name" data-searchtype="librarycollection" data-foreignkeyid="library" 
+							data-placeholder="$text" data-sortby="$namedetail.getDefaultSort()">
+							#if( $librarycol )
+##							  <option value="$collection.getId()" selected="selected">#esc($librarycol.getName($context))</option>
+							#end
+						</select>
+						
+					</form>
+				</div>
+
+	</div>
+</div>	
+#end

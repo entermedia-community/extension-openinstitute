@@ -31,4 +31,13 @@
   
    <property id="communityimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="communitytag/${id}">Image</property>  
   
+      <property id="funddescription" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="de"><![CDATA[Projektbeschreibung]]></language>  
+      <language id="en"><![CDATA[Description]]></language>  
+      <language id="es"><![CDATA[Descripción del Proyecto]]></language>  
+      <language id="fr"><![CDATA[Description du projet]]></language> 
+    </name> 
+  </property>  
+  
 </properties>
