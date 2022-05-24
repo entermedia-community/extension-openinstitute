@@ -62,10 +62,24 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			objects.put("donor", (String) receipt.getValue("name"));
 			
 			String price = receipt.getValue("totalprice");
-			
 			objects.put("amount", "\$" + price );
+			
+			
+			String collection_url = '';
+			String collection_url_donation = '';
+			
+			String appid = context.findValue("sitelink");
+			
+			appid = 'app';  //Sitelink not working
+			
 			if (collection != null) {
 				objects.put("organization", collection);
+				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId()+"/index.html"
+				objects.put("organization_url", collection_url);
+				
+				collection_url_donation = getSiteRoot() + "/" + appid + "/collective/donate/"+collection.getId()+"/donate.html"
+				objects.put("organization_url_donation", collection_url_donation);
+				log.info(collection_url_donation);
 			}
 		
 			WebEmail templateEmail = mediaArchive.createSystemEmailBody(receiptemail);
