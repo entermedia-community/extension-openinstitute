@@ -17,8 +17,9 @@
 		
 	#set($caneditgoal = false)
 	#if($user && ( $canviewsettings || $caneditcollection)  && $goal.collectionid)
-			#set($caneditgoal = true)
+		#set($caneditgoal = true)
 	#end
+	$context.putPageValue("caneditgoal", $caneditgoal)
 	
 	#set($points = 0)
 	#foreach($task in $tasks)

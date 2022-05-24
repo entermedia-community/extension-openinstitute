@@ -832,8 +832,12 @@ height: 40px;
 	word-break:break-all;
 }
 .message-attach-box .render-type-thumbnail {
-	font-size:80%;
-	}
+	font-size:90%;
+	text-align: center;
+}
+.message-attach-box .attachment-clearselection {
+	display:block;
+}
 .message-edit-box {
 	padding:20px;
 	background-color:#FEF9EC;
