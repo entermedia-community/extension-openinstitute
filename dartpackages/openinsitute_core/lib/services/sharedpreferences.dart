@@ -1,24 +1,40 @@
+import 'dart:convert';
+
+import 'package:openinsitute_core/models/emUser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class sharedPref {
-  saveEMKey(String key) async {
+  static saveEMKey(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('entermediakey', key);
   }
 
-  getEMKey() async {
+  static getEMKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     String? stringValue = prefs.getString('entermediakey');
     return stringValue;
   }
+  static saveEmUser(EmUser emUser) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('emUser', emUser.toJson());
+  }
 
-  saveWorkspaceKey(String key) async {
+  static Future<EmUser?> getEmUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? stringValue = prefs.getString('emUser');
+    if(stringValue == null){
+      return null;
+    }
+    return EmUser.fromJson(jsonDecode(stringValue));
+  }
+
+  static saveWorkspaceKey(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('workspacekey', key);
   }
 
-  getWorkspaceKey() async {
+  static getWorkspaceKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     String? stringValue = prefs.getString('workspacekey');
@@ -64,7 +80,7 @@ class sharedPref {
   //todo; bool CheckValue = prefs.containsKey('value');
   //todo; containsKey will return true if persistent storage contains the given key and false if not.
 
-  resetValues() async {
+  static resetValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Remove entermediakey
     prefs.remove("entermediakey");
@@ -72,5 +88,7 @@ class sharedPref {
     prefs.remove("workspacekey");
     //Remove most recent workspace ID
     prefs.remove("recent");
+    // remove emUser
+    prefs.remove("emUser");
   }
 }

@@ -1,7 +1,7 @@
 name: openinsitute_core
 description: Shared code for OI apps
 version: 0.0.1
-homepage:
+# homepage:
 
 environment:
   sdk: ">=2.15.0-116.0.dev <3.0.0"
