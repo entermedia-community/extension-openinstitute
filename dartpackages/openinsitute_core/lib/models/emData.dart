@@ -9,7 +9,6 @@ class emData{
 
     emData.fromJson(Map<String, dynamic> json){
         id = json["id"];
-
         name = json["name"]?["en"] ?? "No Name";
         properties = json;
     }
@@ -18,8 +17,4 @@ class emData{
         properties[id] = id;
         return properties;
     }
-
-
-
-
 }

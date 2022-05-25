@@ -6,17 +6,16 @@ import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:isar/isar.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
+import 'package:openinsitute_core/services/authentication.dart';
+import 'package:openinsitute_core/services/chatManager.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:openinsitute_core/services/emSocketManager.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
+import 'package:openinsitute_core/services/message_manager.dart';
+import 'package:openinsitute_core/services/sharedpreferences.dart';
 
 //import 'contact.dart';
 
@@ -26,7 +25,8 @@ class OpenI {
   DataManager? dataManager;
   EmSocketManager? socketManager;
   String? email;
-
+  ChatManager? chatManager;
+  MessageManager? messageManager;
 
 
   Map? get app  {
@@ -50,6 +50,8 @@ class OpenI {
 
   DataManager get datamanager => Get.find<DataManager>();
   EmSocketManager get emSocketManager => Get.find<EmSocketManager>();
+  ChatManager get chatmanager => Get.find<ChatManager>();
+  MessageManager get messagemanager => Get.find<MessageManager>();
 
   Future<void> initialize() async {
     await loadAppSettings();
@@ -58,14 +60,16 @@ class OpenI {
     Get.put<DataManager>(dataManager!,permanent: true);
     socketManager = EmSocketManager();
     Get.put<EmSocketManager>(socketManager!,permanent: true);
-    await Hive.initFlutter();
-
+    chatManager = ChatManager();
+    Get.put<ChatManager>(chatManager!,permanent: true);
+    messageManager = MessageManager();
+    Get.put<MessageManager>(messageManager!,permanent: true);
   }
 
   Future<Map?> loadAppSettings() async {
     if (_settings == null) {
       String json = await rootBundle.loadString("system/appsettings.json");
-      print("loaded ${json}");
+        print("loaded $json");
       _settings = jsonDecode(json);
     }
     return _settings;
@@ -73,7 +77,7 @@ class OpenI {
 
   //TODO: Add prefix before the token
   String handleTokenKey(String token) {
-    final String newToken = /*"em" + */ "$token";
+    final String newToken = /*"em" + */ token;
     return newToken;
   }
 
@@ -84,8 +88,8 @@ class OpenI {
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
-    if (this.emUser != null) {
-      String tokenKey = handleTokenKey(this.emUser!.entermediakey);
+    if (emUser != null) {
+      String tokenKey = handleTokenKey(emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
     //make API post
@@ -112,8 +116,8 @@ class OpenI {
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
-    if (this.emUser != null) {
-      String tokenKey = handleTokenKey(this.emUser!.entermediakey);
+    if (emUser != null) {
+      String tokenKey = handleTokenKey(emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     } else{
       String tokenKey = handleTokenKey("adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc");
@@ -128,7 +132,7 @@ class OpenI {
       customError: customError,
     );
     if (response != null && response.statusCode == 200) {
-      print("Success user info is:" + response.body);
+        print("Success user info is:" + response.body);
       final String responseString = response.body;
       return responseString;
     } else {
@@ -147,12 +151,12 @@ class OpenI {
     String customError = "Some Error",
   }) async {
     String url = requestUrl;
-    print(url);
+      print(url);
     http.Response response;
     try {
-      var responseJson;
-      print("isPutMethod: $isPutMethod");
-      if (isPutMethod != null && isPutMethod == true) {
+      http.Response responseJson;
+        print("isPutMethod: $isPutMethod");
+      if (isPutMethod == true) {
         print("isPutMethod: $isPutMethod");
         responseJson = await http.put(
           Uri.parse(url),
@@ -224,9 +228,8 @@ class OpenI {
     print("Logging in");
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
-      this.emUser = EmUser.fromJson(results);
-
-      return this.emUser;
+      emUser!.firebasepassword = results["firebasepassword"];
+      return emUser;
     } else {
       return null;
     }
@@ -240,13 +243,12 @@ class OpenI {
     print("Logging in");
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
-      this.emUser = EmUser.fromJson(results);
+      emUser = EmUser.fromJson(results);
       print("complete");
-
-      return this.emUser;
+      await sharedPref.saveEmUser(emUser!);
+      return emUser;
     } else {
       print("login failed");
-
       return null;
     }
   }
@@ -257,7 +259,7 @@ class OpenI {
 
   //Entermedia Login with key pasted in
   Future<bool?> emEmailKey(String email) async {
-    this.emUser = null;
+    emUser = null;
     // tempKey = null;
     // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
     final resMap = await postEntermedia(app!["mediadb"] + '/services/authentication/emailonlysendmagiclinkfinish.json', {"to": email},);
@@ -309,8 +311,7 @@ class OpenI {
 
   //todo; Entermedia login with 6 digit code from email. Returns EM User.
   Future<EmUser?> loginCode( String logincode) async {
-
-
+    await AuthenticationService.instance.signOut();
     final resMap = await postEntermedia(
         app!["mediadb"] + '/services/authentication/login.json',
         {
@@ -322,20 +323,23 @@ class OpenI {
     print("Logging in with code: " + logincode);
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
-      this.emUser = EmUser.fromJson(results);
+      emUser = EmUser.fromJson(results);
       print("complete");
-
-      return this.emUser;
+      emUser  = await firebaseLogin(email!, emUser!.entermediakey);
+      await AuthenticationService.instance.signIn(email: email!, password: emUser!.firebasepassword! );
+      await sharedPref.saveEmUser(emUser!);
+      return emUser;
     } else {
       print("login failed");
-
       return null;
     }
   }
 
-
-
-
+  // todo: logout
+  Future<bool?> logout() async {
+    await sharedPref.resetValues();
+    return true;
+  }
 
 
 
@@ -385,10 +389,9 @@ class OpenI {
   //
   // }
 
-  bool isAuthenticated(){
-    return emUser == null;
+
+  Future<bool> isAuthenticated() async {
+    emUser ??= await sharedPref.getEmUser();
+    return emUser != null;
   }
-
-
-
 }

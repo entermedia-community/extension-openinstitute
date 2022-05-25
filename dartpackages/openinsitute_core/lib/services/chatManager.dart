@@ -3,24 +3,21 @@
 
 
 import 'package:get/get.dart';
-import 'package:openinsitute_core/models/emData.dart';
+import 'package:hive/hive.dart';
+import 'package:openinsitute_core/models/emChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
-import 'package:openinsitute_core/services/emDataManager.dart';
 
 OpenI get oi {
   return Get.find();
 }
-
-
-
 class ChatManager {
-
-  Future<List<emData>> getChatMessages() async{
-    Searcher searcher = await oi.datamanager.getSearcher("chatterbox");
-    searcher.syncData(true);
-    return searcher.getAllHits();
-
+  late Box chatMessages;
+   Future<List<emChatMessage>> getChatMessagesFromHive(String inChatroomId) async {
+    chatMessages = await Hive.openBox<emChatMessage>(inChatroomId);
+    return chatMessages.values.toList() as List<emChatMessage>;
   }
-
-
+  Future<void> saveChatMessageInHive(emChatMessage chatMessage) async {
+    chatMessages = await Hive.openBox<emChatMessage>(chatMessage.chatroomId!);
+    chatMessages.put(chatMessage.timestamp!, chatMessage);
+  }
 }
