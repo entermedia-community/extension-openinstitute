@@ -12,7 +12,7 @@ OpenI get oi {
 
 class DataManager {
   bool initalized = false;
-  Map<String, Searcher> searchers = {};
+  Map<String, DataModule> searchers = {};
   Feeds? feeds;
 
   DataManager() {
@@ -20,10 +20,10 @@ class DataManager {
     Hive.initFlutter();
   }
 
-  Future<Searcher> getSearcher(String inSearchType) async {
-    Searcher? searcher = searchers[inSearchType];
+  Future<DataModule> getSearcher(String inSearchType) async {
+    DataModule? searcher = searchers[inSearchType];
     if (searcher == null) {
-      searcher = await Searcher.createSearcher(inSearchType);
+      searcher = await DataModule.createDataModule(inSearchType);
       searchers[inSearchType] = searcher;
     }
     //https://stackoverflow.com/questions/53886304/understanding-factory-constructor-code-example-dart do this?
@@ -47,7 +47,7 @@ class Feeds {
     var feeds = Feeds._();
     feeds.box = await feeds.getBox(feedString);
     return feeds;
-  } 
+  }
 
   Future<Box> getBox(String inType) async {
     if (!Hive.isBoxOpen(inType)) {
@@ -57,17 +57,20 @@ class Feeds {
     }
   }
 
-  List<emFeed> getAllHits(){
+  List<emFeed> getAllHits() {
     List<emFeed> list = [];
-     box.keys.forEach((element) {
-      if(element != "lastsync"){
-          emFeed newdata = emFeed.fromJson(box.get(element));
-       list.add(newdata);
+    box.keys.forEach((element) {
+      if (element != "lastsync") {
+        emFeed newdata = emFeed.fromJson(box.get(element));
+        list.add(newdata);
       }
-     });
-     return list;
+    });
+    return list;
   }
-    Future<List<emFeed>> getRemoteData(Map? inQuery,) async {
+
+  Future<List<emFeed>> getRemoteData(
+    Map? inQuery,
+  ) async {
     final responsestring = await oi.getEmResponse(
       oi.app!["mediadb"] + "/services/feed/channelfeed.json",
       inQuery,
@@ -88,7 +91,8 @@ class Feeds {
         parsed["uploads"].map<emFeed>((json) => emFeed.fromJson(json)).toList();
     return results;
   }
-    Future<bool> syncData(bool full) async {
+
+  Future<bool> syncData(bool full) async {
     if (full) {
       await box.clear();
       List<emFeed> tosave = await getRemoteData(null);
@@ -96,9 +100,8 @@ class Feeds {
         box.put(element.id, element.properties);
       }
     } else {
-      DateTime lastsync = box.get("lastsync"); 
-      List<emFeed> tosave =
-          await getRemoteData(null);
+      DateTime lastsync = box.get("lastsync");
+      List<emFeed> tosave = await getRemoteData(null);
       for (var element in tosave) {
         box.put(element.id, element.properties);
       }
@@ -106,27 +109,25 @@ class Feeds {
     box.put("lastsync", DateTime.now());
     return true;
   }
-
-
 }
 
-class Searcher {
+class DataModule {
   //https://stackoverflow.com/questions/54549235/dart-await-on-constructor
 
   late String searchtype;
   late Box box;
   bool cache = true;
 
-  Searcher._();
+  DataModule._();
 
-  static Future<Searcher> createSearcher(String inSearchType) async {
-    var searcher = Searcher._();
+  static Future<DataModule> createDataModule(String inSearchType) async {
+    var searcher = DataModule._();
     searcher.searchtype = inSearchType;
     searcher.box = await searcher.getBox(inSearchType);
     return searcher;
   }
 
-  Searcher(this.searchtype);
+  DataModule(this.searchtype);
 
   Future<Box> getBox(String inType) async {
     if (!await Hive.isBoxOpen(inType)) {
@@ -147,17 +148,17 @@ class Searcher {
     return box.get("test");
   }
 
-  List<emData> getAllHits(){
+  List<emData> getAllHits() {
     List<emData> list = [];
     // List list = List.generate(box.keys.length, ,{"growable":true});
-     box.keys.forEach((element) {
-       emData newdata = emData.fromJson(box.get(element));
-       list.add(newdata);
-     });
-     return list;
-
+    box.keys.forEach((element) {
+      if(element != "lastsync") {
+        emData newdata = emData.fromJson(box.get(element));
+        list.add(newdata);
+      }
+    });
+    return list;
   }
-
 
   Future<bool> syncData(bool full) async {
     if (full) {
@@ -168,11 +169,7 @@ class Searcher {
         "hitsperpage": "20",
         "query": {
           "terms": [
-            {
-              "field": "id",
-              "operation": "matches",
-              "value": "*"
-            }
+            {"field": "id", "operation": "matches", "value": "*"}
           ]
         }
       };
@@ -181,18 +178,35 @@ class Searcher {
       tosave.forEach((element) {
         box.put(element.id, element.properties);
       });
+      //check if there are more pages of hits and run next search
+
     } else {
-      DateTime lastsync = box.get("lastsync"); //dunno if this works!
+      DateTime lastsync = box.get("lastsync");
+      Map aftersearch = {
+        "page": "1",
+        "hitsperpage": "20",
+        "query": {
+          "terms": [
+            {"field": "id", "operation": "matches", "value": "*"},
+            {"field": "emrecordstatus.recordmodificationdate", "operation": "after", "value": lastsync.toIso8601String()}
+
+          ]
+        }
+      };
+
+
       List<emData> tosave =
           await getRemoteData({"emrecorddate???? neeed to chec": "*"});
     }
-    //box.put("lastsync", DateTime.now());
+    box.put("lastsync", DateTime.now());
     return true;
   }
 
-  Future<List<emData>> getRemoteData(Map inQuery, ) async {
+  Future<List<emData>> getRemoteData(
+    Map inQuery,
+  ) async {
     final responsestring = await oi.getEmResponse(
-      oi.app!["mediadb"] + '/services/lists/search/${searchtype}/',
+      oi.app!["mediadb"] + '/services/modules/${searchtype}/search',
       inQuery,
     );
     List<emData> results = parseData(responsestring);
@@ -206,6 +220,8 @@ class Searcher {
     //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
   }
 
+
+
   List<emData> parseData(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
     List<emData> results =
@@ -214,14 +230,10 @@ class Searcher {
     return results;
   }
 
-
-  Stream<emData> updates() async * {
-
+  Stream<emData> updates() async* {
     Stream<dynamic> stream = oi.emSocketManager.stream;
-    await for (final data in stream){
-          json.decode(data);
+    await for (final data in stream) {
+      json.decode(data);
     }
-
   }
-
 }

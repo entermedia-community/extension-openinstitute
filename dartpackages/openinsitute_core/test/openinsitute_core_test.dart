@@ -82,6 +82,21 @@ void main() {
 
   });
 
+  test('Server Data Query', () async {
+
+    EmUser? user = await oi.login("admin", "admin");
+    expect(user != null, true);
+    Map chatsearch = {
+      "runpath": "/services/some/command",
+      "channel": "123",
+      "user":"456"
+    };
+    HitTracker hits = oi.dataManager.execute(chatsearch);
+
+
+
+  });
+
 
   test('Test Websocket Connection', () async {
 

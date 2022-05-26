@@ -21,6 +21,7 @@ import 'package:path_provider/path_provider.dart';
 //import 'contact.dart';
 
 class OpenI {
+
   Map? _settings;
   EmUser? emUser; 
   DataManager? dataManager;
