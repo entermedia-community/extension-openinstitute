@@ -1,8 +1,8 @@
 # This is a generated file; do not edit or check into version control.
-firebase_auth=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.8/
-firebase_auth_web=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.8/
-firebase_core=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.12.0/
-firebase_core_web=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.0/
+firebase_auth=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.11/
+firebase_auth_web=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.9/
+firebase_core=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.13.1/
+firebase_core_web=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.1/
 isar_flutter_libs=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-2.2.1/
 path_provider=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/
 path_provider_android=/home/ian/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/
