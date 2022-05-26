@@ -112,6 +112,16 @@ void main() {
   });
 
 
+  test('Test Project CHat loading', () async {
+
+    EmUser? user = await oi.login("admin", "admin");
+    expect(user != null, true);
+
+    List<ChatMessage> messages = await oi.chatManager.getProjectMessages("projectidABCXXX");
+    expect(20 >= messages.length, true);
+
+  });
+
 
   // test('Test Loading and Syncing Data', () async {
   //   Searcher searcher = await oi.datamanager.getSearcher("purpose");
