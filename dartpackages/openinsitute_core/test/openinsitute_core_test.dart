@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:http/http.dart' as http;
-import 'package:openinsitute_core/contact.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
@@ -24,8 +23,7 @@ void main() {
     Map? settings = await oi.loadAppSettings();
     expect(settings!.isNotEmpty, true);
 
-    List<Contact> contacts  = await oi.testIstarSave();
-    expect(contacts.isNotEmpty, true);
+
 
     // Map<String, dynamic> datatest  = await oi.hiveTest();;
     // expect(datatest.isNotEmpty, true);
@@ -82,20 +80,20 @@ void main() {
 
   });
 
-  test('Server Data Query', () async {
-
-    EmUser? user = await oi.login("admin", "admin");
-    expect(user != null, true);
-    Map chatsearch = {
-      "runpath": "/services/some/command",
-      "channel": "123",
-      "user":"456"
-    };
-    HitTracker hits = oi.dataManager.execute(chatsearch);
-
-
-
-  });
+  // test('Server Data Query', () async {
+  //
+  //   EmUser? user = await oi.login("admin", "admin");
+  //   expect(user != null, true);
+  //   Map chatsearch = {
+  //     "runpath": "/services/some/command",
+  //     "channel": "123",
+  //     "user":"456"
+  //   };
+  //   // HitTracker hits = oi.dataManager.execute(chatsearch);
+  // //
+  //
+  //
+  // });
 
 
   test('Test Websocket Connection', () async {
