@@ -1,0 +1,9 @@
+<page>
+	
+	<path-action name="ProjectModule.loadMessages"/>
+
+	<generator name="velocity"/>
+	<permission name="view">
+		  <user/>
+	</permission>
+</page>
