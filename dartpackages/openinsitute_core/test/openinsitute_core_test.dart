@@ -6,6 +6,7 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:http/http.dart' as http;
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
+import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
@@ -117,7 +118,10 @@ void main() {
     EmUser? user = await oi.login("admin", "admin");
     expect(user != null, true);
 
-    List<ChatMessage> messages = await oi.chatManager.getProjectMessages("projectidABCXXX");
+    Map? settings = await oi.loadAppSettings();
+
+    var projectid = settings?['dev']?['test_collection_id'];
+    List<oiChatMessage> messages = oi.chatManager.getProjectChatMessages(projectid);
     expect(20 >= messages.length, true);
 
   });

@@ -15,6 +15,7 @@ import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:openinsitute_core/services/emSocketManager.dart';
+import 'package:openinsitute_core/services/oiChatManager.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -25,6 +26,7 @@ class OpenI {
   Map? _settings;
   EmUser? emUser; 
   DataManager? dataManager;
+  oiChatManager? chatManager;
   EmSocketManager? socketManager;
   String? email;
 
@@ -51,12 +53,18 @@ class OpenI {
 
   DataManager get datamanager => Get.find<DataManager>();
   EmSocketManager get emSocketManager => Get.find<EmSocketManager>();
+  oiChatManager get chatmanager => Get.find<oiChatManager>();
 
   Future<void> initialize() async {
     await loadAppSettings();
     Get.put<OpenI>(this,permanent: true);
+
     dataManager = DataManager();
     Get.put<DataManager>(dataManager!,permanent: true);
+
+    chatManager = oiChatManager();
+    Get.put<oiChatManager>(chatManager!,permanent: true);
+
     socketManager = EmSocketManager();
     Get.put<EmSocketManager>(socketManager!,permanent: true);
     await Hive.initFlutter();
@@ -117,6 +125,7 @@ class OpenI {
       String tokenKey = handleTokenKey(this.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     } else{
+      //TODO: Remove this ASAP
       String tokenKey = handleTokenKey("adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc");
       headers.addAll({"X-token": tokenKey});
 
