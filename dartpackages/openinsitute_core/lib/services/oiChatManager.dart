@@ -37,7 +37,9 @@ class oiChatManager {
     final Map? responded = oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewmessages.json', params) as Map?;
 
      //TODO: How do I create emChatMessages from json?
-     var messages = emChatMessage.fromJson( responded["results"].map<emChatMessage> );
+     List<oiChatMessage> messages =
+     responded!["results"]!.map<oiChatMessage>((json) => emData.fromJson(json)).toList();
+
      results.clear();
      results.addAll(messages); //TODO: This should reload the UI with new entries?
      return results;
