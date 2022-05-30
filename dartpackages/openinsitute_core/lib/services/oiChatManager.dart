@@ -17,13 +17,14 @@ OpenI get oi {
 
 class oiChatManager {
 
-  late Box box = Hive.openBox("oiChatManagerCache") as Box;
 
-  List<oiChatMessage> getProjectChatMessages(String inProjectId)  {
+  Future<List> getProjectChatMessages(String inProjectId)  async {
+    var box =  await getBox("oiChatManagerCache");
 
-     List<oiChatMessage>? results =  box.get(inProjectId);//Some cache system
+
+     var results =  box.get(inProjectId);//Some cache system
      if( results == null) {
-       results = []; //Make one list that is cached
+       results = <oiChatMessage>[]; //Make one list that is cached
        box.put(inProjectId,results);
      }
 
@@ -34,22 +35,23 @@ class oiChatManager {
      };
 
      //TODO; Call this part in an async way
-    final Map? responded = oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewmessages.json', params) as Map?;
+    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewmessages.json', params) as Map?;
 
      //TODO: How do I create emChatMessages from json?
      List<oiChatMessage> messages =
-     responded!["results"]!.map<oiChatMessage>((json) => emData.fromJson(json)).toList();
+     responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
 
      results.clear();
      results.addAll(messages); //TODO: This should reload the UI with new entries?
-     return results;
+      return Future.value(results);
+     //return results;
     //List<emData> results = parseData(responsestring);
     }
   }
 
-  Future<Box> getBox(String inType) async {
+ Future<Box>  getBox(String inType) async  {
        if (!Hive.isBoxOpen(inType)) {
-         return await Hive.openBox(inType);
+         return  Hive.openBox(inType);
        } else {
          return Hive.box(inType);
        }

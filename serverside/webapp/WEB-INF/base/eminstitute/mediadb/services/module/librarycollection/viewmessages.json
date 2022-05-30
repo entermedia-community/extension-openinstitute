@@ -24,7 +24,7 @@ $hits.setHitsPerPage(200)
 			#jsonfields($hit $topics.getSearcher().getPropertyDetails()) 
 			}
 		#end
-		]
+		],
 	"results":[
 		#foreach($hit in $hits.getPageOfHits())#if( ${foreach.count} != 1 ), #end
 			{

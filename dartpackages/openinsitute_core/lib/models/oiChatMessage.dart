@@ -2,13 +2,13 @@ class oiChatMessage {
 
   late Map <String, dynamic> properties;
   late String messageid;
-  late String userid;
+  late Map user;
 
-  oiChatMessage(this.messageid, this.userid,this.properties);
+  oiChatMessage(this.messageid, this.user,this.properties);
 
   oiChatMessage.fromJson(Map<String, dynamic> json){
     messageid = json["id"];
-    userid = json["userid"];
+    user = json["user"];
     properties = json;
   }
 

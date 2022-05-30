@@ -206,7 +206,7 @@ class DataModule {
     Map inQuery,
   ) async {
     final responsestring = await oi.getEmResponse(
-      oi.app!["mediadb"] + '/services/modules/${searchtype}/search',
+      oi.app!["mediadb"] + '/services/module/${searchtype}/search',
       inQuery,
     );
     List<emData> results = parseData(responsestring);

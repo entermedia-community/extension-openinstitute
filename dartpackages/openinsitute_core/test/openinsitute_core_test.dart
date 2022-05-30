@@ -121,8 +121,8 @@ void main() {
     Map? settings = await oi.loadAppSettings();
 
     var projectid = settings?['dev']?['test_collection_id'];
-    List<oiChatMessage>? messages = oi.chatManager?.getProjectChatMessages(projectid);
-    expect(20 >= messages!.length, true);
+    var messages = await oi.chatManager?.getProjectChatMessages(projectid);
+    expect(messages!.length > 5, true);
 
   });
 
