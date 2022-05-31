@@ -11,7 +11,8 @@
 		</div>
 	</div>
 </div>
-#if ($cancomment)
+##if ($cancomment)
+#if( $caneditcollection)
 	<div class="chatterbox-write">
 	<!-- $pages.include("$applicationid/emfrontend2/components/types/teammembers.html", $context) -->
 		<textarea class="chatterbox-text chatter-text" id="chatter-msg" autofocus placeholder="[[Message...]]" ></textarea>
