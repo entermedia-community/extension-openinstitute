@@ -1,6 +1,7 @@
 #set( $users = $goal.getValues("userlikes"))
 <div id="like${goal.id}" class="goallike" >
-	#if($user)
+	#if($caneditcollection)
+	##if($user)
 	  <a href="$applink/collective/goals/like.html?goalid=${goal.id}"
 	  	title="[[Make Priority]]" 
 		class="editgoallike ajax" targetdiv="like$goal.id" 
