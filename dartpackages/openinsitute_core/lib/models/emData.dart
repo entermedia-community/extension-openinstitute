@@ -10,7 +10,20 @@ class emData{
     emData.fromJson(Map<String, dynamic> json){
         id = json["id"];
 
-        name = json["name"]?["en"] ?? "No Name";
+        var langname = json["name"];
+        if( langname == null)
+        {
+            name = "No Name";
+        }
+        else if(  langname.runtimeType == String )
+        {
+            name = langname;
+        }
+        else if( langname["en"] != null )
+        {
+            name = langname["en"];
+        }
+
         properties = json;
     }
 

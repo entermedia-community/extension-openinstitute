@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  	<property name="fallbackdirectory">/site/mediadb/services/module/default</property>
-	<property name="module">librarycollection</property>
-	<property name="searchtype">${module}</property>
-	<permission name="viewallassets">
-			<userprofile property="viewallassets" equals="true" />
-	</permission>
 </page>

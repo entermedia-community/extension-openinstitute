@@ -18,6 +18,36 @@ OpenI get oi {
 class oiChatManager {
 
 
+
+  Future<List> getUserProjects() async {
+
+    Map params = {
+      "page": "1",
+      "hitsperpage": "200"
+    };
+
+    var box =  await getBox("oicache");
+   var results =  box.get("viewprojects");//Some cache system
+    if( results == null) {
+      results = <emData>[]; //Make one list that is cached
+      box.put("viewprojects",results);
+    }
+
+    //TODO; Call this part in an async way
+    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewprojects.json', params) as Map?;
+
+    //TODO: How do I create emChatMessages from json?
+    List<emData> messages =
+    responded!["results"]!.map<emData>((json) => emData.fromJson(json)).toList();
+
+    results.clear();
+    results.addAll(messages); //TODO: This should reload the UI with new entries?
+    return Future.value(results);
+
+
+
+  }
+
   Future<List> getProjectChatMessages(String inProjectId)  async {
     var box =  await getBox("oiChatManagerCache");
 
@@ -28,7 +58,7 @@ class oiChatManager {
        box.put(inProjectId,results);
      }
 
-     Map params = {
+    Map params = {
        "page": "1",
        "hitsperpage": "20",
        "collectionid": inProjectId

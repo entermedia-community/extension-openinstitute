@@ -120,6 +120,10 @@ void main() {
 
     Map? settings = await oi.loadAppSettings();
 
+    //TODO: Get list of all projects
+    var projects = await oi.chatManager?.getUserProjects();
+    expect(projects!.length > 0, true);
+
     var projectid = settings?['dev']?['test_collection_id'];
     var messages = await oi.chatManager?.getProjectChatMessages(projectid);
     expect(messages!.length > 5, true);

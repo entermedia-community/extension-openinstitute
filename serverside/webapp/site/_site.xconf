@@ -1,4 +1,5 @@
 <page>
 
+  <property name="fallbackdirectory">/WEB-INF/base/eminstitute</property>
 
 </page>

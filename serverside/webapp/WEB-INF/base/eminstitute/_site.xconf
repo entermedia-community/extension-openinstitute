@@ -8,4 +8,6 @@
   <property name="allowguestregistration">true</property>
   <property name="autologingroup">users</property>
 
+  <property name="error404">/${siteid}/error404.html</property>
+
 </page>
