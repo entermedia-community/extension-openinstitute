@@ -13,8 +13,8 @@ import org.entermedia.transactions.TransactionManager;
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.elasticsearch.SearchHitData;
 import org.openedit.CatalogEnabled;
-import org.openedit.Data;
 import org.openedit.ModuleManager;
+import org.openedit.data.BaseData;
 import org.openedit.data.QueryBuilder;
 import org.openedit.data.Searcher;
 import org.openedit.hittracker.HitTracker;
@@ -112,18 +112,48 @@ public class FinanceManager  implements CatalogEnabled
 			query.exact("collectiveproject",topicid);
 		}
 		addDateRange(query,"paymentdate",inDateRange);
+		hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
+		pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+	
+			}
+			currencytotal = currencytotal + (Double)data.getValue("totalprice");
+			bycurrency.replace(currency, currencytotal);
+		}
 
 		
+		//Paid Invoices
+		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+		query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			//TODO: Add topics to invoices query.exact("collectiveproject",topicid);
+		}
+        query.exact("paymentstatus","paid");
+		addDateRange(query,"invoicepaidon",inDateRange);
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		pageOfHits = hits.getPageOfHits();
 		pageOfHits = new ArrayList(pageOfHits);
 		
-		
 		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
-			
+			if( currency == null)
+			{
+				currency = "1";
+			}
 			Double currencytotal = (Double) bycurrency.get(currency);
 			if( currencytotal == null || currencytotal == 0.0)
 			{
@@ -206,8 +236,41 @@ public class FinanceManager  implements CatalogEnabled
 			values.add(data);
 			
 		}
+
 		
-		//summarize by IncomeType
+		//Paid Invoices
+		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+		query = incomesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		if( topicid != null)
+		{
+			//TODO: Add topics to invoices query.exact("collectiveproject",topicid);
+		}
+        query.exact("paymentstatus","paid");
+		addDateRange(query,"invoicepaidon",inDateRange);
+		hits = incomesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
+		pageOfHits = hits.getPageOfHits();
+		pageOfHits = new ArrayList(pageOfHits);
+		
+		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency =  "1";//(String) data.getValue("currencytype");  //TODO: Support currencies
+			
+			Collection values = (Collection) bycurrency.get(currency);
+			if( values == null)
+			{
+				values = new ListHitTracker();
+				//values.add(data);
+				bycurrency.put(currency, values);
+			}
+			values.add(data);
+			
+		}
+
+		
+		
+		//summarize by Currency
 		String currentcurrency = "";
 		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
 			Collection data = (Collection) set.getValue();
@@ -215,22 +278,20 @@ public class FinanceManager  implements CatalogEnabled
 			String currenttypeid = "";
 			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
 				SearchHitData row = (SearchHitData) iterator.next();
-				currenttypeid = (String) row.getValue("incometype");
-				
-				SearchHitData values = (SearchHitData)currenttype.get(currenttypeid);
-				if (values == null) {
-					values = new SearchHitData();
-					currenttype.put(currenttypeid, values);
-					values.setValue("total", 0.0);
-				}
-				Double currenttotal = 0.0;
-				String income = row.get("incometype");
-				if (income != null && income.equals("1")) 
+				String incometype = (String) row.getValue("incometype");
+				if( incometype == null)
 				{
-					//OI Donation different total field
-					currenttotal = (Double) row.getValue("totalprice");
+					incometype = "6"; //Invoices
 				}
-				else {
+				BaseData values = (BaseData)currenttype.get(incometype);
+				if (values == null) {
+					values = new BaseData();
+					values.setValue("total", 0.0);
+					currenttype.put(incometype, values);
+				}
+				Double 	currenttotal = (Double) row.getValue("totalprice");
+				if(  currenttotal == null )
+				{
 					currenttotal = (Double) row.getValue("total");
 				}
 				Double subtotal = (Double)values.getValue("total");
@@ -243,8 +304,13 @@ public class FinanceManager  implements CatalogEnabled
 					currenttotal = 0D;
 				}
 				values.setValue("total",  subtotal + currenttotal);
-				values.setValue("currencytype", (String) row.getValue("currencytype"));
-				values.setValue("incometype", currenttypeid);
+				currenttypeid = (String) row.getValue("currencytype");
+				if( currenttypeid == null )
+				{
+					currenttypeid = "1"; //USD
+				}
+				values.setValue("currencytype", currenttypeid);
+				values.setValue("incometype", incometype);
 
 			}
 			bycurrency.replace(set.getKey(), currenttype);
