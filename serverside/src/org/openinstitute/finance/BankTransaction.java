@@ -58,7 +58,11 @@ public class BankTransaction
 	public Double getAmount()
 	{
 		Double t = 0D;
-		if( getSearchType().equals("collectiveexpense") || getSearchType().equals("collectiveincome") )
+		if( getSearchType().equals("collectiveexpense") )
+		{
+			t = 0 - getData().getDouble("total");
+		}
+		else if( getSearchType().equals("collectiveincome") )
 		{
 			t = getData().getDouble("total");
 		}

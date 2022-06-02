@@ -453,13 +453,14 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	protected void addDateRange(QueryBuilder inQuery, String inField ,DateRange inDateRange)
+	protected QueryBuilder addDateRange(QueryBuilder inQuery, String inField ,DateRange inDateRange)
 	{
 		if( inDateRange == null || inDateRange.isAllTime())
 		{
-			return;
+			return inQuery;
 		}
 		inQuery.between(inField, inDateRange.getStartDate(), inDateRange.getEndDate());
+		return inQuery;
 	}
 
 
@@ -492,32 +493,34 @@ public class FinanceManager  implements CatalogEnabled
 		return netIncome;
 	}
 	
-	public List<BankTransaction> getAllTransactionByBank(String inBankId)
+	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> transactions = new ArrayList();
 
-		//addDateRange(query,"paymentdate",inDateRange);
 
 		HitTracker tracker = null;
 		Searcher incomesSearcher = null;
 		if( "1".equals(inBankId) )
 		{
 			incomesSearcher = getMediaArchive().getSearcher("transaction");
-			tracker = incomesSearcher.query().all().search();
+			tracker = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange).search();
 			addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 			incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
-			tracker = incomesSearcher.query().exact("paymentstatus","paid").search();
+			QueryBuilder query = addDateRange(incomesSearcher.query(),"invoicepaidon",inDateRange);
+			tracker = query.exact("paymentstatus","paid").search();
 			addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		}
 		incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
-		tracker = incomesSearcher.query().exact("paidfromaccount",inBankId).search();
+		QueryBuilder query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
-		tracker = incomesSearcher.query().exact("paidfromaccount",inBankId).search();
+		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		//sort
