@@ -39,8 +39,7 @@ public class FinanceModule extends BaseMediaModule
 		}
 		if( range == null)
 		{
-			range  = new DateRange();
-			range.setAllTime(true);
+			range  = new DateRange();			
 			range.setYearPicked(0); //YTD
 		}
 		inReq.putSessionValue("daterange", range);
