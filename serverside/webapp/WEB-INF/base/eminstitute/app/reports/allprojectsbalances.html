@@ -1,8 +1,17 @@
-<div class="container">
+<div id="reportpage" class="container">
 	<div class="row" style="padding-top: 20px">
 		<div class="col">
 			<div class="contentcolumn">
 				<h3>[[General Ledger]]</h3>
+				<form  id="searchform" 
+						class="autosubmit" 
+						data-oemaxlevel="1"
+						data-targetdiv="reportpage" 
+						method="post" 
+						action="$content.path">
+				
+					<input type="hidden" name="oemaxlevel" value="1" />
+					
 				#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
 					#ifnull( $paidfromaccount)
@@ -14,6 +23,7 @@
 						#end
 					</select>
 
+				</form>
 			 <div class="emdata" style="padding-top: 10px">
 				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount) ) 
              <table class="table table-striped">
@@ -22,6 +32,7 @@
                          <th>[[Project]]</th>
                          <th>[[Date]]</th>
                          <th>[[Type]]</th>
+                         <th>[[Label]]</th>
                          <th>[[Currency]]</th>
                          <th>[[Total]]</th>
                      </tr>
@@ -33,6 +44,7 @@
                          <td><a href="$collurl">$collective</a></td>
                          <td>$!context.getDate($transaction.getDate())</td>
                          <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
+                         <td>$transaction.getName()</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType() )</td>
                          #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
                          <td><A href="$link">$transaction.getAmount()</A></td>

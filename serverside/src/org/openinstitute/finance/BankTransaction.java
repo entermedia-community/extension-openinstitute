@@ -85,5 +85,33 @@ public class BankTransaction
 		return currencytype;
 	}
 	
-	
+	public String getName()
+	{
+		String name = null;
+		if( getSearchType().equals("transaction") )
+		{
+			name = getData().get("paymentemail");
+		}
+		else if( getSearchType().equals("collectiveexpense") )
+		{
+			name = getData().get("expensedescription");
+		}
+		else if( getSearchType().equals("collectiveincome") )
+		{
+			name = getData().get("incomedescription");
+		}
+		else if( getSearchType().equals("collectiveinvoice") )
+		{
+			name = getData().get("name");
+			if( name == null)
+			{
+				name = getData().get("invoicedescription");
+			}
+			if( name == null)
+			{
+				name = "#" + getData().get("invoicenumber");
+			}
+		}
+		return name;
+	}
 }
