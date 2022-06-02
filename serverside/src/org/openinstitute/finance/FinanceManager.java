@@ -525,7 +525,7 @@ public class FinanceManager  implements CatalogEnabled
 		{
 			public int compare(BankTransaction arg0, BankTransaction arg1) 
 			{
-				int i = arg0.getDate().compareTo(arg1.getDate());
+				int i = arg1.getDate().compareTo(arg0.getDate());
 				return i;
 			};
 		});

@@ -34,7 +34,8 @@
                          <td>$!context.getDate($transaction.getDate())</td>
                          <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType() )</td>
-                         <td><A href="/modules/$transaction.getSearchType()/edit.html?id=$transaction.getData().getId()">$transaction.getAmount()</A></td>
+                         #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
+                         <td><A href="$link">$transaction.getAmount()</A></td>
                     </tr>
                 #end
 			</table>
