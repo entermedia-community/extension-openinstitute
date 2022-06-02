@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row"  style="padding-top:20px">
+		<div class="col">
+			<div class="contentcolumn">
+<h3>[[General Ledger]]</h3>
+
+##Mix all the streams by date
+## all deposits PayPal,CC,Invoices that deposit to OI
+## all expenses that are paid from OI accounts Rema,e
+     
+
+##Sort by date so we can compare to bank transactions
+
+#set( $expenses = $financeManager.getGeneralLedger() )
+
+#set( $expenses = $mediaarchive.query("collectiveexpense").exact("ispaid","false").sort("dateDown").search($context))
+$context.putPageValue("expenses",$expenses)
+$context.putPageValue("showcollections",true)
+$pages.include("$apphome/collective/services/expenses/results.html",$context)
+              </div>
+              </div>
+              </div>
+              </div>
+                    

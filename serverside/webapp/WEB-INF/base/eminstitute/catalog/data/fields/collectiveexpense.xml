@@ -27,7 +27,7 @@
     </name> 
   </property>  
   
-      <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
+      <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
     </name> 
@@ -63,6 +63,13 @@
 	 </name>
 	</property>
   
+   
+    <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccounts" defaultvalue="1">
+	 <name>
+	 <language id="en" > <![CDATA[Bank Account]]> </language>
+	 </name>
+	</property>
+	
     <property id="paymentdate" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name>
       <language id="en"><![CDATA[Paid Date]]></language>

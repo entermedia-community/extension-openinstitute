@@ -10,13 +10,14 @@
 	<property id="receiptattachment" />
 	
 	<property id="user" />
-   	<property id="ispaid" />  
-   	<property id="paymentdate" />  
-   	<property id="paymentdescription" />  
+   	<property id="ispaid"  editable="false"/> 
+   	<property id="paidfromaccount" editable="false"/> 
+   	<property id="paymentdate"  editable="false"/>  
+   	<property id="paymentdescription"  editable="false"/>  
 
-    <property id="hasreimbursed" />
-	<property id="reimburseuser" />  
-    <property id="reimbursedate" /> 
+    <property id="hasreimbursed"  editable="false"/>
+	<property id="reimburseuser"  editable="false"/>  
+    <property id="reimbursedate"  editable="false"/> 
   
   
 </properties>
