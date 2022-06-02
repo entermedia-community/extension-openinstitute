@@ -4,15 +4,10 @@
 		
 	
 		<div class="goals-header-actions">
-				<div class="dropdown show" style="float:right;">
 				  <!-- <a class="btn btn-success dropdown-toggle" style="color:white;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Employee
 				  </a> -->
 				  
-				  #set( $agents = $mediaarchive.getList("agentlist"))
-				  #if( $agents.isEmpty() )
-				  	<strong>[[Please populate agentlist table]]</strong>
-				  #else
 					##Open Projects
 					
 					#set ($aprojects = $mediaarchive.query("projectgoal").not("projectstatus", "closed").not("projectstatus", "completed").search($context))
@@ -20,37 +15,25 @@
 				  	#foreach ( $aproject in $aprojects)
 				  			#set($x = $pids.add($aproject.id))
 				  	#end
-					#foreach ( $agent in $agents)
-						#set( $auser = $mediaarchive.getUser($agent.get("userid")))
-					  	##set( $nitasks =  $mediaarchive.query("goaltask").exact("taskstatus", "1").exact("taskstatus", "0").exact("completedby", $agent.get("userid")).search($context))
-		
-					  	#set( $nitasks =  $mediaarchive.query("goaltask").not("taskstatus", "3").not("taskstatus", "5").orgroup("projectgoal", $pids).exact("completedby", $agent.get("userid")).search($context))
-					  	<a class='btn btn-success #if( $selecteduser.getId() == $agent.get("userid") ) active #end' 
-					  		style="color:white;" 
-					  		href='$applink/users/tasks/mytasks.html?goaltrackerstaff=${agent.get("userid")}&collectionid=*'>
-					    $auser <span style="color:orange;"><b>$!nitasks.size()</b></span>
-					  </a>
-					#end
-				#end
+				  	<form  action="$content.path" class="form-inline autosubmitform" >
+						#set( $text = "$user" )
+						#if( $selecteduser)
+							#set( $text = "$selecteduser.toString()" )
+						#end
+						
+						<div  style="padding-right:20px;min-width:230px;display:inline-block">
+						<select name="userid" id="userid"  
+							class="listautocomplete selectautosubmit" 
+							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
+							data-searchfield="name" data-searchtype="user"  
+							data-placeholder="$text" data-sortby="name">
+						</select>
+						</div>
 			
-				</div>
 				#if($canviewsettings)
-			 	$opentickets.size() [[open]]
-				#set( $critical = $mediaarchive.query("projectgoal").orgroup("projectstatus", "critical").sort("creationdateUp").search($context) )
-				/ $critical.size() [[priority]].
-				#if( !$critical.isEmpty() )
-					#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($critical.first()) )
-					###set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-					[[Oldest]] <a style="text-decoration:underline; display: inline;" 
-						data-cancelsubmit="true" 
-						data-hidefooter="true"
-						data-urlbar="$applink/users/tasks/search.html?ticketlevel=$goal.ticketlevel&goaltrackerstaff=*&opengoalid=$goal.id" 
-						data-width="900" 
-						href="$sitelink/app/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$goal.collectionid&goalfolder=agent" 
-						title="" 
-						class="emdialog editgoalshow" > $goal.getAge() [[old]]</a>.&nbsp; 
+			 	$opentickets.size() [[Open Tickets]]
 				#end
-				#end
+					</form>
 			
 		</div>
 	#if($canviewsettings)
