@@ -191,11 +191,8 @@ public class FinanceManager  implements CatalogEnabled
 
 		HitTracker hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		Collection pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
-		
 	
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
@@ -223,10 +220,8 @@ public class FinanceManager  implements CatalogEnabled
 
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
 		
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
@@ -254,10 +249,8 @@ public class FinanceManager  implements CatalogEnabled
 		addDateRange(query,"invoicepaidon",inDateRange);
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
 		
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency =  "1";//(String) data.getValue("currencytype");  //TODO: Support currencies
 			
@@ -520,7 +513,7 @@ public class FinanceManager  implements CatalogEnabled
 
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
-		tracker = query.exact("paidfromaccount",inBankId).search();
+		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		//sort
