@@ -12,7 +12,7 @@
    	<property id="ispaid" />
    	<property id="paymentdate" />  
    	<property id="paymentdescription" />  
-
+	<property id="paidfromaccount" />
   
   
 </properties>
