@@ -6,7 +6,7 @@
 
 #set( $expenses = $mediaarchive.query("collectiveexpense").exact("ispaid","false").sort("dateDown").search($context))
 $context.putPageValue("expenses",$expenses)
-$context.putPageValue("showcollection",true)
+$context.putPageValue("showcollections",true)
 $pages.include("$apphome/collective/services/expenses/results.html",$context)
               </div>
               </div>

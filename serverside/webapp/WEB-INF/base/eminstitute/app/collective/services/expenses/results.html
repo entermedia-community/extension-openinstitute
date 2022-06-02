@@ -4,7 +4,7 @@
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  #if($showcollection )
+                                  #if($showcollections )
                                   <th>[[Collection]]</th>
                                   #end
                                   <th>[[Date]]</th>
@@ -23,11 +23,12 @@
 			                 	#end
 			                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
                               <tr>
-                                  #if($showcollection )
+                                  #if($showcollections )
                                   <td>
 									<a
-	                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$hit.collectionid"
-	                                    class="btn btn-xs btn-secondary emdialog"
+	                                    href="$applink/collective/services/expenses/index.html?collectionid=$hit.collectionid"
+	                                    class="btn btn-xs btn-secondary"
+	                                    target="_new"
 	                                    data-hidefooter="true"
 	                                    >
 		                                  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)
@@ -41,11 +42,12 @@
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
                                   <td>#if($hit.ispaid == true)[[true]]#end</td>
 			                      <td style="text-align: center">
-			                            #if( $caneditcollection )
+			                            #if( $caneditcollection || $showcollections)
 			                                <a
-			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$librarycol.id"
+			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
 			                                    data-hidefooter="true"
+			                                    title="[[Edit Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
 			                                    ><i class="fa fa-edit"></i></a>
 			                                    
 			                            #end
