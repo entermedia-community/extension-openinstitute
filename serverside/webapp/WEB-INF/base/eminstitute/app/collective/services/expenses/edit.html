@@ -27,13 +27,13 @@
 	<input type="hidden" name="collectionid.value" value="$collectionid" />
 	<input type="hidden" name="collectionid" value="$collectionid" />
 	
-#if( $caneditsettings)		
+#if( $canviewsettings)		
 	$context.putPageValue("view", "collectiveexpense/editexpenseadmin")
 #else
 	$context.putPageValue("view", "collectiveexpense/editexpense")
 #end	
 	$context.putPageValue("data", $data)
-#if( $caneditcollection ||  $caneditsettings)	 
+#if( $caneditcollection ||  $canviewsettings)	 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 #else	
 	$pages.include("/$applicationid/components/xml/detaileditor4.html?detailsreadonly=true", $context)
