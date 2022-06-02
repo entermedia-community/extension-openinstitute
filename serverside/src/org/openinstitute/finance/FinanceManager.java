@@ -3,8 +3,11 @@ package org.openinstitute.finance;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -14,6 +17,7 @@ import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.elasticsearch.SearchHitData;
 import org.openedit.CatalogEnabled;
 import org.openedit.ModuleManager;
+import org.openedit.MultiValued;
 import org.openedit.data.BaseData;
 import org.openedit.data.QueryBuilder;
 import org.openedit.data.Searcher;
@@ -488,6 +492,57 @@ public class FinanceManager  implements CatalogEnabled
 		return netIncome;
 	}
 	
+	public List<BankTransaction> getAllTransactionByBank(String inBankId)
+	{
+		List<BankTransaction> transactions = new ArrayList();
 
+		//addDateRange(query,"paymentdate",inDateRange);
+
+		HitTracker tracker = null;
+		Searcher incomesSearcher = null;
+		if( "1".equals(inBankId) )
+		{
+			incomesSearcher = getMediaArchive().getSearcher("transaction");
+			tracker = incomesSearcher.query().all().search();
+			addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+			incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+			tracker = incomesSearcher.query().exact("paymentstatus","paid").search();
+			addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+		}
+		incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
+		tracker = incomesSearcher.query().exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+
+		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		tracker = incomesSearcher.query().exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+		//sort
+		Collections.sort(transactions, new Comparator<BankTransaction>()
+		{
+			public int compare(BankTransaction arg0, BankTransaction arg1) 
+			{
+				int i = arg0.getDate().compareTo(arg1.getDate());
+				return i;
+			};
+		});
+		return transactions;
+	}
+
+
+	protected void addAll(String inSearchType, HitTracker inTracker, List<BankTransaction> inTransactions)
+	{
+		for (Iterator iterator = inTracker.iterator(); iterator.hasNext();)
+		{
+			MultiValued hit = (MultiValued) iterator.next();
+			BankTransaction transaction = new BankTransaction(inSearchType,hit);
+			inTransactions.add(transaction);
+			
+		}
+		
+	}
 	
 }

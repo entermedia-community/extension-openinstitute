@@ -64,7 +64,7 @@
 	</property>
   
    
-    <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccounts" defaultvalue="1">
+    <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
 	 <name>
 	 <language id="en" > <![CDATA[Bank Account]]> </language>
 	 </name>

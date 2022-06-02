@@ -1,24 +1,45 @@
 <div class="container">
-	<div class="row"  style="padding-top:20px">
+	<div class="row" style="padding-top: 20px">
 		<div class="col">
 			<div class="contentcolumn">
-<h3>[[General Ledger]]</h3>
+				<h3>[[General Ledger]]</h3>
+				#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
+					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
+					#ifnull( $paidfromaccount)
+						#set($paidfromaccount = "1" )
+					#end
+					<select name="paidfromaccount"  class="form-control-sm" >
+						#foreach( $hit in $hits )
+							<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$hit</option>
+						#end
+					</select>
 
-##Mix all the streams by date
-## all deposits PayPal,CC,Invoices that deposit to OI
-## all expenses that are paid from OI accounts Rema,e
-     
-
-##Sort by date so we can compare to bank transactions
-
-#set( $expenses = $financeManager.getGeneralLedger() )
-
-#set( $expenses = $mediaarchive.query("collectiveexpense").exact("ispaid","false").sort("dateDown").search($context))
-$context.putPageValue("expenses",$expenses)
-$context.putPageValue("showcollections",true)
-$pages.include("$apphome/collective/services/expenses/results.html",$context)
-              </div>
-              </div>
-              </div>
-              </div>
-                    
+			 <div class="emdata" style="padding-top: 10px">
+				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount) ) 
+             <table class="table table-striped">
+                 <thead>
+                     <tr class="tableheader">
+                         <th>[[Project]]</th>
+                         <th>[[Date]]</th>
+                         <th>[[Type]]</th>
+                         <th>[[Currency]]</th>
+                         <th>[[Total]]</th>
+                     </tr>
+                 </thead>
+                 #foreach($transaction in $all)
+                     <tr>
+                     	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
+                     	#set($collurl = "$applink/collective/channel/"+$collective.id+"/"+$collective.name+".html")
+                         <td><a href="$collurl">$collective</a></td>
+                         <td>$!context.getDate($transaction.getDate())</td>
+                         <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
+                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType() )</td>
+                         <td><A href="/modules/$transaction.getSearchType()/edit.html?id=$transaction.getData().getId()">$transaction.getAmount()</A></td>
+                    </tr>
+                #end
+			</table>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>

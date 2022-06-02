@@ -94,19 +94,18 @@
 		#end
 		
 		
-		#if($canviewsettings)
-		<li class="#if($appsection == "mytasks") current #end" style="width:110px; float:left;">
-			<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
-		</li>
-		<li class="#if($appsection == "completed") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
-		<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[Completed]]</a>
-		</li>
-		#end
 		</ul>
-		<div class="clearfix"></div>
-		##if($userprojectsids.size() )
 		#if($canviewsettings)
-		<div class="sidebar-box-header" style="margin-top:0px;">[[Tickets]]</div>
+			#if($canviewsettings)
+	    	<ul class="sidebar-list">
+			<li class="#if($appsection == "mytasks") current #end" style="width:110px; float:left;">
+				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
+			</li>
+			<li class="#if($appsection == "completed") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
+			<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[Completed]]</a>
+			</li>
+			</ul>
+			#end
 			#if ($canviewsettings)
 				#set($args = "goaltrackerstaff=*")
 			#end
@@ -120,15 +119,17 @@
 		##end
 		
 		#if($canviewsettings)
-		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin]]</div>
-		<ul class="sidebar-list" style="margin-bottom:10px;">
-		<li class="#if($appsection == "pendingpayments") current #end" style="width:110px; float:left;">
-			<a href="$sitelink/app/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Pending Payments]]</a>
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin Reports]]</div>
+		<ul class="sidebar-list" style="margin-bottom:0px;">
+		<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
+			<a href="$applink/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
+		</li>
+		<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
+			<a href="$applink/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 		</li>
 		
-		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
-			<a href="$sitelink/app/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
-		</li>
+		##		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
+		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>
 		#end
 		

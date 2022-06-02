@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <data id="1" currencytype="1"> 
+    USD General Funds
+  </data>   
+  <data id="2" currencytype="1"> 
+    USD Cash on Hand
+  </data>   
+</root>
