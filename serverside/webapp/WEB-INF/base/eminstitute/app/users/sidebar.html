@@ -122,6 +122,9 @@
 		#if($canviewsettings)
 		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin]]</div>
 		<ul class="sidebar-list" style="margin-bottom:10px;">
+		<li class="#if($appsection == "pendingpayments") current #end" style="width:110px; float:left;">
+			<a href="$sitelink/app/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Pending Payments]]</a>
+		</li>
 		
 		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
 			<a href="$sitelink/app/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>

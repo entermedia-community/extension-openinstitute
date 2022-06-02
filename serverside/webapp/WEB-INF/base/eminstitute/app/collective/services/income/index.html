@@ -5,15 +5,12 @@
 #end
 
 <div style="padding:10px 20px;">
-	#if( $caneditcollection )
-    	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
-			<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+	#if( $canviewsettings )
+      	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
+	<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
 		#end
-       	<a
-	        href="$applink/collective/services/income/addnew.html?collectionid=${collectionid}"
-              class="emdialog btn btn-sm btn-primary float-right">[[Add Income]]</a>
-      #end
-      
+    #end    
+
       
       
     <a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>

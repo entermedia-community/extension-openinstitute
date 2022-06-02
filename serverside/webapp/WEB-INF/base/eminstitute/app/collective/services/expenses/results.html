@@ -4,12 +4,15 @@
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
+                                  #if($showcollection )
+                                  <th>[[Collection]]</th>
+                                  #end
                                   <th>[[Date]]</th>
                                   <th>[[Topic]]</th>
                                   <th>[[Type]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Total]]</th>
-                                  <th>[[Reimbursed]]</th>
+                                  <th>[[Is Paid]]</th>
                                   <th></th>
                               </tr>
                           </thead>
@@ -20,12 +23,23 @@
 			                 	#end
 			                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
                               <tr>
+                                  #if($showcollection )
+                                  <td>
+									<a
+	                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$hit.collectionid"
+	                                    class="btn btn-xs btn-secondary emdialog"
+	                                    data-hidefooter="true"
+	                                    >
+		                                  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)
+		                             </a>
+                                  </td>
+                                  #end
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                                   <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
                                   <td>#esc($hit.expensedescription)</td>
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
-                                  <td>#if($hit.hasreimbursed == true)[[true]]#end</td>
+                                  <td>#if($hit.ispaid == true)[[true]]#end</td>
 			                      <td style="text-align: center">
 			                            #if( $caneditcollection )
 			                                <a
@@ -65,7 +79,7 @@
             </table>
             $expenses.size() [[hits]]
         </div>
-        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
+        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
            class="btn btn-sm btn-primary mb-4">[[Download]]</a>
         
 </div>
