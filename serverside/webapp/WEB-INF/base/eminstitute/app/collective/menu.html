@@ -52,14 +52,22 @@
 			<a class="nav-link" href="$applink/collective/contact/contact.html?collectionid=${librarycol.id}" >		
 			[[Contact]] </a>
 		</li>
+
+		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
+		<a class="nav-link"
+			data-allwaysloadpage="true"
+			href="$applink/collective/services/finances/dashboard.html?collectionid=$librarycol.getId()" 
+			title="[[Fianances]]">
+			<span class="d-none d-sm-inline-block">[[Finances]]</span></a>
+		</li>
 		
 		 	#if( $caneditcollection)
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
 		<a class="nav-link"
 			data-allwaysloadpage="true"
-			href="$applink/collective/services/finances/dashboard.html?collectionid=$librarycol.getId()" 
+			href="$applink/collective/admin/index.html?collectionid=$librarycol.getId()" 
 			title="[[Project Settings]]">
-			<i class="fas fa-cog d-inline-block"></i> <span class="d-none d-sm-inline-block">[[Accounting]]</span></a>
+			<i class="fas fa-cog d-inline-block"></i> <span class="d-none d-sm-inline-block">[[Settings]]</span></a>
 		</li>
 	#end
 	</ul>

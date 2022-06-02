@@ -1,0 +1,46 @@
+#set($collectionid = $context.getRequestParameter("collectionid"))
+#set($collectiveadminsection = $content.collectiveadminsection)
+#if(!$collectiveadminsection)
+	#set($collectiveadminsection = "finances")
+#end
+<div class="container">
+<div class="contentcolumn" style="padding:0;">
+	<div class="row no-gutters">
+		<div class="col-md-2" style="background-color: #fbfbfb;">
+			<div class="collectivesettings-menu">
+						
+					<ul class="auto-active-container">
+						
+						<li class="menu-subheader">[[Finances]]</li>		
+						<li class="#if($collectiveadminsection == "finances") current #end">
+							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Account Balance]]</a>
+						</li>
+						
+
+						<li class="#if($collectiveadminsection == "income") current #end">
+							<a href="$applink/collective/services/income/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Income]]</a>
+						</li>
+
+						
+						<li class="#if($collectiveadminsection == "invoices") current #end">
+							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
+						</li>
+					
+						<li class="#if($collectiveadminsection == "expenses") current #end">
+							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
+						</li>
+
+						<li class="#if($collectiveadminsection == "investments") current #end">
+							<a href="$applink/collective/services/investments/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Investments]]</a>
+						</li>
+					
+			</div>
+		</div>
+		<div class="col-md-10" >
+			<div id="collectivesettingscontent" style="padding:10px; border-left:1px solid #eee;">
+			$pages.includeContent()	
+			</div>
+		</div>
+	</div>
+</div>
+</div>

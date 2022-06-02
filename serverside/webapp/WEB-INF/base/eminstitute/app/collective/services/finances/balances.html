@@ -1,24 +1,8 @@
 #set( $topic = $context.getRequestParameter("collectiveproject"))		
 #set($collectionid = $context.getRequestParameter("collectionid"))
-			<h3>[[Balances]]</h3>
-			
-			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
 
-			<table class="table tablefinances" >
-			#foreach( $currencytype in $netincome.keySet())
-				#set($net = $netincome.get($currencytype))
-				<tr>
-				
-				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
-				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
-				<td></td>
-				<td style="width:10%"></td>
-				</tr>
-			#end
-			</table>
-			
 
-			<h3>[[Income]]</h3> 
+			<h3>[[Incomes]]</h3> 
 			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
 		
 			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange, $topic) )
@@ -33,14 +17,14 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr class="tablefinances-header">
+						<tr>
 						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
 						<td></td>
 						</tr>
 					#end 
-					<tr>
+					<tr class="tablefinances-header">
 						<td style="width:10%"></td>
 						<td>
 						#if($type.incometype)
@@ -86,17 +70,17 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr class="tablefinances-header">
+						<tr >
 						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
 						<td></td>
 						<td></td>
 						<td></td>
 						</tr>
 					#end 
-					<tr>
+					<tr class="tablefinances-header">
 						<td style="width:10%"></td>
 						<td>$mediaarchive.getCachedData("expensetype", $type.expensetype)</td>
-						<td style="width:15%; text-align: right;">$ $!context.doubleToMoney($type.getValue("total"),2)</td>
+						<td style="width:15%; text-align: right;">- $!context.doubleToMoney($type.getValue("total"),2)</td>
 						<td></td>
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
@@ -105,15 +89,11 @@
 					<tr>
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">$ $!context.doubleToMoney($totalbycurrency,2)</td>
+					<td style="width:15%; text-align: right;">- $!context.doubleToMoney($totalbycurrency,2)</td>
 					<td style="width:10%"></td>
 					</tr>
 					#set($totalbycurrency = 0)
 				
 			#end
 			</table>
-		</div>
-		</div>
-	</div>
-</div>
-			
+
