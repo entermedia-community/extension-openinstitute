@@ -52,7 +52,7 @@
 			                      <td style="text-align: center">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
-			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$librarycol.id&librarycol=$hit.collectionid"
+			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
 			                                    data-hidefooter="true"
 			                                    title="[[Edit Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"

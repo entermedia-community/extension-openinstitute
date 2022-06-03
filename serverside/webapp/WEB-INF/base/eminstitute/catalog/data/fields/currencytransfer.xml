@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+ 
+
+  <property id="id" index="true" filter="false" internalfield="true" editable="true" stored="true" sortable="true" keyword="false">Id
+    <name> 
+      <language id="de"><![CDATA[Id]]></language>  
+      <language id="en"><![CDATA[Id]]></language>  
+      <language id="es"><![CDATA[Id]]></language>  
+      <language id="fr"><![CDATA[Id]]></language> 
+    </name> 
+  </property> 
+  
+   <property id="name" index="true" stored="true" editable="true">
+		<name>
+			<language id="en"><![CDATA[Label]]></language>
+		</name>
+	</property>
+    <property id="date" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
+    <name>
+      <language id="en"><![CDATA[Transaction Date]]></language>
+    </name>
+  </property> 
+
+	<property id="user" index="true" listid="user" filter="true"
+		deleted="false" editable="true" stored="true" listcatalogid="system"
+		viewtype="user" keyword="true" datatype="list">
+		New
+		<name>
+			<language id="de"><![CDATA[Owner]]></language>
+			<language id="en"><![CDATA[Owner]]></language>
+			<language id="es"><![CDATA[Propietario]]></language>
+			<language id="fr"><![CDATA[Propriétaire]]></language>
+		</name>
+	</property>
+	
+   <property id="currencytypedest" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
+    <name> 
+      <language id="en"><![CDATA[Currency Type Dest]]></language> 
+    </name> 
+  </property>  
+	
+   <property id="currencytypesource" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
+    <name> 
+      <language id="en"><![CDATA[Currency Type Source]]></language> 
+    </name> 
+  </property>  
+ 
+   <property id="paymententitysource" index="true" editable="true" stored="true"  datatype="list" listid="paymententity" defaultvalue="1">
+    <name> 
+      <language id="en"><![CDATA[Payment Source]]></language> 
+    </name> 
+  </property> 
+   
+   <property id="paymententitydest" index="true" editable="true" stored="true"  datatype="list" listid="paymententity" defaultvalue="1">
+    <name> 
+      <language id="en"><![CDATA[Payment Destination]]></language> 
+    </name> 
+  </property> 
+  
+  
+</properties>
