@@ -2,9 +2,7 @@ package users;
 
 import org.entermediadb.asset.MediaArchive
 import org.openedit.Data
-import org.openedit.WebPageRequest
 import org.openedit.data.Searcher
-import org.openedit.hittracker.HitTracker
 import org.openedit.users.User
 import org.openedit.users.UserSearcher
 
@@ -45,7 +43,13 @@ public void init()
 	dependants.put("transactionLog", "user");
 	dependants.put("projectgoal", "owner");
 	dependants.put("userupload", "owner");
-
+	dependants.put("collectiveexpense", "user");
+	dependants.put("collectiveincome", "user");
+	dependants.put("collectiveinvoice", "owner");
+	dependants.put("collectiveproduct", "owner");
+	dependants.put("collectivinvestment", "user");
+	dependants.put("collectivinvestment", "investmentuser");
+	
 	dependants.keySet().each {
 		String table = it;
 		String field = dependants.get(it);
@@ -61,7 +65,8 @@ public void update(String inTable, String inField,String oldvalue,  String newVa
 	MediaArchive archive = context.getPageValue("mediaarchive");
 	Searcher searcher = archive.getSearcher(inTable);
 	
-	HitTracker toupdate = searcher.fieldSearch(inField, oldvalue);
+	Collection toupdate = searcher.fieldSearch(inField, oldvalue);
+	toupdate = new ArrayList(toupdate);
 	toupdate.each {
 		log.info("Fixing userid: "+inTable)
 		Data hit = searcher.loadData(it);
