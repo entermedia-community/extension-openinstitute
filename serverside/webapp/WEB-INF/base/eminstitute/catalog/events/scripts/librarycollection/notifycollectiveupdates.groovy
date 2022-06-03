@@ -1,0 +1,262 @@
+package librarycollection;
+
+import org.apache.commons.collections.IteratorUtils
+import org.entermediadb.asset.MediaArchive
+import org.entermediadb.email.WebEmail
+import org.openedit.Data
+import org.openedit.MultiValued
+import org.openedit.data.Searcher
+import org.openedit.hittracker.HitTracker
+import org.openedit.users.User
+import org.openedit.util.DateStorageUtil
+
+
+//Chat Notifications
+
+public void init()
+{
+	MediaArchive mediaArchive = (MediaArchive)context.getPageValue("mediaarchive");
+	
+	
+	Data notificationsent = mediaArchive.getCatalogSetting("collectives_notification_lastsent");
+	if( notificationsent == null)
+	{
+		notificationsent = mediaArchive.getSearcher("catalogsettings").createNewData();
+		notificationsent.setId("collectives_notification_lastsent");
+		notificationsent.setName("Projects Notification Last Sent");
+		notificationsent.setValue("value", DateStorageUtil.getStorageUtil().addDaysToDate(new Date(), -2));
+	}
+	
+	String datestrinng = notificationsent.get("value");
+	
+	//datestrinng= "2022-06-01T10:38:13.099Z";
+	
+	Date since = DateStorageUtil.getStorageUtil().parseFromStorage(datestrinng);
+	Date started = new Date();
+	
+	//--Things to notify
+	
+	
+	
+					/*
+					
+					
+					
+					//First get all the topics
+					HitTracker alltopicsmodified = mediaArchive.query("chattopiclastmodified").after("datemodified", since).search();
+					
+					Collection topicsmod = alltopicsmodified.collectValues("chattopicid");
+				
+					//get the last checked
+					Collection alltopicschecked = mediaArchive.query("chattopiclastchecked").orgroup("chattopicid", topicsmod).after("datechecked", since).search();
+				
+					Set userwhochecked = new HashSet();
+					for (Data topiccheck in alltopicschecked) 
+					{
+						String userid = topiccheck.get("userid");
+						String chattopicid = topiccheck.get("chattopicid");
+						userwhochecked.add(userid + "_" + chattopicid);
+					}
+					
+					
+					
+					*/
+	
+	Map<String, Map<String, List>> collectionsupdated = new HashMap();
+	
+	//--Tickets
+	HitTracker alltickets = mediaArchive.query("projectgoal").after("creationdate", since).sort("projectstatus").sort("creationdateDown").search();
+	getUpdatedRows(collectionsupdated, alltickets, "tickets");
+	
+	HitTracker alltasks = mediaArchive.query("goaltask").after("creationdate", since).search();
+	getUpdatedRows(collectionsupdated, alltasks, "tasks");
+	
+/*	
+	//unify new tasks to current new tickets
+	for(String collectionid in collectionsupdated.keySet()) {
+		Map<String, Map<String, List>>  notifications = collectionsupdated.get(collectionid);
+		Map<String, List> tickets = notifications.get("tickets");
+		Map<String, List> tasks = notifications.get("tasks");
+		List taskstoromove = new ArrayList();
+		for(String taskid in tasks.keySet()) {
+			Data task = tasks.get(taskid);
+			String ticketid = task.getValue("projectgoal"); 
+			if(ticketid in tickets) {
+				//log.info("Found: " + task.getValue("projectgoal"));
+				Data tickettoupdate = tickets.get(ticketid);
+				
+				Map<String, List> currenttasks = tickettoupdate.get("tasks");
+				if(currenttasks == null) {
+					currenttasks = new HashMap();	
+				}
+				currenttasks.put(task.getId(), task);
+				//tickettoupdate.putAt("tasks", currenttasks);
+				tickets.put(ticketid, tickettoupdate)
+
+				taskstoromove.add(taskid);
+			}
+			notifications.put("tickets", tickets);
+		}
+		tasks.keySet().removeAll(taskstoromove);
+		
+		log.info(tickets);
+		
+		notifications.put("tasks", tasks);
+		collectionsupdated.put(collectionid, notifications);
+	}
+	
+*/	
+	log.info(collectionsupdated);
+	//Notify users on collections
+	Map<String, List> usernotifications = new HashMap();
+	for (String collectionid in collectionsupdated.keySet()) {
+		
+		Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
+		for(Data auser in users)
+		{
+			String userid = auser.get("followeruser");
+			//if(!userwhochecked.contains(userid + "_" + chattopicid))
+			//{
+				Data profile = mediaArchive.getCachedData("userprofile", userid);
+				
+				//make it not false?
+				if(profile != null && profile.getBoolean("sendchatnotifications") == true)
+				{
+					log.info("Chat Notification disabled " + userid);
+					continue;
+				}
+				
+				//Users to Notify Only per Collection
+				List  notifications = usernotifications.get(userid);
+				if( notifications == null)
+				{
+					notifications = new ArrayList();
+				}
+				notifications.add(collectionid)
+				usernotifications.put(userid, notifications);
+			//}
+		}
+	}	
+		
+
+	
+	
+	/*SEND EMAIL*/
+	String	appid =  mediaArchive.getCatalogSettingValue("events_notify_collective_app");
+	String template = "/" + appid + "/theme/emails/collective-updates.html";
+	//Loop over the remaining topics
+	try
+	{
+		for (String useerid in usernotifications.keySet())
+		{
+			List collections = usernotifications.get(useerid);
+			User followeruser = mediaArchive.getUser(useerid);
+			if (followeruser == null || followeruser.getEmail() == null) 
+			{
+				log.error("Invalid User or no email address " + useerid);
+				continue;
+			}
+				
+			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
+			if( collections.size() > 1)
+			{
+				templatemail.setSubject("[EM] " + collections.size() + " User Notifications"); //TODO: Translate
+			}
+			else
+			{
+				String oneitem = collections.iterator().next();
+				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
+				templatemail.setSubject("[EM] " + collection.getName() + " Notification"); //TODO: Translate
+			}
+			
+			Map objects = new HashMap();
+			objects.put("usernotifications",usernotifications);
+			objects.put("collectionsupdated",collectionsupdated);
+			objects.put("followeruser",followeruser);
+			objects.put("applink","/" + appid);
+			objects.put("mediaarchive",mediaArchive);
+			objects.put("messagessince",since);
+			objects.put("siteroot", getSiteRoot());
+			objects.put("since", datestrinng);
+			
+			templatemail.send(objects);
+			
+			log.info("Chat Notified " + followeruser.getEmail() + " " + templatemail.getSubject() + " Site: " + getSiteRoot());
+		}
+	} 
+	catch (Exception ex)
+	{
+		log.error("Could not process " ,ex);
+	}	
+	
+	notificationsent.setValue("value", started);
+	mediaArchive.saveData("catalogsettings",notificationsent);
+
+}
+
+
+private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, HitTracker events, String table) {
+	
+	for (Data row in events)
+		{
+			String collectionid = row.get("collectionid");
+			
+			if(collectionid == null) {
+				continue;
+			}
+			//Save Collections to Notify
+			Map<String, Map<String, List>>  notifications = collectionsupdated.get(collectionid);
+			if( notifications == null)
+			{
+				notifications = new HashMap();
+			}
+			
+			//
+			Boolean included = false;
+			if(table.equals("tasks")) {
+				//check if the ticket already listed
+				String ticketid = row.getValue("projectgoal");
+				Map<String, Map<String, List>> tickets = notifications.get("tickets");
+				if(ticketid in tickets.keySet()) {
+					Map<String, List> theticket = tickets.get(ticketid);
+					Map<String, List> thetasks = theticket.get("tasks");
+					if(thetasks == null) {
+						thetasks = new HashMap();
+					}
+					thetasks.put(row.getId(), row);
+					theticket.put("tasks", thetasks);
+					tickets.put(ticketid, theticket);
+					notifications.put("tickets", tickets);
+					collectionsupdated.put(collectionid, notifications);
+					included = true;
+				}
+			}
+			if(!included) {
+				Map<String, Map<String, List>> collectionitems = notifications.get(table);
+				if (collectionitems == null) {
+					collectionitems = new HashMap();
+				}
+				Map<String, List> rowitem = new HashMap();
+				rowitem.put("data", row);
+				collectionitems.put(row.getId(), rowitem);
+				notifications.put(table, collectionitems);
+				collectionsupdated.put(collectionid, notifications);
+			}
+		}
+	return;
+}
+
+
+private String getSiteRoot() {
+	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
+	String site = mediaArchive.getCatalogSettingValue("siteroot");
+	if (!site) {
+		site = mediaArchive.getCatalogSettingValue("cdn_prefix");
+	}
+	return site;
+}
+
+
+
+init();
+

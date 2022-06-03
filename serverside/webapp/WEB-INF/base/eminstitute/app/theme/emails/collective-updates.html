@@ -1,0 +1,68 @@
+#if(!$siteroot)
+	#set($siteroot = $context.siteRoot)
+	#if(!$siteroot)
+		#set($siteroot = $url_util.buildRoot())
+	#end
+#end
+<div style="width:600px;">
+<p>Open Institute [[projects notifications for user]]: <strong>$!followeruser</strong></p>
+
+#foreach( $collectionid in $collectionsupdated.keySet())
+	#set($tables = $collectionsupdated.get($collectionid))
+	#set( $collectionfull = $mediaarchive.getCachedData("librarycollection",$collectionid) )
+	<div style="margin-bottom:20px;">
+		<h3 style="background-color:#efefef; padding:5px; margin:0;">
+		<a href="$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid">$collectionfull.getName()</a></h3>
+		#foreach($tableid as $tables.keySet())
+			#set($tableitems = $tables.get($tableid)) 
+
+			$tableitems.size() $tableid [[created since]] $!since<br>
+			
+			#foreach($data as $tableitems)
+				#set($row = $data.get("data"))
+				#if($tableid=="tickets")
+					#set($ticketurl = "$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid=$!row.getId()")
+					#set($bgcolor = "#f8f8f8")
+					#if($row.projectstatus == "critical")
+						#set($bgcolor = "beige!important")
+					#end
+					<div style="padding:10px; margin-bottom:10px; background-color: $bgcolor;">
+					<a href="$ticketurl">
+						<strong>#$!row.ticketnumber $!row.getName()</strong>
+					</a>
+					#if($row.projectstatus == "critical")
+					&nbsp;[[Status]]: <strong>[[URGENT]]</strong>
+					#end 
+					&nbsp;[[by]]: $!mediaarchive.getUser($row.owner).getAnonNickName()<br>
+					 $!row.details
+					 #if ($row.deliverydate)
+						<div style="color:red; font-weight:bold; font-size:0.9em;">[[Due on:]] $row.deliverydate.substring(0, 10)</div>
+					 #end
+					 #set($tasks = $data.get("tasks"))
+					 #if($tasks)
+					 	<div style="margin:5px 0; padding:10px; border-left:2px solid #eeeeee;">
+					 	<h4 style="margin:0;">$tasks.size() [[Tasks created]]:</h4>
+						 #foreach($task in $tasks)
+						 		<a href="$ticketurl">$task.comment</a> [$!mediaarchive.getData("taskstatus", $task.taskstatus)]<br>
+						 #end
+						 </div>
+					 #end
+					 </div>
+				#elseif($tableid=="tasks")
+					<strong>$!row.comment</strong><br>
+				#end
+			#end
+		#end
+	</div>
+		
+		
+#end
+
+
+<p>
+[[To change notification preferences please edit your]] <a href="$!siteroot$applink/users/index.html">[[Account Preferences]]</a>
+</p>
+
+
+
+</div>
