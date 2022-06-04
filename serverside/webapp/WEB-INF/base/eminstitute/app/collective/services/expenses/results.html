@@ -18,7 +18,7 @@
                               </tr>
                           </thead>
                           #set($totalarray = {})
-                          #foreach($hit in $expenses.getPageOfHits())
+                          #foreach($hit in $expenses)
                                	#if(!$totalarray.get($hit.currencytype))
 			                 		#set($totalarray[$hit.currencytype] = [])
 			                 	#end
