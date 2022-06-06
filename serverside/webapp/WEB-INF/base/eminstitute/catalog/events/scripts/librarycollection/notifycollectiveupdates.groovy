@@ -29,7 +29,7 @@ public void init()
 	
 	String datestrinng = notificationsent.get("value");
 	
-	datestrinng= "2022-06-03T10:38:13.099Z";
+	//datestrinng= "2022-06-03T10:38:13.099Z";
 	
 	Date since = DateStorageUtil.getStorageUtil().parseFromStorage(datestrinng);
 	Date started = new Date();
