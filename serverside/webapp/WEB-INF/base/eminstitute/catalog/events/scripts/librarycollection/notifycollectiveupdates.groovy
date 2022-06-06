@@ -29,7 +29,7 @@ public void init()
 	
 	String datestrinng = notificationsent.get("value");
 	
-	//datestrinng= "2022-06-01T10:38:13.099Z";
+	datestrinng= "2022-06-03T10:38:13.099Z";
 	
 	Date since = DateStorageUtil.getStorageUtil().parseFromStorage(datestrinng);
 	Date started = new Date();
@@ -71,41 +71,7 @@ public void init()
 	HitTracker alltasks = mediaArchive.query("goaltask").after("creationdate", since).search();
 	getUpdatedRows(collectionsupdated, alltasks, "tasks");
 	
-/*	
-	//unify new tasks to current new tickets
-	for(String collectionid in collectionsupdated.keySet()) {
-		Map<String, Map<String, List>>  notifications = collectionsupdated.get(collectionid);
-		Map<String, List> tickets = notifications.get("tickets");
-		Map<String, List> tasks = notifications.get("tasks");
-		List taskstoromove = new ArrayList();
-		for(String taskid in tasks.keySet()) {
-			Data task = tasks.get(taskid);
-			String ticketid = task.getValue("projectgoal"); 
-			if(ticketid in tickets) {
-				//log.info("Found: " + task.getValue("projectgoal"));
-				Data tickettoupdate = tickets.get(ticketid);
-				
-				Map<String, List> currenttasks = tickettoupdate.get("tasks");
-				if(currenttasks == null) {
-					currenttasks = new HashMap();	
-				}
-				currenttasks.put(task.getId(), task);
-				//tickettoupdate.putAt("tasks", currenttasks);
-				tickets.put(ticketid, tickettoupdate)
 
-				taskstoromove.add(taskid);
-			}
-			notifications.put("tickets", tickets);
-		}
-		tasks.keySet().removeAll(taskstoromove);
-		
-		log.info(tickets);
-		
-		notifications.put("tasks", tasks);
-		collectionsupdated.put(collectionid, notifications);
-	}
-	
-*/	
 	log.info(collectionsupdated);
 	//Notify users on collections
 	Map<String, List> usernotifications = new HashMap();
@@ -196,7 +162,7 @@ public void init()
 
 
 private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, HitTracker events, String table) {
-	
+	MediaArchive mediaArchive = (MediaArchive)context.getPageValue("mediaarchive");
 	for (Data row in events)
 		{
 			String collectionid = row.get("collectionid");
@@ -229,6 +195,23 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 					notifications.put("tickets", tickets);
 					collectionsupdated.put(collectionid, notifications);
 					included = true;
+				} else {
+					//add ticket to task??
+					Data ticket = mediaArchive.getCachedData("projectgoal", ticketid);
+					if (ticket) {
+						
+						Map<String, Map<String, List>> collectionitems = notifications.get(table);
+						if (collectionitems == null) {
+							collectionitems = new HashMap();
+						}
+						Map<String, List> rowitem = new HashMap();
+						rowitem.put("data", row);
+						rowitem.put("ticket", ticket);
+						collectionitems.put(row.getId(), rowitem);
+						notifications.put(table, collectionitems);
+						collectionsupdated.put(collectionid, notifications);
+						included = true;
+					}
 				}
 			}
 			if(!included) {

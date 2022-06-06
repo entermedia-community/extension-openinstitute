@@ -43,13 +43,26 @@
 					 	<div style="margin:5px 0; padding:10px; border-left:2px solid #eeeeee;">
 					 	<h4 style="margin:0;">$tasks.size() [[Tasks created]]:</h4>
 						 #foreach($task in $tasks)
-						 		<a href="$ticketurl">$task.comment</a> [$!mediaarchive.getData("taskstatus", $task.taskstatus)]<br>
+						 		#set( $tree =  $mediaarchive.getCategory($task.projectdepartment))
+						 		<a href="$ticketurl">$task.comment</a> - $!tree [$!mediaarchive.getData("taskstatus", $task.taskstatus)]<br>
 						 #end
 						 </div>
 					 #end
 					 </div>
 				#elseif($tableid=="tasks")
-					<strong>$!row.comment</strong><br>
+					#set($ticket = $data.get("ticket"))
+					#set($ticketurl = "$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid=$!ticket.getId()")
+					#set($bgcolor = "#f8f8f8")
+					#if($ticket.projectstatus == "critical")
+						#set($bgcolor = "beige!important")
+					#end
+					#set( $tree =  $mediaarchive.getCategory($row.projectdepartment))
+					<div style="padding:10px; margin-bottom:10px; background-color: $bgcolor;">
+					[[Ticket]]: <a href="$ticketurl">
+						<strong>#$!ticket.ticketnumber $!ticket.getName()</strong> 
+					</a><br>
+					<strong>$!row.comment</strong> - $!tree [$!mediaarchive.getData("taskstatus", $row.taskstatus)]
+					</div>
 				#end
 			#end
 		#end
