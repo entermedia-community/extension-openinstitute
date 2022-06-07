@@ -36,32 +36,6 @@ public void init()
 	
 	//--Things to notify
 	
-	
-	
-					/*
-					
-					
-					
-					//First get all the topics
-					HitTracker alltopicsmodified = mediaArchive.query("chattopiclastmodified").after("datemodified", since).search();
-					
-					Collection topicsmod = alltopicsmodified.collectValues("chattopicid");
-				
-					//get the last checked
-					Collection alltopicschecked = mediaArchive.query("chattopiclastchecked").orgroup("chattopicid", topicsmod).after("datechecked", since).search();
-				
-					Set userwhochecked = new HashSet();
-					for (Data topiccheck in alltopicschecked) 
-					{
-						String userid = topiccheck.get("userid");
-						String chattopicid = topiccheck.get("chattopicid");
-						userwhochecked.add(userid + "_" + chattopicid);
-					}
-					
-					
-					
-					*/
-	
 	Map<String, Map<String, List>> collectionsupdated = new HashMap();
 	
 	//--Tickets
@@ -72,8 +46,19 @@ public void init()
 	getUpdatedRows(collectionsupdated, alltasks, "tasks");
 	
 
+	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("date", since).search();
+	log.info(allexpenses.size());
+	getUpdatedRows(collectionsupdated, allexpenses, "expenses");
+	
+	
+	
 	log.info(collectionsupdated);
+	
+	
+	
 	//Notify users on collections
+	//ontheteam == true
+	//prfile.sendchatnotifications == true
 	Map<String, List> usernotifications = new HashMap();
 	for (String collectionid in collectionsupdated.keySet()) {
 		
