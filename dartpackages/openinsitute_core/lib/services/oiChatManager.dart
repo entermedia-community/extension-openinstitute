@@ -43,9 +43,6 @@ class oiChatManager {
     results.clear();
     results.addAll(messages); //TODO: This should reload the UI with new entries?
     return Future.value(results);
-
-
-
   }
 
   Future<List> getProjectChatMessages(String inProjectId)  async {
@@ -76,6 +73,27 @@ class oiChatManager {
       return Future.value(results);
      //return results;
     //List<emData> results = parseData(responsestring);
+    }
+
+    Future<List> sendMessage(String inProjectId, Map params)  async {
+    var box =  await getBox("oiChatManagerCache");
+
+
+     var results =  box.get(inProjectId);//Some cache system
+     if( results == null) {
+       results = <oiChatMessage>[]; //Make one list that is cached
+       box.put(inProjectId,results);
+     }
+
+    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/savemessage.json', params) as Map?;
+
+     List<oiChatMessage> messages =
+     responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
+
+     results.clear();
+     results.addAll(messages);
+       box.put(inProjectId,results);
+      return Future.value(results);
     }
   }
 
