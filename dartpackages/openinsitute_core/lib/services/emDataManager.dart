@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:openinsitute_core/models/emData.dart';
-import 'package:openinsitute_core/models/emFeeds.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
+import 'package:openinsitute_core/services/feeds.dart';
 
 OpenI get oi {
   return Get.find();
@@ -36,80 +36,6 @@ class DataManager {
   }
 }
 
-class Feeds {
-  static const String feedString = "feeds";
-  late Box box;
-  bool cache = true;
-
-  Feeds._();
-
-  static Future<Feeds> getFeeds() async {
-    var feeds = Feeds._();
-    feeds.box = await feeds.getBox(feedString);
-    return feeds;
-  }
-
-  Future<Box> getBox(String inType) async {
-    if (!Hive.isBoxOpen(inType)) {
-      return await Hive.openBox(inType);
-    } else {
-      return Hive.box(inType);
-    }
-  }
-
-  List<emFeed> getAllHits() {
-    List<emFeed> list = [];
-    box.keys.forEach((element) {
-      if (element != "lastsync") {
-        emFeed newdata = emFeed.fromJson(box.get(element));
-        list.add(newdata);
-      }
-    });
-    return list;
-  }
-
-  Future<List<emFeed>> getRemoteData(
-    Map? inQuery,
-  ) async {
-    final responsestring = await oi.getEmResponse(
-      oi.app!["mediadb"] + "/services/feed/channelfeed.json",
-      inQuery,
-    );
-    List<emFeed> results = parseData(responsestring);
-    results.forEach((element) {
-      box.put(element.id, element.properties);
-    });
-
-    return results;
-
-    //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
-  }
-
-  List<emFeed> parseData(String responseBody) {
-    final Map<String, dynamic> parsed = json.decode(responseBody);
-    List<emFeed> results =
-        parsed["uploads"].map<emFeed>((json) => emFeed.fromJson(json)).toList();
-    return results;
-  }
-
-  Future<bool> syncData(bool full) async {
-    if (full) {
-      await box.clear();
-      List<emFeed> tosave = await getRemoteData(null);
-      for (var element in tosave) {
-        box.put(element.id, element.properties);
-      }
-    } else {
-      DateTime lastsync = box.get("lastsync");
-      List<emFeed> tosave = await getRemoteData(null);
-      for (var element in tosave) {
-        box.put(element.id, element.properties);
-      }
-    }
-    box.put("lastsync", DateTime.now());
-    return true;
-  }
-}
 
 class DataModule {
   //https://stackoverflow.com/questions/54549235/dart-await-on-constructor
@@ -130,10 +56,10 @@ class DataModule {
   DataModule(this.searchtype);
 
   Future<Box> getBox(String inType) async {
-    if (!await Hive.isBoxOpen(inType)) {
+    if (!Hive.isBoxOpen(inType)) {
       return await Hive.openBox(inType);
     } else {
-      return await Hive.box(inType);
+      return Hive.box(inType);
     }
   }
 
@@ -151,21 +77,21 @@ class DataModule {
   List<emData> getAllHits() {
     List<emData> list = [];
     // List list = List.generate(box.keys.length, ,{"growable":true});
-    box.keys.forEach((element) {
-      if(element != "lastsync") {
-        emData newdata = emData.fromJson(box.get(element));
-        list.add(newdata);
-      }
-    });
-    return list;
+     box.keys.forEach((element) {
+       emData newdata = emData.fromJson(box.get(element) as Map<String, dynamic>);
+       list.add(newdata);
+     });
+     return list;
+
   }
 
-  Future<bool> syncData(bool full) async {
+
+  Future<bool> syncData(bool full,int page) async {
     if (full) {
       await box.clear();
 
       Map simplesearch = {
-        "page": "1",
+        "page": "$page",
         "hitsperpage": "20",
         "query": {
           "terms": [
