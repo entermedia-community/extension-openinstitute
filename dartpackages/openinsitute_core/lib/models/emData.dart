@@ -31,8 +31,4 @@ class emData{
         properties[id] = id;
         return properties;
     }
-
-
-
-
 }
