@@ -4,10 +4,10 @@
   <data id="1"> 
     USD
   </data>  
-  <data id="2" exchangetousd="-1"> 
+  <data id="2" exchangetousd="1"> 
   OI Work Points
   </data>  
-  <data id="3" exchangetousd="-1"> 
+  <data id="3" exchangetousd="0"> 
   Seeds
   </data>  
   <data id="4" exchangetousd="7.5"> 
