@@ -13,9 +13,14 @@
 						
 						<li class="menu-subheader">[[Finances]]</li>		
 						<li class="#if($collectiveadminsection == "finances") current #end">
-							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Account Balance]]</a>
+							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Project Wallet]]</a>
 						</li>
 						
+						<li class="#if($collectiveadminsection == "transfers") current #end">
+							<a href="$applink/collective/services/transfers/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Transfers]]</a>
+						</li>
+
 
 						<li class="#if($collectiveadminsection == "income") current #end">
 							<a href="$applink/collective/services/income/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Income]]</a>

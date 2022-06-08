@@ -128,6 +128,9 @@ void main() {
     var messages = await oi.chatManager?.getProjectChatMessages(projectid);
     expect(messages!.length > 5, true);
 
+    //Create new chat
+    
+    oi.chatManager?.saveMessage()
   });
 
 

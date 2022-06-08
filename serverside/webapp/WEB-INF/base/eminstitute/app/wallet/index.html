@@ -1,15 +1,13 @@
-#set($collectionid = $context.getRequestParameter("collectionid"))
-
-<div class="container" id="financesdashboard">
+<div class="container" id="walletdashboard" style="padding-top: 20px;">
+<div class="maincontent">
 
 <div class="row">
-<div class="col-md-5">
-    <h1>[[Project Wallet]]</h1>
+<div class="col-md-7">
+    <h1>[[Your Wallet]]</h1>
 </div>
-<div class="col-md-7">    
-    #if( $XXXXcaneditcollection )
+<div class="col-md-5">    
          <a
-          href="$applink/collective/services/transfers/send.html?collectionid=$collectionid"
+          href="$applink/wallet/send.html?userid=$selecteduser.getId()"
           class="emdialog btn btn-sm btn-primary">[[Send Money]]</a>
 
          <a
@@ -19,12 +17,10 @@
           <a
           href="$applink/users/transfers/request.html"
           class="emdialog btn btn-sm btn-primary">[[Receive Money]]</a>
-
-    #end      
+          
   </div> 
 </div>		    
-			
-			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
+			#set( $netincome = $financeManager.getTransfersByCurrencyForEntity($user.id,$daterange) )
 
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())
@@ -52,7 +48,7 @@
 		<div  id="dashsearchform" class="row inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
 			$context.putPageValue("autocomplete","off")
 			<div class="col-md-2">
-			[[Filter by]]:
+			[[Transactions by]]:
 			</div>
 			<div class="col-md-2">
 				<select name="year" class="form-control-sm" style="width:120px;">
@@ -99,14 +95,19 @@
 			
 		</div>	
 	</form>
-		    
+		 
+		 #set( $transfers = $financeManager.getAllTransfersForEntity($selecteduser.id,$daterange) )
+		    $context.putPageValue("transfers",$transfers)
 		    
 	<div id="report">
-		    
-	$pages.include("./balances.html",$context)
+	$pages.include("$apphome/wallet/transferresults.html",$context)
+#if( $netincome.isEmpty() )
+	[[No Activity]]
+#end
 			
 	</div>
 </div>	 	    
 			
+</div>	 	    
 			
 			

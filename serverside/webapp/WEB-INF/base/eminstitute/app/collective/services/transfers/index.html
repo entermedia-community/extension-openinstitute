@@ -8,8 +8,8 @@
 <div style="padding:10px 20px;">
      #if( $caneditcollection )
          <a
-          href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Expense]]</a>
+          href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
+          class="emdialog btn btn-sm btn-primary float-right">[[Send Transfer]]</a>
     #end      
               
 	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
@@ -18,14 +18,14 @@
 		class="autosubmit" 
 		data-targetdiv="expensereport" 
 		method="post" 
-		action="$!siteroot$applink/collective/services/expenses/results.html">
+		action="$!siteroot$applink/collective/services/transfers/results.html">
 	
-		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
+		#set( $searcher = $mediaarchive.getSearcher("currencytransfer") )
 		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
+		#set ($details = $searcher.getDetailsForView("currencytransfer/search", $userprofile))
 	
-		$context.putPageValue("view","collectiveexpense/search")
-		<input type="hidden" name="searchtype" value="collectiveexpense" />
+		$context.putPageValue("view","currencytransfer/search")
+		<input type="hidden" name="searchtype" value="currencytransfer" />
 		
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$collectionid" />
@@ -53,18 +53,19 @@
 		</tr>
 		</table>
 
-	
-	#ifnull( $expenses)
-              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("expenses",$expenses)
+	#ifnull( $transfers)
+            ##set( $transfers = $mediaarchive.query("currencytransfer").exact("paymententitysource",$collectionid).sort("dateDown").search($context))
+ 			#set( $transfers = $financeManager.getAllTransfersForEntity($collectionid,$daterange) )
+              $context.putPageValue("transfers",$transfers)
 	#end
+	
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Expenses]]</h2>
+   		<h2 class="float-left" style="margin:10px 0;">[[Transfers]]</h2>
    		<div style="float:right; width:260px; margin:10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
 		<select class="select2 	form-control-sm" name="sortby" >
-			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
+			#set ($details = $searcher.getDetailsForView("currencytransfer/edit", $userprofile))
 			#foreach( $detail in $details)
 				<option value="$detail.getId()Down">$context.getText($detail)</option>
 				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
@@ -76,7 +77,6 @@
    </div>
    </form>
    
-   
-	$pages.include("./results.html",$context)
+	$pages.include("$apphome/wallet/transferresults.html",$context)
 </div>
 
