@@ -10,5 +10,5 @@
 	<property id="receiptattachment" />
 	<property id="paymenttype" />
   <property id="paymentemail" />     
-	
+<property id="paidfromaccount" />
 </properties>

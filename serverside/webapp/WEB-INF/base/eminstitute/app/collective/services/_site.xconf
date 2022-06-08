@@ -1,10 +1,10 @@
 <page>
 		
 	<property name="fullwidth">true</property>
-	<property name="collectivesection">settings</property>
+	<property name="collectivesection">finances</property>
 	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
-	<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
+	<inner-layout>/${applicationid}/collective/services/layout.html</inner-layout>
 	
 	
 </page>

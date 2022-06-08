@@ -1,5 +1,6 @@
-class EmUser {
+import 'dart:convert';
 
+class EmUser {
   late Map <String, dynamic> properties;
   late String entermediakey;
   String? firstname;
@@ -19,7 +20,8 @@ class EmUser {
     properties = json;
   }
 
-
-
+  String toJson() {
+    return jsonEncode(properties);
+  }
 }
 

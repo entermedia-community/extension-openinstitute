@@ -1,0 +1,15 @@
+
+<root>
+  <data id="transaction">
+    <name><![CDATA[Transactions]]></name>
+  </data>
+  <data id="collectiveinvoice">
+    <name><![CDATA[Invoices]]></name>
+  </data>
+  <data id="collectiveexpense">
+    <name><![CDATA[Expenses]]></name>
+  </data>
+  <data id="collectiveincome">
+    <name><![CDATA[Cash Income]]></name>
+  </data>
+</root>

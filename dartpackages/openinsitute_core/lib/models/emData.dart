@@ -30,8 +30,4 @@ class emData{
     Map<String, dynamic> toJson()  {
         return properties;
     }
-
-
-
-
 }

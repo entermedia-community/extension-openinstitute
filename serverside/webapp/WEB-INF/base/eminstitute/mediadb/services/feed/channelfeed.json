@@ -30,10 +30,10 @@
 	"ownerid" : "$upload.owner",	
 	#set( $postuser = $userManager.getUser($upload.owner, true)) 
 	"ownername" : "$postuser.getAnonNickName()",	
-	"url": "/site/app/collective/channel/${librarycol.getId()}/index.html?showupload=${upload.id}#showupload-${upload.id}",
+	"url": "/site/app/collective/channel/${librarycol.getId()}/index.html?showupload=${upload.id}#showupload-${upload.id}"
 	#set( $assets = $mediaarchive.getAssetSearcher().query().exact("category-exact",$upload.uploadcategory).hitsPerPage(3).search() )
 	#if( !$assets.isEmpty())
-		"assets":[
+		,"assets":[
 		#foreach( $hit in $assets)			#if( ${foreach.count} != 1 ), #end
 		{
 			"assetid":#jesc($hit.id),

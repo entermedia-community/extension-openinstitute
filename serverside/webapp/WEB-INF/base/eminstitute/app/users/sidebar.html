@@ -76,7 +76,28 @@
    <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right"><i class="fas fa-users-cog"></i></a>
    </div>
    <div class="sidebar-box-content" style="padding:0;">
-    	<ul class="sidebar-list">
+		#if($canviewsettings)
+			#if($canviewsettings)
+	    	<ul class="sidebar-list">
+			<li class="#if($appsection == "completed") current #end">
+			<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
+			</li>
+			<li class="#if($appsection == "mytasks") current #end" >
+				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
+			</li>
+			</ul>
+			#end
+			#if ($canviewsettings)
+				#set($args = "goaltrackerstaff=*")
+			#end
+			
+			<div style="padding:4px 10px 4px;">
+			<a href="$sitelink/app/users/tasks/index.html?$!{args}" class="badge badge-success">[[All]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success">[[Level 1]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Level 2]]</a>
+			</div>
+		#end
+   	<ul class="sidebar-list">
 		<li class="#if($appsection == "activity") current #end" style="width:110px; float:left;">
 			<a href="$sitelink/app/activity/index.html"  >
 			<i class="fa fa-comments"></i> [[All Chats]]</a>
@@ -94,38 +115,19 @@
 		#end
 		
 		
+		</ul>		
 		#if($canviewsettings)
-		<li class="#if($appsection == "mytasks") current #end" style="width:110px; float:left;">
-			<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin Reports]]</div>
+		<ul class="sidebar-list" style="margin-bottom:0px;">
+		<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
+			<a href="$applink/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
 		</li>
-		<li class="#if($appsection == "completed") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
-		<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[Completed]]</a>
+		<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
+			<a href="$applink/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 		</li>
-		#end
-		</ul>
-		<div class="clearfix"></div>
-		##if($userprojectsids.size() )
-		#if($canviewsettings)
-		<div class="sidebar-box-header" style="margin-top:0px;">[[Tickets]]</div>
-			#if ($canviewsettings)
-				#set($args = "goaltrackerstaff=*")
-			#end
-			
-			<div style="padding:4px 10px 4px;">
-			<a href="$sitelink/app/users/tasks/index.html?$!{args}" class="badge badge-success">[[All]]</a>
-			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success">[[Level 1]]</a>
-			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Level 2]]</a>
-			</div>
-		#end
-		##end
 		
-		#if($canviewsettings)
-		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin]]</div>
-		<ul class="sidebar-list" style="margin-bottom:10px;">
-		
-		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
-			<a href="$sitelink/app/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
-		</li>
+		##		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
+		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>
 		#end
 		

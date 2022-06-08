@@ -1,5 +1,5 @@
 <page>
 	<property name="collectivesection">settings</property>
-	
+	<property name="collectiveadminsection">general</property>
 	<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
 </page>

@@ -51,6 +51,12 @@
     </name> 
   </property>  
 
+    <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
+	 <name>
+	 <language id="en" > <![CDATA[Bank Account]]> </language>
+	 </name>
+	</property>
+
     <property id="paidfrom" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name> 
       <language id="en"><![CDATA[Paid By]]></language> 

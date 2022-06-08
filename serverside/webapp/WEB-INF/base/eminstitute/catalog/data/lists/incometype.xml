@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-	<data id="2">Other Donations</data>
+	<data id="1">Online Donation</data>
+	<data id="2">Other Donation</data>
+  	<data id="3">Wages</data>  
 	<data id="4">Paypal Donation</data>
 	<data id="5">Cash Donation</data>  
-  	<data id="3">Wages</data>  
+	<data id="6">Invoice</data>
   	<incometype id="AX-oWIv0qFnpF58wgkLE"> 
 	    <name> 
 	      <language id="en"><![CDATA[Rent]]></language> 

@@ -5,17 +5,13 @@
 #end
 
 <div style="padding:10px 20px;">
+
 	#if( $caneditcollection )
-    	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
-			<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
-		#end
        	<a
 	        href="$applink/collective/services/income/addnew.html?collectionid=${collectionid}"
               class="emdialog btn btn-sm btn-primary float-right">[[Add Income]]</a>
-      #end
-      
-      
-      
+     #end
+
     <a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
@@ -62,7 +58,7 @@
               $context.putPageValue("income",$income)
 	#end
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Income]]</h2>
+   		<h2 class="float-left" style="margin:10px 0;">[[Cash Payments]]</h2>
    		<div style="float:right; width:260px; margin:10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
@@ -88,3 +84,10 @@
 
 $pages.include("/$applicationid/collective/services/donations/index.html", $context)
 
+              #set( $invoices = $mediaarchive.query("collectiveinvoice").exact("paymentstatus","paid").exact("collectionid",
+              $collectionid).sort("createdonDown").search())
+              #if ($invoices)
+                  <h3>[[Invoices]]</h3>
+                  $context.putPageValue("invoices",$invoices)
+				  $pages.include("/$applicationid/collective/services/invoices/results.html", $context)
+               #end

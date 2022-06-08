@@ -1,0 +1,78 @@
+<div id="reportpage" class="container">
+	<div class="row" style="padding-top: 20px">
+		<div class="col">
+			<div class="contentcolumn">
+				<h3>[[Bank Ledger]]</h3>
+				<form  id="searchform" 
+						class="autosubmit" 
+						data-oemaxlevel="1"
+						data-targetdiv="reportpage" 
+						method="post" 
+						action="$content.path">
+				
+					<input type="hidden" name="oemaxlevel" value="1" />
+					
+				#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
+					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
+					#ifnull( $paidfromaccount)
+						#set($paidfromaccount = "1" )
+					#end
+					
+					<div class="row" >
+					<div class="col-md-3">
+						<select name="paidfromaccount"  class="form-control-sm" >
+							#foreach( $hit in $hits )
+								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$hit</option>
+							#end
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select name="year" class="form-control-sm" style="width:120px;">
+							<option value="-1" #if($daterange.getYearPicked() == -1) selected #end>[[All Time]]</option>
+							<option value="0"  #if($daterange.getYearPicked() == 0) selected #end>[[YTD]]</option>
+							<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
+							<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
+						</select>
+					</div>		
+					</div>
+
+				</form>
+			 <div class="emdata" style="padding-top: 10px">
+				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) ) 
+             <table class="table table-striped">
+                 <thead>
+                     <tr class="tableheader">
+                         <th>[[Project]]</th>
+                         <th>[[Date]]</th>
+                         <th>[[Type]]</th>
+                         <th>[[Label]]</th>
+                         <th>[[Currency]]</th>
+                         <th>[[Total]]</th>
+                     </tr>
+                 </thead>
+                 #set($totalbycurrency =  0.0)
+                 #foreach($transaction in $all)
+                     <tr>
+                     	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
+                     	#set($collurl = "$applink/collective/services/finances/dashboard.html?collectionid=$transaction.getCollectionId()")
+                         <td><a href="$collurl">$collective</a></td>
+                         <td>$!context.getDate($transaction.getDate())</td>
+                         <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
+                         <td>$transaction.getName()</td>
+                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType() )</td>
+                         #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
+                         <td><A href="$link">$transaction.getAmount()</A></td>
+                         #set($totalbycurrency = $totalbycurrency + $transaction.getAmount())
+					
+                #end
+					<tr>
+					<td colspan="5" style="text-align: right;">[[Total]]:</td>
+					<td style="width:15%; text-align: right;">$!context.doubleToMoney($totalbycurrency,2)</td>
+                    </tr>
+			</table>
+			$all.size() transactions
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
