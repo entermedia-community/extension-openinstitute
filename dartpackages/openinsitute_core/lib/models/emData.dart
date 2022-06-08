@@ -1,6 +1,6 @@
 class emData{
 
-    late String id;
+    String? id;
     String? name;
     late Map <String, dynamic> properties;
 
@@ -28,7 +28,6 @@ class emData{
     }
 
     Map<String, dynamic> toJson()  {
-        properties[id] = id;
         return properties;
     }
 }
