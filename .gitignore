@@ -2,3 +2,5 @@
 /bin/
 /logs/
 /serverside/webapp/WEB-INF/data/
+/dartpackages/openinsitute_core/.flutter-plugins
+/dartpackages/openinsitute_core/.flutter-plugins-dependencies

@@ -7,6 +7,7 @@ import org.openedit.Data
 import org.openedit.data.QueryBuilder
 import org.openedit.data.Searcher
 import org.openedit.hittracker.HitTracker
+import org.openedit.util.DateStorageUtil
 
 //loop all year
 
@@ -65,23 +66,26 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 
 	Searcher tasksearcher = archive.getSearcher("goaltask");
 	QueryBuilder q = tasksearcher.query();
-	HitTracker alltasks = q.match("completedby", "*").between("completedon", start, onemonth).sort("completedby").search();
+	HitTracker alltasks = q.between("completedon", start, onemonth).sort("completedby").search();
 	//log.info("Query: " + alltasks.getSearchQuery());
 
-
+	//log.info("Found ${alltasks.size()} for for ${monthInt}" );
+		
 	Map<String, Map<String, List>> usersupdated = new HashMap();
 
 	for (Iterator iterator = alltasks.iterator(); iterator.hasNext();)
 	{
 		Data  task = (Data) iterator.next();
 		String userid = task.getValue("completedby");
-		if (task.getValue("projectdepartment") == null) {
+		if (task.getValue("projectdepartment") == null)
+		{
+			log.info("No projectdepartment on " + task.getName());
 			continue;
 		}
 		Category cat = archive.getCategory(task.getValue("projectdepartment"));
 		Double tasktotal = cat.getValue("goalpoints");
-		if (tasktotal == null) {
-			tasktotal = 0.0;
+		if (tasktotal == null || tasktotal == 0) {
+			tasktotal = 10;
 		}
 		
 		Map<String, List> currentuser = usersupdated.get(userid);
@@ -94,6 +98,8 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 		}
 		
 		usertotal = usertotal + tasktotal;
+		//log.info("Adding $usertotal = $usertotal + $tasktotal  for ${monthInt}");
+
 		if(task.getValue("completedurgent")) {
 			usertotal = usertotal + 10;
 		}
@@ -102,6 +108,7 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 		currentuser.put("year",yearInt);
 		usersupdated.put(userid, currentuser);
 	}
+	//log.info("usersupdated size ${usersupdated.size()} for ${monthInt}" );
 	
 	//Update by user
 	Searcher statementsearcher = archive.getSearcher("currencytransfer");
@@ -131,8 +138,11 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 				row.setValue("paymententitydesttype", "user");
 				row.setValue("currencytransferstatus", "2");
 				row.setValue("currencytype", "2");
-				row.setValue("name", start.toString() + " - "  + onemonth.toString());
-				row.setValue("date", today.getTime());
+				row.setValue("expensetype", "2");
+				String dates = DateStorageUtil.getStorageUtil().formatForStorage(start);
+				String endate = DateStorageUtil.getStorageUtil().formatForStorage(onemonth);
+				row.setValue("name", "$dates - $endate" );
+				row.setValue("date", onemonth);
 				statementsearcher.saveData(row);
 			}
 			
