@@ -64,7 +64,7 @@ class DataModule {
   }
 
 
-  Future<emData> loadData(String id) async{
+  Future<emData?> loadData(String id) async{
     Map <String,dynamic> props = box.get(id);
     if(props != null){
       return emData.fromJson(props);
@@ -79,6 +79,7 @@ class DataModule {
         }
       };
     }
+    return null;
   }
 
 
