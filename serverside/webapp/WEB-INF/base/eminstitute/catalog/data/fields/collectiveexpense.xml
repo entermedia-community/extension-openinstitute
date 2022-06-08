@@ -39,7 +39,7 @@
     </name> 
   </property>    
   
-   <property id="total" index="true" editable="true" stored="true" type="double">
+   <property id="total" index="true" editable="true" stored="true" type="double" required="true">
     <name> 
       <language id="en"><![CDATA[Total Price]]></language> 
     </name> 

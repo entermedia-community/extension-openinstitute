@@ -12,7 +12,7 @@
 			id="saveproject" 
 			action="$apphome/collective/services/expenses/addsave.html" 
 			method="post"
-			class="ajaxform autocloseform"
+			class="ajaxform autocloseform force-validate-inputs"
 			data-targetdivinner="collectivesettingscontent"
 			data-oemaxlevel="1"
 			>
@@ -48,18 +48,5 @@
 	<a class="closemodal btn btn-sm btn-secondary" style="margin-left:10px;">[[Cancel]]</a> 
 	</div>
 </form>
-<script type="text/javascript">
-var form = document.getElementById('saveproject');
-	 $(form).validate({
-		  rules: {
-		    "currencytype.value": {
-		      required: true
-		    },
-		    "total.value": {
-			      required: true,
-			      number: true
-			    }
-		  }
-	 });
-</script>
+
 </div>
