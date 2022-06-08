@@ -18,8 +18,4 @@ class emFeed{
         properties[id] = id;
         return properties;
     }
-
-
-
-
 }

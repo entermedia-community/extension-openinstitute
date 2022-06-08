@@ -11,18 +11,29 @@
 	#set($tables = $collectionsupdated.get($collectionid))
 	#set( $collectionfull = $mediaarchive.getCachedData("librarycollection",$collectionid) )
 	<div style="margin-bottom:20px;">
-		<h3 style="background-color:#efefef; padding:5px; margin:0;">
-		<a href="$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid">$collectionfull.getName()</a></h3>
+		<h2 style="padding:5px 0; margin:0;">
+		[[Project]]: <a href="$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid">$collectionfull.getName()</a></h2>
 		#foreach($tableid as $tables.keySet())
 			#set($tableitems = $tables.get($tableid)) 
-
+			
+			#if($tableid=="tickets")
+				<h3 style="padding:5px 0; margin:0;">[[Tickets]]</h3>
+			#elseif($tableid=="tasks")
+				<h3  style="padding:5px 0; margin:0;">[[Tasks]]</h3>
+			#elseif($tableid=="expenses")
+				<h3 style="padding:5px 0; margin:0;">[[Expenses]]</h3>
+			#end
 			$tableitems.size() $tableid [[created since]] $!since<br>
+			#set($odd = false)
 			
 			#foreach($data as $tableitems)
 				#set($row = $data.get("data"))
+				#set($bgcolor = "#f8f8f8")
+				###TICKETS
+			
 				#if($tableid=="tickets")
 					#set($ticketurl = "$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid=$!row.getId()")
-					#set($bgcolor = "#f8f8f8")
+					
 					#if($row.projectstatus == "critical")
 						#set($bgcolor = "beige!important")
 					#end
@@ -49,21 +60,51 @@
 						 </div>
 					 #end
 					 </div>
+					 
+				###TASKS
+				
+				
 				#elseif($tableid=="tasks")
 					#set($ticket = $data.get("ticket"))
 					#set($ticketurl = "$!siteroot$applink/collective/goals/priorities/index.html?collectionid=$!collectionid&opengoalid=$!ticket.getId()")
-					#set($bgcolor = "#f8f8f8")
+
 					#if($ticket.projectstatus == "critical")
 						#set($bgcolor = "beige!important")
 					#end
 					#set( $tree =  $mediaarchive.getCategory($row.projectdepartment))
-					<div style="padding:10px; margin-bottom:10px; background-color: $bgcolor;">
+					<div style="padding:10px; margin-bottom:5px; background-color: $bgcolor;">
 					[[Ticket]]: <a href="$ticketurl">
 						<strong>#$!ticket.ticketnumber $!ticket.getName()</strong> 
 					</a><br>
 					<strong>$!row.comment</strong> - $!tree [$!mediaarchive.getData("taskstatus", $row.taskstatus)]
 					</div>
+					
+				###EXPENSES
+				
+				
+				#elseif($tableid=="expenses")
+					#set($expenseurl= "$!siteroot$applink/collective/services/expenses/index.html?collectionid=$!collectionid")
+					
+					#if($odd)
+						#set($bgcolor = "#fffff")
+					#end
+					<div style="padding:5px 10px; margin-bottom:0px; background-color: $bgcolor; border-bottom:1px solid #e1e1e1;">
+						<table style="width:100%">
+						<tr>
+							<td style="width: 20%;"><a href="$expenseurl">$!mediaarchive.getCachedData("collectiveproject", $row.collectiveproject)</a></td>
+                        	<td>
+                        		<a href="$expenseurl">$!mediaarchive.getCachedData("expensetype", $row.expensetype)</a>
+                        		#if($row.ispaid == true)&nbsp;&nbsp;<strong>([[Paid]])</strong> #end
+                        	</td>
+                        	<td style="text-align:right; width: 20%;">
+                        		$!context.doubleToMoney($!row.total, 2) $!mediaarchive.getCachedData("currencytype", $row.currencytype)
+                        		
+                        	</td>
+						 	</tr>
+						</table>
+					</div>
 				#end
+				#set($odd = !$odd)
 			#end
 		#end
 	</div>
