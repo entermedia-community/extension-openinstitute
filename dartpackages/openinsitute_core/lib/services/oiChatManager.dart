@@ -17,6 +17,8 @@ OpenI get oi {
 
 class oiChatManager {
 
+  List fieldProjectChatChangeListeners;
+
 
 
   Future<List> getUserProjects() async {
@@ -46,6 +48,24 @@ class oiChatManager {
 
 
 
+  }
+
+  /**
+   * TODO: Create a call back
+   */
+  void addProjectChatChangeListener(ChatUiListener inListener)
+  {
+    fieldProjectChatChangeListeners.add(inListener);
+  }
+
+  /**
+   * Firebase can call this when it sees that a chat event came in
+   * so we can invalidate our local cache and update our list of chats
+   */
+  void chatMessageEdited(String inMessageId, String inUserId) async {
+    var box =  await getBox("oiChatManagerCache");
+
+    //fieldProjectChatChangeListeners;
   }
 
   Future<List> getProjectChatMessages(String inProjectId)  async {
@@ -87,3 +107,14 @@ class oiChatManager {
        }
   }
 
+void saveChat(oiChatMessage inMessage)
+{
+  //
+  //TODO; Call this part in an async way
+  final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/savemessage.json', params) as Map?;
+
+  //TODO: How do I create emChatMessages from json?
+  List<oiChatMessage> messages =
+  responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
+
+}

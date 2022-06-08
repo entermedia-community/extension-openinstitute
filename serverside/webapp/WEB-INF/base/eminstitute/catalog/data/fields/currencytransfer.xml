@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<properties> 
- 
+<properties beanname="dataSearcher"> 
+
 
   <property id="id" index="true" filter="false" internalfield="true" editable="true" stored="true" sortable="true" keyword="false">Id
     <name> 
@@ -14,7 +14,7 @@
   
    <property id="name" index="true" stored="true" editable="true">
 		<name>
-			<language id="en"><![CDATA[Label]]></language>
+			<language id="en"><![CDATA[Note]]></language>
 		</name>
 	</property>
     <property id="date" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
@@ -34,30 +34,61 @@
 			<language id="fr"><![CDATA[Propriétaire]]></language>
 		</name>
 	</property>
-	
-   <property id="currencytypedest" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
+
+   <property id="currencytransferstatus" index="true" editable="true" stored="true"  datatype="list" listid="currencytransferstatus" defaultvalue="1">
     <name> 
-      <language id="en"><![CDATA[Currency Type Dest]]></language> 
+      <language id="en"><![CDATA[Transfer Status]]></language> 
     </name> 
   </property>  
 	
-   <property id="currencytypesource" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
+   <property id="paymententitysourcetype" index="true" editable="true" stored="true"  datatype="list" listid="paymententitytype" defaultvalue="1">
     <name> 
-      <language id="en"><![CDATA[Currency Type Source]]></language> 
-    </name> 
-  </property>  
- 
-   <property id="paymententitysource" index="true" editable="true" stored="true"  datatype="list" listid="paymententity" defaultvalue="1">
-    <name> 
-      <language id="en"><![CDATA[Payment Source]]></language> 
+      <language id="en"><![CDATA[Source Type]]></language> 
     </name> 
   </property> 
+   <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
+    <name> 
+      <language id="en"><![CDATA[Currency Type]]></language> 
+    </name> 
+  </property>  
+
+   <property id="paymententitysource" index="true" editable="true" stored="true"  datatype="list" listfilterid="paymententitysourcetype" viewtype="userprojectcampaignpicker" >
+    <name> 
+      <language id="en"><![CDATA[Source]]></language> 
+    </name> 
+  </property> 
+  <property id="expensetype" index="true" editable="true" stored="true"  datatype="list" listid="expensetype">
+    <name> 
+      <language id="en"><![CDATA[Expense Type]]></language> 
+    </name> 
+  </property>    
    
-   <property id="paymententitydest" index="true" editable="true" stored="true"  datatype="list" listid="paymententity" defaultvalue="1">
+   <property id="paymententitydesttype" index="true" editable="true" stored="true"  datatype="list" listid="paymententitytype" defaultvalue="1">
     <name> 
-      <language id="en"><![CDATA[Payment Destination]]></language> 
+      <language id="en"><![CDATA[Type]]></language> 
     </name> 
   </property> 
+   <property id="paymententitydest" index="true" editable="true" stored="true"  datatype="list" listfilterid="paymententitydesttype" viewtype="userprojectcampaignpicker" >
+    <name> 
+      <language id="en"><![CDATA[Send To]]></language> 
+    </name> 
+  </property> 
+	
+   <property id="total" index="true" editable="true" stored="true" type="double">
+    <name> 
+      <language id="en"><![CDATA[Amount]]></language> 
+    </name> 
+  </property> 
+
+    <property id="collectiveproject" required="true" 
+ 	index="true" stored="true" editable="true"  type="list"  datatype="list"
+ 	viewtype="collectionproject" searchcomponent="collectionproject" > 
+    <name> 
+      <language id="en"><![CDATA[Topic]]></language>  
+    </name> 
+  </property> 
+
+
   
   
 </properties>

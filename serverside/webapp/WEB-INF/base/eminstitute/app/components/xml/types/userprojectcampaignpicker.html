@@ -1,0 +1,24 @@
+#set ($listfilterid = $detail.get("listfilterid") )   ##local field that we depend on to get the value, get the value
+
+	<script type="text/javascript">
+		##register for changes to the filter
+		##when it changes load up the correct html page that has a picker the pickers can only pick allowed source types?
+		
+	</script>
+
+
+	<div id="collectionpickerinner" class="librarycollectionpicker">
+		<div class="collectionpicker" style="min-width:200px">
+						#set( $text = "[[Search]]" )
+						#if( $selecteduser)
+							#set( $text = "$selecteduser.toString()" )
+						#end
+						<select name="${detail.getId()}.value" id="userid" 
+							class="listautocomplete" 
+							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
+							data-searchfield="name" data-searchtype="user"  
+							data-placeholder="$text" data-sortby="name">
+						</select>
+				</div>
+
+	</div>

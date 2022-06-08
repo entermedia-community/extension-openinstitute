@@ -23,6 +23,7 @@ import org.openedit.data.QueryBuilder;
 import org.openedit.data.Searcher;
 import org.openedit.hittracker.HitTracker;
 import org.openedit.hittracker.ListHitTracker;
+import org.openedit.hittracker.SearchQuery;
 
 public class FinanceManager  implements CatalogEnabled
 {
@@ -88,11 +89,8 @@ public class FinanceManager  implements CatalogEnabled
 		addDateRange(query,"date",inDateRange);
 		HitTracker hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		Collection pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
 		
-		
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
@@ -118,9 +116,7 @@ public class FinanceManager  implements CatalogEnabled
 		addDateRange(query,"paymentdate",inDateRange);
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
@@ -148,10 +144,8 @@ public class FinanceManager  implements CatalogEnabled
 		addDateRange(query,"invoicepaidon",inDateRange);
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
-		pageOfHits = hits.getPageOfHits();
-		pageOfHits = new ArrayList(pageOfHits);
 		
-		for (Iterator iterator = pageOfHits.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			if( currency == null)
@@ -352,6 +346,14 @@ public class FinanceManager  implements CatalogEnabled
 			
 		}
 		//summarize by ExpenseType
+		rebuildByExpenseType(bycurrency);
+			
+		return bycurrency;
+	}
+
+
+	protected void rebuildByExpenseType(HashMap<String, Object> bycurrency)
+	{
 		String currentcurrency = "";
 		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
 			Collection data = (Collection) set.getValue();
@@ -376,8 +378,6 @@ public class FinanceManager  implements CatalogEnabled
 			bycurrency.replace(set.getKey(), currenttype);
 			
 		}
-			
-		return bycurrency;
 	}
 	
 		
@@ -540,5 +540,64 @@ public class FinanceManager  implements CatalogEnabled
 		}
 		
 	}
-	
+
+	public HashMap<String, Object>   getTransfersByCurrencyForEntity(String inEntityId, DateRange inDateRange)
+	{
+		HitTracker hits = getAllTransfersForEntity(inEntityId, inDateRange);
+
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
+		{
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+			}
+			String source = data.get("paymententitysource");
+			if( source.equals(inEntityId))
+			{
+				currencytotal = currencytotal - (Double)data.getValue("total");
+			}
+			else
+			{
+				currencytotal = currencytotal + (Double)data.getValue("total");
+			}
+			bycurrency.replace(currency, currencytotal);
+		}
+		
+		return bycurrency;
+	}
+
+	public Map  getTransfersByExpensesForEntity(String inEntityId, DateRange inDateRange)
+	{
+		HashMap<String, Object>  bycurrency = getTransfersByCurrencyForEntity(inEntityId,inDateRange);
+		rebuildByExpenseType(bycurrency);
+		return bycurrency;
+	}
+
+	public HitTracker getAllTransfersForEntity(String inEntityId, DateRange inDateRange)
+	{
+		Searcher incomesSearcher = getMediaArchive().getSearcher("currencytransfer");
+		QueryBuilder query = incomesSearcher.query();
+		addDateRange(query,"date",inDateRange);
+		
+		SearchQuery finalq = query.getQuery();
+
+		QueryBuilder query2 = incomesSearcher.query();
+		query2.exact("paymententitysource",inEntityId);
+		query2.exact("paymententitydest",inEntityId);
+		query2.or();
+
+		finalq.addChildQuery(query2.getQuery());
+		
+		HitTracker hits = incomesSearcher.search(finalq);
+		hits.setHitsPerPage(1000);
+		return hits;
+	}
+
 }
