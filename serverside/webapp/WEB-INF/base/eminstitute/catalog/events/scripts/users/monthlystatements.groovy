@@ -130,6 +130,8 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 				row.setValue("paymententitydest", userid);
 				row.setValue("paymententitydesttype", "user");
 				row.setValue("currencytransferstatus", "2");
+				row.setValue("currencytype", "2");
+				row.setValue("name", start.toString() + " - "  + onemonth.toString());
 				row.setValue("date", today.getTime());
 				statementsearcher.saveData(row);
 			}

@@ -45,7 +45,9 @@
                                   </td>
 			                      
                                   <td>#esc($hit.name)</td>
-                                  <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: right; width:140px;">
+                                  	$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)
+                                  </td>
 			                      <td style="text-align: center">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
@@ -54,7 +56,14 @@
 			                                    data-hidefooter="true"
 			                                    title="[[Edit Transaction]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
 			                                    ><i class="fa fa-edit"></i></a>
-			                                    
+			                            #end
+			                            #if($hit.currencytype=="2")
+			                            	 <a
+			                                    href="$applink/users/tasks/report.html?OPERATION=BETWEEN&dateXXXX---StandardSearch"
+			                                    class="btn btn-xs btn-secondary"
+			                                    data-hidefooter="true"
+			                                    title="[[View Transaction]]"
+			                                    ><i class="fa fa-view"></i></a>
 			                            #end
 			                      </td>
                     </tr>
