@@ -19,10 +19,10 @@ class oiChatManager {
 
 
 
-  Future<List> getUserProjects() async {
+  Future<List> getUserProjects(int page) async {
 
     Map params = {
-      "page": "1",
+      "page": "$page",
       "hitsperpage": "200"
     };
 
@@ -39,9 +39,10 @@ class oiChatManager {
     //TODO: How do I create emChatMessages from json?
     List<emData> messages =
     responded!["results"]!.map<emData>((json) => emData.fromJson(json)).toList();
-
+    box.put("pages", responded["response"]["pages"]);
     results.clear();
     results.addAll(messages); //TODO: This should reload the UI with new entries?
+    box.put("viewprojects",results);
     return Future.value(results);
   }
 
@@ -84,12 +85,10 @@ class oiChatManager {
        results = <oiChatMessage>[]; //Make one list that is cached
        box.put(inProjectId,results);
      }
-
     final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/savemessage.json', params) as Map?;
-
      List<oiChatMessage> messages =
      responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
-
+     box.put("pages", responded["response"]["pages"]);
      results.clear();
      results.addAll(messages);
        box.put(inProjectId,results);
