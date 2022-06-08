@@ -17,7 +17,7 @@ OpenI get oi {
 
 class oiChatManager {
 
-  List fieldProjectChatChangeListeners;
+  List? fieldProjectChatChangeListeners;
 
 
 
@@ -51,10 +51,10 @@ class oiChatManager {
   /**
    * TODO: Create a call back
    */
-  void addProjectChatChangeListener(ChatUiListener inListener)
-  {
-    fieldProjectChatChangeListeners.add(inListener);
-  }
+  // void addProjectChatChangeListener(ChatUiListener inListener)
+  // {
+  //   fieldProjectChatChangeListeners.add(inListener);
+  // }
 
   /**
    * Firebase can call this when it sees that a chat event came in
@@ -124,7 +124,7 @@ class oiChatManager {
        }
   }
 
-void saveChat(oiChatMessage inMessage)
+void saveChat(oiChatMessage inMessage, Map params) async
 {
   //
   //TODO; Call this part in an async way
