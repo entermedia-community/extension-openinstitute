@@ -12,6 +12,7 @@
 	<property id="featured" />
 	<property id="paymentstatus" />
 	<property id="recurring" />
+	<property id="nextbillon" />
 	<property id="billingstatus" />
 	<property id="recurringperiod" />
 </properties>

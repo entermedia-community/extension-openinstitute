@@ -3,14 +3,23 @@
 <div class="container" id="financesdashboard">
 
 <div class="row">
-<div class="col-md-8">
-    <h1>[[Account Balance]]</h1>
+<div class="col-md-5">
+    <h1>[[Project Wallet]]</h1>
 </div>
-<div class="col-md-4">    
-		         #if( $caneditcollection )
+<div class="col-md-7">    
+    #if( $XXXXcaneditcollection )
          <a
-          href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Send Payment]]</a>
+          href="$applink/collective/services/transfers/send.html?collectionid=$collectionid"
+          class="emdialog btn btn-sm btn-primary">[[Send Money]]</a>
+
+         <a
+          href="$applink/users/transfers/request.html"
+          class="emdialog btn btn-sm btn-primary">[[Request Money]]</a>
+          
+          <a
+          href="$applink/users/transfers/request.html"
+          class="emdialog btn btn-sm btn-primary">[[Receive Money]]</a>
+
     #end      
   </div> 
 </div>		    

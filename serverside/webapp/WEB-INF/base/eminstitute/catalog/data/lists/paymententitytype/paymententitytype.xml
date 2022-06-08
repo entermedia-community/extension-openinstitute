@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <data id="user"> 
+    <name> 
+      <language id="en"><![CDATA[Person]]></language> 
+      <language id="es"><![CDATA[Persona]]></language> 
+    </name> 
+  </data>   
+     
+  <data id="librarycollection"> 
+    <name> 
+      <language id="en"><![CDATA[Project]]></language> 
+      <language id="en"><![CDATA[Proyecto]]></language> 
+    </name> 
+  </data>   
+
+  <data id="communitytag"> 
+    <name> 
+      <language id="en"><![CDATA[Campaign]]></language> 
+    </name> 
+  </data>   
+     
+</root>

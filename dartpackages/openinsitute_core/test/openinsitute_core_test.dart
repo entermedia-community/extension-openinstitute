@@ -55,10 +55,10 @@ void main() {
       }
     };
 
-    List<emData> listsearch = await (await oi.datamanager.getSearcher("purpose")).getRemoteData(simplesearch);
+    List<emData> listsearch = await (await oi.datamanager.getDataModule("purpose")).getRemoteData(simplesearch);
     expect(listsearch.length > 0, true);
 
-    List<emData> checkcache = (await oi.datamanager.getSearcher("purpose")).getAllHits();
+    List<emData> checkcache = (await oi.datamanager.getDataModule("purpose")).getAllHits();
 
 
 
@@ -110,7 +110,13 @@ void main() {
 
 
   });
+  test('Test Module Crud Operations', () async {
+    DataModule testmodule = await oi.dataManager!.getDataModule("purpose");
+    HitTracker hits = testmodule.getAllHits();
+    emData data = new emData();
 
+
+  });
 
   test('Test Project CHat loading', () async {
 
@@ -127,6 +133,9 @@ void main() {
     var messages = await oi.chatManager?.getProjectChatMessages(projectid);
     expect(messages!.length > 5, true);
 
+    //Create new chat
+    
+    oi.chatManager?.saveMessage()
   });
 
 

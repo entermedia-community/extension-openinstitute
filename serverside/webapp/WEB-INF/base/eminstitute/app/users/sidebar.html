@@ -79,8 +79,8 @@
 		#if($canviewsettings)
 			#if($canviewsettings)
 	    	<ul class="sidebar-list">
-			<li class="#if($appsection == "completed") current #end">
-			<a href="$sitelink/app/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
+			<li class="#if($appsection == "wallet") current #end">
+			<a href="$sitelink/app/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
 			</li>
 			<li class="#if($appsection == "mytasks") current #end" >
 				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>

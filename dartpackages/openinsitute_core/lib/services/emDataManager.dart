@@ -20,7 +20,7 @@ class DataManager {
     Hive.initFlutter();
   }
 
-  Future<DataModule> getSearcher(String inSearchType) async {
+  Future<DataModule> getDataModule(String inSearchType) async {
     DataModule? searcher = searchers[inSearchType];
     if (searcher == null) {
       searcher = await DataModule.createDataModule(inSearchType);
@@ -63,16 +63,25 @@ class DataModule {
     }
   }
 
-  Future<Map<String, dynamic>> hiveTest() async {
-    Map<String, dynamic> map = {
-      "ian": "washere",
-      "bob": {"was": "alsohere"}
-    };
-    var box = await Hive.openBox("test");
-    box.put("test", map);
 
-    return box.get("test");
+  Future<emData> loadData(String id) async{
+    Map <String,dynamic> props = box.get(id);
+    if(props != null){
+      return emData.fromJson(props);
+    } else{
+      Map simplesearch = {
+        "page": "1",
+        "hitsperpage": "20",
+        "query": {
+          "terms": [
+            {"field": "id", "operation": "matches", "value": "*"}
+          ]
+        }
+      };
+    }
   }
+
+
 
   List<emData> getAllHits() {
     List<emData> list = [];

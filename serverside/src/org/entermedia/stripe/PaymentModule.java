@@ -470,18 +470,39 @@ public class PaymentModule extends BaseMediaModule
 	
 	public void createProductService(WebPageRequest inReq) {
 		MediaArchive mediaArchive = getMediaArchive(inReq);
-		Searcher librarysearcher = mediaArchive.getSearcher("collectiveproduct");
+		Searcher collectiveproductsearcher = mediaArchive.getSearcher("collectiveproduct");
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 0);
 		today.set(Calendar.MINUTE, 0);
 		today.set(Calendar.SECOND, 0);
 		
-		Data saved = librarysearcher.createNewData();
-		librarysearcher.updateData(inReq, inReq.getRequestParameters("field"), saved);
+		Data saved = collectiveproductsearcher.createNewData();
+		collectiveproductsearcher.updateData(inReq, inReq.getRequestParameters("field"), saved);
 		saved.setValue("createdon", today.getTime());
 		saved.setValue("billingstatus", "active");
 		saved.setValue("nextbillon", today.getTime());
-		librarysearcher.saveData(saved, null);
+		collectiveproductsearcher.saveData(saved, null);
+	}
+	
+	public void copyProductService(WebPageRequest inReq) {
+		MediaArchive mediaArchive = getMediaArchive(inReq);
+		Searcher collectiveproductsearcher = mediaArchive.getSearcher("collectiveproduct");
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		
+		String sourceId = inReq.getRequestParameter("id");
+		
+		Data source = (Data) collectiveproductsearcher.searchById(sourceId);
+		
+		Data saved = (Data) collectiveproductsearcher.cloneData(source);
+		saved.setValue("createdon", today.getTime());
+		saved.setValue("billingstatus", "new");
+		saved.setValue("nextbillon", today.getTime());
+		collectiveproductsearcher.saveData(saved, null);
+		inReq.putPageValue("data", saved);
+		
 	}
 	
 	public void toggleAutoPay(WebPageRequest inReq) {

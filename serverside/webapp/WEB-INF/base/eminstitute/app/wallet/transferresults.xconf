@@ -1,0 +1,10 @@
+<page>
+  <page-action name="PageValue.loadPageVariable" bean="mathutil" />
+
+  <path-action name="DataEditModule.searchFields" >
+		<property name="searchtype">currencytransaction</property>
+		<property name="hitsname">transfers</property>
+		
+  </path-action>
+
+</page>

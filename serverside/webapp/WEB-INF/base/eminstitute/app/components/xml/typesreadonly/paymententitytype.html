@@ -1,0 +1,21 @@
+
+#ifnull( $val )
+	#set( $val = $context.getRequestParameter("val"))
+#end
+#if( $val )
+	$!mediaarchive.getCachedData("module", $val)
+	#set( $targetid = $context.getRequestParameter("targetid"))
+	
+	#if($val == "user")
+	
+	: $!mediaarchive.getCachedData("user", $targetid)
+	
+	#elseif($val == "librarycollection")
+	
+	: $!mediaarchive.getCachedData("librarycollection", $targetid)
+	
+	#elseif($val == "communitytag")
+	
+	: $!mediaarchive.getCachedData("communitytag", $targetid)
+	#end
+#end	
