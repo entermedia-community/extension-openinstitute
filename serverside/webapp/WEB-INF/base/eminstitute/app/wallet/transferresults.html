@@ -8,10 +8,11 @@
                                   <th>[[Collection]]</th>
                                   #end
                                   <th>[[Date]]</th>
-                                  <th>[[Topic]]</th>
+                                  <th>[[From]]</th>
+                                  <th>[[To]]</th>
                                   <th>[[Type]]</th>
-                                  <th>[[Destination]]</th>
                                   <th>[[Label]]</th>
+                                  <th>[[Topic]]</th>
                                   <th>[[Total]]</th>
                                   <th></th>
                               </tr>
@@ -36,15 +37,20 @@
                                   </td>
                                   #end
                                   <td>$!context.getDate($hit.date)</td>
-                                  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
-                                  <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
+                                  <td>
+								  #set( $type = false)
+                                  #set( $type = $hit.paymententitysourcetype)
+                                  $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitysource")
+                                  </td>
                                   <td>
 								  #set( $type = false)
                                   #set( $type = $hit.paymententitydesttype)
                                   $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitydest")
                                   </td>
+                                  <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
 			                      
                                   <td>#esc($hit.name)</td>
+                             	  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                                   <td style="text-align: right; width:140px;">
                                   	$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)
                                   </td>

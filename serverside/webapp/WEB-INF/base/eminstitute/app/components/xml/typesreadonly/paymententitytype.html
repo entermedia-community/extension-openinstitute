@@ -2,20 +2,20 @@
 #ifnull( $val )
 	#set( $val = $context.getRequestParameter("val"))
 #end
-#if( $val )
-	$!mediaarchive.getCachedData("module", $val)
+#if( $val ) 
 	#set( $targetid = $context.getRequestParameter("targetid"))
 	
 	#if($val == "user")
 	
-	: $!mediaarchive.getCachedData("user", $targetid)
+	User: $!mediaarchive.getCachedData("user", $targetid)
 	
-	#elseif($val == "librarycollection")
-	
-	: $!mediaarchive.getCachedData("librarycollection", $targetid)
+	#elseif($val == "project")
+	$!mediaarchive.getCachedData("librarycollection", $targetid)
 	
 	#elseif($val == "communitytag")
 	
-	: $!mediaarchive.getCachedData("communitytag", $targetid)
+	Campaign: $!mediaarchive.getCachedData("communitytag", $targetid)
+	#else
+	[[Work Credit]]
 	#end
 #end	

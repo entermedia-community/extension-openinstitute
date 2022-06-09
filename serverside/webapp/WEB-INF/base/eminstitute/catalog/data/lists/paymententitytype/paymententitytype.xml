@@ -20,5 +20,10 @@
       <language id="en"><![CDATA[Campaign]]></language> 
     </name> 
   </data>   
-     
+    
+  <data id="system"> 
+    <name> 
+      <language id="en"><![CDATA[Work Credits]]></language> 
+    </name> 
+  </data>   
 </root>
