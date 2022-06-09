@@ -247,7 +247,14 @@ h1 {
 	padding:15px 0 0 28px;
 	font-weight: 700;
 }
-
+.communitycontainer-header h3 a {
+	color:#fff;
+	text-decoration: none;
+}
+.communitycontainer-header h3 a:hover {
+	color:#ccc;
+	text-decoration: none;
+}
 .communitycontainer-header:after, .communitycontainer-header:before {
     content: '';
     display: block;
@@ -269,7 +276,7 @@ top: -40px;
 	color:#fff;
 	border-radius: 20px;
 	border-top-left-radius:0;
-	margin-bottom:30px;
+	margin-bottom:40px;
 	padding:25px 25px;
 }
 
@@ -318,7 +325,9 @@ top: -40px;
 .card-collections a:hover .collectionbox, .card-collections a:hover{
 	color: #1D5655;
 }
-
+.card-collections a:hover .card-collections-thumb {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 30%);
+}
 
 .collectiveheadermenu .navbar-collective li {
 	float:left;
