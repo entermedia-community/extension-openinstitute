@@ -1,13 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Paytone+One');
-@import url('https://fonts.googleapis.com/css?family=Oswald');
-
 html, body, #application {
     height: 100%;
 }
 body {
   overflow-x: hidden;
   max-width:100%;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
   font-size: .9rem;
   background-color: #E9ECEF; 
 }
