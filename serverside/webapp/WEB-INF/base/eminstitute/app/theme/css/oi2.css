@@ -60,7 +60,7 @@ a.badge-success:focus, a.badge-success:hover {
     background-color: #409D90;
     border-color: #409D90;
 }
-.btn-success:focus, a.btn-success:hover {
+.btn-success:focus, .btn-success:hover {
 	color: #fff!important;
     background-color: #1D5655;
     border-color: #1D5655;
@@ -70,7 +70,7 @@ a.badge-success:focus, a.badge-success:hover {
     background-color: #A5DAD3;
     border-color: #A5DAD3;
 }
-.btn-secondary:focus, a.btn-secondary:hover {
+.btn-secondary:focus, .btn-secondary:hover {
 	color: #fff!important;
     background-color: #409D90;
     border-color: #409D90;
@@ -143,6 +143,13 @@ li.menu-subheader {
 .chatterbox-write .chatterbox-text {
     width: calc(100% - 60px);
 }
+
+
+.login-area .container {
+	background-color: #fff;
+	padding:10px 15px 30px;
+}
+
 
 
 .oihometext,
