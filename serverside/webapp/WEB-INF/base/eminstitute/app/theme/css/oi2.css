@@ -15,9 +15,6 @@ body {
 .collectivebanner, .collective-sidebar, .collaborate-sidebar, .maincontent, .community-maincol, .feedupload, .feed-topics, .feedupload-uploader, .profile-sidebar, .contentcolumn, .collectivemaincol, .collective-grid-logo, .shadowbox {
 	box-shadow: none;
 }
-.btn-sm {
-    line-height: 1;
-}
 
 .badge {
     padding: 0.3em 0.4em;
@@ -87,18 +84,21 @@ a.badge-success:focus, a.badge-success:hover {
     border-bottom:0 none;
     color:#1D5655;
     padding:0;
+    margin:0 0 20px;
 }
 
-tr.emborderhover td, .table-hover>tbody>tr:hover, .emsettingslist li:hover, .emsettingslist li.current, .emsettingslist li:nth-of-type(even):hover, .search-list li.current a.search-href, .sidebar-list li.current, .search-list li:hover, .sidebar-list li:hover, .sidebar-collection-list li.current:hover, .emtree .checkbox .field, .emtree .treerow:hover, .emtree .treerow.selected, .emtree .treerow.selected:hover, .emtree .cat-current, .filters-sidebar li:hover, .filters-sidebar-selected li:hover, .list-hover:hover, ul.list-group.list-group-hover li:hover, .emrowselected, .table-striped tr.emrowselected:nth-of-type(odd), .uploadcollection {
+tr.emborderhover td, .table-hover>tbody>tr:hover, .emsettingslist li:hover, .emsettingslist li.current, .emsettingslist li:nth-of-type(even):hover, .search-list li.current a.search-href, .sidebar-list li.current, .search-list li:hover, .sidebar-list li:hover, .sidebar-collection-list li.current:hover, .emtree .checkbox .field, .emtree .treerow:hover, .emtree .treerow.selected, .emtree .treerow.selected:hover, .emtree .cat-current, .filters-sidebar li:hover, .filters-sidebar-selected li:hover, .list-hover:hover, ul.list-group.list-group-hover li:hover, .emrowselected, .table-striped tr.emrowselected:nth-of-type(odd), .uploadcollection,
+.collectivesettings-menu li.current a, .collectivesettings-menu li a:hover {
     background-color: #dcf7f3!important;
 }
 
-h1 {
+h1, h2 {
 	color:#1D5655;
 }
 
 
-.sidebar-box-header {
+.sidebar-box-header, .collectivesettings-menu h3,
+li.menu-subheader {
 	background-color: #d4dbda;
 	color:#1D5655;
 }
@@ -394,19 +394,18 @@ top: -40px;
 
 .collectiveheader {
 	width: calc(100% - 20px);
-	height:130px;
+	height:140px;
 	margin:0 10px 20px;
 }
 
 .collectiveheadermenu {
-	
 	padding-top:10px;
 	position:absolute;
 }
 
 .project-title h1 {
 	font-weight: bold;
-	font-size:1.4rem;
+	font-size:1.8rem;
 	line-height:1.2;
 	margin:0 0 5px 0;
 }
@@ -435,7 +434,7 @@ top: -40px;
 	margin-bottom:30px;
 }
 .collective-sidebar {
-	padding:15px 10px;
+	padding:10px 10px;
 	margin:0 10px 0;
 }
 
@@ -465,11 +464,12 @@ top: -40px;
 	left:95px;
 	}
 	.project-thumb {
-	width: 105px;
-	height: 105px;
-	border:6px solid #C8C446;
+	width: 115px;
+	height: 115px;
+	border:3px solid #C8C446;
 	}
 	.project-title {
+	margin-bottom:10px;
 	font-size:1.6rem;
 	padding-left:5px;
 	height: 70px;
@@ -488,7 +488,8 @@ top: -40px;
 	}
 	.collectiveheadermenu .navbar-collective .nav-link {
 		padding:0.2rem .5rem;
-	font-size:0.95rem;
+		font-size:0.95rem;
+		font-weight: bold;
 	}
 	.community-maincol  {
 		margin:0 20px 20px 0;
@@ -507,7 +508,6 @@ top: -40px;
 li.menu-subheader {
 	margin:0 0 0px 0;
 	padding:10px 15px;
-	background-color: #ddd;
 	font-weight: bold;
 }
 
@@ -530,7 +530,6 @@ li.menu-subheader {
 .collectivesettings-menu li.current a,
 .collectivesettings-menu li a:hover {
 	text-decoration: none;
-	background-color: #f4f7f0;
 	color:#000;
 }
 
