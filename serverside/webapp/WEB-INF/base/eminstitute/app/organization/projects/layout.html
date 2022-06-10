@@ -81,7 +81,7 @@
 		<div class="col-3 col-collectivesidebar">
 			<div class="collective-sidebar">
 				#set($collectivehits = $mediaarchive.query("librarycollection").exact("library",$library.id).sort("creationdate").search($context))
-				<h2>$library Projects</h2>
+				<h3 style="text-align: center;">$library Projects</h3>
 					#if( $caneditlibrary)
 					<div style="padding:10px 0 30px; text-align:center">
 						<a href="$applink/browse/add/addnew.html?libraryid=$library.getId()" title="[[Start New Project]]" class="btn btn-primary">[[Add a Project]]</a>	

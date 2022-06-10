@@ -2,6 +2,8 @@
 	#if($collective.assetportrait)
 		#set($asset = $mediaarchive.getAsset($collective.assetportrait))
 		#set($link = $mediaarchive.asLinkToPreview($asset,"image550x350.jpg"))
+		#else
+					#set($link = "$applink/theme/images/OI_flower.png")
 	#end
 <div class="card-collections">
 <a class="pick-item" href="$applink/collective/channel/${collective.id}/#dash($collective.getName()).html" 

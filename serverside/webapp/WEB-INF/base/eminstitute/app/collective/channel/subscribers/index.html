@@ -30,8 +30,8 @@ $pages.include("$apphome/collective/donate/donatesidebar.html",$context)
 #set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
 <h4>
 <div class="float-right">
-<a class="emdialog" style="font-size:.8em;" data-cancelsubmit="true" title="[[View Team]]" href="$applink/collective/channel/subscribers/teamlist.html?collectionid=$librarycol.getId()">
-$team.size()</a>
+<a class="emdialog" style="font-size:.8em;" data-cancelsubmit="true" title="[[View Team]] ($team.size())" href="$applink/collective/channel/subscribers/teamlist.html?collectionid=$librarycol.getId()">
+<i class="fas fa-list"></i></a>
 </div>
 
 <i class="fas fa-users"></i> [[Team]]</h4>

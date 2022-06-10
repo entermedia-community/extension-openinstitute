@@ -80,6 +80,21 @@ a.badge-success:focus, a.badge-success:hover {
     background-color: #C8C446;
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice, .select2-selection__choice {
+    color: #fff;
+    background-color: #1D5655;
+    border-color: #1D5655;
+    cursor:pointer;
+    font-size:0.9em;
+}
+
+.select2-container--default:hover .select2-selection--multiple .select2-selection__choice, .select2-selection__choice {
+    color: #ccc;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 8px;
+}
+
 .sidebarbox h4 {
     border-bottom:0 none;
     color:#1D5655;
@@ -150,6 +165,14 @@ li.menu-subheader {
 	padding:10px 15px 30px;
 }
 
+
+
+
+
+
+.container-feed {
+	padding-top:20px;
+}
 
 
 .oihometext,
