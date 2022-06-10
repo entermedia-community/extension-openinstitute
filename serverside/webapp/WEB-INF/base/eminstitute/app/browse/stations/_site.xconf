@@ -4,5 +4,5 @@
 	<property name="oisection">stations</property>
 
 	<property name="virtual">true</property>
-	<inner-layout>/${applicationid}/browse/stations/layout.html</inner-layout>
+	
 </page>

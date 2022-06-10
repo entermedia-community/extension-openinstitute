@@ -119,6 +119,30 @@
 		<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
 			<a href="$applink/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 		</li>
+		#end
+		</ul>
+		<div class="clearfix"></div>
+		##if($userprojectsids.size() )
+		#if($canviewsettings)
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Tickets]]</div>
+			#if ($canviewsettings)
+				#set($args = "goaltrackerstaff=*")
+			#end
+			
+			<div style="padding:20px 10px 20px;">
+			<a href="$sitelink/app/users/tasks/index.html?$!{args}" class="badge badge-success">[[All]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success">[[Level 1]]</a>
+			<a href="$sitelink/app/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Level 2]]</a>
+			</div>
+		#end
+		##end
+		
+		#if($canviewsettings)
+		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin]]</div>
+		<ul class="sidebar-list" style="margin-bottom:10px;">
+		
+		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
+			<a href="$sitelink/app/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		<li class="#if($appsection == "completed") current #end" >
 			<a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 		</li>
