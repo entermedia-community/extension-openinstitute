@@ -6,7 +6,7 @@
     <h1>[[Your Wallet]]</h1>
 </div>
 <div class="col-md-5">    
-         <a
+ <!--        <a
           href="$applink/wallet/send.html?userid=$selecteduser.getId()"
           class="emdialog btn btn-sm btn-primary">[[Send Money]]</a>
 
@@ -17,7 +17,7 @@
           <a
           href="$applink/users/transfers/request.html"
           class="emdialog btn btn-sm btn-primary">[[Receive Money]]</a>
-          
+ -->           
   </div> 
 </div>		    
 			#set( $netincome = $financeManager.getTransfersByCurrencyForEntity($user.id,$daterange) )
