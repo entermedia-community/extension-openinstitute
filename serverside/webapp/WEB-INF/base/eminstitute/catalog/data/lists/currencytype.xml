@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data id="1"> 
+  <data id="1" exchangetousd="1"> 
     USD
   </data>  
   <data id="2" exchangetousd="1"> 

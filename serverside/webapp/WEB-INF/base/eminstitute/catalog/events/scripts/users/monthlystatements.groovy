@@ -77,6 +77,9 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 	{
 		Data  task = (Data) iterator.next();
 		String userid = task.getValue("completedby");
+		String collectionid = task.getValue("collectionid");
+		String usercollectionid = "${userid}|${collectionid}";
+		
 		if (task.getValue("projectdepartment") == null)
 		{
 			log.info("No projectdepartment on " + task.getName());
@@ -88,7 +91,7 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 			tasktotal = 10;
 		}
 		
-		Map<String, List> currentuser = usersupdated.get(userid);
+		Map<String, List> currentuser = usersupdated.get(usercollectionid);
 		if(currentuser == null) {
 			currentuser = new HashMap();
 		}
@@ -103,10 +106,12 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 		if(task.getValue("completedurgent")) {
 			usertotal = usertotal + 10;
 		}
+		currentuser.put("userid",userid);
+		currentuser.put("collectionid",collectionid);
 		currentuser.put("total",usertotal);
 		currentuser.put("month",monthInt+1);
 		currentuser.put("year",yearInt);
-		usersupdated.put(userid, currentuser);
+		usersupdated.put(usercollectionid, currentuser);
 	}
 	//log.info("usersupdated size ${usersupdated.size()} for ${monthInt}" );
 	
@@ -114,12 +119,17 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 	Searcher statementsearcher = archive.getSearcher("currencytransfer");
 	Calendar today = Calendar.getInstance();
 	if (usersupdated.size()>0) {
-		for (String userid in usersupdated.keySet())
+		for (String usercollectionid in usersupdated.keySet())
 		{
-			Map<String, List> currentuser = usersupdated.get(userid);
+			Map<String, List> currentuser = usersupdated.get(usercollectionid);
+			
+			String userid = usercollectionid.split("\\|")[0];
+			String collectionid = usercollectionid.split("\\|")[1];
 			//search user+month+year
 			
+			
 			Data rowexists = (Data) statementsearcher.query().exact("paymententitydest", userid)
+					.exact("paymententitysource", collectionid)			
 					.exact("generatedbyscript", "monthlystatements")
 					.between("date", start, onemonth)
 					.searchOne(); 
@@ -132,16 +142,28 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 				Data row = statementsearcher.createNewData();
 				row.setValue("total", currentuser.get("total"));
 				row.setValue("generatedbyscript", "monthlystatements");
-				row.setValue("paymententitysourcetype", "system");
-				row.setValue("paymententitysource", "system");
-				row.setValue("paymententitydest", userid);
-				row.setValue("paymententitydesttype", "user");
-				row.setValue("currencytransferstatus", "2");
+				row.setValue("paymententitysourcetype", "user");
+				row.setValue("paymententitysource", userid);
+				row.setValue("paymententitydest", collectionid);
+				row.setValue("paymententitydesttype", "librarycollection");
+				row.setValue("currencytransferstatus", "1"); //Pending
 				row.setValue("currencytype", "2");
 				row.setValue("expensetype", "2");
-				String dates = DateStorageUtil.getStorageUtil().formatForStorage(start);
-				String endate = DateStorageUtil.getStorageUtil().formatForStorage(onemonth);
-				row.setValue("name", "$dates - $endate" );
+				//String dates = DateStorageUtil.getStorageUtil().formatForStorage(start);
+				//String endate = DateStorageUtil.getStorageUtil().formatForStorage(onemonth);
+				Data collection = archive.getCachedData("librarycollection",collectionid);
+				String name = null;
+				if( collection != null )
+				{
+						name = collection.getName()
+				}
+				else
+				{
+					name = collectionid;
+				}
+				int month = monthInt + 1;
+				String dates = "${name} - ${month} / ${yearInt}";
+				row.setValue("name",  dates );
 				row.setValue("date", onemonth);
 				statementsearcher.saveData(row);
 			}

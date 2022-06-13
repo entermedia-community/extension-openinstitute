@@ -9,13 +9,13 @@
      
   <data id="2"> 
     <name> 
-      <language id="en"><![CDATA[Complete]]></language> 
+      <language id="en"><![CDATA[Paid]]></language> 
     </name> 
   </data>   
 
-  <data id="3"> 
+  <data id="cancel"> 
     <name> 
-      <language id="en"><![CDATA[Cancel]]></language> 
+      <language id="en"><![CDATA[Canceled]]></language> 
     </name> 
   </data>   
      

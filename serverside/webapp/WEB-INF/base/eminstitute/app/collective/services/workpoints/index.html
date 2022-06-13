@@ -5,11 +5,11 @@
 #end
 
 
-<div style="padding:10px 20px;">
+<div id="serviceworkarea" style="padding:10px 20px;">
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Transfer]]</a>
+          class="emdialog btn btn-sm btn-primary float-right">[[Pay For Points]]</a>
     #end      
               
 	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
@@ -60,7 +60,7 @@
 	#end
 	
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Transfers]]</h2>
+   		<h2 class="float-left" style="margin:10px 0;">[[Work Points]]</h2>
    		<div style="float:right; width:260px; margin:10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
