@@ -128,8 +128,8 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 			//search user+month+year
 			
 			
-			Data rowexists = (Data) statementsearcher.query().exact("paymententitydest", userid)
-					.exact("paymententitysource", collectionid)			
+			Data rowexists = (Data) statementsearcher.query().exact("paymententitydest", collectionid)
+					.exact("paymententitysource", userid)			
 					.exact("generatedbyscript", "monthlystatements")
 					.between("date", start, onemonth)
 					.searchOne(); 
