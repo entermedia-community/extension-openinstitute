@@ -24,21 +24,7 @@
   </div> 
 </div>		    
 			
-			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
-
-			<table class="table tablefinances" >
-			#foreach( $currencytype in $netincome.keySet())
-				#set($net = $netincome.get($currencytype))
-				<tr>
-				
-				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
-				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
-				<td></td>
-				<td style="width:10%"></td>
-				</tr>
-			#end
-			</table>
-						
+		
 		    
 	<form  id="searchform" 
 		class="autosubmit" 
@@ -99,7 +85,22 @@
 			
 		</div>	
 	</form>
-		    
+	
+		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
+
+			<table class="table tablefinances" >
+			#foreach( $currencytype in $netincome.keySet())
+				#set($net = $netincome.get($currencytype))
+				<tr>
+				
+				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
+				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
+				<td></td>
+				<td style="width:10%"></td>
+				</tr>
+			#end
+			</table>
+							    
 		    
 	<div id="report">
 		    

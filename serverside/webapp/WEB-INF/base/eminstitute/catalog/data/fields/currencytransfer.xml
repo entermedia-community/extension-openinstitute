@@ -50,12 +50,12 @@
 
    <property id="paymententitysource" index="true" editable="true" stored="true"  datatype="list" listfilterid="paymententitysourcetype" viewtype="userprojectcampaignpicker" >
     <name> 
-      <language id="en"><![CDATA[Source]]></language> 
+      <language id="en"><![CDATA[Sent From]]></language> 
     </name> 
   </property> 
    <property id="paymententitysourcetype" index="true" editable="true" stored="true"  datatype="list" listid="paymententitytype" defaultvalue="1">
     <name> 
-      <language id="en"><![CDATA[Source Type]]></language> 
+      <language id="en"><![CDATA[Send From Type]]></language> 
     </name> 
   </property> 
 
@@ -66,7 +66,7 @@
   </property> 
    <property id="paymententitydesttype" index="true" editable="true" stored="true"  datatype="list" listid="paymententitytype" defaultvalue="1">
     <name> 
-      <language id="en"><![CDATA[Type]]></language> 
+      <language id="en"><![CDATA[Send To Type]]></language> 
     </name> 
   </property> 
 	

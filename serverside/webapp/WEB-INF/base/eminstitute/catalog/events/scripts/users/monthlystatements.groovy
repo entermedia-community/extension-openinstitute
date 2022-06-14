@@ -146,7 +146,7 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 				row.setValue("paymententitysource", userid);
 				row.setValue("paymententitydest", collectionid);
 				row.setValue("paymententitydesttype", "librarycollection");
-				row.setValue("currencytransferstatus", "1"); //Pending
+				row.setValue("currencytransferstatus", "1"); //Pending to be paid
 				row.setValue("currencytype", "2");
 				row.setValue("expensetype", "2");
 				//String dates = DateStorageUtil.getStorageUtil().formatForStorage(start);
@@ -162,7 +162,7 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 					name = collectionid;
 				}
 				int month = monthInt + 1;
-				String dates = "${name} - ${month} / ${yearInt}";
+				String dates = "${name} ( ${month}/${yearInt} )";
 				row.setValue("name",  dates );
 				row.setValue("date", onemonth);
 				statementsearcher.saveData(row);

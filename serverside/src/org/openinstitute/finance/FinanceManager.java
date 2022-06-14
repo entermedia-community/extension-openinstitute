@@ -446,7 +446,7 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	protected QueryBuilder addDateRange(QueryBuilder inQuery, String inField ,DateRange inDateRange)
+	public QueryBuilder addDateRange(QueryBuilder inQuery, String inField ,DateRange inDateRange)
 	{
 		if( inDateRange == null || inDateRange.isAllTime())
 		{
@@ -558,14 +558,22 @@ public class FinanceManager  implements CatalogEnabled
 				currencytotal = 0.0;
 				bycurrency.put(currency, currencytotal);
 			}
-			String source = data.get("paymententitysource");
-			if( source.equals(inEntityId))
+			
+			if( currency.equals("2") &&  "2".equals(data.get("currencytransferstatus") ) ) //Points are paid so dont add em
 			{
-				currencytotal = currencytotal - (Double)data.getValue("total");
+				//Dont add to the total
 			}
 			else
 			{
-				currencytotal = currencytotal + (Double)data.getValue("total");
+				String source = data.get("paymententitysource");
+				if( !currency.equals("2") && source.equals(inEntityId))
+				{
+					currencytotal = currencytotal - (Double)data.getValue("total");
+				}
+				else
+				{
+					currencytotal = currencytotal + (Double)data.getValue("total");
+				}
 			}
 			bycurrency.replace(currency, currencytotal);
 		}
@@ -579,8 +587,18 @@ public class FinanceManager  implements CatalogEnabled
 		rebuildByExpenseType(bycurrency);
 		return bycurrency;
 	}
+	public HitTracker getPendingTransfersForEntity(String inEntityId, DateRange inDateRange)
+	{
+		HitTracker tracker = getTransfersForEntity(inEntityId, null, "1", inDateRange);
+		return tracker;
 
+	}
 	public HitTracker getAllTransfersForEntity(String inEntityId, DateRange inDateRange)
+	{
+		HitTracker tracker = getTransfersForEntity(inEntityId, null, null, inDateRange);
+		return tracker;
+	}
+	public HitTracker getTransfersForEntity(String inEntityId, String currencytype, String currencytransferstatus, DateRange inDateRange)
 	{
 		Searcher incomesSearcher = getMediaArchive().getSearcher("currencytransfer");
 		QueryBuilder query = incomesSearcher.query();
@@ -594,10 +612,61 @@ public class FinanceManager  implements CatalogEnabled
 		query2.or();
 
 		finalq.addChildQuery(query2.getQuery());
+
+		if( currencytype != null)
+		{
+			finalq.addExact("currencytype",currencytype);
+		}
+
+		if( currencytransferstatus != null)
+		{
+			finalq.addExact("currencytransferstatus",currencytransferstatus);
+		}
 		
+		finalq.addSortBy("dateDown");
 		HitTracker hits = incomesSearcher.search(finalq);
 		hits.setHitsPerPage(1000);
 		return hits;
+	}
+	
+	public HashMap<String, Object>   getPointsForEntity(String inEntityId, DateRange inDateRange)
+	{
+		HitTracker hits = getAllTransfersForEntity(inEntityId, inDateRange);
+
+		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
+		{
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+			}
+			
+			if( currency.equals("2") &&  "2".equals(data.get("currencytransferstatus") ) ) //Points are paid so dont add em
+			{
+				//Dont add to the total
+			}
+			else
+			{
+				String source = data.get("paymententitysource");
+				if( !currency.equals("2") && source.equals(inEntityId))
+				{
+					currencytotal = currencytotal - (Double)data.getValue("total");
+				}
+				else
+				{
+					currencytotal = currencytotal + (Double)data.getValue("total");
+				}
+			}
+			bycurrency.replace(currency, currencytotal);
+		}
+		
+		return bycurrency;
 	}
 
 }

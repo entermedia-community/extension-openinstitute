@@ -98,16 +98,16 @@
 			</table>
 
 
+		#set( $transfersbytype = $financeManager.getTransfersByExpensesForEntity($collectionid, $daterange,$topic) )
+		#if( !$transfersbytype.isEmpty() )
 			<h3>[[Transfers]]</h3>  
-			
-			#set( $expensebytype = $financeManager.getTransfersByExpensesForEntity($collectionid, $daterange,$topic) )
 			
 			<table class="table tablefinances" >
 			#set($thecurrency = "0")
 			#set($totalbycurrency = 0)
 			
-			#foreach( $currencytype in $expensebytype.keySet())
-				#set($current = $expensebytype.get($currencytype))
+			#foreach( $currencytype in $transfersbytype.keySet())
+				#set($current = $transfersbytype.get($currencytype))
 	
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
@@ -138,5 +138,4 @@
 				
 			#end
 			</table>
-
-
+		#end

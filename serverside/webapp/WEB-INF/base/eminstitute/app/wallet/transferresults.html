@@ -24,7 +24,14 @@
 			                 		#set($totalarray[$hit.currencytype] = [])
 			                 	#end
 			                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
-                              <tr>
+                              
+                              <tr
+                              #if($hit.currencytransferstatus=="2" ) ##paid
+                              	style="background-color: #409d90"
+                              #elseif($hit.currencytransferstatus=="1" ) 
+                              	style="background-color: #EFEF97"
+                              #end
+                              >
                                   #if($showcollections )
                                   <td>
 									<a
@@ -50,7 +57,7 @@
                                   </td>
                                   <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
 			                      
-                                  <td>#esc($hit.name)</td>
+                                  <td  style="white-space: nowrap;">#esc($hit.name)</td>
                              	  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                                   <td style="text-align: right; width:140px;">
                                   	$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)
@@ -110,9 +117,8 @@
                 	#end
                 #end
             </table>
-            $transfers.size() [[hits]]
         </div>
-        <a href="$applink/collective/services/transfers/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$transfers.getSessionId()"
-           class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+     ##   <a href="$applink/collective/services/transfers/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$transfers.getSessionId()"
+     ##      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
         
 </div>
