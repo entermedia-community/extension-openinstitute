@@ -3,7 +3,4 @@
 	 <path-action name="Script.run">
 	    <script>/${catalogid}/events/scripts/billing/checkinvoices.groovy</script>
 	 </path-action>
-	 
-	 <property name="collectivesection">settings</property>
-	 <inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
 </page>
