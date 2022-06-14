@@ -7,6 +7,7 @@
 	<data id="4">Paypal Donation</data>
 	<data id="5">Cash Donation</data>  
 	<data id="6">Invoice</data>
+	<data id="7">Work Points Accomplished</data>
   	<incometype id="AX-oWIv0qFnpF58wgkLE"> 
 	    <name> 
 	      <language id="en"><![CDATA[Rent]]></language> 
