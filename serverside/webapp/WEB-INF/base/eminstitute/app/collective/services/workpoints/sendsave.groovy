@@ -16,7 +16,7 @@ public void init()
 	
 	tosave.setValue("date",new Date());
 	tosave.setValue("user",context.getUserName());
-	tosave.setValue("paymententitysourcetype","librarycollection"); //Project
+	tosave.setValue("paymententitysourcetype","project"); //Project
 	tosave.setValue("paymententitysource",collectionid); //
 	
 	tosave.setValue("currencytransferstatus","2"); //complete

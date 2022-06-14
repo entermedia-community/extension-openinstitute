@@ -13,9 +13,9 @@
     </name> 
   </data>   
 
-  <data id="3"> 
+  <data id="cancel"> 
     <name> 
-      <language id="en"><![CDATA[Cancel]]></language> 
+      <language id="en"><![CDATA[Canceled]]></language> 
     </name> 
   </data>   
      

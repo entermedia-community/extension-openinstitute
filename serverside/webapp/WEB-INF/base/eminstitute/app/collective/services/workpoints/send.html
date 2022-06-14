@@ -11,7 +11,7 @@
 	$context.putPageValue("searcher",$searcher)
 	<form name="saveproject" 
 			id="saveproject" 
-			action="$apphome/wallet/sendsave.html" 
+			action="$apphome/collective/services/transfers/sendsave.html" 
 			method="post"
 			class="ajaxform autocloseform validate"
 			data-targetdivinner="walletdashboard"
@@ -19,14 +19,18 @@
 	
 	<input type="hidden" name="save" value="true" />
 	<input type="hidden" name="searchtype" value="$searchtype" />
-		
+	<input type="hidden" name="collectionid" value="$collectionid" />
+	
+	<input type="hidden" name="field" value="user" />
+	<input type="hidden" name="user.value" value="$user.getId()" />
+	
 	<div class="form-group row no-gutters">
     <label for="exampleTextarea" class="col">[[Source Funds]]</label>
 	<div class="col-10" style="padding-left:10px;">
 		<div class="emfield-list">
 			<input type="hidden" value="currencytype" name="field">
 			<div id="listdetail_currencytypesource" class="listdetailpicker">
-			#set( $netincome = $financeManager.getTransfersByCurrencyForEntity($user.id,$daterange) )
+			#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid,null,null) )
 			<input type="hidden" name="field" value="currencytype" />
 			<select name="currencytype.value" class="select2" >
 			#foreach( $currencytype in $netincome.keySet())

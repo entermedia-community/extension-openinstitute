@@ -5,11 +5,11 @@
 #end
 
 
-<div style="padding:10px 20px;">
-     #if( $caneditcollection )
+<div id="serviceworkarea" style="padding:10px 20px;">
+     #if( $XXXcaneditcollection )
          <a
           href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Transfer]]</a>
+          class="emdialog btn btn-sm btn-primary float-right">[[Pay For Points]]</a>
     #end      
               
 	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
@@ -53,30 +53,19 @@
 		</tr>
 		</table>
 
-	#ifnull( $transfers)
-            ##set( $transfers = $mediaarchive.query("currencytransfer").exact("paymententitysource",$collectionid).sort("dateDown").search($context))
- 			#set( $transfers = $financeManager.getAllTransfersForEntity($collectionid,$daterange) )
-              $context.putPageValue("transfers",$transfers)
-	#end
-	
-   <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Transfers]]</h2>
-   		<div style="float:right; width:260px; margin:10px 0;">
-		<label>[[Sort by]]</label>
-		<div style="width:200px; display:inline-block;">
-		<select class="select2 	form-control-sm" name="sortby" >
-			#set ($details = $searcher.getDetailsForView("currencytransfer/edit", $userprofile))
-			#foreach( $detail in $details)
-				<option value="$detail.getId()Down">$context.getText($detail)</option>
-				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
-			#end
-		</select>
-		</div>
-		</div>
-		<div class="clearfix"></div>
-   </div>
    </form>
-   
-	$pages.include("$apphome/wallet/transferresults.html",$context)
+
+		#set( $completedpointtransfers = $financeManager.getTransfersForEntity($collectionid, "2", "1", $daterange) )
+		#if( !$completedpointtransfers.isEmpty())
+   		<h2 class="float-left" style="margin:10px 0;">[[Pending Work Points]]</h2>
+        $context.putPageValue("transfers",$completedpointtransfers) 
+		$pages.include("$apphome/wallet/transferresults.html",$context)
+		#end
+ 		#set( $transfers = $financeManager.getTransfersForEntity($collectionid, "2", "2", $daterange) )
+		#if( !$transfers.isEmpty())
+   		<h2 class="float-left" style="margin:10px 0;">[[Paid Work Points]]</h2>
+        $context.putPageValue("transfers",$transfers)
+		$pages.include("$apphome/wallet/transferresults.html",$context)
+   		#end
 </div>
 
