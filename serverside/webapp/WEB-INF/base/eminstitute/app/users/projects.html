@@ -1,78 +1,83 @@
-<h2>[[Team Projects]]</h2>
 
-<div class="stations-grid ">
-	<div class="project-grid">
 
-		#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).search($context) )
+		#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser", $selecteduser.getId()).search($context) )
 		#set($oids = [])
 		#foreach( $ohit in $ids )
 			#set($x = $oids.add($ohit.collectionid))
 		#end
+
 		
-		#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
+		#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search() )
 
-		#set( $modcollections = $chatManager.loadCollectionsModified($collections,$user.getId() ) )
-	
-		#foreach( $ohit in $collections )
-					#set($link = false)
-					#if($ohit.assetportrait)
-						#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
-						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-					#else
-					#set($link = "$applink/theme/images/OI_flower.png")
-					#end
-					<div class="card-collections">
-					<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
-						class=" #if($selectedproject==$ohit.id) active #end">
-
-					<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
-	 				<div class="card-name collectionbox">$ohit.name
-							#if( $modcollections.contains($ohit.getId())) * #end</div>
-					</a>
-					</div>
-		#end
+		#set( $modcollections = $chatManager.loadCollectionsModified($collections, $selecteduser.getId() ) )
 		
-	</div>
-	<div class="clearfix"></div>	
-</div>
+		#if($collections.size()>0)
+		<h2>[[Team Projects]]</h2>
 
-<div class="stations-grid ">
-	<div class="project-grid ">
-	  	 
-	
-		#set( $organizationsuser = $mediaarchive.query("librarycollectionlikes").exact("followeruser",$selecteduser.getId()).search($context) )
-		#set($oids = [])
-		#foreach( $ohit in $organizationsuser )
-			#set($x = $oids.add($ohit.collectionid))
-		#end
-		#if($oids)
-		<h2> [[Following]]</h2>
-			#set( $organizations = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
-			#set( $modcollections = $chatManager.loadCollectionsModified($organizations,$user.getId() ) )
-			#foreach( $ohit in $organizations )
-				#set($link = "")
-				#if($ohit.assetportrait)
-					#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
-					#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-				#else
-					#set($link = "$applink/theme/images/OI_flower.png")
+		<div class="stations-grid ">
+			<div class="project-grid">
+				#foreach( $ohit in $collections )
+							#set($link = false)
+							#if($ohit.assetportrait)
+								#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
+								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+							#else
+							#set($link = "$applink/theme/images/OI_flower.png")
+							#end
+							<div class="card-collections">
+							<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
+								class=" #if($selectedproject==$ohit.id) active #end">
+		
+							<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
+			 				<div class="card-name collectionbox">$ohit.name
+									#if( $modcollections.contains($ohit.getId())) * #end</div>
+							</a>
+							</div>
 				#end
-				
-					
-	
-	
-				<div class="card-collections">
-				<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
-					class=" #if($selectedproject==$ohit.id) active #end">
-				<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
-	 				<div class="card-name collectionbox">$ohit.name
-							#if( $modcollections.contains($ohit.getId())) * #end</div>
-				</a>
-				</div>
-				
-			#end
+			</div>
+			<div class="clearfix"></div>	
+		</div>
 		#end
 		
-	</div>
-	<div class="clearfix"></div>	
-</div>
+ 
+	
+		#set( $organizationsuser = $mediaarchive.query("librarycollectionlikes").exact("followeruser", $selecteduser.getId()).search($context) )
+		#set($foids = [])
+		#foreach( $ohit in $organizationsuser )
+			#set($x = $foids.add($ohit.collectionid))
+		#end
+		
+			#set( $organizations = $mediaarchive.query("librarycollection").ids($foids).sort("name").search() )
+
+			#if($organizations.size()>0)
+			
+			<div class="stations-grid ">
+				<div class="project-grid ">
+					<h2> [[Following]]</h2>
+						#foreach( $ohit in $organizations )
+							#set($link = "")
+							#if($ohit.assetportrait)
+								#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
+								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+							#else
+								#set($link = "$applink/theme/images/OI_flower.png")
+							#end
+				
+							<div class="card-collections">
+							<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
+								class=" #if($selectedproject==$ohit.id) active #end">
+								<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
+				 				<div class="card-name collectionbox">
+				 					$ohit.name
+									#if( $modcollections.contains($ohit.getId())) * #end
+								</div>
+							</a>
+							</div>
+							
+							#end
+						</div>
+					<div class="clearfix"></div>	
+			</div>
+		#end
+		
+
