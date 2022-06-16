@@ -7,18 +7,19 @@
 <div id="channelcontainer" class="channel-container #if($logo) channel-container-logo #end h-100">
 <div class="row no-gutters justify-content-md-center h-100">
  <div class="col community-maincol community-maincol-homepage channel-feed feed-maincol">
-	<div >
- 	<div class="contentcolumn content-body content-collective-home #if($logo) content-collective-home-logo #end">
+	#if($librarycol.htmlintro || $caneditcollection)
+ 	<div class="contentcolumn content-body content-collective-home #if($logo) content-collective-home-logo #end"
+ 	style="#if( $caneditcollection) min-height:60px;#end">
 
 	 	#if( $caneditcollection)
 			<a class="oe-dataedit" style="position:absolute; bottom:22px; right:17px;" data-target="#edithtmlintro-$librarycol.id" title="[[Edit Project Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i> </a>
+			
 		#end
 		<div class="#if( $caneditcollection)oe-editable#end" id="edithtmlintro-$librarycol.id" data-dataid="$librarycol.id" data-field="htmlintro" data-searchtype="librarycollection">
 		   	#if($librarycol.htmlintro) $!librarycol.htmlintro #else $pages.include("$apphome/collective/about/htmlintro.html")#end
 		</div>
-		
 	</div>
-	</div>
+	#end
 	
 	#if( $caneditcollection )
 		$pages.include("$apphome/collective/channel/addnewupload.html")
