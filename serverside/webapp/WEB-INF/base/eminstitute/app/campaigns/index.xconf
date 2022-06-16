@@ -1,0 +1,8 @@
+<page>
+
+	<property name="oisection">community</property>
+	
+   	<property name="postsourcepath">home/index.html</property>
+ 	<page-action name="PostModule.loadPost" />
+ 
+</page>

@@ -1,9 +1,6 @@
 <page>
-  	<path-action name="ProjectModule.loadLibraryByDomain"/>
 
 	<property name="oisection">community</property>
 	
-  	<property name="postsourcepath">home/index.html</property>
- 	<path-action name="PostModule.loadPost" />
  
 </page>

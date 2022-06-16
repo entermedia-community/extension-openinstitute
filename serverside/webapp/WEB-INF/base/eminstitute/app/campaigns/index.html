@@ -1,0 +1,88 @@
+<div class="container oicontainer" >
+	<div class="row no-gutters" >
+		<div class="col oihomepage" style="margin-top: 20px;">
+			<div class="oe-editable bodywebsite" 
+				id="edit-$postdata.id" 
+				data-dataid="$!postdata.id" 
+				data-field="maincontent"	
+				data-searchtype="postdata" 
+				data-viewtype="html">
+  				$!postdata.maincontent
+			</div>
+			  
+			#if( $user.oe_edit_mode == "postedit" )
+				<div class="editpostbtn">
+					<a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true" class="btn btn-xs btn-light">Edit Post</a>
+				</div>
+			#end
+			
+		</div>
+	</div>
+	
+	
+	##Current Campaigs
+
+	<div class="row justify-content-md-center " style="margin-top: 20px;">
+		<div class="col-md-10 col-lg-9" >
+			<div class="currentcampaigs">
+
+#set($tags = $mediaarchive.getList("communitytag"))
+#foreach( $tag in $tags)
+	
+		#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
+		#if( !$projects.isEmpty() && $tag.collectionid )
+		#set( $target = $mediaarchive.getCachedData("librarycollection",$tag.collectionid))
+		<a href="$applink/collective/donate/${target.id}/#dash($target.name).html" class="badge badge-success" style="float:right;padding:5px 20px 5px 20px;margin-right:100px;">Donate</a>
+		<div class="communitycontainer-header">
+		<h3>
+		#if($tag.domain)
+			<a href="$tag.domain" title="$tag.getName()">$tag.getName()</a>
+		#else
+			$tag.getName()
+		#end
+		</h3>
+		
+		</div>
+		<div class="communitytagcontainer-out">
+		
+		<div class="communitytagheader" style="">
+		#set( $donations = $mediaarchive.query("transaction").orgroup("collectionid",$projects).exact("isdonation","true").sort("paymentdateDown").search($context))  
+		#if( !$donations.isEmpty() )
+			 	<div class="communtysofar">$donations.size() [[donations received so far!]]</div>
+			 #end
+		</div>
+		<div class="communitytagdescription" style="">
+			
+				#if( $tag.funddescription )
+					$tag.funddescription
+				#else
+					$target.collectivedescription
+				#end	
+			 
+				<div style="padding-top:20px;">
+		 		#foreach( $project in $projects.getPageOfHits() )
+					$context.putPageValue("collective",$project)
+					$pages.include("$apphome/browse/collectivelist.html",$context)
+				#end
+				</div>
+				<div style="clear:both"></div>
+		</div>
+		</div>
+		<div style="clear:both">
+		</div>	
+		#end	
+	
+#end
+	
+
+	
+	
+
+
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
