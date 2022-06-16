@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
+	<data id="sendinvoice">Sending Invoice</data>
+	<data id="pending">Pending</data>
 	<data id="invoiced">Invoiced</data>
 	<data id="paid">Paid</data>
 	<data id="autopayfailed">Auto Payment Failed</data>

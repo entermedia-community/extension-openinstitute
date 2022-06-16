@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <properties beanname="dataSearcher">
+
 	<property id="producttype" />
 	<property id="name" />
-	<property id="primaryimage" />
 	<property id="productdescription" />
 	<property id="producttags" />
 	<property id="productcost" />
@@ -11,8 +11,7 @@
 	<property id="productprice" />
 	<property id="featured" />
 	<property id="paymentstatus" />
-	<property id="paymenttype" />
 	<property id="recurring" />
+	<property id="nextbillon" />
 	<property id="recurringperiod" />
-	
 </properties>

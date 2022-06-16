@@ -1,6 +1,6 @@
 #set($collectionid = $librarycol.getId())
 
-<div class="collectivecontent">
+<div class="collectivecontent" id="collectivebilling">
     <div class="row no-gutters h-100">
         <div class="col">
             <div class="collectivemaincol h-100">
@@ -17,7 +17,7 @@
                                 <table class="table table-striped  table-hover">
                                     <thead>
                                         <tr class="tableheader">
-                                            <th>[[Created On]]</th>
+                                            <th style="width: 120px;">[[Created On]]</th>
                                             <th>[[Product]]</th>
                                             <th>[[Price]]</th>
                                             <th style="width: 300px;"></th>
@@ -36,40 +36,40 @@
                                                  #end
                                                 ##<div style="font-size: 0.9em;">$!mediaarchive.text($hit.productdescription, $hit.id)</div>
                                                 </td>
-                                                <td style="text-align: center;">$ $!context.doubleToMoney($!hit.productprice,2)</td>
+                                                <td style="text-align: right;">$ $!context.doubleToMoney($!hit.productprice,2)</td>
                                                 <td>
                                                     #if( $canviewsettings )
                                                         <a
                                                             href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveproduct"
-                                                            class="btn btn-sm btn-secondary"
+                                                            class="btn btn-xs btn-secondary"
                                                             target="_blank">
                                                             <i class="fa fa-database"></i>
                                                         </a>
                                                         <a
                                                             href="$applink/collective/services/editproduct.html?collectionid=${collectionid}&id=${hit.id}"
                                                             title="[[Edit Product or Service]]"
-                                                            class="emdialog btn btn-sm btn-info">[[Edit]]</a>
+                                                            class="emdialog btn btn-xs btn-info">[[Edit]]</a>
                                                         <a
                                                             href="$applink/collective/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
                                                             title="[[Copy Product or Service]]"
-                                                            class="emdialog btn btn-sm btn-info">[[Copy]]</a>
+                                                            class="emdialog btn btn-xs btn-info">[[Copy]]</a>
                                                     #end
                                                     #if ($hit.recurring == true)
                                                         #if ($hit.billingstatus == "active")
                                                             #if ($hit.isautopaid == true)
                                                                 <a
                                                                     href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
-                                                                    class="btn btn-sm btn-success">[[AutoPay Enabled]]</a>
+                                                                    class="btn btn-xs btn-success">[[AutoPay Enabled]]</a>
                                                             #else
                                                                 <a
                                                                     href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
-                                                                    class="btn btn-sm btn-secondary">[[AutoPay Paused]]</a>
+                                                                    class="btn btn-xs btn-secondary">[[AutoPay Paused]]</a>
                                                             #end
                                                         #end
                                                         #if ($hit.billingstatus == "active")
                                                             <a
                                                                 href="$applink/collective/services/cancelsubscription.html?collectionid=${collectionid}&productid=${hit.id}"
-                                                                class="emdialog btn btn-sm btn-danger">[[Cancel]]</a>
+                                                                class="emdialog btn btn-xs btn-danger">[[Cancel]]</a>
                                                         #end
                                                     #end
                                                 </td>
@@ -82,7 +82,7 @@
 
                         <a
                             href="$applink/collective/services/addnew.html?collectionid=${collectionid}"
-                            class="emdialog btn btn-sm btn-primary mb-4">[[Add Product or Service]]</a>
+                            class="emdialog btn btn-sm btn-primary mb-4" data-hidefooter="true">[[Add Product or Service]]</a>
                     #end
 
                     #set( $invoices = $mediaarchive.query("collectiveinvoice").match("collectionid",
@@ -93,14 +93,14 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr class="tableheader">
-                                        <th style="width: 10%;">[[Invoice]] #</th>
-                                        <th>[[Due Date]]</th>
-                                        <th>[[Paid On]]</th>
+                                        <th style="width: 80px;">[[Invoice]] #</th>
+                                        <th style="width: 120px;">[[Due Date]]</th>
+                                        <th style="width: 120px;">[[Paid On]]</th>
                                         <th>[[Name]]</th>
                                         ##<th>[[Description]]</th>
                                         <th>[[Total Price]]</th>
                                         <th>[[Status]]</th>
-                                        <th style="width: 150px;"></th>
+                                        <th style="width: 300px;"></th>
                                     </tr>
                                 </thead>
                                 #foreach($hit in $invoices)
@@ -124,7 +124,7 @@
                                     ##            $!mediaarchive.text($prod.productdescription, $hit.id)<br>
                                     ##        #end
                                     ##    </td>
-                                        <td style="text-align: center;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
+                                        <td style="text-align: right;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
                                         <td style="text-align: center;">
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
                                             $status
@@ -133,20 +133,31 @@
                                             #if( $canviewsettings )
                                                 <a
                                                     href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
-                                                    class="btn btn-sm btn-secondary"
+                                                    class="btn btn-xs btn-secondary"
                                                     target="_blank">
                                                     <i class="fa fa-database"></i>
                                                 </a>
+                                                #if ($hit.getValue("paymentstatus") == "pending" ||$hit.getValue("paymentstatus") == "invoiced")
+	                                             <a
+	                                                href="$applink/collective/services/cancelinvoice.html?collectionid=${collectionid}&id=${hit.id}&oemaxlevel=1"
+	                                                class="ajax btn btn-xs btn-danger" data-targetdiv="collectivebilling">[[Cancel]]</a>
+	                                            #end
                                             #end
-                                            #if ($hit.getValue("paymentstatus") == "invoiced")
+                                            #if ($hit.getValue("paymentstatus") == "pending")
+                                            	<a
+                                                    href="$applink/collective/services/previewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
+                                                    target="_blank"
+                                                    class="btn btn-xs btn-secondary emdialog"
+                                                     data-hidefooter="true">[[Preview]]</a>
+                                            #elseif ($hit.getValue("paymentstatus") == "invoiced")
                                                 <a
                                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                                    class="btn btn-sm btn-primary">[[Pay Now]]</a>
+                                                    class="btn btn-xs btn-primary">[[Pay Now]]</a>
                                                 #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") ==
                                                 "error")
                                                 <a
                                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                                    class="btn btn-sm btn-primary">[[Pay Now]]</a>
+                                                    class="btn btn-xs btn-primary">[[Pay Now]]</a>
                                                 #if ($hit.paymentstatusreason != "")
                                                     <div class="alert alert-danger">$hit.paymentstatusreason</div>
                                                 #end
@@ -154,8 +165,9 @@
                                                 <a
                                                     href="$applink/collective/services/viewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                                     target="_blank"
-                                                    class="btn btn-sm btn-secondary">[[View]]</a>
+                                                    class="btn btn-xs btn-secondary">[[View]]</a>
                                             #end
+                                            
                                         </td>
                                     </tr>
                                 #end

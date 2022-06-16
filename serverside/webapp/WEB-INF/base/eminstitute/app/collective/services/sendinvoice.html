@@ -1,0 +1,35 @@
+#set($id = $context.getRequestParameter("invoiceid"))
+#set( $invoice =	$mediaarchive.getInvoiceById($id)) 
+<div id="invoicecontainer">
+#set($collectionid = $invoice.getValue("collectionid"))
+#if($invoice && $collectionid)
+<div>
+
+<form method="post" action="sendinvoicesave.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling">
+<input type="hidden" name="oemaxlevel" value="1">
+<div>
+<label>[[Send to]] <span style="font-size:0.9em; color:#666;">([[Comma separated]])</span>:</label>
+</div>
+<div>
+#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).exact("isbillingcontact","true").search($context) )
+<textarea class="form-control" name="emails">
+#foreach( $hit in $team)
+	#set($followeruser = $mediaarchive.getUser($hit.followeruser) )
+  	#if($followeruser && $followeruser.getEmail())$followeruser.getEmail()#end
+  	#if ( $foreach.hasNext ), #end
+#end
+</textarea>
+<input type="hidden" name="id" value="$id">
+<input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
+
+</div>
+	<div class="text-right" style="padding:15px 10px;">
+	<a href="previewinvoice.html?invoiceid=$id&oemaxlevel=1" class="btn btn-secondary ajax" data-targetdiv="invoicecontainer" style="margin-right:10px;">[[Back]]</a>
+	<input type="submit" class="btn btn-primary" value="[[Send]]"/>
+	
+	</div>
+</form>
+
+</div>
+#end
+</div>

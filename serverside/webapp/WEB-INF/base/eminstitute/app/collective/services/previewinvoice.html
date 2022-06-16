@@ -1,0 +1,9 @@
+#set( $id = $context.getRequestParameter('invoiceid')) 
+<div id="invoicecontainer">
+	$pages.include("./viewinvoice.html", $context)
+	
+	<div class="text-right" style="padding:15px 10px;">
+	<a href="sendinvoice.html?invoiceid=$id" class="btn btn-primary ajax" data-targetdiv="invoicecontainer">[[Send Invoice]]</a>
+	</div>
+
+</div>
