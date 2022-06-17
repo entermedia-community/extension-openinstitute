@@ -34,10 +34,13 @@ void main() {
     var url = "${settings['dev']?['websocket_url']}";
     print(url);
 
-    expect(url.isNotEmpty, true);
-    EmUser? user = await oi.login("admin", "admin");
-    expect(user != null, true);
 
+    expect(url.isNotEmpty, true);
+    EmUser? user = await oi.authenticationManager?.login("admin", "admin");
+    if( user != null) {
+      var email = user.email;
+      expect(user != null, true);
+    }
     // bool? emailed = await oi.emEmailKey("support@openedit.org");
     // expect(emailed, true);
 
@@ -65,11 +68,13 @@ void main() {
 
     expect(user != null, true);
 
-    List<ToDo> tasks = await oi.getOpenTasks();
-    expect(tasks.length > 0, true);
-    ToDo list = tasks.first;
-    expect(list.tasks!.isNotEmpty,true);
-
+    List<ToDo>? tasks = await oi.taskManager?.getOpenTasks();
+    expect(tasks != null, true);
+    if( tasks != null) {
+      expect(tasks.length > 0, true);
+      ToDo list = tasks.first;
+      expect(list.tasks!.isNotEmpty, true);
+    }
 
 
 
@@ -98,7 +103,7 @@ void main() {
 
   test('Test Websocket Connection', () async {
 
-    EmUser? user = await oi.login("admin", "admin");
+    EmUser? user = await oi.authenticationManager?.login("admin", "admin");
     expect(user != null, true);
 
     oi.emSocketManager.connect();
@@ -112,30 +117,37 @@ void main() {
   });
   test('Test Module Crud Operations', () async {
     DataModule testmodule = await oi.dataManager!.getDataModule("purpose");
-    HitTracker hits = testmodule.getAllHits();
-    emData data = new emData();
+    List<emData> hits = testmodule.getAllHits();
+    expect(hits.length > 0 , true);
+
+    Map tosave = {
+      "name": "Test"
+    };
+
+    emData saved = await testmodule.addData(tosave);
+    testmodule.deleteData(saved.id);
 
 
   });
 
   test('Test Project CHat loading', () async {
 
-    EmUser? user = await oi.login("admin", "admin");
+    EmUser? user = await oi.authenticationManager?.login("admin", "admin");
     expect(user != null, true);
 
     Map? settings = await oi.loadAppSettings();
 
     //TODO: Get list of all projects
-    var projects = await oi.chatManager?.getUserProjects(1);
+    var projects = await oi.projectManager?.getUserProjects(1);
     expect(projects!.length > 0, true);
 
     var projectid = settings?['dev']?['test_collection_id'];
-    var messages = await oi.chatManager?.getProjectChatMessages(projectid);
+    var messages = await oi.chatManager?.getProjectChatMessages(projectid,1);
     expect(messages!.length > 5, true);
 
     //Create new chat
     
-    oi.chatManager?.saveMessage()
+    //oi.chatManager?.saveMessage()
   });
 
 

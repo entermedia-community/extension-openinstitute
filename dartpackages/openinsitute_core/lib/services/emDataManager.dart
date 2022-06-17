@@ -157,7 +157,7 @@ class DataModule {
     return results;
   }
 
-  Future<emData> deleteData(String id) async {
+  Future<emData> deleteData(String? id) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         {},
