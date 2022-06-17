@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
-import 'package:openinsitute_core/services/feeds.dart';
 
 OpenI get oi {
   return Get.find();
@@ -13,12 +13,8 @@ OpenI get oi {
 class DataManager {
   bool initalized = false;
   Map<String, DataModule> searchers = {};
-  Feeds? feeds;
 
-  DataManager() {
-    //TODO:  Figure out best way to do this without an async race condition
-    Hive.initFlutter();
-  }
+  DataManager();
 
   Future<DataModule> getDataModule(String inSearchType) async {
     DataModule? searcher = searchers[inSearchType];
@@ -30,12 +26,9 @@ class DataManager {
     return searcher;
   }
 
-  Future<Feeds> getFeeds() async {
-    feeds ??= await Feeds.getFeeds();
-    return feeds!;
-  }
-}
+  // TODO: Update DataModule
 
+}
 
 class DataModule {
   //https://stackoverflow.com/questions/54549235/dart-await-on-constructor
@@ -63,12 +56,11 @@ class DataModule {
     }
   }
 
-
-  Future<emData?> loadData(String id) async{
-    Map <String,dynamic> props = box.get(id);
-    if(props != null){
+  Future<emData?> loadData(String id) async {
+    Map<String, dynamic> props = box.get(id);
+    if (props != null) {
       return emData.fromJson(props);
-    } else{
+    } else {
       Map simplesearch = {
         "page": "1",
         "hitsperpage": "20",
@@ -82,21 +74,18 @@ class DataModule {
     return null;
   }
 
-
-
   List<emData> getAllHits() {
     List<emData> list = [];
     // List list = List.generate(box.keys.length, ,{"growable":true});
-     box.keys.forEach((element) {
-       emData newdata = emData.fromJson(box.get(element) as Map<String, dynamic>);
-       list.add(newdata);
-     });
-     return list;
-
+    box.keys.forEach((element) {
+      emData newdata =
+          emData.fromJson(box.get(element) as Map<String, dynamic>);
+      list.add(newdata);
+    });
+    return list;
   }
 
-
-  Future<bool> syncData(bool full,int page) async {
+  Future<bool> syncData(bool full, int page) async {
     if (full) {
       await box.clear();
 
@@ -124,12 +113,14 @@ class DataModule {
         "query": {
           "terms": [
             {"field": "id", "operation": "matches", "value": "*"},
-            {"field": "emrecordstatus.recordmodificationdate", "operation": "after", "value": lastsync.toIso8601String()}
-
+            {
+              "field": "emrecordstatus.recordmodificationdate",
+              "operation": "after",
+              "value": lastsync.toIso8601String()
+            }
           ]
         }
       };
-
 
       List<emData> tosave =
           await getRemoteData({"emrecorddate???? neeed to chec": "*"});
@@ -142,27 +133,72 @@ class DataModule {
     Map inQuery,
   ) async {
     final responsestring = await oi.getEmResponse(
-      oi.app!["mediadb"] + '/services/module/${searchtype}/search',
-      inQuery,
-    );
+        oi.app!["mediadb"] + '/services/module/$searchtype/search',
+        inQuery,
+        RequestType.GET);
     List<emData> results = parseData(responsestring);
 
-    results.forEach((element) {
+    for (var element in results) {
       box.put(element.id, element.properties);
-    });
-
+    }
     return results;
-
     //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
   }
 
+  Future<List<emData>> updateData(String id, Map inQurey) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        inQurey,
+        RequestType.PUT);
+    List<emData> results = parseData(responsestring);
+    for (var element in results) {
+      box.put(element.id, element.properties);
+    }
+    return results;
+  }
 
+  Future<emData> deleteData(String? id) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        {},
+        RequestType.DELETE);
+    emData results = parseDataSingle(responsestring);
+
+    box.delete(results.id);
+    return results;
+  }
+
+  Future<emData> addData(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/create',
+        inQuery,
+        RequestType.POST);
+    emData results = parseDataSingle(responsestring);
+
+    box.put(results.id, results.properties);
+    return results;
+  }
+
+  Future<emData> saveData(String id) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        {},
+        RequestType.GET);
+    emData results = parseDataSingle(responsestring);
+    box.put(results.id, results.properties);
+    return results;
+  }
 
   List<emData> parseData(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
     List<emData> results =
         parsed["results"].map<emData>((json) => emData.fromJson(json)).toList();
+    return results;
+  }
 
+  emData parseDataSingle(String responseBody) {
+    final Map<String, dynamic> parsed = json.decode(responseBody);
+    emData results = emData.fromJson(parsed);
     return results;
   }
 

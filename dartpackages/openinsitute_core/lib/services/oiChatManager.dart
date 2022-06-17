@@ -1,51 +1,49 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
-import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
-import 'package:openinsitute_core/services/emDataManager.dart';
+import 'package:openinsitute_core/services/hive_manager.dart';
 
-import 'dart:convert';
-
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:openinsitute_core/models/emData.dart';
-import 'package:openinsitute_core/models/emFeeds.dart';
-import 'package:openinsitute_core/openinsitute_core.dart';
-
-OpenI get oi {
-  return Get.find();
-}
-
-class oiChatManager {
-
+class OiChatManager {
+  String chatBox = "oiChatManagerCache";
   List? fieldProjectChatChangeListeners;
 
+  OpenI get oi {
+    return Get.find();
+  }
 
-
-  Future<List> getUserProjects(int page) async {
-
-    Map params = {
-      "page": "$page",
-      "hitsperpage": "200"
-    };
-
-    var box =  await getBox("oicache");
-   var results =  box.get("viewprojects");//Some cache system
-    if( results == null) {
-      results = <emData>[]; //Make one list that is cached
-      box.put("viewprojects",results);
+  Future<void> cacheChat(String projectId, List<oiChatMessage> messages) async {
+    messages.sort(
+      (a, b) => DateTime.parse(a.properties["date"])
+          .compareTo(DateTime.parse(b.properties["date"])),
+    );
+    for (int i = 0; i < messages.length; i++) {
+    await HiveManager.instance.saveData(messages[i].messageid, messages[i].properties, chatBox + "_" + projectId);
     }
+  }
 
-    //TODO; Call this part in an async way
-    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewprojects.json', params) as Map?;
+  Future<void> saveSingleChat(oiChatMessage chatMessage, String projectId) async {
+    await HiveManager.instance.saveData(chatMessage.messageid, chatMessage.properties, chatBox + "_" + projectId);
+  }
 
-    //TODO: How do I create emChatMessages from json?
-    List<emData> messages =
-    responded!["results"]!.map<emData>((json) => emData.fromJson(json)).toList();
-    box.put("pages", responded["response"]["pages"]);
-    results.clear();
-    results.addAll(messages); //TODO: This should reload the UI with new entries?
-    box.put("viewprojects",results);
-    return Future.value(results);
+  Future<List<oiChatMessage>> loadChatCache(String projectId) async {
+    List<Map<String, dynamic>> cache =
+        await HiveManager.instance.getAllHits(chatBox + "_" + projectId);
+    List<oiChatMessage> messages = [];
+    for (var e in cache) {
+      messages.add(oiChatMessage.fromJson(e));
+    }
+    return messages;
+  }
+
+  Future<void> loadChat(String projectId, int page) async {
+    List<oiChatMessage> messages = [];
+    List<oiChatMessage> result  = await getProjectChatMessages(projectId, page);
+    if (result.isNotEmpty) {
+      messages.addAll(result);
+      await cacheChat(projectId, result);
+    }
   }
 
   /**
@@ -60,78 +58,46 @@ class oiChatManager {
    * Firebase can call this when it sees that a chat event came in
    * so we can invalidate our local cache and update our list of chats
    */
-  void chatMessageEdited(String inMessageId, String inUserId) async {
-    var box =  await getBox("oiChatManagerCache");
+  void chatMessageEdited(String inMessageId,  String inUserId) async {
+    // var box = await getBox("oiChatManagerCache");
 
     //fieldProjectChatChangeListeners;
   }
 
-  Future<List> getProjectChatMessages(String inProjectId)  async {
-    var box =  await getBox("oiChatManagerCache");
-
-
-     var results =  box.get(inProjectId);//Some cache system
-     if( results == null) {
-       results = <oiChatMessage>[]; //Make one list that is cached
-       box.put(inProjectId,results);
-     }
-
-    Map params = {
-       "page": "1",
-       "hitsperpage": "20",
-       "collectionid": inProjectId
-     };
-
-     //TODO; Call this part in an async way
-    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/viewmessages.json', params) as Map?;
-
-     //TODO: How do I create emChatMessages from json?
-     List<oiChatMessage> messages =
-     responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
-
-     results.clear();
-     results.addAll(messages); //TODO: This should reload the UI with new entries?
-      return Future.value(results);
-     //return results;
-    //List<emData> results = parseData(responsestring);
-    }
-
-    Future<List> sendMessage(String inProjectId, Map params)  async {
-    var box =  await getBox("oiChatManagerCache");
-
-
-     var results =  box.get(inProjectId);//Some cache system
-     if( results == null) {
-       results = <oiChatMessage>[]; //Make one list that is cached
-       box.put(inProjectId,results);
-     }
-    final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/savemessage.json', params) as Map?;
-     List<oiChatMessage> messages =
-     responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
-     box.put("pages", responded["response"]["pages"]);
-     results.clear();
-     results.addAll(messages);
-       box.put(inProjectId,results);
-      return Future.value(results);
-    }
+  Map getParams(int page, String inProjectId) {
+    return  {
+      "page": "$page",
+      "hitsperpage": "20",
+      "collectionid": inProjectId
+    };
   }
 
- Future<Box>  getBox(String inType) async  {
-       if (!Hive.isBoxOpen(inType)) {
-         return  Hive.openBox(inType);
-       } else {
-         return Hive.box(inType);
-       }
+  Future<List<oiChatMessage>> getProjectChatMessages(String inProjectId, int page) async {
+    final Map? responded = await oi.postEntermedia(
+      oi.app!["mediadb"] +
+          '/services/module/librarycollection/viewmessages.json',
+      getParams(page, inProjectId),
+    );
+    List<oiChatMessage> messages = responded!["results"]!
+        .map<oiChatMessage>((json) => oiChatMessage.fromJson(json))
+        .toList();
+    return Future.value(messages);
   }
 
-void saveChat(oiChatMessage inMessage, Map params) async
-{
-  //
-  //TODO; Call this part in an async way
-  final Map? responded = await oi.postEntermedia(oi.app!["mediadb"] + '/services/module/librarycollection/savemessage.json', params) as Map?;
 
-  //TODO: How do I create emChatMessages from json?
-  List<oiChatMessage> messages =
-  responded!["results"]!.map<oiChatMessage>((json) => oiChatMessage.fromJson(json)).toList();
-
+  Future<void> saveChat(oiChatMessage inMessage,String projectId) async {
+    await saveSingleChat(inMessage, projectId);
+    try {
+       final Map? responded = await oi.postEntermedia(
+      oi.app!["mediadb"] +
+          '/services/module/librarycollection/savemessage.json',
+      inMessage.properties,
+    );
+   log("Saved chat message: " + responded.toString()); 
+    } catch (e) {
+      print(e);
+    }
+   
+  }
 }
+

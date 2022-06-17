@@ -23,7 +23,6 @@ class emData{
         {
             name = langname["en"];
         }
-
         properties = json;
     }
 

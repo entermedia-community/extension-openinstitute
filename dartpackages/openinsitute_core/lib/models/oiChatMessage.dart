@@ -11,6 +11,4 @@ class oiChatMessage {
     user = json["user"];
     properties = json;
   }
-
-
 }
