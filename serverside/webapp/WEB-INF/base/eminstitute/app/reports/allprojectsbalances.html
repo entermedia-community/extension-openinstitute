@@ -74,7 +74,8 @@
 			
 			#set( $tracker = $financeManager.createTracker($all) )
 			$context.putSessionValue($$tracker.getSessionId(),$tracker)
-			        <a href="$applink/reports/export/bankreport-#dash($!paidfromaccount).csv?hitssessionid=$tracker.getSessionId()&detail=name&detail=total&detail=date&detail=searchtype&detail=currencytype&detail=collectionid&detail=expensetype&detail=incometype"
+			#set( $bank = $mediaarchive.getCachedData("bankaccount",$paidfromaccount) )
+			        <a href="$applink/reports/export/bankreport-#dash($bank.getName()).csv?hitssessionid=$tracker.getSessionId()&detail=name&detail=total&detail=date&detail=searchtype&detail=currencytype&detail=collectionid&detail=expensetype&detail=incometype"
            class="btn btn-sm btn-primary mb-4">[[Download]]</a>
 			
 			</div>
