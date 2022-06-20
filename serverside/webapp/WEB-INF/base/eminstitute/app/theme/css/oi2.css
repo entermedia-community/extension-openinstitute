@@ -584,7 +584,7 @@ li.menu-subheader {
 .about-main {
 	background-color: #1D5655;
 	color:#fff;
-	padding:1px 1px 60px;
+	padding:1px 1px 30px;
 	clear:right;
 }
 
@@ -592,8 +592,8 @@ li.menu-subheader {
 	font-size:1.1rem;
 	background-color:#449A8D;
 	text-align: center;
-	width:65%;
-	padding:15px 60px;
+	width:95%;
+	padding:15px 10px;
 	margin:20px auto;
 	border:8px solid #fff;
 	border-radius: 40px;
@@ -607,10 +607,9 @@ li.menu-subheader {
 }
 
 .about-highlight {
-	float:right;
+
 	width:280px;
-	margin-top:-80px;
-	margin-right:8%;
+	margin:10px auto;
 	padding:10px 20px;
 	background-color: #DFDC71;
 	border: 1px solid #DFDC71;
@@ -640,21 +639,19 @@ li.menu-subheader {
 
 .about-team {
 	max-width: 540px;
-	margin-left:8%;
-	margin-top:-10px;
-	float:left;
+	margin:0 10px;;
 }
 
 .about-separator {
 	border-top:4px solid #C5C349;
 	padding:1px 20px;
-	margin:10px 10%;
+	margin:0 10%;
 	
 }
 
 
 .secondary-main {
-	margin:20px 15%;
+	margin:0px 1% 30px;
 	padding:20px 20px 1px;
 	border-radius: 40px;
 	background-color: #449A8D;
@@ -668,6 +665,7 @@ li.menu-subheader {
 } 
 .about-box-content {
 	padding:20px;
+	min-height:120px;
 	background-color: #1D5655;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
@@ -709,4 +707,31 @@ li.menu-subheader {
 	text-align:center;
 	font-size:1.2rem;
 	text-align: center;
+}
+
+@media (min-width: 640px) {
+.about-main {
+	padding:1px 1px 60px;
+}
+
+.about-header {
+	width:65%;
+	padding:15px 60px;
+}
+.secondary-main {
+		margin:20px 15%;
+	}
+.about-team {
+	margin-left:8%;
+	margin-top:-10px;
+	float:left;
+}
+.about-highlight {
+	float:right;
+	width:280px;
+	margin-top:-80px;
+	margin-right:8%;
+	padding:10px 20px;
+	
+}
 }
