@@ -1,7 +1,7 @@
 
 <root>
   <data id="transaction">
-    <name><![CDATA[Transactions]]></name>
+    <name><![CDATA[Online Donation]]></name>
   </data>
   <data id="collectiveinvoice">
     <name><![CDATA[Invoices]]></name>

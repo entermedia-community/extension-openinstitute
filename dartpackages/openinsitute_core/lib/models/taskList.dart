@@ -27,11 +27,6 @@ class ToDo {
     }
     return _tasks;
   }
-
-
-
-
-
 }
 
 

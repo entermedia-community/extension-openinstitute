@@ -19,14 +19,14 @@ class EmSocketManager {
 
   connect() async {
     // String entermediakey = "1114md542420a20f0be0db2c0be3709e0fe09b2c0bf0a84266tstampb9dIRTwjfcNON2/UikPQig==";
-    String url = "${oi.app!["websocket_url"]}?entermedia.key=${oi.emUser!.entermediakey}";
+    String url = "${oi.app!["websocket_url"]}?entermedia.key=${oi.authenticationmanager.emUser!.entermediakey}";
     channel = WebSocketChannel.connect(Uri.parse(url));
     // channel!.stream.listen((data) {
     //   print("!!!!new msg: $data");
 
     // });
 
-    String chaturl =  "${oi.app!["chat_socket_url"]}?entermedia.key=${oi.emUser!.entermediakey}";
+    String chaturl =  "${oi.app!["chat_socket_url"]}?entermedia.key=${oi.authenticationmanager.emUser!.entermediakey}";
     chat = WebSocketChannel.connect(Uri.parse(chaturl));
     // chat!.stream.listen((data) {
     //   print("!!!!new msg: $data");

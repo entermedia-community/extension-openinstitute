@@ -3,8 +3,10 @@ package org.openinstitute.finance;
 import java.util.Date;
 
 import org.openedit.MultiValued;
+import org.openedit.data.BaseData;
+import org.openedit.util.DateStorageUtil;
 
-public class BankTransaction
+public class BankTransaction extends BaseData
 {
 	public BankTransaction(String inSearchType, MultiValued inData)
 	{
@@ -32,6 +34,7 @@ public class BankTransaction
 	public void setData(MultiValued inData)
 	{
 		fieldData = inData;
+		setProperties(inData.getProperties());
 	}
 	public Date getDate()
 	{
@@ -87,6 +90,33 @@ public class BankTransaction
 			currencytype = "1";
 		}
 		return currencytype;
+	}
+	
+	@Override
+	public Object getValue(String inType)
+	{
+		if( inType.equals("name"))
+		{
+			return getName();
+		}
+		if( inType.equals("total"))
+		{
+			return getAmount();
+		}
+		if( inType.equals("date"))
+		{
+			return DateStorageUtil.getStorageUtil().formatForStorage(  getDate() );
+		}
+		if( inType.equals("searchtype"))
+		{
+			return getSearchType();
+		}
+		Object value = getData().getValue(inType);
+		if( value == null && inType.equals("currencytype"))
+		{
+			return "1";
+		}
+		return value;
 	}
 	
 	public String getName()
