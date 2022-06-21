@@ -16,6 +16,7 @@ import 'package:openinsitute_core/services/emSocketManager.dart';
 import 'package:openinsitute_core/services/hive_manager.dart';
 import 'package:openinsitute_core/services/project_manager.dart';
 import 'package:openinsitute_core/services/oiChatManager.dart';
+import 'package:openinsitute_core/services/pushnotification_manager.dart';
 import 'package:openinsitute_core/services/task_manager.dart';
 
 //import 'contact.dart';
@@ -30,6 +31,8 @@ class OpenI {
   AuthenticationManager? authenticationManager;
   TaskManager? taskManager;
   FeedManager? feedManager;
+  HiveManager? hiveManager;
+  PushNotificationManager? pushNotificationManager;
   
   Map? get app  {
     if (_settings == null) {
@@ -56,11 +59,15 @@ class OpenI {
   AuthenticationManager get authenticationmanager => Get.find<AuthenticationManager>();
   TaskManager get taskmanager => Get.find<TaskManager>();
   FeedManager get feedmanager => Get.find<FeedManager>();
+  HiveManager get hivemanager => Get.find<HiveManager>();
+  PushNotificationManager get pushnotificationmanager => Get.find<PushNotificationManager>();
 
   Future<void> initialize() async {
     await loadAppSettings();
-    await HiveManager.instance.init();
+    hiveManager = HiveManager();
+    await hiveManager!.init();
     Get.put<OpenI>(this,permanent: true);
+    Get.put<HiveManager>(hiveManager!, permanent: true);
     dataManager = DataManager();
     Get.put<DataManager>(dataManager!,permanent: true);
     chatManager = OiChatManager();
@@ -75,6 +82,9 @@ class OpenI {
     Get.put<TaskManager>(taskManager!,permanent: true);
     feedManager = FeedManager();
     Get.put<FeedManager>(feedManager!,permanent: true);
+    pushNotificationManager = PushNotificationManager();
+    Get.put<PushNotificationManager>(pushNotificationManager!,permanent: true);
+    pushNotificationManager!.registerNotificationListeners();
   }
 
   Future<Map?> loadAppSettings() async {
@@ -111,6 +121,7 @@ class OpenI {
       requestType: RequestType.POST,
       customError: customError,
     );
+      print(" user info is:" + response!.body);
     if (response != null && response.statusCode == 200) {
       print("Success user info is:" + response.body);
       final String responseString = response.body;
@@ -131,16 +142,11 @@ class OpenI {
     if (authenticationmanager.emUser != null) {
       String tokenKey = handleTokenKey(authenticationmanager.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
-    } 
-    else{
-      //TODO: Remove this ASAP
-      String tokenKey = handleTokenKey("adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc");
-      headers.addAll({"X-token": tokenKey});
     }
 
     final response = await httpRequest(
       requestUrl: url,
-      body: json.encode(jsonBody),
+      body: jsonEncode(jsonBody),
       headers: headers,
       requestType: requestType,
       customError: customError,

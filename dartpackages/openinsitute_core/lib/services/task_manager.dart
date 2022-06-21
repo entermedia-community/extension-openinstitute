@@ -11,7 +11,7 @@ class TaskManager {
   return Get.find();
   }
 
-    Future<List<ToDo>> getOpenTasks() async {
+  Future<List<ToDo>> getOpenTasks() async {
     final responsestring = await oi.getEmResponse(oi.app!["mediadb"] + '/services/users/tasks/mytasks.json', {"goaltrackerstaff": "admin"},   RequestType.POST );
     Map<String, dynamic> results = json.decode(responsestring);
     return results["tickets"].map<ToDo>((json) => ToDo.fromJson(json)).toList();

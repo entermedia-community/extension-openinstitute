@@ -1,13 +1,10 @@
 
-import 'package:hive_flutter/adapters.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 class HiveManager {
   static const assets = "assets";
   static const hivechatrooms = "chatrooms";
 
-  HiveManager._();
-
-  static HiveManager instance = HiveManager._();
+  HiveManager();
 
   Future<void> init() async {
    await Hive.initFlutter();

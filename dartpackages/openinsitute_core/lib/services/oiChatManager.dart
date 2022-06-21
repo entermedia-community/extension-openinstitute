@@ -1,13 +1,16 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
-import 'package:openinsitute_core/services/hive_manager.dart';
 
 class OiChatManager {
   String chatBox = "oiChatManagerCache";
   List? fieldProjectChatChangeListeners;
+
+  StreamController<oiChatMessage> notificationStream = StreamController();
 
   OpenI get oi {
     return Get.find();
@@ -19,17 +22,21 @@ class OiChatManager {
           .compareTo(DateTime.parse(b.properties["date"])),
     );
     for (int i = 0; i < messages.length; i++) {
-    await HiveManager.instance.saveData(messages[i].messageid, messages[i].properties, chatBox + "_" + projectId);
+    await oi.hivemanager.saveData(messages[i].messageid, messages[i].properties, chatBox + "_" + projectId);
     }
   }
 
+ 
   Future<void> saveSingleChat(oiChatMessage chatMessage, String projectId) async {
-    await HiveManager.instance.saveData(chatMessage.messageid, chatMessage.properties, chatBox + "_" + projectId);
-  }
+    await  oi.hivemanager.saveData(chatMessage.messageid, chatMessage.properties, chatBox + "_" + projectId);
+  }  
+
+
+
 
   Future<List<oiChatMessage>> loadChatCache(String projectId) async {
     List<Map<String, dynamic>> cache =
-        await HiveManager.instance.getAllHits(chatBox + "_" + projectId);
+        await  oi.hivemanager.getAllHits(chatBox + "_" + projectId);
     List<oiChatMessage> messages = [];
     for (var e in cache) {
       messages.add(oiChatMessage.fromJson(e));
@@ -72,16 +79,38 @@ class OiChatManager {
     };
   }
 
+
+
   Future<List<oiChatMessage>> getProjectChatMessages(String inProjectId, int page) async {
     final Map? responded = await oi.postEntermedia(
       oi.app!["mediadb"] +
           '/services/module/librarycollection/viewmessages.json',
       getParams(page, inProjectId),
     );
-    List<oiChatMessage> messages = responded!["results"]!
+    // get topics from json 
+    List<emData> topics = responded!["topics"]!.map<emData>((json) => emData.fromJson(json)).toList(); 
+    await saveTopics(topics, inProjectId);
+    List<oiChatMessage> messages = responded["results"]!
         .map<oiChatMessage>((json) => oiChatMessage.fromJson(json))
         .toList();
     return Future.value(messages);
+  }
+
+  saveTopics(List<emData> topics, String projectId) async {
+    // Delete topics from hive 
+    await oi.hivemanager.clear(chatBox +"_"+ "topics" + "_" + projectId);
+    for (var topic in topics) {
+      await oi.hivemanager.saveData(topic.id!, topic.properties, chatBox +"_"+ "topics" + "_" + projectId);
+    }
+  }
+
+  getTopics(String projectId) async {
+    List<Map<String, dynamic>> topics =  await oi.hivemanager.getAllHits(chatBox +"_"+ "topics" + "_" + projectId);
+    List<emData> result = [];
+    for (var topic in topics) {
+      result.add(emData.fromJson(topic));
+    }
+    return result;
   }
 
 

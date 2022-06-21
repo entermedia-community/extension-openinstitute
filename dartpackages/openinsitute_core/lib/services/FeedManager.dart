@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
-import 'package:openinsitute_core/services/hive_manager.dart';
 import 'package:get/get.dart';
 
 OpenI get oi {
@@ -15,16 +13,16 @@ class FeedManager {
 
   Future<List<emData>> loadCache() async {
     List<Map<String, dynamic>> cache =
-        await HiveManager.instance.getAllHits(feedsBox);
+        await  oi.hivemanager.getAllHits(feedsBox);
     return cache.map((e) => emData.fromJson(e)).toList();
   }
 
   Future<int?> getTotal() async {
-    return  (await HiveManager.instance.getData("total", feedsBox));
+    return  (await  oi.hivemanager.getData("total", feedsBox));
   }
 
   updateTotal(int total) async {
-    await HiveManager.instance.saveData("total", total, feedsBox);
+    await  oi.hivemanager.saveData("total", total, feedsBox);
   }
 
   Future<List<emData>> loadFeeds(int page) async {
@@ -46,15 +44,14 @@ class FeedManager {
 
   saveCache(String cacheString) async {
     Map<String, dynamic> cache = json.decode(cacheString);
-    await HiveManager.instance.clear(feedsBox);
+    await  oi.hivemanager.clear(feedsBox);
     await updateTotal(int.parse( cache["total"]));
-    await HiveManager.instance.saveData(
+    await  oi.hivemanager.saveData(
         "lastsync", DateTime.now().millisecondsSinceEpoch.toString(), feedsBox);
     List<emData> results =
         cache["uploads"].map<emData>((json) => emData.fromJson(json)).toList();
     for (var element in results) {
-      await HiveManager.instance
-          .saveData(element.id!, element.properties, feedsBox);
+      await  oi.hivemanager.saveData(element.id!, element.properties, feedsBox);
     }
   }
 
