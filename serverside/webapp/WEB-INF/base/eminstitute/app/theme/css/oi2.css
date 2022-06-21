@@ -356,7 +356,7 @@ li.menu-subheader {
 /*OI Homepage*/
 .bodywebsite h1 {
 	text-align:center;
-	padding:20px 25%;
+	padding:15px 5%;
 	color:#1D5655;
 }
 .bodywebsite .paralax {
@@ -366,7 +366,7 @@ li.menu-subheader {
 	min-height:210px;
 	color:#fff;
 	text-align:center;
-	padding: 120px 25% 0px 25%;
+	padding: 120px 5% 0px 5%;
 	font-size:1.3rem;
 }
 
@@ -464,10 +464,16 @@ top: -40px;
 }
 
 /*#409D90*/
-
+.card-collections {
+	width:150px;
+	float:none;
+}
 .card-collections .card-collections-thumb {
 	border:6px solid #C8C446;
 	box-shadow:none;
+	width:150px;
+	height: 150px;
+	
 }
 .card-collections a .collectionbox {
     color: #1D5655;
@@ -495,6 +501,28 @@ top: -40px;
 .collectiveheadermenu .navbar-collective .nav-link {
 	padding:0.2rem .35rem;
 	font-size:0.80rem;
+}
+.donatenow {
+	float:right;
+	padding:5px 20px 5px 20px;
+	margin-right:1px;
+}
+
+@media (min-width: 640px) {
+	.bodywebsite h1 {
+	padding:20px 25%;
+	}
+	.bodywebsite .paralax {
+	padding: 120px 25% 0px 25%;
+	}
+	.card-collections {
+	
+	float:left;
+	}
+	.donatenow {
+	padding:5px 20px 5px 20px;
+	margin-right:100px;
+}
 }
 
 
@@ -674,7 +702,7 @@ li.menu-subheader {
 .about-donate-btn {
 	width:150px;
 	margin:10px auto;
-	margin-bottom:-30px;
+	margin-bottom:5px;
 }
 
 .about-highlight {
@@ -710,7 +738,7 @@ li.menu-subheader {
 
 .about-team {
 	max-width: 540px;
-	margin:0 10px;;
+	margin:0 ;
 }
 
 .about-separator {
@@ -722,45 +750,38 @@ li.menu-subheader {
 
 
 .secondary-main {
-	margin:0px 1% 30px;
-	padding:20px 20px 1px;
+	margin:70px 0 30px;
+	padding:20px 0px 20px;
+	background-color: #fff;
+	border:8px solid #DFDC71;
 	border-radius: 40px;
-	background-color: #449A8D;
-	color:#fff;
-	
-	box-shadow: -15px 10px 20px -5px rgba(0,0,0,0.6);
 }
-
+.secondary-main h2 {
+	padding-left: 150px;
+}
 .about-box {
-	margin:10px 10px 20px;
+	margin:10px 0px 40px;
 } 
 .about-box-content {
 	padding:20px;
 	min-height:120px;
-	background-color: #1D5655;
-	border-bottom-left-radius: 30px;
-	border-bottom-right-radius: 30px;
 	
-}
-.about-box-content td {
-	vertical-align: top;
-	padding:5px 10px;
 }
 
 .about-platform .about-box-header {
 	background: url('../images/about-header-bg-1.png') repeat;
-	margin:0 20px;
-	height: 32px;
+	margin:0;
+	height: 40px;
 }
 .about-features .about-box-header {
 	background: url('../images/about-header-bg-2.png') repeat;
-	margin:0 20px;
-	height: 32px;
+	margin:0;
+	height: 40px;
 }
 .about-testimonials .about-box-header {
 	background: url('../images/about-header-bg-3.png') repeat;
-	margin:0 20px;
-	height: 32px;
+	margin:0;
+	height: 40px;
 }
 
 .secondary-main h3 {
@@ -778,6 +799,7 @@ li.menu-subheader {
 	text-align:center;
 	font-size:1.2rem;
 	text-align: center;
+	box-shadow: -15px 10px 20px -5px rgba(0,0,0,0.7);
 }
 
 @media (min-width: 640px) {
@@ -786,21 +808,21 @@ li.menu-subheader {
 }
 
 .about-header {
-	width:65%;
+	width:100%;
 	padding:15px 60px;
 }
 .secondary-main {
-		margin:20px 15%;
+		/*margin:20px 0;*/
 	}
 .about-team {
-	margin-left:8%;
 	margin-top:-10px;
 	float:left;
+	margin-left:20px;
 }
 .about-highlight {
 	float:right;
 	width:280px;
-	margin-top:-80px;
+	margin-top:-90px;
 	margin-right:8%;
 	padding:10px 20px;
 	
