@@ -385,6 +385,7 @@ li.menu-subheader {
 	padding:20px 25px;;
 	margin:20px 0;
 	border-radius: 20px;
+	position:relative;
 }
 .currentcampaigs h2 {
 	margin:0 0 30px;
@@ -396,46 +397,28 @@ li.menu-subheader {
 	background-color: #1D5655;
 	color:#fff;
 	border-top-left-radius:20px;
+	border-top-right-radius:20px;
 	padding:0;
-	width: 50%;
-	height: 35px;
 	position:relative;
+	
 }
 .communitycontainer-header h3 {
 	color:#fff;
 	margin:0;
 	padding:15px 0 0 28px;
 	font-weight: 700;
+	width:70%;
+	
 }
 .communitycontainer-header h3 a {
 	color:#fff;
 	text-decoration: none;
 }
-.communitycontainer-header h3 a:hover {
-	color:#ccc;
-	text-decoration: none;
-}
-.communitycontainer-header:after, .communitycontainer-header:before {
-    content: '';
-    display: block;
-    position: absolute;
-}
 
-.communitycontainer-header:after {
-top: -40px;
-    right: -40px;
-    border: 40px solid transparent
-}
-
-.communitycontainer-header:after {
-    border-bottom-color: #1D5655;
-}
 
 .communitytagcontainer-out {
 	background-color: #1D5655;
 	color:#fff;
-	border-radius: 20px;
-	border-top-left-radius:0;
 	margin-bottom:40px;
 	padding:25px 25px;
 }
@@ -495,6 +478,11 @@ top: -40px;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 30%);
 }
 
+.card-name {
+    white-space:normal ;
+  }
+
+
 .collectiveheadermenu .navbar-collective li {
 	float:left;
 }
@@ -503,9 +491,10 @@ top: -40px;
 	font-size:0.80rem;
 }
 .donatenow {
-	float:right;
+	position: absolute;
 	padding:5px 20px 5px 20px;
-	margin-right:1px;
+	top:20px;
+	right: 10px;
 }
 
 @media (min-width: 640px) {
@@ -521,8 +510,48 @@ top: -40px;
 	}
 	.donatenow {
 	padding:5px 20px 5px 20px;
-	margin-right:100px;
+	top:20px; 
+	right: 40px;
+	}
+	.communitycontainer-header {
+		background-color: #1D5655;
+		color:#fff;
+		border-top-left-radius:20px;
+		border-top-right-radius: 0;
+		padding:0;
+		width: 50%;
+		height: 40px;
+		display:inline-block;
+		position:relative;
+	}
+	.communitycontainer-header h3 {
+	float:none;
+	width: 100%;
+	}
+	.communitycontainer-header h3 a:hover {
+	color:#ccc;
+	text-decoration: none;
 }
+.communitycontainer-header:after, .communitycontainer-header:before {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+.communitycontainer-header:after {
+	top: -40px;
+    right: -40px;
+    border: 40px solid transparent
+}
+
+.communitycontainer-header:after {
+    border-bottom-color: #1D5655;
+}
+.communitytagcontainer-out {
+	border-radius: 20px;
+	border-top-left-radius:0;
+}
+
 }
 
 
