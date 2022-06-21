@@ -209,7 +209,7 @@ li.menu-subheader {
 	z-index: 1001;
 }
 .oiheader {
-	height:60px;
+	height:70px;
 	position:relative;
 	z-index:100;
 }
@@ -218,12 +218,9 @@ li.menu-subheader {
 
 
 /*OI NAV*/
-
-.nav-collectionpicker {
-	width: 48%;
-	display: inline-block;
+#mainOINav {
+	padding:0.1rem 0;
 }
-
 #mainOINav .navbar-toggler {
  	color:#3e4553;
 	padding:.25rem .25rem
@@ -242,17 +239,70 @@ li.menu-subheader {
 }
 #mainOINav .nav-item.active
 {
-	background-color: #757570;
+	background-color: #79A6AB;
 }
 #mainOINav .nav-item.active a
 {
 	color: white;
 }
-
 #mainOINav .currentlibrary {
 	background-color: #efefef;
 }
+
+#mainOINav .col-oi-logo {
+	max-width:110px;
+}
+#mainOINav .col-oi-picker {
+	max-width:210px;
+}
+#mainOINav .col-oi-menu {
+	max-width:55px;
+}
+.nav-collectionpicker {
+	width: 100%;;
+	display: block;
+}
+
+.nav-collectionpicker .select2-container .select2-selection--single {
+    height: 26px;
+}
+.nav-collectionpicker .userpicker {
+	margin-bottom:5px;
+}
+@media (max-width: 640px) {
+	.navbar-collapse {
+		position:absolute;
+		right:0px;
+		background-color: #1D5655;
+		border-bottom-left-radius: 20px;
+		overflow: hidden;
+	}
+	#mainOINav .navbar-collapse .navbar-nav .nav-link {
+		font-size:0.9rem;
+		
+		padding:5px 25px;
+		color:#eee;
+		min-width: 220px;
+	}
+	#mainOINav .navbar-collapse .navbar-nav .nav-link:active {
+		color:#fff;
+	}
+	#mainOINav .navbar-collapse .dropdown-menu {
+		border-radius: 0;
+		background-color: #79A6AB;
+		padding:0!important;
+	}
+	#mainOINav .navbar-collapse .dropdown-item {
+		text-align: right;
+	}
+	#mainOINav .navbar-nav a {
+		color:#eee;
+	}
+}
 @media (min-width: 640px) {
+	.oiheader {
+		height:60px;
+	}
 	#mainOINav {
 		background:none;
 		padding:0;
@@ -268,9 +318,30 @@ li.menu-subheader {
 	#mainOINav .dropdown-menu {
 		.border-radius:0;
 	}
+	
+	#mainOINav .col-oi-picker {
+		max-width:600px;
+	}
+	#mainOINav .col-oi-logo {
+		max-width:600px;
+	}
+	#mainOINav .col-oi-menu {
+		max-width:600px;
+	}
+	.nav-collectionpicker {
+		width: 48%;
+		display: inline-block;
+	}
 
 	.collectivelayout {
 		padding-top:20px;
+	}
+	
+	.nav-collectionpicker .select2-container .select2-selection--single {
+    height: 28px;
+	}	
+	.nav-collectionpicker .userpicker {
+		margin-bottom:0px;
 	}
 	
 }
