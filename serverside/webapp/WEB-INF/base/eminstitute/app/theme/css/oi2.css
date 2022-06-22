@@ -789,7 +789,7 @@ li.menu-subheader {
 	border-radius: 40px;
 }
 .secondary-main h2 {
-	padding-left: 150px;
+	padding-left: 20px;
 }
 .about-box {
 	margin:10px 0px 40px;
@@ -808,12 +808,12 @@ li.menu-subheader {
 .about-features .about-box-header {
 	background: url('../images/about-header-bg-2.png') repeat;
 	margin:0;
-	height: 40px;
+	height: 35px;
 }
 .about-testimonials .about-box-header {
 	background: url('../images/about-header-bg-3.png') repeat;
 	margin:0;
-	height: 40px;
+	height: 35px;
 }
 
 .secondary-main h3 {
