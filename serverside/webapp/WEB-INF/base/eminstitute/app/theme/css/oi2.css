@@ -447,8 +447,11 @@ li.menu-subheader {
 }
 
 /*#409D90*/
+.project-grid {
+	text-align: center;
+}
 .card-collections {
-	width:150px;
+	width:200px;
 	float:none;
 }
 .card-collections .card-collections-thumb {
