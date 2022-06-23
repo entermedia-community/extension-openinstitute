@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+
+
+  <data id="modulelibrarycollectioncreate" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/create"> 
+    <samplerequest><![CDATA[{ "name": "JSON Projects Test" }]]></samplerequest>  
+    <name><![CDATA[Create a new Project]]></name> 
+  </data>  
+  <data id="modulelibrarycollectiondelete" uploadfile="false" httpmethod="DELETE" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/data/101"> 
+    <name><![CDATA[Delete Data]]></name> 
+  </data>  
+  <data id="modulelibrarycollectionretrieve" uploadfile="false" httpmethod="GET" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/data/101"> 
+    <name><![CDATA[Load Data ]]></name> 
+  </data>  
+  <data id="modulelibrarycollectionsearch" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/search"> 
+    <samplerequest><![CDATA[{ "page": "1", "hitsperpage":"20", "query": { "terms":[{ "field": "id", "operator": "matches", "value": "*" }] } }]]></samplerequest>  
+    <name><![CDATA[Search for Projects]]></name> 
+  </data>  
+  <data id="modulelibrarycollectionupdate" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/data/101"> 
+    <samplerequest><![CDATA[{ "name": "JSON NAME CHANGE" }]]></samplerequest>  
+    <name><![CDATA[Update Data]]></name> 
+  </data>  
+
+  <data id="modulelibrarycollectionsearchassets" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/searchassets"> 
+    <samplerequest><![CDATA[{ "collectionid": "AX7gTBpbekpQ63X1oUTz" }]]></samplerequest>  
+    <name><![CDATA[Search Assets]]></name> 
+  </data>  
+
+  <data id="modulelibrarycollectionviewprojects" uploadfile="false" httpmethod="GET" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/viewprojects"> 
+    <name><![CDATA[View Projects Of User]]></name> 
+  </data>  
+
+  <data id="modulelibrarycollectionviewmessages" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/viewmessages"> 
+    <samplerequest><![CDATA[{ "collectionid": "AX7gTBpbekpQ63X1oUTz" }]]></samplerequest>  
+    <name><![CDATA[View Messages For Project]]></name> 
+  </data>  
+
+  <data id="modulelibrarycollectionsavemessage" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/messagesave"> 
+    <samplerequest><![CDATA[{  "collectionid": "AX7gTBpbekpQ63X1oUTz", "channel":"AX7gTB36ekpQ63X1oUT4", "message":"Hello world!" }]]></samplerequest>  
+    <name><![CDATA[Message Save]]></name> 
+  </data>  
+
+
+
+
+</root>
