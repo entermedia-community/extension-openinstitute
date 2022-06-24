@@ -15,7 +15,7 @@ public void init() {
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 
 	generateRecurringInvoices(mediaArchive, productSearcher);  //status=active
-	generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
+	//generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
 	payAutoPaidInvoices(mediaArchive, invoiceSearcher);
 	
 	
@@ -214,18 +214,16 @@ private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher in
 private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
 
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
-	String emails = context.getRequestParameter("emails");
-	if (emails!= null) {
 		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) 
 		{
 			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 			String collectionid = invoice.getValue("collectionid");
 			Data workspace = mediaArchive.getData("librarycollection", collectionid);
-			
+			String emails = invoice.getValue("sentto");
 			List<String> emaillist = Arrays.asList(emails.split(","));
 			if (emaillist.size()>0) 
 			{
-				log.info("Reviewing "+emaillist.size()+" members for: "+workspace+ " ("+collectionid+")");
+				log.info("Sending email to  "+emaillist.size()+" members of: "+workspace+ " ("+collectionid+")");
 				for (String email : emaillist)
 				 {
 					if (email != null) {
@@ -260,7 +258,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 					log.info("No email addresses to send Invoice for: "+workspace+ " ("+collectionid+")");
 				}
 			}
-		}
+		
 }
 
 

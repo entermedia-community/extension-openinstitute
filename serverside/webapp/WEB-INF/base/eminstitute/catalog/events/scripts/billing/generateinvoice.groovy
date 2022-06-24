@@ -34,22 +34,29 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 		productid = context.getPageValue("id");
 	}
 	Data product = productSearcher.searchById(productid);
-	if(product != null && product.getValue("billingstatus") == "active" && invoiced != "true")
+	//if(product != null && product.getValue("billingstatus") == "active" && invoiced != "true")
+	if(product != null)
 	{
-		Date nextBillOn = product.getValue("nextbillon");
+		
 		Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
-		if (lastbilldate < nextBillOn) { // otherwise assume it's already created
+//		if (lastbilldate < nextBillOn) { // otherwise assume it's already created
 			Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
 			Data invoice = invoiceSearcher.createNewData();
 
 			Calendar invoiceDue = Calendar.getInstance();
 			invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+
+			//Move this to aux-table?
 			HashMap<String,Object> productItem = new HashMap<String,Object>();
-			productItem.put("productid", product.getValue("id"));
-			productItem.put("productquantity", 1 );
-			productItem.put("productprice", product.getValue("productprice"));
+				productItem.put("productid", product.getValue("id"));
+				productItem.put("productname", product.getValue("name"));
+				productItem.put("productdescription", product.getValue("productdescription"));
+				productItem.put("productquantity", 1 );
+				productItem.put("productprice", product.getValue("productprice"));
 			Collection items = new ArrayList();
 			items.add(productItem);
+			//--
+			
 			invoice.setValue("productlist", items);
 			invoice.setValue("paymentstatus", "pending");
 			invoice.setValue("isautopaid", product.getValue("isautopaid"));
@@ -57,27 +64,61 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("owner", product.getValue("owner"));
 			invoice.setValue("totalprice", product.getValue("productprice"));
 			invoice.setValue("duedate", invoiceDue.getTime());
-			invoice.setValue("invoicedescription", product.getValue("productdescription"));
+			//invoice.setValue("invoicedescription", product.getValue("productdescription"));
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());
-			invoiceSearcher.saveData(invoice);
 			
-			//recurring
+			//Temp
+			invoice.setValue("currencytype", "usd");
+			
+			Collection contacts = mediaArchive.query("librarycollectionusers")
+								.exact("collectionid",product.getValue("collectionid"))
+								.exact("ontheteam",true)
+								.exact("isbillingcontact","true")
+								.search();
+			String contactsstring = "";
+			if (contacts!= null) {
+				for(Data c:contacts)
+				{
+					User user = mediaArchive.getUser(c.getValue("followeruser"));
+					
+					if(user!= null && user.getEmail() != null) {
+						if (contactsstring != "") {
+							contactsstring = contactsstring + ", " + user.getEmail(); 
+						}	
+						else {
+							contactsstring =  user.getEmail();
+						}
+					}
+				}
+			}
+			invoice.setValue("sentto", contactsstring);
+			
+		
+			//recurring moved to invoice
+			/*
 			int recurrentCount = product.getValue("recurringperiod")
 			if(recurrentCount != null) 
 			{
+				Date nextBillOn = today.getTime();
 				int currentMonth = nextBillOn.getMonth();
 				nextBillOn.setMonth(currentMonth + recurrentCount);
-				product.setValue("nextbillon", nextBillOn);
+				//product.setValue("nextbillon", nextBillOn);
 			}
 			
-			product.setValue("lastgeneratedinvoicedate", today.getTime());
-			productSearcher.saveData(product);
+			invoiceSearcher.saveData(invoice);
+			
+			//product.setValue("lastgeneratedinvoicedate", today.getTime());
+			//productSearcher.saveData(product);
+			
+			*/
+			
+			context.putPageValue("invoiceid", invoice.getId())
 			
 			log.info("New Invoice generated - " + invoice.getValue("invoicenumber"));
 		}
 		
-	}
+//	}
 	
 }
 

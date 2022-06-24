@@ -55,9 +55,10 @@
                                                             class="emdialog btn btn-xs btn-info">[[Copy]]</a>
                                                             
                                                         <a
-                                                            href="$applink/collective/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
-                                                            title="[[Copy Product or Service]]"
-                                                            class="emdialog btn btn-xs btn-info">[[Create Invoice]]</a>
+                                                            href="$applink/collective/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
+                                                            title="[[Invoice Product or Service]]"
+                                                            class="emdialog btn btn-xs btn-info"
+                                                            data-hidefooter="true">[[Create Invoice]]</a>
                                                     #end
                                                     #if ($hit.recurring == true)
                                                         #if ($hit.billingstatus == "active")
@@ -154,24 +155,25 @@
                                                     target="_blank"
                                                     class="btn btn-xs btn-secondary emdialog"
                                                      data-hidefooter="true">[[Preview]]</a>
-                                            #elseif ($hit.getValue("paymentstatus") == "invoiced")
+                                            #elseif ($hit.getValue("paymentstatus") == "paid" || $hit.getValue("paymentstatus") == "invoiced")
+                                                <a
+                                                    href="$applink/collective/services/previewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
+                                                    target="_blank"
+                                                    class="btn btn-xs btn-secondary emdialog"
+                                                     data-hidefooter="true">[[View]]</a>
+                                            #end
+                                            #if ($hit.getValue("paymentstatus") == "invoiced")
                                                 <a
                                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                                     class="btn btn-xs btn-primary">[[Pay Now]]</a>
-                                                #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") ==
-                                                "error")
+                                            #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") == "error")
                                                 <a
                                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                                     class="btn btn-xs btn-primary">[[Pay Now]]</a>
                                                 #if ($hit.paymentstatusreason != "")
                                                     <div class="alert alert-danger">$hit.paymentstatusreason</div>
                                                 #end
-                                            #elseif ($hit.getValue("paymentstatus") == "paid")
-                                                <a
-                                                    href="$applink/collective/services/viewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                                    target="_blank"
-                                                    class="btn btn-xs btn-secondary">[[View]]</a>
-                                            #end
+											#end
                                             
                                         </td>
                                     </tr>

@@ -1,6 +1,4 @@
 <page>
 	<path-action name="DataEditModule.saveData" />
-	  <path-action name="Script.run">
-   		 <script>/${catalogid}/events/scripts/billing/generateinvoice.groovy</script>
-  	  </path-action>
+
 </page>

@@ -8,6 +8,7 @@
 	<property id="producttags" />
 	<property id="productcost" />
 	<property id="productattachment" />
+	<property id="currencytype" />
 	<property id="productprice" />
 	<property id="featured" />
 	<property id="paymentstatus" />

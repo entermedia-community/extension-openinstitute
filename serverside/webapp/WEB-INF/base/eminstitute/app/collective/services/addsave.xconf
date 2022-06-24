@@ -1,7 +1,3 @@
 <page>
 	<path-action name="PaymentModule.createProductService"/>
-	
- 	<path-action name="Script.run">
-    	<script>/${catalogid}/events/scripts/billing/generateinvoice.groovy</script>
-  	</path-action>
 </page>

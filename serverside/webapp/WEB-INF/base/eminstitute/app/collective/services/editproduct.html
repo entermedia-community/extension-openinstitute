@@ -5,8 +5,6 @@
 
 ##Exising ones 
 ##No existing programs found.
-<div class="">
- <div class="card-block" style="padding:20px;">
 
 #set( $searcher = $mediaarchive.getSearcher("collectiveproduct") )
 #set( $xmledithome  = "$apphome/components/xml")
@@ -36,29 +34,11 @@ $context.putPageValue("data", $data)
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$librarycol.getId()" />
 		<input type="hidden" name="collectionid" value="$librarycol.getId()" />
+		
+		$context.putPageValue("fieldcolumnsize", 12)
 		$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
-		<div class="form-group row no-gutters">
-		#if($data.getValue("billingstatus")== "active")
-			<div class="col">[[Status]]</div>
-			<div class="col-10" style="padding-left:10px;">
-			[[Active]]
-			</div>
-			<input type="hidden" value="true" name="invoiced">
-		#else
-			<label for="billingstatus" class="col">[[Create Invoice]]</label>
-			<div class="col-10" style="padding-left:10px;">
-				<div class="emfield-boolean">
-					<input type="hidden" value="billingstatus" name="field">
-					<div class="form-check">
-						<input id="bliingstatus" type="checkbox" name="billingstatus.value" value="active" />								
-					</div>
 		
-				</div>
 		
-		    </div>
-		    
-		#end
-		</div>
 	
 	  	<button type="submit" class="btn btn-primary" hidden>[[Submit]]</button>
 	</form>
@@ -67,7 +47,3 @@ $context.putPageValue("data", $data)
 
 
 
-
-
-  </div>
-</div>

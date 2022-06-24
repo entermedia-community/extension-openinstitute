@@ -500,12 +500,20 @@ public class PaymentModule extends BaseMediaModule
 
 	}
 	
-	public void prepareInvoice(WebPageRequest inReq) {
+	public void saveInvoice(WebPageRequest inReq) {
 		MediaArchive mediaArchive = getMediaArchive(inReq);
 		Data invoice = mediaArchive.getInvoiceById(inReq.getRequestParameter("id"));
-		invoice.setValue("paymentstatus", "sendinvoice");
+
+		//Emails
+		String sentto = inReq.getRequestParameter("sentto.value");
+		invoice.setValue("sentto", sentto);
+		
+		String invoicedescription = inReq.getRequestParameter("invoicedescription.value");
+		invoice.setValue("invoicedescription", invoicedescription);
+		
 		mediaArchive.saveData("collectiveinvoice", invoice);
 		
+		/*
 		List products = (List) invoice.getValues("productlist");
 		if (products == null)
 		{
@@ -519,11 +527,16 @@ public class PaymentModule extends BaseMediaModule
 			product.setValue("locked", "true");
 			mediaArchive.saveData("collectiveproduct", product);
 		}
+		*/
 		
-		//Emails
-		String emails = inReq.getRequestParameter("emails");
+		
+		
+		
+		
 		
 	}
+	
+
 	
 	public void createProductService(WebPageRequest inReq) {
 		MediaArchive mediaArchive = getMediaArchive(inReq);
