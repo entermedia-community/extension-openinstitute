@@ -1,0 +1,11 @@
+<page>
+
+	<property name="oisection">community</property>
+
+	<property name="virtual">true</property>
+
+	 <inner-layout>/${applicationid}/appeal/layout.html</inner-layout>
+	 
+	 <path-action name="ProjectModule.loadCollection"></path-action>
+	 
+</page>

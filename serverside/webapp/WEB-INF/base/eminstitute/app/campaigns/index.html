@@ -43,7 +43,7 @@
 			</h3>
 			
 			</div>
-			<a href="$applink/collective/donate/${target.id}/#dash($target.name).html" class="badge badge-success donatenow" style="">[[Donate]]</a>
+			<a href="$applink/appeal/${tag.id}/#dash($tag.name).html" class="badge badge-success donatenow" style="">[[Donate]]</a>
 			
 			<div class="communitytagcontainer-out">
 			
@@ -55,19 +55,27 @@
 			</div>
 			<div class="communitytagdescription" style="">
 				
-					#if( $tag.funddescription )
-						$tag.funddescription
-					#else
-						$!target.collectivedescription
-					#end	
-				 
-					<div style="padding-top:20px;">
-			 		#foreach( $project in $projects.getPageOfHits() )
-						$context.putPageValue("collective",$project)
-						$pages.include("$apphome/browse/collectivelist.html",$context)
-					#end
-					</div>
-					<div style="clear:both"></div>
+				<div class="row">
+				<div  class="col" >
+				<div style="text-align:left;">
+				#if( $tag.funddescription )
+					$tag.funddescription
+				#else
+					$!target.collectivedescription
+				#end	
+			 	</div>
+			 	</div>
+			 	<div  class="col-lg-4" >
+				<div style="padding-top:20px;">
+		 		#foreach( $project in $projects.getPageOfHits() )
+					$context.putPageValue("collective",$project)
+					$pages.include("$apphome/browse/collectivelist.html",$context)
+				#end
+				</div>
+				<div style="clear:both"></div>
+				</div>
+				</div>
+				
 			</div>
 			</div>
 			<div style="clear:both">
