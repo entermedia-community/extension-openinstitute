@@ -4,6 +4,7 @@ import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +17,6 @@ import 'package:openinsitute_core/services/emSocketManager.dart';
 import 'package:openinsitute_core/services/hive_manager.dart';
 import 'package:openinsitute_core/services/project_manager.dart';
 import 'package:openinsitute_core/services/oiChatManager.dart';
-import 'package:openinsitute_core/services/pushnotification_manager.dart';
 import 'package:openinsitute_core/services/task_manager.dart';
 
 //import 'contact.dart';
@@ -32,7 +32,6 @@ class OpenI {
   TaskManager? taskManager;
   FeedManager? feedManager;
   HiveManager? hiveManager;
-  PushNotificationManager? pushNotificationManager;
   
   Map? get app  {
     if (_settings == null) {
@@ -60,12 +59,10 @@ class OpenI {
   TaskManager get taskmanager => Get.find<TaskManager>();
   FeedManager get feedmanager => Get.find<FeedManager>();
   HiveManager get hivemanager => Get.find<HiveManager>();
-  PushNotificationManager get pushnotificationmanager => Get.find<PushNotificationManager>();
 
-  Future<void> initialize() async {
+  Future<void> initialize({required FirebaseAuth firebaseAuth}) async {
     await loadAppSettings();
     hiveManager = HiveManager();
-    await hiveManager!.init();
     Get.put<OpenI>(this,permanent: true);
     Get.put<HiveManager>(hiveManager!, permanent: true);
     dataManager = DataManager();
@@ -76,15 +73,12 @@ class OpenI {
     Get.put<EmSocketManager>(socketManager!,permanent: true);
     projectManager = ProjectManager();
     Get.put<ProjectManager>(projectManager!,permanent: true);
-    authenticationManager = AuthenticationManager();
+    authenticationManager = AuthenticationManager(firebaseAuth);
     Get.put<AuthenticationManager>(authenticationManager!,permanent: true);
     taskManager = TaskManager();
     Get.put<TaskManager>(taskManager!,permanent: true);
     feedManager = FeedManager();
     Get.put<FeedManager>(feedManager!,permanent: true);
-    pushNotificationManager = PushNotificationManager();
-    Get.put<PushNotificationManager>(pushNotificationManager!,permanent: true);
-    pushNotificationManager!.registerNotificationListeners();
   }
 
   Future<Map?> loadAppSettings() async {

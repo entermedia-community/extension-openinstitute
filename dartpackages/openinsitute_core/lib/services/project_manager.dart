@@ -4,41 +4,45 @@ import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 
 class ProjectManager {
-
   OpenI get oi {
-  return Get.find();
-}
+    return Get.find();
+  }
 
   Future<List> getUserProjects(int page) async {
     Map params = {"page": "$page", "hitsperpage": "200"};
 
     var box = await getBox("oicache");
     var results = box.get("viewprojects"); //Some cache system
-    if (results == null) {
-      results = <emData>[]; //Make one list that is cached
-      box.put("viewprojects", results);
-    }
+
+    // clear the cache
 
     //TODO; Call this part in an async way
     final Map? responded = await oi.postEntermedia(
-        oi.app!["mediadb"] +
-            '/services/module/librarycollection/viewprojects.json',
-        params,);
+      oi.app!["mediadb"] +
+          '/services/module/librarycollection/viewprojects.json',
+      params,
+    );
 
-    //TODO: How do I create emChatMessages from json?
-    List<emData> messages = responded!["results"]!
+    List<emData> projects = responded!["results"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
     box.put("pages", responded["response"]["pages"]);
+    
     results.clear();
-    results
-        .addAll(messages); //TODO: This should reload the UI with new entries?
-    box.put("viewprojects", results);
+    results.addAll(projects);
     return Future.value(results);
   }
 
+  Future<void> createProject(String projectName, String projectDes) async {
+    await oi.postEntermedia(
+      oi.app!["mediadb"] + '/services/module/librarycollection/create',
+      {
+        "name": projectName,
+        // "owner": {"id": oi.authenticationManager!.emUser!.userid, "name": oi.authenticationManager!.emUser!.screenname},
+      },
+    );
+  }
 }
-
 
 Future<Box> getBox(String inType) async {
   if (!Hive.isBoxOpen(inType)) {

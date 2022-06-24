@@ -1,24 +1,33 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:http/http.dart' as http;
+import 'package:hive_test/hive_test.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
-import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-
-
   TestWidgetsFlutterBinding.ensureInitialized(); //Nasty!
   final oi = OpenI();
   Get.put<OpenI>(oi);
-  oi.initialize();
+  FirebaseAuth firebaseAuth = MockFirebaseAuth();
+  oi.initialize(firebaseAuth: firebaseAuth,);
   HttpOverrides.global = _MyHttpOverrides(); // Setting a customer override that'll use an unmocked HTTP client
+
+  setUp(() async {
+    await setUpTestHive();
+    SharedPreferences.setMockInitialValues({});
+  });
+
+tearDown(() async {
+  await tearDownTestHive();
+});
 
   test('Load Settings', () async {
     Map? settings = await oi.loadAppSettings();
@@ -119,24 +128,17 @@ void main() {
     DataModule testmodule = await oi.dataManager!.getDataModule("purpose");
     List<emData> hits = testmodule.getAllHits();
     expect(hits.length > 0 , true);
-
     Map tosave = {
       "name": "Test"
     };
-
     emData saved = await testmodule.addData(tosave);
     testmodule.deleteData(saved.id);
-
-
   });
 
   test('Test Project CHat loading', () async {
-
+    Map? settings = await oi.loadAppSettings();
     EmUser? user = await oi.authenticationManager?.login("admin", "admin");
     expect(user != null, true);
-
-    Map? settings = await oi.loadAppSettings();
-
     //TODO: Get list of all projects
     var projects = await oi.projectManager?.getUserProjects(1);
     expect(projects!.length > 0, true);

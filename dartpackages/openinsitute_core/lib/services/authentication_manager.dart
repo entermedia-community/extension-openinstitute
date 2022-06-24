@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 
 //firebase log in code - Mando
 class AuthenticationManager {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  AuthenticationManager(this._firebaseAuth);
+  final FirebaseAuth _firebaseAuth;
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   EmUser? emUser;
   String? email;

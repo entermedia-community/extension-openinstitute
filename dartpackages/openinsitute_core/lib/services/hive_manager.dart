@@ -7,7 +7,7 @@ class HiveManager {
   HiveManager();
 
   Future<void> init() async {
-   await Hive.initFlutter();
+    Hive.initFlutter();
   }
 
   Future<Box> openHiveBox(String boxString) async {
