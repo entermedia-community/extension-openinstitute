@@ -1,5 +1,5 @@
-<div class="container oicontainer"  style="padding:20px;">
-	<div class="row no-gutters"  >
+<div id="campaigninfo" class="container oicontainer" >
+	<div class="row no-gutters"    >
 		<div class="col">
 	#set( $tagid = $url_util.getPathUtilities().extractDirectoryName($content.path) )
 	
@@ -27,11 +27,26 @@
 			 #end
 		</div>
 		<div class="communitytagdescription" style="">
+				#set( $librarycol = $target)
+				$context.putPageValue("librarycol",$librarycol )
+				#if(!$user)
+					<div style="padding:20px ">
+				
+						#set($loginok =	"$applink/collective/donate/$!librarycol.id/donate.html")
+						<i class="fas fa-credit-card"></i> [[Please Login to Donate with Credit Card]] 
+						<div style="padding:20px 0 10px;">
+					  		<a href="$applink/authentication/logon.html?loginokpage=$!loginok"	class="btn btn-success">[[Login to Donate With Credit Card]]</a>
+					  	</div>
+				  	</div>
+					<p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
+				  	$pages.include("$apphome/collective/donate/paypalform.html",$context)
+				#else
+				  	$pages.include("$apphome/collective/donate/creditcardform.html",$context)
+					<p style="text-align:center;padding-top:20px;"><strong>[[Or Use]] PayPal:</strong></p>
+					$pages.include("$apphome/collective/donate/paypalform.html",$context)
+				#end
 
-				$context.putPageValue("librarycol",$target )
-				$pages.include("$apphome/collective/donate/donate.html",$context)
-
-				<div class="row">
+				<div  class="row communitytagdescriptiontext">
 				<div  class="col" >
 				<div style="text-align:left;">
 				#if( $tag.funddescription )
