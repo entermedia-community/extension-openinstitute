@@ -9,6 +9,9 @@
 	 <path-action name="ProjectModule.loadCollection"></path-action>
 	 
 	 	<script id="stripe" src="https://js.stripe.com/v3/"/>
+	 	<page-action name="Date.now"/>
+	<page-action name="TransactionModule.loadTransactionManager"/>
+	<page-action name="PageValue.loadPageVariable" bean="mathutil" />	
 	 
 	 
 </page>

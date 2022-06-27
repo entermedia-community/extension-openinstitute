@@ -132,6 +132,29 @@ public class FinanceManager  implements CatalogEnabled
 			bycurrency.replace(currency, currencytotal);
 		}
 
+		//Transfers
+		//Pull out only income transactions
+		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,true);
+		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) {
+			List<Data> transfers = (List<Data>) set.getValue();
+			String currency = set.getKey();
+			for (Iterator iterator = transfers.iterator(); iterator.hasNext();)
+			{
+				Data transfer = (Data) iterator.next();
+				
+				Double currencytotal = (Double) bycurrency.get(currency);
+				if( currencytotal == null || currencytotal == 0.0)
+				{
+					currencytotal = 0.0;
+					bycurrency.put(currency, currencytotal);
+		
+				}
+				currencytotal = currencytotal + (Double)transfer.getValue("total");
+				bycurrency.replace(currency, currencytotal);
+			}
+		}
+
+		
 		
 		//Paid Invoices
 		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
@@ -259,7 +282,7 @@ public class FinanceManager  implements CatalogEnabled
 			
 		}
 
-		//Pull out only income
+		//Pull out only income transactions
 		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,true);
 		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) {
 			List<Data> values = (List<Data>) set.getValue();
@@ -475,6 +498,28 @@ public class FinanceManager  implements CatalogEnabled
 			bycurrency.put(currency, currencytotal);
 		}
 		
+		
+		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,false);
+		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) {
+			List<Data> transfers = (List<Data>) set.getValue();
+			String currency = set.getKey();
+			for (Iterator iterator = transfers.iterator(); iterator.hasNext();)
+			{
+				Data transfer = (Data) iterator.next();
+				
+				Double currencytotal = (Double) bycurrency.get(currency);
+				if( currencytotal == null || currencytotal == 0.0)
+				{
+					currencytotal = 0.0;
+					bycurrency.put(currency, currencytotal);
+		
+				}
+				currencytotal = currencytotal + (Double)transfer.getValue("total");
+				bycurrency.replace(currency, currencytotal);
+			}
+		}
+
+		
 		return bycurrency;
 		
 	}
@@ -581,6 +626,49 @@ public class FinanceManager  implements CatalogEnabled
 		
 	}
 
+	public HashMap<String, Double> getNetTransafersForUser(String inEntityId, DateRange inDateRange)
+	{
+		HitTracker hits = getAllTransfersForEntity(inEntityId, inDateRange);
+
+		HashMap<String, Double>  bycurrency = new HashMap();
+		
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
+		{
+			SearchHitData data = (SearchHitData) iterator.next();
+			String currency = (String) data.getValue("currencytype");
+			Double currencytotal = (Double) bycurrency.get(currency);
+			if( currencytotal == null || currencytotal == 0.0)
+			{
+				currencytotal = 0.0;
+				bycurrency.put(currency, currencytotal);
+			}
+			String source = data.get("paymententitysource");
+
+			if( source.equals(inEntityId))
+			{
+				if( currency.equals("2") ) //Work points
+				{
+					 if( "1".equals( data.get("currencytransferstatus") ) )//pending
+					 {
+							currencytotal = currencytotal + (Double)data.getValue("total");							 
+					 }
+				}
+				else
+				{
+					currencytotal = currencytotal - (Double)data.getValue("total");
+				}
+			}
+			else
+			{
+				currencytotal = currencytotal + (Double)data.getValue("total");
+			}
+			bycurrency.replace(currency, currencytotal);		
+		}
+		
+		return bycurrency;
+	}
+
+	
 	public HashMap<String, List<Data>>   getTransfersByCurrencyForEntity(String inEntityId, DateRange inDateRange, boolean ifincome)
 	{
 		HitTracker hits = getAllTransfersForEntity(inEntityId, inDateRange);
