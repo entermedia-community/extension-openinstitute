@@ -1,36 +1,60 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 
 class ProjectManager {
+  String projectBox = "viewprojects";
+
   OpenI get oi {
     return Get.find();
   }
 
-  Future<List> getUserProjects(int page) async {
+  Future<void> cacheProject(List<emData> projects) async {
+    await oi.hivemanager.clear(projectBox); 
+    for (int i = 0; i <  projects.length; i++) {
+      await oi.hivemanager
+          .saveData(projects[i].id, projects[i].properties, projectBox);
+    }
+  }
+
+  Future<List<emData>> loadProjectCache() async {
+    List<Map<String, dynamic>> cache = await oi.hivemanager.getAllHits(projectBox);
+    List<emData> projects = [];
+    for(var e in cache) {
+      projects.add(emData.fromJson(e));
+    }
+    return projects;
+  } 
+
+  Future<List<emData>> loadProject(int page) async {
+    List<emData> projects = []; 
+    List<emData> result = await getUserProjects(page); 
+    if(result.isNotEmpty) {
+      projects.addAll(result); 
+      await cacheProject(projects);
+    }
+    return projects; 
+  }
+
+  Future<emData> getProjectById(String projectId) async {
+    Map<String, dynamic> data = await oi.hivemanager.getData(projectId, projectBox);
+    return emData.fromJson(data); 
+  }
+
+  Future<List<emData>> getUserProjects(int page) async {
     Map params = {"page": "$page", "hitsperpage": "200"};
-
-    var box = await getBox("oicache");
-    var results = box.get("viewprojects"); //Some cache system
-
-    // clear the cache
-
     //TODO; Call this part in an async way
     final Map? responded = await oi.postEntermedia(
       oi.app!["mediadb"] +
           '/services/module/librarycollection/viewprojects.json',
       params,
     );
-
     List<emData> projects = responded!["results"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
-    box.put("pages", responded["response"]["pages"]);
-    
-    results.clear();
-    results.addAll(projects);
-    return Future.value(results);
+    await oi.hivemanager.saveData("pages", responded["response"]["pages"], projectBox);
+    // results.addAll(projects);
+    return projects;
   }
 
   Future<void> createProject(String projectName, String projectDes) async {
@@ -38,16 +62,7 @@ class ProjectManager {
       oi.app!["mediadb"] + '/services/module/librarycollection/create',
       {
         "name": projectName,
-        // "owner": {"id": oi.authenticationManager!.emUser!.userid, "name": oi.authenticationManager!.emUser!.screenname},
       },
     );
-  }
-}
-
-Future<Box> getBox(String inType) async {
-  if (!Hive.isBoxOpen(inType)) {
-    return Hive.openBox(inType);
-  } else {
-    return Hive.box(inType);
   }
 }

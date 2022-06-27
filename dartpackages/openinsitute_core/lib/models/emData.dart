@@ -1,7 +1,7 @@
 class emData{
 
-    String? id;
-    String? name;
+    late String id;
+    late String name;
     late Map <String, dynamic> properties;
 
     emData(this.id, this.name, this.properties);

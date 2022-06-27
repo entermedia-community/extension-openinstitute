@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hive/hive.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/sharedpreferences.dart';
@@ -25,9 +26,10 @@ class AuthenticationManager {
     // tempKey = null;
     // final resMap = await postEntermedia(EMFinder + '/services/authentication/sendmagiclink.json', {"to": email}, context);
     final resMap = await oi.postEntermedia(
-        oi.app!["mediadb"] +
-            '/services/authentication/emailonlysendmagiclinkfinish.json',
-        {"to": email},);
+      oi.app!["mediadb"] +
+          '/services/authentication/emailonlysendmagiclinkfinish.json',
+      {"to": email},
+    );
     print("Sending email to..." + email);
     if (resMap != null) {
       var loggedin = true;
@@ -43,8 +45,9 @@ class AuthenticationManager {
     this.email = email;
     // tempKey = null;
     final resMap = await oi.postEntermedia(
-        oi.app!["mediadb"] + '/services/authentication/sendmagiclink.json',
-        {"to": email},);
+      oi.app!["mediadb"] + '/services/authentication/sendmagiclink.json',
+      {"to": email},
+    );
     print("Sending email with login code to..." + email);
     if (resMap != null) {
       var loggedin = true;
@@ -60,8 +63,9 @@ class AuthenticationManager {
     emUser = null;
 
     final resMap = await oi.postEntermedia(
-        oi.app!["mediadb"] + '/services/authentication/sendnewuseremail.json',
-        {"email": email, "firstName": firstName, "lastName": lastName},);
+      oi.app!["mediadb"] + '/services/authentication/sendnewuseremail.json',
+      {"email": email, "firstName": firstName, "lastName": lastName},
+    );
     print("Creating new user " + firstName + " with email: " + email);
     if (resMap != null) {
       var loggedin = true;
@@ -93,11 +97,13 @@ class AuthenticationManager {
         oi.app!["mediadb"] + '/services/authentication/login.json',
         {"id": id, "password": password},
         customError: "Invalid credentials. Please try again!");
-    print("Logging in");
+    print("Logging in...");
     if (resMap != null) {
-      Map<String, dynamic> results = resMap["results"];
+      Map<String, dynamic> results = resMap["results"];   
       emUser = EmUser.fromJson(results);
       print("complete");
+      emUser = await firebaseLogin(emUser!.email!, emUser!.entermediakey);
+      await signIn(email: emUser!.email!, password: emUser!.firebasepassword!);
       await sharedPref.saveEmUser(emUser!);
       return emUser;
     } else {
@@ -132,6 +138,8 @@ class AuthenticationManager {
   Future<bool?> logout() async {
     emUser = null;
     await sharedPref.resetValues();
+    await Hive.deleteFromDisk();
+    await signOut();
     return true;
   }
 

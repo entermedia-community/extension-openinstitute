@@ -1,16 +1,14 @@
-import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 
 class OiChatManager {
   String chatBox = "oiChatManagerCache";
-  List? fieldProjectChatChangeListeners;
-
-  StreamController<oiChatMessage> notificationStream = StreamController();
 
   OpenI get oi {
     return Get.find();
@@ -53,18 +51,6 @@ class OiChatManager {
     }
   }
 
-  /**
-   * TODO: Create a call back
-   */
-  // void addProjectChatChangeListener(ChatUiListener inListener)
-  // {
-  //   fieldProjectChatChangeListeners.add(inListener);
-  // }
-
-  /**
-   * Firebase can call this when it sees that a chat event came in
-   * so we can invalidate our local cache and update our list of chats
-   */
   void chatMessageEdited(String inMessageId,  String inUserId) async {
     // var box = await getBox("oiChatManagerCache");
 
@@ -100,7 +86,7 @@ class OiChatManager {
     // Delete topics from hive 
     await oi.hivemanager.clear(chatBox +"_"+ "topics" + "_" + projectId);
     for (var topic in topics) {
-      await oi.hivemanager.saveData(topic.id!, topic.properties, chatBox +"_"+ "topics" + "_" + projectId);
+      await oi.hivemanager.saveData(topic.id, topic.properties, chatBox +"_"+ "topics" + "_" + projectId);
     }
   }
 
@@ -114,19 +100,22 @@ class OiChatManager {
   }
 
 
-  Future<void> saveChat(oiChatMessage inMessage,String projectId) async {
-    await saveSingleChat(inMessage, projectId);
-    try {
-       final Map? responded = await oi.postEntermedia(
+  Future<oiChatMessage?> saveChat(Map<String, dynamic> inMessage,String projectId) async {
+    // await saveSingleChat(inMessage, projectId);
+       final String? responded = await oi.getEmResponse(
       oi.app!["mediadb"] +
-          '/services/module/librarycollection/savemessage.json',
-      inMessage.properties,
+          '/services/module/librarycollection/messagesave',
+      inMessage,
+      RequestType.PUT
     );
-   log("Saved chat message: " + responded.toString()); 
-    } catch (e) {
-      print(e);
-    }
-   
-  }
+   log("Saved chat message: " + responded.toString());
+   if(responded != null ) {
+   Map<String, dynamic> map = jsonDecode(responded);
+    oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]); 
+   saveSingleChat(chatMessage, projectId);
+   return chatMessage;
+  } 
+  return null; 
+  } 
 }
 

@@ -51,7 +51,7 @@ class FeedManager {
     List<emData> results =
         cache["uploads"].map<emData>((json) => emData.fromJson(json)).toList();
     for (var element in results) {
-      await  oi.hivemanager.saveData(element.id!, element.properties, feedsBox);
+      await  oi.hivemanager.saveData(element.id, element.properties, feedsBox);
     }
   }
 

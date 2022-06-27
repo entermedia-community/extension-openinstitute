@@ -115,7 +115,6 @@ class OpenI {
       requestType: RequestType.POST,
       customError: customError,
     );
-      print(" user info is:" + response!.body);
     if (response != null && response.statusCode == 200) {
       print("Success user info is:" + response.body);
       final String responseString = response.body;

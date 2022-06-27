@@ -14,11 +14,11 @@ dependencies:
   xml: ^5.3.0
   http: ^0.13.3
   web_socket_channel: ^2.1.0
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
   firebase_auth: ^3.3.6
-  hive: ^2.0.6
+  hive: ^2.2.2
   hive_flutter: ^1.1.0
   isar: ^2.2.1
   isar_flutter_libs: ^2.2.1 # contains the binaries (not required for web)

@@ -9,6 +9,18 @@ class sharedPref {
     prefs.setString('entermediakey', key);
   }
 
+  static Future<String?> getEMPath() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString("EMPath");
+  }
+
+  static saveEMPath(String key) async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('EMPath', key);
+  }
+
+
+
   static getEMKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
