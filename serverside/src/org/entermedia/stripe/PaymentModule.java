@@ -345,6 +345,38 @@ public class PaymentModule extends BaseMediaModule
 		return invoice;
 
 	}
+	
+	public void cancelInvoice(WebPageRequest inReq)
+	{
+		MediaArchive archive = getMediaArchive(inReq);
+		String invoiceid = inReq.getRequiredParameter("id");
+		Data invoice = (Data) archive.getInvoiceById(invoiceid);
+		if (invoice != null) 
+		{
+			String status = (String) invoice.getValue("paymentstatus");
+			if (status == null || status.equals("pending") || status.equals("invoiced")) {
+				//only pending and invoiced can be canceled
+				invoice.setValue("paymentstatus", "canceled");
+				archive.saveData("collectiveinvoice", invoice);
+				//Unlock products
+				List products = (List) invoice.getValues("productlist");
+				if (products == null)
+				{
+					return;
+				}
+				for (Iterator iterator = products.iterator(); iterator.hasNext();)
+				{
+					Map productinfo = (Map) iterator.next();
+					String productid = (String) productinfo.get("productid");
+					Data product = archive.getData("collectiveproduct", productid);
+					product.setValue("locked", "false");
+					archive.saveData("collectiveproduct", product);
+				}
+			}
+		}
+
+		inReq.removeSessionValue("current-cart");
+	}
 
 	public void addProductsToInvoice(WebPageRequest inReq)
 	{
@@ -468,6 +500,31 @@ public class PaymentModule extends BaseMediaModule
 
 	}
 	
+	public void prepareInvoice(WebPageRequest inReq) {
+		MediaArchive mediaArchive = getMediaArchive(inReq);
+		Data invoice = mediaArchive.getInvoiceById(inReq.getRequestParameter("id"));
+		invoice.setValue("paymentstatus", "sendinvoice");
+		mediaArchive.saveData("collectiveinvoice", invoice);
+		
+		List products = (List) invoice.getValues("productlist");
+		if (products == null)
+		{
+			return;
+		}
+		for (Iterator iterator = products.iterator(); iterator.hasNext();)
+		{
+			Map productinfo = (Map) iterator.next();
+			String productid = (String) productinfo.get("productid");
+			Data product = mediaArchive.getData("collectiveproduct", productid);
+			product.setValue("locked", "true");
+			mediaArchive.saveData("collectiveproduct", product);
+		}
+		
+		//Emails
+		String emails = inReq.getRequestParameter("emails");
+		
+	}
+	
 	public void createProductService(WebPageRequest inReq) {
 		MediaArchive mediaArchive = getMediaArchive(inReq);
 		Searcher collectiveproductsearcher = mediaArchive.getSearcher("collectiveproduct");
@@ -479,9 +536,10 @@ public class PaymentModule extends BaseMediaModule
 		Data saved = collectiveproductsearcher.createNewData();
 		collectiveproductsearcher.updateData(inReq, inReq.getRequestParameters("field"), saved);
 		saved.setValue("createdon", today.getTime());
-		saved.setValue("billingstatus", "active");
-		saved.setValue("nextbillon", today.getTime());
+		//saved.setValue("billingstatus", "active");
+		//saved.setValue("nextbillon", today.getTime());
 		collectiveproductsearcher.saveData(saved, null);
+		inReq.putPageValue("id", saved.getId());
 	}
 	
 	public void copyProductService(WebPageRequest inReq) {
@@ -499,6 +557,8 @@ public class PaymentModule extends BaseMediaModule
 		Data saved = (Data) collectiveproductsearcher.cloneData(source);
 		saved.setValue("createdon", today.getTime());
 		saved.setValue("billingstatus", "new");
+		saved.setValue("locked", "false");
+		saved.setValue("lastgeneratedinvoicedate", null);
 		saved.setValue("nextbillon", today.getTime());
 		collectiveproductsearcher.saveData(saved, null);
 		inReq.putPageValue("data", saved);

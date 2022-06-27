@@ -118,6 +118,7 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 	//Update by user
 	Searcher statementsearcher = archive.getSearcher("currencytransfer");
 	Calendar today = Calendar.getInstance();
+	int savecount = 0;
 	if (usersupdated.size()>0) {
 		for (String usercollectionid in usersupdated.keySet())
 		{
@@ -128,15 +129,22 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 			//search user+month+year
 			
 			
-			Data rowexists = (Data) statementsearcher.query().exact("paymententitydest", userid)
-					.exact("paymententitysource", collectionid)			
+			Data rowexists = (Data) statementsearcher.query().exact("paymententitydest", collectionid)
+					.exact("paymententitysource", userid)			
 					.exact("generatedbyscript", "monthlystatements")
 					.between("date", start, onemonth)
 					.searchOne(); 
 			
-			if (rowexists != null) {
-				rowexists.setValue("total", currentuser.get("total"));
-				statementsearcher.saveData(rowexists);
+			if (rowexists != null) 
+			{
+				double d1 = currentuser.get("total");
+				double d2 = rowexists.getValue("total");
+				if( d1 != d2)
+				{
+					rowexists.setValue("total", currentuser.get("total"));
+					statementsearcher.saveData(rowexists);
+					savecount++;
+				}	
 			}
 			else {
 				Data row = statementsearcher.createNewData();
@@ -166,11 +174,14 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 				row.setValue("name",  dates );
 				row.setValue("date", onemonth);
 				statementsearcher.saveData(row);
+				savecount++;
 			}
-			
 		}
-		
-		log.info("Updated " + usersupdated.size() + " transactions");
+	}
+	int month = monthInt + 1;
+	if( savecount > 0)
+	{
+		log.info("${month}/${yearInt} Updated $savecount transactions");
 	}
 }
 

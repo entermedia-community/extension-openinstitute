@@ -2,22 +2,17 @@
 ##No existing programs found.
 
 
-    [[Add a new Invoice and email the billing contacts]]
+
+    [[Add a new Product or Service]]
 
  <div style="padding:20px;">
 
 #set( $searcher = $mediaarchive.getSearcher("collectiveproduct") )
 #set( $xmledithome  = "$apphome/components/xml")
 $context.putPageValue("searcher",$searcher)
-<form name="saveproject" 
-		id="saveproject" 
-		action="$apphome/collective/services/addsave.html" 
-		method="post"
-		class="ajaxform autocloseform"
-			data-targetdivinner="collectivesettingscontent"
-			data-oemaxlevel="1">
+<form name="saveproject" id="saveproject" action="addsave.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling" method="post">
 
-
+<input type="hidden" name="oemaxlevel" value="1" />
 <input type="hidden" name="save" value="true" />
 <input type="hidden" name="searchtype" value="collectiveproduct" />
 
@@ -32,7 +27,23 @@ $context.putPageValue("searcher",$searcher)
 $context.putPageValue("searcher",$searcher)
 $context.putPageValue("view", "collectiveproduct/addnew")
 $context.putPageValue("data", $data)
- 
+
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
-  <button type="submit" class="btn btn-primary" hidden>[[Submit]]</button>
+<div class="form-group row no-gutters">
+<label for="billingstatus" class="col">[[Create Invoice]]</label>
+<div class="col-10" style="padding-left:10px;">
+<div class="emfield-boolean">
+	<input type="hidden" value="billingstatus" name="field">
+<div class="form-check">
+<input id="bliingstatus" type="checkbox" name="billingstatus.value" value="active" />								
+</div>
+
+</div>
+
+    </div>
+</div>
+<div class="text-right">
+  <button type="submit" class="btn btn-primary">[[Save]]</button>
+ </div>
 </form>
+</div>

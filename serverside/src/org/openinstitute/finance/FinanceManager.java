@@ -520,10 +520,16 @@ public class FinanceManager  implements CatalogEnabled
 		return netIncome;
 	}
 	
+	public HitTracker createTracker(List inCollection)
+	{
+		ListHitTracker tracker = new ListHitTracker(inCollection);
+		tracker.setSessionId("financemanager");
+		return tracker;
+	}
+	
 	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> transactions = new ArrayList();
-
 
 		HitTracker tracker = null;
 		Searcher incomesSearcher = null;

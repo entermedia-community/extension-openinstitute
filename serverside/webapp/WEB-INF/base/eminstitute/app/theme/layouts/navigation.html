@@ -4,7 +4,7 @@
 #end
 <div class="oiheaderout">
 <div class="oiheader emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end"> 
-<div class="container">
+<div class="container " style="padding:0;">
 
     <nav id="mainOINav" class="navbar navbar-fixed-top navbar-expand-lg nav-project-page mainoinav">    
 		
@@ -29,7 +29,7 @@
 				#else
 					<h1 class="navcommunity">
 						#esc($communitytag.name)
-						</h1> 
+					</h1> 
 				#end	
 				 #if($href)
 				</a>
@@ -38,17 +38,17 @@
 			</ul>
 		#end	 
 	
-       <div class="col-md-4"> 
+       <div class="col-md-4 order-1 col-oi-picker"> 
        		$pages.include("$apphome/components/users/pickuser.html")
        		$pages.include("$apphome/components/libraries/pickcollection.html")
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-sm-1 col-md-4 order-sm-1 col-oi-logo text-center">
 	        <a class="navbar-brand" href="${context.siteRoot}/	" title="Open Institute"> 
 			<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
 			</a>
 		</div>
 		
-		<div class="col-md-4">
+		<div class="col-sm-1 col-md-4 order-3 col-oi-menu">
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fa fa-bars"></i>
         </button>

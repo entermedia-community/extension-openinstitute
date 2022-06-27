@@ -5,6 +5,7 @@ import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
+import org.openedit.users.Group
 import org.openedit.users.User
 import org.openedit.util.URLUtilities
 
@@ -13,13 +14,17 @@ public void init() {
 	Searcher productSearcher = mediaArchive .getSearcher("collectiveproduct");
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 
-	generateRecurringInvoices(mediaArchive, productSearcher);
-	generateNonRecurringInvoices(mediaArchive, productSearcher);
+	generateRecurringInvoices(mediaArchive, productSearcher);  //status=active
+	generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
 	payAutoPaidInvoices(mediaArchive, invoiceSearcher);
+	
+	
 	// Notifications
+	
 	sendInvoiceNotifications(mediaArchive, invoiceSearcher);
 	sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
 	sendInvoicePaidNotifications(mediaArchive, invoiceSearcher);
+	
 }
 
 private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSearcher) {
@@ -124,9 +129,10 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","false")
 			.exact("billingstatus", "active")
-			.exact("producttype","0")
 			.missing("lastgeneratedinvoicedate").search();
-
+			//.exact("producttype","0")
+			
+			
 	log.info("Checking invoice for " + pendingProducts.size() + " none-recurring Products");
 	for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
 		Data product = productSearcher.loadData(productIterator.next());
@@ -165,10 +171,15 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 
 private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
 	Collection pendingNotificationInvoices = invoiceSearcher.query()
-			.exact("notificationsent","false").search();
+			.exact("notificationsent","false")
+			.exact("paymentstatus","sendinvoice").search();
 
-	log.info("Sending Notification for " + pendingNotificationInvoices.size() + " invoices");
-	invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationsent");
+	
+	if (pendingNotificationInvoices.size()>0)
+	{
+		log.info("Sending Notification for " + pendingNotificationInvoices.size() + " invoices");
+		invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationsent");
+	}
 }
 
 private void sendInvoiceOverdueNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
@@ -178,8 +189,12 @@ private void sendInvoiceOverdueNotifications(MediaArchive mediaArchive, Searcher
 			.exact("notificationoverduesent", "false")
 			.exact("paymentstatus","invoiced").search();
 
-	log.info("Found " + pendingNotificationInvoices.size() + " overdue invoices");
-	invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationoverduesent");
+	
+	if (pendingNotificationInvoices.size()>0)
+	{
+		log.info("Found " + pendingNotificationInvoices.size() + " overdue invoices");
+		invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationoverduesent");
+	}
 }
 
 private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
@@ -188,11 +203,71 @@ private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher in
 			.exact("notificationpaidsent", "false")
 			.exact("paymentstatus","paid").search();
 
-	log.info("Found " + pendingNotificationInvoices.size() + " paid invoices");
-	invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationpaidsent");
+	
+	if (pendingNotificationInvoices.size()>0)
+	{
+		log.info("Found " + pendingNotificationInvoices.size() + " paid invoices");
+		invoiceContactIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationpaidsent");
+	}
 }
 
 private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
+
+	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
+	String emails = context.getRequestParameter("emails");
+	if (emails!= null) {
+		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) 
+		{
+			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
+			String collectionid = invoice.getValue("collectionid");
+			Data workspace = mediaArchive.getData("librarycollection", collectionid);
+			
+			List<String> emaillist = Arrays.asList(emails.split(","));
+			if (emaillist.size()>0) 
+			{
+				log.info("Reviewing "+emaillist.size()+" members for: "+workspace+ " ("+collectionid+")");
+				for (String email : emaillist)
+				 {
+					if (email != null) {
+						if (email) {
+							switch (iteratorType) {
+								case "notificationsent":
+									String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+									
+									//String key = mediaArchive.getUserManager().getEnterMediaKey(email);
+									//actionUrl = actionUrl + "&entermedia.key=" + key;
+									
+									actionUrl = URLUtilities.urlEscape(actionUrl);
+									sendEmail(mediaArchive, email, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
+									break;
+								case "notificationoverduesent":
+									sendEmail(mediaArchive, email, invoice, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
+									break;
+								case "notificationpaidsent":
+									sendEmail(mediaArchive, email, invoice, "Payment Received "+workspace, "send-paid-invoice-event.html");
+									break;
+							}
+						}
+					}
+				}
+				invoice.setValue("sentto", emails);
+				invoice.setValue("paymentstatus", "invoiced");
+				invoice.setValue(iteratorType, "true");
+				invoiceSearcher.saveData(invoice);
+				}
+				else 
+				{
+					log.info("No email addresses to send Invoice for: "+workspace+ " ("+collectionid+")");
+				}
+			}
+		}
+}
+
+
+
+/*
+ * 
+ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
 
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
 	
@@ -240,20 +315,22 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 	}
 }
+ * */
 
-private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, String subject, String htmlTemplate) {
+private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, String subject, String htmlTemplate) {
 	sendEmail(mediaArchive, contact, invoice, subject, htmlTemplate, null);
 }
 
-private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, String subject, String htmlTemplate, String actionUrl) {
+private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, String subject, String htmlTemplate, String actionUrl) {
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
 	String template = "/" + appid + "/theme/emails/" + htmlTemplate;
-
+	
+	
 	if (actionUrl == null) {
 		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 		
-		String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
-		actionUrl = actionUrl + "&entermedia.key=" + key;
+		//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
+		//actionUrl = actionUrl + "&entermedia.key=" + key;
 		actionUrl = URLUtilities.urlEscape(actionUrl);
 
 		
@@ -269,7 +346,7 @@ private void sendEmail(MediaArchive mediaArchive, User contact, Data invoice, St
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
 	templateEmail.send(objects);
-	log.info("Email sent to: "+contact.getEmail());
+	log.info("Email sent to: "+contact);
 }
 
 private String getSiteRoot() {
@@ -282,3 +359,8 @@ private String getSiteRoot() {
 }
 
 init();
+
+
+
+
+

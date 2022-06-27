@@ -1,7 +1,7 @@
 #set($link = false) 
 	#if($collective.assetportrait)
 		#set($asset = $mediaarchive.getAsset($collective.assetportrait))
-		#set($link = $mediaarchive.asLinkToPreview($asset,"image550x350.jpg"))
+		#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
 		#else
 					#set($link = "$applink/theme/images/OI_flower.png")
 	#end

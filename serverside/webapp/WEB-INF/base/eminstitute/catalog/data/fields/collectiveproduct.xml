@@ -120,6 +120,9 @@
    		<language id="en"><![CDATA[Primary Image]]></language>
    	</name>
    </property>
+   
+   	<property id="locked" index="true" stored="true"
+		editable="true" type="boolean">Locked</property>
 
 
 </properties>

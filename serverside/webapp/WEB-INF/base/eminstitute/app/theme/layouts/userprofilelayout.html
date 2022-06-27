@@ -2,11 +2,11 @@
 	#set($selecteduser = $user)
 	$context.putPageValue("selecteduser", $selecteduser)
 #end
-<div class="container">
+<div class="container oicontainer">
 	#if($selecteduser)
-		<div class="userprofilecontent"  style="padding-top:20px;">
+		<div class="userprofilecontent">
 		<div class="maincontent">
-		<h2>[[Profile]]</h2>
+		<h2>#if( $user.getId() == $selecteduser.getId()) [[Your Profile]]#else [[User Profile]] #end</h2>
 		<div class="row">
 			<div class="col-md-3">
 			#if( $user.getId() == $selecteduser.getId() || $canviewsettings)
@@ -28,7 +28,7 @@
 								</a>
 								</div>
 							#else
-								<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" style="max-height: 140px;" />
+								<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
 							#end
 					</div>
 			</div>
