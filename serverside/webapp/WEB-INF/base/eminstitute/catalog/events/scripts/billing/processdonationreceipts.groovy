@@ -1,5 +1,7 @@
 package billing;
 
+import org.openedit.util.DateStorageUtil
+
 import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
@@ -58,7 +60,9 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			
 			objects.put("mediaarchive", mediaArchive);
 			objects.put("receipt", receipt);
-			objects.put("date", receipt.getValue("paymentdate"));
+			
+			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "YYYY/MM/dd");
+			objects.put("date", dates);
 			//objects.put("receiptuser", user);
 			objects.put("donor", (String) receipt.getValue("name"));
 			
