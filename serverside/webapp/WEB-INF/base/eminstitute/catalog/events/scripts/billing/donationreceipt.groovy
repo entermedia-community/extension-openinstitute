@@ -47,7 +47,7 @@ public void init() {
 	objects.put("payment", payment); //Old?
 	objects.put("receipt", payment);
 	
-	objects.put("organization", collection);
+	objects.put("project", collection);
 
 	WebEmail templateEmail = mediaArchive.createSystemEmailBody(user);
 	templateEmail.setSubject(subject);

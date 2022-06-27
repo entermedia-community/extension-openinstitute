@@ -10,10 +10,10 @@
   <data id="donation_email_body">
     <value><![CDATA[
     <p>Dear ${donor},</p>
-	<p>We want to thank you for your donation of ${amount} to <strong>${organization}</strong>. Through your contribution we can continue to improve the life of others.</p>
+	<p>We want to thank you for your donation of ${amount} to <strong>${project}</strong> on ${date}. Through your contribution we can continue to improve the life of others.</p>
 	<p>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</p>
 	
-	<p>Support our <a href="${organization_url}">${organization} platform</a> by becoming a <a href="${organization_url_donation}">sponsor</a>.</a></p>
+	<p>Support our <a href="${project_url}">${project} platform</a> by becoming a <a href="${project_url_donation}">sponsor</a>.</a></p>
 	    
     ]]></value>
   </data>

@@ -58,6 +58,7 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			
 			objects.put("mediaarchive", mediaArchive);
 			objects.put("receipt", receipt);
+			objects.put("date", receipt.getValue("paymentdate"));
 			//objects.put("receiptuser", user);
 			objects.put("donor", (String) receipt.getValue("name"));
 			
@@ -73,12 +74,12 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			appid = 'app';  //Sitelink not working
 			
 			if (collection != null) {
-				objects.put("organization", collection);
+				objects.put("project", collection);
 				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId()+"/index.html"
-				objects.put("organization_url", collection_url);
+				objects.put("project_url", collection_url);
 				
 				collection_url_donation = getSiteRoot() + "/" + appid + "/collective/donate/"+collection.getId()+"/donate.html"
-				objects.put("organization_url_donation", collection_url_donation);
+				objects.put("project_url_donation", collection_url_donation);
 				log.info(collection_url_donation);
 			}
 		
