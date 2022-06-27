@@ -26,12 +26,14 @@
 		<div class="emfield-list">
 			<input type="hidden" value="currencytype" name="field">
 			<div id="listdetail_currencytypesource" class="listdetailpicker">
-			#set( $netincome = $financeManager.getTransfersByCurrencyForEntity($user.id,$daterange) )
+			#set( $netincome = $financeManager.getNetTransafersForUser($user.id,$daterange) )
 			<input type="hidden" name="field" value="currencytype" />
 			<select name="currencytype.value" class="select2" >
 			#foreach( $currencytype in $netincome.keySet())
+				#if( $currencytype != "2" )
 				#set($net = $netincome.get($currencytype))
 				<option value="$currencytype">$!mediaarchive.getCachedData("currencytype", $currencytype) / $!context.doubleToMoney($!net, 2)</td>
+				#end
 			#end
 			</select>
 			</div>

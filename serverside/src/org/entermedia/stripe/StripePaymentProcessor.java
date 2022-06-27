@@ -321,7 +321,7 @@ public class StripePaymentProcessor {
 			}
 			else 
 			{
-				updateSource(inArchive, inUser,customerid, inToken);
+				customerid = updateSource(inArchive, inUser,customerid, inToken);
 			}
 			
 			chargeParams.put("customer", customerid); // obtained via https://stripe.com/docs/saving-cards
@@ -382,13 +382,22 @@ public class StripePaymentProcessor {
 
 	}
 
-	private void updateSource(MediaArchive inArchive, User inUser, String inStripeId, String inToken) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException
+	private String updateSource(MediaArchive inArchive, User inUser, String inStripeId, String inToken) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException
 	{
 		Map<String, Object> customerParams = new HashMap<String, Object>();
-		Customer customer =	Customer.retrieve(inStripeId);
-		customerParams.put("email", inUser.getEmail());
-		customerParams.put("source", inToken);
-		Customer updatedCustomer =  customer.update(customerParams);
+		try 
+		{
+			Customer customer =	Customer.retrieve(inStripeId);
+			customerParams.put("email", inUser.getEmail());
+			customerParams.put("source", inToken);
+			Customer updatedCustomer =  customer.update(customerParams);
+		}
+		catch (Exception ex)
+		{
+			log.error("Could not find customer. Creating new ID",ex);
+			createCustomer(inArchive,inUser,inToken);
+		}
+		return inUser.get("stripeid");
 		
 	}
 

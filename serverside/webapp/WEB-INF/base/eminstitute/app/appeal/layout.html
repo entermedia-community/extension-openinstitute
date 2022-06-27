@@ -1,0 +1,89 @@
+<div id="campaigninfo" class="container oicontainer" >
+	<div class="row no-gutters"    >
+		<div class="col">
+	#set( $tagid = $url_util.getPathUtilities().extractDirectoryName($content.path) )
+	
+	#set( $tag = $mediaarchive.getCachedData("communitytag",$tagid) )
+	#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
+		#set( $librarycol = $mediaarchive.getCachedData("librarycollection",$tag.collectionid))
+		
+		<div class="communitycontainer-header">
+		<h3>
+		#if($tag.domain)
+			<a href="$tag.domain" title="$tag.getName()">$tag.getName()</a>
+		#else
+			$tag.getName()
+		#end
+		</h3>
+		
+		</div>
+		
+		<div class="communitytagcontainer-out">
+		
+		<div class="communitytagheader" style="">
+				#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
+				<div class="communtysofar" style="padding-left:6px;">		
+				#if($librarycol.goaldate)
+				<strong>[[Our Goal Is:]] $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong>
+				#if($librarycol.distributedtotal) [[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD 
+				#end
+				#else
+				<strong>[[No goals yet]]!</strong>
+				#end
+				</div>	
+		
+		</div>
+		<div class="communitytagdescription" style="">
+				$context.putPageValue("librarycol",$librarycol )
+				#if(!$user)
+					<div style="padding:20px ">
+				
+						#set($loginok =	"$applink/collective/donate/$!librarycol.id/donate.html")
+						<i class="fas fa-credit-card"></i> [[Please Login to Donate with Credit Card]] 
+						<div style="padding:20px 0 10px;">
+					  		<a href="$applink/authentication/logon.html?loginokpage=$!loginok"	class="btn btn-success">[[Login to Donate With Credit Card]]</a>
+					  	</div>
+				  	</div>
+					<p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
+				  	$pages.include("$apphome/collective/donate/paypalform.html",$context)
+				#else
+				  	$pages.include("$apphome/collective/donate/creditcardform.html",$context)
+					<p style="text-align:center;padding-top:20px;"><strong>[[Or Use]] PayPal:</strong></p>
+					$pages.include("$apphome/collective/donate/paypalform.html",$context)
+				#end
+
+				<div  class="row communitytagdescriptiontext">
+				<div  class="col" >
+				<div style="text-align:left;">
+				#if( $tag.funddescription )
+					$tag.funddescription
+				#else
+					$!target.collectivedescription
+				#end	
+			 	</div>
+			 	</div>
+			 	<div  class="col-lg-4" >
+				<div style="padding-top:20px;">
+		 		#foreach( $project in $projects.getPageOfHits() )
+					$context.putPageValue("collective",$project)
+					$pages.include("$apphome/browse/collectivelist.html",$context)
+				#end
+				</div>
+				<div style="clear:both"></div>
+				</div>
+				</div>
+				
+				
+		</div>
+		</div>
+		
+		
+		</div>
+		<div  class="col-lg-3" style="padding:20px">
+				$pages.include("$apphome/collective/donate/donatesidebar.html?hidegoals=true",$context)
+		</div>
+		
+	</div>	
+</div>
+
+

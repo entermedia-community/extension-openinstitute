@@ -298,6 +298,30 @@ li.menu-subheader {
 	#mainOINav .navbar-nav a {
 		color:#eee;
 	}
+	#campaigninfo 
+	{
+		padding: 5px 1px;
+	}
+	#campaigninfo .communitytagdescription 
+	{
+		padding: 5px 0 0 0;
+	}
+	
+	#campaigninfo .communitytagdescription .communitytagdescriptiontext
+	{
+		padding: 10px;
+	}
+	
+	#campaigninfo .communitytagcontainer-out
+	{
+		padding: 10px 2px;
+	}
+	
+	.donatecard .card-block
+	{
+		padding: 10px 2px;
+	} 
+	
 }
 @media (min-width: 640px) {
 	.oiheader {
@@ -343,8 +367,22 @@ li.menu-subheader {
 	.nav-collectionpicker .userpicker {
 		margin-bottom:0px;
 	}
+	#campaigninfo 
+	{
+		padding: 20px;
+	}
+	#campaigninfo .communitytagdescription .communitytagdescriptiontext
+	{
+		padding: 10px 0 0 0;
+	}
+	
+.donatecard .card-block
+	{
+		padding: 20px 21px;
+	} 
 	
 }
+
 
 
 .sidebar-list li {

@@ -1,22 +1,52 @@
-#set ($listfilterid = $detail.get("listfilterid") )   ##local field that we depend on to get the value, get the value
+#set($detailid = $context.getRequestParameter("detailid") )
+#ifnull($detailid)
+	#set($detailid = $detail.getId() ) 
+#end
 
-	<script type="text/javascript">
-		##register for changes to the filter
-		##when it changes load up the correct html page that has a picker the pickers can only pick allowed source types?
-		
-	</script>
+#set($listfilterid = $context.getRequestParameter("listfilterid") )
+#ifnull($listfilterid)
+	#set($listfilterid = $detail.get("listfilterid") ) 
+#end
+	
+#set($paymententitytype = $context.getRequestParameter("paymententitytype") )
+#ifnull($paymententitytype)
+	#set($paymententitytype = "user" ) 
+#end
+
+#ifnull($val)
+	#set($val = $context.getRequestParameter("value") )
+#end
 
 
-	<div id="collectionpickerinner" class="librarycollectionpicker">
+<div id="collectionpickerinner$detailid" class="librarycollectionpicker" data-listfilterid="$listfilterid" data-detailid="$detailid" data-oemaxlevel="1" data-value="$!val" >
+	
+		<script type="text/javascript">
+			$("#${listfilterid}value").change( function() {
+				var div = jQuery("#collectionpickerinner$detailid");
+				var data = div.data();
+				data["paymententitytype"] = $("#${listfilterid}value").val();
+				jQuery.ajax(
+				{
+					url: "$page.getPath()",
+					data: data,
+					success: function(html)
+					{
+						div.replaceWith(html);										
+					}
+				});
+			});
+		</script>
+	
 		<div class="collectionpicker" style="min-width:200px">
 						#set( $text = "[[Search]]" )
 						#if( $selecteduser)
 							#set( $text = "$selecteduser.toString()" )
 						#end
-						<select name="${detail.getId()}.value" id="userid" 
+						<select name="${detailid}.value" id="picker$detailid" 
 							class="listautocomplete" 
 							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
-							data-searchfield="name" data-searchtype="user"  
+							data-catalogid="$catalogid"
+							data-searchfield="name" data-searchtype="$paymententitytype"  
 							data-placeholder="$text" data-sortby="name">
 						</select>
 				</div>
