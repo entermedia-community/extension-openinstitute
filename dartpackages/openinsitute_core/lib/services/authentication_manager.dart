@@ -99,7 +99,7 @@ class AuthenticationManager {
         customError: "Invalid credentials. Please try again!");
     print("Logging in...");
     if (resMap != null) {
-      Map<String, dynamic> results = resMap["results"];
+      Map<String, dynamic> results = resMap["results"];   
       emUser = EmUser.fromJson(results);
       print("complete");
       emUser = await firebaseLogin(emUser!.email!, emUser!.entermediakey);
