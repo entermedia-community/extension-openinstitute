@@ -14,12 +14,12 @@
 		#set( $invoiceready =	"false")
 	#end
 	<div id="invoicecontainer">
-<form method="post" action="sendinvoice.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling">
+<form method="post" action="$applink/collective/services/sendinvoice.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling">
 <input type="hidden" name="oemaxlevel" value="1">
 <input type="hidden" name="invoiceid" value="$id">
 <input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
 	
-		$pages.include("./viewinvoice.html", $context)
+		$pages.include("$apphome/collective/services/viewinvoice.html", $context)
 		
 		<div class="text-right" style="padding:15px 10px;">
 		<a href="editinvoice.html?invoiceid=$id" 

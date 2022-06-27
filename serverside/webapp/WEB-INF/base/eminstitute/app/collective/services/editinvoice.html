@@ -15,7 +15,7 @@
 	#set( $collection = $mediaarchive.query("librarycollection").exact("id", $collectionid).searchOne() )
 
 	
-<form method="post" action="editinvoicesave.html" class="ajaxform" data-targetdiv="invoicecontainer">	
+<form method="post" action="$applink/collective/services/editinvoicesave.html" class="ajaxform" data-targetdiv="invoicecontainer">	
 	<input type="hidden" name="id" value="$id">
 	<input type="hidden" name="invoiceid" value="$id">
 	<input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
