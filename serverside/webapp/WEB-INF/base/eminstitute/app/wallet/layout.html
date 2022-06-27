@@ -1,1 +1,6 @@
+#if( !$canviewsettings && $selecteduser != $user)
+
+	<p>No permission</p>
+#else	
 $pages.include("$apphome/wallet/${content.getPageName()}.html")
+#end
