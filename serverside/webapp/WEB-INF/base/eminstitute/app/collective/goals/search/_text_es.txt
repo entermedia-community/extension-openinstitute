@@ -1,0 +1,6 @@
+#
+#Mon Jun 27 19:41:52 CDT 2022
+Task=Tarea
+Edit\ Task=Editar tarea
+Add\ Note=A\u00F1adir la nota
+Add\ Task=Agregar tarea

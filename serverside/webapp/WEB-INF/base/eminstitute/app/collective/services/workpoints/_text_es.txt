@@ -1,0 +1,6 @@
+#
+#Mon Jun 27 19:42:46 CDT 2022
+Pay\ For\ Points=Pagar por puntos
+Pending\ Work\ Points=Puntos de trabajo pendientes
+Search=B\u00FAsqueda
+Paid\ Work\ Points=Puntos de trabajo pagados

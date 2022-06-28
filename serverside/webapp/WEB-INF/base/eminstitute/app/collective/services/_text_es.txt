@@ -1,0 +1,35 @@
+#
+#Mon Jun 27 19:43:00 CDT 2022
+Project\ Wallet=Monedero del proyecto
+Description=Descripci\u00F3n
+Invoice=Factura
+Cancel=Cancelar
+Edit\ Product\ or\ Service=Editar producto o servicio
+Expenses=Gastos
+Income=Ingreso
+Product=Producto
+Invoices=Facturas
+Edit=Editar
+Name=Nombre
+AutoPay\ Enabled=Pago autom\u00E1tico habilitado
+Work\ Points=Puntos de trabajo
+Investments=Inversiones
+Create\ Invoice=Crear factura
+Copy\ Product\ or\ Service=Copiar producto o servicio
+Product\ Catalog=Catalogo de producto
+Paid\ On=Pagado en
+Due\ Date=Fecha de vencimiento
+Status=Estado
+Total\ Price=Precio total
+Created\ On=Creado en
+Invoice\ Product\ or\ Service=Facturar Producto o Servicio
+Preview=Avance
+View=Vista
+Pay\ Now=Pagar ahora
+Add\ Product\ or\ Service=A\u00F1adir producto o servicio
+Price=Precio
+Copy=Copiar
+AutoPay\ Paused=Pago autom\u00E1tico en pausa
+Transfers=Transferencias
+Finances=Finanzas
+Canceled=Cancelado

@@ -1,5 +1,5 @@
 #
-#Wed Apr 15 14:35:31 CST 2020
+#Mon Jun 27 19:35:15 CDT 2022
 All=Todos
 Choose\ Files=Seleccionar archivos
 All\ Posts=Todos los mensajes
@@ -10,10 +10,12 @@ Cancel=Cancelar
 Edit\ Post=Editar post
 Post=Enviar
 Edit\ Topics=Editar temas
-ago= 
+ago=
 For\ Team\ Only=Solo para equipo
 loading=cargando
 Upload\ Complete=Carga completa
+Download\ Media=Descargar medios
+Edit\ Project\ Intro=Editar introducci\u00F3n del proyecto
 Share\ Post=Compartir post
 by=por
 Published=Publicado hace

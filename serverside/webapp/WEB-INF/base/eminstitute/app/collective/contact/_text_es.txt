@@ -1,5 +1,7 @@
 #
-#Wed May 29 15:22:32 CDT 2019
+#Mon Jun 27 19:37:02 CDT 2022
+Registration\ test=prueba de registro
+write\ out=escribir
 Contact\ us=Cont\u00E1ctenos
 Your\ message=Tu mensaje
 Do\ you\ have\ any\ questions?\ Please\ do\ not\ hesitate\ to\ contact\ us.=\u00BFTiene usted alguna pregunta? Por favor no dude en contactar con nosotros.

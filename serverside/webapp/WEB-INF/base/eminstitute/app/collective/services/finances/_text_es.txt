@@ -1,9 +1,38 @@
 #
-#Wed May 29 13:11:19 CDT 2019
-Phone=Tel\u00E9fono
-Contact\ us=Cont\u00E1ctenos
-Do\ you\ have\ any\ questions?\ Please\ do\ not\ hesitate\ to\ contact\ us=\u00BFTiene usted alguna pregunta? Por favor no dude en contactar con nosotros
-Your\ message=Tu mensaje
-Your\ name=Tu nombre
+#Mon Jun 27 19:42:10 CDT 2022
+Project\ Wallet=Monedero del proyecto
+All=Todos
+Oct=Oct
+June=Junio
+May=Mayo
+Expenses=Gastos
+YTD=el \u00FAltimo a\u00F1o
+Incomes=Ingresos
+March=Marzo
 Your\ email=Tu correo electr\u00F3nico
 Send=Enviar
+Month=Mes
+Aug=Ago
+Donation\ or\ Invoice=Donaci\u00F3n o Factura
+Phone=Tel\u00E9fono
+Contact\ us=Cont\u00E1ctenos
+July=Julio
+Clear\ Filters=Borrar filtros
+Your\ name=Tu nombre
+Feb=Feb
+Dec=Dic
+Send\ Money=Enviar dinero
+Last\ Year=El a\u00F1o pasado
+April=Abril
+Add\ New\ Income=A\u00F1adir nuevos ingresos
+Nov=Nov
+Receive\ Money=Recibir dinero
+Jan=Ene
+Filter\ by=Filtrado por
+Total=Total
+Request\ Money=Pedir dinero
+Two\ Years\ Ago=Hace dos a\u00F1os
+Do\ you\ have\ any\ questions?\ Please\ do\ not\ hesitate\ to\ contact\ us=\u00BFTiene usted alguna pregunta? Por favor no dude en contactar con nosotros
+Your\ message=Tu mensaje
+Sep=Sep
+Add\ New\ Expense=Agregar nuevo gasto

@@ -1,4 +1,5 @@
 #
-#Wed May 29 13:04:36 CDT 2019
+#Mon Jun 27 19:35:15 CDT 2022
 Login\ to\ comment=Inicia sesi\u00F3n para comentar
+Comment\ as=Comentar como
 Write\ a\ comment=Escribir un comentario
