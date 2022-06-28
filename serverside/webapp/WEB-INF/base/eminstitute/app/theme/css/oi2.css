@@ -186,6 +186,7 @@ li.menu-subheader {
 #mainOINav .select2-container--default .select2-selection--single .select2-selection__placeholder
 {
 	color:#424367;
+	font-size: 0.85rem;
 }
 
 #mainOINav  .select2-container--default .select2-selection--single {
@@ -640,6 +641,7 @@ li.menu-subheader {
 .collective-sidebar {
 	padding:10px 10px;
 	margin:0 10px 0;
+	font-size:0.9rem
 }
 
 .channel-container .collective-sidebar {
