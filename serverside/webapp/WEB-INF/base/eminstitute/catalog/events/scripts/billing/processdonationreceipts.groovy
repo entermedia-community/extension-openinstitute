@@ -61,7 +61,7 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			objects.put("mediaarchive", mediaArchive);
 			objects.put("receipt", receipt);
 			
-			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "YYYY/MM/dd");
+			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "YYYY/mm/dd");
 			objects.put("date", dates);
 			//objects.put("receiptuser", user);
 			objects.put("donor", (String) receipt.getValue("name"));
