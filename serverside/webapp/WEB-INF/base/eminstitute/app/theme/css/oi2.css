@@ -596,7 +596,6 @@ li.menu-subheader {
 
 }
 
-
 .collectiveheader {
 	width: calc(100% - 20px);
 	height:140px;
@@ -604,14 +603,20 @@ li.menu-subheader {
 }
 
 .collectiveheadermenu {
-	padding-top:10px;
+	width:100%;
 	position:absolute;
 }
-
+.collectiveheader .project-thumb {
+	margin:5px;
+}
+.collectiveheadermenu .project-title  {
+padding:10px 0 0 120px ;
+min-height: 115px;
+}
 .project-title h1 {
 	font-weight: bold;
-	font-size:1.8rem;
-	line-height:1.2;
+	font-size:1.6rem;
+	line-height:1.1;
 	margin:0 0 5px 0;
 }
 .project-likes {
@@ -632,8 +637,6 @@ li.menu-subheader {
 .btn-liked {
 	color:#909090;
 }
-
-
 
 .contentcolumn {
 	margin-bottom:30px;
@@ -668,6 +671,9 @@ li.menu-subheader {
 	margin-top:0;
 }
 
+.community-maincol .contentpadding {
+	padding:20px;
+}
 
 .htmlintro {
 	padding:20px;
@@ -686,15 +692,19 @@ li.menu-subheader {
 	height: 115px;
 	border:3px solid #C8C446;
 	}
-	.project-title {
+	.collectiveheadermenu .project-title {
 	margin-bottom:10px;
 	font-size:1.6rem;
-	padding-left:5px;
+	padding:0 0 0 5px;
 	height: 70px;
+	min-height: 70px;
 	text-align:center;
 	}
+
 	.project-title h1 {
 	margin-bottom:10px;
+	font-size:1.6rem;
+	line-height:1.2;
 	}
 	.collectiveheadermenu {
 	padding-top:10px;
