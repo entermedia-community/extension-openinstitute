@@ -68,8 +68,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());
 			
-			//Temp
-			invoice.setValue("currencytype", "usd");
+			invoice.setValue("currencytype",  product.getValue("currencytype"));
 			
 			Collection contacts = mediaArchive.query("librarycollectionusers")
 								.exact("collectionid",product.getValue("collectionid"))
@@ -94,7 +93,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			}
 			invoice.setValue("sentto", contactsstring);
 			
-		
+			invoiceSearcher.saveData(invoice);
 			//recurring moved to invoice
 			/*
 			int recurrentCount = product.getValue("recurringperiod")

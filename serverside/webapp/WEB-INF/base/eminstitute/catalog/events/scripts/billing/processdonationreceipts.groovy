@@ -8,6 +8,8 @@ import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
+import org.openedit.util.URLUtilities
+
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -53,22 +55,24 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 				emailbody = "Thank you for your Donation.";
 			}
 			if (subject.equals("")) {
-				subject =  "Donation Receipt";
+				subject =  collection.getName()+" Donation Receipt";
 			}
 			
 			Map objects = new HashMap();
 			
 			objects.put("mediaarchive", mediaArchive);
+			
 			objects.put("receipt", receipt);
 			
-			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "YYYY/mm/dd");
-			objects.put("date", dates);
-			//objects.put("receiptuser", user);
+			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "dd-MM-YYYY");
+			objects.put("donationdate", dates);
+
 			objects.put("donor", (String) receipt.getValue("name"));
 			
-			String price = receipt.getValue("totalprice");
-			objects.put("amount", "\$" + price );
+			objects.put("amount", "\$" + context.doubleToMoney(receipt.getValue("totalprice"), 2) );
 			
+			String currencytype = mediaArchive.getCachedData("currencytype", receipt.getValue("currencytype"));
+			objects.put("currency", currencytype);
 			
 			String collection_url = '';
 			String collection_url_donation = '';
@@ -79,17 +83,22 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			
 			if (collection != null) {
 				objects.put("project", collection);
-				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId()+"/index.html"
+				
+				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html";
 				objects.put("project_url", collection_url);
 				
 				collection_url_donation = getSiteRoot() + "/" + appid + "/collective/donate/"+collection.getId()+"/donate.html"
 				objects.put("project_url_donation", collection_url_donation);
-				log.info(collection_url_donation);
+
+				//log.info(collection_url_donation);
 			}
 		
 			WebEmail templateEmail = mediaArchive.createSystemEmailBody(receiptemail);
 			templateEmail.setSubject(subject);
 			templateEmail.loadSettings(context);
+			
+				
+			
 			String body = mediaArchive.getReplacer().replace(emailbody, objects);
 			templateEmail.send(body);
 			

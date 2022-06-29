@@ -9,12 +9,30 @@
   
   <data id="donation_email_body">
     <value><![CDATA[
-    <p>Dear ${donor},</p>
-	<p>We want to thank you for your donation of ${amount} to <strong>${project}</strong> on ${date}. Through your contribution we can continue to improve the life of others.</p>
-	<p>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</p>
+
+	<div style="background-color:#f1f1f1; padding:30px 0;">
+	<div style="background-color:#fff; padding:20px; margin:0 auto; width:600px; color:#000;">
+		<div style="background-color:#A5DAD3; padding: 5px 5px; margin-bottom:20px;">
+		<a href="https://openinstitute.org/"><img src="https://openinstitute.org/app/theme/images/oi-logo-w.png"></a>
+		</div>
+		
 	
-	<p>Support our <a href="${project_url}">${project} platform</a> by becoming a <a href="${project_url_donation}">sponsor</a>.</a></p>
 	    
+<p>Dear ${donor},</p>
+
+<p>We want to thank you for your donation of <strong>${amount}(${currency})</strong> to <strong><a href="${project_url}">${project}</a></strong> on ${donationdate}. We appreciate your support a lot!<br />
+<br />
+Through your contribution we can continue to improve the life of others.&nbsp;OI does not charge any fees for projects, they are covered by our sponsors.<br />
+<br />
+We would love to keep our&nbsp;<strong><a href="https://openinstitute.org/app/about/index.html">OI&nbsp;platform</a></strong> free of charge. You can also contribute to this&nbsp;by becoming our <strong><a href="${project_url_donation}">sponsor</a></strong>.</p>
+
+<p>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</p>
+
+<p>&nbsp;</p>
+
+</div>
+</div>
+
     ]]></value>
   </data>
   
