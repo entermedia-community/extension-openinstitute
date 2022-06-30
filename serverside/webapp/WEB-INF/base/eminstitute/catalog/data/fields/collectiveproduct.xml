@@ -92,6 +92,8 @@
 	<property id="recurringperiod" index="true" stored="true"
 		editable="true" type="number">Recurring Period (months)</property>
 
+	<property id="billingday" index="true" stored="true"
+		editable="true" type="number" rendertype="monthday">Billing Day</property>
 
 	<property id="sessioncount" index="true" stored="true"
 		editable="true" type="number">Session Count</property>
