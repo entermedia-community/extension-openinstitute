@@ -114,15 +114,16 @@
 			</div>
 
 		</div>
-		
+		#if( $canviewsettings )
 		<div class="text-right" style="padding:15px 10px;">
-			<a href="previewinvoice.html?invoiceid=$id&oemaxlevel=1" 
+			<a href="$applink/collective/services/previewinvoice.html?invoiceid=$id&oemaxlevel=1" 
 				class="btn btn-secondary ajax" 
 				data-targetdiv="invoicecontainer" 
 				style="margin-right:10px;">[[Back]]</a>
 			<input type="submit" class="btn btn-primary" value="[[Save]]"/>
 	
-	</div>
+		</div>
+		#end
 </form>
 #end
 

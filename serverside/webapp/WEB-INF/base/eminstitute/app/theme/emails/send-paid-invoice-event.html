@@ -426,6 +426,8 @@
     </style>
   </head>
   <body>
+  <div style="background-color:#f1f1f1; padding:30px 0;">
+	<div style="background-color:#fff; padding:20px; margin:0 auto; width:600px; color:#000;">
     <span class="preheader">This is an invoice for your purchase on $!context.getDate($invoice.getValue("createdon")). Please submit payment by $!context.getDate($invoice.getValue("duedate"))</span>
     <div style="background-color:#000; padding: 10px; margin-bottom:20px;">
 		<a href="https://entermediadb.org"><img src="https://entermediadb.org/app/theme/images/entermedia_database.png"></a>
@@ -453,7 +455,7 @@
 						            </span>
                                   </td>
                                   <td style="text-align: right!important">
-                                  	<strong>$currency $!context.roundDouble($invoice.getValue("totalprice"), 2)</strong>
+                                  	<strong>($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))) s$currency $!context.roundDouble($invoice.getValue("totalprice"), 2)</strong>
                                   </td>
                                 </tr>
                               </table>
@@ -502,5 +504,7 @@
         </td>
       </tr>
     </table>
+    </div>
+    </div>
   </body>
 </html>

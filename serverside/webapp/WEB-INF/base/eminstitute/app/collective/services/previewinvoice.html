@@ -14,15 +14,18 @@
 		#set( $invoiceready =	"false")
 	#end
 	<div id="invoicecontainer">
+	#if( $canviewsettings )
 <form method="post" action="$applink/collective/services/sendinvoice.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling">
+#end
 <input type="hidden" name="oemaxlevel" value="1">
 <input type="hidden" name="invoiceid" value="$id">
 <input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
 	
 		$pages.include("$apphome/collective/services/viewinvoice.html", $context)
 		
+		#if( $canviewsettings )
 		<div class="text-right" style="padding:15px 10px;">
-		<a href="editinvoice.html?invoiceid=$id" 
+		<a href="$applink/collective/services/editinvoice.html?invoiceid=$id" 
 			class="btn btn-secondary ajax" 
 			data-targetdiv="invoicecontainer"
 			title="[[Edit Invoice Details]]"
@@ -37,6 +40,9 @@
 				#end
 			#end
 		</div>
+		#end
+		#if( $canviewsettings )
 	</form>
+	#end
 	</div>
 #end
