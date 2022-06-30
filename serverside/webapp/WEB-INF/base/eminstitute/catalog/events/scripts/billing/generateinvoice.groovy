@@ -33,7 +33,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 	if (productid == null) {
 		productid = context.getPageValue("id");
 	}
-	Data product = productSearcher.searchById(productid);
+	MultiValued product = productSearcher.searchById(productid);
 	//if(product != null && product.getValue("billingstatus") == "active" && invoiced != "true")
 	if(product != null)
 	{
