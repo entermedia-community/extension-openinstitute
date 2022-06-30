@@ -47,9 +47,17 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			
 			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "dd-MM-YYYY");
 			objects.put("donationdate", dates);
-
-			objects.put("donor", (String) receipt.getValue("name"));
 			
+			User user = mediaArchive.getUser(receipt.getValue("userid"));
+			if(user != null)
+			{
+				objects.put("donor", (String) user.getScreenName());
+			}
+			else 
+			{
+				objects.put("donor", "Sponsor");
+			}
+
 			objects.put("amount", "\$" + context.doubleToMoney(receipt.getValue("totalprice"), 2) );
 			
 			String currencytype = mediaArchive.getCachedData("currencytype", receipt.getValue("currencytype"));
