@@ -37,27 +37,8 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			String emailbody = "";
 			String subject = "";
 			
-			//get emailbody from collection
 			Data collection = mediaArchive.getData("librarycollection", receipt.getValue("collectionid"));
-			if(collection != null) {
-				if (collection.getValue("donationemailtemplate")) {
-					emailbody = (String) collection.getValue("donationemailtemplate");
-				}
-				if (collection.getValue("donationemailsubject")) {
-					subject = (String) collection.getValue("donationemailsubject");
-				}
-			}
-			//default emailbody+subject
-			if (emailbody.equals("")) {
-				emailbody = (String) mediaArchive.getCatalogSettingValue("donation_email_body");
-			}
-			if (emailbody.equals("")) {
-				emailbody = "Thank you for your Donation.";
-			}
-			if (subject.equals("")) {
-				subject =  collection.getName()+" Donation Receipt";
-			}
-			
+					
 			Map objects = new HashMap();
 			
 			objects.put("mediaarchive", mediaArchive);
@@ -92,14 +73,34 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 
 				//log.info(collection_url_donation);
 			}
+			
+			
+			//get emailbody from collection
+			if(collection != null) {
+				if (collection.getValue("donationemailtemplate")) {
+					emailbody = (String) collection.getValue("donationemailtemplate");
+				}
+				if (collection.getValue("donationemailsubject")) {
+					subject = (String) collection.getValue("donationemailsubject");
+				}
+			}
+			//default emailbody+subject
+			if (emailbody.equals("")) {
+				emailbody = (String) mediaArchive.getCatalogSettingValue("donation_email_body");
+			}
+			if (emailbody.equals("")) {
+				emailbody = "Thank you for your Donation.";
+			}
+			if (subject.equals("")) {
+				subject =  "${project} Donation Receipt";
+			}
+			
+			String body = mediaArchive.getReplacer().replace(emailbody, objects);
+			subject = mediaArchive.getReplacer().replace(subject, objects);
 		
 			WebEmail templateEmail = mediaArchive.createSystemEmailBody(receiptemail);
 			templateEmail.setSubject(subject);
 			templateEmail.loadSettings(context);
-			
-				
-			
-			String body = mediaArchive.getReplacer().replace(emailbody, objects);
 			templateEmail.send(body);
 			
 			receipt.setValue("receiptstatus", "sent");
