@@ -16,19 +16,20 @@
 		<a href="https://openinstitute.org/"><img src="https://openinstitute.org/app/theme/images/oi-logo-w.png"></a>
 		</div>
 		
-	
-	    
-<p>Dear ${donor},</p>
 
-<p>We want to thank you for your donation of <strong>${amount}(${currency})</strong> to <strong><a href="${project_url}">${project}</a></strong> on ${donationdate}. We appreciate your support a lot!<br />
-<br />
-Through your contribution we can continue to improve the life of others.&nbsp;OI does not charge any fees for projects, they are covered by our sponsors.<br />
-<br />
-We would love to keep our&nbsp;<strong><a href="https://openinstitute.org/app/about/index.html">OI&nbsp;platform</a></strong> free of charge. You can also contribute to this&nbsp;by becoming our <strong><a href="${project_url_donation}">sponsor</a></strong>.</p>
 
-<p>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</p>
+<p>Dear <strong>${donor}</strong>, </p>
 
-<p>&nbsp;</p>
+<p>Thank you for your donation of <strong>${amount}(${currency})</strong> to <strong><a href="${project_url}">${project}</a></strong> on <strong>${donationdate}</strong>. We at Open Institute (OI) and our partners appreciate your support!</p>
+
+<p>Through your contribution we are improving the lives of others, OI enables free fundraising for humanitarian and cultural projects.</p>
+
+<p>Open Institute does not charge fees for projects, sponsors and donors like you help us to keep our OI platform free of charge. You can continue to contribute to this by becoming a monthly <strong><a href="${project_url_donation}">sponsor</a></strong>.</p>
+
+<p>We thank you again for your continued support!&nbsp;<br />
+<strong><a href="https://openinstitute.org/app/about/index.html">The OI Team</a></strong></p>
+
+<p><em>This email is serving as a 501(c)(3) tax-compliant donation receipt, for your records, and declaring that no goods or services were provided by the not-for-profit organization in return for the contribution. EIN (US-tax #): 82-1707895.</em></p>
 
 </div>
 </div>
