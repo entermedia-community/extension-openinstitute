@@ -11,7 +11,7 @@ public void init() {
 	
 	//recurring moved to invoice
 	String isrecurring = product.getValue("recurring");
-	if(Boolean.parseBoolean(isrecurring)  )
+	if(Boolean.parseBoolean(isrecurring)  && product.getValue("nextbillon") == null)
 	{
 		Calendar today = Calendar.getInstance();
 		int billingday = product.getInt("billingday");
@@ -25,6 +25,9 @@ public void init() {
 		}
 		
 		nextbillon.set(Calendar.DAY_OF_MONTH, billingday);
+		
+		
+		product.setValue("billingstatus", "active");
 		
 		product.setValue("nextbillon", nextbillon.getTime());
 		productSearcher.saveData(product);
