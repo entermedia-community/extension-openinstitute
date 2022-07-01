@@ -12,7 +12,7 @@
 #set( $userimageurl = $mediaarchive.asLinkToProfile($chatuser.assetportrait) )
 #if(!$userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
 
-#set( $goal = $mediaarchive.query("projectgoal").exact("chatparentid",$chat.getId() ).searchOne() )
+#set( $goal = $goalsinmessages.get($chat.id))
 
 <div class="chatterbox-chat" role="alert" id="chatter-message-$chat.id">
 	<div class="chat-icon">

@@ -1,5 +1,7 @@
 <page>
 <path-action name="ChatModule.loadRecentChats"/>
+<path-action name="ProjectModule.loadGoalsInMessages"/>
+
 <path-action name="ChatModule.getAsset"/>
 
 </page>
