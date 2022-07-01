@@ -310,14 +310,16 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 				}
 			}
 			if (sent) {
+				Calendar today = Calendar.getInstance();
 				invoice.setValue("sentto", emails);
+				invoice.setValue("sentdate", today.getTime());
 				invoice.setValue("paymentstatus", "invoiced");
 				invoice.setValue(iteratorType, "true");
 			}
 			else {
 				invoice.setValue("paymentstatus", "error");
 				invoice.setValue("paymentstatusreason", "No billing address defined in Project.");
-				log.info("No email addresses to send Invoice for: "+workspace+ " ("+collectionid+")");
+				log.info("No email defined to send Invoice for: "+workspace+ " ("+collectionid+")");
 			}
 			invoiceSearcher.saveData(invoice);
 		}

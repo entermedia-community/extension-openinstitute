@@ -11,25 +11,30 @@ public void init() {
 	
 	//recurring moved to invoice
 	String isrecurring = product.getValue("recurring");
-	if(Boolean.parseBoolean(isrecurring)  && product.getValue("nextbillon") == null)
+	if(Boolean.parseBoolean(isrecurring))
 	{
 		Calendar today = Calendar.getInstance();
-		int billingday = product.getInt("billingday");
-		
 		Calendar nextbillon = Calendar.getInstance();
-		int todayday = today.get(Calendar.DAY_OF_MONTH);
-
-		if( billingday < todayday)  //Day passed already
-		{
-			nextbillon.add(Calendar.MONTH,1);
+		int billingday = product.getInt("billingday");
+		if (product.getValue("nextbillon") != null) {
+			nextbillon.setTime(product.getValue("nextbillon"));
+			int currentday = nextbillon.get(Calendar.DAY_OF_MONTH);
+			if (currentday == billingday) {
+				return;
+			}
+			nextbillon.set(Calendar.DAY_OF_MONTH, billingday);
 		}
-		
-		nextbillon.set(Calendar.DAY_OF_MONTH, billingday);
-		
-		
-		product.setValue("billingstatus", "active");
-		
+		else 
+		{
+			int todayday = today.get(Calendar.DAY_OF_MONTH);
+			if( billingday < todayday)  //Day passed already
+			{
+				nextbillon.add(Calendar.MONTH,1);
+			}
+			nextbillon.set(Calendar.DAY_OF_MONTH, billingday);
+		}
 		product.setValue("nextbillon", nextbillon.getTime());
+		product.setValue("billingstatus", "active");
 		productSearcher.saveData(product);
 	}
 }
