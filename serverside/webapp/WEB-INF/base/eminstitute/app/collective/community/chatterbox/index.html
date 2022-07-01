@@ -3,6 +3,7 @@
 	<div class="chatterbox-container">
 		<div class="chatterbox-body-inside">
 			<div class="chatterbox-message-list">
+			##search for todos
 				#foreach($chat in $messages)
 					$context.putPageValue("chat",$chat) 
 					$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
