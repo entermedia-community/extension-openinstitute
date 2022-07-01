@@ -10,18 +10,23 @@ public void init() {
 	Data product = context.getPageValue("data");
 	
 	//recurring moved to invoice
-	if( "true".equals( product.getValue("recurring")) )
+	String isrecurring = product.getValue("recurring");
+	if(Boolean.parseBoolean(isrecurring)  )
 	{
+		Calendar today = Calendar.getInstance();
 		int billingday = product.getInt("billingday");
+		
 		Calendar nextbillon = Calendar.getInstance();
 		int todayday = today.get(Calendar.DAY_OF_MONTH);
+
 		if( billingday < todayday)  //Day passed already
 		{
 			nextbillon.add(Calendar.MONTH,1);
 		}
-		nextbillon.set(Calendar.DAY_OF_MONTH,billingday);
 		
-		product.setValue("nextbillon", nextbillon);
+		nextbillon.set(Calendar.DAY_OF_MONTH, billingday);
+		
+		product.setValue("nextbillon", nextbillon.getTime());
 		productSearcher.saveData(product);
 	}
 }
