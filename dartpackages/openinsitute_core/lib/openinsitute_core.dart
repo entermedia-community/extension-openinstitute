@@ -2,6 +2,7 @@ library openinsitute_core;
 
 import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +19,7 @@ import 'package:openinsitute_core/services/hive_manager.dart';
 import 'package:openinsitute_core/services/project_manager.dart';
 import 'package:openinsitute_core/services/oiChatManager.dart';
 import 'package:openinsitute_core/services/task_manager.dart';
+import 'package:openinsitute_core/services/user_manager.dart';
 
 //import 'contact.dart';
 
@@ -32,6 +34,7 @@ class OpenI {
   TaskManager? taskManager;
   FeedManager? feedManager;
   HiveManager? hiveManager;
+  UserManager? userManager; 
   
   Map? get app  {
     if (_settings == null) {
@@ -59,6 +62,8 @@ class OpenI {
   TaskManager get taskmanager => Get.find<TaskManager>();
   FeedManager get feedmanager => Get.find<FeedManager>();
   HiveManager get hivemanager => Get.find<HiveManager>();
+  UserManager get usermanager => Get.find<UserManager>(); 
+
 
   Future<void> initialize({required FirebaseAuth firebaseAuth}) async {
     await loadAppSettings();
@@ -79,6 +84,8 @@ class OpenI {
     Get.put<TaskManager>(taskManager!,permanent: true);
     feedManager = FeedManager();
     Get.put<FeedManager>(feedManager!,permanent: true);
+    userManager = UserManager();
+    Get.put(userManager!, permanent: true); 
   }
 
   Future<Map?> loadAppSettings() async {
@@ -116,7 +123,7 @@ class OpenI {
       customError: customError,
     );
     if (response != null && response.statusCode == 200) {
-      print("Success user info is:" + response.body);
+      log("Success user info is:" + response.body);
       final String responseString = response.body;
       return json.decode(responseString);
     } else {

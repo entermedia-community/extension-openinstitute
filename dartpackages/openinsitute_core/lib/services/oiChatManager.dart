@@ -77,9 +77,29 @@ class OiChatManager {
     List<emData> topics = responded!["topics"]!.map<emData>((json) => emData.fromJson(json)).toList(); 
     await saveTopics(topics, inProjectId);
     List<oiChatMessage> messages = responded["results"]!
-        .map<oiChatMessage>((json) => oiChatMessage.fromJson(json))
+        .map<oiChatMessage>((json) {
+         oiChatMessage chatMessage = oiChatMessage.fromJson(json); 
+        if(responded["users"] != null ) {
+        int index = responded["users"].indexWhere((element) => element["userid"] == chatMessage.user["id"]); 
+        if(index != -1) {
+          printInfo(info: responded["users"][index]["portrait"] ?? "");
+          chatMessage.user["portrait"] = responded["users"][index]["portrait"]; 
+        }
+        }
+        return chatMessage;
+  })
         .toList();
+
     return Future.value(messages);
+  }
+
+  Future<void> savePeople(List<emData> people) async{
+   await oi.usermanager.saveUsers(people);
+  }
+
+  Future<emData> getUser(String id) async {
+    emData? user =  await oi.usermanager.getUser(id);
+    return user!;
   }
 
   saveTopics(List<emData> topics, String projectId) async {

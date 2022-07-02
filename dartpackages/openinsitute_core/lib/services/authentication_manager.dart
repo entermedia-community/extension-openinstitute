@@ -99,7 +99,7 @@ class AuthenticationManager {
         customError: "Invalid credentials. Please try again!");
     print("Logging in...");
     if (resMap != null) {
-      Map<String, dynamic> results = resMap["results"];   
+      Map<String, dynamic> results = resMap["results"];
       emUser = EmUser.fromJson(results);
       print("complete");
       emUser = await firebaseLogin(emUser!.email!, emUser!.entermediakey);
@@ -114,22 +114,27 @@ class AuthenticationManager {
 
   //todo; Entermedia login with 6 digit code from email. Returns EM User.
   Future<EmUser?> loginCode(String logincode) async {
-    await signOut();
-    final resMap = await oi.postEntermedia(
-        oi.app!["mediadb"] + '/services/authentication/login.json',
-        {"email": email, "templogincode": logincode},
-        customError: "Invalid credentials. Please try again!");
-    print("Logging in with code: " + logincode);
-    if (resMap != null) {
-      Map<String, dynamic> results = resMap["results"];
-      emUser = EmUser.fromJson(results);
-      print("complete");
-      emUser = await firebaseLogin(email!, emUser!.entermediakey);
-      await signIn(email: email!, password: emUser!.firebasepassword!);
-      await sharedPref.saveEmUser(emUser!);
-      return emUser;
-    } else {
-      print("login failed");
+    try {
+      await signOut();
+      final resMap = await oi.postEntermedia(
+          oi.app!["mediadb"] + '/services/authentication/login.json',
+          {"email": email, "templogincode": logincode},
+          customError: "Invalid credentials. Please try again!");
+      print("Logging in with code: " + logincode);
+      if (resMap != null) {
+        Map<String, dynamic> results = resMap["results"];
+        emUser = EmUser.fromJson(results);
+        print("complete");
+        emUser = await firebaseLogin(email!, emUser!.entermediakey);
+        await signIn(email: email!, password: emUser!.firebasepassword!);
+        await sharedPref.saveEmUser(emUser!);
+        return emUser;
+      } else {
+        print("login failed");
+        return null;
+      }
+    } catch (e) {
+      printError(info: e.toString());
       return null;
     }
   }

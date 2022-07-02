@@ -12,14 +12,12 @@ class HiveManager {
 
   Future<void> init() async {
     String? path = await sharedPref.getEMPath();
-    print(path);
     if (path != null) {
       Hive.init(path);
     } else {
       Directory appDir = await getApplicationDocumentsDirectory();
       path = appDir.path; 
       await sharedPref.saveEMPath(path);
-      print(path);
       Hive.init(path);
     }
   }
@@ -65,7 +63,7 @@ class HiveManager {
     box = await setBox(boxString);
     List<Map<String, dynamic>> list = [];
     for (var element in box.keys) {
-      if (element != "lastsync" && element != "total") {
+      if (element != "lastsync" && element != "total" && element != "pages") {
         Map<String, dynamic> newdata =
             (Map<String, dynamic>.from(box.get(element)));
         list.add(newdata);
