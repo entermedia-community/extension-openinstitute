@@ -1,7 +1,5 @@
 package billing;
 
-import org.openedit.util.DateStorageUtil
-
 import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
@@ -9,7 +7,7 @@ import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
 import org.openedit.util.URLUtilities
-
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
