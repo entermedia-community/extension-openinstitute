@@ -164,7 +164,18 @@ li.menu-subheader {
     width: calc(100% - 60px);
 }
 
-
+.chatloadmorelink {
+	display:block;
+	text-decoration: none;
+	padding: 5px;
+	text-align: center;
+	background-color: #efefef;
+	margin:2px;
+}
+.chatloadmorelink:hover {
+	background-color: #cfcfcf;
+text-decoration: none;
+	}
 .login-area .container {
 	background-color: #fff;
 	padding:10px 15px 30px;

@@ -58,7 +58,9 @@
 	$context.putPageValue("resultsPage",$resultsPage)
 	$context.putPageValue("targetdiv","channelcontainer")
 	$context.putPageValue("oemaxlevel","2")
+	
 	$pages.include("$apphome/components/results/positions.html",$context)
+	
 	#foreach( $upload in $topuploads.getPageOfHits())
 		$context.putPageValue("upload",$upload)
 		$pages.include("$apphome/collective/channel/showpost.html",$context)
