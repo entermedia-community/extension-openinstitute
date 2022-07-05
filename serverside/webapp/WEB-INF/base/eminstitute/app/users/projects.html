@@ -50,10 +50,10 @@
 			#set( $organizations = $mediaarchive.query("librarycollection").ids($foids).sort("name").search() )
 
 			#if($organizations.size()>0)
-			
+			<h2> [[Following]]</h2>
 			<div class="stations-grid ">
 				<div class="project-grid ">
-					<h2> [[Following]]</h2>
+					
 						#foreach( $ohit in $organizations )
 							#set($link = "")
 							#if($ohit.assetportrait)

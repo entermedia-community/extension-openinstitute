@@ -1,19 +1,33 @@
 #
-#Tue Apr 07 17:54:07 CST 2020
-Todo=Acciónes
-Channel=Canal
+#Mon Jun 27 19:35:13 CDT 2022
+Todo=Acci\u00F3nes
 Exclusive=Exclusivo
 Exclusive\ Content=Contenido exclusivo
+Store=Tienda
 About\ Us=Nosotros
-Contact=Contacto
 Team\ Chat=Chat
+Request\ Join\ Team=Solicitar unirse al equipo
+Like=Me gusta
+Follow=Seguir
 Donate=Donar
+Donations=Donaciones
+Unfollow\ this\ Project=Dejar de seguir este proyecto
 Chat=Chat
-Donate\ to=Donar a
-Library=Archives
-Goals=Metas
 News\ Feed=Noticias
 Files=Archivos
-Projects\ Files=Archivos
 Home=Inicio
+Settings=Ajustes
+Project\ Settings=Configuraci\u00F3n del proyecto
+Channel=Canal
+Following=Siguiendo
+Followers=Seguidores
+Contact=Contacto
+Donate\ to=Donar a
+Finances=Finanzas
+Fianances=prometidos
+Library=Archives
+Goals=Metas
+Follow\ this\ Project=Sigue este proyecto
+Login\ to\ Follow=Iniciar sesi\u00F3n para seguir
+Projects\ Files=Archivos
 Community=Comunidad

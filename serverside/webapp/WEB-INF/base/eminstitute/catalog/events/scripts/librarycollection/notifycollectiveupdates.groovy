@@ -9,6 +9,7 @@ import org.openedit.data.Searcher
 import org.openedit.hittracker.HitTracker
 import org.openedit.users.User
 import org.openedit.util.DateStorageUtil
+import org.openedit.util.URLUtilities
 
 
 //Chat Notifications
@@ -16,7 +17,7 @@ import org.openedit.util.DateStorageUtil
 public void init()
 {
 	MediaArchive mediaArchive = (MediaArchive)context.getPageValue("mediaarchive");
-	
+	String	appid =  mediaArchive.getCatalogSettingValue("events_notify_collective_app");
 	
 	Data notificationsent = mediaArchive.getCatalogSetting("collectives_notification_lastsent");
 	if( notificationsent == null)
@@ -29,7 +30,7 @@ public void init()
 	
 	String datestrinng = notificationsent.get("value");
 	
-	//datestrinng= "2022-06-03T10:38:13.099Z";
+	//datestrinng= "2022-07-03T10:38:13.099Z";
 	
 	Date since = DateStorageUtil.getStorageUtil().parseFromStorage(datestrinng);
 	Date started = new Date();
@@ -41,16 +42,19 @@ public void init()
 	//--Tickets
 	HitTracker alltickets = mediaArchive.query("projectgoal").after("creationdate", since).sort("projectstatus").sort("creationdateDown").search();
 	getUpdatedRows(collectionsupdated, alltickets, "tickets");
-	
+
+	//-- Goals
 	HitTracker alltasks = mediaArchive.query("goaltask").after("creationdate", since).search();
 	getUpdatedRows(collectionsupdated, alltasks, "tasks");
 	
 
+	//Expenses
 	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("date", since).search();
-	log.info(allexpenses.size());
 	getUpdatedRows(collectionsupdated, allexpenses, "expenses");
 	
-	
+	//Posts
+	HitTracker allposts = mediaArchive.query("userupload").after("uploaddate", since).search();
+	getUpdatedRows(collectionsupdated, allposts, "posts");
 	
 	log.info(collectionsupdated);
 	
@@ -93,7 +97,7 @@ public void init()
 	
 	
 	/*SEND EMAIL*/
-	String	appid =  mediaArchive.getCatalogSettingValue("events_notify_collective_app");
+	
 	String template = "/" + appid + "/theme/emails/collective-updates.html";
 	//Loop over the remaining topics
 	try
@@ -128,7 +132,8 @@ public void init()
 			objects.put("mediaarchive",mediaArchive);
 			objects.put("messagessince",since);
 			objects.put("siteroot", getSiteRoot());
-			objects.put("since", datestrinng);
+			String dates = DateStorageUtil.getStorageUtil().formatDateObj(since, "dd-MM-YYYY");
+			objects.put("since", dates);
 			
 			templatemail.send(objects);
 			
@@ -148,9 +153,15 @@ public void init()
 
 private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, HitTracker events, String table) {
 	MediaArchive mediaArchive = (MediaArchive)context.getPageValue("mediaarchive");
+	String	appid =  mediaArchive.getCatalogSettingValue("events_notify_collective_app");
+	
 	for (Data row in events)
 		{
 			String collectionid = row.get("collectionid");
+			
+			if(collectionid == null) {
+				collectionid = row.get("librarycollection");
+			}	
 			
 			if(collectionid == null) {
 				continue;
@@ -160,6 +171,11 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 			if( notifications == null)
 			{
 				notifications = new HashMap();
+				//New collection save collection info too
+				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
+				String collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html";
+				collection.setValue("finalurl", collection_url);
+				notifications.put("collection", collection);
 			}
 			
 			//

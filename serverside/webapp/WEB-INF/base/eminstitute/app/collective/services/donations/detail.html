@@ -35,6 +35,13 @@
 			<td>$!transaction.authorizationid</td>
 		</tr>
 		#end
+		
+		#if($transaction.receiptstatus == "sent")
+		<tr>
+			<td>[[Receipt]]:</td>
+			<td>[[Sent]]</td>
+		</tr>
+		#end
 	</table>
 
 #end

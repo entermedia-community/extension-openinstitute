@@ -6,6 +6,8 @@ import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
+import org.openedit.util.URLUtilities
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -33,8 +35,53 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			String emailbody = "";
 			String subject = "";
 			
-			//get emailbody from collection
 			Data collection = mediaArchive.getData("librarycollection", receipt.getValue("collectionid"));
+					
+			Map objects = new HashMap();
+			
+			objects.put("mediaarchive", mediaArchive);
+			
+			objects.put("receipt", receipt);
+			
+			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "dd-MM-YYYY");
+			objects.put("donationdate", dates);
+			
+			User user = mediaArchive.getUser(receipt.getValue("userid"));
+			if(user != null)
+			{
+				objects.put("donor", (String) user.getScreenName());
+			}
+			else 
+			{
+				objects.put("donor", "Sponsor");
+			}
+
+			objects.put("amount", "\$" + context.doubleToMoney(receipt.getValue("totalprice"), 2) );
+			
+			String currencytype = mediaArchive.getCachedData("currencytype", receipt.getValue("currencytype"));
+			objects.put("currency", currencytype);
+			
+			String collection_url = '';
+			String collection_url_donation = '';
+			
+			String appid = context.findValue("sitelink");
+			
+			appid = 'app';  //Sitelink not working
+			
+			if (collection != null) {
+				objects.put("project", collection);
+				
+				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html";
+				objects.put("project_url", collection_url);
+				
+				collection_url_donation = getSiteRoot() + "/" + appid + "/collective/donate/"+collection.getId()+"/donate.html"
+				objects.put("project_url_donation", collection_url_donation);
+
+				//log.info(collection_url_donation);
+			}
+			
+			
+			//get emailbody from collection
 			if(collection != null) {
 				if (collection.getValue("donationemailtemplate")) {
 					emailbody = (String) collection.getValue("donationemailtemplate");
@@ -51,41 +98,15 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 				emailbody = "Thank you for your Donation.";
 			}
 			if (subject.equals("")) {
-				subject =  "Donation Receipt";
+				subject =  "${project} Donation Receipt";
 			}
 			
-			Map objects = new HashMap();
-			
-			objects.put("mediaarchive", mediaArchive);
-			objects.put("receipt", receipt);
-			//objects.put("receiptuser", user);
-			objects.put("donor", (String) receipt.getValue("name"));
-			
-			String price = receipt.getValue("totalprice");
-			objects.put("amount", "\$" + price );
-			
-			
-			String collection_url = '';
-			String collection_url_donation = '';
-			
-			String appid = context.findValue("sitelink");
-			
-			appid = 'app';  //Sitelink not working
-			
-			if (collection != null) {
-				objects.put("organization", collection);
-				collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId()+"/index.html"
-				objects.put("organization_url", collection_url);
-				
-				collection_url_donation = getSiteRoot() + "/" + appid + "/collective/donate/"+collection.getId()+"/donate.html"
-				objects.put("organization_url_donation", collection_url_donation);
-				log.info(collection_url_donation);
-			}
+			String body = mediaArchive.getReplacer().replace(emailbody, objects);
+			subject = mediaArchive.getReplacer().replace(subject, objects);
 		
 			WebEmail templateEmail = mediaArchive.createSystemEmailBody(receiptemail);
 			templateEmail.setSubject(subject);
 			templateEmail.loadSettings(context);
-			String body = mediaArchive.getReplacer().replace(emailbody, objects);
 			templateEmail.send(body);
 			
 			receipt.setValue("receiptstatus", "sent");

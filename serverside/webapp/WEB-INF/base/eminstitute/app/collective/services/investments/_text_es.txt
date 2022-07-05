@@ -1,0 +1,11 @@
+#
+#Mon Jun 27 19:49:09 CDT 2022
+Sort\ by=Ordenar por
+User=Usuario
+Description=Descripci\u00F3n
+Reverse=Reverso
+Add\ Investment\ Or\ Disbursement=Agregar inversi\u00F3n o desembolso
+Total=Total
+Currency=Divisa
+Download=Descargar
+Date=Fecha

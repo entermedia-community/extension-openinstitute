@@ -2,11 +2,20 @@
 ##<textarea name="${detail.getId()}.value" id="${detail.getId()}" cols="40" rows="5" 
 ## class="#if($detail.isRequired() && !$multiedit) required #end htmleditor form-control">$!val</textarea>
 
+#set($detailid = $detail.getId())
+#set($isrequired = $detail.isRequired())
+
+#ifnull($detailid)
+	##getting from context?
+	#set($detaild = $detail.id)
+	#set($isrequired = $detailisrequired)
+#end
+
 
 <div style="width:100%;min-height:300px;border: 1px solid #cbd3d5;background:white;" 
-	class="  oehtmlinput attachtext-textbox #if($detail.isRequired() && !$multiedit) required #end" 
-	data-saveto="html${detail.getId()}value"
+	class="  oehtmlinput attachtext-textbox #if($isrequired && !$multiedit) required #end" 
+	data-saveto="html${detailid}value"
 	data-placeholder=""
 	>$!val</div>
 	
-<input id="html${detail.getId()}value" name="${detail.getId()}.value" type="hidden" value="#esc($val)" />
+<input id="html${detailid}value" name="${detailid}.value" type="hidden" value="#esc($val)" />

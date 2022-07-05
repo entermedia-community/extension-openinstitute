@@ -19,6 +19,11 @@
 		viewtype="html" editable="true">
 		Invoice Description
 	</property>
+	
+	<property id="invoicenotes" index="true" stored="true"
+		viewtype="html" editable="true">
+		Invoice Notes
+	</property>
 
 	<property id="collectionid" listid="librarycollection"
 		index="true" stored="true" editable="true" viewtype="list" type="list">
@@ -75,6 +80,12 @@
 			<language id="en"><![CDATA[Total Price]]></language>
 		</name>
 	</property>
+	
+	<property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
+    <name> 
+      <language id="en"><![CDATA[Currency Type]]></language> 
+    </name> 
+  	</property>  
 
 	<property id="duedate" editable="true" stored="true"
 		type="date" index="true">Due Date
@@ -85,6 +96,10 @@
 		<name>
 			<language id="en"><![CDATA[Notification Sent]]></language>
 		</name>
+	</property>
+	
+	<property id="sentdate" editable="true" stored="true"
+		type="date" rendertype="datetime" index="true">Sent Date
 	</property>
 
 	<property id="createdon" editable="true" stored="true"

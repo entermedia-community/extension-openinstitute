@@ -8,4 +8,5 @@
 	<data id="autopayfailed">Auto Payment Failed</data>
 	<data id="canceled">Canceled</data>	
 	<data id="completed">Completed</data>
+	<data id="error">Error</data>
 </root>

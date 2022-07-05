@@ -46,11 +46,23 @@
 
 	<!-- <property id="productprice" datatype="double" editable="true" stored="true"> -->
 	<property id="productprice" index="true" editable="true"
-		stored="true" datatype="double" type="double">
+		stored="true" datatype="double" type="double" required="true">
 		<name>
 			<language id="en"><![CDATA[Price]]></language>
 		</name>
 	</property>
+	
+	<property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype"  required="true">
+    <name> 
+      <language id="en"><![CDATA[Currency Type]]></language> 
+    </name> 
+  </property>  
+ 
+    <property id="incometype" index="true" editable="true" stored="true"  datatype="list" listid="incometype">
+    <name> 
+      <language id="en"><![CDATA[Income Type]]></language> 
+    </name> 
+  </property>   
 
 	<property id="discount" index="true" editable="true"
 		stored="true" datatype="double" type="double">
@@ -80,6 +92,8 @@
 	<property id="recurringperiod" index="true" stored="true"
 		editable="true" type="number">Recurring Period (months)</property>
 
+	<property id="billingday" index="true" stored="true"
+		editable="true" type="number" rendertype="monthday">Billing Day</property>
 
 	<property id="sessioncount" index="true" stored="true"
 		editable="true" type="number">Session Count</property>

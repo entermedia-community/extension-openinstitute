@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col" style="padding-top:20px;">
-			<div class="contentcolumn">
+			<div class="contentcolumn contentpadding">
 
 			    <h1>[[Contact us]]</h1>
 				<div class="row">
@@ -43,7 +43,7 @@
 			    <div class="row justify-content-md-center">
 			        <div class="col-md-8">
 					<div >
-					<h3>Complete the form below</h3>
+					<h3>[[Complete the form below]]</h3>
 					<div class="card-block" >
 			            <form id="contactform" name="contactform" action="sent.html" method="POST">
 			            <input type="hidden" name="collectionid" value="$librarycol.id">
@@ -95,7 +95,7 @@
 			            	<div>
 			            	#if( !$answer )
 			             
-							<label for="registration-human-test">[[Registration test]](write out): $question.description</label>
+							<label for="registration-human-test">[[Registration test]]([[write out]]): $question.description</label>
 							
 							<input class="field small" type="text" name="answerid" id="registration-human-test" />
 							#end

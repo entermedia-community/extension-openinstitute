@@ -3,6 +3,8 @@
 <div id="subscriberssidebar" style="position:relative; ">
 
 	#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
+#set( $hidegoals = $context.getRequestParameter("hidegoals"))
+#if( $hidegoals != "true")
 
 ##	#if( $caneditcollection)
 	
@@ -30,6 +32,7 @@
 	<div style="" class="text-center">
 		<a href="$applink/collective/donate/$collectionid/donate.html" class="btn subscribe-btn">[[Donate]]</a>
 	</div>
+#end	
 	
 	#set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).sort("paymentdateDown").search($context) )
 	#set( $n = $donations.setHitsPerPage(6))

@@ -15,7 +15,7 @@ public void init() {
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 
 	generateRecurringInvoices(mediaArchive, productSearcher);  //status=active
-	generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
+	//generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
 	payAutoPaidInvoices(mediaArchive, invoiceSearcher);
 	
 	
@@ -33,89 +33,117 @@ private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSear
 	Collection invoices = invoiceSearcher.query()
 			.exact("paymentstatus","invoiced")
 			.exact("isautopaid","true").search();
-
-	log.info("Auto-Paid pending invoices " + invoices.size() + " found");
-	for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) {
-		Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
-		Map<String, Object> customer = stripe.getCustomer(mediaArchive,  "billing+" + invoice.getValue("collectionid") + "@entermediadb.com")
-		if (customer != null) {
-			Map<String, Object> sourcesData = customer.get("sources");
-			ArrayList<Map<String, Object>> sources = sourcesData.get("data");
-			if (sources.size() > 0) {
-				Map<String, Object> source = sources.get(0);
-				Searcher payments = mediaArchive.getSearcher("transaction");
-				Data payment = payments.createNewData();
-				payment.setValue("paymenttype","stripe" );
-				payment.setValue("totalprice", invoice.getValue("totalprice"));
-				Boolean chargeSuccess = stripe.createCharge(mediaArchive, payment, customer.get("id"));
-
-				if (chargeSuccess) {
-					invoice.setValue("paymentstatus", "paid");
-					invoice.setValue("invoicepaidon", today.getTime());
+    if (invoices.size() > 0) {
+		log.info("Auto-Paid pending invoices " + invoices.size() + " found");
+		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) {
+			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
+			Map<String, Object> customer = stripe.getCustomer(mediaArchive,  "billing+" + invoice.getValue("collectionid") + "@entermediadb.com")
+			if (customer != null) {
+				Map<String, Object> sourcesData = customer.get("sources");
+				ArrayList<Map<String, Object>> sources = sourcesData.get("data");
+				if (sources.size() > 0) {
+					Map<String, Object> source = sources.get(0);
+					Searcher payments = mediaArchive.getSearcher("transaction");
+					Data payment = payments.createNewData();
+					payment.setValue("paymenttype","stripe" );
+					payment.setValue("totalprice", invoice.getValue("totalprice"));
+					Boolean chargeSuccess = stripe.createCharge(mediaArchive, payment, customer.get("id"));
+	
+					if (chargeSuccess) {
+						invoice.setValue("paymentstatus", "paid");
+						invoice.setValue("invoicepaidon", today.getTime());
+					} else {
+						invoice.setValue("paymentstatus", "autopayfailed");
+						invoice.setValue("paymentstatusreason", "CreditCard failed");
+					}
 				} else {
 					invoice.setValue("paymentstatus", "autopayfailed");
-					invoice.setValue("paymentstatusreason", "CreditCard failed");
+					invoice.setValue("paymentstatusreason", "No Credit Cards Stored");
 				}
 			} else {
 				invoice.setValue("paymentstatus", "autopayfailed");
-				invoice.setValue("paymentstatusreason", "No Credit Cards Stored");
+				invoice.setValue("paymentstatusreason", "No Customer");
 			}
-		} else {
-			invoice.setValue("paymentstatus", "autopayfailed");
-			invoice.setValue("paymentstatusreason", "No Customer");
+			invoiceSearcher.saveData(invoice);
 		}
-		invoiceSearcher.saveData(invoice);
-	}
+    }
 }
 
 private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher productSearcher) {
 	int daysToExpire = 7; // invoice will expire in (days)
 	Calendar today = Calendar.getInstance();
 	Calendar due = Calendar.getInstance();
-	due.add(Calendar.DAY_OF_YEAR, -5); // make invoice 5 days before next bill date
+	due.add(Calendar.DAY_OF_YEAR, +15); // make invoice 5 days before next bill date
 
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","true")
 			.exact("billingstatus", "active")
-			.between("nextbillon", due.getTime(), today.getTime())
+			.between("nextbillon", today.getTime(), due.getTime())
 			.search();
-
-	log.info("Checking invoice for " + pendingProducts.size() + " products");
-	for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
-		Data product = productSearcher.loadData(productIterator.next());
-
-		Date nextBillOn = product.getValue("nextbillon");
-		Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
-		if (lastbilldate < nextBillOn) { // otherwise assume it's already created
-			Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
-			Data invoice = invoiceSearcher.createNewData();
-
-			Calendar invoiceDue = Calendar.getInstance();
-			invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
-			HashMap<String,Object> productItem = new HashMap<String,Object>();
-			productItem.put("productid", product.getValue("id"));
-			productItem.put("productquantity", 1 );
-			productItem.put("productprice", product.getValue("productprice"));
-			Collection items = new ArrayList();
-			items.add(productItem);
-			invoice.setValue("productlist", items);
-			invoice.setValue("paymentstatus", "invoiced");
-			invoice.setValue("isautopaid", product.getValue("isautopaid"));
-			invoice.setValue("collectionid", product.getValue("collectionid"));
-			invoice.setValue("owner", product.getValue("owner"));
-			invoice.setValue("totalprice", product.getValue("productprice"));
-			invoice.setValue("duedate", invoiceDue.getTime());
-			invoice.setValue("invoicedescription", product.getValue("productdescription"));
-			invoice.setValue("notificationsent", "false");
-			invoice.setValue("createdon", today.getTime());
-			invoiceSearcher.saveData(invoice);
-
-			int recurrentCount = product.getValue("recurringperiod")
-			int currentMonth = nextBillOn.getMonth();
-			nextBillOn.setMonth(currentMonth + recurrentCount);
-			product.setValue("nextbillon", nextBillOn);
-			product.setValue("lastgeneratedinvoicedate", today.getTime());
-			productSearcher.saveData(product);
+    log.info(pendingProducts);
+	if (pendingProducts.size() > 0) 
+	{
+		log.info("Creating recurring invoices for " + pendingProducts.size() + " products");
+		for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
+			Data product = productSearcher.loadData(productIterator.next());
+	
+			Date nextBillOn = product.getValue("nextbillon");
+			Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
+			if (lastbilldate == null || lastbilldate < nextBillOn) { // otherwise assume it's already created
+				Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
+				Data invoice = invoiceSearcher.createNewData();
+	
+				Calendar invoiceDue = Calendar.getInstance();
+				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+				HashMap<String,Object> productItem = new HashMap<String,Object>();
+				productItem.put("productid", product.getValue("id"));
+				productItem.put("productquantity", 1 );
+				productItem.put("productprice", product.getValue("productprice"));
+				Collection items = new ArrayList();
+				items.add(productItem);
+				invoice.setValue("productlist", items);
+				invoice.setValue("currencytype",  product.getValue("currencytype"));
+				invoice.setValue("paymentstatus", "sendinvoice");
+				invoice.setValue("isautopaid", product.getValue("isautopaid"));
+				invoice.setValue("collectionid", product.getValue("collectionid"));
+				invoice.setValue("owner", product.getValue("owner"));
+				invoice.setValue("totalprice", product.getValue("productprice"));
+				invoice.setValue("duedate", invoiceDue.getTime());
+				invoice.setValue("invoicedescription", product.getValue("productdescription"));
+				invoice.setValue("notificationsent", "false");
+				invoice.setValue("createdon", today.getTime());
+	
+				Collection contacts = mediaArchive.query("librarycollectionusers")
+					.exact("collectionid",product.getValue("collectionid"))
+					.exact("ontheteam",true)
+					.exact("isbillingcontact","true")
+					.search();
+				String contactsstring = "";
+				if (contacts!= null) {
+					for(Data c:contacts)
+					{
+						User user = mediaArchive.getUser(c.getValue("followeruser"));
+						
+						if(user!= null && user.getEmail() != null) {
+							if (contactsstring != "") {
+								contactsstring = contactsstring + ", " + user.getEmail();
+							}
+							else {
+								contactsstring =  user.getEmail();
+							}
+						}
+					}
+				}
+				invoice.setValue("sentto", contactsstring);
+				invoiceSearcher.saveData(invoice);
+	
+				int recurrentCount = product.getValue("recurringperiod")
+				int currentMonth = nextBillOn.getMonth();
+				nextBillOn.setMonth(currentMonth + recurrentCount);
+				product.setValue("nextbillon", nextBillOn);
+				product.setValue("lastgeneratedinvoicedate", today.getTime());
+				productSearcher.saveData(product);
+			}
 		}
 	}
 }
@@ -133,7 +161,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			//.exact("producttype","0")
 			
 			
-	log.info("Checking invoice for " + pendingProducts.size() + " none-recurring Products");
+	log.info("Creating invoice for " + pendingProducts.size() + " none-recurring Products");
 	for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
 		Data product = productSearcher.loadData(productIterator.next());
 
@@ -172,7 +200,8 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
 	Collection pendingNotificationInvoices = invoiceSearcher.query()
 			.exact("notificationsent","false")
-			.exact("paymentstatus","sendinvoice").search();
+			.orgroup("paymentstatus", "sendinvoice error")
+			.search();
 
 	
 	if (pendingNotificationInvoices.size()>0)
@@ -212,54 +241,87 @@ private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher in
 }
 
 private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
-
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
-	String emails = context.getRequestParameter("emails");
-	if (emails!= null) {
 		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) 
 		{
 			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 			String collectionid = invoice.getValue("collectionid");
 			Data workspace = mediaArchive.getData("librarycollection", collectionid);
-			
-			List<String> emaillist = Arrays.asList(emails.split(","));
-			if (emaillist.size()>0) 
+			String emails = invoice.getValue("sentto");
+			Boolean sent = false;
+			if (emails == null)
 			{
-				log.info("Reviewing "+emaillist.size()+" members for: "+workspace+ " ("+collectionid+")");
-				for (String email : emaillist)
-				 {
-					if (email != null) {
-						if (email) {
-							switch (iteratorType) {
-								case "notificationsent":
-									String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
-									
-									//String key = mediaArchive.getUserManager().getEnterMediaKey(email);
-									//actionUrl = actionUrl + "&entermedia.key=" + key;
-									
-									actionUrl = URLUtilities.urlEscape(actionUrl);
-									sendEmail(mediaArchive, email, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
-									break;
-								case "notificationoverduesent":
-									sendEmail(mediaArchive, email, invoice, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
-									break;
-								case "notificationpaidsent":
-									sendEmail(mediaArchive, email, invoice, "Payment Received "+workspace, "send-paid-invoice-event.html");
-									break;
+					//If no email defined will search again for them.
+					Collection contacts = mediaArchive.query("librarycollectionusers")
+					.exact("collectionid",collectionid)
+					.exact("ontheteam",true)
+					.exact("isbillingcontact","true")
+					.search();
+					String contactsstring = "";
+					if (contacts!= null) {
+						for(Data c:contacts)
+						{
+							User user = mediaArchive.getUser(c.getValue("followeruser"));
+							
+							if(user!= null && user.getEmail() != null) {
+								if (contactsstring != "") {
+									contactsstring = contactsstring + ", " + user.getEmail();
+								}
+								else {
+									contactsstring =  user.getEmail();
+								}
 							}
 						}
 					}
-				}
-				invoice.setValue("sentto", emails);
-				invoice.setValue("paymentstatus", "invoiced");
-				invoice.setValue(iteratorType, "true");
-				invoiceSearcher.saveData(invoice);
-				}
-				else 
+					invoice.setValue("sentto", contactsstring);
+					emails = contactsstring;
+			}
+			if (emails != null)
+			{
+				List<String> emaillist = Arrays.asList(emails.split(","));
+				if (emaillist.size()>0) 
 				{
-					log.info("No email addresses to send Invoice for: "+workspace+ " ("+collectionid+")");
+					log.info("Sending email to  "+emaillist.size()+" members of: "+workspace+ " ("+collectionid+")");
+					for (String email : emaillist)
+					 {
+						if (email != null) {
+								switch (iteratorType) {
+									case "notificationsent":
+										String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+										
+										//String key = mediaArchive.getUserManager().getEnterMediaKey(email);
+										//actionUrl = actionUrl + "&entermedia.key=" + key;
+										
+										actionUrl = URLUtilities.urlEscape(actionUrl);
+										sendEmail(mediaArchive, email, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
+										sent = true;
+										break;
+									case "notificationoverduesent":
+										sendEmail(mediaArchive, email, invoice, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
+										sent = true;
+										break;
+									case "notificationpaidsent":
+										sendEmail(mediaArchive, email, invoice, "Payment Received "+workspace, "send-paid-invoice-event.html");
+										sent = true;
+										break;
+								}
+							}
+						}
 				}
 			}
+			if (sent) {
+				Calendar today = Calendar.getInstance();
+				invoice.setValue("sentto", emails);
+				invoice.setValue("sentdate", today.getTime());
+				invoice.setValue("paymentstatus", "invoiced");
+				invoice.setValue(iteratorType, "true");
+			}
+			else {
+				invoice.setValue("paymentstatus", "error");
+				invoice.setValue("paymentstatusreason", "No billing address defined in Project.");
+				log.info("No email defined to send Invoice for: "+workspace+ " ("+collectionid+")");
+			}
+			invoiceSearcher.saveData(invoice);
 		}
 }
 

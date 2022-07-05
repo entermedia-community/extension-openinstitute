@@ -13,5 +13,6 @@
 </path-action>
 
 <path-action name="ChatModule.loadRecentChats"/>
+<path-action name="ProjectModule.loadGoalsInMessages"/>
 
 </page>

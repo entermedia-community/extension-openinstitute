@@ -1,0 +1,15 @@
+#
+#Mon Jun 27 19:42:56 CDT 2022
+Description=Descripci\u00F3n
+Add\ Income=A\u00F1adir ingresos
+Cash\ Payments=Pagos en efectivo
+Reverse=Reverso
+Invoices=Facturas
+Date=Fecha
+hits=registros
+Type=Tipo
+Sort\ by=Ordenar por
+Search=B\u00FAsqueda
+Total=Total
+Topic=Tema
+Download=Descargar

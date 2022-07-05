@@ -42,13 +42,13 @@
        		$pages.include("$apphome/components/users/pickuser.html")
        		$pages.include("$apphome/components/libraries/pickcollection.html")
         </div>
-        <div class="col-sm-1 col-md-4 order-sm-1 col-oi-logo text-center">
+        <div class="col-sm-1 col-md-3 order-sm-1 col-oi-logo text-center">
 	        <a class="navbar-brand" href="${context.siteRoot}/	" title="Open Institute"> 
 			<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
 			</a>
 		</div>
 		
-		<div class="col-sm-1 col-md-4 order-3 col-oi-menu">
+		<div class="col-sm-1 col-md-5 order-3 col-oi-menu">
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fa fa-bars"></i>
         </button>
@@ -71,8 +71,11 @@
             #end
 	    	       
        
-            <li class="nav-item #if($oisection == "search")active#end" >
-              <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/browse/search/index.html">[[Search]]</a>
+            ##<li class="nav-item #if($oisection == "search")active#end" >
+            ##  <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/browse/search/index.html">[[Search]]</a>
+           ## </li>
+            <li class="nav-item #if($oisection == "about")active#end" >
+              <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/about/index.html">[[About]]</a>
             </li>
             <li class="nav-item #if($oisection == "contact")active#end" >
               <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/contact/contact.html">[[Contact]]</a>

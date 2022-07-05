@@ -64,7 +64,8 @@
       <language id="en"><![CDATA[Send To]]></language> 
     </name> 
   </property> 
-   <property id="paymententitydesttype" index="true" editable="true" stored="true"  datatype="list" listid="paymententitytype" defaultvalue="1">
+   <property id="paymententitydesttype" index="true" editable="true" stored="true"  
+   	datatype="list" listid="paymententitytype" defaultvalue="user">
     <name> 
       <language id="en"><![CDATA[Send To Type]]></language> 
     </name> 

@@ -8,10 +8,11 @@
 	<property id="producttags" />
 	<property id="productcost" />
 	<property id="productattachment" />
+	<property id="currencytype" />
 	<property id="productprice" />
 	<property id="featured" />
 	<property id="paymentstatus" />
 	<property id="recurring" />
-	<property id="nextbillon" />
 	<property id="recurringperiod" />
+	<property id="billingday" />
 </properties>

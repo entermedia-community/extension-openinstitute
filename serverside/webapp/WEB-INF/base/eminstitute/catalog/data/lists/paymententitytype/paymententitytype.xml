@@ -14,11 +14,5 @@
       <language id="es"><![CDATA[Proyecto]]></language> 
     </name> 
   </data>   
-
-  <data id="communitytag"> 
-    <name> 
-      <language id="en"><![CDATA[Campaign]]></language> 
-    </name> 
-  </data>   
     
 </root>

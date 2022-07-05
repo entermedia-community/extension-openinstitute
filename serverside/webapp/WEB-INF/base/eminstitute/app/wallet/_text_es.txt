@@ -1,0 +1,15 @@
+#
+#Mon Jun 27 19:42:28 CDT 2022
+Status=Estado
+Pay\ User=Usuario de pago
+Label=Etiqueta
+View\ Points=Puntos de vista
+From=De
+Date=Fecha
+Type=Escribe
+Edit\ Transaction=Editar transacci\u00F3n
+Total=Total
+Collection=Recopilaci\u00F3n
+To=A
+Topic=Tema
+Download=Descargar

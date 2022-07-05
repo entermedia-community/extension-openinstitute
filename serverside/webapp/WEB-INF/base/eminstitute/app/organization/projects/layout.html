@@ -11,26 +11,29 @@
 					#set($caneditlibrary = true )
 				#end
 				
-				#if( $caneditlibrary)
-				<div class="float-right" style="margin:8px -10px 0 0">
-				<a class="emdialog" data-allwaysloadpage="true" href="$applink/organization/edit/$library.id/editcommunity.html" title="[[Edit your Community]]"><i class="fas fa-cog"></i></a>
+				<div style="padding:20px;">
+					#if( $caneditlibrary)
+					<div class="float-right" style="margin:8px -10px 0 0">
+					<a class="emdialog" data-allwaysloadpage="true" href="$applink/organization/edit/$library.id/editcommunity.html" title="[[Edit your Community]]"><i class="fas fa-cog"></i></a>
+					</div>
+					#end
+					
+					<h2><strong>$library</strong> [[News Feed]]</h2>
+					
+					#if( $caneditlibrary)	
+					<div class="text-right">
+					<a class="oe-dataedit showeditonright" 
+						data-target="#edithtmlintro-$library.id"
+						data-width="500" 
+						title="[[Edit Library Intro]]" 
+						href="#"><i class="fas fa-edit"></i></a>
+					</div>
+					#end
+					<div class="oe-editable seemore" id="edithtmlintro-$library.id" data-dataid="$library.id" data-field="librarydescription" data-searchtype="library">
+					   		#if($library.librarydescription) $!library.librarydescription #end
+					</div>
 				</div>
-				#end
 				
-				<h2><strong>$library</strong> [[News Feed]]</h2>
-				
-				#if( $caneditlibrary)	
-				<div class="text-right">
-				<a class="oe-dataedit showeditonright" 
-					data-target="#edithtmlintro-$library.id"
-					data-width="500" 
-					title="[[Edit Library Intro]]" 
-					href="#"><i class="fas fa-edit"></i></a>
-				</div>
-				#end
-				<div class="oe-editable seemore" id="edithtmlintro-$library.id" data-dataid="$library.id" data-field="librarydescription" data-searchtype="library">
-				   		#if($library.librarydescription) $!library.librarydescription #end
-				</div>
 
 				<div class="feedupload-container organization-feed">
 
