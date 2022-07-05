@@ -570,9 +570,8 @@ public class PaymentModule extends BaseMediaModule
 		Data saved = (Data) collectiveproductsearcher.cloneData(source);
 		saved.setValue("createdon", today.getTime());
 		saved.setValue("billingstatus", "new");
-		saved.setValue("locked", "false");
 		saved.setValue("lastgeneratedinvoicedate", null);
-		saved.setValue("nextbillon", today.getTime());
+		//saved.setValue("nextbillon", today.getTime());
 		collectiveproductsearcher.saveData(saved, null);
 		inReq.putPageValue("data", saved);
 		
