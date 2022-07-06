@@ -1,13 +1,13 @@
 package billing;
 
-import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
+import org.openedit.hittracker.HitTracker
 import org.openedit.users.User
-import org.openedit.util.URLUtilities
 import org.openedit.util.DateStorageUtil
+import org.openedit.util.URLUtilities
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -18,25 +18,42 @@ public void init() {
 }
 
 private void sendDonationReceipt(MediaArchive mediaArchive, Searcher transactionSearcher) {
-	Collection pendingNotification = transactionSearcher.query()
-			.exact("receiptstatus","new").search();
-
-	//log.info("Sending Notification for " + pendingNotification.size() + " Donations");
-	sendReceipt(mediaArchive, transactionSearcher, pendingNotification, "notificationsent");
+	HitTracker pendingNotification = transactionSearcher.query().exact("receiptstatus","new").search();
+	pendingNotification.setHitsPerPage(20);
+	pendingNotification.enableBulkOperations();
+	if(pendingNotification.size()>0) 
+	{
+		log.info("Sending Notification for " + pendingNotification.size() + " Donations");
+		sendReceipt(mediaArchive, transactionSearcher, pendingNotification.getPageOfHits(), "notificationsent");
+	}
 }
 
 private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher, Collection receipts, String iteratorType) {
+	
+	
+	Integer count = 0; 
 	for (Iterator receiptIterator = receipts.iterator(); receiptIterator.hasNext();) {
+	
 		Data receipt = transactionSearcher.loadData(receiptIterator.next());
+		User user = mediaArchive.getUser(receipt.getValue("userid"));
 		
 		String receiptemail = receipt.getValue("paymentemail");
+		
+		if (receiptemail == null && user != null) {
+			//get it from user account
+			receiptemail = user.getEmail();
+		}
 		
 		if (receiptemail != null) {
 			String emailbody = "";
 			String subject = "";
+			String collectionid = receipt.getValue("collectionid");
 			
-			Data collection = mediaArchive.getData("librarycollection", receipt.getValue("collectionid"));
-					
+			Data collection = mediaArchive.getData("librarycollection", collectionid);
+			if(collection == null) {
+				log.info("Can't send receipt, project does not exists: " + collectionid)
+				continue;
+			}		
 			Map objects = new HashMap();
 			
 			objects.put("mediaarchive", mediaArchive);
@@ -46,7 +63,7 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			String dates = DateStorageUtil.getStorageUtil().formatDateObj(receipt.getValue("paymentdate"), "dd-MM-YYYY");
 			objects.put("donationdate", dates);
 			
-			User user = mediaArchive.getUser(receipt.getValue("userid"));
+			
 			if(user != null)
 			{
 				objects.put("donor", (String) user.getScreenName());
@@ -63,6 +80,7 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			
 			String collection_url = '';
 			String collection_url_donation = '';
+			String projectname = collection.getName();
 			
 			String appid = context.findValue("sitelink");
 			
@@ -98,7 +116,7 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 				emailbody = "Thank you for your Donation.";
 			}
 			if (subject.equals("")) {
-				subject =  "${project} Donation Receipt";
+				subject =  projectname +" Donation Receipt";
 			}
 			
 			String body = mediaArchive.getReplacer().replace(emailbody, objects);
@@ -112,7 +130,16 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			receipt.setValue("receiptstatus", "sent");
 			transactionSearcher.saveData(receipt);
 			
-			log.info("Email sent to: " + receiptemail);
+			log.info("Email from ["+projectname+"] Sent to: " + receiptemail);
+			count = count+1;
+			
+			sleep(5000);
+			
+			
+		}
+		else
+		{
+			log.info("Missing email address for receipt: "+receipt.getId())
 		}
 	}
 }
