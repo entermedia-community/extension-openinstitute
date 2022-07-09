@@ -800,7 +800,7 @@ public class FinanceManager  implements CatalogEnabled
 		Data currencytype = getMediaArchive().getCachedData("currencytype", inCurrency);
 		
 		double exchange = Double.parseDouble( currencytype.get("exchangetousd"));
-		double dollars = exchange * number;
+		double dollars = MathUtils.divide(number, exchange );
 		return dollars;
 		
 	}

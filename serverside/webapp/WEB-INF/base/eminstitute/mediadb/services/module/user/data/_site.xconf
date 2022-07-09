@@ -1,5 +1,9 @@
 <page>
+	<property name="forcelayout">true</property>
+	<layout>/${applicationid}/services/module/user/data/layout.json</layout>
+	<property name="virtual">true</property>
 
+	<property name="alternative_extension">json</property>
 	
 	<permission name="view">
 		<or>

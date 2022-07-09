@@ -2,12 +2,12 @@
 #set( $person = $data )
 	"userid" : "$person.id",
 	"screenname": "$person.screenName",
-	"email": "$person.email",
-	"firstName": "$person.firstName",
-	"lastName": "$person.lastName"
+	"email": #jesc( $person.email ),
+	"firstName": #jesc( $person.firstName ),
+	"lastName": #jesc( $person.lastName )
 	#set( $userimageurl = $mediaarchive.asLinkToProfile($person.assetportrait) )
-	#if($userimageurl)
-		,"portrait": "$userimageurl"
+	#if($userimageurl),
+	"portrait": "$userimageurl"
 	#end
 	##TODO Add projects and following?
 }

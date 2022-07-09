@@ -1,5 +1,3 @@
-XXX
-
 #set($method = $context.getMethod())
 #set ($status = "ok")
 #if (!$data)
@@ -18,7 +16,7 @@ XXX
   "response":
       {
         "status":"$status",
-        "id":"$data.id"
+        "id":"$!data.id"
       }
   ,
   "data": $pages.include("./user.json")
@@ -38,11 +36,13 @@ XXX
   "response":
       {
         "status":"$status",
-        "id":"$data.id"
+        "id":"$!data.id"
       }
+      #if( $data )
   ,
   
   "data": $pages.include("./user.json")
+  #end
 }
 #else
   {
