@@ -90,7 +90,7 @@
                             #set($lastproduct = $mediaarchive.getProductById($product.productid))
                             #end
                             <tr>
-                                <td class="text-right" colspan="2"><b>[[Total]] ($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</b></td>
+                                <td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</span></b></td>
                                 <td  style="text-align: right"><b>$currency $!context.doubleToMoney($invoice.getValue("totalprice"), 2)</b></td>
                             </tr>
                         </table>
@@ -99,6 +99,12 @@
             </div>
             
             #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+            	##Disable for not USD
+            	#if($invoice.currencytype!='1')
+            	<div class="col-sm-5" style="text-align:center; padding:40px 10px 0;">
+            		[[Online payment disabled temporarily for current invoice currency type]].
+            	</div>
+            	#else
 	            <div class="col-sm-5">
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
@@ -204,6 +210,7 @@
 	                    </div>
 	                </div>
 	            </div>
+	            #end
 	          #elseif ($invoice.paymentstatus == 'paid')
 	          <div class="col-sm-4">
 	          	<div class="card">
