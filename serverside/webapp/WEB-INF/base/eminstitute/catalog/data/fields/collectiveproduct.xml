@@ -135,8 +135,13 @@
    	</name>
    </property>
    
-   	<property id="locked" index="true" stored="true"
-		editable="true" type="boolean">Locked</property>
+   		
+	<property id="sentto" index="true" stored="true" editable="true">
+		<name>
+			<language id="en"><![CDATA[Notification Sent to]]></language>
+		</name>
+	</property>
+		
 
 
 </properties>
