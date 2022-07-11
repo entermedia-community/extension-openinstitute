@@ -116,10 +116,14 @@
                          <td style="text-align: center;">$!context.getDate($hit.duedate)</td>
                          <td style="text-align: center;">$!context.getDate($hit.invoicepaidon)</td>
                          <td>
-                             #set($prods = $hit.getValue("productlist"))
-                             #foreach($pr in $prods)
-                                 #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                 $prod<br>
+                         	#if($hit.getName())
+                         	$hit.getName()
+                         	#else
+	                             #set($prods = $hit.getValue("productlist"))
+	                             #foreach($pr in $prods)
+	                                 #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
+	                                 $prod<br>
+	                             #end
                              #end
                          </td>
                      ##    <td>

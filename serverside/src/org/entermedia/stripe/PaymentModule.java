@@ -511,6 +511,9 @@ public class PaymentModule extends BaseMediaModule
 		String invoicedescription = inReq.getRequestParameter("invoicedescription.value");
 		invoice.setValue("invoicedescription", invoicedescription);
 		
+		String invoicename = inReq.getRequestParameter("name.value");
+		invoice.setValue("name", invoicename);
+		
 		mediaArchive.saveData("collectiveinvoice", invoice);
 		
 		/*
