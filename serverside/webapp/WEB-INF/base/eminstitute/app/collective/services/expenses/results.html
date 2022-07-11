@@ -12,7 +12,7 @@
                                   <th>[[Type]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Total]]</th>
-                                  <th>[[Bank]]</th>
+                                  <th>[[Approved]]</th>
                                   <th>[[Is Paid]]</th>
                                   <th></th>
                               </tr>
@@ -41,7 +41,7 @@
                                   <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
                                   <td>#esc($hit.expensedescription)</td>
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
-									<td>$!mediaarchive.getCachedData("bankaccount", $hit.paidfromaccount)</td>
+									<td>$!mediaarchive.getCachedData("user", $hit.user)</td>
                                   <td>#if($hit.ispaid == true)[[true]]#end</td>
 			                      <td style="text-align: center">
 			                            #if( $caneditcollection || $showcollections)
