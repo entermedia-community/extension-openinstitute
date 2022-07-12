@@ -4,7 +4,7 @@
 	<property id="collectiveproject" />
 	<property id="date"  />
 	<property id="expensetype" />
-    <property id="hasreimbursed" />
+    <property id="reimbursedstatus" />
 	<property id="reimburseuser" viewtype="user" />  
   
 </properties>

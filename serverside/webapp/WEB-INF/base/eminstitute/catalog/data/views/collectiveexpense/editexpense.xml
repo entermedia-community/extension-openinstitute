@@ -15,7 +15,7 @@
    	<property id="paymentdate"  editable="false"/>  
    	<property id="paymentdescription"  editable="false"/>  
 
-    <property id="hasreimbursed"  editable="false"/>
+    <property id="reimbursedstatus"  editable="false"/>
 	<property id="reimburseuser"  editable="false"/>  
     <property id="reimbursedate"  editable="false"/> 
   
