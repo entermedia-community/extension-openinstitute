@@ -22,17 +22,11 @@ class DataManager {
       searcher = await DataModule.createDataModule(inSearchType);
       searchers[inSearchType] = searcher;
     }
-    //https://stackoverflow.com/questions/53886304/understanding-factory-constructor-code-example-dart do this?
     return searcher;
   }
-
-  // TODO: Update DataModule
-
 }
 
 class DataModule {
-  //https://stackoverflow.com/questions/54549235/dart-await-on-constructor
-
   late String searchtype;
   late Box box;
   bool cache = true;
@@ -42,19 +36,11 @@ class DataModule {
   static Future<DataModule> createDataModule(String inSearchType) async {
     var searcher = DataModule._();
     searcher.searchtype = inSearchType;
-    searcher.box = await searcher.getBox(inSearchType);
+    searcher.box = await oi.hivemanager.setBox(inSearchType);
     return searcher;
   }
 
   DataModule(this.searchtype);
-
-  Future<Box> getBox(String inType) async {
-    if (!Hive.isBoxOpen(inType)) {
-      return await Hive.openBox(inType);
-    } else {
-      return Hive.box(inType);
-    }
-  }
 
   Future<emData?> loadData(String id) async {
     Map<String, dynamic> props = box.get(id);
@@ -100,9 +86,9 @@ class DataModule {
       };
 
       List<emData> tosave = await getRemoteData(simplesearch);
-      tosave.forEach((element) {
+      for (var element in tosave) {
         box.put(element.id, element.properties);
-      });
+      }
       //check if there are more pages of hits and run next search
 
     } else {
@@ -145,16 +131,13 @@ class DataModule {
     //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
   }
 
-  Future<List<emData>> updateData(String id, Map inQurey) async {
+  Future<emData> updateData(String id, Map inQurey) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         inQurey,
         RequestType.PUT);
-    List<emData> results = parseData(responsestring);
-    for (var element in results) {
-      box.put(element.id, element.properties);
-    }
-    return results;
+    emData result = parseDataSingle(responsestring);
+    return result;
   }
 
   Future<emData> deleteData(String? id) async {
@@ -173,6 +156,17 @@ class DataModule {
         oi.app!["mediadb"] + '/services/module/$searchtype/create',
         inQuery,
         RequestType.POST);
+    emData results = parseDataSingle(responsestring);
+
+    box.put(results.id, results.properties);
+    return results;
+  }
+
+  Future<emData> getData(String id) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        {},
+        RequestType.GET);
     emData results = parseDataSingle(responsestring);
 
     box.put(results.id, results.properties);
@@ -198,14 +192,7 @@ class DataModule {
 
   emData parseDataSingle(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
-    emData results = emData.fromJson(parsed);
+    emData results = emData.fromJson(parsed['data']);
     return results;
-  }
-
-  Stream<emData> updates() async* {
-    Stream<dynamic> stream = oi.emSocketManager.stream;
-    await for (final data in stream) {
-      json.decode(data);
-    }
   }
 }

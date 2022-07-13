@@ -1,4 +1,4 @@
-class emData{
+class emData {
 
     late String id;
     late String name;
@@ -29,4 +29,7 @@ class emData{
     Map<String, dynamic> toJson()  {
         return properties;
     }
+
+  @override
+  String toString() => 'emData(id: $id, name: $name, properties: $properties)';
 }

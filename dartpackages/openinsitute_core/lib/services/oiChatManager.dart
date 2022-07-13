@@ -6,12 +6,19 @@ import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
+import 'package:openinsitute_core/services/emDataManager.dart';
 
 class OiChatManager {
   String chatBox = "oiChatManagerCache";
 
+  DataModule? chatterBox;
+
   OpenI get oi {
     return Get.find();
+  }
+
+  createDataModule() async {
+    chatterBox = await oi.datamanager.getDataModule("chatterbox");
   }
 
   Future<void> cacheChat(String projectId, List<oiChatMessage> messages) async {
@@ -20,21 +27,29 @@ class OiChatManager {
           .compareTo(DateTime.parse(b.properties["date"])),
     );
     for (int i = 0; i < messages.length; i++) {
-    await oi.hivemanager.saveData(messages[i].messageid, messages[i].properties, chatBox + "_" + projectId);
+      await oi.hivemanager.saveData(messages[i].messageid,
+          messages[i].properties, chatBox + "_" + projectId);
     }
   }
 
- 
-  Future<void> saveSingleChat(oiChatMessage chatMessage, String projectId) async {
-    await  oi.hivemanager.saveData(chatMessage.messageid, chatMessage.properties, chatBox + "_" + projectId);
-  }  
+  Future<void> saveSingleChat(
+      oiChatMessage chatMessage, String projectId) async {
+    await oi.hivemanager.saveData(chatMessage.messageid, chatMessage.properties,
+        chatBox + "_" + projectId);
+  }
 
-
-
+  Future<oiChatMessage> editChat(
+      String id, oiChatMessage message, String projectId) async {
+    await createDataModule();
+    emData updated = await chatterBox!.updateData(id, message.properties);
+    oiChatMessage updatedMessage = oiChatMessage.fromJson(updated.properties);
+    await saveSingleChat(updatedMessage, projectId);
+    return updatedMessage;
+  }
 
   Future<List<oiChatMessage>> loadChatCache(String projectId) async {
     List<Map<String, dynamic>> cache =
-        await  oi.hivemanager.getAllHits(chatBox + "_" + projectId);
+        await oi.hivemanager.getAllHits(chatBox + "_" + projectId);
     List<oiChatMessage> messages = [];
     for (var e in cache) {
       messages.add(oiChatMessage.fromJson(e));
@@ -44,74 +59,83 @@ class OiChatManager {
 
   Future<void> loadChat(String projectId, int page) async {
     List<oiChatMessage> messages = [];
-    List<oiChatMessage> result  = await getProjectChatMessages(projectId, page);
+    List<oiChatMessage> result = await getProjectChatMessages(projectId, page);
     if (result.isNotEmpty) {
       messages.addAll(result);
       await cacheChat(projectId, result);
     }
   }
 
-  void chatMessageEdited(String inMessageId,  String inUserId) async {
+  void chatMessageEdited(String inMessageId, String inUserId) async {
     // var box = await getBox("oiChatManagerCache");
 
     //fieldProjectChatChangeListeners;
   }
 
   Map getParams(int page, String inProjectId) {
-    return  {
-      "page": "$page",
-      "hitsperpage": "20",
-      "collectionid": inProjectId
-    };
+    return {"page": "$page", "hitsperpage": "20", "collectionid": inProjectId};
   }
 
-
-
-  Future<List<oiChatMessage>> getProjectChatMessages(String inProjectId, int page) async {
+  Future<List<oiChatMessage>> getProjectChatMessages(
+      String inProjectId, int page) async {
     final Map? responded = await oi.postEntermedia(
       oi.app!["mediadb"] +
           '/services/module/librarycollection/viewmessages.json',
       getParams(page, inProjectId),
     );
-    // get topics from json 
-    List<emData> topics = responded!["topics"]!.map<emData>((json) => emData.fromJson(json)).toList(); 
-    await saveTopics(topics, inProjectId);
-    List<oiChatMessage> messages = responded["results"]!
-        .map<oiChatMessage>((json) {
-         oiChatMessage chatMessage = oiChatMessage.fromJson(json); 
-        if(responded["users"] != null ) {
-        int index = responded["users"].indexWhere((element) => element["userid"] == chatMessage.user["id"]); 
-        if(index != -1) {
-          printInfo(info: responded["users"][index]["portrait"] ?? "");
-          chatMessage.user["portrait"] = responded["users"][index]["portrait"]; 
-        }
-        }
-        return chatMessage;
-  })
+    // get topics from json
+    List<emData> topics = responded!["topics"]!
+        .map<emData>((json) => emData.fromJson(json))
         .toList();
+    List<emData> goals = responded["goals"]!
+        .map<emData>((json) => emData.fromJson(json))
+        .toList();
+    await saveTopics(topics, inProjectId);
+    List<oiChatMessage> messages =
+        responded["results"]!.map<oiChatMessage>((json) {
+      oiChatMessage chatMessage = oiChatMessage.fromJson(json);
+      if (responded["users"] != null) {
+        int index = responded["users"].indexWhere(
+            (element) => element["userid"] == chatMessage.user["id"]);
+        if (index != -1) {
+          printInfo(info: responded["users"][index]["portrait"] ?? "");
+          chatMessage.user["portrait"] = responded["users"][index]["portrait"];
+        }
+        chatMessage.properties["goals"] = <Map<String, dynamic>>[];
+        for (int i = 0; i < goals.length; i++) {
+          if (goals[i].properties["chatparentid"]["id"] ==
+              chatMessage.messageid) {
+            chatMessage.properties["goals"]!.add(goals[i].properties);
+          }
+        }
+      }
+      return chatMessage;
+    }).toList();
 
     return Future.value(messages);
   }
 
-  Future<void> savePeople(List<emData> people) async{
-   await oi.usermanager.saveUsers(people);
+  Future<void> savePeople(List<emData> people) async {
+    await oi.usermanager.saveUsers(people);
   }
 
   Future<emData> getUser(String id) async {
-    emData? user =  await oi.usermanager.getUser(id);
+    emData? user = await oi.usermanager.getUserFromHive(id);
     return user!;
   }
 
   saveTopics(List<emData> topics, String projectId) async {
-    // Delete topics from hive 
-    await oi.hivemanager.clear(chatBox +"_"+ "topics" + "_" + projectId);
+    // Delete topics from hive
+    await oi.hivemanager.clear(chatBox + "_" + "topics" + "_" + projectId);
     for (var topic in topics) {
-      await oi.hivemanager.saveData(topic.id, topic.properties, chatBox +"_"+ "topics" + "_" + projectId);
+      await oi.hivemanager.saveData(topic.id, topic.properties,
+          chatBox + "_" + "topics" + "_" + projectId);
     }
   }
 
   getTopics(String projectId) async {
-    List<Map<String, dynamic>> topics =  await oi.hivemanager.getAllHits(chatBox +"_"+ "topics" + "_" + projectId);
+    List<Map<String, dynamic>> topics = await oi.hivemanager
+        .getAllHits(chatBox + "_" + "topics" + "_" + projectId);
     List<emData> result = [];
     for (var topic in topics) {
       result.add(emData.fromJson(topic));
@@ -119,23 +143,20 @@ class OiChatManager {
     return result;
   }
 
-
-  Future<oiChatMessage?> saveChat(Map<String, dynamic> inMessage,String projectId) async {
+  Future<oiChatMessage?> saveChat(
+      Map<String, dynamic> inMessage, String projectId) async {
     // await saveSingleChat(inMessage, projectId);
-       final String? responded = await oi.getEmResponse(
-      oi.app!["mediadb"] +
-          '/services/module/librarycollection/messagesave',
-      inMessage,
-      RequestType.PUT
-    );
-   log("Saved chat message: " + responded.toString());
-   if(responded != null ) {
-   Map<String, dynamic> map = jsonDecode(responded);
-    oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]); 
-   saveSingleChat(chatMessage, projectId);
-   return chatMessage;
-  } 
-  return null; 
-  } 
+    final String? responded = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/librarycollection/messagesave',
+        inMessage,
+        RequestType.PUT);
+    log("Saved chat message: " + responded.toString());
+    if (responded != null) {
+      Map<String, dynamic> map = jsonDecode(responded);
+      oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
+      saveSingleChat(chatMessage, projectId);
+      return chatMessage;
+    }
+    return null;
+  }
 }
-

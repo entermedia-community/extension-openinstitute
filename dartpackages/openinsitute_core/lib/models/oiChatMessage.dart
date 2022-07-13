@@ -1,20 +1,23 @@
-import 'package:openinsitute_core/models/emData.dart';
-
 class oiChatMessage {
-
-  late Map <String, dynamic> properties;
+  late Map<String, dynamic> properties;
   late String messageid;
-  late Map<dynamic,dynamic> user;
+  late Map<dynamic, dynamic> user;
+  List<Map<String, dynamic>>? goals;
 
-  oiChatMessage(this.messageid, this.user,this.properties);
+  oiChatMessage(this.messageid, this.user, this.properties, {this.goals});
 
-  void addPortrait(String portrait ) {
+  void addPortrait(String portrait) {
     user["portrait"] = portrait;
   }
 
-  oiChatMessage.fromJson(Map<String, dynamic> json){
+  oiChatMessage.fromJson(Map<String, dynamic> json) {
     messageid = json["id"];
     user = json["user"];
     properties = json;
+    List goalsList = json["goals"] ?? [];
+    for (var goal in goalsList) {
+      goals = [];
+      goals!.add(Map<String, dynamic>.from(goal));
+    }
   }
 }

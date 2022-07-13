@@ -11,18 +11,28 @@ OpenI get oi {
 class FeedManager {
   String feedsBox = "feeds";
 
+  Future<Map<String, dynamic>> getProjectFeeds(String id, int page) async {
+    Map query = getQuery(page);
+    query["collectionid"] = id;
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + "/services/feed/channelfeed.json",
+        query,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
   Future<List<emData>> loadCache() async {
     List<Map<String, dynamic>> cache =
-        await  oi.hivemanager.getAllHits(feedsBox);
+        await oi.hivemanager.getAllHits(feedsBox);
     return cache.map((e) => emData.fromJson(e)).toList();
   }
 
   Future<int?> getTotal() async {
-    return  (await  oi.hivemanager.getData("total", feedsBox));
+    return (await oi.hivemanager.getData("total", feedsBox));
   }
 
   updateTotal(int total) async {
-    await  oi.hivemanager.saveData("total", total, feedsBox);
+    await oi.hivemanager.saveData("total", total, feedsBox);
   }
 
   Future<List<emData>> loadFeeds(int page) async {
@@ -38,20 +48,20 @@ class FeedManager {
     final Map<String, dynamic> parsed = json.decode(responseBody);
     List<emData> results =
         parsed["uploads"].map<emData>((json) => emData.fromJson(json)).toList();
-    await updateTotal(int.parse( parsed["total"]));
+    await updateTotal(int.parse(parsed["total"]));
     return results;
   }
 
   saveCache(String cacheString) async {
     Map<String, dynamic> cache = json.decode(cacheString);
-    await  oi.hivemanager.clear(feedsBox);
-    await updateTotal(int.parse( cache["total"]));
-    await  oi.hivemanager.saveData(
+    await oi.hivemanager.clear(feedsBox);
+    await updateTotal(int.parse(cache["total"]));
+    await oi.hivemanager.saveData(
         "lastsync", DateTime.now().millisecondsSinceEpoch.toString(), feedsBox);
     List<emData> results =
         cache["uploads"].map<emData>((json) => emData.fromJson(json)).toList();
     for (var element in results) {
-      await  oi.hivemanager.saveData(element.id, element.properties, feedsBox);
+      await oi.hivemanager.saveData(element.id, element.properties, feedsBox);
     }
   }
 
