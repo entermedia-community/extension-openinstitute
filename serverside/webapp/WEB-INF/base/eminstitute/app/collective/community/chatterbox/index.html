@@ -1,13 +1,11 @@
-
+#set($channel = $context.getRequestParameter("channel"))
 <div class="chatterbox-messages" data-lastloaded="$lastloaded">
 	<div class="chatterbox-container">
 		<div class="chatterbox-body-inside">
 			<div class="chatterbox-message-list">
-			##search for todos
-				#foreach($chat in $messages)
-					$context.putPageValue("chat",$chat) 
-					$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
-				#end
+
+			$pages.include("$apphome/collective/community/chatterbox/messages.html", $context)				
+		
 			</div>
 		</div>
 	</div>

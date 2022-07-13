@@ -48,7 +48,6 @@
 	#end
 
 	#set($resultsPage = "$content.getPath()?hitssessionid=$topuploads.sessionId&useruploadpageposition")
-
 	$context.putPageValue("hits",$topuploads)
 	$context.putPageValue("resultsPage",$resultsPage)
 	$context.putPageValue("targetdiv","channelcontainer")

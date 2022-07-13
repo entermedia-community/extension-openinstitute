@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.entermedia.transactions.TransactionManager;
 import org.entermediadb.asset.MediaArchive;
+import org.entermediadb.asset.util.MathUtils;
 import org.entermediadb.elasticsearch.SearchHitData;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
@@ -789,4 +790,19 @@ public class FinanceManager  implements CatalogEnabled
 		return bycurrency;
 	}
 
+	public Double inDollars(String inCurrency, Double number)
+	{
+		
+		if( inCurrency.equals("1"))
+		{
+			return number;
+		}
+		Data currencytype = getMediaArchive().getCachedData("currencytype", inCurrency);
+		
+		double exchange = Double.parseDouble( currencytype.get("exchangetousd"));
+		double dollars = MathUtils.divide(number, exchange );
+		return dollars;
+		
+	}
+	
 }

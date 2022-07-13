@@ -164,7 +164,18 @@ li.menu-subheader {
     width: calc(100% - 60px);
 }
 
-
+.chatloadmorelink {
+	display:block;
+	text-decoration: none;
+	padding: 5px;
+	text-align: center;
+	background-color: #efefef;
+	margin:2px;
+}
+.chatloadmorelink:hover {
+	background-color: #cfcfcf;
+text-decoration: none;
+	}
 .login-area .container {
 	background-color: #fff;
 	padding:10px 15px 30px;
@@ -323,7 +334,10 @@ li.menu-subheader {
 		padding: 10px 2px;
 	} 
 	
+	
 }
+
+
 @media (min-width: 640px) {
 	.oiheader {
 		height:60px;
@@ -359,7 +373,7 @@ li.menu-subheader {
 	}
 
 	.collectivelayout {
-		padding-top:20px;
+		padding-top:1px;
 	}
 	
 	.nav-collectionpicker .select2-container .select2-selection--single {
@@ -599,7 +613,7 @@ li.menu-subheader {
 .collectiveheader {
 	width: calc(100% - 20px);
 	height:140px;
-	margin:0 10px 20px;
+	margin:10px 10px 20px;
 }
 
 .collectiveheadermenu {
@@ -679,10 +693,21 @@ min-height: 115px;
 	padding:20px;
 }
 
+
+.collectivemaincontainer {
+	height: calc(100% - 140px)
+}
+
+.maincontentsidebar {
+	margin-bottom:10px;
+}
+
+
+
 @media (min-width: 640px) {
 	.collectiveheader {
 		width: 780px;
-		margin:auto;
+		margin:10px auto 0;
 	}
 	.collectiveheadermenu {
 	left:95px;
@@ -720,7 +745,7 @@ min-height: 115px;
 		font-weight: bold;
 	}
 	.community-maincol  {
-		margin:0 20px 20px 0;
+		margin:0 20px 10px 0;
 	}
 	.community-maincol-homepage  {
 	margin: 0px;
@@ -771,7 +796,9 @@ li.menu-subheader {
 	background-color: #f5f5f5;
 }
 
-
+.currencysmall {
+	font-size:0.8em;
+}
 
 /*ABOUT US**/
 .about-main {

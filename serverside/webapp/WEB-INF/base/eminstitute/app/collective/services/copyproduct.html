@@ -9,7 +9,7 @@
 #set( $searcher = $mediaarchive.getSearcher("collectiveproduct") )
 #set( $xmledithome  = "$apphome/components/xml")
 $context.putPageValue("searcher",$searcher)
-<form name="saveproject" id="saveproject" action="editsave.html" method="post">
+<form name="saveproject" id="saveproject" action="$applink/collective/services/editsave.html" method="post">
 
 	<input type="hidden" name="id" value="$data.getId()" />
 	<input type="hidden" name="save" value="true" />

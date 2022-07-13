@@ -509,23 +509,31 @@
                               <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                   <th class="purchase_heading" align="left">
+                                    <p class="f-fallback">Qty</p>
+                                  </th>
+                                  <th class="purchase_heading" align="left">
                                     <p class="f-fallback">Description</p>
                                   </th>
                                   <th class="purchase_heading" align="right">
                                     <p class="f-fallback">Amount</p>
                                   </th>
                                 </tr>
-                                
-                                <tr>
-                                  <td width="80%" class="purchase_item">
+                                #set($products = $invoice.getValue("productlist"))
+								#foreach ($product in $products)
+								##set ( $prod = $mediaarchive.getProductById($product.productid) )
+								<tr>
+									<td valign="top" style="vertical-align: top;">$product.productquantity</td>
+									
+									<td valign="top" style="vertical-align: top;">
+										<div>$mediaarchive.getProductName($product.productid)</div>
+										<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
+									</td>
+									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
+								</tr>
+								#end
 
-                                  	
-                                  	</td>
-                                  <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">$currency $!context.roundDouble($invoice.getValue("totalprice"),2)</span></td>
-                                </tr>
-                                
                                 <tr>
-                                  <td width="80%" class="purchase_footer" valign="middle">
+                                  <td width="80%" colspan="2" class="purchase_footer" valign="middle">
                                     <p class="f-fallback purchase_total purchase_total--label">Total ($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">

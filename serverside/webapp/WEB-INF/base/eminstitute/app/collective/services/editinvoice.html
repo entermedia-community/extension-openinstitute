@@ -53,6 +53,15 @@
 		<div style="font-size: .8em;">*[[Comma separated emails]]</div>
 	</div>
 	
+	<div style="margin:20px 0 20px;">
+		<strong>[[Invoice Name]]:</strong>
+
+		<div class="emfield-default">
+			<input type="hidden" value="name" name="field">
+			<input type="text" class="form-control detail_name textinput autosubmited " value='$!invoice.getValue("name")' id="name.value" name="name.value">
+		</div>
+	
+	</div>
 
 	
 	<div style="margin:20px 0 20px;">
@@ -120,7 +129,7 @@
 				class="btn btn-secondary ajax" 
 				data-targetdiv="invoicecontainer" 
 				style="margin-right:10px;">[[Back]]</a>
-			<input type="submit" class="btn btn-primary" value="[[Save]]"/>
+			<input type="submit" class="btn btn-primary dialogsubmitbtn" value="[[Save]]"/>
 	
 		</div>
 		#end

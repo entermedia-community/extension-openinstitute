@@ -2,13 +2,16 @@
 ##<textarea name="${detail.getId()}.value" id="${detail.getId()}" cols="40" rows="5" 
 ## class="#if($detail.isRequired() && !$multiedit) required #end htmleditor form-control">$!val</textarea>
 
+
+
+#ifnull($detail.getId())
+	##getting from context?
+	#set($detailid = $detailid)
+	#set($isrequired = $detailisrequired)
+#end
+#ifnull($detailid)
 #set($detailid = $detail.getId())
 #set($isrequired = $detail.isRequired())
-
-#ifnull($detailid)
-	##getting from context?
-	#set($detaild = $detail.id)
-	#set($isrequired = $detailisrequired)
 #end
 
 

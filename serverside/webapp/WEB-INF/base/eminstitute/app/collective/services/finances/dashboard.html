@@ -88,6 +88,7 @@
 	
 		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
 
+		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())
 				#set($net = $netincome.get($currencytype))
@@ -96,9 +97,22 @@
 				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
 				<td></td>
-				<td style="width:10%"></td>
+				<td style="width:10%;padding-right:20px">
+				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
+				$$!context.doubleToMoney($subtotal, 2)
+				#set( $total = $subtotal + $total)
+				</td>
 				</tr>
 			#end
+			
+			<tr>
+				<td style="width:10%"></td>
+				<td style="width:20%; text-align: right;"></td>
+				<td style="text-align: right;">Total in USD:</td>
+				<td style="width:10%;padding-right:20px">
+			 $$!context.doubleToMoney($total, 2)
+			</td>
+			</tr>
 			</table>
 							    
 		    

@@ -70,23 +70,30 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			
 			invoice.setValue("currencytype",  product.getValue("currencytype"));
 			
-			Collection contacts = mediaArchive.query("librarycollectionusers")
-								.exact("collectionid",product.getValue("collectionid"))
-								.exact("ontheteam",true)
-								.exact("isbillingcontact","true")
-								.search();
 			String contactsstring = "";
-			if (contacts!= null) {
-				for(Data c:contacts)
-				{
-					User user = mediaArchive.getUser(c.getValue("followeruser"));
-					
-					if(user!= null && user.getEmail() != null) {
-						if (contactsstring != "") {
-							contactsstring = contactsstring + ", " + user.getEmail(); 
-						}	
-						else {
-							contactsstring =  user.getEmail();
+			
+			if(product.getValue("sentto") != null) {
+				contactsstring = product.getValue("sentto");
+			}
+			else {
+				Collection contacts = mediaArchive.query("librarycollectionusers")
+									.exact("collectionid",product.getValue("collectionid"))
+									.exact("ontheteam",true)
+									.exact("isbillingcontact","true")
+									.search();
+				
+				if (contacts!= null) {
+					for(Data c:contacts)
+					{
+						User user = mediaArchive.getUser(c.getValue("followeruser"));
+						
+						if(user!= null && user.getEmail() != null) {
+							if (contactsstring != "") {
+								contactsstring = contactsstring + ", " + user.getEmail(); 
+							}	
+							else {
+								contactsstring =  user.getEmail();
+							}
 						}
 					}
 				}

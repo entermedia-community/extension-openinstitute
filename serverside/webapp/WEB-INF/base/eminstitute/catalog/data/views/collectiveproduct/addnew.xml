@@ -15,4 +15,5 @@
 	<property id="recurring" />
 	<property id="recurringperiod" />
 	<property id="billingday" />
+	<property id="sentto" />
 </properties>

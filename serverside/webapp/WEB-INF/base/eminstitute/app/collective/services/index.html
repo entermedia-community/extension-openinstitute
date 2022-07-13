@@ -17,7 +17,7 @@
                                 <th style="width: 120px;">[[Created On]]</th>
                              <th>[[Product]]</th>
                              <th>[[Price]]</th>
-                             <th style="width: 300px;"></th>
+                             <th style="width: 280px;"></th>
                          </tr>
                      </thead>
                      #foreach($hit in $products)
@@ -33,7 +33,9 @@
                                   #end
                                  ##<div style="font-size: 0.9em;">$!mediaarchive.text($hit.productdescription, $hit.id)</div>
                                  </td>
-                                 <td style="text-align: right;">$ $!context.doubleToMoney($!hit.productprice,2)</td>
+                                 <td style="text-align: right;">
+                                 <span class="currencysmall">$!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype"))</span>
+                                 $ $!context.doubleToMoney($!hit.productprice,2)</td>
                                  <td>
                                      #if( $canviewsettings )
                                          <a
@@ -50,14 +52,14 @@
                                              href="$applink/collective/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
                                              title="[[Copy Product or Service]]"
                                              class="emdialog btn btn-xs btn-info">[[Copy]]</a>
-                                         #if ($hit.recurring != true)
+                                         
                                          <a
                                              href="$applink/collective/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
                                              title="[[Invoice Product or Service]]"
                                              class="emdialog btn btn-xs btn-info"
                                              data-hidefooter="true">[[Create Invoice]]</a>
                                      
-	                                     #else
+	                                     #if ($hit.recurring == true)
 	                                         #if ($hit.billingstatus == "active")
 	                                             #if ($hit.isautopaid == true)
 	                                                 <a
@@ -97,14 +99,14 @@
              <table class="table table-striped table-hover">
                  <thead>
                      <tr class="tableheader">
-                         <th style="width: 80px;">[[Invoice]] #</th>
-                         <th style="width: 120px;">[[Due Date]]</th>
-                         <th style="width: 120px;">[[Paid On]]</th>
+                         <th style="width: 70px;">[[Invoice]] #</th>
+                         <th style="width: 90px;">[[Due Date]]</th>
+                         <th style="width: 90px;">[[Paid On]]</th>
                          <th>[[Name]]</th>
                          ##<th>[[Description]]</th>
                          <th>[[Total Price]]</th>
                          <th>[[Status]]</th>
-                         <th style="width: 300px;"></th>
+                         <th style="width: 280px;"></th>
                      </tr>
                  </thead>
                  #foreach($hit in $invoices)
@@ -116,10 +118,14 @@
                          <td style="text-align: center;">$!context.getDate($hit.duedate)</td>
                          <td style="text-align: center;">$!context.getDate($hit.invoicepaidon)</td>
                          <td>
-                             #set($prods = $hit.getValue("productlist"))
-                             #foreach($pr in $prods)
-                                 #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                 $prod<br>
+                         	#if($hit.getName())
+                         	$hit.getName()
+                         	#else
+	                             #set($prods = $hit.getValue("productlist"))
+	                             #foreach($pr in $prods)
+	                                 #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
+	                                 $prod<br>
+	                             #end
                              #end
                          </td>
                      ##    <td>
@@ -128,7 +134,10 @@
                      ##            $!mediaarchive.text($prod.productdescription, $hit.id)<br>
                      ##        #end
                      ##    </td>
-                         <td style="text-align: right;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
+                         <td style="text-align: right;">
+                         <span class="currencysmall">$!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype"))</span>
+                         $ $!context.doubleToMoney($!hit.totalprice, 2)
+                         </td>
                          <td style="text-align: center;">
                              #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
                              $status

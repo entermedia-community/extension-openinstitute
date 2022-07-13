@@ -42,6 +42,14 @@
 						#if( $selecteduser)
 							#set( $text = "$selecteduser.toString()" )
 						#end
+						
+						#if( $paymententitytype == "externalbank")
+							<textarea name="${detailid}.value" style="width: 450px; height:65px" id="picker$detailid" placeholder="[[Enter Bank Name, Account Type, Account# Routing and Full Name]]"></textarea>
+						#elseif( $paymententitytype == "externalwise")
+							<input name="${detailid}.value" size="35" id="picker$detailid" placeholder="[[Enter Wise Email]]"/>
+						#elseif( $paymententitytype == "externalpaypal")
+							<input name="${detailid}.value" size="35" id="picker$detailid" placeholder="[[Enter Paypal Email]]"/>
+						#else
 						<select name="${detailid}.value" id="picker$detailid" 
 							class="listautocomplete" 
 							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
@@ -49,6 +57,7 @@
 							data-searchfield="name" data-searchtype="$paymententitytype"  
 							data-placeholder="$text" data-sortby="name">
 						</select>
+						#end
 				</div>
 
 	</div>

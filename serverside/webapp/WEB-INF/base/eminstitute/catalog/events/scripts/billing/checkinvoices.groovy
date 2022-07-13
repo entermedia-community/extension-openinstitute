@@ -112,24 +112,29 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
 				invoice.setValue("createdon", today.getTime());
-	
-				Collection contacts = mediaArchive.query("librarycollectionusers")
-					.exact("collectionid",product.getValue("collectionid"))
-					.exact("ontheteam",true)
-					.exact("isbillingcontact","true")
-					.search();
+				
 				String contactsstring = "";
-				if (contacts!= null) {
-					for(Data c:contacts)
-					{
-						User user = mediaArchive.getUser(c.getValue("followeruser"));
-						
-						if(user!= null && user.getEmail() != null) {
-							if (contactsstring != "") {
-								contactsstring = contactsstring + ", " + user.getEmail();
-							}
-							else {
-								contactsstring =  user.getEmail();
+				if(product.getValue("sentto") != null) {
+					contactsstring = product.getValue("sentto");
+				}
+				else {
+					Collection contacts = mediaArchive.query("librarycollectionusers")
+						.exact("collectionid",product.getValue("collectionid"))
+						.exact("ontheteam",true)
+						.exact("isbillingcontact","true")
+						.search();
+					if (contacts!= null) {
+						for(Data c:contacts)
+						{
+							User user = mediaArchive.getUser(c.getValue("followeruser"));
+							
+							if(user!= null && user.getEmail() != null) {
+								if (contactsstring != "") {
+									contactsstring = contactsstring + ", " + user.getEmail();
+								}
+								else {
+									contactsstring =  user.getEmail();
+								}
 							}
 						}
 					}

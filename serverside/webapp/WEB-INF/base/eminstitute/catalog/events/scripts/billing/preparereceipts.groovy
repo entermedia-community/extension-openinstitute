@@ -14,13 +14,13 @@ public void init() {
 	Searcher transactionSearcher = mediaArchive.getSearcher("transaction");
 	ArrayList tosave = new ArrayList();
 	HitTracker pendingNotification = transactionSearcher.query()
-			.exact("receiptstatus","sent").search();
+			.missing("receiptstatus").search();
 			
 	pendingNotification.enableBulkOperations();
 	
 	for (Data receipt in pendingNotification) {
 		
-		receipt.setValue("receiptstatus", "");
+		receipt.setValue("receiptstatus", "new");
 		//transactionSearcher.saveData(receipt);
 		
 		tosave.add(receipt);
