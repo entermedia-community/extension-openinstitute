@@ -1,4 +1,4 @@
-#if( !$canviewsettings && $selecteduser != $user)
+#if( !$canviewsettings && !$selecteduser.getId().equals( $user.getId() ))
 
 	<p>No permission</p>
 #else	
