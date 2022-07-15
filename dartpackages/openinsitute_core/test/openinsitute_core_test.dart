@@ -67,7 +67,7 @@ tearDown(() async {
       }
     };
 
-    List<emData> listsearch = await (await oi.datamanager.getDataModule("purpose")).getRemoteData(simplesearch);
+    List<emData> listsearch = await (await oi.datamanager.getDataModule("purpose")).getRemoteData(simplesearch, false);
     expect(listsearch.length > 0, true);
 
     List<emData> checkcache = (await oi.datamanager.getDataModule("purpose")).getAllHits();
@@ -140,11 +140,11 @@ tearDown(() async {
     EmUser? user = await oi.authenticationManager?.login("admin", "admin");
     expect(user != null, true);
     //TODO: Get list of all projects
-    var projects = await oi.projectManager?.getUserProjects(1);
+    var projects = await oi.projectManager?.loadProject(1);
     expect(projects!.length > 0, true);
 
     var projectid = settings?['dev']?['test_collection_id'];
-    var messages = await oi.chatManager?.getProjectChatMessages(projectid,1);
+    var messages = await oi.chatManager?.loadChat(projectid,1);
     expect(messages!.length > 5, true);
 
     //Create new chat

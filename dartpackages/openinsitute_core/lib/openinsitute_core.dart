@@ -24,7 +24,6 @@ import 'package:openinsitute_core/services/user_manager.dart';
 //import 'contact.dart';
 
 class OpenI {
-
   Map? _settings;
   DataManager? dataManager;
   OiChatManager? chatManager;
@@ -34,11 +33,11 @@ class OpenI {
   TaskManager? taskManager;
   FeedManager? feedManager;
   HiveManager? hiveManager;
-  UserManager? userManager; 
-  
-  Map? get app  {
+  UserManager? userManager;
+
+  Map? get app {
     if (_settings == null) {
-       loadAppSettings();
+      loadAppSettings();
     }
     String appmode = _settings!["devmode"];
     if ("dev" == appmode) {
@@ -58,40 +57,40 @@ class OpenI {
   DataManager get datamanager => Get.find<DataManager>();
   EmSocketManager get emSocketManager => Get.find<EmSocketManager>();
   ProjectManager get projectmanager => Get.find<ProjectManager>();
-  AuthenticationManager get authenticationmanager => Get.find<AuthenticationManager>();
+  AuthenticationManager get authenticationmanager =>
+      Get.find<AuthenticationManager>();
   TaskManager get taskmanager => Get.find<TaskManager>();
   FeedManager get feedmanager => Get.find<FeedManager>();
   HiveManager get hivemanager => Get.find<HiveManager>();
-  UserManager get usermanager => Get.find<UserManager>(); 
-
+  UserManager get usermanager => Get.find<UserManager>();
 
   Future<void> initialize({required FirebaseAuth firebaseAuth}) async {
     await loadAppSettings();
     hiveManager = HiveManager();
-    Get.put<OpenI>(this,permanent: true);
+    Get.put<OpenI>(this, permanent: true);
     Get.put<HiveManager>(hiveManager!, permanent: true);
     dataManager = DataManager();
-    Get.put<DataManager>(dataManager!,permanent: true);
+    Get.put<DataManager>(dataManager!, permanent: true);
     chatManager = OiChatManager();
-    Get.put<OiChatManager>(chatManager!,permanent: true);
+    Get.put<OiChatManager>(chatManager!, permanent: true);
     socketManager = EmSocketManager();
-    Get.put<EmSocketManager>(socketManager!,permanent: true);
+    Get.put<EmSocketManager>(socketManager!, permanent: true);
     projectManager = ProjectManager();
-    Get.put<ProjectManager>(projectManager!,permanent: true);
+    Get.put<ProjectManager>(projectManager!, permanent: true);
     authenticationManager = AuthenticationManager(firebaseAuth);
-    Get.put<AuthenticationManager>(authenticationManager!,permanent: true);
+    Get.put<AuthenticationManager>(authenticationManager!, permanent: true);
     taskManager = TaskManager();
-    Get.put<TaskManager>(taskManager!,permanent: true);
+    Get.put<TaskManager>(taskManager!, permanent: true);
     feedManager = FeedManager();
-    Get.put<FeedManager>(feedManager!,permanent: true);
+    Get.put<FeedManager>(feedManager!, permanent: true);
     userManager = UserManager();
-    Get.put(userManager!, permanent: true); 
+    Get.put(userManager!, permanent: true);
   }
 
   Future<Map?> loadAppSettings() async {
     if (_settings == null) {
       String json = await rootBundle.loadString("system/appsettings.json");
-        print("loaded $json");
+      print("loaded $json");
       _settings = jsonDecode(json);
     }
     return _settings;
@@ -111,7 +110,8 @@ class OpenI {
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
     if (authenticationmanager.emUser != null) {
-      String tokenKey = handleTokenKey(authenticationmanager.emUser!.entermediakey);
+      String tokenKey =
+          handleTokenKey(authenticationmanager.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
     //make API post
@@ -131,16 +131,17 @@ class OpenI {
     }
   }
 
-
   //Generic post method to entermedias server
-  Future<String> getEmResponse(String url, dynamic jsonBody, RequestType requestType, 
+  Future<String> getEmResponse(
+      String url, dynamic jsonBody, RequestType requestType,
       {String customError = "An Error Occured"}) async {
     //Set headers
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
     if (authenticationmanager.emUser != null) {
-      String tokenKey = handleTokenKey(authenticationmanager.emUser!.entermediakey);
+      String tokenKey =
+          handleTokenKey(authenticationmanager.emUser!.entermediakey);
       headers.addAll({"X-token": tokenKey});
     }
 
@@ -160,9 +161,6 @@ class OpenI {
     }
   }
 
-
-
-
   Future<http.Response?> httpRequest({
     required String requestUrl,
     required dynamic body,
@@ -171,7 +169,7 @@ class OpenI {
     String customError = "Some Error",
   }) async {
     String url = requestUrl;
-      print(url);
+    print(url);
     http.Response response;
     try {
       http.Response? responseJson;

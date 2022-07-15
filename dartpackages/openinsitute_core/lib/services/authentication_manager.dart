@@ -144,6 +144,7 @@ class AuthenticationManager {
     emUser = null;
     await sharedPref.resetValues();
     await Hive.deleteFromDisk();
+    oi.datamanager.dispose();
     await signOut();
     return true;
   }

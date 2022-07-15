@@ -1,8 +1,8 @@
 class oiChatMessage {
-  late Map<String, dynamic> properties;
+  late Map<dynamic, dynamic> properties;
   late String messageid;
   late Map<dynamic, dynamic> user;
-  List<Map<String, dynamic>>? goals;
+  List<Map<dynamic, dynamic>>? goals;
 
   oiChatMessage(this.messageid, this.user, this.properties, {this.goals});
 
@@ -10,7 +10,7 @@ class oiChatMessage {
     user["portrait"] = portrait;
   }
 
-  oiChatMessage.fromJson(Map<String, dynamic> json) {
+  oiChatMessage.fromJson(Map<dynamic, dynamic> json) {
     messageid = json["id"];
     user = json["user"];
     properties = json;

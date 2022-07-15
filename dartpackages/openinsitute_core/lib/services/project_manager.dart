@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
+import 'package:openinsitute_core/services/emDataManager.dart';
 
 class ProjectManager {
   String projectBox = "viewprojects";
@@ -9,62 +13,45 @@ class ProjectManager {
     return Get.find();
   }
 
-  Future<void> cacheProject(List<emData> projects) async {
-    // await oi.hivemanager.clear(projectBox);
-    for (int i = 0; i < projects.length; i++) {
-      await oi.hivemanager
-          .saveData(projects[i].id, projects[i].properties, projectBox);
-    }
+  DataModule? projectsModule;
+
+  createDataModule() async {
+    projectsModule = await oi.datamanager.getDataModule("librarycollection");
   }
 
   Future<List<emData>> loadProjectCache() async {
-    List<Map<String, dynamic>> cache =
-        await oi.hivemanager.getAllHits(projectBox);
-    List<emData> projects = [];
-    for (var e in cache) {
-      projects.add(emData.fromJson(e));
-    }
-    return projects;
+    await createDataModule();
+    List<emData> cache = projectsModule!.getAllHits();
+    return cache;
   }
 
   Future<List<emData>> loadProject(int page) async {
+    await createDataModule();
     List<emData> projects = [];
-    List<emData> result = await getUserProjects(page);
-    if (result.isNotEmpty) {
-      projects.addAll(result);
-      await cacheProject(projects);
+    if (projectsModule!.page > projectsModule!.pages) {
+      return [];
     }
-    return projects;
-  }
+    Map<String, dynamic> results = await projectsModule!.createModuleOperation(
+        "viewprojects",
+        RequestType.POST,
+        {"page": "$page", "hitsperpage": "20"});
 
-  Future<emData> getProjectById(String projectId) async {
-    Map<String, dynamic> data =
-        await oi.hivemanager.getData(projectId, projectBox);
-    return emData.fromJson(data);
-  }
-
-  Future<List<emData>> getUserProjects(int page) async {
-    Map params = {"page": "$page", "hitsperpage": "200"};
-    //TODO; Call this part in an async way
-    final Map? responded = await oi.postEntermedia(
-      oi.app!["mediadb"] +
-          '/services/module/librarycollection/viewprojects.json',
-      params,
-    );
-    List<emData> projects = responded!["results"]!
-        .map<emData>((json) => emData.fromJson(json))
-        .toList();
-
-    // for (var project in projects) {
-    // List<emData> team = project.properties["team"].map((json) => emData.fromJson(json)).toList();
-    // await oi.usermanager.saveUsers(team); 
-    // }
-    await oi.hivemanager
-        .saveData("pages", responded["response"]["pages"], projectBox);
+    results['data'] =
+        results['results'].map((e) => emData.fromJson(e)).toList();
+    results['totalhits'] = results['total'];
+    results['pages'] = results['totalpages'];
+    if (results['data'].isNotEmpty) {
+      for (var item in results['data']) {
+        projects.add(item);
+      }
+      log("load lenght: ${projects.length}");
+      await projectsModule!.saveCache(results);
+    }
     return projects;
   }
 
   Future<List<emData>> searchProjects(String name) async {
+    await createDataModule();
     Map<String, dynamic> params = {
       "page": "1",
       "hitsperpage": "20",
@@ -75,19 +62,13 @@ class ProjectManager {
       }
     };
 
-    final Map? responded = await oi.postEntermedia(
-      oi.app!["mediadb"] + '/services/module/librarycollection/search',
-      params,
-    );
-    List<emData> projects = responded!["results"]!
-        .map<emData>((json) => emData.fromJson(json))
-        .toList();
-    return projects;
+    final responded = await projectsModule!.getRemoteData(params, false);
+    return responded;
   }
 
   Future<void> createProject(String projectName, String projectDes) async {
-    await oi.postEntermedia(
-      oi.app!["mediadb"] + '/services/module/librarycollection/create',
+    await createDataModule();
+    await projectsModule!.addData(
       {
         "name": projectName,
       },

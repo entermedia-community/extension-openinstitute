@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
@@ -17,80 +18,48 @@ class OiChatManager {
     return Get.find();
   }
 
-  createDataModule() async {
-    chatterBox = await oi.datamanager.getDataModule("chatterbox");
-  }
-
-  Future<void> cacheChat(String projectId, List<oiChatMessage> messages) async {
-    messages.sort(
-      (a, b) => DateTime.parse(a.properties["date"])
-          .compareTo(DateTime.parse(b.properties["date"])),
-    );
-    for (int i = 0; i < messages.length; i++) {
-      await oi.hivemanager.saveData(messages[i].messageid,
-          messages[i].properties, chatBox + "_" + projectId);
-    }
-  }
-
-  Future<void> saveSingleChat(
-      oiChatMessage chatMessage, String projectId) async {
-    await oi.hivemanager.saveData(chatMessage.messageid, chatMessage.properties,
-        chatBox + "_" + projectId);
+  createDataModule(String collectionId) async {
+    chatterBox = await oi.datamanager.getDataModule("librarycollection",
+        boxString: "chatterbox_$collectionId");
   }
 
   Future<oiChatMessage> editChat(
       String id, oiChatMessage message, String projectId) async {
-    await createDataModule();
+    await createDataModule(projectId);
     emData updated = await chatterBox!.updateData(id, message.properties);
     oiChatMessage updatedMessage = oiChatMessage.fromJson(updated.properties);
-    await saveSingleChat(updatedMessage, projectId);
     return updatedMessage;
   }
 
   Future<List<oiChatMessage>> loadChatCache(String projectId) async {
-    List<Map<String, dynamic>> cache =
-        await oi.hivemanager.getAllHits(chatBox + "_" + projectId);
+    await createDataModule(projectId);
+    List<emData> cache = await chatterBox!.getAllHits();
     List<oiChatMessage> messages = [];
     for (var e in cache) {
-      messages.add(oiChatMessage.fromJson(e));
+      messages.add(oiChatMessage.fromJson(e.properties));
     }
     return messages;
   }
 
-  Future<void> loadChat(String projectId, int page) async {
+  Future<List<oiChatMessage>> loadChat(String projectId, int page) async {
+    createDataModule(projectId);
     List<oiChatMessage> messages = [];
-    List<oiChatMessage> result = await getProjectChatMessages(projectId, page);
-    if (result.isNotEmpty) {
-      messages.addAll(result);
-      await cacheChat(projectId, result);
+    if (page != 1 && chatterBox!.pages < page) {
+      return [];
     }
+    Map<String, dynamic> results = await chatterBox!.createModuleOperation(
+        "viewmessages", RequestType.POST, getParams(page, projectId));
+    messages.addAll(await parseData(results));
+    return messages;
   }
 
-  void chatMessageEdited(String inMessageId, String inUserId) async {
-    // var box = await getBox("oiChatManagerCache");
-
-    //fieldProjectChatChangeListeners;
-  }
-
-  Map getParams(int page, String inProjectId) {
-    return {"page": "$page", "hitsperpage": "20", "collectionid": inProjectId};
-  }
-
-  Future<List<oiChatMessage>> getProjectChatMessages(
-      String inProjectId, int page) async {
-    final Map? responded = await oi.postEntermedia(
-      oi.app!["mediadb"] +
-          '/services/module/librarycollection/viewmessages.json',
-      getParams(page, inProjectId),
-    );
-    // get topics from json
-    List<emData> topics = responded!["topics"]!
+  Future<List<oiChatMessage>> parseData(Map<String, dynamic> responded) async {
+    List<emData> topics = responded["topics"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
     List<emData> goals = responded["goals"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
-    await saveTopics(topics, inProjectId);
     List<oiChatMessage> messages =
         responded["results"]!.map<oiChatMessage>((json) {
       oiChatMessage chatMessage = oiChatMessage.fromJson(json);
@@ -100,6 +69,8 @@ class OiChatManager {
         if (index != -1) {
           printInfo(info: responded["users"][index]["portrait"] ?? "");
           chatMessage.user["portrait"] = responded["users"][index]["portrait"];
+          chatMessage.properties["user"]["portrait"] =
+              responded["users"][index]["portrait"];
         }
         chatMessage.properties["goals"] = <Map<String, dynamic>>[];
         for (int i = 0; i < goals.length; i++) {
@@ -112,16 +83,19 @@ class OiChatManager {
       return chatMessage;
     }).toList();
 
-    return Future.value(messages);
+    responded["results"] = null;
+    responded["data"] = messages
+        .map(
+          (e) => emData.fromJson(e.properties),
+        )
+        .toList();
+
+    await chatterBox!.saveCache(responded);
+    return (messages);
   }
 
-  Future<void> savePeople(List<emData> people) async {
-    await oi.usermanager.saveUsers(people);
-  }
-
-  Future<emData> getUser(String id) async {
-    emData? user = await oi.usermanager.getUserFromHive(id);
-    return user!;
+  Map getParams(int page, String inProjectId) {
+    return {"page": "$page", "hitsperpage": "20", "collectionid": inProjectId};
   }
 
   saveTopics(List<emData> topics, String projectId) async {
@@ -134,27 +108,30 @@ class OiChatManager {
   }
 
   getTopics(String projectId) async {
-    List<Map<String, dynamic>> topics = await oi.hivemanager
-        .getAllHits(chatBox + "_" + "topics" + "_" + projectId);
-    List<emData> result = [];
-    for (var topic in topics) {
-      result.add(emData.fromJson(topic));
-    }
-    return result;
+    // List<Map<String, dynamic>> topics = await oi.hivemanager
+    //     .getAllHits(chatBox + "_" + "topics" + "_" + projectId);
+    // List<emData> result = [];
+    // for (var topic in topics) {
+    //   result.add(emData.fromJson(topic));
+    // }
+    return [];
   }
 
   Future<oiChatMessage?> saveChat(
       Map<String, dynamic> inMessage, String projectId) async {
-    // await saveSingleChat(inMessage, projectId);
-    final String? responded = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/librarycollection/messagesave',
-        inMessage,
-        RequestType.PUT);
+    await createDataModule(projectId);
+    final String? responded = await chatterBox!.createModuleOperation(
+      'messagesave',
+      RequestType.PUT,
+      inMessage,
+    );
     log("Saved chat message: " + responded.toString());
     if (responded != null) {
       Map<String, dynamic> map = jsonDecode(responded);
       oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
-      saveSingleChat(chatMessage, projectId);
+
+      await chatterBox!.box.put(chatMessage.messageid, chatMessage.properties);
+
       return chatMessage;
     }
     return null;

@@ -1,7 +1,9 @@
 import 'dart:convert';
-
+import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:openinsitute_core/Helper/merge_map.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
@@ -13,68 +15,66 @@ OpenI get oi {
 class DataManager {
   bool initalized = false;
   Map<String, DataModule> searchers = {};
-
   DataManager();
-
-  Future<DataModule> getDataModule(String inSearchType) async {
-    DataModule? searcher = searchers[inSearchType];
+  Future<DataModule> getDataModule(String inSearchType,
+      {String? boxString}) async {
+    boxString ??= inSearchType;
+    DataModule? searcher = searchers[boxString];
     if (searcher == null) {
-      searcher = await DataModule.createDataModule(inSearchType);
-      searchers[inSearchType] = searcher;
+      searcher = await DataModule.createDataModule(inSearchType, boxString);
+      searchers[boxString] = searcher;
     }
     return searcher;
+  }
+
+  dispose() {
+    searchers.clear();
   }
 }
 
 class DataModule {
   late String searchtype;
+  late String boxString;
   late Box box;
   bool cache = true;
-
+  int total = 0;
+  int page = 0;
+  int pages = 0;
   DataModule._();
 
-  static Future<DataModule> createDataModule(String inSearchType) async {
+  static Future<DataModule> createDataModule(
+    String inSearchType,
+    String boxString,
+  ) async {
     var searcher = DataModule._();
     searcher.searchtype = inSearchType;
-    searcher.box = await oi.hivemanager.setBox(inSearchType);
+    searcher.boxString = boxString;
+    searcher.box = await oi.hivemanager.setBox(boxString);
     return searcher;
   }
 
   DataModule(this.searchtype);
 
-  Future<emData?> loadData(String id) async {
-    Map<String, dynamic> props = box.get(id);
-    if (props != null) {
-      return emData.fromJson(props);
-    } else {
-      Map simplesearch = {
-        "page": "1",
-        "hitsperpage": "20",
-        "query": {
-          "terms": [
-            {"field": "id", "operation": "matches", "value": "*"}
-          ]
-        }
-      };
-    }
-    return null;
-  }
-
   List<emData> getAllHits() {
     List<emData> list = [];
-    // List list = List.generate(box.keys.length, ,{"growable":true});
-    box.keys.forEach((element) {
-      emData newdata =
-          emData.fromJson(box.get(element) as Map<String, dynamic>);
-      list.add(newdata);
-    });
-    return list;
+    total = box.get("totalhits") ?? 0;
+    page = box.get("page") ?? 0;
+    pages = box.get("pages") ?? 0;
+    for (var element in box.keys) {
+      if (element != "totalhits" &&
+          element != "lastsync" &&
+          element != "page" &&
+          element != "pages") {
+        emData newdata = emData.fromJson(box.get(element));
+        list.add(newdata);
+      }
+    }
+    return list.reversed.toList();
   }
 
   Future<bool> syncData(bool full, int page) async {
     if (full) {
       await box.clear();
-
       Map simplesearch = {
         "page": "$page",
         "hitsperpage": "20",
@@ -84,13 +84,11 @@ class DataModule {
           ]
         }
       };
-
-      List<emData> tosave = await getRemoteData(simplesearch);
+      List<emData> tosave = await getRemoteData(simplesearch, true);
       for (var element in tosave) {
         box.put(element.id, element.properties);
       }
       //check if there are more pages of hits and run next search
-
     } else {
       DateTime lastsync = box.get("lastsync");
       Map aftersearch = {
@@ -109,26 +107,23 @@ class DataModule {
       };
 
       List<emData> tosave =
-          await getRemoteData({"emrecorddate???? neeed to chec": "*"});
+          await getRemoteData({"emrecorddate???? neeed to chec": "*"}, false);
     }
     box.put("lastsync", DateTime.now());
     return true;
   }
 
-  Future<List<emData>> getRemoteData(
-    Map inQuery,
-  ) async {
+  Future<List<emData>> getRemoteData(Map inQuery, bool cache) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/search',
         inQuery,
         RequestType.GET);
-    List<emData> results = parseData(responsestring);
-
-    for (var element in results) {
-      box.put(element.id, element.properties);
+    Map<String, dynamic> resultsData = parseData(responsestring);
+    List<emData> results = resultsData["results"];
+    if (cache) {
+      await saveCache(resultsData);
     }
     return results;
-    //return compute(parseData, responsestring);  Figure this out, it keeps everything responsive
   }
 
   Future<emData> updateData(String id, Map inQurey) async {
@@ -137,6 +132,11 @@ class DataModule {
         inQurey,
         RequestType.PUT);
     emData result = parseDataSingle(responsestring);
+    Map<String, dynamic> cache = box.get(
+      result.id,
+    );
+    Map<dynamic, dynamic> data = mergeMaps(result.properties, cache);
+    await box.put(result.id, data);
     return result;
   }
 
@@ -168,31 +168,81 @@ class DataModule {
         {},
         RequestType.GET);
     emData results = parseDataSingle(responsestring);
-
     box.put(results.id, results.properties);
     return results;
   }
 
-  Future<emData> saveData(String id) async {
-    final responsestring = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
-        {},
-        RequestType.GET);
-    emData results = parseDataSingle(responsestring);
-    box.put(results.id, results.properties);
-    return results;
-  }
-
-  List<emData> parseData(String responseBody) {
+  Map<String, dynamic> parseData(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
     List<emData> results =
         parsed["results"].map<emData>((json) => emData.fromJson(json)).toList();
-    return results;
+    Map<String, dynamic> resultData = {};
+    resultData['data'] = results;
+    resultData['page'] = parsed['page'];
+    resultData['pages'] = parsed['pages'];
+    resultData['totalhits'] = parsed['totalhits'];
+    return resultData;
   }
 
   emData parseDataSingle(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
     emData results = emData.fromJson(parsed['data']);
     return results;
+  }
+
+  dynamic createModuleOperation(
+      String endpoint, RequestType requestType, Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/$searchtype/$endpoint',
+        inQuery,
+        requestType);
+    Map<String, dynamic> map =
+        await compute(jsonDecode, responsestring) as Map<String, dynamic>;
+    return map;
+  }
+
+  Future<Map<String, dynamic>> createServiceOperation(
+      String endpoint, RequestType requestType, Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/$searchtype/$endpoint',
+        inQuery,
+        requestType);
+    Map<String, dynamic> map =
+        await compute(jsonDecode, responsestring) as Map<String, dynamic>;
+    return map;
+  }
+
+  saveMetaData(int totalhits, int pages, int page) async {
+    await box.put("page", page);
+    await box.put("pages", pages);
+    await box.put("totalhits", totalhits);
+  }
+
+  saveCache(Map<String, dynamic> resultsData) async {
+    List<dynamic> results = resultsData["data"] ??
+        resultsData['results'].map((e) => emData.fromJson(e));
+    await box.put(
+        "page",
+        int.parse(
+            resultsData["page"] ?? resultsData["response"]["page"].toString()));
+    await box.put(
+        "pages",
+        int.parse(resultsData["pages"] ??
+            resultsData["response"]["pages"].toString()));
+    await box.put(
+        "totalhits",
+        int.parse(resultsData["totalhits"] ??
+            resultsData["response"]["totalhits"].toString()));
+    total = box.get("totalhits") ?? 0;
+    page = box.get("page") ?? 0;
+    pages = box.get("pages") ?? 0;
+    log("size of results  : ${results.length}");
+    if (page == 1) {
+      await box.clear();
+      for (var element in results) {
+        log("saving in ${element.id} ");
+        await box.put(element.id, element.properties);
+      }
+    }
   }
 }

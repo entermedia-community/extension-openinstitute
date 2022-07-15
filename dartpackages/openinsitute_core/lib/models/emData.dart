@@ -1,34 +1,27 @@
 class emData {
+  late String id;
+  late String name;
+  late Map<dynamic, dynamic> properties;
 
-    late String id;
-    late String name;
-    late Map <String, dynamic> properties;
+  emData(this.id, this.name, this.properties);
 
-    emData(this.id, this.name, this.properties);
+  emData.fromJson(Map<dynamic, dynamic> json) {
+    id = json["id"];
 
-
-    emData.fromJson(Map<String, dynamic> json){
-        id = json["id"];
-
-        var langname = json["name"];
-        if( langname == null)
-        {
-            name = "No Name";
-        }
-        else if(  langname.runtimeType == String )
-        {
-            name = langname;
-        }
-        else if( langname["en"] != null )
-        {
-            name = langname["en"];
-        }
-        properties = json;
+    var langname = json["name"];
+    if (langname == null) {
+      name = "No Name";
+    } else if (langname.runtimeType == String) {
+      name = langname;
+    } else if (langname["en"] != null) {
+      name = langname["en"];
     }
+    properties = json;
+  }
 
-    Map<String, dynamic> toJson()  {
-        return properties;
-    }
+  Map<dynamic, dynamic> toJson() {
+    return properties;
+  }
 
   @override
   String toString() => 'emData(id: $id, name: $name, properties: $properties)';
