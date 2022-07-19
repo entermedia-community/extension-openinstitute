@@ -1,0 +1,30 @@
+{
+  "response":
+      {
+        "status":"ok"
+      }
+  ,
+  "goals": 
+  [
+	#foreach($goal in $opentickets)#if( ${foreach.count} != 1 ), #end
+		{
+		#jsonfields($goal $searcher.getPropertyDetails()) 
+	    #set( $tasks =  $tasklookup.get($goal.getId()) )
+	    #if( !$tasks.isEmpty() )
+		,
+		"tasks": [ 
+			#foreach( $task in $tasks )#if( ${foreach.count} != 1 ), #end
+			{	
+			#jsonpartial($task $tasksearcher.getPropertyDetails())
+				#set( $cat = $mediaarchive.getCategory($task.projectdepartment) )
+				#if( $cat )
+				, "projectdepartmentpoints": "$!{cat.goalpoints}"
+				#end
+			}
+			#end
+		]
+		#end
+		}
+	#end
+  ]
+}
