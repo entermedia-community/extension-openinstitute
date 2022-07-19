@@ -15,8 +15,8 @@
 			#set( $weekpoints = 0)  	
 			#set($tasks = $completed.getTasksForWeek($person,$week))
   		    #foreach($task in $tasks)
-  				#set( $selectedcat = $mediaarchive.getCategory($task.projectdepartment))
-				#set( $points = $selectedcat.getValue("goalpoints"))
+  		     	#set( $selectedcat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
+				#set( $points = $selectedcat.getInt("goalpoints"))
 				#if( !$points || $points == 0)
 					#set( $points = 10 )
 				#end

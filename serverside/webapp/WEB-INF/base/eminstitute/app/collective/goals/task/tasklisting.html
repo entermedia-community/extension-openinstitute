@@ -20,8 +20,7 @@
 <div id="opentask$task.getId()" 
 	data-taskid="$task.id"
 	class="card-task card card-mini card-taskcomplete$!{task.taskstatus}"  >
-	
-	#set( $selectedcat = $mediaarchive.getCategory($task.projectdepartment))
+	#set( $selectedcat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
     	<div class="card-task-header taskcomplete taskstatus-$!{task.taskstatus} ui-draggable ui-droppable ui-draggable-handle"
     	 title="$selectedcat.getCategoryPath()"
     	 data-taskid="$task.id"
