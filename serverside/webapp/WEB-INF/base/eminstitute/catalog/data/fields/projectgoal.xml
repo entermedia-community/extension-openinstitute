@@ -62,6 +62,14 @@
       <language id="en"><![CDATA[Collection]]></language>  
     </name> 
   </property>  
+  
+  <property id="chatparentid" required="true" index="true" stored="true" editable="true"  type="list"  listid="chatterbox" datatype="list" > 
+    <name> 
+      <language id="en"><![CDATA[Chat Message Id]]></language>  
+    </name> 
+  </property>  
+  
+  
   <property id="addnotifypolicy" index="true" type="list" listid="librarycollection/addnotifypolicy" stored="true" editable="true" note="[[Who do we notify when assets are added]]"  >Send Notifications 
     <name> 
       <language id="de"><![CDATA[Benachrichtigungen versenden]]></language>  

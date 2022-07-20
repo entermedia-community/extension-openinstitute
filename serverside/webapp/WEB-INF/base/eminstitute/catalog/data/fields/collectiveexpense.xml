@@ -89,9 +89,9 @@
     </name> 
   </property>  
 
-  	<property id="hasreimbursed" index="true" stored="true" type="boolean" >
+  	<property id="reimbursedstatus" index="true" stored="true" type="list" >
 	 <name>
-	 <language id="en" > <![CDATA[Was Reimbursed]]> </language>
+	 <language id="en" > <![CDATA[Reimbursed Status]]> </language>
 	 </name>
 	</property>
   

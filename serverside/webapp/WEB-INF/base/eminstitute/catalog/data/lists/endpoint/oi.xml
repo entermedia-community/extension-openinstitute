@@ -51,6 +51,10 @@
     <name><![CDATA[Load User Profile]]></name> 
   </data>  
 
+  <data id="moduleprojectgoalmytasks" uploadfile="false" httpmethod="POST" docsection="moduleprojectgoal" url="/site/mediadb/services/module/projectgoal/mytasks.json?userid=admin">      
+    <samplerequest><![CDATA[{  "userid": "admin" }]]></samplerequest>  
+    <name><![CDATA[My Tasks]]></name> 
+  </data>  
 
 
 </root>

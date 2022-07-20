@@ -59,12 +59,7 @@
 
 	
 <!-- Add task type -->
-#set($parentid = $mediaarchive.getCatalogSettingValue("rootactionscategory"))
-#if(!$parentid)
-	rootactionscategory is not set in catalogsettings
-	#set($parentid = "AXNtQiCCVfeK6wAcFmEZ")
-#end
-#set( $hits = $mediaarchive.query("category").exact("parents",$parentid).sort("name").search($context) )
+#set( $hits = $mediaarchive.query("projectdepartment").all().sort("name").search($context) )
 <div style="padding:5px 0 10px;">
 			## change completedby field to staff field? 
   			<div style="width:25px; float:left;"><i class="fas fa-hammer" style="color:#07172C"></i></div> 

@@ -13,6 +13,7 @@
    	<property id="paymentdate" />  
    	<property id="paymentdescription" />  
 	<property id="paidfromaccount" />
+    <property id="reimbursedstatus" />
   
   
 </properties>

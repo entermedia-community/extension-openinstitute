@@ -20,7 +20,7 @@
   <tbody>
 	#set($points = 0)
 	#foreach($task in $tasks)
-		#set( $tree =  $mediaarchive.getCategory($task.projectdepartment))
+	  	#set( $tree = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
 		#if($tree)
 			#set( $c = $tree.getInt("goalpoints") )
 			#if( $c == 0)

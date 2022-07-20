@@ -15,7 +15,11 @@
 	#elseif($val == "communitytag")
 	
 	Campaign: $!mediaarchive.getCachedData("communitytag", $targetid)
+	#elseif($val == "externalpaypal")
+		PayPal: $targetid
+	#elseif($val == "workpoints")
+		[[Work Credit]]
 	#else
-	[[Work Credit]]
+		[[None]] $val
 	#end
 #end	
