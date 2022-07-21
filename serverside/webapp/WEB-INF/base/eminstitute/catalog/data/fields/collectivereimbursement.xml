@@ -3,7 +3,7 @@
 <properties  beanname="dataSearcher"> 
  
 
-  <property id="id" index="true" filter="false" internalfield="true" editable="true" stored="true" sortable="true" keyword="false">Id
+  <property id="id" index="true" filter="false" internalfield="true" editable="true" stored="true" sortable="true" keyword="false">
     <name> 
       <language id="de"><![CDATA[Id]]></language>  
       <language id="en"><![CDATA[Id]]></language>  
@@ -32,13 +32,7 @@
       <language id="en"><![CDATA[Currency Type]]></language> 
     </name> 
   </property>  
- 
-    <property id="expensetype" index="true" editable="true" stored="true"  datatype="list" listid="expensetype">
-    <name> 
-      <language id="en"><![CDATA[Expense Type]]></language> 
-    </name> 
-  </property>    
-  
+   
    <property id="total" index="true" editable="true" stored="true" type="double" required="true">
     <name> 
       <language id="en"><![CDATA[Total Price]]></language> 
@@ -47,13 +41,19 @@
   
     <property id="date" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="true" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name>
-      <language id="en"><![CDATA[Expense Date]]></language>
+      <language id="en"><![CDATA[Date Added]]></language>
     </name>
   </property> 
 
     <property id="user"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
       <language id="en"><![CDATA[Expense Approval]]></language> 
+    </name> 
+  </property>  
+
+    <property id="reimburseuser"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
+    <name> 
+      <language id="en"><![CDATA[Reimbursed to]]></language> 
     </name> 
   </property>  
 
@@ -81,43 +81,6 @@
       <language id="en"><![CDATA[How Paid]]></language> 
     </name> 
   </property>  
-
-
-    <property id="reimburseuser"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
-    <name> 
-      <language id="en"><![CDATA[Reimbursed to]]></language> 
-    </name> 
-  </property>  
-
-  	<property id="reimbursedstatus" index="true" stored="true" type="list" editable="true">
-	 <name>
-	 <language id="en" > <![CDATA[Reimbursed Status]]> </language>
-	 </name>
-	</property>
-  
-      <property id="reimbursedate" index="true" editable="true" stored="true" internalfield="false" isbadge="false" required="false" filter="false" multilanguage="false" deleted="false" datatype="date" autocreatefromexif="false" keyword="false" writenametoexif="false">New
-    <name>
-      <language id="en"><![CDATA[Reimbursed Date]]></language>
-    </name>
-  </property> 
-  
-  
-  
-  	<property id="receiptattachment" listid="asset" index="true"
-		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="/uploads/${year}/${collectiveid}/expenses/${id}">
-		<name>
-			<language id="en"><![CDATA[Receipt Photo]]></language>
-		</name>
-	</property>
-  
-    <property id="collectiveproject" required="true" 
- 	index="true" stored="true" editable="true"  type="list"  datatype="list"
- 	viewtype="collectionproject" searchcomponent="collectionproject" > 
-    <name> 
-      <language id="en"><![CDATA[Topic]]></language>  
-    </name> 
-  </property> 
 
   
   
