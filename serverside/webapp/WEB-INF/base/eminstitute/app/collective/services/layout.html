@@ -33,9 +33,13 @@
 						<li class="#if($collectiveadminsection == "invoices") current #end">
 							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
 						</li>
+
 					
 						<li class="#if($collectiveadminsection == "expenses") current #end">
 							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
+						</li>
+						<li class="#if($collectiveadminsection == "reimbursements") current #end">
+							<a href="$applink/collective/services/reimbursements/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Reimbursements]]</a>
 						</li>
 
 						<li class="#if($collectiveadminsection == "investments") current #end">
