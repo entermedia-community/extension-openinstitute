@@ -539,7 +539,12 @@ margin-top:.6rem;
 }
 
 .collectivecontent {
-	height: calc(100% - 135px);
+	min-height: calc(100% - 140px);
+	width:100%;
+	padding-top:1px;
+}
+.collectivecontentfull {
+	height: calc(100% - 140px);
 	width:100%;
 	padding-top:1px;
 }
