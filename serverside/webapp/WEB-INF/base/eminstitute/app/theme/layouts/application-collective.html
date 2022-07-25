@@ -11,8 +11,19 @@
 		#end
 	#end
 
-	#set($sitetitle = $content.title)
-    <title>#if( $library ) $library #end #if( $librarycol ) $librarycol - #end $!sitetitle</title>
+
+	#set($metatitle = $context.metatitle)
+	#if(!$metatitle)
+		#if( $librarycol ) 
+			#set($metatitle = $librarycol) 
+		#end
+		#set($metatitle = "$content.title - $!metatitle")
+	#end
+	#set($metadescription = $context.metadescription)
+	
+	
+    <title>$!metatitle</title>
+
     
 	$pages.include("/${applicationid}/theme/layouts/includes.html")
 	

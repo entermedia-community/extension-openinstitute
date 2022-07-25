@@ -44,7 +44,7 @@
     </name>
   </property> 
 
-  <property id="sourcepath" internalfield="false" index="true" stored="true"   editable="false" sortable="true">Source Path 
+  <property id="sourcepath" internalfield="false" index="true" stored="true"   editable="true" sortable="true">Source Path 
     <name> 
       <language id="de"><![CDATA[Source-Pfad]]></language>  
       <language id="en"><![CDATA[Source Path]]></language>  
@@ -85,6 +85,11 @@
       <language id="en"><![CDATA[Site ID]]></language>  
     </name> 
   </property>
+     <property id="metatitle" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[Meta Title]]></language> 
+    </name> 
+  </property>  
   <property id="metadescription" editable="true" index="true" stored="true"   >
     <name> 
       <language id="en"><![CDATA[Meta Description]]></language>  
@@ -95,13 +100,12 @@
       <language id="en"><![CDATA[Meta Image URL]]></language>  
     </name> 
   </property>
+
   <property id="metaurl" editable="true" index="true" stored="true"   >
     <name> 
       <language id="en"><![CDATA[Canonical URL]]></language>  
     </name> 
-  </property>    
-  
-  
+  </property>     
   <property id="post_title" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
       <language id="en"><![CDATA[post_title]]></language> 
@@ -113,11 +117,7 @@
     </name> 
   </property>  
   
-  <property id="knowledgebase_category" index="true" deleted="false" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" listid="postdata_category_learning" highlight="false" autocreatefromexif="false" keyword="false" writenametoexif="false">New 
-    <name> 
-      <language id="en"><![CDATA[knowledgebase_category]]></language> 
-    </name> 
-  </property> 
+ 
   
   <property id="post_date" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
@@ -129,8 +129,13 @@
     <name> 
       <language id="en"><![CDATA[postcontent]]></language> 
     </name> 
-  </property>  
-  
+  </property>
+    
+    <property id="knowledgebase_category" index="true" deleted="false" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" listid="postdata_category_learning" highlight="false" autocreatefromexif="false" keyword="false" writenametoexif="false">New 
+    <name> 
+      <language id="en"><![CDATA[knowledgebase_category]]></language> 
+    </name> 
+  </property>
   <property id="knowledgebase_tag" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
       <language id="en"><![CDATA[knowledgebase_tag]]></language> 
