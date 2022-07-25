@@ -42,21 +42,23 @@ class OiChatManager {
   }
 
   Future<List<oiChatMessage>> loadChat(String projectId, int page) async {
-    createDataModule(projectId);
+    await createDataModule(projectId);
     List<oiChatMessage> messages = [];
     if (page != 1 && chatterBox!.pages < page) {
       return [];
     }
     Map<String, dynamic> results = await chatterBox!.createModuleOperation(
         "viewmessages", RequestType.POST, getParams(page, projectId));
-    messages.addAll(await parseData(results));
+    messages.addAll(await parseData(results, projectId));
     return messages;
   }
 
-  Future<List<oiChatMessage>> parseData(Map<String, dynamic> responded) async {
+  Future<List<oiChatMessage>> parseData(
+      Map<String, dynamic> responded, String projectId) async {
     List<emData> topics = responded["topics"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
+    await saveTopics(topics, projectId);
     List<emData> goals = responded["goals"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
@@ -67,7 +69,6 @@ class OiChatManager {
         int index = responded["users"].indexWhere(
             (element) => element["userid"] == chatMessage.user["id"]);
         if (index != -1) {
-          printInfo(info: responded["users"][index]["portrait"] ?? "");
           chatMessage.user["portrait"] = responded["users"][index]["portrait"];
           chatMessage.properties["user"]["portrait"] =
               responded["users"][index]["portrait"];
@@ -91,7 +92,11 @@ class OiChatManager {
         .toList();
 
     await chatterBox!.saveCache(responded);
-    return (messages);
+    List<oiChatMessage> messageList = [];
+    for (var e in responded["data"]) {
+      messageList.add(oiChatMessage.fromJson(e.properties));
+    }
+    return messageList;
   }
 
   Map getParams(int page, String inProjectId) {
@@ -108,13 +113,13 @@ class OiChatManager {
   }
 
   getTopics(String projectId) async {
-    // List<Map<String, dynamic>> topics = await oi.hivemanager
-    //     .getAllHits(chatBox + "_" + "topics" + "_" + projectId);
-    // List<emData> result = [];
-    // for (var topic in topics) {
-    //   result.add(emData.fromJson(topic));
-    // }
-    return [];
+    List<Map<String, dynamic>> topics = await oi.hivemanager
+        .getAllHits(chatBox + "_" + "topics" + "_" + projectId);
+    List<emData> result = [];
+    for (var topic in topics) {
+      result.add(emData.fromJson(topic));
+    }
+    return result;
   }
 
   Future<oiChatMessage?> saveChat(
@@ -129,9 +134,7 @@ class OiChatManager {
     if (responded != null) {
       Map<String, dynamic> map = jsonDecode(responded);
       oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
-
       await chatterBox!.box.put(chatMessage.messageid, chatMessage.properties);
-
       return chatMessage;
     }
     return null;

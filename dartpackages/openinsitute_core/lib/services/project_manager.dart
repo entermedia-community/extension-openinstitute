@@ -25,6 +25,11 @@ class ProjectManager {
     return cache;
   }
 
+  Future<emData> getProject(String id) async {
+    await createDataModule();
+    return projectsModule!.getDataById(id);
+  }
+
   Future<List<emData>> loadProject(int page) async {
     await createDataModule();
     List<emData> projects = [];

@@ -42,6 +42,11 @@ class DataModule {
   int pages = 0;
   DataModule._();
 
+  emData getDataById(String id) {
+    emData newdata = emData.fromJson(box.get(id));
+    return newdata;
+  }
+
   static Future<DataModule> createDataModule(
     String inSearchType,
     String boxString,
@@ -117,9 +122,10 @@ class DataModule {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/search',
         inQuery,
-        RequestType.GET);
+        RequestType.POST);
+    log(inQuery.toString());
     Map<String, dynamic> resultsData = parseData(responsestring);
-    List<emData> results = resultsData["results"];
+    List<emData> results = resultsData["data"];
     if (cache) {
       await saveCache(resultsData);
     }
@@ -132,7 +138,7 @@ class DataModule {
         inQurey,
         RequestType.PUT);
     emData result = parseDataSingle(responsestring);
-    Map<String, dynamic> cache = box.get(
+    Map<dynamic, dynamic> cache = box.get(
       result.id,
     );
     Map<dynamic, dynamic> data = mergeMaps(result.properties, cache);
@@ -178,9 +184,10 @@ class DataModule {
         parsed["results"].map<emData>((json) => emData.fromJson(json)).toList();
     Map<String, dynamic> resultData = {};
     resultData['data'] = results;
-    resultData['page'] = parsed['page'];
-    resultData['pages'] = parsed['pages'];
-    resultData['totalhits'] = parsed['totalhits'];
+    resultData['page'] = parsed['page'] ?? parsed["response"]["page"];
+    resultData['pages'] = parsed['pages'] ?? parsed["response"]["pages"];
+    resultData['totalhits'] =
+        parsed['totalhits'] ?? parsed["response"]["totalhits"];
     return resultData;
   }
 
@@ -224,15 +231,18 @@ class DataModule {
     await box.put(
         "page",
         int.parse(
-            resultsData["page"] ?? resultsData["response"]["page"].toString()));
+            (resultsData["page"] ?? resultsData["response"]["page"].toString())
+                .toString()));
     await box.put(
         "pages",
-        int.parse(resultsData["pages"] ??
-            resultsData["response"]["pages"].toString()));
+        int.parse((resultsData["pages"] ??
+                resultsData["response"]["pages"].toString())
+            .toString()));
     await box.put(
         "totalhits",
-        int.parse(resultsData["totalhits"] ??
-            resultsData["response"]["totalhits"].toString()));
+        int.parse((resultsData["totalhits"] ??
+                resultsData["response"]["totalhits"].toString())
+            .toString()));
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
     pages = box.get("pages") ?? 0;

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:hive_test/hive_test.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
-import 'package:openinsitute_core/models/taskList.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
@@ -77,12 +76,12 @@ tearDown(() async {
 
     expect(user != null, true);
 
-    List<ToDo>? tasks = await oi.taskManager?.getOpenTasks();
+    List<dynamic>? tasks = await oi.taskManager?.loadMyTasks();
     expect(tasks != null, true);
     if( tasks != null) {
-      expect(tasks.length > 0, true);
-      ToDo list = tasks.first;
-      expect(list.tasks!.isNotEmpty, true);
+      expect(tasks.isEmpty, true);
+      emData list = tasks.first;
+      expect(list.properties['task']!.isNotEmpty, true);
     }
 
 
