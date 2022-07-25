@@ -61,7 +61,7 @@
 						 	<div style="margin:5px 0; padding:10px; border-left:2px solid #eeeeee;">
 						 	<h4 style="margin:0;">$tasks.size() [[Tasks created]]:</h4>
 							 #foreach($task in $tasks)
-							 		#set( $tree =  $mediaarchive.getCategory($task.projectdepartment))
+					  				#set( $tree = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
 							 		<a href="$ticketurl">$task.comment</a> - $!tree [$!mediaarchive.getData("taskstatus", $task.taskstatus)]<br>
 							 #end
 							 </div>

@@ -46,9 +46,10 @@
 		</tr>
 		</table>
 
-		<div style="height:30px;width:100%">
-		<div style="float:right">
-		[[Sort by]]
+		<div style="padding-top:20px;">
+		<h2 class="float-left" style="margin:10px 0;">[[Investments]]</h2>
+		<div style="float:right; margin-bottom:10px;">
+		<label>[[Sort by]]</label>
 		<select class="select2" name="sortby" >
 			#set ($details = $searcher.getDetailsForView("collectiveinvestment/edit", $userprofile))
 		#foreach( $detail in $details)

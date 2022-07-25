@@ -21,20 +21,28 @@
 			#set( $totalpoints = 0)
 			#set( $counted = 0)
 			<table class="striped" style="width:100%">
-  				<tr><th>Ticket</th><th>Points</th><th>Completed On</th></tr>
+  				<tr>
+  					<th>[[Ticket]]</th>
+  					<th>[[Points]]</th>
+  					<th>[[Completed On]]</th>
+  				</tr>
   			#foreach($ticket in $bypersontickets.get($person.getId()))
-				<tr><td>$ticket.name</td><td>$ticket.getValue("points")</td><td>!context.getDateTime($ticket.getDate("completedon"))</td></tr>
+				<tr>
+				<td>$ticket.name</td>
+				<td>$ticket.getValue("points")</td>
+				<td>!context.getDateTime($ticket.getDate("completedon"))</td>
+				</tr>
 				#set( $counted = $counted +1)
 				#set( $totalpoints = $totalpoints + $ticket.points)
 			#end
 			</table>
-			$counted Tickets = $totalpoints Points
+			$counted [[Tickets]] = $totalpoints [[Points]]
 			#set( $counted = 0)
   			<table class="striped" style="width:100%">
-  				<tr><th>Task</th><th>Points</th><th>Started On</th></tr>
+  				<tr><th>[[Task]]</th><th>[[Points]]</th><th>[[Started On]]</th></tr>
   		#foreach($task in $byperson.get($person.getId()))
-  				#set( $selectedcat = $mediaarchive.getCategory($task.projectdepartment))
-				#set( $points = $selectedcat.getValue("goalpoints"))
+  				#set( $selectedcat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
+  				#set( $points = $selectedcat.getInt("goalpoints"))
 				#if( $points == 0)
 					#set( $points = 10 )
 				#end
@@ -47,7 +55,7 @@
   				</tr>
   		#end
   			</table>
-  			$counted Tasks = $totalpoints Points
+  			$counted [[Tasks]] = $totalpoints [[Points]]
   		</div>
 	</div>
 #end

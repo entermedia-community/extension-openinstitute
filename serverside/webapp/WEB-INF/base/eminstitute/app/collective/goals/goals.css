@@ -23,8 +23,7 @@
 }
 
 .goals-header-actions {
-	padding:8px;
-	margin-bottom:10px;
+	padding:10px 8px 10px;
 	background-color: #f5f5f5;
 	border-bottom:1px solid #efefef;
 }
@@ -485,6 +484,7 @@ ul.projectgoals {
 	border-bottom: 1px solid #ddd;
     box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.4);
 	position:relative;
+	background-color: #fff;
 }
 
 .goal-tabs .emtabs {

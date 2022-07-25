@@ -579,7 +579,7 @@ public class FinanceManager  implements CatalogEnabled
 
 		HitTracker tracker = null;
 		Searcher incomesSearcher = null;
-		if( "1".equals(inBankId) )
+		if( "1".equals(inBankId) )  //Only support a default bank so cant filter by bank
 		{
 			incomesSearcher = getMediaArchive().getSearcher("transaction");
 			tracker = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange).search();
@@ -599,6 +599,11 @@ public class FinanceManager  implements CatalogEnabled
 
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+		incomesSearcher = getMediaArchive().getSearcher("collectivereimbursement");
+		query = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange);
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 

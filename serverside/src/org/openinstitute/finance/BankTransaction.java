@@ -43,6 +43,10 @@ public class BankTransaction extends BaseData
 		{
 			date = getData().getDate("paymentdate");
 		}
+		else if( getSearchType().equals("collectivereimbursement") )
+		{
+			date = getData().getDate("paymentdate");
+		}
 		else if( getSearchType().equals("collectiveinvoice") )
 		{
 			date = getData().getDate("invoicepaidon");
@@ -61,7 +65,7 @@ public class BankTransaction extends BaseData
 	public Double getAmount()
 	{
 		Double t = 0D;
-		if( getSearchType().equals("collectiveexpense") )
+		if( getSearchType().equals("collectiveexpense") || getSearchType().equals("collectivereimbursement") )
 		{
 			t = 0 - getData().getDouble("total");
 		}
@@ -127,6 +131,10 @@ public class BankTransaction extends BaseData
 			name = getData().get("paymentemail");
 		}
 		else if( getSearchType().equals("collectiveexpense") )
+		{
+			name = getData().get("expensedescription");
+		}
+		else if( getSearchType().equals("collectivereimbursement") )
 		{
 			name = getData().get("expensedescription");
 		}

@@ -15,9 +15,8 @@
    	<property id="paymentdate" />  
    	<property id="paymentdescription" />  
 
-    <property id="reimbursedstatus" />
 	<property id="reimburseuser" />  
+  	<property id="reimbursedstatus" />
     <property id="reimbursedate" /> 
-  
   
 </properties>
