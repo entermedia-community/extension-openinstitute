@@ -11,15 +11,15 @@
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 #elseif($librarycol)
-		<meta property="og:type" content="article" />
+		<meta property="og:type" content="website" />
 		<meta property="og:url" content="$prefix$applink/collective/channel/$librarycol.getId()/${librarycol.name}.html" />
-		<meta property="og:title" content="#esc($!librarycol.title)" />
-		<meta property="og:description" content="#esc($!librarycol.collectivedescription)" />
+		<meta property="og:title" content="#esc($!librarycol.name)" />
+		<meta property="og:description" content="#esc($!librarycol.collectiveflatdescription)" />
 		#set( $logo = $mediaarchive.getAsset($librarycol.assetportrait) )
 		#if($logo)
 			#set($logourl = "$prefix/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
 		#else
-			#set($logourl = "https://openinstitute.org/site/app/theme/oi/OI.png")
+			#set($logourl = "https://openinstitute.org/site/app/theme/oi/OpenInstitute-400x400.png")
 		#end	
 		<meta property="og:image" content="$!logourl" />
 #elseif($postdata)
@@ -41,7 +41,6 @@
 			<meta property="og:url" content="$postdata.metaurl" />
 		#end
 #end
-
 
 #if ($postdata.metadescription) 
 	<meta name="description" content="$postdata.metadescription" />
