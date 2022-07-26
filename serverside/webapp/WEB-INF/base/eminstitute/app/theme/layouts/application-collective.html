@@ -17,7 +17,7 @@
 		#if( $librarycol ) 
 			#set($metatitle = $librarycol) 
 		#end
-		#set($metatitle = "$content.title - $!metatitle")
+		#set($metatitle = "$!metatitle - $content.title")
 	#end
 	#set($metadescription = $context.metadescription)
 	
