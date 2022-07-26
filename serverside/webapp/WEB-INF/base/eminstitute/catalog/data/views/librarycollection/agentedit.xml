@@ -5,7 +5,7 @@
   <property id="organizationstatus"/>  
   <property id="communitytag" />
     
-  <property id="collectiveflatdescription"/>  
+  <property id="collectivedescription"/>  
   <property id="contactemail"/> 
   <property id="assetportrait"/>
   <property id="assetbanner"/>

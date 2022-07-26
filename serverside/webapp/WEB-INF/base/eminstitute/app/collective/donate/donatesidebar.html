@@ -14,11 +14,11 @@
 
 
 ##Distribution details, move all this to Donate/Expendetures area 
-
+#if($librarycol.goaldate)
 	<div class="sidebarbox" style="margin-top:0;"  >
 		<h4><i class="fas fa-bullseye"></i> [[Goal]]
 		</h4>
-				<div class="" style="padding-left:6px;">		
+				<div class="" style="padding-left:25px; color:#555;">		
 				#if($librarycol.goaldate)
 				<strong>[[Our Goal Is:]] $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong><br>
 				#if($librarycol.distributedtotal) [[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD<br> 
@@ -29,7 +29,8 @@
 				</div>	
 
 	</div>
-	<div style="" class="text-center">
+#end
+	<div style="" class="sidebarbox text-center">
 		<a href="$applink/collective/donate/$collectionid/donate.html" class="btn subscribe-btn">[[Donate]]</a>
 	</div>
 #end	
