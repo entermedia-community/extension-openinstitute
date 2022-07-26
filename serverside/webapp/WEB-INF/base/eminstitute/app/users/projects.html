@@ -18,19 +18,20 @@
 			<div class="project-grid">
 				#foreach( $ohit in $collections )
 							#set($link = false)
-							#if($ohit.assetportrait)
-								#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
+							#set($collection = $mediaarchive.getCachedData("librarycollection", $ohit.getId()))
+							#if($collection.assetportrait)
+								#set($asset = $mediaarchive.getAsset($collection.assetportrait))
 								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 							#else
 							#set($link = "$applink/theme/images/OI_flower.png")
 							#end
 							<div class="card-collections">
-							<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
-								class=" #if($selectedproject==$ohit.id) active #end">
+							<a href="${applink}/collective/channel/${ohit.id}/#urlencode($collection.getWebName()).html" 
+								class=" #if($selectedproject==$collection.id) active #end">
 		
 							<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
-			 				<div class="card-name collectionbox">$ohit.name
-									#if( $modcollections.contains($ohit.getId())) * #end</div>
+			 				<div class="card-name collectionbox">$collection.name
+									#if( $modcollections.contains($collection.getId())) * #end</div>
 							</a>
 							</div>
 				#end
@@ -56,20 +57,21 @@
 					
 						#foreach( $ohit in $organizations )
 							#set($link = "")
-							#if($ohit.assetportrait)
-								#set($asset = $mediaarchive.getAsset($ohit.assetportrait))
+							#set($collection = $mediaarchive.getCachedData("librarycollection", $ohit.getId()))
+							#if($collection.assetportrait)
+								#set($asset = $mediaarchive.getAsset($collection.assetportrait))
 								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 							#else
 								#set($link = "$applink/theme/images/OI_flower.png")
 							#end
 				
 							<div class="card-collections">
-							<a href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*" 
-								class=" #if($selectedproject==$ohit.id) active #end">
+							<a href="${applink}/collective/channel/${collection.id}/#urlencode($collection.getWebName()).html" 
+								class=" #if($selectedproject==$collection.id) active #end">
 								<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
 				 				<div class="card-name collectionbox">
-				 					$ohit.name
-									#if( $modcollections.contains($ohit.getId())) * #end
+				 					$collection.name
+									#if( $modcollections.contains($collection.getId())) * #end
 								</div>
 							</a>
 							</div>
