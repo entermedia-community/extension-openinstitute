@@ -3,7 +3,7 @@
 <properties> 
   <property id="name"/>  
   <property id="collectivedescription"/>
-  <property id="collectiveflatdescription"/>  
+  
   <property id="contactemail"/> 
   <property id="communitytag" />
   <property id="assetportrait"/>

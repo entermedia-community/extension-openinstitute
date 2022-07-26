@@ -14,7 +14,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="$prefix$applink/collective/channel/$librarycol.getId()/${librarycol.name}.html" />
 		<meta property="og:title" content="#esc($!librarycol.name)" />
-		<meta property="og:description" content="#esc($!librarycol.collectiveflatdescription)" />
+		<meta property="og:description" content="#esc($!librarycol.collectivedescription)" />
 		#set( $logo = $mediaarchive.getAsset($librarycol.assetportrait) )
 		#if($logo)
 			#set($logourl = "$prefix/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
