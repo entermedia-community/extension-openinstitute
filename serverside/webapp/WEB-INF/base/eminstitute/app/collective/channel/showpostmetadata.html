@@ -25,7 +25,7 @@
 			#end
 
 		#end
-		#set($collurl = "$applink/collective/channel/"+$librarycol.id+"/index.html")
+		#set($collurl = "$applink/collective/channel/"+$librarycol.id+"/"+$librarycol.getWebName()+".html")
 		<div class="col-md-6">
 			<div class="feedcard-collective">
 				<a href="$collurl" class="collectivetag" title="$!librarycol.getName()">$!librarycol.getName()</a>
