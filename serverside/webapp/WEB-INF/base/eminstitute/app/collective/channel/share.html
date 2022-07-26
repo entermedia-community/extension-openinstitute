@@ -7,11 +7,11 @@
 #set( $upload = $mediaarchive.getData("userupload",$uploadid))
 
 #set( $librarycol = $context.getRequestParameter("librarycol"))
-#set( $librarycol = $mediaarchive.getData("librarycollection",$librarycol) )
+#set( $librarycol = $mediaarchive.getCachedData("librarycollection",$librarycol) )
 #if($upload.uploadcategory)
 
 #set($thumburl = $mediaarchive.asLinkToPreview($asset,"image1200x630.jpg") )
-#set( $sharelink = "$prefix$applink/collective/channel/${librarycol.getId()}/index.html?showupload=${uploadid}")
+#set( $sharelink = "$prefix$applink/collective/channel/${librarycol.getId()}/${librarycol.getWebName()}.html?showupload=${uploadid}")
 #end
 <div id="share">
 <div class="addthis_inline_share_toolbox" data-url="$sharelink" data-title="$!upload.title" data-description="$!upload.longdescription" 
