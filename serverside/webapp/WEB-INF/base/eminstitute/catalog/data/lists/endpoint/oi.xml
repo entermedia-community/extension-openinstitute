@@ -2,9 +2,8 @@
 
 <root> 
 
-
   <data id="modulelibrarycollectionfeed" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/feed/channelfeed.json"> 
-    <samplerequest><![CDATA[{ "collectionid": "AX7gTBpbekpQ63X1oUTz","page": "1", "hitsperpage":"10", "query": { "terms":[{ "field": "id", "operator": "matches", "value": "*" }] } }]]></samplerequest>  
+    <samplerequest><![CDATA[{ "collectionid": "AX7gTBpbekpQ63X1oUTz","page": "1", "hitsperpage":"10", "query": { "terms":[{ "field": "description", "operator": "contains", "value": "test" }] } }]]></samplerequest>  
     <name><![CDATA[Project Feed]]></name> 
   </data>  
 

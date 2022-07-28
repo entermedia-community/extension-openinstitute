@@ -10,13 +10,25 @@
       <language id="fr"><![CDATA[Id]]></language> 
     </name> 
   </property>  
-  <property id="title" index="true" filter="false" deleted="false" editable="true" stored="true" sortable="true" keyword="false"> 
+  <property id="title" index="true" filter="false" deleted="false" editable="true" stored="true" sortable="true" keyword="true"> 
     <name> 
       <language id="en"><![CDATA[Title]]></language>  
        
     </name> 
+  </property>
+  
+  
+    <property id="description" defaultoperation="freeform" index="true"   stored="true"  editable="false" sortable="true">
+    <name> 
+      <language id="de"><![CDATA[All Fields]]></language>  
+      <language id="en"><![CDATA[All Fields]]></language>  
+      <language id="es"><![CDATA[Todos]]></language>  
+      <language id="fr"><![CDATA[Tous les champs]]></language> 
+    </name> 
   </property>  
-  <property id="longdescription" index="true" stored="true" editable="true"> 
+  
+    
+  <property id="longdescription" index="true" stored="true" editable="true" keyword="true"> 
     <name> 
       <language id="en"><![CDATA[Description]]></language>  
     </name> 
@@ -46,7 +58,7 @@
       <language id="en"><![CDATA[Category ID]]></language>
     </name>
   </property> 
-   <property id="usertags" datatype="kwmap" editable="true" index="true" stored="true"   type="kwmap">User Tags 
+   <property id="usertags" datatype="kwmap" editable="true" index="true" stored="true" keyword="true"  type="kwmap">User Tags 
     <name>
       <language id="de"><![CDATA[Nutzer-Tags]]></language>
       <language id="en"><![CDATA[User Tags]]></language>

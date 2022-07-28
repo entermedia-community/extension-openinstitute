@@ -17,7 +17,7 @@
 		#set($logourl = "$applink/theme/images/OI_flower.png")
 	#end
 	
-	#set($homelink = "$apphome/collective/community/index.html?collectionid=$collectionid")
+	#set($homelink = "$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html")
 
 	#if ($librarycol.assetbanner)
 		#set( $banner= $mediaarchive.getAsset($librarycol.assetbanner) )

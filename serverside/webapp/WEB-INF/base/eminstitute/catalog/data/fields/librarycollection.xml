@@ -17,6 +17,14 @@
       <language id="fr"><![CDATA[Collection]]></language> 
     </name> 
   </property>  
+  <property id="description" defaultoperation="freeform" index="true"   stored="true"  editable="false" sortable="true">
+    <name> 
+      <language id="de"><![CDATA[All Fields]]></language>  
+      <language id="en"><![CDATA[All Fields]]></language>  
+      <language id="es"><![CDATA[Todos]]></language>  
+      <language id="fr"><![CDATA[Tous les champs]]></language> 
+    </name> 
+  </property>  
   
   <property id="creationdate" index="true" stored="true" editable="true"  type="date" datatype="date" >
     <name> 
@@ -198,7 +206,7 @@
     </name>
   </property> 
 
-    <property id="collectivedescription" index="true" stored="true" viewtype="html" editable="true"   > 
+    <property id="collectivedescription" index="true" stored="true" editable="true"  keyword="true"  > 
     <name> 
       <language id="de"><![CDATA[Projektbeschreibung]]></language>  
       <language id="en"><![CDATA[Description]]></language>  
@@ -206,7 +214,7 @@
       <language id="fr"><![CDATA[Description du projet]]></language> 
     </name> 
   </property>  
-   <property id="manifesto" index="true" stored="true" viewtype="html" editable="true"   > 
+   <property id="manifesto" index="true" stored="true" editable="true" keyword="true"   > 
     <name> 
       <language id="en"><![CDATA[Manifesto / Mission]]></language>  
     </name> 
@@ -246,7 +254,7 @@
   	<property id="contactemail" index="true" stored="true" keyword="true" editable="true"  indextype="not_analyzed">Email</property>
 	<property id="contactphone" index="true" stored="true" keyword="true" editable="true"  >Phone</property>
   
-   <property id="vision" index="true" stored="true" viewtype="html" editable="true"   > 
+   <property id="vision" index="true" stored="true" viewtype="html" editable="true" keyword="true"   > 
     <name> 
       <language id="en"><![CDATA[Vision]]></language>  
     </name> 

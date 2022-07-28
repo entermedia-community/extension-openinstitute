@@ -4,8 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	#set($sitetitle = $content.title)
-    <title>#if( $librarycol ) $librarycol - #end $!sitetitle</title>
+	#set($metatitle = $context.metatitle)
+	#if(!$metatitle)
+		#if( $librarycol ) 
+			#set($metatitle = $librarycol)
+			#if($content.title)
+				#set($metatitle = "$metatitle - $content.title")
+			#end
+		#else
+			#set($metatitle = "$content.title") 
+		#end
+		
+	#end
+
+	
+    <title>$!metatitle</title>
 	
 	$pages.include("/${applicationid}/theme/layouts/includes.html")
 	
