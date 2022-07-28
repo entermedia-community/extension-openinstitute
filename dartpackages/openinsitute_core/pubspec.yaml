@@ -20,7 +20,7 @@ dependencies:
   firebase_auth: ^3.3.6
   hive: ^2.2.2
   hive_flutter: ^1.1.0
-  isar: ^2.2.1
+  # isar: ^2.2.1
   # isar_flutter_libs: ^2.2.1 # contains the binaries (not required for web)
   path_provider: ^2.0.9
 

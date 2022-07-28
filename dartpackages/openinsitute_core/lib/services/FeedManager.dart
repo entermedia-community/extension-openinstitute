@@ -37,7 +37,7 @@ class FeedManager {
     await createFeedModule(collectionId: collectionId);
     Map query = getQuery(page);
     if (collectionId != null) {
-      query["collectionId"] = collectionId;
+      query["collectionid"] = collectionId;
     }
     log("${feedsModule!.page} -> ${feedsModule!.pages}");
     if (page != 1 && feedsModule!.pages < page) {

@@ -38,8 +38,8 @@ class DataModule {
   late Box box;
   bool cache = true;
   int total = 0;
-  int page = 0;
-  int pages = 0;
+  int page = 1;
+  int pages = 1;
   DataModule._();
 
   emData getDataById(String id) {
@@ -64,7 +64,7 @@ class DataModule {
     List<emData> list = [];
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
-    pages = box.get("pages") ?? 0;
+    pages = box.get("pages") ?? 1;
     for (var element in box.keys) {
       if (element != "totalhits" &&
           element != "lastsync" &&
