@@ -1,15 +1,14 @@
 <section class="section">
 
     <!--Section heading-->
-    <h2 class="section-heading h1 pt-4">New Message Received</h2>
-    <!--Section description-->
-    <p class="section-description">
- 
+    <h3 class="section-heading pt-4">[[New message received at]] $!project</h3>
+
  	<ul>   
-    #foreach( $key in $context.getParameterMap().keySet() )
-    	<li>$key = $context.getRequestParameter($key)</li>
+    #foreach( $key in $formfields.keySet() )
+    	#set($field = $formfields[$key])
+    	<li>$key = $field</li>
     #end
     </ul>
     
-    </p>
+    
 </section>

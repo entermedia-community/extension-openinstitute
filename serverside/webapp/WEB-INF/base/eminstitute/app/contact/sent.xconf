@@ -5,4 +5,5 @@
 	<property name="emaillayout">/${applicationid}/contact/contacttemplate.html</property>
 	<property name="subject">Open Institute Contact</property>
 	<property name="from">noreply@openinstitute.org</property>
+	<property name="to">help@entermediadb.org</property>
 </page>

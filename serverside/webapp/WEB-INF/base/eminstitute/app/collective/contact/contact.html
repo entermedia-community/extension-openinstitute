@@ -22,7 +22,8 @@
 					
             <form id="contact-form" name="contact-form" action="sent.html" method="POST">
 
-				<input type="hidden" name="to" value="${librarycol.contactemail}" />
+				
+				##<input type="hidden" name="project" value="${librarycol}" />
 				<input type="hidden" name="collectionid" value="${librarycol.id}" />
                 <!--Grid row-->
                 <div class="row">
@@ -31,7 +32,7 @@
                     <div class="col-md-6">
                         <div class="md-form">
                             <input type="hidden" name="field" value="name">
-                            <input type="text" id="name" name="name" class="form-control" placeholder="[[Your name]]">
+                            <input type="text" id="name" name="name.value" class="form-control" placeholder="[[Your name]]">
                             
                         </div>
                     </div>
@@ -40,8 +41,8 @@
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form">
-                            <input type="hidden" name="field" value="name">
-                            <input type="text" id="email" name="email" class="form-control" placeholder="[[Your email]]">
+                            <input type="hidden" name="field" value="email">
+                            <input type="text" id="email" name="email.value" class="form-control" placeholder="[[Your email]]">
                             
                         </div>
                     </div>
@@ -50,9 +51,7 @@
                 </div>
                 <!--Grid row-->
 
-                <!--Grid row-->
-                            <input type="hidden" name="field" value="subject">
-                            <input type="hidden" id="subject" name="subject" value="Contacted: $librarycol" class="form-control">
+                
                 <!--Grid row-->
 				<div style="margin-bottom:20px;"></div>
                 <!--Grid row-->
@@ -63,7 +62,7 @@
 
                         <div class="md-form">
                             <input type="hidden" name="field" value="message">
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="[[Your message]]"></textarea>
+                            <textarea id="message" name="message.value" rows="2" class="form-control md-textarea" placeholder="[[Your message]]"></textarea>
                             
                         </div>
 
