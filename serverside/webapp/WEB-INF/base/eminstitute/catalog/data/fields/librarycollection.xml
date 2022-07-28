@@ -206,7 +206,7 @@
     </name>
   </property> 
 
-    <property id="collectivedescription" index="true" stored="true" viewtype="html" editable="true"  keyword="true"  > 
+    <property id="collectivedescription" index="true" stored="true" editable="true"  keyword="true"  > 
     <name> 
       <language id="de"><![CDATA[Projektbeschreibung]]></language>  
       <language id="en"><![CDATA[Description]]></language>  
@@ -214,7 +214,7 @@
       <language id="fr"><![CDATA[Description du projet]]></language> 
     </name> 
   </property>  
-   <property id="manifesto" index="true" stored="true" viewtype="html" editable="true" keyword="true"   > 
+   <property id="manifesto" index="true" stored="true" editable="true" keyword="true"   > 
     <name> 
       <language id="en"><![CDATA[Manifesto / Mission]]></language>  
     </name> 
