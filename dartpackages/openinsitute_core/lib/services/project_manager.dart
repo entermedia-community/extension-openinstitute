@@ -76,6 +76,7 @@ class ProjectManager {
     await projectsModule!.addData(
       {
         "name": projectName,
+        "description": projectDes,
       },
     );
   }

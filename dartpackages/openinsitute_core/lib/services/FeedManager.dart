@@ -70,4 +70,22 @@ class FeedManager {
       }
     };
   }
+
+  Future<List<emData>> searchfeeds(String keyword, int page) async {
+    await createFeedModule();
+
+    Map inQuery = {
+      "page": "$page",
+      "hitsperpage": "10",
+      "query": {
+        "terms": [
+          {"field": "description", "operator": "freeform", "value": keyword}
+        ]
+      }
+    };
+
+    Map<String, dynamic> results = await feedsModule!
+        .createServiceOperation("channelfeed", RequestType.POST, inQuery);
+    return parseData(results);
+  }
 }
