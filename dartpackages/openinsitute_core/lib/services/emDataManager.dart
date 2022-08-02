@@ -139,9 +139,10 @@ class DataModule {
         RequestType.PUT);
     emData result = parseDataSingle(responsestring);
     Map<dynamic, dynamic> cache = box.get(
-      result.id,
-    );
-    Map<dynamic, dynamic> data = mergeMaps(result.properties, cache);
+          result.id,
+        ) ??
+        {};
+    Map<dynamic, dynamic> data = mergeMaps(cache, result.properties);
     await box.put(result.id, data);
     return result;
   }

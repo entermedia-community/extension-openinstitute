@@ -103,7 +103,6 @@ class OiChatManager {
   }
 
   saveTopics(List<emData> topics, String projectId) async {
-    // Delete topics from hive
     await oi.hivemanager.clear(chatBox + "_" + "topics" + "_" + projectId);
     for (var topic in topics) {
       await oi.hivemanager.saveData(topic.id, topic.properties,

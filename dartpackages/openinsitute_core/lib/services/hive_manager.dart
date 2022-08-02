@@ -16,7 +16,7 @@ class HiveManager {
       Hive.init(path);
     } else {
       Directory appDir = await getApplicationDocumentsDirectory();
-      path = appDir.path; 
+      path = appDir.path;
       await sharedPref.saveEMPath(path);
       Hive.init(path);
     }
@@ -55,7 +55,7 @@ class HiveManager {
   Future<void> clear(String boxString) async {
     Box box;
     box = await setBox(boxString);
-    box.clear();
+    await box.clear();
   }
 
   Future<List<Map<String, dynamic>>> getAllHits(String boxString) async {
