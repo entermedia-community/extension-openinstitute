@@ -1,4 +1,5 @@
 #set($collectionid = $librarycol.getId())
+#set( $topic = $context.getRequestParameter("collectiveproject"))		
 
 #ifnull( $collectionid )
 	#set($collectionid = $context.getRequestParameter("collectionid"))
@@ -81,6 +82,27 @@
 	
    </form>
    
+	#set( $userscurrency = $financeManager.getTotalsReimbursedByUser($collectionid,$daterange) )
+	#if($userscurrency.size()> 0)
+	
+   <div style="padding-top:20px;">
+   		<h2 style="margin:10px 0;">[[Reimbursements Paid]]</h2>
+  
+  	<table>
+		#foreach($value in $userscurrency)	
+			#set( $auser = $mediaarchive.getUser($value.getKeyedOn() ) )
+			<tr>
+			<td>$auser</td>
+			<td>
+				#foreach($currency in $value.getCurrencies() )
+					$value.getValue($currency) $mediaarchive.getCachedData("currencytype",$currency)
+				#end
+			</td>
+			</tr>
+		#end	
+   </table>
+   </div>
+	#end  
    
    	#ifnull( $expenses)
               #set( $expenses = $mediaarchive.query("collectiveexpense").exact("reimbursedstatus","1").exact("collectionid",$collectionid).sort("reimburseuser").search($context))

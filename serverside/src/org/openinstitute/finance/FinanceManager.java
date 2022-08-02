@@ -464,7 +464,7 @@ public class FinanceManager  implements CatalogEnabled
 	}
 
 	
-	public Map  getTotalExpenseByCurrency(String inCollectionId, DateRange inDateRange, String topicid)
+	public Map  getNetExpenseByCurrency(String inCollectionId, DateRange inDateRange, String topicid)
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
@@ -473,6 +473,7 @@ public class FinanceManager  implements CatalogEnabled
 		{
 			query.exact("collectiveproject",topicid);
 		}
+		query.not("reimbursedstatus","1"); //Do not include in totals. Has not happened yet
 		addDateRange(query,"date",inDateRange);
 
 		HitTracker hits = expensesSearcher.search(query.getQuery());
@@ -540,7 +541,7 @@ public class FinanceManager  implements CatalogEnabled
 	public Map  getNetIncomeByCurrency(String inCollectionId, DateRange inDateRange, String topicid)
 	{
 		Map incomebycurrency = getTotalIncomesByDateRange(inCollectionId, inDateRange, topicid);
-		Map expensesbycurrency = getTotalExpenseByCurrency(inCollectionId, inDateRange, topicid);
+		Map expensesbycurrency = getNetExpenseByCurrency(inCollectionId, inDateRange, topicid);
 		
 		HashMap<String, Object> netIncome = new HashMap<String, Object>();
 		
@@ -809,5 +810,45 @@ public class FinanceManager  implements CatalogEnabled
 		return dollars;
 		
 	}
+
+	public Collection<MultiCurrency> getTotalsReimbursedByUser(String inCollectionId, DateRange inDateRange)
+	{
+		return getTotalsReimbursedByUser(inCollectionId,inDateRange,null);
+	}
 	
+	public Collection<MultiCurrency> getTotalsReimbursedByUser(String inCollectionId, DateRange inDateRange, String topicid)
+	{
+		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		QueryBuilder query = expensesSearcher.query();
+		query.exact("collectionid", inCollectionId);
+		query.exact("reimbursedstatus","2");  //paid
+		if( topicid != null)
+		{
+			query.exact("collectiveproject",topicid);
+		}
+		addDateRange(query,"date",inDateRange);
+
+		
+		HitTracker hits = expensesSearcher.search(query.getQuery());
+		hits.setHitsPerPage(1000);
+
+		Map<String,MultiCurrency> byUsers = new HashMap();  //By currency? Or just dollars?
+
+		for (Iterator iterator = hits.iterator(); iterator.hasNext();)
+		{
+			MultiValued hit = (MultiValued) iterator.next();
+			String user = hit.get( "reimburseuser");
+			MultiCurrency bycurrency = byUsers.get(user);
+			if( bycurrency == null)
+			{
+				bycurrency = new MultiCurrency();
+				bycurrency.setKeyedOn(user);
+				byUsers.put(user,bycurrency);
+			}
+			String currency = hit.get("currencytype");
+			bycurrency.addTo(currency , hit.getDouble("total"));
+		}
+		return byUsers.values();
+
+	}
 }

@@ -98,9 +98,11 @@
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
 				<td></td>
 				<td style="width:10%;padding-right:20px">
+				#if( $currencytype != "2") 
 				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
 				$$!context.doubleToMoney($subtotal, 2)
 				#set( $total = $subtotal + $total)
+				#end
 				</td>
 				</tr>
 			#end
@@ -111,6 +113,8 @@
 				<td style="text-align: right;">Total in USD:</td>
 				<td style="width:10%;padding-right:20px">
 			 $$!context.doubleToMoney($total, 2)
+			 
+			 *[[Does not include pending reimbursements]]
 			</td>
 			</tr>
 			</table>
