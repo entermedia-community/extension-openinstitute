@@ -194,8 +194,8 @@ class DataModule {
 
   emData parseDataSingle(String responseBody) {
     final Map<String, dynamic> parsed = json.decode(responseBody);
-    emData results = emData.fromJson(parsed['data']);
-    return results;
+    emData result = emData.fromJson(parsed['data']);
+    return result;
   }
 
   dynamic createModuleOperation(

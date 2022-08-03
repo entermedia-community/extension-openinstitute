@@ -117,24 +117,30 @@ class OiChatManager {
     for (var topic in topics) {
       result.add(emData.fromJson(topic));
     }
-    return result;
+    return result.toSet().toList();
   }
 
   Future<oiChatMessage?> saveChat(
       Map<String, dynamic> inMessage, String projectId) async {
     await createDataModule(projectId);
-    final String? responded = await chatterBox!.createModuleOperation(
+    final Map<String, dynamic>? responded =
+        await chatterBox!.createModuleOperation(
       'messagesave',
       RequestType.PUT,
       inMessage,
     );
     log("Saved chat message: " + responded.toString());
     if (responded != null) {
-      Map<String, dynamic> map = jsonDecode(responded);
+      Map<String, dynamic> map = responded;
       oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
       await chatterBox!.box.put(chatMessage.messageid, chatMessage.properties);
       return chatMessage;
     }
     return null;
+  }
+
+  Future<void> updateChat(String id, Map data) async {
+    await createDataModule(id);
+    await chatterBox!.box.put(id, data);
   }
 }

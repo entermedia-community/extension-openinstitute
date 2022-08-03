@@ -19,7 +19,13 @@ class TaskManager {
 
   addGoal(Map goal) async {
     goalModule = await createDataModule(goalModule, "projectgoal");
+    /// [name] , [details],  [creationdate] , [resolveddate], [collectionid], [tickettype], [projectstatus], [goaltrackercolumn]
     return await goalModule!.addData(goal);
+  }
+
+  editGoal(String id, Map goal) async {
+    goalModule = await createDataModule(goalModule, "projectgoal");
+    return await goalModule!.updateData(id, goal);
   }
 
   /// required keys for add a task -> "[projectgoal]", "[goaltask] => [{we can have the data related to goaltask}]", "[projectstatus]", "[projectdepartment]", "[taskstatus]",
