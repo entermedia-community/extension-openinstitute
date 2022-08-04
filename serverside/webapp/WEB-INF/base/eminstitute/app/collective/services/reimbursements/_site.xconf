@@ -1,4 +1,7 @@
 <page>
 	<property name="collectiveadminsection">reimbursements</property>
+<path-action name="FinanceModule.loadDateRange" />
+
+<path-action name="FinanceModule.loadFinanceManager" />
 
 </page>

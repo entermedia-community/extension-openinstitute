@@ -44,6 +44,8 @@ public void init()
 	dependants.put("projectgoal", "owner");
 	dependants.put("userupload", "owner");
 	dependants.put("collectiveexpense", "user");
+	dependants.put("collectiveexpense", "reimburseuser");
+	dependants.put("collectivereimbursement", "user");
 	dependants.put("collectiveincome", "user");
 	dependants.put("collectiveinvoice", "owner");
 	dependants.put("collectiveproduct", "owner");
