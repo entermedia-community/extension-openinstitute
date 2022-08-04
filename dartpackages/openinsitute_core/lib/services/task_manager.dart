@@ -19,11 +19,12 @@ class TaskManager {
 
   addGoal(Map goal) async {
     goalModule = await createDataModule(goalModule, "projectgoal");
+
     /// [name] , [details],  [creationdate] , [resolveddate], [collectionid], [tickettype], [projectstatus], [goaltrackercolumn]
     return await goalModule!.addData(goal);
   }
 
-  editGoal(String id, Map goal) async {
+  editGoal(String id, Map goal) async { 
     goalModule = await createDataModule(goalModule, "projectgoal");
     return await goalModule!.updateData(id, goal);
   }
@@ -87,15 +88,6 @@ class TaskManager {
   Future<Map<String, List<emData>>> loadFields() async {
     Map<String, List<emData>> data = {};
     await createModules();
-    data["projectstatus"] = await projectStatus!.getRemoteData({
-      "page": "1",
-      "hitsperpage": "20",
-      "query": {
-        "terms": [
-          {"field": "id", "operation": "matches", "value": "*"}
-        ]
-      }
-    }, true);
     data["taskstatus"] = await taskStatus!.getRemoteData({
       "page": "1",
       "hitsperpage": "20",
@@ -115,6 +107,24 @@ class TaskManager {
       }
     }, true);
 
+    return data;
+  }
+
+  Future<List<emData>> getProjectStatus() async {
+    List<emData> data = [];
+    await createModules();
+    data = projectStatus!.getAllHits();
+    if (data.isEmpty) {
+      data = await projectStatus!.getRemoteData({
+        "page": "1",
+        "hitsperpage": "20",
+        "query": {
+          "terms": [
+            {"field": "id", "operation": "matches", "value": "*"}
+          ]
+        }
+      }, true);
+    }
     return data;
   }
 
