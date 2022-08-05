@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
@@ -17,9 +15,10 @@ class OiChatManager {
     return Get.find();
   }
 
-  createDataModule(String collectionId) async {
-    chatterBox = await oi.datamanager.getDataModule("librarycollection",
-        boxString: "chatterbox_$collectionId");
+  createDataModule(String collectionId,
+      {String moduleString = "librarycollection"}) async {
+    chatterBox = await oi.datamanager
+        .getDataModule(moduleString, boxString: "chatterbox_$collectionId");
   }
 
   Future<oiChatMessage> editChat(
@@ -118,6 +117,16 @@ class OiChatManager {
       result.add(emData.fromJson(topic));
     }
     return result.toSet().toList();
+  }
+
+  Future<bool> deleteChat(String inMessageId, String projectId) async {
+    await createDataModule(projectId, moduleString: "chatterbox");
+    try {
+      return await chatterBox!.deleteData(inMessageId);
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
   }
 
   Future<oiChatMessage?> saveChat(

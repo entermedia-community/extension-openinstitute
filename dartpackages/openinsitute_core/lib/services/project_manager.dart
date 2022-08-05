@@ -80,4 +80,35 @@ class ProjectManager {
       },
     );
   }
+
+  Future<List<emData>> searchYourProject(int page, String keyword) async {
+    await createDataModule();
+    List<emData> projects = [];
+    if (projectsModule!.page > projectsModule!.pages) {
+      return [];
+    }
+    Map<String, dynamic> results = await projectsModule!
+        .createModuleOperation("viewprojects", RequestType.POST, {
+      "page": "$page",
+      "hitsperpage": "20",
+      "query": {
+        "terms": [
+          {"field": "name", "operator": "contains", "value": keyword}
+        ]
+      }
+    });
+
+    results['data'] =
+        results['results'].map((e) => emData.fromJson(e)).toList();
+    results['totalhits'] = results['total'];
+    results['pages'] = results['totalpages'];
+    if (results['data'].isNotEmpty) {
+      for (var item in results['data']) {
+        projects.add(item);
+      }
+      log("load lenght: ${projects.length}");
+      // await projectsModule!.saveCache(results);
+    }
+    return projects;
+  }
 }

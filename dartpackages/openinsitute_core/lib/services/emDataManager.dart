@@ -147,15 +147,17 @@ class DataModule {
     return result;
   }
 
-  Future<emData> deleteData(String? id) async {
+  Future<bool> deleteData(String? id) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         {},
         RequestType.DELETE);
-    emData results = parseDataSingle(responsestring);
-
-    box.delete(results.id);
-    return results;
+    Map<dynamic, dynamic> results = jsonDecode(responsestring);
+    if (results['response']['deleted'] == "true") {
+      await box.delete(id);
+      return true;
+    }
+    return false;
   }
 
   Future<emData> addData(Map inQuery) async {
@@ -255,5 +257,33 @@ class DataModule {
         await box.put(element.id, element.properties);
       }
     }
+  }
+
+  cacheAllData(Map<String, dynamic> resultsData) async {
+    List<dynamic> results = resultsData["data"] ??
+        resultsData['results'].map((e) => emData.fromJson(e));
+    await box.put(
+        "page",
+        int.parse(
+            (resultsData["page"] ?? resultsData["response"]["page"].toString())
+                .toString()));
+    await box.put(
+        "pages",
+        int.parse((resultsData["pages"] ??
+                resultsData["response"]["pages"].toString())
+            .toString()));
+    await box.put(
+        "totalhits",
+        int.parse((resultsData["totalhits"] ??
+                resultsData["response"]["totalhits"].toString())
+            .toString()));
+    total = box.get("totalhits") ?? 0;
+    page = box.get("page") ?? 0;
+    pages = box.get("pages") ?? 0;
+    log("size of results  : ${results.length}");
+    for (var element in results) {
+        log("saving in ${element.id} ");
+        await box.put(element.id, element.properties);
+      }
   }
 }

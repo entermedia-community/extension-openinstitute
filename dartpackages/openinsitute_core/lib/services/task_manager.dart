@@ -35,10 +35,19 @@ class TaskManager {
     return await taskModule!.addData(task);
   }
 
-  Future<bool> deleteTask(id) async {
+  Future<bool> deleteTask(String id) async {
     try {
       taskModule = await createDataModule(taskModule, "goaltask");
-      await taskModule!.deleteData(id);
+      return await taskModule!.deleteData(id);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> deleteProjectGoal(id) async {
+    try {
+      goalModule = await createDataModule(goalModule, "projectgoal");
+      await goalModule!.deleteData(id);
       return false;
     } catch (e) {
       return false;
