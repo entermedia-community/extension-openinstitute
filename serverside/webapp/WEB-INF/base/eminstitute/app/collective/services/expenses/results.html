@@ -43,7 +43,7 @@
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
 									<td>$!mediaarchive.getCachedData("user", $hit.user)</td>
                                   <td>#if($hit.ispaid == true)[[true]]#end</td>
-			                      <td style="text-align: center">
+			                      <td style="text-align: center; min-width:70px;">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
 			                                    href="$applink/collective/services/expenses/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
@@ -51,6 +51,12 @@
 			                                    data-hidefooter="true"
 			                                    title="[[Edit Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
 			                                    ><i class="fa fa-edit"></i></a>
+
+			                                <a
+			                                    href="$applink/collective/services/expenses/move/move.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid"
+			                                    class="btn btn-xs btn-secondary emdialog"
+			                                    title="[[Move Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
+			                                    ><i class="fa fa-angle-right"></i></a>
 			                                    
 			                            #end
 			                      </td>
@@ -83,7 +89,13 @@
             </table>
             $expenses.size() [[hits]]
         </div>
+        
+       
+        
         <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
-           class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+           class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
+           
+##        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
+##           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
         
 </div>

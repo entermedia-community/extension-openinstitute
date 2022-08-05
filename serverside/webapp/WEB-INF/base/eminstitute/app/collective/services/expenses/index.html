@@ -17,14 +17,14 @@
 	<form  id="incomesearchform" 
 		class="autosubmit" 
 		data-targetdiv="expensereport" 
-		method="post" 
-		action="$!siteroot$applink/collective/services/expenses/results.html">
-	
-		#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
-		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
-	
-		$context.putPageValue("view","collectiveexpense/search")
+			method="post" 
+			action="$!siteroot$applink/collective/services/expenses/results.html">
+		
+			#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
+			$context.putPageValue("searcher",$searcher)
+			#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
+		
+			$context.putPageValue("view","collectiveexpense/search")
 		<input type="hidden" name="searchtype" value="collectiveexpense" />
 		
 		<input type="hidden" name="field" value="collectionid" />
@@ -74,9 +74,7 @@
 		</div>
 		<div class="clearfix"></div>
    </div>
-   </form>
-   
-   
-	$pages.include("./results.html",$context)
+   </form>      
+	$pages.include("$apphome/collective/services/expenses/results.html",$context)
 </div>
 
