@@ -56,8 +56,9 @@
 						
 						<div class="">
 						<h4>$!selecteduser.getName()</h4>
-						
+						#if( $user )
 						<i class="far fa-envelope"></i> $selecteduser.email<br>
+						#end
 						<i class="far fa-user"></i> $selecteduser.getAnonNickName()
 						#if($canedituserinfo) 
 							<br>
