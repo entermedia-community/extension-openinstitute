@@ -87,7 +87,7 @@
 	</form>
 	
 		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
-
+	<h4>[[Balance]]</h4>
 		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())

@@ -6,6 +6,14 @@
     <samplerequest><![CDATA[{ "collectionid": "AX7gTBpbekpQ63X1oUTz","page": "1", "hitsperpage":"10", "query": { "terms":[{ "field": "description", "operator": "freeform", "value": "test" }] } }]]></samplerequest>  
     <name><![CDATA[Project Feed]]></name> 
   </data>  
+  <data id="moduleuseruploadfinish" uploadfile="false" httpmethod="POST" docsection="moduleuserupload" url="/site/mediadb/services/module/userupload/uploadfinish.json"> 
+    <samplerequest><![CDATA[{ "librarycollection": "AYGOFauOefS9P58F9LdN",
+    "sourcepath":"Collections/ProjectABC/Topic123/2022/12-23_32/",
+    "title":"Test Title","longdescription":"More text",
+    "usertags":["one","two"], 
+    "collectiveproject":"AYGOFazsefS9P58F9LdQ","exclusivecontent":"false"}]]></samplerequest>
+    <name><![CDATA[Feed Upload Finish]]></name> 
+  </data>  
 
   <data id="modulelibrarycollectioncreate" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/create"> 
     <samplerequest><![CDATA[{ "name": "JSON Projects Test" }]]></samplerequest>  

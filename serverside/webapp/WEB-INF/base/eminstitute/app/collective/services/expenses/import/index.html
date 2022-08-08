@@ -1,0 +1,14 @@
+<div style="margin: 0 20px;">
+	<form name="excelimport" method="post" enctype="multipart/form-data" action="$applink/collective/services/expenses/import/importfinish.html">
+
+<p>Will update any existing records if found</p>
+
+	<h3>[[Choose CSV File]]</h3>
+	
+	<input type="file" size="25" name="file">
+	<input type="hidden" name="searchtype" value="collectiveexpense"/>
+	<input type="hidden" name="scriptname" value="ImportCsvFile.groovy" />
+
+	</form>
+</div>
+

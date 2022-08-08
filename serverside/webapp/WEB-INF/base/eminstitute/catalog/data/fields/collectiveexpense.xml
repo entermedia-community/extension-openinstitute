@@ -111,7 +111,7 @@
 		</name>
 	</property>
   
-    <property id="collectiveproject" required="true" 
+    <property id="collectiveproject" required="true" listfilterid="collectionid"
  	index="true" stored="true" editable="true"  type="list"  datatype="list"
  	viewtype="collectionproject" searchcomponent="collectionproject" > 
     <name> 

@@ -55,10 +55,13 @@
 						
 						
 						<div class="">
+						#if( $user)
 						<h4>$!selecteduser.getName()</h4>
-						
-						<i class="far fa-envelope"></i> $selecteduser.email<br>
 						<i class="far fa-user"></i> $selecteduser.getAnonNickName()
+						<i class="far fa-envelope"></i> $selecteduser.email<br>
+						#else
+						<h4>$selecteduser.getAnonNickName()</h4>						
+						#end
 						#if($canedituserinfo) 
 							<br>
 							<a href="$applink/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Profile]]">

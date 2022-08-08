@@ -30,4 +30,8 @@
     <name><![CDATA[List: Task Status]]></name>
   </data>
 
+  <data id="userupload">
+    <name><![CDATA[User Uploads]]></name>
+  </data>
+
 </root>
