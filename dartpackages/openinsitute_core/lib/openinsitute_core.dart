@@ -4,7 +4,6 @@ import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
@@ -20,6 +19,7 @@ import 'package:openinsitute_core/services/project_manager.dart';
 import 'package:openinsitute_core/services/oiChatManager.dart';
 import 'package:openinsitute_core/services/task_manager.dart';
 import 'package:openinsitute_core/services/user_manager.dart';
+import 'package:path/path.dart';
 
 //import 'contact.dart';
 
@@ -221,28 +221,49 @@ class OpenI {
       case 200:
         final http.Response responseJson = response;
         return responseJson;
-        break;
       case 201:
         final http.Response responseJson = response;
         return responseJson;
-        break;
       case 302:
         break;
       case 400:
         throw BadRequestException(response.body.toString());
-        break;
       case 403:
         throw UnauthorisedException(response.body.toString());
-        break;
       case 408:
         throw TimeoutException(response.body.toString());
-        break;
       case 500:
         throw HttpException(response.body.toString());
-        break;
       default:
         // throw FetchDataException('Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
         break;
+    }
+  }
+
+  Future<http.Response> sendFile(
+      String url, Map<String, String> body, File file, String type) async {
+    Map<String, String> headers = <String, String>{};
+    headers.addAll({"X-tokentype": "entermedia"});
+    headers.addAll({"Content-type": "application/json"});
+    if (authenticationmanager.emUser != null) {
+      String tokenKey =
+          handleTokenKey(authenticationmanager.emUser!.entermediakey);
+      headers.addAll({"X-token": tokenKey});
+    }
+    try {
+      var stream = http.ByteStream(file.openRead())..cast();
+      var length = await file.length();
+      String uri = url;
+      Uri validUri = Uri.parse(uri);
+      var request = http.MultipartRequest("POST", validUri);
+      var multipartFileSign = http.MultipartFile(type, stream, length,
+          filename: basename(file.path));
+      request.fields.addAll(body);
+      request.files.add(multipartFileSign);
+      request.headers.addAll(headers);
+      return await http.Response.fromStream(await request.send());
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }
