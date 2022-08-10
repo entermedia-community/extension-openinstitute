@@ -2,8 +2,8 @@
   <page-action name="PageValue.loadPageVariable" bean="mathutil" />
 
   <path-action name="DataEditModule.searchFields" >
-		<property name="searchtype">collectiveexpense</property>
-		<property name="hitsname">expenses</property>
+		<property name="searchtype">collectivereimbursement</property>
+		<property name="hitsname">reimbursements</property>
 		
   </path-action>
 
