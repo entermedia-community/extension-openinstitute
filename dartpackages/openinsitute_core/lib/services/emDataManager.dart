@@ -200,7 +200,7 @@ class DataModule {
     return result;
   }
 
-  dynamic createModuleOperation(
+  Future<Map<String, dynamic>> createModuleOperation(
       String endpoint, RequestType requestType, Map inQuery) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/$endpoint',
@@ -282,8 +282,8 @@ class DataModule {
     pages = box.get("pages") ?? 0;
     log("size of results  : ${results.length}");
     for (var element in results) {
-        log("saving in ${element.id} ");
-        await box.put(element.id, element.properties);
-      }
+      log("saving in ${element.id} ");
+      await box.put(element.id, element.properties);
+    }
   }
 }

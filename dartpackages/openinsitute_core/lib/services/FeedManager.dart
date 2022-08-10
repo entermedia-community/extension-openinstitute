@@ -23,6 +23,15 @@ class FeedManager {
     }
   }
 
+  Future<emData> createFeed(
+      Map<String, dynamic> feed, String collectionId) async {
+    DataModule createFeedModule = await oi.datamanager
+        .getDataModule("userupload", boxString: "feed_$collectionId");
+    Map<String, dynamic> result = await createFeedModule.createModuleOperation(
+        "uploadfinish", RequestType.POST, feed);
+    return emData.fromJson(result);
+  }
+
   Future<List<emData>> loadCache({String? collectionId}) async {
     await createFeedModule(collectionId: collectionId);
     List<emData> result = [];
