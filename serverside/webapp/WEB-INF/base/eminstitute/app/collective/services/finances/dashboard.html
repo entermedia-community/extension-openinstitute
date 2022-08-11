@@ -87,7 +87,7 @@
 	</form>
 	
 		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
-	<h4>[[Balance]]</h4>
+	<h4>[[Summary Balances]]</h4>
 		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())
@@ -110,11 +110,12 @@
 			<tr>
 				<td style="width:10%"></td>
 				<td style="width:20%; text-align: right;"></td>
-				<td style="text-align: right;">Total in USD:</td>
+				<td style="text-align: right;">Total in USD: <br>
+							 [[Only includes reimbursed expenses]]*
+				
+				</td>
 				<td style="width:10%;padding-right:20px">
 			 $$!context.doubleToMoney($total, 2)
-			 
-			 *[[Does not include pending reimbursements]]
 			</td>
 			</tr>
 			</table>
