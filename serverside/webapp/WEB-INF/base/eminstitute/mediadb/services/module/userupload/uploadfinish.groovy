@@ -1,10 +1,10 @@
-package importing;
 
 import org.entermediadb.asset.Category
 import org.entermediadb.asset.MediaArchive
+import org.graalvm.compiler.debug.PathUtilities
 import org.openedit.Data
 import org.openedit.data.Searcher
-
+import org.openedit.util.PathUtilities
 
 public void init()
 {
@@ -24,7 +24,8 @@ public void init()
 	upload.setValue("collectiveproject",context.getRequestParameters("collectiveproject"));
 	
 	log.info("Script running" + sourcepath);
-	Category defaultcat = archive.getCategorySearcher().createCategoryPath(sourcepath);
+	String path = PathUtilities.extractDirectoryPath(sourcepath);
+	Category defaultcat = archive.getCategorySearcher().createCategoryPath(path);
 	upload.setValue("uploadcategory",defaultcat);
 	searcher.saveData(upload);
 		

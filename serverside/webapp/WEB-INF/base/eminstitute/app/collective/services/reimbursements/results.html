@@ -1,5 +1,17 @@
 <Div id="expensereport">
                  
+           <table class="table table-striped">
+                #foreach($currency in $currencytotals.keySet())
+	                	<tr>
+	                		<td class="text-left" style="width:150px">[[Total]]:</td>
+	                		<td class="text-left">
+	                			#set($subtotal = $currencytotals.get($currency))
+	                			$!context.doubleToMoney($subtotal, 2) $!mediaarchive.getCachedData("currencytype", $currency )
+	                		</td>
+                		</tr>
+				#end
+            </table>   
+                 
                   <div class="emdata">
                       <table class="table table-striped">
                           <thead>
@@ -16,12 +28,7 @@
                                   <th></th>
                               </tr>
                           </thead>
-                          #set($totalarray = {})
                           #foreach($hit in $reimbursements)
-                               	#if(!$totalarray.get($hit.currencytype))
-			                 		#set($totalarray[$hit.currencytype] = [])
-			                 	#end
-			                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
                               <tr>
                                   #if($showcollections )
                                   <td>
@@ -53,30 +60,6 @@
 			                            #end
 			                      </td>
                     </tr>
-                #end
-                #if($totalarray.size())
-                	#set($firstrow = true)
-                	#foreach( $total_ in $totalarray.keySet())
-						#set($total = $totalarray.get($total_))
-						
-	                	<tr class="table-totals #if($firstrow)table-totalfirst #set($firstrow=false) #end">
-	                		<td colspan="3"></td>
-	                		<td class="text-right">[[Total]]:</td>
-	                		<td class="text-right">
-	                			#set($totaltotal = 0)
-	                			#foreach($t in $total)
-		                			#if($t)
-		                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
-		                			#end
-	                			#end
-	                			$!context.doubleToMoney($totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_)
-	                			 
-	                		</td>
-	                		<td></td>
-	                		<td></td>
-	                	</tr>
-	                	
-                	#end
                 #end
             </table>
             $reimbursements.size() [[hits]]
