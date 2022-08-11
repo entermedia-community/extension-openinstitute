@@ -4,4 +4,5 @@
   <property name="module">projectgoal</property>
   <property name="searchtype">projectgoal</property>
   <property name="fallbackdirectory">/WEB-INF/base/mediadb/services/module/default</property>
+  
 </page>

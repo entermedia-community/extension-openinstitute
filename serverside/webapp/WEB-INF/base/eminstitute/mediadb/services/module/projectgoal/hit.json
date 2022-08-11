@@ -1,0 +1,18 @@
+{ 
+#jsonpartial($hit $searcher.getPropertyDetails()) 
+#set( $tasks = $goalhits.get($hit.id))
+#if( !$tasks.isEmpty())
+	, "tasks": [ 
+	
+			#foreach( $task in $tasks)#if( ${foreach.count} != 1 ), #end
+			{	
+			#jsonpartial($task $mediaarchive.getSearcher("goaltask").getPropertyDetails())
+				#set( $cat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
+				#if( $cat )
+				, "projectdepartmentpoints": "$!{cat.goalpoints}"
+				#end
+			}
+			#end
+		]
+#end		
+}
