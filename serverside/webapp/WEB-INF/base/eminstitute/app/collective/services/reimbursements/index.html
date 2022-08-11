@@ -6,7 +6,7 @@
 #end
 
 
-<div style="padding:10px 20px;">
+<div style="padding:10px 20px;" id="allreimbursements">
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/reimbursements/addnew.html?collectionid=${collectionid}"
@@ -17,9 +17,9 @@
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
-		data-targetdiv="expensereport" 
+		data-targetdiv="allreimbursements" 
 		method="post" 
-		action="$!siteroot$applink/collective/services/reimbursements/results.html">
+		action="$!siteroot$applink/collective/services/reimbursements/index.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectivereimbursement") )
 		$context.putPageValue("searcher",$searcher)

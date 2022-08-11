@@ -14,9 +14,11 @@ public void init()
 
 	if( query == null)
 	{
-		query = searcher.query().exact("collectionid",collectionid).exact("reimbursedstatus","1").named("reimbursements").sort("dateDown").getQuery();
+		query = searcher.query().exact("collectionid",collectionid).exact("reimbursedstatus","1").sort("dateDown").getQuery();
 	}
 
+	query.setHitsName("reimbursements");
+	
 	String name = "pendingexpensesreimburseuser_total";
 	
 	AggregationBuilder b = AggregationBuilders.terms(name).field("reimburseuser");
