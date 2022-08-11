@@ -258,7 +258,7 @@ class OpenI {
       var request = http.MultipartRequest("POST", validUri);
       var multipartFileSign = http.MultipartFile(type, stream, length,
           filename: basename(file.path));
-      request.fields.addAll(body);
+      request.fields['jsonrequest'] = jsonEncode(body);
       request.files.add(multipartFileSign);
       request.headers.addAll(headers);
       return await http.Response.fromStream(await request.send());

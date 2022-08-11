@@ -6,7 +6,7 @@ class emData {
   emData(this.id, this.name, this.properties);
 
   emData.fromJson(Map<dynamic, dynamic> json) {
-    id = json['id'] ?? json["userid"];
+    id = json['id'] ?? json["userid"] ?? "";
     var langname = json["name"];
     if (langname == null) {
       name = "No Name";

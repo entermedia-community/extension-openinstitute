@@ -141,12 +141,16 @@ class AuthenticationManager {
 
   // todo: logout
   Future<bool?> logout() async {
-    emUser = null;
-    await sharedPref.resetValues();
-    await Hive.deleteFromDisk();
-    oi.datamanager.dispose();
-    await signOut();
-    return true;
+    try {
+      emUser = null;
+      await sharedPref.resetValues();
+      await Hive.deleteFromDisk();
+      oi.datamanager.dispose();
+      await signOut();
+      return true;
+    } catch (e) {
+      return true;
+    }
   }
 
   Future<bool> isAuthenticated() async {
