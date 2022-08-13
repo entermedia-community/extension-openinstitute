@@ -36,9 +36,21 @@
 ##Once complete the points will be marked as paid
 ##Only show this button for unpaid points
 ##
+	#set( $data = $mediaarchive.getData("currencytransfer",$id) )
+
+#set($doll = $librarycol.dollarsperpoints)
+#ifnull($doll)
+	#set($doll = 1)
+#end
+<p>
+#set( $sub = $doll*$data.getDouble("total") )
+[[This project pays]]: <B>$data.total</B> [[points]] * <b>$$doll</b> USD / [[point]] = <b>$$sub USD</b>
+<br>
+([[point exchange rate be edited in project settings]])
+</p>
 
 <div class="form-group row no-gutters">
-    <label for="exampleTextarea" class="col">[[Payment Currency]] (point exchange rate be edited in settings)</label>
+    <label for="exampleTextarea" class="col">[[Available Balance]]</label>
 	<div class="col-10" style="padding-left:10px;">
 		<div class="emfield-list">
 			<input type="hidden" value="currencytype" name="field">
@@ -49,15 +61,15 @@
 			#foreach( $currencytype in $netincome.keySet())
 				#if( $currencytype != "2")
 				#set($net = $netincome.get($currencytype))
-				<option value="$currencytype">$!mediaarchive.getCachedData("currencytype", $currencytype) / $!context.doubleToMoney($!net, 2)</td>
+				<option value="$currencytype">$!context.doubleToMoney($!net, 2) $!mediaarchive.getCachedData("currencytype", $currencytype)</td>
 				#end
 			#end
 			</select>
 			</div>
+			[[Payment will be paid in the selected currency]]
 		</div>
     </div>
     </div>
-
 	<div style="padding:20px 0 0;">
 	<a class="submitform btn btn-sm btn-primary">[[Send]]</a>
 	<a class="closemodal btn btn-sm btn-secondary" style="margin-left:10px;">[[Cancel]]</a> 

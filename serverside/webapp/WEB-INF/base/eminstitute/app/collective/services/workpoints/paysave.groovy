@@ -1,6 +1,7 @@
 package importing;
 
 import org.entermediadb.asset.MediaArchive
+import org.entermediadb.asset.util.MathUtils
 import org.openedit.Data
 import org.openedit.MultiValued
 import org.openedit.data.Searcher
@@ -13,6 +14,7 @@ public void init()
 	String id = context.getRequestParameter("id.value");
 	
 	String collectionid = context.getRequestParameter("collectionid");
+	Data librarycol = mediaarchive.getCachedData("librarycollection",collectionid);
 	
 	Searcher searcher = archive.getSearcher("currencytransfer");
 	Data data = searcher.searchById(id);
@@ -37,9 +39,18 @@ public void init()
 	//Multiply
 	MultiValued currency = (MultiValued)archive.getCachedData("currencytype",currencytype);
 	double totalpoints = data.getValue("total");
-	double exchangerate = currency.getDouble("exchangetousd");
-	double value = totalpoints * exchangerate;
-	tosave.setValue("total",value); //complete
+	
+	Double dollarsperpoints = librarycol.getDouble("dollarsperpoints");
+	if( dollarsperpoints  == null)
+	{
+		dollarsperpoints = 1.0;
+	}
+	double dollars = totalpoints * dollarsperpoints;
+	
+	double exchangerate = currency.getDouble("exchangetousd"); //7.5
+	
+	double incurrency = dollars * exchangerate;
+	tosave.setValue("total",incurrency); 
 	searcher.saveData(tosave);
 
 	searcher.saveData(data);
