@@ -37,14 +37,12 @@
 ##Only show this button for unpaid points
 ##
 	#set( $data = $mediaarchive.getData("currencytransfer",$id) )
+	#set( $targetuserid = $data.get("paymententitysource") )
 
-#set($doll = $librarycol.dollarsperpoints)
-#ifnull($doll)
-	#set($doll = 1)
-#end
+#set($exchange = $financeManager.getDollarForPointForUser($targetuserid,$collectionid))
 <p>
-#set( $sub = $doll*$data.getDouble("total") )
-[[This project pays]]: <B>$data.total</B> [[points]] * <b>$$doll</b> USD / [[point]] = <b>$$sub USD</b>
+#set( $sub = $exchange*$data.getDouble("total") )
+[[This project pays]]: <B>$data.total</B> [[points]] * <b>$$exchange</b> USD / [[point]] = <b>$$sub USD</b>
 <br>
 ([[point exchange rate be edited in project settings]])
 </p>

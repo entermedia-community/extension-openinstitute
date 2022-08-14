@@ -355,7 +355,7 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
     </name> 
   </property>    
   
-  <property id="dollarsperpoints" index="true" stored="true" defaultvalue="1" editable="true" type="number"> 
+  <property id="dollarsperpoints" index="true" stored="true"  editable="true" type="double" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Dollars Per Points]]></language>  
     </name> 

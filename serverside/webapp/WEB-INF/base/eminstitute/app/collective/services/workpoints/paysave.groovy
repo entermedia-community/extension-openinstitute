@@ -5,7 +5,7 @@ import org.entermediadb.asset.util.MathUtils
 import org.openedit.Data
 import org.openedit.MultiValued
 import org.openedit.data.Searcher
-
+import org.openinstitute.finance.FinanceManager
 
 public void init()
 {
@@ -34,17 +34,14 @@ public void init()
 	tosave.setValue("currencytype",currencytype); 
 		
 	tosave.setValue("paymententitydesttype","user"); 
-	String topay = data.get("paymententitysource");
-	tosave.setValue("paymententitydest",topay); 
+	String usertopay = data.get("paymententitysource");
+	tosave.setValue("paymententitydest",usertopay);
+	
 	//Multiply
 	MultiValued currency = (MultiValued)archive.getCachedData("currencytype",currencytype);
 	double totalpoints = data.getValue("total");
-	
-	Double dollarsperpoints = librarycol.getDouble("dollarsperpoints");
-	if( dollarsperpoints  == null)
-	{
-		dollarsperpoints = 1.0;
-	}
+	FinanceManager financeManager = context.getPageValue("financeManager");
+	Double dollarsperpoints = financeManager.getDollarForPointForUser(usertopay,librarycol.getId());
 	double dollars = totalpoints * dollarsperpoints;
 	
 	double exchangerate = currency.getDouble("exchangetousd"); //7.5
