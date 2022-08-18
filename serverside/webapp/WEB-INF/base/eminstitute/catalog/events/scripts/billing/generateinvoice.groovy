@@ -101,23 +101,23 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("sentto", contactsstring);
 			
 			invoiceSearcher.saveData(invoice);
-			//recurring moved to invoice
-			/*
+			
+			
 			int recurrentCount = product.getValue("recurringperiod")
 			if(recurrentCount != null) 
 			{
 				Date nextBillOn = today.getTime();
 				int currentMonth = nextBillOn.getMonth();
 				nextBillOn.setMonth(currentMonth + recurrentCount);
-				//product.setValue("nextbillon", nextBillOn);
+				product.setValue("nextbillon", nextBillOn);
 			}
 			
 			invoiceSearcher.saveData(invoice);
 			
-			//product.setValue("lastgeneratedinvoicedate", today.getTime());
-			//productSearcher.saveData(product);
+			product.setValue("lastgeneratedinvoicedate", today.getTime());
+			productSearcher.saveData(product);
 			
-			*/
+			
 			
 			context.putPageValue("invoiceid", invoice.getId())
 			
