@@ -72,13 +72,17 @@ private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSear
 private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher productSearcher) {
 	int daysToExpire = 7; // invoice will expire in (days)
 	Calendar today = Calendar.getInstance();
+		//to go back
+		Calendar since = Calendar.getInstance();
+		since.add(Calendar.DAY_OF_YEAR, -15);
+		//--
 	Calendar due = Calendar.getInstance();
-	due.add(Calendar.DAY_OF_YEAR, +15); // make invoice 5 days before next bill date
+	due.add(Calendar.DAY_OF_YEAR, +10); // make invoice 10 days before next bill date
 
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","true")
 			.exact("billingstatus", "active")
-			.between("nextbillon", today.getTime(), due.getTime())
+			.between("nextbillon", since.getTime(), due.getTime())
 			.search();
     log.info(pendingProducts);
 	if (pendingProducts.size() > 0) 
