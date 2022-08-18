@@ -49,6 +49,12 @@
 	        	 		#else
 							[[Add Billing Contact]]        	 		
 	        	 		#end</a>
+	        	 		
+	        	 		<a class="btn btn-xs btn-secondary emdialog"
+		        	 		href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
+			               title="[[Edit Entry]]"><i class="fa fa-edit"></i></a>
+	        	 		
+	        	 		
 	        		#elseif( $hit.getBoolean("ontheteam"))
 	        	   	 <span class="whatsapp">([[On The Team]])</span>
 	        		#end

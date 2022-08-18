@@ -1,10 +1,10 @@
-package importing;
 
 import org.entermediadb.asset.Category
 import org.entermediadb.asset.MediaArchive
+import org.graalvm.compiler.debug.PathUtilities
 import org.openedit.Data
 import org.openedit.data.Searcher
-
+import org.openedit.util.PathUtilities
 
 public void init()
 {
@@ -17,12 +17,15 @@ public void init()
 	Data upload = searcher.createNewData();
 	upload.setValue("uploaddate",new Date());
 	upload.setValue("owner",context.getUserName());
-	upload.setValue("librarycollection",context.getRequestParameter("collectionid"));
+	upload.setValue("librarycollection",context.getRequestParameter("librarycollection"));
 	upload.setValue("usertags",context.getRequestParameters("usertags"));
-	upload.setValue("longdescription",context.getRequestParameters("uploaddescription"));
-
+	upload.setValue("title",context.getRequestParameters("title"));
+	upload.setValue("longdescription",context.getRequestParameters("longdescription"));
+	upload.setValue("collectiveproject",context.getRequestParameters("collectiveproject"));
+	
 	log.info("Script running" + sourcepath);
-	Category defaultcat = archive.getCategorySearcher().createCategoryPath(sourcepath);
+	String path = PathUtilities.extractDirectoryPath(sourcepath);
+	Category defaultcat = archive.getCategorySearcher().createCategoryPath(path);
 	upload.setValue("uploadcategory",defaultcat);
 	searcher.saveData(upload);
 		

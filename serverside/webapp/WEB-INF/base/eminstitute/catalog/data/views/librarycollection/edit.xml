@@ -9,6 +9,7 @@
   <property id="assetportrait"/>
   <property id="assetbanner"/>
   <property id="collective"/>  
+  <property id="dollarsperpoints" />
   <property id="facebooklink" />
   <property id="instagramlink" /> 
   <property id="websitelink" />

@@ -15,7 +15,7 @@ public void init()
 	
 	Data data = searcher.searchById(id);
 	String  targetcollectionid = context.getRequestParameter("parentcollectionid");
-	String  topicid = context.getRequestParameter("collectiveproject");
+	String  topicid = context.getRequestParameter("collectiveproject.value");
 
 	data.setValue("collectionid",targetcollectionid);
 	data.setValue("collectiveproject",topicid);

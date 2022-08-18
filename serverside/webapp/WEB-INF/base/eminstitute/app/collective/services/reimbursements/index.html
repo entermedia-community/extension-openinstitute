@@ -6,7 +6,7 @@
 #end
 
 
-<div style="padding:10px 20px;">
+<div style="padding:10px 20px;" id="allreimbursements">
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/reimbursements/addnew.html?collectionid=${collectionid}"
@@ -17,9 +17,9 @@
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
-		data-targetdiv="expensereport" 
+		data-targetdiv="allreimbursements" 
 		method="post" 
-		action="$!siteroot$applink/collective/services/reimbursements/results.html">
+		action="$!siteroot$applink/collective/services/reimbursements/index.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectivereimbursement") )
 		$context.putPageValue("searcher",$searcher)
@@ -53,11 +53,6 @@
 		</td>
 		</tr>
 		</table>
-
-	#ifnull( $reimbursements)
-              #set( $reimbursements = $mediaarchive.query("collectivereimbursement").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("reimbursements",$reimbursements)
-	#end
    <div style="padding-top:20px;">
    		<h2 class="float-left" style="margin:10px 0;">[[Reimbursements Sent]]</h2>
    		<div style="float:right; width:260px; margin-bottom:10px;">
@@ -76,60 +71,43 @@
    </div>
    </form>
    
+   	$pages.include("$apphome/collective/services/reimbursements/results.html",$context)
    
-	$pages.include("./results.html",$context)
-
 	
-   </form>
-   
-	#set( $userscurrency = $financeManager.getTotalsReimbursedByUser($collectionid,$daterange) )
-	#if($userscurrency.size()> 0)
-	
-   <div style="padding-top:20px;">
-   		<h2 style="margin:10px 0;">[[Paid Expenses]]</h2>
-  
-  	<table>
-		#foreach($value in $userscurrency)	
-			#set( $auser = $mediaarchive.getUser($value.getKeyedOn() ) )
-			<tr>
-			<td>$auser</td>
-			<td>
-				#foreach($currency in $value.getCurrencies() )
-					$value.getValue($currency) $mediaarchive.getCachedData("currencytype",$currency)
-				#end
-			</td>
-			</tr>
-		#end	
-   </table>
-   </div>
-	#end  
-   
-   	#ifnull( $expenses)
-              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("reimbursedstatus","1").exact("collectionid",$collectionid).sort("reimburseuser").search($context))
-              $context.putPageValue("expenses",$expenses)
-	#end
 	#if(!$expenses.isEmpty() )
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Pending Expenses]]</h2>
+   		<h2 class="float-left" style="margin:10px 0;">[[Expenses Pending]]</h2>
    		<div style="float:right; width:260px; margin-bottom:10px;">
-		<label>[[Sort by]]</label>
-		<div style="width:200px; display:inline-block;">
-		<select class="select2 	form-control-sm" name="sortby" >
-			#set ($details = $searcher.getDetailsForView("collectivereimbursement/editexpense", $userprofile))
-			#foreach( $detail in $details)
-				<option value="$detail.getId()Down">$context.getText($detail)</option>
-				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
-			#end
-		</select>
-		</div>
 		</div>
 		<div class="clearfix"></div>
    </div>
    #end
    
-   
-	$pages.include("$apphome/collective/services/expenses/results.html",$context)
+	$pages.include("$apphome/collective/services/reimbursements/expenses.html",$context)
 	
+	
+	#set( $userscurrency = $financeManager.getTotalsReimbursedByUser($collectionid,$daterange) )
+	#if($userscurrency.size()> 0)
+	
+   <div style="padding-top:20px;">
+   		<h2 style="margin:10px 0;">[[Expenses Completed]]</h2>
+
+
+ 	<table class="table table-striped">
+		#foreach($value in $userscurrency)	
+			#set( $auser = $mediaarchive.getUser($value.getKeyedOn() ) )
+			#foreach($currency in $value.getCurrencies() )
+			<tr>
+			<td>$auser</td>
+			<td>
+					$value.getValue($currency) $mediaarchive.getCachedData("currencytype",$currency)
+			</td>
+			</tr>
+			#end
+		#end	
+   </table>
+   </div>
+	#end  
 	
 	
 	

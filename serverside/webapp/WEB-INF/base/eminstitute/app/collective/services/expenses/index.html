@@ -52,14 +52,9 @@
 		</td>
 		</tr>
 		</table>
-
 	
-	#ifnull( $expenses)
-              #set( $expenses = $mediaarchive.query("collectiveexpense").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("expenses",$expenses)
-	#end
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Expenses]]</h2>
+   		<h2 class="float-left" style="margin:10px 0;">[[Pending	]]</h2>
    		<div style="float:right; width:260px; margin-bottom:10px;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
