@@ -1,5 +1,6 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
+#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 <div class="container" id="financesdashboard">
 
 <div class="row">
@@ -127,6 +128,6 @@
 			
 	</div>
 </div>	 	    
-			
+#end			
 			
 			

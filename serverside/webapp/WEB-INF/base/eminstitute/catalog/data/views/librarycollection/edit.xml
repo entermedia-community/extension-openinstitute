@@ -3,13 +3,16 @@
 <properties> 
   <property id="name"/>  
   <property id="collectivedescription"/>
-  
   <property id="contactemail"/> 
   <property id="communitytag" />
+  <property id="priviacylevel" />
   <property id="assetportrait"/>
   <property id="assetbanner"/>
+
   <property id="collective"/>  
   <property id="dollarsperpoints" />
+
+
   <property id="facebooklink" />
   <property id="instagramlink" /> 
   <property id="websitelink" />

@@ -1,4 +1,6 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
+
+#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 #set($collectiveadminsection = $content.collectiveadminsection)
 #if(!$collectiveadminsection)
 	#set($collectiveadminsection = "finances")
@@ -56,3 +58,4 @@
 	</div>
 </div>
 </div>
+#end
