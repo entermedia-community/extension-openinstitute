@@ -16,76 +16,12 @@
          <a
           href="$applink/wallet/send.html?userid=$selecteduser.getId()"
           class="emdialog btn btn-sm btn-primary">[[Export]]</a>
-         <a
-          href="$applink/users/transfers/request.html"
-          class="emdialog btn btn-sm btn-primary">[[Request Money]]</a>
-          
           <a
           href="$applink/users/transfers/request.html"
           class="emdialog btn btn-sm btn-primary">[[Receive Money]]</a>
  -->           
   </div> 
 </div>		    
-	<form  id="searchform" 
-		class="autosubmit" 
-		data-targetdiv="financesdashboard" 
-		method="post" 
-		action="$home$applink/collective/services/finances/dashboard.html">
-	
-		<input type="hidden" name="oemaxlevel" value="1" />
-		<input type="hidden" name="collectionid" value="$collectionid" />
-		
-		<div  id="dashsearchform" class="row inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
-			$context.putPageValue("autocomplete","off")
-			<div class="col-md-2">
-			[[Transactions by]]:
-			</div>
-			<div class="col-md-2">
-				<select name="year" class="form-control-sm" style="width:120px;">
-					<option value="-1" #if($daterange.getYearPicked() == -1) selected #end>[[All]]</option>
-					<option value="0"  #if($daterange.getYearPicked() == 0) selected #end>[[YTD]]</option>
-					<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
-					<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
-				</select>
-			</div>
-			<div class="col-md-2">
-				<select name="month" class="form-control-sm" style="width:120px;">
-					<option value="0" #if($daterange.getMonthPicked() == 0) selected #end>[[Month]]</option>
-					<option value="1" #if($daterange.getMonthPicked() == 1) selected #end>[[Jan]]</option>
-					<option value="2" #if($daterange.getMonthPicked() == 2) selected #end>[[Feb]]</option>
-					<option value="3" #if($daterange.getMonthPicked() == 3) selected #end>[[March]]</option>
-					<option value="4" #if($daterange.getMonthPicked() == 4) selected #end>[[April]]</option>
-					<option value="5" #if($daterange.getMonthPicked() == 5) selected #end>[[May]]</option>
-					<option value="6" #if($daterange.getMonthPicked() == 6) selected #end>[[June]]</option>
-					<option value="7" #if($daterange.getMonthPicked() == 7) selected #end>[[July]]</option>
-					<option value="8" #if($daterange.getMonthPicked() == 8) selected #end>[[Aug]]</option>
-					<option value="9" #if($daterange.getMonthPicked() == 9) selected #end>[[Sep]]</option>
-					<option value="10" #if($daterange.getMonthPicked() == 10) selected #end>[[Oct]]</option>
-					<option value="11" #if($daterange.getMonthPicked() == 11) selected #end>[[Nov]]</option>
-					<option value="12" #if($daterange.getMonthPicked() == 12) selected #end>[[Dec]]</option>
-				</select>
-			</div>
-			<div class="col-md-2">
-				#set( $allprojects = $mediaarchive.getSearcher("collectiveproject").query().match("parentcollectionid",$librarycol.getId()).sort("name").search($context) )
-				#if( $allprojects.size() > 1)
-					
-					#set($projectid = $context.getRequestParameter("collectiveproject") )
-					<select name="collectiveproject"  class="form-control-sm" style="width:120px;">
-						<option value="">By Topic</option>
-						#foreach( $project in $allprojects )
-							<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>$project</option>
-						#end
-					</select>
-				#end				
-			</div>		
-			<div class="col-md-2">
-				<a href="dashboard.html?collectionid=$collectionid&clearfilters=true&oemaxlevel=1" class="btn btn-sm btn-light ajax" data-targetdiv="financesdashboard">[[Clear Filters]]</a>
-			</div>		
-			
-			
-		</div>	
-	</form>
-		 
 		 	<table class="table tablefinances" >
 		 	#set( $netincome = $financeManager.getNetTransafersForUser($selecteduser.id, $daterange) )
 		 	
@@ -95,7 +31,7 @@
 				
 				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
-				<td></td>
+				<td><a href="$applink/wallet/details.html?currencytype=$currencytype">[[View Activity]]</a></td>
 				<td style="width:10%"></td>
 				</tr>
 			#end
@@ -104,13 +40,6 @@
 		 #set( $transfers = $financeManager.getAllTransfersForEntity($selecteduser.id,$daterange) )
 		    $context.putPageValue("transfers",$transfers)
 		    
-	<div id="report">
-	$pages.include("$apphome/wallet/transferresults.html",$context)
-#if( $netincome.isEmpty() )
-	[[No Activity]]
-#end
-			
-	</div>
 </div>	 	    
 			
 </div>	 	    

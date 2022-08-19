@@ -15,7 +15,15 @@ public void init()
 
 	if( query == null)
 	{
-		query = searcher.query().exact("collectionid",collectionid).named("expenses").sort("dateDown").getQuery();
+//		if( collectionid != null)
+//		{
+//			query = searcher.query().all().named("expenses").sort("dateDown").getQuery();
+//			
+//		}
+//		else
+//		{
+			query = searcher.query().exact("collectionid",collectionid).named("expenses").sort("dateDown").getQuery();
+//		}
 	}
 
 	AggregationBuilder b = AggregationBuilders.terms("currencytype_total").field("currencytype");

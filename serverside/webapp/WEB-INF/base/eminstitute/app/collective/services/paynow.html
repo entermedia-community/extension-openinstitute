@@ -99,6 +99,9 @@
             </div>
             
             #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+
+	          	$pages.include("$apphome/collective/services/invoices/payoptions.html",$context)
+
             	##Disable for not USD
             	#if($invoice.currencytype!='1')
             	<div class="col-sm-5" style="text-align:center; padding:40px 10px 0;">
@@ -106,6 +109,7 @@
             	</div>
             	#else
 	            <div class="col-sm-5">
+	            
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="$applink/collective/services/payfinish.html" method="post" id="payment-form"
