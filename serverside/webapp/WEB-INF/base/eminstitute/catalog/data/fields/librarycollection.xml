@@ -361,7 +361,7 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
     </name> 
   </property>
 
-<property id="priviacylevel" index="true" stored="true" type="list" listid="projectprivacylevel" editable="true" > 
+<property id="priviacylevel" index="true" stored="true" type="list" listid="projectprivacylevel" editable="true" defaultvalue="community" > 
     <name> 
       <language id="en"><![CDATA[Privacy Level]]></language>  
     </name> 
