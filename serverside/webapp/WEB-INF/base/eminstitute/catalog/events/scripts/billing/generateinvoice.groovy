@@ -64,7 +64,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("owner", product.getValue("owner"));
 			invoice.setValue("totalprice", product.getValue("productprice"));
 			invoice.setValue("duedate", invoiceDue.getTime());
-			//invoice.setValue("invoicedescription", product.getValue("productdescription"));
+			invoice.setValue("invoicedescription", product.getValue("productdescription"));
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());
 			
