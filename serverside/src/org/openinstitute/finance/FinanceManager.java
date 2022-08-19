@@ -740,12 +740,12 @@ public class FinanceManager  implements CatalogEnabled
 
 		finalq.addChildQuery(query2.getQuery());
 
-		if( currencytype != null)
+		if( currencytype != null && !currencytype.equals("*"))
 		{
 			finalq.addExact("currencytype",currencytype);
 		}
 
-		if( currencytransferstatus != null)
+		if( currencytransferstatus != null && !currencytransferstatus.equals("*"))
 		{
 			finalq.addExact("currencytransferstatus",currencytransferstatus);
 		}
@@ -850,5 +850,26 @@ public class FinanceManager  implements CatalogEnabled
 		}
 		return byUsers.values();
 
+	}
+	public Double getDollarForPointForUser(String inUserId,String inCollectionId)
+	{
+		Data oneuser = getMediaArchive().query("librarycollectionusers").exact("collectionid", inCollectionId).
+			exact("followeruser",inUserId).searchOne();
+		
+		Object value = null;
+		if(oneuser != null)
+		{
+			value = oneuser.getValue("dollarsperpoints");
+		}
+		if(value == null)
+		{
+			Data collection = getMediaArchive().getCachedData("librarycollection", inCollectionId);
+			value = collection.getValue("dollarsperpoints");
+		}
+		if(value == null || value.toString().equals("0.0"))
+		{
+			return 1D;
+		}
+		return Double.parseDouble(value.toString());
 	}
 }
