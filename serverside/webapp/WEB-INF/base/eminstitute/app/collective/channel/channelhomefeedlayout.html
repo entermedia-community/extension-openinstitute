@@ -63,10 +63,8 @@
 	$pages.include("$apphome/components/results/positions.html",$context)
 	
 	#foreach( $upload in $topuploads.getPageOfHits())
-		#if( !$userprofile.containsValue("blockedusers",$upload.owner) )
 			$context.putPageValue("upload",$upload)
 			$pages.include("$apphome/collective/channel/showpost.html",$context)
-		#end	
 	#end
 	
 	

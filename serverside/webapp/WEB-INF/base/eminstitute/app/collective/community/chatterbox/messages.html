@@ -14,8 +14,6 @@
 
 
 #foreach($chat in $messages)
-	#if( !$userprofile.containsValue("blockedusers",$chat.user) )
 	$context.putPageValue("chat",$chat) 
 	$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
-	#end
 #end
