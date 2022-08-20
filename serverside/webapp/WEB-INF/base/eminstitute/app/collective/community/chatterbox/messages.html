@@ -9,9 +9,13 @@
 	$context.putPageValue("oemaxlevel","2")
 	
 	$pages.include("$apphome/components/results/chatpositions.html", $context)
+
 </div>
 
+
 #foreach($chat in $messages)
+	#if( !$userprofile.containsValue("blockedusers",$chat.user) )
 	$context.putPageValue("chat",$chat) 
 	$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
+	#end
 #end

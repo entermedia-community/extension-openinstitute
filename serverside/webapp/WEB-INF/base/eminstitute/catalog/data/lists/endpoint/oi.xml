@@ -63,5 +63,9 @@
     <name><![CDATA[My Tasks]]></name> 
   </data>  
 
+  <data id="moduleuserprofileblock" uploadfile="false" httpmethod="POST" docsection="moduleuserprofile" url="/site/mediadb/services/module/userprofile/block.json">
+    <samplerequest><![CDATA[{  "field": "blockedusers","profilepreference.value":"101" }]]></samplerequest>  
+    <name><![CDATA[Toggle Block]]></name> 
+  </data>  
 
 </root>

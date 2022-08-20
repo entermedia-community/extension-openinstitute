@@ -34,4 +34,9 @@
     <name><![CDATA[User Uploads]]></name>
   </data>
 
+  <data id="userprofile">
+    <name><![CDATA[User Profile]]></name>
+  </data>
+
+
 </root>
