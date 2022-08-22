@@ -118,10 +118,15 @@
                                             #end
                                         </td>
                                         <td>
-                                            #foreach($pr in $prods)
-                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                                $!mediaarchive.text($prod.productdescription, $hit.id)<br>
+                                            #if($hit.invoicedescription)
+                                            	$hit.invoicedescription
+                                            #else
+	                                            #foreach($pr in $prods)
+	                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
+	                                                $!mediaarchive.text($prod.productdescription, $hit.id)<br>
+	                                            #end
                                             #end
+                                            
                                         </td>
                                         <td style="text-align: center;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
                                         <td>
