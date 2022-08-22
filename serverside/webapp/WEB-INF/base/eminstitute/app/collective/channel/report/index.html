@@ -1,36 +1,33 @@
-<div class="cardx mx-auto" style="margin:0 40px 10px 40px;text-align:left;">
+<div id="reportingform" class="cardx mx-auto" style="margin:0 40px 10px 40px;text-align:left;">
   <div class="card-block" style="padding:20px;">
 
 #set( $searcher = $mediaarchive.getSearcher("userupload") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("view", "userupload/edit")
 
-<form name="saveproject" id="saveproject"
-	 action="$applink/collective/channel/editupload/save.html" method="post">
+<form name="saveproject" id="saveproject" class="ajaxform" data-oemaxlevel="1" data-targetdiv="reportingform"
+	 action="$applink/collective/channel/report/save.html" method="post">
 
 <input type="hidden" name="save" value="true" />
 <input type="hidden" name="searchtype" value="userupload" />
 <input type="hidden" name="id" value="$data.id" />
+<input type="hidden" name="uploadid" value="$data.id" />
 <input type="hidden" name="collectionid" value="$librarycol.id" />
 
- 
-$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
+<input type="hidden" name="field" value="reportedby" />
 
-<input class="btn btn-sm btn-primary" type="submit" value="[[Save]]" style="margin-right: 10px;" />
-    	
-<a class="btn btn-sm btn-danger confirm"  data-confirm="[[Are you sure]]?" style="margin-righ:10px;" href="$applink/collective/edit/delete.html?id=$data.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1&collectionid=$librarycol.id" style="margin: 20px 20px 0 0;">[[Delete]]</a>
+#if( $data.containsValue("reportedby",$user.id) )
+	<p>You have reported this content</p>
+	<input class="btn btn-sm btn-primary" type="submit" value="[[Unreport]]" style="margin-right: 10px;" />
+	<input type="hidden" name="reportedby.remove" value="$user.id" />
+
+#else
+
+	<p>[[Are you sure you want to report this content]]?</p>
+	<input class="btn btn-sm btn-primary" type="submit" value="[[Report]]" style="margin-right: 10px;" />
+	<input type="hidden" name="reportedby.add" value="$user.id" />
+
+#end
 </form>
 
-<script type="text/javascript">
-
-jQuery(document).ready(function()
-{ 
-	lQuery("#list-country").livequery("blur", function()
-	{
-		
-	});
-});
-
-</script>
   </div>
 </div>

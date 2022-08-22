@@ -2,6 +2,4 @@
 	
 	
 	<path-action name="DataEditModule.saveData"/>
-	<path-action name="ProjectModule.redirectToCollectionRoot">
-	</path-action>
 </page>
