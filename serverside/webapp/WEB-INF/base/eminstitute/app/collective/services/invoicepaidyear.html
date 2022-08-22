@@ -85,7 +85,7 @@
                                          [[Due Date]]
                                        #end                                       
                                        </th>
-                                       <th>[[Name]]</th>
+                                       ##<th>[[Name]]</th>
                                        <th>[[Description]]</th>
                                        <th>[[Total Price]]</th>
                                        <th></th>
@@ -110,20 +110,14 @@
                                               $!context.getDate($hit.duedate)
                                             #end
                                         </td>
-                                        <td>
-                                            #set($prods = $hit.getValue("productlist"))
-                                            #foreach($pr in $prods)
-                                                #set($productname = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                                $!productname<br>
-                                            #end
-                                        </td>
+                                      
                                         <td>
                                             #if($hit.invoicedescription)
                                             	$hit.invoicedescription
                                             #else
 	                                            #foreach($pr in $prods)
-	                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-	                                                $!mediaarchive.text($prod.productdescription, $hit.id)<br>
+	                                                #set($product= $mediaarchive.getCacheData("collectiveproduct", $pr.productid))
+	                                                $!mediaarchive.text($product.productdescription, $hit.id)<br>
 	                                            #end
                                             #end
                                             
@@ -133,9 +127,9 @@
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
                                             $status
                                         </td>
-                                        <td>
+                                        <td> 
                                                 <a
-                                                    href="$siteroot/$db/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
+                                                    href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
                                                     class="btn btn-sm btn-secondary"
                                                     target="_blank">
                                                     <i class="fa fa-database"></i>
