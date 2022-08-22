@@ -113,8 +113,8 @@
                                         <td>
                                             #set($prods = $hit.getValue("productlist"))
                                             #foreach($pr in $prods)
-                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                                $prod<br>
+                                                #set($productname = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
+                                                $!productname<br>
                                             #end
                                         </td>
                                         <td>
