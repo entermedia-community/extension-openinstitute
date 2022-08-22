@@ -52,8 +52,6 @@
 						</script>
 						#end
 						
-						
-						
 						<div class="">
 						#if( $user)
 						<h4>$!selecteduser.getName()</h4>
@@ -61,6 +59,10 @@
 						<i class="far fa-envelope"></i> $selecteduser.email<br>
 						#else
 						<h4>$selecteduser.getAnonNickName()</h4>						
+						#end
+						#if( $user  && $selecteduser.getId() != $user.getId())
+							$pages.include("$apphome/users/block/toggle.html")
+							<br>
 						#end
 						#if($canedituserinfo) 
 							<br>

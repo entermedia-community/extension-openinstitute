@@ -9,7 +9,9 @@
 	$context.putPageValue("oemaxlevel","2")
 	
 	$pages.include("$apphome/components/results/chatpositions.html", $context)
+
 </div>
+
 
 #foreach($chat in $messages)
 	$context.putPageValue("chat",$chat) 
