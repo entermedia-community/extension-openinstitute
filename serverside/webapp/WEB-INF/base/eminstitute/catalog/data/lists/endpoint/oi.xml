@@ -79,9 +79,9 @@
     <name><![CDATA[Toggle Block]]></name> 
   </data>  
 
-  <data id="moduleuserprofiledelete" uploadfile="false" httpmethod="POST" docsection="moduleuserprofile" url="/site/mediadb/services/module/userprofile/deleteall.json">
+  <data id="moduleuserprofiledeleteall" uploadfile="false" httpmethod="POST" docsection="moduleuserprofile" url="/site/mediadb/services/module/userprofile/deleteall.json">
     <samplerequest><![CDATA[{  "userid": "101" }]]></samplerequest>  
-    <name><![CDATA[Delete User]]></name> 
+    <name><![CDATA[Delete All User Data]]></name> 
   </data>  
 
 
