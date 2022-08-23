@@ -15,6 +15,17 @@
     <name><![CDATA[Feed Upload Finish]]></name> 
   </data>  
 
+  <data id="moduleuseruploadreport" uploadfile="false" httpmethod="POST" docsection="moduleuserupload" url="/site/mediadb/services/module/userupload/report.json"> 
+    <samplerequest><![CDATA[{ 
+    "id":"Ardcw23wf34232s",
+    "reportedby.add":"admin",
+    "reportedby.remove":"admin"
+    }
+    ]]>
+    </samplerequest>
+    <name><![CDATA[Report Content]]></name> 
+  </data>  
+
   <data id="modulelibrarycollectioncreate" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/create"> 
     <samplerequest><![CDATA[{ "name": "JSON Projects Test" }]]></samplerequest>  
     <name><![CDATA[Create a new Project]]></name> 
