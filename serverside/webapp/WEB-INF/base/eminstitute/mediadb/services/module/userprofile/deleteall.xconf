@@ -6,6 +6,11 @@
     <script>/${catalogid}/events/scripts/users/deletefinish.groovy</script>
   	</path-action>
 	
+	<!---
+	<permission name="view">
+		<group id="administrators"/>
+	</permission>	
+	-->
 	
 </page>
 
