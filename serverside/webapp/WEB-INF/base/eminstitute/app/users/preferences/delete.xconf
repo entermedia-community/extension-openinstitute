@@ -1,0 +1,9 @@
+<page>
+	
+	<path-action name="DataEditModule.loadData" >
+			<pageval>selecteduser</pageval>
+			<idname>userid</idname>
+			<searchtype>user</searchtype>
+    </path-action>		   
+	
+</page>
