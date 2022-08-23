@@ -4,5 +4,6 @@
     <script>/${catalogid}/events/scripts/users/deletefinish.groovy</script>
   	</path-action>
 	
+	<path-action name="Admin.logout"/>
 	
 </page>
