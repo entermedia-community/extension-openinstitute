@@ -43,7 +43,8 @@
   
    <property id="total" index="true" editable="true" stored="true" type="double" required="true">
     <name> 
-      <language id="en"><![CDATA[Total Price]]></language> 
+      <language id="en"><![CDATA[Total Price]]></language>
+      <language id="es"><![CDATA[Precio Total]]></language> 
     </name> 
   </property> 
   
@@ -55,13 +56,15 @@
 
     <property id="user"  index="true" viewtype="userdefault" type="list" listcatalogid="system" listid="user" filter="true"  keyword="true" stored="true" editable="true" >
     <name> 
-      <language id="en"><![CDATA[Expense Approval]]></language> 
+      <language id="en"><![CDATA[Expense Approval]]></language>
+      <language id="es"><![CDATA[Aprobado por]]></language> 
     </name> 
   </property>  
 
    <property id="ispaid" index="true" stored="true" type="boolean" >
 	 <name>
 	 <language id="en" > <![CDATA[Payment Issued]]> </language>
+	 <language id="es" > <![CDATA[Pago Emitido]]> </language>
 	 </name>
 	</property>
   
@@ -94,6 +97,7 @@
   	<property id="reimbursedstatus" index="true" stored="true" type="list" editable="true">
 	 <name>
 	 <language id="en" > <![CDATA[Reimbursed Status]]> </language>
+	 <language id="es" > <![CDATA[Estatus de Reembolso]]> </language>
 	 </name>
 	</property>
   

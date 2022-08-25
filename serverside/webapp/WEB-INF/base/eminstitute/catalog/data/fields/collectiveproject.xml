@@ -13,7 +13,7 @@
   <property id="name" index="true" stored="true" editable="true"  > 
     <name> 
       <language id="en"><![CDATA[Name]]></language>  
-      <language id="es"><![CDATA[Nobre]]></language>  
+      <language id="es"><![CDATA[Nombre]]></language>  
     </name> 
   </property>  
   
@@ -67,7 +67,7 @@
     <name> 
       <language id="de"><![CDATA[Projekt-Status]]></language>  
       <language id="en"><![CDATA[Project Status]]></language>  
-      <language id="es"><![CDATA[Estado del proyecto]]></language>  
+      <language id="es"><![CDATA[Estatus del proyecto]]></language>  
       <language id="fr"><![CDATA[Etat du projet]]></language> 
     </name> 
   </property>  
@@ -75,7 +75,8 @@
   
     <property id="teamproject" index="true" type="boolean" keyword="false" filter="false" editable="true" > 
     <name> 
-      <language id="en"><![CDATA[Team Only]]></language>  
+      <language id="en"><![CDATA[Team Only]]></language>
+      <language id="en"><![CDATA[Privado]]></language>   
     </name> 
   </property>
 

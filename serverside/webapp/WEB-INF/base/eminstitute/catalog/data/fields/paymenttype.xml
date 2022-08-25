@@ -14,17 +14,9 @@
   
    <property id="name" index="true" stored="true" editable="true" multilanguage="true">
 		<name>
-			<language id="en"><![CDATA[Bank Name]]></language>
-			<language id="es"><![CDATA[Banco]]></language>
+			<language id="en"><![CDATA[Name]]></language>
+			<language id="es"><![CDATA[Nombre]]></language>
 		</name>
 	</property>
-
-      <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
-    <name> 
-      <language id="en"><![CDATA[Currency Type]]></language> 
-      <language id="es"><![CDATA[Moneda]]></language>
-    </name> 
-  </property>  
  
-  
 </properties>
