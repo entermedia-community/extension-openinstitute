@@ -1,0 +1,5 @@
+#
+#Thu Aug 25 17:04:26 CDT 2022
+Fundraising=recaudaci\u00F3n de fondos
+Preferences=preferencias
+Settings=Ajustes

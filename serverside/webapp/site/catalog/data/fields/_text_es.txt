@@ -1,13 +1,15 @@
 #
-#Mon Jun 27 19:49:08 CDT 2022
+#Thu Aug 25 17:23:42 CDT 2022
 Reimbursed\ Date=Fecha de reembolso
 Investment\ Date=Fecha de inversi\u00F3n
 Email=Email
 Banner\ Photo=Foto de banner
+Staff=Personal
 Reimbursed\ to=Reembolsado a
 Payment\ Email=Correo electr\u00F3nico de pago
 \ Payment\ Issued\ =Pago emitido
 Web\ Site=Sitio web
+\ Reimbursed\ Status\ =Estado de reembolso
 Payment\ Date=Fecha de pago
 Expense\ Date=Fecha de gasto
 \ Bank\ Account\ =Cuenta bancaria
@@ -25,11 +27,16 @@ Income\ Date=Fecha de ingreso
 Paid\ Date=Fecha de pago
 Send\ To=Enviar a
 Expense\ Type=Tipo de gasto
+Campaigns=Campa\u00F1as
+Privacy\ Level=Nivel de privacidad
 Portrait\ Photo=Foto de retrato
 Payment\ Type=Tipo de pago
 Details=Detalles
 Expense\ Approval=Aprobaci\u00F3n de gastos
+Dollars\ Per\ Points=D\u00F3lares Por Puntos
 Note=Nota
 Instagram=Instagram
+Level=Nivel
 Income\ Type=Tipo de ingreso
 How\ Paid=C\u00F3mo se paga
+Ticket\ Type=Tipo de billete

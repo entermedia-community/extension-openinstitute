@@ -1,5 +1,5 @@
 #
-#Sat Jun 04 16:26:39 CST 2022
+#Thu Aug 25 17:01:16 CDT 2022
 Account=Cuenta
 Asset\ is\ missing=Falta el activo
 Communities=Comunidades
@@ -8,8 +8,8 @@ Dashboard=Tablero
 Edit=Editar
 View\ Permissions=Ver permisos
 Sharing=Compartir
-Profiles=Perfiles
 Search=B\u00FAsqueda
+Profiles=Perfiles
 \ Library\ Permissions=Permisos de la biblioteca
 My\ Account=Mi cuenta
 Permissions=Permisos
@@ -35,6 +35,7 @@ Projects=Proyectos
 Collectives=Colectivos
 Revisions=Revisiones
 Properties=Propiedades
+User\ Profile=Perfil del usuario
 Annotate=Anotar
 Attachments=Archivos adjuntos
 Profile=Perfil
@@ -44,6 +45,7 @@ Assets=Bienes
 Edit\ Profile=Editar perfil
 Logout=Cerrar sesi\u00F3n
 Home=Casa
+Your\ Profile=Tu perfil
 Selected\ Media=Medios seleccionados
 Applications=aplicaciones
 Project\ Settings=Configuraciones del proyecto
@@ -52,6 +54,7 @@ People=Personas
 Followers=Seguidores
 Contact=Contacto
 Edit\ Preferences=Editar preferencias
+Delete\ Account=Borrar cuenta
 Collective\ Settings=Ajustes colectivos
 Collection\ Permissions=Permisos de colecci\u00F3n
 Pending=Pendiente

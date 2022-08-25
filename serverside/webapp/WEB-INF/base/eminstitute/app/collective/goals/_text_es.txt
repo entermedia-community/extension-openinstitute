@@ -1,3 +1,10 @@
 #
-#Mon Jun 27 19:41:51 CDT 2022
-Make\ Priority=hacer prioridad
+#Thu Aug 25 17:19:01 CDT 2022
+Extended\ Support=Soporte Extendido
+Open\ Tickets=Tickets Abiertos
+Search=B\u00FAsqueda
+Completed=Finalizado
+Time=Tiempo
+Make\ Priority=Priorizar
+Status=Estatus
+Ticket=Ticket

@@ -1,6 +1,6 @@
 #
 #Mon Jun 27 19:42:28 CDT 2022
-Status=Estado
+Status=Estatus
 Pay\ User=Usuario de pago
 Label=Etiqueta
 View\ Points=Ver puntos

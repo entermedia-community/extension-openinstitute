@@ -1,19 +1,26 @@
 #
-#Mon Jun 27 19:44:27 CDT 2022
-Bank=Banco
+#Thu Aug 25 17:15:09 CDT 2022
 Description=Descripci\u00F3n
+Bank=Banco
 Reverse=Reverso
 Expenses=Gastos
-Date=Fecha
+Expenses\ Pending=Gastos Pendientes
 Is\ Paid=Est\u00E1 pagado
+Add\ Expense=Agregar gasto
+Expenses\ Completed=Gastos Finalizados
+Search=B\u00FAsqueda
+Topic=Tema
+Download=Descargar
+Pay\ Date=Fecha de pago
+Approved=Aprobado
+Reimbursed\ User=Usuario reembolsado
+Date=Fecha
 Edit\ Expense=Editar gasto
 hits=registros
 Type=Tipo
 Sort\ by=Ordenar por
-Add\ Expense=Agregar gasto
-Search=B\u00FAsqueda
+Add\ Reimbursement=Agregar reembolso
 Total=Total
 true=verdadero
 Collection=Recopilaci\u00F3n
-Topic=Tema
-Download=Descargar
+Reimbursements\ Sent=Reembolsos enviados
