@@ -30,12 +30,14 @@
       <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
+      <language id="es"><![CDATA[Moneda]]></language>
     </name> 
   </property>  
  
     <property id="expensetype" index="true" editable="true" stored="true"  datatype="list" listid="expensetype">
     <name> 
       <language id="en"><![CDATA[Expense Type]]></language> 
+      <language id="es"><![CDATA[Tipo de Gasto]]></language>
     </name> 
   </property>    
   

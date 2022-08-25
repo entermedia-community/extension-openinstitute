@@ -23,19 +23,22 @@
   
       <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
     <name> 
-      <language id="en"><![CDATA[Currency Type]]></language> 
+      <language id="en"><![CDATA[Currency Type]]></language>
+      <language id="es"><![CDATA[Moneda]]></language> 
     </name> 
   </property>  
  
     <property id="incometype" index="true" editable="true" stored="true"  datatype="list" listid="incometype">
     <name> 
-      <language id="en"><![CDATA[Income Type]]></language> 
+      <language id="en"><![CDATA[Income Type]]></language>
+      <language id="en"><![CDATA[Tipo de Intreso]]></language> 
     </name> 
   </property>    
   
    <property id="total" index="true" editable="true" stored="true" type="double">
     <name> 
       <language id="en"><![CDATA[Total Price]]></language> 
+      <language id="es"><![CDATA[Precio Total]]></language>
     </name> 
   </property> 
   

@@ -105,6 +105,7 @@
     <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
+      <language id="es"><![CDATA[Moneda]]></language>
     </name> 
   </property>
   
