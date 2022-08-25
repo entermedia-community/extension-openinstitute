@@ -2,8 +2,8 @@
 
   	<page-action name="PageValue.loadPageVariable" bean="mathutil" />
 
-	<path-action name="Script.run" >
-		<script>/${applicationid}/collective/services/expenses/totlabycurrency.groovy</script>
-	</path-action>
+	<page-action name="Script.run" >
+		<script>/${applicationid}/collective/services/expenses/totalbycurrency.groovy</script>
+	</page-action>
 
 </page>

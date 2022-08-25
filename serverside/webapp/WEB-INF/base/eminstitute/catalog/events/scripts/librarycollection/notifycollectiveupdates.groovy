@@ -184,34 +184,37 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 				//check if the ticket already listed
 				String ticketid = row.getValue("projectgoal");
 				Map<String, Map<String, List>> tickets = notifications.get("tickets");
-				if(ticketid in tickets.keySet()) {
-					Map<String, List> theticket = tickets.get(ticketid);
-					Map<String, List> thetasks = theticket.get("tasks");
-					if(thetasks == null) {
-						thetasks = new HashMap();
-					}
-					thetasks.put(row.getId(), row);
-					theticket.put("tasks", thetasks);
-					tickets.put(ticketid, theticket);
-					notifications.put("tickets", tickets);
-					collectionsupdated.put(collectionid, notifications);
-					included = true;
-				} else {
-					//add ticket to task??
-					Data ticket = mediaArchive.getCachedData("projectgoal", ticketid);
-					if (ticket) {
-						
-						Map<String, Map<String, List>> collectionitems = notifications.get(table);
-						if (collectionitems == null) {
-							collectionitems = new HashMap();
+				if( tickets != null)
+				{
+					if(ticketid in tickets.keySet()) {
+						Map<String, List> theticket = tickets.get(ticketid);
+						Map<String, List> thetasks = theticket.get("tasks");
+						if(thetasks == null) {
+							thetasks = new HashMap();
 						}
-						Map<String, List> rowitem = new HashMap();
-						rowitem.put("data", row);
-						rowitem.put("ticket", ticket);
-						collectionitems.put(row.getId(), rowitem);
-						notifications.put(table, collectionitems);
+						thetasks.put(row.getId(), row);
+						theticket.put("tasks", thetasks);
+						tickets.put(ticketid, theticket);
+						notifications.put("tickets", tickets);
 						collectionsupdated.put(collectionid, notifications);
 						included = true;
+					} else {
+						//add ticket to task??
+						Data ticket = mediaArchive.getCachedData("projectgoal", ticketid);
+						if (ticket) {
+							
+							Map<String, Map<String, List>> collectionitems = notifications.get(table);
+							if (collectionitems == null) {
+								collectionitems = new HashMap();
+							}
+							Map<String, List> rowitem = new HashMap();
+							rowitem.put("data", row);
+							rowitem.put("ticket", ticket);
+							collectionitems.put(row.getId(), rowitem);
+							notifications.put(table, collectionitems);
+							collectionsupdated.put(collectionid, notifications);
+							included = true;
+						}
 					}
 				}
 			}

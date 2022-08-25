@@ -4,10 +4,10 @@
 			<div class="contentcolumn">
 <h3>[[Pending Payments]]</h3>
 
-#set( $expenses = $mediaarchive.query("collectiveexpense").exact("ispaid","false").sort("dateDown").search($context))
+##set( $expenses = $mediaarchive.query("collectiveexpense").exact("ispaid","false").sort("dateDown").search($context))
 $context.putPageValue("expenses",$expenses)
 $context.putPageValue("showcollections",true)
-$pages.include("$apphome/collective/services/expenses/results.html",$context)
+$pages.include("$apphome/collective/services/expenses/results.html?field=ispaid&ispaid.value=false&operation=exact",$context)
               </div>
               </div>
               </div>

@@ -55,6 +55,8 @@
 			[[Contact]] </a>
 		</li>
 		#end
+		
+		#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
 		<a class="nav-link"
 			data-allwaysloadpage="true"
@@ -62,8 +64,8 @@
 			title="[[Fianances]]">
 			<span class="d-none d-sm-inline-block">[[Finances]]</span></a>
 		</li>
-		
-		 	#if( $caneditcollection)
+		#end
+		#if( $caneditcollection )
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
 		<a class="nav-link"
 			data-allwaysloadpage="true"

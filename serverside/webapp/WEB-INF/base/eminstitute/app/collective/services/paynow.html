@@ -99,13 +99,15 @@
             </div>
             
             #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
-            	##Disable for not USD
+
+	        	##Disable for not USD
             	#if($invoice.currencytype!='1')
             	<div class="col-sm-5" style="text-align:center; padding:40px 10px 0;">
             		[[Online payment disabled temporarily for current invoice currency type]].
             	</div>
             	#else
 	            <div class="col-sm-5">
+	            
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="$applink/collective/services/payfinish.html" method="post" id="payment-form"
@@ -211,6 +213,7 @@
 	                </div>
 	            </div>
 	            #end
+	            
 	          #elseif ($invoice.paymentstatus == 'paid')
 	          <div class="col-sm-4">
 	          	<div class="card">
@@ -235,7 +238,11 @@
 	          </div>          
 	          #end
 	          
-        </div>
+        </div> <!-- end row -->
+        
+        $pages.include("$apphome/collective/services/invoices/payoptions.html",$context)
+        
+        
     </div>
 </div>
 

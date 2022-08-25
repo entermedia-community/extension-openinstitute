@@ -537,6 +537,9 @@ margin-top:.6rem;
   width: 100%;
 /*  height: 100%;  */  
 }
+.collectivemaincontainer {
+	height: calc(100% - 160px)
+}
 
 .collectivecontent {
 	min-height: calc(100% - 140px);
@@ -559,9 +562,8 @@ margin-top:.6rem;
 	padding:10px 25px 30px;
 }
 
-
 .community-maincol {
-	margin:15px 20px 10px 20px;
+	
 }
 .community-sidebar {
  	max-width:350px;
@@ -1153,9 +1155,6 @@ a.collectivetag:hover {
 	border-radius: 100%;
 }
 
-.organization-feed .feedcard-body {
-	margin:0;
-}
 .organization-feed .feedcard {
 	padding-bottom:30px;
 	margin-bottom:30px;
@@ -1638,7 +1637,7 @@ a.pick-item:hover .project-item {
 
 ul.posresultsnavright 
 {
-    padding:0;
+    padding:0 15px 0 0;
     margin: 0;
     list-style: none;
     float: right;
@@ -1648,6 +1647,7 @@ ul.posresultsnavright   li.textheader
     white-space: nowrap;
     vertical-align:top;
     display: inline-block;
+    font-size:0.9rem;
 }
 
 ul.posresultsnavright li.resultpages

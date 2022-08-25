@@ -5,6 +5,7 @@
 	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
 	<inner-layout>/${applicationid}/collective/services/layout.html</inner-layout>
+	<path-action name="FinanceModule.loadFinanceManager" />
 	
 	
 </page>

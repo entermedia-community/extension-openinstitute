@@ -19,11 +19,13 @@
 	<path-action name="ProjectModule.loadCollection">
 	</path-action>
 
+<!--
 	<path-action name="DataEditModule.loadData" allowduplicates="true">
 			<pageval>showupload</pageval>
 			<idname>showupload</idname>
 			<searchtype>userupload</searchtype>
     </path-action>  
+    -->
     
 	<inner-layout>/${applicationid}/collective/channel/channelhomefeedlayout.html</inner-layout>
 </page>

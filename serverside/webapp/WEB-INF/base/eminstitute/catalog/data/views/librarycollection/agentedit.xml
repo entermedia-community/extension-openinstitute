@@ -7,6 +7,12 @@
     
   <property id="collectivedescription"/>  
   <property id="contactemail"/> 
+  <property id="priviacylevel" />
+  
+  <property id="collective"/>  
+  <property id="dollarsperpoints" />
+  
+  
   <property id="assetportrait"/>
   <property id="assetbanner"/>
   <property id="facebooklink" />

@@ -83,5 +83,11 @@
     </name> 
   </property> 
 
+  <property id="reportedby" index="true" viewtype="user" type="list" datatype="multi" listid="user" keyword="true" stored="true"  editable="true" > 
+    <name> 
+      <language id="en"><![CDATA[Reported By]]></language>  
+    </name> 
+  </property>  
+
   
 </properties>

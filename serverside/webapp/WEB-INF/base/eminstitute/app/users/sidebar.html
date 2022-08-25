@@ -134,6 +134,10 @@
 			<a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 		</li>
 		
+		<li class="#if($appsection == "invoices") current #end">
+			<a href="$sitelink/app/collective/services/invoicepaidyear.html" ><i class="fas fa-file-invoice-dollar"></i> [[Invoices]]</a>
+		</li>
+		
 		##		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
 		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>

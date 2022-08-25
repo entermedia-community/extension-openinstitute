@@ -52,8 +52,6 @@
 						</script>
 						#end
 						
-						
-						
 						<div class="">
 						#if( $user)
 						<h4>$!selecteduser.getName()</h4>
@@ -62,6 +60,10 @@
 						#else
 						<h4>$selecteduser.getAnonNickName()</h4>						
 						#end
+						#if( $user  && $selecteduser.getId() != $user.getId())
+							$pages.include("$apphome/users/block/toggle.html")
+							<br>
+						#end
 						#if($canedituserinfo) 
 							<br>
 							<a href="$applink/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Profile]]">
@@ -69,6 +71,9 @@
 							</a>
 							<a href="$applink/users/preferences/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Preferences]]">
 							<i class="fas fa-cog"></i> [[Edit Preferences]]
+							</a>
+							<a href="$applink/users/preferences/delete.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Delete Account]]">
+							<i class="fas fa-cog"></i> [[Delete Account]]
 							</a>
 						#end
 				</div>

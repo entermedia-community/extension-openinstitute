@@ -172,5 +172,11 @@
       <language id="en"><![CDATA[Last Viewed Application]]></language>  
       
     </name> 
+  </property>
+    <property id="blockedusers" index="true" stored="true" internalfield="true" viewtype="multiselect" datatype="list" listid="user" editable="true"  type="list"> 
+    <name> 
+      <language id="en"><![CDATA[Blocked Users]]></language>  
+    </name> 
   </property>  
+    
 </properties>

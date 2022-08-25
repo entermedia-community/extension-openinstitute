@@ -15,6 +15,17 @@
     <name><![CDATA[Feed Upload Finish]]></name> 
   </data>  
 
+  <data id="moduleuseruploadreport" uploadfile="false" httpmethod="POST" docsection="moduleuserupload" url="/site/mediadb/services/module/userupload/report.json"> 
+    <samplerequest><![CDATA[{ 
+    "id":"Ardcw23wf34232s",
+    "reportedby.add":"admin",
+    "reportedby.remove":"admin"
+    }
+    ]]>
+    </samplerequest>
+    <name><![CDATA[Report Content]]></name> 
+  </data>  
+
   <data id="modulelibrarycollectioncreate" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/create"> 
     <samplerequest><![CDATA[{ "name": "JSON Projects Test" }]]></samplerequest>  
     <name><![CDATA[Create a new Project]]></name> 
@@ -61,6 +72,16 @@
   <data id="moduleprojectgoalmytasks" uploadfile="false" httpmethod="POST" docsection="moduleprojectgoal" url="/site/mediadb/services/module/projectgoal/mytasks.json?userid=admin">      
     <samplerequest><![CDATA[{  "userid": "admin" }]]></samplerequest>  
     <name><![CDATA[My Tasks]]></name> 
+  </data>  
+
+  <data id="moduleuserprofileblock" uploadfile="false" httpmethod="POST" docsection="moduleuserprofile" url="/site/mediadb/services/module/userprofile/block.json">
+    <samplerequest><![CDATA[{  "field": "blockedusers","profilepreference.value":"101" }]]></samplerequest>  
+    <name><![CDATA[Toggle Block]]></name> 
+  </data>  
+
+  <data id="moduleuserprofiledeleteall" uploadfile="false" httpmethod="POST" docsection="moduleuserprofile" url="/site/mediadb/services/module/userprofile/deleteall.json">
+    <samplerequest><![CDATA[{  "userid": "101" }]]></samplerequest>  
+    <name><![CDATA[Delete All User Data]]></name> 
   </data>  
 
 

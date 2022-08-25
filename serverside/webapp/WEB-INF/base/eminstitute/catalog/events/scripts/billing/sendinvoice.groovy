@@ -151,6 +151,8 @@ private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, 
 	objects.put("invoice", invoice);
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
+	objects.put("siteroot", getSiteRoot());
+	objects.put("applink", appid);
 	templateEmail.send(objects);
 	log.info("Email sent to: "+contact);
 }

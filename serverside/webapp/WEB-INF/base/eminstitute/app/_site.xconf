@@ -14,10 +14,12 @@
 
    
     <!-- Jquery -->
-	<script id="jquery" src="/${applicationid}/components/javascript/jquery-3.3.1.min.js"/>
-	<script id="jquery-ui" src="/${applicationid}/components/javascript/jquery-ui/1.12/jquery-ui.min.js"/>
+	
+	<script id="jquery" cancel="true" src="/${applicationid}/components/javascript/jquery-3.6.0.min.js"/>
+	<script id="jquery-ui" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/1.12/jquery-ui.min.js"/>
 	<style id="jqueryui" href="/${applicationid}/components/javascript/jquery-ui/1.12/jquery-ui.css"/>
-	<script id="jquery-ui-i18n" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
+	<script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
+	
 	
 	<script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
 	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
@@ -25,15 +27,20 @@
 	<script id="validateandedit" src="/${applicationid}/components/javascript/validateandedit.js"/>
   
     <!-- Bootstrap -->
-	<script id="bootstrap-popper" src="/${applicationid}/components/javascript/bootstrap/4/js/popper.min.js" />
-	<script id="bootstrap" src="/${applicationid}/components/javascript/bootstrap/4/js/bootstrap.min.js" />
-	<style id="bootstrap" href="/${applicationid}/components/javascript/bootstrap/4/css/bootstrap.min.css" />
+	<script id="bootstrap-popper" cancel="true" src="/${applicationid}/components/javascript/bootstrap/4/js/popper.min.js" />
+	<script id="bootstrap" cancel="true" src="/${applicationid}/components/javascript/bootstrap/4/js/bootstrap.min.js" />
+	<style id="bootstrap" href="/${applicationid}/components/javascript/bootstrap/4.5.3/css/bootstrap.min.css" />
 	<style id="fonts-css"  href="/${applicationid}/components/javascript/bootstrap/fonts/css/fontawesome-all.min.css"/>
 	
     <!-- EnterMedia -->
 	<script id="entermedia" src="/${applicationid}/components/javascript/entermedia.js"/>
 	<script id="theme-js" src="/${applicationid}/components/javascript/ui-components.js"/>
 	<script id="emtree" src="/${applicationid}/components/javascript/emtree/emtree.js"/>
+	
+	<!-- OI -->
+	
+	<style id="tasks" href="/${applicationid}/collective/goals/goals.css" />
+    <script id="goals" src="/${applicationid}/collective/goals/goals.js"/>
 	
 	
 	
@@ -61,7 +68,7 @@
 	
 	<script id="detaileditor" src="/${applicationid}/components/xml/detaileditor.js"/>
 	
-	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="chatterbox"  src="/${applicationid}/components/chatterbox/chatterbox.js" />
 	
 	<script id="videojs" src="/${applicationid}/components/javascript/videojs/7.8.2/video.min.js" />
 	<style  id="videojs-css"  href="/${applicationid}/components/javascript/videojs/7.8.2/video-js.min.css" />

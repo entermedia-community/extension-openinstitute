@@ -31,7 +31,7 @@
                 <div class="content">
 				   <div class="card mb-4">
 				   	<div class="card-header ">
-						<b>Filters</b>	   		
+						<b>[[Filters]]</b>	   		
 				   	</div>
 				   	<div class="card-body">
 				   		<form class="ajaxform" data-targetdiv="invoicedata">
@@ -42,7 +42,7 @@
 							#end
 					   		</select>
 					   		
-					   		<label>Month</label>
+					   		<label>[[Month]]</label>
 					   		<select class="form-control form-control-sm" name="month">
 					   		   <option value="0" #if($month == 0) selected="selected" #end>All</option>							
 							   <option value="1" #if($month == 1) selected="selected" #end>[[January]]</option>
@@ -59,13 +59,13 @@
 							   <option value="12" #if($month == 12) selected="selected" #end>[[December]]</option>							
 					   		</select>
 					   		
-					   		<label>Status</label>
+					   		<label>[[Status]]</label>
 					   		<select class="form-control form-control-sm" name="status">
-							   <option value="paid" #if($status == "paid") selected="selected" #end>Paid</option>
-							   <option value="invoiced" #if($status == "invoiced") selected="selected" #end>Invoiced</option>
+							   <option value="paid" #if($status == "paid") selected="selected" #end>[[Paid]]</option>
+							   <option value="invoiced" #if($status == "invoiced") selected="selected" #end>[[Invoiced]]</option>
 					   		</select>
 					   		
-					   		<button class="btn btn-primary" type="submit">Search</button>
+					   		<button class="btn btn-primary" type="submit">[[Search]]</button>
 				   		</form>
 				   	</div>	   	
 				   </div>
@@ -85,7 +85,7 @@
                                          [[Due Date]]
                                        #end                                       
                                        </th>
-                                       <th>[[Name]]</th>
+                                       ##<th>[[Name]]</th>
                                        <th>[[Description]]</th>
                                        <th>[[Total Price]]</th>
                                        <th></th>
@@ -100,7 +100,7 @@
                                         #set($instancescount = $instancescount+1)
                                     #end
                                     <tr>
-                                    	<td>$!mediaarchive.getWorkspaceById($hit.collectionid)</td>
+                                    	<td><a href="$applink/collective/services/index.html?collectionid=$hit.collectionid" style="text-decoration: underline;">$!mediaarchive.getWorkspaceById($hit.collectionid)</a></td>
                                         <td>$hit.invoicenumber</td>
                                         <td>$!context.getDate($hit.createdon)</td>
                                         <td>
@@ -110,27 +110,26 @@
                                               $!context.getDate($hit.duedate)
                                             #end
                                         </td>
+                                      
                                         <td>
-                                            #set($prods = $hit.getValue("productlist"))
-                                            #foreach($pr in $prods)
-                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                                $prod<br>
+                                            #if($hit.invoicedescription)
+                                            	$hit.invoicedescription
+                                            #else
+	                                            #foreach($pr in $prods)
+	                                                #set($product= $mediaarchive.getCacheData("collectiveproduct", $pr.productid))
+	                                                $!mediaarchive.text($product.productdescription, $hit.id)<br>
+	                                            #end
                                             #end
-                                        </td>
-                                        <td>
-                                            #foreach($pr in $prods)
-                                                #set($prod = $mediaarchive.query("collectiveproduct").exact("id", "$pr.productid").searchOne())
-                                                $!mediaarchive.text($prod.productdescription, $hit.id)<br>
-                                            #end
+                                            
                                         </td>
                                         <td style="text-align: center;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
                                         <td>
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
                                             $status
                                         </td>
-                                        <td>
+                                        <td> 
                                                 <a
-                                                    href="$siteroot/$db/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
+                                                    href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
                                                     class="btn btn-sm btn-secondary"
                                                     target="_blank">
                                                     <i class="fa fa-database"></i>

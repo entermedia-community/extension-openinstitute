@@ -1,4 +1,4 @@
-#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
+	#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
 #set( $userlink = "$applink/users/${chatuser.getId()}/${chatuser.getAnonNickName()}.html")
 #set( $userimageurl = $mediaarchive.asLinkToProfile($chatuser.assetportrait) )
 #if(!$userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
