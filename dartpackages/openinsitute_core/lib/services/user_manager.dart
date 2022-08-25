@@ -1,3 +1,4 @@
+import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ class UserManager {
   static String usersBox = "usersBox";
 
   DataModule? userModule;
+  DataModule? userProfileModule;
 
   OpenI get oi {
     return Get.find();
@@ -14,6 +16,26 @@ class UserManager {
 
   createDataModule() async {
     userModule = await oi.datamanager.getDataModule("user");
+  }
+
+  toggleBlockUser(String id) async {
+    userProfileModule = await oi.datamanager.getDataModule("userprofile");
+    return await userProfileModule!.createModuleOperation(
+        "block",
+        RequestType.POST,
+        {"field": "blockedusers", "profilepreference.value": id});
+  }
+
+  loadBlockedUsers() async {
+    userProfileModule = await oi.datamanager.getDataModule("userprofile");
+    return await userProfileModule!
+        .getData(oi.authenticationmanager.emUser!.userid);
+  }
+
+  deleteUser() async {
+    userProfileModule = await oi.datamanager.getDataModule("userprofile");
+    return await userProfileModule!.createModuleOperation("deleteall",
+        RequestType.POST, {"userid": oi.authenticationmanager.emUser!.userid});
   }
 
   Future<void> saveUser(emData user) async {

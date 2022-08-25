@@ -13,6 +13,7 @@ class FeedManager {
   String feedsBox = "feed";
 
   DataModule? feedsModule;
+  DataModule? useruploadModule;
 
   createFeedModule({String? collectionId}) async {
     if (collectionId != null) {
@@ -21,6 +22,16 @@ class FeedManager {
     } else {
       feedsModule = await oi.datamanager.getDataModule("feed");
     }
+  }
+
+  flagFeed(String id) async {
+    useruploadModule = await oi.datamanager.getDataModule("userupload");
+    return await useruploadModule!
+        .createModuleOperation("report", RequestType.POST, {
+      "id": id,
+      "reportedby.add": oi.authenticationmanager.emUser!.userid,
+      // "reportedby.remove": oi.authenticationmanager.emUser!.userid,
+    });
   }
 
   Future<emData> createFeed(
