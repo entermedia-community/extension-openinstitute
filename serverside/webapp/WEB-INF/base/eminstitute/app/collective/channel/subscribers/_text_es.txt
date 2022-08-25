@@ -1,12 +1,14 @@
 #
-#Mon Jun 27 19:44:13 CDT 2022
+#Thu Aug 25 18:35:09 CDT 2022
+Add=to Team\=Agregar al Equipo
 User=Usuario
 Join\ the\ Collective=\u00DAnete al Colectivo
 No\ Team\ yet=A\u00FAn no hay equipo
 Subscribe=Suscribirse
 No\ team\ yet=No hay equipo todav\u00EDa
+Edit\ Entry=Editar entrada
 Add\ Billing\ Contact=Agregar contacto de facturaci\u00F3n
-Un-Like=Diferente a
+Un-Like=No me gusta
 Remove\ Billing\ Contact=Eliminar contacto de facturaci\u00F3n
 JOIN\ THE\ PROJECT=\u00DANETE AL PROYECTO
 Add\ New\ User\ to\ Project=Agregar nuevo usuario al proyecto
@@ -29,9 +31,10 @@ Invite\ Others=Invita a otros
 Project\ Settings=Configuraciones del proyecto
 Edit\ Join\ Collective\ Text=Editar unir texto colectivo
 New\ User=Nuevo Usuario
+Add\ to\ Team=Agregar al equipo
 Search\ Users=Buscar usuarios
 Join\ Team=Unirse al equipo
-Liked=Gust\u00F3
+Liked=Me gusta
 Stations=Estaciones
 On\ The\ Team=En el equipo
 You\ are\ subscribed=Estas suscrito

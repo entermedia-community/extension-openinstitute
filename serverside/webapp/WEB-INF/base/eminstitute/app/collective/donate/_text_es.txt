@@ -1,7 +1,7 @@
 #
 #Mon Jun 27 19:36:23 CDT 2022
 Recent\ Donations=Donaciones recientes
-We\ have\ raised=hemos levantado
+We\ have\ raised=Hemos acumulado
 Monthly=Mensual
 Once=Una vez
 No\ goals\ yet=A\u00FAn no hay metas
@@ -19,5 +19,6 @@ from=de
 Goals=Metas
 Remaining=Restante
 Other\ Income=Otros Ingresos
-Our\ Goal\ Is\:=Nuestro objetivo es\:
+Our\ Goal=Nuestro objetivo
 on=en
+Spent=Gastado

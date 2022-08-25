@@ -22,5 +22,5 @@ Sort\ by=Ordenar por
 Add\ Reimbursement=Agregar reembolso
 Total=Total
 true=verdadero
-Collection=Recopilaci\u00F3n
+Collection=Colecci\u00F3n
 Reimbursements\ Sent=Reembolsos enviados

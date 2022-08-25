@@ -24,4 +24,4 @@ Sort\ by=Ordenar por
 Reimburse=Reembolsar
 Total=Total
 true=verdadero
-Collection=Recopilaci\u00F3n
+Collection=Colecci\u00F3n
