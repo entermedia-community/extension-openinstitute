@@ -673,6 +673,9 @@ min-height: 115px;
 	margin:0;
 }
 
+.content-collective-home img {
+	max-width: 100%;
+}
 
 .feed-maincol {
 	max-width:720px;

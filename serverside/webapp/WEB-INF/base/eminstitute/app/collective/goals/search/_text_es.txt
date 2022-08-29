@@ -1,8 +1,9 @@
 #
-#Mon Aug 29 11:09:09 CDT 2022
+#Mon Aug 29 15:35:40 CDT 2022
 Add\ Ticket=Agregar ticket
 Task=Tarea
 Done=Hecho
+Not\ Defined=No definida
 added=adicional
 ago=atr\u00E1s
 New\ Topic=Nuevo tema
