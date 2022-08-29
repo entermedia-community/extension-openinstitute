@@ -496,10 +496,21 @@ ul.projectgoals {
 	border-right:1px solid #b1b1b1;
 	}
 .goal-tabs .emtabs li a {
-	padding:10px 12px	;
+	padding:0.8rem 0.6rem	;
+	font-size:0.8rem;
 	}
-	
-	
+.goal-tabs .emtabs li a .badge {
+    padding: 0.2em 0.4em;
+    line-height: 1;
+}
+@media (min-width: 640px) {
+	.goal-tabs .emtabs li a {
+		padding:0.8rem 0.8rem	;
+		font-size:0.9rem;
+	}
+
+	}
+
 .goal-tabs .emtabs li.emtabselected a {
 	background-color: #fff;
 }

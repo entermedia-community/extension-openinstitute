@@ -1468,7 +1468,7 @@ a.pick-item:hover .project-item {
 }
 .navbar-container {
 	display:block;
-	margin-bottom:20px;
+	margin:5px 0 10px;
 	text-align: center;
 }
 .channel-feed .navbar-container {
