@@ -26,7 +26,7 @@ class UserManager {
         {"field": "blockedusers", "profilepreference.value": id});
   }
 
-  loadBlockedUsers() async {
+  Future<emData> loadBlockedUsers() async {
     userProfileModule = await oi.datamanager.getDataModule("userprofile");
     return await userProfileModule!
         .getData(oi.authenticationmanager.emUser!.userid);

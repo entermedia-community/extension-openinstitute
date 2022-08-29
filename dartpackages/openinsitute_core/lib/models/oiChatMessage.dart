@@ -11,8 +11,8 @@ class oiChatMessage {
   }
 
   oiChatMessage.fromJson(Map<dynamic, dynamic> json) {
-    messageid = json["id"];
-    user = json["user"];
+    messageid = json["id"] ?? "";
+    user = json["user"] ?? {};
     properties = json;
     List goalsList = json["goals"] ?? [];
     for (var goal in goalsList) {
