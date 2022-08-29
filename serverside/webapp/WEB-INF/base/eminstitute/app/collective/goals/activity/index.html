@@ -24,7 +24,7 @@
 	$context.putPageValue("goal",$goal)
 	<td >
 	#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-	<a href="$applink/collective/goals/search/search.html?collectionid=$collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$project.id">
+	<a href="$applink/collective/goals/search/search.html?collectionid=$collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id">
 	$!project
 	</a>
 	</td>
