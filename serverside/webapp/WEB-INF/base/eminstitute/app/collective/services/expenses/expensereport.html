@@ -59,7 +59,7 @@
                                   #end
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
-                                  <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
+                                  <td>$context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
                                   <td>#esc($hit.expensedescription)</td>
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
 								 #if( $showreimburst )

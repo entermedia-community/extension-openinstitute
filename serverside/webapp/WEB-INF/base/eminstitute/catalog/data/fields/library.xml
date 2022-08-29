@@ -18,7 +18,7 @@
     <name> 
       <language id="de"><![CDATA[Client-Status]]></language>  
       <language id="en"><![CDATA[Client Status]]></language>  
-      <language id="es"><![CDATA[Estado del cliente]]></language>  
+      <language id="es"><![CDATA[Estatus del cliente]]></language>  
       <language id="fr"><![CDATA[État du client]]></language> 
     </name> 
   </property>  

@@ -778,6 +778,9 @@ height: 40px;
 	border-radius: 0;
 	height: 32px;
 	font-weight: bold;
+	padding:0.275rem 0;
+	text-align:center;
+	width:59px
 }
 .chatterbox {
 	height: calc(100% - 40px); /*- header*/

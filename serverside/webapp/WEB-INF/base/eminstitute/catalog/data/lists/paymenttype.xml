@@ -2,13 +2,22 @@
 
 <root> 
   <data id="paypal"> 
-    PayPal
+    <name> 
+      <language id="en"><![CDATA[PayPal]]></language> 
+      <language id="es"><![CDATA[PayPal]]></language>
+    </name> 
   </data>  
   <data id="stripe"> 
-  Credit Card
+   <name> 
+      <language id="en"><![CDATA[Credit Card]]></language> 
+      <language id="es"><![CDATA[Tarjeta de Crédito]]></language>
+    </name> 
   </data>  
   <data id="cash"> 
-  Cash
+   <name> 
+      <language id="en"><![CDATA[Cash]]></language> 
+      <language id="es"><![CDATA[Efectivo]]></language>
+    </name> 
   </data>  
  
 </root>

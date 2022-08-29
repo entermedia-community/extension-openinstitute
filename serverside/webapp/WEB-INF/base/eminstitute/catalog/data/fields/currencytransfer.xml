@@ -38,6 +38,7 @@
    <property id="currencytransferstatus" index="true" editable="true" stored="true"  datatype="list" listid="currencytransferstatus" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Transfer Status]]></language> 
+      <language id="es"><![CDATA[Estatus de Transferencia]]></language>
     </name> 
   </property>  
 	
@@ -88,6 +89,7 @@
    <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
+      <language id="es"><![CDATA[Moneda]]></language>
     </name> 
   </property>  
   <property id="expensetype" index="true" editable="true" stored="true"  datatype="list" listid="expensetype">

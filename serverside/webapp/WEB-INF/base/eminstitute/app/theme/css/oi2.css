@@ -706,7 +706,7 @@ min-height: 115px;
 
 @media (min-width: 640px) {
 	.collectiveheader {
-		width: 780px;
+		width: 860px;
 		margin:10px auto 0;
 	}
 	.collectiveheadermenu {

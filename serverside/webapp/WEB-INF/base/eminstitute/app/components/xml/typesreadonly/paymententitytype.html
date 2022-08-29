@@ -7,14 +7,14 @@
 	
 	#if($val == "user")
 	
-	User: $!mediaarchive.getCachedData("user", $targetid)
+	[[User]]: $!mediaarchive.getCachedData("user", $targetid)
 	
 	#elseif($val == "librarycollection")
 	$!mediaarchive.getCachedData("librarycollection", $targetid)
 	
 	#elseif($val == "communitytag")
 	
-	Campaign: $!mediaarchive.getCachedData("communitytag", $targetid)
+	[[Campaign]]: $!mediaarchive.getCachedData("communitytag", $targetid)
 	#elseif($val == "externalpaypal")
 		PayPal: $targetid
 	#elseif($val == "workpoints")

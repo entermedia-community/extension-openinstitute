@@ -49,7 +49,7 @@
                                   #set( $type = $hit.paymententitydesttype)
                                   $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitydest")
                                   </td>
-                                  <td>$!mediaarchive.getCachedData("expensetype", $hit.expensetype)</td>
+                                  <td>$context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
 			                      
                                   <td  style="white-space: nowrap;">#esc($hit.name)</td>
                              	  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>

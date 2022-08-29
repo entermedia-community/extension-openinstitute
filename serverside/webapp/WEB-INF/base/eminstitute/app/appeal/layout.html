@@ -25,8 +25,9 @@
 				#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
 				<div class="communtysofar" style="padding-left:6px;">		
 				#if($librarycol.goaldate)
-				<strong>[[Our Goal Is:]] $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong>
-				#if($librarycol.distributedtotal) [[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD 
+				<strong>[[Our Goal]]: $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong>
+				#if($librarycol.distributedtotal) 
+				[[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD 
 				#end
 				#else
 				<strong>[[No goals yet]]!</strong>

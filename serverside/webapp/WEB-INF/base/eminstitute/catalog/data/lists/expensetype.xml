@@ -2,40 +2,76 @@
 
 <root> 
   <data id="1"> 
-    Materials
+    <name> 
+      <language id="en"><![CDATA[Materials]]></language> 
+      <language id="es"><![CDATA[Materiales]]></language>
+    </name>
   </data>  
   <data id="2"> 
-  Labor
+  <name> 
+      <language id="en"><![CDATA[Labor]]></language> 
+      <language id="es"><![CDATA[Trabajo]]></language>
+    </name>
   </data>  
   <data id="3"> 
-  Tools
+  <name> 
+      <language id="en"><![CDATA[Tools]]></language> 
+      <language id="es"><![CDATA[Herramientas]]></language>
+    </name>
   </data>  
   <data id="4"> 
-  Food
+  <name> 
+      <language id="en"><![CDATA[Food]]></language> 
+      <language id="es"><![CDATA[Comida]]></language>
+    </name>
   </data>  
   <data id="5"> 
-  Misc
+  <name> 
+      <language id="en"><![CDATA[Misc]]></language> 
+      <language id="es"><![CDATA[Miscelaneos]]></language>
+    </name>
   </data>  
   <data id="6"> 
-  Reimbursement
+  <name> 
+      <language id="en"><![CDATA[Reimbursement]]></language> 
+      <language id="es"><![CDATA[Reembolso]]></language>
+    </name>
   </data>  
   <data id="transportation"> 
-  Transportation
+  <name> 
+      <language id="en"><![CDATA[Transportation]]></language> 
+      <language id="es"><![CDATA[Transporte]]></language>
+    </name>
   </data>  
   <data id="AX-oS0XP5OXsVhEn3agJ"> 
-  Disbursement
+  <name> 
+      <language id="en"><![CDATA[Disbursement]]></language> 
+      <language id="es"><![CDATA[Desembolso]]></language>
+    </name>
   </data>  
   <data id="AX-oUQ_iqFnpF58wgkHu"> 
-  Professional Services
+  <name> 
+      <language id="en"><![CDATA[Professional Services]]></language> 
+      <language id="es"><![CDATA[Servicios Profesionales]]></language>
+    </name>
   </data>  
   <data id="AX-oSAaF5OXsVhEn3agG"> 
-  Taxes
+  <name> 
+      <language id="en"><![CDATA[Taxes]]></language> 
+      <language id="es"><![CDATA[Impuestos]]></language>
+    </name>
   </data>  
   <data id="AYHZzog6TncrdaxoMDMP"> 
-  Tuition
+  <name> 
+      <language id="en"><![CDATA[Tuition]]></language> 
+      <language id="es"><![CDATA[Matrícula]]></language>
+    </name>
   </data>  
   <data id="AX-oQNJF5OXsVhEn3agA"> 
-  Utilities
+  <name> 
+      <language id="en"><![CDATA[Utilities]]></language> 
+      <language id="es"><![CDATA[Utilidades]]></language>
+    </name>
   </data>  
 
  

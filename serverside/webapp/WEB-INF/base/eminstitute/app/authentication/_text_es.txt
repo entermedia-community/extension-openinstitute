@@ -1,0 +1,32 @@
+#
+#Thu Aug 25 17:00:24 CDT 2022
+You\ do\ not\ have\ permissions\ to\ perform\ the\ previous\ action.=No tiene permisos para realizar la acci\u00F3n anterior.
+Email\ or\ Username=Correo electr\u00F3nico o nombre de usuario
+contact\ us=Cont\u00E1ctenos
+Or\ Sign-in\ with\ E-Mail\ only=O inicie sesi\u00F3n solo con correo electr\u00F3nico
+Login\ here=Entre aqu\u00ED
+You\ are\ logged\ in\ as=Has iniciado sesi\u00F3n como
+Key\ will\ expire\ by=La clave caducar\u00E1 en
+Your\ Login\ Info=Su informaci\u00F3n de inicio de sesi\u00F3n
+You\ are\ currently\ logged\ in\ as=Est\u00E1s conectado actualmente como
+Hello=Hola
+Forgotten\ your\ password?=Olvidaste tu contrase\u00F1a?
+Enter\ App\ Key=Ingrese la clave de la aplicaci\u00F3n
+A\ magic\ link\ was\ requested\ for=Se solicit\u00F3 un enlace m\u00E1gico para
+Logout=Cerrar sesi\u00F3n
+Log\ in=iniciar sesi\u00F3n
+You\ can=Puedes
+Send\ Key=Enviar Clave
+Password=Contrase\u00F1a
+Use\ login\ code=Usar c\u00F3digo de inicio de sesi\u00F3n
+Enter\ your\ Email\ Address=Ingrese su direcci\u00F3n de correo electr\u00F3nico
+Login=Iniciar Sesi\u00F3n
+Welcome\!\ Please\ enter\ your\ email\ and\ password\:=\u00A1Bienvenido\! 
+App\ Key=Clave de la aplicaci\u00F3n
+Please=Por favor
+Do\ you\ have\ any\ questions?=\u00BFTiene usted alguna pregunta?
+Please\ enter\ your\ password=Por favor, introduzca su contrase\u00F1a
+Sign-in\ with=Inicie sesi\u00F3n con
+Username\ and\ Password=Nombre de usuario y contrase\u00F1a
+or\ Create\ a\ New\ Account=o Crear una cuenta nueva
+Permission\ Error=Error de permisos

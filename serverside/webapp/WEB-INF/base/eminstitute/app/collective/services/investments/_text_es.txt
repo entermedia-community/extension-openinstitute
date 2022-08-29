@@ -1,9 +1,11 @@
 #
-#Mon Jun 27 19:49:09 CDT 2022
+#Thu Aug 25 17:15:14 CDT 2022
+hits=registros
 Sort\ by=Ordenar por
 User=Usuario
 Description=Descripci\u00F3n
 Reverse=Reverso
+Investments=Inversiones
 Add\ Investment\ Or\ Disbursement=Agregar inversi\u00F3n o desembolso
 Total=Total
 Currency=Divisa

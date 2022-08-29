@@ -1,0 +1,11 @@
+#
+#Thu Aug 25 17:29:03 CDT 2022
+Month=Mes
+Ticket=Boleto
+Points=Puntos
+Closed\ On=Cerrado el
+Points\ Report=Informe de puntos
+Total=Total
+Go\ Back=Regresa
+Tickets\ and\ Tasks=Tickets y Tareas
+Current\ Month=Mes actual

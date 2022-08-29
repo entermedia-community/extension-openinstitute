@@ -28,7 +28,7 @@
 						<td style="width:10%"></td>
 						<td>
 						#if($type.incometype)
-							$mediaarchive.getCachedData("incometype", $type.incometype)
+							$context.getText($mediaarchive.getCachedData("incometype", $type.incometype))
 						#else
 							##OI Donation
 							[[Donation or Invoice]]
@@ -79,7 +79,7 @@
 					#end 
 					<tr class="tablefinances-header">
 						<td style="width:10%"></td>
-						<td>$mediaarchive.getCachedData("expensetype", $type.expensetype)</td>
+						<td>$context.getText($mediaarchive.getCachedData("expensetype", $type.expensetype))</td>
 						<td style="width:15%; text-align: right;">- $!context.doubleToMoney($type.getValue("total"),2)</td>
 						<td></td>
 					</tr>
