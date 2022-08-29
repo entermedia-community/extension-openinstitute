@@ -28,7 +28,7 @@
 	</td>
 	<td >
 	#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-	<a href="$applink/collective/goals/search/search.html?collectionid=$activity.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$project.id" 
+	<a href="$applink/collective/goals/search/search.html?collectionid=$activity.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id" 
 	style="text-decoration:underline;" >
 	$!project
 	</a>

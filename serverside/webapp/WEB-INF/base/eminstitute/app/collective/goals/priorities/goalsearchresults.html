@@ -104,7 +104,7 @@
 			</span><br>
 			
 					#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-		<a href="$sitelink/app/collective/goals/search/search.html?collectionid=$goal.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$project.id" 
+		<a href="$sitelink/app/collective/goals/search/search.html?collectionid=$goal.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id" 
 		style="text-decoration:underline;" >
 		$!project
 		</a>

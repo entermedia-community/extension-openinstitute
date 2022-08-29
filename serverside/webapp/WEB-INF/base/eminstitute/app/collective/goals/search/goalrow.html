@@ -22,7 +22,7 @@
 				$!{collection} 
 				</a> >
 				#end
-				<a title="$goal.name" class="" href="$applink/collective/goals/search/index.html?collectionid=$goal.collectionid&goaltrackercolumn.value=${project.id}&operation=matches&field=goaltrackercolumn">
+				<a title="$goal.name" class="" href="$applink/collective/goals/search/index.html?collectionid=$goal.collectionid&goaltrackercolumn.value=$!{project.id}&operation=matches&field=goaltrackercolumn">
 				$!{project}
 				</a>	
 			</div>
@@ -30,7 +30,7 @@
 			
 	    	<div  class="text-right">
 		    	#if( $goal.ticketlevel)
-		    		<i class="ticketlevel"> $mediaarchive.getData("ticketlevel",$goal.ticketlevel)</i>
+		    		<i class="ticketlevel"> $context.getText($mediaarchive.getCachedData("ticketlevel",$goal.ticketlevel))</i>
 		    	#end
 			</div>
     		#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")

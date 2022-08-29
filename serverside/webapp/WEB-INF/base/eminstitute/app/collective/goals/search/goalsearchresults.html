@@ -3,7 +3,7 @@
 #set( $projectid = $context.getRequestParameter("projectid"))
 
 #if(!$projectids)
-#set( $projectids = $userprofile.getValues("goaltrackercolumns") )
+	#set( $projectids = $userprofile.getValues("goaltrackercolumns") )
 #end
 
 #if( $projects.isEmpty() )
@@ -17,7 +17,7 @@
 	    <div class="dropdown-menu">
 	    <a class="dropdown-item" href="#">[[Open Topics]]</a>
 	    #foreach( $project in $allprojects )
-	    	<a class="dropdown-item" href="openproject.html?collectionid=$librarycol.getId()&profilepreference=goaltrackercolumns&profilepreference.value=$project.id">$project.name</a>
+	    	<a class="dropdown-item" href="openproject.html?collectionid=$librarycol.getId()&profilepreference=goaltrackercolumns&profilepreference.value=$!project.id">$project.name</a>
 	    #end
 	    </div>
 		#if($caneditcollection)
@@ -48,15 +48,18 @@
 
 #foreach( $projectid in $projectids )
 
-#set( $project = $mediaarchive.getData("collectiveproject",$projectid))
+#set( $project = $mediaarchive.getData("collectiveproject", $projectid))
 <div class="goals-column-container" style="width:33%" data-col="$project.id">
 
 <div class="goals-column">
 <div class="goals-column-header"> 
-#set( $hits = $context.getPageValue("goalhits${projectid}"))
-#if(!$project) $projectid missing #end
+	#set( $hits = $context.getPageValue("goalhits${projectid}"))
+	#if(!$project) 
+		##$projectid [[missing]]
+		[[Not Defined]] 
+	#end
 	$!project.name	( $!hits.size() ) 
-	<a class="goals-column-header-close" href="closeproject.html?collectionid=$librarycol.getId()&profilepreference=goaltrackercolumns&profilepreference.value=$project.id"><i class="fas fa-times"></i></a>
+	<a class="goals-column-header-close" href="closeproject.html?collectionid=$librarycol.getId()&profilepreference=goaltrackercolumns&profilepreference.value=$!project.id"><i class="fas fa-times"></i></a>
 	<div class="clearfix"></div>
 </div>
 

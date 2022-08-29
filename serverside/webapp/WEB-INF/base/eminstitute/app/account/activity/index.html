@@ -27,8 +27,8 @@
 	</a>
 	</td>
 	<td >
-	#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-	<a href="$applink/collective/goals/search/search.html?collectionid=$activity.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$project.id" 
+	#set( $project= $mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
+	<a href="$applink/collective/goals/search/search.html?collectionid=$activity.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id" 
 	style="text-decoration:underline;" >
 	$!project
 	</a>
@@ -36,7 +36,7 @@
 
 	<td >
 	<a href="$applink/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$activity.collectionid&goalfolder=search" 
-		title="" class="emdialog editgoalshow" style="text-decoration:underline;" data-urlbar="$applink/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$activity.collectionid&opengoalid=$goal.id" 
+		title="" class="emdialog editgoalshow" style="text-decoration:underline;" data-urlbar="$applink/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$activity.collectionid&opengoalid=$!goal.id" 
 		data-width="900">$goal.name</a>
 	</td>
 	<td >

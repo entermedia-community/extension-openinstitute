@@ -3,9 +3,9 @@
 <div id="$target" >
 	#if($value)
 		#if($value == "Completed")
-			<a class=" badge badge-success" style="color:white">$value</a>
+			<a class=" badge badge-success" style="color:white">[[Completed]]</a>
 		#else
-			<div>$value</div>
+			<div>$context.getText($value)</div>
 		#end
 	#end
 	

@@ -17,4 +17,4 @@ Closed=Cerrado
 by=por
 Sessions\ Purchased=Sesiones compradas
 Any\ Staff=Cualquier Staff
-Goal\ link=Enlace de gol
+Goal\ link=Enlace al Gol

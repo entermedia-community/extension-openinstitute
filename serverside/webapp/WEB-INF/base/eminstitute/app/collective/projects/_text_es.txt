@@ -3,4 +3,4 @@
 Delete=Borrar
 Add\ New\ Project=A\u00F1adir nuevo proyecto
 Are\ you\ sure=Est\u00E1 seguro
-Save=Ahorrar
+Save=Guardar
