@@ -1,9 +1,11 @@
 #set($collectionid = $librarycol.getId())
 <div style="padding:30px">
-<hr>
+
 </div>
-<div style="padding:10px 20px">
-<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
+
+<h2 style="margin:10px 0;">[[Online Donation]]</h2>
+
+<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary float-left"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
 	<form  id="donationsform" 
 		class="autosubmit" 
@@ -47,7 +49,7 @@
 		    $context.putPageValue("donations",$donations)
 		#end
 	   <div style="padding-top:20px;">
-	   		<h2 class="float-left" style="margin:10px 0;">[[Online Donation]]</h2>
+	   		
 	   		<div style="float:right; width:260px; margin:10px 0;">
 			<label>[[Sort by]]</label>
 			<div style="width:200px; display:inline-block;">
@@ -67,6 +69,5 @@
 	$pages.include("/$applicationid/collective/services/donations/results.html",$context)
 	
 	
-</div>
 
 

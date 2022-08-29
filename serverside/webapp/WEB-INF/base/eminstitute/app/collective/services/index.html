@@ -1,7 +1,7 @@
 #set($collectionid = $librarycol.getId())
 
 <div class="collectivecontent" id="collectivebilling">
-	<div class="h-100" style="padding:10px 20px">
+	<div class="h-100">
 	#if( $canviewsettings )
            	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
 			<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
@@ -94,7 +94,7 @@
      #set( $invoices = $mediaarchive.query("collectiveinvoice").match("collectionid",
      $collectionid).sort("createdonDown").search())
      #if ($invoices)
-         <h2>[[Invoices]]</h2>
+         <h2 style="margin-top:30px;">[[Invoices]]</h2>
          <div class="emdata">
              <table class="table table-striped table-hover">
                  <thead>
