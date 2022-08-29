@@ -4,14 +4,16 @@
 	#set($collectionid = $context.getRequestParameter("collectionid"))
 #end
 
-<div style="padding:10px 20px;">
+<h2 >[[Investments]]</h2>
+
+<div>
             
             #if( $caneditcollection )    
            <a
                       href="$applink/collective/services/investments/addnew.html?collectionid=${collectionid}"
-                      class="emdialog btn btn-sm btn-primary mb-4">[[Add Investment Or Disbursement]]</a>
+                      class="emdialog btn btn-sm btn-primary float-right">[[Add Investment Or Disbursement]]</a>
               #end
-		<A href="#" onclick="$('#searchform').toggle()"><i class="fa fa-search"></i></A>
+		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/investments/results.html">
 	
@@ -47,7 +49,7 @@
 		</table>
 
 		<div style="padding-top:20px;">
-		<h2 class="float-left" style="margin:10px 0;">[[Investments]]</h2>
+		
 		<div style="float:right; margin-bottom:10px;">
 		<label>[[Sort by]]</label>
 		<select class="select2" name="sortby" >

@@ -4,8 +4,9 @@
 	#set($collectionid = $context.getRequestParameter("collectionid"))
 #end
 
+<h2>[[Work Points]]</h2>
 
-<div id="serviceworkarea" style="padding:10px 20px;">
+<div id="serviceworkarea">
      #if( $XXXcaneditcollection )
          <a
           href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
@@ -57,13 +58,13 @@
 
 		#set( $completedpointtransfers = $financeManager.getTransfersForEntity($collectionid, "2", "1", $daterange) )
 		#if( !$completedpointtransfers.isEmpty())
-   		<h2 class="float-left" style="margin:10px 0;">[[Pending Work Points]]</h2>
+   		<h3 class="float-left" style="margin:10px 0;">[[Pending Work Points]]</h3>
         $context.putPageValue("transfers",$completedpointtransfers) 
 		$pages.include("$apphome/wallet/transferresults.html",$context)
 		#end
  		#set( $transfers = $financeManager.getTransfersForEntity($collectionid, "2", "2", $daterange) )
 		#if( !$transfers.isEmpty())
-   		<h2 class="float-left" style="margin:10px 0;">[[Paid Work Points]]</h2>
+   		<h3 class="float-left" style="margin:10px 0;">[[Paid Work Points]]</h3>
         $context.putPageValue("transfers",$transfers)
 		$pages.include("$apphome/wallet/transferresults.html",$context)
    		#end
