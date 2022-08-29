@@ -34,7 +34,8 @@
 			  <option value="" ></option>
 			  #set( $options = $mediaarchive.getList("taskstatus"))
 			  #foreach( $option in $options)
-			  <option value="$option.id" #if( $selectedstatus == $option.id) selected #end >$context.getText($option.getName())</option>
+			  <option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
+			  $context.getText($mediaarchive.getCachedData("taskstatus", $option.id))</option>
 			  #end
 			</select>
 		</div>		
