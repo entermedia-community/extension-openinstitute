@@ -70,7 +70,7 @@
 						$context.getText($!mediaarchive.getData("taskstatus", $task.taskstatus))
 						</a>
 					#else
-						<span class="taskedit taskedit-$!{task.taskstatus}">$context.getText($mediaarchive.getData("taskstatus", $task.taskstatus))</span>
+						<span class="taskedit taskedit-$!{task.taskstatus}">$context.getText($mediaarchive.getCachedData("taskstatus", $task.taskstatus))</span>
 					#end
 					
 					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
