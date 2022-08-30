@@ -1,13 +1,14 @@
 #
-#Thu Aug 25 17:15:14 CDT 2022
-hits=registros
-Sort\ by=Ordenar por
+#Tue Aug 30 10:37:42 CDT 2022
 User=Usuario
 Description=Descripci\u00F3n
 Reverse=Reverso
+Add\ Investment\ Or\ Disbursement=Agregar inversi\u00F3n o Desembolso
+Date=Fecha
+hits=registros
+Sort\ by=Ordenar por
 Investments=Inversiones
-Add\ Investment\ Or\ Disbursement=Agregar inversi\u00F3n o desembolso
 Total=Total
 Currency=Divisa
+Search=Buscar
 Download=Descargar
-Date=Fecha

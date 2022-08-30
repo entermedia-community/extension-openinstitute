@@ -3,9 +3,9 @@
 
 </div>
 
-<h2 style="margin:10px 0;">[[Online Donation]]</h2>
 
-<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary float-left"><i class="fa fa-search"></i> [[Search Donations]]</a>
+
+<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
 	<form  id="donationsform" 
 		class="autosubmit" 
@@ -48,9 +48,9 @@
 		    #set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).exact("isdonation","true").sort("paymentdateDown").search($context))
 		    $context.putPageValue("donations",$donations)
 		#end
-	   <div style="padding-top:20px;">
-	   		
-	   		<div style="float:right; width:260px; margin:10px 0;">
+	   <div style="padding-top:10px;">
+	   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Online Donation]]</h2>
+	   		<div style="float:right; width:300px; margin:0 0 10px 0;">
 			<label>[[Sort by]]</label>
 			<div style="width:200px; display:inline-block;">
 			<select class="select2 	form-control-sm" name="sortby" >

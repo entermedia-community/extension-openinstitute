@@ -1,6 +1,6 @@
 <Div id="expensereport">
-                 
-                       <table class="table table-striped">
+           #if($reimbursementsbyuser_total)      
+           	<table class="table table-striped">
                 #foreach($userid in $reimbursementsbyuser_total.keySet())
 	                	<tr>
                 			#set($subtotal = $reimbursementsbyuser_total.get($userid))
@@ -9,7 +9,9 @@
 	                			$!context.doubleToMoney($subtotal, 2)
 	                		</td>
                 		</tr>
-				#end            </table>   
+				#end            
+				</table>
+			#end   
                  
                   <div class="emdata">
                       <table class="table table-striped">
