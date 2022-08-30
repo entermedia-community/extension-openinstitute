@@ -1,5 +1,5 @@
 #
-#Thu Aug 25 17:14:31 CDT 2022
+#Tue Aug 30 10:18:56 CDT 2022
 Project\ Wallet=Monedero del proyecto
 All=Todos
 June=Junio
@@ -21,6 +21,7 @@ Contact\ us=Cont\u00E1ctenos
 July=Julio
 Clear\ Filters=Borrar filtros
 Your\ name=Tu nombre
+Total\ in\ USD=Total en USD
 Feb=Feb
 Dec=Dic
 Send\ Money=Enviar dinero

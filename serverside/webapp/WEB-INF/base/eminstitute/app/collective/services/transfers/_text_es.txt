@@ -2,6 +2,6 @@
 #Mon Jun 27 19:42:25 CDT 2022
 Sort\ by=Ordenar por
 Reverse=Reverso
-Search=B\u00FAsqueda
+Search=Buscar
 Transfers=Transferencias
 Add\ Transfer=Agregar transferencia

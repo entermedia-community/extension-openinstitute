@@ -1,5 +1,5 @@
 #
-#Thu Aug 25 17:15:04 CDT 2022
+#Tue Aug 30 10:31:05 CDT 2022
 Description=Descripci\u00F3n
 Bank=Banco
 Reverse=Reverso
@@ -8,13 +8,15 @@ Import\ Expenes=Gastos de importaci\u00F3n
 Move\ Expense=Gastos de mudanza
 Is\ Paid=Est\u00E1 pagado
 Add\ Expense=Agregar gasto
-Search=B\u00FAsqueda
+Search=Buscar
 Reimburse\ To=Reembolsar a
+Pending\tExpenses=Gastos Pendientes
 Topic=Tema
 Download=Descargar
 Download\ CSV=Descargar CSV
 Approved=Aprobado
-Pending\t=Pendiente
+Pending=Pendiente
+Pending\ Expenses=Gastos Pendientes
 Import\ CSV=Importar CSV
 Date=Fecha
 Edit\ Expense=Editar gasto
