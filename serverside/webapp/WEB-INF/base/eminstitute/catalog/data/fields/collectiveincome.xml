@@ -31,7 +31,7 @@
     <property id="incometype" index="true" editable="true" stored="true"  datatype="list" listid="incometype">
     <name> 
       <language id="en"><![CDATA[Income Type]]></language>
-      <language id="en"><![CDATA[Tipo de Intreso]]></language> 
+      <language id="es"><![CDATA[Tipo de Ingreso]]></language> 
     </name> 
   </property>    
   
