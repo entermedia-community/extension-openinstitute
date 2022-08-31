@@ -948,3 +948,7 @@ li.menu-subheader {
 	
 }
 }
+
+@media (max-width: 640px) {
+.emdatatable { overflow-y:auto }
+}

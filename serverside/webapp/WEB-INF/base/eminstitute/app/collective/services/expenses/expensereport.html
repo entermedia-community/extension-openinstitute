@@ -23,7 +23,7 @@
 				#end
      	</table> 
      #end  
-                  <div class="emdata">
+                  <div class="emdata emdatatable">
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
@@ -95,15 +95,17 @@
                     </tr>
                 #end
             </table>
-            $expenses.size() [[hits]]
+            
         </div>
-        
+        $expenses.size() [[hits]]
        
-        
+        <div>
         <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
            class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
            
 ##        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
 ##           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
+
+		</div>
         
 </div>
