@@ -36,7 +36,7 @@
                                         <td style="text-align: right;">$ $!context.roundDouble($!hit.totalprice, 2)</td>
                          <td style="text-align: center;">
                              #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
-                             $status
+                             $!context.getText($status)
                          </td>
                          <td style="text-align: left;">
                              #if( $canviewsettings )
