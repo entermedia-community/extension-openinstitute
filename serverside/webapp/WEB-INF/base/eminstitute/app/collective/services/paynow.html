@@ -7,7 +7,7 @@
 <div class="collectivemaincol">
 <div class="content">
 <h2>[[Check Out]]</h2>
-	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
+	#if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
 	<div class="alert alert-warning">Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to
 	    catalog settings and switch to production mode to take credit cards.</div>
 	#end
@@ -31,7 +31,9 @@
 			<div>
 					<strong>[[Invoice Number]]: $invoice.getValue("invoicenumber")</strong>
 					<br>
-					[[Created on]]: $!context.getDate($invoice.getValue("createdon"))
+					<strong>[[Created on]]:</strong> $!context.getDate($invoice.getValue("createdon"))
+					<br>
+					<strong>[[Due By]]:</strong> $!context.getDate($invoice.getValue("duedate"))
 			</div>
 			<strong>[[Invoiced to]]:</strong>
 				#set($invoicedto =$workspace.getValue("invoicedto"))

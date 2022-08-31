@@ -143,7 +143,7 @@
                          </td>
                          <td style="text-align: center;">
                              #set($status = $mediaarchive.query("paymentstatus").match("id", "$hit.paymentstatus").searchOne())
-                             $context.getText($status)
+                             $!context.getText($status)
                          </td>
                          <td>
                              #if( $canviewsettings )
