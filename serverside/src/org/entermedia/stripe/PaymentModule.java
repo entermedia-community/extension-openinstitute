@@ -162,7 +162,7 @@ public class PaymentModule extends BaseMediaModule
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		try {
 			ArrayList<Map<String, Object>> customers = getOrderProcessor().getCustomers(archive, email);
-			if (customers.size() > 0) {
+			if (customers!= null && customers.size() > 0) {
 				inReq.putPageValue("customer", customers.get(0));
 				return (Map<String, Object>) customers.get(0);
 			}
