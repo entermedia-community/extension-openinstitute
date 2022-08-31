@@ -4,7 +4,7 @@
 	
 	#if( $canviewsettings )
 		<div style="margin-bottom:30px;">
-    	#if($mediaarchive.getCatalogSettingValue("productionmode") == "false")
+    	#if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
 			<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
 		#end
             <h2>[[Product Catalog]]</h2>
@@ -35,7 +35,7 @@
                                  ##<div style="font-size: 0.9em;">$!mediaarchive.text($hit.productdescription, $hit.id)</div>
                                  </td>
                                  <td style="text-align: right;">
-                                 <span class="currencysmall">$!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype"))</span>
+                                 <span class="currencysmall">$!context.getText($!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))</span>
                                  $ $!context.doubleToMoney($!hit.productprice,2)</td>
                                  <td>
                                      #if( $canviewsettings )
@@ -138,7 +138,7 @@
                      ##        #end
                      ##    </td>
                          <td style="text-align: right;">
-                         <span class="currencysmall">$!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype"))</span>
+                         <span class="currencysmall">$!context.getText($!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))</span>
                          $ $!context.doubleToMoney($!hit.totalprice, 2)
                          </td>
                          <td style="text-align: center;">

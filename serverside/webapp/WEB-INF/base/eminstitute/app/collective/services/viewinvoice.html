@@ -121,7 +121,7 @@
 					</tr>
 					#end
 					<tr>
-						<td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
+						<td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
 						<td  style="text-align: right">
 						<b>
 						$currency $context.doubleToMoney($invoice.getValue("totalprice"), 2)

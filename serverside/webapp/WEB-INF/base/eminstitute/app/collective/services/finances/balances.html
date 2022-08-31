@@ -18,24 +18,24 @@
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
 						<tr>
-						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
+						<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
 						<td></td>
 						<td></td>
-						<td></td>
+						
 						</tr>
 					#end 
 					<tr class="tablefinances-header">
 						<td style="width:10%"></td>
 						<td>
 						#if($type.incometype)
-							$context.getText($mediaarchive.getCachedData("incometype", $type.incometype))
+							$!context.getText($mediaarchive.getCachedData("incometype", $type.incometype))
 						#else
 							##OI Donation
 							[[Donation or Invoice]]
 						#end
 						</td>
 						<td style="width:15%; text-align: right;">$!context.doubleToMoney($type.getValue("total"),2)</td>
-						<td style="width:10%"></td>
+						
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
 					
@@ -44,7 +44,7 @@
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
 					<td style="width:15%; text-align: right;">$!context.doubleToMoney($totalbycurrency,2)</td>
-					<td></td>
+					
 					</tr>
 					#set($totalbycurrency = 0)
 				
@@ -71,17 +71,17 @@
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
 						<tr >
-						<td style="width:10%">$mediaarchive.getCachedData("currencytype", $type.currencytype)</td>
+						<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
 						<td></td>
 						<td></td>
-						<td></td>
+						
 						</tr>
 					#end 
 					<tr class="tablefinances-header">
 						<td style="width:10%"></td>
-						<td>$context.getText($mediaarchive.getCachedData("expensetype", $type.expensetype))</td>
+						<td>$!context.getText($mediaarchive.getCachedData("expensetype", $type.expensetype))</td>
 						<td style="width:15%; text-align: right;">- $!context.doubleToMoney($type.getValue("total"),2)</td>
-						<td></td>
+						
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
 					
@@ -90,7 +90,7 @@
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
 					<td style="width:15%; text-align: right;">- $!context.doubleToMoney($totalbycurrency,2)</td>
-					<td style="width:10%"></td>
+					
 					</tr>
 					#set($totalbycurrency = 0)
 				

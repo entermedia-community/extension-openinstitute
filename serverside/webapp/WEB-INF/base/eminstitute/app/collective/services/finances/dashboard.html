@@ -72,7 +72,7 @@
 					
 					#set($projectid = $context.getRequestParameter("collectiveproject") )
 					<select name="collectiveproject"  class="form-control-sm" style="width:120px;">
-						<option value="">By Topic</option>
+						<option value="">[[By Topic]]</option>
 						#foreach( $project in $allprojects )
 							<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>$project</option>
 						#end
@@ -88,17 +88,17 @@
 	</form>
 	
 		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
-	<h4>[[Summary Balances]]</h4>
+	<h3>[[Summary Balances]]</h3>
 		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())
 				#set($net = $netincome.get($currencytype))
 				<tr>
 				
-				<td style="width:10%">$!mediaarchive.getCachedData("currencytype", $currencytype)</td>
+				<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
 				<td></td>
-				<td style="width:10%;padding-right:20px">
+				<td style="width:10%;padding-right:20px; text-align: right;">
 				#if( $currencytype != "2") 
 				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
 				$$!context.doubleToMoney($subtotal, 2)
@@ -112,11 +112,11 @@
 				<td style="width:10%"></td>
 				<td style="width:20%; text-align: right;"></td>
 				<td style="text-align: right;">[[Total in USD]]: <br>
-							 [[Only includes reimbursed expenses]]*
+				<span style="font-size:0.9rem; color:#666;">[[Only includes reimbursed expenses]]*</span>
 				
 				</td>
-				<td style="width:10%;padding-right:20px">
-			 $$!context.doubleToMoney($total, 2)
+				<td style="width:10%;padding-right:20px;vertical-align: top;">
+			 	$$!context.doubleToMoney($total, 2)
 			</td>
 			</tr>
 			</table>
