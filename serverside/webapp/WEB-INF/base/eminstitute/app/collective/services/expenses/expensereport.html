@@ -68,7 +68,8 @@
 								 #else
 								 	<td>$!mediaarchive.getCachedData("user", $hit.user)</td>
 								#end                                 
-								 	<td>$!mediaarchive.getCachedData("reimbursedstatus", $hit.reimbursedstatus)</td>
+								  <td>$!context.getText($!mediaarchive.getCachedData("reimbursedstatus", $hit.reimbursedstatus))</td>
+								  
 			                      <td style="text-align: center; min-width:70px;">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
