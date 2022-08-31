@@ -14,7 +14,7 @@
 	#set( $collection = $mediaarchive.query("librarycollection").exact("id",$invoice.getValue("collectionid")).searchOne() )
 	
 	#set($status = $invoice.getValue("paymentstatus"))
-	
+<div class="viewinvoice">
 	
 	<div style="padding:0 0 5px;">
 	<strong>[[Invoice Status]]:</strong> 
@@ -50,33 +50,27 @@
 
 	</div>
 	
-	<div style="width:100%; max-width:980px; margin: 0 auto;">
-	<div class="card"
-		style=" max-width: 100%; text-align: left;">
-		<div class="card-body">
-
-
-
-	
-	
-			<div class="row">
-				<div class="col-sm-4">
-						<img src="$applink/theme/images/invoice-logo-dark.png" class="img-fluid">
-				</div>
-				<div class="col-sm-8 text-right">
-					EnterMedia, Inc. 1550<br>
-					Magnolia Dr. Cincinnati<br>
-					OH 45215
-				</div>
+	<div style="border:1px solid #999;; width:100%; max-width:980px; margin: 0 auto;">
+	<div style="padding:10px; text-align: left;">
+		<div class="row">
+			<div class="col-sm-4">
+					<img src="$applink/theme/images/invoice-logo-dark.png" class="img-fluid">
+			</div>
+			<div class="col-sm-8 text-right">
+				EnterMedia, Inc. 1550<br>
+				Magnolia Dr. Cincinnati<br>
+				OH 45215
 			</div>
 		</div>
-		<div class="card-body">
-			<div class="row" style="background-color:#efefef; padding:10px 0;">
-				<div class="col-sm-6">
+	
+		
+			<div style="background-color:#efefef; padding:10px; margin:10px 0;">
+				
 						<strong>[[Invoice Number]]: $invoice.getValue("invoicenumber")</strong>
 						<br>
-						[[Created on]]: $!context.getDate($invoice.getValue("createdon"))
-				</div>
+						<strong>[[Created on]]:</strong> $!context.getDate($invoice.getValue("createdon"))
+						<br>
+						<strong>[[Due By]]:</strong> $!context.getDate($invoice.getValue("duedate"))
 				
 			</div>
 			<div style="margin-top:10px;">
@@ -93,9 +87,9 @@
 					</div>
 				#end
 			</div>
-		</div>
 		
-		<div class="card-body" style="padding: 20px;">		
+		
+		<div style="padding: 10px;">		
 			<h4>[[Products]]</h4>
 			<div class="table-responsive">
 				<table class="d-print-table table">
@@ -127,7 +121,7 @@
 					</tr>
 					#end
 					<tr>
-						<td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</span></b></td>
+						<td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
 						<td  style="text-align: right">
 						<b>
 						$currency $context.doubleToMoney($invoice.getValue("totalprice"), 2)
@@ -142,7 +136,7 @@
 		
 		
 	</div>
-	
+	</div>
 </div>
 #end
 	
