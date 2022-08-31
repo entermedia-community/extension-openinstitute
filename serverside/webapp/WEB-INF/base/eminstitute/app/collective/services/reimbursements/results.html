@@ -46,7 +46,7 @@
                                   <td>$!context.getDate($hit.paymentdate)</td>
                                   <td>$!mediaarchive.getCachedData("user", $hit.reimburseuser)</td>
                                   <td>#esc($hit.expensedescription)</td>
-                                  <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))</td>
 									<td>$!mediaarchive.getCachedData("user", $hit.user)</td>
                                   <td>#if($hit.ispaid == true)[[true]]#end</td>
 			                      <td style="text-align: center">

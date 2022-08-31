@@ -69,8 +69,8 @@
 		<select class="select2 	form-control-sm" name="sortby" >
 			#set ($details = $searcher.getDetailsForView("currencytransfer/edit", $userprofile))
 			#foreach( $detail in $details)
-				<option value="$detail.getId()Down">$context.getText($detail)</option>
-				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+				<option value="$detail.getId()Down">$!context.getText($detail)</option>
+				<option value="$detail.getId()Up">$!context.getText($detail) [[Reverse]]</option>
 			#end
 		</select>
 		</div>
