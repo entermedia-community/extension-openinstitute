@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-	<data id="1">Online Donation</data>
-	<data id="2">Other Donation</data>
-  	<data id="3">Wages</data>  
-	<data id="4">Paypal Donation</data>
-	<data id="5">Cash Donation</data>  
-	<data id="6">Invoice</data>
-	<data id="7">Work Points Accomplished</data>
-  	<incometype id="AX-oWIv0qFnpF58wgkLE"> 
+	<data id="1"><name> 
+	      <language id="en"><![CDATA[Online Donation]]></language> 
+	    </name> </data>
+	<data id="2"> <name> 
+	      <language id="en"><![CDATA[Other Donation]]></language> 
+	    </name>
+	    </data>
+  	<data id="3">
+  	 <name> 
+	      <language id="en"><![CDATA[Wages]]></language> 
+	    </name></data>  
+	<data id="4"> <name> 
+	      <language id="en"><![CDATA[Paypal Donation]]></language> 
+	    </name>
+	    </data>
+	<data id="5"> <name> 
+	      <language id="en"><![CDATA[Cash Donation]]></language> 
+	    </name>
+	    </data>  
+	<data id="6"> <name> 
+	      <language id="en"><![CDATA[Invoice]]></language> 
+	    </name>
+	    </data>
+	<data id="7"> <name> 
+	      <language id="en"><![CDATA[Work Points Accomplished]]></language> 
+	    </name>
+	    </data>
+  	<data id="AX-oWIv0qFnpF58wgkLE"> 
 	    <name> 
 	      <language id="en"><![CDATA[Rent]]></language> 
 	    </name> 
-  	</incometype>  
-  	<incometype id="AYAZtSrMI1NvzXHWb6L8">
+  	</data>  
+  	<data id="AYAZtSrMI1NvzXHWb6L8">
 	    <name>
 	      <language id="en"><![CDATA[Product Sales]]></language>
 	    </name>
-	</incometype>
+	</data>
 
 </root>

@@ -1,5 +1,5 @@
 #
-#Mon Jun 27 19:42:53 CDT 2022
+#Tue Aug 30 10:50:03 CDT 2022
 New=Nuevo
 No\ values\ found=No se encontraron valores
 After\ Date=despu\u00E9s de la fecha
@@ -10,7 +10,9 @@ chars\ more=Chars m\u00E1s
 Remove=retirar
 Add\ New=A\u00F1adir nuevo
 Over=encima
+Enter\ Wise\ Email=Ingrese el correo electr\u00F3nico inteligente
 Remove\ Asset\ Selected=Eliminar activo seleccionado
+[Add\ New=[Agregar nuevo
 Clear\ Selection=Limpiar Selecci\u00F3n
 Search=Buscar
 limit\ reached=l\u00EDmite alcanzado
@@ -18,7 +20,9 @@ Pick\ Categories=Escoja Categor\u00EDas
 or=o
 Past\ year=A\u00F1o pasado
 Between=Entre
+Enter\ Bank\ Name,\ Account\ Type,\ Account\#\ Routing\ and\ Full\ Name=Ingrese el nombre del banco, el tipo de cuenta, el enrutamiento del n\u00FAmero de cuenta y el nombre completo
 No\ results=No hay resultados
+Enter\ Paypal\ Email=Ingrese el correo electr\u00F3nico de Paypal
 Add\ Language=Agregar idioma
 Past\ week=Semana pasada
 View=Ver
