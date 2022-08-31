@@ -4,12 +4,12 @@
 #set($products = $mediaarchive.getInvoiceProductList($id))
 #set($workspace = $mediaarchive.getWorkspaceById($invoice.collectionid))
 <div class="collectivecontent">
-<div class="collectivemaincol">
+
 <div class="content">
 <h2>[[Check Out]]</h2>
-	#if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
-	<div class="alert alert-warning">Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to
-	    catalog settings and switch to production mode to take credit cards.</div>
+
+	#if(!$mediaarchive.isCatalogSettingTrue("productionmode"))
+	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
 	#end
 
 	<div class="card" style="max-width:1000px; margin:0 auto;">
@@ -220,10 +220,10 @@
 	          <div class="col-sm-4">
 	          	<div class="card">
 		          	<div class="card-header alert-success">
-		          	   Invoice already paid
+		          	   [[Invoice already paid]]
 		          	</div>
 		          	<div class="card-body">
-		          		Thank you for your preference
+		          		[[Thank you for your preference]]
 		          	</div>
 	          	</div>
 	          </div>
@@ -231,10 +231,10 @@
 	          <div class="col-sm-4">
 	          	<div class="card">
 		          	<div class="card-header alert-danger">
-		          	   This invoice was canceled
+		          	   [[This invoice was canceled]]
 		          	</div>
 		          	<div class="card-body">
-		          		Please contact support or reach us via chat
+		          		[[Please contact support or reach us via chat]]
 		          	</div>
 	          	</div>
 	          </div>          
@@ -249,8 +249,7 @@
 </div>
 
 <div style="padding:20px 0">
-<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Billing]]</a>
-</div>
+<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
 </div>
 </div>
 
