@@ -11,7 +11,7 @@
             ##Search instances in these organizations
             #set($products = $mediaarchive.query("collectiveproduct").match("collectionid", $collectionid).sort("createdonDown").search())
             #if ($products)
-                <div class="emdata">
+                <div class="emdata emdatatable">
                     <table class="table table-striped  table-hover">
                         <thead>
                             <tr class="tableheader">
@@ -98,7 +98,7 @@
      $collectionid).sort("createdonDown").search())
      #if ($invoices)
          <h2 style="margin-bottom:10px;">[[Invoices]]</h2>
-         <div class="emdata">
+         <div class="emdata emdatatable">
              <table class="table table-striped table-hover">
                  <thead>
                      <tr class="tableheader">

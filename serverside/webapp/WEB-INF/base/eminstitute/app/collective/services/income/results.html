@@ -1,6 +1,6 @@
 <div id="incomereport">
                  
-         <div class="emdata">
+         <div class="emdata emdatatable">
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">
@@ -57,9 +57,11 @@
                 	#end
                 #end
             </table>
-            $!income.size() [[hits]]
+            
         </div>
+        $!income.size() [[hits]]
+        <div>
 ##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
 ##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
-        
+        </div>
 </div>

@@ -1,5 +1,5 @@
 <div id="investmentreport">
-                  <div class="emdata">
+                  <div class="emdata emdatatable">
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
@@ -31,9 +31,12 @@
                     </tr>
                 #end
             </table>
-            <div style="font-size:0.9rem; padding-bottom:5px;">$investments.size() [[hits]]</div>
+            
         </div>
+        <div>$investments.size() [[hits]]</div>
+        <div>
         <a href="$applink/collective/services/investments/export/investments.csv?collectionid=${librarycol.id}&hitssessionid=$investments.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        </div>
         
 </div>

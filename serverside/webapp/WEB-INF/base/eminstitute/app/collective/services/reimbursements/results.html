@@ -13,7 +13,7 @@
 				</table>
 			#end   
                  
-                  <div class="emdata">
+                  <div class="emdata emdatatable">
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
@@ -63,9 +63,12 @@
                     </tr>
                 #end
             </table>
-            $reimbursements.size() [[hits]]
+           
         </div>
+         $reimbursements.size() [[hits]]
+         
+         <div>
         <a href="$applink/collective/services/reimbursements/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$reimbursements.getSessionId()"
            class="btn btn-sm btn-primary mb-4">[[Download]]</a>
-        
+        </div>
 </div>
