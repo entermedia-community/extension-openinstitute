@@ -100,7 +100,7 @@
 			<tr>
 			<td>$auser</td>
 			<td>
-					$value.getValue($currency) $mediaarchive.getCachedData("currencytype",$currency)
+					$value.getValue($currency) $!context.getText($mediaarchive.getCachedData("currencytype",$currency))
 			</td>
 			</tr>
 			#end

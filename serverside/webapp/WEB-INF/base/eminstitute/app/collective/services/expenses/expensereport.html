@@ -17,7 +17,7 @@
 	                		<td class="text-left" style="width:150px">[[Total]]:</td>
 	                		<td class="text-left">
 	                			#set($subtotal = $currencytype_total.get($currency))
-	                			$!context.doubleToMoney($subtotal, 2) $!mediaarchive.getCachedData("currencytype", $currency )
+	                			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))
 	                		</td>
                 		</tr>
 				#end
@@ -60,9 +60,9 @@
                                   #end
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
-                                  <td>$context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
                                   <td>#esc($hit.expensedescription)</td>
-                                  <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+                                  <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!context.getText($!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))</td>
 								 #if( $showreimburst )
 								 	<td>$!mediaarchive.getCachedData("user", $hit.reimburseuser)</td>								
 								 #else

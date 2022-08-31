@@ -49,12 +49,12 @@
                                   #set( $type = $hit.paymententitydesttype)
                                   $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitydest")
                                   </td>
-                                  <td>$context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
 			                      
                                   <td  style="white-space: nowrap;">#esc($hit.name)</td>
                              	  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
                                   <td style="text-align: right; width:140px;">
-                                  	$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $hit.currencytype)
+                                  	$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
                                   </td>
                                   <td>$!mediaarchive.getCachedData("currencytransferstatus", $hit.currencytransferstatus)</td>
                                   

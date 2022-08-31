@@ -53,7 +53,7 @@
 			       	 	$hit.paymenttype
 			       	 	</td>
 			       	 	
-			       	 	<td  style="width: 150px" class="text-right">$hit.totalprice  $!mediaarchive.getCachedData("currencytype", $hit.currencytype)</td>
+			       	 	<td  style="width: 150px" class="text-right">$hit.totalprice  $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))</td>
 			       	 	
 			       	 	
 			       	 
@@ -85,7 +85,7 @@
 	                			#foreach($t in $total)
 	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
 	                			#end
-	                			$!context.doubleToMoney($!totaltotal, 2) $!mediaarchive.getCachedData("currencytype", $total_) 
+	                			$!context.doubleToMoney($!totaltotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $total_)) 
 	                		</td>
 	                		<td></td>
 	                	</tr>
