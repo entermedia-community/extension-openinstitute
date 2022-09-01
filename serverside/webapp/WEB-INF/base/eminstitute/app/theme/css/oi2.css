@@ -159,11 +159,6 @@ li.menu-subheader {
 .community-add-btn {
     color: #C8C446;
 }
-
-.chatterbox-write .chatterbox-text {
-    width: calc(100% - 60px);
-}
-
 .chatloadmorelink {
 	display:block;
 	text-decoration: none;

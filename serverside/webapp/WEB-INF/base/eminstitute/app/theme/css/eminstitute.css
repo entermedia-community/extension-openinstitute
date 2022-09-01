@@ -764,7 +764,7 @@ height: 40px;
     font-size: 1rem;
     line-height: 1.1;
 	float:left;
-	width:calc(100% - 56px);
+	  width: calc(100% - 60px);
 	margin-right:1px;
 	color: #495057;
     background-color: #fff;
