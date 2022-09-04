@@ -162,9 +162,9 @@
     </name> 
   </property>  
   
-  <property id="sendchatnotifications" index="true" type="boolean" internalfield="true" keyword="false" filter="false" editable="true" > 
+  <property id="sendchatnotifications" index="true" type="boolean" defaultvalue="true" internalfield="true" keyword="false" filter="false" editable="true" > 
     <name> 
-      <language id="en"><![CDATA[Chat Notifications]]></language>  
+      <language id="en"><![CDATA[Send Notifications]]></language>  
     </name> 
   </property>  
   <property id="lastviewedapp" index="true"  internalfield="true" keyword="false" filter="false" editable="true" > 
