@@ -3,26 +3,21 @@
 
 #set($libraryid = $context.getRequestParameter("libraryid"))
 
-<div id="projectresultholder" class="container container-feed">
-	<div class="row justify-content-md-center">
-		<div class="col-lg-10">
 
-			<div class="contentcolumn">
-			<h1>[[New Project]]</h1>  
-			  <div class="" style="padding:20px;">
+  <div class="" style="padding:20px;">
 			
 			#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 			#set( $xmledithome  = "$apphome/components/xml")
 			$context.putPageValue("searcher",$searcher)
-			<form name="saveproject" id="saveproject" action="$applink/collective/welcome.html" method="post" class="force-validate-inputs">
-			
 			#if(!$user)
-			
+
 			<div  class="alert alert-success"> 
 				  <strong>[[Login Required]]</strong> 
 			</div>
+
+			#else
+			<form name="saveproject" id="saveproject" action="$applink/collective/newsave.html" method="post" class="force-validate-inputs">
 			
-			#end
 			
 			<input type="hidden" name="save" value="true" />
 			<input type="hidden" name="searchtype" value="librarycollection" />
@@ -39,12 +34,8 @@
 			
 			$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 			
-			  <button type="submit" class="btn btn-primary">[[Create]]</button>
 			</form>
+			#end
 			
-			  </div>
-			</div>
-		</div>
-	</div>
-</div>
-			
+  </div>
+		
