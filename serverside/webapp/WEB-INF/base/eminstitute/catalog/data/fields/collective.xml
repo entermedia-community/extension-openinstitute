@@ -17,7 +17,7 @@
     </name> 
   </property>  
   
-    <property id="collectivedescription" index="true" stored="true" viewtype="html" editable="true"   > 
+    <property id="collectivedescription" index="true" stored="true" editable="true"   > 
     <name> 
       <language id="de"><![CDATA[Projektbeschreibung]]></language>  
       <language id="en"><![CDATA[Description]]></language>  

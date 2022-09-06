@@ -28,9 +28,9 @@
 			<input type="hidden" name="field" value="library" />
 			<input type="hidden" name="library.value" value="$!libraryid" />
 			
-			#set( $searcher = $mediaarchive.getSearcher("collective") )
+			#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 			$context.putPageValue("searcher",$searcher)
-			$context.putPageValue("view", "collective/addnew")
+			$context.putPageValue("view", "librarycollection/addnew")
 			
 			$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 			
