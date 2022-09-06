@@ -165,14 +165,15 @@
 		                                    </div>
 		                                </div>
 		
-										#if ($lastproduct.recurring == true)
-		                               <div class="col-md-6">	                               
-				                            <div class="form-group">
-				                                <label for="staticEmail">[[Recurring Monthly]]</label>                                 
-				                                <input type="text" class="form-control" name="recurringperiod" value="$lastproduct.recurringperiod" disabled></input>
-				                            </div>
-		                        	   </div>
-		                        		#end
+## We control recurring
+##										#if ($lastproduct.recurring == true)
+##		                               <div class="col-md-6">	                               
+##				                            <div class="form-group">
+##				                                <label for="staticEmail">[[Recurring Monthly]]</label>                                 
+##				                                <input type="text" class="form-control" name="recurringperiod" value="$lastproduct.recurringperiod" disabled></input>
+##				                            </div>
+##		                        	   </div>
+##		                        		#end
 		                        	  	<div class="col-md-12">
 		                                	<div class="form-check">
 				                                <input type="checkbox" class="form-check-input" id="issavecard" name="issavecard"></input>
@@ -253,6 +254,7 @@
 </div>
 </div>
 
+<div class="clearfix"></div>
 </div>
 
 
