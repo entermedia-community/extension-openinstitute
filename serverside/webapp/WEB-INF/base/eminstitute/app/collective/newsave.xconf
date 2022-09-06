@@ -1,10 +1,19 @@
 <page>
+
+	<permission name="view">
+		<user />
+	</permission>
 	
-	<path-action name="DataEditModule.saveData"/>
+	<inner-layout />
+	
+	<path-action name="DataEditModule.saveData">
+		<property name="searchtype">librarycollection</property>
+	</path-action>
 	<path-action name="Script.run" >
 		<script>/${catalogid}/events/scripts/librarycollection/savecollective.groovy</script>
 	</path-action>
+	
+	
 	<path-action name="ProjectModule.redirectToCollectionRoot">
 	</path-action>
-	
 </page>
