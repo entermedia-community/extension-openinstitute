@@ -4,6 +4,8 @@
   <property id="name"/>
   <property id="organizationstatus"/>  
   <property id="communitytag" />
+  <property id="collectivetags" />
+  
     
   <property id="collectivedescription"/>  
   <property id="contactemail"/> 
