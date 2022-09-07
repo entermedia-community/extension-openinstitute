@@ -39,7 +39,7 @@
 		    	<div style="font-weight:bold;" >	 
 		    	 $goal.name
 		    	 </div> 
-			<span class="headersubtext">$!mediaarchive.getData("tickettype",$goal.tickettype) [[added]] $!goal.getAge() [[ago]] - [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()</span>
+			<span class="headersubtext">$!context.getText($!mediaarchive.getData("tickettype",$goal.tickettype)) [[added]] $!goal.getAge() [[ago]] - [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()</span>
 			</a>
     			$pages.include("$apphome/collective/goals/like.html",$context)
 				#if($goal.projectstatus != "completed")
