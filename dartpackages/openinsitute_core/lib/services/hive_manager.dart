@@ -11,7 +11,7 @@ class HiveManager {
   HiveManager();
 
   Future<void> init() async {
-    String? path = await sharedPref.getEMPath();
+      String? path = await sharedPref.getEMPath();
     if (path != null) {
       Hive.init(path);
     } else {

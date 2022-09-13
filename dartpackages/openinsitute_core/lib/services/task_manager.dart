@@ -24,7 +24,7 @@ class TaskManager {
     return await goalModule!.addData(goal);
   }
 
-  editGoal(String id, Map goal) async { 
+  editGoal(String id, Map goal) async {
     goalModule = await createDataModule(goalModule, "projectgoal");
     return await goalModule!.updateData(id, goal);
   }
@@ -47,8 +47,7 @@ class TaskManager {
   Future<bool> deleteProjectGoal(id) async {
     try {
       goalModule = await createDataModule(goalModule, "projectgoal");
-      await goalModule!.deleteData(id);
-      return false;
+      return await goalModule!.deleteData(id);
     } catch (e) {
       return false;
     }
