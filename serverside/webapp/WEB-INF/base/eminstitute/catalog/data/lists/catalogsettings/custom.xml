@@ -40,4 +40,17 @@
   
   <property id="events_notify_collective_app" value="entermediadb/app">Collective Chat Notify App</property>
   
+  <data id="invoice_email_header"> 
+    <name><![CDATA[invoice_email_header]]></name>  
+    <value><![CDATA[<h2>Hello ${invoiceto}</h2><p>Thank you for your purchase at ${project}, this is your invoice.</p>]]></value> 
+  </data>  
+  <data id="invoice_email_footer"> 
+    <name><![CDATA[invoice_email_footer]]></name>  
+    <value><![CDATA[<p>If you have any questions about this invoice, reach out to our support team for help.  </p><p>Cheers,<br> The Open Institute Team</p>]]></value> 
+  </data>  
+  <data id="invoice_paid_email"> 
+    <name><![CDATA[invoice_paid_email]]></name>  
+    <value><![CDATA[<p>Thank you for your purchase.</p> <p>If you have any questions about this invoice, reach out to our support team for help.</p>]]></value> 
+  </data>
+  
 </root>

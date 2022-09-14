@@ -250,6 +250,12 @@
       <language id="en"><![CDATA[Web Site]]></language>  
     </name> 
   </property>  
+  <property id="invoicebusinessinfo" index="true" stored="true" editable="true" viewtype="html"> 
+    <name> 
+      <language id="en"><![CDATA[Business Info (Invoice)]]></language>  
+    </name> 
+  </property>  
+  
 
   	<property id="contactemail" index="true" stored="true" keyword="true" editable="true"  indextype="not_analyzed">Email</property>
 	<property id="contactphone" index="true" stored="true" keyword="true" editable="true"  >Phone</property>
@@ -353,7 +359,26 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
     <name> 
       <language id="en"><![CDATA[Donation Email Template]]></language>  
     </name> 
-  </property>    
+  </property>
+  
+  <property id="invoiceemailheader" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="en"><![CDATA[Invoice Email Header]]></language>  
+    </name> 
+  </property>
+  
+    <property id="invoiceemailfooter" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="en"><![CDATA[Invoice Email Footer]]></language>  
+    </name> 
+  </property>     
+  
+  <property id="invoicepaidemail" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="en"><![CDATA[Payd Invoice Email Message]]></language>  
+    </name> 
+  </property>     
+  
   
   <property id="dollarsperpoints" index="true" stored="true"  editable="true" type="double" defaultvalue="1">
     <name> 

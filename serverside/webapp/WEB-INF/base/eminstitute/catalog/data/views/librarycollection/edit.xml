@@ -7,13 +7,13 @@
   <property id="communitytag" />
   <property id="collectivetags" />
   <property id="priviacylevel" />
-  <property id="assetportrait"/>
-  <property id="assetbanner"/>
-
+  
   <property id="collective"/>  
   <property id="dollarsperpoints" />
 
-
+  <property id="assetportrait"/>
+  <property id="assetbanner"/>
+  
   <property id="facebooklink" />
   <property id="instagramlink" /> 
   <property id="websitelink" />

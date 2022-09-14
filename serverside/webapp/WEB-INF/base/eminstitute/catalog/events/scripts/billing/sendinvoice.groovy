@@ -88,6 +88,10 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		 {
 			if (email != null) {
 				if (email) {
+					
+					sendinvoiceEmail(mediaArchive, email, invoice, workspace, iteratorType);
+					//"Invoice "+workspace, "send-invoice-event.html", actionUrl);
+					/*
 					switch (iteratorType) {
 						case "notificationsent":
 							String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
@@ -96,15 +100,16 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 							//actionUrl = actionUrl + "&entermedia.key=" + key;
 							
 							actionUrl = URLUtilities.urlEscape(actionUrl);
-							sendEmail(mediaArchive, email, invoice, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
+							sendEmail(mediaArchive, email, invoice, workspace, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
 							break;
 						case "notificationoverduesent":
-							sendEmail(mediaArchive, email, invoice, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
+							sendEmail(mediaArchive, email, invoice, workspace, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
 							break;
 						case "notificationpaidsent":
-							sendEmail(mediaArchive, email, invoice, "Payment Received "+workspace, "send-paid-invoice-event.html");
+							sendEmail(mediaArchive, email, invoice, workspace, "Payment Received "+workspace, "send-paid-invoice-event.html");
 							break;
 					}
+					*/
 				}
 			}
 		}
@@ -121,38 +126,100 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 }
 
+/*
 
-
-private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, String subject, String htmlTemplate) {
-	sendEmail(mediaArchive, contact, invoice, subject, htmlTemplate, null);
+private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String subject, String htmlTemplate) {
+	sendEmail(mediaArchive, contact, invoice, workspace, subject, htmlTemplate, null);
 }
-
-private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, String subject, String htmlTemplate, String actionUrl) {
+*/
+private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String messagetype) {
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
-	String template = "/" + appid + "/theme/emails/" + htmlTemplate;
-	
-	
-	if (actionUrl == null) {
-		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
-		
-		//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
-		//actionUrl = actionUrl + "&entermedia.key=" + key;
-		actionUrl = URLUtilities.urlEscape(actionUrl);
+	String template = "/" + appid + "/theme/emails/";
 
+	String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
+	//actionUrl = actionUrl + "&entermedia.key=" + key;
+	actionUrl = URLUtilities.urlEscape(actionUrl);
+	
+	String subject;
+	String invoiceemailheader;
+	String invoiceemailfooter;
+	
+	String collectionid = workspace.getId();
+	
+	switch(messagetype) {
+		case "notificationsent":
+			actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+			actionUrl = URLUtilities.urlEscape(actionUrl);
+			subject = "Invoice "+workspace;
+			template = template + "send-invoice-event.html";
+			//Invoice Template from collection
+			invoiceemailheader = workspace.get("invoiceemailheader");
+			if(invoiceemailheader == null || invoiceemailheader.equals("")) {
+				invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_email_header");
+			}
+			
+			
+			invoiceemailfooter = workspace.get("invoiceemailfooter");
+			if(invoiceemailfooter == null || invoiceemailheader.equals("")) {
+				invoiceemailfooter =  mediaArchive.getCatalogSettingValue("invoice_email_footer");
+			}
 		
+		break;
+	case "notificationoverduesent":
+		subject = "Overdue Invoice for "+workspace;
+		template = template + "send-overdue-invoice-event.html";
+		//Invoice Template from collection
+		invoiceemailheader = workspace.get("invoiceemailheader");
+		if(invoiceemailheader == null || invoiceemailheader.equals("")) {
+			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_email_header");
+		}
+		
+		
+		invoiceemailfooter = workspace.get("invoiceemailfooter");
+		if(invoiceemailfooter == null || invoiceemailheader.equals("")) {
+			invoiceemailfooter =  mediaArchive.getCatalogSettingValue("invoice_email_footer");
+		}
+
+		break;
+	case "notificationpaidsent":
+		subject = "Payment Received "+workspace;
+		template = template + "send-paid-invoice-event.html";
+		
+		invoiceemailheader = workspace.get("invoicepaidemail");
+		if(invoiceemailheader == null || invoiceemailheader.equals("")) {
+			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_paid_email");
+		}
+		break;
 	}
+	
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
+	
 	Map objects = new HashMap();
 	objects.put("followeruser", contact);
+	objects.put("invoiceto", contact); //change to name
+	
 	objects.put("mediaarchive", mediaArchive);
 	objects.put("invoice", invoice);
+	objects.put("project", workspace);
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
 	objects.put("siteroot", getSiteRoot());
 	objects.put("applink", appid);
+	
+	if (!invoiceemailheader.equals("")) {
+		invoiceemailheader = mediaArchive.getReplacer().replace(invoiceemailheader, objects);
+	}
+	if (!invoiceemailfooter.equals("")) {
+		invoiceemailfooter= mediaArchive.getReplacer().replace(invoiceemailfooter, objects);
+	}
+	
+	objects.put("invoiceheader", invoiceemailheader);
+	objects.put("invoicefooter", invoiceemailfooter);
+	
 	templateEmail.send(objects);
 	log.info("Email sent to: "+contact);
 }
