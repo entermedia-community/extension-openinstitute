@@ -4,7 +4,7 @@
 	<path-action name="Page.uploadFile"/>
 	<property name="path" >/WEB-INF/temp/importing/${catalogid}/uploaded.csv</property>
 	<property name="importpath" >/WEB-INF/temp/importing/${catalogid}/uploaded.csv</property>
-	<property name="dataroot" >/${applicationid}/collective/services/expenses</property>
+	<property name="dataroot" >/${applicationid}/collective/services/income</property>
 	
 	<path-action name="DataImportModule.importDataWithScript"/>
 
