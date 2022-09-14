@@ -41,7 +41,7 @@
 		$!goal.details 		
 	</td>
 	<td class="text-center" >
-		$!mediaarchive.getData("projectstatus",$goal.projectstatus)
+		$!context.getName($!mediaarchive.getData("projectstatus",$goal.projectstatus))
 	</td>
 	<td class="text-center" >
 		$!goal.sessioncount

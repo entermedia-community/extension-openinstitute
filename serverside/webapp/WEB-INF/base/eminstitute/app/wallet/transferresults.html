@@ -56,7 +56,7 @@
                                   <td style="text-align: right; width:140px;">
                                   	$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
                                   </td>
-                                  <td>$!mediaarchive.getCachedData("currencytransferstatus", $hit.currencytransferstatus)</td>
+                                  <td>$!context.getName($!mediaarchive.getCachedData("currencytransferstatus", $hit.currencytransferstatus))</td>
                                   
 			                      <td style="text-align: center; white-space: nowrap;">
 			                            #if($hit.currencytype=="2") ##points
