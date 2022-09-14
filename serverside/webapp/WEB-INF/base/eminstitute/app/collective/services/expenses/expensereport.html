@@ -24,6 +24,13 @@
      	</table> 
      #end  
                   <div class="emdata emdatatable">
+            #set($hits = $expenses)
+			$context.putPageValue("hits",$hits)
+			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
+			$context.putPageValue("resultsLink",$resultsLink)
+            $pages.include("${apphome}/components/table/pages.html", $context)
+
+                  
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
@@ -44,14 +51,14 @@
                                   <th></th>
                               </tr>
                           </thead>
-                          #foreach($hit in $expenses)
+                          #foreach($hit in $hits.getPageOfHits())
                               <tr>
                                   #if($showcollections )
                                   <td>
 									<a
 	                                    href="$applink/collective/services/expenses/index.html?collectionid=$hit.collectionid"
 	                                    class="btn btn-xs btn-secondary"
-	                                    target="_new"
+	                                    target="_new"income
 	                                    data-hidefooter="true"
 	                                    >
 		                                  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)
@@ -98,14 +105,13 @@
             </table>
             
         </div>
-        $expenses.size() [[hits]]
        
         <div>
         <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
            class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
            
-##        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
-##           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
+        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
+           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
 
 		</div>
         

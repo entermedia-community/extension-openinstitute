@@ -1,6 +1,14 @@
 <div id="incomereport">
                  
          <div class="emdata emdatatable">
+         
+            #set($hits = $income)
+			$context.putPageValue("hits",$hits)
+			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
+			$context.putPageValue("resultsLink",$resultsLink)
+            $pages.include("${apphome}/components/table/pages.html", $context)
+         
+         
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">
@@ -14,7 +22,7 @@
                      </tr>
                  </thead>
                  #set($totalarray = {})
-                 #foreach($hit in $income)
+                 #foreach($hit in $hits.getPageOfHits())
                  	#if(!$totalarray.get($hit.currencytype))
                  		#set($totalarray[$hit.currencytype] = [])
                  	#end
@@ -63,7 +71,12 @@
         </div>
         $!income.size() [[hits]]
         <div>
-##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
-##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        <a href="$applink/collective/services/income/export/income.csv?collectionid=${librarycol.id}&hitssessionid=$hits.getSessionId()"
+                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+                      
+        <a href="$applink/collective/services/income/import/index.html?collectionid=$!{librarycol.id}"
+           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Income]]">[[Import CSV]]</a>
+
+                      
         </div>
 </div>

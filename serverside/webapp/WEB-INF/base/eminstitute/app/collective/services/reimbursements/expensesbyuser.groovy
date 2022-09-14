@@ -14,7 +14,7 @@ public void init()
 
 	if( query == null)
 	{
-		query = searcher.query().exact("collectionid",collectionid).exact("reimbursedstatus","1").sort("dateDown").getQuery();
+		query = searcher.query().exact("collectionid",collectionid).exact("reimbursedstatus","1").named("expenses").sort("dateDown").getQuery();
 	}
 
 	query.setHitsName("reimbursements");
@@ -27,7 +27,7 @@ public void init()
 	b.subAggregation(sum);
 	query.setAggregation(b);
 	query.setHitsPerPage(50);
-	HitTracker hits = searcher.search(query);
+	HitTracker hits = searcher.cachedSearch(context,query);
 	hits.getActiveFilterValues();
 	Map currencymap = hits.getAggregationMap(name);
 	context.putPageValue(name,currencymap);
