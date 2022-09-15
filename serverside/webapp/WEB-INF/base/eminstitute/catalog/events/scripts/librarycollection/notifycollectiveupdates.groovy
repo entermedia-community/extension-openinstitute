@@ -115,13 +115,13 @@ public void init()
 			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 			if( collections.size() > 1)
 			{
-				templatemail.setSubject("[EM] " + collections.size() + " User Notifications"); //TODO: Translate
+				templatemail.setSubject("[OI] " + collections.size() + " User Notifications"); //TODO: Translate
 			}
 			else
 			{
 				String oneitem = collections.iterator().next();
 				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
-				templatemail.setSubject("[EM] " + collection.getName() + " Notification"); //TODO: Translate
+				templatemail.setSubject("[OI] " + collection.getName() + " Notification"); //TODO: Translate
 			}
 			
 			Map objects = new HashMap();
