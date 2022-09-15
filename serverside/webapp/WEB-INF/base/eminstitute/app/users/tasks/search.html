@@ -74,7 +74,7 @@
 				<div class="clearfix" style="padding:5px;"> </div>
 				<span class="headersubtext">
 				
-					$!mediaarchive.getData("tickettype",$goal.tickettype) $!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()
+					$!context.getText($!mediaarchive.getData("tickettype",$goal.tickettype)) $!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()
 				</span><br>
 				
 					#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )

@@ -22,7 +22,7 @@
 					<div class="col-md-3">
 						<select name="paidfromaccount"  class="form-control-sm" >
 							#foreach( $hit in $hits )
-								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$context.getText($hit.getName())</option>
+								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$context.getText($mediaarchive.getCachedData("bankaccount", $hit.getId()))</option>
 							#end
 						</select>
 					</div>
