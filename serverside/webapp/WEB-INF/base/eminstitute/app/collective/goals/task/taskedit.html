@@ -53,7 +53,9 @@
 			  #set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
 				#foreach( $hit in $team)
 					#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+					#if( $followeruser)
 			  		<option value="$hit.followeruser" #if( $completedby == $hit.followeruser) selected #end>$followeruser.getName()</option>
+			  		#end
 				#end
 			</select>
 			</div>
