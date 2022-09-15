@@ -49,12 +49,20 @@
 				#foreach($transaction in $donations.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.userid) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
-						<span style="font-size:1rem"><strong>$$transaction.totalprice</strong></span> [[from]]
-						#if( $transaction.paymenttype =="paypal" && $transaction.name) 
-							 $transaction.name
-						#elseif($selecteduser)$!selecteduser.getAnonNickName()
-						#end
-						 <br>[[on]] $!context.getDateTime($transaction.paymentdate) 
+					
+					<table  style="width:100%;">
+						<tr>
+							<td style="width:27%; text-align: right;"><strong>$$!context.doubleToMoney($transaction.totalprice,2) <span style="font-size:0.8rem">$context.getText($!mediaarchive.getCachedData("currencytype", $transaction.currencytype))</span></strong></td>
+							<td style="width:28%; text-align: center; padding-left:5px;">$!context.getDate($transaction.paymentdate)</td>
+							<td style="width:45%">
+							#if( $transaction.paymenttype =="paypal" && $transaction.name) 
+							 	$transaction.name
+							#elseif($selecteduser)
+								$!selecteduser.getAnonNickName()
+							#end
+							</td>
+						</tr>
+					</table>
 					</div>	
 				#end
 			#end
