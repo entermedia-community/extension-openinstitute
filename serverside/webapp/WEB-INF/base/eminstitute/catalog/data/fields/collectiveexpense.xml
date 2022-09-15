@@ -60,7 +60,14 @@
       <language id="es"><![CDATA[Aprobado por]]></language> 
     </name> 
   </property>  
-
+ <property id="owner" index="true" listid="user" deleted="false" editable="true" stored="true" viewtype="user" keyword="true" datatype="list">New 
+    <name> 
+      <language id="de"><![CDATA[Owner]]></language>  
+      <language id="en"><![CDATA[Owner]]></language>  
+      <language id="es"><![CDATA[Propietario]]></language>  
+      <language id="fr"><![CDATA[Propriétaire]]></language> 
+    </name> 
+  </property>  
    <property id="ispaid" index="true" stored="true" type="boolean" >
 	 <name>
 	 <language id="en" > <![CDATA[Payment Issued]]> </language>

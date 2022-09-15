@@ -1,5 +1,6 @@
 #set( $showreimburst = $context.getRequestParameter("showreimburst"))
 <div id="expensereport">
+	<div id="resultsdiv">
 	#if($pendingexpensesreimburseuser_total)
     	<table class="table table-striped">
                #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
@@ -114,5 +115,5 @@
            class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
 
 		</div>
-        
+      </div>  
 </div>

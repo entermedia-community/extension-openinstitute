@@ -53,7 +53,14 @@
       <language id="en"><![CDATA[Entered By]]></language> 
     </name> 
   </property>  
-
+ <property id="owner" index="true" listid="user" deleted="false" editable="true" stored="true" viewtype="user" keyword="true" datatype="list">New 
+    <name> 
+      <language id="de"><![CDATA[Owner]]></language>  
+      <language id="en"><![CDATA[Owner]]></language>  
+      <language id="es"><![CDATA[Propietario]]></language>  
+      <language id="fr"><![CDATA[Propriétaire]]></language> 
+    </name> 
+  </property>  
     <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
 	 <name>
 	 <language id="en" > <![CDATA[Bank Account]]> </language>

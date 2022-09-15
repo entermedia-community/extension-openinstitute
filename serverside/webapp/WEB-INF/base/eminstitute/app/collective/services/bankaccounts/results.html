@@ -1,0 +1,36 @@
+<div id="investmentreport">
+                  <div class="emdata emdatatable">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr class="tableheader">
+                                  <th>[[Name]]</th>
+                                  <th>[[Currency]]</th>
+                                  <th>[[Owner]]</th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          #foreach($hit in $hits.getPageOfHits())
+                              <tr>
+                                  <td>$!context.getText($hit)</td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))</td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("user", $hit.owner))</td>
+                        <td style="text-align: center">
+                            #if( $caneditcollection )
+                                <a
+                                    href="$applink/collective/services/bankaccounts/edit.html?id=$hit.id&searchtype=collectiveinvestment&collectionid=$librarycol.id&librarycol=$librarycol.id"
+                                    class="btn btn-xs btn-secondary emdialog"
+                                    data-hidefooter="true"
+                                    ><i class="fa fa-edit"></i></a>
+                                    
+                            #end
+                        </td>
+                    </tr>
+                #end
+            </table>
+            
+        </div>
+        <div>$hits.size() [[hits]]</div>
+        <div>
+        </div>
+        
+</div>

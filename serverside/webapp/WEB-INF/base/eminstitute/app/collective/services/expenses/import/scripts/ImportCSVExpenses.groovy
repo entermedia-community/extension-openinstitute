@@ -8,25 +8,14 @@ class CsvImporter extends BaseImporter
 {
 	public String collectionid;
 	
-		protected Data findOrCreateById(String inTable, String id, String value)
+	public Object scrubValueIfNeeded(PropertyDetail inDetail, Object inValue)
+	{
+		if( inDetail.getId().equals("collectionid"))
 		{
-			if( inTable.equals("collectiveproject"))
-			{
-				Searcher searcher = getSearcherManager().getSearcher(getSearcher().getCatalogId(), inTable);
-				Data data = (Data) searcher.query().exact("parentcollectionid", collectionid).match("name",value).searchOne();
-				if (data == null)
-				{
-					data = searcher.createNewData();
-					data.setId(id); //Hope its unique
-					data.setName(value);
-					data.setValue("parentcollectionid", collectionid);
-					searcher.saveData(data, null);
-				}
-				return data;
-			}
-			Data data = super.findOrCreateById(inTable, id, value);
-			return data;
+			return collectionid;
 		}
+		return inValue;
+	}
 
 }
 
