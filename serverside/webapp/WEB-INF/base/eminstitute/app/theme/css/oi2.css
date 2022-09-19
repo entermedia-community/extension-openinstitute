@@ -350,7 +350,7 @@ text-decoration: none;
 	}
 	
 	#mainOINav .dropdown-menu {
-		.border-radius:0;
+		border-radius:0;
 	}
 	
 	#mainOINav .col-oi-picker {
