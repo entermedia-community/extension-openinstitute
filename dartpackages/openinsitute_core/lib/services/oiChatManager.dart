@@ -15,6 +15,23 @@ class OiChatManager {
     return Get.find();
   }
 
+  Future<List<oiChatMessage>> getRecentMessages() async {
+    chatterBox = await oi.datamanager
+        .getDataModule("librarycollection", boxString: "Recent Chat");
+    Map<String, dynamic> results = await chatterBox!.createModuleOperation(
+        "viewtopmessages",
+        RequestType.PUT,
+        {"userid": oi.authenticationmanager.emUser!.userid});
+
+    List<oiChatMessage> messages = [];
+
+    for (var message in results["results"]) {
+      messages.add(oiChatMessage.fromJson(message));
+    }
+
+    return messages;
+  }
+
   createDataModule(String collectionId,
       {String moduleString = "librarycollection"}) async {
     chatterBox = await oi.datamanager
