@@ -430,7 +430,7 @@
     <span class="preheader">This is an invoice for your purchase on $!context.getDate($invoice.getValue("createdon")). Please submit payment by $!context.getDate($invoice.getValue("duedate"))</span>
     
     <div style="background-color:#A5DAD3; padding: 5px 5px; margin-bottom:20px; text-align:center;">
-		<a href="${siteroot}"><img src="${siteroot}/$applink/theme/images/invoice-logo.png"></a>
+		<a href="${siteroot}"><img src="${siteroot}/$applink/theme/images/email-logo.png"></a>
 	</div>
     
     
@@ -444,8 +444,12 @@
                   <tr>
                     <td class="content-cell">
                       <div class="f-fallback">
-                        <h1>Hi $followeruser,</h1>
-                        <p>Thanks for using Open Institute. This is an invoice for your recent purchase.</p>
+                        
+                        
+                        $!invoiceheader
+                        
+                        
+                        
                         <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td class="attributes_content">
@@ -453,7 +457,9 @@
                                 <tr>
                                   <td class="attributes_item">
                                     <span class="f-fallback">
-						              <strong>Amount Due:</strong> $currency $!context.roundDouble($invoice.getValue("totalprice"), 2)
+						              <strong>Amount Due:</strong> 
+						              $currency $!context.roundDouble($invoice.getValue("totalprice"), 2) 
+						              ($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))
 						            </span>
                                   </td>
                                 </tr>
@@ -534,7 +540,7 @@
 
                                 <tr>
                                   <td width="80%" colspan="2" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total purchase_total--label">Total ($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</p>
+                                    <p class="f-fallback purchase_total purchase_total--label">Total ($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</p>
                                   </td>
                                   <td width="20%" class="purchase_footer" valign="middle">
                                     <p class="f-fallback purchase_total">$currency $!context.roundDouble($invoice.getValue("totalprice"),2)</p>
@@ -544,35 +550,28 @@
                             </td>
                           </tr>
                         </table>
-                        <p>If you have any questions about this invoice, reach out to our <a href="$supporturl">support team</a> for help.</p>
-                        <p>Cheers,
-                          <br>The Open Institute Team</p>
-                        <!-- Sub copy -->
-                        <table class="body-sub" role="presentation">
+                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
-                            <td>
-                              <p class="f-fallback sub">If you’re having trouble with the button above, copy and paste the URL below into your web browser.</p>
-                              <p class="f-fallback sub">$actionurl</p>
+                            <td align="center">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                                <tr>
+                                  <td align="center">
+                                    <a href="$actionurl" class="f-fallback button button--green" target="_blank">Pay Invoice</a>
+                                  </td>
+                                </tr>
+                              </table>
                             </td>
                           </tr>
                         </table>
+                        <div style="font-size:0.75rem; padding:10px;">
+                        If you’re having trouble with the button above, copy and paste the URL below into your web browser.<br> 
+                        <strong>$actionurl</strong>
+                        </div>
+                        
+                        $!invoicefooter
+                        
+                        
                       </div>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table class="email-footer" align="center" width="600" cellpadding="0" cellspacing="0" role="presentation">
-                  <tr>
-                    <td class="content-cell" align="center">
-                      <p class="f-fallback sub align-center">&copy; 2022 Open Institute &  EnterMediaDB. All rights reserved.</p>
-                      <p class="f-fallback sub align-center">
-                        EnterMediaDB
-                        <br>1550 Magnolia Dr.
-						<br>Cincinnati, OH 45215
-                      </p>
                     </td>
                   </tr>
                 </table>

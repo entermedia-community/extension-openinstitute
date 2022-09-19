@@ -25,7 +25,7 @@ public void init()
 	b.subAggregation(sum);
 	query.setAggregation(b);
 	query.setHitsPerPage(50);
-	HitTracker hits = searcher.search(query);
+	HitTracker hits =  searcher.cachedSearch(context,query);
 	hits.getActiveFilterValues();
 	Map currencymap = hits.getAggregationMap(name);
 	

@@ -7,4 +7,6 @@
 	<property id="currencytype" />
 	<property id="total" />
 	<property id="investmentuser" />
+	<property id="bankaccount" />
+	
 </properties>

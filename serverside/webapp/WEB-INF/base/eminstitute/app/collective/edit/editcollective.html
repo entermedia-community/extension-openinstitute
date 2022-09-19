@@ -35,6 +35,28 @@ $context.putPageValue("data", $librarycol)
 	#end
 #end
 
+#if(!$librarycol.get("invoiceemailheader"))
+	#set($invoiceemailheader = $mediaarchive.getCatalogSettingValue("invoice_email_header"))
+	#if($invoiceemailheader)
+		$!context.setRequestParameter("invoiceemailheader.value",$invoiceemailheader)
+	#end
+#end
+
+#if(!$librarycol.get("invoiceemailfooter"))
+	#set($invoiceemailfooter = $mediaarchive.getCatalogSettingValue("invoice_email_footer"))
+	#if($invoiceemailfooter)
+		$!context.setRequestParameter("invoiceemailfooter.value",$invoiceemailfooter)
+	#end
+#end
+ 
+ 
+#if(!$librarycol.get("invoicepaidemail"))
+	#set($invoicepaidemail = $mediaarchive.getCatalogSettingValue("invoice_paid_email"))
+	#if($invoicepaidemail)
+		$!context.setRequestParameter("invoicepaidemail.value",$invoicepaidemail)
+	#end
+#end
+ 
  
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 

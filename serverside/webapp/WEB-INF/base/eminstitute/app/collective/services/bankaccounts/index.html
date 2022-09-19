@@ -1,0 +1,75 @@
+#set($collectionid = $librarycol.getId())
+
+#ifnull( $collectionid )
+	#set($collectionid = $context.getRequestParameter("collectionid"))
+#end
+
+
+
+<div>
+            
+            #if( $caneditcollection )    
+           <a
+                      href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
+                      class="emdialog btn btn-sm btn-primary float-right">[[Add Bank Account]]</a>
+              #end
+		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+
+	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
+	
+		#set( $searcher = $mediaarchive.getSearcher($content.searchtype) )
+		$context.putPageValue("searcher",$searcher)
+		#set ($details = $searcher.getDetailsForView("collectiveinvestment/search", $userprofile))
+	
+		<input type="hidden" name="searchtype" value="collectiveinvestment" />
+		
+		<input type="hidden" name="field" value="collectionid" />
+		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
+		<input type="hidden" name="operation" value="exact" />
+		<input type="hidden" name="oemaxlevel" value="1" />
+		
+		<table>
+		<tr>
+		<td width="100%">
+		<div  id="searchform" class="row inlinesearch" style="display:none" >
+		$context.putPageValue("autocomplete","off")
+			#foreach( $detail in $details)
+			<div class="col-md-3">
+					$context.putPageValue("detail", $detail)
+					$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+			</div>
+			#if( $counter == 4)
+				</div>
+				<div  class="row" >
+			#end	
+			#end
+		</div>	
+		</td>
+		</tr>
+		</table>
+
+		<div style="padding-top:20px;">
+		<h2 class="float-left" style="margin:0 0 10px">[[Bank Accounts]]</h2>
+		<div style="float:right;width:300px; margin-bottom:10px;">
+		<label>[[Sort by]]</label>
+		<div style="width:200px; display:inline-block;">
+		<select class="select2 form-control-sm" name="sortby" >
+			#set ($details = $searcher.getDetailcollectiveinvestmentsForView("collectiveinvestment/edit", $userprofile))
+		#foreach( $detail in $details)
+			<option value="$detail.getId()Down">$!context.getText($detail)</option>
+			<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+		#end
+		</select>
+		</div>
+		</div>
+		<div class="clearfix"></div>
+		</div>
+
+	</form>
+	#ifnull( $hits) 
+              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
+              $context.putPageValue("hits",$hits)
+	#end
+	$pages.include("./results.html",$context)
+</div>
+

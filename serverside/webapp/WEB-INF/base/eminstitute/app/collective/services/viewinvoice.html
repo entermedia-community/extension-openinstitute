@@ -54,12 +54,17 @@
 	<div style="padding:10px; text-align: left;">
 		<div class="row">
 			<div class="col-sm-4">
-					<img src="$applink/theme/images/invoice-logo-dark.png" class="img-fluid">
+				#set($logo = $mediaarchive.getAsset($librarycol.assetportrait) )
+	
+				#if ($logo)
+					#set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
+				#else
+					#set($logourl = "$applink/theme/images/invoice-logo.png")
+				#end
+				<img src="$logourl" style="max-height: 100px;">
 			</div>
-			<div class="col-sm-8 text-right">
-				EnterMedia, Inc. 1550<br>
-				Magnolia Dr. Cincinnati<br>
-				OH 45215
+			<div class="col-sm-8 text-right" style="padding-top:20px;">
+				$!collection.getValue("invoicebusinessinfo")
 			</div>
 		</div>
 	
@@ -74,17 +79,15 @@
 				
 			</div>
 			<div style="margin-top:10px;">
-				<strong>[[Invoiced to]]:</strong>
-					#set($invoicedto = $collection.getValue("invoicedto"))
-					#if($invoicedto)
-						<div style="line-height: 1;">$invoicedto</div>
-					#else
-						<br>$!collection
-					#end
+					##<strong>[[Invoiced to]]:</strong>
+					###set($invoicedto = $collection.getValue("invoicedto"))
+					###if($invoicedto)
+					##	<div style="line-height: 1;">$invoicedto</div>
+					###else
+					##	<br>$!collection
+					###end
 				#if($invoice.getValue("invoicedescription"))
-					<div style="margin-top:10px;">
 						$invoice.getValue("invoicedescription")
-					</div>
 				#end
 			</div>
 		

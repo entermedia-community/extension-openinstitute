@@ -8,10 +8,10 @@ $context.putPageValue("searcher",$searcher)
 			name="wizard" 
 			method="post" 
 			data-targetdiv="channelcontainer" 
-			action="$applink/collective/channel/upload.html" 
+			##action="$applink/collective/channel/uploadX.html" 
 			data-finishaction="$applink/collective/channel/uploadsave.html?oemaxlevel=2"
 			data-linkfinishaction="$applink/collective/channel/uploadlink.html?oemaxlevel=2"
-			class="validate showonselect autofinishaction"
+			class="validateX showonselectX autofinishactionX ajaxform"
 			data-finishtargetdiv="channelcontainer"
 			>
 		
@@ -103,7 +103,9 @@ $context.putPageValue("searcher",$searcher)
 			    </div> 
 				<div class="float-right">
 						<div id="uploadinstructionsafter">
+						##submitform-oehtml
 				           <a class="btn btn-primary btn-sm" id="startbutton" data-complete="[[Upload Complete]]" href="#">[[Post]]</a>
+				           <a class="btn btn-primary btn-sm oehtmlinputblur" data-complete="[[Upload Complete]]" href="#">[[Post Now]]</a>
 					    </div>
 				</div>
 					<div class="float-right" style="padding-right:20px">

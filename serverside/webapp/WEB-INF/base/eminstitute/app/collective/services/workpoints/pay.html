@@ -59,7 +59,7 @@
 			#foreach( $currencytype in $netincome.keySet())
 				#if( $currencytype != "2")
 				#set($net = $netincome.get($currencytype))
-				<option value="$currencytype">$!context.doubleToMoney($!net, 2) $!mediaarchive.getCachedData("currencytype", $currencytype)</td>
+				<option value="$currencytype">$!context.doubleToMoney($!net, 2) $!context.getName($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
 				#end
 			#end
 			</select>

@@ -12,7 +12,7 @@
 				
 					<input type="hidden" name="oemaxlevel" value="1" />
 					
-				#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
+					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
 					#ifnull( $paidfromaccount)
 						#set($paidfromaccount = "1" )
@@ -22,7 +22,7 @@
 					<div class="col-md-3">
 						<select name="paidfromaccount"  class="form-control-sm" >
 							#foreach( $hit in $hits )
-								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$hit</option>
+								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$context.getText($mediaarchive.getCachedData("bankaccount", $hit.getId()))</option>
 							#end
 						</select>
 					</div>
@@ -59,9 +59,11 @@
                          <td>$!context.getDate($transaction.getDate())</td>
                          <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
                          <td>$transaction.getName()</td>
-                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType() )</td>
+                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
+                         $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
+                         </td>
                          #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
-                         <td><A href="$link">$transaction.getAmount()</A></td>
+                         <td><a href="$link">$transaction.getAmount()</a></td>
                          #set($totalbycurrency = $totalbycurrency + $transaction.getAmount())
 					
                 #end
@@ -70,7 +72,7 @@
 					<td style="width:15%; text-align: right;">$!context.doubleToMoney($totalbycurrency,2)</td>
                     </tr>
 			</table>
-			$all.size() transactions
+			$all.size() [[transactions]]
 			
 			#set( $tracker = $financeManager.createTracker($all) )
 			$context.putSessionValue($$tracker.getSessionId(),$tracker)

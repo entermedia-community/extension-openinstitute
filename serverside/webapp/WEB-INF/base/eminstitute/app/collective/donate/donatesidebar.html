@@ -49,12 +49,20 @@
 				#foreach($transaction in $donations.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.userid) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
-						<span style="font-size:1rem"><strong>$$transaction.totalprice</strong></span> [[from]]
-						#if( $transaction.paymenttype =="paypal" && $transaction.name) 
-							 $transaction.name
-						#elseif($selecteduser)$!selecteduser.getAnonNickName()
-						#end
-						 <br>[[on]] $!context.getDateTime($transaction.paymentdate) 
+					
+					<table  style="width:100%;">
+						<tr>
+							<td style="width:28%; text-align: right;"><strong>$$!context.doubleToMoney($transaction.totalprice,2) <span style="font-size:0.8rem">$context.getText($!mediaarchive.getCachedData("currencytype", $transaction.currencytype))</span></strong></td>
+							<td style="width:28%; text-align: center; padding-left:5px;">$!context.getDate($transaction.paymentdate)</td>
+							<td style="width:44%">
+							#if( $transaction.paymenttype =="paypal" && $transaction.name) 
+							 	$transaction.name
+							#elseif($selecteduser)
+								$!selecteduser.getAnonNickName()
+							#end
+							</td>
+						</tr>
+					</table>
 					</div>	
 				#end
 			#end
@@ -62,16 +70,29 @@
 			#set( $other = $mediaarchive.query("collectiveincome").exact("collectionid",$collectionid).sort("dateDown").search($context) )
 			#if( !$other.isEmpty() )
 				#set( $n = $other.setHitsPerPage(6))
-			<strong>[[Other Income]] ($other.size())</strong>
+				
+				<strong>[[Other Income]] ($other.size())</strong>
 				#foreach($transaction in $other.getPageOfHits())
 				 	#set( $selecteduser = $mediaarchive.getUser($transaction.paidfrom) )
 					<div style="background-color:#eee;padding:5px 10px 5px 10px; margin:4px 0;">
-						<span style="font-size:1rem"><strong>$transaction.total</strong> $mediaarchive.getCachedData("currencytype", $transaction.currencytype)</span> 
-						#if($selecteduser)[[from]] $!selecteduser.getAnonNickName()
-						#else
-						$transaction.incomedescription
-						#end
-						 <br>[[on]] $!context.getDateTime($transaction.date) 
+					<table  style="width:100%;">
+						<tr>
+							<td style="width:28%; text-align: right;"><strong>$$!context.doubleToMoney($transaction.total,2) <span style="font-size:0.8rem">$context.getText($!mediaarchive.getCachedData("currencytype", $transaction.currencytype))</span></strong></td>
+							<td style="width:28%; text-align: center; padding-left:5px;">$!context.getDate($transaction.date)</td>
+							<td style="width:44%">
+							#if($selecteduser)
+								$!selecteduser.getAnonNickName()
+							#else
+								##$transaction.incomedescription
+								$!context.getText($!mediaarchive.getCachedData("incometype", $transaction.incometype))
+							#end
+							</td>
+						</tr>
+					</table>
+						
+						 
+						
+						 
 					</div>	
 				#end
 			#end

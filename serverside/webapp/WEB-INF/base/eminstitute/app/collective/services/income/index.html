@@ -54,7 +54,7 @@
 
 	
 	#ifnull( $income)
-              #set( $income = $mediaarchive.query("collectiveincome").hitsPerPage(500).exact("collectionid",$collectionid).sort("dateDown").search($context))
+              #set( $income = $mediaarchive.query("collectiveincome").hitsPerPage(500).exact("collectionid",$collectionid).named("income").sort("dateDown").search($context))
               $context.putPageValue("income",$income)
 	#end
    <div style="padding-top:20px;">

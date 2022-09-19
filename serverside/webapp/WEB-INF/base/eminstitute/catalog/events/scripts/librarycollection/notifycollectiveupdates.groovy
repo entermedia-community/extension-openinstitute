@@ -115,13 +115,13 @@ public void init()
 			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 			if( collections.size() > 1)
 			{
-				templatemail.setSubject("[EM] " + collections.size() + " User Notifications"); //TODO: Translate
+				templatemail.setSubject("[OI] " + collections.size() + " User Notifications"); //TODO: Translate
 			}
 			else
 			{
 				String oneitem = collections.iterator().next();
 				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
-				templatemail.setSubject("[EM] " + collection.getName() + " Notification"); //TODO: Translate
+				templatemail.setSubject("[OI] " + collection.getName() + " Notification"); //TODO: Translate
 			}
 			
 			Map objects = new HashMap();
@@ -173,8 +173,9 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 				notifications = new HashMap();
 				//New collection save collection info too
 				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
-				String collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html";
+				String collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+ collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html?collectionid="+collection.getId();
 				collection.setValue("finalurl", collection_url);
+				
 				notifications.put("collection", collection);
 			}
 			

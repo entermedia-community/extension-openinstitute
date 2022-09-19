@@ -59,6 +59,12 @@
     <name><![CDATA[View Messages For Project]]></name> 
   </data>  
 
+  <data id="modulelibrarycollectionviewtopmessages" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/viewtopmessages"> 
+    <samplerequest><![CDATA[{ "userid": "admin" }]]></samplerequest>  
+    <name><![CDATA[View Top Messages By Project]]></name> 
+  </data>  
+
+
   <data id="modulelibrarycollectionsavemessage" uploadfile="false" httpmethod="PUT" docsection="modulelibrarycollection" url="/site/mediadb/services/module/librarycollection/messagesave"> 
     <samplerequest><![CDATA[{  "collectionid": "AX7gTBpbekpQ63X1oUTz", "channel":"AX7gTB36ekpQ63X1oUT4", "message":"Hello world!" }]]></samplerequest>  
     <name><![CDATA[Message Save]]></name> 

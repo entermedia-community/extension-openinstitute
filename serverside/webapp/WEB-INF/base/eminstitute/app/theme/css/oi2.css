@@ -947,3 +947,38 @@ li.menu-subheader {
 @media (max-width: 640px) {
 .emdatatable { overflow-y:auto }
 }
+
+.smartpages ul
+{
+    margin: 0;
+    padding: 10px 0 0 0;
+    list-style: none;
+    float: right;
+}
+.smartpages ul li
+{
+
+list-style: none;
+    position: relative;
+    float: left;
+    display: block;
+    margin: 4px;
+    padding: 4px 6px;
+    line-height: 25px;
+    font-weight: bold;
+}
+.smartpages ul li.pagenum
+{
+
+    color: #ddd;
+    backgroundcolor: white;
+    border: 1px solid white;
+}
+
+.smartpages ul li.current
+{
+
+    color: #bbb;
+    border: 1px solid #bbb;
+    background-color: #eee;
+}

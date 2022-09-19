@@ -1,3 +1,4 @@
+
 #set( $currency = '$' )
 <html>
   <head>
@@ -142,10 +143,8 @@
     }
     
     .attributes_content {
-      background-color: #d1e7dd;
-      border-color: #badbcc;
+      background-color: #F4F4F7;
       padding: 16px;
-      color: #0f5132;
     }
     
     .attributes_item {
@@ -429,9 +428,12 @@
   <div style="background-color:#f1f1f1; padding:30px 0;">
 	<div style="background-color:#fff; padding:20px; margin:0 auto; width:600px; color:#000;">
     <span class="preheader">This is an invoice for your purchase on $!context.getDate($invoice.getValue("createdon")). Please submit payment by $!context.getDate($invoice.getValue("duedate"))</span>
-  <div style="background-color:#A5DAD3; padding: 5px 5px; margin-bottom:20px; text-align:center;">
-		<a href="${siteroot}"><img src="${siteroot}/$applink/theme/images/invoice-logo.png"></a>
+    
+    <div style="background-color:#A5DAD3; padding: 5px 5px; margin-bottom:20px; text-align:center;">
+		<a href="${siteroot}"><img src="${siteroot}/$applink/theme/images/email-logo.png"></a>
 	</div>
+    
+    
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
         <td align="center">
@@ -442,26 +444,11 @@
                   <tr>
                     <td class="content-cell">
                       <div class="f-fallback">
-                        <h1>Hi $followeruser,</h1>
-                        <p>Thanks for using Open Institute. Thank you for your purchase.</p>
-                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                          <tr>
-                            <td class="attributes_content">
-                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-						              <strong>Payment Received</strong> 
-						            </span>
-                                  </td>
-                                  <td style="text-align: right!important">
-                                  	<strong>($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))) s$currency $!context.roundDouble($invoice.getValue("totalprice"), 2)</strong>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
+                        
+                        
+                        $!invoiceheader
+                        
+                       #if($actionurl)
                         <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td align="center">
@@ -475,26 +462,12 @@
                             </td>
                           </tr>
                         </table>
-                        <p>If you have any questions about this invoice, reach out to our <a href="$supporturl">support team</a> for help.</p>
-                        <p>Cheers,
-                          <br>The Open Institute Team</p>
+                        #end
+                        
+                        $!invoicefooter
+                        
+                        
                       </div>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table class="email-footer" align="center" width="600" cellpadding="0" cellspacing="0" role="presentation">
-                  <tr>
-                    <td class="content-cell" align="center">
-                      <p class="f-fallback sub align-center">&copy; 2022 Open Institute &  EnterMediaDB. All rights reserved.</p>
-                      <p class="f-fallback sub align-center">
-                        EnterMediaDB
-                        <br>1550 Magnolia Dr.
-						<br>Cincinnati, OH 45215
-                      </p>
                     </td>
                   </tr>
                 </table>
