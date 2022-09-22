@@ -90,5 +90,18 @@
     <name><![CDATA[Delete All User Data]]></name> 
   </data>  
 
+  <data id="modulecollectiveexpensecreatewithupload" filefieldstoupload="receiptattachment"
+   httpmethod="POST" docsection="modulecollectiveexpense" url="/site/mediadb/services/module/collectiveexpense/create.json"> 
+    <samplerequest><![CDATA[{ 
+    "collectionid": "AYGOFauOefS9P58F9LdN",
+    "name":"Exmple REST Expense",
+    "expensedescription":"More text",
+    "currencytype":"1",
+    "total":"1.23",
+    "collectiveproject":"AYGOFazsefS9P58F9LdQ"
+    }]]></samplerequest>
+    <name><![CDATA[Create With Attachment]]></name> 
+  </data>  
+
 
 </root>

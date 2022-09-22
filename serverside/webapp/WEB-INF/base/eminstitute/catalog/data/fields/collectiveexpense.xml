@@ -118,7 +118,7 @@
   
   	<property id="receiptattachment" listid="asset" index="true"
 		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="/uploads/${year}/${collectiveid}/expenses/${id}">
+		sourcepath="/uploads/${formattedyear}/${collectionid}/expenses/${shortguid}">
 		<name>
 			<language id="en"><![CDATA[Receipt Photo]]></language>
 		</name>
