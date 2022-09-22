@@ -40,7 +40,7 @@
 		stored="true" editable="true" viewtype="asset" type="list"
 		sourcepath="${collectiveid}/productattachements/${id}">
 		<name>
-			<language id="en"><![CDATA[Quote or additional details]]></language>
+			<language id="en"><![CDATA[Attachment]]></language>
 		</name>
 	</property>
 
@@ -79,6 +79,24 @@
 	<property id="nextbillon" editable="true" stored="true"
 		type="date" index="true">Next Bill Date
 	</property>
+
+	<property id="startdate" editable="true" stored="true"
+		type="date" index="true">
+
+<name>
+			<language id="en"><![CDATA[Start Date]]></language>
+		</name>
+
+	</property>
+
+	<property id="enddate" editable="true" stored="true"
+		type="date" index="true">
+
+	<name>
+			<language id="en"><![CDATA[End Date]]></language>
+		</name>
+	</property>
+
 
 	<!-- <property id="featured" index="true" type="boolean" keyword="false" 
 		filter="false" editable="true" > <name> <language id="en"><![CDATA[Featured]]></language> 
@@ -132,9 +150,15 @@
 
   <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="products/${year}/${filename}">
    	<name>
-   		<language id="en"><![CDATA[Primary Image]]></language>
+   		<language id="en"><![CDATA[Primary Attachment]]></language>
    	</name>
    </property>
+   
+    <property id="uploadcategory"  index="true" type="list" viewtype="category" listid="category" stored="true" note="Auto populated"  editable="false" >
+    <name>
+      <language id="en"><![CDATA[Image Category]]></language>
+    </name>
+  </property> 
    
    		
 	<property id="sentto" index="true" stored="true" editable="true">

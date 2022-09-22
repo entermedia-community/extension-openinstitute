@@ -1,0 +1,43 @@
+<div id="collectivesettingscontent" class="contentcolumn" >
+
+<div class="container" style="padding:10px 20px;min-height:500px">
+			
+	#set( $id  = $context.getRequestParameter("id"))
+	
+	#set( $id = $url_util.getPathUtilities().extractDirectoryName($content.getDirectory()) )
+	
+	#set( $searchtype  = "collectiveproduct")
+	
+	#set($data = $mediaarchive.getData($searchtype, $id))
+
+
+       $context.putPageValue("aproduct",$data)
+  <div class="row no-gutters">     
+  	<div class="col-md-2">
+       <div style="max-height:200px">
+		$pages.include("$apphome/collective/store/details/thumb.html",$context)
+		</div>
+	</div>
+	<div class="col">
+		$data.productdescription
+		
+		
+		Price
+		
+		Carousel of other images
+		
+		Button to Buy
+		
+#if( $caneditcollection)
+<div style="float:right">
+<a class="emdialog" title="[[Edit Product]]" href="$apphome/collective/store/edit.html?id=$data.id&collectionid=$librarycol.id"><i class="fas fa-edit"></i></a>
+</div>
+#end
+
+	</div>
+</div>
+
+##$pages.include("$apphome/collective/store/details/${content.getPageName()}.html")
+
+</div>
+</div>
