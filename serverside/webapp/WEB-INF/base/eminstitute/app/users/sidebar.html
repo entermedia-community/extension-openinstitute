@@ -21,14 +21,14 @@
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
 		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
-			<div class="col-2" >
+			<div class="col-2" style="padding:0px;" >
 				<div class="messageiconholder">
 				#set($chatuser = $mediaarchive.getUser($message.user))
 				$context.putPageValue("chatuser",$chatuser)
 				$pages.include("$apphome/users/icon.html",$context)
 				</div>	
 			</div>
-			<div class="col" style="padding-right:0px;">	
+			<div class="col" style="padding:0px;">	
 				<a  
 				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
 				 >		
