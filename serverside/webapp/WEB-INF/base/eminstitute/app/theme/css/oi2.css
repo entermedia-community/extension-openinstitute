@@ -982,3 +982,15 @@ list-style: none;
     border: 1px solid #bbb;
     background-color: #eee;
 }
+
+.usersidebartopmessages  .usericon
+{
+	max-height:30px;
+	max-width:30px;
+	width:30px;
+}
+
+.usersidebartopmessages .current
+{
+	background-color: #eee;
+}
