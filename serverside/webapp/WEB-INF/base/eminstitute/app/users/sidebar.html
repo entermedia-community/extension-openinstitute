@@ -15,7 +15,7 @@
     </div>
 
 	#set($selectedproject = $librarycol.getId())
-	<div style="height: 350px; overflow-y:auto;">
+	<div style="max-height: 370px; overflow-y:auto;">
 	<div class="container usersidebartopmessages" >
 		#foreach( $message in $messages )
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
@@ -47,7 +47,7 @@
 	</div>
 	
 </div>
-   <div class="sidebar-box-header" style="margin-top:20px;">[[Profile]]
+   <div class="sidebar-box-header" >[[Profile]]
    <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
    <div class="sidebar-box-content" style="padding:0;">
