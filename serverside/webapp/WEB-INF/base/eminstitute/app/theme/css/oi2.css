@@ -994,3 +994,40 @@ list-style: none;
 {
 	background-color: #eee;
 }
+
+
+.usersidebartopmessages .messagearea
+{
+	overflow-wrap: break-word;
+	inline-size: 189px;
+	
+}
+
+.messageiconholder
+{
+ height:30px;max-width:30px;
+ padding:8px 2px 2px 4px;";
+}
+ 
+.messageselection
+{
+	padding:6px 2px 6px 2px;
+} 
+ 
+.messageselection:hover { 
+  background-color: #eee;
+}
+
+
+.messageselection:hover { 
+  background-color: #eee;
+}
+
+.messageselection a:hover { 
+  text-decoration:none;
+}
+
+.addnewproject
+{
+	padding-top: 4px;
+}

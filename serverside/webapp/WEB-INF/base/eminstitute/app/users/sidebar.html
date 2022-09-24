@@ -3,7 +3,7 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="usersidebarstatus" class="Xajaxstatus" data-reloadspeed="60000" data-ajaxpath="$applink/users/sidebar.html?appsection=$appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$applink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
@@ -20,33 +20,33 @@
 		#foreach( $message in $messages )
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
-		  <div class="row #if($selectedproject==$collective.id) current #end">
+		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
 			<div class="col-2" >
-				<div style="height:30px;width:30px;max-width:30px;padding-top:8px">
+				<div class="messageiconholder">
 				#set($chatuser = $mediaarchive.getUser($message.user))
 				$context.putPageValue("chatuser",$chatuser)
 				$pages.include("$apphome/users/icon.html",$context)
 				</div>	
-			</div>	
-			<div class="col">			
-					<a  href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  title="[[Project]] #text($collective.name)" >
+			</div>
+			<div class="col" style="padding-right:0px;">	
+				<a  
+				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
+				 >		
 					<b> #text($collective.name) / #text($topic) </b>
 					<div class="messagearea">
-						##<i class="fas fa-comment fa-xs" style="color:orange">
-						<div style="white-space: pre-line;">$url_util.escapeMessage($message.message,200)</div>
+						
+						$url_util.escapeMessage($message.message,80)
 					</div>
-					</a>
+				</a>	
 			</div>
+ 		 
  		 </div>
+ 		 
 		#end
 	</div>	
 	</div>
 	
-	<div style="padding:10px 0 0; text-align:center;">
-		<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Add a Project]]</a>
-	</div>
-    
-    </div>
+</div>
    <div class="sidebar-box-header" style="margin-top:20px;">[[Profile]]
    <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>

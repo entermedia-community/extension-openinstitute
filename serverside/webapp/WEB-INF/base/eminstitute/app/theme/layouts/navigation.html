@@ -112,9 +112,11 @@
             	</ul>
             	
           </li>
-
-            
-            
+#if( $user)
+	   <li class="nav-item addnewproject">
+		<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[New Project]]</a>
+	  </li>
+#end    
           </ul>
         </div>
       	</div>
