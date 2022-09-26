@@ -15,14 +15,37 @@ class ProjectManager {
 
   DataModule? projectsModule;
 
-  createDataModule() async {
-    projectsModule = await oi.datamanager.getDataModule("librarycollection");
+  createDataModule({String? boxString}) async {
+    projectsModule = await oi.datamanager
+        .getDataModule("librarycollection", boxString: boxString);
+  }
+
+  deleteProject(String id) async {
+    await createDataModule();
+    return await projectsModule!.deleteData(id);
+  }
+
+  updateProject(String id, Map project) async {
+    await createDataModule();
+    return await projectsModule!.updateData(id, project);
   }
 
   Future<List<emData>> loadProjectCache() async {
     await createDataModule();
     List<emData> cache = projectsModule!.getAllHits();
     return cache;
+  }
+
+  Future<emData> projectFromServer(String id) async {
+    await createDataModule(boxString: "ProjectsInfo");
+    var data = projectsModule!.box.get(id);
+    if (data != null) {
+      return emData.fromJson(data);
+    } else {
+      var data = await projectsModule!.getData(id);
+      projectsModule!.box.put(id, data.properties);
+      return data;
+    }
   }
 
   Future<emData> getProject(String id) async {

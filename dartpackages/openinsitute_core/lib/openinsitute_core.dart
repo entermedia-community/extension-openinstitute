@@ -14,6 +14,7 @@ import 'package:openinsitute_core/services/FeedManager.dart';
 import 'package:openinsitute_core/services/authentication_manager.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:openinsitute_core/services/emSocketManager.dart';
+import 'package:openinsitute_core/services/finance_manager.dart';
 import 'package:openinsitute_core/services/hive_manager.dart';
 import 'package:openinsitute_core/services/project_manager.dart';
 import 'package:openinsitute_core/services/oiChatManager.dart';
@@ -34,6 +35,7 @@ class OpenI {
   FeedManager? feedManager;
   HiveManager? hiveManager;
   UserManager? userManager;
+  FinanceManager? financeManager;
 
   Map? get app {
     if (_settings == null) {
@@ -63,6 +65,7 @@ class OpenI {
   FeedManager get feedmanager => Get.find<FeedManager>();
   HiveManager get hivemanager => Get.find<HiveManager>();
   UserManager get usermanager => Get.find<UserManager>();
+  FinanceManager get financemanager => Get.find();
 
   Future<void> initialize({required FirebaseAuth firebaseAuth}) async {
     await loadAppSettings();
@@ -85,6 +88,8 @@ class OpenI {
     Get.put<FeedManager>(feedManager!, permanent: true);
     userManager = UserManager();
     Get.put(userManager!, permanent: true);
+    financeManager = FinanceManager();
+    Get.put(financeManager, permanent: true);
   }
 
   Future<Map?> loadAppSettings() async {
