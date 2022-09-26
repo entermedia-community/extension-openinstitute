@@ -39,8 +39,6 @@
 		#end
 	
 	#set($selectedproject = $librarycol.getId())
-
-	
 	<div style="#if($collectives.size() > 4) height: 200px; overflow-y:auto; #end ">
 	#set( $modcollections = $chatManager.loadCollectionsModified($collectives,$user.getId() ) )
 	<ul class="sidebar-list" >

@@ -1,0 +1,58 @@
+
+	<div class="contentcolumn">
+	
+	#set( $collectionid = ${librarycol.id})
+	
+	#if( $caneditcollection)
+		<div style="" class="text-right">
+	
+	                        <a
+                            href="$applink/collective/store/addnew.html?collectionid=${collectionid}"
+                            class="emdialog btn btn-sm btn-primary mb-4" title="$library.name [[Product]]">[[Add A Product]]</a>
+        </div>          
+	#end
+	
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("collectionid",$collectionid).not("producttype","0").sort("name").search($context) )
+#if( $hits.isEmpty())
+
+	<div style="" class="text-center">
+		<a href="$applink/collective/donate/$collectionid/donate.html" class="btn subscribe-btn">[[Donate]]</a>
+	</div>
+	
+
+
+#end
+
+<div class="masonry-grid" 
+data-maxheightX="$!mediaarchive.getCatalogSettingValue('stacked_gallery_imagesize')"
+data-maxheight="180" 
+data-cellpadding="4"
+data-makebox="true"
+data-singlepage="true"  >
+
+#set($count = 0)
+#set( $viewerlink = $content.get("assetviewerlink") )
+
+
+#foreach( $aproduct in $hits.getPageOfHits())
+	
+	#set( $hit = false)
+
+	 <a class="footer-text" href="$sitelink/app/collective/store/details/$aproduct.id/$collectionid/#esc($aproduct.name).html">
+       
+       $context.putPageValue("aproduct",$aproduct)
+       
+		$pages.include("$apphome/collective/store/details/thumb.html",$context)
+		
+		</a>
+
+       #set ( $count = $count + 1) 
+    
+	#end
+
+	</div>
+
+	
+	
+	
+	</div>

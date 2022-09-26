@@ -7,18 +7,15 @@
 #if(!$goalfolder)
 	#set( $goalfolder = "search" )
 #end
-#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
-#set( $userlink = "$applink/users/${chatuser.getId()}/${chatuser.getAnonNickName()}.html")
-#set( $userimageurl = $mediaarchive.asLinkToProfile($chatuser.assetportrait) )
-#if(!$userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
 
 #set( $goal = $goalsinmessages.get($chat.id))
+#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
 
 <div class="chatterbox-chat" role="alert" id="chatter-message-$chat.id">
-	<div class="chat-icon">
-		<a href="#esc($userlink)" title="$chatuser.getAnonNickName()"><img
-			src="${userimageurl}" class="img-fluid usericon"></a>
-	</div>
+		<div class="chat-icon">
+	$context.putPageValue("chatuser",$chatuser)
+	$pages.include("$apphome/users/icon.html",$context)
+		</div>
 	#if($chat.attachedassets)
 		$pages.include("$apphome/collective/community/chatterbox/attach.html",$context)
 	#end

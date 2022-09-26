@@ -76,6 +76,10 @@ public class TransactionManager implements CatalogEnabled
 
 	public double getTransactionTotal(String inCollectionId)
 	{
+		if( inCollectionId == null)
+		{
+			return 0D;
+		}
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("transaction");
 		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
 		double amount = 0;

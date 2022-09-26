@@ -1,78 +1,53 @@
-##Search collections this user is teammeber
-#set( $organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search() )
-#set($userprojectsids = [])
-
-##set($userticketsids = [])
-#foreach( $ohit in $organizationsuser )
-	#set($x = $userprojectsids.add($ohit.collectionid))
-##	##Search for Tickets in Collection
-##	#set($goalsuser = $mediaarchive.query("projectgoal").exact("collectionid",$ohit.collectionid).enduser(true).search())
-##	#if ($goalsuser)
-##	#set($x = $userticketsids.add($goalsuser))
-	##end
-#end
-
-#set( $pendingmessages = $chatManager.loadChatTopicLastChecked("${user.getId()}-messages",$user.getId() ) )
-
 #set( $appsection = $context.getRequestParameter("appsection"))
 #if( !$appsection)
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="usersidebarstatus" class="ajaxstatusX" data-reloadspeed="60000" data-ajaxpath="$applink/users/sidebar.html?appsection=$appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$applink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
-        [[Your Projects]]        
+        [[Recent Chats]]        
         <a href="#" class="sidebar-toggler" data-action="hide" data-targetdiv="usersidebar"
         title="[[Hide User Sidebar]]">
         <i class="fas fa-angle-double-left"></i>
         </a>
     </div>
 
-#set( $collectives = $mediaarchive.query("librarycollection").ids($userprojectsids).sort("name").search($context) )
-
-
-    <div class="sidebar-box-content" style="padding:0;" id="sidebarboxprojects">
-    	#if( $collectives.size() >= 10)
-    		<div style="padding:5px 15px;">
-			<select  id="collectivesearch2" 
-						name="collectionid" 
-						class="form-control autosubmitlink" 
-						data-placeholder="[[Search Projects]]"
-						data-url="$sitelink/app/collective/community/index.html?goaltrackerstaff=*&collectionid="
-						data-dropdownparent="sidebarboxprojects"
-					>
-					<option></option>
-					#foreach( $collective in $collectives )
-						<option value="$collective.getId()">#esc($collective.name)</option>
-					#end
-			</select>
-			</div>
-		#end
-	
 	#set($selectedproject = $librarycol.getId())
-
-	<div style="#if($collectives.size() > 4) height: 200px; overflow-y:auto; #end ">
-	#set( $modcollections = $chatManager.loadCollectionsModified($collectives,$user.getId() ) )
-	<ul class="sidebar-list" >
-		#foreach( $collective in $collectives )
-					<li class="#if($selectedproject==$collective.id) current #end">
-						<a  href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  title="[[Project]] $collective.name" >
-						<i class="fas fa-sitemap"></i> $collective.name <i class="fas fa-comment fa-xs" style="color:orange"></i>
-						</a>
-					</li>
+	<div style="max-height: 370px; overflow-y:auto;">
+	<div class="container usersidebartopmessages" >
+		#foreach( $message in $messages )
+			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
+			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
+		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
+			<div class="col-2" style="padding:0px;" >
+				<div class="messageiconholder">
+				#set($chatuser = $mediaarchive.getUser($message.user))
+				$context.putPageValue("chatuser",$chatuser)
+				$pages.include("$apphome/users/icon.html",$context)
+				</div>	
+			</div>
+			<div class="col" style="padding:0px;">	
+				<a  
+				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
+				 >		
+					<b> #text($collective.name) / #text($topic) </b>
+					<div class="messagearea">
+						
+						$url_util.escapeMessage($message.message,80)
+					</div>
+				</a>	
+			</div>
+ 		 
+ 		 </div>
+ 		 
 		#end
-	</ul>
+	</div>	
 	</div>
 	
-	
-	<div style="padding:10px 0 0; text-align:center;">
-		<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Add a Project]]</a>
-	</div>
-    
-    </div>
-   <div class="sidebar-box-header" style="margin-top:20px;">[[Profile]]
+</div>
+   <div class="sidebar-box-header" >[[Profile]]
    <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
    <div class="sidebar-box-content" style="padding:0;">
@@ -149,7 +124,3 @@
     </div> 
     
 </div>
-
-</div>
-
-
