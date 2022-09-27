@@ -18,6 +18,6 @@
 <option value="">[[All]]</option>
 #end
 #foreach( $project in $allprojects )
-	<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>$project</option>
+	<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>#text($project)</option>
 #end
 </select>
