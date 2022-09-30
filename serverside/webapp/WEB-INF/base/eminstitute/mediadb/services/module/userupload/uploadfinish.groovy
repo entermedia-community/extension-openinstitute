@@ -19,9 +19,9 @@ public void init()
 	upload.setValue("owner",context.getUserName());
 	upload.setValue("librarycollection",context.getRequestParameter("librarycollection"));
 	upload.setValue("usertags",context.getRequestParameters("usertags"));
-	upload.setValue("title",context.getRequestParameters("title"));
-	upload.setValue("longdescription",context.getRequestParameters("longdescription"));
-	upload.setValue("collectiveproject",context.getRequestParameters("collectiveproject"));
+	upload.setValue("title",context.getRequestParameter("title"));
+	upload.setValue("longdescription",context.getRequestParameter("longdescription"));
+	upload.setValue("collectiveproject",context.getRequestParameter("collectiveproject"));
 	
 	log.info("Script running" + sourcepath);
 	String path = PathUtilities.extractDirectoryPath(sourcepath);
