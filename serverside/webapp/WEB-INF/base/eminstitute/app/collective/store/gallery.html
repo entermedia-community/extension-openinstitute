@@ -13,7 +13,7 @@
         </div>          
 	#end
 	
-#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("collectionid",$collectionid).not("producttype","0").sort("name").search($context) )
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("collectionid",$collectionid).exact("producttype","5").sort("name").search($context) )
 
 #set($count = 0)
 #set( $viewerlink = $content.get("assetviewerlink") )
