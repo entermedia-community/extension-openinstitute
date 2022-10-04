@@ -10,4 +10,11 @@
     </name> 
   </property> 
 
+   	<property id="collectiveproduct" 
+		index="true" stored="true" editable="true" viewtype="list" type="list">
+		<name>
+			<language id="en"><![CDATA[Store Product]]></language>
+		</name>
+	</property>
+
 </properties>

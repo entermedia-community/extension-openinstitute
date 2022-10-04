@@ -82,7 +82,7 @@
 	
 	
 	<!-- CKeditor -->
-	<script id="ckeditor" src="/openedit/components/html/ckeditor/ckeditor.js" />
+	<script id="ckeditor" cancel="true" src="/openedit/components/html/ckeditor/ckeditor.js" />
    
    
     <style id="app-css" href="/${applicationid}/theme/styles/theme.css"/>

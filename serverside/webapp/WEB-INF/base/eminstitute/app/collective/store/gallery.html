@@ -1,5 +1,6 @@
+<div id="storeworkarea" class="container">
+<div class="contentcolumn">
 
-	<div class="contentcolumn">
 	
 	#set( $collectionid = ${librarycol.id})
 	
@@ -13,46 +14,35 @@
 	#end
 	
 #set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("collectionid",$collectionid).not("producttype","0").sort("name").search($context) )
-#if( $hits.isEmpty())
-
-	<div style="" class="text-center">
-		<a href="$applink/collective/donate/$collectionid/donate.html" class="btn subscribe-btn">[[Donate]]</a>
-	</div>
-	
-
-
-#end
-
-<div class="masonry-grid" 
-data-maxheightX="$!mediaarchive.getCatalogSettingValue('stacked_gallery_imagesize')"
-data-maxheight="180" 
-data-cellpadding="4"
-data-makebox="true"
-data-singlepage="true"  >
 
 #set($count = 0)
 #set( $viewerlink = $content.get("assetviewerlink") )
 
 
+<div class="card-group">
 #foreach( $aproduct in $hits.getPageOfHits())
 	
 	#set( $hit = false)
-
-	 <a class="footer-text" href="$sitelink/app/collective/store/details/$aproduct.id/$collectionid/#esc($aproduct.name).html">
-       
+    <div class="card" >
+		<a class="footer-text" href="$sitelink/app/collective/store/details/$aproduct.id/$collectionid/#esc($aproduct.name).html">
+      <div class="card-body">
+        <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
        $context.putPageValue("aproduct",$aproduct)
+	   $pages.include("$apphome/collective/store/details/thumbprimary.html",$context)
+        <p class="card-text">$!aproduct.getText("productdescription",$context)</p>
+       </div> 
+       		</a>
        
-		$pages.include("$apphome/collective/store/details/thumb.html",$context)
+    </div>
+	#if( $count > 2)
 		
-		</a>
-
-       #set ( $count = $count + 1) 
-    
+	</div>
+	<div class="card-group">
+	
+		#set ( $count = 0)
 	#end
-
-	</div>
-
-	
-	
-	
-	</div>
+       #set ( $count = $count + 1) 
+	#end
+  </div>
+</div>
+</div>

@@ -1043,3 +1043,7 @@ list-style: none;
 	padding-top: 4px;
 }
 
+.form-group
+{
+	margin: 6px 0 6px 0px;
+}

@@ -1,43 +1,111 @@
-<div id="collectivesettingscontent" class="contentcolumn" >
 
-<div class="container" style="padding:10px 20px;min-height:500px">
-			
-	#set( $id  = $context.getRequestParameter("id"))
-	
-	#set( $id = $url_util.getPathUtilities().extractDirectoryName($content.getDirectory()) )
-	
+<div id="storeworkarea" class="container" style="padding:10px 20px;min-height:500px">
+<div id="storedetailarea" class="contentcolumn" >
 	#set( $searchtype  = "collectiveproduct")
+	#if( $data )
 	
-	#set($data = $mediaarchive.getData($searchtype, $id))
+		#set( $id  = $data.getId() )
+	#else		
+		#set( $id  = $context.getRequestParameter("id"))
+		#ifnull($id)
+			#set( $id = $url_util.getPathUtilities().extractDirectoryName($content.getDirectory()) )
+		#end
+		#set($data = $mediaarchive.getData($searchtype, $id))
+	#end
+	
+	#set($aproduct = $data)
+	
+    $context.putPageValue("aproduct",$data)
+<div class="cardX" >
+  <div class="card-bodyX">
 
-
-       $context.putPageValue("aproduct",$data)
-  <div class="row no-gutters">     
-  	<div class="col-md-2">
-       <div style="max-height:200px">
-		$pages.include("$apphome/collective/store/details/thumb.html",$context)
+  <div class="row">     
+  	<div class="col-md-3">
+       <div style="max-height:300px">
+	       	$context.putPageValue("thumbsize", "mediumplus")       
+			$pages.include("$apphome/collective/store/details/thumbprimary.html",$context)
 		</div>
-	</div>
-	<div class="col">
-		$data.productdescription
-		
-		
-		Price
-		
-		Carousel of other images
-		
-		Button to Buy
-		
-#if( $caneditcollection)
-<div style="float:right">
-<a class="emdialog" title="[[Edit Product]]" href="$apphome/collective/store/edit.html?id=$data.id&collectionid=$librarycol.id"><i class="fas fa-edit"></i></a>
-</div>
-#end
+	    #if( $caneditcollection)
+		<div >
+		<a class="emdialog" title="[[Edit Product]]" 
+			href="$apphome/collective/store/edit.html?id=$data.id&collectionid=$librarycol.id"><i class="fas fa-edit"></i></a>
+		</div>
+		#end
 
+      <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
+      	
+		<div>      
+	       <p class="">$!aproduct.getText("productdescription",$context)</p>
+	       
+			#set($subtotal = $aproduct.getDouble("productprice"))
+			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
+		</div>
+
+#if( $user )
+      <div style="padding:20px;">
+		      <a class="btn btn-primary emdialog"
+		      href="$apphome/collective/store/details/startinvoice.html?productid=$data.id&collectionid=$librarycol.id" >[[Make Reservation]]</a>
+      </div>
+#else
+	<p>login to reserve</p>  
+#end   	
+      	
 	</div>
+  	<div class="col-md-4">
+  	#if( $data )
+		#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$data.id).search($context))
+	#end	
+  		#if( $invoices.isEmpty())
+  			
+  		#else
+  		<div style="max-width:200px">
+  		<h2>Reservations</h2>
+		<ul>
+		#foreach($invoice in $invoices)
+			<li>
+			<a class="emdialog"		
+			 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$data.id&collectionid=$librarycol.id"
+			>
+			$context.getDate($invoice.getDate("startdate")) - $context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
+			</a></li> 
+		#end
+		</ul>
+		#end
+		</div>
+  	
+  	</div>
+	<div class="col card-textX">
+		#if( $data )
+		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$data.id).search($context))
+		#end
+		$context.putPageValue("assetshits", $assetshits)
+		$context.putPageValue("fullview",true) 
+		$context.putPageValue("thumbsize", "small" )
+		$context.putPageValue("primaryimage", $entity.primaryimage )
+		#set( $assetsshown = 4)
+		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
+      
+		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id")
+		
+			#set($oemaxlevel = "1")
+		#set($targetdiv = "applicationmaincontent")
+		<a href="$uploadlink" 
+			class="ajax moreactions"
+			data-targetdivinner="storedetailarea"
+			data-closedialog="true" 
+			data-closemediaviewer="true"
+			data-updateurl="true"
+			data-oemaxlevel="$!oemaxlevel"
+			title="[[Upload assets here]]">
+			<i class="fas fa-upload"></i></a>
+			
+      
+  </div>
 </div>
 
-##$pages.include("$apphome/collective/store/details/${content.getPageName()}.html")
+</div> <!-- body -->
+</div> <!--  card -->
+
 
 </div>
 </div>

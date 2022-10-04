@@ -80,23 +80,6 @@
 		type="date" index="true">Next Bill Date
 	</property>
 
-	<property id="startdate" editable="true" stored="true"
-		type="date" index="true">
-
-<name>
-			<language id="en"><![CDATA[Start Date]]></language>
-		</name>
-
-	</property>
-
-	<property id="enddate" editable="true" stored="true"
-		type="date" index="true">
-
-	<name>
-			<language id="en"><![CDATA[End Date]]></language>
-		</name>
-	</property>
-
 
 	<!-- <property id="featured" index="true" type="boolean" keyword="false" 
 		filter="false" editable="true" > <name> <language id="en"><![CDATA[Featured]]></language> 
