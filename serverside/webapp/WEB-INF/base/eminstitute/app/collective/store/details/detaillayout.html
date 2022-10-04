@@ -1,4 +1,3 @@
-
 <div id="storeworkarea" class="container" style="padding:10px 20px;min-height:500px">
 <div id="storedetailarea" class="contentcolumn" >
 	#set( $searchtype  = "collectiveproduct")
@@ -85,7 +84,7 @@
 		#set( $assetsshown = 4)
 		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
       
-		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id")
+		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
 		
 			#set($oemaxlevel = "1")
 		#set($targetdiv = "applicationmaincontent")
