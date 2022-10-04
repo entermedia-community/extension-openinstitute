@@ -57,21 +57,20 @@
   		#if( $invoices.isEmpty())
   			
   		#else
-  		<div style="max-width:200px">
-  		<h2>Reservations</h2>
-		<ul>
-		#foreach($invoice in $invoices)
-			<li>
-			<a class="emdialog"		
-			 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$data.id&collectionid=$librarycol.id"
-			>
-			$context.getDate($invoice.getDate("startdate")) - $context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
-			</a></li> 
+	  		<div style="max-width:200px">
+	  		<h2>Reservations</h2>
+			<ul>
+			#foreach($invoice in $invoices)
+				<li>
+				<a class="emdialog"		
+				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$data.id&collectionid=$librarycol.id"
+				>
+				$context.getDate($invoice.getDate("startdate")) - $context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
+				</a></li> 
+			#end
+			</ul>
+			</div>
 		#end
-		</ul>
-		#end
-		</div>
-  	
   	</div>
 	<div class="col card-textX">
 		#if( $data )
@@ -99,12 +98,12 @@
 			<i class="fas fa-upload"></i></a>
 			
       
-  </div>
-</div>
+    </div>
+</div> <!--row -->
 
 </div> <!-- body -->
 </div> <!--  card -->
 
 
-</div>
+</div> <!-- storedetail -->
 </div>

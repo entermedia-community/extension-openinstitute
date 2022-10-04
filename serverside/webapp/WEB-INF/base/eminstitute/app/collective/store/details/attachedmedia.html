@@ -5,7 +5,6 @@
 	#set($entityid = $context.getRequestParameter("entityid"))
 #end
 
-#if($assetshits)
 	#set($count = 0)
 	#set($stackedfield = $mediaarchive.getCatalogSettingValue("stackedgalleryfield"))
 	
@@ -46,16 +45,12 @@
 	 	<div class="carousel-item active">
     	  	<div class="d-block w-100">
 		 	<a class="stackedplayerX imageareaX" id="clickid${hit.id}" data-assetid="$hit.id" href="#" title="$!title">
-		$context.putPageValue("thumbsize", "postsize" )
-		$context.putPageValue("thumbsize", "mediumplus" )
+			$context.putPageValue("thumbsize", "postsize" )
+			$context.putPageValue("thumbsize", "mediumplus" )
 			$pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
-			
-			##<img class="d-block w-100"  src="/site/mediadb/services/module/librarycollection/downloads/preset/AYM3tVAf7npdKOYnFw--/Collections/collectives/Test%20project1/2022/294146216_10160030242422720_7785032566332458592_n.jpg/image730x480.jpg" />
-			
 			</a>
 			</div>
 		</div>
-	
 	#end
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -65,10 +60,5 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+  </div>
 </div>
-	
-</div>
-
-<div class="clearfix"></div>
-
-#end
