@@ -1,10 +1,14 @@
 #set($collectionid = $librarycol.getId())
 
 <div id="reportpage" class="container">
-	<div class="row" style="padding-top: 20px">
-		<div class="col">
+
 			<div class="contentcolumn">
-				<h3>[[Bank Ledger]]</h3>
+		     #if( $caneditcollection )    
+		    <a style="margin-left:6px"
+		               href="$applink/collective/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
+		               class="btn btn-sm btn-primary float-right">[[Go Back]]</a>
+			#end
+				<h3>[[Reconcile Bank Ledger]]</h3>
 				<form  id="searchform" 
 						class="autosubmit" 
 						data-oemaxlevel="1"
@@ -15,13 +19,16 @@
 					
 					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().exact("collectionid",$collectionid).sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
-					#ifnull( $paidfromaccount)
-						#set($paidfromaccount = "1" )
+					#ifnull( $paidfromaccount )
+						#if( !$hits.isEmpty() )
+							#set($paidfromaccount = $hits.get(0).getId() )
+						#end
 					#end
 					
 					<div class="row" >
 					<div class="col-md-3">
 						<select name="paidfromaccount"  class="form-control-sm" >
+							<option value="*">[[All]]</option>
 							#foreach( $hit in $hits )
 								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$context.getText($mediaarchive.getCachedData("bankaccount", $hit.getId()))</option>
 							#end
@@ -34,12 +41,31 @@
 							<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
 							<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
 						</select>
-					</div>		
+					</div>
+					<div class="col-md-2">
+						<select name="month" class="form-control-sm" style="width:120px;">
+							<option value="0" #if($daterange.getMonthPicked() == 0) selected #end>[[All Months]]</option>
+							<option value="1" #if($daterange.getMonthPicked() == 1) selected #end>[[Jan]]</option>
+							<option value="2" #if($daterange.getMonthPicked() == 2) selected #end>[[Feb]]</option>
+							<option value="3" #if($daterange.getMonthPicked() == 3) selected #end>[[March]]</option>
+							<option value="4" #if($daterange.getMonthPicked() == 4) selected #end>[[April]]</option>
+							<option value="5" #if($daterange.getMonthPicked() == 5) selected #end>[[May]]</option>
+							<option value="6" #if($daterange.getMonthPicked() == 6) selected #end>[[June]]</option>
+							<option value="7" #if($daterange.getMonthPicked() == 7) selected #end>[[July]]</option>
+							<option value="8" #if($daterange.getMonthPicked() == 8) selected #end>[[Aug]]</option>
+							<option value="9" #if($daterange.getMonthPicked() == 9) selected #end>[[Sep]]</option>
+							<option value="10" #if($daterange.getMonthPicked() == 10) selected #end>[[Oct]]</option>
+							<option value="11" #if($daterange.getMonthPicked() == 11) selected #end>[[Nov]]</option>
+							<option value="12" #if($daterange.getMonthPicked() == 12) selected #end>[[Dec]]</option>
+						</select>
+					</div>
+					
+							
 					</div>
 
 				</form>
 			 <div class="emdata" style="padding-top: 10px">
-				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) ) 
+				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) )
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">
@@ -93,5 +119,3 @@
 			</div>
 		</div>
 		</div>
-	</div>
-</div>

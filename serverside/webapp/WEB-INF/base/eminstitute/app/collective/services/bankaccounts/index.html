@@ -7,24 +7,31 @@
 
 
 <div>
+	#ifnull( $hits) 
+              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
+              $context.putPageValue("hits",$hits)
+	#end
             
-            #if( $caneditcollection )    
+      #if( $caneditcollection )    
            <a style="margin-left:6px"
                       href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
                       class="emdialog btn btn-sm btn-primary float-right">[[Add Bank Account]]</a>
                       &nbsp;&nbsp;
+#if( !$hits.isEmpty() )                      
            <a 
                       href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
                       class="btn btn-sm btn-primary float-right">[[Reconcile]]</a>
-                      
-              #end
+#end
+         #end
+#if( !$hits.isEmpty() )                      
 		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
-
-	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post" action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
+#end
+	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post"
+			 action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher($content.searchtype) )
 		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("collectiveinvestment/search", $userprofile))
+		#set ($details = $searcher.getDetailsForView("bankaccount/search", $userprofile))
 	
 		<input type="hidden" name="searchtype" value="collectiveinvestment" />
 		
@@ -72,10 +79,6 @@
 		</div>
 
 	</form>
-	#ifnull( $hits) 
-              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
-              $context.putPageValue("hits",$hits)
-	#end
 	$pages.include("./results.html",$context)
 </div>
 
