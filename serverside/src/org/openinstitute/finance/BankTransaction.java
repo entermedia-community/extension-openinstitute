@@ -69,7 +69,7 @@ public class BankTransaction extends BaseData
 		{
 			t = 0 - getData().getDouble("total");
 		}
-		else if( getSearchType().equals("collectiveincome") )
+		else if( getSearchType().equals("collectiveincome") || getSearchType().equals("collectiveinvestment") )
 		{
 			t = getData().getDouble("total");
 		}
@@ -153,6 +153,18 @@ public class BankTransaction extends BaseData
 			{
 				name = "#" + getData().get("invoicenumber");
 			}
+		}
+		else if( getSearchType().equals("collectiveinvestment") )
+		{
+			name = getData().get("note");
+			if( name == null)
+			{
+				name = getData().getId();
+			}
+		}
+		else
+		{
+			name = getSearchType();
 		}
 		return name;
 	}
