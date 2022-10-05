@@ -1,11 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
-<properties>
-  <property id="owner" index="true" listid="user" filter="true" deleted="false" editable="true" stored="true" listcatalogid="system" viewtype="user" keyword="true" datatype="list">New
+<properties> 
+  <property id="hasreimbursed" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[hasreimbursed]]></language> 
+    </name> 
+  </property>  
+  <property id="name" index="true" multilanguage="true" filter="false" deleted="false" editable="true" stored="true" sortable="true" keyword="false">New
     <name>
-      <language id="de"><![CDATA[Owner]]></language>
-      <language id="en"><![CDATA[Owner]]></language>
-      <language id="es"><![CDATA[Propietario]]></language>
-      <language id="fr"><![CDATA[Propriétaire]]></language>
+      <language id="de"><![CDATA[Identität]]></language>
+      <language id="en"><![CDATA[Name]]></language>
+      <language id="es"><![CDATA[Nombre]]></language>
+      <language id="fr"><![CDATA[Identité]]></language>
     </name>
   </property>
 </properties>

@@ -1,7 +1,13 @@
 package org.entermedia.invoice;
 
 import java.text.DecimalFormat;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -126,4 +132,31 @@ public class InvoiceManager implements CatalogEnabled
 		fieldModuleManager = inModuleManager;
 	}
 
+	protected void saveNewInvoiceForStore(MediaArchive mediaArchive, MultiValued invoice, MultiValued product)
+	{
+		Date startdate = invoice.getDate("startdate");
+		Date enddate = invoice.getDate("enddate");
+		long noOfDaysBetween = ChronoUnit.DAYS.between(startdate.toInstant(), enddate.toInstant());
+		
+		Map map = new HashMap();
+		map.put("productid",product.getId());
+		map.put("productquantity","1");
+		
+		
+		double price = product.getDouble("productprice");
+		double totalcost = price * noOfDaysBetween;
+		map.put("productprice", totalcost );
+		
+		List products = new ArrayList(1);
+		products.add(map);
+		invoice.setValue("productlist", products);
+
+		if( invoice.getValue("currencytype") == null)
+		{
+			invoice.setValue("currencytype",product.get("currencytype"));
+		}
+		
+		mediaArchive.saveData("collectiveinvoice", invoice);
+	}
+	
 }

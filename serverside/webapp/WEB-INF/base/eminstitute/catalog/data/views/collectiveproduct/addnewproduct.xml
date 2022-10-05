@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties >
+
+	<property id="name" />
+	<property id="productdescription" />
+	<property id="producttags" />
+	<property id="productcost" />
+	<property id="primaryimage" />
+	<property id="currencytype" />
+	<property id="productprice" />
+	<property id="featured" />
+</properties>

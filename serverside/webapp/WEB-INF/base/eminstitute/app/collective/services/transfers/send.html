@@ -35,7 +35,7 @@
 			<select name="currencytype.value" class="select2" >
 			#foreach( $currencytype in $netincome.keySet())
 				#set($net = $netincome.get($currencytype))
-				<option value="$currencytype">$!mediaarchive.getCachedData("currencytype", $currencytype) / $!context.doubleToMoney($!net, 2)</td>
+				<option value="$currencytype">#datatext($!mediaarchive.getCachedData("currencytype", $currencytype),"name") / $!context.doubleToMoney($!net, 2)</td>
 			#end
 			</select>
 			</div>

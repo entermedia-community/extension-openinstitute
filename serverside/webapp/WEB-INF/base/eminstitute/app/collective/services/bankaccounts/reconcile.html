@@ -1,26 +1,34 @@
+#set($collectionid = $librarycol.getId())
+
 <div id="reportpage" class="container">
-	<div class="row" style="padding-top: 20px">
-		<div class="col">
+
 			<div class="contentcolumn">
-				<h3>[[Bank Ledger]]</h3>
+		     #if( $caneditcollection )    
+		    <a style="margin-left:6px"
+		               href="$applink/collective/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
+		               class="btn btn-sm btn-primary float-right">[[Go Back]]</a>
+			#end
+				<h3>[[Reconcile Bank Ledger]]</h3>
 				<form  id="searchform" 
 						class="autosubmit" 
 						data-oemaxlevel="1"
 						data-targetdiv="reportpage" 
 						method="post" 
 						action="$content.path">
-				
-					<input type="hidden" name="oemaxlevel" value="1" />
+					<input type="hidden" name="collectionid" value="$librarycol.id" />
 					
-					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
+					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().exact("collectionid",$collectionid).sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
-					#ifnull( $paidfromaccount)
-						#set($paidfromaccount = "1" )
+					#ifnull( $paidfromaccount )
+						#if( !$hits.isEmpty() )
+							#set($paidfromaccount = $hits.get(0).getId() )
+						#end
 					#end
 					
 					<div class="row" >
 					<div class="col-md-3">
 						<select name="paidfromaccount"  class="form-control-sm" >
+							<option value="*">[[All]]</option>
 							#foreach( $hit in $hits )
 								<option value="$hit.getId()" #if($paidfromaccount == $hit.getId()) selected #end>$context.getText($mediaarchive.getCachedData("bankaccount", $hit.getId()))</option>
 							#end
@@ -33,12 +41,31 @@
 							<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
 							<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
 						</select>
-					</div>		
+					</div>
+					<div class="col-md-2">
+						<select name="month" class="form-control-sm" style="width:120px;">
+							<option value="0" #if($daterange.getMonthPicked() == 0) selected #end>[[All Months]]</option>
+							<option value="1" #if($daterange.getMonthPicked() == 1) selected #end>[[Jan]]</option>
+							<option value="2" #if($daterange.getMonthPicked() == 2) selected #end>[[Feb]]</option>
+							<option value="3" #if($daterange.getMonthPicked() == 3) selected #end>[[March]]</option>
+							<option value="4" #if($daterange.getMonthPicked() == 4) selected #end>[[April]]</option>
+							<option value="5" #if($daterange.getMonthPicked() == 5) selected #end>[[May]]</option>
+							<option value="6" #if($daterange.getMonthPicked() == 6) selected #end>[[June]]</option>
+							<option value="7" #if($daterange.getMonthPicked() == 7) selected #end>[[July]]</option>
+							<option value="8" #if($daterange.getMonthPicked() == 8) selected #end>[[Aug]]</option>
+							<option value="9" #if($daterange.getMonthPicked() == 9) selected #end>[[Sep]]</option>
+							<option value="10" #if($daterange.getMonthPicked() == 10) selected #end>[[Oct]]</option>
+							<option value="11" #if($daterange.getMonthPicked() == 11) selected #end>[[Nov]]</option>
+							<option value="12" #if($daterange.getMonthPicked() == 12) selected #end>[[Dec]]</option>
+						</select>
+					</div>
+					
+							
 					</div>
 
 				</form>
 			 <div class="emdata" style="padding-top: 10px">
-				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) ) 
+				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) )
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">
@@ -47,7 +74,8 @@
                          <th>[[Type]]</th>
                          <th>[[Label]]</th>
                          <th>[[Currency]]</th>
-                         <th>[[Total]]</th>
+                         <th >[[Total]]</th>
+                         <th ></th>
                      </tr>
                  </thead>
                  #set($totalbycurrency =  0.0)
@@ -55,15 +83,23 @@
                      <tr>
                      	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
                      	#set($collurl = "$applink/collective/services/finances/dashboard.html?collectionid=$transaction.getCollectionId()")
+                         #set($section = $transaction.getSearchType().replace("collective",""))
+                         #if($section != "income" )
+                         	#set($section = "${section}s")
+                         #end	
                          <td><a href="$collurl">$collective</a></td>
                          <td>$!context.getDate($transaction.getDate())</td>
-                         <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
+                         #set( $link = "$applink/collective/services/$section/index.html?collectionid=$transaction.getCollectionId()")
+                         <td><a href="$link">
+                         #datatext( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a></td>
                          <td>$transaction.getName()</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
                          $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
                          </td>
-                         #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
-                         <td><a href="$link">$transaction.getAmount()</a></td>
+                         <td>$transaction.getAmount() </td>
+                         
+                         #set( $link = "$applink/collective/services/$section/edit.html?id=$transaction.getData().getId()&collectionid=$transaction.getCollectionId()")
+                         <td><a class="emdialog" href="$link"><i class="fa fa-edit"></i></a></td>
                          #set($totalbycurrency = $totalbycurrency + $transaction.getAmount())
 					
                 #end
@@ -83,5 +119,3 @@
 			</div>
 		</div>
 		</div>
-	</div>
-</div>

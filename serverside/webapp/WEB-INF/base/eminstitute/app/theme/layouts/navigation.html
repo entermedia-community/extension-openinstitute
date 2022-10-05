@@ -98,7 +98,7 @@
             
        <li class="nav-item dropdown">
 			#set( $currentlang = $mediaarchive.getData("locale",$context.language) )
-              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown">#if($currentlang)$currentlang.id #else $context.language#end</a>	
+              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown" data-bs-toggle="dropdown">#if($currentlang)$currentlang.id #else $context.language#end</a>	
 	  
               <ul class="dropdown-menu">
 
@@ -112,9 +112,11 @@
             	</ul>
             	
           </li>
-
-            
-            
+#if( $user)
+	   <li class="nav-item addnewproject">
+		<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[New Project]]</a>
+	  </li>
+#end    
           </ul>
         </div>
       	</div>

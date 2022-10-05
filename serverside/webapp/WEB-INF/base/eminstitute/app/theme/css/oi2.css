@@ -982,3 +982,78 @@ list-style: none;
     border: 1px solid #bbb;
     background-color: #eee;
 }
+
+.usersidebartopmessages  .usericon
+{
+	max-height:30px;
+	max-width:30px;
+	width:30px;
+}
+
+.usersidebartopmessages .current
+{
+	background-color: #eee;
+}
+
+
+.usersidebartopmessages .messagearea
+{
+	overflow-wrap: break-word;
+	inline-size: 190px;
+	
+}
+
+.messageiconholder
+{
+ height:30px;
+ padding:4px 2px 2px 4px;
+}
+
+.messageiconholder .usericon
+{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ 
+.messageselection
+{
+	padding:6px 2px 6px 2px;
+} 
+ 
+.messageselection:hover { 
+  background-color: #eee;
+}
+
+
+.messageselection:hover { 
+  background-color: #eee;
+}
+
+.messageselection a:hover { 
+  text-decoration:none;
+}
+
+.addnewproject
+{
+	padding-top: 4px;
+}
+
+.form-group
+{
+	margin: 6px 0 6px 0px;
+}
+
+#usersidebar .card-collections-thumb {
+	box-shadow:none;
+	width:40px;
+	padding:0px;
+	height:40px;
+	margin-top: 2px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}

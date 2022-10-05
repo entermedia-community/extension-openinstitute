@@ -597,7 +597,12 @@ public class FinanceManager  implements CatalogEnabled
 		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
+		incomesSearcher = getMediaArchive().getSearcher("collectiveinvestment");
+		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		tracker = query.exact("bankaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
+		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();

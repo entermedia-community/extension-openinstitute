@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
-<properties> 
-  <property id="primaryimage" index="true" listid="asset" internalfield="false" deleted="false" datatype="list" editable="true" stored="true" viewtype="asset" sourcepath="products/${year}/${filename}">New 
-    <name> 
-      <language id="en"><![CDATA[Primary Image]]></language> 
-    </name> 
-  </property>  
-  <property id="htmlintro" index="true" deleted="false" editable="true" stored="true">New
+<properties>
+  <property id="primaryimage" index="true" listid="asset" internalfield="false" deleted="false" datatype="list" editable="true" stored="true" viewtype="asset" sourcepath="products/${year}/${filename}">New
     <name>
-      <language id="en"><![CDATA[htmlintro]]></language>
+      <language id="en"><![CDATA[Primary Attachment]]></language>
     </name>
   </property>
 </properties>

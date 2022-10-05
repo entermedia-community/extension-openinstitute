@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <properties> 
-  <property id="chatterboxsort" index="true" deleted="false" editable="true" stored="true">New 
+  <property id="leftbarstatus" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
-      <language id="en"><![CDATA[chatterboxsort]]></language> 
+      <language id="en"><![CDATA[leftbarstatus]]></language> 
+    </name> 
+  </property>  
+  <property id="testsort" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[testsort]]></language> 
     </name> 
   </property>  
   <property id="assetopentab" index="true" deleted="false" editable="true" stored="true">New 
@@ -16,14 +21,24 @@
       <language id="en"><![CDATA[usersidebarhidden]]></language> 
     </name> 
   </property>  
-  <property id="colleftwidth" index="true" deleted="false" editable="true" stored="true">New 
+  <property id="sidebarcomponent" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
-      <language id="en"><![CDATA[colleftwidth]]></language> 
+      <language id="en"><![CDATA[sidebarcomponent]]></language> 
     </name> 
   </property>  
-  <property id="lastselectedcollection" index="true" deleted="false" editable="true" stored="true">New
+  <property id="modulesort" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[modulesort]]></language> 
+    </name> 
+  </property>  
+  <property id="lastselectedcollection" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[lastselectedcollection]]></language> 
+    </name> 
+  </property>  
+  <property id="filtersbarstatus" index="true" deleted="false" editable="true" stored="true">New
     <name>
-      <language id="en"><![CDATA[lastselectedcollection]]></language>
+      <language id="en"><![CDATA[filtersbarstatus]]></language>
     </name>
   </property>
 </properties>

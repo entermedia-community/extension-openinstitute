@@ -86,11 +86,17 @@ public void bymonth(Integer yearInt, Integer monthInt) {
 			continue;
 		}
 		Category cat = archive.getCategory(task.getValue("projectdepartment"));
-		Double tasktotal = cat.getValue("goalpoints");
-		if (tasktotal == null || tasktotal == 0) {
+		if( cat == null)
+		{
 			tasktotal = 10;
 		}
-		
+		else 
+		{
+			Double tasktotal = cat.getValue("goalpoints");
+			if (tasktotal == null || tasktotal == 0) {
+				tasktotal = 10;
+			}
+		}		
 		Map<String, List> currentuser = usersupdated.get(usercollectionid);
 		if(currentuser == null) {
 			currentuser = new HashMap();

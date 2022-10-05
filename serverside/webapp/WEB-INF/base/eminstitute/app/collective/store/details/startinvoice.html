@@ -1,0 +1,63 @@
+##Exising ones 
+##No existing programs found.
+
+
+ <div style="padding:20px;">
+#set( $searchtype = "collectiveinvoice")
+#set( $searcher = $mediaarchive.getSearcher($searchtype) )
+#set( $xmledithome  = "$apphome/components/xml")
+$context.putPageValue("searcher",$searcher)
+
+#set( $data = $searcher.createNewData())
+$data.setValue("name","$user.getScreenName() [[Reservation]]")
+
+	#set( $id  = $context.getRequestParameter("productid"))
+	#set($aproduct = $mediaarchive.getData("collectiveproduct", $id))
+
+<form name="saveproject" 
+		id="saveproject" 
+		action="$apphome/collective/store/details/saveinvoice.html" 
+		method="post"
+		class="ajaxform autocloseform"
+			data-targetdiv="storeworkarea"
+			data-oemaxlevel="1">
+
+
+<input type="hidden" name="save" value="true" />
+<input type="hidden" name="searchtype" value="${searchtype}" />
+
+<input type="hidden" name="field" value="owner" />
+<input type="hidden" name="owner.value" value="$user.getId()" />
+
+<input type="hidden" name="field" value="collectionid" />
+<input type="hidden" name="collectionid.value" value="$librarycol.getId()" />
+<input type="hidden" name="collectionid" value="$librarycol.getId()" />
+
+<input type="hidden" name="productlist.add" value="$aproduct.id" />
+
+
+#if( !$caneditcollection)
+<input type="hidden" name="field" value="name" />
+<input type="text" name="name.value" value="$user.getScreenName() [[Reservation]]" />
+<input type="hidden" name="field" value="forcustomer" />
+<input type="hidden" name="forcustomer.value" value="$user.getId()" />
+#end
+
+
+#set( $searcher = $mediaarchive.getSearcher($searchtype) )
+$context.putPageValue("searcher",$searcher)
+
+#set( $producttype = $aproduct.producttype )
+
+#if( $caneditcollection)
+$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}team")
+#else
+$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}")
+#end
+ $context.putPageValue("data",$data)
+ 
+$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
+
+##Put js logic in here for handing sub-totals and filling on more details
+
+</form>

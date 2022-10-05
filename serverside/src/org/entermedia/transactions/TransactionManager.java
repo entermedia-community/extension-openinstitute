@@ -22,6 +22,10 @@ public class TransactionManager implements CatalogEnabled
 
 	public String getCombinedTotalIncome(String inCollectionId, String currency)
 	{
+		if( inCollectionId == null)
+		{
+			return "0";
+		}
 		double total = getTransactionTotal(inCollectionId);
 		double other = getOtherDonationTotal(inCollectionId);
 		double combined = total + other;
@@ -76,6 +80,10 @@ public class TransactionManager implements CatalogEnabled
 
 	public double getTransactionTotal(String inCollectionId)
 	{
+		if( inCollectionId == null)
+		{
+			return 0D;
+		}
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("transaction");
 		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
 		double amount = 0;
