@@ -66,10 +66,6 @@
 		</div>
 
 	</form>
-	#ifnull( $investments)
-              #set( $investments = $mediaarchive.query("collectiveinvestment").exact("collectionid",$collectionid).sort("dateDown").search($context))
-              $context.putPageValue("investments",$investments)
-	#end
 	$pages.include("./results.html",$context)
 </div>
 
