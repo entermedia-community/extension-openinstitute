@@ -2,5 +2,6 @@
 
 <property name="usemap">true</property>
 	<inner-layout>/${applicationid}/theme/layouts/dialoglayout.html</inner-layout>
+	<page-action name="Date.now" />
 
 </page>

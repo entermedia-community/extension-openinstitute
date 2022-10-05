@@ -5,8 +5,8 @@
 	<property id="collectiveproject" />
 	<property id="expensetype" />
 	<property id="expensedescription" />
-	<property id="currencytype" />
-	<property id="total" />
+	<property id="currencytype" required="true" />
+	<property id="total" required="true" />
 	<property id="receiptattachment" />
 	<property id="user" />
    	<property id="ispaid" />
