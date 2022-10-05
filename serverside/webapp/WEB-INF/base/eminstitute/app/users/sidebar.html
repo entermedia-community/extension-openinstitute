@@ -22,26 +22,27 @@
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
 		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
 			<div class="col-2" style="padding:0px;" >
-				<div class="messageiconholder">
-				#set($chatuser = $mediaarchive.getUser($message.user))
-				$context.putPageValue("chatuser",$chatuser)
-				$pages.include("$apphome/users/icon.html",$context)
-				</div>	
+					#if($collection.assetportrait)
+					#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+					#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+					#else
+					#set($link = "$applink/theme/images/OI_flower.png")
+					#end
+					<div class="card-collections-thumb" style='background-image: url("$link")'></div>
 			</div>
 			<div class="col" style="padding:0px;">	
 				<a  
 				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
 				 >		
-					<b> #text($collective.name) / #text($topic) </b>
+				#set($chatuser = $mediaarchive.getUser($message.user))
+					<b> #datatext($collective,"name") </b>
 					<div class="messagearea">
-						
 						$url_util.escapeMessage($message.message,26)
 					</div>
+					<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
 				</a>	
 			</div>
- 		 
  		 </div>
- 		 
 		#end
 	</div>	
 	</div>

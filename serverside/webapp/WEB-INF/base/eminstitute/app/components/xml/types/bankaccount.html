@@ -15,6 +15,6 @@
 #end
 <select name="${detail.getId()}.value" class="select2">
 #foreach( $bank in $banks )
-	<option value="$bank.getId()" #if($projectid == $bank.getId()) selected #end>#text($bank,"name")</option>
+	<option value="$bank.getId()" #if($projectid == $bank.getId()) selected #end>#datatext($bank,"name")</option>
 #end
 </select>

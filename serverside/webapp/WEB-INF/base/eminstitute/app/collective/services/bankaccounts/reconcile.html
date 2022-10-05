@@ -66,7 +66,7 @@
                          <td>$!context.getDate($transaction.getDate())</td>
                          #set( $link = "$applink/collective/services/$section/index.html?collectionid=$transaction.getCollectionId()")
                          <td><a href="$link">
-                         #text( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a></td>
+                         #datatext( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a></td>
                          <td>$transaction.getName()</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
                          $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
