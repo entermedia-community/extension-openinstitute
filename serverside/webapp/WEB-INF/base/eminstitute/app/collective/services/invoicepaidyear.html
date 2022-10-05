@@ -20,14 +20,15 @@
 #if ($!context.getRequestParameter("status")) 
 	#set( $status = $!context.getRequestParameter("status"))
 #else
-	#set( $status = "paid")
+	#set( $status = "invoiced")
 #end
 #if( $canviewsettings )
+<div class="maincontent">
 <div class="collectivecontent" id="invoicedata">
 	
     <div class="row no-gutters h-100">
         <div class="col">
-            <div class="collectivemaincol h-100">
+            <div class="collectivemaincolx h-100">
                 <div class="content">
 				   <div class="card mb-4">
 				   	<div class="card-header ">
@@ -145,5 +146,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 #end

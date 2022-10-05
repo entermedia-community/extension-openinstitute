@@ -3,4 +3,5 @@
     <permission name="view">
 		<userprofile property="viewsettings" equals="true" />
 	</permission>
+	<inner-layout>/${applicationid}/theme/layouts/application-collective.html</inner-layout>
 </page>
