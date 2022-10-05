@@ -1,8 +1,8 @@
 <page>
 
   <path-action name="DataEditModule.searchFields" >
-		<property name="searchtype">collectiveinvestments</property>
-		<property name="hitsname">investments</property>
+		<property name="searchtype">bankaccount</property>
+		<property name="hitsname">hits</property>
 		
   </path-action>
 

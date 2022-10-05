@@ -1,3 +1,5 @@
+#set($collectionid = $librarycol.getId())
+
 <div id="reportpage" class="container">
 	<div class="row" style="padding-top: 20px">
 		<div class="col">
@@ -12,7 +14,7 @@
 				
 					<input type="hidden" name="oemaxlevel" value="1" />
 					
-					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().all().sort("nameDown").search($context) )
+					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().exact("collectionid",$collectionid).sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
 					#ifnull( $paidfromaccount)
 						#set($paidfromaccount = "1" )
@@ -47,7 +49,8 @@
                          <th>[[Type]]</th>
                          <th>[[Label]]</th>
                          <th>[[Currency]]</th>
-                         <th>[[Total]]</th>
+                         <th >[[Total]]</th>
+                         <th ></th>
                      </tr>
                  </thead>
                  #set($totalbycurrency =  0.0)
@@ -55,15 +58,23 @@
                      <tr>
                      	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
                      	#set($collurl = "$applink/collective/services/finances/dashboard.html?collectionid=$transaction.getCollectionId()")
+                         #set($section = $transaction.getSearchType().replace("collective",""))
+                         #if($section != "income" )
+                         	#set($section = "${section}s")
+                         #end	
                          <td><a href="$collurl">$collective</a></td>
                          <td>$!context.getDate($transaction.getDate())</td>
-                         <td>$!mediaarchive.getCachedData("module", $transaction.getSearchType())</td>
+                         #set( $link = "$applink/collective/services/$section/index.html?collectionid=$transaction.getCollectionId()")
+                         <td><a href="$link">
+                         #text( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a></td>
                          <td>$transaction.getName()</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
                          $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
                          </td>
-                         #set( $link = "$applink/views/modules/$transaction.getSearchType()/edit/edit.html?id=$transaction.getData().getId()&viewid=$transaction.getSearchType()general&viewpath=$transaction.getSearchType()/$transaction.getSearchType()general&searchtype=$transaction.getSearchType()")
-                         <td><a href="$link">$transaction.getAmount()</a></td>
+                         <td>$transaction.getAmount() </td>
+                         
+                         #set( $link = "$applink/collective/services/$section/edit.html?id=$transaction.getData().getId()&collectionid=$transaction.getCollectionId()")
+                         <td><a class="emdialog" href="$link"><i class="fa fa-edit"></i></a></td>
                          #set($totalbycurrency = $totalbycurrency + $transaction.getAmount())
 					
                 #end

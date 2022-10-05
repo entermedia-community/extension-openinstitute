@@ -9,9 +9,14 @@
 <div>
             
             #if( $caneditcollection )    
-           <a
+           <a style="margin-left:6px"
                       href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
                       class="emdialog btn btn-sm btn-primary float-right">[[Add Bank Account]]</a>
+                      &nbsp;&nbsp;
+           <a 
+                      href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
+                      class="btn btn-sm btn-primary float-right">[[Reconcile]]</a>
+                      
               #end
 		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
 
