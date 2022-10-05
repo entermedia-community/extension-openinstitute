@@ -11,8 +11,7 @@
 						data-targetdiv="reportpage" 
 						method="post" 
 						action="$content.path">
-				
-					<input type="hidden" name="oemaxlevel" value="1" />
+					<input type="hidden" name="collectionid" value="$librarycol.id" />
 					
 					#set( $hits = $mediaarchive.getSearcher("bankaccount").query().exact("collectionid",$collectionid).sort("nameDown").search($context) )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
