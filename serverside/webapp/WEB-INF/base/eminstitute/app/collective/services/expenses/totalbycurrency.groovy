@@ -25,7 +25,7 @@ public void init()
 			query = searcher.query().exact("collectionid",collectionid).named("expenses").sort("dateDown").getQuery();
 //		}
 	}
-
+	
 	AggregationBuilder b = AggregationBuilders.terms("currencytype_total").field("currencytype");
 	SumBuilder sum = new SumBuilder("total_sum");
 	sum.field("total");
@@ -33,9 +33,12 @@ public void init()
 	query.setAggregation(b);
 	query.setHitsPerPage(50);
 	HitTracker hits = searcher.cachedSearch(context,query);
+
+
 	//hits.enableBulkOperations();  //Breaks aggregations, when logging all searches
-	hits.getActiveFilterValues();
+	//hits.getActiveFilterValues();
 	Map currencymap = hits.getAggregationMap("currencytype_total");
+//	log.info("query" + query + " hits " + hits.size() + " agr:" + hits.getActiveFilterValues() +  " map: " + currencymap);
 	context.putPageValue("currencytype_total",currencymap);
 	context.putPageValue("searcher", searcher);
 	context.putPageValue("expenses", hits);

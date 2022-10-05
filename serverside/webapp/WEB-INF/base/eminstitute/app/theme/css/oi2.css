@@ -1053,5 +1053,7 @@ list-style: none;
 	width:40px;
 	padding:0px;
 	height:40px;
+	margin-top: 2px;
 	background-size: contain;
+	background-repeat: no-repeat;
 }

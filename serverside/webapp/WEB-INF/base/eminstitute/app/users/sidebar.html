@@ -22,7 +22,7 @@
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
 		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
 			<div class="col-2" style="padding:0px;" >
-					#if($collection.assetportrait)
+					#if($collective.assetportrait)
 					#set($asset = $mediaarchive.getAsset($collective.assetportrait))
 					#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 					#else

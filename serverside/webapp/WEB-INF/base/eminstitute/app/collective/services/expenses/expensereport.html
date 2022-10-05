@@ -1,7 +1,8 @@
 #set( $showreimburst = $context.getRequestParameter("showreimburst"))
 <div id="expensereport">
 	<div id="resultsdiv">
-	#if($pendingexpensesreimburseuser_total)
+	
+	#if($pendingexpensesreimburseuser_total || $currencytype_total)
     	<table class="table table-striped">
                #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
 	                	<tr>
@@ -12,7 +13,7 @@
 	                		</td>
                 		</tr>
 				#end   
-
+	
                 #foreach($currency in $currencytype_total.keySet())
 	                	<tr>
 	                		<td class="text-left" style="width:150px">[[Total]]:</td>
