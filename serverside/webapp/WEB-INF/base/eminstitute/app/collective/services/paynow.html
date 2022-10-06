@@ -3,10 +3,14 @@
 #set($invoice = $mediaarchive.getInvoiceById($id))
 #set($products = $mediaarchive.getInvoiceProductList($id))
 #set($workspace = $mediaarchive.getWorkspaceById($invoice.collectionid))
-<div class="collectivecontent">
+<div class="collectivecontent" id="collectivecheckout">
 
-<div class="content">
-<h2>[[Check Out]]</h2>
+<h2 style="margin-bottom:10px;">[[Check Out]]</h2>
+#if($invoice.paymentstatus == "paid")
+<strong>[[Invoice]] #$!invoice.invoicenumber</strong> [[Status is Paid]].
+#else
+
+
 
 	#if(!$mediaarchive.isCatalogSettingTrue("productionmode"))
 	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
@@ -51,7 +55,7 @@
 				
 			</div>
 			<div class="col-sm-5 text-right">
-				$!collection.getValue("invoicebusinessinfo"))
+				$!collection.getValue("invoicebusinessinfo")
 			</div>
 				
 		</div>
@@ -111,8 +115,12 @@
 	            
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
-	                        <form action="$applink/collective/services/payfinish.html" method="post" id="payment-form"
-	                            class="form">
+	                        <form action="$applink/collective/services/payfinish.html" 
+	                        		method="post" 
+	                        		id="payment-form"
+	                        		class="form ajaxform"
+	                        		data-targetdiv="collectivecheckout"
+	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
 	                            
 	                             #if ($workspace.savestripecreditcard == true && $customer.sources.data.size() > 0)
@@ -248,10 +256,13 @@
     </div>
 </div>
 
+
+
+#end
 <div style="padding:20px 0">
 <a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
 </div>
-</div>
+
 
 <div class="clearfix"></div>
 </div>

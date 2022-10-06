@@ -1,6 +1,9 @@
 #set($collectionid = $librarycol.getId())
-
-<div class="collectivecontent" id="collectivebilling">
+<div id="collectivebilling">
+#if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
+	<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+#end
+<div class="collectivecontent" style="margin-bottom:40px;">
 	
      #set( $invoices = $mediaarchive.query("collectiveinvoice").match("collectionid",
      $collectionid).sort("createdonDown").search())
@@ -83,11 +86,14 @@
                              #if ($hit.getValue("paymentstatus") == "invoiced")
                                  <a
                                      href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                     class="btn btn-xs btn-primary">[[Pay Now]]</a>
+                                     class="btn btn-xs btn-primary"
+                                     
+                                     >[[Pay Now]]</a>
                              #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") == "error")
                                  <a
                                      href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                     class="btn btn-xs btn-primary">[[Pay Now]]</a>
+                                     class="btn btn-xs btn-primary ajax"
+                                     data-targetdiv="collectivebilling">[[Pay Now]]</a>
                                  #if ($hit.paymentstatusreason != "")
                                      <div class="alert alert-danger">$hit.paymentstatusreason</div>
                                  #end
@@ -103,4 +109,4 @@
  
  $pages.include("$apphome/collective/services/products/results.html",$context)
  
- 
+ </div>
