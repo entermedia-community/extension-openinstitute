@@ -156,7 +156,7 @@ public class BankTransaction extends BaseData
 		}
 		else if( getSearchType().equals("collectiveinvestment") )
 		{
-			name = getData().get("note");
+			name = getData().get("notes");
 			if( name == null)
 			{
 				name = getData().getId();

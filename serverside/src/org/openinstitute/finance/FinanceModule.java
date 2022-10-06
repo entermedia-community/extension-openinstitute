@@ -18,23 +18,25 @@ public class FinanceModule extends BaseMediaModule
 		if( year != null)
 		{
 			range = new DateRange();
+			String month = inReq.getRequestParameter("month");
+			
 			int intyear = Integer.parseInt(year);
-			if( intyear == -1)
+			if( month != null && !month.equals("0"))
+			{
+				if( intyear == -1)
+				{
+					intyear = 0; //Only
+				}
+				range.setYearAndMonth(intyear, Integer.parseInt(month));
+			}
+			else if( intyear == -1)
 			{
 				range.setAllTime(true);
 				range.setYearPicked(-1);
 			}
 			else
 			{
-				String month = inReq.getRequestParameter("month");
-				if( month != null && !month.equals("0"))
-				{
-					range.setYearAndMonth(intyear, Integer.parseInt(month));
-				}
-				else
-				{
-					range.setYearToDate(intyear);
-				}		
+				range.setYearToDate(intyear);
 			}
 		}
 		if( range == null)
