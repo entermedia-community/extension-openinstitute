@@ -22,7 +22,8 @@
       <language id="fr"><![CDATA[État du client]]></language> 
     </name> 
   </property>  
-  <property id="thumbnail" internalfield="false" index="true" stored="true" editable="true" type="list" viewtype="asset" searchtype="library" listid="assetid" datatype="list" keyword="false"  sortable="true"> 
+  <property id="thumbnail" internalfield="false" index="true" stored="true" editable="true" type="list" viewtype="asset"
+  	 searchtype="library" listid="assetid" datatype="list" keyword="false"  sortable="true"> 
     <name> 
       <language id="de"><![CDATA[Miniaturansicht]]></language>  
       <language id="en"><![CDATA[Thumbnail]]></language>  

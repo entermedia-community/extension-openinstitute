@@ -195,12 +195,18 @@
     </name>
   </property>
   
-   <property id="assetportrait" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" rendertype="asset" required="false" filter="false" multilanguage="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New 
+   <property id="assetportrait" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" 
+   	rendertype="asset" required="false" filter="false" multilanguage="false" datatype="list"
+   	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}" 
+   	autocreatefromexif="false" keyword="false" writenametoexif="false">New 
     <name> 
       <language id="en"><![CDATA[Portrait Photo]]></language> 
     </name> 
   </property>  
-  <property id="assetbanner" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" rendertype="asset" required="false" filter="false" multilanguage="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New 
+  <property id="assetbanner" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" rendertype="asset" 
+  	required="false" filter="false" multilanguage="false" datatype="list" autocreatefromexif="false" keyword="false" 
+  	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}"
+  	writenametoexif="false">New 
     <name>
       <language id="en"><![CDATA[Banner Photo]]></language>
     </name>
@@ -267,7 +273,8 @@
   </property>  
   
   
-   <property id="collectionimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="collections/${id}">Image</property>  
+   <property id="collectionimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset"
+   	 internalfield="false" datatype="list" sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}">Image</property>  
 
   <property id="automatictagging"  index="true" datatype="boolean"  editable="true" >
     <name> 
