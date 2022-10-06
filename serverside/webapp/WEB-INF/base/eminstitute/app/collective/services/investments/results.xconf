@@ -1,9 +1,7 @@
 <page>
 
-  <path-action name="DataEditModule.searchFields" >
-		<property name="searchtype">collectiveinvestments</property>
-		<property name="hitsname">investments</property>
-		
-  </path-action>
+	<page-action name="Script.run" >
+		<script>/${applicationid}/collective/services/investments/totalbycurrency.groovy</script>
+	</page-action>
 
 </page>

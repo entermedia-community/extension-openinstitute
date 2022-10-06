@@ -1,4 +1,17 @@
 <div id="investmentreport">
+
+
+	<table class="table table-striped">
+                #foreach($currency in $currencytype_total.keySet())
+	                	<tr>
+	                		<td class="text-left" style="width:150px">[[Total]]:</td>
+	                		<td class="text-left">
+	                			#set($subtotal = $currencytype_total.get($currency))
+	                			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))
+	                		</td>
+                		</tr>
+				#end
+    </table> 
                   <div class="emdata emdatatable">
                       <table class="table table-striped">
                           <thead>

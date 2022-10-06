@@ -29,6 +29,9 @@
 	
 	
 	$context.putPageValue("view", "collectiveincome/addnew")
+	
+	#set( $data = $searcher.createNewData() )
+	$data.setValue("date",$now)
 	$context.putPageValue("data", $data)
 	 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)

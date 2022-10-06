@@ -1043,3 +1043,17 @@ list-style: none;
 	padding-top: 4px;
 }
 
+.form-group
+{
+	margin: 6px 0 6px 0px;
+}
+
+#usersidebar .card-collections-thumb {
+	box-shadow:none;
+	width:40px;
+	padding:0px;
+	height:40px;
+	margin-top: 2px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}

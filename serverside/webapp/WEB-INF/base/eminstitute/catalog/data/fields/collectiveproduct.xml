@@ -38,7 +38,7 @@
 
 	<property id="productattachment" listid="asset" index="true"
 		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="${collectiveid}/productattachements/${id}">
+		sourcepath="/uploads/${data.collectiveid}/products/${formattedyear}/${shortguid}">
 		<name>
 			<language id="en"><![CDATA[Attachment]]></language>
 		</name>
@@ -52,7 +52,7 @@
 		</name>
 	</property>
 	
-	<property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype"  required="true">
+	<property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype"  required="true"  defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language> 
       <language id="es"><![CDATA[Moneda]]></language>
@@ -78,23 +78,6 @@
 
 	<property id="nextbillon" editable="true" stored="true"
 		type="date" index="true">Next Bill Date
-	</property>
-
-	<property id="startdate" editable="true" stored="true"
-		type="date" index="true">
-
-<name>
-			<language id="en"><![CDATA[Start Date]]></language>
-		</name>
-
-	</property>
-
-	<property id="enddate" editable="true" stored="true"
-		type="date" index="true">
-
-	<name>
-			<language id="en"><![CDATA[End Date]]></language>
-		</name>
 	</property>
 
 
@@ -148,7 +131,8 @@
 	<property id="isautopaid" index="true" stored="true"
 		editable="true" type="boolean">Automatic Payments</property>
 
-  <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="products/${year}/${filename}">
+  <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false"
+  	 datatype="list" sourcepath="/uploads/${data.collectiveid}/products/${formattedyear}/${shortguid}">
    	<name>
    		<language id="en"><![CDATA[Primary Attachment]]></language>
    	</name>

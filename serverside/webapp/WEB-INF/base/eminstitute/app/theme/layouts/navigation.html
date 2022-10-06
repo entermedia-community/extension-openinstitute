@@ -98,7 +98,7 @@
             
        <li class="nav-item dropdown">
 			#set( $currentlang = $mediaarchive.getData("locale",$context.language) )
-              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown">#if($currentlang)$currentlang.id #else $context.language#end</a>	
+              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown" data-bs-toggle="dropdown">#if($currentlang)$currentlang.id #else $context.language#end</a>	
 	  
               <ul class="dropdown-menu">
 

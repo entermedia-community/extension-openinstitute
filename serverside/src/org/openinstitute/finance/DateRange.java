@@ -67,10 +67,10 @@ public class DateRange
 		cal.set(Calendar.SECOND, 0);
 		Date start = cal.getTime();
 		setStartDate(start);
-		int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		cal.add(Calendar.MONTH, 1);
+		cal.add(Calendar.DAY_OF_MONTH,-1);
 		cal.set(Calendar.MINUTE, 59);
 		cal.set(Calendar.HOUR_OF_DAY, 23);
-		cal.add(Calendar.DAY_OF_MONTH,days);
 		
 		Date onemonth = cal.getTime();
 		setEndDate(onemonth);

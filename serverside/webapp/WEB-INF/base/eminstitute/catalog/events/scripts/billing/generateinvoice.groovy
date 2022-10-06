@@ -68,7 +68,13 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());
 			
-			invoice.setValue("currencytype",  product.getValue("currencytype"));
+			//fix currencyprice if not defined deault to USD
+			String productcurrency = product.getValue("currencytype");
+			if (productcurrency == null) {
+				productcurrency = '1';
+			}
+			invoice.setValue("currencytype",  productcurrency);
+			
 			
 			String contactsstring = "";
 			

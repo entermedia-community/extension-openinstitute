@@ -21,7 +21,7 @@
     </name>
   </property> 
   
-      <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype">
+      <property id="currencytype" index="true" editable="true" stored="true"  datatype="list" listid="currencytype" defaultvalue="1">
     <name> 
       <language id="en"><![CDATA[Currency Type]]></language>
       <language id="es"><![CDATA[Moneda]]></language> 
@@ -61,7 +61,9 @@
       <language id="fr"><![CDATA[Propriétaire]]></language> 
     </name> 
   </property>  
-    <property id="paidfromaccount" index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
+    <property id="paidfromaccount" 
+    viewtype="bankaccount" searchcomponent="bankaccount"
+    index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
 	 <name>
 	 <language id="en" > <![CDATA[Bank Account]]> </language>
 	 </name>
@@ -75,7 +77,7 @@
 
   	<property id="receiptattachment" listid="asset" index="true"
 		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="/uploads/${year}/${collectiveid}/income/${id}">
+		sourcepath="/uploads/${data.collectiveid}/income/${formattedyear}/${shortguid}">
 		<name>
 			<language id="en"><![CDATA[Receipt Photo]]></language>
 		</name>

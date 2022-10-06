@@ -42,7 +42,7 @@ $context.putPageValue("currenttopic", $currenttopic)
 					<div class="channel-name float-left">
 						#if($alltopics.size()>1)
 						<div class="dropdown show">
-						<a href="#" class=" dropdown-toggl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						#if($caneditcollection)
 							#if ($currenttopic.teamproject == "true")
 								<i class="fas fa-lock chanel-teamonly"></i>

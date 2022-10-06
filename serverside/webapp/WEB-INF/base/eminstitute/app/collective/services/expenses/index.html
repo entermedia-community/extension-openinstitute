@@ -18,20 +18,22 @@
 		class="autosubmit" 
 		data-targetdiv="expensereport" 
 			method="post" 
+			data-oemaxlevel="1"
 			action="$!siteroot$applink/collective/services/expenses/results.html">
-		
-			#set( $searcher = $mediaarchive.getSearcher("collectiveexpense") )
+			#set( $searchtype = "collectiveexpense")
+			#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 			$context.putPageValue("searcher",$searcher)
-			#set ($details = $searcher.getDetailsForView("collectiveexpense/search", $userprofile))
-		
-			$context.putPageValue("view","collectiveexpense/search")
-		<input type="hidden" name="searchtype" value="collectiveexpense" />
+			#set ($details = $searcher.getDetailsForView("${searchtype}/search", $userprofile))
+			$context.putPageValue("view","${$searchtype}/search")
+			$context.putPageValue("searchform",true)
+			
+		<input type="hidden" name="searchtype" value="$searchtype" />
 		
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$collectionid" />
 		<input type="hidden" name="operation" value="exact" />
 		<input type="hidden" name="collectionid" value="$collectionid" />
-		<input type="hidden" name="oemaxlevel" value="1" />
+		<input type="hidden" name="${searchtype}hitsname" value="expenses" />
 		
 		<table>
 		<tr>
@@ -54,7 +56,7 @@
 		</table>
 	
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Pending	Expenses]]</h2>
+   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Expenses]]</h2>
    		<div style="float:right; width:300px;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">

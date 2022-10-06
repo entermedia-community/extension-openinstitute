@@ -1,10 +1,5 @@
-	<div class="masonry-grid-cell stackedplayer-cell assetdraggable resultsassetcontainer" 
-		 id="gallerycell_${hit.id}"
-		 data-assetid="$hit.id" 
-		 data-width="$assetwidth" 
-		 data-height="$assetheight">
-	    	    <div class="grid-thumbimage" data-assetid="$hit.id">
 					#set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
+	    	    <div class="card-img-top" data-assetid="$hit.id" style="text-align:center">
 						
 					#ifnull( $hit )
 						#set( $hit = $mediaarchive.getAsset( "AXrj_8u2To2Y34J739re") )
@@ -27,11 +22,4 @@
 	    	    	#end
 	    	    	
 	        	    $pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
-	        	   	##$pages.include("$componenthome/results/badges.html", $context)
-	        	</div>
-		         <div class="grid-gallery-footer">
-	
-		         	$aproduct.name
-
-		         </div>
-		</div>
+				</div>
