@@ -38,14 +38,11 @@ class ProjectManager {
 
   Future<emData> projectFromServer(String id) async {
     await createDataModule(boxString: "ProjectsInfo");
-    var data = projectsModule!.box.get(id);
-    if (data != null) {
-      return emData.fromJson(data);
-    } else {
-      var data = await projectsModule!.getData(id);
-      projectsModule!.box.put(id, data.properties);
-      return data;
-    }
+    // var data = projectsModule!.box.get(id);
+
+    var data = await projectsModule!.getData(id);
+    projectsModule!.box.put(id, data.properties);
+    return data;
   }
 
   Future<emData> getProject(String id) async {

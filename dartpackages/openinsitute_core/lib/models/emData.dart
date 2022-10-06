@@ -9,7 +9,7 @@ class emData {
     id = json['id'] ?? json["userid"] ?? "";
     var langname = json["name"];
     if (langname == null) {
-      name = "No Name";
+      name = json["screenname"] ?? "No Name";
     } else if (langname.runtimeType == String) {
       name = langname;
     } else if (langname["en"] != null) {

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
+import 'package:openinsitute_core/Helper/request_type.dart';
+import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/models/emUser.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/sharedpreferences.dart';
@@ -92,6 +96,15 @@ class AuthenticationManager {
     }
   }
 
+  Future<emData> editUser(Map user) async {
+    final resMap = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/settings/users/data/${emUser!.userid}',
+        user,
+        RequestType.PUT,
+        customError: "Invalid credentials. Please try again!");
+    return emData.fromJson(jsonDecode(resMap)['data']);
+  }
+
   Future<EmUser?> login(String id, String password) async {
     final resMap = await oi.postEntermedia(
         oi.app!["mediadb"] + '/services/authentication/login.json',
@@ -146,7 +159,7 @@ class AuthenticationManager {
       await sharedPref.resetValues();
       await Hive.deleteFromDisk();
       oi.datamanager.dispose();
-      await signOut();
+      signOut();
       return true;
     } catch (e) {
       return false;

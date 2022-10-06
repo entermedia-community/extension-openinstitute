@@ -8,6 +8,25 @@ class FinanceManager {
         await oi.datamanager.getDataModule(modulestring, boxString: boxString);
   }
 
+  addBankDetails(String projectId, Map inQuery) async {
+    await initBankDetails(projectId);
+    return await addData(inQuery);
+  }
+
+  bankDetailsCache(String projectId) async {
+    await initBankDetails(projectId);
+    return module!.getAllHits();
+  }
+
+  initBankDetails(String projectId) async {
+    await createDataModule("bankaccount", boxString: "bankaccount_$projectId");
+  }
+
+  getBankDetails(String projectId, int page) async {
+    await initBankDetails(projectId);
+    return await getData(projectId, page);
+  }
+
   incomeCache(String projectId) async {
     await initIncome(projectId);
     return module!.getAllHits();
@@ -164,7 +183,6 @@ class FinanceManager {
   }
 
   // TODO: Project Wallet.
-  // TODO: Bank Accounts.
   // TODO: Transfers.
   // TODO: Work Points.
   // TODO: Invoices.

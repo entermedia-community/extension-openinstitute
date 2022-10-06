@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="module">currencytype</property>
+  <property name="fallbackdirectory">/site/app/views/settings/modules/default</property>
+</page>

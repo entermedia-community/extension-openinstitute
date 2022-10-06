@@ -22,8 +22,6 @@ import 'package:openinsitute_core/services/task_manager.dart';
 import 'package:openinsitute_core/services/user_manager.dart';
 import 'package:path/path.dart';
 
-//import 'contact.dart';
-
 class OpenI {
   Map? _settings;
   DataManager? dataManager;
@@ -89,7 +87,7 @@ class OpenI {
     userManager = UserManager();
     Get.put(userManager!, permanent: true);
     financeManager = FinanceManager();
-    Get.put(financeManager, permanent: true);
+    Get.put<FinanceManager>(financeManager!, permanent: true);
   }
 
   Future<Map?> loadAppSettings() async {
@@ -136,7 +134,7 @@ class OpenI {
     }
   }
 
-  //Generic post method to entermedias server
+  // Generic post method to entermedias server
   Future<String> getEmResponse(
       String url, dynamic jsonBody, RequestType requestType,
       {String customError = "An Error Occured"}) async {
@@ -220,6 +218,16 @@ class OpenI {
     return null;
   }
 
+  getProjectID() {
+    String url =
+        "https://openinstitute.org/app/collective/community/AW_EEOogCrPBxPh_P9NA/OI-App-Version-2-Team.html";
+    if (url.isNotEmpty) {
+      Uri uri = Uri.dataFromString(url);
+      print(uri.pathSegments[6]);
+    }
+  }
+
+
   dynamic handleException(http.Response response) {
     print("Response code: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -266,6 +274,7 @@ class OpenI {
       request.fields['jsonrequest'] = jsonEncode(body);
       request.files.add(multipartFileSign);
       request.headers.addAll(headers);
+
       return await http.Response.fromStream(await request.send());
     } catch (e) {
       throw Exception(e);
