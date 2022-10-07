@@ -255,7 +255,12 @@
 	          
         </div> <!-- end row -->
         
-        $pages.include("$apphome/collective/services/invoices/payoptions.html",$context)
+        #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+	        #set( $invoice_pay_options = $mediaarchive.getCatalogSettingsValue("invoice_pay_options"))
+	        #if($invoice_pay_options)
+	        <div>$invoice_pay_options</div>
+	        #end
+        #end
         
         
     </div>
