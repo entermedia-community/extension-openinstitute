@@ -13,7 +13,7 @@
 		#set( $projectid = $banks.get(0).getId() )  ##TODO: remeber last one picked
 	#end	
 #end
-<select name="${detail.getId()}.value" class="select2">
+<select name="${detail.getId()}.value" class="select2 form-control">
 #foreach( $bank in $banks )
 	<option value="$bank.getId()" #if($projectid == $bank.getId()) selected #end>#datatext($bank,"name")</option>
 #end
