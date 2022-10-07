@@ -40,7 +40,8 @@
     </name> 
   </property>  
   
-  <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="entities/${id}">
+  <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" 
+  	datatype="list" sourcepath="/uploads/${data.collectiveid}/products/${formattedyear}/${shortguid}">
    	<name>
    		<language id="en"><![CDATA[Primary Image]]></language>
    	</name>

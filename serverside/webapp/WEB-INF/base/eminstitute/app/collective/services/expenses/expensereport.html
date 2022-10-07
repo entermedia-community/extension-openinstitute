@@ -1,7 +1,5 @@
 #set( $showreimburst = $context.getRequestParameter("showreimburst"))
 <div id="expensereport">
-	<div id="resultsdiv">
-	
 	#if($pendingexpensesreimburseuser_total || $currencytype_total)
     	<table class="table table-striped">
                #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
@@ -25,12 +23,16 @@
 				#end
      	</table> 
      #end  
+	<div id="resultsdiv">
+     
                   <div class="emdata emdatatable">
             #set($hits = $expenses)
 			$context.putPageValue("hits",$hits)
-			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
-			$context.putPageValue("resultsLink",$resultsLink)
-            $pages.include("${apphome}/components/table/pages.html", $context)
+			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&collectionid=$!librarycol.id&pageposition")
+			$context.putPageValue("resultsPage",$resultsLink)
+			$context.putPageValue("targetdiv","resultsdiv")
+			$context.putPageValue("oemaxlevel","1")
+            $pages.include("${apphome}/components/results/positions.html", $context)
 
                   
                       <table class="table table-striped">

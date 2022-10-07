@@ -29,7 +29,9 @@
     </name> 
   </property>  
   
-   <property id="communityimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="communitytag/${id}">Image</property>  
+   <property id="communityimage" index="true" stored="true" editable="true" type="list" viewtype="asset" 
+   	listid="asset" internalfield="false" datatype="list" 
+   		sourcepath="/uploads/${data.collectiveid}/community/${formattedyear}/${shortguid}">Image</property>  
   
       <property id="funddescription" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
