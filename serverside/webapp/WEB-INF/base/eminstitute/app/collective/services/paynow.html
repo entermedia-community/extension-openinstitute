@@ -256,7 +256,11 @@
         </div> <!-- end row -->
         
         #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
-	        #set( $invoice_pay_options = $mediaarchive.getCatalogSettingsValue("invoice_pay_options"))
+        	#if($invoice.invoicepayoptions)
+        		#set( $invoice_pay_options = $invoice.invoicepayoptions)
+        	#else
+	        	#set( $invoice_pay_options = $mediaarchive.getCatalogSettingsValue("invoice_pay_options"))
+	        #ende
 	        #if($invoice_pay_options)
 	        <div>$invoice_pay_options</div>
 	        #end
