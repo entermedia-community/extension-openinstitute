@@ -426,5 +426,10 @@
 		<permission name="showcollectionpicker">
 		<userprofile property="showcollectionpicker" equals="true" />
 	</permission>
+
+	<permission name="showsidebar">
+		<user />
+	</permission>
+
 	
 </page>
