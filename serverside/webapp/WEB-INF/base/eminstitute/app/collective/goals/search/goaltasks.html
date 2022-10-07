@@ -12,8 +12,8 @@
 #set( $target = "$!{container}tasklist#eid($goal.id)")
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
 <div id="editgoal-${goal.id}">
-<div id="$target">
-<div  class="goalstaskcontainer" id="${goal.id}container">
+<div id="$target" class="goaltaskcontainer">
+<div  >
 		
 	#set($caneditgoal = false)
 	#if($user && ( $canviewsettings || $caneditcollection)  && $goal.collectionid)

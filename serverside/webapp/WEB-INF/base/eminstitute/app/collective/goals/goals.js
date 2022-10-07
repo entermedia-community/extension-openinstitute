@@ -268,10 +268,13 @@ jQuery(document).ready(function(url,params)
 				
 				var href = button.attr("href");
 				var options = button.data();
+				var targetdiv = button.closest(".goaltaskcontainer");
 				jQuery.ajax({
-					url: href, data: options, success: function (data) 
+					url: href, 
+					data: options, 
+					success: function (data) 
 					{
-						$("#" + goalid + "container").append(data);
+						$(targetdiv).append(data);
 						jQuery('.grabfocus').focus();
 
 					},
