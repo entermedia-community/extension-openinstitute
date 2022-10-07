@@ -188,6 +188,12 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 	supportUrl = URLUtilities.urlEscape(supportUrl);
+	
+	//Other Pay options
+	String invoicepayoptions = workspace.get("invoicepayoptions");
+	if(invoicepayoptions == null) {
+		invoicepayoptions =  mediaArchive.getCatalogSettingValue("invoice_pay_options");
+	}
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
@@ -213,6 +219,8 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	objects.put("invoiceheader", invoiceemailheader);
 	objects.put("invoicefooter", invoiceemailfooter);
+	
+	objects.put("invoicepayoptions", invoicepayoptions);
 	
 	templateEmail.send(objects);
 	log.info("Email sent to: "+contact);
