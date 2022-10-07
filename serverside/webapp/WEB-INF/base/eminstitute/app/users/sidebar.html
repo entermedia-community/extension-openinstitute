@@ -2,7 +2,7 @@
 #if( !$appsection)
 	#set( $appsection = $content.appsection )
 #end
-
+#if($user)
 <div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$applink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
@@ -125,3 +125,4 @@
     </div> 
     
 </div>
+#end

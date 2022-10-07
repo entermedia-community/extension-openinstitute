@@ -84,7 +84,8 @@
 			#set( $usersidebarhidden = 'false')
 		#end
 		
-		#if($user && !$browser.inApp())
+		
+		#if($user && !$browser.inApp() && $canshowsidebar)
 			$pages.include("$apphome/components/sidebars/user/index.html")
 		#end
 		<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end emmaincontent">

@@ -15,32 +15,38 @@
 	#end
 	<div id="invoicecontainer">
 	#if( $canviewsettings )
-<form method="post" action="$applink/collective/services/sendinvoice.html" class="ajaxform autocloseform" data-targetdiv="collectivebilling">
+<form method="post" action="$applink/collective/services/sendinvoice.html" 
+		class="ajaxform autocloseform" 
+		data-targetdiv="collectivebilling">
 #end
 <input type="hidden" name="oemaxlevel" value="1">
 <input type="hidden" name="invoiceid" value="$id">
 <input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
 	
 		$pages.include("$apphome/collective/services/viewinvoice.html", $context)
-		
-		#if( $canviewsettings )
 		<div class="text-right" style="padding:15px 10px;">
-		<a href="$applink/collective/services/editinvoice.html?invoiceid=$id" 
-			class="btn btn-secondary ajax" 
-			data-targetdiv="invoicecontainer"
-			title="[[Edit Invoice Details]]"
-			>[[Edit Invoice]]</a>
-			
+		<button id="closebutton" type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">[[Close]]</button>
+		#if( $canviewsettings )
 			#set($status = $invoice.getValue("paymentstatus"))
+			
+			#if(!$status.equals("paid"))
+			<a href="$applink/collective/services/editinvoice.html?invoiceid=$id" 
+				class="btn btn-secondary ajax" 
+				data-targetdiv="invoicecontainer"
+				title="[[Edit Invoice Details]]"
+				>[[Edit Invoice]]</a>
+			#end
+			
 			#if($invoiceready == "true")
 				#if($status.equals("invoiced"))
 					<input type="submit" class="btn btn-primary" value="[[Re-send Invoice]]"/>
-				#else
+				#elseif(!$status.equals("paid"))
 					<input type="submit" class="btn btn-primary" value="[[Send Invoice]]"/>
 				#end
 			#end
-		</div>
+		
 		#end
+		</div>
 		#if( $canviewsettings )
 	</form>
 	#end

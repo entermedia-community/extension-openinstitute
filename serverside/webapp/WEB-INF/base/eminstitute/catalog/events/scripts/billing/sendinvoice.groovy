@@ -13,21 +13,33 @@ public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
 	
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
-	
-	
 	String invoiceid = context.getRequestParameter("invoiceid");
+	log.info("Sending Invoices...");
 	if(invoiceid!=null) {
 		Data invoice = mediaArchive.getInvoiceById(invoiceid);
 		if(invoice != null) {
-			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
+			if (!invoice.get("paymentstatus").equals("paid")) {
+				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
+				invoice.setValue("paymentstatus", "invoiced");
+				invoice.setValue("notificationsent", "true")
+				invoiceSearcher.saveData(invoice);
+		
+			}
+			else if(invoice.get("paymentstatus").equals("paid") && !
+				Boolean.valueOf(invoice.get("notificationpaidsent"))) {
+				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationpaidsent");
+				invoice.setValue("notificationpaidsent", "true")
+				invoiceSearcher.saveData(invoice);
+			}
 		}
 	}
-
+	
+	
 	// Notifications
-	/*sendInvoiceNotifications(mediaArchive, invoiceSearcher);
+	sendInvoiceNotifications(mediaArchive, invoiceSearcher);
 	sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
-	sendInvoicePaidNotifications(mediaArchive, invoiceSearcher);
-	*/
+	
+	
 }
 
 private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
@@ -88,35 +100,13 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		 {
 			if (email != null) {
 				if (email) {
-					
 					sendinvoiceEmail(mediaArchive, email, invoice, workspace, iteratorType);
-					//"Invoice "+workspace, "send-invoice-event.html", actionUrl);
-					/*
-					switch (iteratorType) {
-						case "notificationsent":
-							String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
-							
-							//String key = mediaArchive.getUserManager().getEnterMediaKey(email);
-							//actionUrl = actionUrl + "&entermedia.key=" + key;
-							
-							actionUrl = URLUtilities.urlEscape(actionUrl);
-							sendEmail(mediaArchive, email, invoice, workspace, "Invoice "+workspace, "send-invoice-event.html", actionUrl);
-							break;
-						case "notificationoverduesent":
-							sendEmail(mediaArchive, email, invoice, workspace, "Overdue Invoice "+workspace, "send-overdue-invoice-event.html");
-							break;
-						case "notificationpaidsent":
-							sendEmail(mediaArchive, email, invoice, workspace, "Payment Received "+workspace, "send-paid-invoice-event.html");
-							break;
-					}
-					*/
 				}
 			}
 		}
 		Calendar today = Calendar.getInstance();
 		invoice.setValue("sentto", emails);
 		invoice.setValue("sentdate", today.getTime());
-		invoice.setValue("paymentstatus", "invoiced");
 		invoice.setValue(iteratorType, "true");
 		invoiceSearcher.saveData(invoice);
 		}
@@ -137,9 +127,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	String template = "/" + appid + "/theme/emails/";
 
 	String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	
 	//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
 	//actionUrl = actionUrl + "&entermedia.key=" + key;
-	actionUrl = URLUtilities.urlEscape(actionUrl);
+	
 	
 	String subject;
 	String invoiceemailheader;
@@ -150,7 +141,8 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	switch(messagetype) {
 		case "notificationsent":
 			actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
-			actionUrl = URLUtilities.urlEscape(actionUrl);
+			actionUrl = actionUrl + "&contactemail="+contact;
+			
 			subject = "Invoice "+workspace;
 			template = template + "send-invoice-event.html";
 			//Invoice Template from collection
@@ -192,8 +184,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		}
 		break;
 	}
+	actionUrl = URLUtilities.urlEscape(actionUrl);
 	
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	supportUrl = URLUtilities.urlEscape(supportUrl);
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
