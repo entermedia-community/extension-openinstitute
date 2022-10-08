@@ -257,12 +257,12 @@
         
         #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
         	#if($invoice.invoicepayoptions)
-        		#set( $invoice_pay_options = $invoice.invoicepayoptions)
+        		#set( $invoicepayoptions = $invoice.invoicepayoptions)
         	#else
-	        	#set( $invoice_pay_options = $mediaarchive.getCatalogSettingsValue("invoice_pay_options"))
+	        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
 	        #ende
-	        #if($invoice_pay_options)
-	        <div>$invoice_pay_options</div>
+	         #if($invoicepayoptions != "")
+	        <div style="padding-top:20px">$!invoicepayoptions</div>
 	        #end
         #end
         
