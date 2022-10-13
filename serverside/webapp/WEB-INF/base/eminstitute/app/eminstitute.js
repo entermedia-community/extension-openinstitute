@@ -454,7 +454,7 @@ initcomments = function()
 
 
 stripeinit = function() {
-	if (Stripe) {
+	if (typeof Stripe !== "undefined") {
 		lQuery(".stripepaymentform").livequery(function() {
 			var paymentform = $(this);
 			var stripepublishkey = paymentform.data("stripepublishkey");
