@@ -1,3 +1,4 @@
+#set($paypalclientid = $mediaarchive.getCatalogSettingValue("paypalclientid"))
 <div class="container" id="donationcontainer">
 <div class="contentcolumn">
 	##<h1>[[Donate to ]] $librarycol</h1>
@@ -13,12 +14,21 @@
 		  		<a href="$applink/authentication/logon.html?loginokpage=$!loginok"	class="btn btn-success">[[Login to Donate With Credit Card]]</a>
 		  	</div>
 	  	</div>
-		<p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
-	  	$pages.include("$apphome/collective/donate/paypalform.html",$context)
+	  	#if($paypalclientid)
+			<p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
+		  	$pages.include("$apphome/collective/donate/paypalform.html",$context)
+	  	#end
+	  	
+	  	
+	  	
+	  	
 	#else
 	  	$pages.include("$apphome/collective/donate/creditcardform.html",$context)
-		<p style="text-align:center;padding-top:20px;"><strong>[[Or Use]] PayPal:</strong></p>
-		$pages.include("$apphome/collective/donate/paypalform.html",$context)
+	  	
+	  	#if($paypalclientid)
+			<p style="text-align:center;padding-top:20px;"><strong>[[Or Use]] PayPal:</strong></p>
+			$pages.include("$apphome/collective/donate/paypalform.html",$context)
+		#end
 	#end
 	</div>
 </div>

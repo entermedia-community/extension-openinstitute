@@ -15,7 +15,7 @@
 ##Load Stripe only on pay pages.
 #foreach( $script in $content.getScriptPaths() )
 	#if($script.indexOf("stripe") > -1)
-		<script type="text/javascript" defer src="#if(!$script.startsWith("http"))$home#end$script"></script>
+		<script type="text/javascript" src="#if(!$script.startsWith("http"))$home#end$script"></script>
 	#end
 #end
 
