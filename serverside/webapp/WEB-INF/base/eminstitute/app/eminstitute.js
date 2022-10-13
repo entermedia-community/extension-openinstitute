@@ -405,8 +405,18 @@ lQuery(".chatter-send").livequery("click", function(){
 	});
 	
 	
-	initcomments();
+	
+	
+	
+	
 
+	
+	
+	
+	initcomments();
+	
+	//Init Stripe if required
+	stripeinit();
 
 });
 
@@ -440,6 +450,94 @@ initcomments = function()
 		
 	});
 		
+}
+
+
+stripeinit = function() {
+	if (Stripe) {
+		lQuery(".stripepaymentform").livequery(function() {
+			var paymentform = $(this);
+			var stripepublishkey = paymentform.data("stripepublishkey");
+			if (stripepublishkey) {
+				var stripe = Stripe(stripepublishkey);
+			  	lQuery("#donatecheckout").livequery("click", function(e) {
+				  	$("#donatecheckout").addClass('disabled');
+				  	$("#donatecheckout").text("Processing...");
+				  	//$("#donatecheckout").css("cursor:wait");
+			  		e.preventDefault();
+			  		if( paymentform.valid() )
+			  		{
+					     stripe.createToken(card).then(function(result) {
+						     if (result.error) {
+						       // Inform the user if there was an error
+						       var errorElement = document.getElementById('card-errors');
+						       $(errorElement).html('<div class="errormsg">'+result.error.message+'</div>');
+						       $("#donatecheckout").removeClass('disabled');		
+						  		$("#donatecheckout").text("Check Out");
+						     } else {
+						       // Send the token to server
+						       stripeResponseHandler(result);
+						       paymentform.trigger("submit");
+						     }
+					   });
+			  		}
+			  		else 
+			  		{
+				  	 	$("#donatecheckout").removeClass('disabled');		
+				  		$("#donatecheckout").text("Check Out");
+			  		}
+			  	});
+			  	
+			   	var elements = stripe.elements();
+			  	
+			   	var style = {
+			   		  base: {
+			   		    fontSize: '18px',
+			   		    color: "#495057"
+			   		  }
+			   		};
+			
+					// Create an instance of the card Element.
+					var card = elements.create('card', {style: style});
+			
+				 // Add an instance of the card Element into the `card-element` <div>
+				 card.mount('#card-element');
+			
+				 // Handle real-time validation errors from the card Element.
+				 card.addEventListener('change', function(event) {
+				   var displayError = document.getElementById('card-errors');
+				   if (event.error) {
+				     $(displayError).html('<div class="errormsg">'+event.error.message+'</div>');
+				   } else {
+				     displayError.textContent = '';
+				   }
+				 });
+				 
+				 paymentform.validate({
+					  rules: {
+					    "totalprice.value": {
+					      required: true,
+					      number: true
+					    }
+					  },
+					  errorElement: "div",
+					  errorClass: "errormsg",
+					  errorPlacement: function(error, element) {
+						  error.appendTo( element.closest(".form-group").parent() );
+						}
+				});
+				  	
+				stripeResponseHandler = function( response){
+					  var hiddenInput = document.createElement('input');
+					  hiddenInput.setAttribute('type', 'hidden');
+					  hiddenInput.setAttribute('name', 'stripeToken');
+					  hiddenInput.setAttribute('value', response.token.id);
+					  paymentform.append(hiddenInput);
+				  
+				}
+			}
+		});
+	}
 }
 
 
