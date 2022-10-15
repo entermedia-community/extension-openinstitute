@@ -14,6 +14,25 @@ class UserManager {
     return Get.find();
   }
 
+  Future<List<emData>> searchUser(String searchText) async {
+    await createDataModule();
+    return await userModule!.getRemoteData({
+      "page": "1",
+      "hitsperpage": "20",
+      "query": {
+        "terms": [
+          {"field": "name", "operator": "freeform", "value": searchText}
+        ]
+      }
+    }, false);
+  }
+
+  Future<emData> createNewUser(
+      String firstName, String lastName, String email) {
+    return userModule!.addData(
+        {"firstName": firstName, "lastName": lastName, "email": email});
+  }
+
   createDataModule() async {
     userModule = await oi.datamanager.getDataModule("user");
   }

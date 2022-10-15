@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
@@ -103,6 +105,21 @@ class AuthenticationManager {
         RequestType.PUT,
         customError: "Invalid credentials. Please try again!");
     return emData.fromJson(jsonDecode(resMap)['data']);
+  }
+
+  Future<emData> uploadProfileImage(File file) async {
+    try {
+      final resMap = await oi.postMultiPart(
+        "PUT", // TODO: handle PUT and POST in single Object.
+        oi.app!["mediadb"] + '/services/settings/users/data/${emUser!.userid}',
+        {},
+        {"assetportrait": file},
+      );
+      log(resMap.toString());
+      return emData.fromJson(jsonDecode(resMap.body)['data']);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<EmUser?> login(String id, String password) async {

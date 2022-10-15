@@ -9,9 +9,7 @@ import 'package:openinsitute_core/services/emDataManager.dart';
 class ProjectManager {
   String projectBox = "viewprojects";
 
-  OpenI get oi {
-    return Get.find();
-  }
+  OpenI get oi => Get.find();
 
   DataModule? projectsModule;
 
@@ -130,5 +128,18 @@ class ProjectManager {
       // await projectsModule!.saveCache(results);
     }
     return projects;
+  }
+
+  Future<emData> addUserOnTeam(String projectId, String userId) async {
+    DataModule projectModule =
+        await oi.datamanager.getDataModule("librarycollectionusers");
+    return await projectModule.addData(
+      {
+        "collectionid": projectId,
+        "followeruser": userId,
+        "addeddate": DateTime.now().toUtc().toIso8601String(),
+        "ontheteam": "true"
+      },
+    );
   }
 }

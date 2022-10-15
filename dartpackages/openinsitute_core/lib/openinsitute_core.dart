@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:openinsitute_core/Helper/custom-multipart.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/services/FeedManager.dart';
@@ -227,7 +228,6 @@ class OpenI {
     }
   }
 
-
   dynamic handleException(http.Response response) {
     print("Response code: " + response.statusCode.toString());
     switch (response.statusCode) {
@@ -253,8 +253,8 @@ class OpenI {
     }
   }
 
-  Future<http.Response> sendFile(
-      String url, Map<String, String> body, File file, String type) async {
+  Future<http.Response> postMultiPart( String mt, 
+      String url, Map<String, dynamic> body, Map<String, File>? files) async {
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});
@@ -264,17 +264,19 @@ class OpenI {
       headers.addAll({"X-token": tokenKey});
     }
     try {
-      var stream = http.ByteStream(file.openRead())..cast();
-      var length = await file.length();
       String uri = url;
       Uri validUri = Uri.parse(uri);
-      var request = http.MultipartRequest("POST", validUri);
-      var multipartFileSign = http.MultipartFile(type, stream, length,
-          filename: basename(file.path));
-      request.fields['jsonrequest'] = jsonEncode(body);
-      request.files.add(multipartFileSign);
+      var request = CustomMultipartRequest(mt, validUri);
+      request.fields['jsonrequest'] =
+          Field(jsonEncode(body), 'application/json');
+      files?.forEach((fieldName, file) async {
+        var stream = http.ByteStream(file.openRead())..cast();
+        var length = await file.length();
+        var multipartFileSign = http.MultipartFile(fieldName, stream, length,
+            filename: basename(file.path));
+        request.files.add(multipartFileSign);
+      });
       request.headers.addAll(headers);
-
       return await http.Response.fromStream(await request.send());
     } catch (e) {
       throw Exception(e);
