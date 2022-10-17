@@ -17,4 +17,10 @@
   <property id="facebooklink" />
   <property id="instagramlink" /> 
   <property id="websitelink" />
+  
+  <property id="street"/>  
+  <property id="city"/>  
+  <property id="country"/>
+  
+  
 </properties>
