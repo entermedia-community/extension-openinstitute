@@ -51,7 +51,12 @@
 	</div>
 	
 	<div style="border:1px solid #999;; width:100%; max-width:980px; margin: 0 auto;">
-	<div style="padding:10px; text-align: left;">
+	<div style="padding:10px; text-align: left; position:relative;">
+		#if($status.equals("pending"))
+			<div style="right:5px; top:5px; position:absolute;">
+				<a href="$applink/collective/admin/index.html?collectionid=$!collection.getId()" class="btn btn-xs btn-light"><i class="fas fa-cog "></i> [[Invoice Template]]</a>
+			</div>
+		#end
 		<div class="row">
 			<div class="col-sm-4">
 				#set($logo = $mediaarchive.getAsset($librarycol.assetportrait) )
