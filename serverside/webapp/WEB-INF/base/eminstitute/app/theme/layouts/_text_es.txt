@@ -1,5 +1,5 @@
 #
-#Thu Aug 25 17:01:16 CDT 2022
+#Mon Oct 17 14:17:02 CDT 2022
 Account=Cuenta
 Asset\ is\ missing=Falta el activo
 Communities=Comunidades
@@ -29,6 +29,7 @@ Donations\ Made=Donaciones realizadas
 Upload\ square\ image\ for\ better\ results=Sube una imagen cuadrada para obtener mejores resultados
 Collection\ Properties=Propiedades de colecci\u00F3n
 Collection\ Actions=Acciones de cobro
+New\ Project=Nuevo proyecto
 Related\ Media=Medios Relacionados
 System\ Settings=Ajustes del sistema
 Projects=Proyectos
@@ -39,6 +40,7 @@ User\ Profile=Perfil del usuario
 Annotate=Anotar
 Attachments=Archivos adjuntos
 Profile=Perfil
+Add\ a\ Project=Agregar un proyecto
 Language=Idioma
 Powered\ by=Energizado por
 Assets=Bienes
