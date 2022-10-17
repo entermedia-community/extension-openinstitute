@@ -5,14 +5,15 @@
 #end
 
 <div >
-
+	<h2 class="float-left" style="margin:0 0 10px 0;">[[Direct Payments]]</h2>
 	#if( $caneditcollection )
        	<a
 	        href="$applink/collective/services/income/addnew.html?collectionid=${collectionid}"
-              class="emdialog btn btn-sm btn-primary float-right">[[Add Income]]</a>
+              class="emdialog btn btn-sm btn-primary float-right"
+              title="[[Add Income]]"><i class="fa fa-plus"></i> [[Add Income]]</a>
      #end
 
-    <a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+    <a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -58,7 +59,7 @@
               $context.putPageValue("income",$income)
 	#end
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Direct Payments]]</h2>
+   		
    		<div style="float:right; text-align:right; width:300px; margin: 0 0 10px;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">

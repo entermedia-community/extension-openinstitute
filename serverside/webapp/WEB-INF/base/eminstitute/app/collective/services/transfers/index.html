@@ -7,14 +7,16 @@
 
 <div >
 	
+	<h2 class="float-left" style="margin-bottom:10px">[[Transfers]]</h2>
 	
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Transfer]]</a>
+          class="emdialog btn btn-sm btn-primary float-right"
+          title="[[Add Transfer]]"><i class="fa fa-search"></i> [[Add Transfer]]</a>
     #end      
               
-	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -62,7 +64,7 @@
 	#end
 	
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin-bottom:10px">[[Transfers]]</h2>
+   		
    		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">

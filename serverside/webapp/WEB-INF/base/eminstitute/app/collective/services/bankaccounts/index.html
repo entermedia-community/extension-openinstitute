@@ -7,6 +7,7 @@
 
 
 <div>
+<h2 class="float-left" style="margin:0 0 10px">[[Bank Accounts]]</h2>
 	#ifnull( $hits) 
               #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
               $context.putPageValue("hits",$hits)
@@ -15,8 +16,8 @@
       #if( $caneditcollection )    
            <a style="margin-left:6px"
                       href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
-                      class="emdialog btn btn-sm btn-primary float-right">[[Add Bank Account]]</a>
-                      &nbsp;&nbsp;
+                      class="emdialog btn btn-sm btn-primary float-right"
+                      title="[[Add Bank Account]]"><i class="fa fa-plus"></i> [[Add Bank Account]]</a>
 #if( !$hits.isEmpty() )                      
            <a 
                       href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
@@ -24,7 +25,7 @@
 #end
          #end
 #if( !$hits.isEmpty() )                      
-		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+		<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 #end
 	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post"
 			 action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
@@ -62,7 +63,7 @@
 		</table>
 
 		<div style="padding-top:20px;">
-		<h2 class="float-left" style="margin:0 0 10px">[[Bank Accounts]]</h2>
+		
 		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">

@@ -7,13 +7,18 @@
 
 
 <div id="allreimbursements">
+
+<h2 class="float-left" style="margin:0 0 10px 0;">[[Reimbursements Sent]]</h2>
+
+
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/reimbursements/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Reimbursement]]</a>
+          class="emdialog btn btn-sm btn-primary float-right"
+          title="[[Add Reimbursement]]"><i class="fa fa-plus"></i> [[Add Reimbursement]]</a>
     #end      
               
-	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -54,7 +59,7 @@
 		</tr>
 		</table>
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Reimbursements Sent]]</h2>
+   		
    		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
@@ -74,14 +79,16 @@
    	$pages.include("$apphome/collective/services/reimbursements/results.html",$context)
    
 	
+	
+   <hr>
+	
 	#if(!$expenses.isEmpty() )
-   <div style="padding-top:30px;">
-   		<h2 class="float-left" style="margin:10px 0;">[[Expenses Pending]]</h2>
-   		<div style="float:right; width:260px; margin-bottom:10px;">
-		</div>
+   
+   		<h2 class="float-left" style="margin:30px 0 10px 0;">[[Expenses Pending]]</h2>
 		<div class="clearfix"></div>
-   </div>
+   
    #end
+   
    
 	$pages.include("$apphome/collective/services/reimbursements/expenses.html",$context)
 	

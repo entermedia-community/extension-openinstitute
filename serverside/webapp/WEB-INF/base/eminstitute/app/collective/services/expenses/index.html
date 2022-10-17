@@ -6,13 +6,15 @@
 
 
 <div >
+<h2 class="float-left" style="margin:0 0 10px 0;">[[Expenses]]</h2>
      #if( $caneditcollection )
          <a
           href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Add Expense]]</a>
+          class="emdialog btn btn-sm btn-primary float-right"
+          title="[[Add Expense]]"><i class="fa fa-search"></i> [[Add Expense]]</a>
     #end      
               
-	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -56,7 +58,7 @@
 		</table>
 	
    <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Expenses]]</h2>
+   		
    		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
