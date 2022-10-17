@@ -67,10 +67,8 @@
 		viewtype="user" keyword="true" datatype="list">
 		New
 		<name>
-			<language id="de"><![CDATA[Owner]]></language>
-			<language id="en"><![CDATA[Owner]]></language>
-			<language id="es"><![CDATA[Propietario]]></language>
-			<language id="fr"><![CDATA[Propriétaire]]></language>
+			<language id="en"><![CDATA[Created By]]></language>
+			<language id="es"><![CDATA[Creada por]]></language>
 		</name>
 	</property>
 
