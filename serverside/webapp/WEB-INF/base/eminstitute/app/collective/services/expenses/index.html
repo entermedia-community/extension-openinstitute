@@ -14,7 +14,7 @@
           title="[[Add Expense]]"><i class="fa fa-search"></i> [[Add Expense]]</a>
     #end      
               
-	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -41,7 +41,7 @@
 		<tr>
 		<td width="100%">
 		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
-		$context.putPageValue("autocomplete","off")
+			$context.putPageValue("autocomplete","off")
 			#foreach( $detail in $details)
 			<div class="col-md-4">
 					$context.putPageValue("detail", $detail)
