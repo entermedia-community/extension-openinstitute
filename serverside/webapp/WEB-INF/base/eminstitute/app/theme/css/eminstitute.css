@@ -1743,8 +1743,35 @@ ul.inlinelist   li
 	font-size:0.9rem;
 }
 
+.form-control {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    height: calc(1.5rem + 0.25rem);
+}
 .inlinesearch {
 	padding:20px;
 	margin:20px 0;
 	background-color:#efefef;
 }
+.inlinesearch .emsearchfieldrow {
+	margin-bottom:5px;
+}
+
+.form-component-datasearch-operation {
+	margin-bottom:6px;
+	width:220px;
+}
+.form-control.datepicker {
+	width:195px;
+}
+.ui-datepicker-trigger {
+	margin-left: 2px;
+	padding:6px 6px 0;
+    float: right;
+    display: inline-block;
+}
+.form-control.datepicker {
+    width: 200px;
+}
+
