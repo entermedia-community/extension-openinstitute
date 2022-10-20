@@ -13,7 +13,8 @@
           class="emdialog btn btn-sm btn-primary float-right"
           title="[[Add Expense]]"><i class="fa fa-search"></i> [[Add Expense]]</a>
     #end      
-              
+   <div class="clearfix"></div>      
+	
 	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
@@ -37,27 +38,23 @@
 		<input type="hidden" name="collectionid" value="$collectionid" />
 		<input type="hidden" name="${searchtype}hitsname" value="expenses" />
 		
-		<table>
-		<tr>
-		<td width="100%">
-		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
-			$context.putPageValue("autocomplete","off")
-			#foreach( $detail in $details)
-			<div class="col-md-4">
-					$context.putPageValue("detail", $detail)
-					$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
-			</div>
-			#if( $counter == 3)
-				</div>
-				<div  class="row" >
-			#end	
-			#end
-		</div>	
-		</td>
-		</tr>
-		</table>
+		<div  id="searchform" class="inlinesearch" style="display:none" >
+			<div class="row">
+				$context.putPageValue("autocomplete","off")
+				#foreach( $detail in $details)
+					<div class="col-md-3">
+							$context.putPageValue("detail", $detail)
+							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+					</div>
+					#if( $counter == 4)
+						</div>
+						<div  class="row" >
+					#end	
+				#end
+			</div>	
+		</div>
 	
-   <div style="padding-top:20px;">
+   <div>
    		
    		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 		<label>[[Sort by]]</label>

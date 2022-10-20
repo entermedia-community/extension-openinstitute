@@ -1743,3 +1743,8 @@ ul.inlinelist   li
 	font-size:0.9rem;
 }
 
+.inlinesearch {
+	padding:20px;
+	margin:20px 0;
+	background-color:#efefef;
+}

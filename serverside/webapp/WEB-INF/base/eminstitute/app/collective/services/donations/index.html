@@ -1,8 +1,8 @@
 #set($collectionid = $librarycol.getId())
 
-<h2 class="float-left" style="margin:40px 0 10px 0;">[[Online Donation]]</h2>
-
-<a href="#" onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>
+<h2 class="float-left" style="margin:0 0 10px 0;">[[Online Donation]]</h2>
+<div class="clearfix"></div>
+<a onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>
 
 	<form  id="donationsform" 
 		class="autosubmit" 
@@ -45,7 +45,7 @@
 		    #set( $donations = $mediaarchive.query("transaction").exact("collectionid",$collectionid).exact("isdonation","true").sort("paymentdateDown").search($context))
 		    $context.putPageValue("donations",$donations)
 		#end
-	   <div style="padding-top:10px;">
+	   <div >
 	   		
 	   		<div style="float:right;  text-align:right; width:300px; margin:0 0 10px 0;">
 			<label>[[Sort by]]</label>
