@@ -164,8 +164,8 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
 			subject = "Invoice for "+workspace;
-			if(invoice.getValue("isrecurring")) {
-				String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("nextbillon"));
+			if(invoice.getValue("isrecurring") && invoice.getValue("billdate") != null) {
+				String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
 				subject = "${month} Invoice for "+workspace;
 				objects.put("invoicemonth", month);
 			}
