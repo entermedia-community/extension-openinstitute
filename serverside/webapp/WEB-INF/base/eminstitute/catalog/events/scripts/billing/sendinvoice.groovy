@@ -12,7 +12,7 @@ public void init() {
 	
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 	String invoiceid = context.getRequestParameter("invoiceid");
-	log.info("Sending Invoices...");
+	log.info("Sending Individual Invoices...");
 	if(invoiceid!=null) {
 		Data invoice = mediaArchive.getInvoiceById(invoiceid);
 		if(invoice != null) {
@@ -224,7 +224,6 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
 	
-	Map objects = new HashMap();
 	objects.put("followeruser", contact);
 	objects.put("invoiceto", contact); //change to name
 	
