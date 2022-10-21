@@ -27,5 +27,5 @@
     </path-action>  
     -->
     
-	<inner-layout>/${applicationid}/collective/channel/channelhomefeedlayout.html</inner-layout>
+	<inner-layout>/${applicationid}/collective/channel/channelchatfeedlayout.html</inner-layout>
 </page>

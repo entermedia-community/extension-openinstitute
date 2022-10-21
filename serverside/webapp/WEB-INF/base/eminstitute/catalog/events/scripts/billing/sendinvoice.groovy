@@ -14,9 +14,8 @@ public void init() {
 	
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 	String invoiceid = context.getRequestParameter("invoiceid");
-	
+	log.info("Sending Invoices...");
 	if(invoiceid!=null) {
-		log.info("Sending Invoice.");
 		Data invoice = mediaArchive.getInvoiceById(invoiceid);
 		if(invoice != null) {
 			if (!invoice.get("paymentstatus").equals("paid")) {
@@ -35,7 +34,7 @@ public void init() {
 		}
 	}
 	
-	log.info("Sending Recurring Invoices...");
+	
 	// Notifications
 	sendInvoiceNotifications(mediaArchive, invoiceSearcher);
 	sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
@@ -46,14 +45,16 @@ public void init() {
 private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
 	Collection pendingNotificationInvoices = invoiceSearcher.query()
 			.exact("notificationsent","false")
-			.orgroup("paymentstatus", "sendinvoice error")
-			.search();
+			.exact("paymentstatus","sendinvoice").search();
 
 	
 	if (pendingNotificationInvoices.size()>0)
 	{
 		log.info("Sending Notification for " + pendingNotificationInvoices.size() + " invoices");
-		invoiceIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationsent");
+		for (Data invoice: pendingNotificationInvoices)
+		{
+			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
+		}
 	}
 }
 
@@ -68,7 +69,10 @@ private void sendInvoiceOverdueNotifications(MediaArchive mediaArchive, Searcher
 	if (pendingNotificationInvoices.size()>0)
 	{
 		log.info("Found " + pendingNotificationInvoices.size() + " overdue invoices");
-		invoiceIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationoverduesent");
+		for (Data invoice: pendingNotificationInvoices)
+		{
+			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationoverduesent");
+		}
 	}
 }
 
@@ -82,21 +86,16 @@ private void sendInvoicePaidNotifications(MediaArchive mediaArchive, Searcher in
 	if (pendingNotificationInvoices.size()>0)
 	{
 		log.info("Found " + pendingNotificationInvoices.size() + " paid invoices");
-		invoiceIterate(mediaArchive, invoiceSearcher, pendingNotificationInvoices, "notificationpaidsent");
+		for (Data invoice: pendingNotificationInvoices)
+		{
+			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationpaidsent");
+		}
+	
 	}
 }
 
-
-private void invoiceIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Collection invoices, String iteratorType) {
-	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
-		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();)
-		{
-			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
-			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, iteratorType);
-		}
-}
-
-private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Data invoice, String iteratorType) {
+private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSearcher, Data invoice, String iteratorType) 
+{
 
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
 		
@@ -209,7 +208,12 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
-	
+	//Check project email
+	String email = workspace.get("contactemail");
+	if( email != null)
+	{
+		templateEmail.setBCC(email);
+	}
 	Map objects = new HashMap();
 	objects.put("followeruser", contact);
 	objects.put("invoiceto", contact); //change to name
