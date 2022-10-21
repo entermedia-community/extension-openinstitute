@@ -28,14 +28,19 @@ public class InvoiceModule extends BaseMediaModule
 			MultiValued product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
 			manager.saveNewInvoiceForStore(mediaArchive, invoice, product);
 			inReq.putPageValue("data",product); //Render on details  page
+			inReq.setRequestParameter("invoiceid", invoice.getId());
 		}
 		else
 		{
+			//Just editing an existing invoice
 			productid = inReq.getRequestParameter("productid");
 			MultiValued product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
 			inReq.putPageValue("data",product); //Render on details  page
 		}
 		//TODO email someone
+		//Depending on the producttype??
+		
+		
 		
 	}
 
