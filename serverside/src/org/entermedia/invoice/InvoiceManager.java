@@ -17,6 +17,7 @@ import org.openedit.Data;
 import org.openedit.ModuleManager;
 import org.openedit.MultiValued;
 import org.openedit.data.Searcher;
+import org.openedit.users.User;
 
 public class InvoiceManager implements CatalogEnabled
 {
@@ -142,7 +143,6 @@ public class InvoiceManager implements CatalogEnabled
 		map.put("productid",product.getId());
 		map.put("productquantity","1");
 		
-		
 		double price = product.getDouble("productprice");
 		double totalcost = price * noOfDaysBetween;
 		map.put("productprice", totalcost );
@@ -155,8 +155,31 @@ public class InvoiceManager implements CatalogEnabled
 		{
 			invoice.setValue("currencytype",product.get("currencytype"));
 		}
+		//Grab email from user who ordered the product
+		User sentto = mediaArchive.getUser(invoice.get("forcustomer"));
+		User sentto2 = mediaArchive.getUser(invoice.get("owner"));
+		StringBuffer to = new StringBuffer();
+		if( sentto != null && sentto.getEmail() != null)
+		{
+			to.append(sentto.getEmail());
+		}
+		if( sentto != sentto2 && sentto2 != null && sentto2.getEmail() != null)
+		{
+			if(sentto != null && sentto.getEmail() != null)
+			{
+				to.append(",");
+			}
+			to.append(sentto2.getEmail());
+		}
+		if( to.length() > 0)
+		{
+			invoice.setValue("sentto",to.toString()); //Collective admin plus the users
+		}
+		invoice.setValue("paymentstatus","sendinvoice");
 		
 		mediaArchive.saveData("collectiveinvoice", invoice);
+		mediaArchive.fireSharedMediaEvent("billing/sendinvoices");
+		
 	}
 	
 }
