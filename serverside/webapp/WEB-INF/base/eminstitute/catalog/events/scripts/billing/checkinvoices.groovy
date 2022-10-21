@@ -100,6 +100,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 	
 				Calendar invoiceDue = Calendar.getInstance();
 				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
 				productItem.put("productquantity", 1 );
@@ -113,6 +114,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("collectionid", product.getValue("collectionid"));
 				invoice.setValue("owner", product.getValue("owner"));
 				invoice.setValue("totalprice", product.getValue("productprice"));
+				invoice.setValue("isrecurring", "true");
+				invoice.setValue("billdate", nextBillOn); //Original Bill Date
 				invoice.setValue("duedate", invoiceDue.getTime());
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
@@ -146,8 +149,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				}
 				invoice.setValue("sentto", contactsstring);
 				invoiceSearcher.saveData(invoice);
-				log.info("Invoice Created for recurring product")
-				int recurrentCount = product.getValue("recurringperiod")
+				log.info("Invoice Created for recurring product");
+				
+				int recurrentCount = product.getValue("recurringperiod");
 				int currentMonth = nextBillOn.getMonth();
 				nextBillOn.setMonth(currentMonth + recurrentCount);
 				product.setValue("nextbillon", nextBillOn);
@@ -194,7 +198,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			Collection items = new ArrayList();
 			items.add(productItem);
 			invoice.setValue("productlist", items);
-			invoice.setValue("paymentstatus", "invoiced");
+			invoice.setValue("paymentstatus", "sendinvoice");
 			invoice.setValue("isautopaid", product.getValue("isautopaid"));
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));

@@ -89,6 +89,10 @@
 	<property id="duedate" editable="true" stored="true"
 		type="date" index="true">Due Date
 	</property>
+	
+		<property id="billdate" editable="true" stored="true"
+		type="date" index="true">Bill Date
+	</property>
 
 	<property id="notificationsent" index="true" type="boolean"
 		keyword="false" filter="false" editable="true">
@@ -168,5 +172,12 @@
 		</name>
 	</property>
   
+  
+  	<property id="isrecurring" index="true"
+		type="boolean" keyword="false" filter="false" editable="true">
+		<name>
+			<language id="en"><![CDATA[Is Recurring]]></language>
+		</name>
+	</property>
  
 </properties>
