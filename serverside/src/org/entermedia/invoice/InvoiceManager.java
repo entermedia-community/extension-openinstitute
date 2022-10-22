@@ -146,7 +146,7 @@ public class InvoiceManager implements CatalogEnabled
 		products.add(map);
 		invoice.setValue("productlist", products);
 		invoice.setValue("totalprice",totalcost);
-		if( invoice.getValue("currencytype") == null)
+		if( invoice.getValue("currencytype") != null)
 		{
 			invoice.setValue("currencytype",product.get("currencytype"));
 		}
