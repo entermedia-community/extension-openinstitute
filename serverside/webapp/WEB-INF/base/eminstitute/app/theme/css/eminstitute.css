@@ -746,7 +746,7 @@ height: 40px;
 }
 	
 .collaborate-content { 
-	padding:10px 0;
+	padding:10px 5px;
 }
 .chatterbox-write {
 	height: 38px;
@@ -1756,7 +1756,7 @@ ul.inlinelist   li
     padding: 0.25rem 0.75rem;
     font-size: 0.9rem;
     line-height: 1.3;
-    height: calc(1.5rem + 0.25rem);
+    height: calc(1.5rem + 0.45rem);
 }
 .inlinesearch {
 	padding:20px;
@@ -1777,10 +1777,41 @@ ul.inlinelist   li
 .ui-datepicker-trigger {
 	margin-left: 2px;
 	padding:6px 6px 0;
-    float: right;
+    float: left;
     display: inline-block;
 }
 .form-control.datepicker {
-    width: 200px;
+    width: 190px;
 }
 
+.select2-container .select2-search--inline .select2-search__field {
+	margin-top:0;
+	font-size:0.9rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	font-size:0.9rem;
+}
+
+.table-col-totals {
+	width: 30%;
+	text-align: right;
+	vertical-align: top;
+}
+
+.finances-table-sort {
+	float:right;  
+	text-align:right; 
+	width:300px; 
+	margin:0 0 10px 0;
+	padding-top:10px;
+}
+
+@media (min-width: 640px) {
+	.table-col-totals {
+		width: 15%;
+	}	
+	.finances-table-sort {
+	padding-top:0;
+	}
+}

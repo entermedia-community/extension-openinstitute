@@ -5,7 +5,7 @@
 
 <div class="row">
 <div class="col-md-5">
-    <h2>[[Project Wallet]]</h2>
+    <h2 style="margin-bottom:10px">[[Project Wallet]]</h2>
 </div>
 <div class="col-md-7">    
     #if( $XXXXcaneditcollection )
@@ -38,7 +38,7 @@
 		
 		<div  id="dashsearchform" class="row inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
 			$context.putPageValue("autocomplete","off")
-			<div class="col-md-2">
+			<div class="col-md-1">
 			[[Filter by]]:
 			</div>
 			<div class="col-sm-6 col-md-2" style="margin-bottom:5px;">
@@ -79,7 +79,7 @@
 					</select>
 				#end				
 			</div>		
-			<div class="col-md-2">
+			<div class="col-md-5 text-right">
 				<a href="dashboard.html?collectionid=$collectionid&clearfilters=true&oemaxlevel=1" class="btn btn-sm btn-light ajax" data-targetdiv="financesdashboard">[[Clear Filters]]</a>
 			</div>		
 			
@@ -98,7 +98,7 @@
 				<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
 				<td></td>
-				<td style="width:10%;padding-right:20px; text-align: right;">
+				<td  class="table-col-totals">
 				#if( $currencytype != "2") 
 				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
 				$$!context.doubleToMoney($subtotal, 2)
@@ -109,13 +109,12 @@
 			#end
 			
 			<tr>
-				<td style="width:10%"></td>
-				<td style="width:20%; text-align: right;"></td>
-				<td style="text-align: right;">[[Total in USD]]: <br>
+				
+				<td colspan="3" style="text-align: right;">[[Total in USD]]: <br>
 				<span style="font-size:0.9rem; color:#666;">[[Only includes reimbursed expenses]]*</span>
 				
 				</td>
-				<td style="width:10%;padding-right:20px;vertical-align: top;">
+				<td class="table-col-totals">
 			 	$$!context.doubleToMoney($total, 2)
 			</td>
 			</tr>

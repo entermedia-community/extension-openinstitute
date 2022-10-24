@@ -70,26 +70,25 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr >
-						<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
-						<td></td>
-						<td></td>
+						<tr class="tablefinances-header">
+						<td colspan="2" >$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
+						
 						
 						</tr>
 					#end 
-					<tr class="tablefinances-header">
-						<td style="width:10%"></td>
+					<tr class="">
+						
 						<td>$!context.getText($mediaarchive.getCachedData("expensetype", $type.expensetype))</td>
-						<td style="width:15%; text-align: right;">- $!context.doubleToMoney($type.getValue("total"),2)</td>
+						<td class="table-col-totals">- $!context.doubleToMoney($type.getValue("total"),2)</td>
 						
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
 					
 				#end
 					<tr>
-					<td></td>
-					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">- $!context.doubleToMoney($totalbycurrency,2)</td>
+					
+					<td style="text-align: right;"><strong>[[Total]]:</strong></td>
+					<td class="table-col-totals"><strong>- $!context.doubleToMoney($totalbycurrency,2)</strong></td>
 					
 					</tr>
 					#set($totalbycurrency = 0)

@@ -1,4 +1,6 @@
-<div class="card-block" style="padding:20px;">
+<div class="card-block" style="padding:5px 20px;">
+
+<h2>[[Project Settings]]</h2>
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
@@ -56,7 +58,6 @@ $context.putPageValue("data", $librarycol)
 		$!context.setRequestParameter("invoicepaidemail.value",$invoicepaidemail)
 	#end
 #end
- 
  
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 
