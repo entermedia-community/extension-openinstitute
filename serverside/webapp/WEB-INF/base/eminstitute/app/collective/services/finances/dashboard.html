@@ -71,7 +71,7 @@
 				#if( $allprojects.size() > 1)
 					
 					#set($projectid = $context.getRequestParameter("collectiveproject") )
-					<select name="collectiveproject"  class="form-control-sm" style="width:120px;">
+					<select name="collectiveproject"  class="select2 form-control-sm" style="width:120px;">
 						<option value="">[[By Topic]]</option>
 						#foreach( $project in $allprojects )
 							<option value="$project.getId()" #if($projectid == $project.getId()) selected #end>$project</option>

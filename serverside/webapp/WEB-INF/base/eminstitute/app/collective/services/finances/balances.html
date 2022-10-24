@@ -17,15 +17,15 @@
 				#foreach($type as $current)
 					#if($type.currencytype != $thecurrency)
 						#set($thecurrency = $type.currencytype)
-						<tr>
+						<tr class="tablefinances-header">
 						<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
-						<td></td>
+						
 						<td></td>
 						
 						</tr>
 					#end 
 					<tr class="tablefinances-header">
-						<td style="width:10%"></td>
+						
 						<td>
 						#if($type.incometype)
 							$!context.getText($mediaarchive.getCachedData("incometype", $type.incometype))
@@ -34,7 +34,7 @@
 							[[Donation or Invoice]]
 						#end
 						</td>
-						<td style="width:15%; text-align: right;">$!context.doubleToMoney($type.getValue("total"),2)</td>
+						<td class="table-col-totals">$!context.doubleToMoney($type.getValue("total"),2)</td>
 						
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
@@ -43,7 +43,7 @@
 					<tr>
 					<td></td>
 					<td style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">$!context.doubleToMoney($totalbycurrency,2)</td>
+					<td class="table-col-totals">$!context.doubleToMoney($totalbycurrency,2)</td>
 					
 					</tr>
 					#set($totalbycurrency = 0)

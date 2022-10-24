@@ -1792,7 +1792,9 @@ ul.inlinelist   li
 .select2-container--default .select2-selection--single .select2-selection__rendered {
 	font-size:0.9rem;
 }
-
+textarea.form-control {
+    min-height: calc(3.5em + 0.95rem + 2px);
+}
 .table-col-totals {
 	width: 30%;
 	text-align: right;
