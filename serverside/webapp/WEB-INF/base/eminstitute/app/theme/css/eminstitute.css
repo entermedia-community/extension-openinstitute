@@ -285,10 +285,11 @@ margin-top:.6rem;
 
 	}
 
-@media (min-width: 1400px) {
-.empushcontent {
-    margin-left:250px;
-}
+@media (min-width: 1320px) {
+	.empushcontent {
+	    margin-left:250px;
+	}
+
 .sidebar-togglerX {display:none;}
 }
 
@@ -329,6 +330,14 @@ margin-top:.6rem;
 	padding:0;
 	height: 100%;
 }
+}
+
+@media (min-width: 1680px) {
+	.empushcontent {
+	   margin-left:00px;
+	}
+}
+
 
 @media (max-width: 1280px) {
 	.account-content {

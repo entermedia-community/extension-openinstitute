@@ -194,7 +194,10 @@ text-decoration: none;
 	color:#424367;
 	font-size: 0.85rem;
 }
-
+#mainOINav .navbar-nav a.btn {
+	font-size: 0.75rem;
+	padding:0.25rem 0.45rem;
+}
 #mainOINav  .select2-container--default .select2-selection--single {
 	border-color:#002685;
 }
@@ -216,14 +219,34 @@ text-decoration: none;
 	z-index: 1001;
 }
 .oiheader {
-	height:70px;
+	height:120px;
 	position:relative;
 	z-index:100;
 }
+.oi-header-table {
+	display:inline-table;
+	width: 100%;
+}
 
+.oi-header-table-c1 {
+	display:inline-block;
+	
+	vertical-align: top;
+}
+.oi-header-table-c2 {
+	display:inline;
+	
+	vertical-align: top;
+}
 
-
-
+.oi-header-table-c3 {
+	display:table-footer-group;
+	width: 100%;
+	vertical-align: top;
+}
+.oi-header-table {
+	vertical-align: top;
+}
 /*OI NAV*/
 #mainOINav {
 	padding:0.1rem 0;
@@ -235,11 +258,18 @@ text-decoration: none;
 #mainOINav .nav-item { 
 	text-align:right; 
 	font-weight: normal;
-	font-size: 0.9rem;
 	text-transform: uppercase;
+	padding-top:8px;
+}
+#mainOINav .addnewproject {
+	padding-top:6px;
 }
 #mainOINav .dropdown-item {
-	font-size: 0.9rem;
+	font-size: 0.8em;
+}
+#mainOINav .dropdown-item a {
+	color:#fff;
+	text-decoration: none;
 }
 #mainOINav .dropdown-item a:hover {
 	text-decoration: none;
@@ -248,25 +278,16 @@ text-decoration: none;
 {
 	background-color: #79A6AB;
 }
-#mainOINav .nav-item.active a
-{
+#mainOINav .nav-item.active a {
 	color: white;
 }
 #mainOINav .currentlibrary {
 	background-color: #efefef;
 }
 
-#mainOINav .col-oi-logo {
-	max-width:110px;
-}
-#mainOINav .col-oi-picker {
-	max-width:210px;
-}
-#mainOINav .col-oi-menu {
-	max-width:55px;
-}
+
 .nav-collectionpicker {
-	width: 100%;;
+	width: 100%;
 	display: block;
 }
 
@@ -276,131 +297,99 @@ text-decoration: none;
 .nav-collectionpicker .userpicker {
 	margin-bottom:5px;
 }
-@media (max-width: 640px) {
-	.navbar-collapse {
-		position:absolute;
-		right:0px;
-		background-color: #1D5655;
-		border-bottom-left-radius: 20px;
-		overflow: hidden;
-	}
-	#mainOINav .navbar-collapse .navbar-nav .nav-link {
-		font-size:0.9rem;
-		
-		padding:5px 25px;
-		color:#eee;
-		min-width: 220px;
-	}
-	#mainOINav .navbar-collapse .navbar-nav .nav-link:active {
-		color:#fff;
-	}
-	#mainOINav .navbar-collapse .dropdown-menu {
-		border-radius: 0;
-		background-color: #79A6AB;
-		padding:0!important;
-	}
-	#mainOINav .navbar-collapse .dropdown-item {
-		text-align: right;
-	}
-	#mainOINav .navbar-nav a {
-		color:#eee;
-	}
-	#campaigninfo 
-	{
-		padding: 5px 1px;
-	}
-	#campaigninfo .communitytagdescription 
-	{
-		padding: 5px 0 0 0;
-	}
-	
-	#campaigninfo .communitytagdescription .communitytagdescriptiontext
-	{
-		padding: 10px;
-	}
-	
-	#campaigninfo .communitytagcontainer-out
-	{
-		padding: 10px 2px;
-	}
-	
-	.donatecard .card-block
-	{
-		padding: 10px 2px;
-	} 
-	
-	
+#mainOINav  .oi-navbar-nav {
+	padding:10px 5px ;
+	display:flex;
+	flex-direction: row;
+	list-style: none;
+	float:right;
+}
+#mainOINav  .col-oi-logo {
+	display: inline-block;
+	float:right;
+	padding:10px 10px 0 0;
+}
+#mainOINav  .oi-navbar-nav .nav-link {
+		font-size:0.85rem;
+		padding:1px 5px;
+		line-height: 1.6;
+}
+#mainOINav .dropdown-menu {
+	border-radius: 0;
+	background-color: #79A6AB;
+	padding:0!important;
 }
 
-
-@media (min-width: 640px) {
+#mainOINav .col-oi-picker {
+		width:200px;
+		padding:8px 0 0 10px;
+	}
+.nav-collectionpicker {
+   display: inline-block;
+}
+	
+@media (min-width: 992px) {
+	.oi-header-table-c1 {
+	display:table-cell;
+	width: 40%;
+	}
+	.oi-header-table-c2 {
+		display:table-cell;
+		width: 20%;
+	}
+	.oi-header-table-c3 {
+	display:table-cell;
+	width: 40%;
+	}
 	.oiheader {
-		height:60px;
+	height:70px;
 	}
-	#mainOINav {
-		background:none;
-		padding:0;
-	}
-
-
-	#mainOINav .navbar-nav .nav-item 
-	{
-		background-color: transparent;
-		border:0 none;
-	}
-	
-	#mainOINav .dropdown-menu {
-		.border-radius:0;
-	}
-	
+	#mainOINav  .col-oi-logo {
+	float:left;
+	padding-top:5px;
+}
 	#mainOINav .col-oi-picker {
-		max-width:600px;
-	}
-	#mainOINav .col-oi-logo {
-		max-width:600px;
-	}
-	#mainOINav .col-oi-menu {
-		max-width:600px;
+		width:340px;
+		padding:15px 0 0;
 	}
 	.nav-collectionpicker {
-		width: 48%;
-		display: inline-block;
-	}
-
-	.collectivelayout {
-		padding-top:1px;
-	}
-	
-	.nav-collectionpicker .select2-container .select2-selection--single {
-    height: 28px;
-	}	
-	.nav-collectionpicker .userpicker {
-		margin-bottom:0px;
-	}
-	#campaigninfo 
-	{
-		padding: 20px;
-	}
-	#campaigninfo .communitytagdescription .communitytagdescriptiontext
-	{
-		padding: 10px 0 0 0;
-	}
-	
-.donatecard .card-block
-	{
-		padding: 20px 21px;
-	} 
-	
+    width: 40%;
+    display: inline-block;
 }
-
-
-
-.sidebar-list li {
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #fff;
+	#mainOINav  .oi-navbar-nav .nav-link {
+		font-size:0.9rem;
+		padding:1px 15px;
+		line-height: 2;
+	}
+	
+	#mainOINav .oi-navbar-nav a.btn {
+	font-size: 0.75rem;
+	padding:0.45rem 0.55rem;
 }
-
-
+}	
+@media (min-width: 1200px) {
+	.oi-header-table-c1 {
+		
+	}
+	.oi-header-table-c2 {
+		
+	}
+	#mainOINav .col-oi-picker {
+		width:380px;
+		padding:15px 0 0;
+	}
+	.nav-collectionpicker {
+    width: 45%;
+    display: inline-block;
+}
+	.addnewproject {
+	padding-top:8px;
+	}
+	.navbar-brand {
+	padding:5px 20px 0;
+	margin:0 20px;
+	}
+}
 /*OI Homepage*/
 .bodywebsite h1 {
 	text-align:center;
@@ -739,7 +728,7 @@ min-height: 115px;
 		font-weight: bold;
 	}
 	.community-maincol  {
-		margin:0 20px 10px 0;
+		margin:0 10px 10px 0;
 	}
 	.community-maincol-homepage  {
 	margin: 0px;
@@ -1036,11 +1025,6 @@ list-style: none;
 
 .messageselection a:hover { 
   text-decoration:none;
-}
-
-.addnewproject
-{
-	padding-top: 4px;
 }
 
 .form-group

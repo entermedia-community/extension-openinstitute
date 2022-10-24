@@ -41,16 +41,16 @@
 			<div class="col-md-2">
 			[[Filter by]]:
 			</div>
-			<div class="col-md-2">
-				<select name="year" class="form-control-sm" style="width:120px;">
+			<div class="col-sm-6 col-md-2" style="margin-bottom:5px;">
+				<select name="year" class="select2 form-control-sm " style="width:120px;">
 					<option value="-1" #if($daterange.getYearPicked() == -1) selected #end>[[All]]</option>
 					<option value="0"  #if($daterange.getYearPicked() == 0) selected #end>[[YTD]]</option>
 					<option value="1"  #if($daterange.getYearPicked() == 1) selected #end>[[Last Year]]</option>
 					<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
 				</select>
 			</div>
-			<div class="col-md-2">
-				<select name="month" class="form-control-sm" style="width:120px;">
+			<div class="col-sm-6  col-md-2" style="margin-bottom:5px;">
+				<select name="month" class="select2 form-control-sm" style="width:120px;">
 					<option value="0" #if($daterange.getMonthPicked() == 0) selected #end>[[Month]]</option>
 					<option value="1" #if($daterange.getMonthPicked() == 1) selected #end>[[Jan]]</option>
 					<option value="2" #if($daterange.getMonthPicked() == 2) selected #end>[[Feb]]</option>
