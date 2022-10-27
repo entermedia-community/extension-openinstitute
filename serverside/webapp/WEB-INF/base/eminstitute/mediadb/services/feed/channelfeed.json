@@ -41,6 +41,8 @@
 			"assetname":#jesc($hit.name),
 			"importstatus": "$hit.importstatus",
 			"previewstatus": "$hit.previewstatus",
+			"imagewidth": "$mediaarchive.getRealImageWidth($hit)",
+			"imageheight": "$mediaarchive.getRealImageHeight($hit)",
 			"downloads":[
 			#set($presets = $mediaarchive.asListOfPreviewLinks($hit) )
 			#foreach( $preset in $presets )#if( ${foreach.count} != 1 ), #end
