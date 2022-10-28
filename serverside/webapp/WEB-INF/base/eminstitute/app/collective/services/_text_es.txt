@@ -1,5 +1,5 @@
 #
-#Thu Aug 25 17:15:38 CDT 2022
+#Mon Oct 17 14:17:03 CDT 2022
 Project\ Wallet=Monedero del proyecto
 Products=Productos
 Invoice=Factura
@@ -37,6 +37,7 @@ Invoice\ Number=N\u00FAmero de factura
 Copy\ Product\ or\ Service=Copiar producto o servicio
 Product\ Catalog=Catalogo de producto
 Paid\ On=Pagado en
+Bank\ Accounts=Cuentas bancarias
 Due\ Date=Vencimiento
 Invoice\ sent=Factura Enviada
 Invoice\ Product\ or\ Service=Facturar Producto o Servicio

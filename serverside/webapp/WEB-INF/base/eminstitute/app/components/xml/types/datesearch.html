@@ -19,7 +19,11 @@
 #else
 	#set( $op = 	$term.getOperation() )
 
-	<select name="operation" id="operation${inputid}" onchange="updateDateInput${inputid}(this.selectedIndex);" class="form-control custom-select">
+	<select 
+		name="operation" 
+		id="operation${inputid}" 
+		onchange="updateDateInput${inputid}(this.selectedIndex);" 
+		class="form-control form-component-datasearch-operation custom-select">
 		<option value="equals" >[[Equals]]</option>
 		<option value="after" #if( $op && $op == "afterdate" )selected #end>[[After Date]]</option>
 		<option value="before" #if( $op && $op == "beforedate" )selected #end >[[Before Date]]</option>
@@ -29,7 +33,7 @@
 		<option value="before30" #if( $op && $op == "before30" )selected #end>[[Past month]]</option>
 		<option value="before365" #if( $op && $op == "before365" )selected #end>[[Past year]]</option>
 	</select>
-	<br/>
+	
 	<span id="dateinput${inputid}" class="dateinputbox" >
 
 	</span>

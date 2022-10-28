@@ -6,5 +6,7 @@
   <property id="invoiceemailheader"/>  
   <property id="invoiceemailfooter"/>
   
-    <property id="invoicepaidemail"/>  
+   <property id="invoicepaidemail"/>
+   
+   <property id="invoicepayoptions"/>    
 </properties>

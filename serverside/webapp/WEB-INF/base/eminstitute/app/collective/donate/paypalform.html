@@ -1,4 +1,4 @@
-	
+#set($paypalclientid = $mediaarchive.getCatalogSettingValue("paypalclientid"))
 				<div class="container card donatecard" style="margin-top: 25px">
 
 					<div class="card-block" style="padding: 00px 21px;margin-top: 25px">
@@ -81,8 +81,8 @@
 								<div class="col-md-6">
 									##TODO: get from catalog settings
 									<script
-										src='https://www.paypal.com/sdk/js?client-id=$!mediaarchive.getCatalogSettingValue("paypalclientid")&disable-funding=credit,card&intent=capture'></script>
-										##src="https://www.paypal.com/sdk/js?client-id=AWtTwfOeBNI1ok8JfbeKd2Ld2te2isssU1nudKiv-zdd-dURV3kWfs3CMQ70M9Bj-HeqLXnMyQ6ChhDO&disable-funding=credit,card&intent=capture"></script>
+										src='https://www.paypal.com/sdk/js?client-id=$!paypalclientid&disable-funding=credit,card&intent=capture'></script>
+										
 									<div style="max-width: 300px; float:rightX; margin: 30px 0px;">
 										<div id="paypal-button-container"></div>
 									</div>

@@ -13,18 +13,19 @@ public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
 	Searcher productSearcher = mediaArchive .getSearcher("collectiveproduct");
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
-
+	log.info("Checking Invoices");
 	generateRecurringInvoices(mediaArchive, productSearcher);  //status=active
 	//generateNonRecurringInvoices(mediaArchive, productSearcher);  //status=active
 	payAutoPaidInvoices(mediaArchive, invoiceSearcher);
 	
 	
-	// Notifications
+	// Notifications - Handled on sendinvoice.groovy
+	mediaArchive.fireMediaEvent("billing","sendinvoices",  null, context.getUser());
 	
-	sendInvoiceNotifications(mediaArchive, invoiceSearcher);
-	sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
-	sendInvoicePaidNotifications(mediaArchive, invoiceSearcher);
-	
+	//sendInvoiceNotifications(mediaArchive, invoiceSearcher);  //may work same as sendinvoice.
+	//sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
+	//sendInvoicePaidNotifications(mediaArchive, invoiceSearcher);
+	//done in sendinvoice.groovy
 }
 
 private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSearcher) {
@@ -84,7 +85,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 			.exact("billingstatus", "active")
 			.between("nextbillon", since.getTime(), due.getTime())
 			.search();
-    log.info(pendingProducts);
+    //log.info(pendingProducts);
 	if (pendingProducts.size() > 0) 
 	{
 		log.info("Creating recurring invoices for " + pendingProducts.size() + " products");
@@ -99,6 +100,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 	
 				Calendar invoiceDue = Calendar.getInstance();
 				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
 				productItem.put("productquantity", 1 );
@@ -112,6 +114,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("collectionid", product.getValue("collectionid"));
 				invoice.setValue("owner", product.getValue("owner"));
 				invoice.setValue("totalprice", product.getValue("productprice"));
+				invoice.setValue("isrecurring", "true");
+				invoice.setValue("billdate", nextBillOn); //Original Bill Date
 				invoice.setValue("duedate", invoiceDue.getTime());
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
@@ -145,14 +149,19 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				}
 				invoice.setValue("sentto", contactsstring);
 				invoiceSearcher.saveData(invoice);
-	
-				int recurrentCount = product.getValue("recurringperiod")
+				log.info("Invoice Created for recurring product");
+				
+				int recurrentCount = product.getValue("recurringperiod");
 				int currentMonth = nextBillOn.getMonth();
 				nextBillOn.setMonth(currentMonth + recurrentCount);
 				product.setValue("nextbillon", nextBillOn);
 				product.setValue("lastgeneratedinvoicedate", today.getTime());
 				productSearcher.saveData(product);
 			}
+			else {
+				log.info("Invoice not created, invoice alreay sent. ${lastbilldate} < ${nextBillOn}")
+			} 
+				
 		}
 	}
 }
@@ -170,7 +179,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			//.exact("producttype","0")
 			
 			
-	log.info("Creating invoice for " + pendingProducts.size() + " none-recurring Products");
+	//log.info("Creating invoice for " + pendingProducts.size() + " none-recurring Products");
 	for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
 		Data product = productSearcher.loadData(productIterator.next());
 
@@ -189,7 +198,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			Collection items = new ArrayList();
 			items.add(productItem);
 			invoice.setValue("productlist", items);
-			invoice.setValue("paymentstatus", "invoiced");
+			invoice.setValue("paymentstatus", "sendinvoice");
 			invoice.setValue("isautopaid", product.getValue("isautopaid"));
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));
@@ -205,6 +214,10 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 		}
 	}
 }
+
+/**
+Moved to sendinvoice.groovy
+
 
 private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
 	Collection pendingNotificationInvoices = invoiceSearcher.query()
@@ -297,7 +310,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 								switch (iteratorType) {
 									case "notificationsent":
 										String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
-										
+										actionUrl = actionUrl + "&notifiedemail="+email;
 										//String key = mediaArchive.getUserManager().getEnterMediaKey(email);
 										//actionUrl = actionUrl + "&entermedia.key=" + key;
 										
@@ -388,6 +401,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 }
  * */
 
+/*
 private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, String subject, String htmlTemplate) {
 	sendEmail(mediaArchive, contact, invoice, subject, htmlTemplate, null);
 }
@@ -399,13 +413,11 @@ private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, 
 	
 	if (actionUrl == null) {
 		actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
-		
 		//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
 		//actionUrl = actionUrl + "&entermedia.key=" + key;
-		actionUrl = URLUtilities.urlEscape(actionUrl);
-
-		
 	}
+	actionUrl = URLUtilities.urlEscape(actionUrl);
+	
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
@@ -421,6 +433,7 @@ private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, 
 	templateEmail.send(objects);
 	log.info("Email sent to: "+contact);
 }
+*/
 
 private String getSiteRoot() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");

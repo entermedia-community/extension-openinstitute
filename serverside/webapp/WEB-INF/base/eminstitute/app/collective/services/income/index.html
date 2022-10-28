@@ -5,14 +5,17 @@
 #end
 
 <div >
-
+	<h2 class="float-left" style="margin:0 0 10px 0;">[[Direct Payments]]</h2>
 	#if( $caneditcollection )
        	<a
 	        href="$applink/collective/services/income/addnew.html?collectionid=${collectionid}"
-              class="emdialog btn btn-sm btn-primary float-right">[[Add Income]]</a>
+              class="emdialog btn btn-sm btn-primary float-right"
+              title="[[Add Income]]"><i class="fa fa-plus"></i> [[Add Income]]</a>
      #end
 
-    <a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+	<div class="clearfix"></div>
+
+    <a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
 		class="autosubmit" 
@@ -32,34 +35,30 @@
 		<input type="hidden" name="collectionid" value="$collectionid" />
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
-		<table>
-		<tr>
-		<td width="100%">
-		<div  id="searchform" class="row inlinesearch" style="display:none; padding:20px 0; margin:20px 10px; background-color: #f0f0f0;" >
-			$context.putPageValue("autocomplete","off")
-			#foreach( $detail in $details)
-				<div class="col-md-4">
-						$context.putPageValue("detail", $detail)
-						$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
-				</div>
-				#if( $counter == 3)
+		<div  id="searchform" class="inlinesearch" style="display:none" >
+			<div class="row">
+				$context.putPageValue("autocomplete","off")
+				#foreach( $detail in $details)
+					<div class="col-md-3">
+							$context.putPageValue("detail", $detail)
+							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
 					</div>
-					<div  class="row" >
-				#end	
-			#end
-		</div>	
-		</td>
-		</tr>
-		</table>
+					#if( $counter == 4)
+						</div>
+						<div  class="row" >
+					#end	
+				#end
+			</div>	
+		</div>
 
 	
 	#ifnull( $income)
               #set( $income = $mediaarchive.query("collectiveincome").hitsPerPage(500).exact("collectionid",$collectionid).named("income").sort("dateDown").search($context))
               $context.putPageValue("income",$income)
 	#end
-   <div style="padding-top:20px;">
-   		<h2 class="float-left" style="margin:0 0 10px 0;">[[Direct Payments]]</h2>
-   		<div style="float:right; width:320px; margin: 0;">
+   <div>
+   		
+   		<div class="finances-table-sort">
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
 		<select class="select2 	form-control-sm" name="sortby" >
@@ -80,7 +79,7 @@
 
 </div>
 
-
+<hr>
 
 $pages.include("/$applicationid/collective/services/donations/index.html", $context)
 

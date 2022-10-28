@@ -1,7 +1,8 @@
 	#if( $canviewsettings )
 	#set($collectionid = $librarycol.getId())
+	<hr>
 
-       <h2 style="margin-bottom:10px;">[[Product Catalog]]</h2>
+       <h2 style="margin:30px 0 10px;">[[Product Catalog]]</h2>
        ##Search instances in these organizations
        #set($products = $mediaarchive.query("collectiveproduct").match("collectionid", $collectionid).sort("createdonDown").search())
        #if ($products)
@@ -33,45 +34,54 @@
                             $ $!context.doubleToMoney($!hit.productprice,2)</td>
                             <td>
                                 #if( $canviewsettings )
+           
                                     <a
+                                        href="$applink/collective/services/editproduct.html?collectionid=${collectionid}&id=${hit.id}"
+                                        title="[[Edit Product or Service]]"
+                                        class="emdialog btn btn-xs btn-primary">[[Edit]]</a>
+                                    <a
+                                        href="$applink/collective/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
+                                        title="[[Copy Product or Service]]"
+                                        class="emdialog btn btn-xs btn-secondary">[[Copy]]</a>
+
+                                        
+
+                                
+	                                 #if ($hit.recurring == true)
+	                                     #if ($hit.billingstatus == "active")
+	                                         #if ($hit.isautopaid == true)
+	                                             <a
+	                                                 href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
+	                                                 class="btn btn-xs btn-success">[[AutoPay Enabled]]</a>
+	                                         #else
+	                                             <a
+	                                                 href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
+	                                                 class="btn btn-xs btn-secondary">[[AutoPay Paused]]</a>
+	                                         #end
+	                                     #end
+	                                     #if ($hit.billingstatus == "active")
+	                                         <a
+	                                             href="$applink/collective/services/cancelsubscription.html?collectionid=${collectionid}&productid=${hit.id}"
+	                                             class="emdialog btn btn-xs btn-danger">[[Cancel]]</a>
+	                                     #end
+	                                 #end
+	                                 
+	                                 <div style="padding:5px 0 0;">
+	                                                                     
+                                    <a
+                                        href="$applink/collective/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
+                                        title="[[Invoice Product or Service]]"
+                                        class="emdialog btn btn-xs btn-primary"
+                                        data-hidefooter="true">[[Create Invoice]]</a>
+	                                 
+	                                 
+	                                <a
                                         href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveproduct"
                                         class="btn btn-xs btn-secondary"
                                         target="_blank">
                                         <i class="fa fa-database"></i>
                                     </a>
-                                    <a
-                                        href="$applink/collective/services/editproduct.html?collectionid=${collectionid}&id=${hit.id}"
-                                        title="[[Edit Product or Service]]"
-                                        class="emdialog btn btn-xs btn-info">[[Edit]]</a>
-                                    <a
-                                        href="$applink/collective/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
-                                        title="[[Copy Product or Service]]"
-                                        class="emdialog btn btn-xs btn-info">[[Copy]]</a>
-                                    
-                                    <a
-                                        href="$applink/collective/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
-                                        title="[[Invoice Product or Service]]"
-                                        class="emdialog btn btn-xs btn-info"
-                                        data-hidefooter="true">[[Create Invoice]]</a>
-                                
-                                 #if ($hit.recurring == true)
-                                     #if ($hit.billingstatus == "active")
-                                         #if ($hit.isautopaid == true)
-                                             <a
-                                                 href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
-                                                 class="btn btn-xs btn-success">[[AutoPay Enabled]]</a>
-                                         #else
-                                             <a
-                                                 href="$applink/collective/services/toggleautopay.html?collectionid=${collectionid}&id=${hit.id}"
-                                                 class="btn btn-xs btn-secondary">[[AutoPay Paused]]</a>
-                                         #end
-                                     #end
-                                     #if ($hit.billingstatus == "active")
-                                         <a
-                                             href="$applink/collective/services/cancelsubscription.html?collectionid=${collectionid}&productid=${hit.id}"
-                                             class="emdialog btn btn-xs btn-danger">[[Cancel]]</a>
-                                     #end
-                                 #end
+                                    </div>
                                 #end
                             </td>
                         </tr>
@@ -83,7 +93,7 @@
 
     <a
         href="$applink/collective/services/addnew.html?collectionid=${collectionid}"
-        class="emdialog btn btn-sm btn-primary mb-4" data-hidefooter="true">[[Add Product or Service]]</a>
+        class="emdialog btn btn-sm btn-primary">[[Add Product or Service]]</a>
         
 #end
 

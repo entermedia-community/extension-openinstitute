@@ -3,9 +3,22 @@
 #set($invoice = $mediaarchive.getInvoiceById($id))
 #set($products = $mediaarchive.getInvoiceProductList($id))
 #set($workspace = $mediaarchive.getWorkspaceById($invoice.collectionid))
+
+<div class="container">
+<div class="contentcolumn">
 <div class="collectivecontent" id="collectivecheckout">
 
 <h2 style="margin-bottom:10px;">[[Check Out]]</h2>
+
+#ifnull($user)
+	#set($user = $checkoutuser)
+#end
+
+#ifnull($user)
+	[[No user]]
+#end
+
+
 #if($invoice.paymentstatus == "paid")
 <strong>[[Invoice]] #$!invoice.invoicenumber</strong> [[Status is Paid]].
 #else
@@ -118,7 +131,7 @@
 	                        <form action="$applink/collective/services/payfinish.html" 
 	                        		method="post" 
 	                        		id="payment-form"
-	                        		class="form ajaxform"
+	                        		class="form ajaxformX"
 	                        		data-targetdiv="collectivecheckout"
 	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
@@ -171,16 +184,7 @@
 		                                        </div>
 		                                    </div>
 		                                </div>
-		
-## We control recurring
-##										#if ($lastproduct.recurring == true)
-##		                               <div class="col-md-6">	                               
-##				                            <div class="form-group">
-##				                                <label for="staticEmail">[[Recurring Monthly]]</label>                                 
-##				                                <input type="text" class="form-control" name="recurringperiod" value="$lastproduct.recurringperiod" disabled></input>
-##				                            </div>
-##		                        	   </div>
-##		                        		#end
+
 		                        	  	<div class="col-md-12">
 		                                	<div class="form-check">
 				                                <input type="checkbox" class="form-check-input" id="issavecard" name="issavecard"></input>
@@ -200,6 +204,7 @@
 	                                <div class="col-md-6 text-right">
 	                                    <div style=" margin: 0px auto;">
 	                                        <a href="#" onclick='$("#payment-form").submit()' class="btn btn-success"><i
+	                                        
 	                                                class="fas fa-credit-card"></i> [[Pay Now]] </a>
 	                                    </div>
 	                                </div>
@@ -209,12 +214,12 @@
 								<input type="hidden" name="savestripecreditcard" id="savestripecreditcard" value="true" />
 								<input type="hidden" name="recurring" value="$lastproduct.recurring" />
 	                            <input type="hidden" name="field" value="collectionid" /> 
-	                            <input type="hidden" name="collectionid.value" value="$librarycol.getId()" /> 
-	                            <input type="hidden" name="collectionid" value="$librarycol.getId()" />
+	                            <input type="hidden" name="collectionid.value" value="$!librarycol.getId()" /> 
+	                            <input type="hidden" name="collectionid" value="$!librarycol.getId()" />
 	                            <input type="hidden" name="invoiceid" value="$id" /> 
 	                            <input type="hidden" name="field" value="totalprice" /> 
 	                            <input type="hidden" name="field" value="userid" /> 
-	                            <input type="hidden" name="userid.value" value="$user.getId()" />
+	                            <input type="hidden" name="userid.value" value="$!user.getId()" />
 	                            <input type="hidden" name="customerselected" id="customerselected" value="0" />
 	                            <input type="text" name="stripecustomer" id="stripecustomer" value="$customer.id" hidden="" />
 	                        </form>
@@ -250,7 +255,16 @@
 	          
         </div> <!-- end row -->
         
-        $pages.include("$apphome/collective/services/invoices/payoptions.html",$context)
+        #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+        	#if($invoice.invoicepayoptions)
+        		#set( $invoicepayoptions = $invoice.invoicepayoptions)
+        	#else
+	        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
+	        #ende
+	         #if($invoicepayoptions != "")
+	        <div style="padding-top:20px">$!invoicepayoptions</div>
+	        #end
+        #end
         
         
     </div>
@@ -259,14 +273,16 @@
 
 
 #end
-<div style="padding:20px 0">
-<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
-</div>
-
+#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
+	<div style="padding:20px 0">
+	<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
+	</div>
+#end
 
 <div class="clearfix"></div>
 </div>
 
+</div></div>
 
 <script type="text/javascript">
 	$("#issavecard").change(function() {  
@@ -346,6 +362,7 @@
 	                    }
                 	});
             	} else {
+            		//$(form).trigger("submit");
             		form.submit();
             	}
             },
@@ -364,8 +381,9 @@
             hiddenInput.setAttribute('type', 'hidden');
             hiddenInput.setAttribute('name', 'stripecustomer');
             hiddenInput.setAttribute('value', response.token.id);
-            form.appendChild(hiddenInput);
-            form.submit();
+            $(form).appendChild(hiddenInput);
+            //$(form).trigger("submit");
+            $(form).submit();
         }
 
     });

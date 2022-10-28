@@ -6,7 +6,7 @@
 #end
 
 <div id="channelcontainer" class="channel-container #if($logo) channel-container-logo #end h-100">
-<div class="row no-gutters g-0 justify-content-md-center h-100">
+<div class="row no-gutters justify-content-md-center h-100">
  <div class="col community-maincol community-maincol-homepage channel-feed feed-maincol">
 	#if($librarycol.htmlintro || $caneditcollection)
  	<div class="contentcolumn content-body content-collective-home #if($logo) content-collective-home-logo #end"
@@ -62,11 +62,17 @@
 	
 	$pages.include("$apphome/components/results/positions.html",$context)
 	
-	#foreach( $upload in $topuploads.getPageOfHits())
+	#foreach( $event in $combinedevents)
+		#if( $event.type == "chatterbox")
+			$context.putPageValue("chat",$event.data) 
+			$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
+			
+		#else
+			#set( $upload = $event.data )
 			$context.putPageValue("upload",$upload)
 			$pages.include("$apphome/collective/channel/showpost.html",$context)
+		#end	
 	#end
-	
 	
 	$pages.include("$apphome/components/results/positions.html",$context)
 

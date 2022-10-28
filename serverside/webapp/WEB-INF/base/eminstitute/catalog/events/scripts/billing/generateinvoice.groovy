@@ -116,6 +116,9 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 				int currentMonth = nextBillOn.getMonth();
 				nextBillOn.setMonth(currentMonth + recurrentCount);
 				product.setValue("nextbillon", nextBillOn);
+				
+				invoice.setValue("isrecurring", "true");
+				invoice.setValue("billdate", today.getTime()); //Original Bill Date
 			}
 			
 			invoiceSearcher.saveData(invoice);

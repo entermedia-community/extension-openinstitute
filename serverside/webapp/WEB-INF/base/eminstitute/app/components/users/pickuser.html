@@ -1,13 +1,13 @@
-<div id="userpicker" class="nav-form nav-collectionpicker">
+<div id="userpickernav" class="nav-form nav-collectionpicker">
 
-	<div id="userpickerinner" class="userpicker">
+	<div class="userpicker">
 		<div class="collectionpicker">
 					<form  action="$home$applink/users/viewuser.html" class="form-inline autosubmitform">
 						#set( $text = "[[All Users]]" )
 						#if( $selecteduser)
 							#set( $text = "$selecteduser.toString()" )
 						#end
-						<select name="userid" id="userid" 
+						<select name="userid" id="navuserid" 
 							class="listautocomplete selectautosubmit #if($canaddnewcollectionXX) selectaddnew #end" 
 							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
 							data-searchfield="name" data-searchtype="user"  

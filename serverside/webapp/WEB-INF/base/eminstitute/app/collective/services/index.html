@@ -57,19 +57,6 @@
                              $!context.getText($status)
                          </td>
                          <td>
-                             #if( $canviewsettings )
-                                 <a
-                                     href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
-                                     class="btn btn-xs btn-secondary"
-                                     target="_blank">
-                                     <i class="fa fa-database"></i>
-                                 </a>
-                                 #if ($hit.getValue("paymentstatus") == "pending" ||$hit.getValue("paymentstatus") == "invoiced")
-                               <a
-                                  href="$applink/collective/services/cancelinvoice.html?collectionid=${collectionid}&id=${hit.id}&oemaxlevel=1"
-                                  class="ajax btn btn-xs btn-danger" data-targetdiv="collectivebilling">[[Cancel]]</a>
-                              #end
-                             #end
                              #if ($hit.getValue("paymentstatus") == "pending")
                              	<a
                                      href="$applink/collective/services/previewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
@@ -86,9 +73,8 @@
                              #if ($hit.getValue("paymentstatus") == "invoiced")
                                  <a
                                      href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
-                                     class="btn btn-xs btn-primary"
-                                     
-                                     >[[Pay Now]]</a>
+                                     class="btn btn-xs btn-primary">
+                                     [[Pay Now]]</a>
                              #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") == "error")
                                  <a
                                      href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
@@ -97,7 +83,21 @@
                                  #if ($hit.paymentstatusreason != "")
                                      <div class="alert alert-danger">$hit.paymentstatusreason</div>
                                  #end
-		#end
+							 #end
+							 
+	                       	 #if( $canviewsettings )
+                                 #if ($hit.getValue("paymentstatus") == "pending" ||$hit.getValue("paymentstatus") == "invoiced")
+                             	  <a
+                                  href="$applink/collective/services/cancelinvoice.html?collectionid=${collectionid}&id=${hit.id}&oemaxlevel=1"
+                                  class="ajax btn btn-xs btn-danger" data-targetdiv="collectivebilling">[[Cancel]]</a>
+                            	  #end
+                            	  <a
+                                     href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveinvoice"
+                                     class="btn btn-xs btn-secondary"
+                                     target="_blank">
+                                     <i class="fa fa-database"></i>
+                                 </a>
+                           	#end
                                    
                                </td>
                            </tr>

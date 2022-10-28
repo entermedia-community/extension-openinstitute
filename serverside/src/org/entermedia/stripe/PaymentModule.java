@@ -69,6 +69,17 @@ public class PaymentModule extends BaseMediaModule
 		fieldSearcherManager = inSearcherManager;
 	}
 	
+	public void createCheckoutUser(WebPageRequest inReq)
+	{
+		User user = inReq.getUser();
+		if(user != null) {
+			return;
+		}
+		String email = inReq.getRequestParameter("contactemail");
+		user = getUserManager(inReq).createTempUserFromEmail(email);
+		inReq.putSessionValue("checkoutuser", user);
+	}
+	
 	public void processPaymentTest(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
 		String source = inReq.getRequestParameter("stripecustomer");		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
@@ -77,12 +88,18 @@ public class PaymentModule extends BaseMediaModule
 		Searcher payments = archive.getSearcher("transaction");
 		Data payment = payments.createNewData();
 		payments.updateData(inReq, inReq.getRequestParameters("field"), payment);
+		
 		payment.setValue("paymenttype","stripe" );
 		Calendar today = Calendar.getInstance();
 		
 		String invoiceId = inReq.getRequestParameter("invoiceid");
 		Searcher invoiceSearcher = archive.getSearcher("collectiveinvoice");
 		Data invoice = archive.getInvoiceById(invoiceId);
+		
+		if (invoice.get("paymentstatus").equals("paid")) {
+			log.info("Invoice "+ invoiceId+" already Paid");
+			return;
+		}
 		
 		Searcher workspaceSearcher = archive.getSearcher("librarycollection");
 		Data workspace = archive.getWorkspaceById((String) invoice.getValue("collectionid"));
@@ -97,7 +114,9 @@ public class PaymentModule extends BaseMediaModule
 		Boolean isRecurring = Boolean.valueOf(inReq.getRequestParameter("recurring"));
 		Boolean isSuccess = false;
 
-		User user = inReq.getUser();
+		String userid = payment.get("userid");
+		User user = archive.getUser(userid);
+		
 		if (isRecurring == true)
 		{
 			String customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);

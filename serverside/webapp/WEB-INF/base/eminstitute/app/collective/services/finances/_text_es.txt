@@ -1,5 +1,5 @@
 #
-#Tue Aug 30 10:18:56 CDT 2022
+#Mon Oct 17 14:17:03 CDT 2022
 Project\ Wallet=Monedero del proyecto
 All=Todos
 June=Junio
@@ -25,6 +25,7 @@ Total\ in\ USD=Total en USD
 Feb=Feb
 Dec=Dic
 Send\ Money=Enviar dinero
+By\ Topic=Por tema
 Last\ Year=El a\u00F1o pasado
 April=Abril
 Add\ New\ Income=A\u00F1adir nuevos ingresos
