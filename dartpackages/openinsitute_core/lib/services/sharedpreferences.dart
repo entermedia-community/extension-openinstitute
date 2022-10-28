@@ -15,7 +15,7 @@ class sharedPref {
   }
 
   static saveEMPath(String key) async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('EMPath', key);
   }
 

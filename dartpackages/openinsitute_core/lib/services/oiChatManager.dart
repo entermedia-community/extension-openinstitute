@@ -70,10 +70,12 @@ class OiChatManager {
 
   Future<List<oiChatMessage>> parseData(
       Map<String, dynamic> responded, String projectId) async {
-    List<emData> topics = responded["topics"]!
+    List<emData>? topics = responded["topics"]
         .map<emData>((json) => emData.fromJson(json))
         .toList();
-    await saveTopics(topics, projectId);
+    if (topics != null) {
+      await saveTopics(topics, projectId);
+    }
     List<emData> goals = responded["goals"]!
         .map<emData>((json) => emData.fromJson(json))
         .toList();
@@ -147,7 +149,7 @@ class OiChatManager {
   }
 
   Future<oiChatMessage?> saveChat(
-      Map<String, dynamic> inMessage, String projectId) async {
+      Map<String, dynamic> inMessage, String projectId, String tempId) async {
     await createDataModule(projectId);
     final Map<String, dynamic>? responded =
         await chatterBox!.createModuleOperation(
@@ -155,8 +157,7 @@ class OiChatManager {
       RequestType.PUT,
       inMessage,
     );
-    log("Saved chat message: " + responded.toString());
-    if (responded != null) {
+    if (responded != null && responded.isNotEmpty) {
       Map<String, dynamic> map = responded;
       oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
       await chatterBox!.box.put(chatMessage.messageid, chatMessage.properties);
@@ -168,5 +169,29 @@ class OiChatManager {
   Future<void> updateChat(String id, Map data) async {
     await createDataModule(id);
     await chatterBox!.box.put(id, data);
+  }
+
+  sendAllNonSendChat() async {
+    List<Map<String, dynamic>> list =
+        await oi.hivemanager.getAllHits('UnSentChat');
+    for (var chat in list) {
+      oiChatMessage? sentChat = await saveChat({
+        "collectionid": chat['collectionid'],
+        "channel": chat['channel'],
+        "message": chat['message'],
+        "messagestatus": "pendingbroadcast",
+        "date": chat['date'],
+      }, chat["collectionid"], chat['id']);
+      if (sentChat != null) {
+        await oi.hivemanager.removeData(chat['id'], 'UnSentChat');
+        await oi.hivemanager.saveData(chat['id'], sentChat.properties,
+            'chatterbox_${chat["collectionid"]}');
+      }
+    }
+  }
+
+  saveChatLocal(oiChatMessage chat, String projectId) async {
+    await oi.hivemanager
+        .saveData(chat.messageid, chat.properties, 'UnSentChat');
   }
 }

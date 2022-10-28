@@ -23,6 +23,10 @@ dependencies:
   # isar: ^2.2.1
   # isar_flutter_libs: ^2.2.1 # contains the binaries (not required for web)
   path_provider: ^2.0.9
+  connectivity_plus: ^2.3.9
+  internet_connection_checker: ^1.0.0+1
+  http_interceptor: ^1.0.2
+  permission_handler: ^10.2.0
 
 
 

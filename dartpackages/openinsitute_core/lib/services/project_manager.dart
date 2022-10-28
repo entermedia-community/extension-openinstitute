@@ -67,7 +67,6 @@ class ProjectManager {
       for (var item in results['data']) {
         projects.add(item);
       }
-      log("load lenght: ${projects.length}");
       await projectsModule!.saveCache(results);
     }
     return projects;
@@ -124,8 +123,6 @@ class ProjectManager {
       for (var item in results['data']) {
         projects.add(item);
       }
-      log("load lenght: ${projects.length}");
-      // await projectsModule!.saveCache(results);
     }
     return projects;
   }

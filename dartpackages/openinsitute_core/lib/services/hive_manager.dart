@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:openinsitute_core/services/sharedpreferences.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HiveManager {
   static const assets = "assets";
@@ -11,7 +12,7 @@ class HiveManager {
   HiveManager();
 
   Future<void> init() async {
-      String? path = await sharedPref.getEMPath();
+    String? path = await sharedPref.getEMPath();
     if (path != null) {
       Hive.init(path);
     } else {
@@ -23,6 +24,10 @@ class HiveManager {
   }
 
   Future<Box> openHiveBox(String boxString) async {
+    // var status = await Permission.storage.status;
+    // if (!status.isGranted) {
+    //   await Permission.storage.request();
+    // }
     return await Hive.openBox(boxString);
   }
 
@@ -70,5 +75,11 @@ class HiveManager {
       }
     }
     return list;
+  }
+
+  removeData(String id, String boxString) async {
+    Box box;
+    box = await setBox(boxString);
+    return box.delete(id);
   }
 }

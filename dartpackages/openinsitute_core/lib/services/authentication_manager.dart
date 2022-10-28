@@ -88,7 +88,6 @@ class AuthenticationManager {
       {"email": email, "password": password},
       customError: "Invalid credentials. Please try again!",
     );
-    print("Logging in");
     if (resMap != null) {
       Map<String, dynamic> results = resMap["results"];
       emUser!.firebasepassword = results["firebasepassword"];
@@ -110,7 +109,7 @@ class AuthenticationManager {
   Future<emData> uploadProfileImage(File file) async {
     try {
       final resMap = await oi.postMultiPart(
-        "PUT", // TODO: handle PUT and POST in single Object.
+        "PUT", // TODO: handle PUT and POST using single Object.
         oi.app!["mediadb"] + '/services/settings/users/data/${emUser!.userid}',
         {},
         {"assetportrait": file},
@@ -179,6 +178,7 @@ class AuthenticationManager {
       signOut();
       return true;
     } catch (e) {
+      log(e.toString());
       return false;
     }
   }

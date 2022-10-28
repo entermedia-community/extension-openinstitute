@@ -59,7 +59,6 @@ class FeedManager {
     if (collectionId != null) {
       query["collectionid"] = collectionId;
     }
-    log("${feedsModule!.page} -> ${feedsModule!.pages}");
     if (page != 1 && feedsModule!.pages < page) {
       return [];
     }

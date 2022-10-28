@@ -42,9 +42,6 @@ void main() {
     },
   );
 
-  test("test String Url", () async {
-    oi.getProjectID();
-  });
 
   test('Load Settings', () async {
     Map? settings = await oi.loadAppSettings();

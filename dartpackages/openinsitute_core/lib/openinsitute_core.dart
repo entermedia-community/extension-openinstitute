@@ -2,17 +2,20 @@ library openinsitute_core;
 
 import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
+import 'package:http_interceptor/http/intercepted_client.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:openinsitute_core/Helper/custom-multipart.dart';
 import 'package:openinsitute_core/Helper/customException.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/services/FeedManager.dart';
 import 'package:openinsitute_core/services/authentication_manager.dart';
+import 'package:openinsitute_core/services/connectivity_manager.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 import 'package:openinsitute_core/services/emSocketManager.dart';
 import 'package:openinsitute_core/services/finance_manager.dart';
@@ -22,6 +25,8 @@ import 'package:openinsitute_core/services/oiChatManager.dart';
 import 'package:openinsitute_core/services/task_manager.dart';
 import 'package:openinsitute_core/services/user_manager.dart';
 import 'package:path/path.dart';
+
+import 'Helper/logging_interseptor.dart';
 
 class OpenI {
   Map? _settings;
@@ -35,6 +40,22 @@ class OpenI {
   HiveManager? hiveManager;
   UserManager? userManager;
   FinanceManager? financeManager;
+  ConnectivityManager? connectivityManager;
+  late InterceptedClient httpClient;
+
+  OpenI() {
+    httpClient = InterceptedClient.build(
+      interceptors: [
+        LoggingInterceptor(),
+      ],
+      requestTimeout: const Duration(seconds: 20),
+      client: IOClient(
+        HttpClient()
+          ..badCertificateCallback =
+              ((X509Certificate cert, String host, int port) => true),
+      ),
+    );
+  }
 
   Map? get app {
     if (_settings == null) {
@@ -89,12 +110,18 @@ class OpenI {
     Get.put(userManager!, permanent: true);
     financeManager = FinanceManager();
     Get.put<FinanceManager>(financeManager!, permanent: true);
+    connectivityManager = ConnectivityManager();
+    Get.put<ConnectivityManager>(connectivityManager!);
+    connectivityManager!.subscription.listen((event) {
+      if (event == InternetConnectionStatus.connected) {
+        chatManager!.sendAllNonSendChat();
+      }
+    });
   }
 
   Future<Map?> loadAppSettings() async {
     if (_settings == null) {
       String json = await rootBundle.loadString("system/appsettings.json");
-      print("loaded $json");
       _settings = jsonDecode(json);
     }
     return _settings;
@@ -127,7 +154,6 @@ class OpenI {
       customError: customError,
     );
     if (response != null && response.statusCode == 200) {
-      log("Success user info is:" + response.body);
       final String responseString = response.body;
       return json.decode(responseString);
     } else {
@@ -157,7 +183,6 @@ class OpenI {
       customError: customError,
     );
     if (response != null && response.statusCode == 200) {
-      print("Success user info is:" + response.body);
       final String responseString = response.body;
       return responseString;
     } else {
@@ -173,36 +198,34 @@ class OpenI {
     String customError = "Some Error",
   }) async {
     String url = requestUrl;
-    print(url);
     http.Response response;
     try {
       http.Response? responseJson;
       if (requestType == RequestType.PUT) {
-        responseJson = await http.put(
+        responseJson = await httpClient.put(
           Uri.parse(url),
           body: body,
           headers: headers,
         );
       } else if (requestType == RequestType.POST) {
-        responseJson = await http.post(
+        responseJson = await httpClient.post(
           Uri.parse(url),
           body: body,
           headers: headers,
         );
       } else if (requestType == RequestType.GET) {
-        responseJson = await http.get(
+        responseJson = await httpClient.get(
           Uri.parse(url),
           headers: headers,
         );
       } else if (requestType == RequestType.DELETE) {
-        responseJson = await http.delete(
+        responseJson = await httpClient.delete(
           Uri.parse(url),
           headers: headers,
           body: body,
         );
       }
-      print(responseJson!.statusCode);
-      response = await handleException(responseJson);
+      response = await handleException(responseJson!);
       return response;
     } on BadRequestException catch (error) {
       //showErrorFlushbar( "Bad request! Please try again later.");
@@ -219,17 +242,7 @@ class OpenI {
     return null;
   }
 
-  getProjectID() {
-    String url =
-        "https://openinstitute.org/app/collective/community/AW_EEOogCrPBxPh_P9NA/OI-App-Version-2-Team.html";
-    if (url.isNotEmpty) {
-      Uri uri = Uri.dataFromString(url);
-      print(uri.pathSegments[6]);
-    }
-  }
-
   dynamic handleException(http.Response response) {
-    print("Response code: " + response.statusCode.toString());
     switch (response.statusCode) {
       case 200:
         final http.Response responseJson = response;
@@ -253,8 +266,8 @@ class OpenI {
     }
   }
 
-  Future<http.Response> postMultiPart( String mt, 
-      String url, Map<String, dynamic> body, Map<String, File>? files) async {
+  Future<http.Response> postMultiPart(String mt, String url,
+      Map<String, dynamic> body, Map<String, File>? files) async {
     Map<String, String> headers = <String, String>{};
     headers.addAll({"X-tokentype": "entermedia"});
     headers.addAll({"Content-type": "application/json"});

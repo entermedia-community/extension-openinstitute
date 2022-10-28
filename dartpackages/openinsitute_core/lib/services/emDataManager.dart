@@ -123,7 +123,6 @@ class DataModule {
         oi.app!["mediadb"] + '/services/module/$searchtype/search',
         inQuery,
         RequestType.POST);
-    log(inQuery.toString());
     Map<String, dynamic> resultsData = parseData(responsestring);
     List<emData> results = resultsData["data"];
     if (cache) {
@@ -249,11 +248,9 @@ class DataModule {
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
     pages = box.get("pages") ?? 0;
-    log("size of results  : ${results.length}");
     if (page == 1) {
       await box.clear();
       for (var element in results) {
-        log("saving in ${element.id} ");
         await box.put(element.id, element.properties);
       }
     }
@@ -280,9 +277,7 @@ class DataModule {
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
     pages = box.get("pages") ?? 0;
-    log("size of results  : ${results.length}");
     for (var element in results) {
-      log("saving in ${element.id} ");
       await box.put(element.id, element.properties);
     }
   }
