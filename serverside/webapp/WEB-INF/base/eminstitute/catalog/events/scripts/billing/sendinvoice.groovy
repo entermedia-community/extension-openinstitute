@@ -220,6 +220,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	if(invoicepayoptions == null) {
 		invoicepayoptions =  mediaArchive.getCatalogSettingValue("invoice_pay_options");
 	}
+	
+	//Variables
+	String invoicedescription = mediaArchive.getReplacer().replace(invoice.get("invoicedescription"), objects);
+	objects.put("invoicedescription", invoicedescription);
 
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
 	templateEmail.setSubject(subject);
