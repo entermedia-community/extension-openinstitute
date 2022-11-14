@@ -173,10 +173,12 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 				notifications = new HashMap();
 				//New collection save collection info too
 				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
-				String collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+ collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html?collectionid="+collection.getId();
-				collection.setValue("finalurl", collection_url);
-				
-				notifications.put("collection", collection);
+				if(collection) {
+					String collection_url = getSiteRoot() + "/" + appid + "/collective/channel/"+ collection.getId() +"/"+ URLUtilities.dash(collection.getName()) + ".html?collectionid="+collection.getId();
+					collection.setValue("finalurl", collection_url);
+					
+					notifications.put("collection", collection);
+				}
 			}
 			
 			//
