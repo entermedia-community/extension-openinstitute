@@ -34,18 +34,22 @@ class ProjectManager {
     return cache;
   }
 
-  Future<emData> projectFromServer(String id) async {
+  Future<emData> projectFromServer(String id, {bool syn = true}) async {
     await createDataModule(boxString: "ProjectsInfo");
-    // var data = projectsModule!.box.get(id);
+    var data = projectsModule!.box.get(id);
 
-    var data = await projectsModule!.getData(id);
-    projectsModule!.box.put(id, data.properties);
-    return data;
+    if (!syn && data != null) {
+      return emData.fromJson(data);
+    }
+
+    var data2 = await projectsModule!.getData(id);
+    projectsModule!.box.put(id, data2.properties);
+    return data2;
   }
 
-  Future<emData> getProject(String id) async {
+  Future<emData?> getProject(String id) async {
     await createDataModule();
-    return projectsModule!.getDataById(id);
+    return projectsModule?.getDataById(id);
   }
 
   Future<List<emData>> loadProject(int page) async {

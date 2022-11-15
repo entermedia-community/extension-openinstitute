@@ -23,5 +23,11 @@ class emData {
   }
 
   @override
+  bool operator ==(Object other) => other is emData && id == other.id;
+
+  @override
   String toString() => 'emData(id: $id, name: $name, properties: $properties)';
+
+  @override
+  int get hashCode => id.hashCode;
 }
