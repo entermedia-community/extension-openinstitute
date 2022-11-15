@@ -76,7 +76,7 @@
     <property id="teamproject" index="true" type="boolean" keyword="false" filter="false" editable="true" > 
     <name> 
       <language id="en"><![CDATA[Team Only]]></language>
-      <language id="en"><![CDATA[Privado]]></language>   
+      <language id="es"><![CDATA[Privado]]></language>   
     </name> 
   </property>
 
