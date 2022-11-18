@@ -67,30 +67,35 @@ public void init()
 	for (String collectionid in collectionsupdated.keySet()) {
 		
 		Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
-		for(Data auser in users)
-		{
-			String userid = auser.get("followeruser");
-			//if(!userwhochecked.contains(userid + "_" + chattopicid))
-			//{
-				Data profile = mediaArchive.getCachedData("userprofile", userid);
-				
-				//make it not false?
-				if(profile != null && profile.getBoolean("sendchatnotifications") == true)
-				{
-					log.info("Chat Notification disabled " + userid);
-					continue;
-				}
-				
-				//Users to Notify Only per Collection
-				List  notifications = usernotifications.get(userid);
-				if( notifications == null)
-				{
-					notifications = new ArrayList();
-				}
-				notifications.add(collectionid)
-				usernotifications.put(userid, notifications);
-			//}
+		
+		if(!users.isEmpty()) {
+			for(Data auser in users)
+			{
+				String userid = auser.get("followeruser");
+				//if(!userwhochecked.contains(userid + "_" + chattopicid))
+				//{
+					Data profile = mediaArchive.getCachedData("userprofile", userid);
+					
+					//make it not false?
+					if(profile != null && profile.getBoolean("sendchatnotifications") == true)
+					{
+						log.info("Chat Notification disabled " + userid);
+						continue;
+					}
+					
+					//Users to Notify Only per Collection
+					List  notifications = usernotifications.get(userid);
+					if( notifications == null)
+					{
+						notifications = new ArrayList();
+					}
+					notifications.add(collectionid)
+					usernotifications.put(userid, notifications);
+				//}
+			}
+			
 		}
+		
 	}	
 		
 
@@ -102,31 +107,39 @@ public void init()
 	//Loop over the remaining topics
 	try
 	{
-		for (String useerid in usernotifications.keySet())
+		for (String notifyuserid in usernotifications.keySet())
 		{
-			List collections = usernotifications.get(useerid);
-			User followeruser = mediaArchive.getUser(useerid);
+			List collections = usernotifications.get(notifyuserid);
+			
+			User followeruser = mediaArchive.getUser(notifyuserid);
 			if (followeruser == null || followeruser.getEmail() == null) 
 			{
-				log.error("Invalid User or no email address " + useerid);
+				log.error("Invalid User or no email address " + notifyuserid);
 				continue;
 			}
+			
+			Map<String, Map<String, List>> usercollectionsupdated = new HashMap();
 				
 			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 			if( collections.size() > 1)
 			{
 				templatemail.setSubject("[OI] " + collections.size() + " User Notifications"); //TODO: Translate
+				for(String usercollectionid in collections) {
+					usercollectionsupdated.put(usercollectionid, collectionsupdated.get(usercollectionid));
+				}
 			}
 			else
 			{
 				String oneitem = collections.iterator().next();
 				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
 				templatemail.setSubject("[OI] " + collection.getName() + " Notification"); //TODO: Translate
+				
+				usercollectionsupdated.put(oneitem, collectionsupdated.get(oneitem));
 			}
 			
 			Map objects = new HashMap();
 			objects.put("usernotifications",usernotifications);
-			objects.put("collectionsupdated",collectionsupdated);
+			objects.put("collectionsupdated",usercollectionsupdated);
 			objects.put("followeruser",followeruser);
 			objects.put("applink","/" + appid);
 			objects.put("mediaarchive",mediaArchive);
