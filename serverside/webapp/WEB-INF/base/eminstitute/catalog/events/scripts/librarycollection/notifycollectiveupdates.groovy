@@ -11,6 +11,8 @@ import org.openedit.users.User
 import org.openedit.util.DateStorageUtil
 import org.openedit.util.URLUtilities
 
+import groovy.util.logging.Log
+
 
 //Chat Notifications
 
@@ -40,23 +42,22 @@ public void init()
 	Map<String, Map<String, List>> collectionsupdated = new HashMap();
 	
 	//--Tickets
-	HitTracker alltickets = mediaArchive.query("projectgoal").after("creationdate", since).sort("projectstatus").sort("creationdateDown").search();
+	HitTracker alltickets = mediaArchive.query("projectgoal").after("emrecordstatus.recordmodificationdate", since).sort("projectstatus").sort("creationdateDown").search();
 	getUpdatedRows(collectionsupdated, alltickets, "tickets");
 
 	//-- Goals
-	HitTracker alltasks = mediaArchive.query("goaltask").after("creationdate", since).search();
+	HitTracker alltasks = mediaArchive.query("goaltask").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, alltasks, "tasks");
-	
 
 	//Expenses
-	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("date", since).search();
+	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, allexpenses, "expenses");
 	
 	//Posts
-	HitTracker allposts = mediaArchive.query("userupload").after("uploaddate", since).search();
+	HitTracker allposts = mediaArchive.query("userupload").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, allposts, "posts");
 	
-	log.info(collectionsupdated);
+	//log.info(collectionsupdated);
 	
 	
 	
@@ -200,9 +201,8 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 				//check if the ticket already listed
 				String ticketid = row.getValue("projectgoal");
 				Map<String, Map<String, List>> tickets = notifications.get("tickets");
-				if( tickets != null)
-				{
-					if(ticketid in tickets.keySet()) {
+				if( tickets != null && ticketid in tickets.keySet())
+				{			
 						Map<String, List> theticket = tickets.get(ticketid);
 						Map<String, List> thetasks = theticket.get("tasks");
 						if(thetasks == null) {
@@ -214,11 +214,11 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 						notifications.put("tickets", tickets);
 						collectionsupdated.put(collectionid, notifications);
 						included = true;
-					} else {
+				} 
+				else {
 						//add ticket to task??
 						Data ticket = mediaArchive.getCachedData("projectgoal", ticketid);
 						if (ticket) {
-							
 							Map<String, Map<String, List>> collectionitems = notifications.get(table);
 							if (collectionitems == null) {
 								collectionitems = new HashMap();
@@ -231,7 +231,6 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 							collectionsupdated.put(collectionid, notifications);
 							included = true;
 						}
-					}
 				}
 			}
 			if(!included) {
