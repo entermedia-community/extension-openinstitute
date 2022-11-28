@@ -2,12 +2,10 @@ package billing;
 
 import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
-import org.openedit.users.Group
 import org.openedit.users.User
-import org.openedit.util.URLUtilities
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -85,7 +83,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 			.exact("billingstatus", "active")
 			.between("nextbillon", since.getTime(), due.getTime())
 			.search();
-    //log.info(pendingProducts);
+    log.info("Searching invoices from ${since.getTime()} to ${due.getTime()}. ${pendingProducts.size()} found.");
+	
 	if (pendingProducts.size() > 0) 
 	{
 		log.info("Creating recurring invoices for " + pendingProducts.size() + " products");
@@ -99,6 +98,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				Data invoice = invoiceSearcher.createNewData();
 	
 				Calendar invoiceDue = Calendar.getInstance();
+				invoiceDue.setTime(nextBillOn);
 				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
 				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
@@ -120,6 +120,23 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
 				invoice.setValue("createdon", today.getTime());
+				
+				//start
+				invoice.setValue("startdate", nextBillOn);
+				//end
+				Integer recurringperiod = product.getValue("recurringperiod");
+				Calendar endbilldate = Calendar.getInstance();
+				endbilldate.setTime(nextBillOn);
+				endbilldate.add(Calendar.MONTH, recurringperiod);
+				invoice.setValue("enddate", endbilldate.getTime());
+
+				//name -subject
+				String collectionid = product.getValue("collectionid");
+				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
+				if(collection != null) {
+					String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
+					invoice.setValue("name", "${collection} - ${month} Invoice");
+				}
 				
 				String contactsstring = "";
 				if(product.getValue("sentto") != null) {
@@ -159,7 +176,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				productSearcher.saveData(product);
 			}
 			else {
-				log.info("Invoice not created, invoice alreay sent. ${lastbilldate} < ${nextBillOn}")
+				log.info("Invoice not created, invoice may alreay sent. ${lastbilldate} < ${nextBillOn}")
 			} 
 				
 		}

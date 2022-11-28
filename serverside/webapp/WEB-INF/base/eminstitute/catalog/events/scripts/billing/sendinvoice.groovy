@@ -158,18 +158,26 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	String collectionid = workspace.getId();
 	
+	String month = "";
+	
 	switch(messagetype) {
 		case "notificationsent":
 			actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
-			subject = "Invoice for "+workspace;
-			if(invoice.getValue("isrecurring") && invoice.getValue("billdate") != null) {
-				String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
-				subject = "${month} Invoice for "+workspace;
-				objects.put("invoicemonth", month);
+			subject =  workspace.getName() + " Invoice";
+			if(invoice.getValue("isrecurring")) {
+				if(invoice.getName()!= null) {
+					subject = invoice.getName();
+				}
+				else {
+					subject = workspace.getName() + " - ${month}  Invoice";
+				}
 			}
-			
+			else {
+				month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
+			}
+		
 			template = template + "send-invoice-event.html";
 			//Invoice Template from collection
 			invoiceemailheader = workspace.get("invoiceemailheader");
@@ -185,7 +193,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		
 		break;
 	case "notificationoverduesent":
-		subject = "Overdue Invoice for "+workspace;
+		subject = "Overdue Invoice for " + workspace.getName();
 		template = template + "send-overdue-invoice-event.html";
 		//Invoice Template from collection
 		invoiceemailheader = workspace.get("invoiceemailheader");
@@ -201,7 +209,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 
 		break;
 	case "notificationpaidsent":
-		subject = "Payment Received "+workspace;
+		subject = "Payment Received " + workspace.getName();
 		template = template + "send-paid-invoice-event.html";
 		
 		invoiceemailheader = workspace.get("invoicepaidemail");
@@ -210,6 +218,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		}
 		break;
 	}
+
 	actionUrl = URLUtilities.urlEscape(actionUrl);
 	
 	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
@@ -233,11 +242,16 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	objects.put("mediaarchive", mediaArchive);
 	objects.put("invoice", invoice);
-	objects.put("project", workspace);
+	objects.put("project", workspace.getName());
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
 	objects.put("siteroot", getSiteRoot());
 	objects.put("applink", appid);
+	
+	//recurring
+	objects.put("invoicemonth", month);
+	objects.put("startdate", invoice.getValue("startdate"));
+	objects.put("enddate", invoice.getValue("enddate"));
 	
 	if (!invoiceemailheader.equals("")) {
 		invoiceemailheader = mediaArchive.getReplacer().replace(invoiceemailheader, objects);
@@ -252,7 +266,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("invoicepayoptions", invoicepayoptions);
 	
 	templateEmail.send(objects);
-	log.info("Email sent to: "+contact);
+	log.info(workspace.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact);
 }
 
 private String getSiteRoot() {
