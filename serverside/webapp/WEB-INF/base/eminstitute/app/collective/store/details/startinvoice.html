@@ -8,11 +8,11 @@
 #set( $xmledithome  = "$apphome/components/xml")
 $context.putPageValue("searcher",$searcher)
 
-#set( $data = $searcher.createNewData())
-$data.setValue("name","$user.getScreenName() [[Reservation]]")
-
 	#set( $id  = $context.getRequestParameter("productid"))
 	#set($aproduct = $mediaarchive.getData("collectiveproduct", $id))
+
+#set( $data = $searcher.createNewData())
+$data.setValue("name","$user.getScreenName() [[Reservation]]")
 
 <form name="saveproject" 
 		id="saveproject" 
