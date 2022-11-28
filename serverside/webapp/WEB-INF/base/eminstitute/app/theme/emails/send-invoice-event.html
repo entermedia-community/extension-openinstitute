@@ -1,4 +1,3 @@
-
 #set( $currency = '$' )
 <html>
   <head>
@@ -430,7 +429,7 @@
     <span class="preheader">This is an invoice for your purchase on $!context.getDate($invoice.getValue("createdon")). Please submit payment by $!context.getDate($invoice.getValue("duedate"))</span>
     
     <div style="background-color:#A5DAD3; padding: 5px 5px; margin-bottom:20px; text-align:center;">
-		<a href="${siteroot}"><img src="${siteroot}/$applink/theme/images/email-logo.png"></a>
+		<a href="${siteroot}"><img src="$!{siteroot}$applink/theme/images/email-logo.png"></a>
 	</div>
     
     
@@ -476,6 +475,7 @@
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td valign="top">
+                              <div><strong>Invoice:</strong> #text($invoice.getValue("name"))</div>
                               <div><strong>Invoice #:</strong> $invoice.getValue("invoicenumber")</div>
                               #if($invoicemonth)
                               <div><strong>Month:</strong> $invoicemonth</div>
