@@ -14,7 +14,7 @@
 
 
 	<property id="productdescription" index="true" stored="true"
-		viewtype="html" editable="true" hint="Allowed variables: ${project} ${invoicenumber} ${startdate} ${enddate}">
+		viewtype="html" editable="true" hint="Allowed variables: ${project} ${invoicenumber} ${invoicemonth} ${startdate} ${enddate}">
 		<name>
 			<language id="de"><![CDATA[Projektbeschreibung]]></language>
 			<language id="en"><![CDATA[Description]]></language>
@@ -92,7 +92,7 @@
 		editable="true" type="boolean">Is Recurring Payment</property>
 
 	<property id="recurringperiod" index="true" stored="true"
-		editable="true" type="number">Recurring Period (months)</property>
+		editable="true" type="list" listid="productrecurringperiod">Recurring Period</property>
 
 	<property id="billingday" index="true" stored="true"
 		editable="true" type="number" rendertype="monthday">Billing Day</property>
