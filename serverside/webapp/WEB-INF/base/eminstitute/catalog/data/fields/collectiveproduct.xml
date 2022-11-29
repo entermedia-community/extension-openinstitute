@@ -14,7 +14,7 @@
 
 
 	<property id="productdescription" index="true" stored="true"
-		viewtype="html" editable="true">
+		viewtype="html" editable="true" hint="Allowed variables: ${project} ${invoicenumber} ${startdate} ${enddate}">
 		<name>
 			<language id="de"><![CDATA[Projektbeschreibung]]></language>
 			<language id="en"><![CDATA[Description]]></language>

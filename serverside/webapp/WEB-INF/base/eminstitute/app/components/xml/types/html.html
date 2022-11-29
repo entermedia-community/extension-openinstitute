@@ -22,3 +22,9 @@
 	>$!val</div>
 	
 <input id="html${detailid}value" name="${detailid}.value" type="hidden" value="#esc($val)" />
+
+
+#set($fieldhint = $detail.hint)
+#if($fieldhint)
+<span>$fieldhint</span>
+#end

@@ -166,17 +166,17 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
 			subject =  workspace.getName() + " Invoice";
-			if(invoice.getValue("isrecurring")) {
+//			if(invoice.getValue("isrecurring")) {
 				if(invoice.getName()!= null) {
 					subject = invoice.getName();
 				}
 				else {
-					subject = workspace.getName() + " - ${month}  Invoice";
+					subject = "\${project} - \${invoicemonth} Invoice";
 				}
-			}
-			else {
+			//}
+//			else {
 				month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
-			}
+			//}
 		
 			template = template + "send-invoice-event.html";
 			//Invoice Template from collection
@@ -230,18 +230,15 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		invoicepayoptions =  mediaArchive.getCatalogSettingValue("invoice_pay_options");
 	}
 	
-	//Variables
-	String invoicedescription = mediaArchive.getReplacer().replace(invoice.get("invoicedescription"), objects);
-	objects.put("invoicedescription", invoicedescription);
-
 	WebEmail templateEmail = mediaArchive.createSystemEmail(contact, template);
-	templateEmail.setSubject(subject);
 	
+	//Variables
 	objects.put("followeruser", contact);
 	objects.put("invoiceto", contact); //change to name
 	
 	objects.put("mediaarchive", mediaArchive);
 	objects.put("invoice", invoice);
+	objects.put("invoicenumber", invoice.getValue("invoicenumber"));
 	objects.put("project", workspace.getName());
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
@@ -250,8 +247,18 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	//recurring
 	objects.put("invoicemonth", month);
-	objects.put("startdate", invoice.getValue("startdate"));
-	objects.put("enddate", invoice.getValue("enddate"));
+	objects.put("startdate", context.getDate(invoice.getValue("startdate")));
+	objects.put("enddate", context.getDate(invoice.getValue("enddate")));
+	
+	String invoicedescription = mediaArchive.getReplacer().replace(invoice.get("invoicedescription"), objects);
+	objects.put("invoicedescription", invoicedescription);
+	
+	String invoicename = mediaArchive.getReplacer().replace(invoice.get("name"), objects);
+	objects.put("invoicename", invoicename);
+	
+	String invoicesubject = mediaArchive.getReplacer().replace(subject, objects);
+	templateEmail.setSubject(invoicesubject);
+	
 	
 	if (!invoiceemailheader.equals("")) {
 		invoiceemailheader = mediaArchive.getReplacer().replace(invoiceemailheader, objects);

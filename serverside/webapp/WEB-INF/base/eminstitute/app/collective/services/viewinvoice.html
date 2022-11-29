@@ -14,6 +14,20 @@
 	#set( $collection = $mediaarchive.query("librarycollection").exact("id",$invoice.getValue("collectionid")).searchOne() )
 	
 	#set($status = $invoice.getValue("paymentstatus"))
+	
+	#set($invoicemonth = $dateStorageUtil2.getStorageUtil().getMonthName($invoice.getValue("billdate")))
+	
+	##For Replace Formating
+		#set($invoiceformated = $invoice)
+		#set($replacer = $mediaarchive.getReplacer())
+		#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
+		#set($ignore = $invoiceformated.setValue("project", $collection))
+		#set($startdate = "#date($invoice, 'startdate')")
+		#set($ignore = $invoiceformated.setValue("startdate", $startdate))
+		#set($enddate = "#date($invoice, 'enddate')")
+		#set($ignore = $invoiceformated.setValue("enddate", $enddate))
+	##--
+	
 <div class="viewinvoice">
 	
 	<div style="padding:0 0 5px;">
@@ -78,11 +92,12 @@
 				<table style="width: 100%;">
 				<tr>
 				<td>
-					<strong>[[Invoice]]:</strong> $!invoice.getValue("name")<br>
+					#set($invoiceoriginalname = $invoice.getValue("name"))
+					#set($invoicename = $replacer.replace($invoiceoriginalname, $invoiceformated))
+					<strong>[[Invoice]]:</strong> $!invoicename<br>
 					<strong>[[Invoice Number]]:</strong> $invoice.getValue("invoicenumber")
 						<br>
-						
-						#set($invoicemonth = $dateStorageUtil2.getStorageUtil().getMonthName($invoice.getValue("billdate")))
+			
 						#if($invoicemonth)
                               <div><strong>Month:</strong> $invoicemonth</div>
                         #end</td>
@@ -103,13 +118,10 @@
 					###else
 					##	<br>$!collection
 					###end
-				
-
+								
 					#set($invoicedescription = $invoice.getValue("invoicedescription"))
 					#if($invoicedescription)
-						#set($replacer = $mediaarchive.getReplacer())
-						#set($ii = $invoice.setValue("invoicemonth",$invoicemonth))
-						#set($invoicedescription = $replacer.replace($invoicedescription, $invoice))
+						#set($invoicedescription = $replacer.replace($invoicedescription, $invoiceformated))
 						$invoicedescription
 					#end
 			</div>

@@ -134,8 +134,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				String collectionid = product.getValue("collectionid");
 				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
 				if(collection != null) {
-					String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
-					invoice.setValue("name", "${collection} - ${month} Invoice");
+					//String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
+					String name = "\${project} - \${invoicemonth} Invoice";
+					invoice.setValue("name", name);
 				}
 				
 				String contactsstring = "";

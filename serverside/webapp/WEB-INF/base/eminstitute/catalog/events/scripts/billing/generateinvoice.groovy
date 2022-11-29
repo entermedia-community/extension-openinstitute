@@ -1,12 +1,10 @@
 package billing;
 
-import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
-import org.openedit.util.URLUtilities
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -75,6 +73,15 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			}
 			invoice.setValue("currencytype",  productcurrency);
 			
+			//name -subject
+			String collectionid = product.getValue("collectionid");
+			Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
+			if(collection != null) {
+				//String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
+				String name = "\${project} - \${invoicemonth} Invoice";
+
+				invoice.setValue("name", name);
+			}
 			
 			String contactsstring = "";
 			
@@ -119,14 +126,24 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 				
 				invoice.setValue("isrecurring", "true");
 				invoice.setValue("billdate", today.getTime()); //Original Bill Date
+				
+				//start
+				invoice.setValue("startdate", today.getTime());
+				//end
+				Integer recurringperiod = product.getValue("recurringperiod");
+				Calendar endbilldate = Calendar.getInstance();
+				endbilldate.setTime(today.getTime());
+				endbilldate.add(Calendar.MONTH, recurringperiod);
+				invoice.setValue("enddate", endbilldate.getTime());
+	
+				
+	
 			}
 			
 			invoiceSearcher.saveData(invoice);
 			
 			product.setValue("lastgeneratedinvoicedate", today.getTime());
 			productSearcher.saveData(product);
-			
-			
 			
 			context.putPageValue("invoiceid", invoice.getId())
 			
