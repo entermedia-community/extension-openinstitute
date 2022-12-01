@@ -16,6 +16,7 @@ public void init() {
 	if(invoiceid!=null) {
 		Data invoice = mediaArchive.getInvoiceById(invoiceid);
 		if(invoice != null) {
+
 			if (!invoice.get("paymentstatus").equals("paid")) {
 				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
 				invoice.setValue("paymentstatus", "invoiced");
@@ -23,20 +24,20 @@ public void init() {
 				invoiceSearcher.saveData(invoice);
 		
 			}
-			else if(invoice.get("paymentstatus").equals("paid") && !
-				Boolean.valueOf(invoice.get("notificationpaidsent"))) {
+			else if(invoice.get("paymentstatus").equals("paid") && !Boolean.valueOf(invoice.get("notificationpaidsent"))) {
+				log.info("Sending Paid Notification for ${invoiceid}");
 				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationpaidsent");
 				invoice.setValue("notificationpaidsent", "true")
 				invoiceSearcher.saveData(invoice);
 			}
 		}
 	}
-	
-	log.info("Sending Pending & Recurring Invoices...");
-	// Notifications
-	sendInvoiceNotifications(mediaArchive, invoiceSearcher);
-	sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
-	
+	else {
+		log.info("Sending Pending & Recurring Invoices...");
+		// Notifications
+		sendInvoiceNotifications(mediaArchive, invoiceSearcher);
+		sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
+	}
 	
 }
 
@@ -119,8 +120,13 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 			Calendar today = Calendar.getInstance();
 			invoice.setValue("sentto", emails);
 			invoice.setValue("sentdate", today.getTime());
-			invoice.setValue("paymentstatus", "invoiced");
 			invoice.setValue(iteratorType, "true");
+			
+			if (!invoice.get("paymentstatus").equals("paid")) {
+				//mark as invoiced
+				invoice.setValue("paymentstatus", "invoiced");
+			}
+			
 		}
 		else {
 			invoice.setValue("paymentstatus", "error");
