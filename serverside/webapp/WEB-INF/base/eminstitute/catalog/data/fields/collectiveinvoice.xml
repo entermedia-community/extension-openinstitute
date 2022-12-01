@@ -5,7 +5,7 @@
 	<property id="id" index="true" stored="true" editable="true"
 		internalfield="true"> ID</property>
 
-	<property id="name" index="true" stored="true" editable="true">
+	<property id="name" index="true" stored="true" editable="true"  hint="Allowed variables: ${project} ${invoicenumber} ${invoicemonth} ${startdate} ${enddate}">
 		Invoice Name
 	</property>
 
@@ -179,5 +179,12 @@
 			<language id="en"><![CDATA[Is Recurring]]></language>
 		</name>
 	</property>
+	
+	<property id="transaction" listid="transaction"
+		index="true" stored="true" editable="true" viewtype="list" type="list">
+		<name>
+			<language id="en"><![CDATA[Transaction Record]]></language>
+		</name>
+	</property>	
  
 </properties>
