@@ -80,7 +80,7 @@ public class PaymentModule extends BaseMediaModule
 		inReq.putSessionValue("checkoutuser", user);
 	}
 	
-	public void processPaymentTest(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
+	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
 		String source = inReq.getRequestParameter("stripecustomer");		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
 		
@@ -235,7 +235,7 @@ public class PaymentModule extends BaseMediaModule
 		}
 	}
 
-	public void processPayment(WebPageRequest inReq)
+	public void processPaymentDonation(WebPageRequest inReq)
 	{
 		String token = inReq.getRequestParameter("stripeToken");
 		if( token == null)
