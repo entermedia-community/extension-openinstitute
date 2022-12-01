@@ -10,10 +10,17 @@ import org.openedit.users.UserSearcher
  
 public void init()
 {
+	String useridA = context.getRequestParameter("copytoid"); //will be keept//
+	String useridB = context.getRequestParameter("copyid"); //move from//
 	
-	String useridA = "userA"; //will be keept
+	//useridA = "userA"; //will be keept//
+	//useridB = "userB";
 	
-	String useridB = "userB";
+	if(useridA == null || useridB == null) {
+		log.info("No users defined");
+		return;
+	}
+	
 	
 	MediaArchive archive = context.getPageValue("mediaarchive");
 	UserSearcher usersearch = archive.getSearcherManager().getSearcher("system","user");
@@ -59,6 +66,8 @@ public void init()
 		
 	}
 	
+	
+	
 }
 
 public void update(String inTable, String inField,String oldvalue,  String newValue) {
@@ -70,7 +79,7 @@ public void update(String inTable, String inField,String oldvalue,  String newVa
 	Collection toupdate = searcher.fieldSearch(inField, oldvalue);
 	toupdate = new ArrayList(toupdate);
 	toupdate.each {
-		log.info("Fixing userid: "+inTable)
+		log.info("Moving User data ${inTable}: ${inField} => ${newValue}")
 		Data hit = searcher.loadData(it);
 		hit.setValue(inField, newValue);
 		searcher.saveData(hit);
