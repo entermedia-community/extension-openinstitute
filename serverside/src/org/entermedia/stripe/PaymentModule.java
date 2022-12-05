@@ -80,6 +80,8 @@ public class PaymentModule extends BaseMediaModule
 		inReq.putSessionValue("checkoutuser", user);
 	}
 	
+	//*Process Regular Payments (EM Portal) *//
+	
 	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
 		String source = inReq.getRequestParameter("stripecustomer");		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
@@ -137,8 +139,8 @@ public class PaymentModule extends BaseMediaModule
 			return;
 		}
 		isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, invoice, user.getEmail());
-		log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 		if (isSuccess) {
+			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
 			invoice.setValue("invoicepaidon", today.getTime());
 		} else {
