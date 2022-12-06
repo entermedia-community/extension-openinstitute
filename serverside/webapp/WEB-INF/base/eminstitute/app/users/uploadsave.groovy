@@ -1,6 +1,8 @@
 package importing;
 
 import org.entermediadb.asset.*;
+import org.openedit.OpenEditException
+import org.openedit.profile.UserProfile
 import org.openedit.users.*;
 
 
