@@ -12,8 +12,14 @@ public void init2()
 	{
 		Asset onefile = assets.iterator().next();
 		User edituser =  context.getPageValue("selecteduser");
-		edituser.setValue("assetportrait",onefile.getId());
-		archive.saveData("user",edituser);
+		String username = context.getUserName();
+		if( username == null || edituser == null || !edituser.getId().equals(username))
+		{
+			throw new OpenEditException("No permission to edit user");
+		}
+		UserProfile profile = archive.getUserProfile(edituser.getId());
+		profile.setValue("assetportrait",onefile.getId());
+		archive.saveData("userprofile",profile);
 		if( edituser.getId().equals(  context.getUser().getId() ) )
 		{
 				String catalogid = context.findValue("catalogid");
