@@ -12,12 +12,14 @@
 		#end
 	  <img src="$userimageurl" class="usericon" alt="${comment.getUserLabel()}"/>
 	  </a>
+	  </div>
 	  <div class="comment-content">
 		  <div>
 		  	<a class="comment-poster" href="#urlescape($userlink)" title="${comment.getUserLabel()}"><strong>${comment.getUserLabel()}</strong></a>
+		  	<span class="comment-timestamp">$comment.getShortDate($context)</span>
 		  </div>
 		  <span class="comment-body">#esc($comment.commenttext)</span> 
-		  <div class="comment-timestamp">$comment.getShortDate($context)</div>
+		  
 			#if( $comment.canEdit($user) )
 		        #if ( $comment.isVisible() )
 		        	#set ( $actionText = "Unpublish" )
@@ -30,7 +32,7 @@
 			
 		</div>
 		
-	</div>
+	
   </div>						
 #end
 

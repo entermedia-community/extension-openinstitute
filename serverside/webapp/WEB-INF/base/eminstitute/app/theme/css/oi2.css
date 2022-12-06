@@ -496,11 +496,11 @@ text-decoration: none;
 	float:none;
 }
 .card-collections .card-collections-thumb {
-	border:6px solid #C8C446;
+	border:3px solid #C8C446;
 	box-shadow:none;
-	width:150px;
-	height: 150px;
-	
+	width:115px;
+	height: 115px;
+	background-repeat: no-repeat;	
 }
 .card-collections a .collectionbox {
     color: #1D5655;
@@ -1047,7 +1047,7 @@ list-style: none;
 
 #usersidebar .card-collections-thumb {
 	box-shadow:none;
-	width:40px;
+	width:35px;
 	padding:0px;
 	height:40px;
 	margin-top: 2px;
