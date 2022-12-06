@@ -6,7 +6,7 @@
 	  #set($commentuser = $comment.getUser())
 	  #set($userlink = "$applink/users/${commentuser.getId()}/${commentuser.getAnonNickName()}.html")
 	  <a href="#urlescape($userlink)" title="${comment.getUserLabel()}">
-		#set( $userimageurl = $mediaarchive.asLinkToProfile($commentuser.assetportrait) )
+		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($commentuser) )
 		#if(!$userimageurl)
 			#set( $userimageurl = "$applink/theme/images/user.svg" )
 		#end
@@ -35,7 +35,7 @@
 #end
 
 #if ($user)
-	#set( $userimageurl = $mediaarchive.asLinkToProfile($user.assetportrait) )
+	#set( $userimageurl = $mediaarchive.asLinkToUserProfile($user) )
 	#if(!$userimageurl)
 		#set( $userimageurl = "$applink/theme/images/user.svg" )
 	#end

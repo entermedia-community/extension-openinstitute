@@ -14,7 +14,7 @@
 					#set($canedituserinfo = true)
 				#end
 			
-				#set( $userimageurl = $mediaarchive.asLinkToProfile($selecteduser.assetportrait) )
+				#set( $userimageurl = $mediaarchive.asLinkToUserProfile($selecteduser) )
 				#if(!$userimageurl)
 					#set( $userimageurl = "$applink/theme/images/user.svg" )
 				#end
