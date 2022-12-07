@@ -14,7 +14,7 @@
 
 
 	<property id="productdescription" index="true" stored="true"
-		viewtype="html" editable="true" hint="Allowed variables: ${project} ${invoicenumber} ${invoicemonth} ${startdate} ${enddate}">
+		viewtype="html" editable="true" hint="Allowed variables: ${project} ${invoicenumber} ${invoicemonth} ${period} ${duedate} ${enddate}">
 		<name>
 			<language id="de"><![CDATA[Projektbeschreibung]]></language>
 			<language id="en"><![CDATA[Description]]></language>
@@ -73,8 +73,15 @@
 	</property>
 
 	<property id="createdon" editable="true" stored="true"
-		type="date" index="true">New Creation Date
+		type="date" index="true">Creation Date
 	</property>
+	
+	<property id="startbillingdate" editable="true" stored="true" type="date" index="true">
+		<name>
+			<language id="en"><![CDATA[Starting Due Date]]></language>
+		</name>
+	</property>
+	
 
 	<property id="nextbillon" editable="true" stored="true"
 		type="date" index="true">Next Bill Date

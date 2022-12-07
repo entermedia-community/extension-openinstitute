@@ -76,7 +76,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 		since.add(Calendar.DAY_OF_YEAR, -15);
 		//--
 	Calendar due = Calendar.getInstance();
-	due.add(Calendar.DAY_OF_YEAR, +10); // make invoice 10 days before next bill date
+	due.add(Calendar.DAY_OF_YEAR, +15); // make invoice 10 days before next bill date
 
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","true")
@@ -97,9 +97,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
 				Data invoice = invoiceSearcher.createNewData();
 	
-				Calendar invoiceDue = Calendar.getInstance();
+				/*Calendar invoiceDue = Calendar.getInstance();
 				invoiceDue.setTime(nextBillOn);
-				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);*/
 				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
@@ -115,14 +115,16 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("owner", product.getValue("owner"));
 				invoice.setValue("totalprice", product.getValue("productprice"));
 				invoice.setValue("isrecurring", "true");
-				invoice.setValue("billdate", nextBillOn); //Original Bill Date
-				invoice.setValue("duedate", invoiceDue.getTime());
+				invoice.setValue("recurringperiod", product.getValue("recurringperiod"));
+				//invoice.setValue("billdate", nextBillOn); //Original Bill Date
+				invoice.setValue("duedate", nextBillOn);  
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
 				invoice.setValue("createdon", today.getTime());
 				
 				//start
-				invoice.setValue("startdate", nextBillOn);
+				//invoice.setValue("startdate", nextBillOn);  //use duedate
+				
 				//end
 				Integer recurringperiod = product.getValue("recurringperiod");
 				Calendar endbilldate = Calendar.getInstance();
@@ -134,7 +136,6 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				String collectionid = product.getValue("collectionid");
 				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
 				if(collection != null) {
-					//String month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
 					String name = "\${project} - \${invoicemonth} Invoice";
 					invoice.setValue("name", name);
 				}
@@ -221,7 +222,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));
 			invoice.setValue("totalprice", product.getValue("productprice"));
-			invoice.setValue("duedate", invoiceDue.getTime());
+			invoice.setValue("startdate", invoiceDue.getTime());
 			invoice.setValue("invoicedescription", product.getValue("productdescription"));
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());

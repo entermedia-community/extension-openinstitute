@@ -36,7 +36,7 @@ public void init() {
 		log.info("Sending Pending & Recurring Invoices...");
 		// Notifications
 		sendInvoiceNotifications(mediaArchive, invoiceSearcher);
-		sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);
+		//sendInvoiceOverdueNotifications(mediaArchive, invoiceSearcher);  //Need to adjust Due Calculation
 	}
 	
 }
@@ -60,7 +60,7 @@ private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoic
 private void sendInvoiceOverdueNotifications(MediaArchive mediaArchive, Searcher invoiceSearcher) {
 	Calendar today = Calendar.getInstance();
 	Collection pendingNotificationInvoices = invoiceSearcher.query()
-			.before("duedate", today.getTime())
+			.before("startdate", today.getTime())
 			.exact("notificationoverduesent", "false")
 			.exact("paymentstatus","invoiced").search();
 
@@ -181,7 +181,8 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 				}
 			//}
 //			else {
-				month = DateStorageUtil.getStorageUtil().getMonthName(invoice.getValue("billdate"));
+				month = context.getLocaleManager().getMonthName(invoice.getValue("duedate"), context.getLocale());
+				
 			//}
 		
 			template = template + "send-invoice-event.html";
@@ -253,10 +254,15 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	//recurring
 	objects.put("invoicemonth", month);
-	String dates = DateStorageUtil.getStorageUtil().formatDateObj(invoice.getValue("startdate"), "dd/MM/YY");
-	objects.put("startdate",  dates);
+	String dates = DateStorageUtil.getStorageUtil().formatDateObj(invoice.getValue("duedate"), "dd/MM/YY");
+	objects.put("startdate",  dates); //legacy
+	objects.put("duedate",  dates);
 	String datee = DateStorageUtil.getStorageUtil().formatDateObj(invoice.getValue("enddate"), "dd/MM/YY");
 	objects.put("enddate", datee);
+	
+	//period
+	String recurringperiod = mediaArchive.getData("productrecurringperiod", invoice.get("recurringperiod"));
+	objects.put("period", recurringperiod);
 	
 	String invoicedescription = mediaArchive.getReplacer().replace(invoice.get("invoicedescription"), objects);
 	objects.put("invoicedescription", invoicedescription);
