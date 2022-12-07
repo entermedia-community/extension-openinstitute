@@ -475,14 +475,14 @@
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td valign="top">
-                              <div><strong>Invoice:</strong> #text($invoicename)</div>
                               <div><strong>Invoice #:</strong> $invoice.getValue("invoicenumber")</div>
-                              #if($invoicemonth)
-                              <div><strong>Month:</strong> $invoicemonth</div>
-                              #end
+                              <div><strong> #text($invoicename)</strong></div>
+                              ###if($invoicemonth)
+                              ##<div><strong>Month:</strong> $invoicemonth</div>
+                              ###end
                             </td>
                             <td style="" valign="top">
-                              <div class="align-right"><Strong>Date:</Strong> $!context.getDate($invoice.getValue("createdon"))</div>
+                              ##<div class="align-right"><Strong>Date:</Strong> $!context.getDate($invoice.getValue("createdon"))</div>
                             </td>
                           </tr>
                           <tr>

@@ -18,14 +18,18 @@
 	#set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
 	
 	##For Replace Formating
-		#set($invoiceformated = $invoice)
+				#set($invoiceformated = $invoice)
 		#set($replacer = $mediaarchive.getReplacer())
 		#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
 		#set($ignore = $invoiceformated.setValue("project", $collection))
 		#set($startdate = "#date($invoice, 'duedate')")
-		#set($ignore = $invoiceformated.setValue("startdate", $startdate))
+		#set($ignore = $invoiceformated.setValue("duedate", $startdate))
+		#set($ignore = $invoiceformated.setValue("startdate", $startdate))  ####legacy??
 		#set($enddate = "#date($invoice, 'enddate')")
 		#set($ignore = $invoiceformated.setValue("enddate", $enddate))
+		#set($recurringperiod = $mediaarchive.getData("productrecurringperiod", $invoice.getValue("recurringperiod")))
+		#set($recurringperiod = $context.getText($recurringperiod))
+		#set($ignore = $invoiceformated.setValue("period", $recurringperiod))
 	##--
 	
 <div class="viewinvoice">
