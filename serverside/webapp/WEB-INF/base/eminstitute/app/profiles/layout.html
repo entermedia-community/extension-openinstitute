@@ -22,12 +22,12 @@
 			  <tbody class="table-striped">
 			   	#foreach($hit in $userrecords)
 			
-			#set( $auser = $mediaarchive.getUser($hit.get("followeruser")))
-			  #set($userlink = "$applink/users/${auser.getId()}/${auser.getAnonNickName()}.html")
+				#set( $auser = $mediaarchive.getUser($hit.get("followeruser")))
+			  	#set($userlink = "$applink/users/${auser.getId()}/${auser.getAnonNickName()}.html")
 			    <tr>
 					<td>
 					  <a href="#urlescape($userlink)" title="${comment.getUserLabel()}">
-						#set( $userimageurl = $mediaarchive.asLinkToProfile($auser.assetportrait) )
+						#set( $userimageurl = $mediaarchive.asLinkToUserProfile($auser) )
 						#if(!$userimageurl)
 							#set( $userimageurl = "$applink/theme/images/user.svg" )
 						#end

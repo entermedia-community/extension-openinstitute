@@ -74,7 +74,7 @@ $context.putPageValue("longform",false)
 	$!context.putPageValue("detail",$detail)
 	$!context.putPageValue("val",$val)
  	<div class="form-group row no-gutters g-0">
-    <label for="exampleTextarea" class="col-sm-12 col-md-2">$detail.getText($context)</label>
+    <label for="exampleTextarea" class="col-sm-12 col-$fieldcolumnsize">$detail.getText($context)</label>
     #if(!$fieldcolumnsize)
     	#set($fieldcolumnsize = 10)
     #end

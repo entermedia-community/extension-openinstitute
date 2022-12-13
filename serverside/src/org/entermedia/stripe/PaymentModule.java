@@ -80,7 +80,9 @@ public class PaymentModule extends BaseMediaModule
 		inReq.putSessionValue("checkoutuser", user);
 	}
 	
-	public void processPaymentTest(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
+	//*Process Regular Payments (EM Portal) *//
+	
+	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
 		String source = inReq.getRequestParameter("stripecustomer");		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
 		
@@ -116,35 +118,42 @@ public class PaymentModule extends BaseMediaModule
 
 		String userid = payment.get("userid");
 		User user = archive.getUser(userid);
+		String customerId = "";
 		
 		if (isRecurring == true)
 		{
-			String customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);
-			if (customerId.isEmpty()) {
-				invoice.setValue("paymentstatus", "error");
-				invoice.setValue("paymentstatusreason", "Stripe error, please contact your admin");
-				invoiceSearcher.saveData(invoice);
-				inReq.putPageValue("invoice", invoice);
-				return;
-			}			
-			isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, invoice, user.getEmail());
-			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
+			customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);
+			
 		} else {
-			String customerId = "";
 			if (!stripeCust) {
 				customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);
 			} else {
 				customerId = (String) inReq.getRequestParameter("stripecustomer");
 			}
-			isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, invoice, user.getEmail());
 		}
+		if (customerId.isEmpty()) {
+			invoice.setValue("paymentstatus", "error");
+			invoice.setValue("paymentstatusreason", "Stripe error, please contact your admin");
+			invoiceSearcher.saveData(invoice);
+			inReq.putPageValue("invoice", invoice);
+			return;
+		}
+		isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, invoice, user.getEmail());
 		if (isSuccess) {
+			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
 			invoice.setValue("invoicepaidon", today.getTime());
 		} else {
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Credit Card failed");
-		}		
+		}	
+		
+		payments.saveData(payment);
+		inReq.putPageValue("payment", payment);
+		
+		//For Tracking payments
+		invoice.setValue("transaction", payment.getId());
+		
 		invoiceSearcher.saveData(invoice);
 		inReq.putPageValue("invoice", invoice);
 	}
@@ -228,7 +237,7 @@ public class PaymentModule extends BaseMediaModule
 		}
 	}
 
-	public void processPayment(WebPageRequest inReq)
+	public void processPaymentDonation(WebPageRequest inReq)
 	{
 		String token = inReq.getRequestParameter("stripeToken");
 		if( token == null)
@@ -263,7 +272,7 @@ public class PaymentModule extends BaseMediaModule
 				payment.setValue("userid", username);
 				
 				String frequency = inReq.findValue("frequency");
-				if (frequency != null && frequency != "")
+				if (isdonation && frequency != null && frequency != "")
 				{
 					Searcher plans = archive.getSearcher("paymentplan");
 					Data plan = plans.createNewData();

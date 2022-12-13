@@ -276,6 +276,11 @@ jQuery(document).ready(function(url,params)
 					{
 						$(targetdiv).append(data);
 						jQuery('.grabfocus').focus();
+						
+						var parent = button.closest(".goalstatusopen");
+						if (parent.length > 0) {
+							parent[0].scrollIntoView();
+						}
 
 					},
 					type: "POST",

@@ -5,7 +5,7 @@
 	"email": #jesc( $person.email ),
 	"firstName": #jesc( $person.firstName ),
 	"lastName": #jesc( $person.lastName )
-	#set( $userimageurl = $mediaarchive.asLinkToProfile($person.assetportrait) )
+	#set( $userimageurl = $mediaarchive.asLinkToUserProfile($person) )
 	#if($userimageurl),
 	"portrait": "$userimageurl"
 	#end

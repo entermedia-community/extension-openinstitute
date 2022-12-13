@@ -9,10 +9,10 @@ public void init() {
 	Searcher productSearcher = mediaArchive.getSearcher("collectiveproduct");
 	Data product = context.getPageValue("data");
 	
-	//recurring moved to invoice
 	String isrecurring = product.getValue("recurring");
 	if(Boolean.parseBoolean(isrecurring))
 	{
+		/*
 		Calendar today = Calendar.getInstance();
 		Calendar nextbillon = Calendar.getInstance();
 		int billingday = product.getInt("billingday");
@@ -35,6 +35,29 @@ public void init() {
 		}
 		product.setValue("nextbillon", nextbillon.getTime());
 		product.setValue("billingstatus", "active");
+		*/
+		Calendar today = Calendar.getInstance();
+		Date billingdate = product.getValue("startbillingdate");
+		if (billingdate == null) {
+			billingdate = today.getTime();
+			
+		}
+		
+		int recurringperiod = product.getInt("recurringperiod");
+		if(recurringperiod == null)
+		{
+			//recurring default to 1 month
+			recurringperiod = 1;
+			product.setValue("recurringperiod", "1"); //put it back to product
+		}
+		Calendar nextBillOn = Calendar.getInstance();
+		nextBillOn.setTime(billingdate);
+		int currentMonth = nextBillOn.get(Calendar.MONTH);
+		nextBillOn.set(Calendar.MONTH, currentMonth + recurringperiod);
+		product.setValue("nextbillon", nextBillOn.getTime());
+		
+		product.setValue("billingstatus", "active");
+		
 		productSearcher.saveData(product);
 	}
 }

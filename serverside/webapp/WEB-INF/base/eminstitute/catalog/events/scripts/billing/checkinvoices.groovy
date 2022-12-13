@@ -2,12 +2,10 @@ package billing;
 
 import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
-import org.openedit.users.Group
 import org.openedit.users.User
-import org.openedit.util.URLUtilities
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -78,14 +76,15 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 		since.add(Calendar.DAY_OF_YEAR, -15);
 		//--
 	Calendar due = Calendar.getInstance();
-	due.add(Calendar.DAY_OF_YEAR, +10); // make invoice 10 days before next bill date
+	due.add(Calendar.DAY_OF_YEAR, +15); // make invoice 10 days before next bill date
 
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","true")
 			.exact("billingstatus", "active")
 			.between("nextbillon", since.getTime(), due.getTime())
 			.search();
-    //log.info(pendingProducts);
+    log.info("Searching invoices from ${since.getTime()} to ${due.getTime()}. ${pendingProducts.size()} found.");
+	
 	if (pendingProducts.size() > 0) 
 	{
 		log.info("Creating recurring invoices for " + pendingProducts.size() + " products");
@@ -98,8 +97,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
 				Data invoice = invoiceSearcher.createNewData();
 	
-				Calendar invoiceDue = Calendar.getInstance();
-				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+				/*Calendar invoiceDue = Calendar.getInstance();
+				invoiceDue.setTime(nextBillOn);
+				invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);*/
 				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
@@ -115,11 +115,30 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("owner", product.getValue("owner"));
 				invoice.setValue("totalprice", product.getValue("productprice"));
 				invoice.setValue("isrecurring", "true");
-				invoice.setValue("billdate", nextBillOn); //Original Bill Date
-				invoice.setValue("duedate", invoiceDue.getTime());
+				invoice.setValue("recurringperiod", product.getValue("recurringperiod"));
+				//invoice.setValue("billdate", nextBillOn); //Original Bill Date
+				invoice.setValue("duedate", nextBillOn);  
 				invoice.setValue("invoicedescription", product.getValue("productdescription"));
 				invoice.setValue("notificationsent", "false");
 				invoice.setValue("createdon", today.getTime());
+				
+				//start
+				//invoice.setValue("startdate", nextBillOn);  //use duedate
+				
+				//end
+				Integer recurringperiod = product.getValue("recurringperiod");
+				Calendar endbilldate = Calendar.getInstance();
+				endbilldate.setTime(nextBillOn);
+				endbilldate.add(Calendar.MONTH, recurringperiod);
+				invoice.setValue("enddate", endbilldate.getTime());
+
+				//name -subject
+				String collectionid = product.getValue("collectionid");
+				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
+				if(collection != null) {
+					String name = "\${project} - \${invoicemonth} Invoice";
+					invoice.setValue("name", name);
+				}
 				
 				String contactsstring = "";
 				if(product.getValue("sentto") != null) {
@@ -159,7 +178,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				productSearcher.saveData(product);
 			}
 			else {
-				log.info("Invoice not created, invoice alreay sent. ${lastbilldate} < ${nextBillOn}")
+				log.info("Invoice not created, invoice may alreay sent. ${lastbilldate} < ${nextBillOn}")
 			} 
 				
 		}
@@ -203,7 +222,7 @@ private void generateNonRecurringInvoices(MediaArchive mediaArchive, Searcher pr
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));
 			invoice.setValue("totalprice", product.getValue("productprice"));
-			invoice.setValue("duedate", invoiceDue.getTime());
+			invoice.setValue("startdate", invoiceDue.getTime());
 			invoice.setValue("invoicedescription", product.getValue("productdescription"));
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());

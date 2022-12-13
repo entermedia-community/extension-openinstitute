@@ -1,12 +1,10 @@
 package billing;
 
-import org.entermedia.stripe.StripePaymentProcessor
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.email.WebEmail
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
-import org.openedit.util.URLUtilities
+import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -25,8 +23,6 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 	Calendar due = Calendar.getInstance();
 	due.add(Calendar.DAY_OF_YEAR, -5); // make invoice 5 days before next bill date
 
-	
-	
 	String productid = context.getRequestParameter("id");
 	String invoiced = context.getRequestParameter("invoiced");
 	
@@ -37,14 +33,13 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 	//if(product != null && product.getValue("billingstatus") == "active" && invoiced != "true")
 	if(product != null)
 	{
-		
 		Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
 //		if (lastbilldate < nextBillOn) { // otherwise assume it's already created
 			Searcher invoiceSearcher = mediaArchive.getSearcher("collectiveinvoice");
 			Data invoice = invoiceSearcher.createNewData();
 
-			Calendar invoiceDue = Calendar.getInstance();
-			invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
+//			Calendar invoiceDue = Calendar.getInstance();
+//			invoiceDue.add(Calendar.DAY_OF_YEAR, daysToExpire);
 
 			//Move this to aux-table?
 			HashMap<String,Object> productItem = new HashMap<String,Object>();
@@ -63,7 +58,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));
 			invoice.setValue("totalprice", product.getValue("productprice"));
-			invoice.setValue("duedate", invoiceDue.getTime());
+			//invoice.setValue("duedate", invoiceDue.getTime()); //defined later
 			invoice.setValue("invoicedescription", product.getValue("productdescription"));
 			invoice.setValue("notificationsent", "false");
 			invoice.setValue("createdon", today.getTime());
@@ -75,6 +70,13 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			}
 			invoice.setValue("currencytype",  productcurrency);
 			
+			//name -subject
+			String collectionid = product.getValue("collectionid");
+			Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
+			if(collection != null) {
+				String name = "\${project} - \${invoicemonth} Invoice";
+				invoice.setValue("name", name);
+			}
 			
 			String contactsstring = "";
 			
@@ -106,31 +108,55 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			}
 			invoice.setValue("sentto", contactsstring);
 			
-			invoiceSearcher.saveData(invoice);
 			
 			
-			int recurrentCount = product.getValue("recurringperiod")
-			if(recurrentCount != null) 
-			{
-				Date nextBillOn = today.getTime();
-				int currentMonth = nextBillOn.getMonth();
-				nextBillOn.setMonth(currentMonth + recurrentCount);
-				product.setValue("nextbillon", nextBillOn);
-				
-				invoice.setValue("isrecurring", "true");
-				invoice.setValue("billdate", today.getTime()); //Original Bill Date
+			//Start Billing Date
+			Date startbillingdate = product.getValue("startbillingdate");
+			if (startbillingdate == null) {
+				startbillingdate = today.getTime();
 			}
+		
+			//invoiceSearcher.saveData(invoice);
 			
+			int recurringperiod = product.getInt("recurringperiod");
+			if(recurringperiod == null)
+			{
+				//recurring default to 1 month
+				recurringperiod = 1;
+				product.setValue("recurringperiod", "1"); //put it back to product
+			}
+			invoice.setValue("recurringperiod", recurringperiod);
+			
+			//Old startdate Used as Due Date Now
+			invoice.setValue("duedate", startbillingdate);
+
+			//end date
+			Calendar endbilldate = Calendar.getInstance();
+			endbilldate.setTime(startbillingdate);
+			endbilldate.add(Calendar.MONTH, recurringperiod);
+			invoice.setValue("enddate", endbilldate.getTime());
+			
+			Boolean isrecurring = product.getValue("recurring");
+			if (isrecurring) {
+				invoice.setValue("isrecurring", "true");
+
+				Calendar nextBillOn = Calendar.getInstance();
+				nextBillOn.setTime(startbillingdate);
+				int currentMonth = nextBillOn.get(Calendar.MONTH);
+				nextBillOn.set(Calendar.MONTH, currentMonth + recurringperiod);
+				product.setValue("nextbillon", nextBillOn.getTime());
+				//invoice.setValue("billdate", today.getTime()); //use createdon					
+			}
+					
 			invoiceSearcher.saveData(invoice);
 			
 			product.setValue("lastgeneratedinvoicedate", today.getTime());
+			product.setValue("billingstatus", "active");
 			productSearcher.saveData(product);
-			
-			
 			
 			context.putPageValue("invoiceid", invoice.getId())
 			
-			log.info("New Invoice generated - " + invoice.getValue("invoicenumber"));
+			log.info("New Invoice generated for " + collection.getName());
 		}
 		
 //	}

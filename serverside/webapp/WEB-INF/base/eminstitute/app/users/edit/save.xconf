@@ -1,11 +1,8 @@
 <page>
 	
 	<path-action name="AssetEditModule.handleUploads"/>
-	<path-action name="User.updateUserProperties" />
-	<path-action name="DataEditModule.loadData" >
-			<pageval>selecteduser</pageval>
-			<idname>username</idname>
-			<searchtype>user</searchtype>
-    </path-action>		   
+	<path-action name="Script.run">
+		<script>/${applicationid}/users/edit/saveuser.groovy</script>
+	</path-action>
 	
 </page>

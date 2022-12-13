@@ -796,8 +796,8 @@ height: 40px;
 	position:relative;
 }
 .chatterbox-chat .goalstatus {
-	padding: 6px;
-	margin-top:3px;
+	padding: 6px 8px 12px 6px;
+	margin:3px 0 20px;
 	border:1px dashed #999;
 	
 }
@@ -1133,7 +1133,7 @@ a.collectivetag:hover {
 }
 
 .feedcard-footer {
-	padding:10px;
+	padding:15px;
 }
 
 .feedcard .badge-tags {
@@ -1148,6 +1148,12 @@ a.collectivetag:hover {
 .feed-comments-textinput {
 	
 	width:calc(100% - 1px);
+}
+.feedcard-header .usericon {
+	width:32px;
+	height:32px;
+	position: absolute;
+	border-radius: 100%;
 }
 .feedcard-comments .usericon {
 	width:32px;
@@ -1244,9 +1250,9 @@ div.errormsg {
 }
 
 .feedcard-comment {
-	margin-bottom:15px;
-	padding:5px 5px 10px;
-	background-color: #fafafa;
+	margin-bottom:10px;
+	padding:10px;
+	background-color: #f4f4f4;
 	
 }
 .comment-poster {

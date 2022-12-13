@@ -11,6 +11,8 @@ import org.openedit.users.User
 import org.openedit.util.DateStorageUtil
 import org.openedit.util.URLUtilities
 
+import groovy.util.logging.Log
+
 
 //Chat Notifications
 
@@ -40,23 +42,22 @@ public void init()
 	Map<String, Map<String, List>> collectionsupdated = new HashMap();
 	
 	//--Tickets
-	HitTracker alltickets = mediaArchive.query("projectgoal").after("creationdate", since).sort("projectstatus").sort("creationdateDown").search();
+	HitTracker alltickets = mediaArchive.query("projectgoal").after("emrecordstatus.recordmodificationdate", since).sort("projectstatus").sort("creationdateDown").search();
 	getUpdatedRows(collectionsupdated, alltickets, "tickets");
 
 	//-- Goals
-	HitTracker alltasks = mediaArchive.query("goaltask").after("creationdate", since).search();
+	HitTracker alltasks = mediaArchive.query("goaltask").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, alltasks, "tasks");
-	
 
 	//Expenses
-	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("date", since).search();
+	HitTracker allexpenses = mediaArchive.query("collectiveexpense").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, allexpenses, "expenses");
 	
 	//Posts
-	HitTracker allposts = mediaArchive.query("userupload").after("uploaddate", since).search();
+	HitTracker allposts = mediaArchive.query("userupload").after("emrecordstatus.recordmodificationdate", since).search();
 	getUpdatedRows(collectionsupdated, allposts, "posts");
 	
-	log.info(collectionsupdated);
+	//log.info(collectionsupdated);
 	
 	
 	
@@ -67,30 +68,35 @@ public void init()
 	for (String collectionid in collectionsupdated.keySet()) {
 		
 		Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
-		for(Data auser in users)
-		{
-			String userid = auser.get("followeruser");
-			//if(!userwhochecked.contains(userid + "_" + chattopicid))
-			//{
-				Data profile = mediaArchive.getCachedData("userprofile", userid);
-				
-				//make it not false?
-				if(profile != null && profile.getBoolean("sendchatnotifications") == true)
-				{
-					log.info("Chat Notification disabled " + userid);
-					continue;
-				}
-				
-				//Users to Notify Only per Collection
-				List  notifications = usernotifications.get(userid);
-				if( notifications == null)
-				{
-					notifications = new ArrayList();
-				}
-				notifications.add(collectionid)
-				usernotifications.put(userid, notifications);
-			//}
+		
+		if(!users.isEmpty()) {
+			for(Data auser in users)
+			{
+				String userid = auser.get("followeruser");
+				//if(!userwhochecked.contains(userid + "_" + chattopicid))
+				//{
+					Data profile = mediaArchive.getCachedData("userprofile", userid);
+					
+					//make it not false?
+					if(profile != null && profile.getBoolean("sendchatnotifications") == true)
+					{
+						log.info("Chat Notification disabled " + userid);
+						continue;
+					}
+					
+					//Users to Notify Only per Collection
+					List  notifications = usernotifications.get(userid);
+					if( notifications == null)
+					{
+						notifications = new ArrayList();
+					}
+					notifications.add(collectionid)
+					usernotifications.put(userid, notifications);
+				//}
+			}
+			
 		}
+		
 	}	
 		
 
@@ -102,31 +108,39 @@ public void init()
 	//Loop over the remaining topics
 	try
 	{
-		for (String useerid in usernotifications.keySet())
+		for (String notifyuserid in usernotifications.keySet())
 		{
-			List collections = usernotifications.get(useerid);
-			User followeruser = mediaArchive.getUser(useerid);
+			List collections = usernotifications.get(notifyuserid);
+			
+			User followeruser = mediaArchive.getUser(notifyuserid);
 			if (followeruser == null || followeruser.getEmail() == null) 
 			{
-				log.error("Invalid User or no email address " + useerid);
+				log.error("Invalid User or no email address " + notifyuserid);
 				continue;
 			}
+			
+			Map<String, Map<String, List>> usercollectionsupdated = new HashMap();
 				
 			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 			if( collections.size() > 1)
 			{
 				templatemail.setSubject("[OI] " + collections.size() + " User Notifications"); //TODO: Translate
+				for(String usercollectionid in collections) {
+					usercollectionsupdated.put(usercollectionid, collectionsupdated.get(usercollectionid));
+				}
 			}
 			else
 			{
 				String oneitem = collections.iterator().next();
 				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
 				templatemail.setSubject("[OI] " + collection.getName() + " Notification"); //TODO: Translate
+				
+				usercollectionsupdated.put(oneitem, collectionsupdated.get(oneitem));
 			}
 			
 			Map objects = new HashMap();
 			objects.put("usernotifications",usernotifications);
-			objects.put("collectionsupdated",collectionsupdated);
+			objects.put("collectionsupdated",usercollectionsupdated);
 			objects.put("followeruser",followeruser);
 			objects.put("applink","/" + appid);
 			objects.put("mediaarchive",mediaArchive);
@@ -187,9 +201,8 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 				//check if the ticket already listed
 				String ticketid = row.getValue("projectgoal");
 				Map<String, Map<String, List>> tickets = notifications.get("tickets");
-				if( tickets != null)
-				{
-					if(ticketid in tickets.keySet()) {
+				if( tickets != null && ticketid in tickets.keySet())
+				{			
 						Map<String, List> theticket = tickets.get(ticketid);
 						Map<String, List> thetasks = theticket.get("tasks");
 						if(thetasks == null) {
@@ -201,11 +214,11 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 						notifications.put("tickets", tickets);
 						collectionsupdated.put(collectionid, notifications);
 						included = true;
-					} else {
+				} 
+				else {
 						//add ticket to task??
 						Data ticket = mediaArchive.getCachedData("projectgoal", ticketid);
 						if (ticket) {
-							
 							Map<String, Map<String, List>> collectionitems = notifications.get(table);
 							if (collectionitems == null) {
 								collectionitems = new HashMap();
@@ -218,7 +231,6 @@ private void getUpdatedRows(Map<String, Map<String, List>> collectionsupdated, H
 							collectionsupdated.put(collectionid, notifications);
 							included = true;
 						}
-					}
 				}
 			}
 			if(!included) {

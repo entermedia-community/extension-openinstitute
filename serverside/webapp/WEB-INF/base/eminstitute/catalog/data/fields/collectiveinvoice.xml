@@ -5,7 +5,7 @@
 	<property id="id" index="true" stored="true" editable="true"
 		internalfield="true"> ID</property>
 
-	<property id="name" index="true" stored="true" editable="true">
+	<property id="name" index="true" stored="true" editable="true"  hint=" ${project} ${invoicenumber} ${invoicemonth} ${period} ${duedate} ${enddate}">
 		Invoice Name
 	</property>
 
@@ -90,8 +90,8 @@
 		type="date" index="true">Due Date
 	</property>
 	
-		<property id="billdate" editable="true" stored="true"
-		type="date" index="true">Bill Date
+	<property id="billdate" editable="true" stored="true"
+		type="date" index="true">Old Bill Date
 	</property>
 
 	<property id="notificationsent" index="true" type="boolean"
@@ -138,7 +138,7 @@
   	<property id="startdate" editable="true" stored="true"
 		type="date" index="true">
 		<name>
-			<language id="en"><![CDATA[Start Date]]></language>
+			<language id="en"><![CDATA[Legacy Start Date]]></language>
 		</name>
 	</property>
 
@@ -179,5 +179,15 @@
 			<language id="en"><![CDATA[Is Recurring]]></language>
 		</name>
 	</property>
+	
+	<property id="recurringperiod" index="true" stored="true"
+		editable="true" type="list" listid="productrecurringperiod">Recurring Period</property>
+	
+	<property id="transaction" listid="transaction"
+		index="true" stored="true" editable="true" viewtype="list" type="list">
+		<name>
+			<language id="en"><![CDATA[Transaction Record]]></language>
+		</name>
+	</property>	
  
 </properties>

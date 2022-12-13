@@ -1,6 +1,6 @@
 	#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
 #set( $userlink = "$applink/users/${chatuser.getId()}/${chatuser.getAnonNickName()}.html")
-#set( $userimageurl = $mediaarchive.asLinkToProfile($chatuser.assetportrait) )
+#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser) )
 #if(!$userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
 
 <div class="chatterbox-chat" role="alert"

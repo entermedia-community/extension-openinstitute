@@ -46,7 +46,7 @@ $pages.include("$apphome/collective/donate/donatesidebar.html",$context)
   	#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
   	#if($followeruser)
 	    #set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-		#set( $userimageurl = $mediaarchive.asLinkToProfile($followeruser.assetportrait) )
+		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 		#if(!$userimageurl)
 			#set( $userimageurl = "$applink/theme/images/user.svg" )
 		#end

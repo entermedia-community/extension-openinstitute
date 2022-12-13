@@ -118,8 +118,8 @@ public class StripePaymentProcessor {
 				: "usd";
 		URI uri = new URIBuilder(http.getURI()).addParameter("amount", amountstring).addParameter("currency", currency)
 				.addParameter("customer", customer)
-				.addParameter("description", "Payment Invoice: " + invoice.getId() + " by " + email).build();
-		log.info("stripe amount: " + totalprice);
+				.addParameter("description", "Payment Invoice: " + invoice.getValue("invoicenumber") + " Id: " + invoice.getId() + " by " + email).build();
+		log.info("Stripe amount: " + totalprice);
 		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
 		// TODO: log this somewhere
 		if (response.getStatusLine().getStatusCode() != 200) {
