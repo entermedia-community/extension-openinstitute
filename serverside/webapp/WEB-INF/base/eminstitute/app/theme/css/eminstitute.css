@@ -1757,7 +1757,11 @@ ul.inlinelist   li
 	padding:0.75rem;
 	font-size:0.9rem;
 }
-
+.viewinvoicebody {
+	border:1px solid #999;; width:100%; max-width:980px; margin: 0 auto;
+	padding:10px;
+	text-align: left;
+} 
 .form-control {
     padding: 0.25rem 0.75rem;
     font-size: 0.9rem;
