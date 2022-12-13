@@ -7,15 +7,6 @@ class HiveManager {
   HiveManager();
 
   Future<void> init() async {
-    // String? path = await sharedPref.getEMPath();
-    // if (path != null) {
-    //   Hive.init(path);
-    // } else {
-    //   Directory appDir = await getApplicationDocumentsDirectory();
-    //   path = appDir.path;
-    //   await sharedPref.saveEMPath(path);
-    //   Hive.init(path);
-    // }
     await Hive.initFlutter();
   }
 

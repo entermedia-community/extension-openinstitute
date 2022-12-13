@@ -193,8 +193,11 @@ class TaskManager {
   Future<List<dynamic>> loadMyTasks() async {
     goalModule =
         await oi.datamanager.getDataModule('projectgoal', boxString: 'mytasks');
-    final responseString = await goalModule!.createModuleOperation("mytasks",
-        RequestType.POST, {"userid": oi.authenticationmanager.emUser!.userid});
+    final responseString = await goalModule!.createModuleOperation(
+      "mytasks",
+      RequestType.POST,
+      {"userid": oi.authenticationmanager.emUser!.userid},
+    );
     Map<String, dynamic> parsed = parseData(jsonEncode(responseString));
     goalModule!.saveCache(parsed);
     return parsed['data'];

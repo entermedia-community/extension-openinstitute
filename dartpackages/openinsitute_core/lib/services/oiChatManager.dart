@@ -6,7 +6,7 @@ import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 
-class OiChatManager {
+class OiChatManager { 
   String chatBox = "oiChatManagerCache";
 
   DataModule? chatterBox;
@@ -15,20 +15,26 @@ class OiChatManager {
     return Get.find();
   }
 
-  Future<List<oiChatMessage>> getRecentMessages() async {
+  Future<List<oiChatMessage>> getRecentMessages(
+      {bool fromCache = false}) async {
+    List<oiChatMessage> messages = [];
     chatterBox = await oi.datamanager
         .getDataModule("librarycollection", boxString: "Recent Chat");
-    Map<String, dynamic> results = await chatterBox!.createModuleOperation(
-        "viewtopmessages",
-        RequestType.PUT,
-        {"userid": oi.authenticationmanager.emUser!.userid});
-
-    List<oiChatMessage> messages = [];
-
-    for (var message in results["results"]) {
-      messages.add(oiChatMessage.fromJson(message));
+    if (fromCache) {
+      var datalist = chatterBox!.getAllHits();
+      for (var message in datalist) {
+        messages.add(oiChatMessage.fromJson(message.properties));
+      }
+    } else {
+      Map<String, dynamic> results = await chatterBox!.createModuleOperation(
+          "viewtopmessages",
+          RequestType.PUT,
+          {"userid": oi.authenticationmanager.emUser!.userid},
+          cache: true);
+      for (var message in results["results"]) {
+        messages.add(oiChatMessage.fromJson(message));
+      }
     }
-
     return messages;
   }
 

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
@@ -7,6 +6,7 @@ import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 
 class ProjectManager {
+
   String projectBox = "viewprojects";
 
   OpenI get oi => Get.find();

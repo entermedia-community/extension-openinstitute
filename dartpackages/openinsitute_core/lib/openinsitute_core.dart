@@ -266,6 +266,7 @@ class OpenI {
     }
   }
 
+/// use to upload multiple files with assign data. 
   Future<http.Response> postMultiPart(String mt, String url,
       Map<String, dynamic> body, Map<String, File>? files) async {
     Map<String, String> headers = <String, String>{};

@@ -200,31 +200,33 @@ class DataModule {
   }
 
   Future<Map<String, dynamic>> createModuleOperation(
-      String endpoint, RequestType requestType, Map inQuery) async {
+      String endpoint, RequestType requestType, Map inQuery,
+      {bool cache = false}) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/$endpoint',
         inQuery,
         requestType);
     Map<String, dynamic> map =
         await compute(jsonDecode, responsestring) as Map<String, dynamic>;
+    if (cache) {
+      await cacheAllData(map);
+    }
     return map;
   }
 
   Future<Map<String, dynamic>> createServiceOperation(
-      String endpoint, RequestType requestType, Map inQuery) async {
+      String endpoint, RequestType requestType, Map inQuery,
+      {bool cache = false}) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/$searchtype/$endpoint',
         inQuery,
         requestType);
     Map<String, dynamic> map =
         await compute(jsonDecode, responsestring) as Map<String, dynamic>;
+    if (cache) {
+      await cacheAllData(map);
+    }
     return map;
-  }
-
-  saveMetaData(int totalhits, int pages, int page) async {
-    await box.put("page", page);
-    await box.put("pages", pages);
-    await box.put("totalhits", totalhits);
   }
 
   saveCache(Map<String, dynamic> resultsData) async {
@@ -257,8 +259,9 @@ class DataModule {
   }
 
   cacheAllData(Map<String, dynamic> resultsData) async {
-    List<dynamic> results = resultsData["data"] ??
-        resultsData['results'].map((e) => emData.fromJson(e));
+    await box.clear();
+    List<dynamic> results = resultsData["data"] ?? 
+        resultsData['results']?.map((e) => emData.fromJson(e)).toList() ?? resultsData['goals'].map((e) => emData.fromJson(e)).toList() ;
     await box.put(
         "page",
         int.parse(
