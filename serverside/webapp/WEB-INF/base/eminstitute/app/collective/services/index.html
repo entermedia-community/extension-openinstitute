@@ -35,7 +35,8 @@
                          <td style="text-align: center;">$!context.getDate($invoice.invoicepaidon)</td>
                          <td>
                          
-                         	#set($invoicemonth = $dateStorageUtil2.getStorageUtil().getMonthName($invoice.getValue("billdate")))
+                         	
+                         	#set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
 	
 							##For Replace Formating
 								#set($invoiceformated = $invoice)

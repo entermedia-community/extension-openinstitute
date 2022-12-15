@@ -1,4 +1,5 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
+
 #set( $id = $context.getRequestParameter('invoiceid')) 
 #if(!$id)
 	#set( $id = $invoiceid)
@@ -7,6 +8,11 @@
 	#set( $invoice = $mediaarchive.getInvoiceById($id))
 #end
 #if ($invoice)
+	#if(!$collectionid)
+		#set( $collection = $mediaarchive.query("librarycollection").exact("id", $invoice.getValue("collectionid")).searchOne() )
+		#set( $collectionid = $collection.getId())
+	#end
+
 	$context.putPageValue("invoice", $invoice)
 	#set( $invoiceready =	"true")
 	#set($sentto = $invoice.getValue("sentto"))
@@ -77,7 +83,7 @@ body {
 	{
 		font-size: 11pt;
 	}
-	
+	.hideprinting { display:none;}
 
 </style>
 </head>
@@ -92,7 +98,11 @@ body {
 	$pages.include("$apphome/collective/services/viewinvoice.html", $context)
 	</div>
 	
-	 #set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
+		#if($collection.invoicepayoptions)
+       		#set( $invoicepayoptions = $collection.invoicepayoptions)
+       	#else
+        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
+        #end
       #if($invoicepayoptions != "")
       <div style="padding:20px">$!invoicepayoptions</div>
       #end
