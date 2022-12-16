@@ -45,7 +45,8 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
 				productItem.put("productname", product.getValue("name"));
-				productItem.put("productdescription", product.getValue("productdescription"));
+				String productname = product.getValue("name");
+				//productItem.put("productdescription", product.getValue("productdescription"));
 				productItem.put("productquantity", 1 );
 				productItem.put("productprice", product.getValue("productprice"));
 			Collection items = new ArrayList();
@@ -73,7 +74,11 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			//name -subject
 			String collectionid = product.getValue("collectionid");
 			Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
-			if(collection != null) {
+			
+			if(productname != null) {
+				invoice.setValue("name", productname);
+			}
+			else if(collection != null) {
 				String name = "\${project} - \${invoicemonth} Invoice";
 				invoice.setValue("name", name);
 			}
