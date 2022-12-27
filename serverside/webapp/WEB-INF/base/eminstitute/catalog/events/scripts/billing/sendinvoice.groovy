@@ -181,8 +181,11 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 				}
 			//}
 //			else {
-				month = context.getLocaleManager().getMonthName(invoice.getValue("duedate"), context.getLocale());
-				
+				Date duedate = invoice.getValue("duedate");
+				if( duedate != null)
+				{
+					month = context.getLocaleManager().getMonthName(duedate, context.getLocale());
+				}
 			//}
 		
 			template = template + "send-invoice-event.html";
