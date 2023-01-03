@@ -179,7 +179,11 @@ public class InvoiceManager implements CatalogEnabled
 
 	public double calculatePricePerDay(MultiValued product, MultiValued invoice)
 	{
-		Date startdate = invoice.getDate("startdate");
+		Date startdate = invoice.getDate("duedate");
+		if( startdate == null)
+		{
+			startdate = invoice.getDate("startdate");
+		}
 		Date enddate = invoice.getDate("enddate");
 		long noOfDaysBetween = ChronoUnit.DAYS.between(startdate.toInstant(), enddate.toInstant());
 		
