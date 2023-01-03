@@ -184,19 +184,19 @@ class TaskManager {
     return await taskModule!.updateData(task.id, task.properties);
   }
 
-  Future<List<dynamic>> getMyTasks() async {
-    goalModule =
-        await oi.datamanager.getDataModule('projectgoal', boxString: 'mytasks');
+  Future<List<dynamic>> getMyTasks({String? userId}) async {
+    goalModule = await oi.datamanager.getDataModule('projectgoal',
+        boxString: userId != null ? 'mytasks$userId' : 'mytasks');
     return goalModule!.getAllHits();
   }
 
-  Future<List<dynamic>> loadMyTasks() async {
-    goalModule =
-        await oi.datamanager.getDataModule('projectgoal', boxString: 'mytasks');
+  Future<List<dynamic>> loadMyTasks({String? userId}) async {
+    goalModule = await oi.datamanager.getDataModule('projectgoal',
+        boxString: userId != null ? 'mytasks$userId' : 'mytasks');
     final responseString = await goalModule!.createModuleOperation(
       "mytasks",
       RequestType.POST,
-      {"userid": oi.authenticationmanager.emUser!.userid},
+      {"userid": userId ?? oi.authenticationmanager.emUser!.userid},
     );
     Map<String, dynamic> parsed = parseData(jsonEncode(responseString));
     goalModule!.saveCache(parsed);
