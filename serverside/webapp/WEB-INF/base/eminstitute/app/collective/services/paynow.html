@@ -2,7 +2,7 @@
 #set($id = $context.getRequestParameter('invoiceid'))
 #set($invoice = $mediaarchive.getInvoiceById($id))
 #set($products = $mediaarchive.getInvoiceProductList($id))
-#set($workspace = $mediaarchive.getWorkspaceById($invoice.collectionid))
+#set($collection = $mediaarchive.getWorkspaceById($invoice.collectionid))
 
 <div class="container">
 <div class="contentcolumn">
@@ -25,7 +25,7 @@
 	#set($invoiceformated = $invoice)
 	#set($replacer = $mediaarchive.getReplacer())
 	#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
-	#set($ignore = $invoiceformated.setValue("project", $workspace))
+	#set($ignore = $invoiceformated.setValue("project", $collection))
 	#set($startdate = "#date($invoice, 'startdate')")
 	#set($ignore = $invoiceformated.setValue("startdate", $startdate))
 	#set($enddate = "#date($invoice, 'enddate')")
@@ -66,7 +66,7 @@
 					<strong>[[Due By]]:</strong> $!context.getDate($invoice.getValue("duedate"))
 			</div>
 				
-				#set($invoicedto = $workspace.getValue("invoicedto"))
+				#set($invoicedto = $collection.getValue("invoicedto"))
 				#if($invoicedto)
 					<strong>[[Invoiced to]]:</strong>
 					<div style="line-height: 1;">$invoicedto</div>
@@ -149,7 +149,7 @@
 	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
 	                            
-	                             #if ($workspace.savestripecreditcard == true && $customer.sources.data.size() > 0)
+	                             #if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
 	                            <div class="row">
 	                                <div class="col-md-12 mb-3">
 	                                    <label>[[Card Options]]:</label>
@@ -269,8 +269,8 @@
         </div> <!-- end row -->
         
         #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
-        	#if($invoice.invoicepayoptions)
-        		#set( $invoicepayoptions = $invoice.invoicepayoptions)
+        	#if($collection.invoicepayoptions)
+        		#set( $invoicepayoptions = $collection.invoicepayoptions)
         	#else
 	        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
 	        #end
@@ -283,7 +283,7 @@
     </div>
 </div>
 
- 
+  
 
 #end
 #if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
@@ -307,7 +307,7 @@
 	});
 	document.getElementById('issavecard').checked = true;
 	
-	#if ($workspace.savestripecreditcard == true && $customer.sources.data.size() > 0)
+	#if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
 	let element = document.getElementById("creditcardselect");
 	element.value = "0";
 
@@ -322,7 +322,7 @@
 	document.getElementById('customerselected').value = false;
 	
     $(document).ready(function () {
-    	#if ($workspace.savestripecreditcard == true && $customer.sources.data.size() > 0)
+    	#if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
 	    	element.value = "$custsource";
 		    $("#allcreditcardform").attr('hidden', $("#creditcardselect").val() !== "0");
 		    document.getElementById("customerselected").value = "true";

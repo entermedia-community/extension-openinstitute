@@ -64,7 +64,7 @@
 		<br> 
 		#if($chat.message)
 			#if( $chat.message.startsWith("http"))
-				<a href="$chat.message">$chat.message</a>
+				<a href="$chat.message" target="_blank">$chat.message</a>
 			#else
 			<div style="white-space: pre-line;">$url_util.escapeMessage($chat.message)</div>
 			#end

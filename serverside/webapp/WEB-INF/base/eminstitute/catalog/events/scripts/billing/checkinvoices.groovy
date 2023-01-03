@@ -103,6 +103,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				
 				HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
+				productItem.put("productname", product.getValue("name"));
+				String productname = product.getValue("name");
 				productItem.put("productquantity", 1 );
 				productItem.put("productprice", product.getValue("productprice"));
 				Collection items = new ArrayList();
@@ -135,7 +137,10 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				//name -subject
 				String collectionid = product.getValue("collectionid");
 				Data collection = mediaArchive.getCachedData("librarycollection", collectionid);
-				if(collection != null) {
+				if(productname != null) {
+					invoice.setValue("name", productname);
+				}
+				else if(collection != null) {
 					String name = "\${project} - \${invoicemonth} Invoice";
 					invoice.setValue("name", name);
 				}

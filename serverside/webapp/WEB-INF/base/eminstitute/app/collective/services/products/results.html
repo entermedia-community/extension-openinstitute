@@ -1,5 +1,6 @@
-	#if( $canviewsettings )
+#if( $canviewsettings )
 	#set($collectionid = $librarycol.getId())
+	#set($collection = $librarycol)
 	<hr>
 
        <h2 style="margin:30px 0 10px;">[[Product Catalog]]</h2>
@@ -23,7 +24,30 @@
                     #if($hit.recurring == true || $canviewsettings)
                         <tr>
                             <td style="text-align: center;">$!context.getDate($hit.createdon)</td>
-                            <td>$hit.name
+                            <td>
+                            #if($hit.getValue("startbillingdate"))
+								#set($invoicemonth = $context.getLocaleManager().getMonthName($hit.getValue("startbillingdate"), $context.getLocale()))
+							#end
+							##For Replace Formating
+								#set($productformated = $hit)
+								#set($replacer = $mediaarchive.getReplacer())
+								#set($ignore = $productformated.setValue("invoicemonth",$invoicemonth))
+								#set($ignore = $productformated.setValue("project", $collection))
+								#set($startdate = "#date($hit, 'startbillingdate')")
+								#set($ignore = $productformated.setValue("duedate", $startdate))
+								#set($ignore = $productformated.setValue("startdate", $startdate))  ####legacy??
+								#set($enddate = "#date($hit, 'enddate')")
+								##set($ignore = $productformated.setValue("enddate", $enddate))
+								#set($recurringperiod = $mediaarchive.getData("productrecurringperiod", $invoice.getValue("recurringperiod")))
+								#set($recurringperiod = $context.getText($recurringperiod))
+								#set($ignore = $productformated.setValue("period", $recurringperiod))
+							##--
+
+                            
+                            #set($productname = $replacer.replace($hit.name, $productformated))
+							#text($productname)
+                            
+                            
                              #if ($hit.billingstatus == "canceled")
                                  &nbsp;<strong>[[Canceled]]</strong>
                              #end

@@ -18,7 +18,7 @@
 	#set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
 	
 	##For Replace Formating
-				#set($invoiceformated = $invoice)
+		#set($invoiceformated = $invoice)
 		#set($replacer = $mediaarchive.getReplacer())
 		#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
 		#set($ignore = $invoiceformated.setValue("project", $collection))
@@ -33,51 +33,53 @@
 	##--
 	
 <div class="viewinvoice">
-	
-	<div style="padding:0 0 5px;">
-	<strong>[[Invoice Status]]:</strong> 
+	<div class="viewinvoiceheader">
+		<div class="float-right printinvoicebtn"><a href="$applink/collective/services/printpreview.html?invoiceid=$!invoice.id" target="_blank" class="btn btn-sm btn-light"><i class="fas fa-print"></i> [[Print]]</a></div>
+		
+		<div style="padding:0 0 5px;">
+		<strong>[[Invoice Status]]:</strong> 
+			#if($status.equals("invoiced"))
+				[[Invoice sent]]
+			#elseif($status.equals("pending"))
+				[[Pending]]
+			#elseif($status.equals("payd"))
+				[[Payd]]
+			#end
+		</div>
 		#if($status.equals("invoiced"))
-			[[Invoice sent]]
-		#elseif($status.equals("pending"))
-			[[Pending]]
-		#elseif($status.equals("payd"))
-			[[Payd]]
+		<div style="padding:0 0 5px 0;">
+		<strong>[[Sent Date]]</strong>: $invoice.getValue("sentdate")
+		</div>
 		#end
-	</div>
-	#if($status.equals("invoiced"))
-	<div style="padding:0 0 5px 0;">
-	<strong>[[Sent Date]]</strong>: $invoice.getValue("sentdate")
-	</div>
-	#end
-	##contacts
-	<div style="margin:0 0 20px;">
+		##contacts
+		<div style="margin:0 0 20px;">
+		
+		
+		#if($status.equals("invoiced"))
+			<strong>[[Sent to]]:</strong>
+		#else
+			<strong>[[Send invoice to]]:</strong>
+		#end
+		<div style="border:1px solid #555; padding:3px 5px; margin-bottom:10px; background-color: #f1f1f1;">
+		#if($invoice.getValue("sentto"))
+			$invoice.getValue("sentto")
+		#else
+			--[[Edit invoice to add contacts]]--
+		#end
+		</div>
 	
-	
-	#if($status.equals("invoiced"))
-		<strong>[[Sent to]]:</strong>
-	#else
-		<strong>[[Send invoice to]]:</strong>
-	#end
-	<div style="border:1px solid #555; padding:3px 5px; margin-bottom:10px; background-color: #f1f1f1;">
-	#if($invoice.getValue("sentto"))
-		$invoice.getValue("sentto")
-	#else
-		--[[Edit invoice to add contacts]]--
-	#end
-	</div>
-
+		</div>
 	</div>
 	
-	<div style="border:1px solid #999;; width:100%; max-width:980px; margin: 0 auto;">
-	<div style="padding:10px; text-align: left; position:relative;">
+	<div class="viewinvoicebody" style="position:relative;">
 		#if($status.equals("pending"))
-			<div style="right:5px; top:5px; position:absolute;">
+			<div class="hideprinting" style="right:5px; top:5px; position:absolute;">
 				<a href="$applink/collective/admin/index.html?collectionid=$!collection.getId()" class="btn btn-xs btn-light"><i class="fas fa-cog "></i> [[Invoice Template]]</a>
 			</div>
 		#end
 		<div class="row">
-			<div class="col-sm-4">
-				#set($logo = $mediaarchive.getAsset($librarycol.assetportrait) )
+			<div class="col-sm-4 invoicecompanylogo">
+				#set($logo = $mediaarchive.getAsset($collection.assetportrait) )
 	
 				#if ($logo)
 					#set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
@@ -86,13 +88,13 @@
 				#end
 				<img src="$logourl" style="max-height: 100px;">
 			</div>
-			<div class="col-sm-8 text-right" style="padding-top:20px;">
+			<div class="col-sm-8 text-right invoicecompanyinfo" style="padding-top:20px;">
 				$!collection.getValue("invoicebusinessinfo")
 			</div>
 		</div>
-	
+		<div class="clearfix"></div>
 		
-			<div style="background-color:#efefef; padding:10px; margin:10px 0;">
+			<div style="background-color:#efefef;  padding:10px; margin:10px 0;">
 				<table style="width: 100%;">
 				<tr>
 				<td>
@@ -103,7 +105,7 @@
 						<br>
 					<strong>$!invoicename</strong>
 						#if($invoicemonth)
-                              <div><strong>Month:</strong> $invoicemonth</div>
+                      	##       <div><strong>Month:</strong> $invoicemonth</div>
                         #end</td>
 				<td style="width: 240px; text-align: right; vertical-align: top;">
 					<strong>[[Due Date]]:</strong> $!context.getDate($invoice.getValue("duedate"))
@@ -131,7 +133,7 @@
 			</div>
 		
 		
-		<div style="padding: 10px;">		
+		<div style="padding-top: 10px;">		
 			<h4>[[Products]]</h4>
 			<div class="table-responsive">
 				<table class="d-print-table table">
@@ -151,16 +153,21 @@
 					</tr>
 					#set($products = $invoice.getValue("productlist"))
 					#foreach ($product in $products)
-					##set ( $prod = $mediaarchive.getProductById($product.productid) )
-					<tr>
-						<td valign="top" style="vertical-align: top;">$product.productquantity</td>
-						
-						<td valign="top" style="vertical-align: top;">
-							<div>$mediaarchive.getProductName($product.productid)</div>
-							<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
-						</td>
-						<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
-					</tr>
+						#set ( $prod = $mediaarchive.getProductById($product.productid) )
+						<tr>
+							<td valign="top" style="vertical-align: top;">$product.productquantity</td>
+							
+							<td valign="top" style="vertical-align: top;">
+								##<div>$mediaarchive.getProductName($product.productid)</div>
+								##<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
+								
+								#set($productname = $replacer.replace($prod.name, $invoiceformated))
+								
+								#text($productname)
+								
+							</td>
+							<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
+						</tr>
 					#end
 					<tr>
 						<td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
@@ -176,8 +183,6 @@
 		</div>
 		
 		
-		
-	</div>
 	</div>
 </div>
 #end

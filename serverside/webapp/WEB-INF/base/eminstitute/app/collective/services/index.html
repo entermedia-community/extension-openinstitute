@@ -34,17 +34,23 @@
                          <td style="text-align: center;">$!context.getDate($invoice.duedate)</td>
                          <td style="text-align: center;">$!context.getDate($invoice.invoicepaidon)</td>
                          <td>
-                         
-                         	#set($invoicemonth = $dateStorageUtil2.getStorageUtil().getMonthName($invoice.getValue("billdate")))
-	
+                         $invoice.getValue("duedate")
+                         	#if($invoice.getValue("duedate"))
+                         		#set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
+							#end
+							
 							##For Replace Formating
 								#set($invoiceformated = $invoice)
 								
 								#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
 								#set($ignore = $invoiceformated.setValue("project", $librarycol))
-								#set($startdate = "#date($invoice, 'startdate')")
+								#if($invoice.startdate)
+									#set($startdate = "#date($invoice, 'startdate')")
+								#end
 								#set($ignore = $invoiceformated.setValue("startdate", $startdate))
-								#set($enddate = "#date($invoice, 'enddate')")
+								#if($invoice.enddate)
+									#set($enddate = "#date($invoice, 'enddate')")
+								#end
 								#set($ignore = $invoiceformated.setValue("enddate", $enddate))
 							##
                          

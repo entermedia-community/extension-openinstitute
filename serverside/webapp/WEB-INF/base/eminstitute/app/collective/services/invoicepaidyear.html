@@ -145,7 +145,7 @@
                                             #end
                                             
                                         </td>
-                                        <td style="text-align: center;">$ $!context.doubleToMoney($!hit.totalprice, 2)</td>
+                                        <td style="text-align: center;">$ $!context.doubleToMoney($!invoice.totalprice, 2)</td>
                                         <td>
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$invoice.paymentstatus").searchOne())
                                             $context.getText($status)
