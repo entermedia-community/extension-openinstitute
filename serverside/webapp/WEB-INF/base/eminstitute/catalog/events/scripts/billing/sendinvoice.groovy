@@ -119,8 +119,10 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 		if (sent) {
 			//send Copy to bookkeeper@entermediadb.org
-			sendinvoiceEmail(mediaArchive, "bookkeeper@entermediadb.org", invoice, workspace, iteratorType);
-			
+			String ccinvoices = mediaArchive.getCatalogSettingValue("invoice_cc_email");
+			if (ccinvoices != null) {
+				sendinvoiceEmail(mediaArchive, ccinvoices, invoice, workspace, iteratorType);
+			}
 			
 			Calendar today = Calendar.getInstance();
 			invoice.setValue("sentto", emails);
