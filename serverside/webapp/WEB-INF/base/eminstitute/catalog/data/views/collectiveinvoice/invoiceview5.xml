@@ -2,7 +2,7 @@
 
 <properties>
 	
-	<property id="startdate"  editable="false" />
+	<property id="duedate"  editable="false" />
 	<property id="enddate"  editable="false"/>
 	<property id="headcount" defaultvalue="1"  editable="false" />
 	<property id="customernote" />

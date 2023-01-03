@@ -2,7 +2,11 @@
 
 <properties>
 	
-	<property id="startdate" />
+	<property id="duedate" >
+	  <name> 
+	      <language id="en"><![CDATA[Start Date]]></language> 
+	    </name> 
+    </property>
 	<property id="enddate" />
 	<property id="headcount" defaultvalue="1" />
 	<property id="customernote" />

@@ -2,8 +2,8 @@
 
 <properties>
 	
-	<property id="name" />
-	<property id="startdate" />
+	<property id="name" hint="" />
+	<property id="duedate" />
 	<property id="enddate" />
 	<property id="headcount" defaultvalue="1" />
 	<property id="customernote" />

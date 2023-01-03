@@ -2,12 +2,13 @@
 
 <properties >
 
-	<property id="name" />
-	<property id="productdescription" />
+	<property id="name" hint=""/>
+	<property id="productdescription" hint="" />
 	<property id="producttags" />
 	<property id="productcost" />
 	<property id="primaryimage" />
 	<property id="currencytype" />
 	<property id="productprice" />
+	<property id="recurringperiod" />
 	<property id="featured" />
 </properties>

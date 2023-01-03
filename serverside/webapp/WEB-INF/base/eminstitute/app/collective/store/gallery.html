@@ -23,8 +23,8 @@
 #foreach( $aproduct in $hits.getPageOfHits())
 	
 	#set( $hit = false)
-    <div class="card" style="max-width:500px;">
 		<a class="footer-text" href="$sitelink/app/collective/store/details/$aproduct.id/$collectionid/#esc($aproduct.name).html">
+    <div class="card" style="max-width:500px;">
       <div class="card-body">
         <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
        $context.putPageValue("aproduct",$aproduct)
@@ -36,9 +36,9 @@
         
 		</p>
        </div> 
-       		</a>
        
     </div>
+       		</a>
 	#if( $count > 2)
 		
 	</div>

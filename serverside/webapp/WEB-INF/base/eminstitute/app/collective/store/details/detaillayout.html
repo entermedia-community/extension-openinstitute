@@ -38,7 +38,7 @@
 	       <p class="">$!aproduct.getText("productdescription",$context)</p>
 	       
 			#set($subtotal = $aproduct.getDouble("productprice"))
-			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / [[Per night]]
+			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / $!context.getText($!mediaarchive.getCachedData("productrecurringperiod", $aproduct.recurringperiod ))
 		</div>
 
 #if( $user )
