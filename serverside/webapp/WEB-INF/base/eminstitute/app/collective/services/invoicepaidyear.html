@@ -23,13 +23,13 @@
 	#set( $status = "invoiced")
 #end
 #if( $canviewsettings )
-<div class="maincontent">
-<div class="collectivecontent" id="invoicedata">
+<div class="maincontent" id="invoicedata">
+<div class="collectivecontent">
 	
     <div class="row no-gutters g-0 h-100">
         <div class="col">
             <div class="collectivemaincolx h-100">
-                <div class="content">
+                <div class="">
 				   <div class="card mb-4">
 				   	<div class="card-header ">
 						<b>[[Filters]]</b>	   		
@@ -95,6 +95,7 @@
 	                		
 	                		<tbody>
 	                		###set( $invoices = $mediaarchive.query("collectiveinvoice").search())
+	                		
 	                		#set( $invoices = $mediaarchive.getInvoiceFromMonth($status, $year, $month) )
 	                		#foreach($invoice in $invoices)
                                     #if ($invoice.instance_status == "active")
