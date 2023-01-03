@@ -103,6 +103,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 	Data workspace = mediaArchive.getData("librarycollection", collectionid);
 	String emails = invoice.getValue("sentto");
 	List<String> emaillist = Arrays.asList(emails.split(","));
+
 	Boolean sent = false;
 	if (emaillist.size()>0) 
 	{
@@ -117,6 +118,10 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 			}
 		}
 		if (sent) {
+			//send Copy to bookkeeper@entermediadb.org
+			sendinvoiceEmail(mediaArchive, "bookkeeper@entermediadb.org", invoice, workspace, iteratorType);
+			
+			
 			Calendar today = Calendar.getInstance();
 			invoice.setValue("sentto", emails);
 			invoice.setValue("sentdate", today.getTime());
@@ -288,6 +293,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("invoicefooter", invoiceemailfooter);
 	
 	objects.put("invoicepayoptions", invoicepayoptions);
+	
+	//printurl
+	String printurl = getSiteRoot() + "/" + appid + "/collective/services/printpreview.html?invoiceid="+invoice.getId()+"&collectionid=" + invoice.getValue("collectionid");
+	objects.put("printurl", printurl);
 	
 	templateEmail.send(objects);
 	log.info(workspace.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact);
