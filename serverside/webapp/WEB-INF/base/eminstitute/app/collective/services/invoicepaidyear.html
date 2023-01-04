@@ -111,6 +111,8 @@
 										#set($ignore = $invoiceformated.setValue("project", $workspace))
 										#set($startdate = "#date($invoice, 'startdate')")
 										#set($ignore = $invoiceformated.setValue("startdate", $startdate))
+										#set($duedate = "#date($invoice, 'duedate')")
+										#set($ignore = $invoiceformated.setValue("duedate", $duedate))
 										#set($enddate = "#date($invoice, 'enddate')")
 										#set($ignore = $invoiceformated.setValue("enddate", $enddate))
 									##--
