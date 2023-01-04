@@ -123,10 +123,9 @@
                                         <td>$invoice.invoicenumber</td>
                                         <td>$!context.getDate($invoice.createdon)</td>
                                         <td>
+                                        	$!context.getDate($invoice.duedate)
                                             #if ($status == "paid")
-                                              $!context.getDate($invoice.invoicepaidon)
-                                            #elseif ($status == "invoiced")
-                                              $!context.getDate($invoice.duedate)
+                                            ##  $!context.getDate($invoice.invoicepaidon)
                                             #end
                                         </td>
                                       
