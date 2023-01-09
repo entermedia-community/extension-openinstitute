@@ -87,7 +87,11 @@
   	</property>  
 
 	<property id="duedate" editable="true" stored="true"
-		type="date" index="true">Due Date
+		type="date" index="true">
+	 <name> 
+      <language id="en"><![CDATA[Start Date]]></language>
+    </name> 
+
 	</property>
 	
 	<property id="billdate" editable="true" stored="true"

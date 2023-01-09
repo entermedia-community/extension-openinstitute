@@ -8,9 +8,30 @@
 	#set($count = 0)
 	#set($stackedfield = $mediaarchive.getCatalogSettingValue("stackedgalleryfield"))
 	
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
-  <div class="carousel-inner">
+	<style>
+	
+	   .bootgriditem img
+	   {
+	   border-radius: 4px!important;
+	    margin-bottom: 1.5rem!important;
+	    width: 100%!important;
+	    box-shadow: 0 0 2px 0 rgba(0,0,0,.16),0 1px 1px 0 rgba(0,0,0,.1)!important;
+		}
+	
+	</style>
+	
+
+<!-- Gallery -->
+<div class="row">
+
+	  <div class="col-md-12">
+
+		 	<div class="bootgriditem emdialog" >
    
+	       	$context.putPageValue("thumbsize", "mediumplus")       
+			$pages.include("$apphome/collective/store/details/thumbprimary.html",$context)
+		</div>
+	</div>   
 	#foreach( $hit in $assetshits.getPageOfHits())
 		#set($count = $count + 1)
 		$context.putPageValue("hit", $hit)
@@ -41,24 +62,15 @@
 		    #end
 		#end
 	 	
-	 	
-	 	<div class="carousel-item active">
-    	  	<div class="d-block w-100">
-		 	<a class="stackedplayerX imageareaX" id="clickid${hit.id}" data-assetid="$hit.id" href="#" title="$!title">
+	  <div class="col-md-12">
+
+		 	##<a class="bootgriditem emdialog" id="clickid${hit.id}" data-assetid="$hit.id" href="#" title="$!title">
+		 	<div class="bootgriditem emdialog" >
 			$context.putPageValue("thumbsize", "postsize" )
 			$context.putPageValue("thumbsize", "mediumplus" )
 			$pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
-			</a>
+			##</a>
 			</div>
-		</div>
+	</div>
 	#end
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-  </div>
 </div>
