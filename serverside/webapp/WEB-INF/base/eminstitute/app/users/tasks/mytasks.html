@@ -1,8 +1,9 @@
 <div class="maincontent">
 	#set( $hits = $opentickets)
-	
-		
-	
+
+	#ifnull($user)
+		<p> [[Must be logged in to view tasks]] </p>
+	#end	
 		<div class="goals-header-actions">
 				  <!-- <a class="btn btn-success dropdown-toggle" style="color:white;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Employee
