@@ -6,6 +6,20 @@ import org.openedit.Data
 import org.openedit.data.BaseSearcher
 import org.openedit.data.Searcher
 
+public void addUser(MediaArchive mediaArchive, Data collection, String inUserId)
+{
+	Data userrecord = mediaArchive.query("librarycollectionusers").exact("collectionid",collection.getId()).exact("followeruser", inUserId).searchOne();
+	if( userrecord == null)
+	{
+		userrecord = mediaArchive.getSearcher("librarycollectionusers").createNewData();
+		userrecord.setValue("collectionid",collection.getId());
+		userrecord.setValue("followeruser",inUserId);
+		userrecord.setValue("ontheteam","true");
+		mediaArchive.saveData("librarycollectionusers",userrecord);
+	}
+
+}
+
 public void init()
 {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");//Search for all files looking for videos
@@ -15,6 +29,7 @@ public void init()
 	Searcher librarysearcher = mediaArchive.getSearcher("library");
 	log.info("User is: " + user.getId() );
 
+	
 	if( collection.getLibrary() == null)
 	{
 		Data library = librarysearcher.searchById("collectives");
@@ -33,17 +48,20 @@ public void init()
 		collection.setValue("owner",user.getId());
 	}	
 
-	//#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
-	Data userrecord = mediaArchive.query("librarycollectionusers").exact("collectionid",collection.getId()).exact("followeruser", user.getId()).searchOne();
-	if( userrecord == null)
+	addUser(mediaArchive,collection,context.getUserName());
+	
+	String collectiontype = context.getRequestParameter("collectiontype");
+	if( collectiontype == "3")
 	{
-		userrecord = mediaArchive.getSearcher("librarycollectionusers").createNewData();
-		userrecord.setValue("collectionid",collection.getId());
-		userrecord.setValue("followeruser",user.getId());
-		userrecord.setValue("ontheteam","true");
-		mediaArchive.saveData("librarycollectionusers",userrecord);
+		//Get extra users 
+		String[] otherusers = context.getRequestParameters("otherusers");
+		for (userid in otherusers) {
+			addUser(mediaArchive,collection,user);
+		}
 	}
-
+	
+	//#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
+	
 	collectionsearcher.saveData(collection);
 	
 	mediaArchive.getProjectManager().getRootCategory(mediaArchive,collection);
