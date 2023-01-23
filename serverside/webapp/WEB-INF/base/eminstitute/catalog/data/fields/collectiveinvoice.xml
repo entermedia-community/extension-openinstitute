@@ -172,10 +172,9 @@
 	<property id="customernote" index="true" stored="true"
 		viewtype="textarea" editable="true">
 		<name>
-			<language id="en"><![CDATA[Customer Message]]></language>
+			<language id="en"><![CDATA[Customer Comment]]></language>
 		</name>
 	</property>
-  
   
   	<property id="isrecurring" index="true"
 		type="boolean" keyword="false" filter="false" editable="true">

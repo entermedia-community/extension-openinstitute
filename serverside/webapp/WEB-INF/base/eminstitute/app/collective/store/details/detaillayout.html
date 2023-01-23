@@ -1,25 +1,12 @@
 <div id="storeworkarea" class="container" style="padding:10px 20px;min-height:500px">
 <div id="storedetailarea" class="contentcolumn" >
 	#set( $searchtype  = "collectiveproduct")
-	#if( $data )
-	
-		#set( $id  = $data.getId() )
-	#else		
-		#set( $id  = $context.getRequestParameter("id"))
-		#ifnull($id)
-			#set( $id = $url_util.getPathUtilities().extractDirectoryName($content.getDirectory()) )
-		#end
-		#set($data = $mediaarchive.getData($searchtype, $id))
-	#end
-	
-	#set($aproduct = $data)
-	
-    $context.putPageValue("aproduct",$data)
+
 <div class="cardX" >
   <div class="card-bodyX">
 
   <div class="row">     
-  	<div class="col-md-3">
+  	<div class="col-md-5" >
       <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
 	    #if( $caneditcollection)
 		<div >
@@ -36,28 +23,24 @@
 			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / $!context.getText($!mediaarchive.getCachedData("productrecurringperiod", $aproduct.recurringperiod ))
 		</div>
 
-		<p>
-	  		<h2>Reservations</h2>
-	  	</p>	
-  	#if( $data )
-		#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$data.id).sort("startdate").search($context))
-	#end	
+		#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$aproduct.id).sort("startdate").search($context))
   		#if( $invoices.isEmpty())
   			
   		#else
+		
 	  		<div style="max-width:200px">
 			<ul>
 			#foreach($invoice in $invoices)
-				<li>
 				#if( $caneditsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
+				<li>
 				<a class="emdialog"		
 				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$data.id&collectionid=$librarycol.id" >
 				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
 				</a>
-				#else
-				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
-				#end
 				</li> 
+				#else
+				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
+				#end
 			#end
 			</ul>
 			</div>
@@ -65,15 +48,20 @@
 		#end
 
 #if( $user )
-      <div style="padding:20px;">
-		      <a class="btn btn-primary emdialog"
-		      href="$apphome/collective/store/details/startinvoice.html?productid=$data.id&collectionid=$librarycol.id" >[[Make Reservation]]</a>
-      </div>
-#else
-	<p><a href="$applink/authentication/login.html">login</a> to reserve</p>  
-#end   	
-      	
 
+	#if($content.path.contains("/reserve/"))
+		$pages.include("$apphome/collective/store/details/startinvoice.html",$context)	
+	#else
+      <div style="padding:20px;">
+		      <a class="btn btn-primary"
+		      href="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" >[[Make Reservation]]</a>
+      </div>
+    #end  
+#else
+	$pages.include("$apphome/components/xml/types/daterange.html",$context)
+	<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
+		 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  
+#end   	
 	</div>
 	<div class="col card-textX">
 		#if( $data )

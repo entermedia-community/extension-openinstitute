@@ -23,7 +23,7 @@
 #foreach( $aproduct in $hits.getPageOfHits())
 	
 	#set( $hit = false)
-		<a class="footer-text" href="$sitelink/app/collective/store/details/$aproduct.id/$collectionid/#esc($aproduct.name).html">
+		<a class="footer-text" href="$sitelink/app/collective/store/details/$collectionid/$aproduct.id/#esc($aproduct.name).html">
     <div class="card" style="max-width:500px;">
       <div class="card-body">
         <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
