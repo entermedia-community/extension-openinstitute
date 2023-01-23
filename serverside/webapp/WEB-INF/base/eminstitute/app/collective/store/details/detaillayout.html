@@ -5,11 +5,34 @@
 #ifnull( $aproduct )
 	#set( $aproduct = $data)
 #end
-<div class="cardX" >
-  <div class="card-bodyX">
 
-  <div class="row">     
-  	<div class="col-md-5" >
+  <div class="row">  
+  <div class="col-md-5">
+		#if( $data )
+		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$data.id).search($context))
+		#end
+		$context.putPageValue("assetshits", $assetshits)
+		$context.putPageValue("fullview",true) 
+		$context.putPageValue("thumbsize", "small" )
+		$context.putPageValue("primaryimage", $entity.primaryimage )
+		#set( $assetsshown = 4)
+		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
+      
+		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
+		#set($oemaxlevel = "1")
+		#set($targetdiv = "applicationmaincontent")
+		<a href="$uploadlink" 
+			class="ajax moreactions"
+			data-targetdivinner="storedetailarea"
+			data-closedialog="true" 
+			data-closemediaviewer="true"
+			data-updateurl="true"
+			data-oemaxlevel="$!oemaxlevel"
+			title="[[Upload assets here]]">
+			<i class="fas fa-upload"></i></a>
+    </div>
+     
+  	<div class="col-md-7" >
       <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
 	    #if( $caneditcollection)
 		<div >
@@ -55,7 +78,7 @@
 	#if($content.path.contains("/reserve/"))
 		$pages.include("$apphome/collective/store/details/startinvoice.html",$context)	
 	#else
-      <div style="padding:20px;">
+      <div style="padding:20px 0;"> 
 		      <a class="btn btn-primary"
 		      href="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" >[[Make Reservation]]</a>
       </div>
@@ -66,36 +89,9 @@
 	$pages.include("$apphome/components/xml/types/daterange.html",$context)
 #end   	
 	</div>
-	<div class="col card-textX">
-		#if( $data )
-		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$data.id).search($context))
-		#end
-		$context.putPageValue("assetshits", $assetshits)
-		$context.putPageValue("fullview",true) 
-		$context.putPageValue("thumbsize", "small" )
-		$context.putPageValue("primaryimage", $entity.primaryimage )
-		#set( $assetsshown = 4)
-		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
-      
-		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
-		#set($oemaxlevel = "1")
-		#set($targetdiv = "applicationmaincontent")
-		<a href="$uploadlink" 
-			class="ajax moreactions"
-			data-targetdivinner="storedetailarea"
-			data-closedialog="true" 
-			data-closemediaviewer="true"
-			data-updateurl="true"
-			data-oemaxlevel="$!oemaxlevel"
-			title="[[Upload assets here]]">
-			<i class="fas fa-upload"></i></a>
-    </div>
-
+	
 </div> <!--row -->
 
 </div> <!-- body -->
-</div> <!--  card -->
 
-
-</div> <!-- storedetail -->
 </div>
