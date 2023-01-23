@@ -403,6 +403,13 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
     <name> 
       <language id="en"><![CDATA[Privacy Level]]></language>  
     </name> 
-  </property>  
+  </property>
+  
+  <property id="storedescription" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="en"><![CDATA[Store Description]]></language>  
+    </name> 
+  </property>
+    
     
 </properties>

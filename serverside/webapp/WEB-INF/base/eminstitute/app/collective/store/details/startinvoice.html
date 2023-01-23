@@ -1,6 +1,6 @@
 ##Exising ones 
 ##No existing programs found.
-<div style="padding:20px 0;">
+<div style="padding:10px 0;">
 #set( $searchtype = "collectiveinvoice")
 #set( $searcher = $mediaarchive.getSearcher($searchtype) )
 #set( $xmledithome  = "$apphome/components/xml")
@@ -33,7 +33,9 @@ $data.setValue("name","$user.getEmail() [[Reservation]]")
 <input type="hidden" name="productid" value="$aproduct.id" />
 <input type="hidden" name="productlist.add" value="$aproduct.id" />
 
+<div style="padding-bottom:10px;">
 $pages.include("$apphome/components/xml/types/daterange.html",$context)
+</div>
 
 <input type="hidden" name="field" value="name" />
 <input type="hidden" name="name.value" value="$data.name" />

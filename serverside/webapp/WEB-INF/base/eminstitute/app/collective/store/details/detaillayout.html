@@ -8,36 +8,38 @@
 
   <div class="row">  
   <div class="col-md-5">
-		#if( $data )
-		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$data.id).search($context))
+		#if( $aproduct  )
+		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id).search($context))
 		#end
+		
 		$context.putPageValue("assetshits", $assetshits)
 		$context.putPageValue("fullview",true) 
 		$context.putPageValue("thumbsize", "small" )
 		$context.putPageValue("primaryimage", $entity.primaryimage )
 		#set( $assetsshown = 4)
+		
 		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
       
 		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
 		#set($oemaxlevel = "1")
 		#set($targetdiv = "applicationmaincontent")
 		<a href="$uploadlink" 
-			class="ajax moreactions"
+			class="ajax moreactions btn btn-xs btn-secondary"
 			data-targetdivinner="storedetailarea"
 			data-closedialog="true" 
 			data-closemediaviewer="true"
 			data-updateurl="true"
 			data-oemaxlevel="$!oemaxlevel"
-			title="[[Upload assets here]]">
-			<i class="fas fa-upload"></i></a>
+			title="[[Upload Product Images]]">
+			<i class="fas fa-upload"></i> [[Add Images]]</a>
     </div>
      
   	<div class="col-md-7" >
       <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
 	    #if( $caneditcollection)
 		<div >
-		<a class="emdialog" title="[[Edit Product]]" 
-			href="$apphome/collective/store/edit.html?id=$data.id&collectionid=$librarycol.id"><i class="fas fa-edit"></i></a>
+		<a class="emdialog btn btn-xs btn-secondary" title="[[Edit Product]]" 
+			href="$apphome/collective/store/edit.html?id=${aproduct.id}&collectionid=$librarycol.id"><i class="fas fa-edit"></i> [[Edit Product]]</a>
 		</div>
 		#end
 
@@ -46,48 +48,73 @@
 	       <p class="">$!aproduct.getText("productdescription",$context)</p>
 	       
 			#set($subtotal = $aproduct.getDouble("productprice"))
-			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / $!context.getText($!mediaarchive.getCachedData("productrecurringperiod", $aproduct.recurringperiod ))
+			<p>$$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / $!context.getText($!mediaarchive.getCachedData("productrecurringperiod", $aproduct.recurringperiod ))</p>
 		</div>
-
-		#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$aproduct.id).sort("startdate").search($context))
+		
+		
+	#if( $user )
+	
+	#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$aproduct.id).sort("startdate").search($context))
   		#if( $invoices.isEmpty())
   			
   		#else
 		
-	  		<div style="max-width:200px">
+	  		<div class="storecurrentreservations">
+	  		<strong>[[Your Reservation]]</strong>
 			<ul>
 			#foreach($invoice in $invoices)
 				#if( $caneditsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
 				<li>
 				<a class="emdialog"		
-				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$data.id&collectionid=$librarycol.id" >
-				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
+				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$aproduct.id&collectionid=$librarycol.id" >
+				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) $invoice.getName()
 				</a>
 				</li> 
 				#else
-				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) <br> $invoice.getName()
+				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate"))  $invoice.getName()
 				#end
 			#end
 			</ul>
 			</div>
 
+	#end
+		
+		<form name="saveproject" 
+		id="saveproject" 
+		action="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" 
+		method="post"
+		class="ajaxform"
+			data-targetdiv="storeworkarea"
+			data-oemaxlevel="3">
+		
+		<input type="hidden" name="save" value="true" />
+		
+		#if($content.path.contains("/reserve/"))
+				
+		#else
+			$pages.include("$apphome/components/xml/types/daterange.html",$context)
 		#end
-
-#if( $user )
-
-	#if($content.path.contains("/reserve/"))
-		$pages.include("$apphome/collective/store/details/startinvoice.html",$context)	
-	#else
-      <div style="padding:20px 0;"> 
-		      <a class="btn btn-primary"
-		      href="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" >[[Make Reservation]]</a>
-      </div>
-    #end  
-#else
-	<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
-		 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  
-	$pages.include("$apphome/components/xml/types/daterange.html",$context)
-#end   	
+			
+			#if($content.path.contains("/reserve/"))
+			
+				$pages.include("$apphome/collective/store/details/startinvoice.html",$context)
+					
+			#else
+				
+		      	<div style="padding:20px 0;">
+		      	 <input type="submit" class="btn btn-primary" value="[[Make Reservation]]" />
+		      	</div>
+		    #end
+		</form>
+		
+		  
+		#else
+			##ifuser
+			<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
+				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  
+			
+		#end   	
+	
 	</div>
 	
 </div> <!--row -->

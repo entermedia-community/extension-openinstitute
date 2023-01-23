@@ -1067,3 +1067,41 @@ list-style: none;
   		margin-top:5px;
 	}
 
+
+.storegalleryproduct {
+	margin:0 10px 10px 0;
+	bordeR:1px solid #999;
+	border-radius: 3px!important;
+	padding:8px;
+	
+}
+
+.storeproductcard {
+	width: 260px;
+	font-size:0.9rem;
+	}
+
+	
+.storeproductcard h4 {
+	margin: 0 0 10px;
+}
+
+
+.storeproductcard .emthumbholder {
+	max-height: 170px;
+	overflow: hidden;
+}
+
+.storecurrentreservations {
+	background-color: #f1f1f1; 
+	padding:5px;
+	margin:10px 0;
+	font-size:0.8rem;
+	
+}
+
+.storecurrentreservations ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
