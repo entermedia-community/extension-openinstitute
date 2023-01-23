@@ -2,6 +2,9 @@
 <div id="storedetailarea" class="contentcolumn" >
 	#set( $searchtype  = "collectiveproduct")
 
+#ifnull( $aproduct )
+	#set( $aproduct = $data)
+#end
 <div class="cardX" >
   <div class="card-bodyX">
 

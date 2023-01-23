@@ -13,20 +13,23 @@ import org.openinstitute.finance.DateRange
 public void runit()
 {
 	//Search for dates
-	Data product = aproduct;
-	log.info("On " + product);
-
-	Collection invoices = mediaarchive.query("collectiveinvoice").exact("productlist.productid",product.getId()).search();
-	log.info("Invoices " + invoices.size());
-
-	DateRange range = new DateRange();
-	for(Data invoice in invoices)
+	if( context.getPageValue("aproduct") != null )
 	{
-		Date startDate = invoice.getDate("duedate");
-		Date endDate = invoice.getDate("enddate");
-		range.addBlockedDateRange(startDate, endDate);
+		Data product = context.getPageValue("aproduct");
+		log.info("On " + product);
+	
+		Collection invoices = mediaarchive.query("collectiveinvoice").exact("productlist.productid",product.getId()).search();
+		log.info("Invoices " + invoices.size());
+	
+		DateRange range = new DateRange();
+		for(Data invoice in invoices)
+		{
+			Date startDate = invoice.getDate("duedate");
+			Date endDate = invoice.getDate("enddate");
+			range.addBlockedDateRange(startDate, endDate);
+		}
+		context.putPageValue("blockeddates",range);
 	}
-	context.putPageValue("blockeddates",range);
 }
 
 runit();
