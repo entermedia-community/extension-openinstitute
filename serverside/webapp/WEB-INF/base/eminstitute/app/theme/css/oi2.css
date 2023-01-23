@@ -1054,3 +1054,16 @@ list-style: none;
 	background-size: contain;
 	background-repeat: no-repeat;
 }
+
+
+	   .bootgriditem img
+	 {
+	    border-radius: 3px!important;
+	    margin-bottom: 1.5rem!important;
+	    width: 100%!important;
+	    box-shadow: 0 0 4px 3px rgba(0,0,0,.44)!important;
+	    max-width: 100%;
+  		height: auto;
+  		margin-top:5px;
+	}
+
