@@ -35,13 +35,15 @@ $data.setValue("name","$user.getEmail() [[Reservation]]")
 
 $pages.include("$apphome/components/xml/types/daterange.html",$context)
 
-#if( !$caneditcollection)
 <input type="hidden" name="field" value="name" />
 <input type="hidden" name="name.value" value="$data.name" />
-<p>New Reservation:<b> $user.getEmail()</b></p>
-<input type="hidden" name="field" value="forcustomer" />
-<input type="hidden" name="forcustomer.value" value="$user.getId()" />
-#end
+
+<p>[[New Reservation]]:<b> $user.getEmail()</b></p>
+
+##if( !$caneditcollection)
+	<input type="hidden" name="field" value="forcustomer" />
+	<input type="hidden" name="forcustomer.value" value="$user.getId()" />
+##end
 
 #set( $searcher = $mediaarchive.getSearcher($searchtype) )
 $context.putPageValue("searcher",$searcher)
