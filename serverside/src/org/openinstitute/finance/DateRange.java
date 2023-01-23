@@ -1,10 +1,32 @@
 package org.openinstitute.finance;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 public class DateRange
 {
+	Collection<BookingDate> fieldBlockedDates;
+	
+	public Collection<BookingDate> getBlockedDates()
+	{
+		if (fieldBlockedDates == null)
+		{
+			fieldBlockedDates = new ArrayList<BookingDate>();
+		}
+
+		return fieldBlockedDates;
+	}
+	public void setBlockedDates(Collection<BookingDate> inBlockedDates)
+	{
+		fieldBlockedDates = inBlockedDates;
+	}
 	Date fieldStartDate;
 	
 	boolean fieldAllTime;
@@ -101,4 +123,25 @@ public class DateRange
 		setEndDate(onemonth);
 	}
 
+	public void addBlockedDateRange(Date inStartDate,Date inEndDate)
+	{
+	    LocalDateTime date1 = toLocalDate(inStartDate);
+	    LocalDateTime date2 = toLocalDate(inEndDate);
+		long daysBetween = ChronoUnit.DAYS.between(date1, date2);
+		LocalDate starting = date1.toLocalDate();
+		for (int i = 0; i < daysBetween; i++)
+		{
+			BookingDate newdate = new BookingDate(starting);
+			newdate.setAvailable(false);
+			getBlockedDates().add(newdate);
+			starting = starting.plusDays(1);
+		}
+	}
+	
+	protected LocalDateTime toLocalDate(Date inDate)
+	{
+		 return Instant.ofEpochMilli(inDate.getTime())
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDateTime();
+	}
 }

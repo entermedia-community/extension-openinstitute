@@ -1,9 +1,12 @@
 package org.entermedia.invoice;
 
+import java.util.Date;
+
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.asset.modules.BaseMediaModule;
 import org.openedit.MultiValued;
 import org.openedit.WebPageRequest;
+import org.openedit.util.DateStorageUtil;
 
 public class InvoiceModule extends BaseMediaModule
 {
@@ -21,6 +24,16 @@ public class InvoiceModule extends BaseMediaModule
 		InvoiceManager manager = (InvoiceManager) mediaArchive.getBean("invoiceManager");
 		//Grab data?
 		MultiValued invoice = (MultiValued)inReq.getPageValue("data");
+		
+		String range = inReq.getRequestParameter("datarange");
+		if( range != null)
+		{
+			String[] parts = range.split(" ");
+			Date start = DateStorageUtil.getStorageUtil().parseFromStorage(parts[0]);
+			invoice.setValue("duedate",start);
+			Date enddate = DateStorageUtil.getStorageUtil().parseFromStorage(parts[2]);
+			invoice.setValue("enddate",enddate);
+		}
 		
 		String productid = inReq.getRequestParameter("productlist.add");
 		if( productid != null)
