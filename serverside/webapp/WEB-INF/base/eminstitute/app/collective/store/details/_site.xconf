@@ -23,5 +23,7 @@
 		<script>/${applicationid}/collective/store/details/availaility.groovy</script>
 	</path-action>
 
+    <path-action name="Admin.loadPermissions"/>
+
 
 </page>

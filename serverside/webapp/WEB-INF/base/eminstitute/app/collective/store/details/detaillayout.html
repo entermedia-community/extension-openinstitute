@@ -8,6 +8,7 @@
   <div class="row">     
   	<div class="col-md-5" >
       <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
+	    $caneditcollection
 	    #if( $caneditcollection)
 		<div >
 		<a class="emdialog" title="[[Edit Product]]" 
@@ -58,9 +59,9 @@
       </div>
     #end  
 #else
-	$pages.include("$apphome/components/xml/types/daterange.html",$context)
 	<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
 		 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  
+	$pages.include("$apphome/components/xml/types/daterange.html",$context)
 #end   	
 	</div>
 	<div class="col card-textX">

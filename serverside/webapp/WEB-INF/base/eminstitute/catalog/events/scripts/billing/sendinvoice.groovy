@@ -101,6 +101,12 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 	//Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 	String collectionid = invoice.getValue("collectionid");
 	Data workspace = mediaArchive.getData("librarycollection", collectionid);
+	if( workspace == null)
+	{
+		invoice.setValue(iteratorType, "true");
+		invoiceSearcher.saveData(invoice);
+		
+	}
 	String emails = invoice.getValue("sentto");
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
@@ -129,7 +135,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 			invoice.setValue("sentdate", today.getTime());
 			invoice.setValue(iteratorType, "true");
 			
-			if (!invoice.get("paymentstatus").equals("paid")) {
+			if (!invoice.get("paymentstatus").equals("paid")) { //TODO: Seems weird. Should this be if invoice.get("paymentstatus") == null 
 				//mark as invoiced
 				invoice.setValue("paymentstatus", "invoiced");
 			}
