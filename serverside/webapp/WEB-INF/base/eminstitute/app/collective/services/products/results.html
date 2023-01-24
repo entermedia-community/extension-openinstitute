@@ -3,7 +3,7 @@
 	#set($collection = $librarycol)
 	<hr>
 
-       <h2 style="margin:30px 0 10px;">[[Product Catalog]]</h2>
+       <h2 style="margin:30px 0 10px;">[[Products]]</h2>
        ##Search instances in these organizations
        #set($products = $mediaarchive.query("collectiveproduct").match("collectionid", $collectionid).sort("createdonUp").search())
        #if ($products)
