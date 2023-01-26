@@ -13,15 +13,13 @@ $context.putPageValue("searcher",$searcher)
 
 $data.setValue("name","$user.getEmail() [[Reservation]]")
 
-
-Start Invoice
 <form name="saveproject" 
 		id="saveproject" 
 		action="$apphome/collective/store/details/saveinvoice.html" 
 		method="post"
 		class="ajaxform"
 			data-targetdiv="storeworkarea"
-			data-oemaxlevel="5">
+			data-oemaxlevel="1">
 <input type="hidden" name="save" value="true" />
 <input type="hidden" name="searchtype" value="${searchtype}" />
 

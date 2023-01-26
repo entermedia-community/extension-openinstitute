@@ -54,6 +54,12 @@
 		
 	#if( $user )
 	
+		#if( $status == "saved")
+		<div class="alert alert-success" role="alert">
+			[[Reservation is saved. We will contact you regarding payment]]
+		</div>
+		#end
+	
 	#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$aproduct.id).sort("startdate").search($context))
   		#if( $invoices.isEmpty())
   			
