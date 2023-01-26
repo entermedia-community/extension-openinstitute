@@ -76,9 +76,10 @@
 			#end
 			</ul>
 			</div>
-
 	#end
-		
+	#end
+	
+	#if(!$content.path.contains("/reserve/"))
 		<form name="saveproject" 
 		id="saveproject" 
 		action="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" 
@@ -87,33 +88,28 @@
 			data-targetdiv="storeworkarea"
 			data-oemaxlevel="2">
 		
-		<input type="hidden" name="save" value="true" />
+			<input type="hidden" name="save" value="true" />
 		
-		#if($content.path.contains("/reserve/"))
-				
-		#else
 			$pages.include("$apphome/components/xml/types/daterange.html",$context)
-		#end
 			
-			#if($content.path.contains("/reserve/"))
-			
-				$pages.include("$apphome/collective/store/details/startinvoice.html",$context)
-					
-			#else
-				
+			#if( $user )
 		      	<div style="padding:20px 0;">
 		      	 <input type="submit" class="btn btn-primary" value="[[Make Reservation]]" />
 		      	</div>
-		    #end
+			#else
+				<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
+				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  							
+		     #end 	
 		</form>
-		
-		  
-		#else
-			##ifuser
-			<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
-				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  
-			
-		#end   	
+	#else
+
+			#if( $user )
+				$pages.include("$apphome/collective/store/details/startinvoice.html",$context)
+			#else	
+				<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
+				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>
+			#end	   							
+    #end
 	
 	</div>
 	
