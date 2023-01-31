@@ -135,11 +135,16 @@ public class InvoiceManager implements CatalogEnabled
 
 	protected void saveNewInvoiceForStore(MediaArchive mediaArchive, MultiValued invoice, MultiValued product)
 	{
-		double totalcost = calculatePricePerDay(product, invoice);
+		int days = calculateDays(invoice);
 		
+		double price = product.getDouble("productprice");
+		
+		//Daily?
+		double totalcost = price * days;
+
 		Map map = new HashMap();
 		map.put("productid",product.getId());
-		map.put("productquantity","1");
+		map.put("productquantity",days);
 		map.put("productprice", totalcost );
 		
 		List products = new ArrayList(1);
@@ -177,7 +182,7 @@ public class InvoiceManager implements CatalogEnabled
 		
 	}
 
-	public double calculatePricePerDay(MultiValued product, MultiValued invoice)
+	public int calculateDays(MultiValued invoice)
 	{
 		Date startdate = invoice.getDate("duedate");
 		if( startdate == null)
@@ -186,10 +191,8 @@ public class InvoiceManager implements CatalogEnabled
 		}
 		Date enddate = invoice.getDate("enddate");
 		long noOfDaysBetween = ChronoUnit.DAYS.between(startdate.toInstant(), enddate.toInstant());
-		
-		double price = product.getDouble("productprice");
-		double totalcost = price * noOfDaysBetween;
-		return totalcost;
+
+		return (int)Math.ceil(noOfDaysBetween);
 	}
 	
 }

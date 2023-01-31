@@ -473,7 +473,7 @@ public class FinanceManager  implements CatalogEnabled
 		{
 			query.exact("collectiveproject",topicid);
 		}
-		query.not("reimbursedstatus","1"); //Do not include in totals. Has not happened yet
+		//query.not("reimbursedstatus","1"); //Do not include in totals. Has not happened yet
 		addDateRange(query,"date",inDateRange);
 
 		HitTracker hits = expensesSearcher.search(query.getQuery());

@@ -52,8 +52,7 @@ public class InvoiceModule extends BaseMediaModule
 		}
 		//TODO email someone
 		//Depending on the producttype??
-		
-		
+		inReq.putPageValue("status","saved");
 		
 	}
 
