@@ -13,32 +13,45 @@
         <i class="fas fa-angle-double-left"></i>
         </a>
     </div>
-
+	#set( $chatmanager = $mediaarchive.getBean("chatManager"))
 	#set($selectedproject = $librarycol.getId())
 	<div style="max-height: 370px; overflow-y:auto;">
 	<div class="container usersidebartopmessages" >
 		#foreach( $message in $messages )
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
+			#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
+			
 		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
 			<div class="col-2" style="padding:0px;" >
-					#if($collective.assetportrait)
-					#set($asset = $mediaarchive.getAsset($collective.assetportrait))
-					#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-					#else
-					#set($link = "$applink/theme/images/OI_flower.png")
+					#ifnotnull($otherperson)
+						$context.putPageValue("chatuser",$otherperson)
+						$pages.include("${apphome}/users/icon.html",$context)
 					#end
-					<div class="card-collections-thumb" style='background-image: url("$link")'></div>
+					#ifnull($otherperson)
+						#if($collective.assetportrait)
+						#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#else
+						#set($link = "$applink/theme/images/OI_flower.png")
+						#end
+						<div class="card-collections-thumb" style='background-image: url("$link")'></div>
+					#end
 			</div>
 			<div class="col" style="padding:0px;">	
 				<a  
 				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
 				 >		
-				#set($chatuser = $mediaarchive.getUser($message.user))
+				 	#ifnotnull($otherperson)
+					<b>  $otherperson.getScreenName() </b>
+					#end
+					#ifnull($otherperson)
 					<b> #datatext($collective,"name") </b>
+					#end
 					<div class="messagearea">
 						$url_util.escapeMessage($message.message,26)
 					</div>
+					#set($chatuser = $mediaarchive.getUser($message.user))
 					<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
 				</a>	
 			</div>
