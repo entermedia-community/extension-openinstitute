@@ -22,9 +22,9 @@
 		#set($replacer = $mediaarchive.getReplacer())
 		#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
 		#set($ignore = $invoiceformated.setValue("project", $collection))
-		#set($startdate = "#date($invoice, 'duedate')")
-		#set($ignore = $invoiceformated.setValue("duedate", $startdate))
-		#set($ignore = $invoiceformated.setValue("startdate", $startdate))  ####legacy??
+		#set($duedate = "#date($invoice, 'duedate')")
+		#set($ignore = $invoiceformated.setValue("duedate", $duedate))
+		#set($ignore = $invoiceformated.setValue("startdate", $duedate))  ####legacy??
 		#set($enddate = "#date($invoice, 'enddate')")
 		#set($ignore = $invoiceformated.setValue("enddate", $enddate))
 		#set($recurringperiod = $mediaarchive.getData("productrecurringperiod", $invoice.getValue("recurringperiod")))
@@ -108,9 +108,7 @@
                       	##       <div><strong>Month:</strong> $invoicemonth</div>
                         #end</td>
 				<td style="width: 240px; text-align: right; vertical-align: top;">
-					<strong>[[Due Date]]:</strong> $!context.getDate($invoice.getValue("duedate"))
-						<br>
-					##<strong>[[Due By]]:</strong> $!context.getDate($invoice.getValue("duedate"))
+					<strong>[[Due Date]]:</strong> $!duedate
 				</td>
 				</tr>
 				</table>
