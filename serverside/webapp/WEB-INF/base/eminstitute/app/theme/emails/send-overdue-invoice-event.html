@@ -495,23 +495,37 @@
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td valign="top">
-                            	<div><strong>Invoice #:</strong> $invoice.getValue("invoicenumber")</div>
-                              	<div><strong> #text($invoicename)</strong></div>
-                            	  ###if($invoicemonth)
-                            	  ##<div><strong>Month:</strong> $invoicemonth</div>
-                            	  ###end
+                              <div><strong>Invoice #:</strong> $invoice.getValue("invoicenumber")</div>
+                              <div><strong> #text($invoicename)</strong></div>
+                              ###if($invoicemonth)
+                              ##<div><strong>Month:</strong> $invoicemonth</div>
+                              ###end
                             </td>
                             <td style="" valign="top">
-                              <div class="align-right"><Strong>Date:</Strong> $!context.getDate($invoice.getValue("createdon"))</div>
+                              ##<div class="align-right"><Strong>Date:</Strong> $!context.getDate($invoice.getValue("createdon"))</div>
                             </td>
                           </tr>
                           <tr>
                             <td colspan="2">
-                            
-								#if(!$invoicedescription)
+                            	#if(!$invoicedescription)
 									#set($invoicedescription = $mediaarchive.text($invoice.getValue("invoicedescription"), $invoice.id))
 								#end
+								
+								##For Replace Formating
+									#set($invoiceformated = $invoice)
+									#set($replacer = $mediaarchive.getReplacer())
+									#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
+									#set($ignore = $invoiceformated.setValue("project", $collection))
+									#set($startdate = "#date($invoice, 'startdate')")
+									#set($ignore = $invoiceformated.setValue("startdate", $startdate))
+									#set($enddate = "#date($invoice, 'enddate')")
+									#set($ignore = $invoiceformated.setValue("enddate", $enddate))
+								##--
+								
+								
+								
 								#if($invoicedescription)
+									#set($invoicedescription = $replacer.replace($invoicedescription, $invoiceformated))
 								<div class="f-fallback" style="padding-top:10px;">$invoicedescription</div>
 								#end
                             </td>
@@ -529,21 +543,29 @@
                                   <th class="purchase_heading" align="right">
                                     <p class="f-fallback">Amount</p>
                                   </th>
-                                </tr>
-                                #set($products = $invoice.getValue("productlist"))
+                              	</tr>
+                                
+                               #set($products = $invoice.getValue("productlist"))
 								#foreach ($product in $products)
-								##set ( $prod = $mediaarchive.getProductById($product.productid) )
-								<tr>
-									<td valign="top" style="vertical-align: top;">$product.productquantity</td>
-									
-									<td valign="top" style="vertical-align: top;">
-										<div>$mediaarchive.getProductName($product.productid)</div>
-										<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
-									</td>
-									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
-								</tr>
+									#set ( $prod = $mediaarchive.getProductById($product.productid) )
+									<tr>
+										<td valign="top" style="vertical-align: top;">$product.productquantity</td>
+										
+										<td valign="top" style="vertical-align: top;">
+											<div>
+											
+											##$mediaarchive.getProductName($prod.productid)
+											
+											#set($productname = $replacer.replace($prod.name, $invoiceformated))
+											
+											#text($productname)
+											</div>
+											<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
+										</td>
+										<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
+									</tr>
 								#end
-
+ 
                                 <tr>
                                   <td width="80%" colspan="2" class="purchase_footer" valign="middle">
                                     <p class="f-fallback purchase_total purchase_total--label">Total ($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</p>
