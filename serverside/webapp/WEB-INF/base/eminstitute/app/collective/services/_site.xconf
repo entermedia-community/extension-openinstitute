@@ -7,5 +7,6 @@
 	<inner-layout>/${applicationid}/collective/services/layout.html</inner-layout>
 	<path-action name="FinanceModule.loadFinanceManager" />
 	
+	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
 	
 </page>
