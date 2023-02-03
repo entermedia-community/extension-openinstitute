@@ -173,14 +173,15 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				}
 				invoice.setValue("sentto", contactsstring);
 				invoiceSearcher.saveData(invoice);
-				log.info("Invoice Created for recurring product");
+				log.info("Invoice Created for recurring product for: " +collection);
 				
-				int recurrentCount = product.getValue("recurringperiod");
+				String recurrentCount = product.getValue("recurringperiod");
 				int currentMonth = nextBillOn.getMonth();
-				nextBillOn.setMonth(currentMonth + recurrentCount);
+				nextBillOn.setMonth(currentMonth + recurrentCount.toInteger() );
 				product.setValue("nextbillon", nextBillOn);
 				product.setValue("lastgeneratedinvoicedate", today.getTime());
 				productSearcher.saveData(product);
+				log.info("Next Invoice for: "+collection+", will be generated: " +nextBillOn);
 			}
 			else {
 				log.info("Invoice not created, invoice may alreay sent. ${lastbilldate} < ${nextBillOn}")
