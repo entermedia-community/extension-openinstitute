@@ -66,10 +66,10 @@
   		#else
 		
 	  		<div class="storecurrentreservations">
-	  		<strong>[[Your Reservation]]</strong>
+	  		<strong>[[Your Reservation]]</strong> 
 			<ul>
 			#foreach($invoice in $invoices)
-				#if( $caneditsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
+				#if( $caneviewsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
 				<li>
 				<a class="emdialog"		
 				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$aproduct.id&collectionid=$librarycol.id" >
