@@ -270,10 +270,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	//recurring
 	objects.put("invoicemonth", month);
-	String dates = DateStorageUtil.getStorageUtil().formatDateObj(invoice.getValue("duedate"), "dd/MM/YY");
+	String dates = DateStorageUtil.getStorageUtil().formatDate(invoice.getValue("duedate"), "dd/MM/YY");
 	objects.put("startdate",  dates); //legacy
 	objects.put("duedate",  dates);
-	String datee = DateStorageUtil.getStorageUtil().formatDateObj(invoice.getValue("enddate"), "dd/MM/YY");
+	String datee = DateStorageUtil.getStorageUtil().formatDate(invoice.getValue("enddate"), "dd/MM/YY"); 
 	objects.put("enddate", datee);
 	
 	//period
