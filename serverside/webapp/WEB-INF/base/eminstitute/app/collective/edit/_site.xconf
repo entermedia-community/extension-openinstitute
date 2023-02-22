@@ -22,6 +22,11 @@
 		<searchtype>librarycollection</searchtype>
 	</path-action>
 	
-	
+	<permission name="view">
+		<or>
+			<action name="ProjectModule.canEditCollection" />
+			<action name="ProjectModule.isOnTeam" />			
+		</or>
+	</permission>	
 	
 </page>

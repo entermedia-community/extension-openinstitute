@@ -26,11 +26,11 @@
 		<div class="col-md-10 col-lg-9" >
 			<div class="currentcampaigs">
 
-#set($tags = $mediaarchive.getList("communitytag"))
+#set($tags = $mediaarchive.query("communitytag").all().search($context) )
 #foreach( $tag in $tags)
 	
-		#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
-		#if( !$projects.isEmpty() && $tag.collectionid )
+		#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search($context) )
+		#if( $tag.collectionid )
 			#set( $target = $mediaarchive.getCachedData("librarycollection",$tag.collectionid))
 			
 			<div class="communitycontainer-header">

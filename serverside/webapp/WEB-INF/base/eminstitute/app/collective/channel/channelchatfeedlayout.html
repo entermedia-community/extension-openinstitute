@@ -21,6 +21,21 @@
 		</div>
 	</div>
 	#end
+
+
+	#if( $librarycol.collectivetype == "4")
+	
+		#set( $value = $librarycol.communitytag )
+		#set( $communityprojects = $mediaarchive.query("librarycollection").exact("communitytag",$value).not("id",$librarycol.id).search($context) )
+	
+	<div class="collective-sidebar">
+		#foreach( $collection in $communityprojects )
+		$context.putPageValue("collective", $collection)
+		$pages.include("$apphome/browse/collectivelisting.html", $context)
+		#end
+	</div>		
+	
+	#end
 	
 	#if( $caneditcollection )
 		$pages.include("$apphome/collective/channel/addnewupload.html")

@@ -90,36 +90,23 @@ $pages.include("$apphome/collective/donate/donatesidebar.html",$context)
 
 </div>
 
-
+#if($librarycol.communitytag)
+	#set( $tags = $mediaarchive.query("communitytag").ids($librarycol.getValues("communitytag")).search($context) )
+	#if( !$tag.isEmpty() )
 <div class="sidebarbox">
-<h4><i class="fas fa-globe"></i> [[Community]]</h4>
-		<div class="" style="padding-left:6px;">		
-	#foreach($library in $librarycol.getLibraries()) 
-		<a  href='$applink/organization/projects/${library.id}/${library.name.replaceAll(" ","-")}.html'>$library</a>
+	<h4><i class="fas fa-globe"></i> [[Community]]</h4>
+	
+		<div class="" style="padding-left:6px;">	
+	#foreach($tag in $tags) 
+		#set( $col = $mediarchive.getCachedData("librarycol",$tag.collectionid))
+		 <a  href="$applink/collective/channel/${col.id}/#urlencode($librarycol.getWebName()).html">
 	#end
 		</div>	
 </div>
-
-
-
-
-
-
-
+	#end
+#end
 
 <!-- 
-
-<div class="subscribers-box text-center">
-	<div class="subscribers-box-box">
-		<a class="emdialog" data-cancelsubmit="true" title="View Subscribers" href="$applink/collective/channel/subscribers/subscriberslist.html?collectionid=$librarycol.getId()">
-			<div class="box-content" style="border-right:1px solid #ddd;">
-			<strong>[[Likes]]</strong>
-			#set( $subscribers = $mediaarchive.query("librarycollectionlikes").exact("collectionid",$collectionid).search($context) )
-			<div class="box-number">$subscribers.size()</div>
-			</div>
-		</a>	
-	</div> 
-
 	<div class="subscribers-box-box">
 		<a class="emdialog" title="[[Share]]" href="$applink/components/share/embed.html?collectionid=$librarycol.id">
 			<div class="box-content">
