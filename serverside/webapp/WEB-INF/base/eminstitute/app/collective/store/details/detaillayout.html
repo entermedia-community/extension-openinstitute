@@ -66,10 +66,10 @@
   		#else
 		
 	  		<div class="storecurrentreservations">
-	  		<strong>[[Your Reservation]]</strong> 
+	  		<strong>[[Existing Reservations]]</strong> 
 			<ul>
 			#foreach($invoice in $invoices)
-				#if( $caneviewsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
+				#if( $canviewsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
 				<li>
 				<a class="emdialog"		
 				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$aproduct.id&collectionid=$librarycol.id" >
@@ -100,7 +100,9 @@
 			
 			#if( $user )
 		      	<div style="padding:20px 0;">
-		      	 <input type="submit" class="btn btn-primary" value="[[Make Reservation]]" />
+		      	<p>[[Choose dates then]]:
+		      	 <input type="submit" class="btn btn-primary" value="[[Reserve Room]]" /> [[pay when you arrive]]
+		      	 </p>
 		      	</div>
 			#else
 				<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
