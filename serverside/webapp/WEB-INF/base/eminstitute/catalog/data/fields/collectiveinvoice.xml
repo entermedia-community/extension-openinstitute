@@ -191,6 +191,13 @@
 		<name>
 			<language id="en"><![CDATA[Transaction Record]]></language>
 		</name>
+	</property>
+	
+		<property id="sent" editable="true" stored="true"
+		type="date" index="true">
+		<name>
+			<language id="en"><![CDATA[Sent Date]]></language>
+		</name>
 	</property>	
  
 </properties>
