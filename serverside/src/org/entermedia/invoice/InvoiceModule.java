@@ -1,6 +1,8 @@
 package org.entermedia.invoice;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.asset.modules.BaseMediaModule;
@@ -32,10 +34,15 @@ public class InvoiceModule extends BaseMediaModule
 			Date start = DateStorageUtil.getStorageUtil().parseFromStorage(parts[0]);
 			invoice.setValue("duedate",start);
 			Date enddate = DateStorageUtil.getStorageUtil().parseFromStorage(parts[2]);
-			if( enddate.getYear() < 1000)
+			Calendar endcal = new GregorianCalendar();
+			endcal.setTime(enddate);
+			int year = endcal.get(Calendar.YEAR);  // 2012
+			if( year < 1000)
 			{
-				enddate.setYear(enddate.getYear() + 2000);
+				endcal.set(Calendar.YEAR, year + 2000);
+				enddate = endcal.getTime();
 			}
+			
 			invoice.setValue("enddate",enddate);
 		}
 		
