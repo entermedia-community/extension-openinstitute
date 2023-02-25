@@ -131,6 +131,11 @@ public class DateRange
 	public void addBlockedDateRange(Date inStartDate,Date inEndDate)
 	{
 	    LocalDateTime date1 = toLocalDate(inStartDate);
+
+	    if( inEndDate.getYear() < 1000)
+	    {
+	    	inEndDate.setYear( inEndDate.getYear() + 2000);
+	    }
 	    LocalDateTime date2 = toLocalDate(inEndDate);
 		long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 		LocalDate starting = date1.toLocalDate();

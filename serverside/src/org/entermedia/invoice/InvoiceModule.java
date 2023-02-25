@@ -32,6 +32,10 @@ public class InvoiceModule extends BaseMediaModule
 			Date start = DateStorageUtil.getStorageUtil().parseFromStorage(parts[0]);
 			invoice.setValue("duedate",start);
 			Date enddate = DateStorageUtil.getStorageUtil().parseFromStorage(parts[2]);
+			if( enddate.getYear() < 1000)
+			{
+				enddate.setYear(enddate.getYear() + 2000);
+			}
 			invoice.setValue("enddate",enddate);
 		}
 		
