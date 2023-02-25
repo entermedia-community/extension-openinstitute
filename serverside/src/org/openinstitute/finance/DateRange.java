@@ -135,7 +135,7 @@ public class DateRange
 	    LocalDateTime date2 = toLocalDate(inEndDate);
 	    if( date2.getYear() < 1000)
 	    {
-	    	date2.plusYears(2000);
+	    	date2 = date2.plusYears(2000);
 	    }
 		long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 		LocalDate starting = date1.toLocalDate();
