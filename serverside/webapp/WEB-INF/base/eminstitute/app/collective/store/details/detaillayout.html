@@ -73,11 +73,11 @@
 				<li>
 				<a class="emdialog"		
 				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$aproduct.id&collectionid=$librarycol.id" >
-				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) $invoice.getName()
+				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) $invoice.getName()  $!invoice.customernote
 				</a>
 				</li> 
 				#else
-				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate"))  $invoice.getName()
+				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate"))  $invoice.getName() $!invoice.customernote
 				#end
 			#end
 			</ul>

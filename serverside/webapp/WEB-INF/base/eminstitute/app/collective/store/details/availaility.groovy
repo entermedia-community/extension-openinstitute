@@ -17,8 +17,10 @@ public void runit()
 	{
 		Data product = context.getPageValue("aproduct");
 		log.info("On " + product);
-	
-		Collection invoices = mediaarchive.query("collectiveinvoice").exact("productlist.productid",product.getId()).search();
+        Date now = new Date();
+        Date from = mediaarchive.getBean("dateStorageUtil").addDaysToDate(now,-31);
+
+		Collection invoices = mediaarchive.query("collectiveinvoice").after("duedate",from).exact("productlist.productid",product.getId()).sort("duedate").search();
 		log.info("Invoices " + invoices.size());
 	
 		DateRange range = new DateRange();
