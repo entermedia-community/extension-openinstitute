@@ -134,7 +134,7 @@ public class DateRange
 	    LocalDateTime date2 = toLocalDate(inEndDate);
 		long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 		LocalDate starting = date1.toLocalDate();
-		log.info("Blocking " + starting + " for " + daysBetween + " days");
+		log.info("Blocking " + starting + " for " + daysBetween + " days:" + date1 + " - " + date2);
 		for (int i = 0; i < daysBetween; i++)
 		{
 			BookingDate newdate = new BookingDate(starting);
