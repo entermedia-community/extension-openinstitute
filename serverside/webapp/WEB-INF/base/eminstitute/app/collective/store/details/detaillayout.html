@@ -60,7 +60,6 @@
 		</div>
 		#end
 	
-	#set( $invoices = $mediaarchive.query("collectiveinvoice").exact("productlist.productid",$aproduct.id).sort("startdate").search($context))
   		#if( $invoices.isEmpty())
   			
   		#else

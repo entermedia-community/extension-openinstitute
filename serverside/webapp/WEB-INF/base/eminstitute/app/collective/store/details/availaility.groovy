@@ -20,9 +20,10 @@ public void runit()
         Date now = new Date();
         Date from = mediaarchive.getBean("dateStorageUtil").addDaysToDate(now,-31);
 
+        
 		Collection invoices = mediaarchive.query("collectiveinvoice").after("duedate",from).exact("productlist.productid",product.getId()).sort("duedate").search();
-		log.info("Invoices " + invoices.size());
-	
+		log.info("Invoices " + invoices.size() + " " + invoices.getSearchQuery());
+		context.putPageValue("invoices",invoices);
 		DateRange range = new DateRange();
 		for(Data invoice in invoices)
 		{
