@@ -22,7 +22,6 @@ public void runit()
 
         
 		Collection invoices = mediaarchive.query("collectiveinvoice").after("duedate",from).exact("productlist.productid",product.getId()).sort("duedate").search();
-		log.info("Invoices " + invoices.size() + " " + invoices.getSearchQuery());
 		context.putPageValue("invoices",invoices);
 		DateRange range = new DateRange();
 		for(Data invoice in invoices)
@@ -31,6 +30,7 @@ public void runit()
 			Date endDate = invoice.getDate("enddate");
 			range.addBlockedDateRange(startDate, endDate);
 		}
+		log.info("Invoices " + invoices.size() + " " + invoices.getSearchQuery() + " show dates "+ range.getBlockedDates());
 		context.putPageValue("blockeddates",range);
 	}
 }
