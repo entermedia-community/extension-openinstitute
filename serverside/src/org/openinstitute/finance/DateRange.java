@@ -10,8 +10,13 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.entermediadb.email.TemplateWebEmail;
+
 public class DateRange
 {
+	private static final Log log = LogFactory.getLog(DateRange.class);
 	Collection<BookingDate> fieldBlockedDates;
 	
 	public Collection<BookingDate> getBlockedDates()
@@ -129,6 +134,7 @@ public class DateRange
 	    LocalDateTime date2 = toLocalDate(inEndDate);
 		long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 		LocalDate starting = date1.toLocalDate();
+		log.info("Blocking " + starting + " for " + daysBetween + " days");
 		for (int i = 0; i < daysBetween; i++)
 		{
 			BookingDate newdate = new BookingDate(starting);

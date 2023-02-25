@@ -46,4 +46,9 @@ public class BookingDate
 		
 		return formated.toString();
 	}
+	
+	public String toString()
+	{
+		return "[" + toDateString() + "]";
+	}
 }
