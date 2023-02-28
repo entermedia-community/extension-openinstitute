@@ -85,8 +85,8 @@
 	#end
 	
 	#if(!$content.path.contains("/reserve/"))
-		<form name="saveproject" 
-		id="saveproject" 
+		<form name="inlinesaveproject" 
+		id="inlinesaveproject" 
 		action="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" 
 		method="post"
 		class="ajaxform"
@@ -94,6 +94,8 @@
 			data-oemaxlevel="2">
 		
 			<input type="hidden" name="save" value="true" />
+			<input type="hidden" name="collectionid" value="$librarycol.id" />
+			<input type="hidden" name="productid" value="$aproduct.id" />
 		
 			$pages.include("$apphome/components/xml/types/daterange.html",$context)
 			
