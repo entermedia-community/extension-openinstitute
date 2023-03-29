@@ -10,8 +10,10 @@ public void init() {
 	Data product = context.getPageValue("data");
 	
 	String isrecurring = product.getValue("recurring");
-	if(Boolean.parseBoolean(isrecurring))
+	String nextbillon = product.getValue("nextbillon.value");
+	if(nextbillon != null && Boolean.parseBoolean(isrecurring))
 	{
+		log.info("nextbillon not set, will be set now.");
 		/*
 		Calendar today = Calendar.getInstance();
 		Calendar nextbillon = Calendar.getInstance();
@@ -40,7 +42,6 @@ public void init() {
 		Date billingdate = product.getValue("startbillingdate");
 		if (billingdate == null) {
 			billingdate = today.getTime();
-			
 		}
 		
 		int recurringperiod = product.getInt("recurringperiod");
@@ -56,10 +57,13 @@ public void init() {
 		nextBillOn.set(Calendar.MONTH, currentMonth + recurringperiod);
 		product.setValue("nextbillon", nextBillOn.getTime());
 		
+		//always set product active?
 		product.setValue("billingstatus", "active");
 		
 		productSearcher.saveData(product);
 	}
-}
+} 
 
 init();
+
+
