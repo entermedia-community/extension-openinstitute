@@ -44,7 +44,7 @@
 	
 	#if ($librarycol.assetbanner)
 		#set( $background= $mediaarchive.getAsset($librarycol.assetbanner) )
-		#set ($backgroundurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${banner.sourcepath}/image1920x500cropped.jpg")
+		#set ($backgroundurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${background.sourcepath}/image1920x500cropped.jpg")
 	#end
 
 <body id="page-top" #if($browser.inApp()) data-hidetoolbar="true" #end
