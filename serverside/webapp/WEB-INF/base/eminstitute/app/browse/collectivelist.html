@@ -10,7 +10,7 @@
 		class="project-title #if ($librarycol.id == $collective.id) project-selected #end" title="${collective.getName()}">
 	
 	 <div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
-	 <div class="card-name collectionbox">$collective.name</div>
+	 <div class="card-name collectionbox"><span>#esc($collective.name)</span></div>
 	 
 	 
 </a>

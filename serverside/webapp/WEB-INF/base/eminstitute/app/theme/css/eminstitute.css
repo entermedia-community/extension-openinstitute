@@ -1470,7 +1470,12 @@ a.pick-item:hover .project-item {
 .collectivelayout{
 	height: 100%;
 }
-
+.campaigncollectivelayout {
+	height: 100%;
+	width:100%;
+	max-width: 1600px;
+	margin: 0 auto;
+}
 .collectivebanner {
 	background-color: #fff;
 	color:#111;

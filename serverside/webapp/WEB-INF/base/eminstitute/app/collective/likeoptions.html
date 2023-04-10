@@ -1,5 +1,8 @@
-#set($collectionid = $librarycol.getId())
+#if(!$collectionid && $librarycol)
+	#set($collectionid = $librarycol.getId())
+#end
 
+#if($collectionid)
 #set( $subscribers = $mediaarchive.query("librarycollectionlikes").exact("collectionid",$collectionid).search($context) )
 #set( $subscriberssize = $subscribers.size())
 <div class="project-likes" id="projectlikes">
@@ -71,4 +74,6 @@
 			class="btn btn-xs btn-success" style=""><i class="fas fa-thumbs-up"></i> &nbsp;[[Login to Follow]]</a>
 		#end	
 </div>		
+#end
+
 

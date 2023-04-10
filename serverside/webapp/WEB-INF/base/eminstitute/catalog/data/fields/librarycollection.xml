@@ -208,6 +208,15 @@
   	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}"
   	writenametoexif="false">New 
     <name>
+      <language id="en"><![CDATA[Background Photo]]></language>
+    </name>
+  </property>
+  
+  <property id="collectivebanner" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" rendertype="asset" 
+  	required="false" filter="false" multilanguage="false" datatype="list" autocreatefromexif="false" keyword="false" 
+  	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}"
+  	writenametoexif="false">New 
+    <name>
       <language id="en"><![CDATA[Banner Photo]]></language>
     </name>
   </property> 

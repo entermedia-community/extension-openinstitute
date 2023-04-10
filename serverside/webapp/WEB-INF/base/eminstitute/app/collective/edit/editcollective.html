@@ -69,8 +69,15 @@ $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
     data-confirm="[[Are you sure]]?" 
     href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
     >[[Delete]]</a>
-    #end
+  #end
 
+#if($canviewsettings)
+<a class="btn btn-sm btn-light float-right"
+    style="margin: 0px 0 0 10px;" 
+    target="_blank"
+    href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection" 
+    ><i class="fa fa-database"></i></a>
+#end
 
 </form>
 </div>

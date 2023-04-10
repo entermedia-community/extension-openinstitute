@@ -24,12 +24,14 @@
 
 	<div class="row justify-content-md-center " style="margin-top: 20px;">
 		<div class="col-md-10 col-lg-9" >
-			<div class="currentcampaigs">
+			<div class="currentcampaigns">
 
 #set($tags = $mediaarchive.query("communitytag").all().search($context) )
+
 #foreach( $tag in $tags)
 	
 		#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search($context) )
+		
 		#if( $tag.collectionid )
 			#set( $target = $mediaarchive.getCachedData("librarycollection",$tag.collectionid))
 			

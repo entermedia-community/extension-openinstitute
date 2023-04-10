@@ -419,14 +419,22 @@ text-decoration: none;
 
 
 
-.currentcampaigs {
+.currentcampaigns {
 	background-color: #EFEF97;
-	color:#fff;
+	
 	padding:20px 25px;;
 	margin:20px 0;
 	border-radius: 20px;
 	position:relative;
 }
+
+.currentcampaign {
+	background-color: #EFEF97;
+	padding:20px 15px;;
+	margin:0;
+	position:relative;
+}
+
 .currentcampaigs h2 {
 	margin:0 0 30px;
 	font-weight:700;
@@ -448,14 +456,78 @@ text-decoration: none;
 	padding:15px 0 0 28px;
 	font-weight: 700;
 	width:70%;
-	
 }
+
 .communitycontainer-header h3 a {
 	color:#fff;
 	text-decoration: none;
 }
 
 
+.communityprojects-header {
+	background-color: #1D5655;
+	color:#fff;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+	padding:0;
+	position:relative;
+	
+}
+.communityprojects-header h3 {
+	color:#fff;
+	margin:0;
+	padding:10px 0 0 18px;
+	font-weight: 700;
+	width:85%;
+}
+
+.communityprojects-body {
+	background-color: #1D5655;
+	padding:15px;
+}
+.communityprojects-content {
+	background-color: #fff;
+	border-radius:20px;
+	
+	padding:10px;
+}
+
+.communityprojects-content .card-collections {
+	width:100%;
+	
+	margin:0 0 10px;
+}
+
+.communityprojects-content .pick-item {
+	height: 75px;
+	display: block;
+}
+.communityprojects-content .card-collections .card-collections-thumb {
+	width:75px;
+	height: 75px;
+	float:left;
+}
+
+.communityprojects-content .card-collections .collectionbox {
+	line-height: 1.2;
+	height: 100%;
+	margin:0;
+	padding: 0 0 0 6px;
+ display: flex;
+  align-items: center;
+  justify-content: center;	
+}
+.communityprojects-content .card-collections .collectionbox span {
+
+}
+.communitytagheader h4 {
+	color:#fff;
+	margin:0;
+	padding:8px 0 0;
+	font-weight: 700;
+	width:70%;
+	
+}
 .communitytagcontainer-out {
 	background-color: #1D5655;
 	color:#fff;
@@ -467,7 +539,6 @@ text-decoration: none;
 .communitytagdescription {
 	background-color: #fff;
 	padding:20px;
-	text-align:center;
 	color: #1D5655;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
@@ -570,26 +641,57 @@ text-decoration: none;
 	.communitycontainer-header h3 a:hover {
 	color:#ccc;
 	text-decoration: none;
-}
-.communitycontainer-header:after, .communitycontainer-header:before {
-    content: '';
-    display: block;
-    position: absolute;
-}
-
-.communitycontainer-header:after {
-	top: -40px;
-    right: -40px;
-    border: 40px solid transparent
-}
-
-.communitycontainer-header:after {
-    border-bottom-color: #1D5655;
-}
-.communitytagcontainer-out {
-	border-radius: 20px;
-	border-top-left-radius:0;
-}
+	}
+	.communitycontainer-header:after, .communitycontainer-header:before {
+	    content: '';
+	    display: block;
+	    position: absolute;
+	}
+	
+	.communitycontainer-header:after {
+		top: -40px;
+	    right: -40px;
+	    border: 40px solid transparent
+	}
+	
+	.communitycontainer-header:after {
+	    border-bottom-color: #1D5655;
+	}
+	.communitytagcontainer-out,
+	.communityprojects-body {
+		border-radius: 20px;
+		border-top-left-radius:0;
+	}
+	
+	
+	.communityprojects-header {
+		background-color: #1D5655;
+		color:#fff;
+		border-top-left-radius:20px;
+		border-top-right-radius: 0;
+		padding:0;
+		width: 80%;
+		height: 35px;
+		display:inline-block;
+		position:relative;
+	}
+	
+	.communityprojects-header:after, .communityprojects-header:before {
+	    content: '';
+	    display: block;
+	    position: absolute;
+	}
+	
+	.communityprojects-header:after {
+		top: -40px;
+	    right: -40px;
+	    border: 40px solid transparent
+	}
+	
+	.communityprojects-header:after {
+	    border-bottom-color: #1D5655;
+	}
+	
 
 }
 
@@ -603,13 +705,30 @@ text-decoration: none;
 	width:100%;
 	position:absolute;
 }
+.campaigncollectiveheadermenu {
+	width:100%;
+}
 .collectiveheader .project-thumb {
 	margin:5px;
 }
-.collectiveheadermenu .project-title  {
+.collectiveheader .project-title  {
 padding:10px 0 0 120px ;
 min-height: 115px;
 }
+
+.campaignscollectiveheader {
+	width: 100%;
+	height:220px;
+	margin:0 0  5px;
+}
+.oicontainercampaigns {
+	margin:0 0 5px;
+}
+
+.campaignscollectiveheader h1 {
+	color:#fff;
+}
+
 .project-title h1 {
 	font-weight: bold;
 	font-size:1.6rem;
@@ -698,17 +817,31 @@ min-height: 115px;
 	.collectiveheadermenu {
 	left:95px;
 	}
-	.project-thumb {
+	.collectiveheader .project-thumb {
 	width: 115px;
 	height: 115px;
 	border:3px solid #C8C446;
 	}
-	.collectiveheadermenu .project-title {
+	.campaignscollectiveheader .project-thumb {
+	position:relative;
+	width: 85px;
+	height: 85px;
+	border:1px solid #C8C446;
+	}
+	.collectiveheader .project-title {
 	margin-bottom:10px;
 	font-size:1.6rem;
 	padding:0 0 0 5px;
 	height: 70px;
 	min-height: 70px;
+	text-align:center;
+	}
+	
+	.campaignscollectiveheader .project-title {
+	margin-bottom:10px;
+	font-size:1.5rem;
+	padding:40px 0 0 5px;
+	min-height: 50px;
 	text-align:center;
 	}
 
@@ -725,7 +858,7 @@ min-height: 115px;
 	.collectiveheadermenu .navbar-collective li {
 	float:none;
 	}
-	.collectiveheadermenu .navbar-collective .nav-link {
+	.navbar-collective .nav-link {
 		padding:0.2rem .35rem;
 		font-size:0.85rem;
 		font-weight: bold;

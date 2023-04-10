@@ -43,13 +43,13 @@
 	
 	
 	#if ($librarycol.assetbanner)
-		#set( $banner= $mediaarchive.getAsset($librarycol.assetbanner) )
-		#set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${banner.sourcepath}/image1920x500cropped.jpg")
+		#set( $background= $mediaarchive.getAsset($librarycol.assetbanner) )
+		#set ($backgroundurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${banner.sourcepath}/image1920x500cropped.jpg")
 	#end
 
 <body id="page-top" #if($browser.inApp()) data-hidetoolbar="true" #end
-		#if ($bannerurl) style="
-			background-image:url($bannerurl); 
+		#if ($backgroundurl) style="
+			background-image:url($backgroundurl); 
 			background-size: cover;
 			background-attachment: fixed;
 			background-position:  0 50px;"#end
