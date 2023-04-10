@@ -13,6 +13,8 @@
 
   <property id="assetportrait"/>
   <property id="assetbanner"/>
+  <property id="collectivebanner"/>
+  
   
   <property id="facebooklink" />
   <property id="instagramlink" /> 
