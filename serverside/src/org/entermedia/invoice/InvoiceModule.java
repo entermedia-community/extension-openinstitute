@@ -14,7 +14,7 @@ public class InvoiceModule extends BaseMediaModule
 {
 	public void loadInvoiceManager(WebPageRequest inReq)
 	{
-		String catalogid = inReq.findValue("catalogid");
+		String catalogid = inReq.findPathValue("catalogid");
 		InvoiceManager manager = (InvoiceManager) getModuleManager().getBean(catalogid, "invoiceManager");
 	
 		inReq.putPageValue("invoiceManager", manager);

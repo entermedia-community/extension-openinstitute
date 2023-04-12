@@ -50,7 +50,7 @@ public class FinanceModule extends BaseMediaModule
 	}
 	public FinanceManager loadFinanceManager(WebPageRequest inReq)
 	{
-		String catalogid = inReq.findValue("catalogid");
+		String catalogid = inReq.findPathValue("catalogid");
 		FinanceManager manager = (FinanceManager)getModuleManager().getBean(catalogid, "financeManager");
 		inReq.putPageValue("financeManager",manager);
 		return manager;

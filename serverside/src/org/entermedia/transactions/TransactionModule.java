@@ -7,7 +7,7 @@ public class TransactionModule extends BaseMediaModule
 {
 	public void loadTransactionManager(WebPageRequest inReq)
 	{
-		String catalogid = inReq.findValue("catalogid");
+		String catalogid = inReq.findPathValue("catalogid");
 		TransactionManager manager = (TransactionManager) getModuleManager().getBean(catalogid, "transactionManager");
 	
 		inReq.putPageValue("transactionManager", manager);
