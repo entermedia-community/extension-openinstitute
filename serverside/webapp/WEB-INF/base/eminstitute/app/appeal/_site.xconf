@@ -1,17 +1,24 @@
 <page>
 
 	<property name="oisection">community</property>
-
+	<property name="communitytag">true</property>
 	<property name="virtual">true</property>
 
 	 <inner-layout>/${applicationid}/appeal/layout.html</inner-layout>
 	 
-	 <path-action name="ProjectModule.loadCollection"></path-action>
+	 <path-action name="ProjectModule.loadCollection">
+	 	
+	 </path-action>
 	 
  	<script id="stripe" src="https://js.stripe.com/v3/"/>
  	<page-action name="Date.now"/>
 	<page-action name="TransactionModule.loadTransactionManager"/>
 	<page-action name="PageValue.loadPageVariable" bean="mathutil" />	
 	 
-	 
+	     <permission name="editcollection">
+		<or>
+			<action name="ProjectModule.canEditCollection" />
+			<action name="ProjectModule.isOnTeam" />			
+		</or>
+	</permission>
 </page>

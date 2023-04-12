@@ -6,28 +6,33 @@
 	$context.putPageValue("communitytag",$tag )
 	#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
 	$context.putPageValue("communityprojects",$projects )
+
+	
+	
 	<div class="row no-gutters g-0"    >
 		<div  class="col-lg-2" style="padding:0 20px 0 10px">
-			<div class="communityprojects-header">
-			<h3>[[Projects]]</h3>
-			</div>
-			<div class="communityprojects-body">
-			<div class="communityprojects-content">
-			#foreach( $project in $projects.getPageOfHits() )
-				$context.putPageValue("collective",$project)
-				$pages.include("$apphome/browse/collectivelist.html",$context)
+				$pages.include("$apphome/collective/donate/donatesidebar.html?hidegoals=true",$context)
 				
-			#end
-			<div class="clearfix"></div>
-			</div>
-			</div>
+				
+				
+				
+				#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
+				<div class="communtysofar" style="padding-left:6px;">		
+				#if($librarycol.goaldate)
+				<strong>[[Our Goal]]: $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong>
+				#if($librarycol.distributedtotal) 
+				[[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD 
+				#end
+				#else
+				<strong>[[No goals yet]]!</strong>
+				#end
+				</div>
 		</div>
 		
 		
 		<div class="col">
 			<div class="currentcampaign">
-				#set( $librarycol = $mediaarchive.getCachedData("librarycollection",$tag.collectionid))
-				$context.putPageValue("librarycol",$librarycol )
+				
 				
 				<div class="communitycontainer-header">
 				<h3>
@@ -71,22 +76,36 @@
 			</div>
 		</div>
 		<div  class="col-lg-3" style="padding:0 10px 10px 20px">
-				$pages.include("$apphome/collective/donate/donatesidebar.html?hidegoals=true",$context)
+		
+		
+		<div class="communityprojects-header">
+			<h3>[[Sponsors]]</h3>
+			</div>
+			<div class="communityprojects-body" style="margin-bottom:20px;">
+			<div class="communityprojects-content">
+			#foreach( $project in $projects.getPageOfHits() )
+				$context.putPageValue("collective",$project)
+				$pages.include("$apphome/browse/collectivelist.html",$context)
 				
-				
-				
-				
-				#set($currentTotal = $transactionManager.getCombinedTotalIncome($librarycol.getId(),"1"))
-				<div class="communtysofar" style="padding-left:6px;">		
-				#if($librarycol.goaldate)
-				<strong>[[Our Goal]]: $${librarycol.goalamount} by #date($librarycol,"goaldate")! </strong>
-				#if($librarycol.distributedtotal) 
-				[[We have raised]]: $$!context.doubleToMoney($currentTotal, 2) USD 
-				#end
-				#else
-				<strong>[[No goals yet]]!</strong>
-				#end
-				</div>	
+			#end
+			<div class="clearfix"></div>
+			</div>
+			</div>
+			
+						
+			 	<div class="communityprojects-body">
+				<div class="communityprojects-content">
+				 	#if( $caneditcollection)
+						<a class="oe-dataedit" style="position:absolute; bottom:22px; right:17px;" data-target="#editcampaignhighlights-$librarycol.id" title="[[Edit Project Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i> </a>
+						
+					#end
+					<div class="#if( $caneditcollection)oe-editable#end" id="editcampaignhighlights-$librarycol.id" data-dataid="$librarycol.id" data-field="campaignhighlights" data-searchtype="librarycollection">
+					   	#if($librarycol.campaignhighlights) $!librarycol.campaignhighlights #else <h4>[[Testimonials]]</h4> #end
+					</div>
+				</div>
+				</div>
+			
+			
 		</div>
 		
 	</div>
