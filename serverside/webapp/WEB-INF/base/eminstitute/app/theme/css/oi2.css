@@ -10,6 +10,10 @@ body {
 	font-size: 0.9rem;
 }
 
+.col-lg-20p {
+	width:20%;
+}
+
 
 /* Remove eminstitute styles */
 .collectivebanner, .collective-sidebar, .collaborate-sidebar, .maincontent, .community-maincol, .feedupload, .feed-topics, .feedupload-uploader, .profile-sidebar, .contentcolumn, .collectivemaincol, .collective-grid-logo, .shadowbox {
@@ -39,6 +43,15 @@ a:hover {
 	padding:0;
 }
 
+.btn {
+	border-radius: 1.2rem;
+}
+
+
+.btn-xl {
+	font-size:1.2rem;
+	padding:.45rem 1.1rem
+}
 
 .btn-primary {
     color: #ccc;
@@ -69,15 +82,16 @@ a.badge-success:focus, a.badge-success:hover {
     background-color: #1D5655;
     border-color: #1D5655;
 }
+
 .btn-secondary {
-    color: #1D5655!important;
-    background-color: #A5DAD3;
-    border-color: #A5DAD3;
+    color: #fff!important;
+    background-color: #009DA4;
+    border-color: #009DA4;
 }
 .btn-secondary:focus, .btn-secondary:hover {
 	color: #fff!important;
-    background-color: #409D90;
-    border-color: #409D90;
+    background-color: #0D7479!important;
+    border-color: #0D7479!important;
 }
 
 .subscribe-btn {
@@ -422,15 +436,14 @@ text-decoration: none;
 .currentcampaigns {
 	background-color: #EFEF97;
 	
-	padding:20px 25px;;
+	padding:15px 25px;;
 	margin:20px 0;
 	border-radius: 20px;
 	position:relative;
 }
 
 .currentcampaign {
-	background-color: #EFEF97;
-	padding:20px 15px;;
+	padding:15px 15px;;
 	margin:0;
 	position:relative;
 }
@@ -453,7 +466,7 @@ text-decoration: none;
 .communitycontainer-header h3 {
 	color:#fff;
 	margin:0;
-	padding:15px 0 0 28px;
+	padding:10px 0 0 18px;
 	font-weight: 700;
 	width:70%;
 }
@@ -476,18 +489,13 @@ text-decoration: none;
 .communityprojects-header h3 {
 	color:#fff;
 	margin:0;
-	padding:10px 0 0 18px;
+	padding:10px 0 0 10px;
 	font-weight: 700;
 	width:85%;
 }
 
-.communityprojects-body {
-	background-color: #1D5655;
-	padding:15px;
-}
+
 .communityprojects-content {
-	background-color: #fff;
-	border-radius:20px;
 	
 	padding:10px;
 }
@@ -501,6 +509,7 @@ text-decoration: none;
 .communityprojects-content .pick-item {
 	height: 75px;
 	display: block;
+	color:#009DA4;
 }
 .communityprojects-content .card-collections .card-collections-thumb {
 	width:75px;
@@ -515,7 +524,8 @@ text-decoration: none;
 	padding: 0 0 0 6px;
  display: flex;
   align-items: center;
-  justify-content: center;	
+  justify-content: left;
+  text-align:left;	
 }
 .communityprojects-content .card-collections .collectionbox span {
 
@@ -532,13 +542,13 @@ text-decoration: none;
 	background-color: #1D5655;
 	color:#fff;
 	margin-bottom:40px;
-	padding:25px 25px;
+	padding:15px 15px;
 }
 
 
 .communitytagdescription {
 	background-color: #fff;
-	padding:20px;
+	padding:1px 15px;
 	color: #1D5655;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
@@ -546,9 +556,9 @@ text-decoration: none;
 
 .communitytagheader {
 	height: 40px;
-	padding:0 20px;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	padding:0 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 	background-color: #409D90;
 }
 .communtysofar {
@@ -557,6 +567,12 @@ text-decoration: none;
 	font-weight:700;
 }
 
+
+.community-sidebar-box {
+	border:8px solid #1D5655;
+	background-color: #fff;;
+	
+}
 
 /*#409D90*/
 .project-grid {
@@ -574,7 +590,7 @@ text-decoration: none;
 	background-repeat: no-repeat;	
 }
 .card-collections a .collectionbox {
-    color: #1D5655;
+    color: #009DA4;
 }
 .card-collections .collectionbox {
     padding: 4px 8px;
@@ -630,7 +646,7 @@ text-decoration: none;
 		border-top-right-radius: 0;
 		padding:0;
 		width: 50%;
-		height: 40px;
+		height: 35px;
 		display:inline-block;
 		position:relative;
 	}
@@ -667,10 +683,10 @@ text-decoration: none;
 	.communityprojects-header {
 		background-color: #1D5655;
 		color:#fff;
-		border-top-left-radius:20px;
+		border-top-left-radius:0px;
 		border-top-right-radius: 0;
 		padding:0;
-		width: 80%;
+		width: 87%;
 		height: 35px;
 		display:inline-block;
 		position:relative;
@@ -683,9 +699,9 @@ text-decoration: none;
 	}
 	
 	.communityprojects-header:after {
-		top: -40px;
-	    right: -40px;
-	    border: 40px solid transparent
+		top: -35px;
+	    right: -35px;
+	    border: 35px solid transparent
 	}
 	
 	.communityprojects-header:after {
@@ -723,6 +739,7 @@ min-height: 115px;
 }
 .oicontainercampaigns {
 	margin:0 0 5px;
+		background-color: #EFEF97;
 }
 
 .campaignscollectiveheader h1 {
@@ -1237,4 +1254,15 @@ list-style: none;
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+
+
+.donate-proposal-sidebar {
+	padding:10px;
+	font-size:0.9rem;
+}
+
+
+.donate-proposal-sidebar h3 {
+	margin: 0 0 10px;
 }
