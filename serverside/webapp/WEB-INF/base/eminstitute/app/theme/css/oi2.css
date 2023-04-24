@@ -1266,3 +1266,13 @@ list-style: none;
 .donate-proposal-sidebar h3 {
 	margin: 0 0 10px;
 }
+
+
+.communitytagcategory h2 {
+	background-color: #009DA4;
+	color:#fff;
+	font-size:1.3rem;
+	padding:3px 10px;	
+}
+
+

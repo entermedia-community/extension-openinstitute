@@ -1,6 +1,6 @@
 #set($logo = false) 
-#if($collective.assetportrait)
-	#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+#if($communitytag.communityimage)
+	#set($asset = $mediaarchive.getAsset($communitytag.communityimage))
 	#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
 #else
 	#set($logo = "$applink/theme/images/OI_flower.png")
@@ -11,10 +11,10 @@
 <div class="card-collections">
 <a href="$link" 
 	class="pick-item  #if ($librarycol.id == $collective.id) project-selected #end" 
-	title="${collective.getName()}">
+	title="${communitytag.getName()}">
 	
 	 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
-	 <div class="card-name collectionbox"><span>#esc($collective.name)</span></div>
+	 <div class="card-name collectionbox"><span>#esc($communitytag.getName()</span></div>
 	 
 	 
 </a>

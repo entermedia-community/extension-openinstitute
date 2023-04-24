@@ -1,0 +1,43 @@
+<div class="container oicontainer" >
+	<div class="row no-gutters g-0" >
+		<div class="col oihomepage" style="margin-top: 20px;">
+			<div class="oe-editable bodywebsite" 
+				id="edit-$postdata.id" 
+				data-dataid="$!postdata.id" 
+				data-field="maincontent"	
+				data-searchtype="postdata" 
+				data-viewtype="html">
+  				$!postdata.maincontent
+			</div>
+			  
+			#if( $user.oe_edit_mode == "postedit" )
+				<div class="editpostbtn">
+					<a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true" class="btn btn-xs btn-light">Edit Post</a>
+				</div>
+			#end
+			
+		</div>
+	</div>
+	
+	
+##Current Campaigs
+#set($tagscategories = $mediaarchive.query("communitytagcategory").all().search($context) )
+#foreach( $tagcategory in $tagscategories)
+<div class="communitytagcategory">
+	<h2>$tagcategory.getName()</h2>
+	<div class="communitytagscontainer">
+		
+		#set($tags = $mediaarchive.query("communitytag").exact("communitytagcategory", $tagcategory).search($context) )
+		#foreach( $tag in $tags)
+			$context.putPageValue("collective",$tag)
+			
+			$pages.include("$apphome/browse/collectivelist.html",$context)
+			
+		#end
+		
+	</div>
+</div>
+#end
+
+</div>
+

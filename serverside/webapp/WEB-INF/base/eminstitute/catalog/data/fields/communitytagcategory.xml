@@ -17,12 +17,6 @@
     </name> 
   </property>  
   
-  	<property id="communitytag" 
-		index="true" stored="true" editable="true" viewtype="list" type="list">
-		<name>
-			<language id="en"><![CDATA[Cause Category]]></language>
-		</name>
-	</property>
-  
+
   
 </properties>

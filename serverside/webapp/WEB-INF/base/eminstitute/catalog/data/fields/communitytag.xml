@@ -31,7 +31,7 @@
   
    <property id="communityimage" index="true" stored="true" editable="true" type="list" viewtype="asset" 
    	listid="asset" internalfield="false" datatype="list" 
-   		sourcepath="/uploads/${data.collectiveid}/community/${formattedyear}/${shortguid}">Image</property>  
+   		sourcepath="/uploads/${data.id}/community/${formattedyear}/${shortguid}">Image</property>  
   
       <property id="funddescription" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
@@ -41,6 +41,14 @@
       <language id="fr"><![CDATA[Description du projet]]></language> 
     </name> 
   </property>  
+  
+    <property id="communitytagcategory" 
+		index="true" stored="true" editable="true" viewtype="list" type="list">
+		<name>
+			<language id="en"><![CDATA[Cause Category]]></language>
+		</name>
+	</property>
+  
 
   
 </properties>
