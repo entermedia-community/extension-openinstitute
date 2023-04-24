@@ -42,11 +42,5 @@
     </name> 
   </property>  
 
-	<property id="collectionid" listid="librarycollection"
-		index="true" stored="true" editable="true" viewtype="list" type="list">
-		<name>
-			<language id="en"><![CDATA[Campaign Collection]]></language>
-		</name>
-	</property>
   
 </properties>
