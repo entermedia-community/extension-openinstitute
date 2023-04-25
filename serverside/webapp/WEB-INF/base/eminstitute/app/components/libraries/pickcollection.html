@@ -17,7 +17,7 @@
 						#set( $namedetail = $searcher.getDetail("name"))
 						
 						<select name="collectionid" id="collectionid" 
-							class="listautocomplete selectautosubmit #if($canaddnewcollectionXX) selectaddnew #end" 
+							class="safelistautocomplete selectautosubmit #if($canaddnewcollectionXX) selectaddnew #end" 
 							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
 							data-searchfield="name" data-searchtype="librarycollection" data-foreignkeyid="library" 
 							data-placeholder="$text" data-sortby="$namedetail.getDefaultSort()">
