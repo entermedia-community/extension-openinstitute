@@ -29,9 +29,9 @@
 		
 		#set($tags = $mediaarchive.query("communitytag").exact("communitytagcategory", $tagcategory).search($context) )
 		#foreach( $tag in $tags)
-			$context.putPageValue("collective",$tag)
+			$context.putPageValue("communitytag",$tag)
 			
-			$pages.include("$apphome/browse/collectivelist.html",$context)
+			$pages.include("$apphome/browse/communitytaglist.html",$context)
 			
 		#end
 		

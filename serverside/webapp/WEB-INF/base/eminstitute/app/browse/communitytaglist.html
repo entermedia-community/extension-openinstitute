@@ -6,15 +6,15 @@
 	#set($logo = "$applink/theme/images/OI_flower.png")
 #end
 #if(!$link)
-	#set($link = "$applink/collective/channel/${collective.id}/#dash($collective.getName()).html")
+	#set($link = "$applink/causes/category/${communitytag.id}/#dash($communitytag.getName()).html")
 #end
 <div class="card-collections">
 <a href="$link" 
-	class="pick-item  #if ($librarycol.id == $collective.id) project-selected #end" 
+	class="pick-item  #if ($librarycol.id == $communitytag.id) project-selected #end" 
 	title="${communitytag.getName()}">
 	
 	 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
-	 <div class="card-name collectionbox"><span>#esc($communitytag.getName()</span></div>
+	 <div class="card-name"><span>#esc($communitytag.getName())</span></div>
 	 
 	 
 </a>
