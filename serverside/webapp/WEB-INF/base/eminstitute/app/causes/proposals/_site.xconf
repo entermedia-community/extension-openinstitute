@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+	<property name="virtual">true</property>
+	<property name="oisection">stations</property>
+	<property name="collectivesection">community</property>
+	
+	<property name="fullwidth">true</property>
+	
+	<path-action name="ProjectModule.loadCommunityTagFolder" />
+	
+	<inner-layout>/${applicationid}/causes/proposals/innerlayout.html</inner-layout>
+</page>

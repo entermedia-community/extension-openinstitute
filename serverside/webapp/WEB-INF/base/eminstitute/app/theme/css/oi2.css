@@ -1292,7 +1292,28 @@ list-style: none;
 	padding:4px 0;
 }
 
+.communitytaglayout-proposals {
+	background-color: #dedede;
+	padding:15px;
+}
+.proposal-summary {
+	background-color: #fff;
+	padding:10px 15px;
+	margin-bottom:15px;
+}
 
+.proposal-summary h3 {
+	margin:0 0 10px 10px;
+	color:#009DA4;
+}
+.proposal-summary .card-collections {
+	width:110px;
+}
+.proposal-summary .card-collections .card-collections-thumb {
+	width: 100px;
+	height: 100px;
+	border:2px solid #C8C446
+}
 
 
 

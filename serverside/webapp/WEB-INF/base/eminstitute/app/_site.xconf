@@ -11,6 +11,8 @@
   
   <inner-layout>/${applicationid}/theme/layouts/application-collective.html</inner-layout>
   <property name="editable">true</property>
+  
+  <property name="searchtypeFromRequest">true</property>
 
    
     <!-- Jquery -->

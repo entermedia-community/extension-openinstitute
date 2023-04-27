@@ -30,7 +30,7 @@
   </property>  
   
    <property id="communityimage" index="true" stored="true" editable="true" type="list" viewtype="asset" 
-   	listid="asset" internalfield="false" datatype="list" 
+   		listid="asset" internalfield="false" datatype="list" 
    		sourcepath="/uploads/${data.id}/community/${formattedyear}/${shortguid}">Image</property>  
   
       <property id="funddescription" index="true" stored="true" viewtype="html" editable="true"   > 

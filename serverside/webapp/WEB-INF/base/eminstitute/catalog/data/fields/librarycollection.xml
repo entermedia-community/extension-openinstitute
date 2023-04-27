@@ -191,7 +191,7 @@
 
     <property id="geo_point_formatedaddress" index="true" editable="true" stored="true">New
     <name>
-      <language id="en"><![CDATA[geo_point_formatedaddress]]></language>
+      <language id="en"><![CDATA[Geo Formated Address]]></language>
     </name>
   </property>
   
@@ -234,7 +234,7 @@
       <language id="en"><![CDATA[Manifesto / Mission]]></language>  
     </name> 
   </property>  
-  <property id="collectivetags" viewtype="tageditor" defaultoperation="andgroup" index="true" stored="true" editable="true" indextype="analyzed" analyzer="tags" >User Tags 
+  <property id="collectivetags" viewtype="tageditor"  keyword="true" defaultoperation="andgroup" index="true" stored="true" editable="true" indextype="analyzed" analyzer="tags" >User Tags 
     <name>
       <language id="de"><![CDATA[Nutzer-Tags]]></language>
       <language id="en"><![CDATA[Hashtags]]></language>
@@ -248,6 +248,16 @@
       <language id="en"><![CDATA[Campaigns]]></language>
     </name>
   </property> 
+  
+  <property id="keywords" viewtype="tageditor" keyword="true" defaultoperation="andgroup" index="true" stored="true" 
+  		editable="true" indextype="analyzed" analyzer="tags" filter="true"   sortable="true">Tags 
+    <name> 
+      <language id="de"><![CDATA[Tags]]></language>  
+      <language id="en"><![CDATA[Tags]]></language>  
+      <language id="es"><![CDATA[Etiquetas]]></language>  
+      <language id="fr"><![CDATA[Tags]]></language> 
+    </name> 
+  </property>
   
  
   <property id="facebooklink" index="true" stored="true" editable="true"> 
@@ -426,6 +436,11 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
       <language id="en"><![CDATA[Campaign Highlights]]></language>  
     </name> 
   </property>
-    
+  
+    <property id="proposalhighlights" index="true" stored="true" viewtype="html" editable="true"   > 
+    <name> 
+      <language id="en"><![CDATA[Proposal Highlights]]></language>  
+    </name> 
+  </property>
     
 </properties>

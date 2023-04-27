@@ -1,0 +1,34 @@
+
+#if($communitytagid)
+<div class="container oicontainer" >
+	<div class="row no-gutters g-0" >
+		<div class="col oihomepage communitytaglayout">
+			<div class="communitytaglayout-header" style="background-color:#1D5655; padding:10px;">
+				#set($logo = false) 
+				#if($communitytag.communityimage)
+					#set($asset = $mediaarchive.getAsset($communitytag.communityimage))
+					#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+				#else
+					#set($logo = "$applink/theme/images/OI_flower.png")
+				#end
+				<div class="" style="width:120px; height:100px; text-align:center; float:left;"><img src="$logo" style="width:100px;" /></div>
+				<h2 style="color:#fff; float:left;">$communitytag.getName()</h2>
+				
+				<div class="clearfix"></div>
+				<h3 style="color:#fff; float:left; margin:5px 0 0 10px;">[[Active Proposals]]</h3>
+				<div style="float:right; margin:5px 10px 0 0">
+					<a href="" class="btn btn-secondary btn-lg">+ Proposal</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>		
+			<div class="communitytaglayout-proposals">
+					#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$communitytagid).search($context) )
+					#foreach( $project in $projects.getPageOfHits() )
+						$context.putPageValue("project",$project)
+						$pages.include("$apphome/causes/proposals/proposalsummary.html", $context)
+				#end
+			</div>
+		</div>
+	</div>
+</div>
+#end

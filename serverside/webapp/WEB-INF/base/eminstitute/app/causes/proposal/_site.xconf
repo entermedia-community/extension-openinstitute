@@ -4,7 +4,7 @@
 	<property name="communitytag">true</property>
 	<property name="virtual">true</property>
 
-	 <inner-layout>/${applicationid}/appeal/layout.html</inner-layout>
+	 <inner-layout>/${applicationid}/causes/proposal/layout.html</inner-layout>
 	 
 	 <path-action name="ProjectModule.loadCollection">
 	 	

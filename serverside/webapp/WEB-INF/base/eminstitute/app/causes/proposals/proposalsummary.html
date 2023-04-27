@@ -1,0 +1,78 @@
+<div class="proposal-summary">
+	<h3>$project.getName()</h3>
+	<div class="clearfox"></div>
+	#set($logo = false) 
+	#if($project.assetportrait)
+		#set($asset = $mediaarchive.getAsset($project.assetportrait))
+		#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+	#else
+		#set($logo = "$applink/theme/images/OI_flower.png")
+	#end
+	#if(!$link)
+		#set($link = "$applink/causes/proposal/${project.id}/#dash($project.getName()).html")
+	#end
+	<div class="card-collections" style="float:left;">
+	<a href="$link" 
+		class="pick-item  #if ($librarycol.id == $project.id) project-selected #end" 
+		title="${collective.getName()}">
+		 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
+	</a>
+	</div>
+	<div class="proposal-summary-content"  style="width: calc(100% - 140px); float:right;">
+		
+			#set($keywords = $project.collectivetags)
+			#set( $vals = $keywords.split("\s*\|\s*") )
+			#set($count = 0)
+			#if($vals)
+				<div class="" style="margin:0 0 10px">
+				#set($link = "$siteroot$apphome/views/modules/asset/index.html")
+				 #foreach( $val in $vals )
+			       	#if($count<3)
+				       	
+						#set($fulllink = "$link?field=${type}&operation=contains&${type}.value=#esc($val)")
+						#if ($clearfilters)
+							#set($fulllink = "$fulllink&clearfilters=true")
+						#end
+						#set($count=$count+1)
+						<a class="btn btn-xs btn-light" title="#text($val)"	
+							href="$fulllink">
+							<span class="">#text($val)</span>
+						</a>
+						#set($tagsize = $val.length())
+						#set($characters = $characters + $tagsize)
+					#end
+				#end		
+				</div>
+			#end
+		
+		<div class="">
+		 	#if( $caneditcollection)
+				<a class="oe-dataedit" style="position:absolute; bottom:22px; right:17px;" data-target="#editproposalhighlights-$librarycol.id" title="[[Edit Project Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i> </a>
+				
+			#end
+			<div class="#if( $caneditcollection)oe-editable#end" id="editproposalhighlights-$librarycol.id" data-dataid="$librarycol.id" data-field="proposalhighlights" data-searchtype="librarycollection">
+			   	#if($librarycol.proposalhighlights) $!librarycol.proposalhighlights #else 
+			   	
+			   	<table style="width:100%;">
+			   		<tr>
+			   			<td style="width:33%;">
+			   				<strong>Problem:</strong><br>
+			   				<p>Proposal Problem</p>
+			   			</td>
+			   			<td style="width:33%;">
+			   				<strong>Summary:</strong><br>
+			   				<p>Proposal Problem</p>
+			   			</td>
+			   			<td style="width:33px;">
+			   				<strong>Budget:</strong><br>
+			   				<p>Proposal Problem</p>
+			   			</td>
+			   		</tr>
+			   	</table>
+			   	
+			   	 #end
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
