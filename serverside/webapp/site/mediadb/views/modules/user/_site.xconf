@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="module">user</property>
+  <property name="fallbackdirectory">/site/mediadb/views/modules/default</property>
+</page>
