@@ -23,7 +23,7 @@
 	##<form name="user" action="$applink/users/tasks/index.html" class="autosubmitform form-inline" style="width:200px; float:left; padding-right:20px;">
 	##	<input name="collectionid" value="$collectionid" type="hidden" />
 	##	    <select class="listdropdown autosubmited form-control-sm" name="goaltrackerstaff" data-placeholder="[[Staff]]">
-	##		<option value="*">[[All Projects/Members]]</option>
+	##		<option value="*">[[All Teams]]</option>
 	##		    ##set( $allmembers = $mediaarchive.getList("user") )
 	##		    #set( $allmembers = $mediaarchive.query("user").ids($otherusers).enduser(true).search() )
 	##		    #foreach( $member in $allmembers )
