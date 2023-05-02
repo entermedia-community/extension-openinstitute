@@ -122,9 +122,14 @@ public void init()
 			Map<String, Map<String, List>> usercollectionsupdated = new HashMap();
 				
 			WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
+			String notificationsprefix = mediaArchive.getCatalogSettingValue("notificationsprefix");
+			if (notificationsprefix == null)
+			{
+				notificationsprefix = "[OI]";
+			}
 			if( collections.size() > 1)
 			{
-				templatemail.setSubject("[OI] " + collections.size() + " User Notifications"); //TODO: Translate
+				templatemail.setSubject(notificationsprefix + " " + collections.size() + " User Notifications"); //TODO: Translate
 				for(String usercollectionid in collections) {
 					usercollectionsupdated.put(usercollectionid, collectionsupdated.get(usercollectionid));
 				}
@@ -133,7 +138,7 @@ public void init()
 			{
 				String oneitem = collections.iterator().next();
 				Data collection = mediaArchive.getCachedData("librarycollection", oneitem);
-				templatemail.setSubject("[OI] " + collection.getName() + " Notification"); //TODO: Translate
+				templatemail.setSubject(notificationsprefix + " " + collection.getName() + " Notification"); //TODO: Translate
 				
 				usercollectionsupdated.put(oneitem, collectionsupdated.get(oneitem));
 			}
