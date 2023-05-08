@@ -18,14 +18,17 @@
 			
 		</div>
 	</div>
-
+	#set( $communitytagid = $context.getRequestParameter("communitytag"))
+	$context.putPageValue("curentcommunitytagid",$communitytagid)
+	<div class="communityhomecontainer">
 	<div class="row no-gutters g-0" >
 		<div class="col-2 " >
+		<div class="communitysidebar">
 			##Current Campaigs
 			#set($tagscategories = $mediaarchive.query("communitytagcategory").all().search($context) )
 			#foreach( $tagcategory in $tagscategories)
-			<div class="communitytagcategory" style="margin-left:5px;">
-				<h2>$tagcategory.getName()</h2>
+			<div class="communitytagcategory">
+				<h3>$tagcategory.getName()</h3>
 					
 					#set($tags = $mediaarchive.query("communitytag").exact("communitytagcategory", $tagcategory).search($context) )
 					#foreach( $tag in $tags)
@@ -34,27 +37,52 @@
 					#end
 			</div>
 			#end
+			</div>
 		</div>
 		<div class="col" >
 			
 			<div class="communitytaglayout-proposals" style="margin:0 0 0 20px;">
-					#set( $communitytag = $context.getRequestParameter("communitytag"))
-					#ifnull($communitytag)
+					
+					#ifnull($communitytagid)
 						#set( $projects = $mediaarchive.query("librarycollection").all().search($context) )
 					#end
-					#ifnotnull($communitytag)
-						#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$communitytag).search($context) )
+					#ifnotnull($communitytagid)
+						#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$communitytagid).search($context) )
+						#set($comunitytag = $mediaarchive.getCachedData("communitytag", $communitytagid))
 					#end
+
+					
+						<div class="proposalscategoryheader">
+							#ifnotnull($comunitytag)
+							<h2>$comunitytag.getName()</h2>
+							#end
+							#ifnull($comunitytag)
+							<h2>[[Featured Projects]]</h2>
+							#end
+							<div style="float:right; margin:5px 20px 0 0">
+								<a href="" class="btn btn-primary btn-sm">+ [[Proposal]]</a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					
+					
+					<div class="proposalscategory">
+					#if($projects.size() <= 0)
+						[[No projects found within this category.]] <a href="#">[[Create Proposal]]</a>. [[Or]] <a href="$applink/index.html">[[browse featured Proposals]]</a>.
+					#end
+					
+					$context.putPageValue("communitytagid",$communitytagid)
 					#foreach( $project in $projects.getPageOfHits() )
 						$context.putPageValue("project",$project)
 						$pages.include("$apphome/causes/proposals/proposalsummary.html", $context)
 					#end
+					</div>
 			</div>
 
 
 		</div>
 	</div>
-
+	</div>
 	
 
 </div>

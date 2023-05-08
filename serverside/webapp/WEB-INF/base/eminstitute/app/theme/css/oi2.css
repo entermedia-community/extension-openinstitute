@@ -1267,14 +1267,32 @@ list-style: none;
 	margin: 0 0 10px;
 }
 
-.communitytagcategory h2 {
+.communityhomecontainer {
+	background-color:#dedede; 
+}
+.communitysidebar {
+	background-color: #fff;
+	margin:15px 0 0 15px;
+}
+.communitytagcategory { 
+	padding: 0 0 1px 0;
+}
+.communitytagcategory h3 {
 	background-color: #009DA4;
 	color:#fff;
-	font-size:1.3rem;
-	padding:3px 10px;	
+	font-size:1rem;
+	line-height:36px;
+	height:36px;
+	padding:0px 10px;
+	margin: 0 0 20px;	
 }
 .communitytagcategory .card-collections {
 	width: 140px;
+    float: none;
+    display: block;
+    border: 0 none;
+    margin: 5px auto 30px;
+    
 }
 .communitytagcategory .card-collections a .collectionbox {
 	color:#Fff;
@@ -1285,19 +1303,29 @@ list-style: none;
 	margin-bottom:6px;
 }
 
-.communitytagcategory .card-name {
+.card-collections .card-name {
+	background-color: #ddd;
+	color:#333;
+	border-radius: 0.75rem;
+	padding:4px 0;
+	line-height: 16px;
+}
+.card-collections:hover .card-name,
+.card-collections.currentcat .card-name {
 	background-color: #009DA4;
 	color:#fff;
-	border-radius: 1rem;
-	padding:4px 0;
+}
+.communitytaglayout-proposals {
+	padding:15px 15px 15px 0;
 }
 
-.communitytaglayout-proposals {
-	background-color: #dedede;
-	padding:15px;
-}
-.proposal-summary {
+.proposalscategory {
 	background-color: #fff;
+	padding:10px;
+}
+
+.proposal-summary {
+	
 	padding:10px 15px;
 	margin-bottom:15px;
 }
@@ -1313,6 +1341,21 @@ list-style: none;
 	width: 100px;
 	height: 100px;
 	border:2px solid #C8C446
+}
+
+.proposalscategoryheader {
+	background-color: #009DA4;
+	
+}
+.proposalscategoryheader h2 {
+	margin:0;
+	float:left;
+	color:#fff;
+	font-size:1.2rem;
+	line-height:36px;
+	padding:0 15px;
+	height: 36px;
+
 }
 
 

@@ -6,9 +6,10 @@
 	#set($logo = "$applink/theme/images/OI_flower.png")
 #end
 #if(!$link)
-	#set($link = "$applink/causes/proposals/${communitytag.id}/#dash($communitytag.getName()).html")
+	##set($link = "$applink/causes/proposals/${communitytag.id}/#dash($communitytag.getName()).html")
+	#set($link = "$applink/index.html?communitytag=${communitytag.id}")
 #end
-<div class="card-collections">
+<div class="card-collections  #if($curentcommunitytagid==$communitytag.getId()) currentcat #end">
 <a href="$link" 
 	class="pick-item  #if ($librarycol.id == $communitytag.id) project-selected #end" 
 	title="${communitytag.getName()}">
