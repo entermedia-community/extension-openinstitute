@@ -245,7 +245,7 @@
   
   <property id="communitytag" index="true" stored="true" editable="true" viewtype="multiselect" filter="true"  datatype="list"  type="list">
     <name>
-      <language id="en"><![CDATA[Campaigns]]></language>
+      <language id="en"><![CDATA[Category]]></language>
     </name>
   </property> 
   
