@@ -3,7 +3,8 @@
 body,
 .navbar-collective,
 h1, h2, h3, h4, h5, h6, .resultsnav .nav-btn, .resultsnavright .nav-btn {
-  font-family: 'Red Hat Display', sans-serif;
+/*  font-family: 'Red Hat Display', sans-serif;*/
+
 }
 
 body {
@@ -1281,6 +1282,7 @@ list-style: none;
 	background-color: #009DA4;
 	color:#fff;
 	font-size:1rem;
+	font-weight:600;
 	line-height:36px;
 	height:36px;
 	padding:0px 10px;
@@ -1298,15 +1300,15 @@ list-style: none;
 	color:#Fff;
 }
 .communitytagcategory .card-collections .card-collections-thumb {
-	width: 95px;
-	height: 95px;
+	width: 90px;
+	height: 90px;
 	margin-bottom:6px;
 }
 
 .card-collections .card-name {
 	background-color: #ddd;
 	color:#333;
-	border-radius: 0.75rem;
+	border-radius: 0.55rem;
 	padding:4px 0;
 	line-height: 16px;
 }
@@ -1325,21 +1327,21 @@ list-style: none;
 }
 
 .proposal-summary {
-	
 	padding:10px 15px;
-	margin-bottom:15px;
+	margin-bottom:30px;
 }
 
-.proposal-summary h3 {
+.proposal-summary h3 a {
 	margin:0 0 10px 10px;
-	color:#009DA4;
+	color:#1D5655;
+	font-weight: 600;
 }
 .proposal-summary .card-collections {
 	width:110px;
 }
 .proposal-summary .card-collections .card-collections-thumb {
-	width: 100px;
-	height: 100px;
+	width: 95px;
+	height: 95px;
 	border:2px solid #C8C446
 }
 
@@ -1348,6 +1350,7 @@ list-style: none;
 	
 }
 .proposalscategoryheader h2 {
+	font-weight:600;
 	margin:0;
 	float:left;
 	color:#fff;
