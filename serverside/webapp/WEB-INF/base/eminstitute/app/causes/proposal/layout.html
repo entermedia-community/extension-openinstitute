@@ -90,16 +90,17 @@
 			
 			</div>
 			
-			<div class="text-center" style="margin-bottom:20px;">
+			<div class="text-center" style="margin-bottom:30px;">
 			<a href="#" class="btn btn-xl  btn-secondary">[[Supporters]]</a>
 			<a href="#" class="btn btn-xl  btn-secondary">[[Join]]</a>
 			</div>
 			
-						
-			 	<div class="community-sidebar-box ">
+				#if($librarycol.proposaltestimonials)
+			 	<div class="community-sidebar-box proposal-sidebarbox">
+			 		<h3>[[Testimonials]]</h3>
 					   	$!librarycol.proposaltestimonials
 				</div>
-			
+				#end
 			
 		</div>
 		

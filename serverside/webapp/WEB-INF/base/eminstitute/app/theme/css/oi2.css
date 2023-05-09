@@ -564,6 +564,9 @@ text-decoration: none;
 	border-bottom-right-radius: 20px;
 }
 
+.proposalnews .feedcard-body {
+	margin:0;
+}
 .proposalheader {
 	height: 40px;
 	padding:0 15px;
@@ -696,7 +699,7 @@ text-decoration: none;
 		border-top-left-radius:0px;
 		border-top-right-radius: 0;
 		padding:0;
-		width: 87%;
+		width: 89%;
 		height: 35px;
 		display:inline-block;
 		position:relative;
@@ -1277,6 +1280,7 @@ list-style: none;
 
 .donate-proposal-sidebar h3 {
 	margin: 0 0 10px;
+	font-weight: 600;
 }
 
 .communityhomecontainer {
@@ -1384,4 +1388,13 @@ list-style: none;
 	vertical-align: top;
 	padding:5px 8px;
 	
+}
+
+.proposal-sidebarbox {
+	padding:10px 15px;
+}
+.proposal-sidebarbox h3 {
+	text-align:center;
+	font-weight: 600;
+	margin:0 0 10px;
 }
