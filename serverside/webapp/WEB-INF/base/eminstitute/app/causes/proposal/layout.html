@@ -31,6 +31,19 @@
 				##<h4>[[What is going on]]:</h4>
 				##</div>
 				<div class="proposaldescription" style="">
+					<table style="width:100%;" class="proposalsummarytable">
+				   		<tr>
+				   			<td style="width:33%;">
+				   				$!librarycol.get("proposalproblem")
+				   			</td>
+				   			<td style="width:33%;">
+				   				$!librarycol.get("proposalsummary")
+				   			</td>
+				   			<td style="width:33px;">
+				   				$!librarycol.get("proposalbudget")
+				   			</td>
+				   		</tr>
+				   	</table>
 					
 				</div>
 				</div>
@@ -84,15 +97,7 @@
 			
 						
 			 	<div class="community-sidebar-box ">
-				
-				 	#if( $caneditcollection)
-						<a class="oe-dataedit" style="position:absolute; bottom:22px; right:17px;" data-target="#editcampaignhighlights-$librarycol.id" title="[[Edit Project Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i> </a>
-						
-					#end
-					<div class="#if( $caneditcollection)oe-editable#end" id="editcampaignhighlights-$librarycol.id" data-dataid="$librarycol.id" data-field="campaignhighlights" data-searchtype="librarycollection">
-					   	#if($librarycol.campaignhighlights) $!librarycol.campaignhighlights #else <h4>[[Testimonials]]</h4> #end
-					</div>
-				
+					   	$!librarycol.proposaltestimonials
 				</div>
 			
 			

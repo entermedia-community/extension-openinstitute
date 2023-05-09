@@ -754,6 +754,7 @@ min-height: 115px;
 
 .campaignscollectiveheader h1 {
 	color:#fff;
+	text-shadow: 1px 1px #000000;
 }
 
 .project-title h1 {
@@ -761,6 +762,7 @@ min-height: 115px;
 	font-size:1.6rem;
 	line-height:1.1;
 	margin:0 0 5px 0;
+	
 }
 .project-likes {
 	font-weight:normal;
@@ -1378,3 +1380,8 @@ list-style: none;
 	display: none;
 }
 
+.proposalsummarytable td {
+	vertical-align: top;
+	padding:5px 8px;
+	
+}

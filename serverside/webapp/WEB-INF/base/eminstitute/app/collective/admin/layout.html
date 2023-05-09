@@ -19,10 +19,12 @@
 						<li  class="#if($collectiveadminsection == "general") current #end"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[General]]</a></li>
 						
 						#if($isproposal)
-						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=proposalsummary" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Summary]]</a></li>
+							<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=proposalsummary" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Summary]]</a></li>
+							<li><a href="#budget" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Budget]]</a></li>
+							<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=proposaltestimonials" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Testimonials]]</a></li>
 						#else
-						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editinvoicetemplate" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoice Template]]</a></li>
-						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Fundraising]]</a></li>
+							<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editinvoicetemplate" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoice Template]]</a></li>
+							<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Fundraising]]</a></li>
 						#end
 					</ul>
 			</div>
