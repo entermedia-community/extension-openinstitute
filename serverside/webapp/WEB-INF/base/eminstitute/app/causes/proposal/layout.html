@@ -1,11 +1,5 @@
-<div id="campaigninfo" class=" oicontainer oicontainercampaigns " >
-	#set( $tagid = $url_util.getPathUtilities().extractDirectoryName($content.path) )
-		
-	#set( $tag = $mediaarchive.getCachedData("communitytag",$tagid) )
-	#if($tag)
-	$context.putPageValue("communitytag",$tag )
-	#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
-	$context.putPageValue("communityprojects",$projects )
+
+<div id="campaigninfo" class=" oicontainercampaigns " >
 
 	
 	
@@ -27,16 +21,35 @@
 				
 				<div class="communitycontainer-header">
 				<h3>
-				[[News:]]
+				[[Proposal Summary:]]
 				</h3>
 				</div>
 				
 				
-				<div class="communitytagcontainer-out">
-				<div class="communitytagheader" style="">
-				<h4>[[What is going on in this campaign:]]</h4></div>
-				<div class="communitytagdescription" style="">
-					$pages.include("$apphome/appeal/channelfeed.html",$context)
+				<div class="proposalcontainer-out">
+				##<div class="proposalheader" style="">
+				##<h4>[[What is going on]]:</h4>
+				##</div>
+				<div class="proposaldescription" style="">
+					
+				</div>
+				</div>
+
+
+
+
+				<div class="communitycontainer-header">
+				<h3>
+				[[News]]:
+				</h3>
+				</div>
+				
+				<div class="proposalcontainer-out">
+				<div class="proposalheader" style="">
+				<h4>[[What is going on in this proposal]]:</h4>
+				</div>
+				<div class="proposalnews" style="">
+					$pages.include("$apphome/causes/proposal/channelfeed.html",$context)
 				</div>
 				</div>
 				
@@ -86,7 +99,7 @@
 		</div>
 		
 	</div>
-	#end	
+		
 </div>
 
 

@@ -531,7 +531,7 @@ text-decoration: none;
 .communityprojects-content .card-collections .collectionbox span {
 
 }
-.communitytagheader h4 {
+.proposalheader h4 {
 	color:#fff;
 	margin:0;
 	padding:8px 0 0;
@@ -539,7 +539,7 @@ text-decoration: none;
 	width:70%;
 	
 }
-.communitytagcontainer-out {
+.proposalcontainer-out {
 	background-color: #1D5655;
 	color:#fff;
 	margin-bottom:40px;
@@ -547,15 +547,24 @@ text-decoration: none;
 }
 
 
-.communitytagdescription {
+.proposaldescription {
 	background-color: #fff;
-	padding:1px 15px;
+	padding:15px;
 	color: #1D5655;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+.proposalnews {
+	background-color: #fff;
+	padding:5px 15px;
+	color: #1D5655;
+	
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
 }
 
-.communitytagheader {
+.proposalheader {
 	height: 40px;
 	padding:0 15px;
 	border-top-left-radius: 15px;
@@ -674,7 +683,7 @@ text-decoration: none;
 	.communitycontainer-header:after {
 	    border-bottom-color: #1D5655;
 	}
-	.communitytagcontainer-out,
+	.proposalcontainer-out,
 	.communityprojects-body {
 		border-radius: 20px;
 		border-top-left-radius:0;

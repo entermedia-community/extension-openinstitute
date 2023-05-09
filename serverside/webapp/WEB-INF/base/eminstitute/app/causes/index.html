@@ -44,7 +44,7 @@
 			<div class="communitytaglayout-proposals" style="margin:0 0 0 20px;">
 					
 					#ifnull($communitytagid)
-						#set( $projects = $mediaarchive.query("librarycollection").all().search($context) )
+						#set( $projects = $mediaarchive.query("librarycollection").exact("collectiontype", "5").search($context) )
 					#end
 					#ifnotnull($communitytagid)
 						#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$communitytagid).search($context) )
@@ -57,7 +57,7 @@
 							<h2>$comunitytag.getName()</h2>
 							#end
 							#ifnull($comunitytag)
-							<h2>[[Featured Projects]]</h2>
+							<h2>[[Recent Proposals]]</h2>
 							#end
 							<div style="float:right; margin:5px 20px 0 0">
 								<a href="" class="btn btn-primary btn-sm">+ [[Proposal]]</a>

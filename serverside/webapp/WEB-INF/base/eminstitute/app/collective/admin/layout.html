@@ -3,6 +3,11 @@
 #if(!$collectiveadminsection)
 	#set($collectiveadminsection = "settings")
 #end
+
+#if($librarycol.get("collectiontype") == "5")
+	#set($isproposal = "true")
+#end
+
 <div class="container">
 <div class="contentcolumn" style="padding:0;">
 	<div class="row no-gutters g-0">
@@ -10,10 +15,15 @@
 			<div class="collectivesettings-menu">
 						
 					<ul class="auto-active-container">
-						<li class="menu-subheader">[[Settings]]</li>
-						<li  class="#if($collectiveadminsection == "general") current #end"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Preferences]]</a></li>
+						<li class="menu-subheader">[[Configuration]]</li>
+						<li  class="#if($collectiveadminsection == "general") current #end"><a href="$applink/collective/admin/index.html?collectionid=$collectionid" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[General]]</a></li>
+						
+						#if($isproposal)
+						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=proposalsummary" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Summary]]</a></li>
+						#else
 						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editinvoicetemplate" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoice Template]]</a></li>
 						<li><a href="$applink/collective/edit/editcollective.html?collectionid=$!collectionid&view=editdonations" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Fundraising]]</a></li>
+						#end
 					</ul>
 			</div>
 		</div>

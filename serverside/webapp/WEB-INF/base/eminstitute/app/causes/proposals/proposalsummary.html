@@ -49,32 +49,21 @@
 			#end
 		
 		<div class="">
-		 	#if( $caneditcollection)
-				<a class="oe-dataedit" style="position:absolute; bottom:22px; right:17px;" data-target="#editproposalhighlights-$librarycol.id" title="[[Edit Project Intro]]" data-width="500"	href="#"><i class="fas fa-edit"></i> </a>
-				
-			#end
-			<div class="#if( $caneditcollection)oe-editable#end" id="editproposalhighlights-$librarycol.id" data-dataid="$librarycol.id" data-field="proposalhighlights" data-searchtype="librarycollection">
-			   	#if($librarycol.proposalhighlights) $!librarycol.proposalhighlights #else 
 			   	
 			   	<table style="width:100%;">
 			   		<tr>
 			   			<td style="width:33%;">
-			   				<strong>Problem:</strong><br>
-			   				<p>Proposal Problem</p>
+			   				$!project.get("proposalproblem")
 			   			</td>
 			   			<td style="width:33%;">
-			   				<strong>Summary:</strong><br>
-			   				<p>Summary Text</p>
+			   				$!project.get("proposalsummary")
 			   			</td>
 			   			<td style="width:33px;">
-			   				<strong>Budget:</strong><br>
-			   				<p>Budget Description</p>
+			   				$!project.get("proposalbudget")
 			   			</td>
 			   		</tr>
 			   	</table>
 			   	
-			   	 #end
-			</div>
 		</div>
 	</div>
 	<div class="clearfix"></div>

@@ -1,16 +1,25 @@
+#if($librarycol.get("collectiontype") == "5")
+	#set($isproposal = "true")
+#end
+
 <div class="card-block" style="padding:5px 20px;">
 
-<h2>[[Project Settings]]</h2>
+<h2>[[General]]</h2>
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
-
 #set( $view = $context.getRequestParameter("view") )
+
 #if(!$view)
-	#if($canviewsettings)
-		#set( $view = "agentedit")
+	#if($isproposal)
+		##Proposals Settings
+		#set( $view = "proposalgeneral")
 	#else
-		#set( $view = "edit")
+		#if($canviewsettings)
+			#set( $view = "agentedit")
+		#else
+			#set( $view = "edit")
+		#end
 	#end
 #end
 $context.putPageValue("view", "librarycollection/$view")
