@@ -1361,5 +1361,11 @@ list-style: none;
 
 }
 
-
+.card-collections:hover .edit-communitytag {
+	display: inline-block;
+} 
+.edit-communitytag {
+	float:right;
+	display: none;
+}
 

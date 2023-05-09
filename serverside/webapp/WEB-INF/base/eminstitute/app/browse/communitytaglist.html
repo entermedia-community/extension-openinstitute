@@ -9,14 +9,14 @@
 	##set($link = "$applink/causes/proposals/${communitytag.id}/#dash($communitytag.getName()).html")
 	#set($link = "$applink/index.html?communitytag=${communitytag.id}")
 #end
-<div class="card-collections  #if($curentcommunitytagid==$communitytag.getId()) currentcat #end">
+<div class="card-collections  #if($curentcommunitytagid==${communitytag.getId()}) currentcat #end">
+#if($canviewsettings)
+<a href="$applink/causes/admin/index.html?id=${communitytag.getId()}" class="edit-communitytag"><i class="fas fa-edit"></i></a>
+#end
 <a href="$link" 
 	class="pick-item  #if ($librarycol.id == $communitytag.id) project-selected #end" 
 	title="${communitytag.getName()}">
-	
 	 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
 	 <div class="card-name"><span>#esc($communitytag.getName())</span></div>
-	 
-	 
 </a>
 </div>
