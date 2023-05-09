@@ -30,6 +30,7 @@
 		#end
 		<div style="padding:5px 0 10px;">
 			<div style="width:25px; float:left;"><i class="fas fa-check-square" style="color:#07172C"></i></div>
+			<div style="padding:5px 0 10px;float:left;">
   			<select  name="taskstatus" class="form-control form-control-sm" >
 			  <option value="" ></option>
 			  #set( $options = $mediaarchive.getList("taskstatus"))
@@ -38,9 +39,24 @@
 			  $context.getText($mediaarchive.getCachedData("taskstatus", $option.id))</option>
 			  #end
 			</select>
+			</div>
 		</div>		
+		<div class="clearfix"></div>
 
-
+		<div style="padding:5px 0 10px;">
+				<div style="width:25px; float:left;"><i class="fas fa-tags" style="color:#07172C"></i></div>
+				<div style="min-width:400px; padding:5px 0 10px;float:left;">
+				#set( $searcher = $mediaarchive.getSearcher("goaltask") )
+				$context.putPageValue("searcher",$searcher)	
+				#set( $detail = $searcher.getDetail("keywords") )
+				$context.putPageValue("detail",$detail)
+				$context.putPageValue("values",$task.getValues("keywords"))	
+				$context.putPageValue("data",$task)	
+				$pages.include("$componenthome/xml/types/tageditor.html", $context)
+			</div>
+		</div>
+			<div class="clearfix"></div>
+		
 			<div style="padding:5px 0 10px;">
 			## change completedby field to staff field? 
 			#set( $completedby = $task.completedby)

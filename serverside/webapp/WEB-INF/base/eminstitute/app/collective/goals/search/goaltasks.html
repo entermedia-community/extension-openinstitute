@@ -50,7 +50,20 @@
 					$!task.comment
 				#end
 				</div>
-	
+
+				<div class="taskdetails">
+					#set( $type = "goaltask" )
+					#set( $vals = $task.getValues("keywords") )
+					#ifnotnull($vals)
+					##USE AJAX
+					#foreach( $val in $vals )
+						#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+					  	<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" 
+					href="$link" title="#esc($val)">#esc($val)</a> 
+					#end
+					#end
+				</div>
+		
 				
 				<div class="taskstatus goalstatus-$!task.taskstatus">
 					#if($caneditgoal)

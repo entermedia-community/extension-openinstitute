@@ -458,7 +458,7 @@ ul.projectgoals {
 }
 
 
-.taskgoaledit textarea {
+.taskgoaledit #textarea {
 	min-height: 110px;
 	font-size:0.9rem;
 }
