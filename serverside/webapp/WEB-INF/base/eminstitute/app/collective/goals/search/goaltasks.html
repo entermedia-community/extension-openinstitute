@@ -34,7 +34,6 @@
 		#set($collectionid = $goal.collectionid)
 		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
-
 		
 			<div id="$!{container}taskrow${task.id}" class="goaltaskrow" >
 				<div class="taskage">$task.getAge()</div>
@@ -66,6 +65,7 @@
 		
 				
 				<div class="taskstatus goalstatus-$!task.taskstatus">
+					
 					#if($caneditgoal)
 						<a 
 							id="task${task.id}"

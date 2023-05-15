@@ -95,12 +95,16 @@
 </div>	
 
 		<div>
-  			<input id="submitbutton" type="submit" form="someform" value="[[Save]]" name="submitbutton" class="btn btn-xs btn-primary float-right">
+  			<input id="submitbutton" type="submit" form="someform" value="[[Save]]" name="submitbutton" 
+  				class="btn btn-xs btn-primary float-right"
+  				style="margin-left:10px;">
 		
-			#if( $caneditcollection )
-    		<a class="btn btn-xs btn-danger float-right ajax" style="margin:0 10px;" data-confirm="[[Are you sure?]]"
-    			 targetdiv="editgoal" title="[[Remove task]]"
-    			href="$applink/collective/goals/taskdelete.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">[[Delete]]</a> 
+			#if( $task.id && $caneditcollection )
+    		<a class="btn btn-xs btn-danger float-right ajax" 
+    			style="margin:0 0 0 10px;" data-confirm="[[Are you sure?]]"
+    			targetdiv="editgoal" title="[[Remove task]]"
+    			href="$applink/collective/goals/taskdelete.html?collectionid=$!librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">
+    			[[Delete]]</a> 
     		#end
     	
     		##set( $targetdiv = "tasklist#eid($selectedgoal.id)")

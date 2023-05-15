@@ -35,7 +35,10 @@
 			</div>
     		#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
 		    <a href="$goallink"
-		    	title="$goal.name" class="emdialog editgoalshow" data-urlbar="$applink/collective/goals/priorities/index.html?collectionid=$goal.collectionid&opengoalid=${goal.id}" data-width="900" >
+		    	title="$goal.name" class="emdialog editgoalshow" 
+		    	data-urlbar="$applink/collective/goals/priorities/index.html?collectionid=$goal.collectionid&opengoalid=${goal.id}" 
+		    	data-width="900"
+		    	data-hidefooter="true" >
 		    	<div style="font-weight:bold;" >	 
 		    	 $goal.name
 		    	 </div> 

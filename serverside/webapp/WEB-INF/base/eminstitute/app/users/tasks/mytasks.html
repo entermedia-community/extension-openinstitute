@@ -4,6 +4,8 @@
 	#ifnull($user)
 		<p> [[Must be logged in to view tasks]] </p>
 	#end	
+	
+	
 		<div class="goals-header-actions">
 				  <!-- <a class="btn btn-success dropdown-toggle" style="color:white;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Employee
@@ -16,28 +18,33 @@
 				  	#foreach ( $aproject in $aprojects)
 				  			#set($x = $pids.add($aproject.id))
 				  	#end
-				  	<form  action="$content.path" class="form-inline autosubmitform" >
-						#set( $text = "$user" )
-						#if( $selecteduser)
-							#set( $text = "$selecteduser.toString()" )
-						#end
+				  	
+				  	#set( $user_text = "$user" )
+					#if( $selecteduser)
+						#set( $user_text = "$selecteduser.toString()" )
+					#end
+				  	
+				  	#if($canviewsettings)
+				  	<form  action="$content.path" class="form-inline autosubmitform" style = "float:left">
+						
 						
 						<div  style="padding-right:20px;min-width:230px;display:inline-block">
 						<select name="userid" id="userid"  
 							class="listautocomplete selectautosubmit" 
 							data-showdefault="$text" data-addnewlabel="[[[Add New]]]" 
 							data-searchfield="name" data-searchtype="user"  
-							data-placeholder="$text" data-sortby="name">
+							data-placeholder="$user_text" data-sortby="name">
 						</select>
 						</div>
-			
-				#if($canviewsettings)
-			 	$opentickets.size() [[Open Tickets]]
-				#end
 					</form>
-			
+					#end
+				##if($canviewsettings)
+			 	<div class="float-right">$opentickets.size() [[Open Tickets for]]: <strong>$!user_text</strong></div>
+				##end
+				
+			<div class="clearfix"></div>
 		</div>
-	#if($canviewsettings)
+	##if($canviewsettings)
 	#if($hits)
 		
 		<div class="emdata" style="overflow-x:auto;">
@@ -83,6 +90,7 @@
 					$!goal.details 		
 					
 					<div class="goal-body">
+						$context.putPageValue("caneditcollection","true")
 						$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true&onlyuser=true", $context)
 					</div>
 					
@@ -112,7 +120,7 @@
 		#end
 		</table>
 		</div>
-	#end
+	##end
 #end
 
 

@@ -24,9 +24,9 @@ $context.putPageValue("searcher",$searcher)
 
 
 
-#set($projectname = $mediaarchive.getData("librarycollection",$data.collectionid))
+#set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
-	<a href="$applink/collective/goals/search/index.html?collectionid=$data.collectionid">$projectname</a>
+	[[Project]]: <strong><a href="$applink/collective/goals/search/index.html?collectionid=$collectionid" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></strong>
 #end
 <div class="clearfix"></div>
 <form name="saveproject" class ="ajaxform autocloseform showwaiting autoreloadsource" id="saveproject" method="post" 
