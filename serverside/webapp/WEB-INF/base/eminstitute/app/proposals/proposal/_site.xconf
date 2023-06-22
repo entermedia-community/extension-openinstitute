@@ -4,10 +4,10 @@
 	<property name="communitytag">true</property>
 	<property name="virtual">true</property>
 
-	 <inner-layout>/${applicationid}/causes/proposal/layout.html</inner-layout>
+	 <inner-layout>/${applicationid}/proposals/proposal/layout.html</inner-layout>
 	 
 	 <path-action name="ProjectModule.loadCollection">
-	 	
+	 		<property name="collectionidonpagename">true</property>
 	 </path-action>
 	 
  	<script id="stripe" src="https://js.stripe.com/v3/"/>

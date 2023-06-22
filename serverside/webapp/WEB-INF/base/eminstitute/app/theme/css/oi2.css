@@ -1,9 +1,8 @@
-@import url('../fonts/Red_Hat_Display/static/RedHatDisplay-Regular.ttf');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 
 body,
 .navbar-collective,
 h1, h2, h3, h4, h5, h6, .resultsnav .nav-btn, .resultsnavright .nav-btn {
-/*  font-family: 'Red Hat Display', sans-serif;*/
 
 }
 
@@ -1290,18 +1289,22 @@ list-style: none;
 	background-color: #fff;
 	margin:15px 0 0 15px;
 }
+.communitytopbar {
+	text-align: center;
+	font-family: Raleway;
+	font-size:1.7em;
+}
+
 .communitytagcategory { 
 	padding: 0 0 1px 0;
+	margin: 3px 10px 0 6px;	
 }
 .communitytagcategory h3 {
-	background-color: #009DA4;
-	color:#fff;
 	font-size:1rem;
 	font-weight:600;
 	line-height:36px;
 	height:36px;
 	padding:0px 10px;
-	margin: 0 0 20px;	
 }
 .communitytagcategory .card-collections {
 	width: 140px;
@@ -1398,3 +1401,11 @@ list-style: none;
 	font-weight: 600;
 	margin:0 0 10px;
 }
+
+@font-face {
+  font-family: 'Farmhouse';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Farmhouse'), url('./fonts/farmhouse.otf') format('opentype');
+}
+

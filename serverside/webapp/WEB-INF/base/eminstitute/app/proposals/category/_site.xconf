@@ -7,7 +7,7 @@
 	
 	<property name="fullwidth">true</property>
 	
-	<path-action name="ProjectModule.loadCommunityTagFolder" />
+	<path-action name="ProjectModule.loadCommunityTagCategory" />
 	
-	<inner-layout>/${applicationid}/causes/proposals/innerlayout.html</inner-layout>
+	<inner-layout>/${applicationid}/proposals/category/innerlayout.html</inner-layout>
 </page>

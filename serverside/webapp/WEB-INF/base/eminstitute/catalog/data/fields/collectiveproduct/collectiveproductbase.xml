@@ -145,6 +145,13 @@
    	</name>
    </property>
    
+       <property id="uploadsourcepath"  index="true" type="list" viewtype="category" listid="category" stored="true" note="Auto populated"  editable="false" >
+    <name>
+      <language id="en"><![CDATA[Base Path]]></language>
+    </name>
+  </property> 
+   
+   
     <property id="uploadcategory"  index="true" type="list" viewtype="category" listid="category" stored="true" note="Auto populated"  editable="false" >
     <name>
       <language id="en"><![CDATA[Image Category]]></language>

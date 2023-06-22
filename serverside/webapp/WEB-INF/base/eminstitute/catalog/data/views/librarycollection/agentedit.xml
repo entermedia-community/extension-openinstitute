@@ -2,7 +2,8 @@
 
 <properties> 
   <property id="name"/>
-  <property id="organizationstatus"/>  
+  <property id="organizationstatus"/>
+    <property id="communitytagcategory" />  
   <property id="communitytag" />
   <property id="collectivetags" />
   

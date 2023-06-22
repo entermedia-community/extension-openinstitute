@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data id="0">
+  <data id="0" primaryimagepath="/theme/images/home-natural.jpg">
     <name> 
-      <language id="en"><![CDATA[The Arts]]></language> 
+      <language id="en"><![CDATA[Natural World]]></language> 
     </name> 
   </data>  
-  <data id="1"> 
+  <data id="1"  primaryimagepath="/theme/images/home-creative.jpg">
     <name> 
-      <language id="en"><![CDATA[Humanitarian]]></language> 
+      <language id="en"><![CDATA[Creativity]]></language> 
     </name> 
   </data>  
-  <data id="2"> 
+  <data id="2"  primaryimagepath="/theme/images/home-human.jpg">
     <name> 
-      <language id="en"><![CDATA[Environmental]]></language> 
+      <language id="en"><![CDATA[Human Development]]></language> 
     </name> 
   </data>  
-  <data id="3"> 
+  <data id="3"  primaryimagepath="/theme/images/home-technology.jpg"> 
     <name> 
-      <language id="en"><![CDATA[Animal Rights]]></language> 
-    </name> 
-  </data>    
-  <data id="4"> 
-    <name> 	
-      <language id="en"><![CDATA[Technology]]></language> 
+      <language id="en"><![CDATA[Open Technology]]></language> 
     </name> 
   </data>    
 </root>

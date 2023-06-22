@@ -1,0 +1,69 @@
+<div class="container oicontainer" >
+
+<div class="row no-gutters g-0" >
+		<div class="col oihomepage">
+			<div class="oe-editable bodywebsite" 
+				id="edit-$postdata.id" 
+				data-dataid="$!postdata.id" 
+				data-field="maincontent"	
+				data-searchtype="postdata" 
+				data-viewtype="html">
+  				$!postdata.maincontent
+			</div>
+			  
+			#if( $user.oe_edit_mode == "postedit" )
+				<div class="editpostbtn">
+					<a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true" class="btn btn-xs btn-light">Edit Post</a>
+				</div>
+			#end
+			
+		</div>
+	</div>
+
+	#set( $communitytagid = $context.getRequestParameter("communitytag"))
+	$context.putPageValue("curentcommunitytagid",$communitytagid)
+	<div class="communityhomecontainer">
+
+		<div class="communitytopbar">
+			##Current Campaigs
+			[[Proposals For]]
+		</div>
+
+
+	<div class="row no-gutters g-0" >
+		<div class="col" >
+
+#set($tagscategories = $mediaarchive.query("communitytagcategory").all().search($context) )
+
+<div class="card-group">
+#foreach( $tagcategory in $tagscategories)
+<div class="card" style="width: 18rem;margin:5px;">
+#set( $link = "$apphome/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
+    <h5 class="card-title" style="position:absolute;width:100%;padding:8px 0 6px 0;text-transform: uppercase;background:rgba(220,220,220,.6);text-align:center;">
+    	<a class="active" style="font-family: Raleway;color: #162f2e; " aria-current="page" href="$link">$tagcategory.getName()</a>
+  </h5>
+  <img class="card-img-top" src="$apphome${tagcategory.primaryimagepath}" alt="Card image cap">
+	<div class="card-body">
+    <p class="card-text">
+		$!tagcategory.summary    
+</p>
+    <p style="text-align:center">
+    <a href="#" class="btn btn-primary">View Proposals</a>
+    </p>
+  </div>
+</div>
+#end
+</div>
+			
+	##		$pages.include("$apphome/proposals/listproposals.html", $context)
+			
+
+		</div>
+	</div>
+	</div>
+	
+<div class="entermedia-media"><iframe allowfullscreen="true" height="700" mozallowfullscreen="true" src="https://entermediadb.org/entermediadb/mediadb/services/module/asset/players/play/AWojCykVBcRirzJYj_Vj.html" style="border: none;height:700px" webkitallowfullscreen="true"></iframe></div>
+<!-- div>Collaboration tools with finance tracking, accountability and communication</div -->
+	
+</div>
+

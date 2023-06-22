@@ -1,5 +1,5 @@
 #if(!$link)
-		#set($link = "$applink/causes/proposal/${project.id}/#dash($project.getName()).html")
+	#set($link = "$applink/proposals/proposal/#dash($project.getName())/${project.id}.html")
 #end
 <div class="proposal-summary">
 	<h3><a href="$link" title="${project.getName()}">$project.getName()</a></h3>
