@@ -449,17 +449,17 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
   
   <property id="proposalproblem" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
-      <language id="en"><![CDATA[Proposal Problem]]></language>  
+      <language id="en"><![CDATA[Problem]]></language>  
     </name> 
   </property>
-  <property id="proposalsummary" index="true" stored="true" viewtype="html" editable="true"   > 
+  <property id="proposalcauses" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
-      <language id="en"><![CDATA[Proposal Summary]]></language>  
+      <language id="en"><![CDATA[Root Causes]]></language>  
     </name> 
   </property>
-  <property id="proposalbudget" index="true" stored="true" viewtype="html" editable="true"   > 
+  <property id="proposalempowerment" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
-      <language id="en"><![CDATA[Proposal Budget]]></language>  
+      <language id="en"><![CDATA[Empowerment]]></language>  
     </name> 
   </property>
   <property id="proposaltestimonials" index="true" stored="true" viewtype="html" editable="true"   > 

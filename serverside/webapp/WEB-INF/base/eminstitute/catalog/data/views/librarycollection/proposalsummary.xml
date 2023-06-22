@@ -2,8 +2,8 @@
 
 <properties> 
   <property id="proposalproblem"/>
-  <property id="proposalsummary"/>  
-  <property id="proposalbudget" />
+  <property id="proposalcauses"/>  
+  <property id="proposalempowerment" />
 
     
 
