@@ -2,7 +2,7 @@
 <div class="navbar-container">
 	<ul class="navbar-collective">
 		#set($homelink = "$applink/proposals/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
-		<li id="home" class="nav-item #if($collectivesection == "channel") active #end d-none d-sm-inline-block">
+		<li id="home" class="nav-item #if($collectivesection == "home") active #end d-none d-sm-inline-block">
 			 <a class="nav-link" href="$homelink">
 			[[Home]]</a>
 		</li>
