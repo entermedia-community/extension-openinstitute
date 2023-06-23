@@ -1,9 +1,9 @@
 #set($collectivesection = $content.collectivesection)
 <div class="navbar-container">
 	<ul class="navbar-collective">
-
+		#set($homelink = "$applink/proposals/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
 		<li id="home" class="nav-item #if($collectivesection == "channel") active #end d-none d-sm-inline-block">
-			 <a class="nav-link" href="$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html">
+			 <a class="nav-link" href="$homelink">
 			[[Activity]]</a>
 		</li>
 		<li id="community"  class="nav-item #if($collectivesection == "community") active #end">

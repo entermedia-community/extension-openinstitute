@@ -26,7 +26,10 @@
 		#set($logourl = "$applink/theme/images/OI_flower.png")
 	#end
 	
-	#set($homelink = "$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html")
+	###set($homelink = "$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html")
+	
+	
+	#set($homelink = "$applink/proposals/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
 
 
 	#if ($librarycol.collectivebanner)

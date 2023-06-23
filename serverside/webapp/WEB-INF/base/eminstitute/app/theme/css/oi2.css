@@ -1349,13 +1349,16 @@ list-style: none;
 	margin-bottom:10px;
 }
 
+.proposal-summary h3 {
+	margin:0;
+}
 .proposal-summary h3 a {
-	margin:0 0 10px 10px;
+	margin:0 0 10px 0px;
 	color:#1D5655;
 	font-weight: 600;
 }
 .proposal-summary .card-collections {
-	
+	width:100px;
 }
 .proposal-summary .card-collections .card-collections-thumb {
 	width: 95px;
