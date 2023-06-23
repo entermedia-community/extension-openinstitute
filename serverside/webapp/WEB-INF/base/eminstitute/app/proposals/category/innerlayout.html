@@ -10,20 +10,22 @@
 				#else
 					#set($logo = "$applink/theme/images/OI_flower.png")
 				#end
-				<div class="" style="text-align:center; float:right;"><img src="$logo" style="height:180px;"  /></div>
-				<h2 style="padding:18px;float:left;font-family: Raleway;font-size:6em; color: #eee; ">$communitytagcategory.getName()</h2>
+				<div class="" style='text-align:left; background-image: url("$logo");background-repeat: no-repeat;  background-position: right top; '  >
+				<h2 style="padding:18px;font-family: Raleway;font-size:6em; color: #eee; ">$communitytagcategory.getName()</h2>
 				##<p>$communitytagcategory.summary</p>
+				</div>
 				<div class="clearfix"></div>
-
+			</div>
 			</div>		
 			<div class="communitytaglayout-proposals">
 
 ##				<div style="float:right; margin:5px 10px 0 0">
 ##					<a href="" class="btn btn-secondary btn-lg">[[Create a Proposal]]</a>
 ##				</div>
-
+				#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 				#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context) )
 				#foreach( $project in $projects.getPageOfHits() )
+					#set( $project = $searcher.loadData($project) )
 					$context.putPageValue("project",$project)
 					$pages.include("$apphome/proposals/proposalsummary.html", $context)
 				#end

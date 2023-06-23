@@ -1,9 +1,10 @@
 #if(!$link)
 	#set($link = "$applink/proposals/proposal/#dash($project.getName())/${project.id}.html")
 #end
-<div class="proposal-summary">
-	<h3><a href="$link" title="${project.getName()}">$project.getName()</a></h3>
-	
+<div class="row" >
+
+<div class="proposal-summary col-2" style="text-align:center">
+	<h3><a href="$link" class="btn btn-primary"title="${project.getName()}">$project.getName()</a></h3>
 	
 	<div class="clearfix"></div>
 	#set($logo = false) 
@@ -14,17 +15,27 @@
 		#set($logo = "$applink/theme/images/OI_flower.png")
 	#end
 	
-	<div class="card-collections" style="float:left;">
+	<div class="card-collections" >
 	<a href="$link" 
 		class="pick-item  #if ($librarycol.id == $project.id) project-selected #end" 
 		title="${project.getName()}">
 		 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
 	</a>
+	<div style="padding:4px;">
+	#set( $days = $mediaarchive.getProjectManager().calcDaysRemaining($project) )
+	#set( $per = $days / 365 ) 
+		<div class="progress" style="margin:10px;width:90%;height: 20px;">
+		  <div class="progress-bar" role="progressbar" style="width: $per%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+	<div style="color:#aaa">
+		$days [[Days Remaining]]
 	</div>
-	<div class="proposal-summary-content"  style="width: calc(100% - 140px); float:right;">
+	</div>
+	</div>
+</div>	
+<div class="proposal-summary-content col" >
 		
-			#set($keywords = $project.collectivetags)
-			#set( $vals = $keywords.split("\s*\|\s*") )
+			#set($vals = $project.getValues("collectivetags") )
 			#set($count = 0)
 			#if($vals)
 				<div class="" style="margin:0 0 10px">
@@ -52,19 +63,29 @@
 			   	
 			   	<table style="width:100%;" class="proposalsummarytable">
 			   		<tr>
+			   			<th style="width:33%;">
+			   				[[Problem]]
+			   			</th>
+			   			<th style="width:33%;">
+			   				[[Solution]]
+			   			</th>
+			   			<th style="width:33%;">
+			   				[[Empowerment]]
+			   			</th>
+			   		</tr>
+			   		<tr>
 			   			<td style="width:33%;">
 			   				$!project.get("proposalproblem")
 			   			</td>
 			   			<td style="width:33%;">
 			   				$!project.get("proposalcauses")
 			   			</td>
-			   			<td style="width:33px;">
+			   			<td style="width:33%;">
 			   				$!project.get("proposalempowerment")
 			   			</td>
 			   		</tr>
 			   	</table>
 			   	
 		</div>
-	</div>
-	<div class="clearfix"></div>
+</div>
 </div>
