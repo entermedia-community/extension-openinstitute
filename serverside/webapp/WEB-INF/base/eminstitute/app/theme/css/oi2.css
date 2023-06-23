@@ -748,10 +748,13 @@ min-height: 115px;
 	width: 100%;
 	height:220px;
 	margin:0 0  5px;
+	background-color: #ddd;
 }
 .oicontainercampaigns {
 	margin:0 0 5px;
-		background-color: #EFEF97;
+	background-color: #EFEF97;
+	padding-bottom:40px;
+	min-height: 400px;
 }
 
 .campaignscollectiveheader h1 {

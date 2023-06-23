@@ -4,44 +4,49 @@
 	
 	<div class="row no-gutters g-0"    >
 		<div  class="col-lg-20p" style="padding:15px 10px 0 10px">
-
-			<div class="communitycontainer-header">
-				<h3>
-				[[Proposal]]:
-				</h3>
-				</div>
-		
-			<div class="proposalcontainer-out">
-				##<div class="proposalheader" style="">
-				##<h4>[[What is going on]]:</h4>
-				##</div>
-				<div class="proposaldescription" style="">
-				
-					#if($!librarycol.get("proposalproblem"))
-					<div> 
-					<strong>[[Problem]]</strong><br>
-					$!librarycol.get("proposalproblem")
+			
+			#set($proposalproblem = $librarycol.get("proposalproblem"))
+			#set($proposalcauses = $librarycol.get("proposalcauses"))
+			#set($proposalempowerment = $librarycol.get("proposalempowerment"))
+			
+			#if($proposalproblem  || $proposalcauses || $proposalempowerment)
+				<div class="communitycontainer-header">
+					<h3>
+					[[Proposal]]:
+					</h3>
 					</div>
-					#end
+			
+				<div class="proposalcontainer-out">
+					##<div class="proposalheader" style="">
+					##<h4>[[What is going on]]:</h4>
+					##</div>
+					<div class="proposaldescription" style="">
 					
-					#if($!librarycol.get("proposalcauses"))
-					<div> 
-					<strong>[[Root Causes]]</strong><br>
-					$!librarycol.get("proposalcauses")
+						#if($proposalproblem )
+						<div> 
+						<strong>[[Problem]]</strong><br>
+						$proposalproblem 
+						</div>
+						#end
+						
+						#if($proposalcauses )
+						<div> 
+						<strong>[[Root Causes]]</strong><br>
+						$proposalcauses 
+						</div>
+						#end
+					
+						#if($proposalempowerment)
+						<div> 
+						<strong>[[Empowerment]]</strong><br>
+						$proposalempowerment
+						</div>
+						#end
+					
+					
 					</div>
-					#end
-				
-					#if($!librarycol.get("proposalempowerment"))
-					<div> 
-					<strong>[[Empowerment]]</strong><br>
-					$!librarycol.get("proposalempowerment")
-					</div>
-					#end
-				
-				
 				</div>
-				</div>
-		
+			#end
 		
 		
 			<div class="community-sidebar-box">
@@ -81,23 +86,12 @@
 		<div  class="col-lg-20p" style="padding:15px 10px 10px 0px">
 		
 		
-		<div class="communityprojects-header">
-			<h3>[[Teams]]</h3>
-			</div>
-			<div class="community-sidebar-box communityprojects-content" style="margin-bottom:20px;">
 			
-			#foreach( $project in $projects.getPageOfHits() )
-				$context.putPageValue("collective",$project)
-				$pages.include("$apphome/browse/collectivelist.html",$context)
-				
-			#end
-			<div class="clearfix"></div>
-			
-			</div>
 			
 			<div class="text-center" style="margin-bottom:30px;">
-			<a href="#" class="btn btn-xl  btn-secondary">[[Supporters]]</a>
-			<a href="#" class="btn btn-xl  btn-secondary">[[Join]]</a>
+			
+			$pages.include("$apphome/collective/likeoptions.html", $context)
+			<div style="padding:10px"><a href="#" class="btn btn-lg  btn-secondary">[[Supporters]]</a></div>
 			</div>
 			
 				#if($librarycol.proposaltestimonials)

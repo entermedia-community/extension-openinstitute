@@ -3,7 +3,8 @@
 <properties> 
   <property id="name"  required="true"/>  
   <property id="collectivedescription"/> 
-  <property id="communitytag" />
+  
+  <property id="communitytagcategory" />
   <property id="collectivetags" />
   
   <property id="contactemail"/>  
