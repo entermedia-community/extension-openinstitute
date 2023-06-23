@@ -432,6 +432,14 @@
 	<permission name="showsidebar">
 		<user />
 	</permission>
-
+	
+	
+    <permission name="editcollection">
+		<or>
+			<action name="ProjectModule.canEditCollection" />
+			<action name="ProjectModule.isOnTeam" />		
+			<group id="administrators"/>	
+		</or>
+	</permission>
 	
 </page>

@@ -1,7 +1,7 @@
 #if(!$link)
 	#set($link = "$applink/proposals/proposal/#dash($project.getName())/${project.id}.html")
 #end
-<div class="row" >
+<div class="row no-gutters g-0" >
 
 <div class="proposal-summary col-2" style="text-align:center">
 	<h3><a href="$link" class="btn btn-primary"title="${project.getName()}">$project.getName()</a></h3>
@@ -21,15 +21,16 @@
 		title="${project.getName()}">
 		 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
 	</a>
-	<div style="padding:4px;">
+	
+	</div>
+	<div style="padding: 0 10px;">
 	#set( $days = $mediaarchive.getProjectManager().calcDaysRemaining($project) )
 	#set( $per = $days / 365 ) 
-		<div class="progress" style="margin:10px;width:90%;height: 20px;">
+		<div class="progress" style="margin:15px 0;width:100%; height: 20px;">
 		  <div class="progress-bar" role="progressbar" style="width: $per%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 		</div>
 	<div style="color:#aaa">
 		$days [[Days Remaining]]
-	</div>
 	</div>
 	</div>
 </div>	
@@ -48,7 +49,7 @@
 							#set($fulllink = "$fulllink&clearfilters=true")
 						#end
 						#set($count=$count+1)
-						<a class="btn btn-xs btn-light" title="#text($val)"	
+						<a class="btn btn-xs btn-secondary" title="#text($val)"	
 							href="$fulllink">
 							<span class="">#text($val)</span>
 						</a>
@@ -74,13 +75,13 @@
 			   			</th>
 			   		</tr>
 			   		<tr>
-			   			<td style="width:33%;">
+			   			<td style="width:33%; padding-right: 10px;">
 			   				$!project.get("proposalproblem")
 			   			</td>
-			   			<td style="width:33%;">
+			   			<td style="width:33%; padding-right: 10px;">
 			   				$!project.get("proposalcauses")
 			   			</td>
-			   			<td style="width:33%;">
+			   			<td style="width:33%; padding-right: 2px;">
 			   				$!project.get("proposalempowerment")
 			   			</td>
 			   		</tr>
