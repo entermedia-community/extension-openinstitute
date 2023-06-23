@@ -3,21 +3,24 @@
 <div class="container oicontainer" >
 	<div class="row no-gutters g-0" >
 		<div class="col oihomepage communitytaglayout">
+				<div style="float:right; margin:95px 10px 0 0">
+					<a href="" class="btn btn-secondary btn-lg">[[Create a Proposal]]</a>
+				</div>
 			<div class="communitytaglayout-header" style="background-color:#1D5655; padding:0px;">
-				#set($logo = false) 
-				#if($communitytagcategory.primaryimagepath)
-					#set($logo = "$apphome${communitytagcategory.primaryimagepath}")
+				#set($logo = false)
+				#if($communitytagcategory.primaryimagepathwide)
+					#set($logo = "$apphome${communitytagcategory.primaryimagepathwide}")
 				#else
 					#set($logo = "$applink/theme/images/OI_flower.png")
 				#end
-				<div class="" style='text-align:left; background-image: url("$logo");background-repeat: no-repeat;  background-position: right top; '  >
-				<h2 style="padding:18px;font-family: Raleway;font-size:6em; color: #eee; ">$communitytagcategory.getName()</h2>
-				##<p>$communitytagcategory.summary</p>
+				<div class="" style='text-align:left; background-image: url("$logo");background-size: cover;background-repeat: no-repeat;  background-position: right top; '  >
+				<h2 style="padding:18px 0 0 20px;font-family: Raleway;font-size:6em; color: #eee; margin: 0px;">$communitytagcategory.getName()</h2>
+				<div style="color:white;padding:0 0 5px 23px">$communitytagcategory.caption</div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 			</div>		
-			<div class="communitytaglayout-proposals">
+			<div class="communitytaglayout-proposals" style="background-color: #d4dbda;">
 
 ##				<div style="float:right; margin:5px 10px 0 0">
 ##					<a href="" class="btn btn-secondary btn-lg">[[Create a Proposal]]</a>
@@ -31,7 +34,6 @@
 					$context.putPageValue("project",$project)
 					$pages.include("$apphome/proposals/proposalsummary.html", $context)
 				#end
-			</div>
 		</div>
 	</div>
 </div>

@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data id="0" primaryimagepath="/theme/images/home-natural.jpg">
+  <data id="0" primaryimagepath="/theme/images/home-natural.jpg"
+  primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
+  >
+  <caption><![CDATA[Proposals to support, renew and celebrate the environment]]></caption>
     <name> 
       <language id="en"><![CDATA[Natural World]]></language> 
     </name> 
+    <summary>The natural world is a treasure that sustains all life, brings harmony to our ecosystems, and nourishes our souls. Its abundance nurtures our well-being, offering solace, inspiration, and a deep connection to the world around us.  However, our natural world is in danger right now from threats like pollution and industrialization.  By embracing and protecting this remarkable gift , we ensure a thriving future filled with endless possibilities.
+    </summary>
   </data>  
-  <data id="1"  primaryimagepath="/theme/images/home-creative.jpg">
+  <data id="1"  primaryimagepath="/theme/images/home-creative.jpg"
+  primaryimagepathwide="/theme/images/home-creative-wide.jpg"
+  >
+    <caption><![CDATA[The Arts, Music and Performance]]></caption>
     <name> 
       <language id="en"><![CDATA[Creativity]]></language> 
     </name> 
+    <summary>
+    Artists everywhere need our help to create thriving communities and events!  The arts provide connect people across cultures and generations. By nurturing creativity, we are able to cultivate innovative thinking, problem-solving skills, and emotional intelligence. Let us embrace the power of creativity and invest in the the arts.  The arts are a way to celebrate our shared humanity and promote understanding in our diverse world.
+    </summary>
   </data>  
-  <data id="2"  primaryimagepath="/theme/images/home-human.jpg">
+  <data id="2"  primaryimagepath="/theme/images/home-human.jpg"
+  primaryimagepathwide="/theme/images/home-human-wide.jpg">
     <name> 
       <language id="en"><![CDATA[Human Development]]></language> 
     </name> 
-  </data>  
-  <data id="3"  primaryimagepath="/theme/images/home-technology.jpg"> 
+    <caption><![CDATA[Education, health, assistance and cultural preservation]]></caption>
+    
+    <summary>
+    Many people around the world don't have access to basic human needs. Together, we can create a world where every person has access to the resources they need to thrive.  Charities and organizations worldwide are working tirelessly to ensure that basic needs such as food security, shelter, health, and education are met for everyone. With the help of technological advancements, we can take this progress even further.    
+    </summary>
+  </data>
+  <data id="3"  primaryimagepath="/theme/images/home-technology.jpg"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  > 
     <name> 
       <language id="en"><![CDATA[Open Technology]]></language> 
-    </name> 
+    </name>
+    <caption><![CDATA[Software, tools, science in the common wellness]]></caption>
+    
+    <summary>
+    Open technology is one of the most important advancements in humanity. It has brought efficiency, new jobs, and advancements that have made our lives better. This resource has allowed for collaboration and innovation on a scale never before seen. With open technology, we have access to tools that can help us solve some of the world's biggest problems. From renewable energy to healthcare.
+    
+    </summary>
+   
   </data>    
 </root>

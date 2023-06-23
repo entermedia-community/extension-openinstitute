@@ -1,7 +1,7 @@
 #if(!$link)
 	#set($link = "$applink/proposals/proposal/#dash($project.getName())/${project.id}.html")
 #end
-<div class="row no-gutters g-0" style="margin-bottom:40px;">
+<div class="row" style="background-color:white;margin:10px;padding:8px">
 
 <div class="proposal-summary col-2" style="text-align:center">
 	<h3><a href="$link" class="btn btn-primary"title="${project.getName()}">$project.getName()</a></h3>
@@ -15,15 +15,13 @@
 		#set($logo = "$applink/theme/images/OI_flower.png")
 	#end
 	
-	<div class="card-collections" >
+	<div class="card-collections" >  
 	<a href="$link" 
 		class="pick-item  #if ($librarycol.id == $project.id) project-selected #end" 
 		title="${project.getName()}">
 		 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
 	</a>
-	
-	</div>
-	
+	<div style="padding:4px;">
 	#set( $days = $mediaarchive.getProjectManager().calcDaysRemaining($project) )
 	#if($days)
 		<div style="padding: 0 10px;">
@@ -35,8 +33,7 @@
 				$days [[Days Remaining]]
 			</div>
 		</div>
-	#end
-	
+	</div>
 </div>	
 <div class="proposal-summary-content col" >
 		
@@ -68,18 +65,7 @@
 			   	
 			   	<table style="width:100%;" class="proposalsummarytable">
 			   		<tr>
-			   			<th style="width:33%;">
-			   				[[Problem]]
-			   			</th>
-			   			<th style="width:33%;">
-			   				[[Solution]]
-			   			</th>
-			   			<th style="width:33%;">
-			   				[[Empowerment]]
-			   			</th>
-			   		</tr>
-			   		<tr>
-			   			<td style="width:33%; padding-right: 10px;">
+			   			<td style="width:33%;">
 			   				$!project.get("proposalproblem")
 			   			</td>
 			   			<td style="width:33%; padding-right: 10px;">
