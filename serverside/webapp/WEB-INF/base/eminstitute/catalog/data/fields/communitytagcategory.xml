@@ -16,6 +16,30 @@
       <language id="es"><![CDATA[Nobre]]></language>  
     </name> 
   </property>  
+
+  <property id="summary"  index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Summary]]></language>  
+    </name> 
+  </property>  
+
+
+  <property id="caption" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Caption]]></language>  
+    </name> 
+  </property>  
+  <property id="primaryimagepath" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Image]]></language>  
+    </name> 
+  </property>  
+  
+  <property id="primaryimagepathwide" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Image Wide]]></language>  
+    </name> 
+  </property>  
   
 
   
