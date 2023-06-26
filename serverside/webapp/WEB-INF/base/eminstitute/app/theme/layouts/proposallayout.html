@@ -35,6 +35,8 @@
 	#if ($librarycol.collectivebanner)
 		#set( $banner= $mediaarchive.getAsset($librarycol.collectivebanner) )
 		#set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
+	#else
+		#set ($bannerurl = "$applink/theme/images/oi-background-2023.jpg")
 	#end
 
 
