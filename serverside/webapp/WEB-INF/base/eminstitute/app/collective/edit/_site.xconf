@@ -16,7 +16,6 @@
 	
 	<path-action name="ProjectModule.loadCollection">
 	</path-action>
-
     
     <path-action name="ProjectModule.searchForAssetsOnCollection">
 		<searchtype>librarycollection</searchtype>

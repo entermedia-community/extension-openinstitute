@@ -1,0 +1,12 @@
+<div class="text-center" style="margin-bottom:30px;">
+			
+			$pages.include("$apphome/collective/likeoptions.html", $context)
+			<div style="padding:10px"><a href="#" class="btn btn-lg  btn-secondary">[[Supporters]]</a></div>
+			</div>
+			
+				#if($librarycol.proposaltestimonials)
+			 	<div class="community-sidebar-box proposal-sidebarbox">
+			 		<h3>[[Testimonials]]</h3>
+					   	$!librarycol.proposaltestimonials
+				</div>
+				#end

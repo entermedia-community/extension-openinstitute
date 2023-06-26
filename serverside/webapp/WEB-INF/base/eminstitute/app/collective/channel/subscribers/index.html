@@ -1,14 +1,9 @@
 #set($collectionid = $librarycol.getId())
 <div id="subscriberssidebar">
 
-$pages.include("$apphome/collective/donate/donatesidebar.html",$context)
+##$pages.include("$apphome/collective/donate/donatesidebar.html",$context)
 
 
-#if(1==2 && $librarycol.collectivedescription)
-	<div class="collectivedescription">
-	#esc($librarycol.collectivedescription)
-	</div>
-#end
 
 
 #if ($librarycol.facebooklink || $librarycol.instagramlink || $librarycol.websitelink)

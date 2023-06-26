@@ -19,7 +19,7 @@ body {
 .collectivebanner, .collective-sidebar, .collaborate-sidebar, .maincontent, .community-maincol, .feedupload, .feed-topics, .feedupload-uploader, .profile-sidebar, .contentcolumn, .collectivemaincol, .collective-grid-logo, .shadowbox {
 	box-shadow: none;
 }
-.community-maincol-homepage .feedcard, .card-uploader, .content-collective-home, .collective-sidebar, .collectivemaincol, .contentcolumn, .shadowbox,
+.community-maincol-homepage .feedcard,  .content-collective-home, .collective-sidebar, .shadowbox,
 .oicontainer, .profile-userimage, .login-area .container {
     box-shadow: 0 0 1px rgb(0 0 0 / 25%), 0 1px 3px rgb(0 0 0 / 30%);
 }
@@ -118,7 +118,7 @@ a.badge-success:focus, a.badge-success:hover {
 
 .sidebarbox h4 {
     border-bottom:0 none;
-    color:#1D5655;
+    color:#fff;
     padding:0;
     margin:0 0 20px;
 }
@@ -132,11 +132,13 @@ h1, h2 {
 	color:#1D5655;
 }
 
+.navbar-container {
+	
+}
 
-.sidebar-box-header, .collectivesettings-menu h3,
 li.menu-subheader {
-	background-color: #d4dbda;
-	color:#1D5655;
+	background-color: #1D5655;
+	color:#ddd;
 	padding: 0 10px 0 15px;
 }
 
@@ -165,6 +167,10 @@ li.menu-subheader {
 .collaborate-sidebar {
     background-color: #1D5655;
     color: #fff;
+    padding:5px 10px;
+}
+.collaborate-sidebar a {
+	color: #ccc;
 }
 .collaborate-channels ul li.current a {
     background-color: transparent;
@@ -929,8 +935,8 @@ li.menu-subheader {
 .collectivesettings-menu li a {
 	display: block;
 	padding:5px 15px;
-	background-color: #fff;
-	color:#666;
+	background-color: #dfdfdf;
+	color:#333;
 }
 
 .collectivesettings-menu li.current a,

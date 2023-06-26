@@ -1,0 +1,47 @@
+#set($proposalproblem = $librarycol.get("proposalproblem"))
+#set($proposalcauses = $librarycol.get("proposalcauses"))
+#set($proposalempowerment = $librarycol.get("proposalempowerment"))
+
+#if($proposalproblem  || $proposalcauses || $proposalempowerment)
+	<div class="communitycontainer-header">
+		<h3>
+		[[Proposal]]:
+		</h3>
+		</div>
+
+	<div class="proposalcontainer-out">
+		<div class="proposaldescription" style="">
+		
+			#if($proposalproblem )
+			<div> 
+			<strong>[[Problem]]</strong><br>
+			$proposalproblem 
+			</div>
+			#end
+			
+			#if($proposalcauses )
+			<div> 
+			<strong>[[Root Causes]]</strong><br>
+			$proposalcauses 
+			</div>
+			#end
+		
+			#if($proposalempowerment)
+			<div> 
+			<strong>[[Empowerment]]</strong><br>
+			$proposalempowerment
+			</div>
+			#end
+		
+		
+		</div>
+	</div>
+#end
+
+
+<div class="community-sidebar-box">
+
+	$pages.include("$apphome/collective/donate/donateproposalsidebar.html?hidegoals=true",$context)
+
+
+</div>

@@ -33,13 +33,22 @@ $context.putPageValue("currenttopic", $currenttopic)
 		<div class="collectivemaincol h-100">
 			<div class="row no-gutters g-0 h-100">
 				#if(!$browser.inApp())
-			 		<div class="col-lg-2 collaborate-sidebar d-none d-lg-block">
+			 		<div class="col-lg-2 col-xl-3 collaborate-sidebar d-none d-lg-block">
+			 		
+			 			$pages.include("$apphome/collective/channel/subscribers/index.html", $context)
+			 			
+			 			
 						$pages.include("$apphome/collective/community/projectlist.html", $context)
 			 		</div>
 			 	#end 
 				<div class="collaborate-channel col">
 				<div class="collaborate-channel-header">
 					<div class="channel-name float-left">
+					
+					
+					
+					
+					
 						#if($alltopics.size()>1)
 						<div class="dropdown show">
 						<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -6,14 +6,12 @@
 #if(!$collectiveadminsection)
 	#set($collectiveadminsection = "finances")
 #end
-<div class="container">
-<div class="contentcolumn" style="padding:0;">
-	<div class="row no-gutters g-0">
-		<div class="col-md-2" style="background-color: #fbfbfb;">
+
+<div class="contentcolumn" style="padding:0; min-height: calc(100% - 270px);">
+	<div class="row no-gutters g-0" style=" height: 100%;">
+		<div class="col-md-2" style="background-color: #dfdfdf;">
 			<div class="collectivesettings-menu">
-						
 					<ul class="auto-active-container">
-						
 						<li class="menu-subheader">[[Finances]]</li>		
 						<li class="#if($collectiveadminsection == "finances") current #end">
 							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" 
@@ -55,12 +53,12 @@
 					</ul>
 			</div>
 		</div>
-		<div class="col-md-10" >
-			<div id="collectivesettingscontent" style="padding:15px 20px; border-left:1px solid #eee;">
+		<div class="col-md-10">
+			<div id="collectivesettingscontent" style="padding:15px 20px; border-top:1px solid #ddd;">
 			$pages.includeContent()	
 			</div>
 		</div>
 	</div>
 </div>
-</div>
+
 #end

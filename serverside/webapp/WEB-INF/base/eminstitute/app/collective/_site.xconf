@@ -7,7 +7,7 @@
 	<property name="subsection">home</property>
 	<property name="collectivesection">projects</property>
 	
-	<inner-layout>/${applicationid}/theme/layouts/collectivelayout.html</inner-layout>
+	<inner-layout>/${applicationid}/theme/layouts/proposallayout.html</inner-layout>
 	
 	<style id="results" href="${themeprefix}/styles/pages/results.css"/>
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/>

@@ -1,5 +1,5 @@
 <page>
-<inner-layout>/${applicationid}/theme/layouts/campaigncollectivelayout.html</inner-layout>
+<inner-layout>/${applicationid}/theme/layouts/proposal3columns.html</inner-layout>
 
 	<path-action name="DataEditModule.loadData" >
 			<pageval>librarycol</pageval>

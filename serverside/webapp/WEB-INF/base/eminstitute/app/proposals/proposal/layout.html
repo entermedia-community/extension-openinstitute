@@ -1,64 +1,4 @@
 
-<div id="campaigninfo" class=" oicontainercampaigns " >
-
-	
-	<div class="row no-gutters g-0"    >
-		<div  class="col-lg-20p" style="padding:15px 10px 0 10px">
-			
-			#set($proposalproblem = $librarycol.get("proposalproblem"))
-			#set($proposalcauses = $librarycol.get("proposalcauses"))
-			#set($proposalempowerment = $librarycol.get("proposalempowerment"))
-			
-			#if($proposalproblem  || $proposalcauses || $proposalempowerment)
-				<div class="communitycontainer-header">
-					<h3>
-					[[Proposal]]:
-					</h3>
-					</div>
-			
-				<div class="proposalcontainer-out">
-					##<div class="proposalheader" style="">
-					##<h4>[[What is going on]]:</h4>
-					##</div>
-					<div class="proposaldescription" style="">
-					
-						#if($proposalproblem )
-						<div> 
-						<strong>[[Problem]]</strong><br>
-						$proposalproblem 
-						</div>
-						#end
-						
-						#if($proposalcauses )
-						<div> 
-						<strong>[[Root Causes]]</strong><br>
-						$proposalcauses 
-						</div>
-						#end
-					
-						#if($proposalempowerment)
-						<div> 
-						<strong>[[Empowerment]]</strong><br>
-						$proposalempowerment
-						</div>
-						#end
-					
-					
-					</div>
-				</div>
-			#end
-		
-		
-			<div class="community-sidebar-box">
-
-				$pages.include("$apphome/collective/donate/donateproposalsidebar.html?hidegoals=true",$context)
-		
-
-			</div>
-		</div>
-		
-		
-		<div class="col">
 			<div class="currentcampaign">
 				
 				<div class="communitycontainer-header">
@@ -68,9 +8,21 @@
 				</div>
 				
 				<div class="proposalcontainer-out">
+				
+				#if( $caneditcollection )
+					<div class="proposalheader" style="">
+						<h4>[[Add Post]]</h4>
+					</div>
+					<div class="proposalnews" style="margin-bottom:20px">				
+							$pages.include("$apphome/collective/channel/addnewupload.html")
+					</div>
+				#end
+				
+				
 				<div class="proposalheader" style="">
 				<h4>[[What is going on in this proposal]]:</h4>
 				</div>
+				
 				<div class="proposalnews" style="">
 					$pages.include("$apphome/proposals/proposal/channelfeed.html",$context)
 				</div>
@@ -82,29 +34,5 @@
 				
 	
 			</div>
-		</div>
-		<div  class="col-lg-20p" style="padding:15px 10px 10px 0px">
 		
-		
-			
-			
-			<div class="text-center" style="margin-bottom:30px;">
-			
-			$pages.include("$apphome/collective/likeoptions.html", $context)
-			<div style="padding:10px"><a href="#" class="btn btn-lg  btn-secondary">[[Supporters]]</a></div>
-			</div>
-			
-				#if($librarycol.proposaltestimonials)
-			 	<div class="community-sidebar-box proposal-sidebarbox">
-			 		<h3>[[Testimonials]]</h3>
-					   	$!librarycol.proposaltestimonials
-				</div>
-				#end
-			
-		</div>
-		
-	</div>
-		
-</div>
-
 
