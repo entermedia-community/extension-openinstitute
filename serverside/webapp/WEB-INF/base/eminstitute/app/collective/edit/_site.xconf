@@ -28,4 +28,6 @@
 		</or>
 	</permission>	
 	
+		<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
+	
 </page>
