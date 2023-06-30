@@ -649,10 +649,10 @@ margin-top:.6rem;
 	color:#111;
 }
 .sidebarbox {
-	margin:20px 0 40px;
+	margin:0px 0 20px 0;
 }
 .sidebarbox h4 {
-	padding:5px 1px 5px 5px;
+	padding:0px 1px 5px 5px;
 	border-bottom:1px solid #28a745;
 	margin-bottom:0.6rem;
 }
