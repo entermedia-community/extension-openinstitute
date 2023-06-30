@@ -521,7 +521,7 @@ margin-top:.6rem;
 }
 .navbar-collective .nav-link {
 	padding:0.2rem .8rem ;
-	color:#666;
+	color:#fff;
 }
 
 .navbar-collective li.active a {
@@ -1484,7 +1484,7 @@ a.pick-item:hover .project-item {
 }
 .navbar-container {
 	display:block;
-	margin:10px 0 10px;
+	margin:16px 0 0px 0;
 	text-align: center;
 }
 .channel-feed .navbar-container {
