@@ -10,15 +10,15 @@
 
 	<div class="proposalcontainer-out">
 		<div class="proposaldescription" style="">
-	
-			[[Serving]]:	
+			<div style="margin-bottom:20px">
+			<strong>[[Serving]]</strong><br>	
 			#set( $cats = $librarycol.getValues("communitytagcategory"))
 			#foreach( $cat in $cats)
 			#set( $community = $mediaarchive.getCachedData("communitytagcategory",$cat) )
 			#set( $link = "$applink/proposals/category/#dash($community)/${community.getId()}.html")
-				<a href="$link"><h3>#text($community)</h3></a>
+				<a href="$link" style="text-decoration: underline;">#text($community)</a>
 			#end
-		
+			</div>
 			#if($proposalproblem )
 			<div> 
 			<strong>[[Problem]]</strong><br>
