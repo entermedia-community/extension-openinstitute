@@ -120,7 +120,7 @@ a.badge-success:focus, a.badge-success:hover {
     border-bottom:0 none;
     color:#fff;
     padding:0;
-    margin:0 0 20px;
+    margin:8px 0 20px;
 }
 
 tr.emborderhover td, .table-hover>tbody>tr:hover, .emsettingslist li:hover, .emsettingslist li.current, .emsettingslist li:nth-of-type(even):hover, .search-list li.current a.search-href, .sidebar-list li.current, .search-list li:hover, .sidebar-list li:hover, .sidebar-collection-list li.current:hover, .emtree .checkbox .field, .emtree .treerow:hover, .emtree .treerow.selected, .emtree .treerow.selected:hover, .emtree .cat-current, .filters-sidebar li:hover, .filters-sidebar-selected li:hover, .list-hover:hover, ul.list-group.list-group-hover li:hover, .emrowselected, .table-striped tr.emrowselected:nth-of-type(odd), .uploadcollection,
@@ -589,7 +589,7 @@ text-decoration: none;
 .community-sidebar-box {
 	border:8px solid #1D5655;
 	background-color: #fff;;
-	
+	padding:6px;
 }
 
 /*#409D90*/
