@@ -1,0 +1,97 @@
+<div class="communitytaglayout-proposals" style="margin:0 0 0 20px;">
+					
+#set($communitytagid = "4")
+#set($comunitytag = $mediaarchive.getCachedData("communitytagcategory", $communitytagid))
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagid).search($context) )
+
+	<div class="proposalscategoryheader">
+		#ifnotnull($comunitytag)
+		<h2>$comunitytag.getName()</h2>
+		#end
+		<div style="float:right; margin:5px 20px 0 0">
+			<a href="$applink/browse/add/addnew.html?communitytagcategory=$communitytagid" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Add Your Property]]</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context) )
+<div class="card-group">
+#foreach( $aproduct in $hits.getPageOfHits())
+
+#set($logo = false) 
+#if($collective.assetportrait)
+	#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+	#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+#else
+	#set($logo = "$applink/theme/images/OI_flower.png")
+#end
+#if(!$link)
+	#set($link = "$applink/collective/channel/${collective.id}/#dash($collective.getName()).html")
+#end
+
+#set( $collectives = $mediaarchive.query("librarycollection").match("library","organizations").sort("name").search() )
+	#set( $hit = false)
+	<a href="$sitelink/app/collective/store/details/$collectionid/$aproduct.id/#esc($aproduct.name).html"
+	title="#text($aproduct.name)"
+	class="storegalleryproduct">
+    <div class="storeproductcard">
+      
+       $context.putPageValue("aproduct",$aproduct)
+
+#set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
+<div class="card-img-top" data-assetid="$hit.id" style="text-align:center">
+		
+	#if( $hit )
+		$context.putPageValue("hit", $hit)
+				
+		#set($type = $hit.getSearchHit().getType())
+		#set( $rendertype = $mediaarchive.getMediaRenderType($hit.fileformat))
+		$context.putPageValue("type", $rendertype)
+		
+		$context.putPageValue("assetid", $hit.id)
+		$context.putPageValue("count", $count )
+		$context.putPageValue("sourcepath", $hit.sourcepath )
+		$context.putPageValue("thumbsize", "mediumplus" )
+		
+	   	#if(!$rendertype || $type =="rendertype")
+	   		#set( $rendertype = "mime" )
+	   	#elseif( $rendertype =="video")
+	   		#set( $rendertype = "videothumbnail" )
+	   	#end
+	   	
+	  	    $pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
+  	 #else
+  	 ###set( $hit = $mediaarchive.getAsset( "AXrj_8u2To2Y34J739re") )
+		#set( $userimageurl = "$applink/theme/images/product-image.png" )
+		<div id="emthumbholder" class="emthumbholder">
+			<div class="thumbimagecontainer">
+				<img class="imagethumb img-fluid d-block w-100"
+					 border="0" 
+					 src="$userimageurl" 
+					  />
+			</div>
+		</div>
+  	 #end
+</div>
+        <p>
+        <h4>	$!aproduct.getText("name",$context)</h4>
+        	$!aproduct.getText("productdescription",$context)
+       <p class="text-center">
+        	#set($subtotal = $aproduct.getDouble("productprice"))
+			$$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / [[Night]]
+		</p>
+      </div>
+    </a>
+	#if( $count > 2)
+		
+	</div>
+	<div class="card-group">
+	
+		#set ( $count = 0)
+	#end
+       #set ( $count = $count + 1) 
+#end
+</div>
+
+</div>
+</div>

@@ -2,8 +2,8 @@
 
 	<property name="oisection">community</property>
 	
-	<property name="postsourcepath">home/index.html</property>
+
+    <inner-layout>/${applicationid}/theme/layouts/application.html</inner-layout>
    	
- 	<path-action name="PostModule.loadPost" />
- 
+   
 </page>

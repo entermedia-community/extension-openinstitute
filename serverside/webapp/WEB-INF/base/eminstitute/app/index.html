@@ -1,1 +1,8 @@
-$pages.include("$apphome/proposals/index.html",$context) 
+#set($home = "$apphome/home/proposals/index.html") 
+
+#if( $sitedata )
+	#if( $sitedata.welcomepage)
+		#set( $home = $sitedata.welcomepage)
+	#end
+#end
+$pages.include($home,$context) 

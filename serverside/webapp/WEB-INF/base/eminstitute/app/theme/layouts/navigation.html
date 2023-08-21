@@ -15,7 +15,7 @@
 			        </div>
 		        	<div class="oi-header-table-c2">
         			<div class="col-oi-logo">
-			        <a class="" href="${context.siteRoot}/" title="Open Institute"> 
+			        <a class="" href="$applink/index.html" title="Open Institute"> 
 					<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
 					</a>
 					</div>
@@ -24,10 +24,10 @@
 						#set($oisection = $content.oisection)          
 						<ul class="oi-navbar-nav">
 				            <li class="nav-item #if($oisection == "about")active#end" >
-				             	 <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/about/index.html">[[About]]</a>
+				             	 <a class="nav-link js-scroll-trigger" href="$applink/about/index.html">[[About]]</a>
 				            </li>
 				            <li class="nav-item #if($oisection == "contact")active#end" >
-				             	 <a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/contact/contact.html">[[Contact]]</a>
+				             	 <a class="nav-link js-scroll-trigger" href="$applink/contact/contact.html">[[Contact]]</a>
 				            </li>
 				            #if( $user )
 				            <li class="nav-item">
@@ -35,7 +35,7 @@
 				            </li>
 				            #else
 				            <li class="nav-item">
-				              	<a class="nav-link js-scroll-trigger" href="${context.siteRoot}$applink/authentication/login.html">[[Login]]</a>
+				              	<a class="nav-link js-scroll-trigger" href="$applink/authentication/login.html">[[Login]]</a>
 				            </li>
 				            #end
 				            

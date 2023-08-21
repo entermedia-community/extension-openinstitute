@@ -23,6 +23,18 @@
     </name> 
   </property>  
 
+  <property id="gallerylayout" editable="true" index="true" stored="true"   >
+    <name> 
+      <language id="en"><![CDATA[rental or proposals]]></language>  
+    </name> 
+  </property>     
+
+  <property id="externaldomain" editable="true" index="true" stored="true"   >
+    <name> 
+      <language id="en"><![CDATA[External Domain]]></language>  
+    </name> 
+  </property>     
+
 
   <property id="caption" index="true" stored="true" editable="true"  > 
     <name> 

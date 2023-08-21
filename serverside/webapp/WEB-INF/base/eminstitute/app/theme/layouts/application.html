@@ -33,34 +33,50 @@
 	    <link rel="Shortcut Icon" type="image/x-icon" href="$applink/theme/images/favicon.ico" />
 	#end
 	</head>
+<body id="page-top" #if($browser.inApp()) data-hidetoolbar="true" #end >
 
-<body id="page-top"  data-hidetoolbar="true">
 <div id="errordiv"></div>
 <div id="application"
-	class="eminstituteapp" 
-	data-home="$siteroot"
+
+	class="eminstitutecollective"
+	data-home="$home" 
 	data-user="$!user.id" 
-	data-siteroot="$siteroot" 
 	data-apphome="$apphome"
-	data-applink="$applink" 
-	data-inapp="$browser.inApp()"
+	data-applink="$applink"
+	data-inapp="$browser.inApp()" 
 	data-themeprefix="/${applicationid}/theme" 
 	data-browserlanguage="$!{browserlanguage}"
 	data-editmode='$!user.get("oe_edit_mode")' 
 	data-mediadbappid="$!mediaarchive.getMediaDbId()"
-	data-componenthome="$!componenthome"
+	data-componenthome="$!componenthome"	
 	#if( $showupload)
-		data-showuploadid="${showupload.id}"
+	data-showuploadid="${showupload.id}"
 	#end
-	data-viewertemplate="$applink/collective/channel/show/index.html"
-	>
-	
-  	#if(!$browser.inApp())
-		$pages.include("${apphome}/theme/layouts/navigation.html", $context)
+	data-viewertemplate="$applink/collective/channel/show/index.html" 
+>
+
+	#if(!$browser.inApp())
+		$pages.include("/${apphome}/theme/layouts/navigation.html")
 	#end
-	
-	$pages.includeContent()
-	
+	<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
+		#if($browser.inApp())
+            $pages.includeContent()
+		#else	
+		#set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
+		#if (!$usersidebarhidden)
+			#set( $usersidebarhidden = 'false')
+		#end
+		
+		
+		#if($user && !$browser.inApp() && $canshowsidebar)
+			$pages.include("$apphome/components/sidebars/user/index.html")
+		#end
+		<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end emmaincontent">
+            $pages.includeContent()
+        </div>
+        #end
+    </div>
+
 
 </div>
 	#if(!$browser.inApp())
