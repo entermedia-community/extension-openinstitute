@@ -7,22 +7,30 @@
 	#if($communitytagcategory.primaryimagepathwide)
 		#set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
 	#end
+	
+	#if($communitytagcategory.logo)
+		#set($logo = "$applink${communitytagcategory.logo}")
+	#end
 #end
+
+#set($homelink = "$applink/home/proposals/index.html") 
+
+
+
 <div class="oiheaderout">
 <div class="oiheader" 
 	#if($headerbg)
 	style='background-image: url("$headerbg");background-size: cover;background-repeat: no-repeat;  background-position: right top;'
 	#end
 > 
-        	<div id="mainOINav" >
-		        <div class="container-fluid g-0">
-					<div class="oi-header-table">
+        	<div id="mainOINav" class="h-100">
+					<div class="oi-header-table h-100">
 					
 					<div class="oi-header-table-c1 ">
 					
-					#if($communitytagcategoryid)
-					<a class="logo-sm1" href="$applink/index.html" title="Open Institute"> 
-					<img style="height: 40px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
+					#if($logo)
+					<a class="logo-sm1" href="$homelink" title="#text($communitytagcategory)"> 
+					<img style="height: 75px;" src="$logo" alt="#text($communitytagcategory)">
 					</a>
 					#end
 					
@@ -50,8 +58,16 @@
 					
 					</div>
 					<div class="oi-header-table-c3">
+					
 						#set($oisection = $content.oisection)          
 						<ul class="oi-navbar-nav">
+							<li>
+								#if($communitytagcategoryid)
+								<a class="logo-sm1" href="$applink/index.html" title="Open Institute"> 
+								<img style="height: 35px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
+								</a>
+								#end
+							</li>
 				            <li class="nav-item #if($oisection == "about")active#end" >
 				             	 <a class="nav-link js-scroll-trigger" href="$applink/about/index.html">[[About]]</a>
 				            </li>
@@ -95,7 +111,6 @@
 			        </div>
 			        </div>
 	      	</div>
-      	</div>
     </div>
 </div>
 

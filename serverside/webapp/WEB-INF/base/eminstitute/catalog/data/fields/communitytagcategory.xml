@@ -53,6 +53,11 @@
     </name> 
   </property>  
   
+  <property id="logo" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Logo]]></language>  
+    </name> 
+  </property>  
 
   
 </properties>

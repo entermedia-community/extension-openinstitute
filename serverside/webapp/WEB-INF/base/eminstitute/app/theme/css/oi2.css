@@ -250,7 +250,7 @@ color: #1D5655;
 	z-index:100;
 }
 .oi-header-table {
-	display:inline-table;
+	display:table;
 	width: 100%;
 }
 
@@ -271,8 +271,9 @@ color: #1D5655;
 }
 .oi-header-table {
 	vertical-align: top;
-	width: calc(100% - 250px);
-	float:right;
+	width: calc(100% - 40px);
+	margin:0 auto;
+	
 }
 /*OI NAV*/
 #mainOINav {
@@ -286,7 +287,7 @@ color: #1D5655;
 	text-align:right; 
 	font-weight: normal;
 	text-transform: uppercase;
-	padding-top:8px;
+	padding-top:4px;
 }
 #mainOINav .addnewproject {
 	padding-top:6px;
@@ -325,7 +326,8 @@ color: #1D5655;
 	margin-bottom:5px;
 }
 #mainOINav  .oi-navbar-nav {
-	padding:10px 5px ;
+	padding:0 5px ;
+	margin:0;
 	display:flex;
 	flex-direction: row;
 	list-style: none;
@@ -381,7 +383,7 @@ color: #1D5655;
 	}
 
 	#mainOINav  .oi-navbar-nav .nav-link {
-		font-size:0.9rem;
+		font-size:0.85rem;
 		padding:1px 15px;
 		line-height: 2;
 		color:#fff;
