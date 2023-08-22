@@ -47,8 +47,9 @@
     </summary>
    
   </data>    
-  <data id="4"  primaryimagepath="/theme/images/home-technology.jpg" externaldomain="tierrasagrada.openinstitute.org:8080"
+  <data id="4" logo="/theme/images/logos/tierrasagrada.svg" primaryimagepath="/theme/images/home-technology.jpg" externaldomain="tierrasagrada.openinstitute.org:8080"
   primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  domaincommunityid="4"
   > 
     <name> 
       <language id="en"><![CDATA[Tierra Sagrada]]></language> 

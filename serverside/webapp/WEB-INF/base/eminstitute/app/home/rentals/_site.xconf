@@ -1,7 +1,8 @@
 <page>
 	<property name="collectivesection">store</property>
 
-	<inner-layout>/${applicationid}/collective/store/storelayout.html</inner-layout>
+	<path-action name="ProjectModule.loadCommunityTagCategory" />
+
 
 	<property name="virtual">true</property>
 
