@@ -43,13 +43,8 @@
 
 		        	<div class="oi-header-table-c2">
 		        	
-		        	#if(!$communitytagcategoryid)
-	        			<div class="col-oi-logo">
-				        <a class="" href="$applink/index.html" title="Open Institute"> 
-						<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
-						</a>
-						</div>
-					#else
+		        	#if($communitytagcategoryid)
+	        	
 						<div style="font-family: Raleway;font-size:1.5rem; color: #eee; margin: 0px; text-shadow: 0 0 black">$communitytagcategory.getName()</div>
 					#end
 					
@@ -66,6 +61,10 @@
 								<a class="logo-sm1" href="$applink/index.html" title="Open Institute"> 
 								<img style="height: 35px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
 								</a>
+								#else
+									<a class="" href="$applink/index.html" title="Open Institute"> 
+									<img style="height: 40px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
+									</a>
 								#end
 							</li>
 				            <li class="nav-item #if($oisection == "about")active#end" >
