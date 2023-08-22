@@ -28,13 +28,13 @@
 		</div>
 	<div class="row no-gutters g-0" >
 		<div class="col" >
-#set($tagscategories = $mediaarchive.query("communitytagcategory").all().search($context) )
+#set($tagscategories = $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context) )
 
 <div class="card-group">
 #foreach( $tagcategory in $tagscategories)
 <div class="card" style="width: 18rem;margin:5px;">
 #if( $tagcategory.externaldomain)
-	#set( $link = "${tagcategory.externaldomain}/app/index.html")
+	#set( $link = "//${tagcategory.externaldomain}/app/index.html")
 #else
 	#set( $link = "$apphome/home/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
 #end

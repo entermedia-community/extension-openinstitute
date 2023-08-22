@@ -1,19 +1,38 @@
-<div class="communitytaglayout-proposals" style="margin:0 0 0 20px;">
+<div style="background-color: black;height:100%;">
+<div class="communitytaglayout-proposals" style='height:100%;margin:0 auto;
+ background: url("$apphome/home/rentals/images/background.jpg") no-repeat;
+ background-position: cover;
+ 
+'>
 					
 #set($communitytagid = "4")
 #set($comunitytag = $mediaarchive.getCachedData("communitytagcategory", $communitytagid))
 #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagid).search($context) )
 
-	<div class="proposalscategoryheader">
-		#ifnotnull($comunitytag)
-		<h2>$comunitytag.getName()</h2>
-		#end
-		<div style="float:right; margin:5px 20px 0 0">
-			<a href="$applink/browse/add/addnew.html?communitytagcategory=$communitytagid" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Add Your Property]]</a>
-		</div>
-		<div class="clearfix"></div>
-	</div>
+<div class="container">
 
+		<div style="float:right; padding:5px 20px 0 0">
+			<a href="$applink/browse/add/addnew.html?communitytagcategory=$communitytagid" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Request To Add Your Property]]</a>
+		</div>
+<p style="padding:0px;font-size:1.8em;font-family: Raleway;font-size:6em; color: #222; margin: 0px;">
+Community Booking   
+</p>
+
+<div style="padding:0px;font-size:1.5em">
+A collaborative booking platform that focuses on giving back to and empowering communities around Lake Atitlan Guatemala. 
+</div>
+
+<p style="padding:0px;font-size:1.5em">
+5% of profits goes to <A href="https://openinstitute.org">Open Institute</A> projects that are conserving land, educating children, supporting musicians, and having a positive social and justice impact.
+</p>
+
+<div class="clearfix">
+<div style="margin:0px;float:right; border: 3px solid #dfdc71; width:300px; text-align:center;">
+
+    $pages.include("$apphome/home/rentals/daterange.html", $context)
+
+</div>
+</div>
 #set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context) )
 <div class="card-group">
 #foreach( $aproduct in $hits.getPageOfHits())
@@ -93,5 +112,6 @@
 #end
 </div>
 
+</div>
 </div>
 </div>
