@@ -32,7 +32,7 @@ A collaborative booking platform that focuses on giving back to and empowering c
 
 </div>
 </div>
-##set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context) )
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context) )
 <div class="card-group">
 #foreach( $aproduct in $hits.getPageOfHits())
 
@@ -77,7 +77,7 @@ A collaborative booking platform that focuses on giving back to and empowering c
 	   		#set( $rendertype = "videothumbnail" )
 	   	#end
 	   	
-	  	  ##  $pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
+	  	    $pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
   	 #else
   	 ###set( $hit = $mediaarchive.getAsset( "AXrj_8u2To2Y34J739re") )
 		#set( $userimageurl = "$applink/theme/images/product-image.png" )
