@@ -9,5 +9,5 @@
 	
 	<path-action name="ProjectModule.loadCommunityTagCategory" />
 	
-	<inner-layout>/${applicationid}/proposals/category/innerlayout.html</inner-layout>
+	<inner-layout>/${applicationid}/home/proposals/category/innerlayout.html</inner-layout>
 </page>

@@ -2,23 +2,52 @@
 #if (!$usersidebarhidden)
 	#set( $usersidebarhidden = 'false')
 #end
+
+#if($communitytagcategory)
+	#if($communitytagcategory.primaryimagepathwide)
+		#set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
+	#end
+#end
 <div class="oiheaderout">
-<div class="oiheader #if($user && $usersidebarhidden == 'false') empushcontent #end "> 
+<div class="oiheader" 
+	#if($headerbg)
+	style='background-image: url("$headerbg");background-size: cover;background-repeat: no-repeat;  background-position: right top;'
+	#end
+> 
         	<div id="mainOINav" >
-		        <div class="container g-0">
+		        <div class="container-fluid g-0">
 					<div class="oi-header-table">
-		        	<div class="oi-header-table-c1">
-			        <div class="col-oi-picker" > 
-			       		$pages.include("$apphome/components/users/pickuser.html")
+					
+					<div class="oi-header-table-c1 ">
+					
+					#if($communitytagcategoryid)
+					<a class="logo-sm1" href="$applink/index.html" title="Open Institute"> 
+					<img style="height: 40px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
+					</a>
+					#end
+					
+					<div class="col-oi-picker" > 
+			       		##$pages.include("$apphome/components/users/pickuser.html")
 			       		$pages.include("$apphome/components/libraries/pickcollection.html")
 			        </div>
+			        
 			        </div>
+
 		        	<div class="oi-header-table-c2">
-        			<div class="col-oi-logo">
-			        <a class="" href="$applink/index.html" title="Open Institute"> 
-					<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
-					</a>
-					</div>
+		        	
+		        	#if(!$communitytagcategoryid)
+	        			<div class="col-oi-logo">
+				        <a class="" href="$applink/index.html" title="Open Institute"> 
+						<img style="height: 50px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
+						</a>
+						</div>
+					#else
+						<div style="font-family: Raleway;font-size:1.5rem; color: #eee; margin: 0px; text-shadow: 0 0 black">$communitytagcategory.getName()</div>
+					#end
+					
+					
+					
+					
 					</div>
 					<div class="oi-header-table-c3">
 						#set($oisection = $content.oisection)          
@@ -55,11 +84,13 @@
 					            	</ul>
 					            	
 					        </li>
+					        #if(!$communitytagcategoryid)
 							#if( $user)
 							   <li class="addnewproject">
 									<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Create a Proposal]]</a>
 								  </li>
 							#end    
+							#end
 			          	</ul>
 			        </div>
 			        </div>

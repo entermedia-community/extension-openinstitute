@@ -36,7 +36,7 @@
 #if( $tagcategory.externaldomain)
 	#set( $link = "${tagcategory.externaldomain}/app/index.html")
 #else
-	#set( $link = "$apphome/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
+	#set( $link = "$apphome/home/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
 #end
     <h5 class="card-title" style="position:absolute;width:100%;padding:8px 0 6px 0;text-transform: uppercase;background:rgba(220,220,220,.6);text-align:center;">
     	<a class="active" style="font-family: Raleway;color: #162f2e; " aria-current="page" href="$link">$tagcategory.getName()</a>
