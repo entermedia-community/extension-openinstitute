@@ -27,13 +27,7 @@
 					<div class="oi-header-table h-100">
 					
 					<div class="oi-header-table-c1 ">
-					
-					#if($logo)
-					<a class="logo-sm1" href="$homelink" title="#text($communitytagcategory)"> 
-					<img style="height: 75px;" src="$logo" alt="#text($communitytagcategory)">
-					</a>
-					#end
-					
+										
 					<div class="col-oi-picker" > 
 			       		##$pages.include("$apphome/components/users/pickuser.html")
 			       		$pages.include("$apphome/components/libraries/pickcollection.html")
@@ -44,8 +38,12 @@
 		        	<div class="oi-header-table-c2">
 		        	
 		        	#if($communitytagcategoryid)
-	        	
-						<div style="font-family: Raleway;font-size:1.5rem; color: #eee; margin: 0px; text-shadow: 0 0 black">$communitytagcategory.getName()</div>
+	        			#if($logo)
+						<a class="logo-sm1" href="$homelink" title="#text($communitytagcategory)"> 
+						<img style="height: 75px;" src="$logo" alt="#text($communitytagcategory)">
+						</a>
+						#end
+						<div style="display:inline-block; font-family: Raleway;font-size:1.5rem; color: #eee; margin: 0px; text-shadow: 0 0 black">$communitytagcategory.getName()</div>
 					#end
 					
 					
