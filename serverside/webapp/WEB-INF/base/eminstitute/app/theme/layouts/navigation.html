@@ -1,116 +1,82 @@
 #set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
 #if (!$usersidebarhidden)
-	#set( $usersidebarhidden = 'false')
+  #set( $usersidebarhidden = 'false')
 #end
 
 #if($communitytagcategory)
-	#if($communitytagcategory.primaryimagepathwide)
-		#set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
-	#end
-	
-	#if($communitytagcategory.logo)
-		#set($logo = "$applink${communitytagcategory.logo}")
-	#end
+  #if($communitytagcategory.primaryimagepathwide)
+    #set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
+  #end
+
+  #if($communitytagcategory.logo)
+    #set($logo = "$applink${communitytagcategory.logo}")
+  #end
 #end
 
-#set($homelink = "$applink/home/proposals/index.html") 
+#set($homelink = "$applink/home/proposals/index.html")
 
+##$pages.include("$apphome/components/users/pickuser.html")
+##$pages.include("$apphome/components/libraries/pickcollection.html")
 
-
-<div class="oiheaderout">
-<div class="oiheader" 
-	#if($headerbg)
-	style='background-image: url("$headerbg");background-size: cover;background-repeat: no-repeat;  background-position: right top;'
-	#end
-> 
-        	<div id="mainOINav" class="h-100">
-					<div class="oi-header-table h-100">
-					
-					<div class="oi-header-table-c1 ">
-										
-					<div class="col-oi-picker" > 
-			       		##$pages.include("$apphome/components/users/pickuser.html")
-			       		$pages.include("$apphome/components/libraries/pickcollection.html")
-			        </div>
-			        
-			        </div>
-
-		        	<div class="oi-header-table-c2">
-		        	
-		        	#if($communitytagcategoryid)
-	        			#if($logo)
-						<a class="logo-sm1" href="$homelink" title="#text($communitytagcategory)"> 
-						<img style="height: 75px;" src="$logo" alt="#text($communitytagcategory)">
-						</a>
-						#end
-						<div style="display:inline-block; font-family: Raleway;font-size:1.5rem; color: #eee; margin: 0px; text-shadow: 0 0 black">$communitytagcategory.getName()</div>
-					#end
-					
-					
-					
-					
-					</div>
-					<div class="oi-header-table-c3">
-					
-						#set($oisection = $content.oisection)          
-						<ul class="oi-navbar-nav">
-							<li>
-								#if($communitytagcategoryid)
-								<a class="logo-sm1" style="margin-right:40px;" href="$applink/index.html" title="Open Institute"> 
-								<img style="height: 35px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
-								</a>
-								#else
-									<a class="" href="$applink/index.html" title="Open Institute"> 
-									<img style="height: 40px;" src="$applink/theme/images/oi-logo-w.png" alt="Open Institute">
-									</a>
-								#end
-							</li>
-				            <li class="nav-item #if($oisection == "about")active#end" >
-				             	 <a class="nav-link js-scroll-trigger" href="$applink/about/index.html">[[About]]</a>
-				            </li>
-				            <li class="nav-item #if($oisection == "contact")active#end" >
-				             	 <a class="nav-link js-scroll-trigger" href="$applink/contact/contact.html">[[Contact]]</a>
-				            </li>
-				            #if( $user )
-				            <li class="nav-item">
-				             	 <a class="nav-link js-scroll-trigger" href="$applink/authentication/logout.html">[[Logout]]</a>
-				            </li>
-				            #else
-				            <li class="nav-item">
-				              	<a class="nav-link js-scroll-trigger" href="$applink/authentication/login.html">[[Login]]</a>
-				            </li>
-				            #end
-				            
-					       	<li class="nav-item dropdown">
-								#set( $currentlang = $mediaarchive.getData("locale",$context.language) )
-					              <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown" data-bs-toggle="dropdown">#if($currentlang)$currentlang.id #else $context.language#end</a>	
-						  
-					              <ul class="dropdown-menu">
-					
-										#set( $localesearcher = $mediaarchive.getSearcher("locale") )
-										#set( $languages = $localesearcher.query().match("enabled", "true").search($context) )
-										#foreach( $lang in $languages)
-						    	        	<li class="dropdown-item">
-											 <a href="$home$apphome/components/languages/changelanguage.html?newlang=locale_$lang.id&origURL=#urlescape($context.getPathUrl())">$lang </a>
-							            	</li>
-										#end
-					            	</ul>
-					            	
-					        </li>
-					        #if(!$communitytagcategoryid)
-							#if( $user)
-							   <li class="addnewproject">
-									<a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog btn btn-sm btn-primary" title="[[Add a Project]]"><i class="fas fa-plus"></i> [[Create a Proposal]]</a>
-								  </li>
-							#end    
-							#end
-			          	</ul>
-			        </div>
-			        </div>
-	      	</div>
+<nav class="navbar sticky-top navbar-expand-lg">
+  <div class="container">
+    #if($logo)
+    <a class="navbar-brand" href="#" title="#text($communitytagcategory)">
+      <img src="$logo" alt="#text($communitytagcategory)" class="me-2" />
+    </a>
+    #else
+    <a class="navbar-brand" href="$applink/index.html" title="Open Institute">
+      <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
+    </a>
+    #end
+    <div class="d-flex">
+      <a href="/" class="me-4 d-none d-md-block"> </a>
+      <button class="d-block d-md-none navbar-toggler" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#drawerMenu" aria-controls="drawerMenu">
+        <i class="fas fa-bars text-white" style="transform: scaleX(1.5)"></i>
+      </button>
+      <div class="d-none d-md-flex flex-grow-1 align-items-center">
+        <div class="navbar-nav flex-row gap-2">
+          <a class="lnk nav-link" href="$applink/about/index.html">[[About]]</a>
+          <a class="lnk nav-link" href="$applink/contact/contact.html">[[Contact]]</a>
+          #if($user)
+            <a class="lnk nav-link" href="$applink/authentication/logout.html" title="[[Logout]]">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          #else
+            <a class="lnk nav-link" href="$applink/authentication/login.html" title="[[Login]]">
+              [[Login]] <i class="fas fa-sign-in-alt ms-1"></i>
+            </a>
+          #end
+          <div class="dropdown nav-item">
+            #set( $currentlang = $mediaarchive.getData("locale",$context.language) )
+            <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown">
+              #if($currentlang)$currentlang.id #else $context.language#end
+            </a>
+            <ul class="dropdown-menu dropdown-menu-md-end">
+              #set( $localesearcher = $mediaarchive.getSearcher("locale") )
+              #set( $languages = $localesearcher.query().match("enabled", "true").search($context) )
+              #foreach( $lang in $languages)
+              <li class="dropdown-item">
+                <a href="$home$apphome/components/languages/changelanguage.html?newlang=locale_$lang.id&origURL=#urlescape($context.getPathUrl())">$lang</a>
+              </li>
+              #end
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="offcanvas offcanvas-end d-flex d-md-none" tabindex="-1" id="drawerMenu"
+        aria-labelledby="drawerMenuLabel">
+        <div class="offcanvas-header">
+          <a href="/" class="me-4">
+            <img src="./OI_files/oi-logo-w.png" class="me-2" />
+          </a>
+          <button type="button" class="btn text-white" data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="offcanvas-body"></div>
+      </div>
     </div>
-</div>
-
-
-
-
+  </div>
+</nav>
