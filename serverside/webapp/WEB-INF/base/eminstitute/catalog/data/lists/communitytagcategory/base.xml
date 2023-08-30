@@ -4,9 +4,9 @@
   <data id="0" primaryimagepath="/theme/images/home-natural.jpg"
   primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
   >
-  <caption><![CDATA[Proposals to support, renew and celebrate the environment]]></caption>
+  <caption><![CDATA[Projects to support, renew and celebrate the environment]]></caption>
     <name> 
-      <language id="en"><![CDATA[Ecology]]></language> 
+      <language id="en"><![CDATA[Sol Vida Dynamico]]></language> 
     </name> 
     <summary>The natural world is a treasure that sustains all life, brings harmony to our ecosystems, and nourishes our souls. Its abundance nurtures our well-being, offering solace, inspiration, and a deep connection to the world around us.  However, our natural world is in danger right now from threats like pollution and industrialization.  By embracing and protecting this remarkable gift , we ensure a thriving future filled with endless possibilities.
     </summary>
@@ -16,7 +16,7 @@
   >
     <caption><![CDATA[The Arts, Music and Performance]]></caption>
     <name> 
-      <language id="en"><![CDATA[Common Roots]]></language> 
+      <language id="en"><![CDATA[Common Roots Collective]]></language> 
     </name> 
     <summary>
     Artists everywhere need our help to create thriving communities and events!  The arts provide connect people across cultures and generations. By nurturing creativity, we are able to cultivate innovative thinking, problem-solving skills, and emotional intelligence. Let us embrace the power of creativity and invest in the the arts.  The arts are a way to celebrate our shared humanity and promote understanding in our diverse world.
@@ -25,7 +25,7 @@
   <data id="2"  primaryimagepath="/theme/images/home-human.jpg"
   primaryimagepathwide="/theme/images/home-human-wide.jpg">
     <name> 
-      <language id="en"><![CDATA[Attitlan Development]]></language> 
+      <language id="en"><![CDATA[Kansha Academy]]></language> 
     </name> 
     <caption><![CDATA[Education, health, assistance and cultural preservation]]></caption>
     
