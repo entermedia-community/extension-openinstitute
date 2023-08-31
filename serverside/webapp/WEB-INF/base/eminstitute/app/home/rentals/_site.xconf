@@ -7,5 +7,6 @@
 	<property name="virtual">true</property>
 
 	<path-action name="ProjectModule.loadCommunityTagCategory" />
-
+ 
+	<inner-layout>/${applicationid}/theme/layouts/application-rentals.html</inner-layout>
 </page>

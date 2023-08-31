@@ -1,0 +1,556 @@
+body {
+    color: #1B1C1F;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+@media (min-width:1200px) {
+
+    .h1,
+    h1 {
+        font-size: 2.5rem;
+        color: #1B1C1F;
+    }
+}
+
+.navbar {
+    color: #ffffff;
+    background-color: #1B1C1F;
+}
+
+.navbar-brand {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+    color: #efefef;
+}
+
+.navbar-brand:active {
+    color: #efefef;
+    font-size: 1.45em;
+}
+
+.logo {
+    height: 60px;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+}
+
+i.navbar-toggler-icon,
+.navbar-nav .nav-link.active {
+    color: #ffffff;
+}
+
+.navbar-nav .lnk.nav-link.active::after,
+.navbar-nav .lnk.nav-link.active:hover::after,
+.navbar-nav .lnk.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    bottom: 4px;
+    background-color: #ffffff;
+}
+
+.navbar-nav .nav-link:hover::after {
+    background-color: #888888;
+}
+
+.navbar-nav .dropdown-toggle {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.offcanvas-header img {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.offcanvas-header .btn-close {
+    color: #fff;
+}
+
+.offcanvas-body .lnk.nav-link,
+.offcanvas-body .dropdown-toggle {
+    /* color: #1B1C1F; */
+    font-size: 20px;
+    padding: 8px 16px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.offcanvas-header,
+.offcanvas-body {
+    background-color: #1B1C1F;
+}
+
+.offcanvas-body {
+    padding-top: 50px;
+}
+
+.dropdown-menu {
+    padding: 0;
+    background-color: #28292e;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.dropdown-item:hover {
+    background-color: #37383f;
+}
+
+.dropdown-item a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+header {
+    color: #1B1C1F;
+    margin-top: 16px;
+    box-shadow: 0 0 3px rgba(115, 115, 115, 0.5);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+header h1 {
+    font-weight: 400;
+}
+
+header p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.container-fluid.main {
+    margin-top: 16px;
+}
+
+.ad-container {
+    width: 100%;
+    padding: 12px;
+    max-width: 360px;
+    display: flex;
+}
+
+.ad-body {
+    width: 100%;
+    /* box-shadow: 0 0 3px rgba(200, 200, 200, 0.5);
+    background-color: #ffffff; */
+    border-radius: 8px;
+    padding-bottom: 12px;
+    cursor: pointer;
+}
+
+.ad-img {
+    flex: 1;
+    height: 340px;
+    max-height: calc(100vw - 16px);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ad-img .carousel,
+.ad-img .carousel-item,
+.ad-img .carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+.ad-img .carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+button.owner-btn {
+    border: 4px solid #ffffff;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(128, 128, 128, 0.5);
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+}
+
+.ad-body:hover button.owner-btn {
+    border-radius: 8px;
+    left: 16px;
+    bottom: 16px;
+}
+
+button.owner-btn img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.ad-details {
+    margin-top: 8px;
+    position: relative;
+}
+
+.ad-details p {
+    margin: 0;
+    text-align: left;
+    font-size: 14px;
+    font-family: Lato, sans-serif;
+}
+
+.ad-details .location {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+}
+
+.ad-details .owner,
+.ad-details .availability {
+    color: #666666;
+}
+
+.reservation .price {
+    color: #666666;
+}
+
+.reservation .price .currency {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: #444444;
+}
+
+.ad-details .price {
+    color: #666666;
+}
+
+.ad-details .price .currency {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #444444;
+}
+
+.ad-details .rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #353535;
+    background-color: #fff;
+}
+
+.reservation .reviews,
+.reservation .rating {
+    margin: 0;
+    color: #353535;
+}
+
+.modal {
+    backdrop-filter: blur(4px);
+}
+
+.owner-preview {
+    padding: 50px 16px 16px 16px;
+    background-color: #f4efefef;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    max-height: 100%;
+}
+
+.owner-preview.details-page {
+    padding: 16px;
+    margin: 0;
+    margin-top: 16px;
+}
+
+.owner-preview .btn-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transform: scale(0.9);
+}
+
+.details-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 16px 8px;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    box-shadow: 0 0 3px rgba(200, 200, 200, 0.5);
+}
+
+.details-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    margin: 8px;
+}
+
+.details-card .name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.details-card strong {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.details-card .rank {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.details-card .stats p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1
+}
+
+.owner-preview .description {
+    text-align: left;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background-color: #1B1C1F;
+    margin-top: 24px;
+}
+
+.search .form-control {
+    border-radius: 16px;
+    padding-left: 20px;
+}
+
+.search .form-control:focus {
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(27, 28, 31, 0.25);
+}
+
+.search .form-floating>label {
+    padding-left: 20px;
+}
+
+.search-btn {
+    width: 150px;
+    height: 56px;
+    background-color: #1B1C1F;
+    color: #ffffff;
+    border-radius: 16px;
+    border: none;
+    font-size: 18px;
+}
+
+.image-gallery {
+    position: relative;
+}
+
+.see-more {
+    border: none;
+    border-radius: 8px;
+    padding: 4px 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    width: 180px;
+    justify-content: center;
+    opacity: 0.95;
+    box-shadow: 0 0 3px rgba(200, 200, 200, 0.5);
+}
+
+.see-more:hover {
+    background-color: #efefef;
+    opacity: 1;
+}
+
+.image-gallery img {
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.amenity {
+    display: flex;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    margin: 8px;
+}
+
+.amenity i {
+    margin-right: 8px;
+}
+
+.amenity.more {
+    font-weight: 600;
+    border: none;
+}
+
+.reservation {
+    margin-top: 16px;
+    max-width: 400px;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(200, 200, 200, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.reservation #checkIn {
+    border-radius: 0;
+    border-top-left-radius: 8px;
+}
+
+.reservation #checkOut {
+    border-radius: 0;
+    border-top-right-radius: 8px;
+}
+
+.reservation #guests {
+    border-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+@media screen and (max-width:385px) {
+    .reservation #checkIn {
+        border-radius: 0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .reservation #checkOut {
+        border-radius: 0;
+    }
+
+    .reservation #guests {
+        border-radius: 0;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+}
+
+.reservation input {
+    border: none;
+    outline: 1px solid #cccccc;
+}
+
+.caption {
+    color: #666666;
+    font-size: 14px;
+}
+
+.caption a {
+    color: #1B1C1F;
+}
+
+.pricing p {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.description {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+p.h5 {
+    font-family: Montserrat, sans-serif;
+    font-weight: bold;
+}
+
+.stats .h5 {
+    font-weight: normal;
+}
+
+.rating-breakdown {
+    margin-top: 16px;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+}
+
+.rating-breakdown .col {
+    height: 40px;
+}
+
+.small,
+.rating-breakdown small {
+    font-size: 12px;
+}
+
+.rating-breakdown small {
+    font-weight: 600;
+}
+
+img.circular {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.stats-header {
+    font-family: Montserrat, sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+}
