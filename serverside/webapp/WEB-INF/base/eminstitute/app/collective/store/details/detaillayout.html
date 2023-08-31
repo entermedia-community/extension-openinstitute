@@ -1,129 +1,276 @@
-<div id="storeworkarea" class="container" style="padding:10px 20px;min-height:500px">
-<div id="storedetailarea" class="contentcolumn" >
-	#set( $searchtype  = "collectiveproduct")
-
 #ifnull( $aproduct )
-	#set( $aproduct = $data)
+#set( $aproduct = $data)
 #end
 
-  <div class="row">  
-  <div class="col-md-5">
-		#if( $aproduct  )
-		#set( $assetshits = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id).search($context))
-		#end
-		
-		$context.putPageValue("assetshits", $assetshits)
-		$context.putPageValue("fullview",true) 
-		$context.putPageValue("thumbsize", "small" )
-		$context.putPageValue("primaryimage", $entity.primaryimage )
-		#set( $assetsshown = 4)
-		
-		$pages.include("$apphome/collective/store/details/attachedmedia.html",$context)
-      
-		#set($uploadlink = "$siteroot$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
-		#set($oemaxlevel = "1")
-		#set($targetdiv = "applicationmaincontent")
-		<a href="$uploadlink" 
-			class="ajax moreactions btn btn-xs btn-secondary"
-			data-targetdivinner="storedetailarea"
-			data-closedialog="true" 
-			data-closemediaviewer="true"
-			data-updateurl="true"
-			data-oemaxlevel="$!oemaxlevel"
-			title="[[Upload Product Images]]">
-			<i class="fas fa-upload"></i> [[Add Images]]</a>
+<div class="container">
+  <div class="d-flex align-items-center">
+    <div class="d-flex flex-column">
+      <h2 class="mt-5 mb-0">$!aproduct.getText("name",$context)</h2>
+      <div class="d-flex gap-2">
+        <p class="rating">★ 4.56</p>
+        <span>&middot;</span>
+        <p class="reviews">155 reviews</p>
+        <span>&middot;</span>
+        <p class="reviews">San Lucas Sacatepéquez</p>
+      </div>
     </div>
-     
-  	<div class="col-md-7" >
-      <h5 class="card-title">	$!aproduct.getText("name",$context)</h5>
-	    #if( $caneditcollection)
-		<div >
-		<a class="emdialog btn btn-xs btn-secondary" title="[[Edit Product]]" 
-			href="$apphome/collective/store/edit.html?id=${aproduct.id}&collectionid=$librarycol.id"><i class="fas fa-edit"></i> [[Edit Product]]</a>
-		</div>
-		#end
-
-      	
-		<div>      
-	       <p class="">$!aproduct.getText("productdescription",$context)</p>
-	       
-			#set($subtotal = $aproduct.getDouble("productprice"))
-			<p>$$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) / $!context.getText($!mediaarchive.getCachedData("productrecurringperiod", $aproduct.recurringperiod ))</p>
-		</div>
-		
-		
-	#if( $user )
-	
-		#if( $status == "saved")
-		<div class="alert alert-success" role="alert">
-			[[Reservation is saved. We will contact you regarding payment]]
-		</div>
-		#end
-	
-  		#if( $invoices.isEmpty())
-  			
-  		#else
-		
-	  		<div class="storecurrentreservations">
-	  		<strong>[[Existing Reservations]]</strong> 
-			<ul>
-			#foreach($invoice in $invoices)
-				#if( $canviewsettings || $user.getId() == $invoice.forcustomer || $user.getId() == $invoice.owner)
-				<li>
-				<a class="emdialog"		
-				 href="$apphome/collective/store/details/editinvoice.html?id=$invoice.id&productid=$aproduct.id&collectionid=$librarycol.id" >
-				$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate")) $invoice.getName()  $!invoice.customernote
-				</a>
-				</li> 
-				#else
-				##$!context.getDate($invoice.getDate("duedate")) - $!context.getDate($invoice.getDate("enddate"))  $invoice.getName() $!invoice.customernote
-				#end
-			#end
-			</ul>
-			</div>
-	#end
-	#end
-	
-	#if(!$content.path.contains("/reserve/"))
-		<form name="inlinesaveproject" 
-		id="inlinesaveproject" 
-		action="$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html" 
-		method="post"
-		class="ajaxform"
-			data-targetdiv="storeworkarea"
-			data-oemaxlevel="2">
-		
-			<input type="hidden" name="save" value="true" />
-			<input type="hidden" name="collectionid" value="$librarycol.id" />
-			<input type="hidden" name="productid" value="$aproduct.id" />
-		
-			$pages.include("$apphome/components/xml/types/daterange.html",$context)
-			
-			#if( $user )
-		      	<div style="padding:20px 0;">
-		      	<p>[[Choose dates then]]:
-		      	 <input type="submit" class="btn btn-primary" value="[[Reserve Room]]" /> [[pay when you arrive]]
-		      	 </p>
-		      	</div>
-			#else
-				<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
-				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>  							
-		     #end 	
-		</form>
-	#else
-
-			#if( $user )
-				$pages.include("$apphome/collective/store/details/startinvoice.html",$context)
-			#else	
-				<p id="loginarea"><a class="ajax" data-targetdiv="loginarea" data-oemaxlevel="1"
-				 href="$applink/authentication/loginajax.html?loginokpage=$apphome/collective/store/details/reserve/$librarycol.id/$aproduct.id/startinvoice.html">login</a> to reserve</p>
-			#end	   							
+    <div class="d-flex flex-grow-1"></div>
+    <p class="my-0"><i class="fas fa-share-alt"></i> Share</p>
+    #if( $caneditcollection) 
+      <a class="emdialog btn btn-sm btn-outline-success text-success ms-3" title="[[Edit Product]]" href="$apphome/collective/store/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
+        <i class="fas fa-edit"></i> [[Edit Product]]
+      </a> 
     #end
-	
-	</div>
-	
-</div> <!--row -->
+  </div>
+  <div class="row image-gallery">
+    <div class="col col-md-6 col-sm-12">
+      <img src="https://source.unsplash.com/collection/8890044/600x500" alt="image" />
+    </div>
+    <div class="col col-md-6 d-none d-md-block">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
+        </div>
+        <div class="col-md-6">
+          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
+        </div>
+        <div class="col-md-6 mt-3">
+          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
+        </div>
+        <div class="col-md-6 mt-3">
+          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
+        </div>
+      </div>
+    </div>
+    <button class="d-flex align-items-center see-more" data-bs-toggle="modal" data-bs-target="#preview">
+      <i class="fas fa-camera"></i>
+      <p class="m-0 ms-2">See all photos</p>
+    </button>
+  </div>
 
-</div> <!-- body -->
-
+  <div class="row">
+    <div class="col col-12 col-md-6 d-flex flex-column align-items-center">
+      <p class="h5 mt-5">Pricing</p>
+      <div class="reservation">
+        <div class="d-flex align-items-center justify-content-between">
+          #set($subtotal = $aproduct.getDouble("productprice"))
+          <p class="price m-0"><span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
+                $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
+                style="text-transform: lowercase;">[[Night]]</span></p>
+          <div class="d-flex align-items-center gap-2">
+            <p class="rating m-0">★ 4.56</p>
+            &middot;
+            <p class="reviews m-0">155 reviews</p>
+          </div>
+        </div>
+        <div class="d-flex flex-column mt-3">
+          <div class="d-flex align-items-center flex-wrap">
+            <div class="form-floating flex-grow-1">
+              <input type="date" class="form-control" id="checkIn" placeholder="Check-In" />
+              <label for="dateRange">Check-In</label>
+            </div>
+            <div class="form-floating flex-grow-1">
+              <input type="date" class="form-control" id="checkOut" placeholder="Check-Out" />
+              <label for="dateRange">Check-Out</label>
+            </div>
+          </div>
+          <div class="form-floating flex-grow-1">
+            <input class="form-control" id="guests" placeholder="Guests" value="1 guest" />
+            <label for="guests">Guests</label>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-success w-100 mt-3">Reserve</button>
+        <div class="pricing">
+          <p class="text-center caption mt-2">
+            You won't be charged yet. <a href="#">Learn more</a>
+          </p>
+          <div class="d-flex mt-3">
+            <p class="label flex-grow-1">$45 &times; 7 nights</p>
+            <p class="value">$318</p>
+          </div>
+          <div class="d-flex">
+            <p class="label flex-grow-1">Weekly stay discount</p>
+            <p class="value text-success">-$16</p>
+          </div>
+          <div class="d-flex">
+            <p class="label flex-grow-1">Cleaning fee</p>
+            <p class="value">$22</p>
+          </div>
+          <hr class="divider" />
+          <div class="d-flex">
+            <p class="label flex-grow-1"><strong>Total</strong></p>
+            <p class="value"><strong>$344</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-12 col-md-6 d-flex flex-column align-items-center">
+      <p class="h5 mt-5 ms-1">Meet your host</p>
+      <div class="owner-preview details-page">
+        <div class="details-card">
+          <img src="https://loremflickr.com/g/320/240/potrait,people/all" />
+          <p class="name"></p>
+          <p class="rank"></p>
+          <div class="d-flex justify-content-around w-100 stats">
+            <p class="reviews">
+              <strong>150</strong>
+              <small>Reviews</small>
+            </p>
+            <p class="rating">
+              <strong>4.85</strong>
+              <small>Rating</small>
+            </p>
+            <p class="duration">
+              <strong>5</strong>
+              <small>Years hosting</small>
+            </p>
+          </div>
+        </div>
+        <p class="description">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
+        </p>
+        <button class="btn btn-dark">Contact</button>
+      </div>
+    </div>
+  </div>
+  <p class="h5 mt-5 ms-1">Amenities</p>
+  <div class="d-flex flex-wrap align-items-center">
+    <div class="amenity">
+      <i class="fas fa-bed"></i>
+      <p class="m-0">1 king bed</p>
+    </div>
+    <div class="amenity">
+      <i class="fas fa-shower"></i>
+      <p class="m-0">Shared Bathroom</p>
+    </div>
+    <div class="amenity">
+      <i class="fas fa-home"></i>
+      <p class="m-0">Host's family lives here</p>
+    </div>
+    <div class="amenity more">
+      <p class="m-0">See More</p>
+    </div>
+  </div>
+  <p class="h5 mt-3">About this place</p>
+  <p class="description">
+    $!aproduct.getText("productdescription",$context)
+  </p>
+  <hr />
+  <div class="d-flex w-100 stats-header gap-2 mt-4 mb-2">
+    <p>
+      <strong>&starf; 4.85</strong>
+      <small>Rating</small>
+    </p>
+    <span>&middot;</span>
+    <p>
+      <strong>150</strong>
+      <small>Reviews</small>
+    </p>
+  </div>
+  <div class="row mb-4">
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Cleanliness</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 90%"></div>
+      </div>
+      <small>4.8</small>
+    </div>
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Communication</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 85%"></div>
+      </div>
+      <small>4.6</small>
+    </div>
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Check-in</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 90%"></div>
+      </div>
+      <small>4.9</small>
+    </div>
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Accuracy</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 75%"></div>
+      </div>
+      <small>4.5</small>
+    </div>
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Location</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 90%"></div>
+      </div>
+      <small>4.8</small>
+    </div>
+    <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
+      <span>Value</span>
+      <div class="progress flex-grow-1 ms-auto" style="height: 3px; max-width: 200px">
+        <div class="progress-bar bg-dark" role="progressbar" style="width: 90%"></div>
+      </div>
+      <small>4.75</small>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col col-12 col-md-6 d-flex flex-column gap-2 review-item h-100 pb-4">
+      <div class="d-flex align-items-center gap-2">
+        <img src="https://loremflickr.com/g/320/240/potrait,people/all" alt="image" class="img-thumbnail circular" />
+        <div class="d-flex flex-column">
+          <p class="m-0">John Doe</p>
+          <p class="m-0 text-muted small">May 2021</p>
+        </div>
+      </div>
+      <p class="m-0">
+        We had a wonderful stay at Made's place! The tree house is as dreamy
+        and beautiful as the pictures. It feels private and is away from the
+        bustle of tourists, but there are restaurants
+      </p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-start">
+    <button class="btn btn-outline-dark mb-3">Show all reviews</button>
+  </div>
 </div>
+<div class="modal fade" id="preview">
+  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-content">
+      <button type="button" class="btn-close p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body">
+        <div class="row image-gallery">
+          <div class="col col-sm-12 p-1">
+            <img src="https://source.unsplash.com/collection/8890044/600x500" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>&copy; 2021 Tierra Sagrada</footer>
+
+<script>
+  $(document).ready(function () {
+    // generating placeholders for testing, delete this section in production
+    let el = document.querySelector(".review-item");
+    for (let i = 0; i <= 4; i++) {
+      let clone = el.cloneNode(true);
+      el.parentElement.appendChild(clone);
+    }
+    let gallery = document.querySelector(".modal-body .image-gallery .col");
+    for (let i = 0; i <= 4; i++) {
+      let clone = gallery.cloneNode(true);
+      clone.className = [
+        "col col-md-6 col-sm-12 p-1",
+        "col col-md-6 col-sm-12 p-1",
+        "col col-sm-12 p-1",
+      ][i % 3];
+      gallery.parentElement.appendChild(clone);
+    }
+    // section end
+  });
+</script>

@@ -36,11 +36,7 @@
         <div class="navbar-nav flex-row gap-2">
           <a class="lnk nav-link" href="$applink/about/index.html">[[About]]</a>
           <a class="lnk nav-link" href="$applink/contact/contact.html">[[Contact]]</a>
-          #if($user)
-            <a class="lnk nav-link" href="$applink/authentication/logout.html" title="[[Logout]]">
-              <i class="fas fa-sign-out-alt"></i>
-            </a>
-          #else
+          #if(!$user) 
             <a class="lnk nav-link" href="$applink/authentication/login.html" title="[[Login]]">
               [[Login]] <i class="fas fa-sign-in-alt ms-1"></i>
             </a>
@@ -60,6 +56,11 @@
               #end
             </ul>
           </div>
+          #if($user)
+            <a class="lnk nav-link" href="$applink/authentication/logout.html" title="[[Logout]]">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          #end
         </div>
       </div>
       <div class="offcanvas offcanvas-end d-flex d-md-none" tabindex="-1" id="drawerMenu"

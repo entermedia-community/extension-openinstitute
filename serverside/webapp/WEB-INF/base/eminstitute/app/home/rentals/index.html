@@ -49,11 +49,11 @@ $mediaarchive.query("librarycollection").exact("communitytagcategory",$community
     </div>
   </form>
 </div>
-    
-##$pages.include("$apphome/home/rentals/daterange.html", $context) 
 
-#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context))
-<h1>$hits.getPageOfHits()</h1>
+##$pages.include("$apphome/home/rentals/daterange.html", $context)
+
+#set( $hits =
+$mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$projects).exact("producttype","5").sort("name").search($context))
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">
     #foreach( $aproduct in $hits.getPageOfHits())
@@ -67,7 +67,7 @@ $mediaarchive.query("librarycollection").exact("communitytagcategory",$community
     #if(!$link)
     #set($link = "$applink/collective/channel/${collective.id}/#dash($collective.getName()).html")
     #end
-    
+
     #set( $collectives =
     $mediaarchive.query("librarycollection").match("library","organizations").sort("name").search())
     #set( $hit = false)
@@ -119,7 +119,9 @@ $mediaarchive.query("librarycollection").exact("communitytagcategory",$community
           <div class="d-flex justify-content-between mt-2">
             <p class="availability">Sep 10 &mdash; Sep 25</p>
             <p class="price">
-              <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span style="text-transform: lowercase;">[[Night]]</span>
+              <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
+                $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
+                style="text-transform: lowercase;">[[Night]]</span>
             </p>
           </div>
         </div>
