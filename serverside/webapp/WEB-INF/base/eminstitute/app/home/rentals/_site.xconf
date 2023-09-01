@@ -1,9 +1,6 @@
 <page>
 	<property name="collectivesection">store</property>
 
-	<path-action name="ProjectModule.loadCommunityTagCategory" />
-
-
 	<property name="virtual">true</property>
 
 	<path-action name="ProjectModule.loadCommunityTagCategory" />
