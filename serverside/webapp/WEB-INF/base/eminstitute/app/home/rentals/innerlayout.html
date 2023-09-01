@@ -1,0 +1,38 @@
+<div class="d-flex flex-column bg-white py-4">
+  <div class="container">
+    <div class="cat-header">
+      <img src="$apphome${communitytagcategory.primaryimagepath}" />
+      <div class="cat-details">
+        <h1>
+          $communitytagcategory.getName()
+        </h1>
+        <p>
+          $communitytagcategory.summary
+        </p>
+      </div>
+    </div>
+  <div class="d-flex flex-column p-3">
+    <h1>Community Booking</h1>
+    <a href="$applink/browse/add/addnew.html?communitytagcategory=$communitytagid"
+      class="emdialog btn btn-success align-self-center mb-2" title="[[Request To Add Your Property]]">
+      <i class="fas fa-plus"></i>
+      [[Request To Add Your Property]]
+    </a>
+  </div>
+
+
+    <hr/>
+    
+
+    
+  </div>
+
+  $pages.includeContent()
+
+</div>
+
+<footer>
+  <div class="container">
+    &copy; 2023 Open Institute. All rights reserved.
+  </div>
+</footer>

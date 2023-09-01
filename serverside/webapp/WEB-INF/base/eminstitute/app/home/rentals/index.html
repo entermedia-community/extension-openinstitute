@@ -1,28 +1,7 @@
-#set($communitytagid = "")
+#set($communitytagid = "4")
 #set($comunitytag = $mediaarchive.getCachedData("communitytagcategory", $communitytagid))
 #set( $projects =
 $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagid).search($context) )
-
-
-<div class="container">
-  <header class="d-flex flex-column p-3">
-    <h1>Community Booking</h1>
-    <p>
-      A collaborative booking platform that focuses on giving back to and
-      empowering communities around Lake Atitlan Guatemala.<br />5% of profits
-      goes to <a class="text-dark" href="https://openinstitute.org">Open Institute</a> projects that are
-      conserving land, educating
-      children, supporting musicians, and having a positive social and
-      justice impact.
-    </p>
-    <a href="$applink/browse/add/addnew.html?communitytagcategory=$communitytagid"
-      class="emdialog btn btn-success align-self-center mb-2" title="[[Request To Add Your Property]]">
-      <i class="fas fa-plus"></i>
-      [[Request To Add Your Property]]
-    </a>
-  </header>
-</div>
-
 
 <div class="container search">
   <form class="d-flex flex-column align-items-center">

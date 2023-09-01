@@ -7,10 +7,10 @@
   #if($communitytagcategory.primaryimagepathwide)
     #set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
   #end
-
   #if($communitytagcategory.logo)
-    #set($logo = "$applink${communitytagcategory.logo}")
+    ##set($logo = "$applink${communitytagcategory.logo}")
   #end
+
 #end
 
 #set($homelink = "$applink/home/proposals/index.html")
@@ -20,15 +20,9 @@
 
 <nav class="navbar sticky-top navbar-expand-lg">
   <div class="container"> 
-    #if($logo)
-    <a class="navbar-brand" href="#" title="#text($communitytagcategory)">
-      <img src="$logo" alt="#text($communitytagcategory)" class="me-2" />
-    </a>
-    #else
-    <a class="navbar-brand" href="$applink/index.html" title="Open Institute">
+     <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
       <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
     </a>
-    #end
     <div class="d-flex"> 
       <button class="d-block d-md-none navbar-toggler" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#drawerMenu" aria-controls="drawerMenu">
@@ -78,5 +72,8 @@
         <div class="offcanvas-body"></div>
       </div>
     </div>
+    
+    
+    
   </div>
 </nav>
