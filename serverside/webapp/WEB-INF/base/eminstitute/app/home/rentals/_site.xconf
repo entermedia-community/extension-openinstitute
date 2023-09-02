@@ -5,4 +5,8 @@
 
 	<path-action name="ProjectModule.loadCommunityTagCategory" />
  	<inner-layout>/${applicationid}/home/rentals/innerlayout.html</inner-layout>
+
+ 	<style id="custom-css" cancel="true" />
+ 	
+ 	
 </page>
