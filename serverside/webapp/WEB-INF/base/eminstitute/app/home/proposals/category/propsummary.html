@@ -2,7 +2,14 @@
       <div class="prop-credit">
       	#set($link = "$applink/proposal/#dash($project.getName())/${project.id}.html")
         <a href="$link" class="d-flex flex-column align-items-center p-2 w-100">
-          <img src="$apphome${communitytagcategory.primaryimagepath}" />
+        	#set($logo = false) 
+	#if($project.assetportrait)
+		#set($asset = $mediaarchive.getAsset($project.assetportrait))
+		#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+	#else
+		#set($logo = "$applink/theme/images/OI_flower.png")
+	#end
+          <img src="$logo" />
           <p>#text($project)</p>
           #set( $days = $mediaarchive.getProjectManager().calcDaysRemaining($project) )
 			#if($days)
