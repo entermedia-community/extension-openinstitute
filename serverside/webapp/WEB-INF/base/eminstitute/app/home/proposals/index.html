@@ -30,31 +30,10 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
   </button>
 </header>
 
-<div class="d-flex flex-column justify-content-center bg-black video-container" style="position: relative">
-  <video autoplay="" muted="" loop="" id="ftVideo">
-    <source type="video/mp4"
-      src="https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
-      label="1920" />
-    <source type="video/flash"
-      src="mp4:https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
-      label="1920" />
-  </video>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" style="width: 0%; transition: none"
-      id="vProgress"></div>
-  </div>
-  <button id="toggleMute" class="btn">
-    <i class="fas fa-volume-mute text-white"></i>
-  </button>
-  <button id="toggleFS" class="btn">
-    <i class="fas fa-expand text-white"></i>
-  </button>
-</div>
-
 <div class="communities">
-  <div class="container  pt-3">
+  <div class="container">
     <h2 class="my-3 text-center">[[Communities]]</h2>
-    <div class="row justify-content-center proposals">
+    <div class="row justify-content-center proposals pt-4">
       #set($tagscategories =
       $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context))
       #foreach( $tagcategory in $tagscategories)
@@ -87,6 +66,27 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
       ## $pages.include("$apphome/proposals/listproposals.html", $context)
     </div>
   </div>
+</div>
+
+<div class="d-flex flex-column justify-content-center bg-black video-container" style="position: relative">
+  <video autoplay="" muted="" loop="" id="ftVideo">
+    <source type="video/mp4"
+      src="https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
+      label="1920" />
+    <source type="video/flash"
+      src="mp4:https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
+      label="1920" />
+  </video>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" style="width: 0%; transition: none"
+      id="vProgress"></div>
+  </div>
+  <button id="toggleMute" class="btn">
+    <i class="fas fa-volume-mute text-white"></i>
+  </button>
+  <button id="toggleFS" class="btn">
+    <i class="fas fa-expand text-white"></i>
+  </button>
 </div>
 
 <script>
