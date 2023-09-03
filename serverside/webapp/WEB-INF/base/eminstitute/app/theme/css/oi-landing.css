@@ -23,7 +23,7 @@
 body {
     color: #151515;
     font-family: 'Roboto', sans-serif;
-    background-color: #1D5655;
+    background-color: #ffffff;
     scrollbar-width: thin;
     scrollbar-color: #339996 #133939;
 }
@@ -377,10 +377,11 @@ h2 {
 }
 
 .thumbnail img {
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    object-fit: cover;
+    width: 80%;
+    height: 80%;
+    opacity: 0.45;
+    object-fit: contain;
+    transition: all 0.2s ease-in-out
 }
 
 .thumbnail span {
@@ -400,11 +401,15 @@ h2 {
 
 .thumbnail:hover {
     border-radius: 8px;
-    outline: 2px #267371 dashed;
+}
+
+.thumbnail:hover img {
+    width: 90%;
+    height: 90%;
 }
 
 .thumbnail:hover span {
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .proposal .info {
