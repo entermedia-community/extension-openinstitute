@@ -19,18 +19,18 @@
 ##$pages.include("$apphome/components/libraries/pickcollection.html")
 
 <nav class="navbar sticky-top navbar-expand-lg">
-  <div class="container"> 
+  <div class="container flex-nowrap"> 
      <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
       <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
     </a>
+    $pages.include("$apphome/components/quicksearch/navbar.html")	
     <div class="d-flex"> 
       <button class="d-block d-md-none navbar-toggler" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#drawerMenu" aria-controls="drawerMenu">
-        <i class="fas fa-bars text-white" style="transform: scaleX(1.5)"></i>
+        <i class="fas fa-bars text-white"></i>
       </button>
       <div class="d-none d-md-flex flex-grow-1 align-items-center">
         <div class="navbar-nav flex-row gap-2">
-          $pages.include("$apphome/components/quicksearch/navbar.html")	
           <a class="lnk nav-link" href="$applink/about/index.html">[[About]]</a>
           <a class="lnk nav-link" href="$applink/contact/contact.html">[[Contact]]</a>
           #if(!$user) 

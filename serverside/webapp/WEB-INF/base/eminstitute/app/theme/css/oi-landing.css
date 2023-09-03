@@ -1,25 +1,3 @@
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #133939;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #339996;
-    border-radius: 8px;
-}
-
-::-webkit-scrollbar-corner {
-    background: #133939;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #267371;
-}
-
 body {
     color: #151515;
     font-family: 'Roboto', sans-serif;
@@ -635,4 +613,103 @@ h2.accordion-header {
 
 hr {
     opacity: 0.15;
+}
+
+#primary-search-results {
+    scrollbar-width: thin;
+    scrollbar-color: #cccccc #888888;
+    opacity: 0;
+    margin-top: 8px;
+    position: absolute;
+    width: 90vw;
+    max-width: 600px;
+    height: 0;
+    overflow: hidden;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    color: #151515;
+    overflow-y: auto;
+    transition: all 0.2s ease-in-out;
+    z-index: 9999;
+}
+
+
+
+.search-primary {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input.search-primary {
+    height: 42px;
+    border-radius: 21px;
+    border: 0;
+    outline: 1px solid #194d4b;
+    background-color: rgba(25, 77, 75, 0.75);
+    color: #ffffff;
+    padding: 0 16px;
+    font-size: 20px;
+    min-width: 200px;
+    z-index: 999;
+}
+
+input.search-primary.active {
+    background-color: #ffffff;
+    color: #194d4b;
+}
+
+@media screen and (max-width:768px) {
+    input.search-primary.active {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        width: 90%;
+        transform: translateX(-50%);
+    }
+
+    #primary-search-results {
+        position: fixed;
+        width: 96%;
+        top: 60px;
+    }
+}
+
+@media screen and (max-width: 422px) {
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    input.search-primary {
+        font-size: 18px;
+        height: 36px;
+        flex: 1;
+        width: 180px;
+        min-width: 100px;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    input.search-primary {
+        font-size: 18px;
+        height: 36px;
+        flex: 1;
+        width: 140px;
+    }
+}
+
+#search-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    display: none;
 }

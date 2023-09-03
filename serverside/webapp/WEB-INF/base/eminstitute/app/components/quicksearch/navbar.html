@@ -1,66 +1,30 @@
-#if(!$module)
-	#set($module = $mediaArchive.getCachedData($context.module))
-#end
-
-
-#if($librarycol)
-	#set( $collectionid = $librarycol.getId())
-#else
-	#set( $collectionid = $context.getRequestParameter("collectionid"))
-#end
-<div class="nav-form nav-quicksearch">
-##TODO  Remember last selected module of profile
-
-#if(!$hits)
-#set( $hits = $modulehits)
-$context.putPageValue("hits",$hits)
-#end
-		#set( $input = $hits.getInput("description") )
-		#if (!$input)
-			#set( $input = "")
-		#end
-
-
-		<div class="input-group"  style="position:relative;">
-			<input class="typeaheaddropdown form-control border-right-0 grabfocus" 
-					type="text"  
-					id="searchinput"
-					name="description.value"
-					value="#esc($input)"
-					autocomplete="off"
-					placeholder="[[Search...]]"
-					
-					data-updateurl="true" 
-					data-field="description"
-					
-					##regularsearch
-					data-quicksearched='$!context.getRequestParameter("quicksearched")'
-					data-searchurltargetdiv="applicationmaincontent"
-					data-oemaxlevel="2"
-					
-					##enterkeyaction?  
-					data-searchurlentertargetdiv="applicationmaincontent"
-					data-searchurlenteroemaxlevel="2"
-					
-					##typeahed
-					data-typeaheadurl="$siteroot$applink/components/quicksearch/results.html"
-					data-typeaheadtargetdiv="applicationmaincontent"
-					data-typeaheadoemaxlevel="2"
-					
-					data-hitssessionid="$!hits.sessionId"
-					
-					data-moduleid="$moduleid"
-					
-					data-operation="freeform"
-					 />
-			
-			<div class="input-group-addon submitform" style="pointer-events: initial;">
-			<a title="[[Search Now]]">[[Search]]</a>
-			</div>
-            
-		</div>
-
-
+<div class="flex-grow-1 d-flex ps-1 pe-2" style="position: relative;">
+	<input class="search-primary" />
+	$pages.include("$apphome/components/quicksearch/results.html")
+	<div id="search-mask"></div>
 </div>
+<script>
+	$(document).ready(function () {
+		var resultBox = $("#primary-search-results");
+		function showSearch(e) { 
+			$(".search-primary").addClass("active");
+			resultBox.css({"height": "auto", "opacity": 1});
+			$("#search-mask").show();
+		}
+		
+		$(".search-primary").on("focus", showSearch);
+		$(".search-primary").on("click", showSearch);
 
-
+		$(".search-primary").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#primary-search-results .content").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+		$("#search-mask").on("click", function () {
+			$(".search-primary").removeClass("active");
+			resultBox.css({"height": 0,"min-height": 0,"opacity": 0});
+			$("#search-mask").hide();
+		});
+	});
+</script>
