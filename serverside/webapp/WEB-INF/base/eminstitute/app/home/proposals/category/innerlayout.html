@@ -12,20 +12,15 @@
       </div>
     </div>
 
-#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context))
-#foreach( $project in $projects )
-     <hr/>
-  #set( $project = $searcher.loadData($project) )
-  $context.putPageValue("project",$project)
-  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
-#end
+    #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+    #set( $projects =
+    $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context))
+    #foreach( $project in $projects )
+      <hr />
+      #set( $project = $searcher.loadData($project) )
+      $context.putPageValue("project",$project)
+      $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+    #end
 
   </div>
 </div>
-
-<footer>
-  <div class="container">
-    &copy; 2023 Open Institute. All rights reserved.
-  </div>
-</footer>

@@ -42,6 +42,7 @@
 		<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
 			#if($browser.inApp())
 				$pages.includeContent()
+				$pages.include("/${apphome}/theme/layouts/footer.html")
 			#else
 				#set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
 				#if (!$usersidebarhidden)
@@ -55,9 +56,8 @@
 			#end
 		</div>
 		#if(!$browser.inApp())
-		$pages.include("${apphome}/googleanalytics.html", $context)
+			$pages.include("${apphome}/googleanalytics.html", $context)
 		#end
-	</div>
+	</div> 
 </body>
-
 </html>

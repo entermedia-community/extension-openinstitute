@@ -23,23 +23,13 @@ h6 {
     }
 }
 
-.dropdown-menu {
-    padding: 0;
-    background-color: #28292e;
+.secondary-header {
+    display: flex;
+    justify-content: space-between;
 }
 
-.dropdown-item {
-    cursor: pointer;
-    padding: 8px 12px;
-}
-
-.dropdown-item:hover {
-    background-color: #37383f;
-}
-
-.dropdown-item a {
-    text-decoration: none;
-    color: #ffffff;
+.secondary-header img {
+    height: 64px;
 }
 
 header {
