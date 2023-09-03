@@ -1,26 +1,35 @@
-<div class="d-flex flex-column bg-white py-4">
+<div class="d-flex bg-dark p-4">
   <div class="container">
-    <div class="cat-header">
-      <img src="$apphome${communitytagcategory.primaryimagepath}" />
-      <div class="cat-details">
-        <h1>
+    <div class="d-flex align-items-center">
+      <img class="cat-thumb" src="$apphome${communitytagcategory.primaryimagepath}" />
+      <div class="d-flex flex-column">
+        <h2 class="text-white m-0">
           $communitytagcategory.getName()
-        </h1>
-        <p>
+        </h2>
+        <p class="text-white mt-2 d-none d-md-block">
           $communitytagcategory.summary
         </p>
       </div>
     </div>
-
-    #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-    #set( $projects =
-    $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context))
-    #foreach( $project in $projects )
-      <hr />
-      #set( $project = $searcher.loadData($project) )
-      $context.putPageValue("project",$project)
-      $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
-    #end
-
+    <p class="text-white mt-2 d-md-none">
+      $communitytagcategory.summary
+    </p>
   </div>
 </div>
+
+#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context))
+
+<h2 class="text-center mt-4">Projects</h2>
+
+#foreach( $project in $projects )
+  #set( $project = $searcher.loadData($project) )
+  $context.putPageValue("project",$project)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+
+#end
