@@ -1,27 +1,15 @@
-<div class="row">
-  <div class="col oihomepage">
-    <div
-      class="oe-editable bodywebsite"
-      id="edit-$postdata.id"
-      data-dataid="$!postdata.id"
-      data-field="maincontent"
-      data-searchtype="postdata"
-      data-viewtype="html"
-    >
+#if( $user.oe_edit_mode == "postedit" )
+  <div class="row">
+    <div class="oe-editable bodywebsite" id="edit-$postdata.id" data-dataid="$!postdata.id" data-field="maincontent"
+      data-searchtype="postdata" data-viewtype="html">
       $!postdata.maincontent
     </div>
-
-    #if( $user.oe_edit_mode == "postedit" )
     <div class="editpostbtn">
-      <a
-        href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true"
-        class="btn btn-xs btn-light"
-        >Edit Post</a
-      >
+      <a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true"
+        class="btn btn-xs btn-light">Edit Post</a>
     </div>
-    #end
   </div>
-</div>
+#end
 
 #set( $communitytagid = $context.getPageName())
 $context.putPageValue("curentcommunitytagid", $communitytagid)
@@ -42,29 +30,18 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
   </button>
 </header>
 
-<div
-  class="d-flex flex-column justify-content-center bg-black video-container"
-  style="position: relative"
->
+<div class="d-flex flex-column justify-content-center bg-black video-container" style="position: relative">
   <video autoplay="" muted="" loop="" id="ftVideo">
-    <source
-      type="video/mp4"
+    <source type="video/mp4"
       src="https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
-      label="1920"
-    />
-    <source
-      type="video/flash"
+      label="1920" />
+    <source type="video/flash"
       src="mp4:https://openinstitute.org/site/mediadb/services/module/asset/downloads/originals/Collections/EnterMediaDB/The%20Open%20Institute%20Team%20-%20Development/2023_08/30/11_15_59/Open%20institute.mp4/Open%20institute.mp4"
-      label="1920"
-    />
+      label="1920" />
   </video>
   <div class="progress">
-    <div
-      class="progress-bar progress-bar-striped bg-dark"
-      role="progressbar"
-      style="width: 0%; transition: none"
-      id="vProgress"
-    ></div>
+    <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" style="width: 0%; transition: none"
+      id="vProgress"></div>
   </div>
   <button id="toggleMute" class="btn">
     <i class="fas fa-volume-mute text-white"></i>
@@ -78,15 +55,16 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
   <div class="container  pt-3">
     <h2 class="my-3 text-center">[[Communities]]</h2>
     <div class="row justify-content-center proposals">
-      #set($tagscategories = $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context))
+      #set($tagscategories =
+      $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context))
       #foreach( $tagcategory in $tagscategories)
         <div class="col col-sm-12 col-lg-6">
           <div class="proposal">
-            #if( $tagcategory.externaldomain) 
-              #set( $link ="//${tagcategory.externaldomain}/app/index.html") 
+            #if( $tagcategory.externaldomain)
+              #set( $link ="//${tagcategory.externaldomain}/app/index.html")
             #elseif($tagcategory.entitytype == "entityrental")
               #set( $link = "$apphome/home/rentals/#dash($tagcategory)/${tagcategory.getId()}.html")
-            #else 
+            #else
               #set( $link = "$apphome/home/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
             #end
             <a href="$link" class="thumbnail">
@@ -96,27 +74,20 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
             <div class="info">
               <p>$!tagcategory.summary</p>
               <a href="$link">[[View]]
-              
-              #if($tagcategory.entitytype == "entityrental")
-              	[[Rentals]]
-              #else
-              [[Projects]]
-              #end
-               <i class="fa fa-arrow-right"></i></a>
-            </div> 
-          </div> 
+                #if($tagcategory.entitytype == "entityrental")
+                  [[Rentals]]
+                #else
+                  [[Projects]]
+                #end
+                <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
         </div>
-      #end 
+      #end
       ## $pages.include("$apphome/proposals/listproposals.html", $context)
-    </div> 
+    </div>
   </div>
 </div>
-
-<footer>
-  <div class="container">
-    &copy; 2023 Open Institute. All rights reserved.
-  </div>
-</footer>
 
 <script>
   $(document).ready(function () {

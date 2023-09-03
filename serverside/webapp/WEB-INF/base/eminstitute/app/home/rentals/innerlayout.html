@@ -1,13 +1,17 @@
+#set($communitytagid = "4")
+#set($comunitytag = $mediaarchive.getCachedData("communitytagcategory", $communitytagid))
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagid).search($context) )
+
 <div class="d-flex flex-column bg-white py-4">
   <div class="container">
     <div class="cat-header">
-      <img src="$apphome${communitytagcategory.primaryimagepath}" />
+      <img src="$apphome${comunitytag.primaryimagepath}" />
       <div class="cat-details">
         <h1>
-          $communitytagcategory.getName()
+          $comunitytag.getName()
         </h1>
         <p>
-          $communitytagcategory.summary
+          $comunitytag.summary
         </p>
       </div>
     </div>

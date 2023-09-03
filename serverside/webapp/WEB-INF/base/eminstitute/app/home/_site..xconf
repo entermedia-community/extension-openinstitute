@@ -3,4 +3,5 @@
 	<property name="virtual">true</property>
 	<path-action name="MediaArchiveModule.loadApplicationId"/>
 	<inner-layout>/${applicationid}/theme/layouts/application.html</inner-layout>
+	<style id="oi2" cancel="true" />
 </page>

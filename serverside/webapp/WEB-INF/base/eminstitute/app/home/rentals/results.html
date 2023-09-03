@@ -1,8 +1,3 @@
-#set($communitytagid = "4")
-#set($comunitytag = $mediaarchive.getCachedData("communitytagcategory", $communitytagid))
-#set( $projects =
-$mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagid).search($context) )
-
 <div class="container search">
   <form class="d-flex flex-column align-items-center">
     <div class="d-flex align-items-center justify-content-center flex-wrap mt-4 w-100 gap-2">
@@ -36,76 +31,76 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">
     #foreach( $aproduct in $hits.getPageOfHits())
-    #set($logo = false)
-    #if($collective.assetportrait)
-    #set($asset = $mediaarchive.getAsset($collective.assetportrait))
-    #set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
-    #else
-    #set($logo = "$applink/theme/images/OI_flower.png")
-    #end
-    #if(!$link)
-    #set($link = "$applink/collective/channel/${collective.id}/#dash($collective.getName()).html")
-    #end
+      #set($logo = false)
+      #if($collective.assetportrait)
+        #set($asset = $mediaarchive.getAsset($collective.assetportrait))
+        #set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+      #else
+        #set($logo = "$applink/theme/images/OI_flower.png")
+      #end
+      #if(!$link)
+        #set($link = "$applink/collective/channel/${collective.id}/#dash($collective.getName()).html")
+      #end
 
-    #set( $collectives =
-    $mediaarchive.query("librarycollection").match("library","organizations").sort("name").search())
-    #set( $hit = false)
-    <div class="ad-container" id="ad"
-      data-href="$sitelink/app/collective/store/details/$collectionid/$aproduct.id/#esc($aproduct.name).html"
-      title="#text($aproduct.name)">
-      <div class="ad-body">
-        $context.putPageValue("aproduct",$aproduct)
-        #set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
-        #set($subtotal = $aproduct.getDouble("productprice"))
-        <div class="ad-img">
-          <div id="imgCarousel" class="carousel slide">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="2"></button>
+      #set( $collectives =
+      $mediaarchive.query("librarycollection").match("library","organizations").sort("name").search())
+      #set( $hit = false)
+      <div class="ad-container" id="ad"
+        data-href="$sitelink/app/collective/store/details/$collectionid/$aproduct.id/#esc($aproduct.name).html"
+        title="#text($aproduct.name)">
+        <div class="ad-body">
+          $context.putPageValue("aproduct",$aproduct)
+          #set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
+          #set($subtotal = $aproduct.getDouble("productprice"))
+          <div class="ad-img">
+            <div id="imgCarousel" class="carousel slide">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#imgCarousel" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://source.unsplash.com/collection/8890044/600x480" />
+                </div>
+                <div class="carousel-item">
+                  <img src="https://source.unsplash.com/collection/8890044/600x480" />
+                </div>
+                <div class="carousel-item">
+                  <img src="https://source.unsplash.com/collection/8890044/600x480" />
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#imgCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#imgCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" role="button"></span>
+              </button>
             </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://source.unsplash.com/collection/8890044/600x480" />
-              </div>
-              <div class="carousel-item">
-                <img src="https://source.unsplash.com/collection/8890044/600x480" />
-              </div>
-              <div class="carousel-item">
-                <img src="https://source.unsplash.com/collection/8890044/600x480" />
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#imgCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#imgCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" role="button"></span>
+            #set( $userimageurl = "$applink/theme/images/product-image.png" )
+            <button class="owner-btn" data-name="John Doe" data-reviews="144" data-rating="4.56" data-rank="Host"
+              data-duration="5" data-location="San Lucas Sacatepéquez"
+              data-description="Lore ipsum dolor sit amet, adipiscing elit.">
+              <img src="$userimageurl" />
             </button>
           </div>
-          #set( $userimageurl = "$applink/theme/images/product-image.png" )
-          <button class="owner-btn" data-name="John Doe" data-reviews="144" data-rating="4.56" data-rank="Host"
-            data-duration="5" data-location="San Lucas Sacatepéquez"
-            data-description="Lore ipsum dolor sit amet, adipiscing elit.">
-            <img src="$userimageurl" />
-          </button>
-        </div>
-        <div class="ad-details">
-          <p class="rating">★ 4.56</p>
-          <p class="location text-truncate" style="max-width: calc(100% - 50px)">
-            $!aproduct.getText("name",$context)
-          </p>
-          <p class="owner text-truncate">Hosted by $!aproduct.getText("name",$context)</p>
-          <div class="d-flex justify-content-between mt-2">
-            <p class="availability">Sep 10 &mdash; Sep 25</p>
-            <p class="price">
-              <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
-                $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
-                style="text-transform: lowercase;">[[Night]]</span>
+          <div class="ad-details">
+            <p class="rating">★ 4.56</p>
+            <p class="location text-truncate" style="max-width: calc(100% - 50px)">
+              $!aproduct.getText("name",$context)
             </p>
+            <p class="owner text-truncate">Hosted by $!aproduct.getText("name",$context)</p>
+            <div class="d-flex justify-content-between mt-2">
+              <p class="availability">Sep 10 &mdash; Sep 25</p>
+              <p class="price">
+                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
+                  $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
+                  style="text-transform: lowercase;">[[Night]]</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     #end
   </div>
 </div>

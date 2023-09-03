@@ -23,97 +23,6 @@ h6 {
     }
 }
 
-.navbar {
-    color: #ffffff;
-    background-color: #1B1C1F;
-}
-
-.navbar-brand {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.5em;
-    color: #ffffff;
-}
-
-.navbar-brand:focus,
-.navbar-brand:hover {
-    color: #efefef;
-}
-
-.navbar-brand:active {
-    color: #efefef;
-    font-size: 1.45em;
-}
-
-.logo {
-    height: 60px;
-}
-
-.navbar-nav .nav-link {
-    color: #ffffff;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    position: relative;
-}
-
-i.navbar-toggler-icon,
-.navbar-nav .nav-link.active {
-    color: #ffffff;
-}
-
-.navbar-nav .lnk.nav-link.active::after,
-.navbar-nav .lnk.nav-link.active:hover::after,
-.navbar-nav .lnk.nav-link:hover::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    width: 100%;
-    left: 0;
-    bottom: 4px;
-    background-color: #ffffff;
-}
-
-.navbar-nav .nav-link:hover::after {
-    background-color: #888888;
-}
-
-.navbar-nav .dropdown-toggle {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.offcanvas-header img {
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.offcanvas-header .btn-close {
-    color: #fff;
-}
-
-.offcanvas-body .lnk.nav-link,
-.offcanvas-body .dropdown-toggle {
-    /* color: #1B1C1F; */
-    font-size: 20px;
-    padding: 8px 16px;
-    margin-bottom: 4px;
-    font-weight: 600;
-}
-
-.offcanvas-header,
-.offcanvas-body {
-    background-color: #1B1C1F;
-}
-
-.offcanvas-body {
-    padding-top: 50px;
-}
-
 .dropdown-menu {
     padding: 0;
     background-color: #28292e;
@@ -354,18 +263,6 @@ button.owner-btn img {
     text-align: left;
     font-weight: 300;
     margin-bottom: 16px;
-}
-
-footer {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    background-color: #1B1C1F;
-    margin-top: 24px;
 }
 
 .search .form-control {

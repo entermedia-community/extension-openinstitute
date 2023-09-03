@@ -97,11 +97,11 @@
     <!-- App Custom -->
   	<style id="eminstitute-css" href="/${applicationid}/theme/css/eminstitute.css"/>
   	<script id="eminstitute-js" src="/${applicationid}/eminstitute.js"/>
- 	<style id="custom-css" href="/${applicationid}/theme/css/oi2.css"/>
-  	<style id="oi" href="/${applicationid}/theme/css/oi3.css"/>
+ 	  <style id="oi2" href="/${applicationid}/theme/css/oi2.css"/>
+  	<style id="oi_landing" href="/${applicationid}/theme/css/oi-landing.css"/>
+  	<style id="oi3" href="/${applicationid}/theme/css/oi3.css"/>
    
-     
- 
+
   <property name="assetviewerlink">/${applicationid}/views/modules/asset/editor/viewer/index.html</property>
   <property name="asseteditlink">//${applicationid}/views/modules/asset/editor/generalinformation/index.html</property>
   <property name="login-path">/${applicationid}/authentication/login.html</property>
