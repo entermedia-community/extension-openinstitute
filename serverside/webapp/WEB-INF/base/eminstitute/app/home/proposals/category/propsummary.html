@@ -50,10 +50,10 @@
         </li>
       </ul>
       <div class="content px-2 py-1">
-        <div id="problem">
+        <div class="problem">
           $!project.get("proposalproblem")
         </div>
-        <div id="empowerment">
+        <div class="empowerment">
           $!project.get("proposalempowerment")
         </div>
       </div>
@@ -61,24 +61,19 @@
   </div> 
 </div>
 <script>
-  $(document).ready(function () {
-    $('#problem').show();
-    $('#empowerment').hide();
-    $('.prop-pse .nav-link').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-      var target = $(this).data('target');
-      if (target === 'problem') {
-        $('#problem').show();
-        $('#empowerment').hide();
-        $('.prop-pse').removeClass('emp');
-        $('.prop-pse').addClass('prb');
-      } else {
-        $('#problem').hide();
-        $('#empowerment').show();
-        $('.prop-pse').removeClass('prb');
-        $('.prop-pse').addClass('emp');
-      }
+    $(document).ready(function () {
+      $('.prop-pse .nav-link').on('click', function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+        var target = $(this).data('target');
+        var propPse = $(this).closest('.prop-pse')
+        if (target === 'problem') {
+          propPse.removeClass('emp');
+          propPse.addClass('prb');
+        } else {
+          propPse.removeClass('prb');
+          propPse.addClass('emp');
+        }
+      });
     });
-  });
 </script>

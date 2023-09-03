@@ -545,6 +545,13 @@ img.cat-thumb {
     border-color: transparent;
 }
 
+.prop-pse.prb .empowerment {
+    display: none;
+}
+
+.prop-pse.emp .problem {
+    display: none;
+}
 
 .prop-pse.prb .nav-link.active {
     border-color: #f39d00;
