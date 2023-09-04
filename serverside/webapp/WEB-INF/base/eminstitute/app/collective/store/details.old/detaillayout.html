@@ -2,7 +2,7 @@
 #set( $aproduct = $data)
 #end
 
-<div class="container">
+<div class="container" id="storedetailarea">
   <div class="d-flex align-items-center">
     <div class="d-flex flex-column">
       <h2 class="mt-5 mb-0 text-dark">$!aproduct.getText("name",$context)</h2>
@@ -20,26 +20,39 @@
       <a class="emdialog btn btn-sm btn-outline-success text-success ms-3" title="[[Edit Product]]" href="$apphome/collective/store/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
         <i class="fas fa-edit"></i> [[Edit Product]]
       </a> 
+      #set($uploadlink = "$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
+		#set($oemaxlevel = "1")
+		#set($targetdiv = "applicationmaincontent")
+		<a href="$uploadlink" 
+			class="ajax moreactions btn btn-xs btn-secondary"
+			data-targetdivinner="storedetailarea"
+			data-closedialog="true" 
+			data-closemediaviewer="true"
+			data-updateurl="true"
+			data-oemaxlevel="$!oemaxlevel"
+			title="[[Upload Product Images]]">
+			<i class="fas fa-upload"></i> [[Add Images]]</a>
+      
     #end
   </div>
+  
+  
+  
   <div class="row image-gallery">
     <div class="col col-md-6 col-sm-12">
-      <img src="https://source.unsplash.com/collection/8890044/600x500" alt="image" />
+  			#set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
+                  <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' />
     </div>
     <div class="col col-md-6 d-none d-md-block">
       <div class="row">
-        <div class="col-md-6">
-          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
-        </div>
-        <div class="col-md-6">
-          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
-        </div>
-        <div class="col-md-6 mt-3">
-          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
-        </div>
-        <div class="col-md-6 mt-3">
-          <img src="https://source.unsplash.com/collection/8890044/600x500" class="img-fluid" alt="image" />
-        </div>
+     		#set( $query = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id))
+				#set( $assethits = $mediaarchive.getCachedSearch($query))
+           #foreach($asset in $assethits)
+      
+        	<div class="col-md-6 mt-3">
+             <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="image" />
+            </div>
+        	#end
       </div>
     </div>
     <button class="d-flex align-items-center see-more" data-bs-toggle="modal" data-bs-target="#preview">
@@ -108,7 +121,10 @@
       <p class="h5 mt-5 ms-1">Meet your host</p>
       <div class="owner-preview details-page">
         <div class="details-card">
-          <img src="https://loremflickr.com/g/320/240/potrait,people/all" />
+
+			#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
+			#ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+			<img src="$userimageurl" />
           <p class="name"></p>
           <p class="rank"></p>
           <div class="d-flex justify-content-around w-100 stats">

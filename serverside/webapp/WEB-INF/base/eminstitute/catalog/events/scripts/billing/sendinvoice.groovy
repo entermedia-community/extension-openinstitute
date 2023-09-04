@@ -324,7 +324,7 @@ private String getSiteRoot() {
 	return site;
 }
 
-init();
+//init();
 
 
 

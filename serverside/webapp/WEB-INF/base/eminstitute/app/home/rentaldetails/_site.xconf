@@ -1,6 +1,6 @@
 <page>
 
-	<inner-layout>/${applicationid}/collective/store/details/detaillayout.html</inner-layout>
+	<inner-layout>/${applicationid}/home/rentaldetails/detaillayout.html</inner-layout>
 
 	<property name="virtual">true</property>
 
@@ -23,4 +23,4 @@
     <path-action name="Admin.loadPermissions"/>
 
 
-</page> 
+</page>

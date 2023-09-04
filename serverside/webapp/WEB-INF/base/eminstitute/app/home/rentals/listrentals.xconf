@@ -1,0 +1,4 @@
+<page>
+ 	<inner-layout>/${applicationid}/theme/layouts/rentallayout.html</inner-layout>
+
+</page>

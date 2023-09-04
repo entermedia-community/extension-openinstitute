@@ -2,6 +2,6 @@
 	<property name="collectivesection">store</property>
 	<property name="virtual">true</property>
 	<path-action name="ProjectModule.loadCommunityTagCategory" />
- 	<inner-layout>/${applicationid}/home/rentals/innerlayout.html</inner-layout>
+ 	<inner-layout>/${applicationid}/home/rentals/listrentals.html</inner-layout>
  	<style id="oi2" cancel="true" />
 </page>
