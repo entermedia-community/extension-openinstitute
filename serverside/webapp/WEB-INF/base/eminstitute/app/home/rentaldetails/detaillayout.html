@@ -11,7 +11,7 @@
         <span>&middot;</span>
         <p class="reviews">155 reviews</p>
         <span>&middot;</span>
-        <p class="reviews">San Lucas Sacatepéquez</p>
+        <p class="reviews">San Marcos La Laguna</p>
       </div>
     </div>
     <div class="d-flex flex-grow-1"></div>
@@ -260,7 +260,8 @@
       <div class="modal-body">
         <div class="row image-gallery">
           <div class="col col-sm-12 p-1">
-            <img src="https://source.unsplash.com/collection/8890044/600x500" alt="image" />
+   			#set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
+            <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' />
           </div>
         </div>
       </div>
@@ -281,15 +282,15 @@
       let clone = el.cloneNode(true);
       el.parentElement.appendChild(clone);
     }
-    let gallery = document.querySelector(".modal-body .image-gallery .col");
-    for (let i = 0; i <= 4; i++) {
-      let clone = gallery.cloneNode(true);
+    let colums = document.querySelectorAll(".modal-body .image-gallery .col");
+    for (i = 0; i < colums.length; ++i) {
+      let clone = colums[i].cloneNode(true);
       clone.className = [
         "col col-md-6 col-sm-12 p-1",
         "col col-md-6 col-sm-12 p-1",
         "col col-sm-12 p-1",
       ][i % 3];
-      gallery.parentElement.appendChild(clone);
+      colums[i].parentElement.appendChild(clone);
     }
     // section end
   });
