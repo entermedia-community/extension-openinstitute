@@ -1,30 +1,4 @@
-<div class="container search">
-  <form class="d-flex flex-column align-items-center">
-    <div class="d-flex align-items-center justify-content-center flex-wrap mt-4 w-100 gap-2">
-      <div class="form-floating flex-grow-1">
-        <input class="form-control" id="location" placeholder="Where to?" name="location" />
-        <label for="location">Destination</label>
-      </div>
-      <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
-        <div class="form-floating flex-grow-1">
-          <input type="date" class="form-control" id="checkIn" placeholder="Check-In" name="in" />
-          <label for="dateRange">Check-In</label>
-        </div>
-        <div class="form-floating flex-grow-1">
-          <input type="date" class="form-control" id="checkOut" placeholder="Check-Out" name="out" />
-          <label for="dateRange">Check-Out</label>
-        </div>
-        <div class="form-floating flex-grow-1">
-          <input type="number" class="form-control" id="checkOut" placeholder="Guests" name="guests" readonly />
-          <label for="dateRange">Guests</label>
-        </div>
-      </div>
-      <button class="search-btn">Search</button>
-    </div>
-  </form>
-</div>
-
-##$pages.include("$apphome/home/rentals/daterange.html", $context)
+$pages.include("$apphome/home/rentals/filters.html", $context)
 
 
 
@@ -86,7 +60,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
 			#ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
             <button class="owner-btn" data-name="John Doe" data-reviews="144" data-rating="4.56" data-rank="Host"
               data-duration="5" data-location="San Lucas Sacatepéquez"
-              data-description="Lore ipsum dolor sit amet, adipiscing elit.">
+              data-description="Lore ipsum dolor sit amet, adipiscing elit." data-img="$userimageurl">
               <img src="$userimageurl" />
             </button>
           </div>
@@ -115,7 +89,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
     <div class="modal-content owner-preview">
       <button type="button" class="btn-close"></button>
       <div class="details-card">
-        <img src="https://loremflickr.com/g/320/240/potrait,people/all" />
+        <img src="#" />
         <p class="name"></p>
         <p class="rank"></p>
         <div class="d-flex justify-content-around w-100 stats">
@@ -182,6 +156,6 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
         return;
       }
       window.location.href = $(this).data("href");
-    });
+    }); 
   });
 </script>
