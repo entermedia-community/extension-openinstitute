@@ -1473,8 +1473,6 @@ a.pick-item:hover .project-item {
 .campaigncollectivelayout {
 	height: 100%;
 	width:100%;
-	max-width: 1600px;
-	margin: 0 auto;
 }
 .collectivebanner {
 	background-color: #fff;
@@ -1859,3 +1857,6 @@ textarea.form-control {
     transition: all 0.2s ease-in-out;
 }
 
+#primary-search-results .oilogo {
+	max-width:70px;
+}

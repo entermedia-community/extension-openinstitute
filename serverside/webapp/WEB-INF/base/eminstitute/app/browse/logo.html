@@ -1,0 +1,9 @@
+#set( $logoassetid = $context.getRequestParameter("logoassetid"))
+#if($logoassetid)
+	#set($asset = $mediaarchive.getAsset($logoassetid))
+	#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+#end	
+#ifnull( $logo)
+	#set($logo = "$applink/theme/images/OI_flower.png")
+#end
+<img class="oilogo" src="$logo" />
