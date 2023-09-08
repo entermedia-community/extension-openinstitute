@@ -5,9 +5,9 @@
 		<commandbase>./WEB-INF/bin/mac</commandbase>
 		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
 		<asperaupload>./aspera/upload.sh</asperaupload>
-		<convert>/usr/local/Cellar/imagemagick/6.7.1-1/bin/convert</convert>
-		<composite>/usr/local/Cellar/imagemagick/6.7.1-1/bin/composite</composite>
-		<ffmpeg>/usr/local/Cellar/ffmpeg/0.9/bin/ffmpeg</ffmpeg>
+		<convert>/Users/hi/homebrew/Cellar/imagemagick/7.1.1-15/bin/convert</convert>
+		<composite>/Users/hi/homebrew/Cellar/imagemagick/7.1.1-15/bin/composite</composite>
+		<ffmpeg>/Applications/ffmpeg</ffmpeg>
 		<qt-faststart>./qt-faststart</qt-faststart>
 	</commandmap>
 	<commandmap os="LINUX">

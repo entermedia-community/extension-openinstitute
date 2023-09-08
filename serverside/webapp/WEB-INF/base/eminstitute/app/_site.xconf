@@ -102,7 +102,7 @@
   	<style id="oi_landing" href="/${applicationid}/theme/css/oi-landing.css"/>
   	<style id="oi3" href="/${applicationid}/theme/css/oi3.css"/>
 
-    <style id="drangepicker" href="/${applink}/components/javascript/multidate/daterangepicker.min.css" />
+    <!-- <style id="drangepicker" href="/${applicationid}/components/javascript/multidate/daterangepicker.min.css" /> -->
    
 
   <property name="assetviewerlink">/${applicationid}/views/modules/asset/editor/viewer/index.html</property>
