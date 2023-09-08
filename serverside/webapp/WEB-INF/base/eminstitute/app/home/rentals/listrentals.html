@@ -21,7 +21,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
       #end
 
       <div class="ad-container" id="ad"
-        data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#esc($aproduct.name).html"
+        data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
         title="#text($aproduct.name)">
         <div class="ad-body"> 
           $context.putPageValue("aproduct",$aproduct)
