@@ -29,7 +29,7 @@
 	###set($homelink = "$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html")
 	
 	
-	#set($homelink = "$applink/proposals/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
+	#set($homelink = "$applink/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
 
 
 	#if ($librarycol.collectivebanner)
@@ -48,7 +48,7 @@
  		">
 			<div class="project-title">
 			#if($librarycol.name)
-			<h1>$!librarycol.name</h1>
+			<h1>#text($librarycol.name)</h1>
 			#end
 			
 			<div class="collectiveheaderlogo">

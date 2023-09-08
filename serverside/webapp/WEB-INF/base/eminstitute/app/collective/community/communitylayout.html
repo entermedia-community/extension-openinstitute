@@ -28,79 +28,67 @@
 #end
 $context.putPageValue("currenttopic", $currenttopic)
 
-#if($currenttopic)
-	$context.putPageValue("currenttopic", $currenttopic)
+<div id="campaigninfo" class=" oicontainercampaigns " >
+$context.putPageValue("currenttopic", $currenttopic)
 		<div class="collectivemaincol">
 			<div class="row no-gutters g-0 h-100">
-				#if(!$browser.inApp())
-			 		<div class="col-lg-2 col-xl-3 collaborate-sidebar d-none d-lg-block">
-			 		
-			 			$pages.include("$apphome/collective/channel/subscribers/index.html", $context)
-			 			
-			 			
-						$pages.include("$apphome/collective/community/projectlist.html", $context)
-			 		</div>
-			 	#end 
-				<div class="collaborate-channel col">
-				<div class="collaborate-channel-header">
-					<div class="channel-name float-left">
-					
-					
-					
-					
-					
-						#if($alltopics.size()>1)
-						<div class="dropdown show">
-						<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						#if($caneditcollection)
-							#if ($currenttopic.teamproject == "true")
-								<i class="fas fa-lock chanel-teamonly"></i>
-							#else 
-								<i class="fas fa-lock-open  chanel-teamonly"></i>
-							#end
-						#end
-						$currenttopic <i class="fas fa-caret-down"></i>
-						</a>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						 #foreach( $hit in $alltopics)
-						    #if ($hit.id != $currenttopic.id)
-							<a href="$applink/collective/community/index.html?collectionid=$collectionid&topic=$hit.getId()"
-								class="dropdown-item">
+				<div class="collaborate-channel col" style="margin: 20px;  border-radius: 15px;  padding: 20px;">
+					<div class="proposalcontainer-outX ">
+						<div class="collaborate-channel-header">
+							<div class="channel-name float-left">
+								#if($alltopics.size()>1)
+								<div class="dropdown show">
+								<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								#if($caneditcollection)
-									#if ($hit.teamproject == "true")
-										<i class="fas fa-lock"></i>
+									#if ($currenttopic.teamproject == "true")
+										<i class="fas fa-lock chanel-teamonly"></i>
 									#else 
-										<i class="fas fa-lock-open"></i>
+										<i class="fas fa-lock-open  chanel-teamonly"></i>
 									#end
-								#end 
-								$hit.name
-							</a>
-							#end
-						  #end
+								#end
+								$currenttopic <i class="fas fa-caret-down"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								 #foreach( $hit in $alltopics)
+								    #if ($hit.id != $currenttopic.id)
+									<a href="$applink/collective/community/index.html?collectionid=$collectionid&topic=$hit.getId()"
+										class="dropdown-item">
+										#if($caneditcollection)
+											#if ($hit.teamproject == "true")
+												<i class="fas fa-lock"></i>
+											#else 
+												<i class="fas fa-lock-open"></i>
+											#end
+										#end 
+										$hit.name
+									</a>
+									#end
+								  #end
+								</div>
+								</div>
+								#else
+								$currenttopic
+								#end
+								</div>
+							<div class="channel-actions float-right">
+								#if( $caneditcollection )
+								<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html" 
+										class="emdialog" 
+										title="[[Edit a Topic]]"
+										data-hidefooter="true">
+								<i class="fas fa-cog"></i></a>
+								#end
+								</div>	
 						</div>
-						</div>
-						#else
-						$currenttopic
-						#end
-						</div>
-					<div class="channel-actions float-right">
-						#if( $caneditcollection )
-						<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html" 
-								class="emdialog" 
-								title="[[Edit a Topic]]"
-								data-hidefooter="true">
-						<i class="fas fa-cog"></i></a>
-						#end
-						</div>	
+						$pages.include("$apphome/collective/community/chatbox.html", $context)
 				</div>
-			
-				$pages.include("$apphome/collective/community/chatbox.html", $context)
+				</div>
+				<div  class="col-lg-20p" style="padding:15px 10px 10px 0px">
+					$pages.include("$apphome/proposal/sidebar-right.html",$context)
+				</div>
 				
-				</div>
 			</div>	
 		</div>
-
 #end
 
-#end
-
+</div>

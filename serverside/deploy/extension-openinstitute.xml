@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="default" name="upgrade">
+
+   
+    <property name="appname" value="${ant.project.name}"/>
+    <property name="org" value="eInnovation, inc."/>
+    <property name="webinf" location="WEB-INF"/>
+    <property name="src" location="${webinf}/src"/>
+    <property name="lib" location="${webinf}/lib"/>
+    <property name="resources" location="resources"/>
+    <property name="build" location="./tmp/oe_upgrade"/>
+    <property name="wardir" location="${build}/wartmp"/>
+    <property name="dockerwebapp" location="/opt/entermediadb/webapp"/>
+    <property name="dockerlib" location="${dockerwebapp}/WEB-INF/lib"/>
+    
+
+	<!-- 
+		========================================================================
+		Anthill build server properties.  These properties will be passed in
+		by anthill when this script is executed on the build server.
+		
+			- "version" is set by the version adapter
+			- "deployDir" is set by anthill.publish.dir
+		========================================================================
+	--> 
+  	<property name="version"  value="dev"/>
+  	<property name="deployDir" location="deploy"/>
+  	
+  	<!-- A convenience variable for documentation output -->
+  	<property name="versionDir" location="${deployDir}/${version}"/>
+  	<property name="versionedApp" value="${appname}-${version}"/>
+
+   <target name="default" depends="clean"/>
+
+  <target name="clean">
+  </target>
+    
+  <target name="extend">
+  	<echo>Reinstall plugin(s)</echo>
+ 	 <delete failonerror="false">
+       <fileset dir="${dockerwebapp}/WEB-INF/base/eminstitute/"/>
+     </delete>
+     <copy todir="${dockerwebapp}/WEB-INF/base/eminstitute" preservelastmodified="true">
+       <fileset dir="${basedir}/base/eminstitute"/>
+     </copy>
+  	<!--
+    <delete>
+      <fileset file="${dockerlib}/eminstitute**.jar"/>
+    </delete>
+  	
+    <copy todir="${dockerlib}" overwrite="false" preservelastmodified="true">
+      <fileset file="${basedir}/lib/eminstitute**.jar"/>
+    </copy>
+  	-->
+  </target>
+</project>

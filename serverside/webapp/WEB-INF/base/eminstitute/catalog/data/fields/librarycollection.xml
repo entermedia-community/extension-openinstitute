@@ -9,7 +9,7 @@
       <language id="fr"><![CDATA[Id]]></language> 
     </name> 
   </property>  
-  <property id="name" index="true" stored="true" editable="true"  multilanguage="false"  > 
+  <property id="name" index="true" stored="true" editable="true"  keyword="true" multilanguage="true"  > 
     <name> 
       <language id="de"><![CDATA[Kollektion]]></language>  
       <language id="en"><![CDATA[Name]]></language>  
@@ -58,7 +58,7 @@
       <language id="fr"><![CDATA[Date de mise à jour]]></language> 
     </name> 
   </property>  
-  <property id="owner" index="true" viewtype="user" type="list" listid="user" keyword="true" stored="true"  editable="true" > 
+  <property id="owner" index="true" viewtype="user" type="list" listid="user" keyword="false" stored="true"  editable="true" > 
     <name> 
       <language id="de"><![CDATA[Owner]]></language>  
       <language id="en"><![CDATA[Owner]]></language>  

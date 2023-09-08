@@ -35,6 +35,12 @@
     </name> 
   </property>     
 
+  <property id="entitytype" editable="true" type="list" listid="module" index="true" stored="true"   >
+    <name> 
+      <language id="en"><![CDATA[Type]]></language>  
+    </name> 
+  </property>     
+
 
   <property id="caption" index="true" stored="true" editable="true"  > 
     <name> 

@@ -4,6 +4,6 @@
 	
 
     <inner-layout>/${applicationid}/theme/layouts/application.html</inner-layout>
-   	
-   
+    <style id="oi2" cancel="true" />
+    <style id="oi3" cancel="true" />
 </page>

@@ -1,0 +1,5 @@
+#
+#Tue Aug 29 23:19:33 BDT 2023
+Communities=Gemeinschaften
+View\ Proposals=Vorschl\u00E4ge ansehen
+Create\ a\ Proposal=einen Vorschlag erstellen

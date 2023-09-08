@@ -1,43 +1,38 @@
-<div class="container oicontainer" >
-	<div class="row no-gutters g-0" >
+<div class="container oicontainer">
+	<div class="row no-gutters g-0">
 		<div class="col oihomepage" style="margin-top: 20px;">
-			<div class="oe-editable bodywebsite" 
-				id="edit-$postdata.id" 
-				data-dataid="$!postdata.id" 
-				data-field="maincontent"	
-				data-searchtype="postdata" 
-				data-viewtype="html">
-  				$!postdata.maincontent
+			<div class="oe-editable bodywebsite" id="edit-$postdata.id" data-dataid="$!postdata.id"
+				data-field="maincontent" data-searchtype="postdata" data-viewtype="html">
+				$!postdata.maincontent
 			</div>
-			  
+
 			#if( $user.oe_edit_mode == "postedit" )
 				<div class="editpostbtn">
-					<a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true" class="btn btn-xs btn-light">Edit Post</a>
+					<a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true"
+						class="btn btn-xs btn-light">Edit Post</a>
 				</div>
 			#end
-			
+
 		</div>
 	</div>
-	
-	
+
+
 	##Current Campaigs
 
 	<div class="row justify-content-md-center " style="margin-top: 20px;">
-		<div class="col-md-10 col-lg-9" >
+		<div class="col-md-10 col-lg-9">
 			<div class="currentcampaigs">
 				<h2>[[Current Campaigs]]</h2>
-				##If we are on a subdomain then search for only that 
+				##If we are on a subdomain then search for only that
 				#if($communitytag)
 					<div class="feedupload-container">
 						$pages.include("$apphome/browse/channelfeed.html",$context)
-					</div>		
+					</div>
 				#else
-					$pages.include("$apphome/browse/channellist.html",$context) 
-				#end		
+					$pages.include("$apphome/browse/channellist.html",$context)
+				#end
 			</div>
 		</div>
 	</div>
-	
+
 </div>
-
-

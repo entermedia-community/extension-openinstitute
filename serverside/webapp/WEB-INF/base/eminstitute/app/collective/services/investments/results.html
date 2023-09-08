@@ -16,7 +16,7 @@
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  <th>[[User]]</th>
+                                  <th>[[Invested By]]</th>
                                   <th>[[Date]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Total]]</th>
@@ -26,7 +26,7 @@
                           </thead>
                           #foreach($hit in $investments.getPageOfHits())
                               <tr>
-                                  <td>#set( $auser = $mediaarchive.getUser($hit.user) )$auser</td>
+                                  <td>#set( $auser = $mediaarchive.getUser($hit.investmentuser) )$auser</td>
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>#esc($hit.notes)</td>
                                   <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>
