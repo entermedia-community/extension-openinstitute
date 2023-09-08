@@ -48,7 +48,7 @@
         <div class="col-md-6 mt-3">
           <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="image" />
         </div>
-        if ($velocityCount > 4) #break
+        	#if($foreach.count > 3) #break #end
         #end
       </div>
     </div>
