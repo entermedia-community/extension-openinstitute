@@ -39,20 +39,20 @@
 #set( $assethits = $mediaarchive.getCachedSearch($query))
 
   <div class="row image-gallery">
-    <div class="col col-md-6 col-sm-12">
+    <div class="col col-md-6 col-sm-12 previewImg" style="max-height: 466px;">
       <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1500x1500.jpg")' />
     </div>
     <div class="col col-md-6 d-none d-md-block">
       <div class="row">
         #foreach($asset in $assethits)
-        <div class="col-md-6 mt-3">
+        <div class="col-md-6 mt-3 previewImg">
           <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="image" />
         </div>
         	#if($foreach.count > 3) #break #end
         #end
       </div>
     </div>
-    <button class="d-flex align-items-center see-more" data-bs-toggle="modal" data-bs-target="#preview">
+    <button class="d-flex align-items-center see-more shadow" data-bs-toggle="modal" data-bs-target="#preview" id="triggerPreview">
       <i class="fas fa-camera"></i>
       <p class="m-0 ms-2">See all photos</p>
     </button>
@@ -281,33 +281,32 @@
   </div>
 </div>
 <div class="modal fade" id="preview">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <button type="button" class="btn-close p-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <div class="row image-gallery">
-          <div class="col col-sm-12 p-1"> 
-            <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1500x1500.jpg")' />
-          </div>
-          #set( $i = 0 )
-          #set( $gridLayouts = [
-            "col col-md-6 col-sm-12 p-1",
-            "col col-md-6 col-sm-12 p-1",
-            "col col-sm-12 p-1"
-          ])
-          #foreach($asset in $assethits)
-            #set( $gridLayout = $gridLayouts.get($i % 3) )
-            <div class="$gridLayout mt-3"> 
-              <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="image" />
+  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-content bg-black">
+      <button type="button" class="btn btn-lg text-white align-self-start m-2" data-bs-dismiss="modal">
+        <i class="fas fa-times me-1 text-white"></i>
+        <span>Close</span>
+      </button>
+      <div class="modal-body d-flex align-items-center justify-content-center">
+        <div id="carouselMax" class="carousel carousel-fade" data-bs-ride="true">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1500x1500.jpg")' class="img-fluid"
+                alt="preview">
             </div>
-            #set( $i = $i + 1 )
-          #end
+            #foreach($asset in $assethits)
+              <div class="carousel-item">
+                <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="preview">
+              </div>
+            #end
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselMax" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselMax" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
       </div>
     </div>
   </div>
@@ -392,6 +391,9 @@
         $(this).siblings("strong").text(val);
         updateGuests(gt, -1);
       }
+    });
+    $(".previewImg").click(function () {
+      $('#triggerPreview').trigger('click');
     });
   });
 </script>
