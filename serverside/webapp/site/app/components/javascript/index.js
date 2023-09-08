@@ -1986,6 +1986,208 @@ toggleBox = function(inId, togglePath, inPath)
 
 
 /** 
+ EnterMediaDB javascriptGenerator : /site/app/components/javascript/oicomponents.js
+  **/
+
+jQuery(document).ready(function() {
+
+	var lasttypeahead;
+	var lastsearch;
+
+	lQuery(".typeaheaddropdown").livequery(function() {  //TODO: Move to results.js
+		
+		var input = $(this);
+
+		var hidescrolling = input.data("hidescrolling");
+
+		
+		var id = input.data("dialogid");
+		if (!id) {
+			id = "typeahead";	
+		}
+		
+		var modaldialog = $("#" + id);
+		if (modaldialog.length == 0) {
+			input.parent().append(
+					'<div class="typeaheadmodal" tabindex="-1" id="' + id
+							+ '" style="display:none" ></div>');
+			modaldialog = $("#" + id);
+		}
+		
+		var width = input.width();
+		var minwidth = input.data("minwidth");
+
+		if (minwidth && width) {
+			if( minwidth >  width )
+			{
+				width =  minwidth;
+			}
+		}
+		
+		modaldialog.css("width", width + "px");
+		var topposition =  input.height() + 5;
+		modaldialog.css("top", topposition+"px");
+		modaldialog.css("left", input.offset().left/2+"px");
+		//modaldialog.css("left", input.position().left+"px");
+		//modaldialog.css("margin", "0 auto");
+		modaldialog.css("height", input.data("resultheight")+"px");	 
+
+
+		var options = input.data();
+		
+		var searchurltargetdiv = input.data("searchurltargetdiv");
+			
+		var typeaheadtargetdiv = input.data("typeaheadtargetdiv");
+		if(typeaheadtargetdiv == null) {
+			typeaheadtargetdiv = "applicationmaincontent"
+		}	
+		var url = input.data("typeaheadurl");
+		var isloaded = false;
+
+		var showdialog = function()
+		{
+			if( modaldialog.is(":hidden") )
+			{
+				if( !isloaded)
+				{
+					var options = input.data();
+					modaldialog.load(url, options, function() 
+					{
+						modaldialog.show();
+						isloaded =true;
+					});
+				}
+				else
+				{
+					modaldialog.show();
+				}
+			}
+			else
+			{
+				console.log("hide");
+				modaldialog.hide();
+			}
+		}
+		
+
+		input.on("focus", function(e) //Keyup sets the value first 
+		{
+			//showdialog();
+		});	
+		input.on("click", function(e) //Keyup sets the value first 
+		{
+			showdialog();
+		});	
+			
+		input.on("keyup", function(e) //Keyup sets the value first 
+		{
+			var q = input.val();
+			q = q.trim();
+			options["description.value"] = q;
+			
+			//var moduleid = $("#applicationcontent").data("moduleid");
+			//var searchurl = apphome + "/views/modules/" + moduleid + "/index.html";
+
+			//options["moduleid"] = moduleid;
+			
+			if( q && q.length < 2)
+			{
+				return;
+			}
+			if( q.endsWith(" "))
+			{
+				return;
+			}
+			//console.log("Keyup" + e.which);
+			if( e.which == 27) //Tab?
+			{
+				modaldialog.hide();	
+			}
+			else if(q != "" && (e.which == 8 || (e.which != 37 && e.which != 39 && e.which > 32) ) ) //Real words and backspace
+			{
+				//console.log("\"" + q + "\" type aheading on " + e.which);
+				//Typeahead
+				if( lasttypeahead )
+				{
+					lasttypeahead.abort();
+				}
+				//Typeahead ajax call
+				lasttypeahead = $.ajax(
+				{ 
+					url: url, async: true, 
+					data: options,
+					timeout: 5000,
+					success: function(data) 
+					{
+						if(data) 
+						{
+							modaldialog.html(data);
+							var lis = modaldialog.find("li");
+							if( lis.length > 0)
+							{
+								//modaldialog.css("min-height",lis.length * 42 + 25);
+								modaldialog.show();
+							}
+							else
+							{
+								//modaldialog.hide();
+							}
+						}	
+					}
+				});
+
+				var searching = input.data("searching");
+				if( searching == "true")
+				{
+					//console.log("already searching"  + searching);
+				}
+				var searchurl = input.data("searchurl");//apphome + "/index.html";
+
+				if (searchurl != null) {
+					console.log(q + " searching");
+					input.data("searching","true");
+					
+					if( lastsearch )
+					{
+						lastsearch.abort();
+					}
+					options["oemaxlevel"] = input.data("oemaxlevel");
+					//Regular Search Ajax Call
+					lastsearch = $.ajax({ url: searchurl, async: true, data: options, 
+						success: function(data) 
+						{
+							input.data("searching","false");
+							//if(data) 
+							{
+								//var q2 = input.val();
+								//if( q2 == q)
+								{
+									$("#"+searchurltargetdiv).html(data);
+									$(window).trigger("resize");
+								}	
+							}
+						}
+						,
+						complete:  function(data) 
+						{
+							input.data("searching","false");
+							input.css( "cursor","");
+						}
+					});
+				}
+			}
+		});
+		//jQuery("body").on("click", function(event){
+		//	modaldialog.hide();
+		//});
+	});
+	
+
+});
+
+
+
+/** 
  EnterMediaDB javascriptGenerator : /site/app/components/javascript/entermedia.js
   **/
 
@@ -8861,190 +9063,189 @@ jQuery(document).ready(function()
 	var hide = body.data("hidetoolbar");
 	//console.log(hide);
 	
-	if( hide == true )
+	if( hide != true )
 	{	
-		return;
-	}
-	var path = window.location.pathname;
-	if( window.location.search )
-	{
-		path = path + window.location.search;
-	}
-
-	jQuery.get("/openedit/components/toolbar/admintoolbarselector.html", {path:	path }, function(data) 
-	{
-		
-		body.prepend(data);
-		
-		loadToolbar();
-	});
-	
-	$(document).on("click",  ".oe-enableedit" ,function()
-	{
-		var apphome = jQuery("#application").data("apphome");
-		//<li><a href="$home/openedit/views/workflow/mode/viewdebug.html?origURL=$origURL" ><img src="$home/openedit/theme/images/toolbar/modepreview.gif" border="0" title="Debug Mode" />Debug Mode</a></li>
-		
-		var args = $(this).data();
-		//Enable dashes on 
-		$.get(href, args, function(data) 
+		var path = window.location.pathname;
+		if( window.location.search )
 		{
-			//reload page
-			
-		});
-	});
-	
-	$(document).on("click",  ".oeDialog" ,function(){
-		var target = $(this).data('target');
-		if(target == null){
-			target = $(this).attr('href');
+			path = path + window.location.search;
 		}
-		var title= $(this).data('title');
-		if(title != null){
-			
-			$('#modal-title').text(title);
-		}
-		$('#edit-modal-body').load(target,function(result){
-			var textareas = jQuery(".htmleditor");
-			if(textareas.size() > 0){
-			
-				loadEditors();
-			}
-			$('#editmodal').modal({show:true});
-		
-		});
-	  return false;
-		
-	});	
 	
-	
-	$(document).on("click",  ".oemodechange" ,function(e){
-		
-		var target = $(this).attr('href');
-		jQuery.get(target, function(){
-			
-			location.reload();
-			
-		});
-	     e.preventDefault();
-		}
-	);
-		
-	jQuery("a.openeditdialog").each(
-		function() 
+		jQuery.get("/openedit/components/toolbar/admintoolbarselector.html", {path:	path }, function(data) 
 		{
-			var height  = jQuery(window).height();
-			var width  = jQuery(window).width();
-			height = height * 0.9;
-			width = width * 0.9;
-			if(width < 900){
-				width = 1050;
-			}
 			
-			var newfancy = jQuery(this).fancybox(
-			{ 
-				'zoomSpeedIn': 300, 'zoomSpeedOut': 300, 'overlayShow': true,
-				enableEscapeButton: true, type: 'iframe', 
-				height: height, width: width
-			});
-		}
-	); 
-	
-	//OLD Approach
-	jQuery("a.oeinlineedit").on('click',
-			function(e) 
-			{	
+			body.prepend(data);
 			
-			var container = $(this).parent().parent().parent();
-			container = $(container);
-			var editpath = container.data("editpath");
-			var app = jQuery("#application");
-
-			var catalogid = app.data("catalogid");
-			//alert("using " + catalogid);
-			var home = $("#openedit").data("home");
-			if(!home)
+			loadToolbar();
+		});
+		
+		$(document).on("click",  ".oe-enableedit" ,function()
+		{
+			var apphome = jQuery("#application").data("apphome");
+			//<li><a href="$home/openedit/views/workflow/mode/viewdebug.html?origURL=$origURL" ><img src="$home/openedit/theme/images/toolbar/modepreview.gif" border="0" title="Debug Mode" />Debug Mode</a></li>
+			
+			var args = $(this).data();
+			//Enable dashes on 
+			$.get(href, args, function(data) 
 			{
-				home = "";
+				//reload page
+				
+			});
+		});
+		
+		$(document).on("click",  ".oeDialog" ,function(){
+			var target = $(this).data('target');
+			if(target == null){
+				target = $(this).attr('href');
 			}
-			var savepath = home + "/openedit/components/html/save.html";
-			
-		 	CKEDITOR.config.saveSubmitURL = savepath + "?editPath=" + editpath;	 //TODO: Save this URL specific to this editor
-		 	CKEDITOR.config.filebrowserBrowseUrl =  home+ '/openedit/components/html/browse/index.html?editPath=$editPath';
-		    CKEDITOR.config.filebrowserUploadUrl = home+ '/openedit/components/html/edit/actions/imageupload-finish.html';
-		    CKEDITOR.config.filebrowserImageBrowseUrl = home+'/openedit/components/html/browse/index.html?editPath=$editPath';
-			CKEDITOR.config.filebrowserImageUploadUrl = home+ '/openedit/components/html/edit/actions/imageupload-finish.html';
-			CKEDITOR.config.entities =false;
-			CKEDITOR.config.basicEntities= true;
-				e.preventDefault();
-				var content = container.find(".openediteditcontent" ).get(0);
-				//var content = jQuery(".openediteditcontent" ).get(0);
-				content.setAttribute('contenteditable', 'true');
-				var editor = CKEDITOR.inline( content,
-					 {
-					 extraConfig : { 'oldcontent' : 'null'
-						 
-					 
-					 },
-        			 startupFocus : true ,        			 
-        			 on: 
-        			   {
-        			   	dataReady: function( event ) {
-        			   		
-        			   		 event.editor.config.extraConfig.oldcontent = event.editor.getData();
-        			   	},        			   
-		                 blur: function( event ) {
-          	
-		                    var data = event.editor.getData();
-							
-							if( data != editor.config.extraConfig.oldcontent )
-							{
-									$(window).on("beforeunload", function() {
-										return "You have unsaved changes.  Reloading will loose these changes.";
-										
-										
-									});
-								
-							}
-							return false;
-							//event.editor.destroy();
-		                 } ,
-		                 savecontentdone: function( event )    {
-		                	 location.reload();
-
-		                 }  
-		              }      
-                } );
-                
-               
-                	
-				/*
-				if( typeof content.ckeditorGet == "undefined")
-				{
-					CKEDITOR.inline( content,
-					 {
-        				startupFocus : true
-        			 }
-        			);	
+			var title= $(this).data('title');
+			if(title != null){
+				
+				$('#modal-title').text(title);
+			}
+			$('#edit-modal-body').load(target,function(result){
+				var textareas = jQuery(".htmleditor");
+				if(textareas.size() > 0){
+				
+					loadEditors();
 				}
-				*/
-//				content.focus();
-
-/*
-  				jQuery(content).blur( function() {
-	                content.setAttribute('contenteditable', 'false');
-	               
-					for(name in CKEDITOR.instances)
-					{
-					    CKEDITOR.instances[name].destroy()
-					}
-
-	             } ); 
-*/
-
-				return false;
+				$('#editmodal').modal({show:true});
+			
+			});
+		  return false;
+			
+		});	
+		
+		
+		$(document).on("click",  ".oemodechange" ,function(e){
+			
+			var target = $(this).attr('href');
+			jQuery.get(target, function(){
+				
+				location.reload();
+				
+			});
+		     e.preventDefault();
 			}
-	);		
+		);
+			
+		jQuery("a.openeditdialog").each(
+			function() 
+			{
+				var height  = jQuery(window).height();
+				var width  = jQuery(window).width();
+				height = height * 0.9;
+				width = width * 0.9;
+				if(width < 900){
+					width = 1050;
+				}
+				
+				var newfancy = jQuery(this).fancybox(
+				{ 
+					'zoomSpeedIn': 300, 'zoomSpeedOut': 300, 'overlayShow': true,
+					enableEscapeButton: true, type: 'iframe', 
+					height: height, width: width
+				});
+			}
+		); 
 
+		//OLD Approach
+		jQuery("a.oeinlineedit").on('click',
+				function(e) 
+				{	
+				
+				var container = $(this).parent().parent().parent();
+				container = $(container);
+				var editpath = container.data("editpath");
+				var app = jQuery("#application");
+	
+				var catalogid = app.data("catalogid");
+				//alert("using " + catalogid);
+				var home = $("#openedit").data("home");
+				if(!home)
+				{
+					home = "";
+				}
+				var savepath = home + "/openedit/components/html/save.html";
+				
+			 	CKEDITOR.config.saveSubmitURL = savepath + "?editPath=" + editpath;	 //TODO: Save this URL specific to this editor
+			 	CKEDITOR.config.filebrowserBrowseUrl =  home+ '/openedit/components/html/browse/index.html?editPath=$editPath';
+			    CKEDITOR.config.filebrowserUploadUrl = home+ '/openedit/components/html/edit/actions/imageupload-finish.html';
+			    CKEDITOR.config.filebrowserImageBrowseUrl = home+'/openedit/components/html/browse/index.html?editPath=$editPath';
+				CKEDITOR.config.filebrowserImageUploadUrl = home+ '/openedit/components/html/edit/actions/imageupload-finish.html';
+				CKEDITOR.config.entities =false;
+				CKEDITOR.config.basicEntities= true;
+					e.preventDefault();
+					var content = container.find(".openediteditcontent" ).get(0);
+					//var content = jQuery(".openediteditcontent" ).get(0);
+					content.setAttribute('contenteditable', 'true');
+					var editor = CKEDITOR.inline( content,
+						 {
+						 extraConfig : { 'oldcontent' : 'null'
+							 
+						 
+						 },
+	        			 startupFocus : true ,        			 
+	        			 on: 
+	        			   {
+	        			   	dataReady: function( event ) {
+	        			   		
+	        			   		 event.editor.config.extraConfig.oldcontent = event.editor.getData();
+	        			   	},        			   
+			                 blur: function( event ) {
+	          	
+			                    var data = event.editor.getData();
+								
+								if( data != editor.config.extraConfig.oldcontent )
+								{
+										$(window).on("beforeunload", function() {
+											return "You have unsaved changes.  Reloading will loose these changes.";
+											
+											
+										});
+									
+								}
+								return false;
+								//event.editor.destroy();
+			                 } ,
+			                 savecontentdone: function( event )    {
+			                	 location.reload();
+	
+			                 }  
+			              }      
+	                } );
+	                
+	               
+	                	
+					/*
+					if( typeof content.ckeditorGet == "undefined")
+					{
+						CKEDITOR.inline( content,
+						 {
+	        				startupFocus : true
+	        			 }
+	        			);	
+					}
+					*/
+	//				content.focus();
+	
+	/*
+	  				jQuery(content).blur( function() {
+		                content.setAttribute('contenteditable', 'false');
+		               
+						for(name in CKEDITOR.instances)
+						{
+						    CKEDITOR.instances[name].destroy()
+						}
+	
+		             } ); 
+	*/
+	
+					return false;
+				}
+		);		
+
+	}
 
 	loadHtmlEditor = function(searchtype,id,field,viewtype,container) 
 	{
@@ -9136,10 +9337,6 @@ jQuery(document).ready(function()
 		    					var saveto = container.data("saveto");
 		    					var data = event.editor.getData();
 								$("#" + saveto).val(data);
-								var theform = container.closest('form');
-								if (theform.data("readytosubmit") == "true") {
-									theform.trigger("submit"); //todo validate double submit?
-								}
 		    				}
 		                } ,
 		                savecontentdone: function( event )    
@@ -9246,16 +9443,16 @@ jQuery(document).ready(function()
 	});		
 	
 	
-lQuery(".oehtmlinput").livequery(
-		function(e) 
-		{	
-			var container = $(this);
-			var field = container.data("field");
-			var viewtype = "html";
-			loadHtmlEditor(null,null,field,viewtype,container);
-
-			return false;
-		});		
+	lQuery(".oehtmlinput").livequery(
+			function(e) 
+			{	
+				var container = $(this);
+				var field = container.data("field");
+				var viewtype = "html";
+				loadHtmlEditor(null,null,field,viewtype,container);
+	
+				return false;
+			});		
 	
 	
 	
@@ -9286,13 +9483,14 @@ jQuery("form.oeajaxform").bind('submit',
 	
 			}
 			return false;
-		});
+		}
+	);
 
-
-
+	
 });
-
-loadToolbar = function() {
+	
+	loadToolbar = function()
+	{
 		jQuery("#oeselector").mouseenter(
 			function()
 			{
