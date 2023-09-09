@@ -12,7 +12,7 @@
 	
 	<path-action name="JsonAdminModule.preprocess" />
   	<path-action name="Admin.createTempUser"/>
-  	<path-action name="Admin.emailPasswordReminder"/>
+  	<path-action name="Admin.emailUserLoginCode"/>
   	
   	
   	

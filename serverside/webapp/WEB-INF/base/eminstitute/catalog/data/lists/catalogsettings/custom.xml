@@ -7,6 +7,11 @@
     <name><![CDATA[MediaDB Application ID]]></name>
   </data>
   
+  <data id="allowloginbyemail" value="true">
+    <name><![CDATA[Allow Login By Email]]></name>
+  </data>
+  
+  
   <data id="donation_email_body">
     <value><![CDATA[
 
