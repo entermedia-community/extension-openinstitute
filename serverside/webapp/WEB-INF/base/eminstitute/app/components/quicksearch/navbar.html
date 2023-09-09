@@ -26,6 +26,8 @@ $context.putPageValue("hits",$hits)
 			<input class="typeaheaddropdown search-primary active" type="text" id="searchinput" name="description.value"
 				value="#esc($input)" autocomplete="off" placeholder="[[Search Open Institute]]" data-resultheight="600"
 				data-updateurl="true" data-field="description" ##regularsearch
+				data-maxhitsperpage="10"
+				
 				data-quicksearched='$!context.getRequestParameter("quicksearched")'
 				data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
 				data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" ##typeahed
