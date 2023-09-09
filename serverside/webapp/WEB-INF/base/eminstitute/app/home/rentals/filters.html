@@ -68,7 +68,11 @@
     $("#checkIn").val(moment().format("DD MMM YYYY"));
     $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
 
-    $("#checkOut").dateRangePicker(config);
+    $("#checkOut").dateRangePicker(config).bind('datepicker-open', function () {
+      $("#gp-mask").show();
+    }).bind('datepicker-close', function () {
+      $("#gp-mask").hide();
+    });;
 
     $("#checkIn").dateRangePicker(config).bind('datepicker-change', function (event, obj) {
       $("#checkOut").data('dateRangePicker').destroy();
@@ -80,6 +84,10 @@
         $("#checkOut").val(config.startDate);
       }
       config.startDate = moment().format("DD MMM YYYY")
+    }).bind('datepicker-open', function () {
+      $("#gp-mask").show();
+    }).bind('datepicker-close', function () {
+      $("#gp-mask").hide();
     });
 
     $("#guests").click(function () {
@@ -97,7 +105,7 @@
       pet: 0
     };
 
-    function updateGuests(gt, f=1) {
+    function updateGuests(gt, f = 1) {
       if (gt == 'adult' || gt == 'children') {
         curGuestVal.guest += f;
       } else if (gt == 'pet') {
@@ -123,7 +131,7 @@
     });
     $(".g-minus").click(function () {
       var gt = $(this).data("gt");
-      
+
       var val = parseInt($(this).siblings("strong").text());
       var min = 0;
       if (gt == 'adult') {
