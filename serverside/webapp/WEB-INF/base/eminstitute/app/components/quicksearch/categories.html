@@ -1,18 +1,20 @@
-			<h6 class="text-center">Communities</h6>
-
-#set( $tagscategories = $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context))
-      #foreach( $tagcategory in $tagscategories)
-          <div class="proposalX">
-            #if( $tagcategory.externaldomain)
-              #set( $link ="//${tagcategory.externaldomain}/app/index.html")
-            #elseif($tagcategory.entitytype == "entityrental")
-              #set( $link = "$apphome/home/rentals/#dash($tagcategory)/${tagcategory.getId()}.html")
-            #else
-              #set( $link = "$apphome/home/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
-            #end
-            <a href="$link" class="thumbnailX">
-              <img style="max-width:80px;" src="$apphome${tagcategory.primaryimagepath}" />
-              <span class="#if ($tagcategory.getName().length() > 10) sm #else lg #end">$tagcategory.getName()</span>
-            </a>
-          </div>
+<h6 class="text-center">Communities</h6>
+#set( $tagscategories =
+$mediaarchive.query("communitytagcategory").named("communitytagcategory").all().search($context))
+<div class="row justify-content-md-center">
+  #foreach( $tagcategory in $tagscategories)
+    <div class="col-6 col-md-4 h-100">
+      #if( $tagcategory.externaldomain)
+      #set( $link ="//${tagcategory.externaldomain}/app/index.html")
+      #elseif($tagcategory.entitytype == "entityrental")
+      #set( $link = "$apphome/home/rentals/#dash($tagcategory)/${tagcategory.getId()}.html")
+      #else
+      #set( $link = "$apphome/home/proposals/category/#dash($tagcategory)/${tagcategory.getId()}.html")
       #end
+      <a href="$link" class="result-item">
+        <img style="max-width:80px;" src="$apphome${tagcategory.primaryimagepath}" />
+        <span class="#if ($tagcategory.getName().length() > 10) sm #else lg #end">$tagcategory.getName()</span>
+      </a>
+    </div>
+  #end
+</div>

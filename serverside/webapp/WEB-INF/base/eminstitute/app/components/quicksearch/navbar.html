@@ -1,57 +1,60 @@
 #if(!$module)
-	#set($module = $mediaArchive.getCachedData($context.module))
+#set($module = $mediaArchive.getCachedData($context.module))
 #end
 
 
 #if($librarycol)
-	#set( $collectionid = $librarycol.getId())
+#set( $collectionid = $librarycol.getId())
 #else
-	#set( $collectionid = $context.getRequestParameter("collectionid"))
+#set( $collectionid = $context.getRequestParameter("collectionid"))
 #end
-##TODO  Remember last selected module of profile
+
+##TODO Remember last selected module of profile
 
 #if(!$hits)
 #set( $hits = $modulehits)
 $context.putPageValue("hits",$hits)
 #end
-		#set( $input = $hits.getInput("description") )
-		#if (!$input)
-			#set( $input = "")
-		#end
 
-<div class="flex-grow-1 d-flex ps-1 pe-2" style="position: relative;">
-	<div id="search-mask"></div>
+#set( $input = $hits.getInput("description") )
+#if (!$input)
+#set( $input = "")
+#end
+<div class="flex-grow-1 d-flex justify-content-end ps-1 pe-2" style="position: relative;">
+	<div class="search-popup">
+		<div class="d-flex align-items-center">
+			<input class="typeaheaddropdown search-primary active" type="text" id="searchinput" name="description.value"
+				value="#esc($input)" autocomplete="off" placeholder="[[Search Open Institute]]" data-resultheight="600"
+				data-updateurl="true" data-field="description" ##regularsearch
+				data-quicksearched='$!context.getRequestParameter("quicksearched")'
+				data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
+				data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" ##typeahed
+				data-typeaheadurl="$siteroot$applink/components/quicksearch/results.html"
+				data-typeaheadtargetdiv="applicationmaincontent" data-typeaheadoemaxlevel="2"
+				data-hitssessionid="$!hits.sessionId" data-moduleid="$moduleid" data-operation="freeform" />
+			<button class="btn text-white" id="closeSearch">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+	</div>
+	<button class="btn text-white" id="searchbtn">
+		<i class="fas fa-search"></i>
+	</button>
+</div>
 
-			<input class="typeaheaddropdown  search-primary" 
-					type="text"  
-					id="searchinput"
-					name="description.value"
-					value="#esc($input)"
-					autocomplete="off"
-					placeholder="[[Search Open Institute]]"
-					data-resultheight="600"
-					data-updateurl="true" 
-					data-field="description"
-					
-					##regularsearch
-					data-quicksearched='$!context.getRequestParameter("quicksearched")'
-					data-searchurltargetdiv="applicationmaincontent"
-					data-oemaxlevel="2"
-					
-					##enterkeyaction?  
-					data-searchurlentertargetdiv="applicationmaincontent"
-					data-searchurlenteroemaxlevel="2"
-					
-					##typeahed
-					data-typeaheadurl="$siteroot$applink/components/quicksearch/results.html"
-					data-typeaheadtargetdiv="applicationmaincontent"
-					data-typeaheadoemaxlevel="2"
-					
-					data-hitssessionid="$!hits.sessionId"
-					
-					data-moduleid="$moduleid"
-					
-					data-operation="freeform"
-					 />
-			
-			</div>
+<script>
+	$(document).ready(function () {
+		$("#searchbtn").on("click", function () {
+			$(".search-popup").css("display", "flex")
+			$("#searchinput").focus();
+			$("#searchinput").trigger("click");
+		});
+		$("#closeSearch").on("click", function () {
+			$(".search-popup").css("display", "none")
+		});
+		$(".search-popup").on("click", function (e) {
+			if (e.target !== this) return;
+			$(".search-popup").css("display", "none")
+		});
+	});
+</script>
