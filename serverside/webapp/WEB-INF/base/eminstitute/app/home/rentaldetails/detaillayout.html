@@ -3,34 +3,34 @@
 #end
 
 <div class="container" id="storedetailarea">
-  <div class="d-flex align-items-center">
+
+  <h2 class="mt-3 mb-1 text-dark">$!aproduct.getText("name",$context)</h2>
+  <div class="d-flex flex-wrap justify-content-between mb-4">
     <div class="d-flex flex-column">
-      <h2 class="mt-5 mb-0 text-dark">$!aproduct.getText("name",$context)</h2>
-      <div class="d-flex gap-2">
-        <p class="rating">★ 4.56</p>
-        <span>&middot;</span>
-        <p class="reviews">155 reviews</p>
-        <span>&middot;</span>
-        <p class="reviews">San Marcos La Laguna</p>
+      <p class="text-secondary mb-0">San Marcos La Laguna</p>
+      <div class="d-flex align-items-center">
+        <p class="rating m-0">★ 4.56</p>
+        <span class="mx-2">&middot;</span>
+        <p class="reviews m-0">155 reviews</p>
       </div>
     </div>
-    <div class="d-flex flex-grow-1"></div>
-    <p class="my-0 me-1"><i class="fas fa-share-alt"></i> Share</p>
-    #if( $caneditcollection)
-    <a class="emdialog btn btn-sm btn-outline-success mx-2" title="[[Edit Product]]"
-      href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
-      <i class="fas fa-edit"></i> [[Edit Product]]
-    </a>
-    #set($uploadlink =
-    "$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
-    #set($oemaxlevel = "1")
-    #set($targetdiv = "applicationmaincontent")
-    <a href="$uploadlink" class="ajax moreactions btn btn-sm btn-outline-primary" data-targetdivinner="storedetailarea"
-      data-closedialog="true" data-closemediaviewer="true" data-updateurl="true" data-oemaxlevel="$!oemaxlevel"
-      title="[[Upload Product Images]]">
-      <i class="fas fa-plus"></i> [[Add Images]]</a>
-
-    #end
+    <div class="d-flex flex-column flex-md-row align-items-center">
+      <button class="btn btn-sm m-1" id="shareAd" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
+      #if( $caneditcollection)
+        <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
+          href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
+          <i class="fas fa-edit"></i> [[Edit Product]]
+        </a>
+        #set($uploadlink = "$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
+        #set($oemaxlevel = "1")
+        #set($targetdiv = "applicationmaincontent")
+        <a href="$uploadlink" class="ajax moreactions btn btn-sm btn-outline-primary m-1" data-targetdivinner="storedetailarea"
+          data-closedialog="true" data-closemediaviewer="true" data-updateurl="true" data-oemaxlevel="$!oemaxlevel"
+          title="[[Upload Product Images]]">
+          <i class="fas fa-plus"></i> [[Add Images]]
+        </a>
+      #end
+    </div>
   </div>
 
 
@@ -394,6 +394,20 @@
     });
     $(".previewImg").click(function () {
       $('#triggerPreview').trigger('click');
+    });
+    $("#shareAd").click(function () {
+      var url = window.location.href;
+      var dummy = $('<input>').val(url).appendTo('body').select();
+      document.execCommand('copy');
+      dummy.remove();
+      $(this).addClass('text-success');
+      $(this).find('span').text('Link copied')
+      $(this).find('i').removeClass('fa-share-alt').addClass('fa-check');
+      setTimeout(() => {
+        $(this).find('i').removeClass('fa-check').addClass('fa-share-alt');
+        $(this).removeClass('text-success');
+        $(this).find('span').text('Share')
+      }, 2000);
     });
   });
 </script>
