@@ -190,6 +190,5 @@ jQuery(document).ready(function() {
 		//	modaldialog.hide();
 		//});
 	});
-	
 
 });
