@@ -557,19 +557,21 @@ input.search-primary {
     margin-right: -30px;
 }
 
-#primary-search-results {
+#searchResultContainer {
     position: absolute;
     left: 50vw;
     width: 600px;
     max-width: 100vw;
     transform: translateX(-50%);
-    top: 60px;
+    top: 90px;
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
 }
 
-.typeaheadmodal {
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
+#searchLoading,
+#searchNoResult {
+    display: none;
 }
 
 .result-item {

@@ -23,7 +23,7 @@ $context.putPageValue("hits",$hits)
 <div class="flex-grow-1 d-flex justify-content-end ps-1 pe-2" style="position: relative;">
 	<div class="search-popup">
 		<div class="d-flex align-items-center">
-			<input class="typeaheaddropdown search-primary active" type="text" id="searchinput" name="description.value"
+			<input class="search-primary active" type="text" id="searchInput" name="description.value"
 				value="#esc($input)" autocomplete="off" placeholder="[[Search Open Institute]]" data-resultheight="600"
 				data-updateurl="true" data-field="description" ##regularsearch
 				data-quicksearched='$!context.getRequestParameter("quicksearched")'
@@ -36,25 +36,30 @@ $context.putPageValue("hits",$hits)
 				<i class="fas fa-times"></i>
 			</button>
 		</div>
+		<div id="searchResultContainer">
+			<p class="m-0 small text-center text-secondary" id="searchInputEmpty">
+				Start typing to search for communities, projects, and other contents.
+			</p>
+			<p class="m-0 fw-bold small text-center text-danger" id="searchNoResult">
+				No results found.
+			</p>
+			<div class="align-items-center flex-column" id="searchLoading">
+				<div class="spinner-border text-secondary" role="status">
+					<span class="visually-hidden">Searching...</span>
+				</div>
+				<p class="mb-0 mt-1 small text-center text-secondary">
+					<span class="d-none">...</span>Searching...
+				</p>
+			</div>
+			<div id="searchResult"></div>
+			<div id="searchResultPlaceholder"> 
+				<hr style="border-color: #000000;" />
+				$pages.include("$apphome/components/quicksearch/categories.html")
+			</div>
+		</div>
 	</div>
-	<button class="btn text-white" id="searchbtn">
+	<button class="btn text-white" id="searchBtn">
 		<i class="fas fa-search"></i>
 	</button>
-</div>
 
-<script>
-	$(document).ready(function () {
-		$("#searchbtn").on("click", function () {
-			$(".search-popup").css("display", "flex")
-			$("#searchinput").focus();
-			$("#searchinput").trigger("click");
-		});
-		$("#closeSearch").on("click", function () {
-			$(".search-popup").css("display", "none")
-		});
-		$(".search-popup").on("click", function (e) {
-			if (e.target !== this) return;
-			$(".search-popup").css("display", "none")
-		});
-	});
-</script>
+</div>
