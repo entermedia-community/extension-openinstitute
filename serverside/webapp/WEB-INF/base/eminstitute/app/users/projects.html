@@ -47,11 +47,11 @@
 		#foreach( $ohit in $organizationsuser )
 			#set($x = $foids.add($ohit.collectionid))
 		#end
+			#if($foids.size()>0)
 		
 			#set( $organizations = $mediaarchive.query("librarycollection").ids($foids).sort("name").search() )
 
-			#if($organizations.size()>0)
-			<h2> [[Following]]</h2>
+			<h2> [[Liked]]</h2>
 			<div class="stations-grid ">
 				<div class="project-grid ">
 					
