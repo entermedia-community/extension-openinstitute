@@ -847,3 +847,14 @@ img.cat-thumb {
 .previewImg:hover img {
     filter: brightness(0.8);
 }
+
+.chatterbox .chatterboxreplyto {
+	
+	margin-left:0px; 
+	padding: 5px;
+	font-style: italic;
+	border:2px solid #bbb; 
+	border-left:8px solid purple;
+	background-color:#ddd; 
+	color: #666;
+}

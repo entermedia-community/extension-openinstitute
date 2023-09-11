@@ -7,15 +7,10 @@
 			$pages.include("$apphome/collective/community/chatterbox/messages.html", $context)				
 		
 			</div>
+			<div id="newmessagearea"></div>
 		</div>
 	</div>
 </div>
-##if ($cancomment)
 #if( $caneditcollection)
-	<div class="chatterbox-write">
-	
-		<textarea class="chatterbox-text chatter-text" id="chatter-msg"  placeholder="[[Message...]]" ></textarea>
-		<button class="btn btn-primary btn-sm chatter-send float-left"
-			data-command="messagereceived" type="button">[[Send]]</button>
-	</div>
+		$pages.include("$apphome/collective/community/chatterbox/editarea.html", $context)				
 #end

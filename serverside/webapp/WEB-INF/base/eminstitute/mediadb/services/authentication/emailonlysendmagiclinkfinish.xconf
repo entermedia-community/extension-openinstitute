@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  	<property name="emaillayout">/${siteid}/mediadb/authentication/sendmagiclinkemail.html</property>
+  	<property name="emaillayout">/${siteid}/mediadb/services/authentication/sendmagiclinkemail.html</property>
 	
 	<permission name="view">
     	<boolean value="true" />
@@ -12,7 +12,7 @@
 	
 	<path-action name="JsonAdminModule.preprocess" />
   	<path-action name="Admin.createTempUser"/>
-  	<path-action name="Admin.emailPasswordReminder"/>
+  	<path-action name="Admin.emailUserLoginCode"/>
   	
   	
   	
