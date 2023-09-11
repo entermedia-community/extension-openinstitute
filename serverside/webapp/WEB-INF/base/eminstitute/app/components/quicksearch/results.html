@@ -41,7 +41,7 @@
 			#if($module.id == "librarycollection")
 				#set($link = "$applink/proposal/#dash($hit.getName())/${hit.id}.html")
 				<a class="col-6 col-md-4 result-item" href="$link" class="quickresult">
-					$pages.include("$apphome/browse/logo.html?assetid=$hit.assetportrait",$context)
+					$pages.include("$apphome/browse/logo.html?logoassetid=$hit.assetportrait",$context)
 					<span>#text($hit)</span>
 				</a>
 			#else
