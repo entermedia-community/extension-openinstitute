@@ -1,7 +1,6 @@
 #set( $target = "messagetask${goal.id}")
-<div id="$target" class="goalstatus goalstatus$!{goal.projectstatus}" style="position:relative"> 
+<div id="$target" class="goalstatus goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" style="position:relative"> 
 #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
-
 <div>
 #if($caneditcollection)
 <a data-cancelsubmit="true" 
@@ -13,9 +12,8 @@
 	data-width="900" >
 		<i class="fas fa-flag"></i> 
 		#set( $level = $mediaarchive.getData("ticketlevel",$goal.ticketlevel))
-		[[Ticket]] : #$!goal.ticketnumber  #text($level)
+		#text($level) : #$!goal.ticketnumber  
 		#set( $status  = $mediaarchive.getData("projectstatus", $goal.projectstatus) )
-		#text($status)
 </a>
 #end
 <div class="goalslike float-right">

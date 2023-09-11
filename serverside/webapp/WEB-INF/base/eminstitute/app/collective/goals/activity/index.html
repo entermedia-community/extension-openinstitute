@@ -20,7 +20,7 @@
 #foreach($activity in $results)
 	
 	#set( $goal = $mediaarchive.getData("projectgoal",$activity.goalid) )
-	<tr class="goalstatus$!{goal.projectstatus}" >
+	<tr class="goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" >
 	$context.putPageValue("goal",$goal)
 	<td >
 	#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )

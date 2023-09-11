@@ -1,13 +1,7 @@
 <div class="maincontent">
 ##Search collections this user is teammember
-#set($organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search() )
-#set($userprojects = [])
-#foreach( $ohit in $organizationsuser )
-	#set($x = $userprojects.add($ohit.collectionid))
-	#set($collectionid = "$collectionids|$ohit.collectionid")
-#end
-
-#if(!$userprojects)
+#set($userprojects = $mediaarchive.getProjectManager().listCollectionsOnTeam($user))
+#if($userprojects.isEmpty())
 	[[No projects for this user]]
 #else
 <div id="goaleditor" class="goals-container">
@@ -20,19 +14,6 @@
 	##	#set($x = $otherusers.add($ohit.followeruser))
 	###end	
 	
-	##<form name="user" action="$applink/users/tasks/index.html" class="autosubmitform form-inline" style="width:200px; float:left; padding-right:20px;">
-	##	<input name="collectionid" value="$collectionid" type="hidden" />
-	##	    <select class="listdropdown autosubmited form-control-sm" name="goaltrackerstaff" data-placeholder="[[Staff]]">
-	##		<option value="*">[[All Teams]]</option>
-	##		    ##set( $allmembers = $mediaarchive.getList("user") )
-	##		    #set( $allmembers = $mediaarchive.query("user").ids($otherusers).enduser(true).search() )
-	##		    #foreach( $member in $allmembers )
-	##		   		<option value="$member.getId()" #if($member.getId()==$selecteduser.getId()) selected="selected" #end >$member</option>
-	##		    #end
-	##   </select>
-	##</form>
-	
-	 	
 	 	<div style="float:left; line-height: 2;">
 			[[Total Priorities]]: <strong>$totallikes</strong> [[Open]]: <strong>$totalopen</strong> [[Closed]]: <strong>$totalclosed</strong>
 		</div>
@@ -40,7 +21,7 @@
 		#set( $opengoalid = $context.getRequestParameter("opengoalid"))
 		#if( $opengoalid )
 		    #set( $goal = $mediaarchive.getData("projectgoal",$opengoalid))
-		    #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=agentcalendar")
+		    #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=agentcalendar")
 		    <a href="$goallink" title="$goal.name" class="emdialog editgoalshow openemdialog" style="display: cnone" >[[Goal link]]</a>	
 		#end	
 	 	
@@ -60,7 +41,6 @@
 			
 			<ul class="projectgoals"
 				data-oemaxlevel="2"  
-				data-collectionid="$collectionid" 
 				data-categoryid="$!selectedcat.id" 
 				data-savepath="$applink/collective/goals/goalmovepriority.html">  
 				##set a completed date

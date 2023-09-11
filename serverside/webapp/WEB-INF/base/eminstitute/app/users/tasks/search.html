@@ -1,17 +1,14 @@
 <div class="maincontent">
 ##Search collections this user is teammeber
-#set($organizationsuser = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("ontheteam","true").search() )
-#set($userprojects = [])
-#foreach( $ohit in $organizationsuser )
-	#set($x = $userprojects.add($ohit.collectionid))
-#end
-#if(!$userprojects)
-	[[No projects for this user]]
-#else
-	#set($ticketlevel = $context.getRequestParameter("ticketlevel"))
+#set($userprojects = $mediaarchive.getProjectManager().listCollectionsOnTeam($user))
+#set($ticketlevel = $context.getRequestParameter("ticketlevel"))
 	#if(!$ticketlevel)
 		#set($ticketlevel = "1")
 	#end
+
+#if($userprojects.isEmpty())
+	[[No projects for this user]]
+#else
 	
 #set( $opengoalid = $context.getRequestParameter("opengoalid"))
 #if( $opengoalid )
@@ -28,21 +25,22 @@
 	#end
 	#if (!$hits.isEmpty())
 		<div class="goals-header-actions">
-		$hits.size() [[Tasks]]
+		#set($level = $mediaarchive.getCachedData("ticketlevel",$ticketlevel))
+		#text($level) ($hits.size())
 		</div>
 		<div class="emdata" style="overflow-x:auto;">
 		<table width="100%" class="table table-striped table-hover">
 		<thead>
 			<tr class="tableheader">
 				<th style="width:130px;">[[Project]]</th>
-				<th style="width:130px;">[[Ticket]]</th>
+				<th style="width:130px;">[[Goals]]</th>
 				<th>[[Details]]</th>
 				<th style="width:180px">[[Status]]</th>		
 			</tr>
 		</thead>
 		#foreach($goal in $hits)
 			#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($goal))
-			<tr class="goalstatus$!{goal.projectstatus}" >
+			<tr class="goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" >
 			$context.putPageValue("goal",$goal)
 			<td >
 			#set( $project= $!mediaarchive.getData("librarycollection",$goal.collectionid) )
@@ -57,7 +55,7 @@
 				data-width="900">$!goal.ticketnumber $goal.name</a>
 			</td>
 			<td >
-				#esc( $!goal.details ) 	
+				$!url_util.escapeMessage($goal.details)
 				
 				#if( $goal.response)
 					<hr><i>

@@ -42,7 +42,7 @@
     <a href="$goallink" title="$goal.name" class="emdialog editgoalshow openemdialog" style="display: cnone" >[[Goal link]]</a>	
 #end
 	
-#set( $hits = $mediaarchive.query("projectgoal").orgroup("collectionid",$collectionid).orgroup("projectstatus","open|critical").enduser(true).sort("projectstatus").sort("creationdateDown").search() )
+#set( $hits = $mediaarchive.query("projectgoal").orgroup("collectionid",$collectionid).orgroup("projectstatus","open|critical").enduser(true).sort("projectstatus").sort("ticketlevelUp").sort("creationdateDown").search() )
 
 #if ($hits)
 	<div class="clearfix" style="padding:5px;">
@@ -62,7 +62,7 @@
 	#foreach($goal in $hits)
 		#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($goal))
 		$context.putPageValue("goal",$goal)
-		<tr class="goalstatus$!{goal.projectstatus}" >
+		<tr class="goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" >
 
 ##		<td >
 ##		#set( $project= $!mediaarchive.getData("librarycollection",$goal.collectionid) )
@@ -79,7 +79,7 @@
 			style="text-decoration:underline;" 
 			data-hidefooter="true"
 			data-urlbar="$applink/collective/goals/$goalfolder/index.html?collectionid=$goal.collectionid&opengoalid=$goal.id"
-			data-width="900">#if( $goal.ticketnumber ) #$goal.ticketnumber #end$goal.name</a>
+			data-width="900">#if( $goal.ticketnumber ) #$goal.ticketnumber #end<b>$goal.name</b></a>
 			</div>
 		</td>
 	
