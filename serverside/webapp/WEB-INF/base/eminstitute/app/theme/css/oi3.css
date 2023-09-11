@@ -510,8 +510,7 @@ img.cat-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 200px;
-    max-width: 300px;
+    width: 250px;
     color: #267371;
 }
 
@@ -519,7 +518,9 @@ img.cat-thumb {
     font-size: 1.2em;
     font-weight: bold;
     color: #444444;
-    margin-bottom: 0;
+    margin-bottom: 8px;
+    text-align: center;
+    line-height: 1;
 }
 
 .prop-credit>.progress {
