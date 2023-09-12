@@ -863,3 +863,8 @@ img.cat-thumb {
 {
 	background: #f0dbdf;
 }
+
+.taskmyself a.taskstatusbutton 
+{
+	background-color: #de2a2a;	!important;
+}

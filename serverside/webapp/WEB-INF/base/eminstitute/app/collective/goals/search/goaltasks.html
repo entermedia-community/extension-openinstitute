@@ -64,7 +64,11 @@
 				</div>
 		
 				
-				<div class="taskstatus goalstatus-$!task.taskstatus">
+				<div class="taskstatus goalstatus-$!task.taskstatus
+					#if( $task.taskstatus == "0" && $task.completedby == $user.id)
+						taskmyself
+					#end			
+				">
 					
 					#if($caneditgoal)
 						<a 
@@ -75,12 +79,16 @@
 							title="[[Task]]"
 							data-focuson="$task.id"
 							data-width="900"
-							class=" taskedit taskedit-$!{task.taskstatus} #if($caneditgoal) ajax #end " 
+							class="taskstatusbutton taskedit taskedit-$!{task.taskstatus} #if($caneditgoal) ajax #end " 
 							data-targetdiv="$!{container}taskrow${task.id}" 
 							data-oemaxlevel="1" 
 							 >
 						##<i class="fas fa-pencil-alt"></i>
-						$context.getText($!mediaarchive.getData("taskstatus", $task.taskstatus))
+						#if( $task.taskstatus == "0")
+							$!mediaarchive.getUser($task.completedby).getAnonNickName()
+						#else
+							$context.getText($!mediaarchive.getData("taskstatus", $task.taskstatus))
+						#end
 						</a>
 					#else
 						<span class="taskedit taskedit-$!{task.taskstatus}">$context.getText($mediaarchive.getCachedData("taskstatus", $task.taskstatus))</span>
