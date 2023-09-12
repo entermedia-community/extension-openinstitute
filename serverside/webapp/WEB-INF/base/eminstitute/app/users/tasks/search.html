@@ -55,8 +55,9 @@
 				data-width="900">$!goal.ticketnumber $goal.name</a>
 			</td>
 			<td >
+				<div class="goal-details-pre">
 				$!url_util.escapeMessage($goal.details)
-				
+				</div>
 				#if( $goal.response)
 					<hr><i>
 					#esc($goal.response)

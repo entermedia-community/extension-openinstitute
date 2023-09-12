@@ -386,9 +386,11 @@ ul.projectgoals {
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 }
+.goal-details-pre {
+	white-space: pre-line;
+}
 .goal-details {
 	margin-bottom:10px;
-	
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
