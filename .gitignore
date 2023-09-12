@@ -10,6 +10,5 @@ serverside/webapp/assets
 serverside/webapp/WEB-INF/data
 serverside/webapp/WEB-INF/temp
 serverside/webapp/WEB-INF/trash
-/**/build/
-.vscode
+/**/build/ 
 serverside/webapp/WEB-INF/data/*
