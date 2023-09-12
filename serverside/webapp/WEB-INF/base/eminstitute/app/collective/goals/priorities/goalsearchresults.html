@@ -85,7 +85,7 @@
 	
 		<td class="goal-description" >
 			<div class="goal-details">
-			#esc( $!goal.details ) 	
+			$url_util.escapeMessage($!goal.details ) 	
 			</div>
 			#if( $goal.response)
 				<hr><i>
