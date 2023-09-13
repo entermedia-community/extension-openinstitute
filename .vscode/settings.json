@@ -1,0 +1,11 @@
+{
+  "git.ignoreLimitWarning": true,
+  "emmet.includeLanguages": {"velocity": "html"},
+  "[html]":{
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnSave": false
+  },
+  "cSpell.words": [
+    "livequery"
+  ]
+}
