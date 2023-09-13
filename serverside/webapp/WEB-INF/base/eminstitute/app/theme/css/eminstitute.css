@@ -7,7 +7,6 @@ body,
 body {
 	overflow-x: hidden;
 	max-width: 100%;
-
 	font-size: .9rem;
 	background-color: #E9ECEF;
 }
@@ -323,9 +322,15 @@ a.primary:hover .fas {
 
 }
 
-@media (min-width: 1320px) {
-	.empushcontent {
-		margin-left: 250px;
+.emrightcontent {
+	height: calc(100%);
+	margin-left: 0px;
+	transition: margin-left .3s ease-in-out;
+}
+
+@media (min-width: 1080px) {
+	.emrightcontent.empushcontent {
+		margin-left: 248px;
 	}
 
 	.sidebar-togglerX {
@@ -374,13 +379,6 @@ a.primary:hover .fas {
 	padding: 0;
 	height: 100%;
 }
-}
-
-@media (min-width: 1680px) {
-	.empushcontent {
-		margin-left: 00px;
-	}
-}
 
 
 @media (max-width: 1280px) {
@@ -396,10 +394,6 @@ a.primary:hover .fas {
 
 .account-content h3 i {
 	font-size: .85em;
-}
-
-.emmaincontent {
-	height: calc(100%);
 }
 
 .maincontent {

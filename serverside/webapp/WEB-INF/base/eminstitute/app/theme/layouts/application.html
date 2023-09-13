@@ -36,24 +36,26 @@
 		data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
 		data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
-		#if(!$browser.inApp())
-			$pages.include("/${apphome}/theme/layouts/navigation.html")
+		#set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
+		#if (!$usersidebarhidden)
+			#set( $usersidebarhidden = 'false')
 		#end
-		<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
-			#if($browser.inApp())
-				$pages.includeContent()
-				$pages.include("/${apphome}/theme/layouts/footer.html")
-			#else
-				#set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
-				#if (!$usersidebarhidden)
-					#set( $usersidebarhidden = 'false')
+		<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end">
+			#if(!$browser.inApp())
+				$pages.include("/${apphome}/theme/layouts/navigation.html")
+			#end 
+			<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
+				#if($browser.inApp())
+					$pages.includeContent()
+					$pages.include("/${apphome}/theme/layouts/footer.html")
+				#else
+					#if($user && !$browser.inApp() && $canshowsidebar)
+						$pages.include("$apphome/components/sidebars/user/index.html")
+					#end 
+					$pages.includeContent()
+					$pages.include("/${apphome}/theme/layouts/footer.html")
 				#end
-				#if($user && !$browser.inApp() && $canshowsidebar)
-					$pages.include("$apphome/components/sidebars/user/index.html")
-				#end
-				$pages.includeContent()
-				$pages.include("/${apphome}/theme/layouts/footer.html")
-			#end
+			</div>
 		</div>
 		#if(!$browser.inApp())
 			$pages.include("${apphome}/googleanalytics.html", $context)

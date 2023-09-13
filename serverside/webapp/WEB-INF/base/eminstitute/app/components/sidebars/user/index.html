@@ -4,14 +4,14 @@
 #end
  
 <button class="btn btn-lg btn-light rounded-0 userOffcanvasToggler" type="button" data-bs-toggle="offcanvas"
-	data-bs-target="#userOffcanvas" data-action="hide"
+	data-bs-target="#userOffcanvas" data-action="show"
 	style="position:fixed; left:0; top:76px;z-index:100;padding: 10px 8px 6px 8px;" title="[[Show User Sidebar]]">
 	<i class="fas fa-angle-double-right text-secondary" style="font-size: 1.5em;"></i>
 </button>
 
-<div class="offcanvas offcanvas-start" tabindex="-1"
-	id="userOffcanvas" aria-labelledby="userOffcanvasLabel">
+<div class="offcanvas offcanvas-start #if($user && $usersidebarhidden == 'false') show #end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+	id="userOffcanvas" aria-labelledby="userOffcanvasLabel"  style="max-width:250px">
 	<div class="offcanvas-body">
 		$pages.include("$apphome/users/sidebar.html")
 	</div>
-</div>
+</div> 
