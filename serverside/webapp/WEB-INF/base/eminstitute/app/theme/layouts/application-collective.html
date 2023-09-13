@@ -70,7 +70,7 @@
 			#if($user && !$browser.inApp() && $canshowsidebar)
 				$pages.include("$apphome/components/sidebars/user/index.html")
 			#end
-			<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end emmaincontent">
+			<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end">
 				$pages.includeContent()
 				$pages.include("/${apphome}/theme/layouts/footer.html")
 			</div>
