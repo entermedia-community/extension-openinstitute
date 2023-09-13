@@ -109,7 +109,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
 </div>
 <script>
   $(document).ready(function () {
-    $(".offcanvas-body").html($(".navbar-nav").html());
+    $("#drawerMenu .offcanvas-body").html($(".navbar-nav#superNav").html());
     $("#checkIn").attr("min", new Date().toISOString().split("T")[0]);
     $("#checkIn").on("change", function () {
       var checkOutDate = new Date($(this).val());

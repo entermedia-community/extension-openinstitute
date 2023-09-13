@@ -5724,7 +5724,6 @@ uiload = function() {
 		}
 		$(window).trigger("resize");
 	});
-	
 
 	lQuery(".assetpicker .removefieldassetvalue").livequery("click", function(e) 
 	{
@@ -7591,8 +7590,8 @@ $(document).ready(function(url,params)
 		{
 			jQuery("#resultsheader").replaceWith(data);
 		});	
-	}
-		
+	}    
+		 
 	lQuery("select#selectresultview").livequery( function()
 	{
 		var select = $(this);
