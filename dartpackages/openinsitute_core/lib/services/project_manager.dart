@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
@@ -6,7 +5,6 @@ import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 
 class ProjectManager {
-
   String projectBox = "viewprojects";
 
   OpenI get oi => Get.find();
@@ -50,6 +48,15 @@ class ProjectManager {
   Future<emData?> getProject(String id) async {
     await createDataModule();
     return projectsModule?.getDataById(id);
+  }
+
+  Future<emData?> createDMchat(String sender) async {
+    await createDataModule();
+    Map<String, dynamic> results = await projectsModule!
+        .createModuleOperation("startdirectchat", RequestType.POST, {
+      "users": [oi.authenticationmanager.emUser!.userid, sender]
+    });
+    return emData.fromJson(results['data']);
   }
 
   Future<List<emData>> loadProject(int page) async {

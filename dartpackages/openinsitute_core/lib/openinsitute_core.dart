@@ -2,6 +2,7 @@ library openinsitute_core;
 
 import 'dart:async' show Future, TimeoutException;
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -27,6 +28,7 @@ import 'package:openinsitute_core/services/user_manager.dart';
 import 'package:path/path.dart';
 
 import 'Helper/logging_interseptor.dart';
+import 'services/assets_manager.dart';
 
 class OpenI {
   Map? _settings;
@@ -41,6 +43,7 @@ class OpenI {
   UserManager? userManager;
   FinanceManager? financeManager;
   ConnectivityManager? connectivityManager;
+  AssetsManager? assetsManager;
   late InterceptedClient httpClient;
 
   OpenI() {
@@ -86,6 +89,7 @@ class OpenI {
   HiveManager get hivemanager => Get.find<HiveManager>();
   UserManager get usermanager => Get.find<UserManager>();
   FinanceManager get financemanager => Get.find();
+  AssetsManager get assetsmanager => Get.find();
 
   Future<void> initialize({required FirebaseAuth firebaseAuth}) async {
     await loadAppSettings();
@@ -112,6 +116,8 @@ class OpenI {
     Get.put<FinanceManager>(financeManager!, permanent: true);
     connectivityManager = ConnectivityManager();
     Get.put<ConnectivityManager>(connectivityManager!);
+    assetsManager = AssetsManager();
+    Get.put<AssetsManager>(assetsManager!);
     connectivityManager!.subscription.listen((event) {
       if (event == InternetConnectionStatus.connected) {
         chatManager!.sendAllNonSendChat();
@@ -226,6 +232,7 @@ class OpenI {
         );
       }
       response = await handleException(responseJson!);
+      log('test response: $response');
       return response;
     } on BadRequestException catch (error) {
       //showErrorFlushbar( "Bad request! Please try again later.");
@@ -266,7 +273,7 @@ class OpenI {
     }
   }
 
-/// use to upload multiple files with assign data. 
+  /// use to upload multiple files with assign data.
   Future<http.Response> postMultiPart(String mt, String url,
       Map<String, dynamic> body, Map<String, File>? files) async {
     Map<String, String> headers = <String, String>{};

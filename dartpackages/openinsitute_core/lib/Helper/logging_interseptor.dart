@@ -5,25 +5,36 @@ import 'package:flutter/foundation.dart' as Foundation;
 
 class LoggingInterceptor implements InterceptorContract {
   @override
-  Future<RequestData> interceptRequest({required RequestData data}) async {
-    if (Foundation.kDebugMode) {
-      log("----> Request");
-      log("${data.method} URL: ${data.baseUrl}");
-      log("Headers: ${data.headers}");
-      log("Params: ${data.params}");
-      log("Body: ${data.body}");
-    }
-    return data;
+  Future<bool> shouldInterceptRequest() async {
+    return true;
   }
 
   @override
-  Future<ResponseData> interceptResponse({required ResponseData data}) async {
+  Future<bool> shouldInterceptResponse() async {
+    return true;
+  }
+
+  @override
+  Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
     if (Foundation.kDebugMode) {
-      log("<---- Response  ${data.statusCode}");
-      log("URL: ${data.url}");
-      log("Headers: ${data.headers}");
-      log("Body: ${data.body}");
+      log("----> Request");
+      log("${request.method} URL: ${request.url}");
+      log("Headers: ${request.headers}");
+      // log("Params: ${request.params}");
+      log("Body: ${request.contentLength}");
     }
-    return data;
+    return request;
+  }
+
+  @override
+  Future<BaseResponse> interceptResponse(
+      {required BaseResponse response}) async {
+    if (Foundation.kDebugMode) {
+      log("<---- Response  ${response.statusCode}");
+      log("URL: ${response.request?.url}");
+      log("Headers: ${response.headers}");
+      log("Body: ${response.contentLength}");
+    }
+    return response;
   }
 }

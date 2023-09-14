@@ -260,22 +260,24 @@ class DataModule {
 
   cacheAllData(Map<String, dynamic> resultsData) async {
     await box.clear();
-    List<dynamic> results = resultsData["data"] ?? 
-        resultsData['results']?.map((e) => emData.fromJson(e)).toList() ?? resultsData['goals'].map((e) => emData.fromJson(e)).toList() ;
+    List<dynamic> results = resultsData["data"] ??
+        resultsData['results']?.map((e) => emData.fromJson(e)).toList() ??
+        resultsData['goals'].map((e) => emData.fromJson(e)).toList();
     await box.put(
         "page",
         int.parse(
-            (resultsData["page"] ?? resultsData["response"]["page"].toString())
+            (resultsData["page"] ?? resultsData["response"]["page"] ?? "0")
                 .toString()));
     await box.put(
         "pages",
-        int.parse((resultsData["pages"] ??
-                resultsData["response"]["pages"].toString())
-            .toString()));
+        int.parse(
+            (resultsData["pages"] ?? resultsData["response"]["pages"] ?? "0")
+                .toString()));
     await box.put(
         "totalhits",
         int.parse((resultsData["totalhits"] ??
-                resultsData["response"]["totalhits"].toString())
+                resultsData["response"]["totalhits"] ??
+                "0")
             .toString()));
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
