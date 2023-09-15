@@ -6,6 +6,7 @@
 	<property name="goalfolder">search</property>
 	
 	<path-action name="ProjectModule.loadCollection"/>
+	<path-action name="OiModule.loadCommunityCategory" />
 	
 	<path-action name="TaskModule.createTree" />
 

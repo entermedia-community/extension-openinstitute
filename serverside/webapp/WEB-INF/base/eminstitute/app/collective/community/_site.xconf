@@ -34,6 +34,7 @@
   	<path-action name="Admin.allowViewing"/>
 
   	<path-action name="ChatModule.getChatManager"/>
+	<path-action name="OiModule.loadCommunityCategory" />
 
 
 	<inner-layout>/${applicationid}/collective/community/communitylayout.html</inner-layout>

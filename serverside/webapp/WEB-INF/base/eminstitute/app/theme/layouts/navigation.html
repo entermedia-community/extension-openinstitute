@@ -7,10 +7,6 @@
   #if($communitytagcategory.primaryimagepathwide)
     #set($headerbg = "$applink${communitytagcategory.primaryimagepathwide}")
   #end
-  #if($communitytagcategory.logo)
-    ##set($logo = "$applink${communitytagcategory.logo}")
-  #end
-
 #end
 
 #set($homelink = "$applink/home/proposals/index.html")
@@ -23,6 +19,15 @@
      <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
       <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
     </a>
+            <h2 class="text-white my-1 mx-3" >
+              #text($communitytagcategory)
+            </h2>
+          </a>
+        <a href="$link">
+          <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="max-height:53px"/>
+        </a>
+    
+    
     $pages.include("$apphome/components/quicksearch/navbar.html")	
     <div class="d-flex"> 
       <button class="d-block d-md-none navbar-toggler" type="button" data-bs-toggle="offcanvas"

@@ -1,6 +1,3 @@
-#set( $projects =
-$mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context) )
-
 #if( $comunitytagcategory.externaldomain)
   #set( $link ="//${comunitytagcategory.externaldomain}/app/index.html")
 #elseif($comunitytag.entitytype == "entityrental")
