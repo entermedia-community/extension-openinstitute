@@ -19,13 +19,13 @@
   <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg"
   primaryimagepathwide="/theme/images/home-creative-wide.jpg"
   >
-    <caption><![CDATA[The Arts, Music and Performance]]></caption>
+    <caption><![CDATA[Folk music with beats]]></caption>
     <name> 
       <language id="en"><![CDATA[Common Roots Collective]]></language> 
     </name> 
     <summary>
-    Artists everywhere need our help to create thriving communities and events!  The arts provide connect people across cultures and generations. By nurturing creativity, we are able to cultivate innovative thinking, problem-solving skills, and emotional intelligence. Let us embrace the power of creativity and invest in the the arts.  The arts are a way to celebrate our shared humanity and promote understanding in our diverse world.
-    </summary>
+    Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
+     for future generation to build upon.</summary>
   </data>  
   <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg"
   primaryimagepathwide="/theme/images/home-human-wide.jpg">
@@ -66,7 +66,7 @@ of media Files
     
     <summary>
     <![CDATA[
-    An collaborative booking platform that focuses on giving back to and empowering communities around Lake Atitlan. 5% of profits goes to projects that are conserving land, educating children, supporting musicians, and having a positive social and justice impact.
+    An collaborative home rental booking platform that focuses on giving back to and empowering communities around Lake Atitlan. 5% of profits goes to projects that are conserving land, educating children, supporting musicians, and having a positive social and justice impact.
     ]]>
     </summary>
    
