@@ -53,7 +53,11 @@ public class OpenInstituteModule extends BaseMediaModule
 	public void loadCommunityTagFolder(WebPageRequest inReq)
 	{
 		MediaArchive archive = getMediaArchive(inReq);
-		String tagid = PathUtilities.extractDirectoryName(inReq.getPath());
+		String tagid = inReq.findPathValue("communitytagcategory");
+		if( tagid == null)
+		{
+			tagid =	PathUtilities.extractDirectoryName(inReq.getPath());
+		}
 		Data tag = archive.getData("communitytagcategory", tagid);
 		if(tag != null) {
 			inReq.putPageValue("communitytagcategory", tag);
@@ -87,16 +91,6 @@ public class OpenInstituteModule extends BaseMediaModule
 					return;
 				}
 			}
-		}
-		String tagid = PathUtilities.extractPageName(inReq.getPath());
-		if( tagid.equals("index"))
-		{
-			return;
-		}
-		Data tag = archive.getCachedData("communitytagcategory", tagid);
-		if(tag != null) {
-			inReq.putPageValue("communitytagcategory", tag);
-			inReq.putPageValue("communitytagcategoryid", tag.getId());
 		}
 	}
 	
