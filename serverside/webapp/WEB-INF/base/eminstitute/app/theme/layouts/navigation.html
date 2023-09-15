@@ -19,6 +19,7 @@
      <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
       <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
     </a>
+    #if( $communitytagcategory)
             <h2 class="text-white my-1 mx-3" >
               #text($communitytagcategory)
             </h2>
@@ -26,7 +27,7 @@
         <a href="$link">
           <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="max-height:53px"/>
         </a>
-    
+    #end
     
     $pages.include("$apphome/components/quicksearch/navbar.html")	
     <div class="d-flex"> 
