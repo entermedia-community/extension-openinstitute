@@ -39,7 +39,7 @@
 	<div class="row">
 		#foreach( $hit in $hits.getPageOfHits()) 
 			#if($module.id == "librarycollection")
-				#set($link = "$applink/proposal/#dash($hit.getName())/${hit.id}.html")
+				#set($link = "$applink/proposal/${hit.id}/#dash($hit.getName()).html")
 				<a class="col-6 col-md-4 result-item" href="$link" class="quickresult">
 					$pages.include("$apphome/browse/logo.html?logoassetid=$hit.assetportrait",$context)
 					<span>#text($hit)</span>

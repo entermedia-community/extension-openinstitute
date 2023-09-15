@@ -7,14 +7,15 @@
 
 	 <inner-layout>/${applicationid}/proposal/layout.html</inner-layout>
 	 
-	 <path-action name="ProjectModule.loadCollection">
-	 		<property name="collectionidonpagename">true</property>
+	 <path-action name="ProjectModule.loadCollectionFromFolder">
 	 </path-action>
 	 
  	<script id="stripe" src="https://js.stripe.com/v3/"/>
  	<page-action name="Date.now"/>
 	<page-action name="TransactionModule.loadTransactionManager"/>
 	<page-action name="PageValue.loadPageVariable" bean="mathutil" />	
+
+	<path-action name="OiModule.loadCommunityCategory" />
 	
 	<style id="uploadstyle" href="${themeprefix}/styles/pages/upload.css" />
 	<property name="uploadtab">single</property>

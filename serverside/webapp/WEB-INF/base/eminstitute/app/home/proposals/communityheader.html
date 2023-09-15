@@ -1,0 +1,30 @@
+#set( $projects =
+$mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context) )
+
+#if( $comunitytagcategory.externaldomain)
+  #set( $link ="//${comunitytagcategory.externaldomain}/app/index.html")
+#elseif($comunitytag.entitytype == "entityrental")
+  #set( $link = "$apphome/home/rentals/${comunitytagcategory.getId()}/#dash($comunitytagcategory)/.html")
+#else
+  #set( $link = "$apphome/home/proposals/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html")
+#end
+
+<div class="d-flex bg-dark" style="min-height:70px;padding:6px 0 6px 0;">
+  <div class="container">
+    <div class="secondary-header">
+      <div class="d-flex align-items-center w-100">
+        <div class="d-flex flex-grow-1 flex-column flex-md-row align-items-md-center justify-content-md-between">
+          <a href="$link"  style="margin-left: auto; ">
+            <h2 class="text-white my-1 mx-3">
+              #text($communitytagcategory)
+            </h2>
+          </a>
+        <a href="$link">
+          <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" />
+        </a>
+	        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 

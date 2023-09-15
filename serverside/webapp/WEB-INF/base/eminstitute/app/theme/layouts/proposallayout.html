@@ -29,7 +29,7 @@
 	###set($homelink = "$applink/collective/channel/${librarycol.id}/#urlencode($librarycol.getWebName()).html")
 	
 	
-	#set($homelink = "$applink/proposal/#dash($librarycol.getWebName())/${librarycol.id}.html")
+	#set($homelink = "$applink/proposal/${librarycol.id}/#dash($librarycol.getWebName()).html")
 
 
 	#if ($librarycol.collectivebanner)
@@ -39,6 +39,7 @@
 		#set ($bannerurl = "$applink/theme/images/oi-background-2023.jpg")
 	#end
 
+$pages.include("$apphome/home/proposals/communityheader.html")
 
 <div class="campaigncollectivelayout oicontainer" id="collectivelayout">
 

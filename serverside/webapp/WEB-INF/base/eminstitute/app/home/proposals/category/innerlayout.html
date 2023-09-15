@@ -18,7 +18,7 @@
 </div>
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategoryid).search($context))
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
 
 <h2 class="text-center mt-4">Projects</h2>
 

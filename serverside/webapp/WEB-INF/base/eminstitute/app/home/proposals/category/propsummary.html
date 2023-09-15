@@ -1,7 +1,7 @@
 <div class="container py-2 project-container">
   <div class="prop-details">
     <div class="prop-credit">
-      #set($link = "$applink/proposal/#dash($project.getName())/${project.id}.html")
+      #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
       <a href="$link" class="d-flex flex-column align-items-center p-2 w-100">
         #set($logo = false)
         #if($project.assetportrait)
