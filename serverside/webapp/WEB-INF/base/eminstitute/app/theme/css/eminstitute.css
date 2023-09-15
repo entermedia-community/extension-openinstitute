@@ -118,7 +118,7 @@ a.primary:hover .fas {
 }
 
 .applicationcontent {
-	height: calc(100% - 70px);
+	/*height: calc(100% - 70px);*/
 	position: relative;
 }
 
@@ -1004,7 +1004,7 @@ a.primary:hover .fas {
 
 .chatterbox-messages {
 	height: calc(100% - 39px);
-	min-height: 300px;
+	min-height: 250px;
 
 }
 

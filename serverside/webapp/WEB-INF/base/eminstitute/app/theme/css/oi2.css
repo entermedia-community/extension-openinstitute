@@ -197,6 +197,11 @@ li.menu-subheader {
 	padding: 0 10px 0 15px;
 }
 
+.applicationcollective-community {
+	height:calc(100% - 70px);
+	position: relative;
+}
+
 .sidebar-toggler {
 	color: #666;
 	background-color: #a7b7b5;
@@ -243,6 +248,12 @@ li.menu-subheader {
 
 .community-add-btn {
 	color: #C8C446;
+}
+
+.chatterbox {
+	height: calc(100% - 50px);
+	/*- header*/
+
 }
 
 .chatloadmorelink {
@@ -794,7 +805,7 @@ li.menu-subheader {
 		border-top-left-radius: 20px;
 		border-top-right-radius: 0;
 		padding: 0;
-		width: 50%;
+		width: 70%;
 		height: 35px;
 		display: inline-block;
 		position: relative;
@@ -898,12 +909,15 @@ li.menu-subheader {
 }
 
 .oicontainercampaigns {
-	margin: 0 0 5px;
+	margin: 0 ;
 	background-color: #EFEF97;
-	padding-bottom: 40px;
-	min-height: 400px;
+	padding-bottom:40px;
+	min-height: 390px;
 }
-
+.oicommunitylayout {
+	height: calc(100% - 192px);
+	padding:20px;
+}
 .campaignscollectiveheader h1 {
 	color: #fff;
 	text-shadow: 1px 1px #000000;
