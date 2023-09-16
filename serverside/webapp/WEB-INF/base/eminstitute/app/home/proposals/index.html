@@ -90,7 +90,7 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
 
 <script>
   $(document).ready(function () {
-    $(".offcanvas-body").html($(".navbar-nav").html());
+    $("#drawerMenu .offcanvas-body").html($(".navbar-nav#superNav").html());
     var video = document.getElementById("ftVideo");
     function resizeVideo() {
       video.style.width = Math.min($(window).width(), 1920) + "px";

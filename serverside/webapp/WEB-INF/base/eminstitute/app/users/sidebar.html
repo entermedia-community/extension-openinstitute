@@ -8,10 +8,9 @@
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
         [[Recent Chats]]        
-        <a href="#" class="sidebar-toggler" data-action="hide" data-targetdiv="usersidebar"
-        title="[[Hide User Sidebar]]">
-        <i class="fas fa-angle-double-left"></i>
-        </a>
+        <button class="btn btn-light rounded-0 border-0 sidebar-toggler userOffcanvasToggler" data-action="hide" data-bs-dismiss="offcanvas" title="[[Hide User Sidebar]]">
+        	<i class="fas fa-times"></i>
+        </button>
     </div>
 	#set( $chatmanager = $mediaarchive.getBean("chatManager"))
 	#set($selectedproject = $librarycol.getId())
