@@ -20,7 +20,7 @@ public class OpenInstituteModule extends BaseMediaModule
 		if( col != null)
 		{
 			Collection all = col.getValues("communitytagcategory");
-			if( !all.isEmpty())
+			if( all != null && !all.isEmpty())
 			{
 				String communitytagcategory = (String)all.iterator().next();
 				Data data = getMediaArchive(inReq).getCachedData("communitytagcategory", communitytagcategory);
