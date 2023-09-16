@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="date" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[date]]></language> 
+    </name> 
+  </property>  
+  <property id="id" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[id]]></language> 
+    </name> 
+  </property>  
+  <property id="locked" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[locked]]></language> 
+    </name> 
+  </property>  
+  <property id="ownerid" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[ownerid]]></language> 
+    </name> 
+  </property>  
+  <property id="sourcepath" index="true" deleted="false" editable="true" stored="true">New 
+    <name> 
+      <language id="en"><![CDATA[sourcepath]]></language> 
+    </name> 
+  </property>  
+  <property id="nodeid" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[nodeid]]></language>
+    </name>
+  </property>
+</properties>

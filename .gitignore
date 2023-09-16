@@ -7,8 +7,8 @@
 /dartpackages/openinsitute_core/.flutter-plugins
 /dartpackages/openinsitute_core/.flutter-plugins-dependencies
 serverside/webapp/assets
-serverside/webapp/WEB-INF/data
+
 serverside/webapp/WEB-INF/temp
 serverside/webapp/WEB-INF/trash
 /**/build/ 
-serverside/webapp/WEB-INF/data/*
+
