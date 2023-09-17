@@ -192,5 +192,14 @@
 			<language id="en"><![CDATA[Sent Date]]></language>
 		</name>
 	</property>	
+
+    <property id="paidtoaccount" 
+    	viewtype="bankaccount" searchcomponent="bankaccount"
+     index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
+	 <name>
+	 <language id="en" > <![CDATA[Account Balance]]> </language>
+	 </name>
+	</property>
+
  
 </properties>

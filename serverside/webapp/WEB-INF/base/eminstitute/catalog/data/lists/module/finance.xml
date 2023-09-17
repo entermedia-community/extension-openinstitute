@@ -12,6 +12,9 @@
   <data id="collectiveincome">
     <name><![CDATA[Finance: Cash Income]]></name>
   </data>
+    <data id="collectiveinvestment">
+    <name><![CDATA[]]>Finance: Investment Shares</name>
+  </data>
   
     <data id="collectivereimbursement">
     <name><![CDATA[]]>Finance: Reimbursements</name>

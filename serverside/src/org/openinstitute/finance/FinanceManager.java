@@ -580,20 +580,27 @@ public class FinanceManager  implements CatalogEnabled
 
 		HitTracker tracker = null;
 		Searcher incomesSearcher = null;
-		if( "1".equals(inBankId) )  //Only support a default bank so cant filter by bank
+		if( "1".equals(inBankId) )  //TODO: Add accounts to invoices 
 		{
-			incomesSearcher = getMediaArchive().getSearcher("transaction");
-			tracker = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange).search();
-			addAll(incomesSearcher.getSearchType(),tracker,transactions);
+//			incomesSearcher = getMediaArchive().getSearcher("transaction");
+//			tracker = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange).search();
+//			addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
-			incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
-			QueryBuilder query = addDateRange(incomesSearcher.query(),"invoicepaidon",inDateRange);
-			tracker = query.exact("paymentstatus","paid").search();
-			addAll(incomesSearcher.getSearchType(),tracker,transactions);
+//			incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+//			QueryBuilder query = addDateRange(incomesSearcher.query(),"invoicepaidon",inDateRange);
+//			tracker = query.exact("paymentstatus","paid").search();
+//			addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		}
+		
+		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+		QueryBuilder query = addDateRange(incomesSearcher.query(),"invoicepaidon",inDateRange);
+		tracker = query.exact("paymentstatus","paid").exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
-		QueryBuilder query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
 		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
