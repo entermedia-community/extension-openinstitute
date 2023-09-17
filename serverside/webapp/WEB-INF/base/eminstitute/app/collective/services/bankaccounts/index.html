@@ -7,7 +7,7 @@
 
 
 <div>
-<h2 class="float-left" style="margin:0 0 10px">[[Bank Accounts]]</h2>
+<h2 class="float-left" style="margin:0 0 10px">[[Account Balances]]</h2>
 	#ifnull( $hits) 
               #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
               $context.putPageValue("hits",$hits)
@@ -17,7 +17,7 @@
            <a style="margin-left:6px"
                       href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
                       class="emdialog btn btn-sm btn-primary float-right"
-                      title="[[Add Bank Account]]"><i class="fa fa-plus"></i> [[Add Bank Account]]</a>
+                      title="[[Add An Account]]"><i class="fa fa-plus"></i> [[Add An Account]]</a>
 			#if( !$hits.isEmpty() )                      
            <a 
                       href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"

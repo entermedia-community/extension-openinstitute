@@ -71,7 +71,7 @@
    index="true" stored="true" editable="true"  type="list"  datatype="list"
  	viewtype="bankaccount" searchcomponent="bankaccount" > 
 	 <name>
-	 <language id="en" > <![CDATA[Bank Account]]> </language>
+	 <language id="en" > <![CDATA[Account Balance]]> </language>
 	 <language id="es" > <![CDATA[Cuenta De Banco]]> </language>
 	 </name>
 	</property>

@@ -7,16 +7,17 @@
 
 
 <div>
-<h2 class="float-left" style="margin:0 0 10px">[[Investments]]</h2>
-            
-            #if( $caneditcollection )    
+
+           #if( $caneditcollection )    
            <a
                       href="$applink/collective/services/investments/addnew.html?collectionid=${collectionid}"
                       class="emdialog btn btn-sm btn-primary float-right"
                       title="[[Add Investment Or Disbursement]]"><i class="fa fa-search"></i> [[Add Investment Or Disbursement]]</a>
               #end
 
- <div class="clearfix"></div>
+<h2 style="margin:0 0 10px">[[Investment Shares]]</h2>
+            <p>These are payments on accounts that do not qualify as expenses or income</p>
+  <div class="clearfix"></div>
             
 	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
