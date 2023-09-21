@@ -100,10 +100,27 @@
                          #set($totalbycurrency = $totalbycurrency + $transaction.getAmount())
 					
                 #end
-					<tr>
-					<td colspan="5" style="text-align: right;">[[Total]]:</td>
-					<td style="width:15%; text-align: right;">$!context.doubleToMoney($totalbycurrency,2)</td>
-                    </tr>
+				#set( $totals = $financeManager.getTotalsByType($all)) 
+                #foreach($currency in $totals.keySet())
+	                	<tr>
+	                		<td></td>
+	                		<td></td>
+	                		<td></td>
+	                		<td></td>
+	                		<td class="text-right" style="width:150px">
+	                		<strong>[[Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))):</strong>
+	                		</td>
+	                		<td class="text-right">
+	                			<strong>
+	                			#set($subtotal = $totals.get($currency))
+	                			$!context.doubleToMoney($subtotal, 2)
+	                			</strong> 
+	                		</td>
+	                		<td></td>
+                		</tr>
+				#end
+
+
 			</table>
 			$all.size() [[transactions]]
 			

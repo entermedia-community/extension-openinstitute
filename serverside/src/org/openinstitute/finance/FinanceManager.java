@@ -653,9 +653,63 @@ public class FinanceManager  implements CatalogEnabled
 				return i;
 			};
 		});
+
+		/*
+		 
+	#foreach($userid in $pendingexpensesreimburseuser_total.keySet())
+        	<tr>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+    			#set($subtotal = $pendingexpensesreimburseuser_total.get($userid))
+        		<td class="text-left" style="width:150px">$!mediaarchive.getUser( $userid )</td>
+        		<td class="text-right">
+        			$!context.doubleToMoney($subtotal, 2)
+        		</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+    		</tr>
+	#end   
+
+		  
+		AggregationBuilder b = AggregationBuilders.terms("currencytype_total").field("currencytype");
+		SumBuilder sum = new SumBuilder("total_sum");
+		sum.field("total");
+		b.subAggregation(sum);
+		query.setAggregation(b);
+		query.setHitsPerPage(50);
+		HitTracker hits = searcher.cachedSearch(context,query);
+
+
+		//hits.enableBulkOperations();  //Breaks aggregations, when logging all searches
+		//hits.getActiveFilterValues();
+		Map currencymap = hits.getAggregationMap("currencytype_total");
+//		log.info("query" + query + " hits " + hits.size() + " agr:" + hits.getActiveFilterValues() +  " map: " + currencymap);
+		context.putPageValue("currencytype_total",currencymap);
+		context.putPageValue("searcher", searcher);
+		context.putPageValue("expenses", hits);
+		*/
+		
 		return transactions;
 	}
-
+	public Map<String,Double> getTotalsByType(Collection<BankTransaction> transactions)
+	{
+		Map<String,Double> bytype = new HashMap();
+		
+		for (Iterator iterator = transactions.iterator(); iterator.hasNext();)
+		{
+			BankTransaction transaction = (BankTransaction) iterator.next();
+			Double total = bytype.get(transaction.getCurrencyType());
+			if( total == null)
+			{
+				total = 0.0;
+			}
+			total = total + transaction.getAmount();
+			bytype.put(transaction.getCurrencyType(),total);
+		}
+		return bytype;
+	}
 
 	protected void addAll(String inSearchType, HitTracker inTracker, List<BankTransaction> inTransactions)
 	{
