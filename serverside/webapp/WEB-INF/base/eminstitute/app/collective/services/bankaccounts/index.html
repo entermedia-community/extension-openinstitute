@@ -7,7 +7,7 @@
 
 
 <div>
-<h2 class="float-left" style="margin:0 0 10px">[[Account Balances]]</h2>
+<h2 class="float-left" style="margin:0 0 10px">[[Accounts]]</h2>
 	#ifnull( $hits) 
               #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
               $context.putPageValue("hits",$hits)

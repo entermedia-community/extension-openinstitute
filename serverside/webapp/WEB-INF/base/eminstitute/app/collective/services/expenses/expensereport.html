@@ -20,7 +20,7 @@
                                   <th>[[Collection]]</th>
                                   #end
                                   <th>[[Date]]</th>
-                                  <th>[[Topic]]</th>
+                                  <th>[[Account]]</th>
                                   <th>[[Type]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Total]]</th>
@@ -48,7 +48,7 @@
                                   </td>
                                   #end
                                   <td>$!context.getDate($hit.date)</td>
-                                  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
+                                  <td>$!mediaarchive.getCachedData("bankaccount", $hit.paidfromaccount)</td>
                                   <td>$!context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
                                   <td>#esc($hit.expensedescription)</td>
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype) )</td>
