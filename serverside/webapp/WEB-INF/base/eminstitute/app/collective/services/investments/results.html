@@ -1,13 +1,12 @@
 <div id="investmentreport">
-
-
+	<h3>[[Totals]]</h3>
 	<table class="table table-striped">
-                #foreach($currency in $currencytype_total.keySet())
+                #foreach($account in $paidfromaccount_totals.keySet())
 	                	<tr>
-	                		<td class="text-left" style="width:150px">[[Total]]:</td>
+	                		<td class="text-left" style="width:300px"> $!context.getText($!mediaarchive.getCachedData("bankaccount", $account ))</td>
 	                		<td class="text-left">
-	                			#set($subtotal = $currencytype_total.get($currency))
-	                			$!context.doubleToMoney($subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))
+	                			#set($subtotal = $paidfromaccount_totals.get($account))
+	                			$!context.doubleToMoney($subtotal, 2)
 	                		</td>
                 		</tr>
 				#end
@@ -16,7 +15,8 @@
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  <th>[[Invested By]]</th>
+                                  <th>[[Approved By]]</th>
+                                  <th>[[Account]]</th>
                                   <th>[[Date]]</th>
                                   <th>[[Description]]</th>
                                   <th>[[Total]]</th>
@@ -24,9 +24,10 @@
                                   <th></th>
                               </tr>
                           </thead>
-                          #foreach($hit in $investments.getPageOfHits())
+                          #foreach($hit in $investments)
                               <tr>
                                   <td>#set( $auser = $mediaarchive.getUser($hit.investmentuser) )$auser</td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("bankaccount", $hit.bankaccount))</td>
                                   <td>$!context.getDate($hit.date)</td>
                                   <td>#esc($hit.notes)</td>
                                   <td style="text-align: center;">$ $!context.roundDouble($!hit.total, 2)</td>

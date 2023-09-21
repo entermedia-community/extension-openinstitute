@@ -15,29 +15,24 @@ public void init()
 
 	if( query == null)
 	{
-//		if( collectionid != null)
-//		{
-//			query = searcher.query().all().named("expenses").sort("dateDown").getQuery();
-//			
-//		}
-//		else
-//		{
 			query = searcher.query().exact("collectionid",collectionid).named("investments").sort("dateDown").getQuery();
-//		}
 	}
 	
-	AggregationBuilder b = AggregationBuilders.terms("currencytype_total").field("currencytype");
+	String named = "paidfromaccount_totals";
+	
+	
+	AggregationBuilder b = AggregationBuilders.terms(named).field("bankaccount");
 	SumBuilder sum = new SumBuilder("total_sum");
 	sum.field("total");
 	b.subAggregation(sum);
 	query.setAggregation(b);
 	query.setHitsPerPage(50);
 	HitTracker hits = searcher.cachedSearch(context,query);
-	Map currencymap = hits.getAggregationMap("currencytype_total");
+	Map currencymap = hits.getAggregationMap(named);
 //	log.info("query" + query + " hits " + hits.size() + " agr:" + hits.getActiveFilterValues() +  " map: " + currencymap);
-	context.putPageValue("currencytype_total",currencymap);
+	context.putPageValue(named,currencymap);
 	context.putPageValue("searcher", searcher);
-	context.putPageValue("expenses", hits);
+	context.putPageValue("investments", hits);
 	
 }
 

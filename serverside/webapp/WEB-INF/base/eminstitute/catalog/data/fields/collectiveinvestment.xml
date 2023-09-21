@@ -48,7 +48,7 @@
 
     <property id="investmentuser" index="true" editable="true" stored="true" listid="user" viewtype="list" rendertype="list" required="false" filter="false" multilanguage="false" deleted="false" datatype="list" autocreatefromexif="false" keyword="false" writenametoexif="false">New
     <name> 
-      <language id="en"><![CDATA[Invested By]]></language> 
+      <language id="en"><![CDATA[Investor]]></language> 
     </name> 
   </property>  
   
