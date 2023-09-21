@@ -18,11 +18,13 @@
 						action="$content.path">
 					<input type="hidden" name="collectionid" value="$librarycol.id" />
 					
+					#set($showall = $context.getRequestParameter("showall") )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
 					
 					<div class="row" >
 					<div class="col-md-3">
 						<input type="hidden" name="paidfromaccount"  value="$paidfromaccount" />
+						<input type="checkbox" name="showall"  value="true" #ifnotnull($showall) checked #end /> Show Across All Projects
 					</div>
 					<div class="col-md-4">
 						<select name="year" class="form-control-sm" style="width:120px;">
@@ -55,7 +57,12 @@
 
 				</form>
 			 <div class="emdata" style="padding-top: 10px">
+					#ifnotnull( $showall )
 				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) )
+					#end
+					#ifnull( $showall )
+				#set($all = $financeManager.getTransactionsByAccount($librarycol.id,$paidfromaccount,$daterange) )				
+					#end
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">

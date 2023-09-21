@@ -573,8 +573,12 @@ public class FinanceManager  implements CatalogEnabled
 		tracker.setSessionId("financemanager");
 		return tracker;
 	}
-	
 	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
+	{
+		List<BankTransaction> results = getTransactionsByAccount(null,inBankId,inDateRange);
+		return results;
+	}
+	public List<BankTransaction> getTransactionsByAccount(String inCollectionId, String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> transactions = new ArrayList();
 
@@ -595,28 +599,48 @@ public class FinanceManager  implements CatalogEnabled
 		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
 		QueryBuilder query = addDateRange(incomesSearcher.query(),"invoicepaidon",inDateRange);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
 		tracker = query.exact("paymentstatus","paid").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
 		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		incomesSearcher = getMediaArchive().getSearcher("collectiveinvestment");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
 		tracker = query.exact("bankaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		incomesSearcher = getMediaArchive().getSearcher("collectivereimbursement");
 		query = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
