@@ -1,0 +1,8 @@
+
+<properties>
+  <property id="domaincommunityid" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[domaincommunityid]]></language>
+    </name>
+  </property>
+</properties>
