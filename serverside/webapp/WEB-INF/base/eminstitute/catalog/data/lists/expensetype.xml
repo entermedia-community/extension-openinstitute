@@ -51,14 +51,14 @@
       <language id="en"><![CDATA[Capital: Disbursement]]></language> 
     </name>
   </data>  
-  <data id="7" iscapitalloan="true"> 
-  <name> 
-      <language id="en"><![CDATA[Capital: Depreciating Asset]]></language> 
-    </name>
-  </data>  
   <data id="9" iscapitalloan="true"> 
   <name> 
       <language id="en"><![CDATA[Capital:Credit Card Payment]]></language> 
+    </name>
+  </data>  
+  <data id="10" iscapitalloan="true"> 
+  <name> 
+      <language id="en"><![CDATA[Capital: Depreciating Asset]]></language> 
     </name>
   </data>  
   <data id="transportation"> 
