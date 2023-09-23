@@ -83,6 +83,10 @@ public class FinanceManager  implements CatalogEnabled
 		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		Collection incometypes = getMediaArchive().query("incometype").exact("iscapitalloan", false).search();
+		query.orgroup("incometype", incometypes);
+
+		
 		if( topicid != null)
 		{
 			query.exact("collectiveproject",topicid);
@@ -201,6 +205,8 @@ public class FinanceManager  implements CatalogEnabled
 		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
+		Collection incometypes = getMediaArchive().query("incometype").exact("iscapitalloan", false).search();
+		query.orgroup("incometype", incometypes);
 		if( topicid != null)
 		{
 			query.exact("collectiveproject",topicid);
@@ -360,6 +366,10 @@ public class FinanceManager  implements CatalogEnabled
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
+		
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", true).search();
+		query.orgroup("expensetype", expensetypes);
+		
 		query.exact("collectionid", inCollectionId);
 		if( topicid != null)
 		{
@@ -473,6 +483,10 @@ public class FinanceManager  implements CatalogEnabled
 		{
 			query.exact("collectiveproject",topicid);
 		}
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", true).search();
+		query.orgroup("expensetype", expensetypes);
+
+		
 		//query.not("reimbursedstatus","1"); //Do not include in totals. Has not happened yet
 		addDateRange(query,"date",inDateRange);
 
@@ -573,6 +587,56 @@ public class FinanceManager  implements CatalogEnabled
 		tracker.setSessionId("financemanager");
 		return tracker;
 	}
+	public List<BankTransaction> getAllInvestmentsByBank(String inBankId, DateRange inDateRange)
+	{
+		List<BankTransaction> results = getInvestmentsByAccount(null,inBankId,inDateRange);
+		return results;
+	}
+	public List<BankTransaction> getInvestmentsByAccount(String inCollectionId, String inBankId, DateRange inDateRange)
+	{
+		List<BankTransaction> transactions = new ArrayList();
+
+		HitTracker tracker = null;
+		Searcher incomesSearcher = null;
+		QueryBuilder query = null;
+		
+		
+		incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
+		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		Collection incometypes = getMediaArchive().query("incometype").exact("iscapitalloan", true).search();
+		query.orgroup("incometype", incometypes);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
+		tracker = query.exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+		
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", true).search();
+		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
+		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+		query.orgroup("expensetype", expensetypes);
+		if( inCollectionId != null)
+		{
+			query.exact("collectionid",inCollectionId);
+		}
+		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
+		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+
+		Collections.sort(transactions, new Comparator<BankTransaction>()
+		{
+			public int compare(BankTransaction arg0, BankTransaction arg1) 
+			{
+				int i = arg1.getDate().compareTo(arg0.getDate());
+				return i;
+			};
+		});
+
+		
+		return transactions;
+	}
+
+	
 	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> results = getTransactionsByAccount(null,inBankId,inDateRange);
@@ -693,7 +757,7 @@ public class FinanceManager  implements CatalogEnabled
 		
 		return transactions;
 	}
-	public Map<String,Double> getTotalsByType(Collection<BankTransaction> transactions)
+	public Map<String,Double> getTotalsByCurrencyType(Collection<BankTransaction> transactions)
 	{
 		Map<String,Double> bytype = new HashMap();
 		

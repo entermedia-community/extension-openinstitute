@@ -7,5 +7,6 @@
 	<property id="ispaid" />
     <property id="reimbursedstatus" />
 	<property id="reimburseuser" viewtype="user" />  
+ 	<property id="paidfromaccount" />
   
 </properties>

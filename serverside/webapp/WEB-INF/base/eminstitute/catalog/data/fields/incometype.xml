@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<properties beanname="dataSearcher"> 
+<properties > 
 
   <property id="id" index="true" filter="false" internalfield="true" editable="true" stored="true" sortable="true" keyword="false">Id
     <name> 
@@ -18,5 +18,10 @@
 		</name>
 	</property>
 
+    <property id="iscapitalloan" index="true" stored="true" type="boolean" >
+	 <name>
+	 <language id="en" > <![CDATA[Is Capital Loan]]> </language>
+	 </name>
+	</property>
   
 </properties>

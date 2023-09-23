@@ -8,7 +8,7 @@
 		               href="$applink/collective/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
 		               class="btn btn-sm btn-primary float-right">[[Go Back]]</a>
 			#end
-				<h3>[[Transactions]] - #text($account)
+				<h3>[[Capital Investments]]	- #text($account)
 				</h3>
 				<form  id="searchform" 
 						class="autosubmit" 
@@ -58,10 +58,10 @@
 				</form>
 			 <div class="emdata" style="padding-top: 10px">
 					#ifnotnull( $showall )
-				#set($all = $financeManager.getAllTransactionByBank($paidfromaccount,$daterange) )
+				#set($all = $financeManager.getAllInvestmentsByBank($paidfromaccount,$daterange) )
 					#end
 					#ifnull( $showall )
-				#set($all = $financeManager.getTransactionsByAccount($librarycol.id,$paidfromaccount,$daterange) )				
+				#set($all = $financeManager.getInvestmentsByAccount($librarycol.id,$paidfromaccount,$daterange) )				
 					#end
              <table class="table table-striped">
                  <thead>
