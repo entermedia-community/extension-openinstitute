@@ -4,6 +4,7 @@
 	<property id="collectiveproject" />
 	<property id="date"  />
 	<property id="incometype" />
+  	<property id="paidfromaccount" />
       
   
 </properties>
