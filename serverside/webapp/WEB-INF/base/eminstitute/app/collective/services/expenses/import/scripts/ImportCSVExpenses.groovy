@@ -26,6 +26,11 @@ csvimporter.setModuleManager(moduleManager);
 csvimporter.setContext(context);
 csvimporter.setLog(log);
 csvimporter.setMakeId(false);
+
+csvimporter.addDbLookUp("currencytype");
+csvimporter.addDbLookUp("expensetype");
+csvimporter.addDbLookUp("paidfromaccount");
+
 //csvimporter.addDbLookUp("collectiveproject");
 csvimporter.collectionid = collectionid;
 csvimporter.importData();

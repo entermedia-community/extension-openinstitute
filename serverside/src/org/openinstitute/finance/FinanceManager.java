@@ -680,14 +680,14 @@ public class FinanceManager  implements CatalogEnabled
 		tracker = query.exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
-		incomesSearcher = getMediaArchive().getSearcher("collectiveinvestment");
-		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
-		if( inCollectionId != null)
-		{
-			query.exact("collectionid",inCollectionId);
-		}
-		tracker = query.exact("bankaccount",inBankId).search();
-		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+//		incomesSearcher = getMediaArchive().getSearcher("collectiveinvestment");
+//		query = addDateRange(incomesSearcher.query(),"date",inDateRange);
+//		if( inCollectionId != null)
+//		{
+//			query.exact("collectionid",inCollectionId);
+//		}
+//		tracker = query.exact("bankaccount",inBankId).search();
+//		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		
 		incomesSearcher = getMediaArchive().getSearcher("collectiveexpense");
@@ -699,14 +699,14 @@ public class FinanceManager  implements CatalogEnabled
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
-		incomesSearcher = getMediaArchive().getSearcher("collectivereimbursement");
-		query = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange);
-		if( inCollectionId != null)
-		{
-			query.exact("collectionid",inCollectionId);
-		}
-		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
-		addAll(incomesSearcher.getSearchType(),tracker,transactions);
+//		incomesSearcher = getMediaArchive().getSearcher("collectivereimbursement");
+//		query = addDateRange(incomesSearcher.query(),"paymentdate",inDateRange);
+//		if( inCollectionId != null)
+//		{
+//			query.exact("collectionid",inCollectionId);
+//		}
+//		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
+//		addAll(incomesSearcher.getSearchType(),tracker,transactions);
 
 		//sort
 		Collections.sort(transactions, new Comparator<BankTransaction>()
