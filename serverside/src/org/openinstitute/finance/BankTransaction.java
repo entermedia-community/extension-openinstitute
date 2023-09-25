@@ -8,6 +8,17 @@ import org.openedit.util.DateStorageUtil;
 
 public class BankTransaction extends BaseData
 {
+	
+	boolean fieldBePositive = false;
+	
+	protected boolean isBePositive()
+	{
+		return fieldBePositive;
+	}
+	protected void setBePositive(boolean inBePositive)
+	{
+		fieldBePositive = inBePositive;
+	}
 	public BankTransaction(String inSearchType, MultiValued inData)
 	{
 		setSearchType(inSearchType);
@@ -76,6 +87,10 @@ public class BankTransaction extends BaseData
 		else
 		{
 			t = getData().getDouble("totalprice");
+		}
+		if( isBePositive())
+		{
+			t = Math.abs(t);
 		}
 		return t;
 	}

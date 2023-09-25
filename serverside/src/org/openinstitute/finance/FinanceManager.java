@@ -367,7 +367,7 @@ public class FinanceManager  implements CatalogEnabled
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
 		
-		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", true).search();
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", false).search();
 		query.orgroup("expensetype", expensetypes);
 		
 		query.exact("collectionid", inCollectionId);
@@ -483,7 +483,7 @@ public class FinanceManager  implements CatalogEnabled
 		{
 			query.exact("collectiveproject",topicid);
 		}
-		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", true).search();
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", false).search();
 		query.orgroup("expensetype", expensetypes);
 
 		
@@ -622,7 +622,14 @@ public class FinanceManager  implements CatalogEnabled
 		}
 		tracker = query.exact("ispaid","true").exact("paidfromaccount",inBankId).search();
 		addAll(incomesSearcher.getSearchType(),tracker,transactions);
-
+		for (Iterator iterator = transactions.iterator(); iterator.hasNext();)
+		{
+			BankTransaction bankTransaction = (BankTransaction) iterator.next();
+			if( !"AX-oS0XP5OXsVhEn3agJ".equals(bankTransaction.getValue("expensetype")))  //Disburstment
+			{
+				bankTransaction.setBePositive(true);
+			}
+		}
 		Collections.sort(transactions, new Comparator<BankTransaction>()
 		{
 			public int compare(BankTransaction arg0, BankTransaction arg1) 
@@ -637,6 +644,7 @@ public class FinanceManager  implements CatalogEnabled
 	}
 
 	
+
 	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> results = getTransactionsByAccount(null,inBankId,inDateRange);
