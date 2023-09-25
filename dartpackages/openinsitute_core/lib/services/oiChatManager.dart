@@ -6,7 +6,7 @@ import 'package:openinsitute_core/models/oiChatMessage.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
 
-class OiChatManager { 
+class OiChatManager {
   String chatBox = "oiChatManagerCache";
 
   DataModule? chatterBox;
