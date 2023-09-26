@@ -70,8 +70,8 @@
   </property>  
    <property id="ispaid" index="true" stored="true" type="boolean" >
 	 <name>
-	 <language id="en" > <![CDATA[Payment Issued]]> </language>
-	 <language id="es" > <![CDATA[Pago Emitido]]> </language>
+	 <language id="en" ><![CDATA[Payment Issued]]> </language>
+	 <language id="es" ><![CDATA[Pago Emitido]]> </language>
 	 </name>
 	</property>
   
@@ -80,7 +80,7 @@
     	viewtype="bankaccount" searchcomponent="bankaccount"
      index="true" editable="true" stored="true"  datatype="list" listid="bankaccount" defaultvalue="1">
 	 <name>
-	 <language id="en" > <![CDATA[Account Balance]]> </language>
+	 <language id="en" ><![CDATA[Account Balance]]></language>
 	 </name>
 	</property>
 	
@@ -105,8 +105,8 @@
 
   	<property id="reimbursedstatus" index="true" stored="true" type="list" editable="true">
 	 <name>
-	 <language id="en" > <![CDATA[Reimbursed Status]]> </language>
-	 <language id="es" > <![CDATA[Estatus de Reembolso]]> </language>
+	 <language id="en" ><![CDATA[Reimbursed Status]]> </language>
+	 <language id="es" ><![CDATA[Estatus de Reembolso]]> </language>
 	 </name>
 	</property>
   

@@ -8,13 +8,9 @@ class CsvImporter extends BaseImporter
 {
 	public String collectionid;
 	
-	public Object scrubValueIfNeeded(PropertyDetail inDetail, Object inValue)
+	public void addCustomProperties(Row inRow, Data inData)
 	{
-		if( inDetail.getId().equals("collectionid"))
-		{
-			return collectionid;
-		}
-		return inValue;
+		inData.setValue("collectionid", collectionid);
 	}
 
 }
@@ -27,10 +23,6 @@ csvimporter.setContext(context);
 csvimporter.setLog(log);
 csvimporter.setMakeId(false);
 
-csvimporter.addDbLookUp("currencytype");
-csvimporter.addDbLookUp("expensetype");
-csvimporter.addDbLookUp("paidfromaccount");
-
-//csvimporter.addDbLookUp("collectiveproject");
 csvimporter.collectionid = collectionid;
+csvimporter.addDbLookUpFilter("collectiveproject","parentcollectionid", collectionid);
 csvimporter.importData();
