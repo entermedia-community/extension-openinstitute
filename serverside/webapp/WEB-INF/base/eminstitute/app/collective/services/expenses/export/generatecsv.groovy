@@ -16,8 +16,7 @@ searcherManager = context.getPageValue("searcherManager");
 searchtype = context.findValue("searchtype");
 catalogid = context.findValue("catalogid");
 searcher = searcherManager.getSearcher(catalogid, searchtype);
-boolean friendly = Boolean.parseBoolean(context.getRequestParameter("friendly"));
-
+boolean friendly = true;
 
 PropertyDetails	details = searcher.getPropertyDetails();
 
@@ -131,17 +130,10 @@ writer.writeNext(headers);
 
 					} else{
 
-						 value = hit.get(detail.getId());
+					 	value = hit.get(detail.getId());
 						nextrow[fieldcount] = value;
 						fieldcount++;
 					}
-
-					
-					
-					
-					
-
-				
 				}	
 				writer.writeNext(nextrow);
 		}
