@@ -4635,7 +4635,7 @@ uiload = function() {
 							});
 					});
 
-	lQuery(".grabfocus").livequery(function() {
+	lQuery("input.grabfocus").livequery(function() {
 		var theinput = $(this);
 		theinput.css("color", "#666");
 		if (theinput.val() == "") {
@@ -5696,6 +5696,44 @@ uiload = function() {
 	
 	
 	
+	lQuery('.userOffcanvasToggler').livequery("click", function (e) {
+		// e.preventDefault();
+		var toggler = $(this);
+		var data = toggler.data();
+		console.log(data);
+		if (data.action == 'hide') {
+			console.log('hide drawer');
+			var url = apphome + '/components/sidebars/user/hide.html';
+
+			$.ajax({
+				url: url,
+				async: false,
+				data: data,
+				success: function (d) {
+					// toggler.find('.offcanvas-body').html(d);
+					// $(document.body).removeClass('drawer-open');
+				$(".emrightcontent").removeClass('empushcontent');
+					saveProfileProperty("usersidebarhidden", "true");
+				}
+			});
+		} else {
+			console.log('show drawer');
+			var url = apphome + '/components/sidebars/user/show.html';
+
+			$.ajax({
+				url: url,
+				async: false,
+				data: data,
+				success: function (data) {
+					// toggler.find('.offcanvas-body').html(data);
+					// $(document.body).addClass('drawer-open');
+				$(".emrightcontent").addClass('empushcontent');
+					saveProfileProperty("usersidebarhidden", "false");
+				}
+			});
+		}
+	});
+
 	lQuery('.sidebar-toggler').livequery("click", function(e) {
 		e.preventDefault();
 		var toggler = $(this);
@@ -5724,7 +5762,6 @@ uiload = function() {
 		}
 		$(window).trigger("resize");
 	});
-	
 
 	lQuery(".assetpicker .removefieldassetvalue").livequery("click", function(e) 
 	{
@@ -7591,8 +7628,8 @@ $(document).ready(function(url,params)
 		{
 			jQuery("#resultsheader").replaceWith(data);
 		});	
-	}
-		
+	}    
+		 
 	lQuery("select#selectresultview").livequery( function()
 	{
 		var select = $(this);
@@ -17030,19 +17067,9 @@ function chatterbox() {
 		var button = jQuery(this);
 		var chatter = button.closest(".chatterbox");
 		var data = chatter.data();
-		
-		data = jQuery.extend({}, data); //So we can edit it
-	    data.command= button.data("command");
-
-		var input = $("#chatter-msg");
-	    var replytoid = input.data("replytoid");
-		if( replytoid )
-		{
-			data.replytoid = replytoid;
-		}
-	    var content = input.val();
+	    var content = document.getElementById("chatter-msg").value;
 	    data.content = content;
-
+	    data.command= button.data("command");
 	    var json = JSON.stringify(data);
 	    content.value="";
 	    
@@ -17055,21 +17082,12 @@ function chatterbox() {
 	    	jQuery(".chatter-toggle").toggle();
 	    }
 	    
-	    if(jQuery("#chatter-msg").val() != "" )
-	    {
-			chatconnection.send(json);
-			
-			//Clear editing area
-		    var area = jQuery("#chatterbox-write");
-		    $("#chatter-msg", area).val("");
-		    $("#chatter-msg").data("replytoid",'');
-		    
-			console.log($("#chatter-msg").data("replytoid"));
-
-		    $(".chatterboxreplyto", area).hide();
-
-		    //scroll down, delay a little?
-		    scrollToChat();
+	    if(jQuery("#chatter-msg").val() != "" ){
+		chatconnection.send(json);
+	    jQuery("#chatter-msg").val("");
+	    
+	    //scroll down, delay a little?
+	    scrollToChat();
 		
 		}
 	    
@@ -17224,6 +17242,7 @@ function connect() {
 	        scrollToChat();
 		});
 	
+        
         registerServiceWorker();
         
         /*Check if you are the sender, play sound and notify. "message.topic != message.user" checks for private chat*/

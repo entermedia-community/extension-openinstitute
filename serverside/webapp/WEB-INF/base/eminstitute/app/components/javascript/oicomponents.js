@@ -37,7 +37,7 @@ jQuery(function () {
 		var input = $(this);
 		var options = input.data();
 
-		input.on("keyup", function (e) {
+		input.on("keyup input", function (e) {
 			if(e.key.length > 1 || e.key === ' ') {
 				return;
 			}
