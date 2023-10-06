@@ -1,5 +1,5 @@
 <page>
-    <page-action name="PageValue.loadPageVariable"  bean="searcherManager" alltypes="true"/>
+    <path-action name="PageValue.loadPageVariable"  bean="searcherManager" alltypes="true"/>
 	<path-action name="DataEditModule.loadHits"  alltypes="true">
 		<property name="searchtype">collectiveexpense</property>
 		<property name="hitsname">expenses</property>
@@ -8,10 +8,9 @@
 	<property name="searchtype">collectiveexpense</property>
 	
 	
-	<page-action name="BaseExporter.exportHits" alltypes="true" >
+	<path-action name="BaseExporter.exportHits" alltypes="true" >
 		<property name="hitsname">expenses</property>
-		
-	</page-action>
+	</path-action>
 	<generator name="velocity"/>
 	
 	<property name="virtual">true</property>
