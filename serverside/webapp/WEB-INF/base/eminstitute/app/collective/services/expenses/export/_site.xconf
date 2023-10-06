@@ -8,8 +8,9 @@
 	<property name="searchtype">collectiveexpense</property>
 	
 	
-	<page-action name="Script.run" alltypes="true" >
-		<script>./generatecsv.groovy</script>
+	<page-action name="BaseExporter.exportHits" alltypes="true" >
+		<property name="hitsname">expenses</property>
+		
 	</page-action>
 	<generator name="velocity"/>
 	

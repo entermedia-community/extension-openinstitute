@@ -44,7 +44,7 @@ for (Iterator iterator = details.iterator(); iterator.hasNext();)
 						}
 					}
 					else{
-						headers[count] = detail.getId();
+						headers[count] = detail.getName();
 						count++;
 					}
 	}		
