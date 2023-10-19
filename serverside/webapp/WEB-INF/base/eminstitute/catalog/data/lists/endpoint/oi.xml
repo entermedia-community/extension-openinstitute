@@ -112,5 +112,11 @@
     <name><![CDATA[Create a new Reaction]]></name> 
   </data>  
 
+  <data id="modulelibrarycollectionreaction" uploadfile="false" httpmethod="POST" docsection="modulelibrarycollection" 
+  url="/site/mediadb/services/module/librarycollection/messagereaction.json">
+    <samplerequest><![CDATA[{ "messageid":"321122", "reactioncharacter": "1F44D","userid": "admin" }]]></samplerequest>  
+    <name><![CDATA[Toggle Emoticon]]></name> 
+  </data>  
+
 
 </root>
