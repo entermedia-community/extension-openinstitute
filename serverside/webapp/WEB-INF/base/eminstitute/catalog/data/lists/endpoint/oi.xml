@@ -102,6 +102,15 @@
     }]]></samplerequest>
     <name><![CDATA[Create With Attachment]]></name> 
   </data>  
+  <data id="modulechatterboxreactioncreate" uploadfile="false" httpmethod="POST" docsection="modulechatterboxreaction" 
+  url="/site/mediadb/services/module/chatterboxreaction/create"> 
+    <samplerequest><![CDATA[{
+  "name": "1f600",
+"messageid":"AYepPiqjMR3Z0acSZT2L",
+"user":"admin"
+}]]></samplerequest>  
+    <name><![CDATA[Create a new Reaction]]></name> 
+  </data>  
 
 
 </root>
