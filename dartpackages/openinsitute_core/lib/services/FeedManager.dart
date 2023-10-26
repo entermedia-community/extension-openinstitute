@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
 import 'package:get/get.dart';
 import 'package:openinsitute_core/services/emDataManager.dart';
+import 'package:logger/logger.dart';
 
 OpenI get oi {
   return Get.find();

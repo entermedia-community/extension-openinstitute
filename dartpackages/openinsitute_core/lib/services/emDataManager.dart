@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -7,6 +6,7 @@ import 'package:openinsitute_core/Helper/merge_map.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
 import 'package:openinsitute_core/openinsitute_core.dart';
+import 'package:logger/logger.dart';
 
 OpenI get oi {
   return Get.find();

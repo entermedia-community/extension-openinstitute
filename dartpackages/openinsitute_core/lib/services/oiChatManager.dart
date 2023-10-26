@@ -69,7 +69,9 @@ class OiChatManager {
       return [];
     }
     Map<String, dynamic> results = await chatterBox!.createModuleOperation(
-        "viewmessages", RequestType.POST, getParams(page, projectId));
+        "viewmessages", RequestType.POST, getParams(page, projectId),
+        cache: true);
+
     messages.addAll(await parseData(results, projectId));
     return messages;
   }
@@ -152,6 +154,15 @@ class OiChatManager {
       log(e.toString());
       return false;
     }
+  }
+
+  addRemoveMsgReaction(Map<String, dynamic> jsonBody, String projectId) async {
+    await createDataModule(projectId);
+    await chatterBox!.createModuleOperation(
+      'messagereaction',
+      RequestType.POST,
+      jsonBody,
+    );
   }
 
   Future<oiChatMessage?> saveChat(
