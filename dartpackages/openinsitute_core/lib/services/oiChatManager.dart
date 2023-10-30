@@ -123,7 +123,7 @@ class OiChatManager {
   }
 
   Map getParams(int page, String inProjectId) {
-    return {"page": "$page", "hitsperpage": "20", "collectionid": inProjectId};
+    return {"page": "$page", "hitsperpage": "50", "collectionid": inProjectId};
   }
 
   saveTopics(List<emData> topics, String projectId) async {
