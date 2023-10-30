@@ -250,8 +250,8 @@ class DataModule {
     total = box.get("totalhits") ?? 0;
     page = box.get("page") ?? 0;
     pages = box.get("pages") ?? 0;
-    if (page <= 2) {
-      // await box.clear();
+    if (page == 1) {
+      await box.clear();
       for (var element in results) {
         await box.put(element.id, element.properties);
       }
