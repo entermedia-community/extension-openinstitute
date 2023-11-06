@@ -133,7 +133,7 @@ class DataModule {
 
   Future<emData> updateData(String id, Map inQurey) async {
     final responsestring = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        oi.app!["mediadb"] + '/services/module/chatterbox/data/$id',
         inQurey,
         RequestType.PUT);
     emData result = parseDataSingle(responsestring);
@@ -148,7 +148,7 @@ class DataModule {
 
   Future<bool> deleteData(String? id) async {
     final responsestring = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
+        oi.app!["mediadb"] + '/services/module/chatterbox/data/$id',
         {},
         RequestType.DELETE);
     Map<dynamic, dynamic> results = jsonDecode(responsestring);
