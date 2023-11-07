@@ -46,7 +46,7 @@ class OiChatManager {
 
   Future<oiChatMessage> editChat(
       String id, oiChatMessage message, String projectId) async {
-    await createDataModule(projectId);
+    await createDataModule(projectId, moduleString: 'chatterbox');
     emData updated = await chatterBox!.updateData(id, message.properties);
     oiChatMessage updatedMessage = oiChatMessage.fromJson(updated.properties);
     return updatedMessage;
@@ -168,13 +168,13 @@ class OiChatManager {
   Future<oiChatMessage?> saveChat(
       Map<String, dynamic> inMessage, String projectId, String tempId) async {
     await createDataModule(projectId);
-    final Map<String, dynamic>? responded =
+    final Map<String, dynamic> responded =
         await chatterBox!.createModuleOperation(
       'messagesave',
       RequestType.PUT,
       inMessage,
     );
-    if (responded != null && responded.isNotEmpty) {
+    if (responded.isNotEmpty) {
       Map<String, dynamic> map = responded;
       oiChatMessage chatMessage = oiChatMessage.fromJson(map["data"]);
       await chatterBox!.box.put(chatMessage.messageid, chatMessage.properties);

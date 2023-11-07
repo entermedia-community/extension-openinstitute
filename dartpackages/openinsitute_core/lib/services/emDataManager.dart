@@ -23,7 +23,9 @@ class DataManager {
     if (searcher == null) {
       searcher = await DataModule.createDataModule(inSearchType, boxString);
       searchers[boxString] = searcher;
+      return searcher;
     }
+    searcher = await DataModule.createDataModule(inSearchType, boxString);
     return searcher;
   }
 
@@ -133,7 +135,7 @@ class DataModule {
 
   Future<emData> updateData(String id, Map inQurey) async {
     final responsestring = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/chatterbox/data/$id',
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         inQurey,
         RequestType.PUT);
     emData result = parseDataSingle(responsestring);
@@ -148,7 +150,7 @@ class DataModule {
 
   Future<bool> deleteData(String? id) async {
     final responsestring = await oi.getEmResponse(
-        oi.app!["mediadb"] + '/services/module/chatterbox/data/$id',
+        oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         {},
         RequestType.DELETE);
     Map<dynamic, dynamic> results = jsonDecode(responsestring);
