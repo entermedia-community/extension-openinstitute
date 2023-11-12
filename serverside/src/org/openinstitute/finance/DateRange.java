@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.entermediadb.email.TemplateWebEmail;
 
 public class DateRange
 {
@@ -84,7 +84,7 @@ public class DateRange
 	{
 		setYearPicked(yearsback);
 		setMonthPicked(inMonth);
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		int year = cal.get(Calendar.YEAR);
 		cal.set(Calendar.YEAR,year - yearsback);
 		cal.set(Calendar.MONTH, inMonth - 1);
@@ -92,6 +92,8 @@ public class DateRange
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
 		Date start = cal.getTime();
 		setStartDate(start);
 		cal.add(Calendar.MONTH, 1);
