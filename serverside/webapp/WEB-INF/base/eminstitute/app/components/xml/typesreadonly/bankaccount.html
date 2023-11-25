@@ -1,2 +1,4 @@
+#ifnotnull($val)
 #set( $dataval = $mediaarchive.getCachedData($detail.getListId(),$val) )
-$context.getText($dataval)
+$!context.getText($dataval)
+#end
