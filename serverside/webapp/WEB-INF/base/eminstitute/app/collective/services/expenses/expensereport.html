@@ -141,6 +141,16 @@
         <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
            class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
 
+        #if( $canviewsettings)
+        <div>
+        <a class="ajax" data-targetdiv="expensereport" 
+        data-collectionid="$librarycol.id" data-confirm="[[Sure you want to delete all] $expenses.size() [[records?]]" 
+        href="$applink/collective/services/expenses/deleteall.html" data-hitssessionid="$expenses.getSessionId()">[[Delete]] $expenses.size()</a>
+        </div>
+        
+        #end
+
+
 		</div>
       </div>  
 </div>
