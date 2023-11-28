@@ -1,0 +1,9 @@
+<page>
+<property name="appsection">pendingpayments</property>
+ <permission name="view">
+    <or>
+      <group id="administrators"/>
+      <settingsgroup id="administrator"/>
+    </or>
+  </permission>
+</page>  

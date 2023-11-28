@@ -1,0 +1,10 @@
+<page>
+    <script id="stripe" src="https://js.stripe.com/v3/"/>
+    <property name="autocreatetempuser">true</property>
+    
+    <path-action name="PaymentModule.createCheckoutUser" />
+    
+	<path-action name="PaymentModule.getStripeUser"/>
+	
+	<inner-layout>/${applicationid}/theme/layouts/collectivelayout.html</inner-layout>
+</page>

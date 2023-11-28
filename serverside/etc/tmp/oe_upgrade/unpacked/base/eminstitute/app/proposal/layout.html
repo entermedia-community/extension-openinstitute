@@ -1,0 +1,27 @@
+
+<div class="currentcampaign">
+	
+	<div class="communitycontainer-header">
+	<h3>
+	[[News]]:
+	</h3>
+	</div>
+	
+	<div class="proposalcontainer-out">
+	
+	#if( $caneditcollection )
+		<div class="proposalheader" style="">
+			<h4>[[Add Post]]</h4>
+		</div>
+		<div class="proposalnews" style="margin-bottom:20px">				
+				$pages.include("$apphome/collective/channel/addnewupload.html")
+		</div>
+	#end
+	
+	$pages.include("$apphome/proposal/channelfeed.html",$context)
+	
+	</div>
+
+</div>
+		
+

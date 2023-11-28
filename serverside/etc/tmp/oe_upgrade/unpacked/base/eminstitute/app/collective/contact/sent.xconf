@@ -1,0 +1,6 @@
+<page>
+	<path-action name="User.checkQuestion" />
+	<path-action name="Email.sendEmailtoProject" />
+	<property name="emaillayout">/${applicationid}/collective/contact/contacttemplate.html</property>
+	<property name="subjectprefix">OI Contact</property>
+</page>

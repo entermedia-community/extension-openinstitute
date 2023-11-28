@@ -1,0 +1,13 @@
+<page>
+<inner-layout>/${applicationid}/theme/layouts/proposal3columns.html</inner-layout>
+
+	<path-action name="DataEditModule.loadData" >
+			<pageval>librarycol</pageval>
+			<idname>collectionid</idname>
+			<searchtype>librarycollection</searchtype>
+    </path-action>
+
+	<path-action name="ProjectModule.loadCollection">
+	</path-action>
+
+</page>

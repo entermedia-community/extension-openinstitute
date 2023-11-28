@@ -1,0 +1,88 @@
+#set($collectionid = $librarycol.getId())
+
+#ifnull( $collectionid )
+	#set($collectionid = $context.getRequestParameter("collectionid"))
+#end
+
+
+
+<div>
+<h2 class="float-left" style="margin:0 0 10px">[[Accounts]]</h2>
+	#ifnull( $hits) 
+              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
+              $context.putPageValue("hits",$hits)
+	#end
+            
+      #if( $caneditcollection )    
+           <a style="margin-left:6px"
+                      href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
+                      class="emdialog btn btn-sm btn-primary float-right"
+                      title="[[Add An Account]]"><i class="fa fa-plus"></i> [[Add An Account]]</a>
+			#if( !$hits.isEmpty() )                      
+           <a 
+                      href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
+                      class="btn btn-sm btn-primary float-right">[[Reconcile]]</a>
+			#end
+         #end
+<div class="clearfix"></div>
+
+#if( !$hits.isEmpty() )                      
+	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+
+	<form  id="colsearchform" class="autosubmit" data-targetdiv="expensereport" method="post"
+			 action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
+	
+		#set( $searcher = $mediaarchive.getSearcher($content.searchtype) )
+		$context.putPageValue("searcher",$searcher)
+		#set ($details = $searcher.getDetailsForView("bankaccount/search", $userprofile))
+	
+		<input type="hidden" name="searchtype" value="collectiveinvestment" />
+		
+		<input type="hidden" name="field" value="collectionid" />
+		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
+		<input type="hidden" name="collectionid" value="$librarycol.id" />
+		<input type="hidden" name="operation" value="exact" />
+		<input type="hidden" name="oemaxlevel" value="1" />
+		
+
+		<div  id="searchform" class="inlinesearch" style="display:none" >
+			<div class="row">
+				$context.putPageValue("autocomplete","off")
+				#foreach( $detail in $details)
+					<div class="col-md-3">
+							$context.putPageValue("detail", $detail)
+							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+					</div>
+					#if( $counter == 4)
+						</div>
+						<div  class="row" >
+					#end	
+				#end
+			</div>	
+		</div>
+		
+		
+		<div>
+		
+		<div class="finances-table-sort">
+			<label>[[Sort by]]</label>
+			<div style="width:200px; display:inline-block;">
+			<select class="select2 form-control-sm" name="sortby" >
+				#set ($details = $searcher.getDetailcollectiveinvestmentsForView("collectiveinvestment/edit", $userprofile))
+			#foreach( $detail in $details)
+				<option value="$detail.getId()Down">$!context.getText($detail)</option>
+				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+			#end
+			</select>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		
+		</div>
+
+	</form>
+#end	
+	
+	$pages.include("./results.html",$context)
+</div>
+

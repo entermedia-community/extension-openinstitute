@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <data id="1" exchangetousd="1"> 
+    USD
+  </data>  
+  <data id="2" exchangetousd="1"> 
+  OI Work Points
+  </data>  
+  <data id="3" exchangetousd="0"> 
+  Seeds
+  </data>  
+  <data id="4" exchangetousd="7.5"> 
+  GTQ
+  </data>  
+ 
+</root>

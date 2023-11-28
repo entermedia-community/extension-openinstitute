@@ -1,0 +1,94 @@
+<Div id="expensereport">
+
+                  <div class="emdata emdatatable">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr class="tableheader">
+                                  #if($showcollections )
+                                  <th>[[Collection]]</th>
+                                  #end
+                                  <th>[[Date]]</th>
+                                  <th>[[From]]</th>
+                                  <th>[[To]]</th>
+                                  <th>[[Type]]</th>
+                                  <th>[[Label]]</th>
+                                  <th>[[Topic]]</th>
+                                  <th>[[Total]]</th>
+                                  <th>[[Status]]</th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          #foreach($hit in $transfers)
+                              <tr
+                              #if($hit.currencytransferstatus=="2" ) ##paid
+                              	style="background-color: #409d90"
+                              #elseif($hit.currencytransferstatus=="1" ) 
+                              	style="background-color: #EFEF97"
+                              #end
+                              >
+                                  #if($showcollections )
+                                  <td>
+									<a
+	                                    href="$applink/collective/services/expenses/index.html?collectionid=$hit.collectionid"
+	                                    class="btn btn-xs btn-secondary"
+	                                    target="_new"
+	                                    data-hidefooter="true"
+	                                    >
+		                                  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)
+		                             </a>
+                                  </td>
+                                  #end
+                                  <td>$!context.getDate($hit.date)</td>
+                                  <td>
+								  #set( $type = false)
+                                  #set( $type = $hit.paymententitysourcetype)  
+                                  $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitysource")
+                                  </td>
+                                  <td>
+								  #set( $type = false)
+                                  #set( $type = $hit.paymententitydesttype)
+                                  $pages.include("$apphome/components/xml/typesreadonly/paymententitytype.html?val=$type&targetid=$hit.paymententitydest")
+                                  </td>
+                                  <td>$!context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
+			                      
+                                  <td  style="white-space: nowrap;">#esc($hit.name)</td>
+                             	  <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
+                                  <td style="text-align: right; width:140px;">
+                                  	$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
+                                  </td>
+                                  <td>$!context.getName($!mediaarchive.getCachedData("currencytransferstatus", $hit.currencytransferstatus))</td>
+                                  
+			                      <td style="text-align: center; white-space: nowrap;">
+			                            #if($hit.currencytype=="2") ##points
+			                            	#if($librarycol && $hit.currencytransferstatus=="1" && $hit.paymententitydesttype=="librarycollection" && $hit.paymententitysourcetype == "user") ##pending
+			                            	 <a
+			                                    href="$applink/collective/services/workpoints/pay.html?collectionid=$librarycol.id&id=$hit.id"
+			                                    class="btn btn-xs btn-secondary emdialog"
+			                                    data-hidefooter="true"
+			                                    title="[[Pay User]]"
+			                                    ><i class="fa fa-user"></i></a>
+			                                #end    
+			                            	 <a
+			                                    href="$applink/users/tasks/report.html?OPERATION=BETWEEN&dateXXXX---StandardSearch"
+			                                    class="btn btn-xs btn-secondary"
+			                                    data-hidefooter="true"
+			                                    title="[[View Points]]"
+			                                    ><i class="fa fa-eye"></i></a>
+			                            #end
+			                            #if( $canviewsettings)
+			                                <a
+			                                    href="$applink/collective/services/transfers/edit.html?id=$hit.id&searchtype=currencytransaction&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
+			                                    class="btn btn-xs btn-secondary emdialog"
+			                                    data-hidefooter="true"
+			                                    title="[[Edit Transaction]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
+			                                    ><i class="fa fa-edit"></i></a>
+			                            #end
+			                      </td>
+                    </tr>
+                #end
+            </table>
+        </div>
+     ##   <a href="$applink/collective/services/transfers/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$transfers.getSessionId()"
+     ##      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+        
+</div>

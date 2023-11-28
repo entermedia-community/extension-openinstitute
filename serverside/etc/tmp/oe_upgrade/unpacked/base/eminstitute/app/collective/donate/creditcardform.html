@@ -1,0 +1,120 @@
+			
+		#if( $caneditcollection) <a class="oe-dataedit showeditonright"
+			data-target="#editdonatedescription-$librarycol.id"
+			title="[[Edit Donation Description]]" data-width="500" href="#"><i
+			class="fas fa-edit"></i></a> #end
+		<div class="oe-editable" id="editdonatedescription-$librarycol.id"
+			data-dataid="$librarycol.id" data-field="donatedescription"
+			data-searchtype="librarycollection">
+			#if($librarycol.donatedescription) $!librarycol.donatedescription
+			#else
+			<p>[[Choose Payment Method]].</p>
+			#end
+		</div>
+
+
+	#if(!$mediaarchive.isCatalogSettingTrue("productionmode"))
+	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
+	#end
+		
+		<p style="text-align:center;padding-top:10px;">
+		<strong>[[Credit Card]]:</strong>
+		</p>
+
+		<div class="card donatecard">
+		
+
+		<div class="card-block" >
+	  	#if($mediaarchive.isCatalogSettingTrue("productionmode"))
+	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
+	  	 #else
+	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
+	  	 #end
+			<form action="$applink/collective/donate/donatefinish.html"
+				method="post" 
+				id="payment-form" 
+				class="form ajaxform stripepaymentform" 
+				data-targetdiv="donationcontainer"
+				data-stripepublishkey="$!publishkey">
+				
+				<input type="hidden" name="oemaxlevel" value="3" />
+				<input type="hidden" name="collectionid" value="$!librarycol.id" />
+
+				
+
+	             	
+	             	<div class="float-right" style="margin-top:-4px"><img src="$applink/theme/icons/creditcard.png" /></div>
+	             	<div class="form-group">
+	   					<label for="staticEmail">[[Card Info]]:</label>
+	   			 		<div class="form-control">
+							<div id="card-element" style="width: 100%">
+							</div>      
+				    	</div>
+	   				</div>
+	             	
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="staticEmail">[[Amount]]:</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">$</div>
+										</div>
+										<input type="text" class="form-control"
+											name="totalprice.value" id="donationamount">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+									<div class="form-group">
+									<label for="staticEmail">[[Donation Type]]:</label> <select
+										class="form-control" name="frequency">
+										<option value="">[[Once]]</option>
+										##<option value="weekly">[[Weekly]]</option>
+										##<option value="monthly">[[Monthly]]</option>
+										##<option value="yearly">[[Yearly]]</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="card-errors" class="donateformerror" role="alert"></div>
+
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="donate-secure " >
+									<i class="fas fa-lock"></i> [[Secure payment]]
+								</div>
+
+							</div>
+							<div class="col-md-6">
+									<div style=" margin: 0px auto;">
+									<a href="#" 
+										class="btn btn-success"
+										id="donatecheckout"><i class="fas fa-credit-card"></i> [[Check Out]]</a> 
+									</div>
+							</div>
+						</div>
+
+						<input  type="hidden" name="field" value="collectionid" /> 
+						<input	type="hidden" name="collectionid.value"	value="$!librarycol.getId()" /> 
+						<input  type="hidden" name="collectionid" value="$!librarycol.getId()" /> 
+						<input	type="hidden" name="field" value="totalprice" /> 
+						<input	type="hidden" name="field" value="userid" /> 
+						<input	type="hidden" name="userid.value" value="$!user.getId()" />
+						<input	type="hidden" name="isdonation" value="true" />
+						
+						<input type="hidden" name="field" value="currencytype" />
+						<input type="hidden" name="currencytype.value" value="1"/>
+						
+						<input type="hidden" name="field" value="incometype" />
+						<input type="hidden" name="incometype.value" value="1"/>
+						
+			</form>
+		</div>
+	</div>
+
+				

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg"
+  primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
+  >
+  <caption><![CDATA[Creating a Worldwide Digital Heritage]]></caption>
+    <name> 
+      <language id="en"><![CDATA[Ancestral Streaming]]></language> 
+    </name> 
+    <summary>
+    Preserving digital files containing valuable cultural and heritage content. Offering free storage to videographers, influencers, and content creators of original files in long-term archival storage. 
+    
+    Christopher Burkey, the president of eMediaWorkspace, delivered a TEDx talk 7 years ago. 
+    and began an initiative to create independent media libraries around the world.  
+
+    </summary>
+  </data>  
+  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg"
+  primaryimagepathwide="/theme/images/home-creative-wide.jpg"
+  >
+    <caption><![CDATA[Folk music with beats]]></caption>
+    <name> 
+      <language id="en"><![CDATA[Common Roots Collective]]></language> 
+    </name> 
+    <summary>
+    Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
+     for future generation to build upon.</summary>
+  </data>  
+  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg"
+  primaryimagepathwide="/theme/images/home-human-wide.jpg">
+    <name> 
+      <language id="en"><![CDATA[Kansha Academy]]></language> 
+    </name> 
+    <caption><![CDATA[Education, health, assistance and cultural preservation]]></caption>
+    
+    <summary>
+	Supporting education by creating and supporting schools in USA, San Marcos Guatemala and Mexico.    
+    </summary>
+  </data>
+  <data id="3" entitytype="librarycollection"  primaryimagepath="/theme/images/logos/emedialogo.svg"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  > 
+    <name> 
+      <language id="en"><![CDATA[eMedia]]></language> 
+    </name>
+    <caption><![CDATA[Software, tools, science in the common wellness]]></caption>
+    
+    <summary>
+	We believe everyone has a right to maintain and own their digital libraries. We support professional content creators, 
+film makers, and non profits who 
+want Self deterministic, 
+censorship free ownership 
+of media Files    
+    </summary>
+   
+  </data>    
+  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  domaincommunityid="4"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Tierra Sagrada]]></language> 
+    </name>
+    <caption><![CDATA[Rentals that give back to the local community]]></caption>
+    
+    <summary>
+    <![CDATA[
+    An collaborative home rental booking platform that focuses on giving back to and empowering communities around Lake Atitlan. 5% of profits goes to projects that are conserving land, educating children, supporting musicians, and having a positive social and justice impact.
+    ]]>
+    </summary>
+   
+  </data>    
+  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  domaincommunityid="5"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Wellness Network Collective]]></language> 
+    </name>
+    <caption><![CDATA[Inspire personal transformation
+]]></caption>
+    
+    <summary>
+    <![CDATA[
+A directory of mindful and inspired practitioners who inspire, support and serve personal transformation and spiritual growth.
+    ]]>
+    </summary>
+   
+  </data>    
+
+
+</root>

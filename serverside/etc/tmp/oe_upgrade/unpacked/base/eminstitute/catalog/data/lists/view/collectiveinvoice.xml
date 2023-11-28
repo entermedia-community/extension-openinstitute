@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="collectiveinvoiceorder5" 
+  	moduleid="collectiveinvoice" systemdefined="true" byassettype="false">Rental Reserve</property>  
+</properties>

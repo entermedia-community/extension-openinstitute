@@ -1,0 +1,4 @@
+<page>
+	<property name="virtual">true</property>
+	<path-action name="Admin.redirectInternal" redirectpath="${applink}/app/index.html" />
+</page>

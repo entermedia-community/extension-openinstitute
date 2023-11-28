@@ -1,0 +1,23 @@
+<div class="d-flex bg-dark p-4">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <div class="d-flex flex-column">
+        <p class="text-white mt-2 d-none d-md-block">
+          $communitytagcategory.summary
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
+
+<h2 class="text-center mt-4">Projects</h2>
+
+#foreach( $project in $projects )
+  #set( $project = $searcher.loadData($project) )
+  $context.putPageValue("project",$project)
+  $pages.include("$apphome/home/proposals/category/propsummary.html", $context)
+
+#end

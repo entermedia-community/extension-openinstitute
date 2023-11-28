@@ -1,0 +1,15 @@
+<section class="section">
+
+    <!--Section heading-->
+    <h3 class="section-heading pt-4">Message received at Open Institute</h3>
+    <!--Section description-->
+    <p class="section-description">
+ 
+ 	<ul>   
+    #foreach( $key in $context.getParameterMap().keySet() )
+    	<li>$key = $context.getRequestParameter($key)</li>
+    #end
+    </ul>
+    
+    </p>
+</section>
