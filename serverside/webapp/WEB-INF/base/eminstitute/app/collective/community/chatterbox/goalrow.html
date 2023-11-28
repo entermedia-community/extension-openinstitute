@@ -1,42 +1,48 @@
 #set( $target = "messagetask${goal.id}")
-<div id="$target" class="goalstatus goalstatus$!{goal.projectstatus}" style="position:relative"> 
-#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
+<div id="$target" class="goalstatus goalstatus$!{goal.projectstatus}" style="position:relative;min-width:300px"> 
+	#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
+	<div class="d-flex align-items-center justify-content-between pb-2">
+		#if($caneditcollection)
+			<a data-cancelsubmit="true" 
+				data-hidefooter="true" 
+				href="$goallink"
+				title="[[Ticket]] #$!goal.ticketnumber" 
+				class="emdialog goalticket-level d-flex align-items-center justify-content-between"
+				style="font-size: 0.8rem;"
+				data-urlbar="$applink/collective/goals/priorities/index.html?collectionid=$goal.collectionid&opengoalid=${goal.id}" 
+				data-width="900" >
+					<span>
+						<i class="fas fa-flag"></i> 
+						#set( $level = $mediaarchive.getData("ticketlevel",$goal.ticketlevel))
+						[[Ticket]]: #$!goal.ticketnumber
+					</span>
+					<span>#text($level)</span>
+					<span>
+						#set( $status  = $mediaarchive.getData("projectstatus", $goal.projectstatus) )
+						#text($status)
+					</span>
+			</a>
+		#end
+	</div>
 
-<div>
-#if($caneditcollection)
-<a data-cancelsubmit="true" 
-    data-hidefooter="true" 
-    href="$goallink"
-    title="[[Ticket]] #$!goal.ticketnumber" 
-	class="emdialog goalticket-level float-left" 
-	data-urlbar="$applink/collective/goals/priorities/index.html?collectionid=$goal.collectionid&opengoalid=${goal.id}" 
-	data-width="900" >
-		<i class="fas fa-flag"></i> 
-		#set( $level = $mediaarchive.getData("ticketlevel",$goal.ticketlevel))
-		[[Ticket]] : #$!goal.ticketnumber  #text($level)
-		#set( $status  = $mediaarchive.getData("projectstatus", $goal.projectstatus) )
-		#text($status)
-</a>
-#end
-<div class="goalslike float-right">
-$pages.include("$apphome/collective/goals/like.html",$context)
-</div>
-<div class="clearfix"></div>
-</div>
-<div class="goaltasksout">
-$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true&onlyopen=false",$context)
-</div>
-		
+	<div class="d-flex align-items-center justify-content-between pb-3">
+		<div class="goaltasksout">
+			$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true&onlyopen=false",$context)
+		</div>
+		<div class="goalslike" style="font-size: small;">
+			$pages.include("$apphome/collective/goals/like.html",$context)
+		</div>
+	</div>
 
-#if($caneditcollection && $goal.projectstatus != "completed" && $goal.projectstatus != "closed")
-<div class="goalcloseout text-right">
-	<a href="$applink/collective/community/chatterbox/closegoal.html?goalid=$goal.id" 
-		data-targetdiv="$target" 
-		data-oemaxlevel="1"
-		class="ajax btn btn-xs btn-resolve btn-warning" 
-		 ><i class="fas fa-check"></i> [[Resolve]]
-	</a>
-</div>
-#end
-
+	#if($caneditcollection && $goal.projectstatus != "completed" && $goal.projectstatus != "closed")
+		<div class="d-flex justify-content-end">
+			<a href="$applink/collective/community/chatterbox/closegoal.html?goalid=$goal.id" 
+				data-targetdiv="$target" 
+				data-oemaxlevel="1"
+				class="ajax btn btn-xs btn-resolve btn-warning" 
+				>
+				<i class="fas fa-check"></i> [[Resolve]]
+			</a>
+		</div>
+	#end
 </div>

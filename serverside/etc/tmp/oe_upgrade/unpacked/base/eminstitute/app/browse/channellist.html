@@ -1,0 +1,56 @@
+#set($libraryid = $context.getRequestParameter("libraryid"))
+#if(!$libraryid)
+	#set($libraryid= "*")
+#else
+	#set( $library = $mediaarchive.getData("library",$libraryid) ) 
+#end
+
+	
+				
+	
+#set($tags = $mediaarchive.getList("communitytag"))
+#foreach( $tag in $tags)
+	
+		#set( $projects = $mediaarchive.query("librarycollection").exact("communitytag",$tag.getId()).search() )
+		#if( !$projects.isEmpty() )
+		<div class="communitycontainer-header">
+		<h3>
+		#if($tag.domain)
+			<a href="$tag.domain" title="$tag.getName()">$tag.getName()</a>
+		#else
+			$tag.getName()
+		#end
+		</h3>
+		</div>
+		<div class="communitytagcontainer-out">
+		
+		<div class="communitytagheader" style="">
+		#set( $donations = $mediaarchive.query("transaction").orgroup("collectionid",$projects).exact("isdonation","true").sort("paymentdateDown").search($context))  
+		#if( !$donations.isEmpty() )
+			 	<div class="communtysofar">$donations.size() [[donations received so far!]]</div>
+			 #end
+		</div>
+		<div class="communitytagdescription" style="">
+			
+				$!tag.funddescription
+			 
+				<div style="padding-top:20px;">
+		 		#foreach( $project in $projects.getPageOfHits() )
+					$context.putPageValue("collective",$project)
+					$pages.include("$apphome/browse/collectivelist.html",$context)
+				#end
+				</div>
+				<div style="clear:both"></div>
+		</div>
+		</div>
+		<div style="clear:both">
+		</div>	
+		#end	
+	
+#end
+	
+
+	
+	
+
+

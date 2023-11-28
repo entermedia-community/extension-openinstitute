@@ -1,0 +1,14 @@
+#if( !$upload )
+	#set( $upload = $showupload)
+#end
+$context.putPageValue("upload",$upload)
+$context.putPageValue("assetidpostfix","modalview")
+
+<div style="max-width: 720px;margin:auto; position:relative;">
+<div class="feed-showpost-dialog">
+	<div class="OIoverlay-close largeicon" ><span title="[[Esc to Close]]" class="fas fa-window-close"></span></div>
+	
+	$pages.include("$apphome/collective/channel/showpost.html",$context)
+	</div>
+</div>
+

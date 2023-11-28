@@ -12,8 +12,9 @@
 
 </div>
 
-
-#foreach($chat in $messages)
-	$context.putPageValue("chat",$chat) 
-	$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
-#end
+<!-- <div class="d-flex flex-column-reverse w-100"> -->
+	#foreach($chat in $messages)
+		$context.putPageValue("chat",$chat) 
+		$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
+	#end
+<!-- </div> -->

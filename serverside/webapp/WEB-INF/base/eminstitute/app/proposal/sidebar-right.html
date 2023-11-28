@@ -1,42 +1,88 @@
-<div style="margin-bottom:30px;">
-			
-	<div class="communitycontainer-header">
-		<h3>
-		[[Team Circle]]
-		</h3>
-	</div>
+<div class="d-flex align-items-center justify-content-between flex-wrap mb-2">
+	<h3 class="m-0 text-uppercase">[[Team Circle]]</h3>
+	#if ($librarycol.facebooklink || $librarycol.instagramlink || $librarycol.websitelink)
+		<div class="d-flex align-items-center">
+			#if ($librarycol.facebooklink)
+			<a href="${librarycol.facebooklink}" class="btn btn-light btn-sm m-1" target="_blank" title="[[Follow Us]]">
+				<i class="fab fa-facebook-f"></i>
+			</a>
+			#end
+			#if ($librarycol.instagramlink)
+			<a href="${librarycol.instagramlink}" class="btn btn-light btn-sm m-1" target="_blank" title="[[Follow Us]]">
+				<i class="fab fa-instagram"></i>
+			</a>
+			#end
+			#if ($librarycol.websitelink)
+			<a href="${librarycol.websitelink}" class="btn btn-light btn-sm m-1" target="_blank" title="[[Visit Us]]">
+				<i class="fas fa-link"></i>
+			</a>
+			#end
+		</div>
+	#end
+</div>
 
+#set($collectionid = $librarycol.getId())
+<div id="subscriberssidebar">
+	<div class="sidebarbox" style="position:relative;">
+		#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context))
 
-	<div class="proposalcontainer-out ">
-		<div class="proposaldescription" style="">
-			<div id="subscriberssidebar" class="donate-proposal-sidebar">
-				$context.putPageValue("hideteamtitle", true)
-				$pages.include("$apphome/collective/channel/subscribers/index.html", $context)
-				#if($librarycol.proposaltestimonials)
-			 	<div class="community-sidebar-box proposal-sidebarbox">
-			 		<h3>[[Testimonials]]</h3>
-					   	$!librarycol.proposaltestimonials
-				</div>
+		#if($team.isEmpty())
+			<p class="text-secondary text-center">[[No team yet]]</p>
+		#else
+			<div class="list-group border-0">
+				<hr class="m-0" style="opacity: 0.05;" />
+				#foreach( $hit in $team)
+					#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+					#if($followeruser)
+						#set( $userlink = "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
+						#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
+						#if(!$userimageurl)
+							#set( $userimageurl = "$applink/theme/images/user.svg" )
+						#end
+						<a href="#esc($userlink)" class="list-group-item list-group-item-action rounded-0 px-0 py-2 border-0">
+							<div class="d-flex">
+								<div class="mt-1" style="height:32px;width:32px">
+									<img src="${userimageurl}" title="$!followeruser.getAnonNickName()" class="img-fluid align-middle usericon"> 
+								</div>
+								<div class="ms-2 d-flex flex-column">
+									<p class="my-0 fw-bold" style="color:#1D5655">
+										$!followeruser.getAnonNickName()
+									</p>
+									<small class="text-secondary">$!followeruser.getEmail()</small>
+								</div>
+							</div>
+						</a>
+					#end
+					<hr class="m-0" style="opacity: 0.05;" />
 				#end
-				
-				$pages.include("$apphome/collective/likeoptions.html", $context)
-			
 			</div>
-		</div>		
+		#end
 	</div>
 </div>
 
 
-#if ($librarycol.facebooklink || $librarycol.instagramlink || $librarycol.websitelink)
-	<div class="text-center" style="margin:20px;">
-	#if ($librarycol.facebooklink)
-			<a href="${librarycol.facebooklink}" class="btn btn-light btn-sm" target="_blank" title="[[Follow Us]]"><i class="fab fa-facebook-f"></i></a>
-	#end
-	#if ($librarycol.instagramlink)
-		<a href="${librarycol.instagramlink}" class="btn btn-light btn-sm" target="_blank" title="[[Follow Us]]"><i class="fab fa-instagram"></i></a>
-	#end
-	#if ($librarycol.websitelink)
-		<a href="${librarycol.websitelink}" class="btn btn-light btn-sm" target="_blank"  title="[[Visit Us]]"><i class="fas fa-link"></i></a>
-	#end
+<div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
+	<div class="m-1">
+		$pages.include("$apphome/collective/likeoptions.html", $context)
 	</div>
+	#if($caneditcollection)
+	<div class="text-right m-1">
+		<a href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}"
+			class="emdialog btn btn-secondary btn-xs" title="[[Search Users]]">
+			<i class="fas fa-search"></i> [[Add to Team]]
+		</a>
+		<a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}"
+			class="emdialog btn btn-secondary btn-xs" title="[[Add New User to Project]]">
+			<i class="fas fa-plus"></i> [[New User]]
+		</a>
+	</div>
+	#end
+</div>
+
+#if($librarycol.proposaltestimonials)
+<div class="community-sidebar-box proposal-sidebarbox">
+	<h3>[[Testimonials]]</h3>
+	$!librarycol.proposaltestimonials
+</div>
 #end
+

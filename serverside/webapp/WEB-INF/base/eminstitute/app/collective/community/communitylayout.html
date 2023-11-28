@@ -3,92 +3,96 @@
 #set( $searcher = $mediaarchive.getSearcher("collectiveproject") )
 
 #if($collectionid)
+	#if($caneditcollection)
+		#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).sort("name").search($context) )
+	#else
+		#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).exact("teamproject","false").sort("name").search($context) )
+	#end
 
-#if($caneditcollection)
-	#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).sort("name").search($context) )
-#else
-	#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).exact("teamproject","false").sort("name").search($context) )
-#end
+	#if($topicid)
+		#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).exact("id",$topicid).searchOne() )
+	#end
 
-#if($topicid)
-	#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).exact("id",$topicid).searchOne() )
-#end
-
-#if( !$currenttopic)
-	#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).sort("name").searchOne() )
-#end
+	#if( !$currenttopic)
+		#set( $currenttopic = $searcher.query().match("parentcollectionid",$collectionid).sort("name").searchOne() )
+	#end
 
 
-#if( !$currenttopic)
-	##No topics found
-	#set( $currenttopic = $searcher.createNewData() )
-	$currenttopic.setValue("parentcollectionid",$collectionid)
-	$currenttopic.setName("General")
-	$searcher.saveData($currenttopic)
-#end
-$context.putPageValue("currenttopic", $currenttopic)
-
-<div id="campaigninfo" class=" oicontainercampaigns " >
-$context.putPageValue("currenttopic", $currenttopic)
-		<div class="collectivemaincol">
-			<div class="row no-gutters g-0 h-100">
-				<div class="collaborate-channel col" style="margin: 20px;  border-radius: 15px;  padding: 20px;">
+	#if( !$currenttopic)
+		##No topics found
+		#set( $currenttopic = $searcher.createNewData() )
+		$currenttopic.setValue("parentcollectionid",$collectionid)
+		$currenttopic.setName("General")
+		$searcher.saveData($currenttopic)
+	#end
+	$context.putPageValue("currenttopic", $currenttopic)
+	<div class="container-sm">
+		<div id="campaigninfo" class="oicontainercampaigns chat-container">
+			$context.putPageValue("currenttopic", $currenttopic)
+			<div class="collectivemaincol">
+				<div class="collaborate-channel">
 					<div class="proposalcontainer-outX ">
-						<div class="collaborate-channel-header">
-							<div class="channel-name float-left">
+						<div class="d-flex flex-row justify-content-between align-items-center bg-light px-3 py-1 mb-2 chat-header">
+							<div class="channel-name">
 								#if($alltopics.size()>1)
-								<div class="dropdown show">
-								<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								#if($caneditcollection)
-									#if ($currenttopic.teamproject == "true")
-										<i class="fas fa-lock chanel-teamonly"></i>
-									#else 
-										<i class="fas fa-lock-open  chanel-teamonly"></i>
-									#end
-								#end
-								$currenttopic <i class="fas fa-caret-down"></i>
-								</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-								 #foreach( $hit in $alltopics)
-								    #if ($hit.id != $currenttopic.id)
-									<a href="$applink/collective/community/index.html?collectionid=$collectionid&topic=$hit.getId()"
-										class="dropdown-item">
-										#if($caneditcollection)
-											#if ($hit.teamproject == "true")
-												<i class="fas fa-lock"></i>
-											#else 
-												<i class="fas fa-lock-open"></i>
+									<div class="dropdown show">
+										<a href="#" class=" dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">
+											#if($caneditcollection)
+											#if ($currenttopic.teamproject == "true")
+											<i class="fas fa-lock chanel-teamonly"></i>
+											#else
+											<i class="fas fa-lock-open  chanel-teamonly"></i>
 											#end
-										#end 
-										$hit.name
-									</a>
-									#end
-								  #end
-								</div>
-								</div>
+											#end
+											$currenttopic <i class="fas fa-caret-down"></i>
+										</a>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											#foreach( $hit in $alltopics)
+											#if ($hit.id != $currenttopic.id)
+											<a href="$applink/collective/community/index.html?collectionid=$collectionid&topic=$hit.getId()"
+												class="dropdown-item">
+												#if($caneditcollection)
+												#if ($hit.teamproject == "true")
+												<i class="fas fa-lock"></i>
+												#else
+												<i class="fas fa-lock-open"></i>
+												#end
+												#end
+												$hit.name
+											</a>
+											#end
+											#end
+										</div>
+									</div>
 								#else
-								$currenttopic
+									$currenttopic
 								#end
-								</div>
+							</div>
 							<div class="channel-actions float-right">
 								#if( $caneditcollection )
-								<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html" 
-										class="emdialog" 
-										title="[[Edit a Topic]]"
-										data-hidefooter="true">
-								<i class="fas fa-cog"></i></a>
+								<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html"
+									class="emdialog me-2" title="[[Edit a Topic]]" data-hidefooter="true">
+									<i class="fas fa-cog"></i>
+								</a>
 								#end
-								</div>	
-						</div>
-						$pages.include("$apphome/collective/community/chatbox.html", $context)
+								<a data-bs-toggle="offcanvas" href="#offcanvasChatInfo" role="button">
+									<i class="fas fa-info-circle"></i>
+								</a>
+							</div>
+						</div> 
+						$pages.include("$apphome/collective/community/chatbox.html", $context) 
+					</div>
+				</div> 
+				<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasChatInfo" aria-labelledby="offcanvasChatInfoLabel">
+					<div class="offcanvas-header"> 
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body pt-0">
+						$pages.include("$apphome/proposal/sidebar-right.html",$context)
+					</div>
 				</div>
-				</div>
-				<div  class="col-lg-20p" style="padding:15px 10px 10px 0px">
-					$pages.include("$apphome/proposal/sidebar-right.html",$context)
-				</div>
-				
-			</div>	
+			</div>
 		</div>
+	</div>
 #end
-
-</div>

@@ -6,7 +6,7 @@
 #set( $subscribers = $mediaarchive.query("librarycollectionlikes").exact("collectionid",$collectionid).search($context) )
 #set( $subscriberssize = $subscribers.size())
 <div class="project-likes" id="projectlikes">
-	<div class="project-likes-count">$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end</div>
+	<div class="project-likes-count">$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]] #end</div>
 		#if( $user )
 			#set( $likesearcher = $mediaarchive.getSearcher("librarycollectionlikes") )
 			#set( $liked = $likesearcher.query().exact("followeruser",$user.getId()).exact("collectionid",$collectionid).searchOne() )

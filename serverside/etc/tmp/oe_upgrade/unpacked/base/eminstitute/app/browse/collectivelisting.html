@@ -1,0 +1,28 @@
+#set($collurl = "$applink/collective/channel/"+$collective.id+"/"+$collective.name+".html")
+
+<a class="pick-item" href="$applink/collective/channel/${collective.id}/#dash($collective.getName()).html" 
+		class="project-title #if ($librarycol.id == $collective.id) project-selected #end" title="${collective.getName()}">
+	<div class="project-item" style='#if($link) background-image: url("$link") #end;'>
+					
+		<div class="project-item-box" >
+			<span>$collective.name</span>
+
+					  	<div style="">
+					   		#foreach( $usertag in $collective.getValues("usertags") )
+				            	<span class="categories-tag">$usertag</span>
+					    	#end
+							<div class="feedcard-collective">		
+								#foreach($library in $collective.getLibraries())
+								<a class="collectivetag" href="$applink/browse/stations/index.html?libraryid=$library.getId()&grid=true">$library</a> 
+								#end
+							</div>	
+					
+					    </div>
+
+					    <p>
+				    	$!collective.collectivedescription
+				    	</p>
+
+		</div>
+	</div>
+</a>

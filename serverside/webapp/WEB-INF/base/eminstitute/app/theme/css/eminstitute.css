@@ -767,8 +767,6 @@ a.primary:hover .fas {
 	color: #eee;
 }
 
-.collaborate-channel {}
-
 .collaborate-channels ul {
 	list-style: none;
 	margin: 0;
@@ -806,16 +804,38 @@ a.primary:hover .fas {
 }
 
 .collaborate-channel {
-	background-color: #fff;
+	background-color: #efeae2;
+	margin-top: 24px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 3px rgba(0, 0, 0, .3);
+	border-radius: 8px;
+	overflow-y: auto;
+	height: 100%;
+	scrollbar-width: none;
+	max-height: calc(100vh - 300px);
+}
+
+.chatterbox-message-list {
+	/* margin-bottom: 140px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end
+}
+
+.collaborate-channel::-webkit-scrollbar {
+	width: 0;
 }
 
 .collaborate-channel-header {
-	padding: 10px;
+	padding: 12px 16px 16px 16px;
 	height: 40px;
 }
 
 .channel-name {
-	font-size: 1rem;
+	position: sticky;
+	top: 0;
+
+	font-size: 1.5rem;
 	font-weight: bold;
 }
 
@@ -837,7 +857,6 @@ a.primary:hover .fas {
 }
 
 .chatterbox-write {
-	height: 38px;
 	padding: 4px 4px 0;
 	background-color: #F2F2F3;
 
@@ -855,7 +874,7 @@ a.primary:hover .fas {
 }
 
 .chatterbox-write .chatterbox-text {
-	height: 32px;
+	height: 64px;
 	padding: .45rem .25rem 0;
 	font-size: 1rem;
 	line-height: 1.1;
@@ -880,21 +899,22 @@ a.primary:hover .fas {
 	width: 59px
 }
 
+#chatter-msg {
+	border: 0;
+	resize: none;
+}
+
 .chatterbox {
 	height: calc(100% - 40px);
 	/*- header*/
-
-}
-
-.chatterbox-chat {
 	position: relative;
 }
 
 .chatterbox-chat .goalstatus {
 	padding: 6px 8px 12px 6px;
-	margin: 3px 0 20px;
+	margin: 8px;
 	border: 1px dashed #999;
-
+	border-radius: 8px;
 }
 
 .chatterbox-chat .goalstatus:hover {
@@ -957,7 +977,9 @@ a.primary:hover .fas {
 }
 
 .message-edit-box {
-	padding: 20px;
+	width: 100%;
+	flex: 1;
+	padding: 8px;
 	background-color: #FEF9EC;
 	border-bottom: 1px solid #ced4da;
 	border-top: 1px solid #ced4da;
@@ -985,22 +1007,11 @@ a.primary:hover .fas {
 
 .chatterbox-body-inside {
 	padding: 0px;
+	display: flex;
+	flex-direction: column;
 }
 
-.chatterbox-chat {
-	position: relative;
-	min-height: 40px;
-	margin-bottom: 0px;
-	padding: 5px;
-}
 
-.chatterbox-chat:nth-child(odd) {
-	background: #fbfbfb;
-}
-
-.chatterbox-chat:nth-child(even) {
-	background: #f4f7f0;
-}
 
 .chatterbox-messages {
 	height: calc(100% - 39px);
@@ -1009,9 +1020,11 @@ a.primary:hover .fas {
 }
 
 .chat-icon {
-	position: absolute;
-	padding: 0 5px;
-	width: 50px;
+	margin: 8px 4px 4px 4px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #fff;
 }
 
 .chat-icon-usr {
@@ -1020,9 +1033,49 @@ a.primary:hover .fas {
 }
 
 .chat-msg {
-	margin-left: 50px;
-	padding-top: 1px;
-	word-break: break-word;
+	padding: 4px 8px 0 8px;
+}
+
+.chatterbox-chat {
+	position: relative;
+	min-height: 40px;
+	margin: 4px;
+	margin-left: 8px;
+	max-width: 80%;
+	background-color: #fff;
+	border-radius: 0 8px 8px 8px;
+	/* paper */
+	/* box-shadow: 1px 2px 4px #ccc; */
+	filter: drop-shadow(1px 1px 2px #cfcfcf);
+}
+
+.self {
+	justify-content: flex-end;
+}
+
+.self .chatterbox-chat {
+	background-color: #d9fdd3;
+	border-radius: 8px 8px 0 8px;
+	margin: 4px;
+	margin-right: 12px;
+}
+
+.chatterbox-chat::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -9px;
+	width: 10px;
+	height: 16px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 27 44'%3E%3Cpath fill='%23ffffff' d='M0.8,0l25.4,0v44c0,0-1.7-8.8-6.5-19.3c-3.3-7.2-6.6-13.2-19.1-21.6C-0.3,2.4-0.1,0,0.8,0z'/%3E%3C/svg%3E%0A");
+}
+
+.self .chatterbox-chat::before {
+	top: auto;
+	bottom: 0;
+	left: auto;
+	right: -9px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 27 44'%3E%3Cpath fill='%23d9fdd3' d='M25.4,44H0V0c0,0,1.7,8.8,6.5,19.3c3.3,7.2,6.6,13.2,19.1,21.6C26.5,41.6,26.3,44,25.4,44z'/%3E%3C/svg%3E%0A");
 }
 
 .chat-delete {
@@ -1033,7 +1086,10 @@ a.primary:hover .fas {
 }
 
 .chat-timestamp {
+	color: #667788;
 	font-size: .8em;
+	display: inline-block;
+	margin-left: 50px;
 }
 
 .chat-delete:hover {
@@ -1645,7 +1701,7 @@ a.pick-item:hover .project-item {
 }
 
 .campaigncollectivelayout {
-	height: 100%;
+	min-height: 100%;
 	width: 100%;
 }
 
@@ -2081,4 +2137,22 @@ textarea.form-control {
 
 #userOffcanvas .offcanvas-body {
 	padding: 0;
+}
+
+.chat-container {
+	background-color: #fff;
+}
+
+#chatterbox-write {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+}
+
+.chat-header {
+	position: sticky;
+	top: 0;
+	z-index: 999;
 }

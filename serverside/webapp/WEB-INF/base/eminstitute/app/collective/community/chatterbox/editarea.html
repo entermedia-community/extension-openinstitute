@@ -1,23 +1,21 @@
-	<div id="chatterbox-write" class="chatterbox-write">
-		#set( $replytoid = $context.getRequestParameter("replytoid"))
-		#ifnotnull($replytoid)
-			#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$replytoid))
-			#set( $otherchatuser = $mediaarchive.getUser($otherchat.user) ) 
-			<div class="chatterboxreplyto">
-			<span>Replying to</span> 
-			
-			<a href="#esc($userlink)" title="$context.getDateTime($otherchat.date)"><strong>
-			$otherchatuser.getAnonNickName()</strong>
-			</a>
-			
-			
-			$url_util.escapeMessage($otherchat.message)</div>
-		#end
+<div id="chatterbox-write" class="d-flex flex-column align-items-center bg-light">
+	#set( $replytoid = $context.getRequestParameter("replytoid"))
+	#ifnotnull($replytoid)
+		#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$replytoid))
+		#set( $otherchatuser = $mediaarchive.getUser($otherchat.user) ) 
+		<div class="chatterboxreplyto">
+		<span>Replying to</span> 
 		
-		<textarea class="chatterbox-text chatter-text grabfocus" id="chatter-msg" data-replytoid="$!replytoid"  placeholder="[[Message...]]" ></textarea>
-		<button class="btn btn-primary btn-sm chatter-send float-left"
-			data-command="messagereceived" type="button">[[Send]]</button>
-	</div>
-
+		<a href="#esc($userlink)" title="$context.getDateTime($otherchat.date)"><strong>
+		$otherchatuser.getAnonNickName()</strong>
+		</a>
+		
+		
+		$url_util.escapeMessage($otherchat.message)</div>
+	#end
 	
-	
+	<textarea class="flex-grow-1 p-2 w-100 grabfocus rounded" id="chatter-msg" data-replytoid="$!replytoid"  placeholder="[[Message...]]" rows="3" autofocus></textarea>
+	<button class="btn btn-primary btn-lg chatter-send align-self-end text-uppercase fw-bold m-2 px-4 py-2" data-command="messagereceived" type="button">
+		[[Send]] <i class="ms-2 fas fa-paper-plane"></i>
+	</button>
+</div>

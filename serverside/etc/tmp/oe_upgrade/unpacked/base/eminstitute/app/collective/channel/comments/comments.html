@@ -1,0 +1,57 @@
+<div class="feedcard-comments">
+
+#foreach( $comment in $comments)
+  <div class="feedcard-comment">
+	<div class="">
+	  #set($commentuser = $comment.getUser())
+	  #set($userlink = "$applink/users/${commentuser.getId()}/${commentuser.getAnonNickName()}.html")
+	  <a href="#urlescape($userlink)" title="${comment.getUserLabel()}">
+		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($commentuser) )
+		#if(!$userimageurl)
+			#set( $userimageurl = "$applink/theme/images/user.svg" )
+		#end
+	  <img src="$userimageurl" class="usericon" alt="${comment.getUserLabel()}"/>
+	  </a>
+	  </div>
+	  <div class="comment-content">
+		  <div>
+		  	<a class="comment-poster" href="#urlescape($userlink)" title="${comment.getUserLabel()}"><strong>${comment.getUserLabel()}</strong></a>
+		  	<span class="comment-timestamp">$comment.getShortDate($context)</span>
+		  </div>
+		  <span class="comment-body">#esc($comment.commenttext)</span> 
+		  
+			#if( $comment.canEdit($user) )
+		        #if ( $comment.isVisible() )
+		        	#set ( $actionText = "Unpublish" )
+		        #else
+		        	#set ( $actionText = "Publish" )
+		        #end
+		        [<a href="$bloghome/useradmin/publishcomment.html?entryId=${entry.id}&commentId=${comment.id}&origURL=$content.path">$actionText</a>]
+		        [<a href="$bloghome/useradmin/deletecomment.html?entryId=${entry.id}&commentId=${comment.id}&origURL=$content.path">[[Delete]]</a>]
+		    #end
+			
+		</div>
+		
+	
+  </div>						
+#end
+
+#if ($user)
+	#set( $userimageurl = $mediaarchive.asLinkToUserProfile($user) )
+	#if(!$userimageurl)
+		#set( $userimageurl = "$applink/theme/images/user.svg" )
+	#end
+
+	##<img src="$userimageurl" class="usericon" alt="[[Comment as]] $user" />
+	<input type="text"  name="commenttext" 
+			data-useruploadid="$upload.id" 
+			data-collectionid="$librarycol.id" 
+			class="commentadder form-control feed-comments-textinput" 
+			placeholder="[[Write a comment]]"
+			autoComplete="off">
+#else
+	#set($loginok = "$applink/collective/channel/${librarycol.id}/${librarycol.name}.html")
+	<a href="$applink/authentication/login.html?loginokpage=$!loginok" class="btn btn-sm btn-secondary" >
+	[[Login to comment]]</a>
+#end
+</div>

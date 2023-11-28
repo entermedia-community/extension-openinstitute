@@ -898,8 +898,7 @@ li.menu-subheader {
 }
 
 .oicontainercampaigns {
-	margin: 0 0 5px;
-	background-color: #EFEF97;
+	margin: 0;
 	padding-bottom: 40px;
 	min-height: 400px;
 }
