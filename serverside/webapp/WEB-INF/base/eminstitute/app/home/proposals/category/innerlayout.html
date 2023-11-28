@@ -41,8 +41,8 @@
           #if(!$emp)
             #set($emp = "N/A")
           #end
-          
-          ["$logo", "#text($project)", "$days", ` $prob `, ` $emp `, "$link"],
+
+        ["$logo", "#text($project)", "$days", ` $prob `, ` $emp `, "$link"],
         #end
       ];
       new gridjs.Grid({
@@ -53,14 +53,14 @@
           sort: false,
           width: '90px',
           formatter: function (cell, row) {
-            return gridjs.html(`<a href="${ row.cells[5].data }"><img src="${cell}" style="width:30px;height:30px;object-fit:contain;" /></a>`);
+            return gridjs.html(`<a href="${row.cells[5].data}"><img src="${cell}" style="width:30px;height:30px;object-fit:contain"/></a>`);
           },
         },
         {
           name: 'Name',
           sort: true,
           width: '200px',
-          formatter: function (cell,row) { 
+          formatter: function (cell, row) {
             return gridjs.html(`<a href="${row.cells[5].data}">${cell}</a>`);
           },
         },
@@ -69,8 +69,8 @@
           width: '200px',
           sort: true,
           formatter: function (cell) {
-            var percent = Math.round((365 - cell) / 365 * 100);   
-            return gridjs.html(`<div class='progress' style='margin-top:8px;width:100%;height:16px;'><div class='progress-bar progress-bar-striped' role='progressbar' style='width:${percent}%;'></div></div><small>${cell} [[days remaining]]</small>`);
+            var percent = Math.round(((365 - cell) / 365) * 100);
+            return gridjs.html(`<div class="progress" style="margin-top:8px;width:100%;height:16px"><div class="progress-bar progress-bar-striped" style="width:${percent}%"></div></div><small>${cell} [[days remaining]]</small>`);
           },
         },
         {
@@ -90,7 +90,7 @@
         {
           name: 'Link',
           sort: false,
-          hidden: true, 
+          hidden: true,
         }
         ],
         data: data,
