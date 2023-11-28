@@ -3612,7 +3612,7 @@ uiload = function() {
 		var placeholder = $(this).data('placeholder');
 		if( placeholder  == undefined)
 		{
-			placeholder = "...";
+			placeholder = "";
 		}
 		theinput.select2({
 			allowClear : allowClear,
@@ -3654,7 +3654,7 @@ uiload = function() {
             //console.log(theinput.attr("id")+"using: "+dropdownParent.attr("id"));
 			var placeholder = theinput.data('placeholder');
 			if (!placeholder) {
-				placeholder = '';
+				placeholder = ' ';
 			}
             var allowClear = theinput.data('allowclear');
 
@@ -5696,6 +5696,44 @@ uiload = function() {
 	
 	
 	
+	lQuery('.userOffcanvasToggler').livequery("click", function (e) {
+		// e.preventDefault();
+		var toggler = $(this);
+		var data = toggler.data();
+		console.log(data);
+		if (data.action == 'hide') {
+			console.log('hide drawer');
+			var url = apphome + '/components/sidebars/user/hide.html';
+
+			$.ajax({
+				url: url,
+				async: false,
+				data: data,
+				success: function (d) {
+					// toggler.find('.offcanvas-body').html(d);
+					// $(document.body).removeClass('drawer-open');
+				$(".emrightcontent").removeClass('empushcontent');
+					saveProfileProperty("usersidebarhidden", "true");
+				}
+			});
+		} else {
+			console.log('show drawer');
+			var url = apphome + '/components/sidebars/user/show.html';
+
+			$.ajax({
+				url: url,
+				async: false,
+				data: data,
+				success: function (data) {
+					// toggler.find('.offcanvas-body').html(data);
+					// $(document.body).addClass('drawer-open');
+				$(".emrightcontent").addClass('empushcontent');
+					saveProfileProperty("usersidebarhidden", "false");
+				}
+			});
+		}
+	});
+
 	lQuery('.sidebar-toggler').livequery("click", function(e) {
 		e.preventDefault();
 		var toggler = $(this);
@@ -5724,7 +5762,7 @@ uiload = function() {
 		}
 		$(window).trigger("resize");
 	});
-	
+
 
 	lQuery(".assetpicker .removefieldassetvalue").livequery("click", function(e) 
 	{
@@ -5961,7 +5999,9 @@ uiload = function() {
 	});
 		
 
-	lQuery('.pickemoticon').livequery(function() 
+}// uiload
+
+lQuery('.pickemoticon').livequery(function() 
 	{
 		//Load div
 		var input = $(this);
@@ -6018,10 +6058,6 @@ uiload = function() {
 
 		
 	});
-
-
-}// uiload
-
 
 
 
@@ -9291,6 +9327,10 @@ jQuery(document).ready(function()
 		    					var saveto = container.data("saveto");
 		    					var data = event.editor.getData();
 								$("#" + saveto).val(data);
+								var theform = container.closest('form');
+								if (theform.data("readytosubmit") == "true") {
+									theform.trigger("submit"); //todo validate double submit?
+								}
 		    				}
 		                } ,
 		                savecontentdone: function( event )    
@@ -9397,16 +9437,16 @@ jQuery(document).ready(function()
 	});		
 	
 	
-	lQuery(".oehtmlinput").livequery(
-			function(e) 
-			{	
-				var container = $(this);
-				var field = container.data("field");
-				var viewtype = "html";
-				loadHtmlEditor(null,null,field,viewtype,container);
-	
-				return false;
-			});		
+lQuery(".oehtmlinput").livequery(
+		function(e) 
+		{	
+			var container = $(this);
+			var field = container.data("field");
+			var viewtype = "html";
+			loadHtmlEditor(null,null,field,viewtype,container);
+
+			return false;
+		});		
 	
 	
 	
@@ -9437,14 +9477,13 @@ jQuery("form.oeajaxform").bind('submit',
 	
 			}
 			return false;
-		}
-	);
+		});
 
-	
+
+
 });
-	
-	loadToolbar = function()
-	{
+
+loadToolbar = function() {
 		jQuery("#oeselector").mouseenter(
 			function()
 			{
