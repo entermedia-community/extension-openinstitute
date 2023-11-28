@@ -69,8 +69,7 @@
           width: '200px',
           sort: true,
           formatter: function (cell) {
-            var percent = Math.round((365 - $days) / 365 * 100);  
-            console.log(percent);
+            var percent = Math.round((365 - cell) / 365 * 100);   
             return gridjs.html(`<div class='progress' style='margin-top:8px;width:100%;height:16px;'><div class='progress-bar progress-bar-striped' role='progressbar' style='width:${percent}%;'></div></div><small>${cell} [[days remaining]]</small>`);
           },
         },
