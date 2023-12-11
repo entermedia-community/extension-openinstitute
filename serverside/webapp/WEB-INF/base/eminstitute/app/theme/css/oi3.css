@@ -848,23 +848,59 @@ img.cat-thumb {
     filter: brightness(0.8);
 }
 
-.chatterbox .chatterboxreplyto {
-	
-	margin-left:0px; 
-	padding: 5px;
-	font-style: italic;
-	border:2px solid #bbb; 
-	border-left:8px solid purple;
-	background-color:#ddd; 
-	color: #666;
+.chatterbox-write .chatterboxreplyto {
+    width: calc(100% - 9px);
+    margin-left: 0px;
+    padding: 5px;
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 8px;
+    transform: translateY(-100%);
+    font-style: italic;
+    z-index: 10;
+    border-bottom: 0;
 }
 
-.goallevel1
-{
-	background: #f0dbdf;
+.chatterbox-write .chatterboxreplyto div.msg-body {
+    color: #666666;
+    font-style: normal;
+    margin: 5px 0 10px;
+    padding: 5px;
+    border-left: 4px solid #277371;
+    border-radius: 12px;
+    background-color: #ffffff;
 }
 
-.taskmyself a.taskstatusbutton 
-{
-	background-color: #de2a2a;	!important;
+.msg-body .chatterboxreplyto {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border-left: 4px solid #277371;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: #f5f5f5;
+}
+
+.msg-body.me .chatterboxreplyto {
+    background-color: #ffffff;
+}
+
+.msg-body .chatterboxreplyto a {
+    line-height: 1;
+}
+
+.goallevel1 {
+    background: #fffcdd;
+}
+
+.goalstatus {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.goallevel1.goalstatuscompleted {
+    background: #ddffdd;
+}
+
+.taskgoaledit select {
+    min-width: 300px;
 }

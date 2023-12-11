@@ -11,109 +11,150 @@
 #set( $goal = $goalsinmessages.get($chat.id))
 #set( $chatuser = $mediaarchive.getUser($chat.user) ) 
 
-<div id="chatter-message-$chat.id">
-
-		#ifnotnull($chat.replytoid)
-			#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$chat.replytoid))
-			#set( $otherchatuser = $mediaarchive.getUser($otherchat.user) ) 
-			<div class="chatterboxreplyto">
-			<a href="#esc($userlink)" title="$context.getDateTime($otherchat.date)"><strong>
-			$otherchatuser.getAnonNickName()</strong>
-			</a>
-			$url_util.escapeMessage($otherchat.message)</div>
-		#end
-
-
+<div id="chatter-message-$chat.id" class="msg-bubble">
 <div class="chatterbox-chat" role="alert" >
-		<div class="chat-icon">
-	$context.putPageValue("chatuser",$chatuser)
-	$pages.include("$apphome/users/icon.html",$context)
-		</div>
+	<div class="chat-icon">
+		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
+		#ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+		<a href="#esc($userlink)" title="$chatuser.getAnonNickName()" class="msg-avt">
+			<img src="${userimageurl}" class="img-fluid">
+		</a>
+	</div>
 	#if($chat.attachedassets)
 		$pages.include("$apphome/collective/community/chatterbox/attach.html",$context)
 	#end
 	
-	<div class="message-menu" >
-			<div class="pickemoticon" style="display: inline;" data-collectionid="$librarycol.getId()" data-messageid="$chat.id" data-showurl="$applink/collective/community/chatterbox/smiles.html" data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
-				<span data-icon="react" class="qcuzhokb" style="padding:1px 3px 3px 3px;border-radius: 50%;background-color: gray;color:white;">
-				<svg viewBox="0 0 15 15" width="15" preserveAspectRatio="xMidYMid meet" class="" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 7.5C0 11.6305 3.36946 15 7.5 15C11.6527 15 15 11.6305 15 7.5C15 3.36946 11.6305 0 7.5 0C3.36946 0 0 3.36946 0 7.5ZM10.995 8.69333C11.1128 8.67863 11.2219 8.66503 11.3211 8.65309C11.61 8.63028 11.8076 8.91918 11.6784 9.13965C10.8573 10.6374 9.29116 11.793 7.50455 11.793C5.71794 11.793 4.15181 10.6602 3.33072 9.16246C3.18628 8.91918 3.37634 8.63028 3.66524 8.65309C3.79123 8.66749 3.93521 8.68511 4.09426 8.70457C4.94292 8.80842 6.22074 8.96479 7.48174 8.96479C8.81855 8.96479 10.1378 8.80025 10.995 8.69333ZM5.41405 7.37207C6.05761 7.37207 6.60923 6.72851 6.60923 6.02978C6.60923 5.30348 6.05761 4.6875 5.41405 4.6875C4.77048 4.6875 4.21886 5.33106 4.21886 6.02978C4.20967 6.75609 4.77048 7.37207 5.41405 7.37207ZM10.7807 6.05619C10.7807 6.74114 10.24 7.37201 9.60912 7.37201C8.97825 7.37201 8.4375 6.76818 8.4375 6.05619C8.4375 5.37124 8.97825 4.74037 9.60912 4.74037C10.24 4.74037 10.7807 5.34421 10.7807 6.05619Z" fill="currentColor"></path>
-				</svg></span>
+	<div class="message-menu">
+		<div class="d-flex align-items-center">
+			<div class="pickemoticon message-menu-link" data-collectionid="$librarycol.getId()" data-messageid="$chat.id" data-showurl="$applink/collective/community/chatterbox/smiles.html" data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
+				<i class="fas fa-grin"></i>
 			</div>
-		
-	#if($caneditcollection)
-		
-			  <a class="message-menu-link ajax jumptofocus" 
-			  	data-oemaxlevel="1"    
-			  	onclick='$("#chatter-msg").focus()'
-			  	data-targetdiv="chatterbox-write"
-				href="$applink/collective/community/chatterbox/replystart.html?collectionid=$librarycol.getId()&replytoid=$chat.id" 
-				title="[[Reply]]">
-				<i class="fas fa-quote-left"></i></a>
-			
-			#if( !$chat.attachedassets && $chat.user == $user.id)
-			  <a class="message-menu-link ajax" 
-			  	data-oemaxlevel="1"    
-			  	data-targetdiv="attach-${chat.id}"
-				href="$applink/collective/community/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
-				title="[[Attachments]]">
-				<i class="fas fa-paperclip"></i>
+			#if($caneditcollection)
+				<a class="message-menu-link ajax jumptofocus" 
+					data-oemaxlevel="1"    
+					onclick='$("#chatter-msg").focus()'
+					data-targetdiv="chatterbox-write"
+					href="$applink/collective/community/chatterbox/replystart.html?collectionid=$librarycol.getId()&replytoid=$chat.id" 
+					title="[[Reply]]">
+					<i class="fas fa-quote-left"></i>
 				</a>
+					
+				#if(!$chat.attachedassets && $chat.user == $user.id)
+				<a class="message-menu-link ajax" 
+					data-oemaxlevel="1"    
+					data-targetdiv="attach-${chat.id}"
+					href="$applink/collective/community/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
+					title="[[Attachments]]">
+					<i class="fas fa-paperclip"></i>
+				</a>
+				#end
+				
+				#if(!$goal)		
+				<a class="message-menu-link ajax"   
+					data-targetdiv="chatter-message-$chat.id"
+					href="$applink/collective/community/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
+					title="[[Flag as Goal]]">
+					<i class="fas fa-flag"></i>
+				</a>
+				<a class="message-menu-link ajax"   
+					data-targetdiv="chatter-message-$chat.id"
+					href="$applink/collective/community/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
+					title="[[Make Agenda]]">
+					<i class="fas fa-check-double"></i>
+				</a>
+				#end
+
+				#if($chat.user == $user.id )
+				<a class="message-menu-link ajax-edit-msg"   
+					data-targetdiv="chatter-message-$chat.id"
+					href="$applink/collective/community/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
+					title="[[Edit Message]]">
+					<i class="fas fa-pencil-alt"></i>
+				</a>
+				#end
+				##if($candeletecomments)
+				<!-- <a class="confirm" data-confirm="Are you sure?" title="Delete message" data-id="${chat.id}" data-target="#chatter-message-$chat.id" data-searchtype="chatterbox" href="#"><i class="fas fa-times"></i></a> -->
+				##end
 			#end
-		
-		#if(!$goal)		
-		<a class="message-menu-link ajax"   
-		  	data-targetdiv="chatter-message-$chat.id"
-			href="$applink/collective/community/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
-			title="[[Flag as Goal]]">
-		<i class="fas fa-flag"></i></a>
-		<a class="message-menu-link ajax"   
-		  	data-targetdiv="chatter-message-$chat.id"
-			href="$applink/collective/community/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
-			title="[[Make Agenda]]">
-			<i class="fas fa-check-double"></i>
-		</a>
-		#end
-		 #if($chat.user == $user.id )
-		<a class="message-menu-link ajax-edit-msg"   
-		  	data-targetdiv="chatter-message-$chat.id"
-			href="$applink/collective/community/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
-			title="[[Edit Message]]">
-		<i class="fas fa-pencil-alt"></i></a>
-		#end
-		
-		#if($candeletecomments)
-		## 	 <a class="confirm" data-confirm="Are you sure?" title="Delete message"
-		##		data-id="${chat.id}" data-target="#chatter-message-$chat.id"
-		##		data-searchtype="chatterbox" href="#"><i class="fas fa-times"></i></a>
-		##
-		#end
-		<div id="attach-${chat.id}" ></div>
-	#end
 		</div>
-	
-	<div class="chat-msg" >
-		<a href="#esc($userlink)" title="$context.getDateTime($chat.date)"><strong>
-		$chatuser.getAnonNickName()</strong>
-		</a><span class="chat-timestamp">$context.getDateTime($chat.date)</span>
-		<br> 
-		#if($chat.message)
-			<div style="white-space: pre-line;">$url_util.escapeMessage($chat.message)</div>
-		#end	
-		#set( $reactions = $reactionspermessage.get($chat.id) )
-		#if( !$reactions.isEmpty())
-			#foreach($code in $reactions)
-				&#x${code.getName()}; 
-				#set( $otherchatuser = $mediaarchive.getUser($code.user) ) 
-				$otherchatuser
-			#end
-		#end
+		<div id="attach-${chat.id}"></div>
 	</div>
-	<div class="clearfix"></div>
 	
-	#if( $goal)
-		$context.putPageValue("chat",$chat)
-		$context.putPageValue("goal",$goal)
-		$pages.include("$apphome/collective/community/chatterbox/goalrow.html",$context) 
-	#end
+	<div class="chat-msg">
+		<a href="#esc($userlink)" title="$context.getDateTime($chat.date)">
+			<strong>$chatuser.getAnonNickName()</strong>
+		</a>
+		<span class="chat-timestamp">$context.getDateTime($chat.date)</span>
+		<br> 
+		<div class="msg-body #if($chat.user == $user.id) me #end">
+			#ifnotnull($chat.replytoid)
+			#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$chat.replytoid))
+			#set( $otherchatuser = $mediaarchive.getUser($otherchat.user) )
+			<div class="chatterboxreplyto">
+				<a href="#esc($userlink)" title="$context.getDateTime($otherchat.date)">
+					<strong>$otherchatuser.getAnonNickName()</strong>
+				</a>
+				<div>
+					$url_util.escapeMessage($otherchat.message)
+				</div>
+			</div>
+			#end
+
+			#if($chat.message)
+			<div>
+				$url_util.escapeMessage($chat.message)
+			</div>
+			#end
+
+			#if( $goal)
+			$context.putPageValue("chat",$chat)
+			$context.putPageValue("goal",$goal)
+			$pages.include("$apphome/collective/community/chatterbox/goalrow.html",$context)
+			#end
+		</div>
+		#set( $reactions = $reactionspermessage.get($chat.id) )
+		#if(!$reactions.isEmpty())
+			#set($thumbs_ups = [])
+			#set($thumbs_downs = [])
+			#set($laughs = [])
+			#set($cheeses = [])
+
+			#foreach($code in $reactions)
+				#if($code.getName().toLowerCase() == "1f44d") 
+					#set($x = $thumbs_ups.add($code))
+				#end
+				#if($code.getName().toLowerCase() == "1f44e") 
+					#set($x =$thumbs_downs.add($code))
+				#end
+				#if($code.getName().toLowerCase() == "1f600") 
+					#set($x =$laughs.add($code))
+				#end
+				#if($code.getName().toLowerCase() == "1f601") 
+					#set($x =$cheeses.add($code))
+				#end
+			#end 
+
+			#set($emotes = [$thumbs_ups,$thumbs_downs,$laughs,$cheeses])
+			
+			#set($range = [0..3])
+			
+			<div class="d-flex align-items-center mt-1">
+				#foreach($emote in $emotes) 
+					#if($emote.size() > 0)
+						#set($title = "")
+						#foreach($em in $emote)
+							#set($title = "$title$mediaarchive.getUser($em.user)")
+							#if(!$foreach.last)
+								#set($title = "$title, ")
+							#end
+						#end
+					<span class="badge text-bg-light me-1" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="$title">
+						<span class="badge text-dark px-1">$emote.size() &#x$emote.get(0)</span> 
+					</span>
+					#end
+				#end
+			</div>
+		#end
+	</div> 
 </div>
 </div>

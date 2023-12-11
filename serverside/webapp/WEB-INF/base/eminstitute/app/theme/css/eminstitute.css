@@ -724,7 +724,7 @@ a.primary:hover .fas {
 }
 
 .sidebarbox {
-	margin: 0px 0 20px 0;
+	margin: 0px 0 8px 0;
 }
 
 .sidebarbox h4 {
@@ -767,8 +767,6 @@ a.primary:hover .fas {
 	color: #eee;
 }
 
-.collaborate-channel {}
-
 .collaborate-channels ul {
 	list-style: none;
 	margin: 0;
@@ -806,12 +804,18 @@ a.primary:hover .fas {
 }
 
 .collaborate-channel {
+	border-radius: 12px;
+	overflow: hidden;
 	background-color: #fff;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 3px rgba(0, 0, 0, .3);
 }
 
 .collaborate-channel-header {
-	padding: 10px;
-	height: 40px;
+	padding: 8px 16px;
+	background-color: #277371;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .channel-name {
@@ -837,10 +841,9 @@ a.primary:hover .fas {
 }
 
 .chatterbox-write {
-	height: 38px;
-	padding: 4px 4px 0;
-	background-color: #F2F2F3;
-
+	height: 110px;
+	padding: 4px 4px;
+	position: relative;
 }
 
 .chatterbox-write .chatterbox-media {
@@ -848,26 +851,44 @@ a.primary:hover .fas {
 	background-color: #9CDC81;
 	color: #fff;
 	display: inline-block;
-	float: left;
 	padding: 3px;
 	width: 30px;
 	text-align: center;
 }
 
 .chatterbox-write .chatterbox-text {
-	height: 32px;
-	padding: .45rem .25rem 0;
+	height: 102px;
+	width: 100%;
+	padding: .45rem .25rem;
 	font-size: 1rem;
 	line-height: 1.1;
-	float: left;
-	width: calc(100% - 60px);
 	margin-right: 1px;
 	color: #495057;
 	background-color: #fff;
 	background-image: none;
 	background-clip: padding-box;
-	border: 1px solid #ced4da;
+	border: 1px solid #cccccc;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
 
+.chatterbox-write .chatter-send {
+	position: absolute;
+	bottom: 8px;
+	right: 10px;
+	border-radius: 8px;
+	background-color: #277371;
+	width: 88px;
+	color: #fff;
+	font-size: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.chatterbox-write .chatter-send:hover {
+	background-color: #1a4c4a;
+	color: #fff;
 }
 
 .chatterbox-write .btn-sm {
@@ -881,9 +902,7 @@ a.primary:hover .fas {
 }
 
 .chatterbox {
-	height: calc(100% - 40px);
-	/*- header*/
-
+	height: calc(100% - 120px);
 }
 
 .chatterbox-chat {
@@ -892,13 +911,8 @@ a.primary:hover .fas {
 
 .chatterbox-chat .goalstatus {
 	padding: 6px 8px 12px 6px;
-	margin: 3px 0 20px;
-	border: 1px dashed #999;
-
-}
-
-.chatterbox-chat .goalstatus:hover {
-	background-color: #f3f3f3;
+	margin-top: 12px;
+	border-radius: 8px;
 }
 
 .chatterbox-chat .card-task {
@@ -906,35 +920,37 @@ a.primary:hover .fas {
 	height: 225px;
 }
 
-.chat-msg:hover {
-	background-color: rgba(0, 0, 0, .03);
-}
 
 .chatterbox-chat:hover .message-menu {
-	display: block;
+	display: flex;
 }
 
 .message-menu {
+	flex-direction: column;
 	border: 1px solid rgba(0, 0, 0, .15);
 	background-color: #fff;
-	border-radius: .25rem;
+	border-radius: 16px;
 	position: absolute;
-	padding: 1px;
+	padding: 2px 8px;
 	right: 5px;
-	top: 2px;
+	top: -8px;
+	transform: translateY(50%);
 	display: none;
-	box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	z-index: 10;
 }
 
 .message-menu-link {
 	padding: 2px 10px;
+	border-radius: 4px;
 	text-align: center;
+	color: #277371;
 	display: inline-block;
 }
 
 .message-menu-link:hover {
 	color: #28a745;
-	background-color: rgba(0, 0, 0, .15);
+	background-color: #f5f5f5
 }
 
 .message-attach-box {
@@ -945,6 +961,8 @@ a.primary:hover .fas {
 	float: right;
 	padding: 10px;
 	word-break: break-all;
+	margin-bottom: 6px;
+	border-radius: 8px;
 }
 
 .message-attach-box .render-type-thumbnail {
@@ -957,10 +975,9 @@ a.primary:hover .fas {
 }
 
 .message-edit-box {
-	padding: 20px;
-	background-color: #FEF9EC;
-	border-bottom: 1px solid #ced4da;
-	border-top: 1px solid #ced4da;
+	padding: 8px;
+	background-color: #e7e7e7;
+	border-radius: 8px;
 }
 
 .message-edit-box .chatterbox-write {
@@ -976,15 +993,26 @@ a.primary:hover .fas {
 	max-height: 100px;
 	overflow-y: auto;
 	border: 0 none;
-	/*position:absolute;*/
 }
 
 .goalticket-level {
-	color: #333;
+	color: #277371;
 }
 
 .chatterbox-body-inside {
-	padding: 0px;
+	padding: 8px;
+	scrollbar-color: #dfdfdf #fff;
+	scrollbar-width: thin;
+	scrollbar-track-color: #fff;
+}
+
+.chatterbox-body-inside::-webkit-scrollbar {
+	width: 5px;
+}
+
+.chatterbox-body-inside::-webkit-scrollbar-thumb {
+	background-color: #dfdfdf;
+	border-radius: 5px;
 }
 
 .chatterbox-chat {
@@ -994,16 +1022,43 @@ a.primary:hover .fas {
 	padding: 5px;
 }
 
-.chatterbox-chat:nth-child(odd) {
+/* .chatterbox-chat:nth-child(odd) {
 	background: #fbfbfb;
 }
 
 .chatterbox-chat:nth-child(even) {
 	background: #f4f7f0;
+} */
+
+.msg-bubble {
+	margin-top: 12px;
+}
+
+.msg-bubble .msg-avt {
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.msg-bubble .msg-avt img {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+}
+
+.msg-bubble .msg-body {
+	flex: 1;
+	padding: 8px;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	position: relative;
+}
+
+.msg-bubble .msg-body.me {
+	background-color: #e2f2ff;
 }
 
 .chatterbox-messages {
-	height: calc(100% - 39px);
+	height: calc(100% - 68px);
 	min-height: 250px;
 
 }
@@ -1038,22 +1093,6 @@ a.primary:hover .fas {
 
 .chat-delete:hover {
 	color: #333;
-}
-
-.chatterlongtext .chatterbox-messages {
-	height: calc(100% - 76px);
-}
-
-.chatterlongtext .chatterbox-write {
-	height: 76px;
-}
-
-.chatterlongtext .chatterbox-text {
-	height: 70px;
-}
-
-.chatterlongtext .chatterbox-write .btn-sm {
-	margin-top: 42px;
 }
 
 .feedcard-author a {
@@ -1429,6 +1468,11 @@ div.errormsg {
 	position: relative;
 	line-height: 1.1;
 	font-size: 0.9rem;
+	width: 100%;
+}
+
+.teammember:hover {
+	background-color: #f5f5f5;
 }
 
 .collectivedescription {
@@ -1613,8 +1657,6 @@ a.pick-item:hover .project-item {
 	.chatterbox-chat {
 		padding: 5px;
 	}
-
-	.collaborate-channel {}
 
 	.contentcolumn {
 		padding: 20px 10px;

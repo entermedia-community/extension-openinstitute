@@ -156,7 +156,7 @@ a.badge-success:hover {
 .sidebarbox h4 {
 	border-bottom: 0 none;
 	padding: 0;
-	margin: 8px 0 20px;
+	margin: 8px;
 }
 
 tr.emborderhover td,
@@ -198,7 +198,7 @@ li.menu-subheader {
 }
 
 .applicationcollective-community {
-	height:calc(100% - 70px);
+	height: calc(100% - 70px);
 	position: relative;
 }
 
@@ -251,9 +251,7 @@ li.menu-subheader {
 }
 
 .chatterbox {
-	height: calc(100% - 50px);
-	/*- header*/
-
+	height: calc(100% - 82px);
 }
 
 .chatloadmorelink {
@@ -580,21 +578,9 @@ li.menu-subheader {
 }
 
 .communitycontainer-header {
-	background-color: #1D5655;
+	background-color: #277371;
 	color: #fff;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
 	padding: 0;
-	position: relative;
-
-}
-
-.communitycontainer-header h3 {
-	color: #fff;
-	margin: 0;
-	padding: 10px 0 0 18px;
-	font-weight: 700;
-	width: 70%;
 }
 
 .communitycontainer-header h3 a {
@@ -604,10 +590,8 @@ li.menu-subheader {
 
 
 .communityprojects-header {
-	background-color: #1D5655;
+	background-color: #277371;
 	color: #fff;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
 	padding: 0;
 	position: relative;
 
@@ -618,7 +602,6 @@ li.menu-subheader {
 	margin: 0;
 	padding: 10px 0 0 10px;
 	font-weight: 700;
-	width: 85%;
 }
 
 
@@ -676,10 +659,11 @@ li.menu-subheader {
 
 
 .proposaldescription {
-	padding: 15px;
-	border-top-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
+	border: 4px solid #277371;
+	border-top: 0;
+	padding: 8px;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
 }
 
 .proposalnews {
@@ -800,20 +784,21 @@ li.menu-subheader {
 	}
 
 	.communitycontainer-header {
-		background-color: #1D5655;
 		color: #fff;
-		border-top-left-radius: 20px;
-		border-top-right-radius: 0;
-		padding: 0;
-		width: 70%;
-		height: 35px;
-		display: inline-block;
+		border: 12px;
+		padding: 8px 16px;
+		width: 100%;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		position: relative;
 	}
 
 	.communitycontainer-header h3 {
-		float: none;
-		width: 100%;
+		padding: 0;
+		margin: 0;
 	}
 
 	.communitycontainer-header h3 a:hover {
@@ -821,60 +806,18 @@ li.menu-subheader {
 		text-decoration: none;
 	}
 
-	.communitycontainer-header:after,
-	.communitycontainer-header:before {
-		content: '';
-		display: block;
-		position: absolute;
-	}
-
-	.communitycontainer-header:after {
-		top: -40px;
-		right: -40px;
-		border: 40px solid transparent
-	}
-
-	.communitycontainer-header:after {
-		border-bottom-color: #1D5655;
-	}
-
 	.proposalcontainer-out,
 	.communityprojects-body {
-		border-radius: 20px;
+		border-bottom-left-radius: 12px;
+		border-bottom-right-radius: 12px;
 		border-top-left-radius: 0;
 	}
 
 
 	.communityprojects-header {
-		background-color: #1D5655;
+		background-color: #277371;
 		color: #fff;
-		border-top-left-radius: 0px;
-		border-top-right-radius: 0;
-		padding: 0;
-		width: 89%;
-		height: 35px;
-		display: inline-block;
-		position: relative;
 	}
-
-	.communityprojects-header:after,
-	.communityprojects-header:before {
-		content: '';
-		display: block;
-		position: absolute;
-	}
-
-	.communityprojects-header:after {
-		top: -35px;
-		right: -35px;
-		border: 35px solid transparent
-	}
-
-	.communityprojects-header:after {
-		border-bottom-color: #1D5655;
-	}
-
-
 }
 
 .collectiveheader {
@@ -909,15 +852,17 @@ li.menu-subheader {
 }
 
 .oicontainercampaigns {
-	margin: 0 ;
-	background-color: #EFEF97;
-	padding-bottom:40px;
+	margin: 0;
+	background-color: #f5f5f5;
+	padding-bottom: 40px;
 	min-height: 390px;
 }
+
 .oicommunitylayout {
 	height: calc(100% - 192px);
-	padding:20px;
+	padding: 20px;
 }
+
 .campaignscollectiveheader h1 {
 	color: #fff;
 	text-shadow: 1px 1px #000000;
@@ -936,6 +881,9 @@ li.menu-subheader {
 	color: #555;
 	font-size: 0.9rem;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .project-likes-count {

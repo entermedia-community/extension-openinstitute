@@ -13,7 +13,7 @@
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
 <div id="editgoal-${goal.id}">
 <div id="$target" class="goaltaskcontainer">
-<div  >
+<div>
 		
 	#set($caneditgoal = false)
 	#if($user && ( $canviewsettings || $caneditcollection)  && $goal.collectionid)
@@ -35,41 +35,56 @@
 		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
 		
-			<div id="$!{container}taskrow${task.id}" class="goaltaskrow" >
-				<div class="taskage">$task.getAge()</div>
-				<div class="taskowner">$!mediaarchive.getUser($task.completedby).getAnonNickName()</div>
-				<div class="tasktype">
-						$!tree
-				</div>
+			<div id="$!{container}taskrow${task.id}" class="goaltaskrow #if($task.taskstatus == "0" && $task.completedby == $user.id)taskmyself#end">
+				<div>$!tree</div>
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
-				#if($!task.comment.length() > 300)
-					$!task.comment.substring(0, 300) ...
-				#else
-					$!task.comment
-				#end
+					#if($!task.comment.length() > 300)
+						$!task.comment.substring(0, 300) ...
+					#else
+						$!task.comment
+					#end
 				</div>
-
+				#set( $type = "goaltask" )
+				#set( $vals = $task.getValues("keywords") )
+				#ifnotnull($vals)
 				<div class="taskdetails">
-					#set( $type = "goaltask" )
-					#set( $vals = $task.getValues("keywords") )
-					#ifnotnull($vals)
 					##USE AJAX
 					#foreach( $val in $vals )
 						#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
-					  	<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" 
-					href="$link" title="#esc($val)">#esc($val)</a> 
-					#end
+						<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" href="$link" title="#esc($val)">#esc($val)</a> 
 					#end
 				</div>
+				#end
 		
-				
-				<div class="taskstatus goalstatus-$!task.taskstatus
-					#if( $task.taskstatus == "0" && $task.completedby == $user.id)
-						taskmyself
-					#end			
-				">
-					
+				<div class="taskstatus align-self-end"> 
+					#if($task.taskstatus == "0")
+					<div>
+						<div class="badge text-bg-danger attn">
+						<i class="fas fa-bullhorn me-1"></i> $!mediaarchive.getUser($task.completedby).getAnonNickName()
+						</div>
+					</div>
+					#elseif($task.taskstatus == "1")
+					<p class="text-warning m-0">
+						<i class="fas fa-hourglass-half"></i> [[Pending]]
+					</p>
+					#elseif($task.taskstatus == "2")
+					<p class="text-muted m-0">
+						<i class="fas fa-ban"></i> [[Blocked]]
+					</p>
+					#elseif($task.taskstatus == "3")
+					<p class="text-success m-0">
+						<i class="fas fa-check"></i> [[Completed]]
+					</p>
+					#elseif($task.taskstatus == "4")
+					<p class="text-secondary m-0">
+						<i class="fas fa-sync"></i> [[Redo]]
+					</p>
+					#elseif($task.taskstatus == "5")
+					<p class="text-info m-0">
+						<i class="fas fa-sticky-note"></i> [[Note]]
+					</p>
+					#end  
 					#if($caneditgoal)
 						<a 
 							id="task${task.id}"
@@ -79,70 +94,66 @@
 							title="[[Task]]"
 							data-focuson="$task.id"
 							data-width="900"
-							class="taskstatusbutton taskedit taskedit-$!{task.taskstatus} #if($caneditgoal) ajax #end " 
+							class="taskstatusbutton taskedit taskedit-$!{task.taskstatus} ajax btn btn-sm mx-1 text-brand" 
 							data-targetdiv="$!{container}taskrow${task.id}" 
 							data-oemaxlevel="1" 
-							 >
-						##<i class="fas fa-pencil-alt"></i>
-						#if( $task.taskstatus == "0")
-							$!mediaarchive.getUser($task.completedby).getAnonNickName()
-						#else
-							$context.getText($!mediaarchive.getData("taskstatus", $task.taskstatus))
-						#end
+						>
+							<i class="fas fa-pencil-alt"></i>
 						</a>
-					#else
-						<span class="taskedit taskedit-$!{task.taskstatus}">$context.getText($mediaarchive.getCachedData("taskstatus", $task.taskstatus))</span>
 					#end
 					
 					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
 				</div>
-				<div class="clearfix"></div>
+			</div>
+			<div class="credit">
+				<small>
+					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago
+				</small>
 			</div>
 	#end
 
 	<div class="clearfix"></div>	
 
+	<div class="d-flex mt-2">
 	#if($user && $caneditgoal)
-
-	<a class="appendgoalbutton"
-		title="[[Add Note]]"
-		data-targetdiv="$target"
-		data-cancelsubmit="true"
-		data-parameterdata="categoryvalues"
-		data-collectionid="$goal.collectionid"
-		data-categoryid="$!selectedcat.getId()"
-		data-hitssessionid="$!{goalhits.getSessionId()}"
-		data-goalfolder="$!goalfolder" ##tabs
-		data-pickone="true"
-		data-goalid="${goal.id}"
-		data-dialogid="picktask"
-		href="$applink/collective/goals/task/noteedit.html"
-		 ><i class="fas fa-sticky-note"></i> 
+		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
+			title="[[Add Note]]"
+			data-targetdiv="$target"
+			data-cancelsubmit="true"
+			data-parameterdata="categoryvalues"
+			data-collectionid="$goal.collectionid"
+			data-categoryid="$!selectedcat.getId()"
+			data-hitssessionid="$!{goalhits.getSessionId()}"
+			data-goalfolder="$!goalfolder" ##tabs
+			data-pickone="true"
+			data-goalid="${goal.id}"
+			data-dialogid="picktask"
+			href="$applink/collective/goals/task/noteedit.html"
+		>
+			<i class="fas fa-sticky-note"></i> [[Add Note]]
 		</a>
-
-	&nbsp;
-
-	<a class="appendgoalbutton"
-		title="[[Add Task]]"
-		data-targetdiv="$target"
-		data-cancelsubmit="true"
-		data-parameterdata="categoryvalues"
-		data-collectionid="$goal.collectionid"
-		data-categoryid="$!selectedcat.getId()"
-		data-hitssessionid="$!{goalhits.getSessionId()}"
-		data-goalfolder="$!goalfolder" ##tabs
-		data-pickone="true"
-		data-goalid="$goal.id"
-		data-dialogid="picktask"
-		href="$applink/collective/goals/task/taskedit.html"
-		 ><i class="fas fa-clipboard-check"></i> 
+		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
+			title="[[Add Task]]"
+			data-targetdiv="$target"
+			data-cancelsubmit="true"
+			data-parameterdata="categoryvalues"
+			data-collectionid="$goal.collectionid"
+			data-categoryid="$!selectedcat.getId()"
+			data-hitssessionid="$!{goalhits.getSessionId()}"
+			data-goalfolder="$!goalfolder" ##tabs
+			data-pickone="true"
+			data-goalid="$goal.id"
+			data-dialogid="picktask"
+			href="$applink/collective/goals/task/taskedit.html"
+		>
+			<i class="fas fa-clipboard-check"></i> [[Add Task]]
 		</a>
-
-
 	#end
+
 	#if (!$onlyopen && $points>0)
 		$points
 	#end
+	</div>
 	
 </div>		
 </div>	

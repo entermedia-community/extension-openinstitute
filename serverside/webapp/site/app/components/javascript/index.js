@@ -17120,6 +17120,11 @@ function chatterbox() {
     keepAlive(); //this should be here so it doesn't keep getting requeued.
     
 
+	lQuery("#chatterboxreplycancel").livequery("click", function(){
+		$("#chatter-msg").data("replytoid",'');
+		$(this).closest(".chatterboxreplyto").remove();
+	})
+
 	lQuery(".chatter-send").livequery("click", function(){
 		var button = jQuery(this);
 		var chatter = button.closest(".chatterbox");
