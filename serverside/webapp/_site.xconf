@@ -1,5 +1,5 @@
 <page>
-	<property name="eclipsepath">/home/shanti/eclipse/java-2019-09/eclipse/eclipse</property>
+	<property name="eclipsepath">/Users/hi/eclipse/java-2023-06/Eclipse.app</property>
 	<property name="local">true</property>
 	<property name="siteroot">http://localhost:8080</property>
 </page>

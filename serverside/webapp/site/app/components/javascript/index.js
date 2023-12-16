@@ -5696,44 +5696,6 @@ uiload = function() {
 	
 	
 	
-	lQuery('.userOffcanvasToggler').livequery("click", function (e) {
-		// e.preventDefault();
-		var toggler = $(this);
-		var data = toggler.data();
-		console.log(data);
-		if (data.action == 'hide') {
-			console.log('hide drawer');
-			var url = apphome + '/components/sidebars/user/hide.html';
-
-			$.ajax({
-				url: url,
-				async: false,
-				data: data,
-				success: function (d) {
-					// toggler.find('.offcanvas-body').html(d);
-					// $(document.body).removeClass('drawer-open');
-				$(".emrightcontent").removeClass('empushcontent');
-					saveProfileProperty("usersidebarhidden", "true");
-				}
-			});
-		} else {
-			console.log('show drawer');
-			var url = apphome + '/components/sidebars/user/show.html';
-
-			$.ajax({
-				url: url,
-				async: false,
-				data: data,
-				success: function (data) {
-					// toggler.find('.offcanvas-body').html(data);
-					// $(document.body).addClass('drawer-open');
-				$(".emrightcontent").addClass('empushcontent');
-					saveProfileProperty("usersidebarhidden", "false");
-				}
-			});
-		}
-	});
-
 	lQuery('.sidebar-toggler').livequery("click", function(e) {
 		e.preventDefault();
 		var toggler = $(this);
@@ -5762,7 +5724,7 @@ uiload = function() {
 		}
 		$(window).trigger("resize");
 	});
-
+	
 
 	lQuery(".assetpicker .removefieldassetvalue").livequery("click", function(e) 
 	{
@@ -5999,9 +5961,7 @@ uiload = function() {
 	});
 		
 
-}// uiload
-
-lQuery('.pickemoticon').livequery(function() 
+	lQuery('.pickemoticon').livequery(function() 
 	{
 		//Load div
 		var input = $(this);
@@ -6058,6 +6018,10 @@ lQuery('.pickemoticon').livequery(function()
 
 		
 	});
+
+
+}// uiload
+
 
 
 
@@ -17119,11 +17083,6 @@ function chatterbox() {
 	connect();
     keepAlive(); //this should be here so it doesn't keep getting requeued.
     
-
-	lQuery("#chatterboxreplycancel").livequery("click", function(){
-		$("#chatter-msg").data("replytoid",'');
-		$(this).closest(".chatterboxreplyto").remove();
-	})
 
 	lQuery(".chatter-send").livequery("click", function(){
 		var button = jQuery(this);

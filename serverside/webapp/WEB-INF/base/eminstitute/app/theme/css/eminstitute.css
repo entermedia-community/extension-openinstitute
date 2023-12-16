@@ -834,6 +834,22 @@ a.primary:hover .fas {
 
 .collaborate-channel-header .dropdown-menu {
 	border-radius: 0;
+	background-color: #215f5d;
+}
+
+.collaborate-channel-header a.dropdown-toggl {
+	color: #fff;
+	display: flex;
+	align-items: center;
+}
+
+.collaborate-channel-header a.dropdown-item {
+	color: #fff;
+	font-size: 14px;
+}
+
+.collaborate-channel-header a.dropdown-item i {
+	margin-right: 6px;
 }
 
 .collaborate-content {
