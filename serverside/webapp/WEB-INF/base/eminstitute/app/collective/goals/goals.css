@@ -465,9 +465,8 @@ ul.projectgoals {
 
 .taskdetails {
 	float: left;
-	padding: 5px;
+	padding: 0 5px 5px;
 	display: block;
-
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
