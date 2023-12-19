@@ -100,7 +100,7 @@
 			</div>
 			#end
 <div class="msg-body-content" >
-			#ifnotnull($chat.message)XXX$url_util.escapeMessage($chat.message)#end
+			#ifnotnull($chat.message)$url_util.escapeMessage($chat.message)#end
 </div>
 			#if( $goal)
 			$context.putPageValue("chat",$chat)
