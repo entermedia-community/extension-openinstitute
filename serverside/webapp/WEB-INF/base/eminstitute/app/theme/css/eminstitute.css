@@ -1063,7 +1063,7 @@ a.primary:hover .fas {
 
 .msg-bubble .msg-body {
 	flex: 1;
-	padding: 8px;
+	padding: 0 8px 8px 8px;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
 	position: relative;
@@ -1073,6 +1073,12 @@ a.primary:hover .fas {
 	background-color: #e2f2ff;
 }
 
+.msg-body-content
+{
+		 white-space: pre-wrap;
+	 line-height: .9em; 
+	
+}
 .chatterbox-messages {
 	height: calc(100% - 68px);
 	min-height: 250px;
