@@ -2,6 +2,6 @@
 
 <page>
   <property name="fallbackdirectory">/null/services/module/default</property>
-  <property name="module">entityperson</property>
-  <property name="searchtype">entityperson</property>
+  <property name="module">entityproject</property>
+  <property name="searchtype">entityproject</property>
 </page>
