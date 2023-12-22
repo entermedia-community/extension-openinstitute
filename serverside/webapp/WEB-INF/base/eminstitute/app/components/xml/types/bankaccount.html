@@ -16,6 +16,6 @@
 <select name="${detail.getId()}.value" class="select2 form-control">
 <option value=""></option> 
 #foreach( $bank in $banks )
-	<option value="$bank.getId()" #if($projectid == $bank.getId()) selected #end>$banks.size() #datatext($bank,"name")</option>
+	<option value="$bank.getId()" #if($projectid == $bank.getId()) selected #end>#datatext($bank,"name")</option>
 #end
 </select>
