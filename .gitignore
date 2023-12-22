@@ -9,6 +9,7 @@
 serverside/webapp/assets
 
 serverside/webapp/WEB-INF/temp
+serverside/webapp/WEB-INF/tmp
 serverside/webapp/WEB-INF/trash
 /**/build/ 
 
