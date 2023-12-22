@@ -140,7 +140,7 @@ a.primary:hover .fas {
 	padding: 0px 0 4px;
 }
 
-.account-top-menu a {}
+/* .account-top-menu a {} */
 
 .account-top-menu a.topnav-link {
 	color: #bbb;
@@ -403,9 +403,9 @@ a.primary:hover .fas {
 	margin: 0px 20px 10px;
 }
 
-.maincontentsidebar {
-	/*	 max-width:350px;*/
-}
+/* .maincontentsidebar {
+	max-width: 350px;
+} */
 
 .account-sidebar .select2-container {
 	z-index: 102 !important;
@@ -635,13 +635,13 @@ a.primary:hover .fas {
 	padding: 10px 25px 30px;
 }
 
-.community-maincol {}
+/* .community-maincol {} */
 
 .community-sidebar {
 	max-width: 350px;
 }
 
-.goal-tabs {}
+/* .goal-tabs {} */
 
 .collective-sidebar {
 	background-color: #fff;
@@ -1073,12 +1073,12 @@ a.primary:hover .fas {
 	background-color: #e2f2ff;
 }
 
-.msg-body-content
-{
-		 white-space: pre-wrap;
-	 line-height: .9em; 
-	
+.msg-body-content {
+	white-space: pre-wrap;
+	line-height: .9em;
+
 }
+
 .chatterbox-messages {
 	height: calc(100% - 68px);
 	min-height: 250px;
@@ -1296,7 +1296,7 @@ a.collectivetag {
 
 	color: #333;
 	text-decoration: underline;
-	display: inline-block;
+	/* display: inline-block; */
 	padding: 3px 3px;
 
 	float: right;
@@ -1472,9 +1472,9 @@ div.errormsg {
 
 }
 
-.comment-poster {
-	/*color:#666;*/
-}
+/* .comment-poster {
+	color:#666;
+} */
 
 .comment-content {
 	margin-left: 40px;
@@ -1992,7 +1992,7 @@ ul.inlinelist li {
 	word-break: break-all;
 }
 
-.collectivearchive {}
+/* .collectivearchive {} */
 
 .oe-dataedit {
 	font-size: 0.85rem;
@@ -2066,7 +2066,7 @@ ul.inlinelist li {
 	margin-left: 2px;
 	padding: 6px 6px 0;
 	float: left;
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .form-control.datepicker {
