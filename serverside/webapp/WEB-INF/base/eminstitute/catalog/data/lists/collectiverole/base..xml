@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+     
+  <data id="accountant"> 
+    <name> 
+      <language id="en"><![CDATA[Accountant]]></language> 
+    </name> 
+  </data>   
+  <data id="dev_gui"> 
+    <name> 
+      <language id="en"><![CDATA[GUI Dev]]></language> 
+    </name> 
+  </data>   
+
+    
+</root>

@@ -19,17 +19,24 @@
 				#if(!$userimageurl)
 					#set( $userimageurl = "$applink/theme/images/user.svg" )
 				#end 
-				<div class="teammember d-flex "> 
-					<a href="#esc($userlink)" class="align-items-center">
+				<div class="teammember  "> 
+					<a href="#esc($userlink)" class="align-items-center me-2">
 						<img  src="${userimageurl}" title="$!followeruser.getAnonNickName()" width="30px" height="30px" class="me-2">
-						<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())">$!followeruser.getAnonNickName()</span>
+						<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())" style="font-weight: bold;">$!followeruser.getAnonNickName()</span>
 					</a>
 					
-					
-					$hit.getValues("teamroles")
-					
+					#set($roles=$hit.getValues("teamroles"))
+					#if($roles)
+					<span class="me-2" style="line-height: 2.1;">(
+					#foreach($urole in $roles)
+						#set( $role = $mediaarchive.getCachedData("collectiverole",$urole) )
+						<span>$role</span>#if($foreach.count<$roles.size()), #end
+					#end
+					)</span>
+					#end
 					<a class="btn btn-xs btn-secondary emdialog"
-		        	 		href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!followeruser.getId()"
+						
+		        	 		href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
 			               title="[[Edit Entry]]"><i class="fa fa-edit"></i></a>
 	        	 		
 					
