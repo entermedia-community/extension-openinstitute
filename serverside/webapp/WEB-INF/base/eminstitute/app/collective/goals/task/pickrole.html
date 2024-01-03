@@ -1,0 +1,9 @@
+<select  name="addrole" class="picknewrolefortask form-control form-control-sm" data-taskid="$task.id" 
+data-savepath="$applink/collective/goals/task/rolelistsave.html" >
+					<option value=""></option>
+					#set( $options = $mediaarchive.getList("collectiverole"))
+					#foreach( $option in $options)
+					<option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
+					$context.getText($mediaarchive.getCachedData("collectiverole", $option.id))</option>
+					#end
+				</select> 

@@ -38,7 +38,7 @@
 			<div class="d-flex align-items-center m-1">
 				<i class="fas fa-tags me-2" style="width:20px"></i>
 				<div style="min-width:300px;">
-					#set( $searcher = $mediaarchive.getSearcher("goaltask") )
+					#set( $searcher = $mediaarchive.getSearcher("collectiverole") )
 					$context.putPageValue("searcher",$searcher)	
 					#set( $detail = $searcher.getDetail("keywords") )
 					$context.putPageValue("detail",$detail)

@@ -80,7 +80,7 @@
     </name> 
   </property>  
 
- <property id="completedon" index="true" internalfield="false" editable="true" isbadge="false" required="false" filter="false" multilanguage="false" datatype="date" stored="true" autocreatefromexif="false" keyword="false" writenametoexif="false">
+ <property id="completedon" index="true" internalfield="false" editable="true" isbadge="false" required="false" filter="false" multilanguage="false" datatype="date" stored="true" autocreatefromexif="false" writenametoexif="false">
     <name>
       <language id="de"><![CDATA[Erstellungsdatum]]></language>
       <language id="en"><![CDATA[Completion Date]]></language>
@@ -104,5 +104,34 @@
     </name> 
   </property>  
 
+
+  <property id="taskroles" index="true" stored="true" editable="true" datatype="nested" > 
+     <name> 
+      <language id="en"><![CDATA[Role Actions]]></language>  
+    </name> 
+	  <property id="actioncount" index="true" editable="true" stored="true" type="number"> 
+	    <name> 
+	      <language id="en"><![CDATA[Action Count]]></language> 
+	    </name> 
+	  </property>  
+	  <property id="name" index="true" multilanguage="true" filter="false" editable="true" stored="true" sortable="true"> 
+	    <name> 
+	      <language id="en"><![CDATA[Notes]]></language>  
+	    </name> 
+	  </property>  
+	  <property id="date" index="true" filter="false" datatype="date" editable="false" stored="true" sortable="true"> 
+	    <name> 
+	      <language id="de"><![CDATA[Datum]]></language>  
+	      <language id="en"><![CDATA[Date]]></language>  
+	      <language id="es"><![CDATA[Fecha]]></language>  
+	      <language id="fr"><![CDATA[Date]]></language> 
+	    </name> 
+	  </property>  
+	  <property id="collectiverole" index="true" stored="true" type="list"  editable="true">
+	  <name>
+	    <language id="en" > <![CDATA[Role]]> </language>
+	  </name>
+	  </property>
+  </property> 
 
 </properties>

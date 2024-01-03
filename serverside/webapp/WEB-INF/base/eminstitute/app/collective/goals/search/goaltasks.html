@@ -36,6 +36,7 @@
 		
 		
 			<div id="$!{container}taskrow${task.id}" class="goaltaskrow #if($task.taskstatus == "0" && $task.completedby == $user.id)taskmyself#end">
+			
 				<div>$!tree</div>
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
@@ -56,6 +57,10 @@
 					#end
 				</div>
 				#end
+
+				$context.putPageValue("task", $task)
+				$pages.include("$apphome/collective/goals/task/rolelist.html", $context)
+
 		
 				<div class="taskstatus align-self-end"> 
 					#if($task.taskstatus == "0")

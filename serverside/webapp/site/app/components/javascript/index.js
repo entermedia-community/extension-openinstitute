@@ -6932,6 +6932,27 @@ jQuery(document).ready(function(url,params)
 					
 	});
 
+	lQuery("select.picknewrolefortask").livequery(function()
+	{
+		var select = $(this);
+		//var select = div.find("select");
+		select.on("change",function()
+		{
+			var path = select.data("savepath");
+			var params = {}; //div.data();
+			params['addrole'] = select.val();
+			params['taskid'] = select.data("taskid");
+			console.log(path,params);
+			jQuery.get(path, params, function(data) 
+			{
+				var editor = $("#roleeditor");
+				editor.replaceWith(data);
+			});
+		});
+					
+	});
+
+
 	
 	lQuery(".appendgoalbutton").livequery("click", function(e)
 			{
