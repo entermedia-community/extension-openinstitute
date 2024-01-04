@@ -1,12 +1,25 @@
-				#set( $rolesarray = $task.getValues("taskroles") )
-				
-				<div id="roleeditor" class="rolelist">
-					##USE AJAX
-					#foreach( $role in $rolesarray )
-						#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
-						#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
-						#text($collectiverole) ($role.actioncount)
-						 <a	class="ajax"  data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/rolelistaddone.html" title="#esc($val)">+</a> <a class="" href="$link" title="#esc($val)">-</a> 
-					#end
-					<a class="addroletolist ajax" data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
-				</div>
+#set( $rolesarray = $task.getValues("taskroles") )
+
+<div id="roleeditor" class="rolelist">
+	##USE AJAX
+	#foreach( $role in $rolesarray )
+		#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+		#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
+		<div class="btn-group" role="group">
+		<a class="btn btn-sm btn-secondary">#text($collectiverole)#if($role.actioncount)($role.actioncount)#end</a>
+		 <a	class="btn btn-sm btn-secondary ajax" style="padding:.275rem .35rem"  
+		 	data-targetdivinner="roleeditor" 
+		 	data-taskid="$task.id" 
+		 	data-taskactionid="$role.id"
+		 	href="$applink/collective/goals/task/rolelistaddone.html" 
+		 	title="#esc($val)">+</a>
+		 <a class="btn btn-sm btn-secondary ajax" style="padding:.275rem .45rem" 
+		 	data-targetdivinner="roleeditor" 
+		 	data-taskid="$task.id" 
+		 	data-taskactionid="$role.id"
+		 	href="$applink/collective/goals/task/rolelistaddone.html" 
+		 	title="#esc($val)">-</a>
+		 </div> 
+	#end
+	<a class="addroletolist ajax" data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
+</div>
