@@ -6936,6 +6936,7 @@ jQuery(document).ready(function(url,params)
 	{
 		var select = $(this);
 		//var select = div.find("select");
+		var target = select.closest("#roleeditor");
 		select.on("change",function()
 		{
 			var path = select.data("savepath");
@@ -6945,8 +6946,8 @@ jQuery(document).ready(function(url,params)
 			console.log(path,params);
 			jQuery.get(path, params, function(data) 
 			{
-				var editor = $("#roleeditor");
-				editor.replaceWith(data);
+				
+				target.replaceWith(data);
 			});
 		});
 					
