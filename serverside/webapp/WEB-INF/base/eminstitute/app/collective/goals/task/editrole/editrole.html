@@ -1,0 +1,53 @@
+<div class="card-block" style="padding:5px 20px;">
+
+<h2>[[Edit Role]]</h2>
+
+#set( $taskid = $context.getRequestParameter("taskid") )
+#set( $collectiverole = $context.getRequestParameter("collectiverole") )
+#set( $roleuserid = $context.getRequestParameter("roleuserid") )
+
+
+
+<form name="saverole" 
+	id="saverole"
+	action="$applink/collective/editrole/save.html"
+	method="post">
+	
+<input type="hidden" name="save" value="true" />
+
+#set( $goalManager = $mediaarchive.getBean("goalManager") )
+
+#set( $taskrole = $goalManager.findRole($taskid,$collectiverole,$roleuserid) )
+
+Show the total count $taskrole.actioncount
+<pre>
+Show a drop down of users to assign to this if any so they can change it
+
+Show a hitstory table of previous actions and their users
+
+Show a delete option to remove the role
+</pre>
+
+	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
+	
+  #if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+    <a class="btn btn-sm btn-danger confirm"
+    style="margin: 0px 0 0 10px;" 
+    data-confirm="[[Are you sure]]?" 
+    href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
+    >[[Delete]]</a>
+  #end
+
+#if($canviewsettings)
+<a class="btn btn-sm btn-light float-right"
+    style="margin: 0px 0 0 10px;" 
+    target="_blank"
+    href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection" 
+    ><i class="fa fa-database"></i></a>
+#end
+
+</form>
+</div>
+
+
+  

@@ -132,6 +132,17 @@
 	    <language id="en" > <![CDATA[Role]]> </language>
 	  </name>
 	  </property>
+	  
+	 <property id="roleuserid" index="true" viewtype="user" type="list" listid="user" keyword="true" stored="true"  editable="true" > 
+    <name> 
+      <language id="de"><![CDATA[Owner]]></language>  
+      <language id="en"><![CDATA[Owner]]></language>  
+      <language id="es"><![CDATA[Propietario]]></language>  
+      <language id="fr"><![CDATA[Propriétaire]]></language> 
+    </name> 
+  </property>  
+	  
+	  
   </property> 
 
 </properties>
