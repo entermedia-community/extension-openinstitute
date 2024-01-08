@@ -16,8 +16,8 @@
     <property name="wardir" location="${build}/wartmp"/>
     <property name="webapp" location="${basedir}/webapp"/>
 	<property name="webinf" location="${webapp}/WEB-INF"/>
-	<property name="branch" value="em10_" />
-				<property name="majorversion" value="10" />
+	<property name="branch" value="em11_" />
+				<property name="majorversion" value="11" />
 
 	<!-- 
 		========================================================================
@@ -49,7 +49,7 @@
 	<target name="update-dependencies" depends="clean">
 	    <mkdir dir="${build}"/>
 	    <mkdir dir="${wardir}/WEB-INF/" />
-		<get dest="${build}/install.xml" src="http://dev.entermediadb.org/jenkins/job/em10_entermedia-server/lastSuccessfulBuild/artifact/deploy/install.xml"/>
+		<get dest="${build}/install.xml" src="http://dev.entermediadb.org/jenkins/job/${branch}entermedia-server/lastSuccessfulBuild/artifact/deploy/install.xml"/>
 			<ant antfile="${build}/install.xml" inheritAll="false" dir="${wardir}/WEB-INF/" target="default"/> 
 
 	</target>
