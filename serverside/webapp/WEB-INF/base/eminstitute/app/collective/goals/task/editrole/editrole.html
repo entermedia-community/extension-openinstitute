@@ -1,7 +1,5 @@
 <div class="card-block" style="padding:5px 20px;">
 
-<h2>[[Edit Role]]</h2>
-
 #set( $taskid = $context.getRequestParameter("taskid") )
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
 #set( $roleuserid = $context.getRequestParameter("roleuserid") )
@@ -15,28 +13,39 @@
 	
 <input type="hidden" name="save" value="true" />
 
+
+Note: <textarea name="name" > </textarea><br> 
+
+User: <select></select>
+
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
 
-#set( $taskrole = $goalManager.findRole($taskid,$collectiverole,$roleuserid) )
+#set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
 
-Show the total count $taskrole.actioncount
-<pre>
-Show a drop down of users to assign to this if any so they can change it
+#set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
 
-Show a hitstory table of previous actions and their users
 
-Show a delete option to remove the role
-</pre>
+#set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
+<table>
+#foreach( $action in $actions)
+	<tr>
+		<td>$action.date</td> <td>+1</td> <td>delete</td>
+	</tr>
+#end
+</table>
 
-	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
-	
-  #if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+Total: $taskrole.actioncount
+
+
+<br>
+<br>
     <a class="btn btn-sm btn-danger confirm"
     style="margin: 0px 0 0 10px;" 
     data-confirm="[[Are you sure]]?" 
     href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
-    >[[Delete]]</a>
-  #end
+    >[[Delete Role]]</a>
+
+	
 
 #if($canviewsettings)
 <a class="btn btn-sm btn-light float-right"

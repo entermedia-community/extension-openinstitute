@@ -45,6 +45,11 @@
       <language id="fr"><![CDATA[Propriétaire]]></language> 
     </name> 
   </property>  
- 
+  
+   <property id="name" index="true" stored="true" editable="true">
+		<name>
+			<language id="en"><![CDATA[Note]]></language>
+		</name>
+	</property>
     
 </properties>
