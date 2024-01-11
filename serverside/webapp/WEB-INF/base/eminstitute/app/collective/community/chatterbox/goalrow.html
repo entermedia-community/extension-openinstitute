@@ -11,8 +11,8 @@
 			data-urlbar="$applink/collective/goals/priorities/index.html?collectionid=$goal.collectionid&opengoalid=${goal.id}" 
 			data-width="900" >
 				<i class="fas fa-flag"></i> 
-				#set( $level = $mediaarchive.getData("ticketlevel",$goal.ticketlevel))
-				#text($level) : #$!goal.ticketnumber  
+			##	#set( $level = $mediaarchive.getData("ticketlevel",$goal.ticketlevel))
+			##	#text($level) : #$!goal.ticketnumber  
 				#set( $status  = $mediaarchive.getData("projectstatus", $goal.projectstatus) )
 		</a>
 		#end
@@ -25,14 +25,4 @@
 	$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true&onlyopen=false",$context)
 	</div>
 
-	#if($caneditcollection && $goal.projectstatus != "completed" && $goal.projectstatus != "closed")
-	<div class="goalcloseout text-right">
-		<a href="$applink/collective/community/chatterbox/closegoal.html?goalid=$goal.id" 
-			data-targetdiv="$target" 
-			data-oemaxlevel="1"
-			class="ajax btn btn-sm btn-resolve btn-success">
-			<i class="fas fa-check me-1"></i> [[Resolve]]
-		</a>
-	</div>
-	#end
 </div>

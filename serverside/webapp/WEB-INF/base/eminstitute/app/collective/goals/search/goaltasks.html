@@ -79,7 +79,7 @@
 					</p>
 					#elseif($task.taskstatus == "3")
 					<p class="text-success m-0">
-						<i class="fas fa-check"></i> [[Completed]]
+						<i class="fas fa-check"></i>[[Completed]]
 					</p>
 					#elseif($task.taskstatus == "4")
 					<p class="text-secondary m-0">
@@ -91,7 +91,30 @@
 					</p>
 					#end  
 					#if($caneditgoal)
-						<a 
+						#if($task.taskstatus != "3")
+							<div class="goalcloseout text-right">
+							  	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="" >
+							
+								<a href="$applink/collective/goals/task/tasksave.html?goalid=$goal.id" 
+									data-targetdiv="$target" 
+									data-oemaxlevel="1"
+									data-taskid="$task.id"
+									data-taskstatus="3"
+									class="ajax btn btn-sm btn-resolve btn-success">
+									<i class="fas fa-check me-1"></i> [[Resolve]]
+								</a>
+							</div>
+						#end	
+
+					#end
+					
+					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
+				</div>
+			</div>
+			<div class="credit">
+			
+				<small>
+					<a 
 							id="task${task.id}"
 							href="$edittask"
 							title="[[Edit Task]]"
@@ -99,20 +122,12 @@
 							title="[[Task]]"
 							data-focuson="$task.id"
 							data-width="900"
-							class="taskstatusbutton taskedit taskedit-$!{task.taskstatus} ajax btn btn-sm mx-1 text-brand" 
+							class="taskedit-$!{task.taskstatus} ajax btn btn-sm mx-1 text-brand" 
 							data-targetdiv="$!{container}taskrow${task.id}" 
 							data-oemaxlevel="1" 
 						>
-							<i class="fas fa-pencil-alt"></i>
-						</a>
-					#end
-					
-					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
-				</div>
-			</div>
-			<div class="credit">
-				<small>
 					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago
+				</a>
 				</small>
 			</div>
 	#end
@@ -120,23 +135,8 @@
 	<div class="clearfix"></div>	
 
 	<div class="d-flex mt-2">
+	<!-- 
 	#if($user && $caneditgoal)
-		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
-			title="[[Add Note]]"
-			data-targetdiv="$target"
-			data-cancelsubmit="true"
-			data-parameterdata="categoryvalues"
-			data-collectionid="$goal.collectionid"
-			data-categoryid="$!selectedcat.getId()"
-			data-hitssessionid="$!{goalhits.getSessionId()}"
-			data-goalfolder="$!goalfolder" ##tabs
-			data-pickone="true"
-			data-goalid="${goal.id}"
-			data-dialogid="picktask"
-			href="$applink/collective/goals/task/noteedit.html"
-		>
-			<i class="fas fa-sticky-note"></i> [[Add Note]]
-		</a>
 		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
 			title="[[Add Task]]"
 			data-targetdiv="$target"
@@ -151,13 +151,13 @@
 			data-dialogid="picktask"
 			href="$applink/collective/goals/task/taskedit.html"
 		>
-			<i class="fas fa-clipboard-check"></i> [[Add Task]]
+			<i class="fas fa-clipboard-check"></i> [[Add Action]]
 		</a>
 	#end
-
 	#if (!$onlyopen && $points>0)
 		$points
 	#end
+ -->
 	</div>
 	
 </div>		

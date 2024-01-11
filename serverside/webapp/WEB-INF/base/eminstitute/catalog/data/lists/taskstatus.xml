@@ -37,4 +37,10 @@
       <language id="es"><![CDATA[Nota]]></language>
     </name> 
   </data>  
+  <data id="6"> 
+    <name> 
+      <language id="en"><![CDATA[On Agenda]]></language>
+      <language id="es"><![CDATA[En Agenda]]></language> 
+    </name> 
+  </data>  
 </root>

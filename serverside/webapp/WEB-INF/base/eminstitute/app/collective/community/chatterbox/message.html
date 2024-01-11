@@ -99,11 +99,12 @@
 				</div>
 			</div>
 			#end
-			<div class="msg-body-content">#ifnotnull($chat.message)$url_util.escapeMessage($chat.message)#end</div>
 			#if( $goal)
 			$context.putPageValue("chat",$chat)
 			$context.putPageValue("goal",$goal)
 			$pages.include("$apphome/collective/community/chatterbox/goalrow.html",$context)
+			#else
+				<div class="msg-body-content">#ifnotnull($chat.message)$url_util.escapeMessage($chat.message)#end</div>
 			#end
 		</div>
 		#set( $reactions = $reactionspermessage.get($chat.id) )
