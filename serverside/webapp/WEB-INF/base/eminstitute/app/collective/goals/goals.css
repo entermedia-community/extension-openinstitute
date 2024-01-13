@@ -406,7 +406,7 @@ ul.projectgoals {
 
 .goaltaskrow {
 	background-color: #ffffff;
-	padding: 4px;
+	padding: 6px 2px 2px 2px;
 	margin-bottom: 2px;
 	border-radius: 8px;
 	display: flex;

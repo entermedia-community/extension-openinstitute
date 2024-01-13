@@ -1,4 +1,5 @@
 #set( $rolesarray = $task.getValues("taskroles") )
+#set($collectionid = $librarycol.id)
 
 <div id="roleeditor" class="rolelist">
 	##USE AJAX
@@ -8,8 +9,9 @@
 		#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 		<div class="btn-group" role="group">
 		<a href="$applink/collective/goals/task/editrole/editrole.html"
-		
+			title="#text($collectiverole)"
 		 	data-taskid="$task.id" 
+		 	data-collectionid="$!collectionid"
 		 	data-collectiverole="$role.collectiverole"
 		 	data-roleuserid="$role.roleuserid"
 		
@@ -19,6 +21,7 @@
 		 <a	class="btn btn-sm btn-secondary ajax" style="padding:.275rem .35rem"  
 		 	data-targetdivinner="roleeditor" 
 		 	data-taskid="$task.id" 
+		 	data-collectionid="$!collectionid"
 		 	data-collectiverole="$role.collectiverole"
 		 	data-roleuserid="$role.roleuserid"
 		 	href="$applink/collective/goals/task/rolelistaddone.html" 
@@ -26,5 +29,4 @@
 		 #end	
 		 </div> 
 	#end
-	<a class="addroletolist ajax" data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
 </div>

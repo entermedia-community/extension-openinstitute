@@ -62,13 +62,18 @@
 				$pages.include("$apphome/collective/goals/task/rolelist.html", $context)
 
 		
-				<div class="taskstatus align-self-end"> 
-					#if($task.taskstatus == "0")
+		
+				<div class="taskstatus align-self-end">
+					#if($task.taskstatus == "7")
 					<div>
 						<div class="badge text-bg-danger attn">
-						<i class="fas fa-bullhorn me-1"></i> $!mediaarchive.getUser($task.completedby).getAnonNickName()
+						$!mediaarchive.getUser($task.completedby).getAnonNickName() <i class="fas fa-bullhorn me-1"></i>  ## 
 						</div>
 					</div>
+					#elseif($task.taskstatus == "6")
+					<p class="text-secondary m-0">
+						<i class="fas fa-sticky-note"></i> [[On Agenda]]
+					</p>
 					#elseif($task.taskstatus == "1")
 					<p class="text-warning m-0">
 						<i class="fas fa-hourglass-half"></i> [[Pending]]
@@ -90,30 +95,14 @@
 						<i class="fas fa-sticky-note"></i> [[Note]]
 					</p>
 					#end  
-					#if($caneditgoal)
-						#if($task.taskstatus != "3")
-							<div class="goalcloseout text-right">
-							  	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="" >
-							
-								<a href="$applink/collective/goals/task/tasksave.html?goalid=$goal.id" 
-									data-targetdiv="$target" 
-									data-oemaxlevel="1"
-									data-taskid="$task.id"
-									data-taskstatus="3"
-									class="ajax btn btn-sm btn-resolve btn-success">
-									<i class="fas fa-check me-1"></i> [[Resolve]]
-								</a>
-							</div>
-						#end	
-
-					#end
+					
 					
 					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
 				</div>
-			</div>
-			<div class="credit">
+			<div class="credit" style="display: block;  width: 100%;">
 			
 				<small>
+				#if($user && $caneditgoal)
 					<a 
 							id="task${task.id}"
 							href="$edittask"
@@ -126,16 +115,54 @@
 							data-targetdiv="$!{container}taskrow${task.id}" 
 							data-oemaxlevel="1" 
 						>
-					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago
+					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago  (edit)
 				</a>
+				#else
+					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago  (edit)
+				#end
+				
+	#if($user && $caneditgoal)
+			<!-- 	<a href="$applink/collective/goals/task/taskdelete.html?id=$task.id" 
+					data-targetdiv="$target" 
+					data-confirm="Sure you want to delete?"
+					data-oemaxlevel="1"
+					data-taskid="$task.id"
+					data-taskstatus="3"
+					class="ajax"> (delete)
+					 
+				</a>
+			 -->	
+					<a class="addroletolist ajax" data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
+					
+					
+#if($caneditgoal)
+						#if($task.taskstatus != "3")
+							  	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="" >
+							
+								<a href="$applink/collective/goals/task/tasksave.html?goalid=$goal.id" 
+									data-targetdiv="$target" 
+									data-oemaxlevel="1"
+									data-taskid="$task.id"
+									data-taskstatus="3"
+									class="ajax">
+									<i class="fas fa-check me-1"></i> [[Resolve]]
+								</a>
+						#end	
+
+					#end					
+				
+	#end			
+				
 				</small>
 			</div>
+			</div>
+			
+			
 	#end
 
 	<div class="clearfix"></div>	
 
 	<div class="d-flex mt-2">
-	<!-- 
 	#if($user && $caneditgoal)
 		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
 			title="[[Add Task]]"
@@ -157,7 +184,6 @@
 	#if (!$onlyopen && $points>0)
 		$points
 	#end
- -->
 	</div>
 	
 </div>		

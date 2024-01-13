@@ -42,5 +42,12 @@
       <language id="en"><![CDATA[On Agenda]]></language>
       <language id="es"><![CDATA[En Agenda]]></language> 
     </name> 
+  </data>
+   <data id="7"> 
+    <name> 
+      <language id="en"><![CDATA[Urgent]]></language>
+      <language id="es"><![CDATA[Urgente]]></language> 
+    </name> 
   </data>  
+    
 </root>

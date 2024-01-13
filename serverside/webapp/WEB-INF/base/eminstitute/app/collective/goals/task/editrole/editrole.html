@@ -4,6 +4,7 @@
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
 #set( $roleuserid = $context.getRequestParameter("roleuserid") )
 
+#set($collectionid = $librarycol.id)
 
 
 <form name="saverole" 
@@ -13,16 +14,50 @@
 	
 <input type="hidden" name="save" value="true" />
 
-
-Note: <textarea name="name" > </textarea><br> 
-
-User: <select></select>
-
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
 
 #set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
 
 #set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
+
+<style>
+.editrow {
+  display: flex;  /* aligns all child elements (flex items) in a row */
+}
+
+.editname
+{
+	width: 100px;
+}
+</style>
+
+<section>
+  <div class="editrow">
+    <div class="editname">Notes</div>
+    <div class="editval"><textarea name="name" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
+  </div>
+
+  <div class="editrow">
+    <div class="editname">Role User</div>
+    <div class="editval">
+	<select class="form-control form-control-sm"  name="roleuserid">
+		<option value=""></option>
+		#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
+		#foreach( $hit in $team)
+			#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+			#if( $followeruser)
+			<option value="$hit.followeruser" #if( $!taskrole.roleuserid == $hit.followeruser) selected #end>$followeruser.getName()</option>
+			#end
+		#end
+	</select>
+
+		    
+    </div>
+  </div>
+
+</section>
+
+ 
 
 
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
