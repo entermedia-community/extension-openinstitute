@@ -6940,7 +6940,7 @@ jQuery(document).ready(function(url,params)
 		select.on("change",function()
 		{
 			var path = select.data("savepath");
-			var params = {}; //div.data();
+			var params = select.data();
 			params['addrole'] = select.val();
 			params['taskid'] = select.data("taskid");
 			console.log(path,params);

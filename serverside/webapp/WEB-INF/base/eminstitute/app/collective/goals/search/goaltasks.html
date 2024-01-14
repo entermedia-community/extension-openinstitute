@@ -132,8 +132,11 @@
 					 
 				</a>
 			 -->	
-					<a class="addroletolist ajax" data-targetdivinner="roleeditor" data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
-					
+<div id="roleeditor" style="display:inline">
+			<a class="addroletolist ajax" data-targetdivinner="roleeditor" 
+			data-collectionid = "$librarycol.id"
+			data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
+</div>					
 					
 #if($caneditgoal)
 						#if($task.taskstatus != "3")

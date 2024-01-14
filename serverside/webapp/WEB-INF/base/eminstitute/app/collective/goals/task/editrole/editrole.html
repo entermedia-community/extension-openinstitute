@@ -6,13 +6,19 @@
 
 #set($collectionid = $librarycol.id)
 
+		#set( $targetdiv = "tasklist#eid($taskid)")
+
 
 <form name="saverole" 
 	id="saverole"
-	action="$applink/collective/editrole/save.html"
+	data-targetdiv="$targetdiv"
+	class="ajaxform autocloseform" data-oemaxlevel="1"
+	action="$applink/collective/goals/task/editrole/saverole.html"
 	method="post">
 	
 <input type="hidden" name="save" value="true" />
+<input type="hidden" name="taskid" value="$taskid" />
+<input type="hidden" name="collectiverole" value="$collectiverole" />
 
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
 
@@ -34,7 +40,7 @@
 <section>
   <div class="editrow">
     <div class="editname">Notes</div>
-    <div class="editval"><textarea name="name" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
+    <div class="editval"><textarea name="name" style="width:400px" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
   </div>
 
   <div class="editrow">
@@ -69,12 +75,12 @@
 #end
 </table>
 
-Total: $taskrole.actioncount
+Total Actions: $taskrole.actioncount
 
 
 <br>
 <br>
-    <a class="btn btn-sm btn-danger confirm"
+    <a class="btn btn-sm btn-danger confirm  float-right"
     style="margin: 0px 0 0 10px;" 
     data-confirm="[[Are you sure]]?" 
     href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
