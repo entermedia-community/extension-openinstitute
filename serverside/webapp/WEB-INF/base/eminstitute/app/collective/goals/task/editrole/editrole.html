@@ -1,4 +1,4 @@
-<div class="card-block" style="padding:5px 20px;">
+<div id="viewrole" class="card-block" style="padding:5px 20px;">
 
 #set( $taskid = $context.getRequestParameter("taskid") )
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
@@ -35,6 +35,10 @@
 {
 	width: 100px;
 }
+.editname
+{
+	widthxx: 400px;
+}
 </style>
 
 <section>
@@ -63,19 +67,51 @@
 
 </section>
 
- 
+ <h2>[[Action Log]]</h2>
 
 
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
-<table>
+<section>
+  <div class="editrow">
+    <div class="editname">Count</div>
+    <div class="editval" style="width:200px">
+      <span>[[Date]]</span>
+    </div>
+    <div class="editval">
+      <span>[[Added By]]</span>
+    </div>
+    <div class="editval">
+    	
+    </div>
+   </div>
 #foreach( $action in $actions)
-	<tr>
-		<td>$action.date</td> <td>+1</td> <td>delete</td>
-	</tr>
+  <div class="editrow">
+    <div class="editname">$foreach.count</div>
+    <div class="editval" style="width:200px">
+      <span> #datetime($action.date)</span>
+    </div>
+    <div class="editval">
+    	$!action.owner
+    </div>
+    <div class="editval">
+    
+	 <a class="ajax"
+		data-oemaxlevel="1"
+		data-targetdiv="viewrole"
+		data-taskid = "$taskid"
+		data-collectiverole = "$collectiverole"
+		data-roleuserid = "$roleuserid"
+		style="margin: 0px 0 0 10px;" 
+		data-confirm="[[Are you sure]]?" 
+		href="$applink/collective/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
+    >[[Delete Action]]</a>
+    </div>
+  </div>
 #end
-</table>
 
-Total Actions: $taskrole.actioncount
+</section>
+
+
 
 
 <br>
