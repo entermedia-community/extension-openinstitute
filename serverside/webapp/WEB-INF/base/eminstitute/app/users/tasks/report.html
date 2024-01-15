@@ -80,6 +80,17 @@
   				</tr>
   		    #end
   		    
+  		    #set($roleactions = $completed.getRoleActionsForWeek($person, $week))
+  		    #foreach($roleaction in $roleactions)
+  		     	<tr>
+  				<td>
+  				$roleaction.getUserRole()
+  				</td>
+  				<td>
+  				$roleaction.getUserRole()
+  				</td>
+  				</tr>
+  		    #end
   		    			###set($tickets = $completed.getTicketsForWeek($person,$week))
   		    
 						  		    ##DO NOT COUNT TICKET COMPLETITION POINTS ANYMORE (Starting Sept 2020)
