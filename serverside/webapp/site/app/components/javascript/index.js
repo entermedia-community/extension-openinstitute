@@ -6936,9 +6936,9 @@ jQuery(document).ready(function(url,params)
 	{
 		var select = $(this);
 		//var select = div.find("select");
-		var target = select.closest("#roleeditor");
 		select.on("change",function()
 		{
+			var target = select.closest(".goaltaskrow ").find("#roleeditor");
 			var path = select.data("savepath");
 			var params = select.data();
 			params['addrole'] = select.val();

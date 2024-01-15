@@ -6,12 +6,12 @@
 
 #set($collectionid = $librarycol.id)
 
-		#set( $targetdiv = "tasklist#eid($taskid)")
+#set( $tasktargetdiv = "tasklist#eid($taskid)")
 
 
 <form name="saverole" 
 	id="saverole"
-	data-targetdiv="$targetdiv"
+	data-targetdiv="$tasktargetdiv"
 	class="ajaxform autocloseform" data-oemaxlevel="1"
 	action="$applink/collective/goals/task/editrole/saverole.html"
 	method="post">
@@ -116,21 +116,19 @@
 
 <br>
 <br>
-    <a class="btn btn-sm btn-danger confirm  float-right"
-    style="margin: 0px 0 0 10px;" 
-    data-confirm="[[Are you sure]]?" 
-    href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
-    >[[Delete Role]]</a>
-
+    <a class="ajax btn btn-sm btn-danger  float-right"
+   		data-oemaxlevel="1"
+		data-targetdiv="$tasktargetdiv"
+		data-taskid = "$taskid"
+		data-roleid = "$roleid"
+		data-closedialog = "true"
+		data-collectiverole = "$collectiverole"
+		data-roleuserid = "$roleuserid"
+		style="margin: 0px 0 0 10px;" 
+		data-confirm="[[Are you sure]]?" 
+		href="$applink/collective/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
+	>[[Delete Role]]</a>
 	
-
-#if($canviewsettings)
-<a class="btn btn-sm btn-light float-right"
-    style="margin: 0px 0 0 10px;" 
-    target="_blank"
-    href="$sitelink/emshare2/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection" 
-    ><i class="fa fa-database"></i></a>
-#end
 
 </form>
 </div>
