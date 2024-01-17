@@ -84,10 +84,29 @@
   		    #foreach($roleaction in $roleactions)
   		     	<tr>
   				<td>
-  				$roleaction.getUserRole()
+  				#set( $task = $mediaarchive.getCachedData("goaltask",$roleaction.goaltaskid) )
+  				
+  				#set( $col = $mediaarchive.getCachedData("librarycollection",$task.collectionid) )
+ 				<a class="emdialog" 
+					style="text-decoration: underline;"
+					data-width="900"
+					data-hidefooter="true"
+					title="[[Ticket Details]]" 
+					href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&goalfolder=$content.goalfolder">
+
+  				#text( $col ) -
+  				$!task.comment
+  				#set($role = $!mediaarchive.getCachedData("collectiverole",$roleaction.getUserRole().get("collectiverole") ) )
+				( #text($role) )</a>
+						$!roleaction.getUserRole().name
   				</td>
-  				<td>
-  				$roleaction.getUserRole()
+  				<td>$context.getDateTime($roleaction.getDate())</td>
+  				</td>
+  				<td style="text-align:right">
+				#set( $counted = $counted + 1)
+				#set( $weekpoints = $weekpoints + 10)
+				#set( $totalpoints = $totalpoints + 10)
+				10
   				</td>
   				</tr>
   		    #end
@@ -117,7 +136,7 @@
   		    
   		    #if( $weekpoints > 0)
   			<tr><td colspan="2" style="padding-left: 0px;"> </td>
-  			<td style="text-align:right;">$weekpoints</td>
+  			<td style="text-align:right;"><b>$weekpoints</b></td>
   			</tr>
   			#end
 		#end
