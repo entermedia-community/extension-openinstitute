@@ -1,10 +1,13 @@
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 <div class="d-flex bg-dark p-4">
   <div class="container">
-    <p class="text-white mt-2 d-none d-md-block">
-      $communitytagcategory.summary
-    </p>
+    <div style="max-width: 520px;" class="mx-md-auto text-center">
+      <h1 class="text-white mb-0">Good News Network – by Giving Back Studio</h1>
+      <h4 class="text-white mt-0 d-none d-md-block fw-normal">
+        Truly joyful news to delight the spirit of humanity.
+      </h4>
+    </div>
   </div>
 </div>
 <div class="container" style="overflow-x: scroll;">
@@ -13,106 +16,54 @@
   $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
 
   <h2 class="text-center mt-4">Projects</h2>
-  <div id="gridJSTable"></div>
+  <div class="container mb-4">
+    <div class="row">
+      #foreach($project in $projects)
+      #set($project = $searcher.loadData($project))
+      #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+      #set($logo = false)
+      #if($project.assetportrait)
+        #set($asset = $mediaarchive.getAsset($project.assetportrait))
+        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+      #else
+        #set($logo = "$applink/theme/images/OI_flower.png")
+      #end
+      #set($description = $project.get("collectivedescription"))
+      <div class="col-sm-12 col-md-6 col-lg-4 h-100 proposal-grid-item" data-aos="flip-up">
+        <div class="card w-100 mb-4 shadow-sm transition-3d-hover" style="min-height: 600px;">
+          <a href="$link">
+            <img src="$logo" class="card-img-top" alt="#text($project)">
+          </a>
+          <div class="card-body">
+            <span class="text-muted">John Doe <strong class="d-inline-block mx-1">&middot;</strong> 24 Jan, 2024</span>
+            <h5 class="card-title">#text($project)</h5>
+            <p class="card-text mb-auto">$description</p>
+            <a href="$link" class="btn btn-outline-primary transition-3d-hover">Learn more <i class="fas fa-angle-double-right"></i></a>
+          </div>
+        </div>
+      </div> 
+      #end
+    </div>
+    
+    <hr style="border-color: #b5b5b5;" />
 
-  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <div class=" d-flex align-items-center justify-content-center my-5"> 
+      <div class="p-4 shadow-sm rounded-3" style="background-color: #ffffff;">
+        <h2 class="text-center mb-0">Join the Community</h2>
+        <p class="text-center">Join the community to get updates on the latest projects.</p>
+        <div class="input-group input-group-lg mb-3" style="width: 480px;">
+          <input type="text" class="form-control" style="min-height: 48px;" placeholder="Your email"
+            aria-describedby="button-addon2">
+          <button class="btn btn-primary rounded-end" type="button" id="button-addon2">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     $(document).ready(function () {
-      var data = [
-        #foreach($project in $projects)
-          #set($project = $searcher.loadData($project))
-          #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
-          #set($logo = false)
-          #if($project.assetportrait)
-            #set($asset = $mediaarchive.getAsset($project.assetportrait))
-            #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
-          #else
-            #set($logo = "$applink/theme/images/OI_flower.png")
-          #end
-          #set($days = $mediaarchive.getProjectManager().calcDaysRemaining($project))
-          #if(!$days)
-            #set($days = 0) 
-          #end
-          #set($prob = $project.get("proposalproblem"))
-          #if(!$prob)
-            #set($prob = "N/A")
-          #end
-          #set($emp = $project.get("proposalempowerment"))
-          #if(!$emp)
-            #set($emp = "N/A")
-          #end
-
-        ["$logo", "#text($project)", "$days", ` $prob `, ` $emp `, "$link"],
-        #end
-      ];
-      new gridjs.Grid({
-        columns: [{
-          id: 'logo',
-          resizable: false,
-          name: 'Logo',
-          sort: false,
-          width: '90px',
-          formatter: function (cell, row) {
-            return gridjs.html(`<a href="${row.cells[5].data}"><img src="${cell}" style="width:30px;height:30px;object-fit:contain"/></a>`);
-          },
-        },
-        {
-          name: 'Name',
-          sort: true,
-          width: '200px',
-          formatter: function (cell, row) {
-            return gridjs.html(`<a href="${row.cells[5].data}">${cell}</a>`);
-          },
-        },
-        {
-          name: 'Days Remaining',
-          width: '200px',
-          sort: true,
-          formatter: function (cell) {
-            var percent = Math.round(((365 - cell) / 365) * 100);
-            return gridjs.html(`<div class="progress" style="margin-top:8px;width:100%;height:16px"><div class="progress-bar progress-bar-striped" style="width:${percent}%"></div></div><small>${cell} [[days remaining]]</small>`);
-          },
-        },
-        {
-          name: 'Problem',
-          sort: false,
-          formatter: function (cell) {
-            return gridjs.html(cell);
-          },
-        },
-        {
-          name: 'Empowerment',
-          sort: false,
-          formatter: function (cell) {
-            return gridjs.html(cell);
-          },
-        },
-        {
-          name: 'Link',
-          sort: false,
-          hidden: true,
-        }
-        ],
-        data: data,
-        sort: true,
-        search: true,
-        pagination: {
-          limit: 10
-        },
-        resizable: true,
-        language: {
-          search: {
-            placeholder: '🔍 Search...'
-          },
-          pagination: {
-            showing: ' ',
-            results: ' ',
-            previous: '«',
-            next: '»',
-          },
-          noRecordsFound: 'No projects found',
-        }
-      }).render(document.getElementById('gridJSTable'));
+      //
+      AOS.init();
     });
   </script>
 </div>

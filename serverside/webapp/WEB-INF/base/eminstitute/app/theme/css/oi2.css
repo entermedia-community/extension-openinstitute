@@ -80,7 +80,14 @@ a:hover {}
 	background-color: #1D5655;
 	border-color: #1D5655;
 }
-
+.btn-outline-primary {
+	color: #1D5655;
+	background-color: transparent;
+	border-color: #1D5655;
+	transition: all 0.2s ease-in
+}
+.btn-outline-primary:focus,
+.btn-outline-primary:hover,
 .btn-primary:focus,
 .btn-primary:hover {
 	color: #fff;

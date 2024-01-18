@@ -904,3 +904,22 @@ img.cat-thumb {
 .taskgoaledit select {
     min-width: 300px;
 }
+
+.proposal-grid-item .card {
+    border-color: #f1f1f1;
+}
+.proposal-grid-item .card-body {
+    display: flex;
+    flex-direction: column;
+}
+.proposal-grid-item .card-body .btn {
+    align-self: flex-end;
+}
+
+.transition-3d-hover {
+    transition: all 0.2s ease-in-out;
+}
+.transition-3d-hover:hover, .transition-3d-hover:focus {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+}

@@ -14,6 +14,14 @@
 ##$pages.include("$apphome/components/users/pickuser.html")
 ##$pages.include("$apphome/components/libraries/pickcollection.html")
 
+#if( $comunitytagcategory.externaldomain)
+  #set( $link ="//${comunitytagcategory.externaldomain}/app/index.html")
+#elseif($comunitytag.entitytype == "entityrental")
+  #set( $link = "$apphome/home/rentals/${comunitytagcategory.getId()}/#dash($comunitytagcategory)/.html")
+#else
+  #set( $link = "$apphome/home/proposals/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html")
+#end
+
 <nav class="navbar sticky-top navbar-expand-lg" id="superNav">
   <div class="container flex-nowrap"> 
      <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
@@ -25,7 +33,7 @@
             </h2>
           </a>
         <a href="$link">
-          <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="max-height:53px"/>
+          <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;"/>
         </a>
     #end
     
