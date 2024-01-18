@@ -65,7 +65,7 @@
       <language id="en"><![CDATA[Parents]]></language>      </name> 
   </property> 
   
-  <property id="creationdate" index="true" stored="true" editable="true"  type="date" datatype="date" >
+  <property id="creationdate" index="true" stored="true" editable="true"  viewtype="datetime" type="date" >
     <name> 
       <language id="de"><![CDATA[Erstellungsdatum]]></language>  
       <language id="en"><![CDATA[Created Date]]></language>  
@@ -103,6 +103,12 @@
       <language id="fr"><![CDATA[Tags]]></language> 
     </name> 
   </property>  
+
+	<property id="ordering" editable="false" index="true"
+		stored="true" datatype="number" viewtype="autoincrement"
+		indextype="not_analyzed">
+		Ordering
+	</property>
 
 
   <property id="taskroles" index="true" stored="true" editable="true" datatype="nested" > 
