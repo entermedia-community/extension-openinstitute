@@ -906,6 +906,7 @@ img.cat-thumb {
 }
 
 .proposal-grid-item .card {
+    overflow: hidden;
     border-color: #f1f1f1;
 }
 .proposal-grid-item .card-body {
@@ -915,11 +916,24 @@ img.cat-thumb {
 .proposal-grid-item .card-body .btn {
     align-self: flex-end;
 }
-
+.proposal-grid-item .card .card-img-top {
+    transition: all 0.2s ease-in-out;
+}
+.proposal-grid-item .card:hover .card-img-top {
+    transform: scale(1.05) translateY(-3px);
+}
 .transition-3d-hover {
     transition: all 0.2s ease-in-out;
 }
 .transition-3d-hover:hover, .transition-3d-hover:focus {
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
+}
+.form-control.disable-focus-ring:focus { 
+    border-color: inherit; 
+    box-shadow: none;
+}
+.form-control.input-brand.disable-focus-ring:focus {
+    color: #1D5655; 
+    border-color: #1D5655; 
 }

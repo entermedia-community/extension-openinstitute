@@ -1,0 +1,85 @@
+#if(!$link)
+	#set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+#end
+<div class="row no-gutters g-0" style="background-color:white;margin:10px;padding:23px">
+
+<div class="proposal-summary col-2" style="text-align:center">
+	<h3><a href="$link" class="btn btn-primary"title="${project.getName()}">$project.getName()</a></h3>
+	
+	<div class="clearfix"></div>
+	#set($logo = false) 
+	#if($project.assetportrait)
+		#set($asset = $mediaarchive.getAsset($project.assetportrait))
+		#set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
+	#else
+		#set($logo = "$applink/theme/images/OI_flower.png")
+	#end
+	
+	<div class="card-collections" >  
+	<a href="$link" 
+		class="pick-item  #if ($librarycol.id == $project.id) project-selected #end" 
+		title="${project.getName()}">
+		 <div class="card-collections-thumb" style='#if($logo) background-image: url("$logo") #end'></div>
+	</a>
+		#set( $days = $mediaarchive.getProjectManager().calcDaysRemaining($project) )
+	#if($days)
+		<div style="padding: 0 10px;">
+			#set( $completed = 365 - $days) 
+			#set( $per = $numberutils.divide($completed, 365) ) 
+			#set( $per = $per * 100.0 ) 
+			
+			<div class="progress" style="margin:15px 0;width:100%; height: 20px;">
+			  <div class="progress-bar" role="progressbar" style="width: $per%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+			<div style="color:#aaa">
+				$days [[Days Remaining]]
+			</div>
+		</div>
+	#end
+	</div>
+</div>	
+<div class="proposal-summary-content col" >
+		
+			#set($vals = $project.getValues("collectivetags") )
+			#set($count = 0)
+			#if($vals)
+				<div class="" style="margin:0 0 10px">
+				#set($link = "$siteroot$apphome/views/modules/asset/index.html")
+				 #foreach( $val in $vals )
+			       	#if($count<3)
+				       	
+						#set($fulllink = "$link?field=${type}&operation=contains&${type}.value=#esc($val)")
+						#if ($clearfilters)
+							#set($fulllink = "$fulllink&clearfilters=true")
+						#end
+						#set($count=$count+1)
+						<a class="btn btn-xs btn-secondary" title="#text($val)"	
+							href="$fulllink">
+							<span class="">#text($val)</span>
+						</a>
+						#set($tagsize = $val.length())
+						#set($characters = $characters + $tagsize)
+					#end
+				#end		
+				</div>
+			#end
+		
+		<div class="">
+			   	
+			   	<table style="width:100%;" class="proposalsummarytable">
+			   		<tr>
+			   			<td style="width:33%; padding-right: 10px;">
+			   				$!project.get("proposalproblem")
+			   			</td>
+			   			<td style="width:33%; padding-right: 10px;">
+			   				$!project.get("proposalcauses")
+			   			</td>
+			   			<td style="width:33%; padding-right: 2px;">
+			   				$!project.get("proposalempowerment")
+			   			</td>
+			   		</tr>
+			   	</table>
+			   	
+		</div>
+</div>
+</div>

@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<div class="d-flex bg-dark p-4">
+  <div class="container">
+    <div style="max-width: 520px;" class="mx-md-auto text-center">
+      <h1 class="text-white mb-0">Good News Network – by Giving Back Studio</h1>
+      <h4 class="text-white mt-0 d-none d-md-block fw-normal">
+        Truly joyful news to delight the spirit of humanity.
+      </h4>
+    </div>
+  </div>
+</div>
+<div class="container" style="overflow-x: scroll;">
+  #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+  #set( $projects =
+  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
+
+  <h2 class="text-center mt-4">Projects</h2>
+  <div class="container mb-4">
+    <div class="row">
+      #foreach($project in $projects)
+      #set($project = $searcher.loadData($project))
+      #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+      #set($logo = false)
+      #if($project.assetportrait)
+        #set($asset = $mediaarchive.getAsset($project.assetportrait))
+        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+      #else
+        #set($logo = "$applink/theme/images/OI_flower.png")
+      #end
+      #set($description = $project.get("collectivedescription"))
+      <div class="col-sm-12 col-md-6 col-lg-4 h-100 proposal-grid-item" data-aos="flip-up">
+        <div class="card w-100 mb-4 shadow-sm transition-3d-hover" style="min-height: 500px;">
+          <a href="$link">
+            ##<img src="$logo" class="card-img-top" alt="#text($project)">
+            <img src="https://picsum.photos/seed/${project.get("id")}/400/250" class="card-img-top" alt="#text($project)">
+          </a>
+          <div class="card-body">
+            <span class="text-muted">John Doe <strong class="d-inline-block mx-1">&middot;</strong> 24 Jan, 2024</span>
+            <h5 class="card-title">#text($project)</h5>
+            <p class="card-text mb-auto">$description</p>
+            <a href="$link" class="btn btn-outline-primary transition-3d-hover">Learn more <i class="fas fa-angle-double-right"></i></a>
+          </div>
+        </div>
+      </div> 
+      #end
+    </div>
+    
+    <hr style="border-color: #b5b5b5;" />
+
+    <div class=" d-flex align-items-center justify-content-center my-5"> 
+      <div class="p-4 shadow-sm rounded-3" style="background-color: #ffffff;">
+        <h2 class="text-center mb-0">Join the Community</h2>
+        <p class="text-center">Join the community to get updates on the latest projects.</p>
+        <div class="input-group input-group-lg mb-3" style="width: 480px;">
+          <input type="text" class="form-control input-brand disable-focus-ring" style="min-height: 48px;border-width:2px;" placeholder="Your email"
+            aria-describedby="button-addon2">
+          <button class="btn btn-primary rounded-end" type="button" id="button-addon2">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    $(document).ready(function () {
+      //
+      AOS.init();
+    });
+  </script>
+</div>
