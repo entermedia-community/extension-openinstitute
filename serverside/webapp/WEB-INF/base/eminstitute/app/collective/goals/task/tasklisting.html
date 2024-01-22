@@ -71,7 +71,7 @@
 			<input id="submitbutton" type="submit" form="someform" value="[[Save]]" name="submitbutton" class="btn btn-xs btn-primary float-right">
 			#if( $caneditcollection )
     		<a class="btn btn-xs btn-danger float-left ajax" data-confirm="[[Are you sure?]]"
-    			 targetdiv="editgoal" title="[[Remove task]]"
+    			targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
     			href="$applink/collective/goals/taskdelete.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">[[Delete]]</a> 
     		#end
 			

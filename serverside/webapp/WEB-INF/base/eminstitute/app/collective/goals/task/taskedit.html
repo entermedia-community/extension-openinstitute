@@ -86,7 +86,7 @@
 				#if( $task.id && $caneditcollection )
 					<a class="btn btn-sm btn-danger float-right ajax" 
 					style="margin:0 0 0 10px;" data-confirm="[[Are you sure?]]"
-					targetdiv="editgoal" title="[[Remove task]]"
+					targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
 					href="$applink/collective/goals/taskdelete.html?collectionid=$!librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">
 					[[Delete]]</a> 
     			#end
