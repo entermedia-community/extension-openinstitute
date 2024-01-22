@@ -1,4 +1,4 @@
-#set( $target = "messagetask${goal.id}")
+#set( $target = "goalrow#eid(${goal.id})")
 <div id="$target" class="goalstatus goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" style="position:relative"> 
 #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
 	<div class="mb-1">

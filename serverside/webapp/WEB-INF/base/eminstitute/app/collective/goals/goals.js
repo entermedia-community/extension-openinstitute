@@ -272,8 +272,8 @@ jQuery(document).ready(function(url,params)
 			console.log(path,params);
 			jQuery.get(path, params, function(data) 
 			{
-				
 				target.replaceWith(data);
+				select.val("");
 			});
 		});
 					

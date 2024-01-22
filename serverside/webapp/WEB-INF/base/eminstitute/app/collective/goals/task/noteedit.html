@@ -7,7 +7,7 @@
 
 #set($target = $context.getRequestParameter("targetdiv"))
 
-<tr id="taskrow$task.getId()" >
+<tr id="taskrow#eid($task.getId())" >
 	<td class="taskage" scope="row">$!task.getAge()</td>
 	
 <td colspan="4"> 

@@ -6,7 +6,7 @@
 
 #set($collectionid = $librarycol.id)
 
-#set( $tasktargetdiv = "tasklist#eid($taskid)")
+#set( $tasktargetdiv = "taskrow#eid($taskid)")
 
 
 <form name="saverole" 
@@ -19,6 +19,7 @@
 <input type="hidden" name="save" value="true" />
 <input type="hidden" name="taskid" value="$taskid" />
 <input type="hidden" name="collectiverole" value="$collectiverole" />
+<input type="hidden" name="collectionid" value="$collectionid" />
 
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
 
@@ -99,6 +100,7 @@
 		data-oemaxlevel="1"
 		data-targetdiv="viewrole"
 		data-taskid = "$taskid"
+		data-collectionid = "$collectionid"
 		data-collectiverole = "$collectiverole"
 		data-roleuserid = "$roleuserid"
 		style="margin: 0px 0 0 10px;" 
@@ -118,9 +120,10 @@
 <br>
     <a class="ajax btn btn-sm btn-danger  float-right"
    		data-oemaxlevel="1"
-		data-targetdiv="$tasktargetdiv"
+		data-targetdiv="goalrow#eid($task.projectgoal)"
+		data-goalid = "$task.projectgoal"
 		data-taskid = "$taskid"
-		data-roleid = "$roleid"
+		data-collectionid = "$collectionid"
 		data-closedialog = "true"
 		data-collectiverole = "$collectiverole"
 		data-roleuserid = "$roleuserid"

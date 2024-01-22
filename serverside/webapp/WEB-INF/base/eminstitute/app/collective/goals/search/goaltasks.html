@@ -35,7 +35,7 @@
 		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
 		
-			<div id="$!{container}taskrow${task.id}" class="goaltaskrow #if($task.taskstatus == "0" && $task.completedby == $user.id)taskmyself#end">
+			<div id="taskrow#eid(${task.id})" class="goaltaskrow #if($task.taskstatus == "3") goalstatuscompleted #end">
 			
 				<div>$!tree</div>
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
@@ -112,7 +112,7 @@
 							data-focuson="$task.id"
 							data-width="900"
 							class="taskedit-$!{task.taskstatus} ajax btn btn-sm mx-1 text-brand" 
-							data-targetdiv="$!{container}taskrow${task.id}" 
+							data-targetdiv="taskrow#eid(${task.id})" 
 							data-oemaxlevel="1" 
 						>
 					Added by <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') ago  (edit)
