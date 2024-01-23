@@ -675,3 +675,13 @@ ul.projectgoals {
 		transform: rotate(-15deg);
 	}
 }
+
+.rolemyself
+{
+	background-color: #da0000 !important;
+}
+
+.roleselected
+{
+	background-color: #a08b01 !important;
+}

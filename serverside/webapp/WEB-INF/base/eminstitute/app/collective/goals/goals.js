@@ -262,18 +262,28 @@ jQuery(document).ready(function(url,params)
 	{
 		var select = $(this);
 		//var select = div.find("select");
+		
 		select.on("change",function()
 		{
+			var running = select.data("running");
+			if( running )
+			{
+				return;
+			}
+			select.data("running",true);
 			var target = select.closest(".goaltaskrow ").find("#roleeditor");
 			var path = select.data("savepath");
-			var params = select.data();
+			var params = {};//select.cleandata();
 			params['addrole'] = select.val();
+			params['collectionid'] = select.data("collectionid");
 			params['taskid'] = select.data("taskid");
 			console.log(path,params);
 			jQuery.get(path, params, function(data) 
 			{
 				target.replaceWith(data);
 				select.val("");
+				select.trigger('change');
+				select.data("running",false);
 			});
 		});
 					

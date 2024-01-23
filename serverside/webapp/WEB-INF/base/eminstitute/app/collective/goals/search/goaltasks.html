@@ -1,3 +1,5 @@
+#set($collectionid = $context.getRequestParameter("collectionid"))
+
 #if(!$goalfolder)
 	#set( $goalfolder = $context.getRequestParameter("goalfolder"))
 	
@@ -11,7 +13,7 @@
 #end
 #set( $target = "$!{container}tasklist#eid($goal.id)")
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
-<div id="editgoal-${goal.id}">
+<div id="goalrow#eid(${goal.id})">
 <div id="$target" class="goaltaskcontainer">
 <div>
 		
@@ -59,7 +61,7 @@
 				#end
 
 				$context.putPageValue("task", $task)
-				$pages.include("$apphome/collective/goals/task/rolelist.html", $context)
+				$pages.include("$apphome/collective/goals/task/rolelist.html?collectionid=$!collectionid", $context)
 
 		
 		
@@ -134,7 +136,7 @@
 			 -->	
 <div id="rolepicker" style="display:inline">
 			<a class="addroletolist ajax" data-targetdivinner="rolepicker" 
-			data-collectionid = "$librarycol.id"
+			data-collectionid = "$collectionid"
 			data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
 </div>					
 					

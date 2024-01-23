@@ -24,14 +24,15 @@
   			<tr>
   			<th>[[Tickets and Tasks]]</th>
   			<th style="width:280px;">[[Closed On]]</th>
-  			<th style="width:80px;">[[Points]]</th></tr>
-			#set( $totalpoints = 0)  			
-			#set( $totalcritical = 0)  	
+  			<th style="width:80px;text-align:right;">[[Tasks]]</th>
+  			<th style="width:80px;text-align:right;">[[Roles]]</th></tr>
+			#set( $totalroalpoints = 0)  			
+			#set( $totaltaskpoints = 0)  	
   		#foreach( $week in $weeks)
-			#set( $counted = 0)
-			#set( $weekpoints = 0)  	
+			#set( $weektaskpoints = 0)  	
+			#set( $weekrolepoints = 0)  	
 			#set($tasks = $completed.getTasksForWeek($person, $week))
-			#set( $criticalpoints = 0)  	
+			#set( $taskpoints = 0)  	
 			
   		    #foreach($task in $tasks)
   		     	#set( $selectedcat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
@@ -40,8 +41,8 @@
 					#set( $points = 10 )
 				#end
 				#set( $counted = $counted +1)
-				#set( $totalpoints = $totalpoints + $points)
-				#set( $weekpoints = $weekpoints + $points)
+				#set( $totaltaskpoints = $totaltaskpoints + $points)
+				#set( $weektaskpoints = $weektaskpoints + $points)
   				<tr>
   				<td>
   				<a class="emdialog" 
@@ -70,12 +71,12 @@
   					<td style="text-align:right">$points
   					
 					#if( $task.get("completedurgent") == "true")
-						#set( $weekpoints = $$weekpoints + 10)
-						#set( $totalpoints = $totalpoints + 10)
+						#set( $weektaskpoints = $$weektaskpoints + 10)
+						#set( $totaltaskpoints = $totaltaskpoints + 10)
 						+ 10
 		 	 		#end
-  					
   					</td>
+  					<td></td>
 		 	 		#set($prevticket =  $ticket )
   				</tr>
   		    #end
@@ -95,56 +96,41 @@
 					href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&goalfolder=$content.goalfolder">
 
   				#text( $col ) -
-  				$!task.comment
   				#set($role = $!mediaarchive.getCachedData("collectiverole",$roleaction.getUserRole().get("collectiverole") ) )
-				( #text($role) )</a>
+				( #text($role) )
+				
+				  				$!task.comment</a>
 						$!roleaction.getUserRole().name
   				</td>
   				<td>$context.getDateTime($roleaction.getDate())</td>
-  				</td>
+  				<td></td>
   				<td style="text-align:right">
-				#set( $counted = $counted + 1)
-				#set( $weekpoints = $weekpoints + 10)
-				#set( $totalpoints = $totalpoints + 10)
+				#set( $weekrolepoints = $weekrolepoints + 10)
+				#set( $totalroalpoints = $totalroalpoints + 10)
 				10
   				</td>
   				</tr>
   		    #end
-  		    			###set($tickets = $completed.getTicketsForWeek($person,$week))
-  		    
-						  		    ##DO NOT COUNT TICKET COMPLETITION POINTS ANYMORE (Starting Sept 2020)
-						  		    #if(1==2)
-							  		    #set( $countedtickets = 0)
-							  		    #if(!$tickets.isEmpty())
-							  		    #foreach($ticket in $tickets)
-							  		   		#set( $points = $ticket.getValue("points"))
-							  		    	<tr><td>
-							  		    	#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${ticket.id}&collectionid=$ticket.collectionid&goalfolder=search")
-							  		    	#set($collection = $!mediaarchive.getCachedData("librarycollection",$ticket.collectionid) )
-							  		    	  <a href="$goallink"
-									    	title="$ticket.name" class="emdialog editgoalshow" 
-									    	data-urlbar="$applink/collective/goals/search/index.html?collectionid=$ticket.collectionid&opengoalid=${ticket.id}" data-width="900" >
-							  				[[Ticket]]: $collection - $mediaarchive.getCachedData("collectiveproject",$ticket.goaltrackercolumn) - "$ticket.name" </a></td>
-							  				<td>$!context.getDateTime($ticket.getDate("resolveddate"))</td>
-							  				<td>$points</td></tr>
-											#set( $counted = $counted +1)
-											#set( $weekpoints = $weekpoints + $points)
-											#set( $totalpoints = $totalpoints + $points)
-							  		    #end
-							  		    #end
-						  		    #end
-  		    
-  		    #if( $weekpoints > 0)
   			<tr><td colspan="2" style="padding-left: 0px;"> </td>
-  			<td style="text-align:right;"><b>$weekpoints</b></td>
+  			<td style="text-align:right;"><b>#if( $weektaskpoints > 0 )$weektaskpoints #end</b></td>
+  			 <td style="text-align:right;"><b>#if( $weekrolepoints > 0 )$weekrolepoints #end</b></td>
   			</tr>
-  			#end
 		#end
- 		    #if( $totalpoints > 0)
+ 		    #if( $totaltaskpoints > 0)
  			<tr>
- 			<td colspan="2" style="text-align:right;"><b>[[Total]]:</b></td>
+ 			<td colspan="2" style="text-align:right;"><b>[[Tasks]]:</b></td>
  			<td style="text-align:right;">
- 			<b>$totalpoints</b>
+ 			<b>$totaltaskpoints</b>
+ 			</td>
+ 			<td></td>
+ 			</tr>
+ 			#end
+ 		    #if( $totalroalpoints > 0)
+ 			<tr>
+ 			<td colspan="2" style="text-align:right;"><b>[[Roles]]:</b></td>
+ 			<td></td>
+ 			<td style="text-align:right;">
+ 			<b>$totalroalpoints</b>
  			</td></tr>
  			#end
   			</table>

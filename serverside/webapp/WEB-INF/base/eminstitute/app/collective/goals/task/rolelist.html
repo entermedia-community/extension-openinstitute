@@ -1,5 +1,5 @@
 #set( $rolesarray = $task.getValues("taskroles") )
-#set($collectionid = $librarycol.id)
+#set($collectionid = $context.getRequestParameter("collectionid"))
 
 <div id="roleeditor" class="rolelist">
 	##USE AJAX
@@ -15,7 +15,11 @@
 		 	data-collectiverole="$role.collectiverole"
 		 	data-roleuserid="$!role.roleuserid"
 		
-		 class="emdialog btn btn-sm btn-secondary">#text($collectiverole) ($!collectiveuser)</a>
+		 class="#if( $selectedcollectiverole == $collectiverole.id)roleselected#elseif( $!role.roleuserid == $user.id )rolemyself#end
+		 emdialog btn btn-sm btn-secondary 
+		 "
+		 
+		 >#text($collectiverole) ($!collectiveuser)</a>
 		 
 		 #if( $role.roleuserid )  ##default user
 		 <a	class="btn btn-sm btn-secondary ajax" style="padding:.275rem .35rem"  
