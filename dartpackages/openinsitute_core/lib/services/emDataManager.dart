@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -118,6 +119,15 @@ class DataModule {
     }
     box.put("lastsync", DateTime.now());
     return true;
+  }
+
+  Future<List<dynamic>> getUserRoleListData(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/lists/search/collectiverole',
+        inQuery,
+        RequestType.POST);
+
+    return jsonDecode(responsestring)['results'];
   }
 
   Future<List<emData>> getRemoteData(Map inQuery, bool cache) async {

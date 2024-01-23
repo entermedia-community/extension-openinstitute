@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
@@ -57,6 +59,21 @@ class ProjectManager {
       "users": [oi.authenticationmanager.emUser!.userid, sender]
     });
     return emData.fromJson(results['data']);
+  }
+
+  Future<List<dynamic>> getUserRoleList() async {
+    await createDataModule();
+    Map<String, dynamic> params = {
+      "page": "1",
+      "hitsperpage": "30",
+      "query": {
+        "terms": [
+          {"field": "name", "operation": "contains", "value": "*"}
+        ]
+      }
+    };
+
+    return await projectsModule!.getUserRoleListData(params);
   }
 
   Future<List<emData>> loadProject(int page) async {
