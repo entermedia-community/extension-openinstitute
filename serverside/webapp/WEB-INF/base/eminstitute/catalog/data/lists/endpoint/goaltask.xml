@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+
+  <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/taskloadrole.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
+     }]]></samplerequest>  
+    <name><![CDATA[Task Load Role Details]]></name> 
+  </data>  
+
+
+
+
+</root>

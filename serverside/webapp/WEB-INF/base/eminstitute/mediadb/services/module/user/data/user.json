@@ -1,5 +1,7 @@
 { 
+#ifnull($person)
 #set( $person = $data )
+#end
 	"userid" : "$person.id",
 	"screenname": "$person.screenName",
 	"email": #jesc( $person.email ),
