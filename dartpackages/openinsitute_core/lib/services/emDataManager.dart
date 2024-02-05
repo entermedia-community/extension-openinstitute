@@ -130,6 +130,15 @@ class DataModule {
     return jsonDecode(responsestring)['results'];
   }
 
+  Future<List<dynamic>> getProjectTeam(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/librarycollectionusers/search',
+        inQuery,
+        RequestType.POST);
+
+    return jsonDecode(responsestring)['results'];
+  }
+
   Future<List<emData>> getRemoteData(Map inQuery, bool cache) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/search',
@@ -183,6 +192,7 @@ class DataModule {
   }
 
   Future<emData> getData(String id) async {
+    log('collection Id: $id');
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         {},

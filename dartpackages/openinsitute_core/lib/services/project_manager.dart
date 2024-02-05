@@ -47,6 +47,25 @@ class ProjectManager {
     return data2;
   }
 
+  Future<List<dynamic>> projectTeamFromServer(String collectionId) async {
+    await createDataModule();
+    Map<String, dynamic> params = {
+      "page": "1",
+      "hitsperpage": "50",
+      "query": {
+        "terms": [
+          {
+            "field": "collectionid",
+            "operator": "exact",
+            "value": collectionId,
+          }
+        ]
+      }
+    };
+
+    return await projectsModule!.getProjectTeam(params);
+  }
+
   Future<emData?> getProject(String id) async {
     await createDataModule();
     return projectsModule?.getDataById(id);
