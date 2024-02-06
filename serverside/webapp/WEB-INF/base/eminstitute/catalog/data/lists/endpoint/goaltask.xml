@@ -11,6 +11,16 @@
   </data>  
 
 
+  <data id="modulegoaltaskrolelistaddone" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/rolelistaddone.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
+     }]]></samplerequest>  
+    <name><![CDATA[Add One Action To a Task]]></name> 
+  </data>  
+
+
+
 
 
 </root>
