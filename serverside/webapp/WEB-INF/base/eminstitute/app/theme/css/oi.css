@@ -3,6 +3,14 @@ body {
 }
 
 
+@media print {
+
+	.navbar-collective
+	{
+		display:none;
+	}
+	
+}
 a {
 	color: #666;
 }

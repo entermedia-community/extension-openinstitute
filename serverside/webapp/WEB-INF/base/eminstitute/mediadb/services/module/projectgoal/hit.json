@@ -5,13 +5,8 @@
 	, "tasks": [ 
 	
 			#foreach( $task in $tasks)#if( ${foreach.count} != 1 ), #end
-			{	
-			#jsonpartial($task $mediaarchive.getSearcher("goaltask").getPropertyDetails())
-				#set( $cat = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
-				#if( $cat )
-				, "projectdepartmentpoints": "$!{cat.goalpoints}"
-				#end
-			}
+				$context.putPageValue("hit",$task)
+				$pages.include("$apphome/services/modules/goaltask/hit.json",$context)
 			#end
 		]
 #end		
