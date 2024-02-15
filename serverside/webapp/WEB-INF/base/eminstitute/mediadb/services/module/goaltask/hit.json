@@ -19,7 +19,7 @@
 				,
 			    $context.putPageValue("person",$collectiveuser)
 				"collectiveuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
-				 ,"actioncount":"$!role.actioncount)"
+				 ,"actioncount":"$!role.actioncount"
 				#end 
 			}
 		#end
