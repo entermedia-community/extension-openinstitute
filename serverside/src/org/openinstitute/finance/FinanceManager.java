@@ -362,14 +362,24 @@ public class FinanceManager  implements CatalogEnabled
 		
 		return bycurrency;
 	}
-	
-	
-	public Map<String,List> getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
+
+	public Map<String,List> getCapitalExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
+	{
+		Map<String, List> bycurrency = getExpenseTypesByDateRange( inCollectionId,  inDateRange, true, topicid);
+		return bycurrency;
+	}	
+
+	public Map<String,List> getNormalExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
+	{
+		Map<String, List> bycurrency = getExpenseTypesByDateRange( inCollectionId,  inDateRange,  false, topicid);
+		return bycurrency;
+	}	
+	public Map<String,List> getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, boolean capital, String topicid) 
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
 		
-		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", false).search();
+		Collection expensetypes = getMediaArchive().query("expensetype").exact("iscapitalloan", capital).search();
 		query.orgroup("expensetype", expensetypes);
 		
 		query.exact("collectionid", inCollectionId);
