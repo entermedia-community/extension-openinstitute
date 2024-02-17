@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -362,7 +364,7 @@ public class FinanceManager  implements CatalogEnabled
 	}
 	
 	
-	public Map<String, Map> getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
+	public Map<String,List> getExpenseTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid) 
 	{
 		Searcher expensesSearcher = getMediaArchive().getSearcher("collectiveexpense");
 		QueryBuilder query = expensesSearcher.query();
@@ -381,7 +383,7 @@ public class FinanceManager  implements CatalogEnabled
 		HitTracker hits = expensesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		
-		HashMap<String, List> bycurrency = new HashMap<String, List>();
+		Map<String, List> bycurrency = new HashMap<String, List>();
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
@@ -398,7 +400,6 @@ public class FinanceManager  implements CatalogEnabled
 				bycurrency.put(currency, values);
 			}
 			values.add(data);
-			
 		}
 		
 		//Pull out only income
@@ -413,52 +414,70 @@ public class FinanceManager  implements CatalogEnabled
 			if( allvalues == null)
 			{
 				allvalues = new ListHitTracker();
-				//values.add(data);
-				bycurrency.put(currency, values);
 			}
 			allvalues.addAll(values);
+			bycurrency.put(currency, values);
 		}
 
 		
 		//summarize by ExpenseType
-		HashMap<String, Map> bycurrencydata = sumarizeByExpenseType(bycurrency);
-			
-		return bycurrencydata;
+		//Collection bycurrencydata = sumarizeByExpenseType(bycurrency);
+		
+		return bycurrency;
 	}
 
 
-	protected HashMap<String, Map> sumarizeByExpenseType(HashMap<String, List> bycurrency)
+	public Collection<Data> sumarizeByExpenseType(Collection inExpensesOfOneCurrency)
 	{
-		HashMap<String, Map> finalvalues = new HashMap<String, Map>();
-		
-		String currentcurrency = "";
-		for (Map.Entry<String, List> set :bycurrency.entrySet()) {
-			Collection data = (Collection) set.getValue();
-			HashMap<String, Data> currenttype = new HashMap<String, Data>();
-			String currenttypeid = "";
-			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
-				SearchHitData row = (SearchHitData) iterator.next();
-				currenttypeid = (String) row.getValue("expensetype");
-				
-				SearchHitData values = (SearchHitData)currenttype.get(currenttypeid);
-				if (values == null) {
-					values = new SearchHitData();
-					values.setValue("total", 0.0);
-					currenttype.put(currenttypeid, values);
+		HashMap<String, Data> byexpensetype = new HashMap<String, Data>();
+		for (Iterator iterator = inExpensesOfOneCurrency.iterator(); iterator.hasNext();) {
+			Data expense = (Data) iterator.next();
+			String currenttypeid = (String) expense.getValue("expensetype");
+			SearchHitData totalbyexpense = (SearchHitData)byexpensetype.get(currenttypeid);
+			if (totalbyexpense == null) {
+				totalbyexpense = new SearchHitData();
+				totalbyexpense.setValue("total", 0.0);
+				Data type = getMediaArchive().getCachedData("expensetype", currenttypeid );
+				totalbyexpense.setValue("expensetype",type);
+				byexpensetype.put(currenttypeid, totalbyexpense);
+			}
+			//Add up all the values
+			totalbyexpense.setValue("total", addUp((Double) totalbyexpense.getValue("total") , (Double) expense.getValue("total")));
+			totalbyexpense.setValue("currencytype", (String) expense.getValue("currencytype"));
+
+		}
+		List<Data> values = new ArrayList(byexpensetype.values());
+		//TODO: sort em
+		Collections.sort(values,new Comparator<Data>()
+		{
+			@Override
+			public int compare(Data inArg0, Data inArg1)
+			{
+				Data one = (Data)inArg0.getValue("expensetype");
+				Data two = (Data)inArg1.getValue("expensetype");
+				if( one.getName() != null && two.getName() != null)
+				{
+					int i = one.getName().compareToIgnoreCase(two.getName());
+					return i;
 				}
 				
-				values.setValue("total", addUp((Double) values.getValue("total") , (Double) row.getValue("total")));
-				values.setValue("currencytype", (String) row.getValue("currencytype"));
-				values.setValue("expensetype", currenttypeid);
-
+				return 0;
 			}
-			finalvalues.put(set.getKey(), currenttype);
-			
-		}
-		return finalvalues;
+		});
+		return values;
 	}
-	
-		
+
+    protected  <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Entry<K, V>> list = new ArrayList<>(map.entrySet());
+        list.sort(Entry.comparingByValue());
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
 	private Double addUp(Double inValue, Double inValue2)
 	{
 		if(inValue == null)
