@@ -23,13 +23,8 @@
                                   <th>[[Account]]</th>
                                   <th>[[Type]]</th>
                                   <th>[[Description]]</th>
+                                  <th>[[Paid]]</th>
                                   <th>[[Total]]</th>
-                                  #if( $showreimburst )
-                                  <th>[[Reimburse To]]</th>                                  
-                                  #else
-                                  <th>[[Approved]]</th>
-                                  #end
-                                  <th>[[Reimburse]]</th>
                                   <th></th>
                               </tr>
                           </thead>
@@ -51,14 +46,8 @@
                                   <td>$!mediaarchive.getCachedData("bankaccount", $hit.paidfromaccount)</td>
                                   <td>$!context.getText($!mediaarchive.getCachedData("expensetype", $hit.expensetype))</td>
                                   <td>#esc($hit.expensedescription)</td>
+                                  <td>#if( $hit.getValue("ispaid") ) [[paid on ]] $!context.getDate($hit.paymentdate) #end</td>								  
                                   <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype) )</td>
-								 #if( $showreimburst )
-								 	<td>$!mediaarchive.getCachedData("user", $hit.reimburseuser)</td>								
-								 #else
-								 	<td>$!mediaarchive.getCachedData("user", $hit.user)</td>
-								#end                                 
-								  <td>$!context.getText($!mediaarchive.getCachedData("reimbursedstatus", $hit.reimbursedstatus))</td>
-								  
 			                      <td style="text-align: center; min-width:70px;">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
