@@ -7,7 +7,7 @@
     <samplerequest><![CDATA[{
      "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
      }]]></samplerequest>  
-    <name><![CDATA[Task Load Role Details]]></name> 
+    <name><![CDATA[Role Load Role Details]]></name> 
   </data>  
 
 
@@ -16,10 +16,25 @@
     <samplerequest><![CDATA[{
      "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
      }]]></samplerequest>  
-    <name><![CDATA[Add One Action To a Task]]></name> 
+    <name><![CDATA[Role Add One Action To a Task]]></name> 
   </data>  
 
 
+  <data id="modulegoaltaskrolelistremove" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/taskdeleteroleaction.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AfxfwerFSDFSFWE", "goaltaskuserrole":"321122" 
+     }]]></samplerequest>  
+    <name><![CDATA[Role Remove Action from Task]]></name> 
+  </data>  
+
+  <data id="modulegoaltaskrolesave" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/rolelistaddone.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
+     }]]></samplerequest>  
+    <name><![CDATA[Role Save Details]]></name> 
+  </data>  
 
 
 
