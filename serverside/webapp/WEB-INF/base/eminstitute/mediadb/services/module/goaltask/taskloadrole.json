@@ -3,19 +3,24 @@
 #set( $roleuserid = $context.getRequestParameter("roleuserid") )
 #set($collectionid = $librarycol.id)
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
-#set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
-#set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
 {
   "response": {
+  	#if( $taskrole )
     "status": "ok",
     "id": "$taskrole.id"
+    #else
+    "status": "notfound"
+    #end
 	},
 	"data":
 	{
-	    "collectiverole": {"id":"$taskrole.id","name":"$taskrole.name" },
+	    "collectiverole": {"id":"$!taskrole.id","name":"$!taskrole.name" }
+	    
 	    #set( $user = $mediaarchive.getCachedData("user", $taskrole.roleuserid) )
+	    #if( $user ) ,
 	    $context.putPageValue("person",$user)
 		"roleuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
+		#end
 	}
 ,
 "actions":
