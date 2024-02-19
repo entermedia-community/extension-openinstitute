@@ -3,11 +3,13 @@
 	#jsonpartial($hit $searcher.getPropertyDetails()) 
 	#set( $task = $hit )
 	#set( $rolesarray = $task.getValues("taskroles") )
+
 	#if( $rolesarray && !$rolesarray.isEmpty() )
-	  , "taskroles":[ 
+	  , "taskroledetails":[ 
 		#foreach( $role in $rolesarray )
 		 	#if( ${foreach.count} != 1), #end 
 			{
+			"notes": #jesc($role.name),
 			#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
 			#ifnotnull( $collectiverole )
 			"collectiverole": {
@@ -15,14 +17,16 @@
 			}
 			#end
 			#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
-				#if( $collectiveuser )
-				,
-			    $context.putPageValue("person",$collectiveuser)
-				"collectiveuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
-				 ,"actioncount":"$!role.actioncount"
-				#end 
+			#if( $collectiveuser )
+			,
+		    $context.putPageValue("person",$collectiveuser)
+			"collectiveuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
+			#end 
+			 ,"actioncount":"$!role.actioncount"
 			}
 		#end
 		]
 	#end
+
+
 }

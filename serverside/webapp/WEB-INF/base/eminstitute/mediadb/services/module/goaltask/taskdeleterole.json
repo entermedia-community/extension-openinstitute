@@ -1,2 +1,11 @@
+$context.putPageValue("searcher",$mediaarchive.getSearcher("goaltask"))
 $context.putPageValue("hit",$task)
-$pages.include("./hit.json",$context)
+#set( $hit = $task)
+{
+  "response": {
+    "status": "ok",
+    "id": "$hit.id"
+	},
+	"data":
+	$pages.include("./hit.json",$context)
+}

@@ -2,10 +2,19 @@
 
 <root> 
 
+  <data id="modulegoaltaskrolesave" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/tasksaverole.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin","name":"Some note" 
+     }]]></samplerequest>  
+    <name><![CDATA[Role Save Details]]></name> 
+  </data>  
+
+
   <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/taskloadrole.json">
     <samplerequest><![CDATA[{
-     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
      }]]></samplerequest>  
     <name><![CDATA[Role Load Role Details]]></name> 
   </data>  
@@ -14,7 +23,7 @@
   <data id="modulegoaltaskrolelistaddone" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/rolelistaddone.json">
     <samplerequest><![CDATA[{
-     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
      }]]></samplerequest>  
     <name><![CDATA[Role Add One Action To a Task]]></name> 
   </data>  
@@ -23,18 +32,16 @@
   <data id="modulegoaltaskrolelistremove" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/taskdeleteroleaction.json">
     <samplerequest><![CDATA[{
-     "collectionid":"AfxfwerFSDFSFWE", "goaltaskuserrole":"321122" 
+     "roleactionid":"AYsBS3Pov6dNtFqL3zN5"  
      }]]></samplerequest>  
     <name><![CDATA[Role Remove Action from Task]]></name> 
   </data>  
 
-  <data id="modulegoaltaskrolesave" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
-  url="/site/mediadb/services/module/goaltask/rolelistaddone.json">
-    <samplerequest><![CDATA[{
-     "collectionid":"AfxfwerFSDFSFWE", "taskid":"321122", "collectiverole": "0","roleuserid": "admin" 
-     }]]></samplerequest>  
-    <name><![CDATA[Role Save Details]]></name> 
-  </data>  
+		String actionid = inReq.getRequestParameter("actionid");
+		String taskid = inReq.getRequestParameter("taskid");
+		String roleuserid = inReq.getRequestParameter("roleuserid");
+		String collectiverole = inReq.getRequestParameter("collectiverole");
+
 
 
 

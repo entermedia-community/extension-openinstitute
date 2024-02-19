@@ -1,5 +1,6 @@
 <page>
 	<path-action name="JsonAssetModule.preprocess" />
 
-	<path-action name="ProjectModule.loadCollection" />
+	<path-action name="TaskModule.taskRoleLoad" />
+
 </page>
