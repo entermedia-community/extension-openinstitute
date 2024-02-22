@@ -5,7 +5,9 @@
   <data id="modulegoaltaskrolesave" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/tasksaverole.json">
     <samplerequest><![CDATA[{
-     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin","name":"Some note" 
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5",
+      "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin"
+      ,"name":"Some note" 
      }]]></samplerequest>  
     <name><![CDATA[Role Save Details]]></name> 
   </data>  
