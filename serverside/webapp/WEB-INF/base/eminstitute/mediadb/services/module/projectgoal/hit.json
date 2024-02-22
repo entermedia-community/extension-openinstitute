@@ -6,6 +6,7 @@
 	
 			#foreach( $task in $tasks)#if( ${foreach.count} != 1 ), #end
 				$context.putPageValue("hit",$task)
+				$context.putPageValue("task",$task)
 				$pages.include("$apphome/services/module/goaltask/hit.json",$context)
 			#end
 		]

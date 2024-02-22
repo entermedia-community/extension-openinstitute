@@ -2,7 +2,7 @@
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
 #set( $roleuserid = $context.getRequestParameter("roleuserid") )
 #set($collectionid = $librarycol.id)
-#set( $goalManager = $mediaarchive.getBean("goalManager") )
+
 {
   "response": {
   	#if( $taskrole )
@@ -25,6 +25,7 @@
 ,
 "actions":
 [
+#set( $goalManager = $mediaarchive.getBean("goalManager") )
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
 #foreach( $goaltaskuserrole in $actions)
  	#if( ${foreach.count} != 1), #end 

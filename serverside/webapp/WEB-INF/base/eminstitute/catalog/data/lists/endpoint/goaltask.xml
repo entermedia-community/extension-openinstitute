@@ -37,12 +37,5 @@
     <name><![CDATA[Role Remove Action from Task]]></name> 
   </data>  
 
-		String actionid = inReq.getRequestParameter("actionid");
-		String taskid = inReq.getRequestParameter("taskid");
-		String roleuserid = inReq.getRequestParameter("roleuserid");
-		String collectiverole = inReq.getRequestParameter("collectiverole");
-
-
-
-
+			
 </root>

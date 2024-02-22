@@ -1,3 +1,4 @@
+#set( $searcher = $mediaarchive.getSearcher("goaltask"))
 #set( $goalManager = $mediaarchive.getBean("goalManager") )
 {
 	#jsonpartial($hit $searcher.getPropertyDetails()) 
@@ -9,20 +10,20 @@
 		#foreach( $role in $rolesarray )
 		 	#if( ${foreach.count} != 1), #end 
 			{
-			"notes": #jesc($role.name),
+			"notes": #jesc($role.name)
+			 ,"actioncount":"$!role.actioncount"
 			#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
 			#ifnotnull( $collectiverole )
-			"collectiverole": {
-				#jsonpartial($collectiverole $mediaarchive.getSearcher("collectiverole").getPropertyDetails())
-			}
+				,"collectiverole": {
+					#jsonpartial($collectiverole $mediaarchive.getSearcher("collectiverole").getPropertyDetails())
+				}
 			#end
 			#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 			#if( $collectiveuser )
-			,
-		    $context.putPageValue("person",$collectiveuser)
-			"collectiveuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
+				,
+			    $context.putPageValue("person",$collectiveuser)
+				"collectiveuser": $pages.include("/${applicationid}/services/module/user/data/user.json",$context)
 			#end 
-			 ,"actioncount":"$!role.actioncount"
 			}
 		#end
 		]
