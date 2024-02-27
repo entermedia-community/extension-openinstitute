@@ -42,11 +42,7 @@
 				<div>$!tree</div>
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
-					#if($!task.comment.length() > 300)
-						$!task.comment.substring(0, 300) ...
-					#else
-						$!task.comment
-					#end
+					$url_util.escapeMessage($task.comment,300)
 				</div>
 				#set( $type = "goaltask" )
 				#set( $vals = $task.getValues("keywords") )

@@ -2,6 +2,25 @@
 
 <root> 
 
+
+
+  <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/taskroleadd.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
+     }]]></samplerequest>  
+    <name><![CDATA[Task Role Add]]></name> 
+  </data>  
+
+  <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  url="/site/mediadb/services/module/goaltask/taskloadrole.json">
+    <samplerequest><![CDATA[{
+     "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
+     }]]></samplerequest>  
+    <name><![CDATA[Task Role Load Role Details]]></name> 
+  </data>  
+
+
   <data id="modulegoaltaskrolesave" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/tasksaverole.json">
     <samplerequest><![CDATA[{
@@ -9,16 +28,16 @@
       "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin"
       ,"name":"Some note" 
      }]]></samplerequest>  
-    <name><![CDATA[Role Save Details]]></name> 
+    <name><![CDATA[Task Role Save Details]]></name> 
   </data>  
 
 
   <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
-  url="/site/mediadb/services/module/goaltask/taskloadrole.json">
+  url="/site/mediadb/services/module/goaltask/taskroledelete.json">
     <samplerequest><![CDATA[{
      "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
      }]]></samplerequest>  
-    <name><![CDATA[Role Load Role Details]]></name> 
+    <name><![CDATA[Task Role Delete]]></name> 
   </data>  
 
 
@@ -27,7 +46,7 @@
     <samplerequest><![CDATA[{
      "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
      }]]></samplerequest>  
-    <name><![CDATA[Role Add One Action To a Task]]></name> 
+    <name><![CDATA[Task Role Action Add To a Task]]></name> 
   </data>  
 
 
@@ -36,7 +55,7 @@
     <samplerequest><![CDATA[{
      "roleactionid":"AYsBS3Pov6dNtFqL3zN5"  
      }]]></samplerequest>  
-    <name><![CDATA[Role Remove Action from Task]]></name> 
+    <name><![CDATA[Task Role Action Remove from Task]]></name> 
   </data>  
 
 			

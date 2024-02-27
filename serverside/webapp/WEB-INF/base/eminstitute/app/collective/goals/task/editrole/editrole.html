@@ -6,12 +6,13 @@
 
 #set($collectionid = $librarycol.id)
 
-#set( $tasktargetdiv = "taskrow#eid($taskid)")
+#set( $goalManager = $mediaarchive.getBean("goalManager") )
 
+#set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
 
 <form name="saverole" 
 	id="saverole"
-	data-targetdiv="$tasktargetdiv"
+	data-targetdiv="goalrow#eid($task.projectgoal)"
 	class="ajaxform autocloseform" data-oemaxlevel="1"
 	action="$applink/collective/goals/task/editrole/saverole.html"
 	method="post">
@@ -20,10 +21,6 @@
 <input type="hidden" name="taskid" value="$taskid" />
 <input type="hidden" name="collectiverole" value="$collectiverole" />
 <input type="hidden" name="collectionid" value="$collectionid" />
-
-#set( $goalManager = $mediaarchive.getBean("goalManager") )
-
-#set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
 
 #set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
 

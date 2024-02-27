@@ -274,7 +274,7 @@ jQuery(document).ready(function(url,params)
 			var target = select.closest(".goaltaskrow ").find("#roleeditor");
 			var path = select.data("savepath");
 			var params = {};//select.cleandata();
-			params['addrole'] = select.val();
+			params['collectiverole'] = select.val();
 			params['collectionid'] = select.data("collectionid");
 			params['taskid'] = select.data("taskid");
 			console.log(path,params);
