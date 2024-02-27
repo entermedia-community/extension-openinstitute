@@ -4,7 +4,7 @@
 
 
 
-  <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  <data id="modulegoaltaskaddrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/taskroleadd.json">
     <samplerequest><![CDATA[{
      "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
@@ -32,7 +32,7 @@
   </data>  
 
 
-  <data id="modulegoaltaskloadrole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
+  <data id="modulegoaltaskdeleterole" uploadfile="false" httpmethod="POST" docsection="modulegoaltask" 
   url="/site/mediadb/services/module/goaltask/taskroledelete.json">
     <samplerequest><![CDATA[{
      "collectionid":"AYsBS3Pov6dNtFqL3zN5", "taskid":"AY023-oVzQHA2GtlHt5r", "collectiverole": "13","roleuserid": "admin" 
