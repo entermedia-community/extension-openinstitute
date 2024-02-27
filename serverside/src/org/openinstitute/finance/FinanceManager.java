@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.entermedia.transactions.TransactionManager;
 import org.entermediadb.asset.MediaArchive;
-import org.entermediadb.asset.util.MathUtils;
 import org.entermediadb.elasticsearch.SearchHitData;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
@@ -28,6 +27,7 @@ import org.openedit.data.Searcher;
 import org.openedit.hittracker.HitTracker;
 import org.openedit.hittracker.ListHitTracker;
 import org.openedit.hittracker.SearchQuery;
+import org.openedit.util.MathUtils;
 
 public class FinanceManager  implements CatalogEnabled
 {
