@@ -130,6 +130,54 @@ class DataModule {
     return jsonDecode(responsestring)['results'];
   }
 
+  Future<dynamic> addTaskRole(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/taskroleadd',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
+  Future<dynamic> saveRoleDetails(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/tasksaverole',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
+  Future<dynamic> removeTaskRole(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/taskroledelete',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
+  Future<dynamic> removeTaskAction(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/taskdeleteroleaction',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
+  Future<dynamic> getActionLogs(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/taskloadrole',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
+  Future<dynamic> addActionRolePoint(Map inQuery) async {
+    final responsestring = await oi.getEmResponse(
+        oi.app!["mediadb"] + '/services/module/goaltask/rolelistaddone',
+        inQuery,
+        RequestType.POST);
+    return jsonDecode(responsestring);
+  }
+
   Future<List<dynamic>> getProjectTeam(Map inQuery) async {
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/librarycollectionusers/search',

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:openinsitute_core/Helper/request_type.dart';
 import 'package:openinsitute_core/models/emData.dart';
@@ -53,22 +54,131 @@ class TaskManager {
     }
   }
 
+  taskRoleAdd(
+      String projectId, String taskId, String roleId, String roleUserId) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {
+      "collectionid": projectId,
+      "taskid": taskId,
+      "collectiverole": roleId,
+      "roleuserid": roleUserId,
+    };
+    final response = await goalModule!.addTaskRole(inQuery);
+    if (response['response']['status'] == 'ok') {
+      return true;
+    }
+    return false;
+  }
+
+  roleDetailsSave(String projectId, String taskId, String roleId,
+      String roleUserId, String notes) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {
+      "collectionid": projectId,
+      "taskid": taskId,
+      "collectiverole": roleId,
+      "roleuserid": roleUserId,
+      "name": notes
+    };
+    final response = await goalModule!.saveRoleDetails(inQuery);
+    if (response['response']['status'] == 'ok') {
+      return true;
+    }
+    return false;
+  }
+
+  deleteTaskRole(
+      String projectId, String taskId, String roleId, String roleUserId) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {
+      "collectionid": projectId,
+      "taskid": taskId,
+      "collectiverole": roleId,
+      "roleuserid": roleUserId
+    };
+
+    final response = await goalModule!.removeTaskRole(inQuery);
+    if (response['response']['status'] == 'ok') {
+      return true;
+    }
+    return false;
+  }
+
+  deleteTaskAction(String projectId, String id) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {"roleactionid": id};
+    dynamic response = await goalModule!.removeTaskAction(inQuery);
+    if (response['response']['status'] == 'ok') {
+      return true;
+    }
+    return false;
+  }
+
+  Future<List<dynamic>> getActionLogHistory(
+      String projectId, String taskId, String roleId, String roleUserId) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {
+      "collectionid": projectId,
+      "taskid": taskId,
+      "collectiverole": roleId,
+      "roleuserid": roleUserId
+    };
+
+    final response = await goalModule!.getActionLogs(inQuery);
+    List<dynamic> actions = response['actions'] ?? [];
+    return actions;
+  }
+
+  addOneActionToRole(String projectId, taskId, roleId, roleUserId) async {
+    await createDataModule(goalModule, "projectgoal",
+        boxString: "projectgoal_$projectId");
+
+    Map inQuery = {
+      "collectionid": projectId,
+      "taskid": taskId,
+      "collectiverole": roleId,
+      "roleuserid": roleUserId
+    };
+
+    final response = await goalModule!.addActionRolePoint(inQuery);
+    if (response['response']['status'] == 'ok') {
+      return true;
+    }
+    return false;
+  }
+
   loadCacheTask(String projectId) async {
     goalModule = await createDataModule(goalModule, "projectgoal",
-        boxString: "projectgoal_" + projectId);
+        boxString: "projectgoal_$projectId");
     List<emData> tasks = goalModule!.getAllHits();
     return tasks;
   }
 
   loadTask(String projectId, int page) async {
     goalModule = await createDataModule(goalModule, "projectgoal",
-        boxString: "projectgoal_" + projectId);
+        boxString: "projectgoal_$projectId");
+
     Map inQuery = {
       "page": "$page",
       "hitsperpage": "20",
+      "projectgoalsortby": "creationdateDown",
       "query": {
         "terms": [
-          {"field": "collectionid", "operation": "matches", "value": projectId}
+          {
+            "field": "collectionid",
+            "operation": "exact",
+            "value": projectId,
+          }
         ]
       }
     };

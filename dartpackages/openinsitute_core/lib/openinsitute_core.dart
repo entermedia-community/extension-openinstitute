@@ -181,6 +181,11 @@ class OpenI {
       headers.addAll({"X-token": tokenKey});
     }
 
+    log('url: $url');
+    log('headers: $headers');
+    log('body: $jsonBody');
+    log('request type: $requestType');
+
     final response = await httpRequest(
       requestUrl: url,
       body: jsonEncode(jsonBody),
@@ -232,7 +237,6 @@ class OpenI {
         );
       }
       response = await handleException(responseJson!);
-      log('test response: $response');
       return response;
     } on BadRequestException catch (error) {
       //showErrorFlushbar( "Bad request! Please try again later.");
