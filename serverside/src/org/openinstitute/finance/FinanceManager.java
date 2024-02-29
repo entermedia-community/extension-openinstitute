@@ -391,8 +391,8 @@ public class FinanceManager  implements CatalogEnabled
 
 		
 		HitTracker hits = expensesSearcher.search(query.getQuery());
-		hits.setHitsPerPage(1000);
-		
+		hits.enableBulkOperations();
+		log.info("expenses: " + hits);
 		Map<String, List> bycurrency = new HashMap<String, List>();
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
@@ -413,6 +413,7 @@ public class FinanceManager  implements CatalogEnabled
 		}
 		
 		//Pull out only income
+		/*
 		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,false);
 
 		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) 
@@ -428,7 +429,7 @@ public class FinanceManager  implements CatalogEnabled
 			allvalues.addAll(values);
 			bycurrency.put(currency, values);
 		}
-
+		*/
 		
 		//summarize by ExpenseType
 		//Collection bycurrencydata = sumarizeByExpenseType(bycurrency);
