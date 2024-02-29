@@ -534,6 +534,19 @@ li.menu-subheader {
 	}
 }
 
+
+@media print {
+
+
+	.dontprintme,.navbar-collective,.campaignscollectiveheader,.collectivesettings-menu
+	{
+			display:none;
+		
+		
+	}	
+}
+
+
 /*OI Homepage*/
 .bodywebsite h1 {
 	text-align: center;
