@@ -1,7 +1,7 @@
 package importing;
 
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.asset.util.MathUtils
+import org.openedit.util.MathUtils
 import org.openedit.Data
 import org.openedit.MultiValued
 import org.openedit.data.Searcher

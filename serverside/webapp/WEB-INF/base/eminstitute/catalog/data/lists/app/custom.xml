@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data deploypath="/site/collections" id="AWD7AT0ZPPWRiS0pR_sG"> 
+  <data deploypath="/site/collections" id="AWD7AT0ZPPWRiS0pR_sG" roles="admin" url="http://dsfsd.com"> 
     <name> 
       <language id="en"><![CDATA[collections]]></language> 
     </name> 
