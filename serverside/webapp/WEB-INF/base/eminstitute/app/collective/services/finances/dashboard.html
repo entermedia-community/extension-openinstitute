@@ -88,20 +88,19 @@
 	</form>
 	
 		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $topic) )
-	<h3>[[Summary Balances]]</h3>
+	<h3>[[Profit]]</h3>
 		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $netincome.keySet())
 				#set($net = $netincome.get($currencytype))
 				<tr>
-				
 				<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
 				<td style="width:20%; text-align: right;">$!context.doubleToMoney($!net, 2)</td>
 				<td></td>
 				<td  class="table-col-totals">
 				#if( $currencytype != "2") 
 				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
-				$$!context.doubleToMoney($subtotal, 2)
+				$$!context.doubleToMoney($subtotal, 2)  USD
 				#set( $total = $subtotal + $total)
 				#end
 				</td>
@@ -115,7 +114,7 @@
 				
 				</td>
 				<td class="table-col-totals">
-			 	$$!context.doubleToMoney($total, 2)
+			 	$$!context.doubleToMoney($total, 2) USD
 			</td>
 			</tr>
 			</table>
