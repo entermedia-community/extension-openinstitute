@@ -53,6 +53,7 @@
 
 			
 			<h3>[[Normal Expenses]]</h3>  
+			#set($toalusd = 0.0)
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $currencymap = $financeManager.getNormalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
 			
@@ -60,7 +61,8 @@
 			#set($totalbycurrency = 0)
 			#foreach( $currencytype in $currencymap.keySet())
 				<tr class="tablefinances-header">
-				<td colspan="2" >$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
+				#set( $currency = $mediaarchive.getCachedData("currencytype", $currencytype))
+				<td colspan="2" >#text( $currency )</td>
 				</tr>
 			
 				#set( $inExpensess = $currencymap.get($currencytype))
@@ -74,13 +76,34 @@
 					#set($totalbycurrency = $totalbycurrency + $expensecategory.getValue("total"))
 				#end
 				<tr>
-				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
-				<td class="table-col-totals"><strong>- $!context.doubleToMoney($totalbycurrency,2)</strong></td>
+				<td style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
+				<td class="table-col-totals">
+				#if( $currency.exchangetousd != "1")
+					#set( $convert = $currency.getValue("exchangetousd"))
+					#set($usd = $totalbycurrency/$convert)
+					[ -$${context.doubleToMoney($usd,2)} ]
+				#else
+					#set( $usd = $totalbycurrency)
+				#end
+				#set( $toalusd = $toalusd + $usd)
+				
+				<strong>- $!context.doubleToMoney($totalbycurrency,2)</strong>
+				</td>
 				
 				</tr>
 				#set($totalbycurrency = 0)
 				
 			#end
+			
+							<tr>
+				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
+				<td class="table-col-totals">
+				<strong>- $$!context.doubleToMoney($toalusd,2)</strong>
+				</td>
+				
+				</tr>
+			
+			
 			</table>
 			<h3>[[Capital Expenses]]</h3>  
 			#set( $currencymap = $financeManager.getCapitalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
