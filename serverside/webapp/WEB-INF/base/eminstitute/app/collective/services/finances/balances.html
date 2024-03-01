@@ -2,71 +2,66 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
 
-			<h3>[[Incomes]]</h3> 
-			##<a href="#" class="btn btn-sm btn-secondary">[[Add New Income]]</a>
-		
-			#set( $incomebytype = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange, $topic) )
-		
+			<h3>[[Incomes]]</h3>
+			#set($totalusd = 0.0) 
+			#set( $currencymap = $financeManager.getIncomeTypesByDateRange($collectionid, $daterange,$topic) )
 			<table class="table tablefinances" >
-			#set($thecurrency = "0")
-			#set($totalbycurrency = 0)
+			#foreach( $currencytype in $currencymap.keySet())
+				#set($totalbycurrency = 0)
+				<tr class="tablefinances-header">
+				#set( $currency = $mediaarchive.getCachedData("currencytype", $currencytype))
+				<td colspan="2" >#text( $currency )</td>
+				</tr>
 			
-			#foreach( $currencytype in $incomebytype.keySet())
-				#set($current = $incomebytype.get($currencytype))
-	
-				#foreach($type as $current)
-					#if($type.currencytype != $thecurrency)
-						#set($thecurrency = $type.currencytype)
-						<tr class="tablefinances-header">
-						<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $type.currencytype))</td>
+				#set( $incomes = $currencymap.get($currencytype))
+				#set( $expensetotals = $financeManager.sumarizeByType($incomes,"incometype") )
+				#foreach($incomecategory as $expensetotals)
+					<tr class="">
 						
-						<td></td>
-						
-						</tr>
-					#end 
-					<tr class="tablefinances-header">
-						
-						<td>
-						#if($type.incometype)
-							$!context.getText($mediaarchive.getCachedData("incometype", $type.incometype))
-						#else
-							##OI Donation
-							[[Donation or Invoice]]
-						#end
-						</td>
-						<td class="table-col-totals">$!context.doubleToMoney($type.getValue("total"),2)</td>
-						
+						<td>$!context.getText($incomecategory.incometype)</td>
+						<td class="table-col-totals">$!context.doubleToMoney($incomecategory.getValue("total"),2)</td>
 					</tr>
-					#set($totalbycurrency = $totalbycurrency + $type.getValue("total"))
-					
+					#set($totalbycurrency = $totalbycurrency + $incomecategory.getValue("total"))
 				#end
-					<tr>
-					<td></td>
-					<td style="text-align: right;">[[Total]]:</td>
-					<td class="table-col-totals">$!context.doubleToMoney($totalbycurrency,2)</td>
-					
-					</tr>
-					#set($totalbycurrency = 0)
+				<tr>
+				<td style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
+				<td class="table-col-totals">
+				#if( $currency.exchangetousd != "1")
+					#set( $convert = $currency.getValue("exchangetousd"))
+					#set($usd = $totalbycurrency/$convert)
+					[ -$${context.doubleToMoney($usd,2)} ]
+				#else
+					#set( $usd = $totalbycurrency)
+				#end
+				#set( $totalusd = $totalusd + $usd)
 				
+				<strong>$!context.doubleToMoney($totalbycurrency,2)</strong></td>
+				
+				</tr>
 			#end
+			<tr>
+				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
+				<td class="table-col-totals">
+					USD $$!context.doubleToMoney($totalusd,2)
+				</td>
+			</tr>
 			</table>
 
 			
-			<h3>[[Normal Expenses]]</h3>  
+			<h3>[[Expenses]]</h3>  
 			#set($toalusd = 0.0)
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $currencymap = $financeManager.getNormalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
-			
 			<table class="table tablefinances" >
-			#set($totalbycurrency = 0)
 			#foreach( $currencytype in $currencymap.keySet())
+				#set($totalbycurrency = 0)
 				<tr class="tablefinances-header">
 				#set( $currency = $mediaarchive.getCachedData("currencytype", $currencytype))
 				<td colspan="2" >#text( $currency )</td>
 				</tr>
 			
 				#set( $inExpensess = $currencymap.get($currencytype))
-				#set( $expensetotals = $financeManager.sumarizeByExpenseType($inExpensess) )
+				#set( $expensetotals = $financeManager.sumarizeByType($inExpensess,"expensetype") )
 				#foreach($expensecategory as $expensetotals)
 					<tr class="">
 						
@@ -87,12 +82,10 @@
 				#end
 				#set( $toalusd = $toalusd + $usd)
 				
-				<strong>- $!context.doubleToMoney($totalbycurrency,2)</strong>
+				<strong>-$!context.doubleToMoney($totalbycurrency,2)</strong>
 				</td>
 				
 				</tr>
-				#set($totalbycurrency = 0)
-				
 			#end
 			
 							<tr>
@@ -105,9 +98,11 @@
 			
 			
 			</table>
-			<h3>[[Capital Expenses]]</h3>  
-			#set( $currencymap = $financeManager.getCapitalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
-			
+			<h3>[[Capital Income]]</h3>  
+			#set( $currencymap = $financeManager.getCapitalIncomeByDateRange($collectionid, $daterange,$topic) )
+			#if( $currencymap.isEmpty() )
+				<p class="table">[[No entries]]</p>
+			#end
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $currencymap.keySet())
 				#set($totalbycurrency = 0)
@@ -115,27 +110,30 @@
 				<td colspan="2" >$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
 				</tr>
 			
-				#set( $inExpensess = $currencymap.get($currencytype))
-				#set( $expensetotals = $financeManager.sumarizeByExpenseType($inExpensess) )
-				#foreach($expensecategory as $expensetotals)
+				#set( $incomes = $currencymap.get($currencytype))
+				#set( $expensetotals = $financeManager.sumarizeByType($incomes,"incometype") )
+				#foreach($incomecategory as $expensetotals)
 					<tr class="">
 						
-						<td>$!context.getText($expensecategory.expensetype)</td>
-						<td class="table-col-totals">- $!context.doubleToMoney($expensecategory.getValue("total"),2)</td>
+						<td>$!context.getText($incomecategory.incometype)</td>
+						<td class="table-col-totals">$!context.doubleToMoney($incomecategory.getValue("total"),2)</td>
 					</tr>
-					#set($totalbycurrency = $totalbycurrency + $expensecategory.getValue("total"))
+					#set($totalbycurrency = $totalbycurrency + $incomecategory.getValue("total"))
 				#end
 				<tr>
 				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
-				<td class="table-col-totals"><strong>- $!context.doubleToMoney($totalbycurrency,2)</strong></td>
+				<td class="table-col-totals"><strong>$!context.doubleToMoney($totalbycurrency,2)</strong></td>
 				
 				</tr>
 				
 			#end
 			</table>
-			
-			<h3>[[Capital Income]]</h3>  
-			#set( $currencymap = $financeManager.getCapitalIncomeByDateRange($collectionid, $daterange,$topic) )
+
+			<h3>[[Capital Expenses]]</h3>
+			#set( $currencymap = $financeManager.getCapitalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
+			#if( $currencymap.isEmpty() )
+				<p class="table">[[No entries]]</p>
+			#end
 			
 			<table class="table tablefinances" >
 			#foreach( $currencytype in $currencymap.keySet())
@@ -145,7 +143,7 @@
 				</tr>
 			
 				#set( $inExpensess = $currencymap.get($currencytype))
-				#set( $expensetotals = $financeManager.sumarizeByExpenseType($inExpensess) )
+				#set( $expensetotals = $financeManager.sumarizeByType($inExpensess,"expensetype") )
 				#foreach($expensecategory as $expensetotals)
 					<tr class="">
 						
@@ -162,5 +160,5 @@
 				
 			#end
 			</table>
-
+			
 			
