@@ -198,16 +198,25 @@ public class FinanceManager  implements CatalogEnabled
 		return bycurrency;
 		
 	}
-	
 	public Map getIncomeTypesByDateRange(String inCollectionId, DateRange inDateRange, String topicid)
 	{
-		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
+		Map income = getIncomeTypesByDateRange(inCollectionId, false, inDateRange,topicid);
+		return income;
+	}
+	public Map getCapitalIncomeByDateRange(String inCollectionId, DateRange inDateRange, String topicid)
+	{
+		Map income = getIncomeTypesByDateRange(inCollectionId, true, inDateRange,topicid);
+		return income;
+	}
+	public Map getIncomeTypesByDateRange(String inCollectionId, boolean incapital, DateRange inDateRange, String topicid)
+	{
+		HashMap<String, Collection> bycurrency = new HashMap<String, Collection>();
 		
 		//Regular Income
 		Searcher incomesSearcher = getMediaArchive().getSearcher("collectiveincome");
 		QueryBuilder query = incomesSearcher.query();
 		query.exact("collectionid", inCollectionId);
-		Collection incometypes = getMediaArchive().query("incometype").exact("iscapitalloan", false).search();
+		Collection incometypes = getMediaArchive().query("incometype").exact("iscapitalloan", incapital).search();
 		query.orgroup("incometype", incometypes);
 		if( topicid != null)
 		{
@@ -217,7 +226,7 @@ public class FinanceManager  implements CatalogEnabled
 		addDateRange(query,"date",inDateRange);
 
 		HitTracker hits = incomesSearcher.search(query.getQuery());
-		hits.setHitsPerPage(1000);
+		hits.enableBulkOperations();
 	
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
 			SearchHitData data = (SearchHitData) iterator.next();
@@ -235,130 +244,130 @@ public class FinanceManager  implements CatalogEnabled
 		}
 		
 		//OI Donations (transaction table)
-		incomesSearcher = getMediaArchive().getSearcher("transaction");
-		query = incomesSearcher.query();
-		query.exact("collectionid", inCollectionId);
-		if( topicid != null)
-		{
-			query.exact("collectiveproject",topicid);
-		}
-
-		addDateRange(query,"paymentdate",inDateRange);
-
-		hits = incomesSearcher.search(query.getQuery());
-		hits.setHitsPerPage(1000);
-		
-		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
-			String currency = (String) data.getValue("currencytype");
-			
-			Collection values = (Collection) bycurrency.get(currency);
-			if( values == null)
-			{
-				values = new ListHitTracker();
-				//values.add(data);
-				bycurrency.put(currency, values);
-			}
-			values.add(data);
-		}
+//		incomesSearcher = getMediaArchive().getSearcher("transaction");
+//		query = incomesSearcher.query();
+//		query.exact("collectionid", inCollectionId);
+//		if( topicid != null)
+//		{
+//			query.exact("collectiveproject",topicid);
+//		}
+//
+//		addDateRange(query,"paymentdate",inDateRange);
+//
+//		hits = incomesSearcher.search(query.getQuery());
+//		hits.setHitsPerPage(1000);
+//		
+//		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
+//			SearchHitData data = (SearchHitData) iterator.next();
+//			String currency = (String) data.getValue("currencytype");
+//			
+//			Collection values = (Collection) bycurrency.get(currency);
+//			if( values == null)
+//			{
+//				values = new ListHitTracker();
+//				//values.add(data);
+//				bycurrency.put(currency, values);
+//			}
+//			values.add(data);
+//		}
 
 		
 		//Paid Invoices
-		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
-		query = incomesSearcher.query();
-		query.exact("collectionid", inCollectionId);
-		if( topicid != null)
-		{
-			//TODO: Add topics to invoices query.exact("collectiveproject",topicid);
-		}
-        query.exact("paymentstatus","paid");
-		addDateRange(query,"invoicepaidon",inDateRange);
-		hits = incomesSearcher.search(query.getQuery());
-		hits.setHitsPerPage(1000);
-		
-		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
-			String currency =  "1";//(String) data.getValue("currencytype");  //TODO: Support currencies
-			
-			Collection values = (Collection) bycurrency.get(currency);
-			if( values == null)
-			{
-				values = new ListHitTracker();
-				//values.add(data);
-				bycurrency.put(currency, values);
-			}
-			values.add(data);
-			
-		}
+//		incomesSearcher = getMediaArchive().getSearcher("collectiveinvoice");
+//		query = incomesSearcher.query();
+//		query.exact("collectionid", inCollectionId);
+//		if( topicid != null)
+//		{
+//			//TODO: Add topics to invoices query.exact("collectiveproject",topicid);
+//		}
+//        query.exact("paymentstatus","paid");
+//		addDateRange(query,"invoicepaidon",inDateRange);
+//		hits = incomesSearcher.search(query.getQuery());
+//		hits.setHitsPerPage(1000);
+//		
+//		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
+//			SearchHitData data = (SearchHitData) iterator.next();
+//			String currency =  "1";//(String) data.getValue("currencytype");  //TODO: Support currencies
+//			
+//			Collection values = (Collection) bycurrency.get(currency);
+//			if( values == null)
+//			{
+//				values = new ListHitTracker();
+//				//values.add(data);
+//				bycurrency.put(currency, values);
+//			}
+//			values.add(data);
+//			
+//		}
 
-		//Pull out only income transactions
-		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,true);
-		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) {
-			List<Data> values = (List<Data>) set.getValue();
-			String currency = set.getKey();
-			
-			Collection allvalues = (Collection) bycurrency.get(currency);
-			if( allvalues == null)
-			{
-				allvalues = new ListHitTracker();
-				//values.add(data);
-				bycurrency.put(currency, values);
-			}
-			allvalues.addAll(values);
-		}
-		//summarize by Currency
-		String currentcurrency = "";
-		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
-			Collection data = (Collection) set.getValue();
-			HashMap<String, Object> currenttype = new HashMap<String, Object>();
-			String currenttypeid = "";
-			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
-				SearchHitData row = (SearchHitData) iterator.next();
-				String incometype = (String) row.getValue("incometype");
-				if( incometype == null)
-				{
-					if( row.getValue("paymententitydest") != null || row.getValue("paymententitysource") != null )
-					{
-						incometype = "7"; //Transfer
-					}
-					else
-					{
-						incometype = "6"; //Invoices
-					}	
-				}
-				BaseData values = (BaseData)currenttype.get(incometype);
-				if (values == null) {
-					values = new BaseData();
-					values.setValue("total", 0.0);
-					currenttype.put(incometype, values);    //Consolidating into one object
-				}
-				Double 	currenttotal = (Double) row.getValue("totalprice");
-				if(  currenttotal == null )
-				{
-					currenttotal = (Double) row.getValue("total");
-				}
-				Double subtotal = (Double)values.getValue("total");
-				if( subtotal == null)
-				{
-					subtotal = 0D;
-				}
-				if( currenttotal == null)
-				{
-					currenttotal = 0D;
-				}
-				values.setValue("total",  subtotal + currenttotal);
-				currenttypeid = (String) row.getValue("currencytype");
-				if( currenttypeid == null )
-				{
-					currenttypeid = "1"; //USD
-				}
-				values.setValue("currencytype", currenttypeid);
-				values.setValue("incometype", incometype);
-
-			}
-			bycurrency.replace(set.getKey(), currenttype);
-			
-		}
+//		//Pull out only income transactions
+//		Map<String,List<Data>> summarytransfers = getTransfersByCurrencyForEntity(inCollectionId,inDateRange,true);
+//		for (Map.Entry<String, List<Data>> set :summarytransfers.entrySet()) {
+//			List<Data> values = (List<Data>) set.getValue();
+//			String currency = set.getKey();
+//			
+//			Collection allvalues = (Collection) bycurrency.get(currency);
+//			if( allvalues == null)
+//			{
+//				allvalues = new ListHitTracker();
+//				//values.add(data);
+//				bycurrency.put(currency, values);
+//			}
+//			allvalues.addAll(values);
+//		}
+//		//summarize by Currency
+//		String currentcurrency = "";
+//		for (Map.Entry<String, Object> set :bycurrency.entrySet()) {
+//			Collection data = (Collection) set.getValue();
+//			HashMap<String, Object> currenttype = new HashMap<String, Object>();
+//			String currenttypeid = "";
+//			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
+//				SearchHitData row = (SearchHitData) iterator.next();
+//				String incometype = (String) row.getValue("incometype");
+//				if( incometype == null)
+//				{
+//					if( row.getValue("paymententitydest") != null || row.getValue("paymententitysource") != null )
+//					{
+//						incometype = "7"; //Transfer
+//					}
+//					else
+//					{
+//						incometype = "6"; //Invoices
+//					}	
+//				}
+//				BaseData values = (BaseData)currenttype.get(incometype);
+//				if (values == null) {
+//					values = new BaseData();
+//					values.setValue("total", 0.0);
+//					currenttype.put(incometype, values);    //Consolidating into one object
+//				}
+//				Double 	currenttotal = (Double) row.getValue("totalprice");
+//				if(  currenttotal == null )
+//				{
+//					currenttotal = (Double) row.getValue("total");
+//				}
+//				Double subtotal = (Double)values.getValue("total");
+//				if( subtotal == null)
+//				{
+//					subtotal = 0D;
+//				}
+//				if( currenttotal == null)
+//				{
+//					currenttotal = 0D;
+//				}
+//				values.setValue("total",  subtotal + currenttotal);
+//				currenttypeid = (String) row.getValue("currencytype");
+//				if( currenttypeid == null )
+//				{
+//					currenttypeid = "1"; //USD
+//				}
+//				values.setValue("currencytype", currenttypeid);
+//				values.setValue("incometype", incometype);
+//
+//			}
+//			bycurrency.replace(set.getKey(), currenttype);
+//			
+//		}
 		
 		return bycurrency;
 	}
@@ -437,19 +446,18 @@ public class FinanceManager  implements CatalogEnabled
 		return bycurrency;
 	}
 
-
-	public Collection<Data> sumarizeByExpenseType(Collection inExpensesOfOneCurrency)
+	public Collection<Data> sumarizeByType(Collection inExpensesOfOneCurrency, final String valuetype)
 	{
 		HashMap<String, Data> byexpensetype = new HashMap<String, Data>();
 		for (Iterator iterator = inExpensesOfOneCurrency.iterator(); iterator.hasNext();) {
 			Data expense = (Data) iterator.next();
-			String currenttypeid = (String) expense.getValue("expensetype");
+			String currenttypeid = (String) expense.getValue(valuetype);
 			SearchHitData totalbyexpense = (SearchHitData)byexpensetype.get(currenttypeid);
 			if (totalbyexpense == null) {
 				totalbyexpense = new SearchHitData();
 				totalbyexpense.setValue("total", 0.0);
-				Data type = getMediaArchive().getCachedData("expensetype", currenttypeid );
-				totalbyexpense.setValue("expensetype",type);
+				Data type = getMediaArchive().getCachedData(valuetype, currenttypeid );
+				totalbyexpense.setValue(valuetype,type);
 				byexpensetype.put(currenttypeid, totalbyexpense);
 			}
 			//Add up all the values
@@ -464,8 +472,8 @@ public class FinanceManager  implements CatalogEnabled
 			@Override
 			public int compare(Data inArg0, Data inArg1)
 			{
-				Data one = (Data)inArg0.getValue("expensetype");
-				Data two = (Data)inArg1.getValue("expensetype");
+				Data one = (Data)inArg0.getValue(valuetype);
+				Data two = (Data)inArg1.getValue(valuetype);
 				if( one.getName() != null && two.getName() != null)
 				{
 					int i = one.getName().compareToIgnoreCase(two.getName());
