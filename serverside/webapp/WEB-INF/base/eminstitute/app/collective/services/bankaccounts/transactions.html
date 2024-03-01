@@ -17,6 +17,7 @@
 						method="post" 
 						action="$content.path">
 					<input type="hidden" name="collectionid" value="$librarycol.id" />
+					<input type="hidden" name="oemaxlevel" value="1" />
 					
 					#set($showall = $context.getRequestParameter("showall") )
 					#set($paidfromaccount = $context.getRequestParameter("paidfromaccount") )
@@ -87,7 +88,13 @@
                          <td>$!context.getDate($transaction.getDate())</td>
                          #set( $link = "$applink/collective/services/$section/index.html?collectionid=$transaction.getCollectionId()")
                          <td><a href="$link">
-                         #datatext( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a></td>
+                         #datatext( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a>
+                         #if( $transaction.getSearchType() == "collectiveexpense")
+                         	#datatext( $!mediaarchive.getCachedData("expensetype", $transaction.getData().expensetype),"name")</a>
+                         #elseif( $transaction.getSearchType() == "collectiveincome")
+							#datatext( $!mediaarchive.getCachedData("incometype", $transaction.getData().incometype),"name")</a>
+                         #end
+                         </td>
                          <td>$transaction.getName()</td>
                          <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
                          $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
