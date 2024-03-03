@@ -1004,7 +1004,11 @@ public class FinanceManager  implements CatalogEnabled
 			return number;
 		}
 		Data currencytype = getMediaArchive().getCachedData("currencytype", inCurrency);
-		
+		if( currencytype == null || currencytype.get("exchangetousd") == null)
+		{
+			log.info("null currencytype exchange " + inCurrency);
+			return -1D;
+		}
 		double exchange = Double.parseDouble( currencytype.get("exchangetousd"));
 		double dollars = MathUtils.divide(number, exchange );
 		return dollars;
