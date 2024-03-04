@@ -37,7 +37,7 @@
 		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
 		
-			<div id="taskrow#eid(${task.id})" class="goaltaskrow #if($task.taskstatus == "3") goalstatuscompleted #end">
+			<div id="taskrow#eid(${task.id})" class="goaltaskrow goalstatus${task.taskstatus}">
 			
 				<div>$!tree</div>
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )

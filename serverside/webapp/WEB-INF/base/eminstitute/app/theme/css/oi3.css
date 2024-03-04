@@ -937,3 +937,26 @@ img.cat-thumb {
     color: #1D5655; 
     border-color: #1D5655; 
 }
+.see-less,
+.see-more {
+  display: inline;
+  word-break: break-all;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+}
+.see-less:focus,
+.see-less:active,
+.see-more:focus,
+.see-more:active {
+  outline: none;
+}
+
+.showmax150
+{
+	margin:0 4px 0 4px;text-align:left;
+	 width: 150px;
+	 white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

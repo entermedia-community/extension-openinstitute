@@ -33,6 +33,16 @@ jQuery(function () {
 		}
 	});
 
+  lQuery(".trim-text").livequery(function () {
+    var maxLength = $(this).data("max");
+    var text = $(this).text();
+    if (text.length <= maxLength) return;
+    var minimizedText = text.substring(0, maxLength).trim();
+    $(this).text(minimizedText);
+    $(this).data("text", text);
+    $(this).append('<button class="see-more">(...see more)</button>');
+  });
+
 	lQuery("#searchInput").livequery(function () {
 		var input = $(this);
 		var options = input.data();
