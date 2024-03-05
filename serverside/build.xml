@@ -64,7 +64,7 @@
 			</fileset>
 		</copy>
 
-	    <javac debug="true" destdir="${compiled}" srcdir="${src}" source="1.8" target="1.8">
+	    <javac debug="true" destdir="${compiled}" srcdir="${src}"  source="12" target="12">
 	     <compilerarg line="-Xlint" />
 	      <classpath>
 	        <fileset dir="${lib}">
@@ -114,7 +114,7 @@
 	
   <target name="junit">
   	
-    <javac debug="true" destdir="${compiled}" srcdir="${testsrc}" source="1.7" target="1.7">
+    <javac debug="true" destdir="${compiled}" srcdir="${testsrc}"  source="12" target="12">
       <classpath>
         <fileset dir="${lib}">
           <include name="*.jar"/>
