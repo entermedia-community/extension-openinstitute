@@ -29,7 +29,7 @@
 				#if( $currency.exchangetousd != "1")
 					#set( $convert = $currency.getValue("exchangetousd"))
 					#set($usd = $totalbycurrency/$convert)
-					[ -$${context.doubleToMoney($usd,2)} ]
+					[ $${context.doubleToMoney($usd,2)} ]
 				#else
 					#set( $usd = $totalbycurrency)
 				#end
