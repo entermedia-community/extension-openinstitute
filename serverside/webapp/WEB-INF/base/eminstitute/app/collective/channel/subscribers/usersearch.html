@@ -9,8 +9,8 @@ $context.putPageValue("searcher",$searcher)
 		#set($viewpath = "user/${viewid}")
 		#set($details = $searcher.getDetailsForView($viewpath, $userprofile))
 		
-	<form  id="dialogsearchform" style="margin-bottom:10px;" class="autosubmit" 
-		data-targetdiv="adduserpicker" action="$applink/collective/channel/subscribers/usersearchresults.html">
+	<form  id="dialogsearchform" style="margin-bottom:10px;" class="autosubmit ajaxform" 
+		data-targetdivinner="adduserpicker" action="$applink/collective/channel/subscribers/usersearchresults.html">
 		<input type="hidden" name="collectionid" value="$collectionid" />
 		<input type="hidden" name="searchtype" value="user" />
 		<input type="hidden" name="sortby" value="firstName" />

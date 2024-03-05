@@ -4,7 +4,7 @@
 $context.putPageValue("hits",$results)
 $context.putPageValue("searcher",$searcher)
 #set ($details = $searcher.getDetailsForView("category/searchcategory", $userprofile))
-	<form id="dialogautosubmitfilter" name="autosubmitfilter" class="autosubmit" autocomplete="off"  data-targetdiv="goalscategoryresults" 
+	<form id="dialogautosubmitfilter" name="autosubmitfilter" class="autosubmit  ajaxform" autocomplete="off"  data-targetdiv="goalscategoryresults" 
 	action="$applink/collective/goals/actions/search/searchpath.html">
 		
 			<input type="hidden" name="searchtype" value="category" />
