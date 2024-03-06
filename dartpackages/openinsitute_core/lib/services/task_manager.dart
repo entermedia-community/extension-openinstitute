@@ -54,7 +54,7 @@ class TaskManager {
     }
   }
 
-  taskRoleAdd(
+  Future<List<dynamic>> taskRoleAdd(
       String projectId, String taskId, String roleId, String roleUserId) async {
     await createDataModule(goalModule, "projectgoal",
         boxString: "projectgoal_$projectId");
@@ -65,15 +65,18 @@ class TaskManager {
       "collectiverole": roleId,
       "roleuserid": roleUserId,
     };
-    final response = await goalModule!.addTaskRole(inQuery);
-    if (response['response']['status'] == 'ok') {
-      return true;
+    dynamic response = await goalModule!.addTaskRole(inQuery);
+
+    if (response['response']['status'] == 'ok' &&
+        response['data']['taskroledetails'] != null) {
+      return response['data']['taskroledetails'];
+    } else {
+      return [];
     }
-    return false;
   }
 
-  roleDetailsSave(String projectId, String taskId, String roleId,
-      String roleUserId, String notes) async {
+  Future<List<dynamic>> roleDetailsSave(String projectId, String taskId,
+      String roleId, String roleUserId, String notes) async {
     await createDataModule(goalModule, "projectgoal",
         boxString: "projectgoal_$projectId");
 
@@ -85,10 +88,12 @@ class TaskManager {
       "name": notes
     };
     final response = await goalModule!.saveRoleDetails(inQuery);
-    if (response['response']['status'] == 'ok') {
-      return true;
+    if (response['response']['status'] == 'ok' &&
+        response['data']['taskroledetails'] != null) {
+      return response['data']['taskroledetails'];
+    } else {
+      return [];
     }
-    return false;
   }
 
   deleteTaskRole(
@@ -110,16 +115,19 @@ class TaskManager {
     return false;
   }
 
-  deleteTaskAction(String projectId, String id) async {
+  Future<List<dynamic>> deleteTaskAction(String projectId, String id) async {
     await createDataModule(goalModule, "projectgoal",
         boxString: "projectgoal_$projectId");
 
     Map inQuery = {"roleactionid": id};
+
     dynamic response = await goalModule!.removeTaskAction(inQuery);
-    if (response['response']['status'] == 'ok') {
-      return true;
+    if (response['response']['status'] == 'ok' &&
+        response['data']['taskroledetails'] != null) {
+      return response['data']['taskroledetails'];
+    } else {
+      return [];
     }
-    return false;
   }
 
   Future<List<dynamic>> getActionLogHistory(
