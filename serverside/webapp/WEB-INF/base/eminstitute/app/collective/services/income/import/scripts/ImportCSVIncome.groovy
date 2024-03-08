@@ -28,6 +28,11 @@ class CsvImporter extends BaseImporter
 			return data;
 		}
 
+	public void addCustomProperties(Row inRow, Data inData)
+	{
+		inData.setValue("collectionid", collectionid);
+	}
+
 }
 
 String collectionid = context.getRequestParameter("collectionid");
