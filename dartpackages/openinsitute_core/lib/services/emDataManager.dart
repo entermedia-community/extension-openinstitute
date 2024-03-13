@@ -302,6 +302,15 @@ class DataModule {
   saveCache(Map<String, dynamic> resultsData) async {
     List<dynamic> results = resultsData["data"] ??
         resultsData['results'].map((e) => emData.fromJson(e));
+    total = int.parse((resultsData["totalhits"] ??
+            resultsData["response"]["totalhits"].toString())
+        .toString());
+    page = int.parse(
+        (resultsData["page"] ?? resultsData["response"]["page"].toString())
+            .toString());
+    pages = int.parse(
+        (resultsData["pages"] ?? resultsData["response"]["pages"].toString())
+            .toString());
     await box.put(
         "page",
         int.parse(
@@ -317,9 +326,6 @@ class DataModule {
         int.parse((resultsData["totalhits"] ??
                 resultsData["response"]["totalhits"].toString())
             .toString()));
-    total = box.get("totalhits") ?? 0;
-    page = box.get("page") ?? 0;
-    pages = box.get("pages") ?? 0;
     if (page == 1) {
       await box.clear();
       for (var element in results) {
@@ -330,8 +336,9 @@ class DataModule {
 
   cacheAllData(Map<String, dynamic> resultsData) async {
     await box.clear();
-    List<dynamic> results = resultsData["data"] ??
-        resultsData['results']?.map((e) => emData.fromJson(e)).toList() ??
+    List<dynamic> results = (resultsData["data"] ?? resultsData['results'])
+            ?.map((e) => emData.fromJson(e))
+            .toList() ??
         resultsData['goals'].map((e) => emData.fromJson(e)).toList();
     await box.put(
         "page",

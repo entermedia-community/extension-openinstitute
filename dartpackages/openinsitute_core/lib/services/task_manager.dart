@@ -190,9 +190,9 @@ class TaskManager {
         ]
       }
     };
-    if (page > goalModule!.pages) {
-      return [];
-    }
+    // if (page > goalModule!.pages) {
+    //   return [];
+    // }
     List<emData> tasks = await goalModule!.getRemoteData(inQuery, true);
     return tasks;
   }
