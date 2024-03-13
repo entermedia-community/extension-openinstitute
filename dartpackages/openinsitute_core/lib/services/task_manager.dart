@@ -297,8 +297,16 @@ class TaskManager {
     return data;
   }
 
+  Future<emData> resolveTask(taskId) async {
+    taskModule = await oi.datamanager.getDataModule("goaltask");
+    return await taskModule!.updateData(taskId, {
+      "taskstatus": "3",
+    });
+  }
+
   Future<emData> editTask(emData task) async {
     taskModule = await oi.datamanager.getDataModule("goaltask");
+    log('task properties: ${task.properties}');
     return await taskModule!.updateData(task.id, task.properties);
   }
 
