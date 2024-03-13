@@ -194,6 +194,7 @@ class DataModule {
         RequestType.POST);
     Map<String, dynamic> resultsData = parseData(responsestring);
     List<emData> results = resultsData["data"];
+    log('results: ${results[0]}');
     if (cache) {
       await saveCache(resultsData);
     }
