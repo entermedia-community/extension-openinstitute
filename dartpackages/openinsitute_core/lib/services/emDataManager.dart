@@ -194,7 +194,6 @@ class DataModule {
         RequestType.POST);
     Map<String, dynamic> resultsData = parseData(responsestring);
     List<emData> results = resultsData["data"];
-    log('results: ${results[0]}');
     if (cache) {
       await saveCache(resultsData);
     }
@@ -241,7 +240,6 @@ class DataModule {
   }
 
   Future<emData> getData(String id) async {
-    log('collection Id: $id');
     final responsestring = await oi.getEmResponse(
         oi.app!["mediadb"] + '/services/module/$searchtype/data/$id',
         {},

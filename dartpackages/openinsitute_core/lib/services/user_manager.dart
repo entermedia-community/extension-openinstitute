@@ -14,10 +14,10 @@ class UserManager {
     return Get.find();
   }
 
-  Future<List<emData>> searchUser(String searchText) async {
+  Future<List<emData>> searchUser(String searchText, int page) async {
     await createDataModule();
     return await userModule!.getRemoteData({
-      "page": "1",
+      "page": "$page",
       "hitsperpage": "20",
       "query": {
         "terms": [
