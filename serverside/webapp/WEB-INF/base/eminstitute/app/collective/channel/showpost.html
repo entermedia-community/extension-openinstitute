@@ -2,62 +2,135 @@
 	#set( $librarycol = $mediaarchive.getData("librarycollection",$upload.librarycollection) )
 	$context.putPageValue("librarycol",$librarycol)
 #end
-		
-		<div class="feedcard" >
-				#if($upload.title)
-					<div class="feedcard-header">
-							
-							<div class="chat-icon">
-							#set( $postuser = $userManager.getUser($upload.owner, true)) 
-							$context.putPageValue("chatuser",$postuser)
-							$pages.include("$apphome/users/icon.html",$context)
-							</div>
-							
-							
-							<div class="feedcard-title" style="margin-left: 50px;">
-								#esc($!upload.title)
-								#if($upload.getBoolean("exclusivecontent"))
-								<i class="fas fa-lock"></i>
-								#end
-							</div>
-							
-							$pages.include("$apphome/collective/channel/showpostmetadata.html",$context)
-					</div>
-					
-					#if ($upload.longdescription)
-						<div class="feedcard-body">$upload.longdescription</div>
-					#end
-				
-				#end
-			
-				
-				<div class="feedcard-media">
-					$context.putPageValue("upload",$upload)
-					$pages.include("$apphome/collective/channel/images.html", $context)
-					<div class="clearfix"></div>
-				</div>
-				
-				
-				##Show description & meta if not title
-				#if(!$upload.title)
-					#if ($upload.longdescription)
-						<div class="feedcard-body">$upload.longdescription</div>
-					#end
-					<div style="padding: 0 15px">
-					$pages.include("$apphome/collective/channel/showpostmetadata.html",$context)
-					</div>
-				#end
-				
-			
-			 <div class="feedcard-footer">
-			 	#set( $tags = $upload.getValues("usertags") )
-				#if($tags && !$tags.isEmpty() )
-					#foreach( $tag in $tags )
-						<a href="#" class="badge badge-tags" title="#esc($tag)">#esc($tag)</a>
-					#end
-				#end
-				<div class="clearfix"></div>
-				$context.putPageValue("librarycol",$librarycol)
-				$pages.include("$apphome/collective/channel/comments/comments.html",$context)
+
+#set( $shortdescription = "")
+#if ($upload.longdescription)
+	#set($shortdescription = $upload.longdescription.substring(0, $mathutil.getMinValue(640, $upload.longdescription.length())))
+	#if($shortdescription.length() < $upload.longdescription.length())
+		#set($shortdescription = $shortdescription + "...")
+	#end
+#end
+
+<div class="blog-shadow">
+	<div class="blog-list-item" data-uploadid="${upload.id}">
+		<div class="w-100 d-flex align-items-center justify-content-between mb-2">
+			#if($librarycol.collectionimage)
+				#set($asset = $mediaarchive.getAsset($librarycol.collectionimage))
+				#set( $link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+			#else
+				#set($link = "$applink/theme/images/oi-logo-w.png")
+			#end
+			<div class="blog-community w-100">
+				<a href="$applink/collective/channel/${librarycol.getId()}/${librarycol.getName()}.html">
+					<img src="$link" class="blog-community-img" alt="#text($librarycol)" />
+				</a>
+				<a href="$applink/proposal/${librarycol.getId()}/${librarycol.getName()}.html" class="blog-community-header">
+					#text($librarycol)
+				</a>
+			</div>
+			<div class="dropdown">
+				<button class="icon text-brand" data-bs-toggle="dropdown">
+					<i class="fas fa-ellipsis-h"></i>
+				</button>
+				<ul class="dropdown-menu bg-white">
+					<li>
+						<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
+							data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}"
+							href="$home$applink/collective/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
+							<i class="fas fa-share-alt me-2"></i> Share
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">
+							<i class="far fa-bookmark me-2"></i> Bookmark
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
+							data-collectionid="${librarycol.getId()}" data-uploadid="${upload.id}"
+							href="$home$applink/collective/channel/report/index.html?uploadid=${upload.id}">
+							<i class="far fa-flag me-2"></i> Report
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
+		<div class="w-100 d-flex align-items-center justify-content-between">
+			<div class="blog-credit">
+				<div class="blog-avatar">
+					#set( $postuser = $userManager.getUser($upload.owner, true))
+					$context.putPageValue("chatuser",$postuser)
+					$pages.include("$apphome/users/icon.html",$context)
+				</div>
+				<a class="text-brand"
+					href='#urlescape("$applink/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
+					$postuser.getAnonNickName()
+				</a>
+				<span class="d-inline-block mx-2">
+					&middot;
+				</span>
+				<small class="text-muted">
+					$context.getAge($upload.getDate("uploaddate")) [[ago]]
+				</small>
+			</div>
+			
+		</div>
+		#if($upload.title)
+			<div class="blog-container" data-uploadid="${upload.id}">
+				<h1 class="blog-title">
+					#esc($!upload.title)
+					#if($upload.getBoolean("exclusivecontent"))
+						<i class="fas fa-lock"></i>
+					#end
+				</h1>
+			</div>
+			#if ($shortdescription)
+				<div class="blog-body">$shortdescription</div>
+			#else
+				<div class="blog-body">$upload.longdescription</div>
+			#end
+		#end
+
+		<div class="blog-media" data-uploadid="${upload.id}">
+			$context.putPageValue("upload",$upload)
+			$pages.include("$apphome/collective/channel/images.html", $context)
+		</div>
+		#if(!$upload.title)
+			#if ($upload.longdescription)
+				<div class="blog-body">$upload.longdescription</div>
+			#end
+			<div>
+				$pages.include("$apphome/collective/channel/showpostmetadata.html",$context)
+			</div>
+		#end
+		<div class="blog-tags">
+			#set( $tags = $upload.getValues("usertags") )
+			#if($tags && !$tags.isEmpty() )
+				#foreach( $tag in $tags )
+					<a href="#" class="blog-tag" title="#esc($tag)">
+						#esc($tag)
+					</a>
+				#end
+			#end
+		</div>
+		<div class="blog-footer">
+			<button class="icon">
+				<i class="far fa-heart"></i>
+				<span>[[Like]]</span>
+			</button>
+			<button class="icon" data-bs-toggle="collapse" data-bs-target="#blog${upload.id}">
+				<i class="far fa-comment"></i>
+				<span>[[Comment]]</span>
+			</button>
+			<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" href="$home$applink/collective/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
+				<i class="fas fa-share-alt"></i>
+				<span>[[Share]]</span>
+			</a>
+		</div>
+	</div>
+	<div class="collapse" id="blog${upload.id}">
+		$context.putPageValue("librarycol",$librarycol)
+		$pages.include("$apphome/collective/channel/comments/comments.html",$context)
+	</div>
+</div>
+<br><br>

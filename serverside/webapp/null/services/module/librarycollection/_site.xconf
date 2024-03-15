@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="fallbackdirectory">/null/services/module/default</property>
+  <property name="module">librarycollection</property>
+  <property name="searchtype">librarycollection</property>
+</page>

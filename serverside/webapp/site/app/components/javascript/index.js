@@ -2024,6 +2024,16 @@ jQuery(function () {
 		}
 	});
 
+  lQuery(".trim-text").livequery(function () {
+    var maxLength = $(this).data("max");
+    var text = $(this).text();
+    if (text.length <= maxLength) return;
+    var minimizedText = text.substring(0, maxLength).trim();
+    $(this).text(minimizedText);
+    $(this).data("text", text);
+    $(this).append('<button class="see-more">(...see more)</button>');
+  });
+
 	lQuery("#searchInput").livequery(function () {
 		var input = $(this);
 		var options = input.data();
@@ -3991,38 +4001,22 @@ uiload = function() {
 				return false;
 			});
 
-	lQuery("form.autosubmit").livequery(function() {
-		var form = $(this);
-		var data = form.cleandata();
-		var targetdiv = form.data('targetdiv');
-		$("select",form).change(function() {
-			//data["jqxhr"] = null;
-			form.setformdata(data);
-			form.ajaxSubmit({
-				target : "#" + $.escapeSelector(targetdiv) 
-			});
-		});
-		$("input",form).on("keyup", function() {
-			form.setformdata(data);
-			$(form).ajaxSubmit({
-				target : "#" + $.escapeSelector(targetdiv)
-			});
-		});
-		$('input[type="file"]',form).on("change", function() {
-			form.setformdata(data);
-			$(form).ajaxSubmit({
-				target : "#" + $.escapeSelector(targetdiv)
-			});
-		});
-		$('input[type="checkbox"]',form).on("change", function() {
-			form.setformdata(data);
-			$(form).ajaxSubmit({
-				target : "#" + $.escapeSelector(targetdiv)
-			});
-		});
-		
+ lQuery("form.autosubmit").livequery(function () {
+    var form = $(this);
+    $("select", form).change(function () {
+      $(form).trigger("submit");
+    });
+    $("input", form).on("focusout", function (event) {
+      $(form).trigger("submit");
+    });
+    $("input", form).on("keyup", function (e) {
+      $(form).trigger("submit");
+    });
+    $('input[type="file"],input[name="date.after"],input[type="checkbox"]', form).on("change", function () {
+      $(form).trigger("submit");
+    });
+  });
 
-	});
 
 	lQuery("form.ajaxautosubmit").livequery(function() {
 		var theform = $(this);
@@ -6936,18 +6930,28 @@ jQuery(document).ready(function(url,params)
 	{
 		var select = $(this);
 		//var select = div.find("select");
+		
 		select.on("change",function()
 		{
+			var running = select.data("running");
+			if( running )
+			{
+				return;
+			}
+			select.data("running",true);
 			var target = select.closest(".goaltaskrow ").find("#roleeditor");
 			var path = select.data("savepath");
-			var params = select.data();
-			params['addrole'] = select.val();
+			var params = {};//select.cleandata();
+			params['collectiverole'] = select.val();
+			params['collectionid'] = select.data("collectionid");
 			params['taskid'] = select.data("taskid");
 			console.log(path,params);
 			jQuery.get(path, params, function(data) 
 			{
-				
 				target.replaceWith(data);
+				select.val("");
+				select.trigger('change');
+				select.data("running",false);
 			});
 		});
 					
@@ -18053,6 +18057,31 @@ jQuery(document).ready(function()
 				var uploadid = clicked.data("uploadid");
 				showUpload(uploadid);
 		});
+
+		// lQuery(".blog-list-item a").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item button").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item .dropdown").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item input").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-comments").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		lQuery(".blog-media").livequery("click",function(e) {})
+		lQuery(".blog-list-item").livequery("click",function(e) {
+			if(e.target != this) { 
+				return;
+			}
+			e.stopPropagation()
+			var uploadid = $(this).data("uploadid");
+			showUpload(uploadid);
+		});
 		lQuery("#hiddenoverlay").livequery("click",function(e)
 		{
 				e.stopPropagation();
@@ -18365,16 +18394,14 @@ initcomments = function()
 	var app = $("#application");
 	var home = app.data('home') + app.data('apphome');
 
-	lQuery('input.commentadder').livequery("keyup",function(e) 
-	{
-		//Listen for enter
+	lQuery('textarea.commentadder').livequery("keyup",function(e) {
 		var input = $(this);
-		var div = input.closest(".feedcard-comments");
-		var code = e.which; // recommended to use e.which, it's normalized across browsers
-	    if(code==13)e.preventDefault();
-	    if(code==13)
-	    {
-	     	//Submit repaint
+		var div = input.closest(".blog-comments");
+		var code = e.code;
+		console.log(e.code, input.val());
+	    if(code=='Enter' || code=='NumpadEnter') {
+			e.preventDefault();
+			if(input.val() == "") return false;
 	     	var options = input.data();
 	     	options.oemaxlevel = 1;
 	     	options.commenttext = input.val();
@@ -18385,10 +18412,8 @@ initcomments = function()
 					div.replaceWith(data);
 				}
 	        );	     	
-	    } 
-		
+	    }
 	});
-		
 }
 
 

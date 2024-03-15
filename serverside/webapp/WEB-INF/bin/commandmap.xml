@@ -8,6 +8,8 @@
 		<convert>/Users/hi/homebrew/bin/convert</convert>
 		<composite>/Users/hi/homebrew/bin/composite</composite>
 		<ffmpeg>/Applications/ffmpeg</ffmpeg>
+		<avconv>/Applications/ffmpeg</avconv>
+		<avprobe>/Applications/ffprobe</avprobe>
 		<qt-faststart>./qt-faststart</qt-faststart>
 	</commandmap>
 	<commandmap os="LINUX">

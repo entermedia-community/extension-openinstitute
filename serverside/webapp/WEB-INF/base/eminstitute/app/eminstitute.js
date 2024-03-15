@@ -114,6 +114,31 @@ jQuery(document).ready(function()
 				var uploadid = clicked.data("uploadid");
 				showUpload(uploadid);
 		});
+
+		// lQuery(".blog-list-item a").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item button").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item .dropdown").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-list-item input").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		// lQuery(".blog-comments").livequery("click",function(e) { 
+		// 	e.stopPropagation();
+		// });
+		lQuery(".blog-media").livequery("click",function(e) {})
+		lQuery(".blog-list-item").livequery("click",function(e) {
+			if(e.target != this) { 
+				return;
+			}
+			e.stopPropagation()
+			var uploadid = $(this).data("uploadid");
+			showUpload(uploadid);
+		});
 		lQuery("#hiddenoverlay").livequery("click",function(e)
 		{
 				e.stopPropagation();
@@ -426,16 +451,14 @@ initcomments = function()
 	var app = $("#application");
 	var home = app.data('home') + app.data('apphome');
 
-	lQuery('input.commentadder').livequery("keyup",function(e) 
-	{
-		//Listen for enter
+	lQuery('textarea.commentadder').livequery("keyup",function(e) {
 		var input = $(this);
-		var div = input.closest(".feedcard-comments");
-		var code = e.which; // recommended to use e.which, it's normalized across browsers
-	    if(code==13)e.preventDefault();
-	    if(code==13)
-	    {
-	     	//Submit repaint
+		var div = input.closest(".blog-comments");
+		var code = e.code;
+		console.log(e.code, input.val());
+	    if(code=='Enter' || code=='NumpadEnter') {
+			e.preventDefault();
+			if(input.val() == "") return false;
 	     	var options = input.data();
 	     	options.oemaxlevel = 1;
 	     	options.commenttext = input.val();
@@ -446,10 +469,8 @@ initcomments = function()
 					div.replaceWith(data);
 				}
 	        );	     	
-	    } 
-		
+	    }
 	});
-		
 }
 
 
