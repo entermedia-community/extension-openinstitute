@@ -2,59 +2,27 @@
 #set($proposalcauses = $librarycol.get("proposalcauses"))
 #set($proposalempowerment = $librarycol.get("proposalempowerment"))
 
-	<div class="communitycontainer-header">
-		<h3>
-		[[Vision]]
-		</h3>
-		</div>
 
-	<div class="proposalcontainer-out">
-		<div class="proposaldescription" style="">
-			<div style="margin-bottom:20px">
-			<strong>[[Serving]]</strong><br>	
-			#set( $cats = $librarycol.getValues("communitytagcategory"))
-			#foreach( $cat in $cats)
-			#set( $community = $mediaarchive.getCachedData("communitytagcategory",$cat) )
-			#set( $link = "$applink/proposals/category/#dash($community)/${community.getId()}.html")
-				<a href="$link" style="text-decoration: underline;">#text($community)</a>
-			#end
-			</div>
-			#if($proposalproblem )
-			<div> 
-			<strong>[[Problem]]</strong><br>
-			$proposalproblem 
-			</div>
-			#end
-			
-			#if($proposalcauses )
-			<div> 
-			<strong>[[Root Causes]]</strong><br>
-			$proposalcauses 
-			</div>
-			#end
-		
-			#if($proposalempowerment)
-			<div> 
-			<strong>[[Empowerment]]</strong><br>
-			$proposalempowerment
-			</div>
-			#end
-
-		#if( $caneditcollection)
-			#if($proposalproblem  && $proposalcauses && $proposalempowerment)
-			#else
-				<a href="$applink/collective/edit/editcollective.html?collectionid=$librarycol.getId()&view=proposalsummary">[[Edit The Vision]]</a>
-			#end
-		#end	
-		
-		
-		</div>
+<div class="d-flex flex-column align-items-center py-3 px-2 bg-light h-100">
+	$pages.include("$apphome/collective/donate/donateproposalsidebar.html?hidegoals=true",$context) 
+	<div class="w-50 border-top mb-4"></div> 
+	<div class="explore-blog-list">
+		<h6>[[Explore Blogs by Project]]</h6>
+		<a class="#">
+			<img src="$applink/theme/images/oi-logo-w.png">
+			<p class="mb-0">Lorem ipsum dolor</p>
+		</a>
+		<a class="#">
+			<img src="$applink/theme/images/oi-logo-w.png">
+			<p class="mb-0">Consectetur adipiscing elit</p>
+		</a>
+		<a class="#">
+			<img src="$applink/theme/images/oi-logo-w.png">
+			<p class="mb-0">Sed do eiusmod tempor</p>
+		</a>
+		<a class="#">
+			<img src="$applink/theme/images/oi-logo-w.png">
+			<p class="mb-0">Incididunt ut labore</p>
+		</a>
 	</div>
-
-
-<div class="community-sidebar-box">
-
-	$pages.include("$apphome/collective/donate/donateproposalsidebar.html?hidegoals=true",$context)
-
-
 </div>

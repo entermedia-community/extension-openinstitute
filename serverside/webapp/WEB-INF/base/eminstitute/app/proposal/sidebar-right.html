@@ -1,29 +1,29 @@
-<div style="margin-bottom:30px;">	
-	<div class="communitycontainer-header">
-		<h3>[[Team Circle]]</h3>
+<div class="d-flex flex-column py-3 px-2 bg-light h-100">
+<div class="team-list">	
+	<div class="d-flex align-items-center justify-content-between mb-2">
+		<h6 class="m-0">[[Team Circle]]</h6> 
 		#if($user)
-		<a class="emdialog text-white" data-cancelsubmit="true"
-			title="[[View Members]]"
-			href="$applink/collective/channel/subscribers/teamlist.html?collectionid=$librarycol.getId()">
-			<i class="fas fa-list"></i>
-		</a>
+			<a class="emdialog text-brand" data-cancelsubmit="true"
+				title="[[View Members]]"
+				href="$applink/collective/channel/subscribers/teamlist.html?collectionid=$librarycol.getId()">
+				<i class="fas fa-list"></i>
+			</a>
 		#end
-	</div>
+	</div> 
 
-	<div class="proposaldescription">
-		<div id="subscriberssidebar" class="donate-proposal-sidebar">
-			$context.putPageValue("hideteamtitle", true)
-			$pages.include("$apphome/collective/channel/subscribers/index.html", $context)
-			#if($librarycol.proposaltestimonials)
+	<div id="subscriberssidebar" class="donate-proposal-sidebar">
+		$context.putPageValue("hideteamtitle", true)
+		$context.putPageValue("prettylist", true)
+		$context.putPageValue("likeoptions", true)
+		$pages.include("$apphome/collective/channel/subscribers/index.html", $context)
+		
+		#if($librarycol.proposaltestimonials)
 			<div class="community-sidebar-box proposal-sidebarbox">
 				<h3>[[Testimonials]]</h3>
 					$!librarycol.proposaltestimonials
 			</div>
-			#end
-			
-			$pages.include("$apphome/collective/likeoptions.html", $context)
-		</div>
-	</div>		
+		#end
+	</div>
 </div>
 
 
@@ -40,3 +40,4 @@
 	#end
 	</div>
 #end
+</div>

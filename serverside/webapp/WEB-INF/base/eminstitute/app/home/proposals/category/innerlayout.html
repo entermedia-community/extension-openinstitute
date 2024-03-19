@@ -1,119 +1,67 @@
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" />
+<link rel="stylesheet" href="$siteroot/website/assets/css/template1.css" />
 
-<div class="d-flex bg-dark p-4">
-  <div class="container">
-    <p class="text-white mt-2 d-none d-md-block">
-      $communitytagcategory.summary
-    </p>
+<div class="hero-container">
+  <img class="hero-image" src="$siteroot/website/assets/images/template1-hero.jpg" alt="Hero Image" />
+  <div class="hero-text">
+    <h1>Protecting natural habitats from mass extinction.</h1>
+    <button class="btn btn-white">Learn More</button>
   </div>
 </div>
-<div class="container" style="overflow-x: scroll;">
-  #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-  #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
+<div class="bg-light">
+  <div class="container">
+    <div class="mission">
+      <h2>Climate change is the biggest threat to natural habitats.</h2>
+      <p class="lead">Our mission is to protect natural habitats from extinction. We work with local communities and
+        governments to protect and restore natural habitats. We also work with businesses to reduce their environmental
+        impact.</p>
+    </div>
+  </div>
+</div>
 
-  <h2 class="text-center mt-4">Projects</h2>
-  <div id="gridJSTable"></div>
+<div class="container">
+  <div class="track-list">
+    <div class="track">
+      <article>
+        <h3>Protecting natural habitats</h3>
+        <p>We work with local communities and governments to protect and restore natural habitats. We also work with
+          businesses to reduce their environmental impact.</p>
+        <button class="btn btn-navy">Learn More</button>
+      </article>
+      <div class="thumbnail">
+        <img src="$siteroot/website/assets/images/track-1.jpg" alt="Track 1" />
+      </div>
+    </div>
+    <div class="track reversed">
+      <article>
+        <h3>Reducing environmental impact</h3>
+        <p>We work with businesses to reduce their environmental impact. We help businesses to reduce their carbon
+          emissions and waste.</p>
+        <button class="btn btn-navy">Learn More</button>
+      </article>
+      <div class="thumbnail">
+        <img src="$siteroot/website/assets/images/track-2.jpg" alt="Track 2" />
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="hero-container footer">
+  <img class="hero-image" src="$siteroot/website/assets/images/template1-hero-footer.jpg" alt="Hero Image" />
+  <div class="footer-hero-text">
+    <p class="quote">
+      The only way to save a rhinoceros is to save the environment in which it lives, because there's a mutual
+      dependency between it and millions of other species of both animals and plants.
+    </p>
+    <p class="author">- National Geographic</p>
+  </div>
+</div>
 
-  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-  <script>
-    $(document).ready(function () {
-      var data = [
-        #foreach($project in $projects)
-          #set($project = $searcher.loadData($project))
-          #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
-          #set($logo = false)
-          #if($project.assetportrait)
-            #set($asset = $mediaarchive.getAsset($project.assetportrait))
-            #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
-          #else
-            #set($logo = "$applink/theme/images/OI_flower.png")
-          #end
-          #set($days = $mediaarchive.getProjectManager().calcDaysRemaining($project))
-          #if(!$days)
-            #set($days = 0) 
-          #end
-          #set($prob = $project.get("proposalproblem"))
-          #if(!$prob)
-            #set($prob = "N/A")
-          #end
-          #set($emp = $project.get("proposalempowerment"))
-          #if(!$emp)
-            #set($emp = "N/A")
-          #end
-
-        ["$logo", "#text($project)", "$days", ` $prob `, ` $emp `, "$link"],
-        #end
-      ];
-      new gridjs.Grid({
-        columns: [{
-          id: 'logo',
-          resizable: false,
-          name: 'Logo',
-          sort: false,
-          width: '90px',
-          formatter: function (cell, row) {
-            return gridjs.html(`<a href="${row.cells[5].data}"><img src="${cell}" style="width:30px;height:30px;object-fit:contain"/></a>`);
-          },
-        },
-        {
-          name: 'Name',
-          sort: true,
-          width: '200px',
-          formatter: function (cell, row) {
-            return gridjs.html(`<a href="${row.cells[5].data}">${cell}</a>`);
-          },
-        },
-        {
-          name: 'Days Remaining',
-          width: '200px',
-          sort: true,
-          formatter: function (cell) {
-            var percent = Math.round(((365 - cell) / 365) * 100);
-            return gridjs.html(`<div class="progress" style="margin-top:8px;width:100%;height:16px"><div class="progress-bar progress-bar-striped" style="width:${percent}%"></div></div><small>${cell} [[days remaining]]</small>`);
-          },
-        },
-        {
-          name: 'Problem',
-          sort: false,
-          formatter: function (cell) {
-            return gridjs.html(cell);
-          },
-        },
-        {
-          name: 'Empowerment',
-          sort: false,
-          formatter: function (cell) {
-            return gridjs.html(cell);
-          },
-        },
-        {
-          name: 'Link',
-          sort: false,
-          hidden: true,
-        }
-        ],
-        data: data,
-        sort: true,
-        search: true,
-        pagination: {
-          limit: 10
-        },
-        resizable: true,
-        language: {
-          search: {
-            placeholder: '🔍 Search...'
-          },
-          pagination: {
-            showing: ' ',
-            results: ' ',
-            previous: '«',
-            next: '»',
-          },
-          noRecordsFound: 'No projects found',
-        }
-      }).render(document.getElementById('gridJSTable'));
-    });
-  </script>
+<div class="call-to-action">
+  <div class="container">
+    <div class="subscription">
+      <input type="text" placeholder="Enter your email address" />
+      <button class="btn btn-navy">Join Us</button>
+    </div>
+    <h2>Join us in protecting natural habitats from extinction.</h2>
+  </div>
 </div>

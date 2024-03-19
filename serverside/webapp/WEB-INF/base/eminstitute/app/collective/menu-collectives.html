@@ -1,5 +1,5 @@
 #set($collectivesection = $content.collectivesection)
-<div class="navbar-container bg-dark">
+<div class="navbar-container project-navbar bg-white py-1">
 	<ul class="navbar-collective">
 		#set($homelink = "$applink/proposal/${librarycol.id}/#dash($librarycol.getName()).html")
 		<li id="home" class="nav-item #if($collectivesection == "home") active #end d-none d-sm-inline-block">

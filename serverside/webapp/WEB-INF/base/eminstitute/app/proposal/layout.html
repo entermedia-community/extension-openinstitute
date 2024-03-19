@@ -1,27 +1,11 @@
+<div class="w-100 mb-3 home-nav">
+	$pages.include("$apphome/collective/menu.html", $context)
+</div>
 
-<div class="currentcampaign">
-	
-	<div class="communitycontainer-header">
-	<h3>
-	[[News]]:
-	</h3>
-	</div>
-	
-	<div class="proposalcontainer-out">
-	
+<div class="blog-list-container">
 	#if( $caneditcollection )
-		<div class="proposalheader" style="">
-			<h4>[[Add Post]]</h4>
-		</div>
-		<div class="proposalnews" style="margin-bottom:20px">				
-				$pages.include("$apphome/collective/channel/addnewupload.html")
-		</div>
+		$pages.include("$apphome/collective/channel/addnewupload.html")
 	#end
 	
 	$pages.include("$apphome/proposal/channelfeed.html",$context)
-	
-	</div>
-
 </div>
-		
-

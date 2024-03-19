@@ -1,14 +1,14 @@
 #set($collectionid = $librarycol.getId())
 <div id="subscriberssidebar">
-	<div class="sidebarbox" style="position:relative;">
+	<div class="team-list" style="position:relative;">
 	#if(!$hideteamtitle)
-	<h3>[[Team Circle]]</h3>
+		<h6>[[Team Circle]]</h6>
 	#end
 
 	#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
 	
 	#if( $team.isEmpty()) 
-	<p>[[No team yet]]</p>
+		<p class="text-muted text-center">[[No team yet]]</p>
 	#else
 	<div class="d-flex flex-column">
 		#foreach( $hit in $team)
@@ -19,7 +19,7 @@
 				#if(!$userimageurl)
 					#set( $userimageurl = "$applink/theme/images/user.svg" )
 				#end 
-				<div class="teammember  "> 
+				<div class="teammember #if($prettylist) pretty-list #end"> 
 					<a href="#esc($userlink)" class="align-items-center me-2">
 						<img  src="${userimageurl}" title="$!followeruser.getAnonNickName()" width="30px" height="30px" class="me-2">
 						<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())" style="font-weight: bold;">$!followeruser.getAnonNickName()</span>
@@ -34,24 +34,28 @@
 					#end
 					)</span>
 					#end
-					<a class="btn btn-xs btn-secondary emdialog"
-						
+					<a class="btn btn-xs btn-brand text-white emdialog"
 		        	 		href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
 			               title="[[Edit Entry]]"><i class="fa fa-edit"></i></a>
-	        	 		
-					
 				</div>
 			#end
 		#end
 	</div>
-	#end
-	<hr style="margin:0 0 10px 0;opacity: 0.1">
+	#end 
+	<hr style="margin:10px 0;opacity: 0.1"> 
 	#if( $caneditcollection)
-	<div class="d-flex align-items-center justify-content-end w-100">
-		<a href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}" class="emdialog btn btn-secondary btn-xs me-1" title="[[Search Users]]">
+	<div class="d-flex align-items-center justify-content-start w-100 flex-wrap">
+		#if($likeoptions) 
+		<div class="me-1">
+			$pages.include("$apphome/collective/likeoptions.html", $context) 
+		</div>
+		#end
+		<a href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}"
+			class="emdialog btn btn-brand text-white btn-xs me-1" title="[[Search Users]]">
 			<i class="fas fa-search"></i> [[Add to Team]]
 		</a>
-		<a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}" class="emdialog btn btn-secondary btn-xs" title="[[Add New User to Project]]">
+		<a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}"
+			class="emdialog btn btn-brand text-white btn-xs me-1" title="[[Add New User to Project]]">
 			<i class="fas fa-plus"></i> [[New User]]
 		</a>
 	</div>

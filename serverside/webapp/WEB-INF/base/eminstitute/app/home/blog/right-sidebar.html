@@ -1,6 +1,21 @@
 
-<div class="card" style="border-radius: 15px; background-color: #fff;margin-top: 40px;max-width:300px;">
+<div class="card" style="border-radius: 15px; background-color: #fff;margin-top: 56px;max-width:300px;">
     <div class="card-body p-4 text-black">
-        #text($communitytagcategory.summary)
+        <div>
+            <h6 class="mt-0 mb-2">#text($communitytagcategory)</h6>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <p class="small mb-0">
+                    #text($communitytagcategory.summary)
+                </p>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="flex-shrink-0">
+                <img src="$apphome${communitytagcategory.primaryimagepath}" class="img-fluid rounded-circle border border-3" style="width: 70px;">
+            </div> 
+            <a href="$apphome/home/proposals/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html" class="btn btn-outline-dark btn-rounded btn-sm">
+                Explore <i class="ms-1 fas fa-arrow-right"></i>
+            </a>  
+        </div> 
     </div>
 </div>
