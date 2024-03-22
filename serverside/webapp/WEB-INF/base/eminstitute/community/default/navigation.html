@@ -26,7 +26,7 @@
 <nav class="navbar sticky-top navbar-expand community-nav">
   <div class="container">
     <a href="$link">
-      <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
+      <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
     </a>
     <a href="$link"> 
       <h2 class="text-white my-1 me-3">
@@ -39,7 +39,7 @@
                 <a class="nav-link" href="$link">Home</a>
               </li>
         <li class="nav-item #if($action == 'blog') active #end">
-          <a class="nav-link" href="$applink/home/blog/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html">
+          <a class="nav-link" href="/${communitytagcategory.urlname}/blog">
             Blog
           </a>
         </li>

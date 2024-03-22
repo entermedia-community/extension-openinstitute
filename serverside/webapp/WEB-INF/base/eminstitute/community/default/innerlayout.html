@@ -18,7 +18,7 @@
 
 	<title>$!metatitle</title>
 
-	$pages.include("/${applicationid}/theme/layouts/includes.html")
+	$pages.include("/${communityhome}/theme/layouts/includes.html")
 
 	#if(!$browser.inApp())
 		<link rel="Shortcut Icon" type="image/x-icon" href="$applink/theme/images/favicon.ico" />
@@ -43,13 +43,13 @@
 			<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
 				#if($browser.inApp())
 					$pages.includeContent()
-					$pages.include("/${apphome}/theme/layouts/footer.html")
+					$pages.include("/${communityhome}/theme/layouts/footer.html")
 				#else
 					#if($user && !$browser.inApp() && $canshowsidebar)
-						$pages.include("$apphome/components/sidebars/user/index.html")
+						$pages.include("${communityhome}/components/sidebars/user/index.html")
 					#end 
 					$pages.includeContent()
-					$pages.include("/${apphome}/theme/layouts/footer.html")
+					$pages.include("${communityhome}/theme/layouts/footer.html")
 				#end
 			</div>
 		</div>

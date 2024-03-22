@@ -1,0 +1,24 @@
+#set($collectionid = $context.getRequestParameter("collectionid"))
+#set($collectiveadminsection = $content.collectiveadminsection)
+#if(!$collectiveadminsection)
+	#set($collectiveadminsection = "settings")
+#end
+<div class="container" style="padding-top:30px;">
+<div class="contentcolumn" style="padding:0;">
+	<div class="row no-gutters g-0">
+		<div class="col-md-2" style="background-color: #fbfbfb;">
+			<div class="collectivesettings-menu">
+						
+					<ul class="auto-active-container">
+						<li class="menu-subheader">[[Settings]]</li>
+					</ul>
+			</div>
+		</div>
+		<div class="col-md-10" >
+			<div id="collectivesettingscontent" style="padding:10px; border-left:1px solid #eee;">
+			$pages.includeContent()	
+			</div>
+		</div>
+	</div>
+</div>
+</div>

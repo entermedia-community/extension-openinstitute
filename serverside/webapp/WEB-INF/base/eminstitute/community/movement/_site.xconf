@@ -5,6 +5,6 @@
   
     <property name="communityhome">${siteid}/community/movement</property>
 
-    <style id="template_1" src="${communityhome}/css/main.css" />
+    <style id="template_1" href="/${communityhome}/css/main.css" />
   
 </page>

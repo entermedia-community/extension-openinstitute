@@ -9085,11 +9085,11 @@ jQuery(document).ready(function()
 			}
 			$('#edit-modal-body').load(target,function(result){
 				var textareas = jQuery(".htmleditor");
-				if(textareas.size() > 0){
+				if(textareas.length > 0){
 				
 					loadEditors();
 				}
-				$('#editmodal').modal({show:true});
+				$('#editmodal').modal("show");
 			
 			});
 		  return false;

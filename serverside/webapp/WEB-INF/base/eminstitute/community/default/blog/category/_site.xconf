@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+	<property name="virtual">true</property>
+	<property name="oisection">stations</property>
+	<property name="collectivesection">blog</property>
+	
+	<property name="fullwidth">true</property>
+	
+	<path-action name="OiModule.loadCommunityTagFolder" />
+	
+	<inner-layout>/${applicationid}/home/blog/category/innerlayout.html</inner-layout>
+</page>

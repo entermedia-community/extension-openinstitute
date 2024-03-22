@@ -1,0 +1,11 @@
+<page>
+	
+	<path-action name="AssetEditModule.handleUploads"/>
+	
+	<path-action name="DataEditModule.saveData"/>
+
+   	<path-action name="Admin.loadPermissions"/>
+  	<path-action name="Admin.allowViewing"/>
+  
+
+</page>

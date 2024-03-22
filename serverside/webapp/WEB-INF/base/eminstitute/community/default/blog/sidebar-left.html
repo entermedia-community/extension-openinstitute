@@ -1,0 +1,60 @@
+#set($proposalproblem = $librarycol.get("proposalproblem"))
+#set($proposalcauses = $librarycol.get("proposalcauses"))
+#set($proposalempowerment = $librarycol.get("proposalempowerment"))
+
+	<div class="communitycontainer-header">
+		<h3>
+		[[Vision]]
+		</h3>
+		</div>
+
+	<div class="proposalcontainer-out">
+		<div class="proposaldescription" style="">
+			<div style="margin-bottom:20px">
+			<strong>[[Serving]]</strong><br>	
+			#set( $cats = $librarycol.getValues("communitytagcategory"))
+			#foreach( $cat in $cats)
+			#set( $community = $mediaarchive.getCachedData("communitytagcategory",$cat) )
+			#set( $link = "$applink/proposals/category/#dash($community)/${community.getId()}.html")
+				<a href="$link" style="text-decoration: underline;">#text($community)</a>
+			#end
+			</div>
+			#if($proposalproblem )
+			<div> 
+			<strong>[[Problem]]</strong><br>
+			$proposalproblem 
+			</div>
+			#end
+			
+			#if($proposalcauses )
+			<div> 
+			<strong>[[Root Causes]]</strong><br>
+			$proposalcauses 
+			</div>
+			#end
+		
+			#if($proposalempowerment)
+			<div> 
+			<strong>[[Empowerment]]</strong><br>
+			$proposalempowerment
+			</div>
+			#end
+
+		#if( $caneditcollection)
+			#if($proposalproblem  && $proposalcauses && $proposalempowerment)
+			#else
+				<a href="$applink/collective/edit/editcollective.html?collectionid=$librarycol.getId()&view=proposalsummary">[[Edit The Vision]]</a>
+			#end
+		#end	
+		
+		
+		</div>
+	</div>
+
+
+<div class="community-sidebar-box">
+
+	$pages.include("$apphome/collective/donate/donateproposalsidebar.html?hidegoals=true",$context)
+
+
+</div>

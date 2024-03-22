@@ -92,11 +92,11 @@
 	<style id="results" href="/${applicationid}/theme/styles/pages/results.css"/>
    
     <!-- App Custom -->
-  	<style id="eminstitute-css" href="/${applicationid}/theme/css/eminstitute.css"/>
+  	<style id="eminstitute-css" href="/${communityhome}/theme/css/eminstitute.css"/>
   	<script id="eminstitute-js" src="/${applicationid}/eminstitute.js"/>
- 	  <style id="oi2" href="/${applicationid}/theme/css/oi2.css"/>
-  	<style id="oi_landing" href="/${applicationid}/theme/css/oi-landing.css"/>
-  	<style id="oi3" href="/${applicationid}/theme/css/oi3.css"/>
+ 	  <style id="oi2" href="/${communityhome}/theme/css/oi2.css"/>
+  	<style id="oi_landing" href="/${communityhome}/theme/css/oi-landing.css"/>
+  	<style id="oi3" href="/${communityhome}/theme/css/oi3.css"/>
 
     <!-- <style id="drangepicker" href="/${applicationid}/components/javascript/multidate/daterangepicker.min.css" /> -->
    
