@@ -10,46 +10,70 @@
 				#set($totalbycurrency = 0)
 				<tr class="tablefinances-header">
 				#set( $currency = $mediaarchive.getCachedData("currencytype", $currencytype))
-				<td colspan="2" >#text( $currency )</td>
+				#set( $convert = $currency.getValue("exchangetousd"))
+		
+				<td colspan="2" style="width:20%; text-align: right;" >							
+					#if( $currency.exchangetousd != "1")
+						#text( $currency )
+					#end	
+				</td>
+				<td colspan="1"  style="text-align: right;" >USD</td>
 				</tr>
-			
 				#set( $incomes = $currencymap.get($currencytype))
 				#set( $expensetotals = $financeManager.sumarizeByType($incomes,"incometype") )
 				#foreach($incomecategory as $expensetotals)
 					<tr class="">
 						
-						<td>$!context.getText($incomecategory.incometype)</td>
-						<td class="table-col-totals">$!context.doubleToMoney($incomecategory.getValue("total"),2)</td>
+						<td style="width:20%;">$!context.getText($incomecategory.incometype)</td>
+						<td style="width:20%; text-align: right;">
+							#if( $currency.exchangetousd != "1")
+							 $!context.doubleToMoney($incomecategory.getValue("total"),2)
+							#end
+						</td>
+						<td class="table-col-totals">
+							#if( $currency.exchangetousd != "1")
+								#set($money = $incomecategory.getValue("total"))
+								#set($usd = $money/$convert)
+								$${context.doubleToMoney($usd,2)}
+							#else
+								$$!context.doubleToMoney($incomecategory.getValue("total"),2)
+							#end	
+					    </td>
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $incomecategory.getValue("total"))
 				#end
 				<tr>
-				<td style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
+				<td colspan="1"  style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
 				<td class="table-col-totals">
 				#if( $currency.exchangetousd != "1")
-					#set( $convert = $currency.getValue("exchangetousd"))
-					#set($usd = $totalbycurrency/$convert)
-					[ $${context.doubleToMoney($usd,2)} ]
-				#else
-					#set( $usd = $totalbycurrency)
-				#end
-				#set( $totalusd = $totalusd + $usd)
-				
-				<strong>$!context.doubleToMoney($totalbycurrency,2)</strong></td>
+					 -${context.doubleToMoney($totalbycurrency,2)} 
+				#end	
+				</td>	
+				<td class="table-col-totals">
+					#if( $currency.exchangetousd != "1")
+						#set($usd = $totalbycurrency/$convert)
+					#else
+						#set($usd = $totalbycurrency )
+					#end
+				#set($totalusd = $totalusd + $usd )
+				<strong>-$${context.doubleToMoney($usd,2)}</strong>
+				</td>
 				
 				</tr>
 			#end
 			<tr>
-				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
-				<td class="table-col-totals">
-					USD $$!context.doubleToMoney($totalusd,2)
+				<td   style="text-align: right;"><strong>[[Total]]:</strong></td>
+				<td colspan="2" style="text-align: right;" class="table-col-totals">
+				<strong>$$!context.doubleToMoney($totalusd,2)</strong>
 				</td>
-			</tr>
+				
+				</tr>
+
 			</table>
 
 			
 			<h3>[[Expenses]]</h3>  
-			#set($toalusd = 0.0)
+			#set($totalusd = 0.0)
 							## <a href="#"  class="btn btn-sm btn-secondary">[[Add New Expense]]</a>
 			#set( $currencymap = $financeManager.getNormalExpenseTypesByDateRange($collectionid, $daterange,$topic) )
 			<table class="table tablefinances" >
@@ -80,32 +104,37 @@
 								#set($usd = $money/$convert)
 								-$${context.doubleToMoney($usd,2)}
 							#else
-								- $!context.doubleToMoney($expensecategory.getValue("total"),2)
+								- $$!context.doubleToMoney($expensecategory.getValue("total"),2)
 							#end	
 					    </td>
 					</tr>
 					#set($totalbycurrency = $totalbycurrency + $expensecategory.getValue("total"))
+					
 				#end
 				<tr>
 				<td colspan="1"  style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
 				<td class="table-col-totals">
 				#if( $currency.exchangetousd != "1")
-					 -$${context.doubleToMoney($totalbycurrency,2)} 
+					 -${context.doubleToMoney($totalbycurrency,2)} 
 				#end	
 				</td>	
 				<td class="table-col-totals">
-					#set( $usd = $totalbycurrency)
-					#set( $toalusd = $toalusd + $usd)
-				<strong>-$!context.doubleToMoney($totalbycurrency,2)</strong>
+					#if( $currency.exchangetousd != "1")
+						#set($usd = $totalbycurrency/$convert)
+					#else
+						#set($usd = $totalbycurrency )
+					#end
+				<strong>-$${context.doubleToMoney($usd,2)}</strong>
+				#set($totalusd = $totalusd + $usd )
 				</td>
 				
 				</tr>
 			#end
 			
 				<tr>
-				<td style="text-align: right;"><strong>[[Total]]:</strong></td>
+				<td   style="text-align: right;"><strong>[[Total]]:</strong></td>
 				<td colspan="2" style="text-align: right;" class="table-col-totals">
-				<strong>USD -$$!context.doubleToMoney($toalusd,2)</strong>
+				<strong>-$$!context.doubleToMoney($totalusd,2)</strong>
 				</td>
 				
 				</tr>
