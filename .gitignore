@@ -14,3 +14,6 @@ serverside/webapp/WEB-INF/trash
 /**/build/ 
 
 serverside/webapp/WEB-INF/data
+
+.DS_Store
+*.DS_Store
