@@ -1,4 +1,9 @@
 <page>
-	<property name="virtual">true</property>
-	<path-action name="Admin.redirectInternal" redirectpath="${applink}/app/index.html" />
+
+	<property name="oisection">community</property>
+	
+
+    <inner-layout>/${siteid/app/theme/layouts/application.html</inner-layout>
+    <style id="oi2" cancel="true" />
+    <style id="oi3" cancel="true" />
 </page>

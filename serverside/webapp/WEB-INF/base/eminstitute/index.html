@@ -1,0 +1,6 @@
+#if( $sitedata )
+	#if( $sitedata.welcomepage)
+		#set( $home = $sitedata.welcomepage)
+	#end
+#end
+$pages.include($home,$context) 
