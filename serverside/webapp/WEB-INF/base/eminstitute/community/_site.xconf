@@ -10,7 +10,6 @@
   <property name="section">eminstituteapp</property>
   <property name="allowguestregistration">true</property>
   
-  <inner-layout>/${applicationid}/theme/layouts/application-collective.html</inner-layout>
   <property name="editable">true</property>
   
   <property name="searchtypeFromRequest">true</property>
@@ -28,11 +27,7 @@
 	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	<script id="jquery-validate" src="/${applicationid}/components/javascript/jquery.validation/jquery.validate.js"/>
 	<script id="validateandedit" src="/${applicationid}/components/javascript/validateandedit.js"/>
-  	<script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
-  
-    <!-- Bootstrap 
-	<script id="bootstrap" cancel="true" src="/${applicationid}/components/javascript/bootstrap/4/js/bootstrap.min.js" />
--->
+  <script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
 	
 	<style id="bootstrap" href="/${applicationid}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css" />
 	<style id="fonts-css"  href="/${applicationid}/components/javascript/bootstrap/fonts/css/fontawesome-all.min.css"/>
