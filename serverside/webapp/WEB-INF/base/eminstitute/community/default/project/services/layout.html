@@ -1,0 +1,71 @@
+#set($collectionid = $context.getRequestParameter("collectionid"))
+
+
+#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
+#set($collectiveadminsection = $content.collectiveadminsection)
+#if(!$collectiveadminsection)
+	#set($collectiveadminsection = "finances")
+#end
+
+<div class="contentcolumn" style="padding:0; min-height: calc(100% - 270px);">
+	<div class="row no-gutters g-0" style=" height: 100%;">
+		<div class="col-md-2" style="background-color: #dfdfdf;">
+			<div class="collectivesettings-menu">
+					<ul class="auto-active-container">
+						<li class="menu-subheader">[[Finances]]</li>		
+						<li class="#if($collectiveadminsection == "finances") current #end">
+							<a href="$applink/collective/services/finances/dashboard.html?collectionid=$collectionid"  class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-updateurl="true" data-oemaxlevel="1">[[Profit and Loss]]</a>
+						</li>
+
+						<li class="#if($collectiveadminsection == "bankaccounts") current #end">
+							<a href="$applink/collective/services/bankaccounts/index.html?collectionid=$collectionid"
+							data-updateurl="true"  class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Accounts]]</a>
+						</li>
+<!-- 						
+						<li class="#if($collectiveadminsection == "transfers") current #end">
+							<a href="$applink/collective/services/transfers/index.html?collectionid=$collectionid"  data-updateurl="true" class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Transfers]]</a>
+						</li>
+-->
+						<li class="#if($collectiveadminsection == "workpoints") current #end">
+							<a href="$applink/collective/services/workpoints/index.html?collectionid=$collectionid"  data-updateurl="true" class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Work Points]]</a>
+						</li>
+
+						<li class="#if($collectiveadminsection == "income") current #end">
+							<a href="$applink/collective/services/income/index.html?collectionid=$collectionid" data-updateurl="true" class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Income]]</a>
+						</li>
+
+						
+						<li class="#if($collectiveadminsection == "invoices") current #end">
+							<a href="$applink/collective/services/index.html?collectionid=$collectionid"  
+							data-updateurl="true" class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Invoices]]</a>
+						</li>
+					
+						<li class="#if($collectiveadminsection == "expenses") current #end">
+							<a href="$applink/collective/services/expenses/index.html?collectionid=$collectionid"  data-updateurl="true" 
+							class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Expenses]]</a>
+						</li>
+						<li class="#if($collectiveadminsection == "reimbursements") current #end">
+							<a href="$applink/collective/services/reimbursements/index.html?collectionid=$collectionid" data-updateurl="true" 
+							class="ajax auto-active-link" data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Reimbursements]]</a>
+						</li>
+
+						<li class="#if($collectiveadminsection == "investments") current #end">
+							<a href="$applink/collective/services/investments/index.html?collectionid=$collectionid"  data-updateurl="true" class="ajax auto-active-link" 
+							data-targetdivinner="collectivesettingscontent" data-oemaxlevel="1">[[Investments]]</a>
+						</li>
+					</ul>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div id="collectivesettingscontent" style="padding:15px 20px; border-top:1px solid #ddd;">
+			$pages.includeContent()	
+			</div>
+		</div>
+	</div>
+</div>
+
+#end

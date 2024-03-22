@@ -16,6 +16,16 @@
       <language id="es"><![CDATA[Nobre]]></language>  
     </name> 
   </property>  
+  <property id="urlname" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Url Name]]></language>  
+    </name> 
+  </property>  
+  <property id="templatepath" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Template Path]]></language>  
+    </name> 
+  </property>  
 
   <property id="summary"  index="true" stored="true" editable="true"  > 
     <name> 

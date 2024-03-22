@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg"
+  <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg" templatepath="/community/heritage" urlname="Digital-Heritage" 
   primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
   >
   <caption><![CDATA[Creating a Worldwide Digital Heritage]]></caption>
@@ -16,7 +16,7 @@
 
     </summary>
   </data>  
-  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg"
+  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="Common-Roots-Music" 
   primaryimagepathwide="/theme/images/home-creative-wide.jpg"
   >
     <caption><![CDATA[Folk music with beats]]></caption>
@@ -27,7 +27,7 @@
     Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
      for future generation to build upon.</summary>
   </data>  
-  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg"
+  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha-Academy" 
   primaryimagepathwide="/theme/images/home-human-wide.jpg">
     <name> 
       <language id="en"><![CDATA[Kansha Academy]]></language> 
@@ -38,8 +38,8 @@
 	Supporting education by creating and supporting schools in USA, San Marcos Guatemala and Mexico.    
     </summary>
   </data>
-  <data id="3" entitytype="librarycollection"  primaryimagepath="/theme/images/logos/emedialogo.svg"
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  <data id="3" entitytype="librarycollection" primaryimagepath="/theme/images/logos/emedialogo.svg"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" 
   > 
     <name> 
       <language id="en"><![CDATA[eMedia]]></language> 
@@ -55,7 +55,7 @@ of media Files
     </summary>
    
   </data>    
-  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg"
+  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra-Sagrada" 
   primaryimagepathwide="/theme/images/home-technology-wide.jpg"
   domaincommunityid="4"
   > 
@@ -71,7 +71,7 @@ of media Files
     </summary>
    
   </data>    
-  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg"
+  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness-Network" 
   primaryimagepathwide="/theme/images/home-technology-wide.jpg"
   domaincommunityid="5"
   > 
@@ -84,6 +84,23 @@ of media Files
     <summary>
     <![CDATA[
 A directory of mindful and inspired practitioners who inspire, support and serve personal transformation and spiritual growth.
+    ]]>
+    </summary>
+   
+  </data>    
+
+  <data id="movement"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/movement" urlname="Movement-Creators" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  domaincommunityid="4"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Movement Creators]]></language> 
+    </name>
+    <caption><![CDATA[Proliferate effective collaboration]]></caption>
+    
+    <summary>
+    <![CDATA[
+	Evolve an intentional, open-source, platform to facilitate a profitable philanthropic economy.
     ]]>
     </summary>
    

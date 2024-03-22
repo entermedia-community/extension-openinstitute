@@ -4,10 +4,13 @@
   <property name="title">EMInstitute</property>
   
   <property name="siteid">site</property>
+  <property name="catalogid">site/catalog</property>
 
+  <page-loader loader="projectLoader" />
+ 
   <property name="allowguestregistration">true</property>
   <property name="autologingroup">users</property>
 
-  <property name="error404">/${siteid}/error404.html</property>
+  <property name="error404">/${siteid}/common/error404.html</property>
 
 </page>

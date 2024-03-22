@@ -17,6 +17,11 @@
       <language id="fr"><![CDATA[Collection]]></language> 
     </name> 
   </property>  
+  <property id="urlname" index="true" stored="true" editable="true"    > 
+    <name> 
+      <language id="en"><![CDATA[Url Name]]></language>  
+    </name> 
+  </property>  
   <property id="description" defaultoperation="freeform" index="true"   stored="true"  editable="false" sortable="true">
     <name> 
       <language id="de"><![CDATA[All Fields]]></language>  

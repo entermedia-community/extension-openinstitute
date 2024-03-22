@@ -1,0 +1,9 @@
+<page>
+
+  	<path-action name="ProjectModule.loadCollection"></path-action>
+	
+	<property name="module">librarycollection</property>
+	<property name="subsection">home</property>
+	<property name="collectivesection">projects</property>
+
+</page>
