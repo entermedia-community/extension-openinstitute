@@ -9739,7 +9739,7 @@ a:hover {
   height: 75px;
   border: 1px solid #3696b2;
   border-radius: 50%;
-  top: -260px;
+  top: -130px;
   left: 10%;
 }
 .has-circle .circle-3 {
@@ -9748,7 +9748,7 @@ a:hover {
   border: 1px solid #3696b2;
   border-radius: 50%;
   left: 19%;
-  top: 120px;
+  top: 220px;
 }
 .has-circle .circle-4 {
   width: 30px;
@@ -9756,7 +9756,7 @@ a:hover {
   border: 1px solid #3696b2;
   border-radius: 50%;
   right: 15%;
-  top: -260px;
+  top: -130px;
 }
 .has-circle .circle-5 {
   width: 135px;
@@ -9764,7 +9764,7 @@ a:hover {
   border: 1px solid #3696b2;
   border-radius: 50%;
   right: 12%;
-  top: 120px;
+  top: 180px;
 }
 .has-circle .circle-6 {
   width: 280px;
@@ -9774,7 +9774,7 @@ a:hover {
   border-bottom: 0;
   right: -70px;
   transform: rotate(270deg);
-  top: -250px;
+  top: -45px;
 }
 .has-circle .circle-7 {
   width: 60px;
@@ -9784,7 +9784,7 @@ a:hover {
   border-bottom: 0;
   right: -15px;
   transform: rotate(270deg);
-  bottom: -380px;
+  bottom: -350px;
 }
 
 @media (max-width: 575px) {
