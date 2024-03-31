@@ -9201,7 +9201,7 @@ a:hover {
 }
 
 .bg-primary {
-  background-color: #f9f9f9 !important;
+  background-color: #f1f2f4 !important;
 }
 
 .radius {
@@ -9371,7 +9371,7 @@ a:hover {
   }
 }
 .footer-top {
-  background: #f9f9f9;
+  background: #f1f2f4;
 }
 
 .content p {
@@ -9603,11 +9603,11 @@ a:hover {
 @media (max-width: 575px) {
   .fixed-menu {
     padding: 5px 0px !important;
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
   }
   .navigation {
     padding: 5px 0px;
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
   }
   .navigation .navbar-nav .nav-item .nav-link {
     padding-left: 0px;
@@ -9622,11 +9622,11 @@ a:hover {
 @media (max-width: 767px) {
   .fixed-menu {
     padding: 5px 0px !important;
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
   }
   .navigation {
     padding: 5px 0px;
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
   }
   .navigation .navbar-nav .nav-item .nav-link {
     line-height: 0px;
@@ -9640,10 +9640,10 @@ a:hover {
 @media (max-width: 991px) {
   .fixed-menu {
     padding: 5px 15px !important;
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
   }
   .navigation {
-    background-color: #f9f9f9;
+    background-color: #f1f2f4;
     padding: 5px 20px;
   }
   .navigation .navbar-nav .nav-item .nav-link {
@@ -9823,7 +9823,7 @@ a:hover {
   }
 }
 .hero-area h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #252525;
 }
 
@@ -9832,7 +9832,7 @@ a:hover {
   font-weight: 300;
 }
 .hero-community h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.5;
   margin-bottom: 16px;
@@ -9880,7 +9880,7 @@ a:hover {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #f9f9f9;
+  background-color: #f1f2f4;
   width: 50%;
   height: 100%;
   transform: translate(-50%, -50%);
@@ -9947,7 +9947,7 @@ a:hover {
   height: 260px;
   transform: translateX(-50%);
   z-index: -1;
-  background: #f9f9f9;
+  background: #f1f2f4;
 }
 .services .card {
   transition: 0.6s;
@@ -10278,7 +10278,7 @@ p a:hover {
 }
 
 .achivments-bg {
-  background-color: #f9f9f9;
+  background-color: #f1f2f4;
   padding: 75px 65px;
 }
 .achivments-bg .border-bottom:last-child {
