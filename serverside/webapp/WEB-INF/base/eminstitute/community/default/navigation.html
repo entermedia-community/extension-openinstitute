@@ -11,24 +11,14 @@
 
 #set($homelink = "$applink/home/proposals/index.html")
 
-##$pages.include("$apphome/components/users/pickuser.html")
-##$pages.include("$apphome/components/libraries/pickcollection.html")
-
-#if( $comunitytagcategory.externaldomain)
-  #set( $link ="//${comunitytagcategory.externaldomain}/app/index.html")
-#elseif($comunitytag.entitytype == "entityrental")
-  #set( $link = "$apphome/home/rentals/${comunitytagcategory.getId()}/#dash($comunitytagcategory)/.html")
-#else
-  #set( $link = "$apphome/home/proposals/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html")
-#end
 #set ($action = $content.collectivesection)
 #if( $communitytagcategory)
 <nav class="navbar sticky-top navbar-expand community-nav">
   <div class="container">
-    <a href="$link">
+    <a href="/${communitytagcategory.urlname}">
       <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
     </a>
-    <a href="$link"> 
+    <a href="/${communitytagcategory.urlname}"> 
       <h2 class="text-white my-1 me-3">
         #text($communitytagcategory)
       </h2>
@@ -36,7 +26,7 @@
     <div class="d-flex align-items-center justify-content-center ms-auto">
       <ul class="nav nav-underline">
         <li class="nav-item  #if($action == 'community') active #end">
-                <a class="nav-link" href="$link">Home</a>
+                <a class="nav-link" href="/${communitytagcategory.urlname}">Home</a>
               </li>
         <li class="nav-item #if($action == 'blog') active #end">
           <a class="nav-link" href="/${communitytagcategory.urlname}/blog">
@@ -45,7 +35,7 @@
         </li>
       
         <li class="nav-item #if($action == 'projects') active #end">
-          <a class="nav-link" href="$applink/home/projects/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html">Projects</a>
+          <a class="nav-link" href="/${communitytagcategory.urlname}/projects">Projects</a>
         </li>
         <li class="nav-item #if($action == 'people') active #end">
           <a class="nav-link" href="$applink/home/blog/events.html">Events</a>
