@@ -9096,7 +9096,6 @@ h6,
 .btn {
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
-  text-transform: capitalize;
   padding: 0.7em 1em;
   border-radius: 50px;
   border: 1px solid;
@@ -9823,8 +9822,25 @@ a:hover {
     right: -50px;
   }
 }
-.hero-area .h1 {
+.hero-area h2 {
+  font-size: 3rem;
+  color: #252525;
+}
+
+.hero-area h3 {
   font-size: 1.5rem;
+  font-weight: 300;
+}
+.hero-community h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.hero-community h3 {
+  font-size: 1.35rem;
+  font-weight: 300;
+  line-height: 1.5;
 }
 @media (max-width: 1199px) {
   .hero-area .h1 {
@@ -10303,4 +10319,10 @@ p a:hover {
 ul > li {
   font-weight: normal !important;
   color: inherit;
+}
+.fw-thin {
+  font-weight: 300;
+}
+.fw-normal {
+  font-weight: 400;
 }
