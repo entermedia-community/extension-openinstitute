@@ -9,5 +9,5 @@
 	
 	<path-action name="OiModule.loadCommunityTagFolder" />
 	
-	<inner-layout>/${applicationid}/home/blog/category/innerlayout.html</inner-layout>
+	<inner-layout>/${applicationid}/home/blogs/category/innerlayout.html</inner-layout>
 </page>

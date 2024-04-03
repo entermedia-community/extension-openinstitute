@@ -11,10 +11,12 @@
 	<link rel="stylesheet" href="${communityhome}/css/emedia.css">
 	<link rel="stylesheet" href="/${applicationid}/components/javascript/bootstrap/fonts/css/fontawesome-all.min.css">
 	<link rel="stylesheet" href="${communityhome}/css/aos.css">
+  	<!-- OpenEdit -->
+	<script id="openedit" src="/openedit/components/javascript/openedit.js"></script>
 
 </head>
 
-<body>
+<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
 	$pages.include("/${communityhome}/navigation.html")
 	$pages.includeContent()

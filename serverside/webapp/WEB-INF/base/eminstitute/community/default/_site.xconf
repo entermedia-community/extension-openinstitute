@@ -4,4 +4,8 @@
 
   <path-action name="OiModule.loadCommunityTagFolder" />
   <inner-layout>${communityhome}/innerlayout.html</inner-layout>
+  	<!-- OpenEdit -->
+	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
+	
+  
 </page>

@@ -1,0 +1,6 @@
+	#set( $userlink = "$applink/users/${chatuser.getId()}/${chatuser.getAnonNickName()}.html")
+	#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
+	#ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+		<a href="#esc($userlink)" title="$chatuser.getAnonNickName()">
+		<img src="${userimageurl}" class="img-fluid usericon">
+		</a>
