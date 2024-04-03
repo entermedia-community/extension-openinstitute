@@ -10326,3 +10326,18 @@ ul > li {
 .fw-normal {
   font-weight: 400;
 }
+.chip {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  color: #3696b2;
+  font-size: 16px;
+  font-weight: 500;
+  outline: 1px solid transparent;
+  transition: all 0.2s;
+}
+.chip:hover {
+  outline: 1px solid #3696b2;
+}

@@ -25,10 +25,8 @@ $(document).ready(function () {
 });
 
 $(window).on("load", function () {
-  if (AOS in window) {
-    AOS.init({
-      duration: 600,
-      once: true,
-    });
-  }
+  AOS.init({
+    duration: 600,
+    once: true,
+  });
 });
