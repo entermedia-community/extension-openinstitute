@@ -13,6 +13,8 @@ import org.openedit.page.Page;
 import org.openedit.page.PageLoader;
 import org.openedit.page.manage.PageManager;
 import org.openedit.servlet.RightPage;
+import org.openedit.servlet.SiteData;
+import org.openedit.util.URLUtilities;
 
 public class ProjectLoader implements PageLoader, CatalogEnabled
 {
@@ -47,80 +49,149 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	}
 	
 	@Override
-	public RightPage getRightPage(Page inPage)
+	public RightPage getRightPage( URLUtilities util, SiteData sitedata, Page inPage)
 	{
 		String path = inPage.getPath();
-		String[] sections = path.split("/");
-		if(sections[2].equals("mediadb") || sections[2].equals("app"))
+		String[] url = path.split("/");
+
+		//Check domain?
+		String[] domain  = util.domain().split("\\.");
+
+		String communityurlname = null;
+		String projecturlname = null;
+		String anythingelse = null;
+
+		//Assume everything is higher
+		if(domain.length > 2) //Move up everything
+		{
+			if(url.length > 1 && (url[1].equals("mediadb") || url[1].equals("app")))
+			{
+				return null;
+			}
+
+			communityurlname = domain[0];
+			if( url.length > 2)
+			{
+				projecturlname = url[1];
+				if( url.length > 3)
+				{
+					anythingelse = path.substring(path.indexOf(projecturlname));
+				}
+			}
+		}
+		else
+		{
+			if( url.length < 3)
+			{
+				return null;
+			}
+			if(url[2].equals("mediadb") || url[2].equals("app"))
+			{
+				return null;
+			}
+
+			if( url.length == 3)
+			{
+				communityurlname = url[2];
+			}
+			if(url.length > 3) //Might be projects or blogs or a virtual project
+			{
+				communityurlname = url[2];
+				projecturlname = url[3];
+			}
+			if( url.length > 4)
+			{
+				anythingelse = path.substring(path.indexOf(projecturlname) + projecturlname.length());
+			}
+		}
+
+		if(projecturlname == null)
+		{
+			RightPage page = goHome(inPage, communityurlname);
+			return page;	
+		}
+		
+		//TODO: Keep a cached list of sub folders where we always load the page from blogs projects etc and assume .../index.html
+		
+		//Does the page exist or is it a project?
+		String siteid = inPage.get("siteid");
+		Data communitydata = findCommunity(communityurlname);
+		if( communitydata == null)
 		{
 			return null;
 		}
-		if(sections.length == 3)
+		String communityhome = "/" + siteid + communitydata.get("templatepath");
+		String fixedpath =communityhome + "/" + projecturlname;
+		if(  anythingelse != null)
 		{
-			String communityurl = sections[2];
-			QueryBuilder query = getMediaArchive().query("communitytagcategory").exact("urlname", communityurl).hitsPerPage(1);
-			HitTracker hits = getMediaArchive().getCachedSearch(query);
-			Data first = (Data)hits.first();
-			if(first != null)
-			{
-				String siteid = inPage.get("siteid");
-				String communityhome = "/" + siteid + first.get("templatepath");
-				String template =communityhome + "/communityhome.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
-				Page page = getPageManager().getPage(template);
-				RightPage right = new RightPage();
-				right.putParam("communitytagcategory" ,  first.getId());
-				right.putPageValue("communitytagcategory" , first);
-				right.putPageValue("communityhome" , communityhome);
-				
-				right.setRightPage(page);
-				return right;
-
-			}
+			fixedpath = fixedpath + anythingelse;
 		}
-		if(sections.length > 3)
+		RightPage right = new RightPage();
+		right.putParam("communitytagcategory" ,  communitydata.getId());
+		right.putPageValue("communitytagcategory" , communitydata);
+		right.putPageValue("communityhome" , communityhome);
+		Page page = getPageManager().getPage(fixedpath);
+		if( page.exists())  //Must be a real page
 		{
-			String projectname = sections[3];
-			QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", projectname).hitsPerPage(1);
-			HitTracker hits = getMediaArchive().getCachedSearch(query);
-			Data librarycollection = (Data)hits.first();
-			if(librarycollection != null)
-			{
-				String categoryid = librarycollection.get("communitytagcategory");  //communities/emedia/home.html
-				Data cat = getMediaArchive().getCachedData("communitytagcategory", categoryid);
-				String siteid = inPage.get("siteid");
-				String communityhome = "/" + siteid + cat.get("templatepath");
-				
-				String template = null;
-				if( sections.length == 4)
-				{
-					template =communityhome + "/project/projecthome.html";
-				}
-				else
-				{
-					template = communityhome + "/project";
-					for (int i = 4; i < sections.length; i++)
-					{
-						template = template + "/" + sections[i];
-					}
-				}
-
-				Page page = getPageManager().getPage(template);
-				if( !page.exists())
-				{
-					log.info("Cant find " + template);
-				}
-				RightPage right = new RightPage();
-				right.putParam("collectionid" , librarycollection.getId());
-				right.putParam("communitytagcategory" , categoryid);
-				right.putPageValue("communitytagcategory" , cat);
-				right.putPageValue("communityhome" , communityhome);
-				right.putPageValue("librarycol" , librarycollection);				
-				right.setRightPage(page);
-				return right;
-			}
+			right.setRightPage(page);
+			return right;
 		}
-		//Look for a community
+
+		//Must be a project with something on the end?		
+		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", projecturlname).hitsPerPage(1);
+		HitTracker hits = getMediaArchive().getCachedSearch(query);
+		Data librarycollection = (Data)hits.first();
+		if(librarycollection != null)
+		{
+			String template = null;
+			if( anythingelse == null)
+			{
+				template =communityhome + "/project/projecthome.html";
+			}
+			else
+			{
+				template = communityhome + "/project" + anythingelse;
+			}
+
+			Page otherpage = getPageManager().getPage(template);
+			if( !otherpage.exists())
+			{
+				log.info("Cant find " + template);
+			}
+			right.putParam("collectionid" , librarycollection.getId());
+			right.putPageValue("librarycol" , librarycollection);				
+			right.setRightPage(otherpage);
+			return right;
+		}
 		return null;
+	}
+
+	protected RightPage goHome(Page inPage, String communityurlname)
+	{
+		Data first = findCommunity(communityurlname);
+		if(first != null)
+		{
+			String siteid = inPage.get("siteid");
+			String communityhome = "/" + siteid + first.get("templatepath");
+			String template =communityhome + "/communityhome.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
+			Page page = getPageManager().getPage(template);
+			RightPage right = new RightPage();
+			right.putParam("communitytagcategory" ,  first.getId());
+			right.putPageValue("communitytagcategory" , first);
+			right.putPageValue("communityhome" , communityhome);
+			
+			right.setRightPage(page);
+			return right;
+
+		} return null;
+	}
+
+	protected Data findCommunity(String communityurlname)
+	{
+		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1);
+		HitTracker hits = getMediaArchive().getCachedSearch(query);
+		Data first = (Data)hits.first();
+		return first;
 	}
 
 	@Override
