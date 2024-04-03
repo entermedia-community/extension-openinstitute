@@ -117,7 +117,11 @@ public class OpenInstituteModule extends BaseMediaModule
 
 	public void loadCommunityBlog(WebPageRequest inReq)
 	{
-		Data tag = loadCommunityTagByDomain(inReq);
+		Data tag = (Data)inReq.getPageValue("communitytagcategory");
+		if( tag == null)
+		{
+			tag = loadCommunityTagByDomain(inReq);
+		}
 
 		Collection collections = getMediaArchive(inReq).query("librarycollection").exact("communitytagcategory",tag).search(inReq);
 		
