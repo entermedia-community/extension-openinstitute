@@ -163,7 +163,8 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 				log.info("Cant find " + template);
 			}
 			right.putParam("collectionid" , librarycollection.getId());
-			right.putPageValue("librarycol" , librarycollection);				
+			right.putPageValue("librarycol" , librarycollection);
+			right.putPageValue("projecthome" , communityhome + "/" + librarycollection.get("urlname") );
 			right.setRightPage(otherpage);
 			return right;
 		}
