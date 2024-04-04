@@ -164,7 +164,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			}
 			right.putParam("collectionid" , librarycollection.getId());
 			right.putPageValue("librarycol" , librarycollection);
-			right.putPageValue("projecthome" , communityhome + "/" + librarycollection.get("urlname") );
+			right.putPageValue("projectlink" , "/" + communityurlname + "/" + librarycollection.get("urlname") );
 			right.setRightPage(otherpage);
 			return right;
 		}
