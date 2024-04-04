@@ -122,15 +122,19 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 		String communityhome = "/" + siteid + communitydata.get("templatepath");
 		String fixedpath =communityhome + "/" + projecturlname;
+
+		Page page = getPageManager().getPage(fixedpath);
+
 		if(  anythingelse != null)
 		{
 			fixedpath = fixedpath + anythingelse;
+			page = getPageManager().getPage(fixedpath);
 		}
+		
 		RightPage right = new RightPage();
 		right.putParam("communitytagcategory" ,  communitydata.getId());
 		right.putPageValue("communitytagcategory" , communitydata);
 		right.putPageValue("communityhome" , communityhome);
-		Page page = getPageManager().getPage(fixedpath);
 		if( page.exists())  //Must be a real page
 		{
 			right.setRightPage(page);
