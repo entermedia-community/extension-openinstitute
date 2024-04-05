@@ -1,63 +1,96 @@
-
-
 <div class="d-flex bg-dark p-4">
   <div class="container">
-    <div style="max-width: 520px;" class="mx-md-auto text-center">
-      <h1 class="text-white mb-0">Good News Network – by Giving Back Studio</h1>
-      <h4 class="text-white mt-0 d-none d-md-block fw-normal">
+    <div class="mx-md-auto text-center">
+      <h1 class="text-white mb-0">
+        Projects under #text($communitytagcategory) Community
+      </h1>
+      <!-- <h4 class="text-white mt-0 d-none d-md-block fw-thin">
         Truly joyful news to delight the spirit of humanity.
-      </h4>
+      </h4> -->
     </div>
   </div>
 </div>
-<div class="container" style="overflow-x: scroll;">
+<div class="container">
   #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
   #set( $projects =
   $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).search($context))
 
-  <h2 class="text-center mt-4">Projects</h2>
-  <div class="container mb-4">
-    <div class="row">
+  <!-- <h2 class="text-center my-4">Projects</h2> -->
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
       #foreach($project in $projects)
-      #set($project = $searcher.loadData($project))
-      #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
-      #set($logo = false)
-      #if($project.assetportrait)
-        #set($asset = $mediaarchive.getAsset($project.assetportrait))
-        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
-      #else
-        #set($logo = "$applink/theme/images/OI_flower.png")
-      #end
-      #set($description = $project.get("collectivedescription"))
-      <div class="col-sm-12 col-md-6 col-lg-4 h-100 proposal-grid-item" data-aos="flip-up">
-        <div class="card w-100 mb-4 shadow-sm transition-3d-hover" style="min-height: 500px;">
-          <a href="$link">
-            ##<img src="$logo" class="card-img-top" alt="#text($project)">
-            <img src="https://picsum.photos/seed/${project.get("id")}/400/250" class="card-img-top" alt="#text($project)">
-          </a>
-          <div class="card-body">
-            <span class="text-muted">John Doe <strong class="d-inline-block mx-1">&middot;</strong> 24 Jan, 2024</span>
-            <h5 class="card-title">#text($project)</h5>
-            <p class="card-text mb-auto">$description</p>
-            <a href="$link" class="btn btn-outline-primary transition-3d-hover">Learn more <i class="fas fa-angle-double-right"></i></a>
+        #set($project = $searcher.loadData($project))
+        #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+        #set($logo = false)
+        #if($project.assetportrait)
+          #set($asset = $mediaarchive.getAsset($project.assetportrait))
+          #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+        #else
+          #set($logo = "$communityhome/theme/images/OI_flower.png")
+        #end
+        #set($description = $project.get("collectivedescription"))
+
+        #if ($project.collectivebanner)
+          #set( $banner= $mediaarchive.getAsset($project.collectivebanner) )
+          #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
+        #else
+          #set ($bannerurl = "$communityhome/theme/images/oi-background-2023.jpg")
+        #end
+
+        <div class="col-sm-12 col-md-6 col-lg-4 d-flex flex-column h-100" data-aos="fade-up">
+          <img class="project-cover" src="$bannerurl" />
+          <div class="card p-4 project-card">
+            <div class="image d-flex flex-column justify-content-center align-items-center">
+              <a href="$link">
+                <img class="project-thumb" src="$logo" />
+              </a>
+              <a href="$link" class="name mt-3">#text($project)</span>
+              </a>
+              <span class="creator">by John Doe</span>
+              <div class="d-flex flex-column justify-content-center align-items-center mt-3">
+                 <span class="members">45 Members</span>
+              </div>
+              <div class="text mt-3">
+                <span>${description.substring(0,300)}...</span>
+              </div>
+              <div class="d-flex mt-3">
+                <a href="$link" class="explore btn-dark">Explore</a>
+              </div>
+              <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                <a href="#" class="text-dark">
+                  <span><i class="fab fa-twitter"></i></span>
+                </a>
+                <a href="#" class="text-dark">
+                  <span><i class="fab fa-facebook-f"></i></span>
+                </a>
+                <a href="#" class="text-dark">
+                  <span><i class="fab fa-instagram"></i></span>
+                </a>
+                <a href="#" class="text-dark">
+                  <span><i class="fab fa-linkedin"></i></span>
+                </a>
+              </div>
+              <div class="px-2 rounded mt-3 date">
+                <span class="launched">Launched on May, 2024</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div> 
       #end
     </div>
-    
-    <hr style="border-color: #b5b5b5;" />
 
-    <div class=" d-flex align-items-center justify-content-center my-5"> 
-      <div class="p-4 shadow-sm rounded-3" style="background-color: #ffffff;">
+    <div class="my-5" style="width:100%;border-top:1px solid #efefef;"></div>
+
+    <div class=" d-flex align-items-center justify-content-center subscription">
+      <div class="p-4" style="background-color: #ffffff;">
         <h2 class="text-center mb-0">Join the Community</h2>
         <p class="text-center">Join the community to get updates on the latest projects.</p>
-        <div class="input-group input-group-lg mb-3" style="width: 480px;">
-          <input type="text" class="form-control input-brand disable-focus-ring" style="min-height: 48px;border-width:2px;" placeholder="Your email"
-            aria-describedby="button-addon2">
-          <button class="btn btn-primary rounded-end" type="button" id="button-addon2">Subscribe</button>
+        <div class="input-group input-group-lg mb-3">
+          <input type="text" class="form-control input-brand mb-0 px-3 py-2"
+            style="min-height: 48px;border-width:2px;" placeholder="Your email">
+          <button class="btn btn-primary rounded-end" type="button">Subscribe</button>
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </div>

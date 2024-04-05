@@ -42,10 +42,10 @@
 		#if($comments.size() > 0) <hr> #end
 		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($user) )
 		#if(!$userimageurl)
-			#set( $userimageurl = "$applink/theme/images/user.svg" )
+			#set( $userimageurl = "$communityhome/theme/images/user.svg" )
 		#end
 		<div class="d-flex align-items-start">
-			<a class="mt-1 me-1" href='#urlescape("$applink/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
+			<a class="mt-1 me-1 comment-avatar" href='#urlescape("$applink/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
 				<img src="$userimageurl" class="blog-avatar-img" alt="[[Comment as]] $user" />
 			</a>
 			<textarea type="text" name="commenttext" data-useruploadid="$upload.id" data-collectionid="$librarycol.id" class="commentadder blog-comments-input" placeholder="[[Write a comment]]" autoComplete="off" rows="3"></textarea>

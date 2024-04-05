@@ -130,15 +130,15 @@ jQuery(document).ready(function()
 		// lQuery(".blog-comments").livequery("click",function(e) { 
 		// 	e.stopPropagation();
 		// });
-		lQuery(".blog-media").livequery("click",function(e) {})
-		lQuery(".blog-list-item").livequery("click",function(e) {
-			if(e.target != this) { 
-				return;
-			}
-			e.stopPropagation()
-			var uploadid = $(this).data("uploadid");
-			showUpload(uploadid);
-		});
+		// lQuery(".blog-media").livequery("click",function(e) {})
+		// lQuery(".blog-list-item").livequery("click",function(e) {
+		// 	if(e.target != this) { 
+		// 		return;
+		// 	}
+		// 	e.stopPropagation()
+		// 	var uploadid = $(this).data("uploadid");
+		// 	showUpload(uploadid);
+		// });
 		lQuery("#hiddenoverlay").livequery("click",function(e)
 		{
 				e.stopPropagation();

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page> 
-	<property name="oisection">stations</property> 
+	<property name="oisection">project</property>
 
 	<style id="aos-css" href="/${applicationid}/theme/css/aos.css"/>
+	<style id="projects" href="/${applicationid}/theme/css/projects.css"/>
+	<style id="oi3" href="/${applicationid}/theme/css/oi3.css"/>
 	<script id="aos-js" href="/${applicationid}/theme/js/aos.js"/>
 </page>

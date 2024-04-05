@@ -1,6 +1,8 @@
-<page>
+<?xml version="1.0" encoding="UTF-8"?>
 
-	<property name="oisection">community</property>
+<page>
+	<property name="oisection">blogs</property>
+
 	<property name="collectivesection">home</property>
 	<property name="communitytag">true</property>
 	<property name="virtual">true</property>
@@ -14,10 +16,11 @@
 
 	<path-action name="OiModule.loadCommunityBlog" />
 	<style id="uploadstyle" href="${themeprefix}/styles/pages/upload.css" />
+	<style id="oi3" href="${themeprefix}/styles/pages/upload.css" />
 	<property name="uploadtab">single</property>
 	<script id="upload" src="/${applicationid}/components/upload/types/html5/upload.js" />
 	<script id="html5_upload" src="/${applicationid}/components/javascript/upload/jquery.html5_upload.js" />
 	
 	 
-
+<style id="projects" href="/${applicationid}/theme/css/oi3.css"/>
 </page>

@@ -10285,7 +10285,20 @@ p a:hover {
   border-bottom: none !important;
   padding-bottom: 0 !important;
 }
-
+.nav-link.active {
+  color: #3696b2;
+  font-weight: 700;
+  position: relative;
+}
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  width: calc(100% - 40px);
+  left: 20px;
+  bottom: -12px;
+  height: 2px;
+  background-color: #3696b2;
+}
 @media (max-width: 575px) {
   .achivements {
     text-align: center;
@@ -10306,16 +10319,16 @@ p a:hover {
   .achivements .achivments-bg {
     padding: 60px 50px;
   }
+  .nav-link.active::after {
+    display: none;
+  }
 }
 @media (max-width: 1199px) {
   .achivements .achivments-bg {
     padding: 55px 44px;
   }
 }
-.nav-link.active {
-  color: #3696b2;
-  font-weight: 700;
-}
+
 ul > li {
   font-weight: normal !important;
   color: inherit;

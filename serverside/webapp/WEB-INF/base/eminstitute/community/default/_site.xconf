@@ -5,6 +5,7 @@
   <path-action name="OiModule.loadCommunityTagFolder" />
   <inner-layout>${communityhome}/innerlayout.html</inner-layout>
   	<!-- OpenEdit -->
+	<script id="jquery" src="/${applicationid}/components/javascript/jquery-3.6.0.min.js"/>
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	
   
