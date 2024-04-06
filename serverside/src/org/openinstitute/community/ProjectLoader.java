@@ -54,6 +54,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		String path = inPage.getPath();
 		String[] url = path.split("/");
 
+		//Check that we are actually going to the page /site/community/...
+		String appid = inPage.getProperty("applicationid");
+		if( url.length > 0 && appid.startsWith(url[1]))
+		{
+			return null;
+		}
+		
+		
 		//Check domain?
 		String[] domain  = util.domain().split("\\.");
 
