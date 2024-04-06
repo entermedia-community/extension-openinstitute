@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <page>
+	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
 
   	<path-action name="ProjectModule.loadCollection"></path-action>
 	

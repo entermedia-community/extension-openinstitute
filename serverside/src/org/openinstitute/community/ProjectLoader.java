@@ -150,7 +150,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			String template = null;
 			if( anythingelse == null)
 			{
-				template =communityhome + "/project/projecthome.html";
+				template =communityhome + "/project/blog/index.html";
 			}
 			else
 			{
