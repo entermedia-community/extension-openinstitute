@@ -1,13 +1,14 @@
 	
 	
 <div id="campaigninfo" class=" oicontainercampaigns " >
-
+	$pages.include("${communityhome}/project/layout/project-header.html",$context)
 	<div class="row no-gutters g-0">
 		<div  class="col-lg-20p">
 			$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 		</div>
 		
 		<div class="col">
+			$pages.include("${communityhome}/project/layout/menu-collectives.html",$context)
 			$pages.includeContent()	
 		</div>
 		

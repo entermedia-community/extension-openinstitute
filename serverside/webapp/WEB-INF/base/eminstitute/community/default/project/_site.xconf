@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
+	<property name="oisection">project</property>
+	<property name="collectivesection">blog</property>
+
 	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
 
   	<path-action name="ProjectModule.loadCollection"></path-action>
 	
 	<property name="module">librarycollection</property>
-	<property name="subsection">home</property>
-	<property name="collectivesection">projects</property>
 
-	
-
+	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
+	<style id="oi2" href="${communityhome}/theme/css/oi2.css"/>
+	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 </page>

@@ -56,7 +56,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 
 		//Check that we are actually going to the page /site/community/...
 		String appid = inPage.getProperty("applicationid");
-		if( url.length > 0 && appid.startsWith(url[1]))
+		if( appid != null && url.length > 0 && appid.startsWith(url[1]))
 		{
 			return null;
 		}

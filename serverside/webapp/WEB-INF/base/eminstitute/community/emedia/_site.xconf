@@ -4,8 +4,7 @@
 	<property name="oisection">home</property>
 
   <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
-  <property name="communityhome">${siteid}/community/emedia</property>
+  <property name="communityhome">/${siteid}/community/emedia</property>
   <style id="emedia2" href="${communityhome}/css/emedia.css"></style>
-  <style id="projects" href="${communityhome}/theme/css/projects.css"></style>
 
 </page>
