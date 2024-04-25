@@ -81,26 +81,24 @@ public class OpenInstituteModule extends BaseMediaModule
 		Data tag = null;
 		if( tagid != null)
 		{
-			tag = archive.getData("communitytagcategory", tagid);
+			tag = archive.getCachedData("communitytagcategory", tagid);
 		}
-		if(tag != null) {
+		if(tag != null) 
+		{
 			inReq.putPageValue("communitytagcategory", tag);
 			String siteid = inReq.findPathValue("siteid");
+
 			String communityhome = "/" + siteid + tag.get("templatepath");
-
 			inReq.putPageValue("communityhome" , communityhome);
-
-			String communitylink =null;
-
 			
+			String communitylink = communityhome;
             if( tag.get("externaldomain") != null )
             {
-            		communitylink ="//${tagcategory.externaldomain}/";
-            }
-            else
-            {
-            	String apphome = (String)inReq.getPageValue("apphome"); 
-            	communitylink = apphome + tag.get("urlname");
+            	SiteData sitedata = (SiteData)inReq.getPageValue("sitedata");
+        		if(sitedata != null ) //We are on a domain
+        		{
+        			communitylink = ""; // tag.get("externaldomain"); //or ?
+        		}
             }
   			inReq.putPageValue("communitylink" ,communitylink);
 
