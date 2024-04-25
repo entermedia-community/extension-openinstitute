@@ -73,17 +73,37 @@ public class OpenInstituteModule extends BaseMediaModule
 		return null;
 	}
 	
+	
 	public void loadCommunityTagFolder(WebPageRequest inReq)
 	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String tagid = inReq.findPathValue("communitytagcategory");
-		if( tagid == null)
+		Data tag = null;
+		if( tagid != null)
 		{
-			tagid =	PathUtilities.extractDirectoryName(inReq.getPath());
+			tag = archive.getData("communitytagcategory", tagid);
 		}
-		Data tag = archive.getData("communitytagcategory", tagid);
 		if(tag != null) {
 			inReq.putPageValue("communitytagcategory", tag);
+			String siteid = inReq.findPathValue("siteid");
+			String communityhome = "/" + siteid + tag.get("templatepath");
+
+			inReq.putPageValue("communityhome" , communityhome);
+
+			String communitylink =null;
+
+			
+            if( tag.get("externaldomain") != null )
+            {
+            		communitylink ="//${tagcategory.externaldomain}/";
+            }
+            else
+            {
+            	String apphome = (String)inReq.getPageValue("apphome"); 
+            	communitylink = apphome + tag.get("urlname");
+            }
+  			inReq.putPageValue("communitylink" ,communitylink);
+
 		}
 	}
 
