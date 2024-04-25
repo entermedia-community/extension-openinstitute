@@ -38,13 +38,13 @@ $pages.include("$apphome/project/logo.html")
 	#end
 	
 	#if ($!librarycol.websitelink)
-		<a href="$!librarycol.websitelink"><i class="fas fa-link"></i> Web Site</a>
+		<a href="$!librarycol.websitelink"><i class="fa-solidfa-link"></i> Web Site</a>
 	#end
 	
 	#if( $librarycol.owner == $user.getId() || $canviewsettings )
 </p>
 	 <a class="btn btn-light btn-sm emdialog" title="[[Project Details]]" data-width="500" 
-	 	href="$applink/project/edit.html?collectionid=$librarycol.getId()"><i class="fas fa-edit"></i> [[Edit]]</a>
+	 	href="$applink/project/edit.html?collectionid=$librarycol.getId()"><i class="fa-solidfa-edit"></i> [[Edit]]</a>
 </p>
 	#end	
 </div>	

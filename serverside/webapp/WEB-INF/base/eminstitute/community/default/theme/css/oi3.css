@@ -34,7 +34,6 @@ h6 {
 header {
   color: #1b1c1f;
   box-shadow: 0 0 3px rgba(115, 115, 115, 0.5);
-  border-radius: 8px;
   background-color: #fff;
 }
 
@@ -1321,7 +1320,7 @@ textarea.blog-comments-input {
   color: #576f76;
 }
 .project-navbar .nav-link:hover {
-  color: #267371;
+  color: #267371 !important;
 }
 .project-navbar .navbar-collective li.active a {
   color: #267371;
