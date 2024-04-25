@@ -39,7 +39,7 @@
     </summary>
   </data>
   <data id="3" entitytype="librarycollection" primaryimagepath="/theme/images/logos/emedialogo.svg"
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="http://emedia.openinstitute.org:8080"
   > 
     <name> 
       <language id="en"><![CDATA[eMedia]]></language> 

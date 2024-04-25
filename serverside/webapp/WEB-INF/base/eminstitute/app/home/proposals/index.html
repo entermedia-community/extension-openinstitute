@@ -40,11 +40,9 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
         <div class="col col-sm-12 col-lg-6">
           <div class="proposal">
             #if( $tagcategory.externaldomain)
-              #set( $link ="//${tagcategory.externaldomain}/app/index.html")
-            #elseif($tagcategory.entitytype == "entityrental")
-              #set( $link = "$apphome/home/rentals/${tagcategory.getId()}/#dash($tagcategory).html")
+              #set( $link ="//${tagcategory.externaldomain}/")
             #else
-              #set( $link = "$apphome/home/proposals/category/${tagcategory.getId()}/#dash($tagcategory).html")
+              #set( $link = "$apphome/${tagcategory.get('urlname')}")
             #end
             <a href="$link" class="thumbnail">
               <img src="$apphome${tagcategory.primaryimagepath}" />

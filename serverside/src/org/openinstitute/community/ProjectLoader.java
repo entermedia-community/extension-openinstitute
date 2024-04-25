@@ -49,10 +49,35 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	}
 	
 	@Override
-	public RightPage getRightPage( URLUtilities util, SiteData sitedata, Page inPage)
+	public RightPage getRightPage( URLUtilities util, SiteData sitedata, Page inPage, String requestedPath)
 	{
-		String path = inPage.getPath();
-		String[] url = path.split("/");
+		if( sitedata == null)
+		{
+			RightPage right = new RightPage();
+			right.setRightPage(inPage);
+			return right;
+			
+		}
+//		if( sitedata != null )
+//		{
+//			String realpath = sitedata.get("domainpath");
+//			//This just adds back the missing /site/..
+//			if( !inPage.getPath().startsWith(realpath))
+//			{
+//				//sitedata.fixRealPath(realpath)
+//				Page page = getPageManager().getPage(realpath + inPage.getPath());
+//				RightPage right = new RightPage();
+//				right.setRightPage(page);
+//				return right;
+//			}
+//		}
+		
+		//Only works with domains being set. Otherwise use normal page actions to load project pages
+		String[] url = requestedPath.split("/");
+		if(url.length > 1 && (url[1].equals("mediadb") || url[1].equals("app")))
+		{
+			return null;
+		}
 
 		//Check that we are actually going to the page /site/community/...
 		String appid = inPage.getProperty("applicationid");
@@ -61,59 +86,27 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			return null;
 		}
 		
-		
 		//Check domain?
 		String[] domain  = util.domain().split("\\.");
-
+		if(domain.length < 3) 
+		{
+			return null;
+		}
 		String communityurlname = null;
-		String projecturlname = null;
+		String secondpart = null;
 		String anythingelse = null;
 
-		//Assume everything is higher
-		if(domain.length > 2) //Move up everything
+		communityurlname = domain[0];
+		if( url.length > 1)  //Might be a virtual project
 		{
-			if(url.length > 1 && (url[1].equals("mediadb") || url[1].equals("app")))
-			{
-				return null;
-			}
-
-			communityurlname = domain[0];
+			secondpart = url[1]; //might be wrong
 			if( url.length > 2)
 			{
-				projecturlname = url[1];
-				if( url.length > 3)
-				{
-					anythingelse = path.substring(path.indexOf(projecturlname));
-				}
-			}
-		}
-		else
-		{
-			if( url.length < 3)
-			{
-				return null;
-			}
-			if(url[2].equals("mediadb") || url[2].equals("app"))
-			{
-				return null;
-			}
-
-			if( url.length == 3)
-			{
-				communityurlname = url[2];
-			}
-			if(url.length > 3) //Might be projects or blogs or a virtual project
-			{
-				communityurlname = url[2];
-				projecturlname = url[3];
-			}
-			if( url.length > 4)
-			{
-				anythingelse = path.substring(path.indexOf(projecturlname) + projecturlname.length());
+				anythingelse = requestedPath.substring(requestedPath.indexOf(secondpart) + secondpart.length());
 			}
 		}
 
-		if(projecturlname == null)
+		if(secondpart == null)
 		{
 			RightPage page = goHome(inPage, communityurlname);
 			return page;	
@@ -128,12 +121,16 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		{
 			return null;
 		}
-		String communityhome = "/" + siteid + communitydata.get("templatepath");
-		String fixedpath =communityhome + "/" + projecturlname;
+		String communityhome = "/" + siteid + communitydata.get("templatepath");  //Use Mask?
+		String fixedpath = communityhome + "/" + secondpart;
 
-		Page page = getPageManager().getPage(fixedpath);
+		Page page = null;
 
-		if(  anythingelse != null)
+		if( anythingelse == null)
+		{
+			page = getPageManager().getPage(fixedpath);
+		}
+		else
 		{
 			fixedpath = fixedpath + anythingelse;
 			page = getPageManager().getPage(fixedpath);
@@ -151,7 +148,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 
 		//Must be a project with something on the end?		
-		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", projecturlname).hitsPerPage(1);
+		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", secondpart).hitsPerPage(1);
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
 		Data librarycollection = (Data)hits.first();
 		if(librarycollection != null)
@@ -187,7 +184,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		{
 			String siteid = inPage.get("siteid");
 			String communityhome = "/" + siteid + first.get("templatepath");
-			String template =communityhome + "/communityhome.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
+			String template =communityhome + "/index.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
 			Page page = getPageManager().getPage(template);
 			RightPage right = new RightPage();
 			right.putParam("communitytagcategory" ,  first.getId());

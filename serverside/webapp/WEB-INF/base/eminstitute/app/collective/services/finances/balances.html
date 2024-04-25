@@ -46,7 +46,7 @@
 				<td colspan="1"  style="text-align: right;"><strong>[[Sub Total]]:</strong></td>
 				<td class="table-col-totals">
 				#if( $currency.exchangetousd != "1")
-					 -${context.doubleToMoney($totalbycurrency,2)} 
+					 ${context.doubleToMoney($totalbycurrency,2)} 
 				#end	
 				</td>	
 				<td class="table-col-totals">
@@ -56,7 +56,7 @@
 						#set($usd = $totalbycurrency )
 					#end
 				#set($totalusd = $totalusd + $usd )
-				<strong>-$${context.doubleToMoney($usd,2)}</strong>
+				<strong>$${context.doubleToMoney($usd,2)}</strong>
 				</td>
 				
 				</tr>
