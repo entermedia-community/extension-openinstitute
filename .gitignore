@@ -18,3 +18,4 @@ serverside/webapp/WEB-INF/data
 .DS_Store
 *.DS_Store
 serverside/webapp/site/find/components/javascript/index.js
+serverside/webapp/site/community/components/javascript/index.js
