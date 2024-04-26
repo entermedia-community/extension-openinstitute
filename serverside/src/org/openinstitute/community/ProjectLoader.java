@@ -14,6 +14,7 @@ import org.openedit.page.PageLoader;
 import org.openedit.page.manage.PageManager;
 import org.openedit.servlet.RightPage;
 import org.openedit.servlet.SiteData;
+import org.openedit.util.PathUtilities;
 import org.openedit.util.URLUtilities;
 
 public class ProjectLoader implements PageLoader, CatalogEnabled
@@ -162,7 +163,11 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			{
 				template = communityhome + "/project" + anythingelse;
 			}
-
+			String justname = PathUtilities.extractFileName(template);
+			if(!justname.contains(".") )
+			{
+				template = template+ "/index.html";
+			}
 			Page otherpage = getPageManager().getPage(template);
 			if( !otherpage.exists())
 			{
@@ -199,7 +204,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 
 	protected Data findCommunity(String communityurlname)
 	{
-		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1);
+		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1); //Move to use the domain
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
 		Data first = (Data)hits.first();
 		return first;
