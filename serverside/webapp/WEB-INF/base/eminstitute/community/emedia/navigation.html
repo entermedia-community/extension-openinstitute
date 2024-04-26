@@ -1,7 +1,7 @@
 <header class="navigation emedia-community-header">
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="$communitylink">
+      <a class="navbar-brand" href="/">
           <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-1 me-md-3" style="height:50px;width: auto;" /> #text($communitytagcategory) <span>Community</span>
         </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -23,6 +23,20 @@
               Blogs
             </a>
           </li> 
+          #ifnull($user)
+          <li class="nav-item">
+            <a class="nav-link #if($content.oisection == 'login') active #end" href="$communitylink/authentication/login.html">
+              Login / Register <i class="ml-1 fs-small fas fa-user"></i>
+            </a>
+          </li> 
+          #end
+          #ifnotnull($user)
+          <li class="nav-item">
+            <a class="nav-link" href="$communitylink/authentication/logout.html" title="[[Logout]]">
+              <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+            </a>
+          </li>
+          #end
         </ul>
       </div>
     </div>

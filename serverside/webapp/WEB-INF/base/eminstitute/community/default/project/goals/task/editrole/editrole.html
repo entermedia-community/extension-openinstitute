@@ -1,0 +1,137 @@
+<div id="viewrole" class="card-block" style="padding:5px 20px;">
+
+#set( $taskid = $context.getRequestParameter("taskid") )
+#set( $collectiverole = $context.getRequestParameter("collectiverole") )
+#set( $roleuserid = $context.getRequestParameter("roleuserid") )
+
+#set($collectionid = $librarycol.id)
+
+#set( $goalManager = $mediaarchive.getBean("goalManager") )
+
+#set( $task = $mediaarchive.getCachedData("goaltask", $taskid) )
+
+<form name="saverole" 
+	id="saverole"
+	data-targetdiv="goalrow#eid($task.projectgoal)"
+	class="ajaxform autocloseform" data-oemaxlevel="1"
+	action="$applink/collective/goals/task/editrole/saverole.html"
+	method="post">
+	
+<input type="hidden" name="save" value="true" />
+<input type="hidden" name="taskid" value="$taskid" />
+<input type="hidden" name="collectiverole" value="$collectiverole" />
+<input type="hidden" name="collectionid" value="$collectionid" />
+
+#set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
+
+<style>
+.editrow {
+  display: flex;  /* aligns all child elements (flex items) in a row */
+}
+
+.editname
+{
+	width: 100px;
+}
+.editname
+{
+	widthxx: 400px;
+}
+</style>
+
+<section>
+  <div class="editrow">
+    <div class="editname">Notes</div>
+    <div class="editval"><textarea name="name" style="width:500px;height:300px" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
+  </div>
+
+  <div class="editrow">
+    <div class="editname">Role User</div>
+    <div class="editval">
+	<select class="form-control form-control-sm"  name="roleuserid">
+		<option value=""></option>
+		#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
+		#foreach( $hit in $team)
+			#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+			#if( $followeruser)
+			<option value="$hit.followeruser" #if( $!taskrole.roleuserid == $hit.followeruser) selected #end>$followeruser.getName()</option>
+			#end
+		#end
+	</select>
+
+		    
+    </div>
+  </div>
+
+</section>
+
+ <h2>[[Action Log]]</h2>
+
+
+#set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
+<section>
+  <div class="editrow">
+    <div class="editname">Count</div>
+    <div class="editval" style="width:200px">
+      <span>[[Date]]</span>
+    </div>
+    <div class="editval">
+      <span>[[Added By]]</span>
+    </div>
+    <div class="editval">
+    	
+    </div>
+   </div>
+#foreach( $action in $actions)
+  <div class="editrow">
+    <div class="editname">$foreach.count</div>
+    <div class="editval" style="width:200px">
+      <span> #datetime($action.date)</span>
+    </div>
+    <div class="editval">
+    	$!action.owner
+    </div>
+    <div class="editval">
+    
+	 <a class="ajax"
+		data-oemaxlevel="1"
+		data-targetdiv="viewrole"
+		data-taskid = "$taskid"
+		data-collectionid = "$collectionid"
+		data-collectiverole = "$collectiverole"
+		data-roleuserid = "$roleuserid"
+		style="margin: 0px 0 0 10px;" 
+		data-confirm="[[Are you sure]]?" 
+		href="$applink/collective/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
+    >[[Delete Action]]</a>
+    </div>
+  </div>
+#end
+
+</section>
+
+
+
+
+<br>
+<br>
+    <a class="ajax btn btn-sm btn-danger  float-right closedialog"
+   		data-oemaxlevel="1"
+		data-targetdiv="goalrow#eid($task.projectgoal)"
+		data-goalid = "$task.projectgoal"
+		data-taskid = "$taskid"
+		data-collectionid = "$collectionid"
+		data-closedialog = "true"
+		data-collectiverole = "$collectiverole"
+		data-roleuserid = "$roleuserid"
+		style="margin: 0px 0 0 10px;" 
+		data-confirm="[[Are you sure]]?" 
+		href="$applink/collective/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
+	>[[Delete Role]]</a>
+	
+
+</form>
+</div>
+
+
+  

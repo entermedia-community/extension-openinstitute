@@ -3746,6 +3746,70 @@ fieldset:disabled .btn {
   vertical-align: 0;
 }
 
+.divider {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.divider::before,
+.divider::after {
+  position: absolute;
+  top: 50%;
+  content: "";
+}
+
+.divider::before {
+  right: 100%;
+  background-image: linear-gradient(45deg, transparent, #fff);
+  background-repeat: repeat-x;
+}
+
+.divider::after {
+  left: 100%;
+  background-image: linear-gradient(45deg, #fff, transparent);
+  background-repeat: repeat-x;
+}
+
+.divider::before,
+.divider::after {
+  width: 10rem;
+  height: 0.0625rem;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.divider::before {
+  margin-right: 0.625rem;
+}
+
+.divider::after {
+  margin-left: 0.625rem;
+}
+
+@media (max-width: 767.98px) {
+  .divider::before,
+  .divider::after {
+    width: 4rem;
+  }
+}
+
+.divider-xs {
+  font-size: 0.75rem;
+}
+
+.divider-xs::before,
+.divider-xs::after {
+  width: 2.5rem;
+  height: 0.0625rem;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.divider-text {
+  color: #fff;
+}
+
 .dropdown-divider {
   height: 0;
   margin: 0.5rem 0;
@@ -9094,9 +9158,7 @@ h6,
 
 /* Button style */
 .btn {
-  font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
-  padding: 0.7em 1em;
   border-radius: 50px;
   border: 1px solid;
   position: relative;
@@ -9104,8 +9166,27 @@ h6,
   transition: 0.2s ease;
   background-color: #626584;
   color: #fff;
-  padding: 14px 40px;
-  font-size: 18px;
+  padding: 4px 12px;
+  font-size: 14px;
+}
+.btn.btn-lg {
+  padding: 12px 40px;
+  font-size: 20px;
+}
+.btn.btn-outline-transparent,
+.btn.btn-transparent {
+  background-color: transparent;
+  border-color: #626584;
+}
+.btn.btn-transparent {
+  background-color: transparent;
+  color: #f1f2f4;
+  padding: 4px;
+  border: none;
+}
+.btn.btn-outline-transparent:hover {
+  background-color: #62658499;
+  color: #fff;
 }
 @media (max-width: 767px) {
   .btn {
@@ -10367,4 +10448,63 @@ ul > li {
 }
 .fs-small {
   font-size: 14px !important;
+}
+.login-area {
+  min-height: calc(100vh - 154px);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.login-area .container {
+  height: 100%;
+  flex: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-area a {
+  color: #a7a9be;
+  font-size: inherit;
+}
+.loginformquestions {
+  /* margin-top: auto; */
+  font-size: 14px;
+  font-weight: 400;
+}
+.login-area .page-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+.login-area form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.login-area form label {
+  font-size: 14px;
+  font-weight: 500;
+}
+.login-area form input[type="submit"] {
+  width: 100px;
+}
+.login-area form .form-control {
+  margin-bottom: 16px;
+}
+.login-area form.collapse.show {
+  margin-top: 16px;
+}
+
+.login-area .oauthproviderbtn img {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0.8);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.login-area .oauthproviderbtn:hover img {
+  filter: brightness(1);
 }

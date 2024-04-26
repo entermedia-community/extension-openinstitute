@@ -1,79 +1,70 @@
 #set($collectionid = $librarycol.getId())
 <div id="subscriberssidebar">
-  <div class="team-list" style="position: relative">
-    #if(!$hideteamtitle)
-    <h6>[[Team Circle]]</h6>
-    #end #set( $team =
-    $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context)
-    ) #if( $team.isEmpty())
-    <p class="text-muted text-center">[[No team yet]]</p>
-    #else
-    <div class="d-flex flex-column">
-      #foreach( $hit in $team) #set( $followeruser =
-      $mediaarchive.getUser($hit.followeruser) ) #if($followeruser) #set(
-      $userlink =
-      "$applink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-      #set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
-      #if(!$userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg"
-      ) #end
-      <div class="teammember #if($prettylist) pretty-list #end">
-        <a href="#esc($userlink)" class="align-items-center me-2">
-          <img
-            src="${userimageurl}"
-            title="$!followeruser.getAnonNickName()"
-            width="30px"
-            height="30px"
-            class="me-2"
-          />
-          <span
-            title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())"
-            style="font-weight: bold"
-            >$!followeruser.getAnonNickName()</span
-          >
-        </a>
+	<div class="team-list" style="position:relative;">
+	#if(!$hideteamtitle)
+		<h6>[[Team Circle]]</h6>
+	#end
 
-        #set($roles=$hit.getValues("teamroles")) #if($roles)
-        <span class="me-2" style="line-height: 2.1"
-          >( #foreach($urole in $roles) #set( $role =
-          $mediaarchive.getCachedData("collectiverole",$urole) )
-          <span>$role</span>#if($foreach.count<$roles.size()), #end #end )</span
-        >
-        #end
-        <a
-          class="btn btn-xs btn-brand text-white emdialog"
-          href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
-          title="[[Edit Entry]]"
-          ><i class="fa fa-edit"></i
-        ></a>
-      </div>
-      #end #end
+	#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
+	
+	#if( $team.isEmpty()) 
+		<p class="text-muted text-center">[[No team yet]]</p>
+	#else
+	<div class="d-flex flex-column">
+		#foreach( $hit in $team)
+			#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+			#if($followeruser)
+				#set( $userlink = "$communitylink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
+				#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
+				#if(!$userimageurl)
+					#set( $userimageurl = "$communitylink/theme/images/user.svg" )
+				#end 
+				<div class="teammember #if($prettylist) pretty-list #end"> 
+					<a href="#esc($userlink)" class="align-items-center me-2">
+						<img  src="${userimageurl}" title="$!followeruser.getAnonNickName()" width="30px" height="30px" class="me-2">
+						<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())" style="font-weight: bold;">$!followeruser.getAnonNickName()</span>
+					</a>
+					
+					#set($roles=$hit.getValues("teamroles"))
+					#if($roles)
+					<span class="me-2" style="line-height: 2.1;">(
+					#foreach($urole in $roles)
+						#set( $role = $mediaarchive.getCachedData("collectiverole",$urole) )
+						<span>$role</span>#if($foreach.count<$roles.size()), #end
+					#end
+					)</span>
+					#end
+					<a class="btn btn-xs btn-transparent emdialog"
+		        	 		href="$applink/collective/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
+			               title="[[Edit Entry]]"><i class="fas fa-edit"></i></a>
+				</div>
+			#end
+		#end
+	</div>
+	#end 
+	<hr style="margin:10px 0;opacity: 0.1"> 
+	#if( $caneditcollection)
+  <div class="d-flex flex-column">
+    <div class="d-flex align-items-center justify-content-start w-100 flex-wrap">
+      <a href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}"
+        class="emdialog btn btn-brand text-white btn-xs me-1" title="[[Search Users]]">
+        <i class="fas fa-search"></i> [[Add to Team]]
+      </a>
+      <a href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}"
+        class="emdialog btn btn-brand text-white btn-xs me-1" title="[[Add New User to Project]]">
+        <i class="fas fa-plus"></i> [[New User]]
+      </a>
     </div>
-    #end
-    <hr style="margin: 10px 0; opacity: 0.1" />
-    #if( $caneditcollection)
-    <div
-      class="d-flex align-items-center justify-content-start w-100 flex-wrap"
-    >
-      #if($likeoptions)
+    #if($likeoptions)
       <div class="me-1">
         $pages.include("$communityhome/channel/likeoptions.html", $context)
       </div>
-      #end
-      <a
-        href="$applink/collective/channel/subscribers/usersearch.html?collectionid=${collectionid}"
-        class="emdialog btn btn-brand text-white btn-xs me-1"
-        title="[[Search Users]]"
-      >
-        <i class="fa-solidfa-search"></i> [[Add to Team]]
-      </a>
-      <a
-        href="$applink/collective/channel/subscribers/addnew.html?collectionid=${collectionid}"
-        class="emdialog btn btn-brand text-white btn-xs me-1"
-        title="[[Add New User to Project]]"
-      >
-        <i class="fa-solidfa-plus"></i> [[New User]]
-      </a>
-    </div>
     #end
   </div>
+	#end
+	</div>
 </div>
+
+
+        
+ 

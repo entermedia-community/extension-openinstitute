@@ -3,49 +3,49 @@
 	<ul class="navbar-collective mb-2">
 		#set($bloglink = "$applink/proposal/${librarycol.id}/#dash($librarycol.getName()).html")
 		<li id="blog" class="nav-item #if($collectivesection == "blog") active #end d-none d-sm-inline-block">
-			 <a class="nav-link" href="$bloglink">
+			 <a class="nav-link" href="$communitylink/${librarycol.urlname}">
 			[[Blog]]</a>
 		</li>
 		<li id="community"  class="nav-item #if($collectivesection == "community") active #end">
-			<a class="nav-link" href="$applink/collective/community/index.html?collectionid=${librarycol.id}" >
-			[[Chat]] </a>
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/chat/index.html" >
+			[[Chat]]</a>
 		</li>
 
 		#if( $caneditcollection)
 		<li id="tasks"  class="nav-item #if($collectivesection == "tasks") active #end">
-			<a class="nav-link" href="$applink/collective/goals/priorities/index.html?collectionid=${librarycol.id}" >
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/goals/index.html" >
 			[[Goals]] </a>
 		</li>
 		#end
 		#if($caneditcollection)
 		<li id="media"  class="nav-item  #if($collectivesection == "media") active #end">
-			<a class="nav-link" href="$applink/collective/projects/index.html?collectionid=${librarycol.id}" >
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/files/index.html" >
 			[[Files]] </a>
 		</li>
 		#end
 ##		#if($caneditcollection)
 ##		<li id="finances"  class="nav-item  #if($collectivesection == "finances") active #end">
-##			<a class="nav-link" href="$applink/collective/finances/dashboard.html?collectionid=${librarycol.id}" >
+##			<a class="nav-link" href="$communitylink/${librarycol.urlname}/finances/index.html" >
 ##			[[Finances]] </a>
 ##		</li>
 ##		#end
 		
 		
 ##		<li id="menudonations"  class="nav-item #if($collectivesection == "donate") active #end">
-##			<a class="nav-link" href="$applink/collective/donate/${librarycol.id}/donate.html" >		
+##			<a class="nav-link" href="$communitylink/${librarycol.urlname}/donations/index.html" >		
 ##			[[Donations]] </a>
 ##		</li>
 
 		#if($caneditcollection)
 		<li id="menustore"  class="nav-item #if($collectivesection == "store") active #end">
-			<a class="nav-link" href="$applink/collective/store/${librarycol.id}/index.html" >		
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/store/index.html" >		
 			[[Store]] </a>
 		</li>
 		#end
 	    
 	    #if( $librarycol.contactemail )
 		<li id="contact"  class="nav-item #if($collectivesection == "contact") active #end">
-			<a class="nav-link" href="$applink/collective/contact/contact.html?collectionid=${librarycol.id}" >		
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html" >		
 			[[Contact]] </a>
 		</li>
 		#end
@@ -54,7 +54,7 @@
 		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
 		<a class="nav-link"
 			data-allwaysloadpage="true"
-			href="$applink/collective/services/finances/dashboard.html?collectionid=$librarycol.getId()" 
+			href="$communitylink/${librarycol.urlname}/finances/index.html" 
 			title="[[Fianances]]">
 			[[Finances]]</a>
 		</li>
@@ -63,12 +63,10 @@
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
 		<a class="nav-link"
 			data-allwaysloadpage="true"
-			href="$applink/collective/admin/index.html?collectionid=$librarycol.getId()" 
+			href="$communitylink/${librarycol.urlname}/settings/index.html" 
 			title="[[Project Settings]]">
 			<i class="fa-solidfa-cog d-inline-block"></i> <span class="d-none d-sm-inline-block">[[Settings]]</span></a>
 		</li>
 		#end
 	</ul> 
 </div>
-
-

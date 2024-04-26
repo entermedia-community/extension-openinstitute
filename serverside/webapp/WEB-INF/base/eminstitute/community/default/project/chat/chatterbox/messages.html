@@ -8,12 +8,12 @@
 	$context.putPageValue("targetdiv","chatloadmore")
 	$context.putPageValue("oemaxlevel","2")
 	
-	$pages.include("$apphome/components/results/chatpositions.html", $context)
+	$pages.include("$communityhome/components/results/chatpositions.html", $context)
 
 </div>
 
 
 #foreach($chat in $messages)
 	$context.putPageValue("chat",$chat) 
-	$pages.include("$apphome/collective/community/chatterbox/message.html", $context)				
+	$pages.include("$communityhome/project/chat/chatterbox/message.html", $context)				
 #end
