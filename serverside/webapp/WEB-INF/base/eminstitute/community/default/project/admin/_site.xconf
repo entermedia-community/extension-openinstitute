@@ -1,0 +1,12 @@
+<page>
+	<property name="collectivesection">settings</property>
+	<property name="collectiveadminsection">general</property>
+	
+	<permission name="view">
+		<or>
+			<action name="ProjectModule.canEditCollection" />
+			<action name="ProjectModule.isOnTeam" />			
+		</or>
+	</permission>
+	
+</page>

@@ -4,7 +4,7 @@
 	<property name="collectivesection">finances</property>
 	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
-	<inner-layout>${categoryhome}/project/services/layout.html</inner-layout>
+	
 	<path-action name="ProjectModule.loadCollection"/>
 	
 	<path-action name="FinanceModule.loadFinanceManager" />

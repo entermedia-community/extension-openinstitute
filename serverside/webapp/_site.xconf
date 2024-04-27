@@ -1,6 +1,6 @@
 <page>
-	<property name="localopencommand">/home/shanti/eclipse/java-2022-12/eclipse/eclipse</property>
-	<property name="editorparams">--launcher.openFile</property>
+	<property name="localopencommand">/usr/local/bin/code</property>
+	<property name="editorparams"></property>
 	
 	<property name="local">true</property>
 	<property name="siteroot">http://localhost:8080</property>

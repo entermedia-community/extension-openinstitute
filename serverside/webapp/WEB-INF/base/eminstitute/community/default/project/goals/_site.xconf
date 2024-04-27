@@ -10,7 +10,7 @@
 	
 	<path-action name="TaskModule.createTree" />
 
-	<inner-layout>/${applicationid}/collective/goals/tablayout.html</inner-layout>
+
 
 	<property name="defaulttab">goaltab</property>
 
