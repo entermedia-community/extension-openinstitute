@@ -6,5 +6,6 @@
 	
 	<style id="projects" href="${communityhome}/theme/css/projects.css"/>
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
-	<script id="aos-js" href="${communityhome}/theme/js/aos.js"/>
+	<script id="aos-js" src="${communityhome}/theme/js/aos.js"/>
+	
 </page>
