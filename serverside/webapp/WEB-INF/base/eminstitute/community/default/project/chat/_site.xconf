@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
+	<property name="title">Chat</property>
 	<property name="virtual">true</property>
 	<property name="oisection">stations</property>
 	<property name="collectivesection">community</property>

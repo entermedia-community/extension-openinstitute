@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  <property name="title">OI</property>
   <property name="applicationid">${siteid}/community</property>
   
   <property name="fallbackdirectory">/WEB-INF/base/emfrontend2</property>

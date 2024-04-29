@@ -3,7 +3,24 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>eMedia</title>
+	
+	#if( $librarycol )
+		#set($metatitle = "#text($librarycol) - #text($communitytagcategory)")
+	#elseif( $communitytagcategory )
+		#set($metatitle = "#text($communitytagcategory)")
+	#end
+	#if( $metatitle )
+		#if( $content.title )
+			#set($metatitle = "$content.title - $metatitle")
+		#else
+			#set($metatitle = "$metatitle")
+		#end	
+	#else
+		#set($metatitle = "$!content.title")
+	#end		
+
+	<title>$!metatitle</title>
+
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 

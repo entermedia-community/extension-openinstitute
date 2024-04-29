@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  <property name="title">EMInstitute</property>
   
   <property name="siteid">site</property>
   <property name="catalogid">site/catalog</property>
