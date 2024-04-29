@@ -4,11 +4,11 @@
 <div id="roleeditor" class="rolelist">
 	##USE AJAX
 	#foreach( $role in $rolesarray )
-		#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+		#set($link = "$home${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
 		#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
 		#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 		<div class="btn-group" role="group">
-		<a href="$applink/collective/goals/task/editrole/editrole.html"
+		<a href="${communityhome}/project/goals/task/editrole/editrole.html"
 			title="#text($collectiverole)"
 		 	data-taskid="$task.id" 
 		 	data-collectionid="$!collectionid"
@@ -37,7 +37,7 @@
 		 	data-collectionid="$!collectionid"
 		 	data-collectiverole="$role.collectiverole"
 		 	data-roleuserid="$!role.roleuserid"
-		 	href="$applink/collective/goals/task/rolelistaddone.html" 
+		 	href="${communityhome}/project/goals/task/rolelistaddone.html" 
 		 	title="#esc($val)">#if($role.actioncount)($!role.actioncount)#end +</a>
 		 #end	
 		 

@@ -34,7 +34,7 @@
 			#set($points = $points + $c)
 		#end
 		#set($collectionid = $goal.collectionid)
-		#set( $edittask = "$applink/collective/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
+		#set( $edittask = "${communityhome}/project/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
 		
 		
 			<div id="taskrow#eid(${task.id})" class="goaltaskrow goalstatus${task.taskstatus}">
@@ -50,14 +50,14 @@
 				<div class="taskdetails">
 					##USE AJAX
 					#foreach( $val in $vals )
-						#set($link = "$home$apphome/collective/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+						#set($link = "$home${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
 						<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" href="$link" title="#esc($val)">#esc($val)</a> 
 					#end
 				</div>
 				#end
 
 				$context.putPageValue("task", $task)
-				$pages.include("$apphome/collective/goals/task/rolelist.html?collectionid=$!collectionid", $context)
+				$pages.include("${communityhome}/project/goals/task/rolelist.html?collectionid=$!collectionid", $context)
 
 		
 		
@@ -120,7 +120,7 @@
 				#end
 				
 	#if($user && $caneditgoal)
-			<!-- 	<a href="$applink/collective/goals/task/taskdelete.html?id=$task.id" 
+			<!-- 	<a href="${communityhome}/project/goals/task/taskdelete.html?id=$task.id" 
 					data-targetdiv="$target" 
 					data-confirm="Sure you want to delete?"
 					data-oemaxlevel="1"
@@ -133,14 +133,14 @@
 <div id="rolepicker" style="display:inline">
 			<a class="addroletolist ajax" data-targetdivinner="rolepicker" 
 			data-collectionid = "$collectionid"
-			data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
+			data-taskid="$task.id" href="${communityhome}/project/goals/task/pickrole.html">+ add role</a>
 </div>					
 					
 #if($caneditgoal)
 						#if($task.taskstatus != "3")
 							  	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="" >
 							
-								<a href="$applink/collective/goals/task/tasksave.html?goalid=$goal.id" 
+								<a href="${communityhome}/project/goals/task/tasksave.html?goalid=$goal.id" 
 									data-targetdiv="$target" 
 									data-oemaxlevel="1"
 									data-taskid="$task.id"
@@ -177,7 +177,7 @@
 			data-pickone="true"
 			data-goalid="$goal.id"
 			data-dialogid="picktask"
-			href="$applink/collective/goals/task/taskedit.html"
+			href="${communityhome}/project/goals/task/taskedit.html"
 		>
 			<i class="fas fa-clipboard-check"></i> [[Add Action]]
 		</a>

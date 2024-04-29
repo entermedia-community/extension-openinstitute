@@ -16,7 +16,7 @@ $context.putPageValue("searcher",$searcher)
 #if( $data.id )
 	$context.putPageValue("view", "projectgoal/edit")
 	<div style="float:right;margin:0px 20px 5px 0">
-		$pages.include("$apphome/collective/goals/like.html")
+		$pages.include("${communityhome}/project/goals/like.html")
 	</div>
 #else
 	$context.putPageValue("view", "projectgoal/addnew")
@@ -26,7 +26,7 @@ $context.putPageValue("searcher",$searcher)
 
 #set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
-	[[Project]]: <strong><a href="$applink/collective/goals/search/index.html?collectionid=$collectionid" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></strong>
+	[[Project]]: <strong><a href="${communityhome}/project/goals/search/index.html?collectionid=$collectionid" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></strong>
 #end
 <div class="clearfix"></div>
 <form name="saveproject" class ="ajaxform autocloseform showwaiting autoreloadsource" id="saveproject" method="post" 
@@ -110,7 +110,7 @@ $context.putPageValue("searcher",$searcher)
 	$context.putPageValue("container","editgoalpanel")
 	<div class="goal-body">
 			<div class="goal-footerX"> 
-				$pages.include("$apphome/collective/goals/search/goaltasks.html?indialog=true",$context)
+				$pages.include("${communityhome}/project/goals/search/goaltasks.html?indialog=true",$context)
 			</div>
 	</div>
 #end
@@ -124,7 +124,7 @@ $(document).ready(function(){
 	$("#btn-next").click(function(event)
 	{
 		event.preventDefault();
-		$("#saveproject").attr("action", "$applink/collective/goals/${goalfolder}/goalsaveedit.html");
+		$("#saveproject").attr("action", "${communityhome}/project/goals/${goalfolder}/goalsaveedit.html");
 		$("#saveproject").removeClass("autocloseform");
 		$("#saveproject").data("targetdiv","editgoaldialog");
 		$("#saveproject").submit();

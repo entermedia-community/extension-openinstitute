@@ -1,7 +1,7 @@
 #set($channel = $context.getRequestParameter("channel"))
 #set($collectionid = $context.getRequestParameter("collectionid"))
 <div id="chatloadmore">
-	#set($resultsPage = "$applink/collective/community/chatterbox/messages.html?hitssessionid=${messagesthitracker.sessionId}&collectionid=$collectionid&channel=$channel&pageposition")
+	#set($resultsPage = "${communityhome}/project/chat/chatterbox/messages.html?hitssessionid=${messagesthitracker.sessionId}&collectionid=$collectionid&channel=$channel&pageposition")
 
 	$context.putPageValue("hits",$messagesthitracker)
 	$context.putPageValue("resultsPage",$resultsPage)

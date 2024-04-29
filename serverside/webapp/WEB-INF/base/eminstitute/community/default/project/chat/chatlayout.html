@@ -50,7 +50,7 @@ $context.putPageValue("currenttopic", $currenttopic)
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							#foreach( $hit in $alltopics)
 							#if ($hit.id != $currenttopic.id)
-							<a href="$applink/collective/community/index.html?collectionid=$collectionid&topic=$hit.getId()"
+							<a href="$communityhome/project/chat/index.html?collectionid=$collectionid&topic=$hit.getId()"
 								class="dropdown-item">
 								#if($caneditcollection)
 									#if ($hit.teamproject == "true")
@@ -83,16 +83,9 @@ $context.putPageValue("currenttopic", $currenttopic)
 					</a>
 				</div>	
 			</div>
-			$pages.include("$apphome/collective/community/chatbox.html", $context)
+			$pages.include("$communityhome/project/chat/index.html", $context)
 		</div>
-		<div  class="d-sm-none d-md-block col-md-4 pt-sm-2 pt-md-0 ps-md-2">
-			$pages.include("$apphome/proposal/sidebar-right.html",$context)
-		</div>
+		
 	</div>
 	#end
-</div>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileSidebarRight" aria-labelledby="mobileSidebarRightLabel">
-	<div class="offcanvas-body">
-		$pages.include("$apphome/proposal/sidebar-right.html",$context)
-	</div>
 </div>

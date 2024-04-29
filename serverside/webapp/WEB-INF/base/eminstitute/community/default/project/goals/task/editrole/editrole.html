@@ -14,7 +14,7 @@
 	id="saverole"
 	data-targetdiv="goalrow#eid($task.projectgoal)"
 	class="ajaxform autocloseform" data-oemaxlevel="1"
-	action="$applink/collective/goals/task/editrole/saverole.html"
+	action="${communityhome}/project/goals/task/editrole/saverole.html"
 	method="post">
 	
 <input type="hidden" name="save" value="true" />
@@ -102,7 +102,7 @@
 		data-roleuserid = "$roleuserid"
 		style="margin: 0px 0 0 10px;" 
 		data-confirm="[[Are you sure]]?" 
-		href="$applink/collective/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
+		href="${communityhome}/project/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
     >[[Delete Action]]</a>
     </div>
   </div>
@@ -126,7 +126,7 @@
 		data-roleuserid = "$roleuserid"
 		style="margin: 0px 0 0 10px;" 
 		data-confirm="[[Are you sure]]?" 
-		href="$applink/collective/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
+		href="${communityhome}/project/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
 	>[[Delete Role]]</a>
 	
 
