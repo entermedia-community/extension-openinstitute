@@ -5,7 +5,7 @@
 
 	#foreach( $comment in $comments)
 		#set($commentuser = $comment.getUser())
-		#set($userlink = "$applink/users/${commentuser.getId()}/${commentuser.getAnonNickName()}.html")
+		#set($userlink = "${communityhome}/users/${commentuser.getId()}/${commentuser.getAnonNickName()}.html")
 		<div class="blog-comment">
 			<div class="blog-credit">
 				<div class="blog-avatar">
@@ -13,7 +13,7 @@
 					$context.putPageValue("chatuser",$postuser)
 					$pages.include("${communityhome}/users/icon.html",$context)
 				</div>
-				<a class="text-brand" href='#urlescape("$applink/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
+				<a class="text-brand" href='#urlescape("${communityhome}/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
 					${comment.getUserLabel()}
 				</a>
 				<span class="d-inline-block mx-2">
@@ -45,7 +45,7 @@
 			#set( $userimageurl = "$communityhome/theme/images/user.svg" )
 		#end
 		<div class="d-flex align-items-start">
-			<a class="mt-1 me-1 comment-avatar" href='#urlescape("$applink/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
+			<a class="mt-1 me-1 comment-avatar" href='#urlescape("${communityhome}/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
 				<img src="$userimageurl" class="blog-avatar-img" alt="[[Comment as]] $user" />
 			</a>
 			<textarea type="text" name="commenttext" data-useruploadid="$upload.id" data-collectionid="$librarycol.id" class="commentadder blog-comments-input" placeholder="[[Write a comment]]" autoComplete="off" rows="3"></textarea>

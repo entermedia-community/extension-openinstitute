@@ -3,7 +3,7 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$applink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="${communityhome}/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
@@ -75,7 +75,7 @@
 				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
 			</li>
 			<li class="#if($appsection == "completed") current #end" >
-				<a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
+				<a href="${communityhome}/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 			</li>
 			#end
 			</ul>
@@ -135,7 +135,7 @@
 		</li>
 		
 		##		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
-		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
+		##	<a href="${communityhome}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>
 		#end
 		
