@@ -1,9 +1,14 @@
-	
-	
-<div id="campaigninfo" class=" oicontainercampaigns " >
+#set($collectivesection = $content.collectivesection)
+
+<div id="campaigninfo" class="oicontainercampaigns" >
 	$pages.include("${communityhome}/project/layout/project-header.html",$context)
 	<div class="row no-gutters g-0">
-		<div  class="col-lg-20p">
+		<div  class="col-lg-20p bg-light">
+			#if($collectivesection == "settings")
+				$pages.include("${communityhome}/project/admin/sidebar.html",$context)
+			#elseif($collectivesection == "finances")
+				$pages.include("${communityhome}/project/services/finances/sidebar.html",$context)
+			#end
 			$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 		</div>
 		

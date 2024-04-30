@@ -3,7 +3,7 @@
 	<property name="searchtype">collectiveexpenses</property>
 
 	<page-action name="Script.run" allowduplicates="true">
-		<script>/${applicationid}/collective/services/reimbursements/expensesbyuser.groovy</script>
+		<script>${communityhome}/project/services/reimbursements/expensesbyuser.groovy</script>
 	</page-action>
 
 </page>

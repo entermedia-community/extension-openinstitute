@@ -3,7 +3,7 @@
   	<page-action name="PageValue.loadPageVariable" bean="mathutil" />
 
 	<page-action name="Script.run" >
-		<script>/${applicationid}/collective/services/expenses/totalbycurrency.groovy</script>
+		<script>${communityhome}/project/services/expenses/totalbycurrency.groovy</script>
 	</page-action>
 
 </page>

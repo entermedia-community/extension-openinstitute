@@ -2,7 +2,7 @@
 
 <page>
 	<property name="virtual">true</property>
-	<property name="collectivesection">channel</property>
+	<property name="collectivesection">settings</property>
 	
 	<style id="uploadstyle" href="${themeprefix}/styles/pages/upload.css" />
 	<property name="uploadtab">single</property>
@@ -28,6 +28,5 @@
 		</or>
 	</permission>	
 	
-		<inner-layout>/${applicationid}/collective/admin/layout.html</inner-layout>
 	
 </page>

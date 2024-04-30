@@ -3,5 +3,4 @@
 	
 	<path-action name="TaskModule.loadDashboardWeekly"/>
 	<property name="appsection">completed</property>
-	<inner-layout>/${applicationid}/users/tasks/reportlayout.html</inner-layout>
 </page>

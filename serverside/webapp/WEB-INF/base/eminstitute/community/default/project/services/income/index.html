@@ -74,19 +74,19 @@
    </div>
    </form>
    
-	$pages.include("/$applicationid/collective/services/income/results.html",$context)
+	$pages.include("$communityhome/project/services/income/results.html",$context)
 
 
 </div>
 
 <hr>
 
-$pages.include("/$applicationid/collective/services/donations/index.html", $context)
+$pages.include("$communityhome/project/services/donations/index.html", $context)
 
               #set( $invoices = $mediaarchive.query("collectiveinvoice").exact("paymentstatus","paid").exact("collectionid",
               $collectionid).sort("createdonDown").search())
               #if ($invoices)
                   <h3>[[Invoices]]</h3>
                   $context.putPageValue("invoices",$invoices)
-				  $pages.include("/$applicationid/collective/services/invoices/results.html", $context)
+				  $pages.include("$communityhome/project/services/invoices/results.html", $context)
                #end

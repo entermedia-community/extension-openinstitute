@@ -209,7 +209,7 @@ h2 {
 }
 
 li.menu-subheader {
-  background-color: #1d5655;
+  background-color: #2b2d3b;
   color: #ddd;
   padding: 0 10px 0 15px;
 }
@@ -868,7 +868,6 @@ li.menu-subheader {
 .oicontainercampaigns {
   margin: 0;
   background-color: #ffffff;
-  padding-bottom: 40px;
   min-height: 390px;
 }
 
@@ -1065,14 +1064,14 @@ li.menu-subheader {
 .collectivesettings-menu li a {
   display: block;
   padding: 5px 15px;
-  background-color: #dfdfdf;
+  background-color: #f3f3f3;
   color: #333;
 }
 
 .collectivesettings-menu li.current a,
 .collectivesettings-menu li a:hover {
   text-decoration: none;
-  color: #000;
+  color: #000 !important;
 }
 
 .tablefinances {
