@@ -30,10 +30,16 @@
 
 <body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
+	<div id="application" class="eminstitutecollective" data-home="$home" data-user="$!user.id" data-apphome="$apphome"
+		data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
+		data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
+		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome">
+
 	$pages.include("/${communityhome}/navigation.html")
 	$pages.includeContent()
 	$pages.include("/${communityhome}/footer.html")
-
+	</div>
+	
 	<script src="${communityhome}/js/jquery.datetimepicker.full.min.js"></script>
 	<script type="text/javascript" defer
 		src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.bundle.min.js"></script>

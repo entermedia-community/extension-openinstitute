@@ -6,11 +6,6 @@
 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
 
-	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
-	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
-	
-	<script id="uicomponents" src="${communityhome}/components/javascript/ui-components.js"/>
-	<script id="results" src="${communityhome}/components/javascript/results.js"/>
 	
 	<script id="aos-js" src="${communityhome}/theme/js/aos.js"/>
 </page>
