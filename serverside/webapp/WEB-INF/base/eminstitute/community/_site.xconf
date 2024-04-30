@@ -21,7 +21,6 @@
 
   <script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
 
-	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	
 	<script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
 	
