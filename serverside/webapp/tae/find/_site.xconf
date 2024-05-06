@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="catalogid">tae/catalog</property>
+  <property name="systemfromemail">aalexander@tae.com</property>
+  <property name="authenticationdomain">tae.trialphaenergy.com</property>
+  <property name="themeid">AYb2S166Wfb_RJoCgwR5</property>
+  <property name="fallbackdirectory">/WEB-INF/base/finder/find</property>
+  <property name="applicationid">tae/find</property>
+  <property name="title">TAE Digital Asset Manager v1.0</property>
+  <property name="systemfromemailname">Andrew Alexander</property>
+  <property name="authenticationserver">VKM11O-SVWDC01</property>
+  <permission name="editcategorytree">
+    <or>
+      <group id="administrators"/>
+    </or>
+  </permission>
+</page>

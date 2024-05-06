@@ -482,7 +482,6 @@ jQuery(document).ready(function()
 					return false;
 				}
 		);		
-
 	}
 
 	loadHtmlEditor = function(searchtype,id,field,viewtype,container) 
@@ -631,8 +630,7 @@ jQuery(document).ready(function()
 				//Capture the enter key
 				
 			}
-	
-	} 
+	};
 
 	//onload
 	
@@ -727,8 +725,6 @@ jQuery("form.oeajaxform").bind('submit',
 			return false;
 		});
 
-
-
 });
 
 loadToolbar = function() {
@@ -753,7 +749,7 @@ loadToolbar = function() {
 					);
 			}
 	);
-	}
+};
 	
 
 showHover = function(inAssetId)
@@ -767,7 +763,7 @@ showHover = function(inAssetId)
 			el.show();
 		}
 	}
-}
+};
 
 
 refreshFileMenu = function(){
@@ -780,7 +776,7 @@ refreshFileMenu = function(){
 	}
 	$("#fileoptionsmenu").load(home + "/openedit/components/html/edit/menu.html?oemaxlevel=1&editPath=" + editpath);
 	
-}
+};
 
 
 

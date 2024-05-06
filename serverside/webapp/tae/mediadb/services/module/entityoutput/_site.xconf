@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="module">entityoutput</property>
+  <property name="searchtype">entityoutput</property>
+  <property name="fallbackdirectory">/finder/mediadb/services/module/default</property>
+</page>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="module">entityseason</property>
+  <property name="searchtype">entityseason</property>
+  <property name="fallbackdirectory">/finder/mediadb/services/module/default</property>
+</page>

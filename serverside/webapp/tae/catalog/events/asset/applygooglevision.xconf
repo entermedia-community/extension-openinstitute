@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="period">15m</property>
+  <property name="applink">/finder/catalog</property>
+  <property name="enabled">false</property>
+  <property name="eventname">Apply Google Vision</property>
+</page>
