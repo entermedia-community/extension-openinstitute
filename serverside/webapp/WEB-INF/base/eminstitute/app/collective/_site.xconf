@@ -14,7 +14,7 @@
 	
 
 	<!-- move to exact page where needed -->
- 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js?_12345" />
+ 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
    
    
     <path-action name="Admin.loadPermissions"/>

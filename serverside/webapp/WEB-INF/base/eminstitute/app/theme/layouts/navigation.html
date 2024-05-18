@@ -36,22 +36,16 @@
     <div class="d-flex align-items-center justify-content-center ms-auto">
       <ul class="nav nav-underline">
         <li class="nav-item  #if($action == 'community') active #end">
-                <a class="nav-link" href="$link">Home</a>
+                <a class="nav-link" href="${communitytagcategory.externaldomain}/">Home</a>
               </li>
         <li class="nav-item #if($action == 'blog') active #end">
-          <a class="nav-link" href="$applink/home/blog/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html">
-            Blog
+          <a class="nav-link" href="${communitytagcategory.externaldomain}/blogs/">
+            Blogs
           </a>
         </li>
       
         <li class="nav-item #if($action == 'projects') active #end">
-          <a class="nav-link" href="$applink/home/projects/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html">Projects</a>
-        </li>
-        <li class="nav-item #if($action == 'people') active #end">
-          <a class="nav-link" href="$applink/home/blog/events.html">Events</a>
-        </li>
-        <li class="nav-item #if($action == 'people') active #end">
-          <a class="nav-link" href="$applink/home/blog/people.html">People</a>
+          <a class="nav-link" href="${communitytagcategory.externaldomain}/projects/">Projects</a>
         </li>
       </ul>
     </div>

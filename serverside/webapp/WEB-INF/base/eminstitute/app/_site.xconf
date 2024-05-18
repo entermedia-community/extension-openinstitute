@@ -71,9 +71,7 @@
 	<style  id="minicolorcss" href="/${applicationid}/components/javascript/colorpicker/jquery.minicolors.css"/>
 	
 	<script id="detaileditor" src="/${applicationid}/components/xml/detaileditor.js"/>
-	
-	<script id="chatterbox"  src="/${applicationid}/components/chatterbox/chatterbox.js" />
-	
+		
 	<script id="videojs" src="/${applicationid}/components/javascript/videojs/7.8.2/video.min.js" />
 	<style  id="videojs-css"  href="/${applicationid}/components/javascript/videojs/7.8.2/video-js.min.css" />
 	<script id="videojs-hls" src="/${applicationid}/components/javascript/videojs-contrib-hls/videojs-contrib-hls.min.js" />

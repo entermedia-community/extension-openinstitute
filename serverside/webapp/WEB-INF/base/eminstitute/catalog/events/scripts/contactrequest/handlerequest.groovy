@@ -15,7 +15,6 @@ contactsearcher.saveData(request, null);
 context.putPageValue("data", request)
 
 
-
-log.info("request processing...");
+//log.info("request processing...");
 
 

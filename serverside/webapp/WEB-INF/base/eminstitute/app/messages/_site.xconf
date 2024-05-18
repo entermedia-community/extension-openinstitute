@@ -21,7 +21,7 @@
 	<style id="tasks" href="/${applicationid}/collective/goals/goals.css" />
     <script id="goals" src="/${applicationid}/collective/goals/goals.js"/>
 
- 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js?_12345" />
+ 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
 	
 	<path-action name="ProjectModule.loadMessagesCollection">
 	</path-action>
