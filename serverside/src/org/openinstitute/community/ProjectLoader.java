@@ -147,7 +147,18 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			right.setRightPage(page);
 			return right;
 		}
-
+		else
+		{
+			page = getPageManager().getPage(fixedpath + "/index.html");
+			if( page.exists())  //Must be a real page
+			{
+				right.setRightPage(page);
+				return right;
+			}
+			
+		}
+		
+		
 		//Must be a project with something on the end?		
 		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", secondpart).hitsPerPage(1);
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
