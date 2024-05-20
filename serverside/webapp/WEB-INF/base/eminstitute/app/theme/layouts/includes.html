@@ -12,12 +12,12 @@
 
 
 ##This is misc content NOT already included
-#foreach( $script in $content.getScriptsAfterApp() )
+#foreach( $script in $pageManager.getScriptPathsWithoutApp($content))
 	<script type="text/javascript" src="#if(!$script.startsWith("http"))$home#end$script"></script>
 #end
 
 
-#foreach( $style in $content.getStylePaths() )
+#foreach( $style in $pageManager.getStylePathsFor($content) )
 	<link rel="stylesheet" type="text/css" href="$style" />
 #end
    

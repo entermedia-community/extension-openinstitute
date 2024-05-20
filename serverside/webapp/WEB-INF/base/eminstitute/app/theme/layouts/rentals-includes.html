@@ -11,14 +11,13 @@
 <script type="text/javascript" src="$applink/components/javascript/index.js" ></script>
 
 ##Load Stripe only on pay pages.
-#foreach( $script in $content.getScriptPaths() )
+#foreach( $script in $pageManager.getScriptPathsWithoutApp($content))
 	#if($script.indexOf("stripe") > -1)
 		<script type="text/javascript" src="#if(!$script.startsWith("http"))$home#end$script"></script>
 	#end
 #end
 
-#foreach( $style in $content.getStylePaths() )
-<!-- $style -->
+#foreach( $style in $pageManager.getStylePathsFor($content) )
 	#if($style.indexOf("oi2.css") == -1 && $style.indexOf("theme.css") == -1) 
 		<link rel="stylesheet" type="text/css" href="$style" />
 	#end
