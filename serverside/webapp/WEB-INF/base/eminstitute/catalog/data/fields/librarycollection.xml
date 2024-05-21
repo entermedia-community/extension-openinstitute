@@ -276,6 +276,21 @@
       <language id="en"><![CDATA[Facebook]]></language>  
     </name> 
   </property>
+  <property id="twitterlink" index="true" stored="true" editable="true"> 
+    <name> 
+      <language id="en"><![CDATA[X (Twitter)]]></language>
+    </name> 
+  </property>
+  <property id="githublink" index="true" stored="true" editable="true"> 
+    <name> 
+      <language id="en"><![CDATA[GitHub]]></language>  
+    </name> 
+  </property>
+  <property id="linkedinlink" index="true" stored="true" editable="true"> 
+    <name> 
+      <language id="en"><![CDATA[LinkedIn]]></language>  
+    </name> 
+  </property>
   <property id="instagramlink" index="true" stored="true" editable="true"> 
     <name> 
       <language id="en"><![CDATA[Instagram]]></language>  

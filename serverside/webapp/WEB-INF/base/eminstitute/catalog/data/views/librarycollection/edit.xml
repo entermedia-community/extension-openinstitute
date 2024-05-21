@@ -17,8 +17,10 @@
   <property id="collectivebanner"/>
   
   
-  <property id="facebooklink" />
-  <property id="instagramlink" /> 
+  <property id="githublink" /> 
+  <property id="linkedinlink" />  
+  <property id="facebooklink" /> 
+  <property id="instagramlink" />
   <property id="websitelink" />
   
   <property id="street"/>  
