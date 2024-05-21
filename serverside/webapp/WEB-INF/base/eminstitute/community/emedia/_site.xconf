@@ -10,4 +10,8 @@
   <style id="emedia2" href="${communityhome}/css/emedia.css"></style>
   <style id="fontawesome" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css"></style>
 
+	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+	<script id="jquery-runajax" src="/${applicationid}/components/javascript/runajax/runajax-1.0.js" />
+
+
 </page>
