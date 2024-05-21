@@ -10508,3 +10508,8 @@ ul > li {
 .login-area .oauthproviderbtn:hover img {
   filter: brightness(1);
 }
+.project-form {
+  width: 480px;
+  margin: 0 auto;
+  max-width: 100%;
+}

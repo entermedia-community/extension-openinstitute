@@ -11,12 +11,22 @@
             "Saving the world's digital heritage with independent media libraries"
             Creating autonomous media libraries and taking control over our digital assets to save our digital heritage
             </h3>
-            <div id="homecreateproject" class="d-flex flex-column align-items-center justify-content-center flex-wrap mt-5">
+            <div id="homecreateproject" class="d-flex flex-column align-items-center mt-5">
                 #if( $user )
-                <a href="$communitylink/project/add.html" class="ajax btn btn-primary btn-lg m-1 ajax" data-targetdivinner="homecreateproject" data-oemaxlevel="1">Create a Project</a>  
+                <a href="$communitylink/project/add.html" class="ajax btn btn-primary btn-lg m-1" data-targetdivinner="homecreateproject" data-oemaxlevel="1">Create a Project</a>  
                 #else 
                 <a href="$communitylink/authentication/login.html" class="btn btn-primary btn-lg m-1 ">Login to Create a Project</a>
                 #end
+                <div class="collapse show" id="projectForm"> 
+                    <form class="mt-3 mb-4 project-form">
+                        <input type="text" class="form-control mb-3" placeholder="Project Name">
+                        <textarea class="form-control mb-4" placeholder="Project Description"></textarea>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button class="btn btn-primary py-2 px-3">Create Project</button>
+                            <button class="btn btn-transparent text-brand ml-2" type="button" data-bs-toggle="collapse" data-bs-target="#projectForm">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
                 <a href="https://emedialibrary.com" class="m-1" style="color: #8b8fb8;"><span>Learn more about eMedia </span><i class="fs-small fas fa-external-link-alt"></i></a>
             </div>
         </div>
