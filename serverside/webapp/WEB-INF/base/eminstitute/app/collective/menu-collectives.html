@@ -4,7 +4,7 @@
 		#set($homelink = "$applink/proposal/${librarycol.id}/#dash($librarycol.getName()).html")
 		<li id="home" class="nav-item #if($collectivesection == "home") active #end d-none d-sm-inline-block">
 			 <a class="nav-link" href="$homelink">
-			X[[Home]]</a>
+			[[Home]]</a>
 		</li>
 		<li id="community"  class="nav-item #if($collectivesection == "community") active #end">
 			<a class="nav-link" href="$applink/collective/community/index.html?collectionid=${librarycol.id}" >
