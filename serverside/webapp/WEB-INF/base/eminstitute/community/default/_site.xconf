@@ -4,8 +4,6 @@
 
 	<path-action name="OiModule.loadCommunityTagFolder" />
 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
-	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
-	<script id="aos-js" src="${communityhome}/theme/js/aos.js"/>
 	
 	
 </page>

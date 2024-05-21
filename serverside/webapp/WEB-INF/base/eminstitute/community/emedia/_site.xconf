@@ -13,5 +13,7 @@
 	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	<script id="jquery-runajax" src="/${applicationid}/components/javascript/runajax/runajax-1.0.js" />
 
+	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
+	<script id="aos-js" src="${communityhome}/theme/js/aos.js"/>
 
 </page>
