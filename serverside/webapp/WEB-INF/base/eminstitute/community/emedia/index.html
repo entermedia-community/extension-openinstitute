@@ -1,26 +1,26 @@
  
 
 <section class="hero-area section">
-        <div class="container">
-            <div class="d-flex flex-column align-items-center w-100 mx-auto" style="max-width: 800px;" data-aos="fade-up">
-                <img src="${communityhome}/images/logo.png" alt="eMedia" style="width: 150px;height: 150px;">
-                <h2 class="text-center mt-4">
-                    eMedia Community Projects
-                </h2>
-                <h3 class="text-center">
-                "Saving the world's digital heritage with independent media libraries"
-                Creating autonomous media libraries and taking control over our digital assets to save our digital heritage
-                </h3>
-                <div id="homecreateproject" class="d-flex flex-column align-items-center justify-content-center flex-wrap mt-5">
-                    #if( $user )
-                    <a href="$communitylink/project/add.html" class="btn btn-primary btn-lg m-1 ajax" data-targetdivinner="homecreateproject" data-oemaxlevel="1">Create a Project</a>  
-                    #else 
-                    <a href="$communitylink/authentication/login.html" class="btn btn-primary btn-lg m-1 ">Login and Create a Project</a>
-                    #end
-                    <a href="https://emedialibrary.com" class="m-1" style="color: #8b8fb8;"><span>Learn more about eMedia </span><i class="fs-small fas fa-external-link-alt"></i></a>
-                </div>
+    <div class="container">
+        <div class="d-flex flex-column align-items-center w-100 mx-auto" style="max-width: 800px;" data-aos="fade-up">
+            <img src="${communityhome}/images/logo.png" alt="eMedia" style="width: 150px;height: 150px;">
+            <h2 class="text-center mt-4">
+                eMedia Community Projects
+            </h2>
+            <h3 class="text-center">
+            "Saving the world's digital heritage with independent media libraries"
+            Creating autonomous media libraries and taking control over our digital assets to save our digital heritage
+            </h3>
+            <div id="homecreateproject" class="d-flex flex-column align-items-center justify-content-center flex-wrap mt-5">
+                #if( $user )
+                <a href="$communitylink/project/add.html" class="ajax btn btn-primary btn-lg m-1 ajax" data-targetdivinner="homecreateproject" data-oemaxlevel="1">Create a Project</a>  
+                #else 
+                <a href="$communitylink/authentication/login.html" class="btn btn-primary btn-lg m-1 ">Login to Create a Project</a>
+                #end
+                <a href="https://emedialibrary.com" class="m-1" style="color: #8b8fb8;"><span>Learn more about eMedia </span><i class="fs-small fas fa-external-link-alt"></i></a>
             </div>
         </div>
+    </div>
  
     <div class="has-circle">
         <span class="circle circle-1"></span>
