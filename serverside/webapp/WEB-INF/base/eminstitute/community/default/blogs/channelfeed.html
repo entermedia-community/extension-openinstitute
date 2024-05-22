@@ -6,7 +6,7 @@ $context.putPageValue("showchannel",true)
 	<div class="blog-list-container">
 		#foreach( $upload in $topuploads.getPageOfHits())
 			$context.putPageValue("upload",$upload)
-			$pages.include("${communityhome}/channel/showpost.html",$context)
+			$pages.include("${communityhome}/project/channel/showpost.html",$context)
 		#end
 	</div>
 #end

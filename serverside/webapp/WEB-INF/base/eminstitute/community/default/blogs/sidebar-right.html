@@ -16,13 +16,13 @@
   <div class="proposaldescription">
     <div id="subscriberssidebar" class="donate-proposal-sidebar">
       $context.putPageValue("hideteamtitle", true)
-      $pages.include("$apphome/collective/channel/subscribers/index.html",
+      $pages.include("$apphome/project/channel/subscribers/index.html",
       $context) #if($librarycol.proposaltestimonials)
       <div class="community-sidebar-box proposal-sidebarbox">
         <h3>[[Testimonials]]</h3>
         $!librarycol.proposaltestimonials
       </div>
-      #end $pages.include("$apphome/collective/likeoptions.html", $context)
+      #end $pages.include("$communityhome/project/likeoptions.html", $context)
     </div>
   </div>
 </div>
