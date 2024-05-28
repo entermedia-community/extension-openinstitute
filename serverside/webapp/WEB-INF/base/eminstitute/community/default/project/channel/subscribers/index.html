@@ -19,24 +19,26 @@
 				#if(!$userimageurl)
 					#set( $userimageurl = "$communitylink/theme/images/user.svg" )
 				#end 
-				<div class="teammember #if($prettylist) pretty-list #end"> 
-					<a href="#esc($userlink)" class="align-items-center me-2">
-						<img  src="${userimageurl}" title="$!followeruser.getAnonNickName()" width="30px" height="30px" class="me-2">
-						<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())" style="font-weight: bold;">$!followeruser.getAnonNickName()</span>
-					</a>
-					
-					#set($roles=$hit.getValues("teamroles"))
-					#if($roles)
-					<span class="me-2" style="line-height: 2.1;">(
-					#foreach($urole in $roles)
-						#set( $role = $mediaarchive.getCachedData("collectiverole",$urole) )
-						<span>$role</span>#if($foreach.count<$roles.size()), #end
-					#end
-					)</span>
-					#end
+				<div class="teammember #if($prettylist) pretty-list #end">
+					<div class="flex-grow-1">
+						<a href="#esc($userlink)" class="align-items-center me-2">
+							<img  src="${userimageurl}" title="$!followeruser.getAnonNickName()" width="30px" height="30px" class="me-2">
+							<span title="$!followeruser.getAnonNickName()  ($!followeruser.getEmail())" style="font-weight: bold;">$!followeruser.getAnonNickName()</span>
+						</a>
+						
+						#set($roles=$hit.getValues("teamroles"))
+						#if($roles)
+						<span class="me-2" style="line-height: 2.1;">(
+						#foreach($urole in $roles)
+							#set( $role = $mediaarchive.getCachedData("collectiverole",$urole) )
+							<span>$role</span>#if($foreach.count<$roles.size()), #end
+						#end
+						)</span>
+						#end
+					</div>
 					<a class="btn btn-xs btn-transparent emdialog"
 		        	 		href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
-			               title="[[Edit Entry]]"><i class="fas fa-edit"></i></a>
+			               title="[[Edit Entry]]"><i class="fas fa-edit text-muted"></i></a>
 				</div>
 			#end
 		#end

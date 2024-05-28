@@ -2,7 +2,15 @@
 body {
   background-color: #d5d5d5;
 }
-
+#applicationcontent {
+  position: relative;
+}
+#applicationcontent .com-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 #header .navlinks,
 #header .dropdown-menu,
 #header .navlinks .dropdown-item {

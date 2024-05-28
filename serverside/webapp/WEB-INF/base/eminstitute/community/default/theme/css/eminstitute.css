@@ -783,6 +783,14 @@ a.primary:hover .fa-solid {
 }
 
 .collaborate-channel {
+  min-height: calc(100vh - 354px);
+}
+#storeworkarea,
+#financesdashboard,
+#goaleditor {
+  min-height: calc(100vh - 338px);
+}
+.collaborate-channel {
   border-radius: 12px;
   overflow: hidden;
   background-color: #fff;
@@ -1057,7 +1065,7 @@ a.primary:hover .fa-solid {
 }
 
 .chatterbox-messages {
-  height: calc(100% - 68px);
+  height: calc(100% - 74px);
   min-height: 250px;
 }
 
