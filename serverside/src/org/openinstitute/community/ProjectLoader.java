@@ -196,6 +196,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	protected RightPage goHome(Page inPage, String communityurlname)
 	{
 		Data first = findCommunity(communityurlname);
+		log.info("Found community" + first);
 		if(first != null)
 		{
 			String siteid = inPage.get("siteid");
@@ -206,6 +207,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			right.putParam("communitytagcategory" ,  first.getId());
 			right.putPageValue("communitytagcategory" , first);
 			right.putPageValue("communityhome" , communityhome);
+			log.info("Set communityhome=" + communityhome);
 			
 			right.setRightPage(page);
 			return right;
