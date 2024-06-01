@@ -16,7 +16,7 @@
       <language id="es"><![CDATA[Nobre]]></language>  
     </name> 
   </property>  
-  <property id="urlname" index="true" stored="true" editable="true"  > 
+  <property id="urlname" index="true" stored="true" editable="true" note="Should just be the subdomain emedia" > 
     <name> 
       <language id="en"><![CDATA[Url Name]]></language>  
     </name> 
