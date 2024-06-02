@@ -6,6 +6,7 @@ import org.entermediadb.asset.MediaArchive;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
 import org.openedit.ModuleManager;
+import org.openedit.OpenEditException;
 import org.openedit.data.QueryBuilder;
 import org.openedit.data.SearcherManager;
 import org.openedit.hittracker.HitTracker;
@@ -110,6 +111,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		if(secondpart == null)
 		{
 			RightPage page = goHome(inPage, communityurlname);
+			if( page == null)
+			{
+				String siteid = inPage.get("siteid");
+
+				Page apphome = getPageManager().getPage("/" + siteid + "/app/index.html");
+				page = new RightPage();
+				page.setRightPage(apphome);
+			}
 			return page;	
 		}
 		
@@ -199,7 +208,12 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		if(first != null)
 		{
 			String siteid = inPage.get("siteid");
+			if(  first.get("templatepath") == null)
+			{
+				throw new OpenEditException("templatepath is required for " + communityurlname);
+			}
 			String communityhome = "/" + siteid + first.get("templatepath");
+			
 			String template =communityhome + "/index.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
 			Page page = getPageManager().getPage(template);
 			RightPage right = new RightPage();
