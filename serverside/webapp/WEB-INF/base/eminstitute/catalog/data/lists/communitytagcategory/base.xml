@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
+
+ <data id="oi" entitytype="librarycollection" primaryimagepath="/theme/images/logos/oilogo.svg"
+   templatepath="/app" urlname="default" externaldomain="https://openinstitute.org"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Open Institute]]></language> 
+    </name>
+    <caption><![CDATA[Non-profit foundation]]></caption>
+    
+    <summary>
+OI supports a new collaborative economic model for a digital age. The model is an online communication platform where sponsors monitor the ongoing social and ecological impact of their donations.
+
+Projects hosted on OI use accountability and transparency to provide measurable, verifiable outcomes for donations received.  
+    </summary>
+   
+  </data>    
+
   <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg" templatepath="/community/heritage" urlname="Digital-Heritage" 
   primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
   >
@@ -39,7 +56,7 @@
     </summary>
   </data>
   <data id="3" entitytype="librarycollection" primaryimagepath="/theme/images/logos/emedialogo.svg"
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="http://emedia.openinstitute.org:8080"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="https://emedia.openinstitute.org"
   > 
     <name> 
       <language id="en"><![CDATA[eMedia]]></language> 
