@@ -196,7 +196,6 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	protected RightPage goHome(Page inPage, String communityurlname)
 	{
 		Data first = findCommunity(communityurlname);
-		log.info("Found community" + first);
 		if(first != null)
 		{
 			String siteid = inPage.get("siteid");
@@ -218,7 +217,12 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	protected Data findCommunity(String communityurlname)
 	{
 		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1); //Move to use the domain
+
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
+		if( hits.isEmpty())
+		{
+			log.info("Not Found community:" + hits + " for " + communityurlname + " in " + getMediaArchive().getCatalogId());
+		}
 		Data first = (Data)hits.first();
 		return first;
 	}
