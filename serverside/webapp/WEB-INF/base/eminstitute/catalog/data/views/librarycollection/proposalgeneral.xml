@@ -6,12 +6,11 @@
   <property id="communitytag" />
   <property id="collectivetags" />
   
-    
-  
   <property id="contactemail"/> 
   
   <property id="collective"/>  
   
+   <property id="urlname"/>
   
   <property id="assetportrait"/>
   <property id="assetbanner"/>

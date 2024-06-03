@@ -4,6 +4,7 @@
   <property id="name"/>
   <property id="organizationstatus"/>
     <property id="communitytagcategory" />  
+   <property id="urlname"/>
   <property id="communitytag" />
   <property id="collectivetags" />
   
