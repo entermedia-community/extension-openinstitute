@@ -5,6 +5,7 @@ import org.openedit.Data
 
 import org.openedit.data.BaseSearcher
 import org.openedit.data.Searcher
+import org.openedit.util.URLUtilities
 
 public void init()
 {
@@ -48,6 +49,11 @@ public void init()
 	{
 		data.setValue("owner",user.getId());
 	}	
+	if( data.get("urlname") == null )
+		{
+			String name = URLUtilities.dash(data.getName());
+			data.setValue("urlname",name);
+		}
 	
 //	org.entermediadb.asset.Category root = mediaArchive.getProjectManager().createRootCategory(mediaArchive,data);
 //	data.getRootCategoryId(root.getId();
