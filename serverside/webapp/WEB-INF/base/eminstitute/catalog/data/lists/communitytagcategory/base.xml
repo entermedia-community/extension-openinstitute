@@ -33,7 +33,7 @@ Projects hosted on OI use accountability and transparency to provide measurable,
 
     </summary>
   </data>  
-  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="Common-Roots" 
+  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="CommonRoots" 
   primaryimagepathwide="/theme/images/home-creative-wide.jpg" externaldomain="https://commonroots.openinstitute.org"
   >
     <caption><![CDATA[Folk music with beats]]></caption>
@@ -44,7 +44,7 @@ Projects hosted on OI use accountability and transparency to provide measurable,
     Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
      for future generation to build upon.</summary>
   </data>  
-  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha-Academy" 
+  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha" 
   primaryimagepathwide="/theme/images/home-human-wide.jpg" externaldomain="https://kansha.openinstitute.org">
     <name> 
       <language id="en"><![CDATA[Kansha Academy]]></language> 
@@ -72,7 +72,7 @@ of media Files
     </summary>
    
   </data>    
-  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra-Sagrada" 
+  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra" 
   primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"
   domaincommunityid="4"
   > 
@@ -88,7 +88,7 @@ of media Files
     </summary>
    
   </data>    
-  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness-Network" 
+  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness" 
   primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://wellness.openinstitute.org"
   domaincommunityid="5"
   > 
