@@ -3,7 +3,9 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #ffffff;
 }
-
+a {
+  text-decoration: none;
+}
 h1,
 h2,
 h3,
@@ -612,24 +614,28 @@ img.cat-thumb {
   position: absolute;
   background-color: #ffffff;
   min-width: 316px;
-  padding: 8px;
+  padding: 8px !important;
   z-index: 9999;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 8px rgba(88, 88, 88, 0.5);
 }
-
-.month-wrapper {
-  width: 100%;
+.date-picker-wrapper .drp_top-bar {
+  padding: 10px;
 }
 
-.month-wrapper table {
+.date-picker-wrapper .month-wrapper {
+  width: 100%;
+  border: none;
+}
+
+.date-picker-wrapper .month-wrapper table {
   width: 300px;
   border-collapse: collapse;
-  table-layout: fixed;
+  /* table-layout: fixed; */
 }
 
-.month-wrapper table th {
+.date-picker-wrapper .month-wrapper table th {
   padding: 0;
   font-size: 14px;
   font-weight: 700;
@@ -638,11 +644,10 @@ img.cat-thumb {
   text-transform: uppercase;
 }
 
-.month-wrapper table th span.prev,
-.month-wrapper table th span.next {
+.date-picker-wrapper .month-wrapper table th span.prev,
+.date-picker-wrapper .month-wrapper table th span.next {
   display: inline-block;
   width: 34px;
-  font-size: 20px;
   font-weight: normal;
   line-height: 32px;
   color: #666666;
@@ -650,25 +655,26 @@ img.cat-thumb {
   background-color: #f8f8f8;
 }
 
-.month-wrapper table th span.prev:hover,
-.month-wrapper table th span.next:hover {
+.date-picker-wrapper .month-wrapper table th span.prev:hover,
+.date-picker-wrapper .month-wrapper table th span.next:hover {
+  color: #000;
   background-color: #efefef;
 }
 
-.month-wrapper table thead tr {
+.date-picker-wrapper .month-wrapper table thead tr {
   border-top: 8px solid #ffffff;
   border-bottom: 12px solid #ffffff;
 }
 
-.month-wrapper table thead th {
+.date-picker-wrapper .month-wrapper table thead th {
   color: #666666;
 }
 
-.month-wrapper table td {
+.date-picker-wrapper .month-wrapper table td {
   border: 2px solid #ffffff;
 }
 
-.month-wrapper table td div {
+.date-picker-wrapper .month-wrapper table td div {
   width: 38px;
   height: 38px;
   display: flex;
@@ -694,32 +700,36 @@ img.cat-thumb {
   display: none;
 }
 
-.month-wrapper table span.prev,
-.month-wrapper table span.next,
-.month-wrapper table tbody td div {
+.date-picker-wrapper .month-wrapper table span.prev,
+.date-picker-wrapper .month-wrapper table span.next,
+.date-picker-wrapper .month-wrapper table tbody td div {
   cursor: pointer;
 }
 
-.month-wrapper table tbody td div.checked {
+.date-picker-wrapper .month-wrapper table tbody td div.checked {
   background-color: #1b1c1f;
   color: #ffffff;
 }
 
-.month-wrapper table tbody td div.hovering {
+.date-picker-wrapper .month-wrapper table tbody td div.hovering {
   background-color: #666666;
   color: #ffffff;
 }
 
-.month-wrapper table tbody td div.lastMonth {
+.date-picker-wrapper .month-wrapper table tbody td div.lastMonth {
   color: #888888;
 }
 
-.month-wrapper table tbody td div.invalid {
+.date-picker-wrapper .month-wrapper table tbody td div.invalid {
   color: #cccccc;
   cursor: not-allowed;
 }
 
-.month-wrapper table td div:not(.invalid):not(.checked):hover {
+.date-picker-wrapper
+  .month-wrapper
+  table
+  td
+  div:not(.invalid):not(.checked):hover {
   background-color: #666666;
   color: #ffffff;
 }
@@ -802,8 +812,10 @@ img.cat-thumb {
 #guestsPicker button {
   width: 40px;
   height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 20px;
-  font-size: 20px;
 }
 
 #carouselMax {
@@ -1182,6 +1194,7 @@ textarea.blog-comments-input {
 
 .community-nav .nav > li.nav-item {
   font-size: 1.1rem;
+  border-bottom: 2px solid transparent;
 }
 .community-nav .nav > li.nav-item:hover {
   border-bottom: 2px solid #ffffff22;

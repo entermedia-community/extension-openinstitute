@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
-  
-    <property name="communityhome">${siteid}/community/movement</property>
 
-    <style id="template_1" href="/${communityhome}/css/main.css" />
-  
+	<property name="oisection">store</property> 
+	<property name="communitytagcategory">4</property>
+
+  <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
+  <property name="communityhome">/${siteid}/community/tierra</property>
+
+
+	<path-action name="OiModule.loadCommunityTagFolder" />
+
+ 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
+
 </page>

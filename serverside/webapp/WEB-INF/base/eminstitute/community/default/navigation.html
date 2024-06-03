@@ -13,7 +13,7 @@
 
 #set ($action = $content.collectivesection)
 #if( $communitytagcategory)
-<nav class="navbar sticky-top navbar-expand community-nav">
+<nav class="navbar sticky-top navbar-expand community-nav #ifnotnull($navbgdark) bg-black #end ">
   <div class="container">
     <a href="/${communitytagcategory.urlname}">
       <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
