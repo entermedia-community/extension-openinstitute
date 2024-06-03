@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 
-body,
-.navbar-collective,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.resultsnav .nav-btn,
-.resultsnavright .nav-btn {}
-
 body {
 	font-size: 0.9rem;
 }
@@ -56,9 +45,6 @@ body {
 a {
 	color: #1D5655;
 }
-
-a.active,
-a:hover {}
 
 .oicontainer {
 	background-color: #fff;
@@ -372,7 +358,6 @@ li.menu-subheader {
 }
 
 /*OI NAV*/
-#mainOINav {}
 
 #mainOINav .navbar-toggler {
 	color: #3e4553;
@@ -488,10 +473,6 @@ li.menu-subheader {
 		width: 33%;
 	}
 
-	#mainOINav .col-oi-logo {}
-
-	#mainOINav .col-oi-picker {}
-
 	#mainOINav .oi-navbar-nav .nav-link {
 		font-size: 0.85rem;
 		padding: 1px 10px;
@@ -506,9 +487,6 @@ li.menu-subheader {
 }
 
 @media (min-width: 1200px) {
-	.oi-header-table-c1 {}
-
-	.oi-header-table-c2 {}
 
 	#mainOINav .col-oi-picker {
 		width: 220px;
@@ -658,8 +636,6 @@ li.menu-subheader {
 	justify-content: left;
 	text-align: left;
 }
-
-.communityprojects-content .card-collections .collectionbox span {}
 
 .proposalheader h4 {
 	color: #fff;
@@ -1249,10 +1225,6 @@ li.menu-subheader {
 		padding: 15px 60px;
 	}
 
-	.secondary-main {
-		/*margin:20px 0;*/
-	}
-
 	.about-team {
 		margin-top: -10px;
 		float: left;
@@ -1303,9 +1275,8 @@ li.menu-subheader {
 }
 
 .smartpages ul li.pagenum {
-
 	color: #ddd;
-	backgroundcolor: white;
+	background-color: white;
 	border: 1px solid white;
 }
 
