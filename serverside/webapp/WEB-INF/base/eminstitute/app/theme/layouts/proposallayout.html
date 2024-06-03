@@ -43,12 +43,17 @@
 
 	<div class="oicontainer" id="collectivelayout">
 		<div class="d-flex align-items-center flex-column py-3" style="background-color: rgba(255, 0, 0, 0.1);">
+			#set( $communitytagcategory = $mediaarchive.getCachedData("communitytagcategory",$librarycol.get("communitytagcategory") ) )
+			
+			#ifnotnull($communitytagcategory)
 			<p class="mb-2 text-danger">
 				<i class="fa fa-info-circle"></i> You are browsing the old version of Open Institute
 			</p>
-			<a href="#TBD" class="btn btn-lg btn-primary">
-				Go to the New version <i class="fa fa-arrow-right ms-1"></i>
+				#set($link = "${communitytagcategory.externaldomain}/${librarycol.urlname}" )
+			<a href="$link" class="btn btn-lg btn-primary">
+				New #text($librarycol.name) <i class="fa fa-arrow-right ms-1"></i>
 			</a>
+			#end
 		</div>
 		<div class="project-header" id="project-header" #if($bannerurl) style="background-image: url('$bannerurl');" #end>
 			<div class="container">
