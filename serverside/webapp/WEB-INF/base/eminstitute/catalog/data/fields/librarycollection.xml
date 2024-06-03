@@ -17,7 +17,7 @@
       <language id="fr"><![CDATA[Collection]]></language> 
     </name> 
   </property>  
-  <property id="urlname" index="true" stored="true" editable="true"    > 
+  <property id="urlname" index="true" stored="true" editable="true" note="just the label My-Project"   > 
     <name> 
       <language id="en"><![CDATA[Url Name]]></language>  
     </name> 
@@ -225,7 +225,7 @@
       <language id="en"><![CDATA[Banner Photo]]></language>
     </name>
   </property> 
-
+L
     <property id="collectivedescription" index="true" stored="true" editable="true"  keyword="true"  > 
     <name> 
       <language id="de"><![CDATA[Projektbeschreibung]]></language>  

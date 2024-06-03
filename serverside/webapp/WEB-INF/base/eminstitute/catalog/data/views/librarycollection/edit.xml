@@ -15,6 +15,7 @@
   <property id="assetportrait"/>
   <property id="assetbanner"/>
   <property id="collectivebanner"/>
+   <property id="urlname"/>
   
   
   <property id="githublink" /> 
