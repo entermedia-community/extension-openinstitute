@@ -44,7 +44,7 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
             #if( $tagcategory.externaldomain)
               #set( $link ="${tagcategory.externaldomain}")
             #else
-              #set( $link = "$apphome/${tagcategory.get('urlname')}")
+              #set( $link = "$apphome/communities/${tagcategory.get('urlname')}")
             #end
             <a href="$link" class="thumbnail">
               <img src="$apphome${tagcategory.primaryimagepath}" />
