@@ -6,6 +6,7 @@ import org.entermediadb.asset.MediaArchive;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
 import org.openedit.ModuleManager;
+import org.openedit.OpenEditException;
 import org.openedit.data.QueryBuilder;
 import org.openedit.data.SearcherManager;
 import org.openedit.hittracker.HitTracker;
@@ -88,16 +89,17 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 		
 		//Check domain?
-		String[] domain  = util.domain().split("\\.");
-		if(domain.length < 3) 
+		String domain = util.domain();
+		String[] subdomain  = domain.split("\\.");
+		if(subdomain.length < 3) 
 		{
-			return null;
+			subdomain  = ("default." + domain).split("\\.");
 		}
 		String communityurlname = null;
 		String secondpart = null;
 		String anythingelse = null;
 
-		communityurlname = domain[0];
+		communityurlname = subdomain[0];
 		if( url.length > 1)  //Might be a virtual project
 		{
 			secondpart = url[1]; //might be wrong
@@ -110,6 +112,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		if(secondpart == null)
 		{
 			RightPage page = goHome(inPage, communityurlname);
+//			if( page == null)
+//			{
+//				String siteid = inPage.get("siteid");
+//
+//				Page apphome = getPageManager().getPage("/" + siteid + "/app/index.html");
+//				page = new RightPage();
+//				page.setRightPage(apphome);
+//			}
 			return page;	
 		}
 		
@@ -196,16 +206,23 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	protected RightPage goHome(Page inPage, String communityurlname)
 	{
 		Data first = findCommunity(communityurlname);
+		String siteid = inPage.get("siteid");
+		
 		if(first != null)
 		{
-			String siteid = inPage.get("siteid");
+			if(  first.get("templatepath") == null)
+			{
+				throw new OpenEditException("templatepath is required for " + communityurlname);
+			}
 			String communityhome = "/" + siteid + first.get("templatepath");
+			
 			String template =communityhome + "/index.html";  //?communitytagcategoryid=" + first.getId() communities/emedia/home.html
 			Page page = getPageManager().getPage(template);
 			RightPage right = new RightPage();
 			right.putParam("communitytagcategory" ,  first.getId());
 			right.putPageValue("communitytagcategory" , first);
 			right.putPageValue("communityhome" , communityhome);
+			log.info("Set communityhome=" + communityhome);
 			
 			right.setRightPage(page);
 			return right;
@@ -216,7 +233,12 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	protected Data findCommunity(String communityurlname)
 	{
 		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1); //Move to use the domain
+
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
+		if( hits.isEmpty())
+		{
+			log.info("Not Found community:" + hits + " for " + communityurlname + " in " + getMediaArchive().getCatalogId());
+		}
 		Data first = (Data)hits.first();
 		return first;
 	}

@@ -22,36 +22,7 @@
   #set( $link = "$apphome/home/proposals/category/${communitytagcategory.getId()}/#dash($communitytagcategory).html")
 #end
 #set ($action = $content.collectivesection)
-#if( $communitytagcategory)
-<nav class="navbar sticky-top navbar-expand community-nav">
-  <div class="container">
-    <a href="$link">
-      <img src="$apphome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
-    </a>
-    <a href="$link"> 
-      <h2 class="text-white my-1 me-3">
-        #text($communitytagcategory)
-      </h2>
-    </a>
-    <div class="d-flex align-items-center justify-content-center ms-auto">
-      <ul class="nav nav-underline">
-        <li class="nav-item  #if($action == 'community') active #end">
-                <a class="nav-link" href="${communitytagcategory.externaldomain}/">Home</a>
-              </li>
-        <li class="nav-item #if($action == 'blog') active #end">
-          <a class="nav-link" href="${communitytagcategory.externaldomain}/blogs/">
-            Blogs
-          </a>
-        </li>
-      
-        <li class="nav-item #if($action == 'projects') active #end">
-          <a class="nav-link" href="${communitytagcategory.externaldomain}/projects/">Projects</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-#else
+
   <nav class="navbar sticky-top navbar-expand-lg" id="superNav">
     <div class="container flex-nowrap"> 
       <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
@@ -109,4 +80,3 @@
       </div>
     </div>
   </nav>
-#end

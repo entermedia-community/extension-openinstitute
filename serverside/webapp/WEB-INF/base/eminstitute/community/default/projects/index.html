@@ -19,7 +19,6 @@
   <div class="container my-5">
     <div class="row justify-content-md-center">
       #foreach($project in $projects)
-        #set($project = $searcher.loadData($project))
         #set($link = "${communitylink}/${project.urlname}")
         #set($logo = false)
         #if($project.assetportrait)

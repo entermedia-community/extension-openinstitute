@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root> 
-  <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg" templatepath="/community/heritage" urlname="Digital-Heritage" 
-  primaryimagepathwide="/theme/images/home-natural-wide.jpg" 
+
+ <data id="oi" entitytype="librarycollection" primaryimagepath="/theme/images/logos/oilogo.svg"
+   templatepath="/app" urlname="default" externaldomain="https://openinstitute.org"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Open Institute]]></language> 
+    </name>
+    <caption><![CDATA[Non-profit foundation]]></caption>
+    
+    <summary>
+OI supports a new collaborative economic model for a digital age. The model is an online communication platform where sponsors monitor the ongoing social and ecological impact of their donations.
+
+Projects hosted on OI use accountability and transparency to provide measurable, verifiable outcomes for donations received.  
+    </summary>
+   
+  </data>    
+
+  <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg" templatepath="/community/heritage" urlname="Heritage" 
+  primaryimagepathwide="/theme/images/home-natural-wide.jpg" externaldomain="https://heritage.openinstitute.org"
   >
-  <caption><![CDATA[Creating a Worldwide Digital Heritage]]></caption>
+  <caption><![CDATA[Saving our Heritage]]></caption>
     <name> 
       <language id="en"><![CDATA[Ancestral Streaming]]></language> 
     </name> 
@@ -16,8 +33,8 @@
 
     </summary>
   </data>  
-  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="Common-Roots-Music" 
-  primaryimagepathwide="/theme/images/home-creative-wide.jpg"
+  <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="CommonRoots" 
+  primaryimagepathwide="/theme/images/home-creative-wide.jpg" externaldomain="https://commonroots.openinstitute.org"
   >
     <caption><![CDATA[Folk music with beats]]></caption>
     <name> 
@@ -27,8 +44,8 @@
     Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
      for future generation to build upon.</summary>
   </data>  
-  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha-Academy" 
-  primaryimagepathwide="/theme/images/home-human-wide.jpg">
+  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha" 
+  primaryimagepathwide="/theme/images/home-human-wide.jpg" externaldomain="https://kansha.openinstitute.org">
     <name> 
       <language id="en"><![CDATA[Kansha Academy]]></language> 
     </name> 
@@ -39,7 +56,7 @@
     </summary>
   </data>
   <data id="3" entitytype="librarycollection" primaryimagepath="/theme/images/logos/emedialogo.svg"
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="http://emedia.openinstitute.org:8080"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="https://emedia.openinstitute.org"
   > 
     <name> 
       <language id="en"><![CDATA[eMedia]]></language> 
@@ -55,8 +72,8 @@ of media Files
     </summary>
    
   </data>    
-  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra-Sagrada" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"
   domaincommunityid="4"
   > 
     <name> 
@@ -71,8 +88,8 @@ of media Files
     </summary>
    
   </data>    
-  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness-Network" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
+  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://wellness.openinstitute.org"
   domaincommunityid="5"
   > 
     <name> 
@@ -88,23 +105,5 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     </summary>
    
   </data>    
-
-  <data id="movement"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/movement" urlname="Movement-Creators" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg"
-  domaincommunityid="4"
-  > 
-    <name> 
-      <language id="en"><![CDATA[Movement Creators]]></language> 
-    </name>
-    <caption><![CDATA[Proliferate effective collaboration]]></caption>
-    
-    <summary>
-    <![CDATA[
-	Evolve an intentional, open-source, platform to facilitate a profitable philanthropic economy.
-    ]]>
-    </summary>
-   
-  </data>    
-
 
 </root>

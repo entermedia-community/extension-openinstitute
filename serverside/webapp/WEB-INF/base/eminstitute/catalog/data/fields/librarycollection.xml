@@ -248,9 +248,9 @@
     </name>
   </property> 
 
-  <property id="communitytagcategory" index="true" stored="true" editable="true" viewtype="multiselect" filter="true"  datatype="list"  type="list">
+  <property id="communitytagcategory" index="true" stored="true" editable="true" filter="true"  datatype="list"  type="list">
     <name>
-      <language id="en"><![CDATA[Communities]]></language>
+      <language id="en"><![CDATA[Community]]></language>
     </name>
   </property> 
   

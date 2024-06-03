@@ -15,9 +15,7 @@
 $context.putPageValue("curentcommunitytagid", $communitytagid)
 <header>
   <img src="$applink/theme/images/oi-home-banner.svg" />
-  <h1 id="type-out">Fundraising, Accountability and Transparency  
-  </h1>
-  
+  <h1 id="type-out">Fundraising, Accountability and Transparency</h1>
   <a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog proposal-btn">
     <i class="fas fa-plus me-1"></i>
     [[Create a Project]]
@@ -42,7 +40,7 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
         <div class="col col-sm-12 col-lg-6">
           <div class="proposal">
             #if( $tagcategory.externaldomain)
-              #set( $link ="${tagcategory.externaldomain}")
+              #set( $link ="//${tagcategory.externaldomain}/")
             #else
               #set( $link = "$apphome/${tagcategory.get('urlname')}")
             #end
