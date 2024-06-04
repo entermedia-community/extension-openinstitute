@@ -1379,7 +1379,9 @@ a.collectivetag:hover {
   color: #111;
   font-size: 1rem;
 }
-
+.contentcolumn > .row {
+  padding-bottom: 56px;
+}
 .contentcolumn h1 {
   font-size: 2rem;
   margin: 0 0 30px;
