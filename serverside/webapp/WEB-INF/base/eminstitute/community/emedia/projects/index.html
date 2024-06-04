@@ -12,13 +12,8 @@
 </div>
 <div class="container">
   #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-#if( $communitytagcategory.id == "3")
   #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","emediadevelopers").sort("name).search($context))
-#else
-  #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).sort("name).search($context))
-#end  
+  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","AY_jtr589HHjyJ06-yjX").sort("name).search($context))
   <!-- <h2 class="text-center my-4">Projects</h2> -->
   <div class="container my-5">
     <div class="row justify-content-md-center">
