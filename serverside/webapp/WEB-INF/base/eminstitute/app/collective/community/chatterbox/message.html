@@ -16,7 +16,7 @@
 	<div class="chat-icon">
 		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
 		#ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
-		<a href="#esc($userlink)" title="$chatuser.getAnonNickName()" class="msg-avt">
+		<a href="#esc($userlink)" title="$!chatuser.getAnonNickName()" class="msg-avt">
 			<img src="${userimageurl}" class="img-fluid">
 		</a>
 	</div>
@@ -26,7 +26,7 @@
 	
 	<div class="message-menu">
 		<div class="d-flex align-items-center">
-			<div class="pickemoticon message-menu-link" data-collectionid="$librarycol.getId()" data-messageid="$chat.id" data-showurl="$applink/collective/community/chatterbox/smiles.html" data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
+			<div class="pickemoticon message-menu-link" data-collectionid="$collectionid" data-messageid="$chat.id" data-showurl="$applink/collective/community/chatterbox/smiles.html" data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
 			</div>
 			#if($caneditcollection)
@@ -34,7 +34,7 @@
 					data-oemaxlevel="1"    
 					onclick='$("#chatter-msg").focus()'
 					data-targetdiv="chatterbox-write"
-					href="$applink/collective/community/chatterbox/replystart.html?collectionid=$librarycol.getId()&replytoid=$chat.id" 
+					href="$applink/collective/community/chatterbox/replystart.html?collectionid=$collectionid&replytoid=$chat.id" 
 					title="[[Reply]]">
 					<i class="fas fa-quote-left"></i>
 				</a>
