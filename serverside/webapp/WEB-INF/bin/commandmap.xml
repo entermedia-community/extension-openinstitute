@@ -3,6 +3,7 @@
 <commandmaps>
 	<commandmap os="MAC OS X">
 		<commandbase>./WEB-INF/bin/mac</commandbase>
+		<exiftool>/Users/hi/homebrew/bin/exiftool</exiftool>
 		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
 		<asperaupload>./aspera/upload.sh</asperaupload>
 		<convert>/Users/hi/homebrew/bin/convert</convert>
