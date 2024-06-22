@@ -5,11 +5,8 @@
 	<property name="virtual">true</property>
 	<property name="communitytagcategory">4</property>
 
-	<path-action name="DataEditModule.loadDataForEdit" allowduplicates="true">
+	<path-action name="ProjectModule.loadCollectionChild" allowduplicates="true">
 		<property name="searchtype">collectiveproduct</property>
-		<property name="idlevel">1</property>
-		<property name="idname">productid</property>
-		<property name="pageval">aproduct</property>
 	</path-action>
 
 

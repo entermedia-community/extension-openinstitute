@@ -1,4 +1,4 @@
-$pages.include("${communityhome}/project/rentals/filters.html", $context)
+$pages.include("${communityhome}/rentals/filters.html", $context)
 
 #set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5").sort("name").search($context))
 
@@ -12,7 +12,7 @@ $pages.include("${communityhome}/project/rentals/filters.html", $context)
       #end
 
       <div class="property-container" id="ad"
-        data-href="/$collection.urlname/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
+        data-href="$communitylink/${collection.urlname}/rentaldetails/${aproduct.urlname}"
         title="#text($aproduct.name)">
         <div class="property-body"> 
           $context.putPageValue("aproduct",$aproduct)

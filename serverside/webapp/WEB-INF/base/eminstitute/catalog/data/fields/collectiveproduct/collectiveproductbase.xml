@@ -5,10 +5,17 @@
 	<property id="id" index="true" stored="true" editable="true"
 		internalfield="true">ID</property>
 
-	<property id="name" index="true" stored="true" editable="true">
+
+	<property id="name" index="true" stored="true" editable="true" multilanguage="true">
 		<name>
 			<language id="en"><![CDATA[Product Name]]></language>
 			<language id="es"><![CDATA[Nombre del Proyecto]]></language>
+		</name>
+	</property>
+
+	<property id="urlname" index="true" stored="true" editable="true" >
+		<name>
+			<language id="en"><![CDATA[URL Name]]></language>
 		</name>
 	</property>
 

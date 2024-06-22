@@ -1,11 +1,27 @@
-$pages.include("${communityhome}/filters.html", $context)
+  <div class="containerX search text-center" style="background-color: #eee; padding:10px;">
+
+<h1>Welcome Home!</h1>
+
+<p>To expand and maintain many properties around the world in a way that is holistic, generous, professional, with quality, empowering and ecological. </p
+
+<p>5% of rental profits will be donated to Open Institute to be applied in the region where</p>
+
+
+
+</div>
+
+
+<div class="main container-fluid   text-center">
+
+
+  <div class="d-flex justify-content-center flex-wrap">
+
 
 
 
 #set( $hits =
 $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5").sort("name").search($context))
-<div class="main container-fluid text-center">
-  <div class="d-flex justify-content-center flex-wrap">
+
     #set( $adId = 0)
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))
@@ -22,7 +38,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
       #end
 
       <div class="property-container" id="ad"
-        data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
+        data-href="/${communitytagcategory.urlname}/${collection.urlname}/rentalsdetails/#dash($aproduct.name)"
         title="#text($aproduct.name)">
         <div class="property-body"> 
           $context.putPageValue("aproduct",$aproduct)

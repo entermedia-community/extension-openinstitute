@@ -239,7 +239,7 @@ L
       <language id="en"><![CDATA[Manifesto / Mission]]></language>  
     </name> 
   </property>  
-  <property id="collectivetags" viewtype="tageditor"  keyword="true" defaultoperation="andgroup" index="true" stored="true" editable="true" indextype="analyzed" analyzer="tags" >User Tags 
+  <property id="collectivetags" viewtype="tageditor"  keyword="true" defaultoperation="andgroup" index="true" stored="true" editable="true"  >User Tags 
     <name>
       <language id="de"><![CDATA[Nutzer-Tags]]></language>
       <language id="en"><![CDATA[Hashtags]]></language>
@@ -261,7 +261,7 @@ L
   </property> 
   
   <property id="keywords" viewtype="tageditor" keyword="true" defaultoperation="andgroup" index="true" stored="true" 
-  		editable="true" indextype="analyzed" analyzer="tags" filter="true"   sortable="true">Tags 
+  		editable="true"  filter="true"   sortable="true">Tags 
     <name> 
       <language id="de"><![CDATA[Tags]]></language>  
       <language id="en"><![CDATA[Tags]]></language>  
