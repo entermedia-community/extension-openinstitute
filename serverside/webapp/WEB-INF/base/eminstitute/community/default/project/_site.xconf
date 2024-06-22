@@ -21,8 +21,8 @@
   <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
   <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
   
-  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 
 <!-- script id="jquery-liveajax" src="/${applicationid}/components/javascript/runajax/runajax-1.0.js"/ -->
 	

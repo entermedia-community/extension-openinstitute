@@ -7,4 +7,8 @@
 
     <style id="template_1" href="/${communityhome}/css/main.css" />
   
+  	<!-- OpenEdit -->
+	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
+  
 </page>

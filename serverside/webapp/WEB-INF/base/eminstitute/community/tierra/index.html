@@ -68,7 +68,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
             </div>
             #set($chatuser = $mediaarchive.getCachedData("user",$aproduct.owner))
             #set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
-            #ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+            #ifnull($userimageurl) #set( $userimageurl = "$communityhome/theme/images/user.svg" ) #end
             <button class="owner-btn" data-name="John Doe" data-reviews="144" data-rating="4.56" data-rank="Host"
               data-duration="5" data-location="San Lucas Sacatepéquez"
               data-description="Lore ipsum dolor sit amet, adipiscing elit." data-img="$userimageurl">

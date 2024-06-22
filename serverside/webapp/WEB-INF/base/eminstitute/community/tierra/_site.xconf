@@ -13,4 +13,21 @@
 
  	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 
+	<!-- OpenEdit -->
+	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
+
+
+  <path-action name="Admin.autoLogin"/>
+  <path-action name="MediaArchiveModule.loadApplicationId"/>
+  <path-action name="MediaArchiveModule.loadComponentHome" />
+  
+  <path-action name="ProfileModule.loadUserProfile"/>
+  <path-action name="PageValue.loadPageVariable" allowduplicates="true" bean="searcherManager"/>
+  <path-action name="PageValue.loadPageVariable" allowduplicates="true" bean="userManager"/>
+  <path-action name="SessionValue.loadSessionVariable" bean="moduleManager"/>
+  <path-action name="Admin.loadPermissions"/>
+  <path-action name="Admin.allowViewing"/>
+  <path-action name="TranslationModule.loadBrowserLanguage"/>
+
 </page>
