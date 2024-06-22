@@ -17,11 +17,16 @@
   <div class="d-flex justify-content-center flex-wrap">
 
 
+#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id))
+#set( $collections = $mediaarchive.getCachedSearch($query))
+#if( $collections.isEmpty() )
 
+No products
 
-#set( $hits =
-$mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5").sort("name").search($context))
+#else
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").sort("name").search($context))
 
+#end
     #set( $adId = 0)
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))
