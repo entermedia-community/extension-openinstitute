@@ -150,7 +150,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		RightPage right = new RightPage();
 		right.putParam("communitytagcategory" ,  communitydata.getId());
 		right.putPageValue("communitytagcategory" , communitydata);
-		right.putPageValue("communitylink" , "/" + communityurlname);
+		right.putPageValue("communitylink" , "/");
 		right.putPageValue("communityhome" , communityhome);
 		if( page.exists())  //Must be a real page
 		{
