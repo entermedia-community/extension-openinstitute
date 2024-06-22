@@ -3,8 +3,7 @@
 	<inner-layout>${communityhome}/project/rentaldetails/detaillayout.html</inner-layout>
 
 	<property name="virtual">true</property>
-	<property name="communitytagcategory">4</property>
-
+	
 	<path-action name="ProjectModule.loadCollectionChild" allowduplicates="true">
 		<property name="searchtype">collectiveproduct</property>
 	</path-action>
