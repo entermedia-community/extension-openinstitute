@@ -21,14 +21,14 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
         #set($link = "$applink/collective/channel/${collection.id}/#dash($collective.getName()).html")
       #end
 
-      <div class="ad-container" id="ad"
+      <div class="property-container" id="ad"
         data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
         title="#text($aproduct.name)">
-        <div class="ad-body"> 
+        <div class="property-body"> 
           $context.putPageValue("aproduct",$aproduct)
           #set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
           #set($subtotal = $aproduct.getDouble("productprice"))
-          <div class="ad-img"> 
+          <div class="property-img"> 
             <div id="imgCarousel$adId" class="carousel slide">
               <div class="carousel-inner">
 				      #set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
@@ -59,7 +59,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
               <img src="$userimageurl" />
             </button>
           </div>
-          <div class="ad-details">
+          <div class="property-details">
             <p class="rating">★ 4.56</p>
             <p class="location text-truncate" style="max-width: calc(100% - 50px)">
               $!aproduct.getText("name",$context)
@@ -147,7 +147,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
       );
       modal.hide();
     });
-    $(document).on("click", "#ad", function (e) {
+    $(document).on("click", ".property-container", function (e) {
       if (e.target.nodeName === "SPAN" || e.target.nodeName === "BUTTON") {
         return;
       }

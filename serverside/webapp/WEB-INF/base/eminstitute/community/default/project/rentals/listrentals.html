@@ -1,28 +1,18 @@
-$pages.include("$apphome/home/rentals/filters.html", $context)
+$pages.include("${communityhome}/project/rentals/filters.html", $context)
 
+#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5").sort("name").search($context))
 
-
-#set( $hits =
-$mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5").sort("name").search($context))
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">
     #set( $adId = 0)
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))
-    	
-      #set($logo = false)
-      #if($collective.assetportrait)
-        #set($asset = $mediaarchive.getAsset($collection.assetportrait))
-        #set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
-      #else
-        #set($logo = "$applink/theme/images/OI_flower.png")
-      #end
       #if(!$link)
-        #set($link = "$applink/collective/channel/${collection.id}/#dash($collective.getName()).html")
+        #set($link = "${communityhome}/collective/channel/${collection.id}/#dash($collective.getName()).html")
       #end
 
       <div class="property-container" id="ad"
-        data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
+        data-href="/$collection.urlname/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
         title="#text($aproduct.name)">
         <div class="property-body"> 
           $context.putPageValue("aproduct",$aproduct)
@@ -33,13 +23,13 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
               <div class="carousel-inner">
 				      #set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
                 <div class="carousel-item active">
-                  <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' />
+                  <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
                 </div>
               #set( $query = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id))
               #set( $assethits = $mediaarchive.getCachedSearch($query))
               #foreach($asset in $assethits)
                 <div class="carousel-item">
-                  <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' />
+                  <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
                 </div>
               #end  
               </div>
@@ -52,7 +42,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
             </div>
             #set($chatuser = $mediaarchive.getCachedData("user",$aproduct.owner))
             #set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
-            #ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+            #ifnull($userimageurl) #set( $userimageurl = "$communityhome/theme/images/user.svg" ) #end
             <button class="owner-btn" data-name="John Doe" data-reviews="144" data-rating="4.56" data-rank="Host"
               data-duration="5" data-location="San Lucas Sacatepéquez"
               data-description="Lore ipsum dolor sit amet, adipiscing elit." data-img="$userimageurl">

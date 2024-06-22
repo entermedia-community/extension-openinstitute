@@ -51,14 +51,14 @@ header p {
   margin-top: 16px;
 }
 
-.ad-container {
+.property-container {
   width: 100%;
   padding: 12px;
   max-width: 360px;
   display: flex;
 }
 
-.ad-body {
+.property-body {
   width: 100%;
   /* box-shadow: 0 0 3px rgba(200, 200, 200, 0.5);
     background-color: #ffffff; */
@@ -67,7 +67,7 @@ header p {
   cursor: pointer;
 }
 
-.ad-img {
+.property-img {
   flex: 1;
   height: 340px;
   max-height: calc(100vw - 16px);
@@ -76,14 +76,14 @@ header p {
   position: relative;
 }
 
-.ad-img .carousel,
-.ad-img .carousel-item,
-.ad-img .carousel-inner {
+.property-img .carousel,
+.property-img .carousel-item,
+.property-img .carousel-inner {
   width: 100%;
   height: 100%;
 }
 
-.ad-img .carousel-item img {
+.property-img .carousel-item img {
   height: 100%;
   object-fit: cover;
 }
@@ -108,7 +108,7 @@ button.owner-btn {
   justify-content: center;
 }
 
-.ad-body:hover button.owner-btn {
+.property-body:hover button.owner-btn {
   border-radius: 8px;
   left: 16px;
   bottom: 16px;
@@ -121,33 +121,33 @@ button.owner-btn img {
   transition: all 0.2s ease-in-out;
 }
 
-.ad-body img {
+.property-body img {
   transition: all 0.2s ease-in-out;
 }
 
-.ad-body:hover img {
+.property-body:hover img {
   transform: scale(1.05);
 }
 
-.ad-details {
+.property-details {
   margin-top: 8px;
   position: relative;
 }
 
-.ad-details p {
+.property-details p {
   margin: 0;
   text-align: left;
   font-size: 14px;
   font-family: Lato, sans-serif;
 }
 
-.ad-details .location {
+.property-details .location {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
 }
 
-.ad-details .owner,
-.ad-details .availability {
+.property-details .owner,
+.property-details .availability {
   color: #666666;
 }
 
@@ -162,17 +162,17 @@ button.owner-btn img {
   color: #0d2625;
 }
 
-.ad-details .price {
+.property-details .price {
   color: #666666;
 }
 
-.ad-details .price .currency {
+.property-details .price .currency {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   color: #0d2625;
 }
 
-.ad-details .rating {
+.property-details .rating {
   position: absolute;
   top: 0;
   right: 0;

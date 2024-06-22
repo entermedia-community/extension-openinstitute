@@ -1,0 +1,8 @@
+<page>
+	<property name="collectivesection">store</property>
+	<property name="virtual">true</property>
+	<property name="communitytagcategory">4</property>
+	<path-action name="OiModule.loadCommunityTagFolder" />
+ 	<inner-layout>${communityhome}/project/rentals/listrentals.html</inner-layout>
+ 	<style id="oi2" cancel="true" />
+</page>

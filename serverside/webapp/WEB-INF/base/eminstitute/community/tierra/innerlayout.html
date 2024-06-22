@@ -35,38 +35,17 @@
   <link rel="stylesheet" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css">
   <link rel="stylesheet" href="/${applicationid}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="${communityhome}/theme/css/oi3.css">
+  <link rel="stylesheet" href="${communityhome}/theme/css/tierra.css">
 
 </head>
 
 <body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
-  $context.putPageValue("navbgdark", true)
-  $pages.include("/${communityhome}/navigation.html", $context)
-
-<div class="bg-dark py-3">
-  <div class="container">
-    <div class="secondary-header">
-      <div class="d-flex align-items-center w-100">
-        <div
-          class="d-flex flex-grow-1 flex-column flex-md-row align-items-start align-items-md-center justify-content-md-between">
-          <h2 class="text-white my-1 mx-0">
-            Community Booking Site
-          </h2>
-          <a href="https://www.canva.com/design/DAFsZYET-8E/Sb5ZGbL3HOT9JVZhXBe2xg/view?utm_content=DAFsZYET-8E&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"
-            class="btn btn-lg btn-success" target="_blank" title="[[Request To Add Your Property]]">
-            ##<i class="fas fa-plus"></i>
-            [[Tierra Sagrada Overview]]
-            ##[[Request To Add Your Property]]
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+$pages.include("/${communityhome}/navigation.html", $context)
   
-<div class="container">
+<!-- <div class="container">
   <p class="py-2 text-center mb-0">$communitytagcategory.summary</p>
-</div> 
+</div>  -->
 
 
   $pages.includeContent()

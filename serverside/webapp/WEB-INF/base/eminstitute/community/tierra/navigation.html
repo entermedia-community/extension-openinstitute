@@ -1,0 +1,41 @@
+#set($projecthome = $collection.urlname)
+
+<nav class="navbar sticky-top navbar-expand rental-nav bg-black">
+  <div class="container">
+    <a href="$projecthome/rentals/listrenals.html">
+      <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
+    </a>
+    <a href="$projecthome/rentals/listrenals.html">
+      <h2 class="text-white my-1 me-3">
+        #text($communitytagcategory)
+      </h2>
+    </a>
+    <div class="d-flex align-items-center justify-content-center ms-auto">
+      <ul class="nav">
+        <li class="nav-item  #if($action == 'community') active #end">
+          <a class="nav-link" href="/rentals/listrentals.html">
+            <i class="fas fa-bed me-2"></i> Rentals
+          </a>
+        </li>
+        <li class="nav-item  #if($action == 'community') active #end">
+          <a class="nav-link" href="$projecthome/rentals/listrenals.html">
+            <i class="fas fa-calendar-alt me-2"></i> Events
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle me-1"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="$projecthome/rentals/listrenals.html/profile">Account</a></li>
+            <li><a class="dropdown-item" href="$projecthome/rentals/listrenals.html/profile">Sign Up</a></li>
+            <li><a class="dropdown-item" href="$projecthome/rentals/listrenals.html/settings">Log In</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="$projecthome/rentals/listrenals.html/settings">Help Center</a></li>
+            <li><a class="dropdown-item text-danger" href="$projecthome/rentals/listrenals.html/logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
