@@ -1,3 +1,4 @@
 <page>
+ 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 
 </page>

@@ -4,10 +4,10 @@ $pages.include("${communityhome}/rentals/filters.html", $context)
 #set( $collections = $mediaarchive.getCachedSearch($query))
 #if( $collections.isEmpty() )
 
-No products
+No Events
 
 #else
-#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").sort("name").search($context))
+#set( $hits = $mediaarchive.query("collectiveevent").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").sort("name").search($context))
 
 #end
 
@@ -17,7 +17,7 @@ No products
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))
       #if(!$link)
-        #set($link = "/${librarycol.urlname}")
+        #set($link = "${communityhome}/collective/channel/${collection.id}/#dash($collective.getName()).html")
       #end
 
       <div class="property-container" id="ad"
@@ -61,9 +61,9 @@ No products
           <div class="property-details">
             <p class="rating">★ 4.56</p>
             <p class="location text-truncate" style="max-width: calc(100% - 50px)">
-              #text($aproduct)
+              $!aproduct.getText("name",$context)
             </p>
-            <p class="owner text-truncate">Hosted by <a href="/${collection.urlname}">#text($collection)</a></p>
+            <p class="owner text-truncate">Hosted by #text($collection)</p>
             <div class="d-flex justify-content-between mt-2">
               <p class="availability">Sep 10 &mdash; Sep 25</p>
               <p class="price">
