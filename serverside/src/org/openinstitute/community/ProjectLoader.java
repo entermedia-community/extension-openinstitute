@@ -154,6 +154,10 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		right.putPageValue("communityhome" , communityhome);
 		if( page.exists())  //Must be a real page
 		{
+			if( page.isFolder())
+			{
+				page = getPageManager().getPage(fixedpath + "/index.html");
+			}
 			right.setRightPage(page);
 			return right;
 		}
