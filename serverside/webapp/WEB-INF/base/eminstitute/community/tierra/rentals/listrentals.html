@@ -150,6 +150,7 @@ No products
       if (e.target.nodeName === "SPAN" || e.target.nodeName === "BUTTON") {
         return;
       }
+      console.log($(this).data("href"));
       window.location.href = $(this).data("href");
     }); 
   });

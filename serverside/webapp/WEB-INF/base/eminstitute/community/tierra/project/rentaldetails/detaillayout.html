@@ -9,13 +9,13 @@
     <div class="d-flex flex-column">
       <p class="text-secondary mb-0"><a href="/${librarycol.urlname}">#text($librarycol)</a></p>
       <div class="d-flex align-items-center">
-        <p class="rating m-0">★ 4.56</p>
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
         <span class="mx-2">&middot;</span>
-        <p class="reviews m-0">155 reviews</p>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
       </div>
     </div>
     <div class="d-flex flex-column flex-md-row align-items-center">
-      <button class="btn btn-sm m-1" id="shareAd" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
+      <button class="btn btn-sm m-1" id="shareProperty" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
       #if( $caneditcollection)
         <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
           href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
@@ -39,20 +39,20 @@
 #set( $assethits = $mediaarchive.getCachedSearch($query))
 
   <div class="row image-gallery">
-    <div class="col col-md-6 col-sm-12 previewImg" style="max-height: 466px;">
+    <div class="col col-md-6 col-sm-12 previewImg" data-index="0" style="max-height: 466px;">
       <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1200x630.jpg")' />
     </div>
-    <div class="col col-md-6 d-none d-md-block">
+    <div class="col col-md-6 d-none d-md-block extraImg" style="max-height: 466px;">
       <div class="row">
         #foreach($asset in $assethits)
-        <div class="col-md-6 mt-3 previewImg">
+        <div class="col-md-6 previewImg" data-index="$foreach.count">
           <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' class="img-fluid" alt="image" />
         </div>
         	#if($foreach.count > 3) #break #end
         #end
       </div>
     </div>
-    <button class="d-flex align-items-center see-more shadow" data-bs-toggle="modal" data-bs-target="#preview" id="triggerPreview">
+    <button class="d-flex align-items-center see-more-photos shadow" data-bs-toggle="modal" data-bs-target="#preview" id="triggerPreview">
       <i class="fas fa-camera"></i>
       <p class="m-0 ms-2">See all photos</p>
     </button>
@@ -92,9 +92,13 @@
                 <p>Adults</p>
                 <small>Age 13+</small>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="adult">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="adult">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="guest">1</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="adult">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="adult">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <hr />
@@ -102,18 +106,26 @@
                 <p class="m-0">Children</p>
                 <small>Age 0 &mdash; 13</small>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="children">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="children">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="guest">0</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="children">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="children">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <hr />
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
                 <p class="m-0">Pets</p>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="pet">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="pet">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="pet">0</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="pet">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="pet">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -206,15 +218,11 @@
   </p>
   <hr />
   <div class="d-flex w-100 stats-header gap-2 mt-4 mb-2">
-    <p>
-      <strong>&starf; 4.85</strong>
-      <small>Rating</small>
-    </p>
-    <span>&middot;</span>
-    <p>
-      <strong>150</strong>
-      <small>Reviews</small>
-    </p>
+      <div class="d-flex align-items-center">
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
+        <span class="mx-2">&middot;</span>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
+      </div>
   </div>
   <div class="row mb-4">
     <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
@@ -283,7 +291,7 @@
 <div class="modal fade" id="preview">
   <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
     <div class="modal-content bg-black">
-      <button type="button" class="btn btn-lg text-white align-self-start m-2" data-bs-dismiss="modal">
+      <button type="button" class="btn btn-lg text-white align-self-start m-2 close-preview" data-bs-dismiss="modal">
         <i class="fas fa-times me-1 text-white"></i>
         <span>Close</span>
       </button>
@@ -401,9 +409,10 @@
       }
     });
     $(".previewImg").click(function () {
+      $("#carouselMax").carousel($(this).data("index"));
       $('#triggerPreview').trigger('click');
     });
-    $("#shareAd").click(function () {
+    $("#shareProperty").click(function () {
       var url = window.location.href;
       var dummy = $('<input>').val(url).appendTo('body').select();
       document.execCommand('copy');
