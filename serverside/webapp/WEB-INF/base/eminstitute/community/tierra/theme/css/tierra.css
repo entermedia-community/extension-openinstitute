@@ -199,6 +199,12 @@ p.h5,
     padding: 16px;
   }
 }
+@media screen and (max-width: 768px) {
+  #carouselMax .carousel-control-next,
+  #carouselMax .carousel-control-prev {
+    align-items: flex-end;
+  }
+}
 
 #guests,
 #checkIn,
