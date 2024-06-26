@@ -512,7 +512,7 @@ img.cat-thumb {
   flex-direction: column;
   align-items: center;
   width: 250px;
-  color: #267371;
+  color: #267271;
 }
 
 .prop-credit p {
@@ -532,7 +532,7 @@ img.cat-thumb {
   background: #efefef !important;
   border-radius: 6px;
   box-shadow: none;
-  border: 1px solid #267371;
+  border: 1px solid #267271;
   box-shadow: none;
   top: 0;
   left: 0;
@@ -545,7 +545,7 @@ img.cat-thumb {
 }
 
 .prop-credit .progress-bar {
-  background-color: #267371;
+  background-color: #267271;
   box-shadow: none;
 }
 
@@ -1264,7 +1264,7 @@ textarea.blog-comments-input {
   background-color: #f2f4f5;
 }
 .donate {
-  background-color: #267371;
+  background-color: #267271;
   color: #ffffff;
   border: none;
   width: 130px;
@@ -1317,30 +1317,149 @@ textarea.blog-comments-input {
 .explore-blog-list a:hover img {
   background-color: #e2e7e9;
 }
-.project-header {
-  min-height: 120px;
+
+.community-layout {
+  display: flex;
+  position: relative;
+  min-height: calc(100vh - 124px);
 }
-.project-header-logo img {
+.community-layout .sidebar-left,
+.community-layout .sidebar-right {
+  min-height: 100%;
+  min-width: 360px;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+.community-layout .main-content {
+  flex: 1;
+  padding: 0.5rem;
+  max-width: 969px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1280px) {
+  .community-layout .sidebar-left,
+  .community-layout .sidebar-right {
+    min-width: 240px;
+    max-width: 300px;
+  }
+}
+.btn.toggleCommunityDrawer {
+  display: none;
+}
+.btn.toggleCommunityDrawer:active {
+  background-color: rgba(38, 114, 113, 0.15) !important;
+  border-color: #267271 !important;
+}
+.btn.toggleCommunityDrawer i {
+  color: #267271;
+}
+#community-drawer-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  display: none;
+}
+.btn.community-drawer-close {
+  display: none !important;
+}
+@media screen and (max-width: 969px) {
+  #community-drawer-mask,
+  .btn.toggleCommunityDrawer {
+    display: block;
+  }
+  .community-layout .sidebar-left,
+  .community-layout .sidebar-right {
+    top: 0;
+    position: fixed;
+    min-width: 300px;
+    max-width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    z-index: 9999;
+    transition: all 0.3s ease-in-out;
+  }
+  .community-layout .sidebar-left {
+    left: -100%;
+  }
+  .community-layout .sidebar-left.active {
+    left: 0;
+  }
+  .sidebar-left.active .community-drawer-close {
+    display: block !important;
+  }
+  .community-layout .sidebar-right {
+    right: -100%;
+  }
+  .community-layout .sidebar-right.active {
+    right: 0;
+  }
+}
+
+.project-header .banner {
+  height: 70px;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: relative;
+  margin-bottom: 66px;
+}
+.project-header .header-logo {
   width: 100px;
   height: 100px;
-  border-radius: 50px;
+  border-radius: 70px;
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  bottom: -50px;
+  left: 48px;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 8px solid #ffffff;
+}
+.header-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .project-header h1.project-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
-  color: white;
+  color: #000000;
+  position: absolute;
+  line-height: 36px;
+  bottom: -42px;
+  left: 170px;
+}
+.project-navbar {
+  padding: 8px;
+  margin-bottom: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
 }
 .project-navbar .nav-link {
-  color: #576f76;
+  height: auto;
+  color: #267271;
+  padding: 4px 12px;
+  min-width: 50px;
+  font-size: 0.85rem;
+  font-family: Roboto, sans-serif;
 }
 .project-navbar .nav-link:hover {
-  color: #267371 !important;
+  color: #267271 !important;
+  background-color: rgba(38, 114, 113, 0.15) !important;
 }
-.project-navbar .navbar-collective li.active a {
-  color: #267371;
-  border-bottom: 2px solid #267371;
+.project-navbar .navbar-collective li.active .nav-link {
+  color: #267271;
+  border: none;
+  background-color: rgba(40, 115, 115, 0.15);
 }
+
 .pretty-list {
   background: #ffffff;
   display: flex;
@@ -1348,6 +1467,7 @@ textarea.blog-comments-input {
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
   margin-bottom: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
 }
 .pretty-list:hover {
   background: #f2f4f5;

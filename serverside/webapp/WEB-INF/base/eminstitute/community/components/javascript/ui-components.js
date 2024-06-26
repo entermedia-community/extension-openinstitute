@@ -10,20 +10,16 @@ function showLoader() {
   }, 200); //don't show loader if the page loads within 200ms
 }
 
-findclosest = function(link,inid)
-{
-	var result = link.closest(inid);
-	if( result.length == 0 )
-	{
-		result = link.children(inid);
-		if( result.length == 0 )
-		{
-			result = $(inid);
-		}
-	}
-	return result.first();
-}
-
+findclosest = function (link, inid) {
+  var result = link.closest(inid);
+  if (result.length == 0) {
+    result = link.children(inid);
+    if (result.length == 0) {
+      result = $(inid);
+    }
+  }
+  return result.first();
+};
 
 function hideLoader() {
   clearTimeout(lwt);
@@ -167,7 +163,6 @@ runajaxonthis = function (inlink, e) {
 
     showLoader();
 
-
     jQuery
       .ajax({
         url: nextpage,
@@ -303,6 +298,15 @@ uiload = function () {
       });
     });
   }
+
+  lQuery(".toggleCommunityDrawer").livequery("click", function () {
+    $(".sidebar-left").toggleClass("active");
+    $("#community-drawer-mask").show();
+  });
+  lQuery(".community-drawer-close").livequery("click", function () {
+    $(".sidebar-left").removeClass("active");
+    $("#community-drawer-mask").hide();
+  });
 
   lQuery(".setpagetitleX").livequery(function () {
     var setpagetitle = $(this).data("setpagetitle");

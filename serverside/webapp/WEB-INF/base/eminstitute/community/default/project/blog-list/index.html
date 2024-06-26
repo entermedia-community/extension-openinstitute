@@ -1,7 +1,9 @@
  
 $context.putPageValue("showchannel",true)
  #if( $topuploads.isEmpty() )
- 	[[Nothing posted yet]]
+	<p class="text-center text-muted my-5">
+		[[Nothing posted yet]]
+	</p>
  #else
 	<div class="blog-list-container">
 		#foreach( $upload in $topuploads.getPageOfHits())

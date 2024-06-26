@@ -55,7 +55,7 @@ public class InvoiceManager implements CatalogEnabled
 	public int getCancelledInvoiceNumber(String inCollectionId)
 	{
 		int res = 0;
-		Collection<Data> clientinvoices = getMediaArchive().query("clientinvoice").match("status", InvoiceStatus.CANCELLED).exact("librarycollection", inCollectionId).search();
+		Collection<Data> clientinvoices = getMediaArchive().query("clientinvoice").match("status", InvoiceStatus.CANCELED).exact("librarycollection", inCollectionId).search();
 		
 		if (clientinvoices != null)
 		{

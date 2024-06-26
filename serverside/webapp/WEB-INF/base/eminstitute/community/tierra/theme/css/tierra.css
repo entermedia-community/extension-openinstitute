@@ -54,6 +54,20 @@ a {
 button {
   cursor: pointer;
 }
+.project-navbar {
+  padding: 8px;
+  margin-bottom: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: #252525;
+}
+.project-navbar .nav-link {
+  color: #ffffff;
+}
+.project-navbar .navbar-collective li.active .nav-link,
+.project-navbar .nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
 .nav-link {
   color: #fff;
 }

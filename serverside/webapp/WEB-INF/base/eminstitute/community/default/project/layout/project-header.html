@@ -5,40 +5,23 @@ $context.putPageValue("collectionid",$librarycol.getId() )
 #if ($logo)
     #set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
 #else
-    #set($logourl = "$applink/theme/images/OI_flower.png")
+    #set($logourl = "$communityhome/theme/images/OI_flower.png")
 #end
 
-#set($homelink = "$applink/proposal/${librarycol.id}/#dash($librarycol.getWebName()).html")
+#set($homelink = "$communityhome/proposal/${librarycol.id}/#dash($librarycol.getWebName()).html")
 
 #if ($librarycol.collectivebanner)
     #set( $banner= $mediaarchive.getAsset($librarycol.collectivebanner) )
     #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
-#else
-    #set ($bannerurl = "$communityhome/theme/images/oi-background-2023.jpg")
 #end
 
-<div class="project-header" id="project-header" #if($bannerurl) style="background-image: url('$bannerurl');" #end>
-    <div class="container">
-        <div class="row no-gutters g-0">
-            <div class="col-lg-20p"> </div>
-            <div class="col">
-                <div class="d-flex align-items-center" style="height: 120px">
-                    <a class="project-header-logo" href="$homelink" title="$!librarycol.name">
-                        <img src="$logourl" alt="logo" />
-                    </a>
-                    <div class="ms-2">
-                        #if($librarycol.name)
-                        <h1 class="project-title">#text($librarycol.name)</h1>
-                        #end
-                        <p class="text-white m-0" style="line-height: 1.25;">
-                            A googol has no special significance in mathematics. However, it is useful when
-                            comparing with other very large quantities such as the number of subatomic particles in
-                            the visible universe or the number of hypothetical possibilities in a chess game.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-20p"></div>
-        </div>
+<div class="project-header">
+    <div class="bg-white banner" #if($bannerurl) style="background-image: url('$bannerurl');" #end>
+        <a class="header-logo" href="$homelink" title="$!librarycol.name">
+            <img src="$logourl" alt="logo" />
+        </a>
+        #if($librarycol.name)
+            <h1 class="project-title">#text($librarycol.name)</h1>
+        #end
     </div>
 </div>

@@ -1,26 +1,27 @@
 #set($collectivesection = $content.collectivesection)
 
+$pages.include("${communityhome}/project/layout/menu-collectives.html",$context)
 
-<div id="campaigninfo" class="oicontainercampaigns" >
-	$pages.include("${communityhome}/project/layout/project-header.html",$context)
-	<div class="row no-gutters g-0">
-		<div  class="col-lg-20p bg-light">
-			#if($collectivesection == "settings")
-				$pages.include("${communityhome}/project/admin/sidebar.html",$context)
-			#elseif($collectivesection == "finances")
-				$pages.include("${communityhome}/project/services/finances/sidebar.html",$context)
-			#end
-			$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
-		</div>
-		
-		<div class="col">
-			$pages.include("${communityhome}/project/layout/menu-collectives.html",$context)
-			$pages.includeContent()	
-		</div>
-		
-		<div  class="col-lg-20p">
-			$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
-		</div>
-		
+<div id="campaigninfo" class="community-layout bg-light"> 
+	<div  class="sidebar-left">
+		<button class="btn btn-sm community-drawer-close">
+			<i class="fas fa-times text-muted"></i>
+		</button>
+		#if($collectivesection == "settings")
+			$pages.include("${communityhome}/project/admin/sidebar.html",$context)
+		#elseif($collectivesection == "finances")
+			$pages.include("${communityhome}/project/services/finances/sidebar.html",$context)
+		#end
+		$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 	</div>
+	
+	<div class="main-content">
+		$pages.include("${communityhome}/project/layout/project-header.html",$context)
+		$pages.includeContent()	
+	</div>
+	
+	<div class="sidebar-right">
+		$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
+	</div>
+	<div id="community-drawer-mask" class="community-drawer-close" role="button" style="display: none;"></div>
 </div>
