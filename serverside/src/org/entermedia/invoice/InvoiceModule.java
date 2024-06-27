@@ -45,22 +45,35 @@ public class InvoiceModule extends BaseMediaModule
 			
 			invoice.setValue("enddate",enddate);
 		}
+		else
+		{
+			String sduedate = inReq.getRequestParameter("duedate");
+			Date duedate = DateStorageUtil.getStorageUtil().parseFromStorage(sduedate);
+			invoice.setValue("duedate",duedate);
+			
+			String senddate = inReq.getRequestParameter("enddate");
+			Date enddate = DateStorageUtil.getStorageUtil().parseFromStorage(senddate);
+			invoice.setValue("enddate",enddate);
+		}
+		
 		
 		String productid = inReq.getRequestParameter("productlist.add");
+		MultiValued  product = null;
 		if( productid != null)
 		{
-			MultiValued product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
+			product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
 			manager.saveNewInvoiceForStore(mediaArchive, invoice, product);
-			inReq.putPageValue("data",product); //Render on details  page
 			inReq.setRequestParameter("invoiceid", invoice.getId());
 		}
 		else
 		{
 			//Just editing an existing invoice
 			productid = inReq.getRequestParameter("productid");
-			MultiValued product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
-			inReq.putPageValue("data",product); //Render on details  page
+			product = (MultiValued)mediaArchive.getData("collectiveproduct", productid);
+			
 		}
+		inReq.putPageValue("data",product); //Render on details  page
+		inReq.putPageValue("collectiveproduct",product); //Render on details  page
 		//TODO email someone
 		//Depending on the producttype??
 		inReq.putPageValue("status","saved");

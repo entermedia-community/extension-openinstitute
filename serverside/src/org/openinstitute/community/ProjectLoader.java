@@ -194,10 +194,10 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 				template = template+ "/index.html";
 			}
 			Page otherpage = getPageManager().getPage(template);
-			if( !otherpage.exists())
-			{
-				log.info("Cant find " + template);
-			}
+//			if( !otherpage.exists())
+//			{
+//				//log.info("Cant find " + template);
+//			}
 			right.putParam("collectionid" , librarycollection.getId());
 			right.putPageValue("librarycol" , librarycollection);
 			right.putPageValue("projectlink" , "/" + communityurlname + "/" + librarycollection.get("urlname") );
