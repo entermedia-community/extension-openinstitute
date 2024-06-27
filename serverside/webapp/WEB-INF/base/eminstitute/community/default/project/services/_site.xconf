@@ -11,4 +11,5 @@
 	
 	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
 	
+	<inner-layout>/${communityhome}/project/layout/serviceslayout.html</inner-layout>
 </page>

@@ -1,4 +1,4 @@
-#ifnull( $aproduct )
+	#ifnull( $aproduct )
 #set( $aproduct = $collectiveproduct)
 #end
 
@@ -33,11 +33,11 @@
     </div>
   </div>
 
-
+#if($aproduct)
 #set( $primaryAsset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
 #set( $query = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id))
 #set( $assethits = $mediaarchive.getCachedSearch($query))
-
+#end
   <div class="row image-gallery">
     <div class="col col-md-6 col-sm-12 previewImg" data-index="0" style="max-height: 466px;">
       <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1200x630.jpg")' />
@@ -73,14 +73,25 @@
             <p class="reviews m-0">155 reviews</p>
           </div>
         </div>
+
+<form  name="startinvoice" method="post" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
+        
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkIn" placeholder="Check-In" />
+              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" />
+              
               <label for="checkIn">Check-In</label>
             </div>
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkOut" placeholder="Check-Out" />
+              <input class="form-control" id="checkOut" name="checkOut"  placeholder="Check-Out"
+        		data-disableddates='[      
+              	#foreach( $date in $blockeddates.getBlockedDates())
+              		#if( ${foreach.count} != 1), #end
+					{ "$date.toDateString()" }
+				#end
+				]'
+               />
               <label for="checkOut">Check-Out</label>
             </div>
           </div>
@@ -131,7 +142,13 @@
             </div>
           </div>
         </div>
-        ##<button class="btn btn-lg btn-success w-100 mt-3">Reserve</button>
+        #if( $user)
+        
+        <input name="productid" value="$aproduct.getId()" type="hidden" />
+        
+        <button type="submit" class="btn btn-lg btn-success w-100 mt-3">Reserve</button>
+        #end
+</form>        
         <div class="pricing">
           <p class="text-center caption mt-2">
             You won't be charged yet. <a href="#">Learn more</a>

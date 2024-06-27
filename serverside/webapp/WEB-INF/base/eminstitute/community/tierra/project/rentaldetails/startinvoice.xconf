@@ -1,4 +1,4 @@
 <page>
-	<inner-layout>${communityhome}/theme/layouts/dialoglayout.html</inner-layout>
+ 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 	
 </page>

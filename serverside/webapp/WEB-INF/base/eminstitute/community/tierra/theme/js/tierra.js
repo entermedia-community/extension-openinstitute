@@ -6,6 +6,10 @@ $(document).ready(function () {
     window.location.href = $(this).data("href");
   });
 
+  $("#checkIn").val(moment().format("DD MMM YYYY"));
+  $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
+
+	var blockeddates = $("#checkOut").data("disableddates");
   var config = {
     autoClose: true,
     singleDate: true,
@@ -14,9 +18,18 @@ $(document).ready(function () {
     singleMonth: true,
     startDate: moment().format("DD MMM YYYY"),
     format: "DD MMM YYYY",
+    beforeShowDay: function(t)
+		{
+			var m = moment(t.toUTCString());
+			var formated = m.format('YYYY-MM-DD');  
+			if( blockeddates.includes(formated))
+			{
+				var _tooltip = 'Dates are taken';
+				return [false,'',_tooltip];				
+			}
+			return [true,'',''];
+		}
   };
-  $("#checkIn").val(moment().format("DD MMM YYYY"));
-  $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
 
   $("#checkOut")
     .dateRangePicker(config)

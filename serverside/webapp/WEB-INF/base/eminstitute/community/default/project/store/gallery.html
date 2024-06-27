@@ -34,7 +34,7 @@
 #foreach( $aproduct in $hits.getPageOfHits())
 	
 	#set( $hit = false)
-	<a href="$sitelink/app/collective/store/details/$collectionid/$aproduct.id/#esc($aproduct.name).html"
+	<a href="/${librarycol.urlname}/rentaldetails/$aproduct.urlname"
 	title="#text($aproduct.name)"
 	class="storegalleryproduct">
     <div class="storeproductcard">

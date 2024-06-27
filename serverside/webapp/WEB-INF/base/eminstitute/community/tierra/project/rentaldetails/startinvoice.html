@@ -1,6 +1,6 @@
 ##Exising ones 
 ##No existing programs found.
-<div style="padding:10px 0;">
+<div class="container" id="storeworkarea" style="padding:20px;">
 #set( $searchtype = "collectiveinvoice")
 #set( $searcher = $mediaarchive.getSearcher($searchtype) )
 #set( $xmledithome  = "$apphome/components/xml")
@@ -15,7 +15,7 @@ $data.setValue("name","$user.getEmail() [[Reservation]]")
 
 <form name="inlinesaveproject" 
 		id="inlinesaveproject" 
-		action="$apphome/collective/store/details/processinvoice.html" 
+		 action="/${librarycol.urlname}/rentaldetails/processinvoice.html"
 		method="post"
 		class="ajaxform"
 			data-targetdiv="storeworkarea"
@@ -34,7 +34,17 @@ $data.setValue("name","$user.getEmail() [[Reservation]]")
 <input type="hidden" name="productlist.add" value="$aproduct.id" />
 
 <div style="padding-bottom:10px;">
-$pages.include("$apphome/components/xml/types/daterange.html",$context)
+
+#set( $duedate = $context.getRequestParameter("checkIn"))
+<input type="hidden" name="duedate" value="$duedate" />
+
+#set( $enddate = $context.getRequestParameter("checkOut"))
+<input type="hidden" name="enddate" value="$enddate" />
+
+$duedate - $enddate
+ 
+##$pages.include("$communityhome/components/xml/types/daterange.html?daterange=01/01/2018 - 01/15/2018",$context)
+
 </div>
 
 <input type="hidden" name="field" value="name" />

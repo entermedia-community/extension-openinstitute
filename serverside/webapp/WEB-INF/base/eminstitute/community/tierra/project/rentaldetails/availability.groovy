@@ -13,9 +13,9 @@ import org.openinstitute.finance.DateRange
 public void runit()
 {
 	//Search for dates
-	if( context.getPageValue("aproduct") != null )
+	if( context.getPageValue("collectiveproduct") != null )
 	{
-		Data product = context.getPageValue("aproduct");
+		Data product = context.getPageValue("collectiveproduct");
 		log.info("On " + product);
         Date now = new Date();
         Date from = mediaarchive.getBean("dateStorageUtil").addDaysToDate(now,-31);
