@@ -14,6 +14,7 @@
 	#set( $data = $searcher.createNewData())
 
 	$data.setValue("name","$user.getEmail() [[Reservation]]")
+	#if( $user )
 	<form name="inlinesaveproject" 
 		id="inlinesaveproject" 
 		action="/${librarycol.urlname}/rentaldetails/processinvoice.html"
@@ -21,6 +22,7 @@
 		class="ajaxform"
 		data-targetdiv="storeworkarea"
 		data-oemaxlevel="1">
+	#end
 		<input type="hidden" name="save" value="true" />
 		<input type="hidden" name="searchtype" value="${searchtype}" />
 
@@ -72,16 +74,29 @@
 
 		<input type="hidden" name="field" value="forcustomer" />
 		<input type="hidden" name="forcustomer.value" value="$user.getId()" />
-
+		
+		#if( $user )
+		
 		#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 		$context.putPageValue("searcher",$searcher)
 		#set( $producttype = $aproduct.producttype )
 		$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}")
 		$context.putPageValue("data",$data)
 		$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
+
 		<button class="btn themed-btn" type="submit"  >
 			<i class="fas fa-calendar-alt me-1"></i>
 			[[Reserve]]
 		</button>
+		
+		#else
+		
+		$pages.include("${content.loginroot}/ajaxloginform.html")
+		
+		#end
+		
+		
+	#if( $user )
 	</form>
+	#end
 </div>

@@ -15,5 +15,5 @@
 
     <path-action name="Admin.loadPermissions"/>
 
-
+	<property name="loginroot">/${applicationid}/authentication</property>
 </page>

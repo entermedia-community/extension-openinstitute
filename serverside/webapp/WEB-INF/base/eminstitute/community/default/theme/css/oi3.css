@@ -1602,3 +1602,14 @@ textarea.blog-comments-input {
   line-height: 1.5;
   height: auto !important;
 }
+.ajaxloginbox {
+	background-color: #eee;
+}
+.ajaxloginbox .text-error {
+	background-color:var(--bs-danger);
+	color: #fff;;
+}
+.ajaxloginbox .text-info {
+	background-color:#fff;
+}
+

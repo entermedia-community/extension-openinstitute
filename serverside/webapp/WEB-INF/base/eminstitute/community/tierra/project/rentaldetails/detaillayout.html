@@ -74,7 +74,7 @@
           </div>
         </div>
 
-<form  name="startinvoice" method="post" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
+<form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
         
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
@@ -142,12 +142,12 @@
             </div>
           </div>
         </div>
-        #if( $user)
+        
         
         <input name="productid" value="$aproduct.getId()" type="hidden" />
         
         <button type="submit" class="btn btn-lg btn-success w-100 mt-3">Reserve</button>
-        #end
+        
 </form>        
         <div class="pricing">
           <p class="text-center caption mt-2">

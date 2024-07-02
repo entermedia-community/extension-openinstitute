@@ -280,6 +280,10 @@ runajax = function (e) {
   return false;
 };
 
+lQuery(".reloadpage").livequery(function () {
+ 	window.location.reload();
+ });
+
 uiload = function () {
   var app = jQuery("#application");
   var apphome = app.data("siteroot") + app.data("apphome");
