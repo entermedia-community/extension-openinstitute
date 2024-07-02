@@ -14,12 +14,12 @@ $context.putPageValue("searcher",$searcher)
 	#set($data = $mediaarchive.getData($searchtype, $id))
 
 <form name="saveproject" 
-		id="saveproject" 
-		action="$communityhome/project/store/details/save.html" 
-		method="post"
-		class="ajaxform autocloseform"
-			data-targetdiv="storeworkarea"
-			data-oemaxlevel="1">
+	id="saveproject" 
+	action="$communityhome/project/store/save.html" 
+	method="post"
+	class="ajaxform autocloseform"
+	data-targetdiv="storeworkarea"
+	data-oemaxlevel="1">
 
 
 <input type="hidden" name="save" value="true" />
