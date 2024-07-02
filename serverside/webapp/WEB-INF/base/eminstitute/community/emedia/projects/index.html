@@ -12,8 +12,7 @@
 </div>
 <div class="container">
   #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-  #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","AY_jtr589HHjyJ06-yjX").sort("name).search($context))
+  #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","AY_jtr589HHjyJ06-yjX").sort("name").search($context) )
   <!-- <h2 class="text-center my-4">Projects</h2> -->
   <div class="container my-5">
     <div class="row justify-content-md-center">
@@ -106,6 +105,7 @@
 
     <div class="my-5" style="width:100%;border-top:1px solid #efefef;"></div>
 
+<!-- 
     <div class=" d-flex align-items-center justify-content-center subscription">
       <div class="p-4" style="background-color: #ffffff;">
         <h2 class="text-center mb-0">Join the Community</h2>
@@ -117,5 +117,7 @@
         </div>
       </div>
     </div>
+     -->
+     
   </div>
 </div>
