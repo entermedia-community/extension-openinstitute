@@ -25,12 +25,17 @@
             <i class="fas fa-user-circle me-1"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="$communitylink/rentals/listrenals.html/profile">Account</a></li>
-            <li><a class="dropdown-item" href="$communitylink/rentals/listrenals.html/profile">Sign Up</a></li>
-            <li><a class="dropdown-item" href="$communitylink/rentals/listrenals.html/settings">Log In</a></li>
+            #if($user)
+            <li><a class="dropdown-item" href="#">Account</a></li>
+            #else
+            <li><a class="dropdown-item" href="#">Sign Up</a></li>
+            <li><a class="dropdown-item" href="#">Log In</a></li>
+            #end
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="$communitylink/rentals/listrenals.html/settings">Help Center</a></li>
-            <li><a class="dropdown-item text-danger" href="$communitylink/rentals/listrenals.html/logout">Logout</a></li>
+            <li><a class="dropdown-item" href="#">Help Center</a></li>
+            #if($user)
+            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+            #end
           </ul>
         </li>
       </ul>

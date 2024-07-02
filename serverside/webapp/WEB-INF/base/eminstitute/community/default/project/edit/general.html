@@ -1,0 +1,63 @@
+#if($librarycol.get("collectiontype") == "5")
+	#set($isproposal = "true")
+#end
+
+#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+$context.putPageValue("searcher",$searcher)
+
+#set( $view = "" )
+#if($isproposal)
+	##Proposals Settings
+	#set( $view = "proposalgeneral")
+#else
+	#if($canviewsettings)
+		#set( $view = "agentedit")
+	#else
+		#set( $view = "edit")
+	#end
+#end
+
+$context.putPageValue("view", "librarycollection/$view")
+$context.putPageValue("data", $librarycol)
+
+<div class="card-block">
+	<h2 class="mb-3">General Settings</h2>
+	<form name="savecollective" 
+		enctype="multipart/form-data" 
+		id="savecollective"
+		action="$applink/collective/edit/save.html"
+		class="ajaxform"
+		data-targetdivinner="collectivesettingscontent"
+		data-oemaxlevel="1"
+		method="post">
+		<input type="hidden" name="save" value="true" />
+		<input type="hidden" name="searchtype" value="librarycollection" />
+		<input type="hidden" name="id" value="$librarycol.id" />
+		<input type="hidden" name="collectionid" value="$librarycol.id" />
+		<input type="hidden" name="view" value="$!view" />
+
+		$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
+
+		<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
+			
+		#if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+		<a class="btn btn-sm btn-danger confirm"
+			style="margin: 0px 0 0 10px;" 
+			data-confirm="[[Are you sure]]?" 
+			href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
+			[[Delete]]
+		</a>
+		#end
+
+		#if($canviewsettings)
+		<a class="btn btn-sm btn-light float-right"
+			style="margin: 0px 0 0 10px;" 
+			target="_blank"
+			href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection">
+			<i class="fa fa-database"></i>
+		</a>
+		#end
+	</form>
+</div>
+
+

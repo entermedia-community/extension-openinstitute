@@ -9,7 +9,7 @@ $(document).ready(function () {
   $("#checkIn").val(moment().format("DD MMM YYYY"));
   $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
 
-	var blockeddates = $("#checkOut").data("disableddates");
+  var blockeddates = $("#checkOut").data("disableddates");
   var config = {
     autoClose: true,
     singleDate: true,
@@ -18,53 +18,55 @@ $(document).ready(function () {
     singleMonth: true,
     startDate: moment().format("DD MMM YYYY"),
     format: "DD MMM YYYY",
-    beforeShowDay: function(t)
-		{
-			var m = moment(t.toUTCString());
-			var formated = m.format('YYYY-MM-DD');  
-			if( blockeddates.includes(formated))
-			{
-				var _tooltip = 'Dates are taken';
-				return [false,'',_tooltip];				
-			}
-			return [true,'',''];
-		}
+    beforeShowDay: function (t) {
+      var m = moment(t.toUTCString());
+      var formated = m.format("YYYY-MM-DD");
+      if (blockeddates && blockeddates.includes(formated)) {
+        var _tooltip = "Dates are taken";
+        return [false, "", _tooltip];
+      }
+      return [true, "", ""];
+    },
   };
 
-  $("#checkOut")
-    .dateRangePicker(config)
-    .bind("datepicker-open", function () {
-      $("#gp-mask").show();
-    })
-    .bind("datepicker-close", function () {
-      $("#gp-mask").hide();
-    });
+  lQuery("#checkOut").livequery(function () {
+    $(this)
+      .dateRangePicker(config)
+      .bind("datepicker-open", function () {
+        $("#gp-mask").show();
+      })
+      .bind("datepicker-close", function () {
+        $("#gp-mask").hide();
+      });
+  });
 
-  $("#checkIn")
-    .dateRangePicker(config)
-    .bind("datepicker-change", function (event, obj) {
-      $("#checkOut").data("dateRangePicker").destroy();
+  lQuery("#checkIn").livequery(function () {
+    $(this)
+      .dateRangePicker(config)
+      .bind("datepicker-change", function (event, obj) {
+        $("#checkOut").data("dateRangePicker").destroy();
 
-      config.startDate = moment($(this).val(), "DD MMM YYYY")
-        .add(1, "days")
-        .format("DD MMM YYYY");
+        config.startDate = moment($(this).val(), "DD MMM YYYY")
+          .add(1, "days")
+          .format("DD MMM YYYY");
 
-      $("#checkOut").dateRangePicker(config);
-      if (
-        moment($(this).val(), "DD MMM YYYY").isAfter(
-          moment($("#checkOut").val(), "DD MMM YYYY")
-        )
-      ) {
-        $("#checkOut").val(config.startDate);
-      }
-      config.startDate = moment().format("DD MMM YYYY");
-    })
-    .bind("datepicker-open", function () {
-      $("#gp-mask").show();
-    })
-    .bind("datepicker-close", function () {
-      $("#gp-mask").hide();
-    });
+        $("#checkOut").dateRangePicker(config);
+        if (
+          moment($(this).val(), "DD MMM YYYY").isAfter(
+            moment($("#checkOut").val(), "DD MMM YYYY")
+          )
+        ) {
+          $("#checkOut").val(config.startDate);
+        }
+        config.startDate = moment().format("DD MMM YYYY");
+      })
+      .bind("datepicker-open", function () {
+        $("#gp-mask").show();
+      })
+      .bind("datepicker-close", function () {
+        $("#gp-mask").hide();
+      });
+  });
 
   $("#guests").click(function () {
     $("#guestsPicker").addClass("open");

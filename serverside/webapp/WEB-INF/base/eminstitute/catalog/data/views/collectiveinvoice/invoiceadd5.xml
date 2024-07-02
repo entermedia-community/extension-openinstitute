@@ -2,6 +2,10 @@
 
 <properties>
 	
-	<property id="headcount" defaultvalue="1" />
-	<property id="customernote" />
+	<!-- <property id="headcount" defaultvalue="1" /> -->
+	<property id="customernote">
+		<name>
+			<language id="en"><![CDATA[Leave a comment for property owner (optional)]]></language>
+		</name>
+	</property>
 </properties>

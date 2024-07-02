@@ -1327,12 +1327,13 @@ textarea.blog-comments-input {
 .community-layout .sidebar-right {
   min-height: 100%;
   min-width: 360px;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: #ffffff;
 }
 .community-layout .main-content {
   flex: 1;
   padding: 0.5rem;
+  padding-bottom: 1rem;
   max-width: 969px;
   margin: 0 auto;
 }
@@ -1471,4 +1472,133 @@ textarea.blog-comments-input {
 }
 .pretty-list:hover {
   background: #f2f4f5;
+}
+.project-sidebar-menu h3 {
+  color: #444444;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.project-sidebar-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.project-sidebar-menu li {
+  list-style: none;
+}
+.project-sidebar-menu li a {
+  display: block;
+  background-color: #fff;
+  line-height: 40px;
+  padding: 0 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+  color: #444444;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+.project-sidebar-menu li a:hover {
+  background-color: #f2f4f5;
+}
+.project-sidebar-menu li.current a {
+  color: #ffffff;
+  background-color: #252525;
+}
+.project-sidebar-menu li.current a:hover {
+  background-color: #333333;
+}
+.project-sidebar-menu li.current a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 16px solid #252525;
+}
+.storecontainer,
+.card-block {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+}
+.card-block h2 {
+  text-align: center;
+  color: #267271;
+}
+.themed-btn,
+.btn.btn-follow,
+.btn.add-product {
+  background-color: #267271;
+  color: #ffffff;
+}
+.btn.view-reservation {
+  border: 1px solid #267271;
+}
+.btn.view-reservation:hover {
+  background-color: #26727122 !important;
+}
+.product-container {
+  width: 308px;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.store-products .product-card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+}
+.store-products .product-img {
+  margin-bottom: 0.5rem;
+}
+.store-products .product-img img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.store-products .product-summary {
+  padding: 0 0.5rem 1rem 0.5rem;
+}
+.store-products .product-summary p {
+  line-height: 1;
+}
+.edit-product {
+  position: absolute;
+  top: 16px;
+  right: -100px;
+  z-index: 10;
+  transition: right 0.3s ease-in-out;
+  pointer-events: none;
+}
+.product-container:hover .edit-product {
+  pointer-events: all;
+  right: 16px;
+}
+.product-price {
+  font-size: small;
+  line-height: 1;
+}
+.storecontainer h2 {
+  font-size: 1.5rem;
+  color: #267271;
+}
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.form-control {
+  font-size: 1rem;
+  line-height: 1.5;
+  height: auto !important;
 }

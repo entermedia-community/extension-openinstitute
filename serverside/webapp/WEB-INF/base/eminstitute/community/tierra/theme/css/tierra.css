@@ -54,6 +54,10 @@ a {
 button {
   cursor: pointer;
 }
+.modal {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
 .project-navbar {
   padding: 8px;
   margin-bottom: 1px;
@@ -988,4 +992,59 @@ img.cat-thumb {
   font-weight: 400;
   font-size: 14px;
   margin-bottom: 16px;
+}
+.team-list a,
+.card-block h2,
+.btn.toggleCommunityDrawer i {
+  color: #252525;
+}
+.themed-btn,
+.donate,
+.btn.btn-follow,
+.btn.add-product {
+  color: #ffffff;
+  background-color: #252525;
+}
+.themed-btn:hover,
+.donate:hover,
+.btn.btn-follow:hover,
+.btn.add-product:hover {
+  color: #ffffff !important;
+  background-color: #333333 !important;
+}
+.btn.view-reservation {
+  border: 1px solid #252525;
+}
+.btn.view-reservation:hover {
+  background-color: #25252522 !important;
+}
+.storecontainer h2 {
+  color: #252525;
+}
+.storecontainer h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.reservation-date {
+  color: #666666;
+  margin-bottom: 1rem;
+}
+.reservation-date i.fas {
+  font-size: 1.2rem;
+  transform: translateY(-2px);
+}
+.reservation-date span {
+  display: inline-block;
+  line-height: 1;
+}
+.vertical-divider {
+  margin: 0 16px;
+  width: 1px;
+  height: 50px;
+  background-color: #ccc;
+}
+.reservation-price {
+  padding: 16px 24px;
+  background-color: #ebf3ff;
+  margin-bottom: 1rem;
 }

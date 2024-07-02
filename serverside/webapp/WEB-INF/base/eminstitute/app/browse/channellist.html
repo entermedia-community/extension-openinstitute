@@ -24,13 +24,13 @@
 		</div>
 		<div class="communitytagcontainer-out">
 		
-		<div class="communitytagheader" style="">
+		<div class="communitytagheader" >
 		#set( $donations = $mediaarchive.query("transaction").orgroup("collectionid",$projects).exact("isdonation","true").sort("paymentdateDown").search($context))  
 		#if( !$donations.isEmpty() )
 			 	<div class="communtysofar">$donations.size() [[donations received so far!]]</div>
 			 #end
 		</div>
-		<div class="communitytagdescription" style="">
+		<div class="communitytagdescription" >
 			
 				$!tag.funddescription
 			 

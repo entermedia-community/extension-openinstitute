@@ -2,9 +2,7 @@
 	#set($isproposal = "true")
 #end
 
-<div class="card-block" style="padding:5px 20px;">
-
-<h2>[[Vision Statements]]</h2>
+<div class="card-block">
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
@@ -22,8 +20,20 @@ $context.putPageValue("searcher",$searcher)
 		#end
 	#end
 #end
+
 $context.putPageValue("view", "librarycollection/$view")
 $context.putPageValue("data", $librarycol)
+
+	
+#set($view2 = "librarycollection/$view")
+
+#set($details = $searcher.getDetailsForView($view2, $userprofile));
+
+
+<h2 class="mb-3">$details.getTitle()</h2>
+
+
+
 <form name="savecollective" 
 	enctype="multipart/form-data" 
 	id="savecollective"
@@ -67,8 +77,8 @@ $context.putPageValue("data", $librarycol)
 		$!context.setRequestParameter("invoicepaidemail.value",$invoicepaidemail)
 	#end
 #end
- 
-$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
+
+$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
 	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
 	
@@ -92,4 +102,3 @@ $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 </div>
 
 
-  

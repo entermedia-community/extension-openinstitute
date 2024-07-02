@@ -999,9 +999,12 @@ uiload = function () {
     var maxwidth = dialog.data("maxwidth");
     var id = dialog.data("dialogid");
     if (!id) {
+      id = dialog.attr("id");
+    }
+    if (!id) {
       id = "modals";
     }
-
+    console.log(id);
     var modaldialog = $("#" + id);
     if (modaldialog.length == 0) {
       jQuery("#application").append(
@@ -1011,6 +1014,7 @@ uiload = function () {
       );
       modaldialog = jQuery("#" + id);
     }
+
     var options = dialog.data();
     var link = dialog.attr("href");
     if (!link) {

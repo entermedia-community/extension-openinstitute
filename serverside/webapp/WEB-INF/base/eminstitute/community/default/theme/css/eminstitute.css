@@ -1,7 +1,9 @@
 html,
-body,
-#application {
+body {
   height: 100%;
+}
+#application {
+  min-height: 100%;
 }
 
 body {

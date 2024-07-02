@@ -37,8 +37,8 @@
 						#end
 					</div>
 					<a class="btn btn-xs btn-transparent emdialog"
-		        	 		href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
-			               title="[[Edit Entry]]"><i class="fas fa-edit text-muted"></i></a>
+		        href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
+			      title="[[Edit Entry]]"><i class="fas fa-pen text-muted small"></i></a>
 				</div>
 			#end
 		#end
@@ -59,7 +59,7 @@
     </div>
     #if($likeoptions)
       <div class="me-1">
-        $pages.include("$communityhome/project/channel//likeoptions.html", $context)
+        $pages.include("$communityhome/project/channel/likeoptions.html", $context)
       </div>
     #end
   </div>

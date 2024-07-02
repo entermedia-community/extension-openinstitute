@@ -1,4 +1,4 @@
-#set( $xmledithome = $context.getPageProperty("xmledithome"))
+#set( $xmledithome = $context.getContentProperty("xmledithome"))
 #set( $readonly = $context.getRequestParameter("detailsreadonly"))
 #ifnull($readonly)
 	#set( $readonly = "false" )
@@ -42,7 +42,7 @@ $context.putPageValue("longform",false)
 	#if( !$details)
 	#set ($details = $searcher.getPropertyDetails())
 	#end
-#end	
+#end
 
   #set ($mode = $user.get("oe_edit_mode"))
    #if($viewid)
@@ -54,9 +54,6 @@ $context.putPageValue("longform",false)
 		</span>
 	#end
 	#end
-
-  
-	
 <div class="oeinputform detaileditor detaileditor-2cols">
 	<div id="allerrors"></div>
 
@@ -70,19 +67,18 @@ $context.putPageValue("longform",false)
 		#set( $val = $!{data.get($detail.getId())} )
 	#end
 
-
 	$!context.putPageValue("detail",$detail)
 	$!context.putPageValue("val",$val)
  	<div class="form-group row no-gutters g-0">
-    <label for="exampleTextarea" class="col-sm-12 col-$fieldcolumnsize">$detail.getText($context)</label>
+    <label for="exampleTextarea" class="col-sm-12 col-$fieldcolumnsize">
+			$detail.getText($context)
+		</label>
     #if(!$fieldcolumnsize)
     	#set($fieldcolumnsize = 10)
     #end
-    
     <div class="col-$fieldcolumnsize" style="padding-left:10px;">
-    $pages.include("$xmledithome/detailedit.html", $context)
+    	$pages.include("$xmledithome/detailedit.html", $context)
     </div>
-    </div>	
-	
+	</div>
 #end
 </div>
