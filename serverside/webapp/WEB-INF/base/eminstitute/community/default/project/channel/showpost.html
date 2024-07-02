@@ -4,7 +4,7 @@
 #end
 
 #set( $shortdescription = "")
-#if ($upload.longdescription)
+#ifnotnull($upload.longdescription)
 	#set($shortdescription = $upload.longdescription.substring(0, $mathutil.getMinValue(640, $upload.longdescription.length())))
 	#if($shortdescription.length() < $upload.longdescription.length())
 		#set($shortdescription = $shortdescription + "...")
@@ -85,7 +85,7 @@
 		#if ($shortdescription)
 			<div class="blog-body">$shortdescription</div>
 		#else
-			<div class="blog-body">$upload.longdescription</div>
+			<div class="blog-body">$!upload.longdescription</div>
 		#end
 
 		<div class="blog-media" data-uploadid="${upload.id}">
