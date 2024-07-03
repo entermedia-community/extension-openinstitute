@@ -5,7 +5,7 @@ $mediaarchive.query("communitytagcategory").named("communitytagcategory").all().
   #foreach( $tagcategory in $tagscategories)
     <div class="col-6 col-md-4 h-100">
       #if( $tagcategory.externaldomain)
-        #set( $link ="//${tagcategory.externaldomain}/app/index.html")
+        #set( $link ="${tagcategory.externaldomain}/app/index.html")
       #elseif($tagcategory.entitytype == "entityrental")
         #set( $link = "$apphome/home/rentals/${tagcategory.getId()}/#dash($tagcategory).html")
       #else
