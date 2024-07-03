@@ -24,7 +24,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-	$pages.include("/${communityhome}/theme/layouts/includes.html") 
+	 
   
   <script type="text/javascript" defer src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.bundle.min.js"></script>
 
@@ -34,20 +34,22 @@
  
   <link rel="stylesheet" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css">
   <link rel="stylesheet" href="/${applicationid}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css">
+  
+  $pages.include("/${communityhome}/theme/layouts/includes.html")
+  
   <link rel="stylesheet" href="${communityhome}/theme/css/tierra.css">
 
 </head>
 
 <body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
-$pages.include("/${communityhome}/navigation.html", $context)
-  
-<!-- <div class="container">
-  <p class="py-2 text-center mb-0">$communitytagcategory.summary</p>
-</div>  -->
+	$pages.include("/${communityhome}/navigation.html", $context)
+	
+	##if($user && !$browser.inApp() && $canshowsidebar)
+		$pages.include("/${communityhome}/components/sidebars/user/index.html")
+	##end 
 
-
-  $pages.includeContent()
+  	$pages.includeContent()
 
 	<script src="${communityhome}/theme/js/aos.js"></script>
 	<script src="${communityhome}/theme/js/tierra.js"></script>

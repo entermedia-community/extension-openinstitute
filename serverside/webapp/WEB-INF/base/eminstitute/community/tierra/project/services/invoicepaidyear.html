@@ -81,26 +81,18 @@
 	                	<table class="table table-striped">
 	                		<thead>
 	                			 <tr class="tableheader">
-	                			 	  <th>[[Workspace]]</th>
-                                      <th>[[Invoice Number]]</th>
-                                       <th>[[Created On]]</th>
-                                       <th>
-                                       #if ($status == "paid")
-                                         [[Paid On]]
-                                       #elseif ($status == "invoiced")
-                                         [[Due Date]]
-                                       #end                                       
-                                       </th>
-                                       ##<th>[[Name]]</th>
-                                       <th>[[Description]]</th>
-                                       <th>[[Total Price]]</th>
-                                       <th></th>
+	                			 	<th>[[House]]</th>
+	                			 	<th>[[Room]]</th>
+                                    <th>[[Invoice]]</th>
+                                    <th>[[Check-In]]</th>
+                 					<th>[[Check-Out]]</th>
+                                    <th>[[Pax]]</th>
+                                    <th>[[Total Price]]</th>
+                                    <th></th>
                                   </tr>
 	                		</thead>	
 	                		
-	                		<tbody>
-	                		###set( $invoices = $mediaarchive.query("collectiveinvoice").search())
-	                		
+	                		<tbody>           		
 	                		#set( $invoices = $mediaarchive.getInvoiceFromMonth($status, $year, $month) )
 	                		#foreach($invoice in $invoices)
                                     #if ($invoice.instance_status == "active")
@@ -124,46 +116,35 @@
 
 
                                     <tr>
-                                    	<td><a href="$applink/collective/services/index.html?collectionid=$invoice.collectionid" style="text-decoration: underline;">$!mediaarchive.getWorkspaceById($invoice.collectionid)</a></td>
+                                    	<td><a href="#" style="text-decoration: underline;">$!mediaarchive.getWorkspaceById($invoice.collectionid)</a></td>
+                                    	<td>
+											#set($products = $invoice.getValue("productlist"))
+											#foreach ($product in $products)
+												#set ( $prod = $mediaarchive.getProductById($product.productid) )
+												<a href="#" style="text-decoration: underline;">$prod</a>
+											#end
+										</td>
                                         <td>$invoice.invoicenumber</td>
-                                        <td>$!context.getDate($invoice.createdon)</td>
+                                        <td>$!context.getDate($invoice.duedate)</td>
                                         <td>
-                                        	$!context.getDate($invoice.duedate)
-                                            #if ($status == "paid")
-                                            ##  $!context.getDate($invoice.invoicepaidon)
-                                            #end
+                                        	$!context.getDate($invoice.enddate)
                                         </td>
                                       
-                                        <td>
-                                           	#set($invoicename = $invoice.getValue("name"))
-                                           	#set($invoicedescription = $invoice.getValue("invoicedescription"))
-                                           	
-                                           	#if($invoicename)
-                                           		#set($invoicename = $replacer.replace($invoicename, $invoiceformated))
-                                           		$invoicename
-											#elseif($invoicedescription)
-												#set($invoicedescription = $replacer.replace($invoicedescription, $invoiceformated))
-                                            	$invoicedescription
-                                            #else
-	                                            #foreach($pr in $prods)
-	                                                #set($product= $mediaarchive.getCacheData("collectiveproduct", $pr.productid))
-	                                                $!mediaarchive.text($product.productdescription, $invoice.id)<br>
-	                                            #end
-                                            #end
-                                            
-                                        </td>
+                                        <td>$!invoice.getValues("headcount")</td>
                                         <td style="text-align: center;">$ $!context.doubleToMoney($!invoice.totalprice, 2)</td>
                                         <td>
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$invoice.paymentstatus").searchOne())
                                             $context.getText($status)
                                         </td>
                                         <td> 
-                                                <a
-                                                    href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$invoice.id&searchtype=collectiveinvoice"
-                                                    class="btn btn-sm btn-secondary"
-                                                    target="_blank">
-                                                    <i class="fa fa-database"></i>
-                                                </a>                                            
+											#if($canviewsettings)
+                                            <a
+                                                href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$invoice.id&searchtype=collectiveinvoice"
+                                                class="btn btn-sm btn-secondary"
+                                                target="_blank">
+                                                <i class="fa fa-database"></i>
+                                            </a>            
+                                            #end                                
                                         </td>
                                     </tr>
                                 #end
