@@ -1090,6 +1090,7 @@ h1.blog-title {
 }
 .blog-list {
   max-width: 720px;
+  flex: 1;
 }
 hr.blog-divider {
   margin: 0;
@@ -1603,13 +1604,12 @@ textarea.blog-comments-input {
   height: auto !important;
 }
 .ajaxloginbox {
-	background-color: #eee;
+  background-color: #eee;
 }
 .ajaxloginbox .text-error {
-	background-color:var(--bs-danger);
-	color: #fff;;
+  background-color: var(--bs-danger);
+  color: #fff;
 }
 .ajaxloginbox .text-info {
-	background-color:#fff;
+  background-color: #fff;
 }
-
