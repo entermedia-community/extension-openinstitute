@@ -1,15 +1,12 @@
 <page>
 		
-	<property name="fullwidth">true</property>
 	<property name="collectivesection">finances</property>
 	<property name="collectiveadminsection">invoices</property>
 	<property name="invoicepayment">true</property>
-	
-	<path-action name="ProjectModule.loadCollection"/>
 	
 	<path-action name="FinanceModule.loadFinanceManager" />
 	
 	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
 	
-	<inner-layout>/${communityhome}/project/layout/serviceslayout.html</inner-layout>
+	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 </page>

@@ -24,18 +24,11 @@
 	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
   <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 
-<!-- script id="jquery-liveajax" src="/${applicationid}/components/javascript/runajax/runajax-1.0.js"/ -->
-	
+
 	<script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	
 
-	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="oi2" href="${communityhome}/theme/css/oi2.css"/>
-	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
-	
-	
-	
    
   <permission name="openeditdirectedit">
     <group id="administrators"/>
