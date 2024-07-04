@@ -76,23 +76,30 @@
 		<input type="hidden" name="forcustomer.value" value="$user.getId()" />
 		
 		#if( $user )
+			<div class="d-flex flex-column align-items-center">
+				#set( $searcher = $mediaarchive.getSearcher($searchtype) )
+				$context.putPageValue("searcher",$searcher)
+				#set( $producttype = $aproduct.producttype )
+				$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}")
+				$context.putPageValue("data",$data)
+				$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 		
-		#set( $searcher = $mediaarchive.getSearcher($searchtype) )
-		$context.putPageValue("searcher",$searcher)
-		#set( $producttype = $aproduct.producttype )
-		$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}")
-		$context.putPageValue("data",$data)
-		$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
+				<button class="btn btn-lg themed-btn" type="submit"  >
+					<i class="fas fa-calendar-alt me-1"></i>
+					[[Request Reservation]]
+				</button>	
+			</div>
 
-		<button class="btn themed-btn" type="submit"  >
-			<i class="fas fa-calendar-alt me-1"></i>
-			[[Reserve]]
-		</button>
-		
+			<div class="alert alert-info mt-3 mb-0">
+				<i class="fas fa-info-circle me-1"></i>
+				You will be notified by email when your reservation is confirmed.
+			</div>
 		#else
-		
-		$pages.include("${content.loginroot}/ajaxloginform.html")
-		
+			<div class="alert alert-danger mt-3 mb-0 px-2 py-1">
+				<i class="fas fa-exclamation-triangle me-1"></i>
+				[[You must be logged in to request the reservation.]]
+			</div>
+			$pages.include("${content.loginroot}/ajaxloginform.html")
 		#end
 		
 		

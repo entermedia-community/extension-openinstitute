@@ -54,29 +54,28 @@ $context.putPageValue("longform",false)
 		</span>
 	#end
 	#end
-<div class="oeinputform detaileditor detaileditor-2cols">
+<div class="d-flex flex-column w-100 px-2">
 	<div id="allerrors"></div>
 
  #foreach( $detail in $details )
- 
+
+	#set($detail_id = $detail.getId())
+
 	#set( $val = false)
 	#set( $target = "${detail.id}.value")
 	#set( $val = false)
 	#set( $val = $context.getRequestParameter($target))		
 	#if( !$val)
-		#set( $val = $!{data.get($detail.getId())} )
+		#set( $val = $!{data.get($detail_id)} )
 	#end
 
 	$!context.putPageValue("detail",$detail)
 	$!context.putPageValue("val",$val)
- 	<div class="form-group row no-gutters g-0">
-    <label for="exampleTextarea" class="col-sm-12 col-$fieldcolumnsize">
+ 	<div class="form-group detail-input $detail_id">
+    <label for="$detail_id" class="input-label">
 			$detail.getText($context)
 		</label>
-    #if(!$fieldcolumnsize)
-    	#set($fieldcolumnsize = 10)
-    #end
-    <div class="col-$fieldcolumnsize" style="padding-left:10px;">
+    <div class="input-wrapper">
     	$pages.include("$xmledithome/detailedit.html", $context)
     </div>
 	</div>
