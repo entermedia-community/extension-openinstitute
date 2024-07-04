@@ -27,7 +27,6 @@
 	 
   
   <script type="text/javascript" defer src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.bundle.min.js"></script>
-
   <script type="text/javascript" defer src="${communityhome}/theme/js/multidate/moment.js"></script>
   <script type="text/javascript" defer src="${communityhome}/theme/js/multidate/jquery.daterangepicker.min.js"></script>
   <link rel="stylesheet" type="text/css" href="${communityhome}/theme/js/multidate/daterangepicker.min.css" />
@@ -45,9 +44,9 @@
 
 	$pages.include("/${communityhome}/navigation.html", $context)
 	
-	##if($user && !$browser.inApp() && $canshowsidebar)
+	#if($user && !$browser.inApp() && $canshowsidebar)
 		$pages.include("/${communityhome}/components/sidebars/user/index.html")
-	##end 
+	#end 
 
   	$pages.includeContent()
 

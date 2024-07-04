@@ -290,14 +290,15 @@ a.primary:hover .fa-solid {
   width: 32px;
   padding: 0 10px;
   line-height: 36px;
-  color: #666;
-  background-color: #e0e0e0;
+  color: #666!important;
+  background-color: #e0e0e0!important;
   font-size: 1.1rem;
   line-height: 2;
 }
 
 .sidebar-toggler:hover {
-  background-color: #d0d0d0;
+  background-color: #d0d0d0!important;
+  color:#555;
 }
 
 .sidebar-toggler-show {
@@ -306,7 +307,7 @@ a.primary:hover .fa-solid {
   padding:6px 6px 4px;
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.4);
   opacity: 0.8;
-  z-index: 100;
+  z-index: 1000;
       left: 0;
     top: 76px;
     position: fixed;
@@ -432,7 +433,10 @@ a.primary:hover .fa-solid {
 }
 
 .sidebar-box a {
-	color: #333;
+	color: #444;
+}
+.sidebar-box a:hover {
+	color: #000;
 }
 
 .sidebar-box-support .sidebar-box-header {
