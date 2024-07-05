@@ -401,7 +401,6 @@ a.primary:hover .fa-solid {
 }
 
 .maincontent {
-  
   padding: 20px 30px;
   min-height: 100%;
   margin: 0px 20px 10px;
@@ -426,7 +425,7 @@ a.primary:hover .fa-solid {
 
 .sidebar-box-header {
   background-color: #ddd;
-  color:#333;
+  color: #333;
   border-bottom: 1px solid #e0e0e0;
   font-size: 1.1rem;
   font-weight: bold;
