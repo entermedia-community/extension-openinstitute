@@ -43,6 +43,10 @@ a {
   color: #1d5655;
 }
 
+.sidebar-box a.btn-primary {
+  color: #ffffff;
+}
+
 .oicontainer {
   background-color: #fff;
   padding: 0;

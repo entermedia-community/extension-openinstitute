@@ -4,10 +4,11 @@ body {
 }
 #applicationcontent {
   position: relative;
+  height: calc(100vh - 71px);
 }
 #applicationcontent .com-footer {
-  position: absolute;
-  bottom: 0;
+  position: sticky;
+  top: calc(100vh - 54px);
   left: 0;
   width: 100%;
 }
@@ -4507,7 +4508,7 @@ table.greytxt {
 
 .settings.col-main-inner {
   background-color: #fff;
-  padding-bottom: 20px;
+  padding-bottom: 54px;
   min-height: 520px;
 }
 
