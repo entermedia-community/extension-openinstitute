@@ -507,7 +507,7 @@ p.h5,
   border: 1px solid #cccccc;
   border-radius: 8px;
   align-items: center;
-  font-family: "Lato", sans-serif;
+  font-family: "Jost", sans-serif;
   margin: 8px;
 }
 
@@ -638,7 +638,7 @@ button.owner-btn img {
   margin: 0;
   text-align: left;
   font-size: 14px;
-  font-family: Lato, sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 .property-details .location {
@@ -657,7 +657,7 @@ button.owner-btn img {
 
 .reservation .price .currency {
   font-size: 20px;
-  font-family: "Lato", sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: 600;
   color: #0d2625;
 }
@@ -667,7 +667,7 @@ button.owner-btn img {
 }
 
 .property-details .price .currency {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: 700;
   color: #0d2625;
 }
@@ -789,7 +789,7 @@ button.owner-btn {
 .rating-breakdown {
   margin-top: 16px;
   font-size: 14px;
-  font-family: Montserrat, sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 .rating-breakdown .col {
@@ -813,7 +813,7 @@ img.circular {
 }
 
 .stats-header {
-  font-family: Montserrat, sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: normal;
   font-size: 18px;
 }
@@ -982,13 +982,13 @@ img.cat-thumb {
 }
 
 .pricing p {
-  font-family: Montserrat, sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: 400;
   margin-bottom: 8px;
 }
 
 .description {
-  font-family: Montserrat, sans-serif;
+  font-family: "Jost", sans-serif;
   font-weight: 400;
   font-size: 14px;
   margin-bottom: 16px;
