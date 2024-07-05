@@ -568,10 +568,17 @@ h3 {
 
 .modal {
   z-index: 25000;
+  backdrop-filter: blur(5px);
+}
+.modal#inlineedit {
+  z-index: 25002;
 }
 
 .modal-backdrop {
   z-index: 24999;
+}
+.modal#inlineedit + .modal-backdrop {
+  z-index: 25001;
 }
 
 .modal-title {
