@@ -283,6 +283,10 @@ runajax = function (e) {
 lQuery(".reloadpage").livequery(function () {
  	window.location.reload();
  });
+lQuery(".redirecttopage").livequery(function () {
+	var url = $(this).data("redirectok");
+ 	window.location.href = url;
+ }); 
 
 uiload = function () {
   var app = jQuery("#application");

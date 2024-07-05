@@ -22,5 +22,5 @@
 	<script id="html5_upload" src="/${applicationid}/components/javascript/upload/jquery.html5_upload.js" />
 	
 	 
-	<style id="projects" href="${communityhome}/theme/css/oi3.css"/>
+	
 </page>

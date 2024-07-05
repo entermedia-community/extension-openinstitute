@@ -502,6 +502,10 @@ header.navigation {
 footer {
   background-color: #45485e;
 }
+.modal-content {
+	  background-color: #45485e;
+
+}
 .content p {
   color: #222222;
 }

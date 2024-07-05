@@ -9,7 +9,7 @@
   <property name="communityhome">/${siteid}/community/emedia</property>
   
   	
-  	  <path-action name="Admin.autoLogin"/>
+	  <path-action name="Admin.autoLogin"/>
 	  <path-action name="MediaArchiveModule.loadApplicationId"/>
 	  <path-action name="MediaArchiveModule.loadComponentHome" />
 	  
@@ -21,29 +21,25 @@
 	  <path-action name="Admin.allowViewing"/>
 	  <path-action name="TranslationModule.loadBrowserLanguage"/>
 	  
-	  
-	  
-  
-  	<style id="fontawesome" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css"></style>
-  	
-	<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
-	<script id="jquery-runajax" src="/${applicationid}/components/javascript/runajax/runajax-1.0.js" />
-	<script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
-	<script id="results" src="/${applicationid}/components/javascript/results.js"/>
-	
-	
+	  <script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
+	  <script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
+	  <script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
+	  <script id="jquery-validate" src="/${applicationid}/components/javascript/jquery.validation/jquery.validate.js"/>
+  	  <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
+  	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
+	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
+	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
+	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
+			
 
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
+	
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
 	<style id="emedia2" href="${communityhome}/theme/css/emedia.css"></style>
 	
 	
 	
-
-   
-  
-     
   <permission name="openeditdirectedit">
     <group id="administrators"/>
   </permission>
