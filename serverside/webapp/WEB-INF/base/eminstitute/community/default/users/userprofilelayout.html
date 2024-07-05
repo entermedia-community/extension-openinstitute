@@ -16,7 +16,7 @@
 			
 				#set( $userimageurl = $mediaarchive.asLinkToUserProfile($selecteduser) )
 				#if(!$userimageurl)
-					#set( $userimageurl = "$applink/theme/images/user.svg" )
+					#set( $userimageurl = "$communityhome/theme/images/user.svg" )
 				#end
 			
 				
@@ -40,7 +40,7 @@
 							name="wizard" 
 							method="post" 
 							enctype="multipart/form-data"
-							action="$applink/users/uploadsave.html" 
+							action="$communityhome/users/uploadsave.html" 
 							>
 							<input type="hidden" name="userid" value="$selecteduser.getId()" />
 							<input type="hidden" name="sourcepath" value="userprofiles/$selecteduser.getId()/" />
@@ -67,10 +67,10 @@
 						#end
 						#if($canedituserinfo) 
 							<br>
-							<a href="$applink/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Profile]]">
+							<a href="$communityhome/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Profile]]">
 							<i class="fas fa-user"></i> [[Edit Profile]]
 							</a>
-							<a href="$applink/users/preferences/delete.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Delete Account]]">
+							<a href="$communityhome/users/preferences/delete.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Delete Account]]">
 							<i class="fas fa-cog"></i> [[Delete Account]]
 							</a>
 						#end

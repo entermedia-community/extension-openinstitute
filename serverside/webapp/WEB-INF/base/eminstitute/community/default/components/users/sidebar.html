@@ -9,69 +9,69 @@
 	data-ajaxpath="${communityhome}/components/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 	
 	
-
-<div class="sidebar-box" style="height:auto;"> 
-    <div class="sidebar-box-header">
-        [[Recent Chats]] 
-        <button class="btn btn-light rounded-0 border-0 sidebar-toggler userOffcanvasToggler" data-action="hide" data-bs-dismiss="offcanvas" title="[[Hide User Sidebar]]">
-        	<i class="fas fa-times"></i>
-        </button>
-    </div>
-	#set( $chatmanager = $mediaarchive.getBean("chatManager"))
-	#set($selectedproject = $librarycol.getId())
-	<div style="max-height: 370px; overflow-y:auto;">
-	<div class="usersidebartopmessages" >
-		#foreach( $message in $messages )
-			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
-			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
-			#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
-			
-		  <div class="row g-0 messageselection #if($selectedproject==$collective.id) current #end">
-			<div class="col-2" style="padding:0px;" >
-					#ifnotnull($otherperson)
-						$context.putPageValue("chatuser",$otherperson)
-						$pages.include("${apphome}/users/icon.html",$context)
-					#end
-					#ifnull($otherperson)
-						#if($collective.assetportrait)
-						#set($asset = $mediaarchive.getAsset($collective.assetportrait))
-						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-						#else
-						#set($link = "$applink/theme/images/OI_flower.png")
+	#if($messages.size()>0)
+		<div class="sidebar-box" style="height:auto;"> 
+	    <div class="sidebar-box-header">
+	        [[Recent Chats]] 
+	        <button class="btn btn-light rounded-0 border-0 sidebar-toggler userOffcanvasToggler" data-action="hide" data-bs-dismiss="offcanvas" title="[[Hide User Sidebar]]">
+	        	<i class="fas fa-times"></i>
+	        </button>
+	    </div>
+		#set( $chatmanager = $mediaarchive.getBean("chatManager"))
+		#set($selectedproject = $librarycol.getId())
+		<div style="max-height: 370px; overflow-y:auto;">
+		<div class="usersidebartopmessages" >
+			#foreach( $message in $messages )
+				#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
+				#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
+				#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
+				
+			  <div class="row g-0 messageselection #if($selectedproject==$collective.id) current #end">
+				<div class="col-2" style="padding:0px;" >
+						#ifnotnull($otherperson)
+							$context.putPageValue("chatuser",$otherperson)
+							$pages.include("${apphome}/users/icon.html",$context)
 						#end
-						<div class="card-collections-thumb" style='background-image: url("$link")'></div>
-					#end
-			</div>
-			<div class="col" style="padding:0px;">	
-				<a  
-				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
-				 >		
-				 	#ifnotnull($otherperson)
-					<b>  $otherperson.getScreenName() </b>
-					#end
-					#ifnull($otherperson)
-					<b> #datatext($collective,"name") </b>
-					#end
-					<div class="messagearea">
-						$url_util.escapeMessage($message.message,26)
-					</div>
-					#set($chatuser = $mediaarchive.getUser($message.user))
-					<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
-				</a>	
-			</div>
- 		 </div>
- 		 <div class="sidebar-list">
- 		 <a href="$sitelink/app/activity/index.html"><i class="fa fa-comments"></i> [[All Chats]]</a>
- 		 </div>
-		#end
-	</div>	
+						#ifnull($otherperson)
+							#if($collective.assetportrait)
+							#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+							#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+							#else
+							#set($link = "$applink/theme/images/OI_flower.png")
+							#end
+							<div class="card-collections-thumb" style='background-image: url("$link")'></div>
+						#end
+				</div>
+				<div class="col" style="padding:0px;">	
+					<a  
+					 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
+					 >		
+					 	#ifnotnull($otherperson)
+						<b>  $otherperson.getScreenName() </b>
+						#end
+						#ifnull($otherperson)
+						<b> #datatext($collective,"name") </b>
+						#end
+						<div class="messagearea">
+							$url_util.escapeMessage($message.message,26)
+						</div>
+						#set($chatuser = $mediaarchive.getUser($message.user))
+						<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
+					</a>	
+				</div>
+	 		 </div>
+	 		 <div class="sidebar-list">
+	 		 <a href="$sitelink/app/activity/index.html"><i class="fa fa-comments"></i> [[All Chats]]</a>
+	 		 </div>
+			#end
+		</div>	
+		</div>
 	</div>
-	
-</div>
+	#end
 
 <div class="sidebar-box">
    <div class="sidebar-box-header" >[[Profile]]
-   <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
+   <a href="$sitelink/users/index.html" class="float-end" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
    <div class="sidebar-box-content" style="padding:0;">
 		#set($userprojects = $mediaarchive.getProjectManager().listCollectionsOnTeam($user))
@@ -79,9 +79,9 @@
 		
 
 	    	<ul class="sidebar-list">
-			<li class="#if($appsection == "wallet") current #end">
-			<a href="$sitelink/app/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
-			</li>
+			##<li class="#if($appsection == "wallet") current #end">
+			##<a href="$sitelink/app/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
+			##</li>
 			#if(!$userprojects.isEmpty() )
 			<li class="#if($appsection == "mytasks") current #end" >
 				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
