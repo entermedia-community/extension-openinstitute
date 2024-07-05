@@ -1,5 +1,5 @@
-	#ifnull( $aproduct )
-#set( $aproduct = $collectiveproduct)
+#ifnull( $aproduct )
+  #set( $aproduct = $collectiveproduct)
 #end
 
 <div class="container" id="storedetailarea">
@@ -146,9 +146,9 @@
         
         <input name="productid" value="$aproduct.getId()" type="hidden" />
         
-        <button type="submit" class="btn btn-lg btn-success w-100 mt-3">Reserve</button>
+        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">Reserve</button>
         
-</form>        
+      </form>        
         <div class="pricing">
           <p class="text-center caption mt-2">
             You won't be charged yet. <a href="#">Learn more</a>

@@ -4,6 +4,7 @@
 #else
 	#set ($viewtype = $detail.viewType)
 #end
+
 #if (!$viewtype)
 	#set ($viewtype = $detail.dataType)
 #end
@@ -12,7 +13,7 @@
 #end
 
 
-<div class="emfield-${viewtype}">
+<div class="d-flex align emfield-${viewtype}">
 #if($showcheckbox)
 	<input type="checkbox" value="$detail.id" name="field"/>
 #else

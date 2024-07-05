@@ -642,7 +642,7 @@ button.owner-btn img {
 }
 
 .property-details .location {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
 }
 
@@ -848,7 +848,7 @@ img.cat-thumb {
   margin: 0;
   margin-top: 4px;
   color: #ffffff;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .cat-details p {
@@ -1047,4 +1047,5 @@ img.cat-thumb {
   padding: 16px 24px;
   background-color: #ebf3ff;
   margin-bottom: 1rem;
+  border-radius: 8px;
 }
