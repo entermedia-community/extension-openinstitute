@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<page>
-  <property name="oisection">login</property>
-  <path-action name="Admin.login"/>
-</page>
