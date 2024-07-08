@@ -33,6 +33,7 @@ h5,
 .h5,
 h6,
 .h6 {
+  color: inherit;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
@@ -110,7 +111,7 @@ h2,
 h3,
 .h3 {
   font-size: 36px;
-  line-height: 46px;
+  line-height: 32px;
 }
 
 @media (max-width: 575px) {
@@ -138,7 +139,6 @@ h3,
   h3,
   .h3 {
     font-size: 32px;
-    line-height: 32px;
   }
 }
 h4,
@@ -205,13 +205,14 @@ h6,
 .btn {
   font-family: "Roboto", sans-serif;
   border-radius: 50px;
-  border: 1px solid;
+  border: none;
   transition: 0.2s ease;
   background-color: #626584;
   color: #fff;
   padding: 4px 12px;
   font-size: 14px;
 }
+
 .btn.btn-lg {
   padding: 12px 40px;
   font-size: 20px;
@@ -227,8 +228,11 @@ h6,
   padding: 4px;
   border: none;
 }
+.btn.btn-transparent:hover {
+  background-color: transparent !important;
+}
 .btn.btn-outline-transparent:hover {
-  background-color: #62658499;
+  background-color: #62658499 !important;
   color: #fff;
 }
 @media (max-width: 767px) {
@@ -244,13 +248,23 @@ h6,
 .btn.focus {
   outline: 0;
   box-shadow: none !important;
+  background-color: #45485e !important;
 }
-
-.btn-primary {
-  background: #626584;
-  color: #fff!important;
+.themed-btn {
+  color: #fff !important;
+  background: #626584 !important;
   border-color: #626584;
 }
+.btn-primary {
+  color: #fff !important;
+  background: #626584;
+  border-color: #626584;
+}
+.themed-btn:hover,
+.themed-btn:active,
+.themed-btn.active,
+.themed-btn:focus,
+.themed-btn.focus,
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
@@ -275,6 +289,9 @@ h6,
   background: #626584 !important;
   border-color: #626584 !important;
   color: #fff !important;
+}
+.project-card a.name {
+  color: #626584 !important;
 }
 
 * {
@@ -426,7 +443,10 @@ header.navigation {
   text-align: center;
   line-height: 50px;
 }
-
+.project-list-container,
+#application.community-layout {
+  min-height: calc(100vh - 140px);
+}
 .preloader {
   width: 100%;
   height: 100vh;
@@ -503,8 +523,17 @@ footer {
   background-color: #45485e;
 }
 .modal-content {
-	  background-color: #45485e;
-
+  background-color: #45485e;
+}
+.modal-header {
+  border-bottom-color: #626584;
+}
+.modal-footer {
+  border-top-color: #626584;
+}
+.modal-header .btn-close,
+.modal-header .btn-close:hover {
+  filter: invert(1);
 }
 .content p {
   color: #222222;
@@ -733,24 +762,41 @@ footer {
   border: 0;
   vertical-align: 0;
 }
-
-@media (max-width: 575px) {
+.card-block h2 {
+  color: #626584;
+}
+.chatterbox-write .btn.chatter-send {
+  padding: 0.375rem 0.75rem;
+}
+.chatterbox-write .chatter-send,
+.collaborate-channel-header,
+.project-sidebar-menu li.current a {
+  background-color: #626584;
+}
+.project-sidebar-menu li.current a:hover {
+  background-color: #626584;
+}
+.project-sidebar-menu li.current a::after {
+  border-left-color: #626584;
+}
+@media (max-width: 991px) {
   .fixed-menu {
-    padding: 5px 0px !important;
+    padding: 5px 15px !important;
     background-color: #f1f2f4;
   }
   .navigation {
-    padding: 5px 0px;
     background-color: #f1f2f4;
+    padding: 5px 8px;
   }
   .navigation .navbar-nav .nav-item .nav-link {
-    padding-left: 0px;
     line-height: 0px;
     font-size: 14px;
     font-weight: 400;
-    padding-bottom: -20px;
-    margin: 10px 0 !important;
+    margin: 20px 0 !important;
     text-align: center;
+  }
+  .navigation .navbar-toggler i {
+    font-size: 28px;
   }
 }
 @media (max-width: 767px) {
@@ -766,30 +812,26 @@ footer {
     line-height: 0px;
     font-size: 14px;
     font-weight: 400;
-    padding-bottom: -20px;
     margin: 10px 0 !important;
-    text-align: center;
+    padding: 8px;
   }
 }
-@media (max-width: 991px) {
+
+@media (max-width: 575px) {
   .fixed-menu {
-    padding: 5px 15px !important;
+    padding: 5px 0px !important;
     background-color: #f1f2f4;
   }
   .navigation {
+    padding: 5px 0px;
     background-color: #f1f2f4;
-    padding: 5px 8px;
   }
   .navigation .navbar-nav .nav-item .nav-link {
+    padding-left: 0px;
     line-height: 0px;
     font-size: 14px;
     font-weight: 400;
-    padding-bottom: -20px;
-    margin: 20px 0 !important;
-    text-align: center;
-  }
-  .navigation .navbar-toggler i {
-    font-size: 28px;
+    margin: 10px 0 !important;
   }
 }
 .hero-img {
@@ -1405,8 +1447,16 @@ p a {
 .list-inline .list-inline-item a:hover {
   color: #626584 !important;
 }
-
+.btn.sidebar-toggler-show {
+  padding: 4px 6px;
+  border: none;
+  background-color: #626584 !important;
+  top: 96px;
+}
 @media (max-width: 575px) {
+  .btn.sidebar-toggler-show {
+    padding: 4px 4px 0px;
+  }
   .list-inline .list-inline-item:not(:last-child) {
     margin-right: 15px;
   }
@@ -1498,8 +1548,7 @@ ul > li {
 }
 
 .login-area {
-  min-height: calc(100vh - 154px);
-  padding: 16px 0;
+  min-height: calc(100vh - 148px);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1527,8 +1576,8 @@ ul > li {
   font-weight: 700;
 }
 .login-area form {
-  width: 100%;
-  max-width: 400px;
+  width: 720px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .login-area form label {
@@ -1536,13 +1585,13 @@ ul > li {
   font-weight: 500;
 }
 .login-area form input[type="submit"] {
-  width: 100px;
+  min-width: 100px;
+  height: 100%;
+  min-height: 46px;
+  font-size: 1rem;
 }
 .login-area form .form-control {
-  margin-bottom: 16px;
-}
-.login-area form.collapse.show {
-  margin-top: 16px;
+  margin-bottom: 0;
 }
 
 .login-area .oauthproviderbtn img {
@@ -1556,8 +1605,48 @@ ul > li {
 .login-area .oauthproviderbtn:hover img {
   filter: brightness(1);
 }
+.login-area .row > * {
+  margin-top: 0;
+}
 .project-form {
   width: 480px;
   margin: 0 auto;
   max-width: 100%;
+}
+.btn.toggleCommunityDrawer i {
+  color: #ffffff;
+}
+.btn.btn-sm.community-drawer-close {
+  background: transparent;
+  padding: 4px 8px;
+  color: #626584;
+  border: none;
+}
+.btn.btn-follow,
+.donate {
+  background-color: #626584;
+}
+.btn.btn-follow:hover,
+.donate:hover {
+  background-color: #45485e;
+}
+.blog-footer .icon:hover {
+  color: #626584 !important;
+}
+
+.project-navbar .dropdown-menu {
+  background-color: #626584;
+}
+.project-navbar a.dropdown-item {
+  color: #ffffff;
+}
+.project-navbar a.dropdown-item:hover,
+.project-navbar a.dropdown-item:active {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.project-navbar .dropdown-menu li a {
+  color: #ffffff;
+}
+.project-navbar .dropdown-menu li a.nav-link:hover {
+  color: #ffffff !important;
 }

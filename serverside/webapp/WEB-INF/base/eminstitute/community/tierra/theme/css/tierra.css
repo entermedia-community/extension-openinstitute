@@ -59,10 +59,7 @@ button {
   backdrop-filter: blur(4px);
 }
 .project-navbar {
-  padding: 8px;
-  margin-bottom: 1px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  background-color: #252525;
 }
 .project-navbar .nav-link {
   color: #ffffff;
@@ -122,6 +119,24 @@ button {
   margin: 0;
   border-top: 1px solid rgba(149, 157, 165, 0.2);
 }
+.collapsed-menu .dropdown-menu {
+  background-color: #252525;
+}
+.project-navbar a.dropdown-item {
+  color: #ffffff;
+}
+.project-navbar a.dropdown-item:hover,
+.project-navbar a.dropdown-item:active {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.project-navbar .dropdown-menu li a {
+  color: #ffffff;
+  padding: 6px 12px;
+}
+.project-navbar .dropdown-menu li a.nav-link:hover {
+  color: #ffffff !important;
+}
+
 .image-gallery img {
   border-radius: 16px;
   width: 100%;
@@ -994,10 +1009,12 @@ img.cat-thumb {
   margin-bottom: 16px;
 }
 .team-list a,
-.card-block h2,
-.btn.toggleCommunityDrawer i {
+.card-block h2 {
   color: #252525;
 }
+
+.chatterbox-write .chatter-send,
+.collaborate-channel-header,
 .themed-btn,
 .donate,
 .btn.btn-follow,
@@ -1005,6 +1022,7 @@ img.cat-thumb {
   color: #ffffff;
   background-color: #252525;
 }
+.chatterbox-write .chatter-send:hover,
 .themed-btn:hover,
 .donate:hover,
 .btn.btn-follow:hover,

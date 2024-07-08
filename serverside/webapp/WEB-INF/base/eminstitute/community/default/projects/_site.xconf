@@ -2,10 +2,5 @@
 
 <page> 
 	<property name="oisection">project</property>
-
-	
-	<style id="projects" href="${communityhome}/theme/css/projects.css"/>
-	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
-	<script id="aos-js" src="${communityhome}/theme/js/aos.js"/>
 	
 </page>

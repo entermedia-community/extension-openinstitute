@@ -281,12 +281,63 @@ runajax = function (e) {
 };
 
 lQuery(".reloadpage").livequery(function () {
- 	window.location.reload();
- });
+  window.location.reload();
+});
 lQuery(".redirecttopage").livequery(function () {
-	var url = $(this).data("redirectok");
- 	window.location.href = url;
- }); 
+  var url = $(this).data("redirectok");
+  window.location.href = url;
+});
+
+function createElNS(tag) {
+  return $(document.createElementNS("http://www.w3.org/2000/svg", tag));
+}
+lQuery(".coverRandom").livequery(function () {
+  var bgColor = $(this).data("bgcolor");
+  if (!bgColor) {
+    bgColor = "#000";
+  }
+  var shades = ["#222", "#333", "#444"];
+  var shadesString = $(this).data("shades");
+  if (shadesString) {
+    var _shades = shadesString.split(",");
+    if (_shades.length === 3) {
+      shades = _shades;
+    }
+  }
+  var svg = createElNS("svg");
+  svg.attr("xmlns", "http://www.w3.org/2000/svg");
+  svg.attr("width", "900");
+  svg.attr("height", "70");
+
+  var rectBG = createElNS("rect");
+  rectBG.attr("x", "0");
+  rectBG.attr("y", "0");
+  rectBG.attr("width", "900");
+  rectBG.attr("height", "70");
+  rectBG.attr("fill", bgColor);
+  svg.append(rectBG);
+
+  var delta = 150;
+  for (var i = 0; i < 3; i++) {
+    var width = delta * (3 - i);
+    for (var j = 0; j < 7; j++) {
+      var rect = createElNS("rect");
+      rect.attr("x", 0);
+      rect.attr("y", j * 10);
+      rect.attr("width", width + Math.random() * delta);
+      rect.attr("height", 10);
+      rect.attr("fill", shades[i]);
+      svg.append(rect);
+    }
+  }
+
+  var base64 = window.btoa(svg[0].outerHTML);
+
+  $(this).css(
+    "background-image",
+    'url("data:image/svg+xml;base64,' + base64 + '")'
+  );
+});
 
 uiload = function () {
   var app = jQuery("#application");
