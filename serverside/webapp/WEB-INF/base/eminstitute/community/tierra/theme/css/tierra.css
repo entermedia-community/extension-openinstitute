@@ -89,6 +89,9 @@ button {
 .nav-link#navbarDropdown i.fas {
   font-size: 1.25rem;
 }
+.login-area input.form-control {
+  height: 38px !important;
+}
 #drawerNav ul.nav {
   display: flex;
   flex-direction: column;

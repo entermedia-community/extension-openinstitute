@@ -1476,7 +1476,6 @@ textarea.blog-comments-input {
   z-index: 1;
 }
 .project-navbar .nav-link {
-  height: auto;
   color: #fff;
   padding: 4px 12px;
   min-width: 50px;
@@ -1625,7 +1624,7 @@ textarea.blog-comments-input {
 .project-sidebar-menu li.current a:hover {
   background-color: #333333;
 }
-.project-sidebar-menu li.current a::after {
+.project-sidebar-menu li a::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1636,6 +1635,11 @@ textarea.blog-comments-input {
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
   border-left: 16px solid #252525;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.project-sidebar-menu li.current a::after {
+  opacity: 1;
 }
 .storecontainer,
 .card-block {
