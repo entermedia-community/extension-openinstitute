@@ -8,5 +8,5 @@
 	
 	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
 	
-	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
+	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
 </page>
