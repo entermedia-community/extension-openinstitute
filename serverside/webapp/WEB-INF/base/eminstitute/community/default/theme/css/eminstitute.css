@@ -420,6 +420,7 @@ a.primary:hover .fa-solid {
 
 .sidebar-box {
   background-color: #fff;
+  font-size: .95rem;
   z-index: 20;
 }
 
@@ -476,6 +477,16 @@ a.primary:hover .fa-solid {
   display: inline-block;
   padding: 0.25em 0.35em;
   font-size: 0.8rem;
+}
+
+usersidebartopmessages .messageselection:nth-of-type(odd) {
+	background-color: #ddd;
+}
+
+.messagetimestamp {
+	font-size:.7em;
+	line-height: 1;
+	font-style:italic;
 }
 
 .oauthproviderbtn {
