@@ -1032,6 +1032,9 @@ a.primary:hover .fa-solid {
   scrollbar-color: #dfdfdf #fff;
   scrollbar-width: thin;
   scrollbar-track-color: #fff;
+  overflow-y: auto;
+  height: 100%;
+  padding: 10px 20px;
 }
 
 .chatterbox-body-inside::-webkit-scrollbar {

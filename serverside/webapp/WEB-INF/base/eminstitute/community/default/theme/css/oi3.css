@@ -859,8 +859,26 @@ img.cat-thumb {
 .previewImg:hover img {
   filter: brightness(0.8);
 }
+.oicontainercampaigns {
+  margin: 0;
+  min-height: 400px;
+  height: calc(100vh - 300px);
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.collaborate-channel {
+  height: 100%;
+  min-height: auto;
+}
+.chatterbox-messages {
+  height: calc(100% - 110px);
+}
+.chatterbox-container {
+  height: 100%;
+}
 .chatterbox {
-  height: calc(100% - 82px);
+  height: calc(100% - 46px);
 }
 .chatterbox-write .chatterboxreplyto {
   width: calc(100% - 9px);
