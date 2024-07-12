@@ -28,12 +28,11 @@
 	<script type="text/javascript" defer src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="/${applicationid}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css">
   
-	$pages.include("/${communityhome}/theme/layouts/includes.html")
+	$pages.include("${communityhome}/theme/layouts/includes.html")
 
 </head>
 
 <body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
-
 	$pages.include("/${communityhome}/navigation.html", $context)
 	
 	#if($user && !$browser.inApp() && $canshowsidebar)

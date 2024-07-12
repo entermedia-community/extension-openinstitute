@@ -1348,8 +1348,8 @@ textarea.blog-comments-input {
   margin: 0 auto;
 }
 .community-layout.bg-light {
-	color:#222;
-} 
+  color: #222;
+}
 
 @media screen and (max-width: 1280px) {
   .community-layout .sidebar-left,
@@ -1660,6 +1660,9 @@ textarea.blog-comments-input {
 .btn.add-product {
   background-color: #267271;
   color: #ffffff;
+}
+.themed-btn[type="submit"] {
+  min-width: 100px;
 }
 .btn.view-reservation {
   border: 1px solid #267271;

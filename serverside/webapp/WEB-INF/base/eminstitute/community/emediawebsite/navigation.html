@@ -26,14 +26,14 @@
           #ifnull($user)
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'login') active #end" href="$communitylink/authentication/login.html">
-              Login / Register <i class="ml-1 fs-small fas fa-user"></i>
+              Login / Register <i class="ms-1 fs-small fas fa-user"></i>
             </a>
           </li> 
           #end
           #ifnotnull($user)
           <li class="nav-item">
             <a class="nav-link" href="$communitylink/authentication/logout.html" title="[[Logout]]">
-              <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+              <i class="ms-1 fs-small fas fa-sign-out-alt"></i>
             </a>
           </li>
           #end

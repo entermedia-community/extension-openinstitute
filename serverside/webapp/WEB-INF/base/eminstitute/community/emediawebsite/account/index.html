@@ -14,7 +14,7 @@
 	#set( $userimageurl = "$applink/theme/images/user.svg" )
 #end
 
-<div class="p-2 p-lg-4 mx-auto" style="max-width: 1400px;">
+<div class="p-2 p-lg-4 mx-auto mt-3" style="max-width: 1400px;">
 	<div class="container-fluid">
 		<div class="row acc-row">
 			<div class="col-sm-12 col-md-8 profile-credentials">
@@ -22,12 +22,12 @@
 					<a href="$apphome/users/edit/edit.html?userid=$selecteduser.getId()" 
 						class="btn btn-xs btn-soft-primary emdialog"
 						title="[[Edit User Account]]">
-						<i class="fas fa-edit mr-2"></i>
+						<i class="fas fa-edit me-2"></i>
 						[[Edit Profile]]
 					</a>
-					<button class="btn btn-xs btn-primary ml-2 d-md-none" type="button" data-toggle="collapse" data-target="#supportchat" aria-controls="supportchat" id="chatToggler">
+					<button class="btn btn-xs btn-primary ms-2 d-md-none" type="button" data-toggle="collapse" data-target="#supportchat" aria-controls="supportchat" id="chatToggler">
 						#if($haspendingmessages) ##TODO
-							<span class="mr-1">4</span>
+							<span class="me-1">4</span>
 						#end
 						<i class="fas fa-comment-alt"></i>
 					</button>
@@ -41,12 +41,12 @@
 					<h1>$selecteduser.getAnonNickName()</h1>						
 				#end
 				<a class="email d-flex align-items-center">
-					<i class="fas fa-envelope mr-2"></i>
+					<i class="fas fa-envelope me-2"></i>
 					<span>$!selecteduser.get("email")</span>
 				</a>
 				#if($selecteduser.get("companyname"))
 				<p class="position">
-					<i class="fas fa-briefcase mr-2"></i>
+					<i class="fas fa-briefcase me-2"></i>
 					<span>
 						$!selecteduser.get("companyname")
 					</span>
