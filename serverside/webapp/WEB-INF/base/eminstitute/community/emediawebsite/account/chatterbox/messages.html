@@ -1,0 +1,20 @@
+#set($channel = $context.getRequestParameter("channel"))
+
+#set($collectionid = $context.getRequestParameter("collectionid"))
+
+<div id="chatloadmore">
+	#set($resultsPage = "$applink/chatterbox/messages.html?hitssessionid=${messagesthitracker.sessionId}&collectionid=$collectionid&channel=$channel&pageposition")
+
+	$context.putPageValue("hits",$messagesthitracker)
+	$context.putPageValue("resultsPage",$resultsPage)
+	$context.putPageValue("targetdiv","chatloadmore")
+	$context.putPageValue("oemaxlevel","2")
+	
+	$pages.include("$apphome/components/results/chatpositions.html", $context)
+
+</div>
+
+#foreach($chat in $messages)
+	$context.putPageValue("chat",$chat) 
+	$pages.include("$apphome/chatterbox/message.html", $context)				
+#end

@@ -1,5 +1,7 @@
 #set($collectivesection = $content.collectivesection)
 
+$context.putPageValue("communitylink", "${communityhome}")
+
 <div id="application" class="community-layout bg-light"> 
 	<div  class="sidebar-left">
 		<button class="btn btn-sm community-drawer-close">
@@ -10,7 +12,7 @@
 		#elseif($collectivesection == "finances")
 			$pages.include("${communityhome}/project/services/sidebar.html",$context)
 		#end
-		$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
+		##$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 	</div>
 	
 	<div class="main-content">

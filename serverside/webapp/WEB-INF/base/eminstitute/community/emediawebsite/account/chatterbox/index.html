@@ -1,0 +1,21 @@
+#set($channel = $context.getRequestParameter("channel"))
+<div class="chat-messages"> 
+	<div class="chatterbox-messages" data-lastloaded="$lastloaded">
+		<div class="chatterbox-container">
+			<div class="chatterbox-body-inside">
+				<div class="chatterbox-message-list">
+					$pages.include("$apphome/chatterbox/messages.html", $context)				
+				</div>
+				<div id="newmessagearea"></div>
+			</div>
+		</div>
+	</div>
+</div>
+#if( $caneditcollection)
+		$pages.include("$apphome/chatterbox/editarea.html", $context)				
+#end
+
+<script>
+	var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

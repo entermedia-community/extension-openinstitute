@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 	 #set($sitetitle = $content.title)
+    <title>#if( $librarycol ) $librarycol - #end $!sitetitle</title>
+    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="$sitelink/assets/favicon.ico" />
+
+	$pages.include("${communityhome}/theme/layouts/includes.html", $context)
+  	
+	##$pages.include("${communityhome}/collective/opengraphmetadata.html", $context)
+	
+	##if($content.usemap == "true")
+		##$pages.include("${communityhome}/components/map/includes.html")
+	##end
+
+	<script src="$sitelink/assets/js/datetimepicker.full.min.js"></script>
+  <link rel="stylesheet" href="$sitelink/assets/css/font-awesome/all.min.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/hs-mega-menu.min.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/slick.css" />
+  ##<link rel="stylesheet" href="$sitelink/assets/css/bootstrap-custom.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/jquery.datetimepicker.min.css">
+  <link rel="stylesheet" href="$sitelink/assets/css/aos.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/custom.css" />
+
+</head>
+	
+
+    <link rel="Shortcut Icon" type="image/x-icon" href="$apphome/theme/images/em-favicon.ico" />
+
+	</head>
+
+<body id="page-top">
+#if(!$browser.inApp())
+
+	$context.putPageValue("accountpage", "true")
+	$pages.include("/website/views/layouts/header.html", $context)
+
+#end
+
+<div id="application" 
+	class="emedialibraryapplication"
+	data-user="$!user.getId()"
+	data-home="$siteroot"
+	data-siteroot="$siteroot" 
+	data-apphome="$apphome"
+	data-inapp="$browser.inApp()" 
+	data-themeprefix="${communityhome}/theme" 
+	data-browserlanguage="$!{browserlanguage}"
+	data-editmode='$!user.get("oe_edit_mode")' 
+	data-mediadbappid="$!mediaarchive.getMediaDbId()"
+	data-componenthome="$!componenthome"	
+	#if( $showupload)
+	data-showuploadid="${showupload.id}"
+	#end
+	data-viewertemplate="$apphome/collective/channel/show/index.html" 
+	>
+	
+	<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
+		#if($canviewsettings && !$browser.inApp())
+			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+		#end
+		
+		<div class="emrightcontent emmaincontent" >
+            $pages.includeContent()
+        </div>
+    </div>
+</div>
+
+$pages.include("${apphome}/googleanalytics.html", $context)
+
+</body>
+</html>
+
+

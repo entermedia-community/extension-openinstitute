@@ -1347,6 +1347,9 @@ textarea.blog-comments-input {
   max-width: 969px;
   margin: 0 auto;
 }
+.community-layout.bg-light {
+	color:#222;
+} 
 
 @media screen and (max-width: 1280px) {
   .community-layout .sidebar-left,
