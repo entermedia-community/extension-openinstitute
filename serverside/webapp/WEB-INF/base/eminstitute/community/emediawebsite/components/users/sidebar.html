@@ -3,7 +3,7 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="${communityhome}/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="${communityhome}/components/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
@@ -51,8 +51,14 @@
 						$url_util.escapeMessage($message.message,26)
 					</div>
 					#set($chatuser = $mediaarchive.getUser($message.user))
-					<div class="messagetimestamp">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
-				</a>	
+					#set($timestamp = $context.getAge($message.getDate("date")))
+					#if ($timestamp)
+						#set($timestamplabel = "$timestamp [[ago]]")
+					#else
+						#set($timestamplabel = "[[Now]]")
+					#end
+					<div class="messagetimestamp">$chatuser #datatext($topic, "name") / $timestamplabel</div>
+					</a>	
 			</div>
  		 </div>
 		#end
