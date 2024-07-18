@@ -8,7 +8,7 @@
 	
 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
 	
-	<permission name="view">
-		<userprofile property="viewmyaccount" equals="true" />
-	</permission>
+  <permission name="viewmyaccount">
+    <userprofile name="viewmyaccount" value="true"/>
+  </permission>
 </page>

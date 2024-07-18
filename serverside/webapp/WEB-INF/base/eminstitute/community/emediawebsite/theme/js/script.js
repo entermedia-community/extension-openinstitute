@@ -1,4 +1,13 @@
 $(document).ready(function () {
+	
+  new HSHeader($("#header")).init();
+  new HSMegaMenu($(".js-mega-menu"), {
+    desktop: {
+      position: "left",
+    },
+  }).init();
+  
+  
   $(".prop-pse .nav-link").on("click", function (e) {
     e.preventDefault();
     $(this).tab("show");
@@ -13,8 +22,5 @@ $(document).ready(function () {
     }
   });
 
-  AOS.init({
-    duration: 600,
-    once: true,
-  });
+
 });
