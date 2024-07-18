@@ -14,17 +14,23 @@
 	#set( $userimageurl = "$applink/theme/images/user.svg" )
 #end
 
+#if( $user.getId() == $selecteduser.getId() || $canviewsettings)
+	#set($canedituserinfo = true)
+#end
+
 <div class="p-2 p-lg-4 mx-auto mt-3" style="max-width: 1400px;">
 	<div class="container-fluid">
 		<div class="row acc-row">
 			<div class="col-sm-12 col-md-8 profile-credentials">
 				<div class="edit-profile d-flex align-items-center">
+					#if($canedituserinfo)
 					<a href="$apphome/users/edit/edit.html?userid=$selecteduser.getId()" 
 						class="btn btn-xs btn-soft-primary emdialog"
 						title="[[Edit User Account]]">
 						<i class="fas fa-edit me-2"></i>
 						[[Edit Profile]]
 					</a>
+					#end
 					<button class="btn btn-xs btn-primary ms-2 d-md-none" type="button" data-toggle="collapse" data-target="#supportchat" aria-controls="supportchat" id="chatToggler">
 						#if($haspendingmessages) ##TODO
 							<span class="me-1">4</span>
@@ -32,7 +38,34 @@
 						<i class="fas fa-comment-alt"></i>
 					</button>
 				</div>
-				<img src="$userimageurl" alt="User Image" class="profile-image" />
+				
+				#if($canedituserinfo)
+					<div class="">
+					<a href="#" id="filePicker" class="" title="[[Upload square image for better results]]">
+							<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-image" />
+					</a>
+					</div>
+					<form id="uploaddata" 
+						name="wizard" 
+						method="post" 
+						enctype="multipart/form-data"
+						action="$applink/users/uploadsave.html" 
+						>
+						<input type="hidden" name="userid" value="$selecteduser.getId()" />
+						<input type="hidden" name="sourcepath" value="userprofiles/$selecteduser.getId()/" />
+						<input id="upload_field" name="file" type="file" style="position:absolute; top:-1000px;" >
+					</form>
+					<script>
+						$('#upload_field').change(function() {
+						  $('#uploaddata').submit();
+						});
+					</script>
+				#else
+					<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-image" />
+				#end
+				
+				
+				
 				#if( $user)
 				
 					<h1>$!selecteduser.get("firstName") $!selecteduser.get("lastName")</h1>
