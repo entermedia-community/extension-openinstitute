@@ -80,7 +80,7 @@
 		#if($chat.attachedassets)
 			$pages.include("$apphome/chatterbox/attach.html",$context)
 		#end
-		<a href="#esc($userlink)" title="$context.getDateTime($chat.date)">
+		<a href="#esc($userlink)" title="$context.getDateTime($chat.date)" class="author-name">
 			<strong>$chatuser.getName()</strong>
 		</a>
 	</div>
