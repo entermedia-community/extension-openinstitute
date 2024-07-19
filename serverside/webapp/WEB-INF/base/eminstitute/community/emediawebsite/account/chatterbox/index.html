@@ -4,13 +4,14 @@
 		<div class="chatterbox-container">
 			<div class="chatterbox-body-inside">
 				<div class="chatterbox-message-list">
-					$pages.include("$communityhome/account/chatterbox/messages.html", $context)				
+					$pages.include("${communityhome}/account/chatterbox/messages.html", $context)				
 				</div>
 				<div id="newmessagearea"></div>
 			</div>
 		</div>
 	</div>
 </div>
+
 #if( $caneditcollection)
 		$pages.include("$communityhome/account/chatterbox/editarea.html", $context)				
 #end
