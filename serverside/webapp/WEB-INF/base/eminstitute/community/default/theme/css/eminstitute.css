@@ -879,7 +879,21 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 .collaborate-content {
   padding: 10px 5px;
 }
+.chatterbox {
+  height: calc(100% - 56px);
+}
 
+.collaborate-channel {
+  height: 100%;
+  min-height: auto;
+}
+.chatterbox-messages {
+  height: calc(100% - 60px);
+  min-height: 250px;
+}
+.chatterbox-container {
+  height: 100%;
+}
 .chatterbox-write {
   height: 110px;
   padding: 4px 4px;
@@ -897,7 +911,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .chatterbox-write .chatterbox-text {
-  height: 102px;
+  height: 60px;
   width: 100%;
   padding: 0.45rem 0.25rem;
   font-size: 1rem;
@@ -940,11 +954,6 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   text-align: center;
   width: 59px;
 }
-
-.chatterbox {
-  height: calc(100% - 120px);
-}
-
 .chatterbox-chat {
   position: relative;
 }
@@ -1101,12 +1110,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 
 .msg-body-content {
   white-space: pre-wrap;
-  line-height: 1rem;
-}
-
-.chatterbox-messages {
-  height: calc(100% - 74px);
-  min-height: 250px;
+  line-height: 1.5rem;
 }
 
 .chat-icon {
