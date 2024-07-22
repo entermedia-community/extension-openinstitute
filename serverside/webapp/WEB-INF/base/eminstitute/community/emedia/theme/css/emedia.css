@@ -445,7 +445,7 @@ header.navigation {
 }
 .project-list-container,
 #application.community-layout {
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 98px);
 }
 .preloader {
   width: 100%;

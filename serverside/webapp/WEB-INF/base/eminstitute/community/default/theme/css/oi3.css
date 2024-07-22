@@ -34,6 +34,10 @@ h6 {
   height: 64px;
 }
 
+.bg-white {
+	color:#000;
+}
+
 header {
   color: #1b1c1f;
   box-shadow: 0 0 3px rgba(115, 115, 115, 0.5);
@@ -859,14 +863,7 @@ img.cat-thumb {
 .previewImg:hover img {
   filter: brightness(0.8);
 }
-.oicontainercampaigns {
-  margin: 0;
-  min-height: 400px;
-  height: calc(100vh - 300px);
-  position: relative;
-  display: block;
-  overflow: hidden;
-}
+
 
 .chatterbox-write .chatterboxreplyto {
   width: calc(100% - 9px);
@@ -879,12 +876,6 @@ img.cat-thumb {
   font-style: italic;
   z-index: 10;
   border-bottom: 0;
-}
-.msg-bubble .msg-body.me {
-  color: #000000;
-}
-.msg-bubble .msg-body {
-  color: #444444;
 }
 .chatterbox-write .chatterboxreplyto div.msg-body {
   color: #666666;

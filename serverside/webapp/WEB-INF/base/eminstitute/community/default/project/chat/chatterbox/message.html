@@ -81,11 +81,13 @@
 	</div>
 	
 	<div class="chat-msg">
+		<div class="chat-author">
 		<a href="#esc($userlink)" title="$context.getDateTime($chat.date)">
 			<strong>$chatuser.getAnonNickName()</strong>
 		</a>
 		<span class="chat-timestamp">$context.getDateTime($chat.date)</span>
-		<br> 
+		</div>
+		
 		<div class="msg-body #if($chat.user == $user.id) me #end">
 			#ifnotnull($chat.replytoid)
 			#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$chat.replytoid))

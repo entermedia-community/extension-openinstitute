@@ -748,7 +748,14 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   border-bottom: 1px solid #28a745;
   margin-bottom: 0.6rem;
 }
-
+.oicontainercampaigns {
+  margin: 0;
+  min-height: 400px;
+  height: calc(100vh - 260px);
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
 .collaborate-sidebar {
   background-color: #222;
   color: #fff;
@@ -879,6 +886,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 .collaborate-content {
   padding: 10px 5px;
 }
+
 .chatterbox {
   height: calc(100% - 56px);
 }
@@ -899,7 +907,24 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   padding: 4px 4px;
   position: relative;
 }
-
+.msg-bubble {
+	color:#000;
+}
+.msg-bubble .chat-author {
+	font-size: 0.9em;
+}
+.msg-bubble .chat-author a {
+	color:#666;
+}
+.msg-bubble .chat-author a:hover {
+	color:#000;
+}
+.msg-bubble .msg-body.me {
+  color: #000000;
+}
+.msg-bubble .msg-body {
+  color: #444444;
+}
 .chatterbox-write .chatterbox-media {
   height: 24px;
   background-color: #9cdc81;
