@@ -19,53 +19,56 @@
 	    </div>
 		#set( $chatmanager = $mediaarchive.getBean("chatManager"))
 		#set($selectedproject = $librarycol.getId())
-		<div style="max-height: 370px; overflow-y:auto;">
-		<div class="usersidebartopmessages" >
-			#foreach( $message in $messages )
-				#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
-				#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
-				#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
-				
-			  <div class="row g-0 messageselection #if($selectedproject==$collective.id) current #end">
-				<div class="col-2" style="padding:0px;" >
-						#ifnotnull($otherperson)
-							$context.putPageValue("chatuser",$otherperson)
-							$pages.include("${apphome}/users/icon.html",$context)
+		<div style="max-height: 500px; overflow-y:auto;">
+	<div class="usersidebartopmessages" >
+		#foreach( $message in $messages )
+			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
+			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
+			#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
+			
+		  <div class="d-flex messageselection mb-2 #if($selectedproject==$collective.id) current #end">
+			<div class="">
+					#ifnotnull($otherperson)
+						$context.putPageValue("chatuser",$otherperson)
+						$pages.include("${apphome}/users/icon.html",$context)
+					#end
+					#ifnull($otherperson)
+						#if($collective.assetportrait)
+						#set($asset = $mediaarchive.getAsset($collective.assetportrait))
+						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#else
+						#set($link = "${communityhome}/theme/images/OI_flower.png")
 						#end
-						#ifnull($otherperson)
-							#if($collective.assetportrait)
-							#set($asset = $mediaarchive.getAsset($collective.assetportrait))
-							#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-							#else
-							#set($link = "$communityhome/theme/images/OI_flower.png")
-							#end
-							<div class="card-collections-thumb" style='background-image: url("$link")'></div>
-						#end
-				</div>
-				<div class="col" style="padding:0px;">	
-					<a  
-					 href="${communityhome}/project/chat/index.html?collectionid=${librarycol.getId()}"  
-					 >		
-					 	#ifnotnull($otherperson)
-						<b>  $otherperson.getScreenName() </b>
-						#end
-						#ifnull($otherperson)
-						<b> #datatext($collective,"name") </b>
-						#end
-						<div class="messagearea">
-							$url_util.escapeMessage($message.message,26)
-						</div>
-						#set($chatuser = $mediaarchive.getUser($message.user))
-						<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
+						<div class="card-collections-thumb" style='background-image: url("$link")'></div>
+					#end
+			</div>
+			<div>	
+				<a  
+				 href="${communityhome}/project/chat/index.html?collectionid=${collective.getId()}"  
+				 >		
+				 	#ifnotnull($otherperson)
+					<b>  $otherperson.getScreenName() </b>
+					#end
+					#ifnull($otherperson)
+					<b> #datatext($collective,"name") </b>
+					#end
+					<div class="messagearea">
+						$url_util.escapeMessage($message.message,26)
+					</div>
+					#set($chatuser = $mediaarchive.getUser($message.user))
+					#set($timestamp = $context.getAge($message.getDate("date")))
+					#if ($timestamp)
+						#set($timestamplabel = "$timestamp [[ago]]")
+					#else
+						#set($timestamplabel = "[[Now]]")
+					#end
+					<div class="messagetimestamp">$chatuser #datatext($topic, "name") / $timestamplabel</div>
 					</a>	
-				</div>
-	 		 </div>
-	 		 <div class="sidebar-list">
-	 		 <a href="$sitelink/app/activity/index.html"><i class="fa fa-comments"></i> [[All Chats]]</a>
-	 		 </div>
-			#end
-		</div>	
-		</div>
+			</div>
+ 		 </div>
+		#end
+	</div>	
+	</div>
 	</div>
 	#end
 

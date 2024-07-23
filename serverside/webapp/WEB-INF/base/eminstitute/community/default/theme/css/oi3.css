@@ -20,11 +20,16 @@ h6 {
 @media (min-width: 1200px) {
   .h1,
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: #1b1c1f;
   }
 }
 
+.h2,
+  h2{
+    font-size: 2.1rem;
+    color: #1b1c1f;
+  }
 .secondary-header {
   display: flex;
   justify-content: space-between;
@@ -1290,12 +1295,12 @@ textarea.blog-comments-input {
 .explore-blog-list {
   width: 100%;
 }
-.team-list h6,
-.explore-blog-list h6 {
-  font-size: 0.85rem;
+.team-list h3,
+.explore-blog-list h3 {
+  font-size: 1rem;
   text-transform: uppercase;
-  color: #576f76;
-  font-weight: 400;
+  color: #333;
+  font-weight: 600;
 }
 .explore-blog-list a {
   margin-bottom: 0.5rem;
@@ -1322,6 +1327,12 @@ textarea.blog-comments-input {
 .explore-blog-list a:hover img {
   background-color: #e2e7e9;
 }
+
+.collaborate-channel {
+	min-height: 400px;
+  height: calc(100vh - 260px);
+}
+
 .collaborate-channel-header {
   height: 46px;
 }
@@ -1470,7 +1481,7 @@ textarea.blog-comments-input {
   height: 70px;
   padding-right: 16px;
   border-radius: 16px;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
   padding-left: 164px;
   container-type: inline-size;
   z-index: 1;
@@ -1945,3 +1956,5 @@ input.search-primary {
 .btn-searchprojects {
 	background-color: #377dff;
 }
+
+

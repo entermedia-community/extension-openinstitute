@@ -8,7 +8,8 @@ $context.putPageValue("collectionid",$librarycol.getId() )
     #set($logourl = "$communityhome/theme/images/OI_flower.png")
 #end
 
-#set($homelink = "$communityhome/proposal/${librarycol.id}/#dash($librarycol.getWebName()).html")
+
+#set($homelink = "${communitylink}/${librarycol.urlname}")
 
 #if ($librarycol.collectivebanner)
     #set( $banner= $mediaarchive.getAsset($librarycol.collectivebanner) )

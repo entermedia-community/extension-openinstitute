@@ -748,14 +748,14 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   border-bottom: 1px solid #28a745;
   margin-bottom: 0.6rem;
 }
+
 .oicontainercampaigns {
   margin: 0;
-  min-height: 400px;
-  height: calc(100vh - 260px);
   position: relative;
   display: block;
   overflow: hidden;
 }
+
 .collaborate-sidebar {
   background-color: #222;
   color: #fff;
@@ -826,22 +826,17 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   color: #fff;
 }
 
-.collaborate-channel {
-  min-height: calc(100vh - 354px);
-}
-#storeworkarea,
-#financesdashboard,
-#goaleditor {
-  min-height: calc(100vh - 338px);
-}
-.collaborate-channel {
+
+.emwidget {
   border-radius: 12px;
+  height: 100%;
+  min-height: auto;
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.collaborate-channel-header {
+.emwidget-header {
   padding: 8px 16px;
   background-color: #277371;
   display: flex;
@@ -849,52 +844,61 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   justify-content: space-between;
 }
 
-.channel-name {
+.emwidget-name {
   font-size: 1rem;
   font-weight: bold;
+  color: #fff;
 }
 
-.channel-name .chanel-teamonly {
+.emwidget-name .chanel-teamonly {
   font-size: 0.8rem;
   line-height: 0.9;
 }
 
-.channel-name a:hover {
+.cemwidget-name a:hover {
   text-decoration: none;
 }
 
-.collaborate-channel-header .dropdown-menu {
+.emwidget-header .dropdown-menu {
   border-radius: 0;
   background-color: #215f5d;
 }
 
-.collaborate-channel-header a.dropdown-toggl {
+.emwidget-header a.dropdown-toggl {
   color: #fff;
   display: flex;
   align-items: center;
 }
 
-.collaborate-channel-header a.dropdown-item {
+.emwidget-header a.dropdown-item {
   color: #fff;
   font-size: 14px;
 }
 
-.collaborate-channel-header a.dropdown-item i {
+.emwidget-header a.dropdown-item i {
   margin-right: 6px;
 }
 
-.collaborate-content {
+.emwidget-content {
   padding: 10px 5px;
+}
+
+
+.emwidget-chatterbox {
+	height: calc(100vh - 250px);
 }
 
 .chatterbox {
   height: calc(100% - 56px);
 }
-
-.collaborate-channel {
-  height: 100%;
-  min-height: auto;
+#storeworkarea,
+#financesdashboard,
+#goaleditor {
+  min-height: calc(100vh - 338px);
 }
+
+
+
 .chatterbox-messages {
   height: calc(100% - 60px);
   min-height: 250px;
@@ -1073,13 +1077,12 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .chatterbox-body-inside {
-  padding: 8px;
   scrollbar-color: #dfdfdf #fff;
   scrollbar-width: thin;
   scrollbar-track-color: #fff;
   overflow-y: auto;
   height: 100%;
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
 
 .chatterbox-body-inside::-webkit-scrollbar {
@@ -1095,7 +1098,6 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   position: relative;
   min-height: 40px;
   margin-bottom: 0px;
-  padding: 5px;
 }
 
 /* .chatterbox-chat:nth-child(odd) {
@@ -1124,7 +1126,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 .msg-bubble .msg-body {
   flex: 1;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   position: relative;
 }

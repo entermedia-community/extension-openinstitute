@@ -28,61 +28,59 @@
 #end
 $context.putPageValue("currenttopic", $currenttopic)
 
-<div id="campaigninfo" class="oicontainercampaigns p-2">
 	$context.putPageValue("currenttopic", $currenttopic) 
-	<div class="collaborate-channel" style="border-radius: 12px">
-		<div class="collaborate-channel-header">
-			<div class="channel-name">
-				#if($alltopics.size()>1)
-				<div class="dropdown show">
-					<a href="#" class="dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="emwidget emwidget-chatterbox">
+	<div class="emwidget-header">
+		<div class="emwidget-name">
+			#if($alltopics.size()>1)
+			<div class="dropdown show">
+				<a href="#" class="dropdown-toggl" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					#if($caneditcollection)
+						#if ($currenttopic.teamproject == "true")
+							<i class="fas fa-lock chanel-teamonly"></i>
+						#else 
+							<i class="fas fa-lock-open  chanel-teamonly"></i>
+						#end
+					#end
+					<span class="d-inline-block mx-2">$currenttopic</span>
+					<i class="bi bi-caret-down-fill"></i>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					#foreach( $hit in $alltopics)
+					#if ($hit.id != $currenttopic.id)
+					<a href="$communityhome/project/chat/index.html?collectionid=$collectionid&topic=$hit.getId()"
+						class="dropdown-item">
 						#if($caneditcollection)
-							#if ($currenttopic.teamproject == "true")
-								<i class="fas fa-lock chanel-teamonly"></i>
+							#if ($hit.teamproject == "true")
+								<i class="fas fa-lock"></i>
 							#else 
-								<i class="fas fa-lock-open  chanel-teamonly"></i>
+								<i class="fas fa-lock-open"></i>
 							#end
-						#end
-						<span class="d-inline-block mx-2">$currenttopic</span>
-						<i class="bi bi-caret-down-fill"></i>
+						#end 
+						$hit.name
 					</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						#foreach( $hit in $alltopics)
-						#if ($hit.id != $currenttopic.id)
-						<a href="$communityhome/project/chat/index.html?collectionid=$collectionid&topic=$hit.getId()"
-							class="dropdown-item">
-							#if($caneditcollection)
-								#if ($hit.teamproject == "true")
-									<i class="fas fa-lock"></i>
-								#else 
-									<i class="fas fa-lock-open"></i>
-								#end
-							#end 
-							$hit.name
-						</a>
-						#end
-						#end
-					</div>
+					#end
+					#end
 				</div>
-				#else
-				<span class="text-white">$currenttopic</span>
-				#end
 			</div>
-			<div class="channel-actions">
-				#if( $caneditcollection )
-				<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html" 
-						class="emdialog" 
-						title="[[Edit a Topic]]"
-						data-hidefooter="true">
-					<i class="fas fa-cog text-white"></i>
-				</a>
-				#end
-				<a href="#mobileSidebarRight" role="button" class="d-inline d-md-none ms-2" title="[[Team Circle]]" data-bs-toggle="offcanvas">
-					<i class="fas fa-users text-white"></i>
-				</a>
-			</div>	
+			#else
+			<span class="text-white">$currenttopic</span>
+			#end
 		</div>
-		$pages.include("$communityhome/project/chat/index.html", $context)
-	</div> 
-	#end
-</div>
+		<div class="emwidget-actions">
+			#if( $caneditcollection )
+			<a href="$applink/collective/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=$applink/collective/community/index.html" 
+					class="emdialog" 
+					title="[[Edit a Topic]]"
+					data-hidefooter="true">
+				<i class="fas fa-cog text-white"></i>
+			</a>
+			#end
+			<a href="#mobileSidebarRight" role="button" class="d-inline d-md-none ms-2" title="[[Team Circle]]" data-bs-toggle="offcanvas">
+				<i class="fas fa-users text-white"></i>
+			</a>
+		</div>	
+	</div>
+	$pages.include("$communityhome/project/chat/index.html", $context)
+</div> 
+#end
