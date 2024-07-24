@@ -1,0 +1,58 @@
+
+#foreach($module in $organizedModules)
+	#set($hits = $organizedHits.get($module.id))
+
+	$context.putPageValue("hits", $hits)
+	$context.putPageValue("module", $module)
+	$context.putPageValue("moduleid", $module.id)
+
+	#set($moduleicon = "entity")
+	#if ($module.moduleicon)
+		#set($moduleicon = $module.moduleicon)
+	#end
+	#set( $val = $hits.getInput("description"))
+
+	#if($module.id == "librarycollection")
+		<h6 class="text-center text-dark">#text($module)</h6>
+	#else
+		#set($entityurl = "$!siteroot$applink/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val")
+		<div style="margin-bottom: 10px;">
+			<a href="$entityurl" class="ajax qsresultsEntity" data-targetdiv="applicationmaincontent"
+				data-oemaxlevel="3" data-updateurl="true" data-profilepreference="defaultmodule"
+				data-profilepreference.value="$!module.getId()" title="[[View]]: #text($module)">
+				<img src="$siteroot$apphome/theme/images/entity/${moduleicon}.svg"
+					style="height: 25px; max-width:20px;">
+				<span class="qsresultsEntitytext">
+					#if( $module.id == "asset") ##this is safe
+						#set( $count = $hits.size())
+					#else
+						#set( $count = $filter.getCount($module.id) )
+					#end
+					#ifnull($count)
+						#set( $count = $hits.size())
+					#end
+					#text($module)
+				</span>
+				<span class="count">($count)</span>
+			</a>
+		</div>
+	#end
+	<div class="row">
+		#foreach( $hit in $hits.getPageOfHits()) 
+			#if($module.id == "librarycollection")
+				#set($link = "$communityhome/project/chat/index.html?collectionid=${hit.id}")
+				<a class="col-6 col-md-4 result-item" href="$link" class="quickresult">
+					
+					<div>#text($hit)</div>
+				</a>
+			#else
+				#set( $val = $hit.getName())
+				#set($one = "$!siteroot$apphome/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val&topentityid=$hit.getId()&entityid=$hit.getId()&entitytype=${module.id}")
+				<a href="$one" class="col-6 col-md-4 result-item ajax quicksearchlinks" data-targetdiv="applicationmaincontent"
+					data-oemaxlevel="3" data-updateurl="true" data-profilepreference="defaultmodule"
+					data-profilepreference.value="$!module.getId()"
+					title="[[View]] #text($module): #esc($hit) ">$hit</a>
+			#end 
+		#end
+	</div> 
+#end

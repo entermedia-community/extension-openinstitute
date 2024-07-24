@@ -38,11 +38,6 @@ h6 {
 .secondary-header img {
   height: 64px;
 }
-
-.bg-white {
-	color:#000;
-}
-
 header {
   color: #1b1c1f;
   box-shadow: 0 0 3px rgba(115, 115, 115, 0.5);

@@ -11,12 +11,6 @@ data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collecti
 		<button class="btn btn-sm community-drawer-close">
 			<i class="fas fa-times text-muted"></i>
 		</button>
-		#if($collectivesection == "settings")
-			$pages.include("${communityhome}/project/admin/sidebar.html",$context)
-		#elseif($collectivesection == "finances")
-			$pages.include("${communityhome}/project/services/sidebar.html",$context)
-		#end
-		##$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 	</div>
 	
 	<div class="main-content">

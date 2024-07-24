@@ -81,6 +81,12 @@ a.primary:hover .fa-solid {
   height: calc(100% - 80px);
 }
 
+.bg-white,
+.bg-light {
+	color:#000;
+}
+
+
 .table-hover a:hover {
   text-decoration: none;
 }

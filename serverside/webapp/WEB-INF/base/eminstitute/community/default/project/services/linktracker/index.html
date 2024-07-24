@@ -7,8 +7,6 @@
 <div >
 	<h2 style="margin:0 0 10px 0;">[[Links]]</h2>
 
-	<div class="clearfix"></div>
-
     <a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
 
 	<form  id="incomesearchform" 
@@ -47,8 +45,8 @@
 
 	
 	#ifnull( $linkhits)
-              #set( $linkhits = $mediaarchive.query("collectivelinktracker").hitsPerPage(500).exact("collectionid",$collectionid).named("income").sort("dateDown").search($context))
-              $context.putPageValue("linkhits",$linkhits)
+          #set( $linkhits = $mediaarchive.query("collectivelinktracker").hitsPerPage(500).exact("collectionid",$collectionid).named("income").sort("dateDown").search($context))
+          $context.putPageValue("linkhits",$linkhits)
 	#end
    <div>
    		
@@ -56,7 +54,7 @@
 			<label>[[Sort by]]</label>
 			<div style="width:200px; display:inline-block;">
 			<select class="select2 	form-control-sm" name="sortby" >
-				#set ($details = $searcher.getDetailsForView("collectiveincome/addnew", $userprofile))
+				#set ($details = $searcher.getDetailsForView("collectivelinktracker/addnew", $userprofile))
 				#foreach( $detail in $details)
 					<option value="$detail.getId()Down">$context.getText($detail)</option>
 					<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
