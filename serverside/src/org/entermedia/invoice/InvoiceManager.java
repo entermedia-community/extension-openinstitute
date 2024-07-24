@@ -3,8 +3,10 @@ package org.entermedia.invoice;
 import java.text.DecimalFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.openedit.Data;
 import org.openedit.ModuleManager;
 import org.openedit.MultiValued;
 import org.openedit.data.Searcher;
+import org.openedit.hittracker.HitTracker;
 import org.openedit.users.User;
 
 public class InvoiceManager implements CatalogEnabled
@@ -195,4 +198,76 @@ public class InvoiceManager implements CatalogEnabled
 		return (int)Math.ceil(noOfDaysBetween);
 	}
 	
+	
+	//TODO: Move this to InvoiceManager
+	
+	public HitTracker getInvoiceFromMonth(String status, int year, int month) 
+	{
+		Calendar start = month == 0 ? new GregorianCalendar(year, 0, 1) :  new GregorianCalendar(year, month - 1, 1);
+		
+		//Calendar end = month == 0 ? new GregorianCalendar(year, 11, 31) : new GregorianCalendar(year, month, 1);
+		//end.add(Calendar.DAY_OF_YEAR, -1);
+		
+		Calendar end = month == 0 ? new GregorianCalendar(year, 11, 31) : new GregorianCalendar(year, month, 1);
+		//fix 31th
+		int days = end.getActualMaximum(Calendar.DAY_OF_MONTH);
+		end.set(Calendar.DAY_OF_MONTH, days);
+		end.set(Calendar.MINUTE, 59);
+		end.set(Calendar.HOUR_OF_DAY, 23);
+		end.set(Calendar.SECOND, 59);
+		
+		HitTracker invoice = getMediaArchive().query("collectiveinvoice")
+				.exact("paymentstatus", status)
+				.between("duedate", start.getTime(), end.getTime()) 
+				.sort("duedateDown").search();
+		return invoice;
+	}
+	//TODO: Move this to InvoiceManager
+	
+	public Data getInvoiceById(String invoiceId)
+	{
+		Data invoice = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveinvoice", invoiceId);
+		return invoice;
+	}
+	
+	//TODO: Move this to InvoiceManager
+
+	public ArrayList getInvoiceProductList(String invoiceId)
+	{
+		Data invoice = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveinvoice", invoiceId);
+		if (invoice == null) {
+			return null;
+		}
+		ArrayList products = (ArrayList)invoice.getValue("productlist");
+		return products;
+	}
+	//TODO: Move this to InvoiceManager
+	
+	/*
+	public String getProductName (String productId) {
+		Data product = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
+		if (product == null) {
+			return null;
+		}
+		String name = (String) product.getValue("name");
+		return name;
+	}
+	*/
+	
+	public Data getProductById (String productId) {
+		Data product = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
+		if (product == null) {
+			return null;
+		}
+		return product;
+	}
+	
+	public Data getWorkspaceById (String workspaceId) {
+		Data workspace = getMediaArchive().getSearcherManager().getData(getCatalogId(), "librarycollection", workspaceId);		
+		if (workspace == null) {
+			return null;
+		}
+		return workspace;
+	}
+
 }

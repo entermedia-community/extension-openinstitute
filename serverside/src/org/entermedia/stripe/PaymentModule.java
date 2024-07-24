@@ -16,6 +16,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClients;
+import org.entermedia.invoice.InvoiceManager;
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.asset.modules.BaseMediaModule;
 import org.openedit.Data;
@@ -35,6 +36,12 @@ public class PaymentModule extends BaseMediaModule
 	protected HttpClient fieldHttpClient;
 	protected StripePaymentProcessor fieldOrderProcessor;
 
+	protected InvoiceManager getInvoiceManager(WebPageRequest inReq)
+	{
+		InvoiceManager manager = (InvoiceManager)getMediaArchive(inReq).getBean("invoiceManager");
+		return manager;
+	}
+	
 	public StripePaymentProcessor getOrderProcessor()
 	{
 		if (fieldOrderProcessor == null)
@@ -96,7 +103,7 @@ public class PaymentModule extends BaseMediaModule
 		
 		String invoiceId = inReq.getRequestParameter("invoiceid");
 		Searcher invoiceSearcher = archive.getSearcher("collectiveinvoice");
-		Data invoice = archive.getInvoiceById(invoiceId);
+		Data invoice = getInvoiceManager(inReq).getInvoiceById(invoiceId);
 		
 		if (invoice.get("paymentstatus").equals("paid")) {
 			log.info("Invoice "+ invoiceId+" already Paid");
@@ -104,7 +111,7 @@ public class PaymentModule extends BaseMediaModule
 		}
 		
 		Searcher workspaceSearcher = archive.getSearcher("librarycollection");
-		Data workspace = archive.getWorkspaceById((String) invoice.getValue("collectionid"));
+		Data workspace = getInvoiceManager(inReq).getWorkspaceById((String) invoice.getValue("collectionid"));
 		if (Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard"))) {
 			workspace.setValue("savestripecreditcard", "true");
 			workspaceSearcher.saveData(workspace);
@@ -162,7 +169,7 @@ public class PaymentModule extends BaseMediaModule
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher payments = archive.getSearcher("collectiveproduct");
 		String productId = (String) inReq.getRequestParameter("productid");
-		Data product = archive.getProductById(productId);
+		Data product = getInvoiceManager(inReq).getProductById(productId);
 		product.setValue("billingstatus", "canceled");
 		payments.saveData(product);
 		inReq.putPageValue("collectionid", product.getValue("collectionid"));
@@ -378,7 +385,7 @@ public class PaymentModule extends BaseMediaModule
 	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String invoiceid = inReq.getRequiredParameter("id");
-		Data invoice = (Data) archive.getInvoiceById(invoiceid);
+		Data invoice = (Data) getInvoiceManager(inReq).getInvoiceById(invoiceid);
 		if (invoice != null) 
 		{
 			String status = (String) invoice.getValue("paymentstatus");
@@ -530,7 +537,7 @@ public class PaymentModule extends BaseMediaModule
 	
 	public void saveInvoice(WebPageRequest inReq) {
 		MediaArchive mediaArchive = getMediaArchive(inReq);
-		Data invoice = mediaArchive.getInvoiceById(inReq.getRequestParameter("id"));
+		Data invoice = getInvoiceManager(inReq).getInvoiceById(inReq.getRequestParameter("id"));
 
 		//Emails
 		String sentto = inReq.getRequestParameter("sentto.value");
@@ -612,7 +619,7 @@ public class PaymentModule extends BaseMediaModule
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher searcher = archive.getSearcher("collectiveproduct");
 		String productId =  inReq.getRequestParameter("id");
-		Data product = archive.getProductById(productId);
+		Data product = getInvoiceManager(inReq).getProductById(productId);
 		
 		Boolean isPayment = (Boolean) product.getValue("isautopaid");
 		if (isPayment == null) {

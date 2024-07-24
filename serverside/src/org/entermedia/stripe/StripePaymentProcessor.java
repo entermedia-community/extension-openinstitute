@@ -21,9 +21,11 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.entermedia.invoice.InvoiceManager;
 import org.entermediadb.asset.MediaArchive;
 import org.openedit.Data;
 import org.openedit.OpenEditException;
+import org.openedit.WebPageRequest;
 import org.openedit.money.Money;
 import org.openedit.page.manage.PageManager;
 import org.openedit.users.User;
@@ -49,6 +51,13 @@ public class StripePaymentProcessor {
 	protected PageManager fieldPageManager;
 	protected XmlUtil fieldXmlUtil;
 
+	
+	protected InvoiceManager getInvoiceManager(MediaArchive inArchive)
+	{
+		InvoiceManager manager = (InvoiceManager)inArchive.getBean("invoiceManager");
+		return manager;
+	}
+	
 	private CloseableHttpResponse httpPostRequest(MediaArchive inArchive, URI uri) throws ParseException, IOException {
 		boolean productionmode = inArchive.isCatalogSettingTrue("productionmode");
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -131,7 +140,7 @@ public class StripePaymentProcessor {
 	protected String createProduct(MediaArchive inArchive, String productId)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/products");
-		Data product = inArchive.getProductById(productId);
+		Data product = getInvoiceManager(inArchive).getProductById(productId);
 
 		URI uri = new URIBuilder(http.getURI()).addParameter("name", product.getName())
 				.addParameter("description", (String) product.getValue("productdescription")).build();
@@ -219,7 +228,7 @@ public class StripePaymentProcessor {
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		String emailExists = getCustomerId(inArchive, email, source);
 		log.info("customer exists in stripe: "+ emailExists);
-		Data workspace = inArchive.getWorkspaceById(collectionId);
+		Data workspace = getInvoiceManager(inArchive).getWorkspaceById(collectionId);
 		if (emailExists != null && !emailExists.isEmpty()) {
 			log.info("Creating customer in stripe: " + emailExists);	
 			return emailExists;
