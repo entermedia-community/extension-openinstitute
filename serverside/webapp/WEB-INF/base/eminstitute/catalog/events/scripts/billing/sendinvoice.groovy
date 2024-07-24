@@ -14,7 +14,7 @@ public void init() {
 	String invoiceid = context.getRequestParameter("invoiceid");
 	if(invoiceid!=null) {
 		log.info("Sending Individual Invoice: ${invoiceid}");
-		Data invoice = mediaArchive.getInvoiceById(invoiceid);
+		Data invoice = mediaArchive.getBean("invoiceManager").getInvoiceById(invoiceid);
 		if(invoice != null) {
 
 			if (!invoice.get("paymentstatus").equals("paid")) {

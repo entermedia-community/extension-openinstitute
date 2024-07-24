@@ -4,7 +4,7 @@
 	#set( $id = $invoiceid)
 #end
 #if(!$invoice)
-	#set( $invoice = $mediaarchive.getInvoiceById($id))
+	#set( $invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id))
 #end
 #if ($invoice)
 	$context.putPageValue("invoice", $invoice)

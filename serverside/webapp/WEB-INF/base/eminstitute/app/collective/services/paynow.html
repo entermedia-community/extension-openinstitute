@@ -1,8 +1,8 @@
 #set($currency = '$' )
 #set($id = $context.getRequestParameter('invoiceid'))
-#set($invoice = $mediaarchive.getInvoiceById($id))
-#set($products = $mediaarchive.getInvoiceProductList($id))
-#set($collection = $mediaarchive.getWorkspaceById($invoice.collectionid))
+#set($invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id))
+#set($products = $mediaarchive.getBean("invoiceManager").getInvoiceProductList($id))
+#set($collection = $mediaarchive.getBean("invoiceManager").getWorkspaceById($invoice.collectionid))
 
 <div class="container">
 <div class="contentcolumn">
@@ -110,13 +110,11 @@
                             </tr>
                             #set($products = $invoice.getValue("productlist"))
 							#foreach ($product in $products)
-								#set ( $prod = $mediaarchive.getProductById($product.productid) )
+								#set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
 								<tr>
 									<td valign="top" style="vertical-align: top;">$product.productquantity</td>
 									
 									<td valign="top" style="vertical-align: top;">
-										##<div>$mediaarchive.getProductName($product.productid)</div>
-										##<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
 										
 										#set($productname = $replacer.replace($prod.name, $invoiceformated))
 										
@@ -125,7 +123,7 @@
 									</td>
 									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
 								</tr>
-								#set($lastproduct = $mediaarchive.getProductById($product.productid))
+								#set($lastproduct = $mediaarchive.getBean("invoiceManager").getProductById($product.productid))
 							#end
 					
 					

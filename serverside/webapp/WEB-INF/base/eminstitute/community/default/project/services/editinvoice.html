@@ -5,12 +5,12 @@
 	#if(!$id)
 		#set( $id = $invoiceid)
 	#end
-	#set( $invoice =	$mediaarchive.getInvoiceById($id))
+	#set( $invoice =	$mediaarchive.getBean("invoiceManager").getInvoiceById($id))
 #end
  
 <div id="invoicecontainer">
 #if($invoice) 
-	###set( $products = $mediaarchive.getInvoiceProductList($id))
+	###set( $products = $mediaarchive.getBean("invoiceManager").getInvoiceProductList($id))
 	#set( $collectionid = $invoice.getValue("collectionid"))
 	#set( $collection = $mediaarchive.query("librarycollection").exact("id", $collectionid).searchOne() )
 
@@ -100,7 +100,7 @@
 					#set($products = $invoice.getValue("productlist"))
 					
 					#foreach ($product in $products)
-						###set ( $prod = $mediaarchive.getProductById($product.productid) )
+						###set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
 					<tr>
 						<td valign="top" style="vertical-align: top;">
 							##<input type="text" class="form-control" name="productquantity[]" value="$product.productquantity" /></td>

@@ -106,4 +106,24 @@ A directory of mindful and inspired practitioners who inspire, support and serve
    
   </data>    
 
+
+  <data id="atitlan"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/atitlan.svg" templatepath="/community/atitlan" urlname="Atitlan" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://atitlan.openinstitute.org"
+  domaincommunityid="5"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Wellness Network Collective]]></language> 
+    </name>
+    <caption><![CDATA[Inspire personal transformation
+]]></caption>
+    
+    <summary>
+    <![CDATA[
+A directory of mindful and inspired practitioners who inspire, support and serve personal transformation and spiritual growth.
+    ]]>
+    </summary>
+   
+  </data>    
+
+
 </root>

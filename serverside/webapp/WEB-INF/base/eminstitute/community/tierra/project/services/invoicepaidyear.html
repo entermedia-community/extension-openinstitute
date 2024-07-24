@@ -93,7 +93,7 @@
 	                		</thead>	
 	                		
 	                		<tbody>           		
-	                		#set( $invoices = $mediaarchive.getInvoiceFromMonth($status, $year, $month) )
+	                		#set( $invoices = $mediaarchive.getBean("invoiceManager").getInvoiceFromMonth($status, $year, $month) )
 	                		#foreach($invoice in $invoices)
                                     #if ($invoice.instance_status == "active")
                                         #set($instancescount = $instancescount+1)
@@ -116,11 +116,11 @@
 
 
                                     <tr>
-                                    	<td><a href="#" style="text-decoration: underline;">$!mediaarchive.getWorkspaceById($invoice.collectionid)</a></td>
+                                    	<td><a href="#" style="text-decoration: underline;">$!mediaarchive.getBean("invoiceManager").getWorkspaceById($invoice.collectionid)</a></td>
                                     	<td>
 											#set($products = $invoice.getValue("productlist"))
 											#foreach ($product in $products)
-												#set ( $prod = $mediaarchive.getProductById($product.productid) )
+												#set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
 												<a href="#" style="text-decoration: underline;">$prod</a>
 											#end
 										</td>

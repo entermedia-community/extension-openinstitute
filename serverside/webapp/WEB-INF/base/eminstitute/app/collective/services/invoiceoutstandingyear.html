@@ -36,7 +36,7 @@
                                         #set($instancescount = $instancescount+1)
                                     #end
                                     <tr>
-                                    	<td>$!mediaarchive.getWorkspaceById($hit.collectionid)</td>
+                                    	<td>$!mediaarchive.getBean("invoiceManager").getWorkspaceById($hit.collectionid)</td>
                                         <td>$hit.invoicenumber</td>
                                         <td>$!context.getDate($hit.duedate)</td>
                                         <td>$!context.getDate($hit.createdon)</td>

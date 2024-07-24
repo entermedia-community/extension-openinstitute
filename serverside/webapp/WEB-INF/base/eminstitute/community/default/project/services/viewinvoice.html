@@ -1,7 +1,7 @@
 #set( $currency = '$' ) #if(!$invoice) #set( $id =
 $context.getRequestParameter('invoiceid')) #if(!$id) #set( $id = $invoiceid)
-#end #set( $invoice = $mediaarchive.getInvoiceById($id)) #end #if($invoice)
-#set( $products = $mediaarchive.getInvoiceProductList($id)) #set( $collection =
+#end #set( $invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id)) #end #if($invoice)
+#set( $products = $mediaarchive.getBean("invoiceManager").getInvoiceProductList($id)) #set( $collection =
 $mediaarchive.query("librarycollection").exact("id",$invoice.getValue("collectionid")).searchOne()
 ) #set($status = $invoice.getValue("paymentstatus")) #set($invoicemonth =
 $context.getLocaleManager().getMonthName($invoice.getValue("duedate"),
@@ -142,9 +142,8 @@ $invoiceformated.setValue("period", $recurringperiod)) ##--
               <p class="f-fallback">[[Amount]]</p>
             </th>
           </tr>
-          #set($products = $invoice.getValue("productlist")) #foreach ($product
-          in $products) #set ( $prod =
-          $mediaarchive.getProductById($product.productid) )
+          #set($products = $invoice.getValue("productlist"))
+          #foreach ($product    in $products) #set ( $prod =  $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
           <tr>
             <td valign="top" style="vertical-align: top">
               $product.productquantity
@@ -152,7 +151,7 @@ $invoiceformated.setValue("period", $recurringperiod)) ##--
 
             <td valign="top" style="vertical-align: top">
               ##
-              <div>$mediaarchive.getProductName($product.productid)</div>
+              <div>#text($prod)</div>
               ##
               <div style="font-size: 0.9em">
                 $!mediaarchive.text($prod.getValue("productdescription"),

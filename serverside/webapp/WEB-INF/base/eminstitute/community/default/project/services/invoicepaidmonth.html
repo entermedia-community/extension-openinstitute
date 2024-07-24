@@ -29,7 +29,7 @@
 	                		
 	                		<tbody>
 	                		###set( $invoices = $mediaarchive.query("collectiveinvoice").search())
-	                		#set( $invoices = $mediaarchive.getInvoiceFromMonth("paid", 2021, 6) )
+	                		#set( $invoices = $mediaarchive.getBean("invoiceManager").getInvoiceFromMonth("paid", 2021, 6) )
 	                		
 	                		#foreach($hit in $invoices)
                                     #if ($hit.instance_status == "active")

@@ -29,14 +29,14 @@
 	                		
 	                		<tbody>
 	                		###set( $invoices = $mediaarchive.query("collectiveinvoice").search())
-	                		#set( $invoices = $mediaarchive.getInvoiceFromMonth("paid", 2021, 6) )
+	                		#set( $invoices = $mediaarchive.getBean("invoiceManager").getInvoiceFromMonth("paid", 2021, 6) )
 	                		
 	                		#foreach($hit in $invoices)
                                     #if ($hit.instance_status == "active")
                                         #set($instancescount = $instancescount+1)
                                     #end
                                     <tr>
-                                    	<td>$!mediaarchive.getWorkspaceById($hit.collectionid)</td>
+                                    	<td>$!mediaarchive.getBean("invoiceManager").getWorkspaceById($hit.collectionid)</td>
                                         <td>$hit.invoicenumber</td>
                                         <td>$!context.getDate($hit.createdon)</td>
                                         <td>$!context.getDate($hit.invoicepaidon)</td>

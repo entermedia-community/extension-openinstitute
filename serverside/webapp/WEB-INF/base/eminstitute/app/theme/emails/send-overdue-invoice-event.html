@@ -549,14 +549,13 @@
                                 
                                #set($products = $invoice.getValue("productlist"))
 								#foreach ($product in $products)
-									#set ( $prod = $mediaarchive.getProductById($product.productid) )
+									#set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
 									<tr>
 										<td valign="top" style="vertical-align: top;">$product.productquantity</td>
 										
 										<td valign="top" style="vertical-align: top;">
 											<div>
 											
-											##$mediaarchive.getProductName($prod.productid)
 											
 											#set($productname = $replacer.replace($prod.name, $invoiceformated))
 											
