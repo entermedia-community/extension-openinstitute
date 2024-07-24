@@ -109,7 +109,7 @@
 							title="[[Task]]"
 							data-focuson="$task.id"
 							data-width="900"
-							class="taskedit-$!{task.taskstatus} ajax btn btn-sm mx-1 text-brand" 
+							class="taskedit-$!{task.taskstatus} ajax btn btn-light btn-xs mx-1" 
 							data-targetdiv="taskrow#eid(${task.id})" 
 							data-oemaxlevel="1" 
 						>
@@ -165,7 +165,7 @@
 
 	<div class="d-flex mt-2">
 	#if($user && $caneditgoal)
-		<a class="appendgoalbutton btn btn-sm btn-outline-brand me-1"
+		<a class="appendgoalbutton btn btn-primary btn-xs btn-outline-brand me-1"
 			title="[[Add Task]]"
 			data-targetdiv="$target"
 			data-cancelsubmit="true"

@@ -20,12 +20,15 @@ $context.putPageValue("searcher",$searcher)
 $context.putPageValue("view", "librarycollection/$view")
 $context.putPageValue("data", $librarycol)
 
-<div class="card-block">
-	<h2 class="mb-3">General Settings</h2>
+<div class="emwidget">
+	<div class="emwidget-header">
+		<div class="emwidget-name">[[General Settings]]</div>
+	</div>
+	<div class="emwidget-content">
 	<form name="savecollective" 
 		enctype="multipart/form-data" 
 		id="savecollective"
-		action="$applink/collective/edit/save.html"
+		action="$communitylink/${librarycol.urlname}/edit/save.html"
 		class="ajaxform"
 		data-targetdivinner="collectivesettingscontent"
 		data-oemaxlevel="1"
@@ -38,10 +41,12 @@ $context.putPageValue("data", $librarycol)
 
 		$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
-		<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
+
+<div class="py-4">
+		<a class="btn btn-primary submitform-oehtml ">[[Save]]</a>
 			
 		#if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
-		<a class="btn btn-sm btn-danger confirm"
+		<a class="btn btn-danger confirm"
 			style="margin: 0px 0 0 10px;" 
 			data-confirm="[[Are you sure]]?" 
 			href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
@@ -50,14 +55,18 @@ $context.putPageValue("data", $librarycol)
 		#end
 
 		#if($canviewsettings)
-		<a class="btn btn-sm btn-light float-right"
+		
+		<a class="btn  btn-light float-right"
 			style="margin: 0px 0 0 10px;" 
 			target="_blank"
 			href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection">
 			<i class="fa fa-database"></i>
 		</a>
+		
 		#end
+		</div>
 	</form>
+	</div>
 </div>
 
 

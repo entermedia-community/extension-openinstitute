@@ -1739,11 +1739,7 @@ textarea.blog-comments-input {
   width: 100%;
   border-collapse: collapse;
 }
-.form-control {
-  font-size: 1rem;
-  line-height: 1.5;
-  height: auto !important;
-}
+
 .storecontainer .ajaxloginbox {
   background-color: #eee;
 }
@@ -1763,11 +1759,7 @@ textarea.blog-comments-input {
   background-size: 100% 70px;
   background-position: left;
 }
-.card-collections-thumb {
-  height: 40px;
-  width: 40px;
-  background-size: contain;
-}
+
 h1.project-h1 {
   color: #ffffff;
   font-size: 42px;
