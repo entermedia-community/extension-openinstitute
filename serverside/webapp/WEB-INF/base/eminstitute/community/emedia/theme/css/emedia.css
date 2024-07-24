@@ -502,10 +502,12 @@ footer {
   background-color: #45485e;
 }
 .modal-content {
-  background-color: #45485e;
+
 }
 .modal-header {
+	background-color: #45485e;
   border-bottom-color: #626584;
+  color:#fff;
 }
 .modal-footer {
   border-top-color: #626584;

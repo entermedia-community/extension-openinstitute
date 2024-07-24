@@ -1,18 +1,20 @@
 
+#if($communitytagcategory)
+
 	#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser", $selecteduser.getId()).search($context) )
 	#set($oids = [])
 	#foreach( $ohit in $ids )
 		#set($x = $oids.add($ohit.collectionid))
 	#end
 	
-	#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
+	#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
 
 	#set( $modcollections = $chatManager.loadCollectionsModified($collections, $selecteduser.getId() ) )
 	
 	#if($collections.size()>0)
-	<h2>[[Team Projects]]</h2>
+	<h3>[[Team Projects]]</h3>
 
-	<div class="stations-grid ">
+	<div class="stations-grid p-4">
 		<div class="project-grid">
 			#foreach( $ohit in $collections )
 						#set($link = false)
@@ -23,8 +25,9 @@
 						#else
 						#set($link = "$communitylink/theme/images/OI_flower.png")
 						#end
+						#if($collection.urlname)
 						<div class="card-collections">
-						<a href="${applink}/collective/channel/${ohit.id}/#urlencode($collection.getWebName()).html" 
+						<a href="${communitylink}/${collection.urlname}" 
 							class=" #if($selectedproject==$collection.id) active #end">
 	
 						<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
@@ -32,6 +35,7 @@
 								#if( $modcollections.contains($collection.getId())) * #end</div>
 						</a>
 						</div>
+						#end
 			#end
 		</div>
 		<div class="clearfix"></div>	
@@ -45,9 +49,9 @@
 	#end
 		#if($foids.size()>0)
 	
-		#set( $organizations = $mediaarchive.query("librarycollection").ids($foids).sort("name").search() )
+		#set( $organizations = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($foids).sort("name").search() )
 
-		<h2> [[Liked]]</h2>
+		<h3> [[Liked]]</h3>
 		<div class="stations-grid ">
 			<div class="project-grid ">
 				
@@ -77,5 +81,5 @@
 				<div class="clearfix"></div>	
 		</div>
 	#end
-		
+#end		
 
