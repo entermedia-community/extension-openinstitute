@@ -175,9 +175,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoiceSearcher.saveData(invoice);
 				log.info("Invoice Created for recurring product for: " +collection);
 				
-				String recurrentCount = product.getValue("recurringperiod");
+				int recurrentCount = product.getInt("recurringperiod");
 				int currentMonth = nextBillOn.getMonth();
-				nextBillOn.setMonth(currentMonth + recurrentCount.toInteger() );
+				nextBillOn.setMonth(currentMonth + recurrentCount );
 				product.setValue("nextbillon", nextBillOn);
 				product.setValue("lastgeneratedinvoicedate", today.getTime());
 				productSearcher.saveData(product);
