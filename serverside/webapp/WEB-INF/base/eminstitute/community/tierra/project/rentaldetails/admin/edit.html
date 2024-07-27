@@ -1,9 +1,6 @@
 ##Exising ones 
 ##No existing programs found.
 
-
-    [[Add a new Invoice and email the billing contacts]]
-
  <div style="padding:20px;">
 #set( $searchtype = "collectiveproduct")
 #set( $searcher = $mediaarchive.getSearcher($searchtype) )
@@ -15,10 +12,11 @@ $context.putPageValue("searcher",$searcher)
 
 <form name="saveproject" 
 		id="saveproject" 
-		action="$apphome/home/rentaldetails/admin/save.html" 
+		action="/${librarycol.urlname}/rentaldetails/admin/save.html" 
 		method="post"
-		class="ajaxform autocloseform"
-			data-targetdiv="storeworkarea"
+		
+		class="ajaxform"
+			data-targetdiv="saveproject"
 			data-oemaxlevel="1">
 
 

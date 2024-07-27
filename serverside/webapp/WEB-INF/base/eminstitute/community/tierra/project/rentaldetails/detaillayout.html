@@ -13,7 +13,7 @@
       <button class="btn btn-sm m-1" id="shareProperty" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
       #if( $caneditcollection)
         <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
-          href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
+          href="${communityhome}/project/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
           <i class="fas fa-edit"></i> [[Edit Product]]
         </a>
         #set($uploadlink = "$communityhome/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")

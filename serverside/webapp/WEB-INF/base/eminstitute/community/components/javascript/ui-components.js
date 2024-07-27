@@ -1066,7 +1066,7 @@ uiload = function () {
     console.log(id);
     var modaldialog = $("#" + id);
     if (modaldialog.length == 0) {
-      jQuery("#application").append(
+      jQuery("body").append(
         '<div class="modal" tabindex="-1" id="' +
           id +
           '" style="display:none" ></div>'
