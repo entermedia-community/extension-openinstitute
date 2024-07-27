@@ -118,9 +118,9 @@
         curGuestVal.pet += f;
       }
 
-      var guestStr = curGuestVal.guest + " guest" + (curGuestVal.guest > 1 ? "s" : "");
+      var guestStr = curGuestVal.guest + "" + (curGuestVal.guest > 1 ? "s" : "");
       if (curGuestVal.pet > 0) {
-        guestStr += ", " + curGuestVal.pet + " pet" + (curGuestVal.pet > 1 ? "s" : "");
+        guestStr += ", " + curGuestVal.pet + "" + (curGuestVal.pet > 1 ? "s" : "");
       }
 
       $("#guests").val(guestStr);

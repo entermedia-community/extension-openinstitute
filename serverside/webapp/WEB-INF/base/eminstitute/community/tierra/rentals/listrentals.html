@@ -65,11 +65,27 @@ No products
             </p>
             <p class="owner text-truncate">Hosted by <a href="/${collection.urlname}">#text($collection)</a></p>
             <div class="d-flex justify-content-between mt-2">
-              <p class="availability">Sep 10 &mdash; Sep 25</p>
+              <p class="availability">Low Season</p>
               <p class="price">
-                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
-                  $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
-                  style="text-transform: lowercase;">[[Night]]</span>
+                
+                #set( $price = $!context.doubleToMoney($subtotal, 2) )
+                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",$aproduct.currencytype )) $price</span>
+                /
+                <span style="text-transform: lowercase;">
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                </span>
+              </p>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <p class="availability">High Season</p>
+              <p class="price">
+              	#set( $price = $price * 1.3)
+                #set( $price = $!context.doubleToMoney($price, 2) )              	
+                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",$aproduct.currencytype )) $price</span>
+                /
+                <span style="">
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                </span>
               </p>
             </div>
           </div>

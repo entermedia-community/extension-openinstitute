@@ -8,6 +8,11 @@
   <div class="d-flex flex-wrap justify-content-between mb-4">
     <div class="d-flex flex-column">
       <p class="text-secondary mb-0"><a href="/${librarycol.urlname}">#text($librarycol)</a></p>
+      <div class="d-flex align-items-center">
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
+        <span class="mx-2">&middot;</span>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
+      </div>
     </div>
     <div class="d-flex flex-column flex-md-row align-items-center">
       <button class="btn btn-sm m-1" id="shareProperty" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
@@ -59,18 +64,15 @@
       <div class="reservation">
         <div class="d-flex align-items-center justify-content-between">
           #set($subtotal = $aproduct.getDouble("productprice"))
-          <p class="price m-0"><span class="currency">
-          $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
-          $!context.doubleToMoney($subtotal*30, 2)</span>/
-                   ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
-                   Monthly
+          <p class="price m-0"><span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
+              $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
            </p>
-          <p class="price m-0"><span class="currency">
-          $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
-          $!context.doubleToMoney($subtotal, 2)</span>/
-                   ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
-                   Daily
-           </p>
+          <div class="d-flex align-items-center gap-2">
+            <p class="rating m-0">★ 4.56</p>
+            &middot;
+            <p class="reviews m-0">155 reviews</p>
+          </div>
         </div>
 
 <form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
@@ -95,7 +97,7 @@
             </div>
           </div>
           <div class="form-floating flex-grow-1 guests">
-            <input class="form-control" id="guests" name="guests" placeholder="Guests" value="1" />
+            <input class="form-control" id="guests" placeholder="Guests" value="1 guest" />
             <label for="guests">Guests</label>
             <div id="guestsPicker">
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
@@ -150,7 +152,7 @@
       </form>        
         <div class="pricing">
           <p class="text-center caption mt-2">
-            You won't be charged yet. <a href="/${librarycol.urlname}/rentaldetails/policy.html" class="emdialog">Learn more</a>
+            You won't be charged yet. <a href="/${librarycol.urlname}/policy.html" class="emdialog">Learn more</a>
           </p>
           <!-- 
           <div class="d-flex mt-3">
@@ -179,12 +181,26 @@
           #ifnull($userimageurl) #set( $userimageurl = "$communityhome/theme/images/user.svg" ) #end
           <img src="$userimageurl" />
 
-          <p class="name">$chatuser</p>
-         
+          <p class="name"></p>
+          <p class="rank"></p>
+          <div class="d-flex justify-content-around w-100 stats">
+            <p class="reviews">
+              <strong>150</strong>
+              <small>Reviews</small>
+            </p>
+            <p class="rating">
+              <strong>4.85</strong>
+              <small>Rating</small>
+            </p>
+            <p class="duration">
+              <strong>1</strong>
+              <small>Year hosting</small>
+            </p>
+          </div>
         </div>
         <p class="description">
-                   Feel free to contact with questions using the button below
-
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
         </p>
         <a href="https://wa.me/+50240224217" class="btn btn-whatsapp"><svg xmlns="http://www.w3.org/2000/svg" width="16"
             height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -194,14 +210,35 @@
       </div>
     </div>
   </div>
-  
-  
+  <p class="h5 mt-5 ms-1">Amenities</p>
+  <div class="d-flex flex-wrap align-items-center">
+    <div class="amenity">
+      <i class="fas fa-bed"></i>
+      <p class="m-0">1 king bed</p>
+    </div>
+    <div class="amenity">
+      <i class="fas fa-shower"></i>
+      <p class="m-0">Shared Bathroom</p>
+    </div>
+    <div class="amenity">
+      <i class="fas fa-home"></i>
+      <p class="m-0"> Host's family lives here</p>
+    </div>
+    <div class="amenity more">
+      <p class="m-0">See More</p>
+    </div>
+  </div>
   <p class="h5 mt-3">About this place</p>
   <p class="description">
     $!aproduct.getText("productdescription",$context)
   </p>
   <hr />
   <div class="d-flex w-100 stats-header gap-2 mt-4 mb-2">
+      <div class="d-flex align-items-center">
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
+        <span class="mx-2">&middot;</span>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
+      </div>
   </div>
   <div class="row mb-4">
     <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
@@ -250,18 +287,22 @@
   <div class="row my-4">
     <div class="col col-12 col-md-6 d-flex flex-column gap-2 review-item h-100 pb-4">
       <div class="d-flex align-items-center gap-2">
+        <img src="https://loremflickr.com/g/320/240/potrait,people/all" alt="image" class="img-thumbnail circular" />
         <div class="d-flex flex-column">
-          <p class="m-0 text-muted small">Rented since 2022</p>
+          <p class="m-0">John Doe</p>
+          <p class="m-0 text-muted small">May 2021</p>
         </div>
       </div>
       <p class="m-0">
-       5% of rental profits will be donated to Open Institute non-profit to be applied locally
+        We had a wonderful stay at Made's place! The tree house is as dreamy
+        and beautiful as the pictures. It feels private and is away from the
+        bustle of tourists, but there are restaurants
       </p>
     </div>
   </div>
- 
- <br><br>
- 
+  <div class="d-flex justify-content-start">
+    <button class="btn btn-outline-dark mb-3">Show all reviews</button>
+  </div>
 </div>
 <div class="modal fade" id="preview">
   <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">

@@ -91,10 +91,10 @@ $(document).ready(function () {
     }
 
     var guestStr =
-      curGuestVal.guest + " guest" + (curGuestVal.guest > 1 ? "s" : "");
+      curGuestVal.guest + "" + (curGuestVal.guest > 1 ? "" : "");
     if (curGuestVal.pet > 0) {
       guestStr +=
-        ", " + curGuestVal.pet + " pet" + (curGuestVal.pet > 1 ? "s" : "");
+        ", " + curGuestVal.pet + "" + (curGuestVal.pet > 1 ? "" : "");
     }
 
     $("#guests").val(guestStr);

@@ -44,7 +44,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			//Move this to aux-table?
 			HashMap<String,Object> productItem = new HashMap<String,Object>();
 				productItem.put("productid", product.getValue("id"));
-				productItem.put("productname", product.getValue("name"));
+				productItem.put("productname", product.getName());
 				String productname = product.getValue("name");
 				//productItem.put("productdescription", product.getValue("productdescription"));
 				productItem.put("productquantity", 1 );
