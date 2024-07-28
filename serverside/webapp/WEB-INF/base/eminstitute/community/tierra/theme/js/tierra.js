@@ -6,8 +6,8 @@ $(document).ready(function () {
     window.location.href = $(this).data("href");
   });
 
-  $("#checkIn").val(moment().format("DD MMM YYYY"));
-  $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
+ // $("#checkIn").val(moment().format("YYYY-MM-DD"));
+ // $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
 
   var blockeddates = $("#checkOut").data("disableddates");
   var config = {
@@ -16,8 +16,8 @@ $(document).ready(function () {
     hoveringTooltip: false,
     showShortcuts: false,
     singleMonth: true,
-    startDate: moment().format("DD MMM YYYY"),
-    format: "DD MMM YYYY",
+    startDate: moment().format("YYYY-MM-DD"),
+    format: "YYYY-MM-DD",
     beforeShowDay: function (t) {
       var m = moment(t.toUTCString());
       var formated = m.format("YYYY-MM-DD");
@@ -46,19 +46,19 @@ $(document).ready(function () {
       .bind("datepicker-change", function (event, obj) {
         $("#checkOut").data("dateRangePicker").destroy();
 
-        config.startDate = moment($(this).val(), "DD MMM YYYY")
+        config.startDate = moment($(this).val(), "YYYY-MM-DD")
           .add(1, "days")
-          .format("DD MMM YYYY");
+          .format("YYYY-MM-DD");
 
         $("#checkOut").dateRangePicker(config);
         if (
-          moment($(this).val(), "DD MMM YYYY").isAfter(
-            moment($("#checkOut").val(), "DD MMM YYYY")
+          moment($(this).val(), "YYYY-MM-DD").isAfter(
+            moment($("#checkOut").val(), "YYYY-MM-DD")
           )
         ) {
           $("#checkOut").val(config.startDate);
         }
-        config.startDate = moment().format("DD MMM YYYY");
+        config.startDate = moment().format("YYYY-MM-DD");
       })
       .bind("datepicker-open", function () {
         $("#gp-mask").show();

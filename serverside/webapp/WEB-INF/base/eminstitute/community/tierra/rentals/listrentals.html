@@ -1,18 +1,32 @@
 $pages.include("${communityhome}/rentals/filters.html", $context)
 
-#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id))
-#set( $collections = $mediaarchive.getCachedSearch($query))
+#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).named("collections"))
+#set( $collections = $query.search($context))
 #if( $collections.isEmpty() )
 
 No products
 
 #else
-#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").sort("name").search($context))
-
+	#set( $query = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").named("products").sort("name") )
+	
+	#set( $in = $context.getRequestParameter("in"))
+	#ifnotnull( $in)
+	 #set( $null = $query.not("blockeddates",$in) )  ##//YYYY-MM-DD $in
+	#end
+	
+	#set( $hits = $query.search($context) )
 #end
+
+
 
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">
+  
+  #if( $hits.isEmpty() )
+  
+  	[[No availability for ]] $in
+  	
+  #end
     #set( $adId = 0)
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))

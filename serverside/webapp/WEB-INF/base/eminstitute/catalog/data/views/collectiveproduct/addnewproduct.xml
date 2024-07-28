@@ -10,5 +10,7 @@
 	<property id="currencytype" />
 	<property id="productprice" />
 	<property id="recurringperiod" />
-	<property id="featured" />
+	<property id="blockeddates" />
+	<property id="producttype" />
+	
 </properties>
