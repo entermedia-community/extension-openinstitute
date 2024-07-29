@@ -75,23 +75,17 @@
           </div>
         </div>
 
-<form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
-        
+      <form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">  
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" />
+              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" required />
               
               <label for="checkIn">Request Stay</label>
             </div>
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkOut" name="checkOut"  placeholder="Check-Out"
-        		data-disableddates='[      
-              	#foreach( $date in $blockeddates.getBlockedDates())
-              		#if( ${foreach.count} != 1), #end
-					{ "$date.toDateString()" }
-				#end
-				]'
+              <input class="form-control" id="checkOut" name="checkOut"  placeholder="Check-Out" autocomplete="off" required
+                data-disableddates='#foreach( $date in $blockeddates.getBlockedDates())$date.toDateString(),#end'
                />
               <label for="checkOut">Check-Out</label>
             </div>
