@@ -8,7 +8,11 @@ $(document).ready(function () {
 
   var dateFormat = "D MMM, YYYY";
 
-  var blockeddates = $("#checkOut").data("disableddates").split(",");
+  var blockeddates = $("#checkOut").data("disableddates");
+  if (!blockeddates) {
+    blockeddates = "";
+  }
+  blockeddates = blockeddates.split(",");
 
   var config = {
     autoClose: true,
