@@ -97,7 +97,7 @@ No products
                 #set( $price = $!context.doubleToMoney($price, 2) )              	
                 <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",$aproduct.currencytype )) $price</span>
                 /
-                <span style="">
+                <span>
                    $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
                 </span>
               </p>
