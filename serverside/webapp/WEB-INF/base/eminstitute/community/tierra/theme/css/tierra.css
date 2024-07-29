@@ -593,8 +593,52 @@ p.h5,
   padding: 12px;
   max-width: 360px;
   display: flex;
+  border-radius: 8px;
+  position: relative;
 }
 
+.property-container.fully-booked::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+.property-container.fully-booked::after {
+  content: "Fully Booked";
+  position: absolute;
+  top: 170px;
+  left: 50%;
+  width: 250px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ff5555;
+  border: 2px dotted #ff5555;
+  outline: 2px solid #ff5555;
+  outline-offset: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  border-radius: 8px;
+  z-index: 11;
+  opacity: 1;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+.fully-booked:hover::after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0.8);
+}
+.fully-booked:hover::before {
+  opacity: 0;
+}
 .property-body {
   width: 100%;
   /* box-shadow: 0 0 3px rgba(200, 200, 200, 0.5); */
@@ -627,7 +671,8 @@ p.h5,
 
 .property-body:hover button.owner-btn {
   border-radius: 8px;
-  left: 16px;
+  left: auto;
+  right: 16px;
   bottom: 16px;
 }
 
@@ -713,7 +758,8 @@ button.owner-btn {
   height: 80px;
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  left: auto;
+  right: 10px;
   border-radius: 40px;
   overflow: hidden;
   box-shadow: 0 0 8px rgba(128, 128, 128, 0.5);
