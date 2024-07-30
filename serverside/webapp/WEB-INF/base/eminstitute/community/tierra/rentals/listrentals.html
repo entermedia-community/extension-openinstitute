@@ -18,7 +18,11 @@ No products
 #end
 
 $context.putPageValue("hits",$hits)
-
+ #if( $hits.isEmpty() )
+  
+  	[[No availability for ]] $in
+  	
+  #end
 
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">

@@ -1,8 +1,6 @@
 
 #if($region)
-	#set( $link = $region.linkhome)
-#else
-	#set( $link = $communityhome)
+	#set( $linkhome = $region.linkhome)
 #end
 
     #set( $adId = 0)
@@ -15,7 +13,7 @@
       
       #set($fullybooked = $aproduct.getBoolean("fullybooked"))
       <div class="property-container #if($fullybooked) fully-booked #end"
-        data-href="$link/${collection.urlname}/rentaldetails/${aproduct.urlname}"
+        data-href="$!{linkhome}/${collection.urlname}/rentaldetails/${aproduct.urlname}"
         title="#text($aproduct.name)">
         <div class="property-body"> 
           $context.putPageValue("aproduct",$aproduct)
@@ -57,7 +55,7 @@
             <p class="location text-truncate" style="max-width: calc(100% - 50px)">
               #text($aproduct)
             </p>
-            <p class="owner text-truncate">Hosted by <a href="$link/${collection.urlname}">#text($collection)</a></p>
+            <p class="owner text-truncate">Hosted by <a href="$!{linkhome}/${collection.urlname}">#text($collection)</a></p>
             <div class="d-flex justify-content-between mt-2">
               <p class="availability">Low Season</p>
               <p class="price">
