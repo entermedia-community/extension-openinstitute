@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <data id="1" linkhome="https://san-marcos.tierra-sagrada.org">
+    <name> 
+      <language id="en"><![CDATA[Guatemala - San Marcos LL]]></language> 
+    </name> 
+  </data>  
+  <data id="2" linkhome="https://zapallar.tierra-sagrada.org"> 
+    <name> 
+      <language id="en"><![CDATA[Chile - Zapallar]]></language> 
+    </name> 
+  </data>  
+  <data id="3" linkhome="https://cincinnati.tierra-sagrada.org"> 
+    <name> 
+      <language id="en"><![CDATA[USA - Cincinnati]]></language> 
+    </name>
+  </data>  
+  <data id="4" linkhome="https://san-miguel-de-allende.tierra-sagrada.org"> 
+    <name> 
+      <language id="en"><![CDATA[Mexico]]></language> 
+    </name> 
+  </data>  
+</root>
