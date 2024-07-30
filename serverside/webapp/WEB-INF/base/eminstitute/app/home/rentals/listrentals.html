@@ -21,7 +21,7 @@ $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("producttype","5"
         #set($link = "$applink/collective/channel/${collection.id}/#dash($collective.getName()).html")
       #end
 
-      <div class="property-container" id="ad"
+      <div class="property-container"
         data-href="$sitelink/app/home/rentaldetails/${collection.id}/$aproduct.id/#dash($aproduct.name).html"
         title="#text($aproduct.name)">
         <div class="property-body"> 

@@ -8,17 +8,12 @@
   <div class="d-flex flex-wrap justify-content-between mb-4">
     <div class="d-flex flex-column">
       <p class="text-secondary mb-0"><a href="/${librarycol.urlname}">#text($librarycol)</a></p>
-      <div class="d-flex align-items-center">
-        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
-        <span class="mx-2">&middot;</span>
-        <p class="reviews m-0"><strong>155</strong> reviews</p>
-      </div>
     </div>
     <div class="d-flex flex-column flex-md-row align-items-center">
       <button class="btn btn-sm m-1" id="shareProperty" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
       #if( $caneditcollection)
         <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
-          href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
+          href="${communityhome}/project/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
           <i class="fas fa-edit"></i> [[Edit Product]]
         </a>
         #set($uploadlink = "$communityhome/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
@@ -64,39 +59,37 @@
       <div class="reservation">
         <div class="d-flex align-items-center justify-content-between">
           #set($subtotal = $aproduct.getDouble("productprice"))
-          <p class="price m-0"><span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
-              $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
-              style="text-transform: lowercase;">[[Night]]</span></p>
-          <div class="d-flex align-items-center gap-2">
-            <p class="rating m-0">★ 4.56</p>
-            &middot;
-            <p class="reviews m-0">155 reviews</p>
-          </div>
+          <p class="price m-0"><span class="currency">
+          $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
+          $!context.doubleToMoney($subtotal*30, 2)</span>/
+                   ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                   Monthly
+           </p>
+          <p class="price m-0"><span class="currency">
+          $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
+          $!context.doubleToMoney($subtotal, 2)</span>/
+                   ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                   Daily
+           </p>
         </div>
 
-<form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">        
-        
+      <form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" />
+              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" required />
               
-              <label for="checkIn">Check-In</label>
+              <label for="checkIn">Request Stay</label>
             </div>
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkOut" name="checkOut"  placeholder="Check-Out"
-        		data-disableddates='[      
-              	#foreach( $date in $blockeddates.getBlockedDates())
-              		#if( ${foreach.count} != 1), #end
-					{ "$date.toDateString()" }
-				#end
-				]'
+              <input class="form-control" id="checkOut" name="checkOut" placeholder="Check-Out" autocomplete="off" required
+                data-disableddates='#foreach( $date in $blockeddates.getBlockedDates())$date.toDateString(),#end'
                />
               <label for="checkOut">Check-Out</label>
             </div>
           </div>
           <div class="form-floating flex-grow-1 guests">
-            <input class="form-control" id="guests" placeholder="Guests" value="1 guest" />
+            <input class="form-control" id="guests" name="guests" placeholder="Guests" value="1" />
             <label for="guests">Guests</label>
             <div id="guestsPicker">
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
@@ -145,14 +138,14 @@
         
         
         <input name="productid" value="$aproduct.getId()" type="hidden" />
+        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">Request Dates</button>
         
-        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">Reserve</button>
-        
-      </form>        
+      </form>
         <div class="pricing">
           <p class="text-center caption mt-2">
-            You won't be charged yet. <a href="#">Learn more</a>
+            You won't be charged yet. <a href="https://www.canva.com/design/DAGIhxVrO0M/v2LK_QPD2t_twhXgbabq8w/view?utm_content=DAGIhxVrO0M&utm_campaign=designshare&utm_medium=link&utm_source=editor" target="_new">Learn more</a>
           </p>
+          <!-- 
           <div class="d-flex mt-3">
             <p class="label flex-grow-1">$45 &times; 7 nights</p>
             ##<p class="value">$318</p>
@@ -161,15 +154,12 @@
             <p class="label flex-grow-1">Weekly stay discount</p>
             <p class="value text-success">30%</p>
           </div>
-          <div class="d-flex">
-            <p class="label flex-grow-1">Cleaning fee</p>
-            <p class="value">$10</p>
-          </div>
           <hr class="divider" />
           <div class="d-flex">
-            <p class="label flex-grow-1"><strong>Total</strong></p>
+            ##<p class="label flex-grow-1"><strong>Total</strong></p>
             ## <p class="value"><strong>$344</strong></p>
           </div>
+          -->
         </div>
       </div>
     </div>
@@ -182,26 +172,12 @@
           #ifnull($userimageurl) #set( $userimageurl = "$communityhome/theme/images/user.svg" ) #end
           <img src="$userimageurl" />
 
-          <p class="name"></p>
-          <p class="rank"></p>
-          <div class="d-flex justify-content-around w-100 stats">
-            <p class="reviews">
-              <strong>150</strong>
-              <small>Reviews</small>
-            </p>
-            <p class="rating">
-              <strong>4.85</strong>
-              <small>Rating</small>
-            </p>
-            <p class="duration">
-              <strong>1</strong>
-              <small>Year hosting</small>
-            </p>
-          </div>
+          <p class="name">$chatuser</p>
+         
         </div>
         <p class="description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
+                   Feel free to contact with questions using the button below
+
         </p>
         <a href="https://wa.me/+50240224217" class="btn btn-whatsapp"><svg xmlns="http://www.w3.org/2000/svg" width="16"
             height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -211,35 +187,14 @@
       </div>
     </div>
   </div>
-  <p class="h5 mt-5 ms-1">Amenities</p>
-  <div class="d-flex flex-wrap align-items-center">
-    <div class="amenity">
-      <i class="fas fa-bed"></i>
-      <p class="m-0">1 king bed</p>
-    </div>
-    <div class="amenity">
-      <i class="fas fa-shower"></i>
-      <p class="m-0">Shared Bathroom</p>
-    </div>
-    <div class="amenity">
-      <i class="fas fa-home"></i>
-      <p class="m-0"> Host's family lives here</p>
-    </div>
-    <div class="amenity more">
-      <p class="m-0">See More</p>
-    </div>
-  </div>
+  
+  
   <p class="h5 mt-3">About this place</p>
   <p class="description">
     $!aproduct.getText("productdescription",$context)
   </p>
   <hr />
   <div class="d-flex w-100 stats-header gap-2 mt-4 mb-2">
-      <div class="d-flex align-items-center">
-        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
-        <span class="mx-2">&middot;</span>
-        <p class="reviews m-0"><strong>155</strong> reviews</p>
-      </div>
   </div>
   <div class="row mb-4">
     <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
@@ -288,22 +243,18 @@
   <div class="row my-4">
     <div class="col col-12 col-md-6 d-flex flex-column gap-2 review-item h-100 pb-4">
       <div class="d-flex align-items-center gap-2">
-        <img src="https://loremflickr.com/g/320/240/potrait,people/all" alt="image" class="img-thumbnail circular" />
         <div class="d-flex flex-column">
-          <p class="m-0">John Doe</p>
-          <p class="m-0 text-muted small">May 2021</p>
+          <p class="m-0 text-muted small">Rented since 2022</p>
         </div>
       </div>
       <p class="m-0">
-        We had a wonderful stay at Made's place! The tree house is as dreamy
-        and beautiful as the pictures. It feels private and is away from the
-        bustle of tourists, but there are restaurants
+       5% of rental profits will be donated to Open Institute non-profit to be applied locally
       </p>
     </div>
   </div>
-  <div class="d-flex justify-content-start">
-    <button class="btn btn-outline-dark mb-3">Show all reviews</button>
-  </div>
+ 
+ <br><br>
+ 
 </div>
 <div class="modal fade" id="preview">
   <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">

@@ -1,26 +1,40 @@
 $pages.include("${communityhome}/rentals/filters.html", $context)
 
-#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id))
-#set( $collections = $mediaarchive.getCachedSearch($query))
+#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).named("collections"))
+#set( $collections = $query.search($context))
 #if( $collections.isEmpty() )
 
 No products
 
 #else
-#set( $hits = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").sort("name").search($context))
-
+	#set( $query = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").named("products").sort("name") )
+	
+	#set( $in = $context.getRequestParameter("in"))
+	#ifnotnull( $in)
+	 #set( $null = $query.not("blockeddates",$in) )  ##//YYYY-MM-DD $in
+	#end
+	
+	#set( $hits = $query.search($context) )
 #end
+
+
 
 <div class="main container-fluid text-center">
   <div class="d-flex justify-content-center flex-wrap">
+  
+  #if( $hits.isEmpty() )
+  
+  	[[No availability for ]] $in
+  	
+  #end
     #set( $adId = 0)
     #foreach( $aproduct in $hits.getPageOfHits())
        #set($collection = $mediaarchive.getCachedData("librarycollection",$aproduct.collectionid))
       #if(!$link)
         #set($link = "/${librarycol.urlname}")
       #end
-
-      <div class="property-container" id="ad"
+      #set($fullybooked = true)
+      <div class="property-container #if($fullybooked) fully-booked #end"
         data-href="$communitylink/${collection.urlname}/rentaldetails/${aproduct.urlname}"
         title="#text($aproduct.name)">
         <div class="property-body"> 
@@ -65,11 +79,27 @@ No products
             </p>
             <p class="owner text-truncate">Hosted by <a href="/${collection.urlname}">#text($collection)</a></p>
             <div class="d-flex justify-content-between mt-2">
-              <p class="availability">Sep 10 &mdash; Sep 25</p>
+              <p class="availability">Low Season</p>
               <p class="price">
-                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
-                  $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
-                  style="text-transform: lowercase;">[[Night]]</span>
+                
+                #set( $price = $!context.doubleToMoney($subtotal, 2) )
+                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",$aproduct.currencytype )) $price</span>
+                /
+                <span style="text-transform: lowercase;">
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                </span>
+              </p>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <p class="availability">High Season</p>
+              <p class="price">
+              	#set( $price = $price * 1.3)
+                #set( $price = $!context.doubleToMoney($price, 2) )              	
+                <span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",$aproduct.currencytype )) $price</span>
+                /
+                <span>
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+                </span>
               </p>
             </div>
           </div>

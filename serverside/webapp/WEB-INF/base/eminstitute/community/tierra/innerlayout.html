@@ -9,6 +9,10 @@
 	#elseif( $communitytagcategory )
 		#set($metatitle = "#text($communitytagcategory)")
 	#end
+	
+	#ifnotnull($collectiveproduct)
+		#set($metatitle = "#text($collectiveproduct) - $metatitle")
+	#end
 	#if( $metatitle )
 		#if( $content.title )
 			#set($metatitle = "$content.title - $metatitle")

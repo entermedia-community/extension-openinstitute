@@ -1,27 +1,27 @@
 #ifnull( $aproduct )
-#set( $aproduct = $data)
+  #set( $aproduct = $collectiveproduct)
 #end
 
 <div class="container" id="storedetailarea">
 
-  <h2 class="mt-3 mb-1 text-dark">$!aproduct.getText("name",$context)</h2>
+  <h2 class="mt-3 mb-1 text-dark">#text($!aproduct)</h2>
   <div class="d-flex flex-wrap justify-content-between mb-4">
     <div class="d-flex flex-column">
-      <p class="text-secondary mb-0">San Marcos La Laguna</p>
+      <p class="text-secondary mb-0"><a href="/${librarycol.urlname}">#text($librarycol)</a></p>
       <div class="d-flex align-items-center">
-        <p class="rating m-0">★ 4.56</p>
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
         <span class="mx-2">&middot;</span>
-        <p class="reviews m-0">155 reviews</p>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
       </div>
     </div>
     <div class="d-flex flex-column flex-md-row align-items-center">
-      <button class="btn btn-sm m-1" id="shareAd" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
+      <button class="btn btn-sm m-1" id="shareProperty" title="Click to Copy the Link"><i class="fas fa-share-alt"></i> <span>Share</span></button>
       #if( $caneditcollection)
         <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
           href="$apphome/home/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
           <i class="fas fa-edit"></i> [[Edit Product]]
         </a>
-        #set($uploadlink = "$applink/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
+        #set($uploadlink = "$communityhome/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
         #set($oemaxlevel = "1")
         #set($targetdiv = "applicationmaincontent")
         <a href="$uploadlink" class="ajax moreactions btn btn-sm btn-outline-primary m-1" data-targetdivinner="storedetailarea"
@@ -33,26 +33,26 @@
     </div>
   </div>
 
-
+#if($aproduct)
 #set( $primaryAsset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
 #set( $query = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id))
 #set( $assethits = $mediaarchive.getCachedSearch($query))
-
+#end
   <div class="row image-gallery">
-    <div class="col col-md-6 col-sm-12 previewImg" style="max-height: 466px;">
-      <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1500x1500.jpg")' />
+    <div class="col col-md-6 col-sm-12 previewImg" data-index="0" style="max-height: 466px;">
+      <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1200x630.jpg")' />
     </div>
-    <div class="col col-md-6 d-none d-md-block">
+    <div class="col col-md-6 d-none d-md-block extraImg" style="max-height: 466px;">
       <div class="row">
         #foreach($asset in $assethits)
-        <div class="col-md-6 mt-3 previewImg">
-          <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="image" />
+        <div class="col-md-6 previewImg" data-index="$foreach.count">
+          <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' class="img-fluid" alt="image" />
         </div>
         	#if($foreach.count > 3) #break #end
         #end
       </div>
     </div>
-    <button class="d-flex align-items-center see-more shadow" data-bs-toggle="modal" data-bs-target="#preview" id="triggerPreview">
+    <button class="d-flex align-items-center see-more-photos shadow" data-bs-toggle="modal" data-bs-target="#preview" id="triggerPreview">
       <i class="fas fa-camera"></i>
       <p class="m-0 ms-2">See all photos</p>
     </button>
@@ -65,22 +65,28 @@
         <div class="d-flex align-items-center justify-content-between">
           #set($subtotal = $aproduct.getDouble("productprice"))
           <p class="price m-0"><span class="currency">$!context.getText($!mediaarchive.getCachedData("currencytype",
-              $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/<span
-              style="text-transform: lowercase;">[[Night]]</span></p>
+              $aproduct.currencytype )) $!context.doubleToMoney($subtotal, 2)</span>/
+                   $!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
+           </p>
           <div class="d-flex align-items-center gap-2">
             <p class="rating m-0">★ 4.56</p>
             &middot;
             <p class="reviews m-0">155 reviews</p>
           </div>
         </div>
+
+      <form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">  
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkIn" placeholder="Check-In" autocomplete="off" />
-              <label for="checkIn">Check-In</label>
+              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" required />
+              
+              <label for="checkIn">Request Stay</label>
             </div>
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkOut" placeholder="Check-Out" autocomplete="off" />
+              <input class="form-control" id="checkOut" name="checkOut"  placeholder="Check-Out" autocomplete="off" required
+                data-disableddates='#foreach( $date in $blockeddates.getBlockedDates())$date.toDateString(),#end'
+               />
               <label for="checkOut">Check-Out</label>
             </div>
           </div>
@@ -92,9 +98,13 @@
                 <p>Adults</p>
                 <small>Age 13+</small>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="adult">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="adult">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="guest">1</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="adult">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="adult">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <hr />
@@ -102,28 +112,43 @@
                 <p class="m-0">Children</p>
                 <small>Age 0 &mdash; 13</small>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="children">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="children">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="guest">0</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="children">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="children">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <hr />
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
                 <p class="m-0">Pets</p>
                 <div class="d-flex align-items-center">
-                  <button class="btn btn-dark g-minus" type="button" data-gt="pet">-</button>
+                  <button class="btn btn-dark g-minus" type="button" data-gt="pet">
+                    <i class="fa fa-minus"></i>
+                  </button>
                   <strong class="g-input" data-gt="pet">0</strong>
-                  <button class="btn btn-dark g-plus" type="button" data-gt="pet">+</button>
+                  <button class="btn btn-dark g-plus" type="button" data-gt="pet">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        ##<button class="btn btn-lg themed-btn w-100 mt-3">Reserve</button>
+        
+        
+        <input name="productid" value="$aproduct.getId()" type="hidden" />
+        
+        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">Reserve</button>
+        
+      </form>        
         <div class="pricing">
           <p class="text-center caption mt-2">
-            You won't be charged yet. <a href="#">Learn more</a>
+            You won't be charged yet. <a href="/${librarycol.urlname}/policy.html" class="emdialog">Learn more</a>
           </p>
+          <!-- 
           <div class="d-flex mt-3">
             <p class="label flex-grow-1">$45 &times; 7 nights</p>
             ##<p class="value">$318</p>
@@ -132,15 +157,12 @@
             <p class="label flex-grow-1">Weekly stay discount</p>
             <p class="value text-success">30%</p>
           </div>
-          <div class="d-flex">
-            <p class="label flex-grow-1">Cleaning fee</p>
-            <p class="value">$10</p>
-          </div>
           <hr class="divider" />
           <div class="d-flex">
-            <p class="label flex-grow-1"><strong>Total</strong></p>
+            ##<p class="label flex-grow-1"><strong>Total</strong></p>
             ## <p class="value"><strong>$344</strong></p>
           </div>
+          -->
         </div>
       </div>
     </div>
@@ -150,7 +172,7 @@
         <div class="details-card">
           #set($chatuser = $mediaarchive.getCachedData("user",$aproduct.owner))
           #set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
-          #ifnull($userimageurl) #set( $userimageurl = "$applink/theme/images/user.svg" ) #end
+          #ifnull($userimageurl) #set( $userimageurl = "$communityhome/theme/images/user.svg" ) #end
           <img src="$userimageurl" />
 
           <p class="name"></p>
@@ -206,15 +228,11 @@
   </p>
   <hr />
   <div class="d-flex w-100 stats-header gap-2 mt-4 mb-2">
-    <p>
-      <strong>&starf; 4.85</strong>
-      <small>Rating</small>
-    </p>
-    <span>&middot;</span>
-    <p>
-      <strong>150</strong>
-      <small>Reviews</small>
-    </p>
+      <div class="d-flex align-items-center">
+        <p class="rating m-0"><i class="fas fa-star"></i> <strong>4.56</strong></p>
+        <span class="mx-2">&middot;</span>
+        <p class="reviews m-0"><strong>155</strong> reviews</p>
+      </div>
   </div>
   <div class="row mb-4">
     <div class="col col-12 col-md-6 d-flex align-items-center rating-breakdown gap-2">
@@ -283,7 +301,7 @@
 <div class="modal fade" id="preview">
   <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
     <div class="modal-content bg-black">
-      <button type="button" class="btn btn-lg text-white align-self-start m-2" data-bs-dismiss="modal">
+      <button type="button" class="btn btn-lg text-white align-self-start m-2 close-preview" data-bs-dismiss="modal">
         <i class="fas fa-times me-1 text-white"></i>
         <span>Close</span>
       </button>
@@ -291,12 +309,12 @@
         <div id="carouselMax" class="carousel carousel-fade" data-bs-ride="true">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1500x1500.jpg")' class="img-fluid"
+              <img src='$mediaarchive.asLinkToPreview($primaryAsset,"image1200x630.jpg")' class="img-fluid"
                 alt="preview">
             </div>
             #foreach($asset in $assethits)
               <div class="carousel-item">
-                <img src='$mediaarchive.asLinkToPreview($asset,"image1500x1500.jpg")' class="img-fluid" alt="preview">
+                <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' class="img-fluid" alt="preview">
               </div>
             #end
           </div>
@@ -312,110 +330,3 @@
   </div>
 </div>
 <div id="gp-mask"></div>
-<script>
-  $(document).ready(function () {
-    var config = {
-      autoClose: true,
-      singleDate: true,
-      hoveringTooltip: false,
-      showShortcuts: false,
-      singleMonth: true,
-      startDate: moment().format("DD MMM YYYY"),
-      format: "DD MMM YYYY"
-    };
-    $("#checkIn").val(moment().format("DD MMM YYYY"));
-    $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
-
-    $("#checkOut").dateRangePicker(config).bind('datepicker-open', function () {
-      $("#gp-mask").show();
-    }).bind('datepicker-close', function () {
-      $("#gp-mask").hide();
-    });;
-
-    $("#checkIn").dateRangePicker(config).bind('datepicker-change', function (event, obj) {
-      $("#checkOut").data('dateRangePicker').destroy();
-
-      config.startDate = moment($(this).val(), "DD MMM YYYY").add(1, "days").format("DD MMM YYYY");
-
-      $("#checkOut").dateRangePicker(config);
-      if (moment($(this).val(), "DD MMM YYYY").isAfter(moment($("#checkOut").val(), "DD MMM YYYY"))) {
-        $("#checkOut").val(config.startDate);
-      }
-      config.startDate = moment().format("DD MMM YYYY")
-    }).bind('datepicker-open', function () {
-      $("#gp-mask").show();
-    }).bind('datepicker-close', function () {
-      $("#gp-mask").hide();
-    });;
-    $("#guests").click(function () {
-      $("#guestsPicker").addClass("open");
-      $("#gp-mask").show();
-    });
-
-    $("#gp-mask").click(function () {
-      $("#guestsPicker").removeClass("open");
-      $("#gp-mask").hide();
-    });
-
-    var curGuestVal = {
-      guest: 1,
-      pet: 0
-    };
-
-    function updateGuests(gt, f = 1) {
-      if (gt == 'adult' || gt == 'children') {
-        curGuestVal.guest += f;
-      } else if (gt == 'pet') {
-        curGuestVal.pet += f;
-      }
-
-      var guestStr = curGuestVal.guest + " guest" + (curGuestVal.guest > 1 ? "s" : "");
-      if (curGuestVal.pet > 0) {
-        guestStr += ", " + curGuestVal.pet + " pet" + (curGuestVal.pet > 1 ? "s" : "");
-      }
-
-      $("#guests").val(guestStr);
-    }
-
-    $(".g-plus").click(function () {
-      var gt = $(this).data("gt");
-      var val = parseInt($(this).siblings("strong").text());
-      if (val <= 6) {
-        val++;
-        $(this).siblings("strong").text(val);
-        updateGuests(gt);
-      }
-    });
-    $(".g-minus").click(function () {
-      var gt = $(this).data("gt");
-
-      var val = parseInt($(this).siblings("strong").text());
-      var min = 0;
-      if (gt == 'adult') {
-        min = 1;
-      }
-      if (val > min) {
-        val--;
-        $(this).siblings("strong").text(val);
-        updateGuests(gt, -1);
-      }
-    });
-    $(".previewImg").click(function () {
-      $('#triggerPreview').trigger('click');
-    });
-    $("#shareAd").click(function () {
-      var url = window.location.href;
-      var dummy = $('<input>').val(url).appendTo('body').select();
-      document.execCommand('copy');
-      dummy.remove();
-      $(this).addClass('text-success');
-      $(this).find('span').text('Link copied')
-      $(this).find('i').removeClass('fa-share-alt').addClass('fa-check');
-      setTimeout(() => {
-        $(this).find('i').removeClass('fa-check').addClass('fa-share-alt');
-        $(this).removeClass('text-success');
-        $(this).find('span').text('Share')
-      }, 2000);
-    });
-  });
-</script>

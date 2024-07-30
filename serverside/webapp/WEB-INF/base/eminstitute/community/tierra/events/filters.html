@@ -7,11 +7,11 @@
       </div>
       <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
         <div class="form-floating flex-grow-1">
-          <input class="form-control" id="checkIn" placeholder="Check-In" name="in" />
+          <input class="form-control" id="checkIn" placeholder="Check-In" autocomplete="off" name="in" />
           <label for="checkIn">Check-In</label>
         </div>
         <div class="form-floating flex-grow-1">
-          <input class="form-control" id="checkOut" placeholder="Check-Out" name="out" />
+          <input class="form-control" id="checkOut" placeholder="Check-Out" autocomplete="off" name="out" />
           <label for="checkOut">Check-Out</label>
         </div>
         <div class="form-floating flex-grow-1 guests">
@@ -118,9 +118,9 @@
         curGuestVal.pet += f;
       }
 
-      var guestStr = curGuestVal.guest + " guest" + (curGuestVal.guest > 1 ? "s" : "");
+      var guestStr = curGuestVal.guest + "" + (curGuestVal.guest > 1 ? "s" : "");
       if (curGuestVal.pet > 0) {
-        guestStr += ", " + curGuestVal.pet + " pet" + (curGuestVal.pet > 1 ? "s" : "");
+        guestStr += ", " + curGuestVal.pet + "" + (curGuestVal.pet > 1 ? "s" : "");
       }
 
       $("#guests").val(guestStr);

@@ -3,6 +3,10 @@
 <properties beanname="dataSearcher">
 
 		
-
+  <property id="blockeddates" index="true" stored="true" editable="false" multi="true">
+  <name> 
+      <language id="en"><![CDATA[Blocked Dates]]></language>  
+    </name> 
+  </property>
 
 </properties>

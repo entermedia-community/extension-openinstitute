@@ -6,23 +6,27 @@ $(document).ready(function () {
     window.location.href = $(this).data("href");
   });
 
-  $("#checkIn").val(moment().format("DD MMM YYYY"));
-  $("#checkOut").val(moment().add(1, "days").format("DD MMM YYYY"));
+  var dateFormat = "D MMM, YYYY";
 
   var blockeddates = $("#checkOut").data("disableddates");
+  if (!blockeddates) {
+    blockeddates = "";
+  }
+  blockeddates = blockeddates.split(",");
+
   var config = {
     autoClose: true,
     singleDate: true,
     hoveringTooltip: false,
     showShortcuts: false,
     singleMonth: true,
-    startDate: moment().format("DD MMM YYYY"),
-    format: "DD MMM YYYY",
+    startDate: moment().format(dateFormat),
+    format: dateFormat,
     beforeShowDay: function (t) {
       var m = moment(t.toUTCString());
       var formated = m.format("YYYY-MM-DD");
-      if (blockeddates && blockeddates.includes(formated)) {
-        var _tooltip = "Dates are taken";
+      if (blockeddates.length > 0 && blockeddates.includes(formated)) {
+        var _tooltip = "This date is taken";
         return [false, "", _tooltip];
       }
       return [true, "", ""];
@@ -46,19 +50,19 @@ $(document).ready(function () {
       .bind("datepicker-change", function (event, obj) {
         $("#checkOut").data("dateRangePicker").destroy();
 
-        config.startDate = moment($(this).val(), "DD MMM YYYY")
+        config.startDate = moment($(this).val(), dateFormat)
           .add(1, "days")
-          .format("DD MMM YYYY");
+          .format(dateFormat);
 
         $("#checkOut").dateRangePicker(config);
         if (
-          moment($(this).val(), "DD MMM YYYY").isAfter(
-            moment($("#checkOut").val(), "DD MMM YYYY")
+          moment($(this).val(), dateFormat).isAfter(
+            moment($("#checkOut").val(), dateFormat)
           )
         ) {
           $("#checkOut").val(config.startDate);
         }
-        config.startDate = moment().format("DD MMM YYYY");
+        config.startDate = moment().format(dateFormat);
       })
       .bind("datepicker-open", function () {
         $("#gp-mask").show();
@@ -66,6 +70,24 @@ $(document).ready(function () {
       .bind("datepicker-close", function () {
         $("#gp-mask").hide();
       });
+    var val = $(this).val();
+    if (val.includes("-")) {
+      $(this).val(moment(val).format(dateFormat));
+    }
+  });
+
+  lQuery("form[name='startinvoice']").livequery("submit", function (e) {
+    e.preventDefault();
+
+    var checkIn = moment($("#checkIn").val(), dateFormat).format("YYYY-MM-DD");
+    var checkOut = moment($("#checkOut").val(), dateFormat).format(
+      "YYYY-MM-DD"
+    );
+
+    var form = $(this).get(0);
+    form.checkIn.value = checkIn;
+    form.checkOut.value = checkOut;
+    form.submit();
   });
 
   $("#guests").click(function () {
@@ -90,11 +112,9 @@ $(document).ready(function () {
       curGuestVal.pet += f;
     }
 
-    var guestStr =
-      curGuestVal.guest + " guest" + (curGuestVal.guest > 1 ? "s" : "");
+    var guestStr = curGuestVal.guest + "" + (curGuestVal.guest > 1 ? "" : "");
     if (curGuestVal.pet > 0) {
-      guestStr +=
-        ", " + curGuestVal.pet + " pet" + (curGuestVal.pet > 1 ? "s" : "");
+      guestStr += ", " + curGuestVal.pet + "" + (curGuestVal.pet > 1 ? "" : "");
     }
 
     $("#guests").val(guestStr);
