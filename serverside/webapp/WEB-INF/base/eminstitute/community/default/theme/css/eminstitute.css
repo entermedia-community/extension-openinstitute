@@ -3,6 +3,7 @@ body {
   height: 100%;
 }
 #application {
+	height: auto;
   min-height: 100%;
 }
 

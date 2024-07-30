@@ -39,9 +39,11 @@
 						)</span>
 						#end
 					</div>
+					#if($canviewsettings)
 					<a class="btn btn-xs btn-transparent emdialog"
 		        href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$!hit.getId()"
 			      title="[[Edit Entry]]"><i class="fas fa-pen text-muted small"></i></a>
+			      #end
 				</div>
 			#end
 		#end
