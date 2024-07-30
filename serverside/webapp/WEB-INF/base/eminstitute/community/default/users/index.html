@@ -1,9 +1,10 @@
-
+#set($userid = $context.getRequestParameter("id"))
+#set($selecteduser = $mediaarchive.getUser($userid))
 #if(!$selecteduser)
 	#set($selecteduser = $user)
-	$context.putPageValue("selecteduser", $selecteduser)
 #end
- 
+$context.putPageValue("selecteduser", $selecteduser)
+
 #if( $selecteduser )	
 	#set( $subscriptions = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).sort("isbillingcontact").search())
 	$context.putPageValue("subscriptions", $subscriptions)

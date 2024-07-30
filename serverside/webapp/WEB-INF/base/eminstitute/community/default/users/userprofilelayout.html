@@ -1,10 +1,9 @@
 #set($userid = $context.getRequestParameter("id"))
 #set($selecteduser = $mediaarchive.getUser($userid))
-
 #if(!$selecteduser)
 	#set($selecteduser = $user)
-	$context.putPageValue("selecteduser", $selecteduser)
 #end
+$context.putPageValue("selecteduser", $selecteduser)
 
 <div class="bg-white">
 	<div class="container">
