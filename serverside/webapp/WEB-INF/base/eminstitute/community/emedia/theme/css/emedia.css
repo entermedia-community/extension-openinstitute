@@ -680,15 +680,15 @@ footer {
 .navigation .navbar-nav .nav-item .nav-link {
   margin-top: 35px;
   margin-bottom: 30px;
-  color: #efefef;
+  color: #c1c1c1;
   padding: 0 20px;
   font-size: 18px;
   line-height: 14px;
-  font-weight: 400;
+  font-weight: 600;
   transition: 0.4s;
 }
 .navigation .navbar-nav .nav-item .nav-link:hover {
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff !important;
 }
 .navigation .navbar-nav .nav-item .active {
@@ -1568,11 +1568,12 @@ ul > li {
 .login-area form input[type="submit"] {
   min-width: 100px;
   height: 100%;
-  min-height: 46px;
+  min-height: 40px;
   font-size: 1rem;
 }
 .login-area form .form-control {
   margin-bottom: 0;
+  padding: 18px 12px;
 }
 
 .login-area .oauthproviderbtn img {

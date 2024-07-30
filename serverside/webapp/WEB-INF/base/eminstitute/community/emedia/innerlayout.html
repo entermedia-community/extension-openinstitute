@@ -36,7 +36,7 @@
 
 	$pages.include("/${communityhome}/navigation.html", $context)
 	
-	#if($user && !$browser.inApp() && $canshowsidebar)
+	#if($user && !$browser.inApp() && $canviewsettings)
 		$pages.include("/${communityhome}/components/sidebars/user/index.html")
 	#end
 	
