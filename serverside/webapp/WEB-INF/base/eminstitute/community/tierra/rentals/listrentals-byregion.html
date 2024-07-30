@@ -1,29 +1,21 @@
-$pages.include("${communityhome}/rentals/filters.html", $context)
 
-#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).named("collections"))
-#set( $collections = $query.search($context))
-#if( $collections.isEmpty() )
 
-No products
 
-#else
-	#set( $query = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").named("products").sort("name") )
-	
-	#set( $in = $context.getRequestParameter("in"))
-	#ifnotnull( $in)
-	 #set( $null = $query.not("blockeddates",$in) )  ##//YYYY-MM-DD $in
-	#end
-	
-	#set( $hits = $query.search($context) )
-#end
-
-$context.putPageValue("hits",$hits)
+#set( $regions = $mediaarchive.getList("activeregions") )
 
 
 <div class="main container-fluid text-center">
-  <div class="d-flex justify-content-center flex-wrap">
-  	$pages.include("$communityhome/rentals/listrentalresults.html")	
-  </div>
+ 
+#foreach( $region in $regions)
+		<h3>$region.getName()</h3>
+ <div class="d-flex justify-content-center flex-wrap">
+		#set( $query = $mediaarchive.query("collectiveproduct").hitsPerPage(20).exact("activeregions",$region).named("products").sort("name") )
+		#set( $hits = $query.search($context) )
+		$context.putPageValue("hits",$hits)
+		$context.putPageValue("region",$region)
+	  	$pages.include("$communityhome/rentals/listrentalresults.html",$context)	
+    </div>
+#end	
 </div>
 
 <div class="modal fade" id="ownerPreview">

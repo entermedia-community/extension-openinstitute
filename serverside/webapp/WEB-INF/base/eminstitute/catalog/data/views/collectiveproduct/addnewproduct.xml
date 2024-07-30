@@ -12,5 +12,7 @@
 	<property id="recurringperiod" />
 	<property id="blockeddates" />
 	<property id="producttype" />
+	<property id="activeregions" />
+	<property id="fullybooked" />
 	
 </properties>

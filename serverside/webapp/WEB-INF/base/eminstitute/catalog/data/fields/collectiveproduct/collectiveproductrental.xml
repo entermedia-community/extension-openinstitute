@@ -9,4 +9,18 @@
     </name> 
   </property>
 
+
+	<property id="activeregions" listid="activeregions"
+		index="true" stored="true" editable="true" viewtype="multiselect" type="list">
+		<name>
+			<language id="en"><![CDATA[Active Region]]></language>
+		</name>
+	</property>
+	<property id="fullybooked" index="true" stored="true" type="boolean" >
+	 <name>
+	 <language id="en" > <![CDATA[Fully Booked ]]> </language>
+	 </name>
+	</property>
+	
+
 </properties>
