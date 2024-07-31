@@ -39,6 +39,12 @@
     </name> 
   </property>     
 
+  <property id="domainlist" editable="true" index="true" stored="true" viewtype="tageditor" indextype="analyzed" analyzer="tags">
+    <name> 
+      <language id="en"><![CDATA[Domain List]]></language>  
+    </name> 
+  </property>     
+
   <property id="externaldomain" editable="true" index="true" stored="true"   >
     <name> 
       <language id="en"><![CDATA[External Domain]]></language>  

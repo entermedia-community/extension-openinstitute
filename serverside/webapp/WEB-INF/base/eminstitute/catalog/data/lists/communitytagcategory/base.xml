@@ -3,7 +3,7 @@
 <root> 
 
  <data id="oi" entitytype="librarycollection" primaryimagepath="/theme/images/logos/oilogo.svg"
-   templatepath="/app" urlname="default" externaldomain="https://openinstitute.org"
+   templatepath="/app" urlname="default" externaldomain="https://openinstitute.org" domainlist="openinstitute.org"
   > 
     <name> 
       <language id="en"><![CDATA[Open Institute]]></language> 
@@ -19,7 +19,7 @@ Projects hosted on OI use accountability and transparency to provide measurable,
   </data>    
 
   <data id="0" entitytype="librarycollection" primaryimagepath="/theme/images/logos/heritage.svg" templatepath="/community/heritage" urlname="Heritage" 
-  primaryimagepathwide="/theme/images/home-natural-wide.jpg" externaldomain="https://heritage.openinstitute.org"
+  primaryimagepathwide="/theme/images/home-natural-wide.jpg" externaldomain="https://heritage.openinstitute.org" domainlist="heritage.openinstitute.org"
   >
   <caption><![CDATA[Saving our Heritage]]></caption>
     <name> 
@@ -34,7 +34,7 @@ Projects hosted on OI use accountability and transparency to provide measurable,
     </summary>
   </data>  
   <data id="1" entitytype="entityband" primaryimagepath="/theme/images/logos/commonroots.svg" templatepath="/community/commonroots" urlname="CommonRoots" 
-  primaryimagepathwide="/theme/images/home-creative-wide.jpg" externaldomain="https://commonroots.openinstitute.org"
+  primaryimagepathwide="/theme/images/home-creative-wide.jpg" externaldomain="https://commonroots.openinstitute.org" domainlist="common-roots.openinstitute.org"
   >
     <caption><![CDATA[Folk music with beats]]></caption>
     <name> 
@@ -44,19 +44,8 @@ Projects hosted on OI use accountability and transparency to provide measurable,
     Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs
      for future generation to build upon.</summary>
   </data>  
-  <data id="2" entitytype="librarycollection" primaryimagepath="/theme/images/logos/kansha.svg" templatepath="/community/kansha" urlname="Kansha" 
-  primaryimagepathwide="/theme/images/home-human-wide.jpg" externaldomain="https://kansha.openinstitute.org">
-    <name> 
-      <language id="en"><![CDATA[Kansha Academy]]></language> 
-    </name> 
-    <caption><![CDATA[Education, health, assistance and cultural preservation]]></caption>
-    
-    <summary>
-	Supporting education by creating and supporting schools in USA, San Marcos Guatemala and Mexico.    
-    </summary>
-  </data>
   <data id="3" entitytype="librarycollection" primaryimagepath="/theme/images/logos/emedialogo.svg"
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="https://emedia.openinstitute.org"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" templatepath="/community/emedia" urlname="eMedia" externaldomain="https://emedia.openinstitute.org" domainlist="emedia.openinstitute.org"
   > 
     <name> 
       <language id="en"><![CDATA[eMedia]]></language> 
@@ -73,7 +62,7 @@ of media Files
    
   </data>    
   <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"  domainlist="tierra.openinstitute.org|tierra-sagrada.org|tierra.local.org|local.org"
   domaincommunityid="4"
   > 
     <name> 
@@ -88,31 +77,13 @@ of media Files
     </summary>
    
   </data>    
-  <data id="5"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/wellness.svg" templatepath="/community/wellness" urlname="Wellness" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://wellness.openinstitute.org"
-  domaincommunityid="5"
-  > 
-    <name> 
-      <language id="en"><![CDATA[Wellness Network Collective]]></language> 
-    </name>
-    <caption><![CDATA[Inspire personal transformation
-]]></caption>
-    
-    <summary>
-    <![CDATA[
-A directory of mindful and inspired practitioners who inspire, support and serve personal transformation and spiritual growth.
-    ]]>
-    </summary>
-   
-  </data>    
-
 
   <data id="atitlan"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/atitlan.svg" templatepath="/community/atitlan" urlname="Atitlan" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://atitlan.openinstitute.org"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://atitlan.openinstitute.org"  domainlist="atitlan.openinstitute.org"
   domaincommunityid="5"
   > 
     <name> 
-      <language id="en"><![CDATA[Wellness Network Collective]]></language> 
+      <language id="en"><![CDATA[Atitlan Guatemala]]></language> 
     </name>
     <caption><![CDATA[Inspire personal transformation
 ]]></caption>
