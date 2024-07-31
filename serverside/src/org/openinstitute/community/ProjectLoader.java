@@ -90,16 +90,16 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		
 		//Check domain?
 		String domain = util.domain();
-		String[] subdomain  = domain.split("\\.");
-		if(subdomain.length < 3) 
-		{
-			subdomain  = ("default." + domain).split("\\.");
-		}
-		String communityurlname = null;
+//		String[] subdomain  = domain.split("\\.");
+//		if(subdomain.length < 3) 
+//		{
+//			subdomain  = ("default." + domain).split("\\.");
+//		}
+		//String communityurlname = null;
 		String secondpart = null;
 		String anythingelse = null;
 
-		communityurlname = subdomain[0];
+		//communityurlname = subdomain[0];
 		if( url.length > 1)  //Might be a virtual project
 		{
 			secondpart = url[1]; //might be wrong
@@ -111,7 +111,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 
 		if(secondpart == null)
 		{
-			RightPage page = goHome(inPage, communityurlname);
+			RightPage page = goHome(inPage, domain);
 //			if( page == null)
 //			{
 //				String siteid = inPage.get("siteid");
@@ -127,7 +127,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		
 		//Does the page exist or is it a project?
 		String siteid = inPage.get("siteid");
-		Data communitydata = findCommunity(communityurlname);
+		Data communitydata = findCommunity(domain);
 		if( communitydata == null)
 		{
 			return null;
@@ -200,23 +200,23 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 //			}
 			right.putParam("collectionid" , librarycollection.getId());
 			right.putPageValue("librarycol" , librarycollection);
-			right.putPageValue("projectlink" , "/" + communityurlname + "/" + librarycollection.get("urlname") );
+			//right.putPageValue("projectlink" , "/" + domain + "/" + librarycollection.get("urlname") );
 			right.setRightPage(otherpage);
 			return right;
 		}
 		return null;
 	}
 
-	protected RightPage goHome(Page inPage, String communityurlname)
+	protected RightPage goHome(Page inPage, String domain)
 	{
-		Data first = findCommunity(communityurlname);
+		Data first = findCommunity(domain);
 		String siteid = inPage.get("siteid");
 		
 		if(first != null)
 		{
 			if(  first.get("templatepath") == null)
 			{
-				throw new OpenEditException("templatepath is required for " + communityurlname);
+				throw new OpenEditException("templatepath is required for " + domain);
 			}
 			String communityhome = "/" + siteid + first.get("templatepath");
 			
@@ -234,14 +234,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		} return null;
 	}
 
-	protected Data findCommunity(String communityurlname)
+	protected Data findCommunity(String domain)
 	{
-		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("urlname", communityurlname).hitsPerPage(1); //Move to use the domain
+		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("domainlist", domain).hitsPerPage(1); //Move to use the domain
 
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
 		if( hits.isEmpty())
 		{
-			log.info("Not Found community:" + hits + " for " + communityurlname + " in " + getMediaArchive().getCatalogId());
+			log.info("Not Found community:" + hits + " for " + domain + " in " + getMediaArchive().getCatalogId());
 		}
 		Data first = (Data)hits.first();
 		return first;
