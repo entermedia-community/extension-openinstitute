@@ -59,10 +59,11 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv =
 
     <div
       id="adduserpicker"
-      data-targetdiv="${targetdiv}"
+      data-targetdiv="$!{targetdiv}"
       data-oemaxlevel="1"
-      data-collectionid="${collectionid}"
+      data-collectionid="$!{collectionid}"
       data-hitssessionid="$!hits.sessionId"
+      data-saveurl="$communityhome/project/channel/subscribers/addsave.html"
     >
       <div class="clearfix"></div>
     </div>

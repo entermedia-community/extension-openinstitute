@@ -1290,12 +1290,19 @@ textarea.blog-comments-input {
 .explore-blog-list {
   width: 100%;
 }
-.team-list h3,
+.team-list {
+	padding: 0 0.25rem;
+}
+.team-list-header {
+	margin-bottom: 0.75rem;
+}
+.sidebar-right h3,
 .explore-blog-list h3 {
   font-size: 1rem;
   text-transform: uppercase;
   color: #333;
   font-weight: 600;
+  margin-bottom: 0;
 }
 .explore-blog-list a {
   margin-bottom: 0.5rem;
@@ -1323,6 +1330,10 @@ textarea.blog-comments-input {
   background-color: #e2e7e9;
 }
 
+.project-likes-count {
+	padding: 10px;;
+}
+
 .collaborate-channel {
 	min-height: 400px;
   height: calc(100vh - 260px);
@@ -1335,17 +1346,19 @@ textarea.blog-comments-input {
   display: flex;
   position: relative;
   min-height: calc(100vh - 66px);
+  max-width: 1780px;
+  margin: 0 auto;
 }
 .community-layout .sidebar-left,
 .community-layout .sidebar-right {
   min-height: 100%;
-  min-width: 360px;
-  padding: 0.5rem;
+  min-width: 320px;
+  padding: 1rem 0.5rem;
   background-color: #ffffff;
 }
 .community-layout .main-content {
   flex: 1;
-  padding: 0.5rem;
+  padding:1rem 0.5rem;
   padding-bottom: 1rem;
   max-width: 969px;
   margin: 0 auto;
@@ -1584,7 +1597,6 @@ textarea.blog-comments-input {
 
 .pretty-list {
   background: #ffffff;
-  display: flex;
   align-items: center;
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;

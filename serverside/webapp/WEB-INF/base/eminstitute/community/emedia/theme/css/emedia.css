@@ -42,12 +42,15 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
   line-height: 1.5;
-  color: #ffffff;
-  background-color: #3b3d50;
+  color: #111;
+  background-color: #fff;
   font-weight: 500;
   overflow-x: hidden;
 }
-
+.bg-dark {
+	background-color: #3b3d50!important;
+	color: #fff;
+}
 p,
 .paragraph {
   font-weight: 400;
@@ -1681,7 +1684,7 @@ ul > li {
 	background-color: #3b3d50e6;
 }
 
-.team-list h3,
+.sidebar-right h3,
 .explore-blog-list h3 {
   color: #576f76;
 }

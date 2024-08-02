@@ -34,6 +34,7 @@
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
 	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
+	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 			
 
 	<style id="app-css" href="/${applicationid}/theme/styles/theme.css"/>

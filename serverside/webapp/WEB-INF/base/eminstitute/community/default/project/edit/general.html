@@ -49,17 +49,16 @@ $context.putPageValue("data", $librarycol)
 		<a class="btn btn-danger confirm"
 			style="margin: 0px 0 0 10px;" 
 			data-confirm="[[Are you sure]]?" 
-			href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
+			href="$communitylink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
 			[[Delete]]
 		</a>
 		#end
 
 		#if($canviewsettings)
-		
 		<a class="btn  btn-light float-right"
 			style="margin: 0px 0 0 10px;" 
 			target="_blank"
-			href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection">
+			href="$sitelink/app/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection">
 			<i class="fa fa-database"></i>
 		</a>
 		

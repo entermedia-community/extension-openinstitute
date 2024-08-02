@@ -31,29 +31,38 @@
 			       		
 			        	<td class="text-right">
 							#if( $caneditcollection )
-							<span class="whatsapp" id="team${hit.followeruser}">
-			        	 	<a class="ajax btn btn-primary btn-xs " data-targetdiv="team${hit.followeruser}" data-oemaxlevel="1"
-			        	 		href="$communityhome/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
-			        	 		#if( $hit.getBoolean("ontheteam"))
-			        	 			[[Remove from team]]
-			        	 		#else
-									[[Add to team]]        	 		
-			        	 		#end</a></span>
-			        	 		
-			        	 		 <a class="ajax btn btn-primary btn-xs " data-targetdiv="collectiveteamlist" data-oemaxlevel="1"
-			        	 		href="$communityhome/project/channel/subscribers/billingtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
-			        	 		#if( $hit.getBoolean("isbillingcontact"))
-			        	 			[[Remove Billing Contact]]
-			        	 		#else
-									[[Add Billing Contact]]        	 		
-			        	 		#end</a>
-			        	 		
-			        	 		<a class="btn btn-xs btn-transparet emdialog"
-			        	 			data-dialogid="editteammember"
-				        	 		href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
-					               title="[[Edit Entry]]"><i class="fa fa-pen"></i></a>
-			        	 		
-			        	 		
+							<div class="dropdown">
+							  <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							    <i class="fas fa-cog mx-auto"></i>
+							  </a>
+							
+							  <ul class="dropdown-menu">
+								   <li><a class="dropdown-item emdialog"
+							    		data-dialogid="editteammember"
+				        	 			href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
+					               		title="[[Edit Team Config]]">[[Edit]]</a></li>
+							    <li><a class="dropdown-item ajax"  
+							    		data-targetdiv="team${hit.followeruser}" 
+							    		data-oemaxlevel="1"
+							    		href="$communityhome/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+							    		#if( $hit.getBoolean("ontheteam"))
+					        	 			[[Remove from team]]
+					        	 		#else
+											[[Add to team]]        	 		
+					        	 		#end</a>
+			        	 		</li>
+							    <li><a class="dropdown-item ajax"
+							     		data-targetdiv="collectiveteamlist" 
+							     		data-oemaxlevel="1"
+							     		href="$communityhome/project/channel/subscribers/billingtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+							     		#if( $hit.getBoolean("isbillingcontact"))
+					        	 			[[Remove Billing Contact]]
+					        	 		#else
+											[[Add Billing Contact]]        	 		
+					        	 		#end</a></li>
+							   
+							  </ul>
+							</div>
 			        		#elseif( $hit.getBoolean("ontheteam"))
 			        	   	 <span class="whatsapp">([[On The Team]])</span>
 			        		#end

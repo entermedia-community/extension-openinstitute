@@ -952,9 +952,11 @@ uiload = function () {
     $("select", form).change(function () {
       $(form).trigger("submit");
     });
+    /*
     $("input", form).on("focusout", function (event) {
       $(form).trigger("submit");
     });
+    */
     $("input", form).on("keyup", function (e) {
       $(form).trigger("submit");
     });
