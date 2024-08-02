@@ -15,8 +15,7 @@
 		 	data-collectiverole="$role.collectiverole"
 		 	data-roleuserid="$!role.roleuserid"
 		
-		class="
-		#if( $task.taskstatus != "3" )
+		class="#if( $task.taskstatus != "3" )
 		 #if( $selectedcollectiverole == $collectiverole.id)roleselected#elseif( $!role.roleuserid == $user.id )rolemyself#end
 		#end
 		 emdialog btn btn-sm btn-secondary	 "

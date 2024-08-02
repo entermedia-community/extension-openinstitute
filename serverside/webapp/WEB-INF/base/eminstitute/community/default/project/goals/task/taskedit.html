@@ -17,7 +17,7 @@
 	    	<input type="hidden" name="collectionid" value="$librarycol.getId()" />
 
 			<div style="margin-bottom:10px;">
-  				<textarea id="commenttext" class="form-control grabfocus p-1" name="comment" placeholder="Task Comment/Description">$!task.comment</textarea>
+  				<textarea id="commenttext" class="form-control grabfocus" name="comment" placeholder="Task Comment/Description">$!task.comment</textarea>
   			</div>
 
 			#set( $selectedstatus = $task.taskstatus)
@@ -40,9 +40,10 @@
 				<div style="min-width:300px;">
 					#set( $searcher = $mediaarchive.getSearcher("collectiverole") )
 					$context.putPageValue("searcher",$searcher)	
-					#set( $detail = $searcher.getDetail("keywords") )
+					#set( $detail = $searcher.getDetail("name") )
+					
 					$context.putPageValue("detail",$detail)
-					$context.putPageValue("values",$task.getValues("keywords"))	
+					$context.putPageValue("values", $task.getValues("keywords"))	
 					$context.putPageValue("data",$task)	
 					$pages.include("$componenthome/xml/types/tageditor.html", $context)
 				</div>
@@ -78,14 +79,17 @@
 					</select>
 				</div>
 			</div>	
-			<div>
-  				<input id="submitbutton" type="submit" form="taskeditform" value="[[Save]]" name="submitbutton" 
-  				class="btn btn-sm btn-primary float-right"
-  				style="margin-left:10px;">
+			<div class="pt-3">
+  				<input id="submitbutton" 
+  					type="submit" 
+  					form="taskeditform" 
+  					value="[[Save]]" 
+  					name="submitbutton" 
+  					class="btn btn-xs btn-primary ml-1">
 		
 				#if( $task.id && $caneditcollection )
-					<a class="btn btn-sm btn-danger float-right ajax" 
-					style="margin:0 0 0 10px;" data-confirm="[[Are you sure?]]"
+					<a class="btn btn-xs btn-danger ml-1 ajax" 
+					 data-confirm="[[Are you sure?]]"
 					targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
 					href="${communityhome}/project/goals/taskdelete.html?collectionid=$!librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">
 					[[Delete]]</a> 
@@ -96,7 +100,7 @@
 				<a href="$cancellink" 
 					data-focuson="$task.id" 
 					id="task$task.getId()" 
-					class="btn btn-sm btn-secondary float-right taskedit-$!{task.taskstatus} ajax" 
+					class="btn btn-xs btn-secondary taskedit-$!{task.taskstatus} ajax" 
 					data-targetdiv="$target" 
 					data-oemaxlevel="1" 
 					title="[[Cancel]] $!tree.getCategoryPath()" >

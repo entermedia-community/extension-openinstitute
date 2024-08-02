@@ -1,10 +1,6 @@
 #set($collectivesection = $content.collectivesection)
 
-<div id="application" class="community-layout bg-white"  data-home="$home" data-user="$!user.id" data-apphome="$apphome"
-data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
-data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
-data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
-data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html"> 
+<div class="community-layout bg-white"> 
 	<div  class="sidebar-left">
 		<button class="btn btn-sm community-drawer-close">
 			<i class="fas fa-times text-muted"></i>

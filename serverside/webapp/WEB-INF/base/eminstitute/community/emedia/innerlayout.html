@@ -34,6 +34,12 @@
 
 <body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
+<div id="application"  data-home="$home" data-user="$!user.id" data-siteroot="" data-apphome="$apphome"
+data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
+data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
+data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
+data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
+
 	$pages.include("/${communityhome}/navigation.html", $context)
 	
 	#if($user && !$browser.inApp() && $canviewsettings)
@@ -43,7 +49,7 @@
 	$pages.includeContent()
 	
 	$pages.include("/${communityhome}/footer.html")
-	
+</div>
 	<script src="${communityhome}/theme/js/jquery.datetimepicker.full.min.js"></script>
 	<script src="${communityhome}/theme/js/slick.min.js"></script>
 	<script src="${communityhome}/theme/js/aos.js"></script>

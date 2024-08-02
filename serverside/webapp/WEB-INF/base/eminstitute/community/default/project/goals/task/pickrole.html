@@ -1,7 +1,8 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
 
-<select name="collectiverole" id="#eid($task.id)picker"  style="width:300px;"
+<select name="collectiverole" id="#eid($task.id)picker" 
+	style="width:300px;"
 	class="listautocomplete picknewrolefortask" 
 	data-taskid="$task.id" data-collectionid = "$collectionid"
 	data-savepath="${communityhome}/project/goals/task/rolelistsave.html" 

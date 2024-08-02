@@ -6,7 +6,7 @@
 		<div class="chatterboxreplyto">
 			<div class="d-flex align-items-center justify-content-between">
 				<p class="m-0">
-					<span>Replying to</span> 
+					<span><i class="fas fa-quote-left"></i> [[Replying to]]</span> 
 					<a href="#esc($userlink)" title="$context.getDateTime($otherchat.date)">
 						<strong>$otherchatuser.getAnonNickName()</strong>
 					</a>
@@ -21,7 +21,7 @@
 		</div>
 	#end
 	<div class="d-flex align-items-end position-relative w-100">
-		<textarea class="chatterbox-text chatter-text grabfocus flex-1" id="chatter-msg" data-replytoid="$!replytoid"  placeholder="[[Message...]]"></textarea>
+		<textarea class="chatterbox-text chatter-text grabfocus flex-1" id="chatter-msg" data-replytoid="$!replytoid"  placeholder="[[Message]]"></textarea>
 		<button class="btn chatter-send" data-command="messagereceived" type="button">
 			[[Send]] <i class="fas fa-paper-plane"></i>
 		</button>

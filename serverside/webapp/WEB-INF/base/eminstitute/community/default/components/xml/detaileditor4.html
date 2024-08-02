@@ -55,7 +55,7 @@ $context.putPageValue("longform",false)
 	#end
 	#end
 	<div id="allerrors"></div>
-	<div class="d-flex flex-wrap">
+	<div class="d-flex flex-column">
 		#foreach( $detail in $details )
 		
 			#set($detail_id = $detail.getId())
@@ -70,13 +70,13 @@ $context.putPageValue("longform",false)
 		
 			$!context.putPageValue("detail",$detail)
 			$!context.putPageValue("val",$val)
-		 	<div class="form-group detail-input $detail_id p-2" style="flex: 1 0 50%;">
-		    <label for="$detail_id" class="input-label">
-					$detail.getText($context)
+		 	<div class="form-group detail-input $detail_id p-2" >
+			    <label for="$detail_id" class="input-label">
+						$detail.getText($context)
 				</label>
-		    <div class="input-wrapper">
-		    	$pages.include("$xmledithome/detailedit.html", $context)
-		    </div>
+			    <div class="input-wrapper">
+			    	$pages.include("$xmledithome/detailedit.html", $context)
+			    </div>
 			</div>
 		#end
 	</div>

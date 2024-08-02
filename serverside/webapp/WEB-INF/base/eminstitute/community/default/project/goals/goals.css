@@ -418,11 +418,10 @@ ul.projectgoals {
 
 .goaltaskcontainer .credit {
 	color: #757575;
-	margin-bottom: 8px;
 }
 
 .goaltaskrow>div {
-	margin: 0 4px;
+	margin: 0 4px 8px;
 }
 
 .goaltaskrow .taskdetails {
@@ -465,7 +464,7 @@ ul.projectgoals {
 
 .taskdetails {
 	float: left;
-	padding: 0 5px 5px;
+	
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;

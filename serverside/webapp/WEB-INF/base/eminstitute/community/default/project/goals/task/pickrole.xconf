@@ -5,5 +5,6 @@
 			<idname>taskid</idname>
 			<searchtype>goaltask</searchtype>
     </path-action>
-
-    </page>
+    
+	<inner-layout />
+</page>

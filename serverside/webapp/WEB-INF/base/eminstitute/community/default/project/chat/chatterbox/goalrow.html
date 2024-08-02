@@ -1,6 +1,6 @@
 #set( $target = "goalrow#eid(${goal.id})")
 <div id="$target" class="goalstatus goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" style="position:relative"> 
-#set( $goallink = "${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
+	#set( $goallink = "${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=$!goalfolder")
 	<div class="mb-1">
 		#if($caneditcollection)
 		<a data-cancelsubmit="true" 

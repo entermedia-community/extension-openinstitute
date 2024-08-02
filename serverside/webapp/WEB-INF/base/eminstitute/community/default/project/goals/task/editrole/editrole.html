@@ -1,4 +1,4 @@
-<div id="viewrole" class="card-block" style="padding:5px 20px;">
+<div id="viewrole">
 
 #set( $taskid = $context.getRequestParameter("taskid") )
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
@@ -41,7 +41,7 @@
 
 <section>
   <div class="editrow">
-    <div class="editname">Notes</div>
+    <div class="editname">[[Notes]]</div>
     <div class="editval"><textarea name="name" style="width:500px;height:300px" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
   </div>
 
@@ -64,8 +64,8 @@
   </div>
 
 </section>
-
- <h2>[[Action Log]]</h2>
+#ifnotnull($actions)
+ <h3>[[Action Log]]</h3>
 
 
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
@@ -109,13 +109,11 @@
 #end
 
 </section>
+#end
 
-
-
-
-<br>
-<br>
-    <a class="ajax btn btn-sm btn-danger  float-right closedialog"
+<div class="my-3">
+	<a class="btn btn-sm btn-primary submitform">[[Save]]</a>
+    <a class="ajax btn btn-sm btn-danger closedialog"
    		data-oemaxlevel="1"
 		data-targetdiv="goalrow#eid($task.projectgoal)"
 		data-goalid = "$task.projectgoal"
@@ -124,11 +122,11 @@
 		data-closedialog = "true"
 		data-collectiverole = "$collectiverole"
 		data-roleuserid = "$roleuserid"
-		style="margin: 0px 0 0 10px;" 
 		data-confirm="[[Are you sure]]?" 
 		href="${communityhome}/project/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
 	>[[Delete Role]]</a>
 	
+</div>
 
 </form>
 </div>

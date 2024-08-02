@@ -1,7 +1,47 @@
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.modal {
+	--bs-modal-bg: #fff;
+  	--bs-modal-color: #000;
+}
+
+
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 1.2rem;
+  line-height: 1.5;
   color: #ffffff;
   background-color: #3b3d50;
   font-weight: 500;
@@ -72,7 +112,7 @@ h6,
 }
 h3,
 .h3 {
-  font-size: 36px;
+  font-size: 26px;
   line-height: 32px;
 }
 
@@ -175,6 +215,7 @@ h6,
     }
 .btn-xs {
     padding: 0.4rem 0.6rem;
+    line-height: 1.1;
 }
 .btn.btn-lg {
   padding: 12px 40px;
@@ -305,7 +346,7 @@ a {
   transition: 0.4s;
 }
 a:hover {
-  color: #ffffff;
+
 }
 
 .text-primary {
@@ -353,14 +394,16 @@ a:hover {
 }
 
 .form-control {
-  padding: 12px;
-  margin-bottom: 30px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
 .form-control:focus {
   box-shadow: none;
   border-color: #626584;
 }
-
+.select2-container {
+	margin-bottom: 1rem;
+}
 .form-check {
   font-size: 0.933rem;
   font-weight: 500;
@@ -423,7 +466,7 @@ header.navigation {
   line-height: 50px;
 }
 .project-list-container,
-#application.community-layout {
+.community-layout {
   min-height: calc(100vh - 98px);
 }
 .preloader {
