@@ -26,21 +26,24 @@ $context.putPageValue("searcher",$searcher)
 
 #set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
-	[[Project]]: <strong><a href="${communityhome}/project/goals/search/index.html?collectionid=$collectionid" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></strong>
+	<h4 class="mb-2"><a href="$communitylink/${librarycol.urlname}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></h4>
 #end
 <div class="clearfix"></div>
-<form name="saveproject" class ="ajaxform autocloseform showwaiting autoreloadsource" id="saveproject" method="post" 
-#if( $data.id)
-	#if($goalfolder=="agentcalendar")
-		action="/$applicationid/users/tasks/goalsave.html" >
-	#elseif($goalfolder=="agent")
-		action="/$applicationid/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
+<form name="saveproject" 
+	class ="ajaxform autocloseform showwaiting autoreloadsource" 
+	id="saveproject" 
+	method="post" 
+	#if( $data.id)
+		#if($goalfolder=="agentcalendar")
+			action="/$applicationid/users/tasks/goalsave.html" >
+		#elseif($goalfolder=="agent")
+			action="${communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
+		#else
+			action="${communityhome}/project/goals/${goalfolder}/goalsave.html" >
+		#end
 	#else
-		action="/$applicationid/collective/goals/${goalfolder}/goalsave.html" >
+		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" >
 	#end
-#else
-	action="/$applicationid/collective/goals/${goalfolder}/goalsavenew.html" >
-#end
 
 
 
@@ -95,10 +98,8 @@ $context.putPageValue("searcher",$searcher)
 	$pages.include("/$applicationid/components/xml/detaileditorcss.html?detailsreadonly=true", $context)
 #end
 
-<div class="float-right">
-<span>
-<input class="btn btn-sm btn-warning" style="margin:10px 0 0 " type="submit" value="[[Save & Close]]"></input>
-</span>
+<div class="float-right mt-2">
+<input class="btn btn-sm btn-primary" type="submit" value="[[Save & Close]]"></input>
 </div>
 </form>
 ##Show tasks when viewing from points report

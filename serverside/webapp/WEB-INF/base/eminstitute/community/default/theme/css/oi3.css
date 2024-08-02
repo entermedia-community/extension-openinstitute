@@ -1292,6 +1292,7 @@ textarea.blog-comments-input {
 }
 .team-list {
 	padding: 0 0.25rem;
+	margin-bottom: 20px;
 }
 .team-list-header {
 	margin-bottom: 0.75rem;

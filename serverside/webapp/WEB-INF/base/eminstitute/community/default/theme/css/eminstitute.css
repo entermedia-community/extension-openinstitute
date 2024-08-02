@@ -2094,8 +2094,11 @@ ul.inlinelist li {
 .taskdetails {
   word-break: break-all;
 }
-
-/* .collectivearchive {} */
+.rolelist,
+.goaltask-actions,
+.goaltask-credit {
+	padding: 6px 0;;
+}
 
 .oe-dataedit {
   font-size: 0.85rem;
