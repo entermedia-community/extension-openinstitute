@@ -6,14 +6,14 @@
   $searcher.getDetailsForView("user/${viewid}", $userprofile))
   $context.putPageValue("details",$details)
   $context.putPageValue("module","user") $context.putPageValue("hits",$collhits)
-  $pages.include("${apphome}/components/table/results.html", $context)
+  $pages.include("${communityhome}/components/table/results.html", $context)
 </div>
 
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
 <a
   href="$communityhome/project/channel/subscribers/addnew.html?collectionid=${collectionid}"
-  class="emdialog btn btn-sm btn-light"
+  class="emdialog btn btn-sm btn-primary"
   title="[[Add New User to Project]]"
 >
   <i class="fa-solidfa-plus"></i> [[Create New User]]

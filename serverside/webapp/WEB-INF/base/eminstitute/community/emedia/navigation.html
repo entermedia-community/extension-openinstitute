@@ -13,6 +13,9 @@
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'home') active #end" href="$communitylink/">Home</a>
           </li> 
+          <li class="nav-item #if($content.oisection == 'development') active #end">
+          	<a class="nav-link" href="${communitylink}/development">Development</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'project') active #end" href="$communitylink/projects/">
               Projects
