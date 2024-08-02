@@ -7,7 +7,7 @@
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
-        [[Recent Chats]]        
+        [[Recent Chats]]     
         <button class="btn btn-light rounded-0 border-0 sidebar-toggler userOffcanvasToggler" data-action="hide" data-bs-dismiss="offcanvas" title="[[Hide User Sidebar]]">
         	<i class="fas fa-times"></i>
         </button>
@@ -38,10 +38,8 @@
 					#end
 			</div>
 			<div class="col" style="padding:0px;">	
-				<a  
-				 href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html"  
-				 >		
-				 	#ifnotnull($otherperson)
+				<a href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html">
+					#ifnotnull($otherperson)
 					<b>  $otherperson.getScreenName() </b>
 					#end
 					#ifnull($otherperson)
