@@ -45,9 +45,9 @@ data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collecti
 	#if($user && !$browser.inApp() && $canviewsettings)
 		$pages.include("/${communityhome}/components/sidebars/user/index.html")
 	#end
-	<div class="bg-dark">
+	
 	$pages.includeContent()
-	</div>
+	
 	
 	$pages.include("/${communityhome}/footer.html")
 </div>

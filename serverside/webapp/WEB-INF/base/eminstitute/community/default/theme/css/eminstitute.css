@@ -1044,9 +1044,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .message-attach-box {
-  background-color: #fff;
   width: 250px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
   background-color: #fff;
   float: right;
   padding: 10px;

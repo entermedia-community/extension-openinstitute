@@ -1347,8 +1347,9 @@ textarea.blog-comments-input {
   display: flex;
   position: relative;
   min-height: calc(100vh - 66px);
-  max-width: 1780px;
+  max-width: 1680px;
   margin: 0 auto;
+  font-size: 0.95rem;
 }
 .community-layout .sidebar-left,
 .community-layout .sidebar-right {

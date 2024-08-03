@@ -101,10 +101,10 @@
 				</div>
 			</div>
 			#end
-			#if( $goal)
-			$context.putPageValue("chat",$chat)
-			$context.putPageValue("goal",$goal)
-			$pages.include("${communityhome}/project/chat/chatterbox/goalrow.html",$context)
+			#if($caneditcollection && $goal)
+				$context.putPageValue("chat",$chat)
+				$context.putPageValue("goal",$goal)
+				$pages.include("${communityhome}/project/chat/chatterbox/goalrow.html",$context)
 			#else
 				<div class="msg-body-content">#ifnotnull($chat.message)$url_util.escapeMessage($chat.message)#end</div>
 			#end
