@@ -16,10 +16,10 @@
           href="${communityhome}/project/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
           <i class="fas fa-edit"></i> [[Edit Product]]
         </a>
-        #set($uploadlink = "$communityhome/views/modules/asset/add/start.html?entityupload=true&entitytype=$searchtype&entityvalue=$aproduct.id&collectionid=$librarycol.id")
+        #set($uploadlink = "${communityhome}/project/rentaldetails/upload/start.html?entityupload=true&entitytype=collectiveproduct&entityvalue=$aproduct.id&collectionid=$librarycol.id")
         #set($oemaxlevel = "1")
         #set($targetdiv = "applicationmaincontent")
-        <a href="$uploadlink" class="ajax moreactions btn btn-sm btn-outline-primary m-1" data-targetdivinner="storedetailarea"
+        <a href="$uploadlink" class="moreactions btn btn-sm btn-outline-primary m-1" data-targetdivinner="storedetailarea"
           data-closedialog="true" data-closemediaviewer="true" data-updateurl="true" data-oemaxlevel="$!oemaxlevel"
           title="[[Upload Product Images]]">
           <i class="fas fa-plus"></i> [[Add Images]]
