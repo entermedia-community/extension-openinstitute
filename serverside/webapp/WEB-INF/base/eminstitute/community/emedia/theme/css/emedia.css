@@ -213,6 +213,10 @@ h6,
   border: none;
   transition: 0.2s ease;
 }
+.btn-xxs {
+    padding: 0.15rem 0.25rem;
+    border-radius: 6px;
+    }
 .btn-sm {
     padding: 0.8rem 1.2rem;
     }
@@ -1684,13 +1688,18 @@ ul > li {
 	background-color: #3b3d50e6;
 }
 
+.sidebar-left h3,
 .sidebar-right h3,
 .explore-blog-list h3 {
   color: #576f76;
 }
 
 
-
+.referrallinkbox {
+	background-color: #e6e7f3;
+	border-radius: 0.5rem;
+	padding: 0.75rem;;
+}
   
   
   
