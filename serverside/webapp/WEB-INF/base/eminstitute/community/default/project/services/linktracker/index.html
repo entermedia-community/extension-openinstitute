@@ -50,9 +50,9 @@
 	#end
    <div>
    		
-   		<div class="finances-table-sort">
-			<label>[[Sort by]]</label>
-			<div style="width:200px; display:inline-block;">
+	   		<div class="finances-table-sort d-flex flex-rows justify-content-end mb-2">
+			<label>[[Sort by]]:</label>
+			<div style="padding-left:10px; width:220px; display:inline-block;">
 			<select class="select2 	form-control-sm" name="sortby" >
 				#set ($details = $searcher.getDetailsForView("collectivelinktracker/addnew", $userprofile))
 				#foreach( $detail in $details)

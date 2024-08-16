@@ -24,61 +24,68 @@
 			#if( !$selectedstatus )
 				#set( $selectedstatus = "0")	
 			#end
-			<div class="d-flex align-items-center m-1">
-				<i class="fas fa-check-square me-2" style="width:20px"></i> 
-				<select  name="taskstatus" class="form-control form-control-sm" >
-					<option value=""></option>
-					#set( $options = $mediaarchive.getList("taskstatus"))
-					#foreach( $option in $options)
-					<option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
-					$context.getText($mediaarchive.getCachedData("taskstatus", $option.id))</option>
-					#end
-				</select> 
-			</div>		
-			<div class="d-flex align-items-center m-1">
-				<i class="fas fa-tags me-2" style="width:20px"></i>
-				<div style="min-width:300px;">
-					#set( $searcher = $mediaarchive.getSearcher("collectiverole") )
-					$context.putPageValue("searcher",$searcher)	
-					#set( $detail = $searcher.getDetail("name") )
-					
-					$context.putPageValue("detail",$detail)
-					$context.putPageValue("values", $task.getValues("keywords"))	
-					$context.putPageValue("data",$task)	
-					$pages.include("$componenthome/xml/types/tageditor.html", $context)
-				</div>
-			</div>
-			<div class="d-flex align-items-center m-1">
-				<i class="fas fa-user me-2" style="width:20px"></i>
-				## change completedby field to staff field? 
-				#set( $completedby = $task.completedby)
-				#if( !$completedby )
-					#set( $completedby = $user.id)	
-				#end
-				<select class="form-control form-control-sm"  name="completedby">
-					<option value=""></option>
-					#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
-					#foreach( $hit in $team)
-						#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
-						#if( $followeruser)
-						<option value="$hit.followeruser" #if( $completedby == $hit.followeruser) selected #end>$followeruser.getName()</option>
+			<div class="d-flex flex-column">
+				
+				<div class="d-flex flex-row">
+					<span><i class="fas fa-check-square me-2" style="width:20px"></i></span> 
+					<div class="mb-2">
+					<select  name="taskstatus" class="form-control" style="width:300px;" >
+						<option value=""></option>
+						#set( $options = $mediaarchive.getList("taskstatus"))
+						#foreach( $option in $options)
+						<option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
+						$context.getText($mediaarchive.getCachedData("taskstatus", $option.id))</option>
 						#end
-					#end
-				</select>
-			</div>
-			#set( $hits = $mediaarchive.query("projectdepartment").all().sort("name").search($context) )
-			<div class="d-flex align-items-center m-1">
-				<i class="fas fa-hammer me-2" style="width:20px"></i>
-				<div style="width:300px;">
-					<select id="selectedcategories" name="projectdepartment" class="selectautosubmit listautocomplete form-control select2">
-					<option value=""></option>
-					#set( $projectdepartment = $task.projectdepartment)
-					#foreach( $hit in $hits)
-						<option #if ($projectdepartment && $projectdepartment == $hit.id) selected #end value="$hit.id">$hit ($!hit.goalpoints)</option>
-					#end
-					</select>
+					</select> 
+					</div>
+				</div>		
+				<div class="d-flex flex-row m-1">
+					<span><i class="fas fa-tags me-2" style="width:20px"></i></span>
+					<div style="min-width:300px;">
+						#set( $searcher = $mediaarchive.getSearcher("collectiverole") )
+						$context.putPageValue("searcher",$searcher)	
+						#set( $detail = $searcher.getDetail("name") )
+						
+						$context.putPageValue("detail",$detail)
+						$context.putPageValue("values", $task.getValues("keywords"))	
+						$context.putPageValue("data",$task)	
+						$pages.include("$componenthome/xml/types/tageditor.html", $context)
+					</div>
 				</div>
-			</div>	
+				<div class="d-flex flex-row m-1">
+					<span><i class="fas fa-user me-2" style="width:20px"></i></span>
+					## change completedby field to staff field? 
+					#set( $completedby = $task.completedby)
+					#if( !$completedby )
+						#set( $completedby = $user.id)	
+					#end
+					<div style="min-width:300px;">
+					<select class="form-control form-control-sm"  name="completedby">
+						<option value=""></option>
+						#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
+						#foreach( $hit in $team)
+							#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
+							#if( $followeruser)
+							<option value="$hit.followeruser" #if( $completedby == $hit.followeruser) selected #end>$followeruser.getName()</option>
+							#end
+						#end
+					</select>
+					</div>
+				</div>
+				#set( $hits = $mediaarchive.query("projectdepartment").all().sort("name").search($context) )
+				<div class="d-flex flex-row m-1">
+					<span><i class="fas fa-hammer me-2" style="width:20px"></i></span>
+					<div style="width:300px;">
+						<select id="selectedcategories" name="projectdepartment" class="selectautosubmit listautocomplete form-control select2">
+						<option value=""></option>
+						#set( $projectdepartment = $task.projectdepartment)
+						#foreach( $hit in $hits)
+							<option #if ($projectdepartment && $projectdepartment == $hit.id) selected #end value="$hit.id">$hit ($!hit.goalpoints)</option>
+						#end
+						</select>
+					</div>
+				</div>	
+				</div>
 			<div class="pt-3">
   				<input id="submitbutton" 
   					type="submit" 

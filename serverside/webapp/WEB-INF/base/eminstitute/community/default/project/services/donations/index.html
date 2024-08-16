@@ -3,9 +3,10 @@
 <div class="d-flex justify-content-between mb-2">
 	<h2>[[Online Donation]]</h2>
 	<div>
-	<a onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>
+	#if($hits && !$hits.isEmpty() ) <a onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>#end
 	</div>
 </div>
+#if($hits && !$hits.isEmpty() ) 
 	<form  id="donationsform" 
 		class="autosubmit  ajaxform" 
 		data-targetdiv="donationsreport" 
@@ -64,7 +65,7 @@
 			<div class="clearfix"></div>
 	   </div>
    </form>
-   
+   #end
 	$pages.include("$communityhome/project/services/donations/results.html",$context)
 	
 	

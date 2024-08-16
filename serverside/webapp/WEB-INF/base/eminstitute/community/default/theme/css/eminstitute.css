@@ -2163,6 +2163,11 @@ ul.inlinelist li {
   /* line-height: 1.85; */
   height: calc(1.85rem + 0.15rem);
 }
+
+label.error {
+	font-size: 0.85em;
+}
+
 .select2-container .select2-selection--single
 {
 	height: calc(1.5rem + 0.45rem);

@@ -6,12 +6,14 @@
      	<div class="emdata emdatatable">
             #set($hits = $expenses)
 			$context.putPageValue("hits",$hits)
+			
+			#if( !$hits.isEmpty() ) 
 			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&collectionid=$!librarycol.id&pageposition")
 			$context.putPageValue("resultsPage",$resultsLink)
 			$context.putPageValue("targetdiv","resultsdiv")
 			$context.putPageValue("oemaxlevel","1")
             $pages.include("${apphome}/components/results/positions.html", $context)
-
+			#end
                   
                       <table class="table table-striped table-hover">
                           <thead>
