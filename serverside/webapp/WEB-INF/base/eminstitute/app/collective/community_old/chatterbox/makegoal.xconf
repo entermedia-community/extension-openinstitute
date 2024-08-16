@@ -1,0 +1,5 @@
+<page>
+	<path-action name="TaskModule.createGoalFromMessage"/>
+	<path-action name="ProjectModule.loadGoalInMessage"/>
+
+</page>

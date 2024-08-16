@@ -8,24 +8,22 @@
 
 <div id="allreimbursements">
 
-<h2 class="float-left" style="margin:0 0 10px 0;">[[Reimbursements Sent]]</h2>
-
-
-     #if( $caneditcollection )
-         <a
-          href="$applink/collective/services/reimbursements/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right"
-          title="[[Add Reimbursement]]"><i class="fa fa-plus"></i> [[Add Reimbursement]]</a>
-    #end      
-<div class="clearfix"></div>
-
-	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
-
+	<div class="d-flex justify-content-between mb-2">
+		<h3>[[Reimbursements Sent]]</h3>
+		<div>
+		     #if( $caneditcollection )
+		         <a href="${projectlink}/services/reimbursements/addnew.html?collectionid=${collectionid}"
+		          class="emdialog btn btn-sm btn-primary"
+		          title="[[Add Reimbursement]]"><i class="fa fa-plus"></i> [[Add Reimbursement]]</a>
+		    #end
+		    <a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+	    </div>      
+	</div>
 	<form  id="incomesearchform" 
 		class="autosubmit  ajaxform" 
 		data-targetdiv="allreimbursements" 
 		method="post" 
-		action="$!siteroot$applink/collective/services/reimbursements/index.html">
+		action="$!siteroot${projectlink}/services/reimbursements/index.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectivereimbursement") )
 		$context.putPageValue("searcher",$searcher)
@@ -56,11 +54,10 @@
 			</div>	
 		</div>
 		
-   <div >
    		
-   		<div class="finances-table-sort">
-		<label>[[Sort by]]</label>
-		<div style="width:200px; display:inline-block;">
+   		<div class="finances-table-sort d-flex flex-rows justify-content-end">
+		<label>[[Sort by]]:</label>
+		<div style="padding-left:10px; width:220px; display:inline-block;">
 			<select class="select2 	form-control-sm" name="sortby" >
 				#set ($details = $searcher.getDetailsForView("collectivereimbursement/editexpense", $userprofile))
 				#foreach( $detail in $details)
@@ -70,48 +67,44 @@
 			</select>
 		</div>
 		</div>
-		<div class="clearfix"></div>
-   </div>
    </form>
    
    	$pages.include("${communityhome}/project/services/reimbursements/results.html",$context)
    
 	
-	
-   <hr>
+   
 	
 	#if(!$expenses.isEmpty() )
-   
-   		<h2 class="float-left" style="margin:30px 0 10px 0;">[[Expenses Pending]]</h2>
-		<div class="clearfix"></div>
-   
-   #end
-   
-   
-	$pages.include("${communityhome}/project/services/reimbursements/expenses.html",$context)
+   		<hr>
+   		<div class="d-flex justify-content-between mb-2">
+		<h3>[[Expenses Pending]]</h3>
+		</div>
+		$pages.include("${communityhome}/project/services/reimbursements/expenses.html",$context)
+	#end
 	
 	
 	#set( $userscurrency = $financeManager.getTotalsReimbursedByUser($collectionid,$daterange) )
 	#if($userscurrency.size()> 0)
+		<hr/>
+	   <div style="padding-top:20px;">
+	   		<div class="d-flex justify-content-between mb-2">
+			<h3>[[Expenses Completed]]</h3>
+		</div>
 	
-   <div style="padding-top:20px;">
-   		<h2 style="margin:10px 0;">[[Expenses Completed]]</h2>
-
-
- 	<table class="table table-striped">
-		#foreach($value in $userscurrency)	
-			#set( $auser = $mediaarchive.getUser($value.getKeyedOn() ) )
-			#foreach($currency in $value.getCurrencies() )
-			<tr>
-			<td>$auser</td>
-			<td>
-					$value.getValue($currency) $!context.getText($mediaarchive.getCachedData("currencytype",$currency))
-			</td>
-			</tr>
-			#end
-		#end	
-   </table>
-   </div>
+	 	<table class="table table-striped">
+			#foreach($value in $userscurrency)	
+				#set( $auser = $mediaarchive.getUser($value.getKeyedOn() ) )
+				#foreach($currency in $value.getCurrencies() )
+				<tr>
+				<td>$auser</td>
+				<td>
+						$value.getValue($currency) $!context.getText($mediaarchive.getCachedData("currencytype",$currency))
+				</td>
+				</tr>
+				#end
+			#end	
+	   </table>
+	   </div>
 	#end  
 	
 	

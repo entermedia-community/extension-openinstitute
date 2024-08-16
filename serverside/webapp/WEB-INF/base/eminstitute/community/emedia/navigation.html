@@ -1,6 +1,6 @@
-<header class="navigation emedia-community-header">
+<header class="navigation emedia-community-header emedia-header">
   <nav class="navbar navbar-expand-lg">
-    <div class="container">
+    <div class="$!content.containertype">
       <a class="navbar-brand" href="/">
           <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-1 me-md-3" style="height:50px;width: auto;" /> #text($communitytagcategory) <span>Community</span>
         </a>
@@ -13,8 +13,8 @@
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'home') active #end" href="$communitylink/">Home</a>
           </li> 
-          <li class="nav-item #if($content.oisection == 'development') active #end">
-          	<a class="nav-link" href="${communitylink}/development">Development</a>
+          <li class="nav-item">
+          	<a class="nav-link #if($content.oisection == 'development') active #end" href="${communitylink}/development/">Development</a>
           </li>
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'project') active #end" href="$communitylink/projects/">
@@ -45,3 +45,5 @@
     </div>
   </nav>
 </header>
+
+

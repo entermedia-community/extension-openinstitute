@@ -16,9 +16,9 @@
     #set( $link = "$componenthome/emtree/tree.html")
     #set( $link = "${link}?collectiontreeroot=$rootcategory.getId()&tree-name=collectiontree&editabletree=true" )
     #set( $link = "${link}&targetdiv=searchlayout&maxlevelclick=1" )
-	#set( $link = "${link}&url-prefix=$applink/collective/projects/viewassets.html" )
-	#set( $link = "${link}&customurlprefix=$applink/collective/projects/index.html" )
-	#set( $link = "${link}&customurladdmedia=$applink/collective/projects/addmedia.html" )
+	#set( $link = "${link}&url-prefix=${projectlink}/projects/viewassets.html" )
+	#set( $link = "${link}&customurlprefix=${projectlink}/projects/index.html" )
+	#set( $link = "${link}&customurladdmedia=${projectlink}/projects/addmedia.html" )
 	
 	$pages.include($link, $context)
 </div>

@@ -5,7 +5,7 @@
 			<div class="contentcolumn">
 		     #if( $caneditcollection )    
 		    <a style="margin-left:6px"
-		               href="$applink/collective/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
+		               href="${projectlink}/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
 		               class="btn btn-sm btn-primary float-right">[[Go Back]]</a>
 			#end
 				<h3>[[Transactions]] - #text($account)
@@ -79,14 +79,14 @@
                  #foreach($transaction in $all)
                      <tr>
                      	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
-                     	#set($collurl = "$applink/collective/services/finances/dashboard.html?collectionid=$transaction.getCollectionId()")
+                     	#set($collurl = "${projectlink}/services/finances/dashboard.html?collectionid=$transaction.getCollectionId()")
                          #set($section = $transaction.getSearchType().replace("collective",""))
                          #if($section != "income" )
                          	#set($section = "${section}s")
                          #end	
                          <td><a href="$collurl">$collective</a></td>
                          <td>$!context.getDate($transaction.getDate())</td>
-                         #set( $link = "$applink/collective/services/$section/index.html?collectionid=$transaction.getCollectionId()")
+                         #set( $link = "${projectlink}/services/$section/index.html?collectionid=$transaction.getCollectionId()")
                          <td><a href="$link">
                          #datatext( $!mediaarchive.getCachedData("module", $transaction.getSearchType()),"name")</a>
                          #if( $transaction.getSearchType() == "collectiveexpense")
@@ -101,7 +101,7 @@
                          </td>
                          <td>$transaction.getAmount() </td>
                          
-                         #set( $link = "$applink/collective/services/$section/edit.html?id=$transaction.getData().getId()&collectionid=$transaction.getCollectionId()")
+                         #set( $link = "${projectlink}/services/$section/edit.html?id=$transaction.getData().getId()&collectionid=$transaction.getCollectionId()")
                          <td><a class="emdialog" href="$link"><i class="fa fa-edit"></i></a></td>
 					
                 #end

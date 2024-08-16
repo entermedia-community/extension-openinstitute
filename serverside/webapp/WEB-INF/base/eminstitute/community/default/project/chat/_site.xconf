@@ -7,6 +7,9 @@
 	<property name="collectivesection">community</property>
 	
 	<property name="fullwidth">true</property>
+	
+	<property name="containertype">container-fluid</property>
+	
 	<inner-layout>${communityhome}/project/chat/chatlayout.html</inner-layout>
 	
 	<style id="uploadstyle" href="${themeprefix}/styles/pages/upload.css" />

@@ -4,33 +4,35 @@
 	#set($collectionid = $context.getRequestParameter("collectionid"))
 #end
 
-
-
 <div>
-<h2 class="float-left" style="margin:0 0 10px">[[Accounts]]</h2>
-	#ifnull( $hits) 
-              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
-              $context.putPageValue("hits",$hits)
-	#end
-            
-      #if( $caneditcollection )    
-           <a style="margin-left:6px"
-                      href="$applink/collective/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
-                      class="emdialog btn btn-sm btn-primary float-right"
-                      title="[[Add An Account]]"><i class="fa fa-plus"></i> [[Add An Account]]</a>
-			#if( !$hits.isEmpty() )                      
-           <a 
-                      href="$applink/collective/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
-                      class="btn btn-sm btn-primary float-right">[[Reconcile]]</a>
-			#end
-         #end
-<div class="clearfix"></div>
+	<div class="d-flex justify-content-between mb-2">
+		<h3>[[Accounts]]</h3>
+		#ifnull( $hits) 
+	              #set( $hits = $mediaarchive.query($content.searchtype).exact("collectionid",$collectionid).sort("name").named("hits").search($context))
+	              $context.putPageValue("hits",$hits)
+		#end
+	      <div>       
+	      #if( $caneditcollection )  
+	       
+	           <a style="margin-left:6px"
+	                      href="${projectlink}/services/${content.collectiveadminsection}/addnew.html?collectionid=${collectionid}"
+	                      class="emdialog btn btn-sm btn-primary "
+	                      title="[[Add An Account]]"><i class="fa fa-plus"></i> [[Add An Account]]</a>
+				#if( !$hits.isEmpty() )                      
+	           <a href="${projectlink}/services/${content.collectiveadminsection}/reconcile.html?collectionid=${collectionid}"
+	              class="btn btn-sm btn-primary">[[Reconcile]]</a>
+				#end
+			
+	        #end
+	        #if( !$hits.isEmpty() )
+	        <a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+	        #end
+	        </div>
+	</div>
 
 #if( !$hits.isEmpty() )                      
-	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
-
-	<form  id="colsearchform" class="autosubmit  ajaxform" data-targetdiv="expensereport" method="post"
-			 action="$home$applink/collective/services/${content.collectiveadminsection}/results.html">
+	<form  id="colsearchform" class="autosubmit  ajaxform" data-targetdiv="investmentreport" method="post"
+			 action="${projectlink}/services/${content.collectiveadminsection}/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher($content.searchtype) )
 		$context.putPageValue("searcher",$searcher)
@@ -49,9 +51,10 @@
 			<div class="row">
 				$context.putPageValue("autocomplete","off")
 				#foreach( $detail in $details)
-					<div class="col-md-3">
+					<div class="col-md-4">
 							$context.putPageValue("detail", $detail)
-							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
+							
+							$pages.include("${communityhome}/components/advancedsearch/detaileditinline.html", $context)
 					</div>
 					#if( $counter == 4)
 						</div>
@@ -61,23 +64,17 @@
 			</div>	
 		</div>
 		
-		
-		<div>
-		
-		<div class="finances-table-sort">
-			<label>[[Sort by]]</label>
-			<div style="width:200px; display:inline-block;">
-			<select class="select2 form-control-sm" name="sortby" >
-				#set ($details = $searcher.getDetailcollectiveinvestmentsForView("collectiveinvestment/edit", $userprofile))
-			#foreach( $detail in $details)
-				<option value="$detail.getId()Down">$!context.getText($detail)</option>
-				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
-			#end
-			</select>
+		<div class="finances-table-sort d-flex flex-rows justify-content-end">
+			<label>[[Sort by]]:</label>
+			<div style="padding-left:10px; width:220px; display:inline-block;">
+				<select class="select2 form-control-sm" name="sortby" >
+					#set ($details = $searcher.getDetailsForView("bankaccount/addnew", $userprofile))
+					#foreach( $detail in $details)
+						<option value="$detail.getId()Down">$!context.getText($detail)</option>
+						<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
+					#end
+				</select>
 			</div>
-		</div>
-		<div class="clearfix"></div>
-		
 		</div>
 
 	</form>

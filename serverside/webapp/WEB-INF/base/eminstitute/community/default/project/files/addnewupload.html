@@ -4,7 +4,7 @@ $context.putPageValue("searcher",$searcher)
 #set( $xmledithome  = "$apphome/components/xml")
 
 <form id="uploaddata" name="wizard" onSubmit="return false;" method="post" data-targetdiv="projectfeedlayout" 
-	action="$applink/collective/projects/uploadsave.html" class="validate showonselect"  >
+	action="${projectlink}/projects/uploadsave.html" class="validate showonselect"  >
 
 <div class="card card-uploader" style="margin-bottom: 20px;">
 
@@ -72,8 +72,8 @@ $context.putPageValue("searcher",$searcher)
 			       <a class="btn btn-primary" 
 			       	id="autofinishbutton" 
 			       	data-complete="[[Upload Complete]]"
-			       	data-okpage="$applink/collective/projects/index.html?collectionid=${librarycol.getId()}"
-			       	href="$applink/collective/projects/uploadsave.html" style="display:none">[[Finish]]</a>
+			       	data-okpage="${projectlink}/projects/index.html?collectionid=${librarycol.getId()}"
+			       	href="${projectlink}/projects/uploadsave.html" style="display:none">[[Finish]]</a>
 			    </div>
 		    </div>
 		    <div class="float-right" style="padding-right:20px">

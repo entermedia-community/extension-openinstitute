@@ -34,7 +34,7 @@
                                   #if($showcollections )
                                   <td>
 									<a
-	                                    href="$applink/collective/services/reimbursements/index.html?collectionid=$hit.collectionid"
+	                                    href="${projectlink}/services/reimbursements/index.html?collectionid=$hit.collectionid"
 	                                    class="btn btn-xs btn-secondary"
 	                                    target="_new"
 	                                    data-hidefooter="true"
@@ -52,7 +52,7 @@
 			                      <td style="text-align: center">
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
-			                                    href="$applink/collective/services/reimbursements/edit.html?id=$hit.id&searchtype=collectivereimbursement&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
+			                                    href="${projectlink}/services/reimbursements/edit.html?id=$hit.id&searchtype=collectivereimbursement&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
 			                                    data-hidefooter="true"
 			                                    title="[[Edit Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
@@ -65,10 +65,12 @@
             </table>
            
         </div>
-         $reimbursements.size() [[hits]]
-         
+        
+        #if($reimbursements.size() > 0)
+         <div>$reimbursements.size() [[hits]]</div>
          <div>
-        <a href="$applink/collective/services/reimbursements/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$reimbursements.getSessionId()"
-           class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+    		<a href="${projectlink}/services/reimbursements/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$reimbursements.getSessionId()"
+       			class="btn btn-sm btn-primary mb-4">[[Download]]</a>
         </div>
+        #end
 </div>

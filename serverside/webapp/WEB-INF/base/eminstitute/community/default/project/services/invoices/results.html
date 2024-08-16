@@ -49,19 +49,19 @@
                              #end
                              #if ($hit.getValue("paymentstatus") == "invoiced")
                                  <a
-                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-success">[[Pay Now]]</a>
                                  #elseif ($hit.getValue("paymentstatus") == "autopayfailed" || $hit.getValue("paymentstatus") ==
                                  "error")
                                  <a
-                                     href="$applink/collective/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/paynow.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-success">[[Pay Now]]</a>
                                  #if ($hit.paymentstatusreason != "")
                                      <div class="alert alert-danger">$hit.paymentstatusreason</div>
                                  #end
                              #elseif ($hit.getValue("paymentstatus") == "paid")
                                  <a
-                                     href="$applink/collective/services/viewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/viewinvoice.html?invoiceid=${hit.id}&collectionid=$collectionid"
                                      target="_blank"
                                      class="btn btn-xs btn-secondary">[[View]]</a>
                              #end

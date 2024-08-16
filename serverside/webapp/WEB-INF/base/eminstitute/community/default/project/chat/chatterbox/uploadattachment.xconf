@@ -24,5 +24,7 @@
 	
 	<path-action name="Admin.loadPermissions"/>
   	<path-action name="Admin.allowViewing"/>
+  	
+  	<inner-layout />
 
 </page>

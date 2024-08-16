@@ -15,7 +15,7 @@
 	#end
 	<div id="invoicecontainer">
 	#if( $canviewsettings )
-<form method="post" action="$applink/collective/services/sendinvoice.html" 
+<form method="post" action="${projectlink}/services/sendinvoice.html" 
 		class="ajaxform autocloseform" 
 		data-targetdiv="collectivebilling">
 #end
@@ -30,7 +30,7 @@
 			#set($status = $invoice.getValue("paymentstatus"))
 			
 			#if(!$status.equals("paid"))
-			<a href="$applink/collective/services/editinvoice.html?invoiceid=$id" 
+			<a href="${projectlink}/services/editinvoice.html?invoiceid=$id" 
 				class="btn btn-secondary ajax" 
 				data-targetdiv="invoicecontainer"
 				title="[[Edit Invoice Details]]"

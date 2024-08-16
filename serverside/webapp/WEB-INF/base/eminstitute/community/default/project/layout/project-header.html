@@ -8,9 +8,6 @@ $context.putPageValue("collectionid",$librarycol.getId() )
     #set($logourl = "$communityhome/theme/images/OI_flower.png")
 #end
 
-
-#set($homelink = "${communitylink}/${librarycol.urlname}")
-
 #if ($librarycol.collectivebanner)
     #set( $banner= $mediaarchive.getAsset($librarycol.collectivebanner) )
     #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
@@ -26,7 +23,7 @@ $context.putPageValue("collectionid",$librarycol.getId() )
         #else
             class="bg-white banner coverRandom"
         #end>
-        <a class="header-logo" href="$homelink" title="$!librarycol.name">
+        <a class="header-logo" href="$projectlink" title="$!librarycol.name">
             <img src="$logourl" alt="logo" />
         </a>
         $pages.include("${communityhome}/project/layout/menu-collectives.html",$context)

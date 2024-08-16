@@ -15,7 +15,7 @@
 	#set( $collection = $mediaarchive.query("librarycollection").exact("id", $collectionid).searchOne() )
 
 	
-<form method="post" action="$applink/collective/services/editinvoicesave.html" class="ajaxform" data-targetdiv="invoicecontainer">	
+<form method="post" action="${projectlink}/services/editinvoicesave.html" class="ajaxform" data-targetdiv="invoicecontainer">	
 	<input type="hidden" name="id" value="$id">
 	<input type="hidden" name="invoiceid" value="$id">
 	<input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
@@ -125,7 +125,7 @@
 		</div>
 		#if( $canviewsettings )
 		<div class="text-right" style="padding:15px 10px;">
-			<a href="$applink/collective/services/previewinvoice.html?invoiceid=$id&oemaxlevel=1" 
+			<a href="${projectlink}/services/previewinvoice.html?invoiceid=$id&oemaxlevel=1" 
 				class="btn btn-secondary ajax" 
 				data-targetdiv="invoicecontainer" 
 				style="margin-right:10px;">[[Back]]</a>

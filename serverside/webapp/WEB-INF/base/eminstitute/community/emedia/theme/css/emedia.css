@@ -401,8 +401,7 @@ a:hover {
 }
 
 .form-control {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  /* padding: 0.5rem; */
 }
 .form-control:focus {
   box-shadow: none;
@@ -799,8 +798,12 @@ footer {
 .chatterbox-write .btn.chatter-send {
   padding: 0.375rem 0.75rem;
 }
+.emdata .tableheader {
+	background: none;
+}
 .chatterbox-write .chatter-send,
 .emwidget-header,
+.emdata .tableheader,
 .project-sidebar-menu li.current a {
   background-color: #626584;
 }
@@ -809,6 +812,9 @@ footer {
 }
 .project-sidebar-menu li.current a::after {
   border-left-color: #626584;
+}
+#main-results-table th, .emresultstable th, .emdata th {
+	font-size: 0.9rem;
 }
 @media (max-width: 991px) {
   .fixed-menu {
@@ -1682,7 +1688,6 @@ ul > li {
 .project-navbar .dropdown-menu li a.nav-link:hover {
   color: #ffffff !important;
 }
-
 
 .project-navbar {
 	background-color: #3b3d50e6;

@@ -1,14 +1,16 @@
 #set($collectionid = $librarycol.getId())
 
-<h2 class="float-left" style="margin:0 0 10px 0;">[[Online Donation]]</h2>
-<div class="clearfix"></div>
-<a onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>
-
+<div class="d-flex justify-content-between mb-2">
+	<h2>[[Online Donation]]</h2>
+	<div>
+	<a onclick="$('#donationsearchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search Donations]]</a>
+	</div>
+</div>
 	<form  id="donationsform" 
 		class="autosubmit  ajaxform" 
 		data-targetdiv="donationsreport" 
 		method="post" 
-		action="$home$applink/collective/services/donations/results.html">
+		action="${projectlink}/services/donations/results.html">
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
 		#set( $searcher = $mediaarchive.getSearcher("transaction") )

@@ -4,22 +4,23 @@
 	#set($collectionid = $context.getRequestParameter("collectionid"))
 #end
 
-<h2 style="margin-bottom:10px;">[[Pending Work Points]]</h2>
-
 <div id="serviceworkarea">
-     #if( $XXXcaneditcollection )
-         <a
-          href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right">[[Pay For Points]]</a>
-    #end      
-              
-	<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
-
+	<div class="d-flex justify-content-between mb-2">
+		<h3>[[Pending Work Points]]</h3>
+		<div>
+		     #if( $caneditcollection )
+		         <a href="${projectlink}/services/transfers/send.html?collectionid=${collectionid}"
+		          class="emdialog btn btn-sm btn-primary">[[Pay For Points]]</a>
+		    #end      
+		              
+			<a href="#" onclick="$('#searchform').toggle()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> [[Search]]</a>
+		</div>
+	</div>
 
 #foreach($person in $users)
 	<div class="pull-left card card-mini" style="margin:5px 0;"> 
-    	<div class="card-task-header" >$person</div>
-  		<div class="card-task-body " >
+    	<div class="card-header" >$person</div>
+  		<div class="card-body " >
   		#set( $weeks = $completed.weeksInMonth($since) )
 			<table class="striped" style="width:100%">
   			<tr>
@@ -50,7 +51,7 @@
   					data-width="900"
   					data-hidefooter="true"
 		 	 		title="[[Ticket Details]]" 
-		 	 		href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
+		 	 		href="${projectlink}/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
 		 	 		#set($collection = $!mediaarchive.getCachedData("librarycollection",$task.collectionid) )
 
 		 	 		#if( $task.get("completedurgent") == "true")
@@ -90,11 +91,11 @@
 							  		    #foreach($ticket in $tickets)
 							  		   		#set( $points = $ticket.getValue("points"))
 							  		    	<tr><td>
-							  		    	#set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${ticket.id}&collectionid=$ticket.collectionid&goalfolder=search")
+							  		    	#set( $goallink = "${projectlink}/goals/editgoalpanel.html?id=${ticket.id}&collectionid=$ticket.collectionid&goalfolder=search")
 							  		    	#set($collection = $!mediaarchive.getCachedData("librarycollection",$ticket.collectionid) )
 							  		    	  <a href="$goallink"
 									    	title="$ticket.name" class="emdialog editgoalshow" 
-									    	data-urlbar="$applink/collective/goals/search/index.html?collectionid=$ticket.collectionid&opengoalid=${ticket.id}" data-width="900" >
+									    	data-urlbar="${projectlink}/goals/search/index.html?collectionid=$ticket.collectionid&opengoalid=${ticket.id}" data-width="900" >
 							  				[[Ticket]]: $collection - $mediaarchive.getCachedData("collectiveproject",$ticket.goaltrackercolumn) - "$ticket.name" </a></td>
 							  				<td>$!context.getDateTime($ticket.getDate("resolveddate"))</td>
 							  				<td>$points</td></tr>
@@ -122,24 +123,27 @@
   		</div>
 	</div>
 #end
-</div>
-</div>
+
 	
 
 
 
 
-		#set( $completedpointtransfers = $financeManager.getTransfersForEntity($collectionid, "2", "1", $daterange) )
-		#if( !$completedpointtransfers.isEmpty())
-   		<h3 class="float-left" style="margin:10px 0;">[[Pending Work Points]]</h3>
-        $context.putPageValue("transfers",$completedpointtransfers) 
-		$pages.include("$apphome/wallet/transferresults.html",$context)
-		#end
- 		#set( $transfers = $financeManager.getTransfersForEntity($collectionid, "2", "2", $daterange) )
-		#if( !$transfers.isEmpty())
-   		<h3 class="float-left" style="margin:10px 0;">[[Paid Work Points]]</h3>
-        $context.putPageValue("transfers",$transfers)
-		$pages.include("$apphome/wallet/transferresults.html",$context)
-   		#end
+#set( $completedpointtransfers = $financeManager.getTransfersForEntity($collectionid, "2", "1", $daterange) )
+#if( !$completedpointtransfers.isEmpty())
+	<div class="d-flex justify-content-between mb-2">
+		<h3>[[Pending Work Points]]</h3>>
+	</div>
+	$context.putPageValue("transfers",$completedpointtransfers) 
+	$pages.include("${communityhome}/wallet/transferresults.html",$context)
+#end
+#set( $transfers = $financeManager.getTransfersForEntity($collectionid, "2", "2", $daterange) )
+#if( !$transfers.isEmpty())
+	<div class="d-flex justify-content-between mb-2">
+	<h3>[[Paid Work Points]]</h3>
+	</div>
+	$context.putPageValue("transfers",$transfers)
+	$pages.include("${communityhome}/wallet/transferresults.html",$context)
+#end
 </div>
 

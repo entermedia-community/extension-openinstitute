@@ -2,11 +2,14 @@
 		
 	<property name="collectivesection">finances</property>
 	<property name="collectiveadminsection">invoices</property>
+	<property name="containertype">container-fluid</property>
+	
 	<property name="invoicepayment">true</property>
 	
 	<path-action name="FinanceModule.loadFinanceManager" />
 	
 	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
 	
-	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
+	
+	<inner-layout>${communityhome}/project/services/layout.html</inner-layout>
 </page>

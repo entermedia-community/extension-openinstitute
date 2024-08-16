@@ -1,6 +1,6 @@
 <page>
-	<property name="collectiveadminsection">transfers</property>
-<path-action name="FinanceModule.loadDateRange" />
-<path-action name="FinanceModule.loadFinanceManager" />
+	<property name="collectiveadminsection">workpoints</property>
+	<path-action name="FinanceModule.loadDateRange" />
+	<path-action name="FinanceModule.loadFinanceManager" />
 
 </page>

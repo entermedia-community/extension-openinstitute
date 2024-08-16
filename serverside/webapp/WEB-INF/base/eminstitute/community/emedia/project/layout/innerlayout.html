@@ -1,41 +1,49 @@
 #set($collectivesection = $content.collectivesection)
 
-<div class="community-layout bg-white"> 
-	<div  class="sidebar-left">
-		<button class="btn btn-sm community-drawer-close">
-			<i class="fas fa-times text-muted"></i>
-		</button>
-		
-		
-		<div class="referrallinkbox">
-			<h3>[[Link eMedia Library]]</h3>
-			<div>
-				<i class="fas fa-link fa-sm"></i> [[Help our community and share our referral link]]: 
-			<div class="referrallink">https://emedialibrary.com/?fbclid=$!librarycol.getId()</div>
-			<a href="#" class="copytoclipboard btn btn-xxs btn-light" data-targetdiv="referrallinkboxcopied" data-copytext="copyreferral" title="[[Copy to Clipboard]]"><i class="far fa-copy"></i> [[Copy]]</a>
-			<input style="position:absolute; top:-1000px;" id="copyreferral" value="https://emedialibrary.com/?fbclid=$!librarycol.getId()">
+<section class="mainsection">
+	<div class="$!content.containertype">
+		<div class="community-layout bg-white"> 
+
+				#if($collectivesection == "settings")
+					<div  class="sidebar-left">
+					<button class="btn btn-sm community-drawer-close">
+						<i class="fas fa-times text-muted"></i>
+					</button>
+					#if($collectivesection == "settings")
+						$pages.include("${communityhome}/project/admin/sidebar.html",$context)
+					#end
+					</div>
+				#end
+				
+			<div class="main-content">
+				$pages.include("${communityhome}/project/layout/project-header.html",$context)
+				<div id="maincontent">
+					$pages.includeContent()	
+				</div>
 			</div>
 			
+			#if($collectivesection != "settings")
+			<div class="sidebar-right">
+				<div class="mb-4">
+				<div class="referrallinkbox">
+					<h3>[[Link eMedia Library]]</h3>
+					<div>
+						<i class="fas fa-link fa-sm"></i> [[Help our community and share our referral link]]: 
+					<div class="referrallink">https://emedialibrary.com/?fbclid=$!librarycol.getId()</div>
+					<a href="#" class="copytoclipboard btn btn-xxs btn-light" data-targetdiv="referrallinkboxcopied" data-copytext="copyreferral" title="[[Copy to Clipboard]]"><i class="far fa-copy"></i> [[Copy]]</a>
+					<input style="position:absolute; top:-1000px;" id="copyreferral" value="https://emedialibrary.com/?fbclid=$!librarycol.getId()">
+					</div>
+				</div>
+				<div id="referrallinkboxcopied" class="refferralcopied">[[Link copied to clipboard, thank you!]]</div>
+				</div>
+				
+				
+				$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
+				
+			</div>
+			#end
+			<div id="community-drawer-mask" class="community-drawer-close" role="button" style="display: none;"></div>
 		</div>
-		<div id="referrallinkboxcopied" class="refferralcopied">[[Link copied to clipboard, thank you!]]</div>
-		
-		#if($collectivesection == "settings")
-			$pages.include("${communityhome}/project/admin/sidebar.html",$context)
-		#elseif($collectivesection == "finances")
-			$pages.include("${communityhome}/project/services/sidebar.html",$context)
-		#end
-		##$pages.include("${communityhome}/project/layout/sidebar-left.html",$context)
 	</div>
-	
-	<div class="main-content">
-		$pages.include("${communityhome}/project/layout/project-header.html",$context)
-		<div id="maincontent">
-			$pages.includeContent()	
-		</div>
-	</div>
-	
-	<div class="sidebar-right">
-		$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
-	</div>
-	<div id="community-drawer-mask" class="community-drawer-close" role="button" style="display: none;"></div>
-</div>
+</section>
+

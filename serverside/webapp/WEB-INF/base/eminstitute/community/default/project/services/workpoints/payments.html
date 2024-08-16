@@ -9,7 +9,7 @@
 <div id="serviceworkarea">
      #if( $XXXcaneditcollection )
          <a
-          href="$applink/collective/services/transfers/send.html?collectionid=${collectionid}"
+          href="${projectlink}/services/transfers/send.html?collectionid=${collectionid}"
           class="emdialog btn btn-sm btn-primary float-right">[[Pay For Points]]</a>
     #end      
               
@@ -19,7 +19,7 @@
 		class="autosubmit  ajaxform" 
 		data-targetdiv="expensereport" 
 		method="post" 
-		action="$!siteroot$applink/collective/services/transfers/results.html">
+		action="$!siteroot${projectlink}/services/transfers/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("currencytransfer") )
 		$context.putPageValue("searcher",$searcher)

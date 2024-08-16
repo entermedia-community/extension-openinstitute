@@ -10,6 +10,8 @@
 
 #set( $goal = $goalsinmessages.get($chat.id))
 #set( $chatuser = $mediaarchive.getUser($chat.user) ) 
+#set($attachedassets = $attachmentspermessage.get($chat.id))
+
 
 <div id="chatter-message-$chat.id" class="msg-bubble">
 <div class="chatterbox-chat" role="alert" >
@@ -20,9 +22,8 @@
 			<img src="${userimageurl}" class="img-fluid">
 		</a>
 	</div>
-	#if($chat.attachedassets)
-		$pages.include("${communityhome}/project/chat/chatterbox/attach.html",$context)
-	#end
+
+
 	
 	<div class="message-menu">
 		<div class="d-flex align-items-center">
@@ -88,7 +89,13 @@
 		<span class="chat-timestamp">$context.getDateTime($chat.date)</span>
 		</div>
 		
-		<div class="msg-body #if($chat.user == $user.id) me #end">
+		<div class="msg-body #if($chat.user == $user.id) me #end" style="#if($attachedassets) min-height: 110px;;#end">
+			
+		#if($attachedassets)
+			$context.putPageValue("attachedassets", $attachedassets)
+			$pages.include("${communityhome}/project/chat/chatterbox/attach.html",$context)
+		#end
+			
 			#ifnotnull($chat.replytoid)
 			#set( $otherchat = $mediaarchive.getCachedData("chatterbox",$chat.replytoid))
 			#set( $otherchatuser = $mediaarchive.getUser($otherchat.user) )

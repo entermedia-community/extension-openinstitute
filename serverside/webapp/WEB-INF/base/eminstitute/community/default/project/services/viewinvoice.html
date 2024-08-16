@@ -23,7 +23,7 @@ $invoiceformated.setValue("period", $recurringperiod)) ##--
   <div class="viewinvoiceheader">
     <div class="float-right printinvoicebtn">
       <a
-        href="$applink/collective/services/printpreview.html?invoiceid=$!invoice.id"
+        href="${projectlink}/services/printpreview.html?invoiceid=$!invoice.id"
         target="_blank"
         class="btn btn-sm btn-light"
         ><i class="fa-solidfa-print"></i> [[Print]]</a
@@ -65,7 +65,7 @@ $invoiceformated.setValue("period", $recurringperiod)) ##--
     #if($status.equals("pending"))
     <div class="hideprinting" style="right: 5px; top: 5px; position: absolute">
       <a
-        href="$applink/collective/admin/index.html?collectionid=$!collection.getId()"
+        href="${projectlink}/admin/index.html?collectionid=$!collection.getId()"
         class="btn btn-xs btn-light"
         ><i class="fa-solidfa-cog"></i> [[Invoice Template]]</a
       >

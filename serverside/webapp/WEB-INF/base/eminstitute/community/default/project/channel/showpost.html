@@ -38,10 +38,10 @@
 				#set($link = "$communityhome/theme/images/OI_flower.png")
 			#end
 			<div class="blog-community">
-				<a href="$communityhome/project/channel/${librarycol.getId()}/${librarycol.getName()}.html">
+				<a href="${projectlink}">
 					<img src="$link" class="blog-community-img" alt="#text($librarycol)" />
 				</a>
-				<a href="$communitylink/${librarycol.urlname}" class="blog-community-header">
+				<a href="${projectlink}" class="blog-community-header">
 					#text($librarycol)
 				</a>
 				<div class="dropdown">
@@ -52,7 +52,7 @@
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
 								data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}"
-								href="$home$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
+								href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
 								<i class="fas fa-share-alt me-2"></i> Share
 							</a>
 						</li>
@@ -64,7 +64,7 @@
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
 								data-collectionid="${librarycol.getId()}" data-uploadid="${upload.id}"
-								href="$home$communityhome/project/channel/report/index.html?uploadid=${upload.id}">
+								href="$communityhome/project/channel/report/index.html?uploadid=${upload.id}">
 								<i class="far fa-flag me-2"></i> Report
 							</a>
 						</li>
@@ -119,7 +119,7 @@
 				<i class="far fa-comment"></i>
 				<span>[[Comment]]</span>
 			</button>
-			<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" href="$home$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
+			<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
 				<i class="fas fa-share-alt"></i>
 				<span>[[Share]]</span>
 			</a>

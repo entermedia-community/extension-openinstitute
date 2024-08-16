@@ -1,0 +1,41 @@
+
+#if (!$nodeID)
+	#set($nodeID = $context.getRequestParameter("nodeID"))
+	$context.putPageValue("nodeID",$nodeID)
+#end
+
+		
+#if( $librarycol )	
+	#set($moduleid ="asset")
+	$context.putPageValue("moduleid",$moduleid)
+
+	#set($resultview = $userprofile.get("assetresultview"))
+	#if(!$resultview)
+		#set($resultview = $module.get("moduleresultsview"))
+	#end
+	#if(!$resultview)
+		#set($resultview = "stackedgallery")
+	#end
+	
+	#set($searcher = $searcherManager.getSearcher($catalogid, "asset"))
+	$context.putPageValue("searcher", $searcher)
+	
+	#set($searchhome = "$apphome/views/modules/asset" )
+	$context.putPageValue("searchhome", $searchhome )
+	
+	#set($componenthome = "${communityhome}/components")
+
+	$context.putPageValue("componenthome", $componenthome)
+	
+	##SET INTERNAL VIEWS same as ASSET
+	$context.putPageValue("viewid", "assetresultstable")
+	$context.putPageValue("viewpath", "asset/assetresultstable")
+#end
+
+
+
+$context.putPageValue("searchtype", $module.id)
+$context.putPageValue("resultview",$resultview)
+$pages.include("$componenthome/results/resultviews.html", $context)
+
+

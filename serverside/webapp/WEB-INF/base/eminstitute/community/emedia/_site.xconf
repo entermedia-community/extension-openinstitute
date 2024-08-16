@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-
-	<property name="oisection">home</property>
-	<property name="communitytagcategory">3</property>
-
-  <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
-  <property name="communityhome">/${siteid}/community/emedia</property>
-
-  <property name="shades">#585b77,#4e516a,#45475c</property>
-  <property name="bgcolor">#626584</property>
-  
-  	
+	  <property name="communitytagcategory">3</property>
+	  <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
+	  <property name="communityhome">/${siteid}/community/emedia</property>
+	  <property name="shades">#585b77,#4e516a,#45475c</property>
+	  <property name="bgcolor">#626584</property>
+	  <property name="containertype">container</property>
+	  
 	  <path-action name="Admin.autoLogin"/>
 	  <path-action name="MediaArchiveModule.loadApplicationId"/>
 	  <path-action name="MediaArchiveModule.loadComponentHome" />
@@ -30,6 +26,12 @@
 	  <script id="jquery-validate" src="/${applicationid}/components/javascript/jquery.validation/jquery.validate.js"/>
   	  <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
   	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
+  	  
+  	  <script id="datetimepicker" src="${communityhome}/components/javascript/gijgo/js/core.min.js"/>
+  	  
+  	  <script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/bootstrap-datepicker.min.js"/>
+  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/bootstrap-datepicker.min.css" />
+	  
 	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>

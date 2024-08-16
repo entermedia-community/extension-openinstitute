@@ -5,20 +5,20 @@
 		#set( $postuser = $userManager.getUser($upload.owner, true)) 
 		<a class="" href='#urlescape("${communityhome}/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>$postuser.getAnonNickName()</a> |  
 		<a  class="emdialog feed-icon"  data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" 
-    	 		href="$home$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id" title="[[Share Post]]"><i class="fas fa-share-alt"></i></a>
+    	 		href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id" title="[[Share Post]]"><i class="fas fa-share-alt"></i></a>
     	 
     	 	<a class="channelviewer  feed-icon"  data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" 
-    	 		href="$home$communityhome/project/channel/show/${librarycol.getId()}/index.html?showupload=${upload.id}" title="[[View Post]]"><i class="far fa-window-maximize"></i></a>
+    	 		href="$communityhome/project/channel/show/${librarycol.getId()}/index.html?showupload=${upload.id}" title="[[View Post]]"><i class="far fa-window-maximize"></i></a>
 	#if( $user )
     	 	<a class="emdialog feed-icon" data-width="900" data-hidefooter="true"  data-collectionid="${librarycol.getId()}" data-uploadid="${upload.id}" 
-    	 		href="$home$communityhome/project/channel/report/index.html?uploadid=${upload.id}" title="[[Report Content]]"><i class="far fa-flag"></i></a>
+    	 		href="$communityhome/project/channel/report/index.html?uploadid=${upload.id}" title="[[Report Content]]"><i class="far fa-flag"></i></a>
     #end	 
 		</div>
 	</div>
 	<div class="col-md-6">
 		#if( $caneditcollection )
 			<a  class="emdialog  feed-icon float-right" style="margin-right:10px;" data-hidefooter="true" data-collectionid="${librarycol.getId()}" data-uploadid="${upload.id}" 
-    	 			href="$home$communityhome/project/channel/editupload/edit.html" title="[[Edit Post]]" ><i class="fas fa-ellipsis-v"></i></a>
+    	 			href="$communityhome/project/channel/editupload/edit.html" title="[[Edit Post]]" ><i class="fas fa-ellipsis-v"></i></a>
 		#end
 	#if(!$collectivehomepage)
 		#if($content.collectivesection !="channel")

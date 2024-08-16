@@ -7,7 +7,7 @@
 ##set( $hidegoals = $context.getRequestParameter("hidegoals"))
 ##if( $hidegoals != "true")
 	##	#if( $caneditcollection)
-	##	<a class="emdialog btn btn-sm btn-light" style="position:absolute; right: 0px; top:20px;" data-allwaysloadpage="true" href="$applink/collective/edit/editcollective.html?collectionid=$librarycol.getId()" title="[[Edit your Goals]]"><i class="fas fa-cog"></i> [[Goals]]</a>
+	##	<a class="emdialog btn btn-sm btn-light" style="position:absolute; right: 0px; top:20px;" data-allwaysloadpage="true" href="${projectlink}/edit/editcollective.html?collectionid=$librarycol.getId()" title="[[Edit your Goals]]"><i class="fas fa-cog"></i> [[Goals]]</a>
 	##	#end
 
 <p class="text-center text-muted lead mb-1">[[Phase 1 of 3]]</p>
@@ -28,7 +28,7 @@
 
 	</div>
 #end
-	<a href="$applink/collective/donate/$collectionid/donate.html" class="donate">
+	<a href="${projectlink}/donate/$collectionid/donate.html" class="donate">
 		<span>[[Donate]]</span> <i class="ms-2 fas fa-hand-holding-usd" style="line-height: 1;"></i>
 	</a>
 ##end	

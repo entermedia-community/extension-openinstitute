@@ -26,7 +26,7 @@ $context.putPageValue("searcher",$searcher)
 
 #set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
-	<h4 class="mb-2"><a href="$communitylink/${librarycol.urlname}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></h4>
+	<h4 class="mb-2"><a href="${projectlink}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></h4>
 #end
 <div class="clearfix"></div>
 <form name="saveproject" 

@@ -61,7 +61,7 @@ $mediaarchive.query("librarycollection").exact("id",$collectionid).searchOne() )
       >
       #end #if($caneditcollection)
       <a
-        href="$applink/collective/projects/edit.html?collectionid=${collectiveid}"
+        href="${projectlink}/projects/edit.html?collectionid=${collectiveid}"
         class="btn-toolbar float-right emdialog"
         data-hidefooter="true"
         title="[[Edit Topics]]"
@@ -69,7 +69,7 @@ $mediaarchive.query("librarycollection").exact("id",$collectionid).searchOne() )
         ><i class="fa-solidfa-ellipsis-v"></i
       ></a>
       <a
-        href="$applink/collective/projects/addnew.html?collectionid=${collectiveid}"
+        href="${projectlink}/projects/addnew.html?collectionid=${collectiveid}"
         class="btn-toolbar emdialog"
         title="[[Add a Topic]]"
         ><i class="fa-solidfa-plus"></i

@@ -1,19 +1,24 @@
 #set($channel = $context.getRequestParameter("channel"))
-<div class="chatterbox-messages" data-lastloaded="$lastloaded">
-	<div class="chatterbox-container">
-		<div class="chatterbox-body-inside">
-			<div class="chatterbox-message-list">
-				$pages.include("$apphome/collective/community/chatterbox/messages.html", $context)				
-			</div>
-			<div id="newmessagearea"></div>
-		</div>
-	</div>
-</div>
-#if( $caneditcollection)
-		$pages.include("$apphome/collective/community/chatterbox/editarea.html", $context)				
-#end
 
-<script>
-	var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-	var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-</script>
+<div class="chatterbox"
+data-collectionid="$!librarycol.getId()" 
+data-renderurl="$!{communitylink}/project/chat/chatterbox/index.html" 
+data-rendermessageurl="$!{communitylink}/project/chat/chatterbox/message.html"
+data-channel="$!{currenttopic.getId()}" 
+data-channeltype="community" 
+data-user="$!{user.id}" 
+data-catalogid="$!{catalogid}">
+	
+	$pages.include("${communityhome}/project/chat/chatterbox/messages.html", $context)				
+				
+	#if( $caneditcollection)
+			$pages.include("$communityhome/project/chat/chatterbox/editarea.html", $context)				
+	#end
+	
+	
+	<script>
+		var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+		var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+	</script>
+
+</div>

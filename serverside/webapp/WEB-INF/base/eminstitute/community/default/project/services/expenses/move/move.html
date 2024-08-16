@@ -5,7 +5,7 @@
 
 <div style="margin: 0 20px;" id="moveform">
 	<form name="excelimport" id="submitform" method="post" data-id="$id" data-collectionid="$!collectionid" data-oemaxlevel="1"
-	action="$applink/collective/services/expenses/move/finish.html">
+	action="${projectlink}/services/expenses/move/finish.html">
 
 	<p>Move to another project</p>
 
@@ -25,7 +25,7 @@
 				var options = $("#submitform").data();
 				options["parentcollectionid"] = $("#parentcollectionid").val();
 				
-				$.get("$applink/collective/services/expenses/move/move.html", options, function(data) {
+				$.get("${projectlink}/services/expenses/move/move.html", options, function(data) {
 					console.log("changed",options)
 					$("#moveform").replaceWith(data);
 				});

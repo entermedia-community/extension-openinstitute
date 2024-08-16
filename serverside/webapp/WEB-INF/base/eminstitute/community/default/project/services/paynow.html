@@ -149,7 +149,7 @@
 	            
 	                <div class="card donatecard">
 	                    <div class="card-block" style="padding: 20px 21px;">
-	                        <form action="$applink/collective/services/payfinish.html" 
+	                        <form action="${projectlink}/services/payfinish.html" 
 	                        		method="post" 
 	                        		id="payment-form"
 	                        		class="form ajaxformX"
@@ -296,7 +296,7 @@
 #end
 #if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 	<div style="padding:20px 0">
-	<a href="$applink/collective/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
+	<a href="${projectlink}/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
 	</div>
 #end
 

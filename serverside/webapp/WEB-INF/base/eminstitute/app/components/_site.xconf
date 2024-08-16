@@ -3,4 +3,6 @@
 <page>
   
   <property name="fallbackdirectory">/WEB-INF/base/emfrontend2/components</property>
+  <!-- property name="fallbackdirectory">/WEB-INF/base/finder/find/components</property -->
+  
   </page>

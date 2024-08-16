@@ -422,7 +422,7 @@ ul.projectgoals {
 }
 
 .goaltaskrow>div {
-	margin: 0 4px 8px;
+	margin: 0 4px 4px;
 }
 
 .goaltaskrow .taskdetails {
@@ -431,6 +431,12 @@ ul.projectgoals {
 
 .goaltaskrow:hover {
 	background-color: #f9f9f9;
+}
+
+.taskstatus {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }
 
 .taskage {
@@ -457,8 +463,6 @@ ul.projectgoals {
 }
 
 .taskstatus {
-	float: right;
-	display: flex;
 	align-items: center;
 	padding: 0 !important;
 }
@@ -529,6 +533,7 @@ ul.projectgoals {
 .goalstatus3,
 .goalstatus3:hover {
 	background: #93bb93;
+	padding: 0.5rem;
 }
 
 

@@ -17,6 +17,25 @@ body {
 #emcontainer {
   min-height: 480px;
 }
+.mainsection {
+	width: 100%;
+	display: flex;
+}
+@media (min-width: 992px) {
+	.container-fluid {
+		margin: 0 1%;		
+	}
+}
+
+@media (min-width: 1600px) {
+	.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+	    max-width: 1460px;
+	}
+	.container-fluid {
+		margin: 0 2%;		
+	}
+}
+
 
 p {
   line-height: 1.75;
@@ -910,19 +929,20 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   min-height: calc(100vh - 338px);
 }
 
-
-
 .chatterbox-messages {
   height: calc(100% - 60px);
   min-height: 250px;
 }
 .chatterbox-container {
-  height: 100%;
+  height: calc(100% - 34px);
 }
 .chatterbox-write {
-  height: 110px;
   padding: 4px 4px;
   position: relative;
+}
+.chatterbox-messages .resultspositions {
+	padding: 6px 15px;
+	background-color: #efefef;
 }
 .msg-bubble {
 	color:#000;
@@ -958,7 +978,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   padding: 0.45rem 0.25rem;
   font-size: 1rem;
   line-height: 1.1;
-  margin-right: 1px;
+  margin: 0 0.5rem;
   color: #495057;
   background-color: #fff;
   background-image: none;
@@ -970,8 +990,8 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 
 .chatterbox-write .chatter-send {
   position: absolute;
-  bottom: 8px;
-  right: 10px;
+  bottom: 12px;
+  right: 0.95rem;
   border-radius: 8px;
   background-color: #277371;
   width: 88px;
@@ -1456,7 +1476,6 @@ a.collectivetag:hover {
 }
 
 .contentcolumn {
-  padding: 20px 30px 30px;
   margin: 0;
   background-color: white;
   color: #111;
@@ -1472,7 +1491,7 @@ a.collectivetag:hover {
 
 .contentcolumn h2 {
   font-size: 1.6rem;
-  margin: 0 0 30px;
+  margin: 0 0 1rem;
 }
 
 .donatecard {
@@ -2091,6 +2110,7 @@ ul.inlinelist li {
 
 .taskdetails {
   word-break: break-all;
+  position: relative;
 }
 .rolelist,
 .goaltask-actions,
@@ -2139,13 +2159,17 @@ ul.inlinelist li {
 
 .form-control {
   padding: 0.25rem 0.75rem;
-  font-size: 0.9rem;
-  line-height: 1.85;
-  height: calc(1.85rem + 0.45rem);
+  /* font-size: 0.9rem; */
+  /* line-height: 1.85; */
+  height: calc(1.85rem + 0.15rem);
 }
 .select2-container .select2-selection--single
 {
 	height: calc(1.5rem + 0.45rem);
+}
+.listdetailpicker {
+	display: flex;
+	flex-direction: column;
 }
 .inlinesearch {
   padding: 20px;
@@ -2201,11 +2225,6 @@ textarea.form-control {
 }
 
 .finances-table-sort {
-  float: right;
-  text-align: right;
-  width: 300px;
-  margin: 0 0 10px 0;
-  padding-top: 10px;
 }
 
 @media (min-width: 640px) {

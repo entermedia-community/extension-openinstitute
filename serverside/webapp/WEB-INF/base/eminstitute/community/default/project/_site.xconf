@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-	<property name="oisection">project</property>
+	
 	<property name="collectivesection">blog</property>
 
 	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
@@ -9,6 +9,8 @@
   	<path-action name="ProjectModule.loadCollection"></path-action>
 	
 	<property name="module">librarycollection</property>
+	
+	<property name="containertype">container</property>
 
    
   <permission name="openeditdirectedit">

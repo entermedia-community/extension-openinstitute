@@ -48,7 +48,7 @@
                                   #if($showcollections )
                                   <td>
 									<a
-	                                    href="$applink/collective/services/expenses/index.html?collectionid=$hit.collectionid"
+	                                    href="${projectlink}/services/expenses/index.html?collectionid=$hit.collectionid"
 	                                    class="btn btn-xs btn-secondary"
 	                                    target="_new"
 	                                    data-hidefooter="true"
@@ -72,9 +72,9 @@
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
 			                                #if( $showreimburst )
-			                                	#set(  $baselink = "$applink/collective/services/expenses")
+			                                	#set(  $baselink = "${projectlink}/services/expenses")
 			                                #else
-			                                	#set(  $baselink = "$applink/collective/services/reimbursements")
+			                                	#set(  $baselink = "${projectlink}/services/reimbursements")
 			                                #end
 			                                    href="$baselink/expenseedit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
@@ -83,7 +83,7 @@
 			                                    ><i class="fa fa-edit"></i></a>
 
 			                                <a
-			                                    href="$applink/collective/services/expenses/move/move.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid"
+			                                    href="${projectlink}/services/expenses/move/move.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
 			                                    title="[[Move Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
 			                                    ><i class="fa fa-angle-right"></i></a>
@@ -98,10 +98,10 @@
         
        
         
-        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
+        <a href="${projectlink}/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
            class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
            
-##        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
+##        <a href="${projectlink}/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
 ##           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
         
 </div>

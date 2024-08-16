@@ -14,7 +14,7 @@ $context.putPageValue("data", $librarycol)
   <form name="savecollective" 
     enctype="multipart/form-data" 
     id="savecollective"
-    action="$applink/collective/edit/save.html"
+    action="${projectlink}/edit/save.html"
     class="ajaxform"
     data-targetdivinner="collectivesettingscontent"
     data-oemaxlevel="1"
@@ -40,7 +40,7 @@ $context.putPageValue("data", $librarycol)
 		<a class="btn btn-sm btn-danger confirm"
 			style="margin: 0px 0 0 10px;" 
 			data-confirm="[[Are you sure]]?" 
-			href="$applink/collective/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
+			href="${projectlink}/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1">
 			[[Delete]]
 		</a>
 		#end

@@ -28,7 +28,7 @@ $context.putPageValue("searcher",$searcher)
 
 #set( $existingcategories = $context.getRequestParameter("existingcategories"))			
 		
-	<form class="pickedcategoryform emmultivalue" action="$home$applink/views/categories/index.html">
+	<form class="pickedcategoryform emmultivalue" action="$applink/views/categories/index.html">
 		<div id="goalscategoryresults">
 			$pages.include("${communityhome}/project/goals/actions/search/searchpath.html", $context)
 		</div>

@@ -60,7 +60,7 @@
 						style="display:inline-block;" 
 						data-targetdivinner="projectlikes" 
 						data-onsuccessreload="true"
-						action="${communityhome}/collective/likesave.html" 
+						action="${communityhome}/project/channel/likesave.html" 
 						method="post">
 					<input type="hidden" name="oemaxlevel" value="2" />
 					<input type="hidden" name="save" value="true" />
@@ -76,7 +76,7 @@
 			#end
 			
 		#else
-			#set($loginok = "$!{communitylink}/project/channel/$collectionid/${librarycol.getWebName()}.html")
+			#set($loginok = "$!{projectlink}")
 			<a href="${communityhome}/authentication/login.html?loginokpage=$!loginok" 
 			class="btn btn-sm btn-follow"><i class="fas fa-thumbs-up"></i> &nbsp;[[Login to Follow]]</a>
 		#end	

@@ -1,4 +1,4 @@
-//EM Media Finder
+//EM Media Finder -- Community version
 var lwt;
 var trackKeydown = false;
 var exitWarning = false;
@@ -380,10 +380,23 @@ uiload = function () {
   if (browserlanguage == undefined || browserlanguage == "") {
     browserlanguage = "en";
   }
-
-  if ($.datepicker) {
+  
+  /*
+  //bootstrap 5 no datepicker, using gijgo
+  if ($.fn.datepicker) {
+	  lQuery("input.datepicker").livequery(function () {
+		var dpicker = $(this);
+	  	dpicker.datepicker({ 
+			todayBtn: "linked",
+    		autoclose: true
+		  });
+	});
+  }*/
+  
+  if ($.fn.datepicker) {
     lQuery("input.datepicker").livequery(function () {
       var dpicker = $(this);
+      /*
       $.datepicker.setDefaults($.datepicker.regional[browserlanguage]);
       $.datepicker.setDefaults(
         $.extend({
@@ -396,7 +409,7 @@ uiload = function () {
           yearRange: "1900:2050",
         })
       ); // Move this to the Layouts?
-
+*/
       var targetid = dpicker.data("targetid");
       dpicker.datepicker({
         altField: "#" + targetid,
@@ -452,6 +465,7 @@ uiload = function () {
       });
     });
   } //datepicker
+
 
   if ($.fn.minicolors) {
     $(".color-picker").minicolors({
@@ -4527,7 +4541,7 @@ adjustdatamanagertable = function () {
 
 jQuery(document).ready(function () {
   uiload();
-  jQuery(window).trigger("resize");
+//  jQuery(window).trigger("resize");
 
   window.onhashchange = function () {
     $("body").css({ overflow: "visible" }); //Enable scroll

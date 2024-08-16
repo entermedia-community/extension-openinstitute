@@ -42,9 +42,9 @@
 				        	 			href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
 					               		title="[[Edit Team Config]]">[[Edit]]</a></li>
 							    <li><a class="dropdown-item ajax"  
-							    		data-targetdiv="team${hit.followeruser}" 
+							    		data-targetdiv="collectiveteamlist" 
 							    		data-oemaxlevel="1"
-							    		href="$communityhome/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+							    		href="${communityhome}/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
 							    		#if( $hit.getBoolean("ontheteam"))
 					        	 			[[Remove from team]]
 					        	 		#else

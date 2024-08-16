@@ -20,6 +20,7 @@
 		#if($user && ( $canviewsettings || $caneditcollection)  && $goal.collectionid)
 			#set($caneditgoal = true)
 		#end
+		
 		$context.putPageValue("caneditgoal", $caneditgoal)
 		
 		#set($points = 0)
@@ -34,120 +35,119 @@
 			#end
 			#set($collectionid = $goal.collectionid)
 			
+			<div id="taskrow#eid(${task.id})" class="goaltaskrow goalstatus${task.taskstatus}">
 			
-			
-				<div id="taskrow#eid(${task.id})" class="goaltaskrow goalstatus${task.taskstatus}">
-				
-					<div>$!tree</div>
-					#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
-					<div class="taskdetails">
-						$url_util.escapeMessage($task.comment,300)
-					</div>
-					#set( $type = "goaltask" )
-					#set( $vals = $task.getValues("keywords") )
-					#ifnotnull($vals)
-					<div class="taskdetails">
-						##USE AJAX
-						#foreach( $val in $vals )
-							#set($link = "$home${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
-							<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" href="$link" title="#esc($val)">#esc($val)</a> 
-						#end
-					</div>
+				<div>$!tree</div>
+				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
+				<div class="taskdetails">
+					<span class="trim-text" data-max="400">$url_util.escapeMessage($task.comment,900)</span>
+					
+				</div>
+				#set( $type = "goaltask" )
+				#set( $vals = $task.getValues("keywords") )
+				#ifnotnull($vals)
+				<div class="taskdetails-keywords">
+					##USE AJAX
+					#foreach( $val in $vals )
+						#set($link = "${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+						<a	class="badge badge-tags tageditor-${type} tageditor-#esc($val)" href="$link" title="#esc($val)">#esc($val)</a> 
 					#end
-	
-					$context.putPageValue("task", $task)
-					$pages.include("${communityhome}/project/goals/task/rolelist.html?collectionid=$!collectionid", $context)
-	
-			
-			
-					<div class="taskstatus align-self-end">
-						#if($task.taskstatus == "7")
-						<div>
-							<div class="badge text-bg-danger attn">
-							$!mediaarchive.getUser($task.completedby).getAnonNickName() <i class="fas fa-bullhorn me-1"></i>  ## 
-							</div>
-						</div>
-						#elseif($task.taskstatus == "6")
-						<p class="text-secondary m-0">
-							<i class="fas fa-sticky-note"></i> [[On Agenda]]
-						</p>
-						#elseif($task.taskstatus == "1")
-						<p class="text-warning m-0">
-							<i class="fas fa-hourglass-half"></i> [[Pending]]
-						</p>
-						#elseif($task.taskstatus == "2")
-						<p class="text-muted m-0">
-							<i class="fas fa-ban"></i> [[Blocked]]
-						</p>
-						#elseif($task.taskstatus == "3")
-						<p class="text-success m-0">
-							<i class="fas fa-check"></i>[[Completed]]
-						</p>
-						#elseif($task.taskstatus == "4")
-						<p class="text-secondary m-0">
-							<i class="fas fa-sync"></i> [[Redo]]
-						</p>
-						#elseif($task.taskstatus == "5")
-						<p class="text-info m-0">
-							<i class="fas fa-sticky-note"></i> [[Note]]
-						</p>
-						#end  
-						
-						
-						##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
 				</div>
-			</div>
-			
-			<div class="d-flex flex-row goaltask-credit">
-				<div class="pe-2">
-				#if($user && $caneditgoal)
-					#set( $edittask = "${communityhome}/project/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
-					
-					<a 	href="$edittask"
-						id="task${task.id}"
-						title="[[Edit Task]]"
-						data-focuson="$task.id"
-						data-width="900"
-						class="taskedit-$!{task.taskstatus} ajax btn btn-light btn-xs" 
-						data-targetdiv="taskrow#eid(${task.id})" 
-						data-oemaxlevel="1">
-						[[Added by]] <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') [[ago]]  (edit)
-				</a>
-				#else
-					[[Added by]] <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') [[ago]]  (edit)
 				#end
-				</div>
-					
-			#if($user && $caneditgoal)
-					##	<a href="${communityhome}/project/goals/task/taskdelete.html?id=$task.id" 
-					##		data-targetdiv="$target" 
-					##		data-confirm="Sure you want to delete?"
-					##		data-oemaxlevel="1"
-					##		data-taskid="$task.id"
-					##		data-taskstatus="3"
-					##		class="ajax"> (delete)
-					##	</a>
-					 
-				<div id="rolepicker" class="pe-2">
-					<a class="btn btn-xs btn-light ml-1 addroletolist ajax" data-targetdivinner="rolepicker" 
-					data-collectionid = "$!collectionid"
-					data-taskid="$task.id" href="${communityhome}/project/goals/task/pickrole.html">+ [[add role]]</a>
-				</div>					
-							
-				#if($task.taskstatus != "3")
-				<div>
-					<a href="${communityhome}/project/goals/task/tasksave.html?goalid=$goal.id" 
-						data-targetdiv="$target" 
-						data-oemaxlevel="1"
-						data-taskid="$task.id"
-						data-taskstatus="3"
-						class="btn btn-xs btn-primary ajax">
-						<i class="fas fa-check me-1"></i> [[Resolve]]
-					</a>
-					</div>
-				#end	
+
+				$context.putPageValue("task", $task)
+				$pages.include("${communityhome}/project/goals/task/rolelist.html?collectionid=$!collectionid", $context)
+
 		
-			#end					
+		
+				<div class="taskstatus">
+					#if($task.taskstatus == "7")
+					<div>
+						<div class="badge text-bg-danger attn">
+						$!mediaarchive.getUser($task.completedby).getAnonNickName() <i class="fas fa-bullhorn me-1"></i>  ## 
+						</div>
+					</div>
+					#elseif($task.taskstatus == "6")
+					<p class="text-secondary m-0">
+						<i class="fas fa-sticky-note"></i> [[On Agenda]]
+					</p>
+					#elseif($task.taskstatus == "1")
+					<p class="text-warning m-0">
+						<i class="fas fa-hourglass-half"></i> [[Pending]]
+					</p>
+					#elseif($task.taskstatus == "2")
+					<p class="text-muted m-0">
+						<i class="fas fa-ban"></i> [[Blocked]]
+					</p>
+					#elseif($task.taskstatus == "3")
+					<p class="text-success m-0">
+						<i class="fas fa-check"></i>[[Completed]]
+					</p>
+					#elseif($task.taskstatus == "4")
+					<p class="text-secondary m-0">
+						<i class="fas fa-sync"></i> [[Redo]]
+					</p>
+					#elseif($task.taskstatus == "5")
+					<p class="text-info m-0">
+						<i class="fas fa-sticky-note"></i> [[Note]]
+					</p>
+					#end  
+					
+					
+					##set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id).match("commenttext","*").sort("dateDown").searchOne() )
+			</div>
+		</div>
+		
+		<div class="d-flex flex-row goaltask-credit">
+			<div class="pe-2">
+			#if($user && $caneditgoal)
+				#set( $edittask = "${communityhome}/project/goals/task/taskedit.html?id=${task.id}&collectionid=$!collectionid&onlyopen=$!onlyopen&targetdiv=$target")
+				
+				<a 	href="$edittask"
+					id="task${task.id}"
+					title="[[Edit Task]]"
+					data-focuson="$task.id"
+					data-width="900"
+					class="taskedit-$!{task.taskstatus} ajax btn btn-light btn-xs" 
+					data-targetdiv="taskrow#eid(${task.id})" 
+					data-oemaxlevel="1">
+					[[Added by]] <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') [[ago]]  (edit)
+			</a>
+			#else
+				[[Added by]] <strong>$!mediaarchive.getUser($task.completedby).getAnonNickName()</strong> $task.getAge().replace(':', ' ') [[ago]]  (edit)
+			#end
+			</div>
+				
+		#if($user && $caneditgoal)
+				##	<a href="${communityhome}/project/goals/task/taskdelete.html?id=$task.id" 
+				##		data-targetdiv="$target" 
+				##		data-confirm="Sure you want to delete?"
+				##		data-oemaxlevel="1"
+				##		data-taskid="$task.id"
+				##		data-taskstatus="3"
+				##		class="ajax"> (delete)
+				##	</a>
+				 
+			<div id="rolepicker" class="pe-2">
+				<a class="btn btn-xs btn-light ml-1 addroletolist ajax" data-targetdivinner="rolepicker" 
+				data-collectionid = "$!collectionid"
+				data-taskid="$task.id" href="${communityhome}/project/goals/task/pickrole.html">+ [[add role]]</a>
+			</div>					
+						
+			#if($task.taskstatus != "3")
+			<div>
+				<a href="${communityhome}/project/goals/task/tasksave.html?goalid=$goal.id" 
+					data-targetdiv="$target" 
+					data-oemaxlevel="1"
+					data-taskid="$task.id"
+					data-taskstatus="3"
+					class="btn btn-xs btn-primary ajax">
+					<i class="fas fa-check me-1"></i> [[Resolve]]
+				</a>
+				</div>
+			#end	
+		
+		#end					
 		</div>
 				
 				

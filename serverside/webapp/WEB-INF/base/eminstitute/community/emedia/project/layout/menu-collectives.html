@@ -35,12 +35,12 @@
 			<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html">[[Contact]]</a>
 		</li>
 		#end
-		#if(false)
+		
 		#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
-			<a class="nav-link" href="$communitylink/${librarycol.urlname}/finances/dashboard.html">[[Finances]]</a>
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html">[[Finances]]</a>
 		</li>
-		#end
+		
 		#end
 		#if( $caneditcollection )
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
@@ -80,13 +80,13 @@
 					<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html">[[Contact]]</a>
 				</li>
 				#end
-				#if(false)
+				
 				#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 				<li class="#if($collectivesection == "finances") active #end">
 					<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html">[[Finances]]</a>
 				</li>
 				#end
-				#end
+				
 				#if( $caneditcollection )
 				<li class="#if($collectivesection == "settings") active #end">
 					<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]">

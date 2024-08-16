@@ -38,22 +38,12 @@ $context.putPageValue("hideheader", "true")
 #set( $filtersbarstatus = $userprofile.get("filtersbarstatus"))
 
 #if($hits.size() == 0 && $mediaarchive.isCatalogSettingTrue("autopopulatecollections"))
-    $pages.include("$apphome/components/results/header.html",$context)
-    $pages.include("$apphome/components/createmedia/copycategory/index.html?autorun=true", $context)
+    $pages.include("${communityhome}/components/results/header.html",$context)
+    $pages.include("${communityhome}/components/createmedia/copycategory/index.html?autorun=true", $context)
 #else
-	<div class="cols-main h-100 #if ($module) cols-$module #end searchlayout2" id="searchlayout">
-		<div class="col-main  h-100 col-content-main 
-				#if ($leftbarstatus && $leftbarstatus!=false) leftopen #end 
-				#if ($filtersbarstatus!=false) filtersopen #end " id="maincontent">
-				<div id="emresultscontainer" >
-                    
-		    	$pages.include("$apphome/components/results/index.html",$context)
-		    	</div>
-		</div>
-		<div class="col-main col-filters #if($filtersbarstatus!=false) filtersopen #end" id="col-filters">
-			<div class="col-main-inner">
-				$pages.include("$apphome/components/filters/sidebar.html", $context)
-			</div>
-		</div>
-	</div>
+
+	$context.putPageValue("hidecollectionheader", true)
+
+	$pages.include("${communityhome}/components/results/index.html",$context)
+	
 #end

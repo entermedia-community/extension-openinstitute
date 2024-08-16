@@ -3,16 +3,16 @@
 	<property name="oisection">stations</property>
 	<property name="collectivesection">tasks</property>
 	<property name="fullwidth">true</property>
+	<property name="containertype">container-fluid</property>
 	<property name="goalfolder">search</property>
 	
 	<path-action name="ProjectModule.loadCollection"/>
 	<path-action name="OiModule.loadCommunityCategory" />
-	
 	<path-action name="TaskModule.createTree" />
 
-
-
 	<property name="defaulttab">goaltab</property>
-
+	
+	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
+    <script id="goals" src="${communityhome}/project/goals/goals.js"/>
 
 </page>

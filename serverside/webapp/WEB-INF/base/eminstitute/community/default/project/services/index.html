@@ -8,7 +8,11 @@
      #set( $invoices = $mediaarchive.query("collectiveinvoice").match("collectionid",
      $collectionid).sort("createdonDown").search())
      #if ($invoices)
-         <h2 style="margin-bottom:10px;">[[Invoices]]</h2>
+     	
+     	<div class="d-flex justify-content-between mb-2">
+         	<h3 style="margin-bottom:10px;">[[Invoices]]</h3>
+         </div>
+         
          <div class="emdata emdatatable">
              <table class="table table-striped table-hover">
                  <thead>
@@ -91,25 +95,25 @@
                          <td>
                              #if ($invoice.getValue("paymentstatus") == "pending")
                              	<a
-                                     href="$applink/collective/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      target="_blank"
                                      class="btn btn-xs btn-secondary emdialog"
                                       data-hidefooter="true">[[Preview]]</a>
                              #elseif ($invoice.getValue("paymentstatus") == "paid" || $invoice.getValue("paymentstatus") == "invoiced")
                                  <a
-                                     href="$applink/collective/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      target="_blank"
                                      class="btn btn-xs btn-secondary emdialog"
                                       data-hidefooter="true">[[View]]</a>
                              #end
                              #if ($invoice.getValue("paymentstatus") == "invoiced")
                                  <a
-                                     href="$applink/collective/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-primary">
                                      [[Pay Now]]</a>
                              #elseif ($invoice.getValue("paymentstatus") == "autopayfailed" || $invoice.getValue("paymentstatus") == "error")
                                  <a
-                                     href="$applink/collective/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
+                                     href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-primary ajax"
                                      data-targetdiv="collectivebilling">[[Pay Now]]</a>
                                  #if ($invoice.paymentstatusreason != "")
@@ -120,7 +124,7 @@
 	                       	 #if( $canviewsettings )
                                  #if ($invoice.getValue("paymentstatus") == "pending" ||$invoice.getValue("paymentstatus") == "invoiced")
                              	  <a
-                                  href="$applink/collective/services/cancelinvoice.html?collectionid=${collectionid}&id=${invoice.id}&oemaxlevel=1"
+                                  href="${projectlink}/services/cancelinvoice.html?collectionid=${collectionid}&id=${invoice.id}&oemaxlevel=1"
                                   class="ajax btn btn-xs btn-danger" data-targetdiv="collectivebilling">[[Cancel]]</a>
                             	  #end
                             	  <a

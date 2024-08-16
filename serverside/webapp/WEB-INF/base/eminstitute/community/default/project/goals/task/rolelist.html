@@ -4,7 +4,7 @@
 <div id="roleeditor" class="rolelist">
 	##USE AJAX
 	#foreach( $role in $rolesarray )
-		#set($link = "$home${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
+		#set($link = "${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
 		#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
 		#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 		<div class="btn-group" role="group">

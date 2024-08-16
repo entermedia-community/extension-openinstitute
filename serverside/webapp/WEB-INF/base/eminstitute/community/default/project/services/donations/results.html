@@ -59,7 +59,7 @@
 			       	 
 			        	<td class="text-center"  style="width: 80px">
 				        	 	<a class="btn btn-xs btn-secondary emdialog" 
-			        	 		href="$applink/collective/services/donations/detail.html?id=$hit.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
+			        	 		href="${projectlink}/services/donations/detail.html?id=$hit.id&viewid=transactiongeneral&viewpath=transaction/transactiongeneral&hitssessionid=hitstransactionsite/catalog&searchtype=transaction&detailsreadonly=true"
 			        	 		title="[[Donation Details]]">
 			        	 		<i class="fa fa-eye"></i>
 			        	 		</a>
@@ -92,9 +92,14 @@
                 	#end
                 #end
             </table>
-            $!donations.size() [[hits]]
-        </div>
-##        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
-##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a>
+            
+            #if($donations.size() > 0)
+            <div>$!donations.size() [[hits]]</div>
+        
+			##  <div>  <a href="${projectlink}/services/expenses/export/expenses.csv?collectionid=${librarycol.id}&hitssessionid=$expenses.getSessionId()"
+			##                      class="btn btn-sm btn-primary mb-4">[[Download]]</a></div>
+			#end
+
+</div>
         
 </div>

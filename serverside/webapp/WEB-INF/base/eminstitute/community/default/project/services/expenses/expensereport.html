@@ -3,7 +3,7 @@
 	
 	<div id="resultsdiv">
      
-                  <div class="emdata emdatatable">
+     	<div class="emdata emdatatable">
             #set($hits = $expenses)
 			$context.putPageValue("hits",$hits)
 			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&collectionid=$!librarycol.id&pageposition")
@@ -33,7 +33,7 @@
                                   #if($showcollections )
                                   <td>
 									<a
-	                                    href="$applink/collective/services/expenses/index.html?collectionid=$hit.collectionid"
+	                                    href="${projectlink}/services/expenses/index.html?collectionid=$hit.collectionid"
 	                                    class="btn btn-xs btn-secondary"
 	                                    target="_new"income
 	                                    data-hidefooter="true"
@@ -52,10 +52,10 @@
 			                            #if( $caneditcollection || $showcollections)
 			                                <a
 			                                #if( $showreimburst )
-			                                	#set(  $baselink = "$applink/collective/services/reimbursements")
+			                                	#set(  $baselink = "${projectlink}/services/reimbursements")
 			                                    href="$baselink/expenseedit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
 			                                #else
-			                                	#set(  $baselink = "$applink/collective/services/expenses")
+			                                	#set(  $baselink = "${projectlink}/services/expenses")
 			                                    href="$baselink/edit.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid&librarycol=$hit.collectionid"
 			                                #end
 			                                    class="btn btn-xs btn-secondary emdialog"
@@ -64,7 +64,7 @@
 			                                    ><i class="fa fa-edit"></i></a>
 
 			                                <a
-			                                    href="$applink/collective/services/expenses/move/move.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid"
+			                                    href="${projectlink}/services/expenses/move/move.html?id=$hit.id&searchtype=collectiveexpense&collectionid=$hit.collectionid"
 			                                    class="btn btn-xs btn-secondary emdialog"
 			                                    title="[[Move Expense]]  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)"
 			                                    ><i class="fa fa-angle-right"></i></a>
@@ -123,23 +123,25 @@
             
         </div>
        
+       #if($expenses.size() > 0)
         <div>
-        <a href="$applink/collective/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
-           class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
-           
-        <a href="$applink/collective/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
-           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
-
-        #if( $canviewsettings)
-        <div>
-        <a class="ajax" data-targetdiv="expensereport" 
-        data-collectionid="$librarycol.id" data-confirm="[[Sure you want to delete all] $expenses.size() [[records?]]" 
-        href="$applink/collective/services/expenses/deleteall.html" data-hitssessionid="$expenses.getSessionId()">[[Delete]] $expenses.size()</a>
-        </div>
-        
+	        <a href="${projectlink}/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
+	           class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>
+	           
+	        <a href="${projectlink}/services/expenses/import/index.html?collectionid=$!{librarycol.id}"
+	           class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Expenes]]">[[Import CSV]]</a>
+          </div>
+		#end
+        #if( $canviewsettings  && $expenses.size() > 0)
+	        <div>
+	        <a class="ajax btn btn-sm btn-secondary" 
+	        data-targetdiv="expensereport" 
+	        data-collectionid="$librarycol.id" 
+	        data-confirm="[[Sure you want to delete all] $expenses.size() [[records?]]" 
+	        href="${projectlink}/services/expenses/deleteall.html" 
+	        data-hitssessionid="$!expenses.getSessionId()">[[Delete]] $expenses.size()</a>
+	        </div>
         #end
 
-
-		</div>
       </div>  
 </div>

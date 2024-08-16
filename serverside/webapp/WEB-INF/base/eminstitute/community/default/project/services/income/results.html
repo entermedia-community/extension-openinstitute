@@ -43,7 +43,7 @@
                         <td style="text-align: center">
                             #if( $caneditcollection )
                                 <a
-                                    href="$applink/collective/services/income/edit.html?id=$hit.id&searchtype=collectiveincome&collectionid=$librarycol.id&librarycol=$librarycol.id"
+                                    href="${projectlink}/services/income/edit.html?id=$hit.id&searchtype=collectiveincome&collectionid=$librarycol.id&librarycol=$librarycol.id"
                                     class="btn btn-xs btn-secondary emdialog"
                                     data-hidefooter="true"
                                     ><i class="fa fa-edit"></i></a>
@@ -73,16 +73,17 @@
             </table>
             
         </div>
-     $!income.size() [[hits]]
+     
+     #if($income.size() > 0)
+     	<div>$!income.size() [[hits]]</div>
         <div>
-        <a href="$applink/collective/services/income/export/income.csv?collectionid=${librarycol.id}&hitssessionid=$hits.getSessionId()"
+        <a href="${projectlink}/services/income/export/income.csv?collectionid=${librarycol.id}&hitssessionid=$hits.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>
                       
-        <a href="$applink/collective/services/income/import/index.html?collectionid=$!{librarycol.id}"
+        <a href="${projectlink}/services/income/import/index.html?collectionid=$!{librarycol.id}"
            class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Income]]">[[Import CSV]]</a>
-
-                      
         </div>
+        #end
                       
         </div>
 </div>

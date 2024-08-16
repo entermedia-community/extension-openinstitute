@@ -4,25 +4,24 @@
 	#set($collectionid = $context.getRequestParameter("collectionid"))
 #end
 
-
-<div >
-<h2 class="float-left" style="margin:0 0 10px 0;">[[Expenses]]</h2>
-     #if( $caneditcollection )
-         <a
-          href="$applink/collective/services/expenses/addnew.html?collectionid=${collectionid}"
-          class="emdialog btn btn-sm btn-primary float-right"
+<div class="d-flex justify-content-between mb-2">
+	<h3>[[Expenses]]</h3>
+     <div>
+    	 #if( $caneditcollection )
+         <a href="${projectlink}/services/expenses/addnew.html?collectionid=${collectionid}"
+          class="emdialog btn btn-sm btn-primary"
           title="[[Add Expense]]"><i class="fa fa-search"></i> [[Add Expense]]</a>
-    #end      
-   <div class="clearfix"></div>      
-	
-	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+	    #end
+    	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
+     </div>
+    </div>      
 
 	<form  id="incomesearchform" 
 		class="autosubmit  ajaxform" 
 		data-targetdiv="expensereport" 
 			method="post" 
 			data-oemaxlevel="1"
-			action="$!siteroot$applink/collective/services/expenses/results.html">
+			action="$!siteroot${projectlink}/services/expenses/results.html">
 			#set( $searchtype = "collectiveexpense")
 			#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 			$context.putPageValue("searcher",$searcher)
@@ -55,11 +54,10 @@
 			</div>	
 		</div>
 	
-   <div>
    		
-   		<div class="finances-table-sort">
-		<label>[[Sort by]]</label>
-		<div style="width:200px; display:inline-block;">
+   		<div class="finances-table-sort d-flex flex-rows justify-content-end">
+		<label>[[Sort by]]:</label>
+		<div style="padding-left:10px; width:220px; display:inline-block;">
 		<select class="select2 	form-control-sm" name="sortby" >
 			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
 			#foreach( $detail in $details)
@@ -69,9 +67,7 @@
 		</select>
 		</div>
 		</div>
-		<div class="clearfix"></div>
-   </div>
+		
    </form>      
 	$pages.include("${communityhome}/project/services/expenses/results.html",$context)
-</div>
 

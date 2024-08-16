@@ -4,4 +4,5 @@
 <page>
 	<inner-layout>${communityhome}/project/blog/innerlayout.html</inner-layout>
 	<property name="virtual">true</property>
+	
 </page>
