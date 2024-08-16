@@ -380,7 +380,7 @@ uiload = function () {
   if (browserlanguage == undefined || browserlanguage == "") {
     browserlanguage = "en";
   }
-  
+
   /*
   //bootstrap 5 no datepicker, using gijgo
   if ($.fn.datepicker) {
@@ -392,8 +392,8 @@ uiload = function () {
 		  });
 	});
   }*/
-  
-   if ($.fn.datepicker) {
+
+  if ($.fn.datepicker) {
     lQuery("input.datepicker").livequery(function () {
       var dpicker = $(this);
       /*
@@ -413,7 +413,7 @@ uiload = function () {
       var targetid = dpicker.data("targetid");
       dpicker.datepicker({
         altField: "#" + targetid,
-        format: "yyyy-mm-dd",
+        format: "dd M, yyyy",
         yearRange: "1900:2050",
         beforeShow: function (input, inst) {
           setTimeout(function () {
@@ -444,32 +444,28 @@ uiload = function () {
       });
 
       var current = $("#" + targetid).val();
-      if (current != undefined) {
-        // alert(current);
-        var date;
-        if (current.indexOf("-") > 0) {
-          // this is the standard
-          current = current.substring(0, 10);
-          // 2012-09-17 09:32:28 -0400
-          //date = $.fn.datepicker.parseDate("yy-mm-dd", current);
-          date = current;
-          $(this).datepicker("update", date);
-        } else {
-          //date = $.fn.datepicker.parseDate("mm/dd/yy", current); // legacy
-          date = current;
-          $(this).datepicker("setDate", date);
-        }
-        
+      var ymdDate = moment(current, "YYYY-MM-DD");
+      if (ymdDate.isValid()) {
+        ymdDate = ymdDate.format("DD MMM, YYYY"); // equiv to bs datepicker's dd M, yyyy
+        $(this).datepicker("update", ymdDate);
+      } else {
+        $(this).datepicker("update", "");
       }
+
       $(this).blur(function () {
         var val = $(this).val();
         if (val == "") {
           $("#" + targetid).val("");
+        } else {
+          var ymdDate = moment(val, "DD MMM, YYYY");
+          if (ymdDate.isValid()) {
+            ymdDate = ymdDate.format("YYYY-MM-DD");
+            $("#" + targetid).val(ymdDate);
+          }
         }
       });
     });
   } //datepicker
-
 
   if ($.fn.minicolors) {
     $(".color-picker").minicolors({
@@ -4545,7 +4541,7 @@ adjustdatamanagertable = function () {
 
 jQuery(document).ready(function () {
   uiload();
-//  jQuery(window).trigger("resize");
+  //  jQuery(window).trigger("resize");
 
   window.onhashchange = function () {
     $("body").css({ overflow: "visible" }); //Enable scroll
