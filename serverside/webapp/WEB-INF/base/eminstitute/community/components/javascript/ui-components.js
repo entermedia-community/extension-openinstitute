@@ -393,7 +393,7 @@ uiload = function () {
 	});
   }*/
   
-  if ($.fn.datepicker) {
+   if ($.fn.datepicker) {
     lQuery("input.datepicker").livequery(function () {
       var dpicker = $(this);
       /*
@@ -413,7 +413,7 @@ uiload = function () {
       var targetid = dpicker.data("targetid");
       dpicker.datepicker({
         altField: "#" + targetid,
-        altFormat: "yy-mm-dd",
+        format: "yyyy-mm-dd",
         yearRange: "1900:2050",
         beforeShow: function (input, inst) {
           setTimeout(function () {
@@ -451,11 +451,15 @@ uiload = function () {
           // this is the standard
           current = current.substring(0, 10);
           // 2012-09-17 09:32:28 -0400
-          date = $.datepicker.parseDate("yy-mm-dd", current);
+          //date = $.fn.datepicker.parseDate("yy-mm-dd", current);
+          date = current;
+          $(this).datepicker("update", date);
         } else {
-          date = $.datepicker.parseDate("mm/dd/yy", current); // legacy
+          //date = $.fn.datepicker.parseDate("mm/dd/yy", current); // legacy
+          date = current;
+          $(this).datepicker("setDate", date);
         }
-        $(this).datepicker("setDate", date);
+        
       }
       $(this).blur(function () {
         var val = $(this).val();
