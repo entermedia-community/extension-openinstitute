@@ -9,7 +9,11 @@
         <i class="fa fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  
         <ul class="navbar-nav ms-auto mb-lg-0">
+			<li class="nav-item">
+				$pages.include("${communityhome}/components/quicksearch/navbar.html")
+			</li>
           <li class="nav-item">
             <a class="nav-link #if($content.oisection == 'home') active #end" href="$communitylink/">Home</a>
           </li> 
@@ -35,7 +39,7 @@
           #end
           #ifnotnull($user)
           <li class="nav-item">
-            <a class="nav-link" href="$communitylink/authentication/logout.html" title="[[Logout]]">
+            <a class="nav-link" href="$!{communitylink}/authentication/logout.html" title="[[Logout]]">
               <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
             </a>
           </li>

@@ -743,6 +743,9 @@ footer {
   color: #ffffff;
   font-weight: 700;
 }
+.btn-searchprojects {
+	margin-top: 28px;
+}
 @media (min-width: 992px) {
   .navigation .dropdown:hover ul.dropdown-menu {
     opacity: 1;
@@ -1513,17 +1516,9 @@ p a {
 .nav-link.active {
   color: #626584;
   font-weight: 700;
-  position: relative;
+  
 }
-.nav-link.active::after {
-  content: "";
-  position: absolute;
-  width: calc(100% - 40px);
-  left: 20px;
-  bottom: -12px;
-  height: 2px;
-  background-color: #ffffff;
-}
+
 @media (max-width: 575px) {
   .achivements {
     text-align: center;

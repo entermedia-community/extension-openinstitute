@@ -62,37 +62,40 @@ public void init()
 			
 			Map<String,List> usertopics = new HashMap();
 			
-			for (Data topicmod in alltopicsmodified)
-			{
-				String collectionid = topicmod.get("collectionid");
-				String chattopicid = topicmod.get("chattopicid");
+			if(alltopicsmodified.size() > 0) {
+				log.info("New Chats fond at: " + alltopicsmodified);
 				
-				Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
-				for(Data auser in users)
+				for (Data topicmod in alltopicsmodified)
 				{
-					String userid = auser.get("followeruser");
-					if(!userwhochecked.contains(userid + "_" + chattopicid))
+					String collectionid = topicmod.get("collectionid");
+					String chattopicid = topicmod.get("chattopicid");
+					
+					Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
+					for(Data auser in users)
 					{
-						Data profile = mediaArchive.getData("userprofile", userid);
-						
-						//make it not false?
-						if(profile != null && profile.getBoolean("sendchatnotifications") == true)
+						String userid = auser.get("followeruser");
+						if(!userwhochecked.contains(userid + "_" + chattopicid))
 						{
-							log.info("Chat Notification disabled " + userid);
-							continue;
+							Data profile = mediaArchive.getData("userprofile", userid);
+							
+							//make it not false?
+							if(profile != null && profile.getBoolean("sendchatnotifications") == true)
+							{
+								log.info("Chat Notification disabled " + userid);
+								continue;
+							}
+							//Notify them of what they missed only
+							List topics = usertopics.get(userid);
+							if( topics == null)
+							{
+								topics = new ArrayList();
+							}
+							topics.add(topicmod);
+							usertopics.put(userid, topics);
 						}
-						//Notify them of what they missed only
-						List topics = usertopics.get(userid);
-						if( topics == null)
-						{
-							topics = new ArrayList();
-						}
-						topics.add(topicmod);
-						usertopics.put(userid, topics);
 					}
 				}
 			}
-			
 			
 			
 			//Loop over the remaining topics
@@ -109,19 +112,19 @@ public void init()
 					}
 						
 					WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
-					String subject = community.getName() + " " + topicmods.size() + " Project Notifications";
+					String subject = community.getName() + " Project Notifications";
 					
 					if( topicmods.size() > 1)
 					{
-						templatemail.setSubject("[EM] " + topicmods.size() + " Project Notifications"); //TODO: Translate
+						subject =  "[OI] " +community.getName() + ": " + topicmods.size() + " Projects Notifications"; //TODO: Translate
 					}
 					else
 					{
 						Data oneitem = topicmods.iterator().next();
 						Data topic = mediaArchive.getCachedData("collectiveproject", oneitem.get("chattopicid") );
-						//subject = "[EM] " + collection.getName() + "/" + topic.getName() + " Notification";
-						templatemail.setSubject(subject); //TODO: Translate
+						subject = "[OI] " + community.getName() + ": " + collection.getName() + " Notifications";
 					}
+					templatemail.setSubject(subject); //TODO: Translate
 					Map objects = new HashMap();
 					objects.put("topicmods",topicmods);
 					objects.put("followeruser",followeruser);
@@ -133,9 +136,8 @@ public void init()
 					objects.put("siteroot",getSiteRoot());
 					
 					templatemail.send(objects);
-					log.info("Email to: " + followeruser.getEmail() + " Subject: " + subject + " Template: "+template);
-					
-					
+					//log.info("Email to: " + followeruser.getEmail() + " Subject: " + subject + " Template: "+template);
+				
 					log.info("Chat Notified " + followeruser.getEmail() + " " + templatemail.getSubject());
 				}
 			} 

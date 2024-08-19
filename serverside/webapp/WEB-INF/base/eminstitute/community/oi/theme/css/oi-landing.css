@@ -1,13 +1,13 @@
 body {
     color: #151515;
     font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
     scrollbar-width: thin;
     scrollbar-color: #339996 #133939;
+    padding: 0;
+    margin: 0;
 }
 
 .navbar {
-    color: #ffffff;
     background-color: #267371;
 }
 
@@ -524,19 +524,6 @@ hr {
     opacity: 0.15;
 }
 
-.search-popup {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-    padding-top: 40px;
-}
 
 input.search-primary {
     width: 100%;

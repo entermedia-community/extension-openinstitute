@@ -15,42 +15,60 @@
 #if( $communitytagcategory)
 <nav class="navbar sticky-top navbar-expand community-nav #ifnotnull($navbgdark) bg-black #end ">
   <div class="container">
-    <a href="/${communitytagcategory.urlname}">
-      <img src="$communityhome${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
+    <a href="$!{communitytagcategory.externaldomain}">
+      <img src="${communityhome}${communitytagcategory.primaryimagepath}" class="me-3" style="height:50px;width: auto;" />
     </a>
-    <a href="/${communitytagcategory.urlname}"> 
-      <h2 class="text-white my-1 me-3">
+    <a href="$!{communitytagcategory.externaldomain}"> 
+      <h3 class="text-white my-1 me-3">
         #text($communitytagcategory)
-      </h2>
+      </h3>
     </a>
     <div class="d-flex align-items-center justify-content-center ms-auto">
       <ul class="nav nav-underline">
+		  <li class="nav-item">
+				$pages.include("${communityhome}/components/quicksearch/navbar.html")
+			</li>
         <li class="nav-item  #if($action == 'community') active #end">
-                <a class="nav-link" href="/${communitytagcategory.urlname}">Home</a>
+                <a class="nav-link" href="$!{communitytagcategory.externaldomain}">Home</a>
               </li>
         <li class="nav-item #if($action == 'blog') active #end">
-          <a class="nav-link" href="/${communitytagcategory.urlname}/blog">
+          <a class="nav-link" href="$!{communitytagcategory.externaldomain}/blog">
             Blog
           </a>
         </li>
         <li class="nav-item #if($action == 'projects') active #end">
-          <a class="nav-link" href="/${communitylink}/projects">Projects</a>
+          <a class="nav-link" href="$!{communitylink}/projects">Projects</a>
         </li>
         <li class="nav-item #if($action == 'people') active #end">
-          <a class="nav-link" href="${communitylink}/events/">Events</a>
+          <a class="nav-link" href="$!{communitylink}/events/">Events</a>
         </li>
         <li class="nav-item #if($action == 'people') active #end">
-          <a class="nav-link" href="${communitylink}/people/">People</a>
+          <a class="nav-link" href="$!{communitylink}/people/">People</a>
         </li>
+        #ifnull($user)
+          <li class="nav-item">
+            <a class="nav-link #if($content.oisection == 'login') active #end" href="$!{communitylink}/authentication/login.html">
+              Login / Register <i class="ml-1 fs-small fas fa-user"></i>
+            </a>
+          </li> 
+          #end
+          #ifnotnull($user)
+          <li class="nav-item">
+            <a class="nav-link" href="$!{communitylink}/authentication/logout.html" title="[[Logout]]">
+              <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+            </a>
+          </li>
+          #end
       </ul>
     </div>
   </div>
 </nav>
+
 #else
   <nav class="navbar sticky-top navbar-expand-lg" id="superNav">
     <div class="container flex-nowrap"> 
       <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
-        <img src="$applink/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
+        <img src="$!{communitytagcategory.externaldomain}/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
       </a>
       $pages.include("$apphome/components/quicksearch/navbar.html")	
       <div class="d-flex"> 

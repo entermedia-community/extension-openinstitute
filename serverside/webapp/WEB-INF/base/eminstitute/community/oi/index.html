@@ -14,9 +14,9 @@
 #set( $communitytagid = $context.getPageName())
 $context.putPageValue("curentcommunitytagid", $communitytagid)
 <header>
-  <img src="$applink/theme/images/oi-home-banner.svg" />
-  <h1 id="type-out">Fundraising, Accountability and Transparency</h1>
-  <a href="$applink/browse/add/addnew.html?libraryid=collectives" class="emdialog proposal-btn">
+  <img src="$!{communitylink}/theme/images/oi-home-banner.svg" />
+  <h1 id="type-out">[[Fundraising, Accountability and Transparency]]</h1>
+  <a href="$!{communitylink}/projects/add/addnew.html" class="emdialog proposal-btn">
     <i class="fas fa-plus me-1"></i>
     [[Create a Project]]
   </a>
@@ -25,7 +25,7 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
       <div class="chevron"></div>
       <div class="chevron"></div>
       <div class="chevron"></div>
-      <span>Explore</span>
+      <span>[[Explore]]</span>
     </div>
   </button>
 </header>
@@ -40,17 +40,18 @@ $context.putPageValue("curentcommunitytagid", $communitytagid)
         <div class="col col-sm-12 col-lg-6">
           <div class="proposal">
             #if( $tagcategory.externaldomain)
-              #set( $link ="//${tagcategory.externaldomain}/")
+              #set( $link ="$!{tagcategory.externaldomain}")
             #else
               #set( $link = "$apphome/${tagcategory.get('urlname')}")
             #end
+            
             <a href="$link" class="thumbnail">
-              <img src="$apphome${tagcategory.primaryimagepath}" />
+              <img src="$!{communityhome}/$!{tagcategory.primaryimagepath}" />
               <span class="#if ($tagcategory.getName().length() > 10) sm #else lg #end">$tagcategory.getName()</span>
             </a>
             <div class="info">
               <p>$!tagcategory.summary</p>
-              <a href="$link">[[View]]
+              <a href="$link/projects">[[View]]
                 #if($tagcategory.entitytype == "entityrental")
                   [[Rentals]]
                 #else

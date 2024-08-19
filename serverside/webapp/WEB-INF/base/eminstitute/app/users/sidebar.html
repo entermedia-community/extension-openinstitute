@@ -19,6 +19,7 @@
 		#foreach( $message in $messages )
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
 			#set( $collective = $mediaarchive.getCachedData("librarycollection",$topic.parentcollectionid))
+			#set( $community = $mediaarchive.getCachedData("communitytagcategory",$collective.communitytagcategory))
 			#set( $otherperson =  $chatManager.getOtherChatUser($collective,$user) )
 			
 		  <div class="row messageselection #if($selectedproject==$collective.id) current #end">
@@ -37,8 +38,13 @@
 						<div class="card-collections-thumb" style='background-image: url("$link")'></div>
 					#end
 			</div>
-			<div class="col" style="padding:0px;">	
-				<a href="$applink/collective/community/${collective.id}/#dash($collective.getName()).html" >		
+			<div class="col" style="padding:0px;">
+				#if($collective.urlname)
+					#set($collectivelink = "$!{community.externaldomain}/${collective.urlname}/chat/index.html")
+				#else
+					#set($collectivelink = "$applink/collective/community/${collective.id}/#dash($collective.getName()).html")
+				#end	
+				<a href="${collectivelink}">		
 				 	#ifnotnull($otherperson)
 					<b>  $otherperson.getScreenName() </b>
 					#end

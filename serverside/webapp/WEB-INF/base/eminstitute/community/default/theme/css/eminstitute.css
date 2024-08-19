@@ -2083,22 +2083,30 @@ ul.inlinelist li {
   position: relative;
 }
 
-.project-thumb {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 99;
-  width: 105px;
-  height: 105px;
-  margin: 0 auto;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 40%);
-  border-radius: 50%;
+.project-thumb-link {
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+  overflow: hidden;
+  
   background-position: center center;
-  background-repeat: no-repeat;
-  background-color: #fff;
-  background-size: cover;
+  background-color: #ffffff;
+  border: 4px solid #ffffff;
+}
+.project-thumb-link img {
+  height: 70px;
+  width: 70px;
+  transition: all 0.3s;
+}
+.project-thumb:hover img {
+  transform: scale(1.1);
 }
 
+.project-cover .project-thumb-link {
+	position: absolute; 
+  	left: 30px;
+  	transform: translateY(35px);
+}
 .project-selected {
   border: 3px solid #edd400;
 }

@@ -41,6 +41,7 @@
 	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
+	  <script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
 	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 			
