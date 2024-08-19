@@ -12,7 +12,7 @@
 	#set( $val = $hits.getInput("description"))
 
 	#if($module.id == "librarycollection")
-		<h6 class="text-center text-dark">#text($module)</h6>
+		##<h6 class="text-center text-dark">#text($module)</h6>
 	#else
 		#set($entityurl = "$!siteroot$applink/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val")
 		<div style="margin-bottom: 10px;">
@@ -39,11 +39,29 @@
 	<div class="row">
 		#foreach( $hit in $hits.getPageOfHits()) 
 			#if($module.id == "librarycollection")
-				#set($link = "$applink/proposal/${hit.id}/#dash($hit.getName()).html")
-				<a class="col-6 col-md-4 result-item" href="$link" class="quickresult">
-					$pages.include("$apphome/browse/logo.html?logoassetid=$hit.assetportrait",$context)
-					<span>#text($hit)</span>
-				</a>
+				#set( $project = $mediaarchive.getCachedData("librarycollection", $hit.getId()))
+				#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+				#if($project.urlname)
+					#set($link = "$!{community.externaldomain}/${project.urlname}")
+					#if($canviewsettings)
+						#set($link = "$link/chat/")
+					#end
+				#else
+					#set($link = "$applink/collective/community/${project.id}/#dash($project.getName()).html")
+				#end
+				
+				#if($project.assetportrait)
+			        #set($asset = $mediaarchive.getAsset($project.assetportrait))
+			        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+			      #else
+			        #set($logo = "$communityhome/theme/images/OI_flower.png")
+			      #end
+			      <div class="col-6 col-md-4 result-item ">
+					<a class="project-thumb-link" href="$link" title="[[View]]: #text($hit)" >
+						<img src="$logo" />
+					</a>
+					<div><a class="project-link-text" href="$link" title="[[View]]: #text($hit)" >#text($hit)</a></div>
+				</div>
 			#else
 				#set( $val = $hit.getName())
 				#set($one = "$!siteroot$apphome/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val&topentityid=$hit.getId()&entityid=$hit.getId()&entitytype=${module.id}")
