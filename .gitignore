@@ -6,7 +6,7 @@
 /serverside/webapp/site/catalog/views/settings
 /dartpackages/openinsitute_core/.flutter-plugins
 /dartpackages/openinsitute_core/.flutter-plugins-dependencies
-serverside/webapp/assets
+
 
 serverside/webapp/WEB-INF/temp
 serverside/webapp/WEB-INF/tmp
@@ -17,10 +17,9 @@ serverside/webapp/WEB-INF/data
 
 .DS_Store
 *.DS_Store
-serverside/webapp/site/find/components/javascript/index.js
-serverside/webapp/site/community/components/javascript/index.js
-serverside/webapp/site/app/components/javascript/index.js
-serverside/webapp/website/app/components/javascript/index.js
-serverside/webapp/manager/components/javascript/index.js
-serverside/webapp/website/find/components/javascript/index.js
-serverside/webapp/openedit/components/javascript/index.js
+serverside/webapp/site/*
+serverside/webapp/website/*
+serverside/webapp/assets/*
+serverside/webapp/manager/*
+serverside/webapp/openedit/*
+serverside/webapp/_site.xconf
