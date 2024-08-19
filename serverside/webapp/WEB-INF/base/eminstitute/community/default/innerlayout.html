@@ -40,7 +40,7 @@
 		data-browserlanguage="$!{browserlanguage}" 
 		data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
-		data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
+		data-showuploadid="${showupload.id}" #end>
 		
 		<div class="emrightcontent">
 			#if(!$browser.inApp())
@@ -48,14 +48,18 @@
 			#end
 			<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
 				#if($browser.inApp())
+					
 					$pages.includeContent()
+					
 					$pages.include("/${communityhome}/theme/layouts/footer.html")
 				#else
 				
 					#if($user && !$browser.inApp() && $canviewsettings)
 						$pages.include("$!{communityhome}/components/sidebars/user/index.html")
 					#end 
+					
 					$pages.includeContent()
+					
 					$pages.include("${communityhome}/theme/layouts/footer.html")
 				#end
 			</div>

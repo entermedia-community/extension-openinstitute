@@ -69,7 +69,13 @@
 				$context.putPageValue("tasks",$tasks)
 				<td >
 					#set( $project= $!mediaarchive.getData("librarycollection", $goal.collectionid) )
-					<a href="$sitelink/app/collective/goals/priorities/index.html?collectionid=$goal.collectionid"
+					#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+					#if($project.urlname)
+						#set($projectlink = "$!{community.externaldomain}/${project.urlname}/goals/priorities")
+					#else
+						#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+					#end
+					<a href="$projectlink"
 					style="text-decoration:underline;" 
 					title="[[Open]] $!project">
 					$!project
@@ -96,18 +102,11 @@
 					
 				</td>
 				<td class="text-center" >
-					$pages.include("${communityhome}/users/tasks/resolvebutton.html",$context) 
+					$pages.include("${communityhome}/components/users/tasks/resolvebutton.html",$context) 
 					<div class="clearfix" style="padding:5px;"> </div>
 					<span class="headersubtext">
 						$!context.getText($!mediaarchive.getData("tickettype",$goal.tickettype)) $!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()
 					</span><br>
-					
-					#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-					<a href="$sitelink/app/collective/goals/search/search.html?collectionid=$goal.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id" 
-					style="text-decoration:underline;" >
-					$!project
-					</a>
-						<br>
 						
 						#if ($goal.deliverydate)
 							<span style="color:red">[[Due on:]] $goal.deliverydate.substring(0, 10)</span>

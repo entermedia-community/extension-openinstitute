@@ -3,7 +3,7 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$applink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$communitylink/components/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
@@ -42,7 +42,7 @@
 				#if($project.urlname)
 					#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
 				#else
-					#set($projectlink = "$applink/collective/community/${project.id}/#dash($project.getName()).html")
+					#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
 				#end	
 				<a href="${projectlink}">		
 				 	#ifnotnull($otherperson)
@@ -64,6 +64,7 @@
 	</div>
 	
 </div>
+
    <div class="sidebar-box-header" >[[Profile]]
    <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
@@ -76,37 +77,28 @@
 			</li>
 			#if(!$userprojects.isEmpty() )
 			<li class="#if($appsection == "mytasks") current #end" >
-				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
+				<a href="$communitylink/components/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
+					<i class="fas fa-hammer"></i> [[My Tasks]]</a>
 			</li>
 			<li class="#if($appsection == "completed") current #end" >
-				<a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
+				<a href="$communitylink/components/users/tasks/report.html?collectionid=*&goaltrackerstaff=*">
+					<i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 			</li>
 			#end
 			</ul>
 		#if(!$userprojects.isEmpty() )
 		<div style="padding:15px 10px 15px; border-bottom: 1px solid #e5e5e5;">
-		<a href="$sitelink/app/users/tasks/index.html?$!{args}" class="badge badge-success">[[All]]</a>
-		<a href="$sitelink/app/users/tasks/search.html?ticketlevel=1&$!{args}" class="badge badge-success">[[Agendas]]</a>
-		<a href="$sitelink/app/users/tasks/search.html?ticketlevel=2&$!{args}" class="badge badge-success">[[Goals]]</a>
+		<a href="$!{communitylink}/components/users/tasks/index.html?$!{args}" class="btn btn-xs btn-secondary">[[All]]</a>
+		<a href="$!{communitylink}/components/users/tasks/search.html?ticketlevel=1&$!{args}" class="btn btn-xs btn-secondary">[[Agendas]]</a>
+		<a href="$!{communitylink}/components/users/tasks/search.html?ticketlevel=2&$!{args}" class="btn btn-xs btn-secondary">[[Goals]]</a>
 		</div>
 		#end
 		
    	<ul class="sidebar-list">
-		<li class="#if($appsection == "activity") current #end" style="width:110px; float:left;">
+		<li class="#if($appsection == "activity") current #end" >
 			<a href="$sitelink/app/activity/index.html"  >
 			<i class="fa fa-comments"></i> [[All Chats]]</a>
 		</li>
-		#if($canviewsettings)
-		<li  class="#if($appsection == "messages") current #end" style="border-left:1px solid #6666;width:139px; float:left;">
-			<a href="$sitelink/app/messages/index.html" >
-			#if($pendingmessages && !$pendingmessages.isEmpty())
-			<i class="fa fa-comment"></i> [[Direct Chat]] <i class="fas fa-bell fa-xs" style="color:orange"></i>
-			#else
-			<i class="fa fa-comment"></i> [[Direct Chat]]
-			#end
-			</a>
-		</li>
-		#end
 		
 		
 		</ul>		

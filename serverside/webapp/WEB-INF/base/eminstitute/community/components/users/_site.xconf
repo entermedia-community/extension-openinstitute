@@ -5,8 +5,7 @@
 	<path-action name="User.loadUserByFolder" />
 	
 	<property name="appsection">profile</property>
-	
-	<inner-layout>/${communityhome}/users/userprofilelayout.html</inner-layout>
+		
   	<path-action name="ChatModule.getChatManager"/>
 
 </page>

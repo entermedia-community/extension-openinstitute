@@ -5,10 +5,7 @@
 	<property name="appsection">tasks</property>
 	<property name="defaulttab">goaltab</property>
 	
-    <style id="tasks" href="/${applicationid}/collective/goals/goals.css" />
-    <script id="goals" src="/${applicationid}/collective/goals/goals.js"/>
-	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
-	
-	<inner-layout>/${applicationid}/theme/layouts/application-collective.html</inner-layout>
+	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
+    <script id="goals" src="${communityhome}/project/goals/goals.js"/>
 
 </page>

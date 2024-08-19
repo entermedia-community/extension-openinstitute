@@ -1786,6 +1786,7 @@ h1.project-h1 {
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.5s;
+  margin-bottom: 20px;
 }
 .project-card.card:hover {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 0 5px 0 rgba(0, 0, 0, 0.2);
