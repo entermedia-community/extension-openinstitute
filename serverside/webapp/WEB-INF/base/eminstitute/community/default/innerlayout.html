@@ -38,16 +38,8 @@
 		data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
 		data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
-		#set($sidebarshown = false)
-		#if($user && !$browser.inApp() && $canviewsettings)
-			#set($sidebarshown = true)
-		#end
-		#set( $usersidebarhidden = $userprofile.getValue("usersidebarhidden"))
-
-		#if (!$usersidebarhidden)
-			#set($sidebarshown = false)
-		#end
-		<div class="emrightcontent #if($user && $sidebarshown) empushcontent #end">
+		
+		<div class="emrightcontent ">
 			#if(!$browser.inApp())
 				$pages.include("/${communityhome}/navigation.html")
 			#end
