@@ -26,20 +26,23 @@
 	$pages.include("/${communityhome}/theme/layouts/includes.html")
 
 	#if(!$browser.inApp())
-		<link rel="Shortcut Icon" type="image/x-icon" href="$applink/theme/images/favicon.ico" />
+		<link rel="Shortcut Icon" type="image/x-icon" href="$!{communitylink}/theme/images/favicon.ico" />
 	#end
 </head>
 
 <body id="page-top" #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 	<div id="errordiv"></div>
-	<div id="application" class="eminstitutecollective" data-home="$home" data-user="$!user.id" data-apphome="$apphome"
+	<div id="application" class="eminstitutecollective" 
+		data-home="$home" data-user="$!user.id" data-apphome="$apphome"
 		data-communityhome="$!{communityhome}"
-		data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
-		data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
+		data-applink="$applink" data-inapp="$browser.inApp()" 
+		data-themeprefix="/${applicationid}/theme"
+		data-browserlanguage="$!{browserlanguage}" 
+		data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
 		data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
 		
-		<div class="emrightcontent ">
+		<div class="emrightcontent">
 			#if(!$browser.inApp())
 				$pages.include("/${communityhome}/navigation.html")
 			#end
