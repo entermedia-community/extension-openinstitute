@@ -36,11 +36,8 @@
 		data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
 		data-showuploadid="${showupload.id}" #end data-viewertemplate="$applink/collective/channel/show/index.html">
-		#set( $usersidebarhidden = $userprofile.get("usersidebarhidden"))
-		#if (!$usersidebarhidden)
-			#set( $usersidebarhidden = 'false')
-		#end
-		<div class="emrightcontent #if($user && $usersidebarhidden == 'false') empushcontent #end">
+		
+		<div class="emrightcontent ">
 			#if(!$browser.inApp())
 				$pages.include("/${apphome}/theme/layouts/navigation.html")
 			#end 
@@ -50,7 +47,7 @@
 					$pages.include("/${apphome}/theme/layouts/footer.html")
 				#else
 					#if($user && !$browser.inApp() && $canshowsidebar)
-						$pages.include("$apphome/components/sidebars/user/index.html")
+					##	$pages.include("$apphome/components/sidebars/user/index.html")
 					#end 
 					$pages.includeContent()
 					$pages.include("/${apphome}/theme/layouts/footer.html")
