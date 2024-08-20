@@ -2,6 +2,12 @@
 	#set( $librarycol = $mediaarchive.getData("librarycollection",$upload.librarycollection) )
 	$context.putPageValue("librarycol",$librarycol)
 #end
+#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+#if($project.urlname)
+	#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
+#else
+	#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+#end
 
 #set( $shortdescription = "")
 #ifnotnull($upload.longdescription)
@@ -18,7 +24,7 @@
 				<div class="blog-avatar">
 					#set( $postuser = $userManager.getUser($upload.owner, true))
 					$context.putPageValue("chatuser",$postuser)
-					$pages.include("${communityhome}/users/icon.html",$context)
+					$pages.include("${communityhome}/components/users/icon.html",$context)
 				</div>
 				<a class="text-brand"
 					href='#urlescape("${communityhome}/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
@@ -53,19 +59,19 @@
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
 								data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}"
 								href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$upload.id">
-								<i class="fas fa-share-alt me-2"></i> Share
+								<i class="fas fa-share-alt me-2"></i> [[Share]]
 							</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="#">
-								<i class="far fa-bookmark me-2"></i> Bookmark
+								<i class="far fa-bookmark me-2"></i> [[Bookmark]]
 							</a>
 						</li>
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
 								data-collectionid="${librarycol.getId()}" data-uploadid="${upload.id}"
 								href="$communityhome/project/channel/report/index.html?uploadid=${upload.id}">
-								<i class="far fa-flag me-2"></i> Report
+								<i class="far fa-flag me-2"></i> [[Report]]
 							</a>
 						</li>
 					</ul>

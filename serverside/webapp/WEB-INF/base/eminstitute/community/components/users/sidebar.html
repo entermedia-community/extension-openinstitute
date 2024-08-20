@@ -42,7 +42,7 @@
 				#if($project.urlname)
 					#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
 				#else
-					#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+					#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
 				#end	
 				<a href="${projectlink}">		
 				 	#ifnotnull($otherperson)
