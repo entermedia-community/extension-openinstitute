@@ -20,6 +20,13 @@ $context.putPageValue("searcher",$searcher)
 $context.putPageValue("view", "librarycollection/$view")
 $context.putPageValue("data", $librarycol)
 
+##Legacy project URL 
+#if($librarycol.urlname)
+	#set($savelink = "${projectlink}/edit/save.html")
+#else
+	#set($savelink = "/project/edit/save.html")
+#end
+			
 <div class="emwidget">
 	<div class="emwidget-header">
 		<div class="emwidget-name">[[General Settings]]</div>
@@ -28,7 +35,7 @@ $context.putPageValue("data", $librarycol)
 	<form name="savecollective" 
 		enctype="multipart/form-data" 
 		id="savecollective"
-		action="${projectlink}/edit/save.html"
+		action="${savelink}"
 		class="ajaxform"
 		data-targetdivinner="collectivesettingscontent"
 		data-oemaxlevel="1"

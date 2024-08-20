@@ -22,7 +22,7 @@
     	#if($project.urlname)
 			#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
 			#if($canviewsettings)
-				#set($projectlink = "$link/chat/")
+				#set($projectlink = "$projectlink/chat/")
 			#end
 		#else
 			#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
@@ -76,7 +76,7 @@
               </span>
             </div>
             <div class="d-flex mt-3">
-              <a href="$link" class="explore themed-btn">Explore</a>
+              <a href="$projectlink" class="explore themed-btn">Explore</a>
             </div>
             <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
             #ifnotnull($librarycol.facebooklink)

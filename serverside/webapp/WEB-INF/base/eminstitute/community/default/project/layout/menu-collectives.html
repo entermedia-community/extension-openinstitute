@@ -42,11 +42,16 @@
 		</li>
 		#end
 		#if( $caneditcollection )
-		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
-			<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]">
-				<i class="fas fa-cog mx-auto"></i>
-			</a>
-		</li>
+			#if($librarycol.urlname)
+				#set($settingslink = "$!{community.externaldomain}/${project.urlname}/admin/index.html")
+			#else
+				#set($settingslink = "/project/admin/index.html?collectionid=${project.id}")
+			#end
+			<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
+				<a class="nav-link" href="$settingslink" title="[[Settings]]">
+					<i class="fas fa-cog mx-auto"></i>
+				</a>
+			</li>
 		#end
 		<li class="dropdown collapsed-menu">
 			<button class="btn btn-transparent dropdown-toggle" data-bs-toggle="dropdown">
