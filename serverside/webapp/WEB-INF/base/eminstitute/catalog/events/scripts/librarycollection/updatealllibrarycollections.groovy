@@ -10,12 +10,12 @@ import org.openedit.hittracker.HitTracker
 public void init() {
 	MediaArchive mediaArchive = (MediaArchive)context.getPageValue("mediaarchive");
 	
-	HitTracker all = mediaArchive.query("librarycollection").search();
+	HitTracker all = mediaArchive.query("librarycollection").exact("collectiontype", "1").search();
 	all.each {
 		Data librarycol = it;
 		if(librarycol.get("communitytagcategory") == null) {
 		
-		librarycol.setValue("communitytagcategory", "1" );
+		librarycol.setValue("communitytagcategory", "oi" );
 		librarycol.setValue("communitytag", "oicommunity" );
 		mediaArchive.getSearcher("librarycollection").saveData(librarycol, null);
 	    log.info("saving library $librarycol");

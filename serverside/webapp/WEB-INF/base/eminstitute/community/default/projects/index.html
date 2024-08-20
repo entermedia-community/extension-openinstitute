@@ -19,7 +19,14 @@
 #end  
   <div class="row justify-content-md-center">
     #foreach($project in $projects)
-      #set($link = "${communitylink}/${project.urlname}")
+    	#if($project.urlname)
+			#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
+			#if($canviewsettings)
+				#set($projectlink = "$link/chat/")
+			#end
+		#else
+			#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+		#end
       #set($logo = false)
       #if($project.assetportrait)
         #set($asset = $mediaarchive.getAsset($project.assetportrait))
@@ -47,12 +54,12 @@
             #else
               class="project-cover coverRandom"
             #end>
-            <a href="$link" class="project-thumb-link">
+            <a href="$projectlink" class="project-thumb-link"  title="[[View]]: #text($project)">
                 <img src="$logo" />
               </a>
           </div>
           <div class="px-4 pb-4 image d-flex flex-column justify-content-center align-items-center">
-            <a href="$link" class="name mt-2">#text($project)</span></a>
+            <a href="$projectlink" class="name mt-2"  title="[[View]]: #text($project)">#text($project)</span></a>
             #set($owner = $mediaarchive.getUser($project.owner))
             <span class="creator">by #text($owner)</span>
             <!-- <div class="d-flex flex-column justify-content-center align-items-center mt-3">
