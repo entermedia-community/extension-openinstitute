@@ -14,8 +14,7 @@ $context.putPageValue("collectionid",$librarycol.getId() )
 #end
 
 <div class="project-header">
-    <div  
-        #ifnotnull($content.shades)data-shades="$content.shades"#end
+    <div #ifnotnull($content.shades)data-shades="$content.shades"#end
         #ifnotnull($content.bgcolor)data-bgcolor="$content.bgcolor"#end
         #if($bannerurl)
             class="bg-white banner"
@@ -26,6 +25,7 @@ $context.putPageValue("collectionid",$librarycol.getId() )
         <a class="header-logo" href="$projectlink" title="$!librarycol.name">
             <img src="$logourl" alt="logo" />
         </a>
+        
         $pages.include("${communityhome}/project/layout/menu-collectives.html",$context)
         #if($librarycol.name)
             <h1 class="project-title">#text($librarycol.name)</h1>

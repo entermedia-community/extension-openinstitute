@@ -1360,7 +1360,7 @@ textarea.blog-comments-input {
 }
 .community-layout .main-content {
   flex: 1;
-  padding-bottom: 1rem;
+  padding: 0 1rem 1rem;
   padding-right: 1rem;
   margin: 1rem auto;
 }
@@ -1902,7 +1902,6 @@ input.search-primary {
     min-width: 300px;
     margin: 0 auto;
     /* opacity: 0; */
-
     height: 42px;
     border-radius: 21px;
     border: 0;
@@ -1911,7 +1910,7 @@ input.search-primary {
     z-index: 999;
     transition: all 0.2s ease-in-out;
     background-color: #ffffff;
-    color: #194d4b;
+    color: #194d4b!important;
 }
 
 #closeSearch {

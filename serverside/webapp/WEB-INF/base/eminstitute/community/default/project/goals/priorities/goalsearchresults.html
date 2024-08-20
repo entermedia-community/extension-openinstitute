@@ -98,20 +98,14 @@
 			
 		</td>
 		<td class="text-center" >
-			$pages.include("${communityhome}/users/tasks/resolvebutton.html",$context) 
+			$pages.include("${communityhome}/components/users/tasks/resolvebutton.html",$context) 
 			<div class="clearfix" style="padding:5px;"> </div>
 			<span class="headersubtext">
 			
 				$!context.getText($!mediaarchive.getCachedData("tickettype",$goal.tickettype))
 				$!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()
 				
-			</span><br>
-			
-					#set( $project= $!mediaarchive.getData("collectiveproject",$goal.goaltrackercolumn) )
-		<a href="$sitelink/app/collective/goals/search/search.html?collectionid=$goal.collectionid&field=goaltrackercolumn&operation=matches&goaltrackercolumn.value=$!project.id" 
-		style="text-decoration:underline;" >
-		$!project
-		</a>
+			</span>
 			<br>
 			
 			#if ($goal.deliverydate)

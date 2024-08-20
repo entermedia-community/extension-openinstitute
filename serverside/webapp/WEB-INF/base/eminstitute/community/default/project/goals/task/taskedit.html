@@ -17,7 +17,7 @@
 	    	<input type="hidden" name="collectionid" value="$librarycol.getId()" />
 
 			<div style="margin-bottom:10px;">
-  				<textarea id="commenttext" class="form-control grabfocus" name="comment" placeholder="Task Comment/Description">$!task.comment</textarea>
+  				<textarea id="commenttext" class="form-control grabfocus" name="comment" placeholder="[[Task Comment/Description]]" required>$!task.comment</textarea>
   			</div>
 
 			#set( $selectedstatus = $task.taskstatus)

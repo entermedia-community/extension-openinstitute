@@ -33,37 +33,29 @@
 <body id="page-top" #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 	<div id="errordiv"></div>
 	<div id="application" class="eminstitutecollective" 
-		data-home="$home" data-user="$!user.id" data-apphome="$apphome"
+		data-home="$home" 
+		data-user="$!user.id" 
+		data-apphome="$apphome"
 		data-communityhome="$!{communityhome}"
-		data-applink="$applink" data-inapp="$browser.inApp()" 
+		data-applink="$applink" 
+		data-inapp="$browser.inApp()" 
 		data-themeprefix="/${applicationid}/theme"
 		data-browserlanguage="$!{browserlanguage}" 
 		data-editmode='$!user.get("oe_edit_mode")'
-		data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
-		data-showuploadid="${showupload.id}" #end>
+		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
+		data-componenthome="$!componenthome" 
+		#if( $showupload) data-showuploadid="${showupload.id}" #end>
 		
-		<div class="emrightcontent">
-			#if(!$browser.inApp())
-				$pages.include("/${communityhome}/navigation.html")
-			#end
-			<div id="applicationcontent" class="applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
-				#if($browser.inApp())
-					
-					$pages.includeContent()
-					
-					$pages.include("/${communityhome}/theme/layouts/footer.html")
-				#else
-				
-					#if($user && !$browser.inApp() && $canviewsettings)
-						$pages.include("$!{communityhome}/components/sidebars/user/index.html")
-					#end 
-					
-					$pages.includeContent()
-					
-					$pages.include("${communityhome}/theme/layouts/footer.html")
-				#end
-			</div>
-		</div>
+		$pages.include("/${communityhome}/navigation.html")
+			
+		#if($user && !$browser.inApp() &&$canviewsettings)
+			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+		#end
+		
+		$pages.includeContent()
+		
+		$pages.include("${communityhome}/theme/layouts/footer.html")
+
 		#if(!$browser.inApp())
 			##$pages.include("${apphome}/googleanalytics.html", $context)
 		#end

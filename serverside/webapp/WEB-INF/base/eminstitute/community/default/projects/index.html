@@ -13,11 +13,9 @@
 <div class="container my-5">
   #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 #if( $communitytagcategory.id == "3")
-  #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","emediadevelopers").sort("name).search($context))
+  #set( $projects =  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","emediadevelopers").sort("name").search($context))
 #else
-  #set( $projects =
-  $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).sort("name).search($context))
+  #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).sort("name").search($context))
 #end  
   <div class="row justify-content-md-center">
     #foreach($project in $projects)
