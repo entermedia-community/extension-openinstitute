@@ -43,7 +43,7 @@
 		#end
 		#if( $caneditcollection )
 			#if($librarycol.urlname)
-				#set($settingslink = "$!{community.externaldomain}/${project.urlname}/admin/index.html")
+				#set($settingslink = "$!{community.externaldomain}/${librarycol.urlname}/admin/index.html")
 			#else
 				#set($settingslink = "/project/admin/index.html?collectionid=${librarycol.id}")
 			#end
