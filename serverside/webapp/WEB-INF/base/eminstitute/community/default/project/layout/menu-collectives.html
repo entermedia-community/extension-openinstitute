@@ -45,7 +45,7 @@
 			#if($librarycol.urlname)
 				#set($settingslink = "$!{community.externaldomain}/${project.urlname}/admin/index.html")
 			#else
-				#set($settingslink = "/project/admin/index.html?collectionid=${project.id}")
+				#set($settingslink = "/project/admin/index.html?collectionid=${librarycol.id}")
 			#end
 			<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
 				<a class="nav-link" href="$settingslink" title="[[Settings]]">
