@@ -1,4 +1,4 @@
-<div id="viewrole">
+<div id="viewrole" class="">
 
 #set( $taskid = $context.getRequestParameter("taskid") )
 #set( $collectiverole = $context.getRequestParameter("collectiverole") )
@@ -13,8 +13,9 @@
 <form name="saverole" 
 	id="saverole"
 	data-targetdiv="goalrow#eid($task.projectgoal)"
-	class="ajaxform autocloseform" data-oemaxlevel="1"
-	action="${communityhome}/project/goals/task/editrole/saverole.html"
+	class="ajaxform autocloseform" 
+	data-oemaxlevel="1"
+	action="$projectlink/goals/task/editrole/saverole.html"
 	method="post">
 	
 <input type="hidden" name="save" value="true" />
@@ -46,7 +47,7 @@
   </div>
 
   <div class="editrow">
-    <div class="editname">Role User</div>
+    <div class="editname">[[Role User]]</div>
     <div class="editval">
 	<select class="form-control form-control-sm"  name="roleuserid">
 		<option value=""></option>
@@ -64,11 +65,13 @@
   </div>
 
 </section>
-#ifnotnull($actions)
- <h3>[[Action Log]]</h3>
+
+
 
 
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
+#if($actions.size()>0)
+<h2>[[Action Log]]</h2>
 <section>
   <div class="editrow">
     <div class="editname">Count</div>
@@ -82,8 +85,9 @@
     	
     </div>
    </div>
+
 #foreach( $action in $actions)
-  <div class="editrow">
+  <div class="editrow py-2" style="border-bottom: 1px solid #ddd;;" >
     <div class="editname">$foreach.count</div>
     <div class="editval" style="width:200px">
       <span> #datetime($action.date)</span>
@@ -93,7 +97,7 @@
     </div>
     <div class="editval">
     
-	 <a class="ajax"
+	 <a class="ajax btn btn-xs btn-secondary"
 		data-oemaxlevel="1"
 		data-targetdiv="viewrole"
 		data-taskid = "$taskid"
@@ -102,7 +106,7 @@
 		data-roleuserid = "$roleuserid"
 		style="margin: 0px 0 0 10px;" 
 		data-confirm="[[Are you sure]]?" 
-		href="${communityhome}/project/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
+		href="$projectlink/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
     >[[Delete Action]]</a>
     </div>
   </div>
@@ -122,11 +126,11 @@
 		data-closedialog = "true"
 		data-collectiverole = "$collectiverole"
 		data-roleuserid = "$roleuserid"
+		
 		data-confirm="[[Are you sure]]?" 
-		href="${communityhome}/project/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
+		href="$projectlink/goals/task/editrole/deleterole.html?collectionid=$librarycol.id" 
 	>[[Delete Role]]</a>
-	
-</div>
+	</div>
 
 </form>
 </div>

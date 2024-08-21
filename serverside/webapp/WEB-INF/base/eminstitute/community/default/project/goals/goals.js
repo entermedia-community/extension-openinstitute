@@ -271,7 +271,7 @@ jQuery(document).ready(function(url,params)
 				return;
 			}
 			select.data("running",true);
-			var target = select.closest(".goaltaskcontainer").find("#roleeditor");
+			var target = select.closest(".goaltaskrow").find("#roleeditor");
 			var path = select.data("savepath");
 			var params = {};//select.cleandata();
 			params['collectiverole'] = select.val();
