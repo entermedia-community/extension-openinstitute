@@ -77,6 +77,14 @@ public void init()
 	}
 	context.putPageValue("librarycol",collection);
 	context.putPageValue("library",collection.getLibrary());
+	
+	//Redirect
+	String url = collection.get("urlname");
+	if( url != null)
+	{
+		context.redirect("/" + url);
+	}
+	
 }
 
 init();

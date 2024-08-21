@@ -2,7 +2,7 @@
 	
 	<path-action name="AssetEditModule.handleUploads"/>
 	<path-action name="Script.run">
-		<script>/${applicationid}/users/edit/saveuser.groovy</script>
+		<script>${communityhome}/users/edit/saveuser.groovy</script>
 	</path-action>
 	
 </page>

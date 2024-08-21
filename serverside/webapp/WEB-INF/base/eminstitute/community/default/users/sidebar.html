@@ -3,7 +3,7 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$communitylink/components/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
@@ -66,31 +66,31 @@
 </div>
 
    <div class="sidebar-box-header" >[[Profile]]
-   <a href="$sitelink/app/users/$user.getId()/index.html" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
+   <a href="${communitylink}/users/index.html?id=$user.getId()" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
    <div class="sidebar-box-content" style="padding:0;">
 		#set($userprojects = $mediaarchive.getProjectManager().listCollectionsOnTeam($user))
 
 	    	<ul class="sidebar-list">
 			<li class="#if($appsection == "wallet") current #end">
-			<a href="$sitelink/app/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
+			<a href="${communitylink}/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
 			</li>
 			#if(!$userprojects.isEmpty() )
 			<li class="#if($appsection == "mytasks") current #end" >
-				<a href="$communitylink/components/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
+				<a href="$communitylink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
 					<i class="fas fa-hammer"></i> [[My Tasks]]</a>
 			</li>
 			<li class="#if($appsection == "completed") current #end" >
-				<a href="$communitylink/components/users/tasks/report.html?collectionid=*&goaltrackerstaff=*">
+				<a href="$communitylink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*">
 					<i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 			</li>
 			#end
 			</ul>
 		#if(!$userprojects.isEmpty() )
 		<div style="padding:15px 10px 15px; border-bottom: 1px solid #e5e5e5;">
-		<a href="$!{communitylink}/components/users/tasks/index.html?$!{args}" class="btn btn-xs btn-secondary">[[All]]</a>
-		<a href="$!{communitylink}/components/users/tasks/search.html?ticketlevel=1&$!{args}" class="btn btn-xs btn-secondary">[[Agendas]]</a>
-		<a href="$!{communitylink}/components/users/tasks/search.html?ticketlevel=2&$!{args}" class="btn btn-xs btn-secondary">[[Goals]]</a>
+		<a href="$!{communitylink}/users/tasks/index.html?$!{args}" class="btn btn-xs btn-secondary">[[All]]</a>
+		<a href="$!{communitylink}/users/tasks/search.html?ticketlevel=1&$!{args}" class="btn btn-xs btn-secondary">[[Agendas]]</a>
+		<a href="$!{communitylink}/users/tasks/search.html?ticketlevel=2&$!{args}" class="btn btn-xs btn-secondary">[[Goals]]</a>
 		</div>
 		#end
 		

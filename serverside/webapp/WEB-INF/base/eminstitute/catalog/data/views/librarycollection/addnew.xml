@@ -4,13 +4,11 @@
   <property id="name"  required="true"/>  
   <property id="collectivedescription"/> 
   
-  <property id="communitytagcategory" />
   <property id="collectivetags" />
   
-  <property id="contactemail"/>  
+  <property id="contactemail" rendermask="${user.email}"/>  
   <property id="contactphone"/>  
 
-  <property id="street"/>  
   <property id="city"/>  
   <property id="country"/>
   

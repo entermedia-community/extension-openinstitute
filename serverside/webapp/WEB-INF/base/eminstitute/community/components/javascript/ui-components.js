@@ -2907,7 +2907,9 @@ uiload = function () {
       }
       var defaultvalue = theinput.data("defaultvalue");
       var defaultvalueid = theinput.data("defaultvalueid");
-
+	  if(apphome === undefined) {
+		  apphome = "";
+	  }
       var url =
         apphome +
         "/components/xml/types/autocomplete/datasearch.txt?" +
