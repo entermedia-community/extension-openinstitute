@@ -1,6 +1,12 @@
 #if( $user )
-<a href="$communitylink/addprojectform.html" class="ajax btn btn-primary btn-lg m-1" data-targetdivinner="homecreateproject"
-  data-oemaxlevel="1">Create a Project</a>
+##<a href="$communitylink/addprojectform.html" class="ajax btn btn-primary btn-lg m-1" data-targetdivinner="homecreateproject"
+##  data-oemaxlevel="1">Create a Project</a>
+
+<a href="$communitylink/project/add/addnew.html"  class="emdialog btn btn-primary btn-lg m-1" >
+    <i class="fas fa-plus me-1"></i>
+    Create a Project
+  </a>
+
 #else
 <a href="$communitylink/authentication/login.html" class="btn btn-primary btn-lg m-1 ">Login to Create a Project</a>
 #end
