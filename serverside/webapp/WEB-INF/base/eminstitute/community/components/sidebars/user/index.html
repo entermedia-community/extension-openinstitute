@@ -1,19 +1,21 @@
-#set( $usersidebarhidden = $userprofile.get("usersidebarhidden")) #if
-(!$usersidebarhidden) #set( $usersidebarhidden = 'false') #end
-
+#set( $showusersidebar = $userprofile.get("showsidebar")) 
+#if ($showusersidebar != "true") 
+	#set( $showusersidebar = "false") 
+#end
 <button
-  class="btn rounded-0 sidebar-toggler-show userOffcanvasToggler"
+  class="btn rounded-0 oi-sidebar-toggler-show toggleuserpreference userOffcanvasToggler"
   type="button"
   data-bs-toggle="offcanvas"
   data-bs-target="#userOffcanvas"
   data-action="show"
   title="[[Show User Sidebar]]"
+  data-userpreference="showsidebar"
 >
 <i class="fas fa-angle-double-right" style="font-size: 1.2em"></i>
 </button>
 
 <div
-  class="offcanvas offcanvas-start #if($user && $usersidebarhidden == 'false') show #end"
+  class="offcanvas offcanvas-start #if($user && $showusersidebar == 'true') show #end"
   data-bs-scroll="true"
   data-bs-backdrop="false"
   tabindex="-1"

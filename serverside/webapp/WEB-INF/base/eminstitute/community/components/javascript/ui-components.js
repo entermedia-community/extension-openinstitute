@@ -2,6 +2,8 @@
 var lwt;
 var trackKeydown = false;
 var exitWarning = false;
+var siteroot;
+var apphome;
 
 function showLoader() {
   clearTimeout(lwt);
@@ -340,11 +342,17 @@ lQuery(".coverRandom").livequery(function () {
 });
 
 uiload = function () {
+  
   var app = jQuery("#application");
-  var apphome = app.data("siteroot") + app.data("apphome");
-  var themeprefix = app.data("siteroot") + app.data("themeprefix");
-
-  var siteroot = $("#application").data("siteroot");
+  siteroot = app.data("siteroot");
+  apphome = app.data("apphome");
+  var themeprefix = app.data("themeprefix");
+  if (siteroot !== undefined) {
+    //legacy siteroot
+    apphome = siteroot + apphome;
+    themeprefix = siteroot + themeprefix;
+  }
+  
   var mediadb = $("#application").data("mediadbappid");
 
   if ($.fn.tablesorter) {
@@ -4301,6 +4309,86 @@ uiload = function () {
     image.attr("alt", link.attr("title"));
     image.data("assetid", link.data("assetid"));
   });
+  
+  
+  
+  lQuery('.pickemoticon').livequery(function() 
+	{
+		//Load div
+		var input = $(this);
+		input.click(function()
+		{
+			$(".emoticonmenu").hide(); //Hide old ones
+		});
+		
+		input.hover(function()
+		{
+			var isattached = input.data("isattached");
+			if(isattached)
+			{
+				$(".emoticonmenu").hide(); //Hide old ones
+				input.closest(".message-menu").find(".emoticonmenu").show();			
+			}
+			else
+			{
+				var options = input.data();
+				$.ajax({ url: options.showurl, async: true, data: options, 
+					success: function(data) 
+					{
+						$(".emoticonmenu").hide(); //Hide old ones
+						input.data("isattached",true);
+						
+						input.closest(".message-menu").append(data);
+					}	
+				});			
+			}
+		});
+		
+		//On any click hide this:
+		//$(".emoticonmenu").hide();
+	});
+	
+	lQuery('.pickemoticon .emoticonmenu span').livequery("click",function() 
+	{
+		var menuitem = $(this);
+		
+		var aparent = $(menuitem.parents(".pickemoticon"));
+		//console.log(aparent.data());
+
+		var saveurl = aparent.data("toggleurl");
+		//Save
+		var options = aparent.data();
+		options.reactioncharacter = menuitem.data("hex");
+		$.ajax({ url: saveurl, async: true, data: options, 
+			success: function(data) 
+			{
+				$(".emoticonmenu").hide();
+				$("#chatter-message-" + aparent.data("messageid")).html(data);
+				//reload message
+			}	
+		});			
+
+		
+	});
+	
+	toggleUserProperty = function (property, onsuccess) {
+	  jQuery.ajax({
+	    url:
+	      apphome +
+	      "/components/userprofile/toggleprofileproperty.html?field=" +
+	      property,
+	    success: onsuccess,
+	  });
+	};
+	
+	
+  lQuery(".toggleuserpreference").livequery("click", function () {
+	  var preference = $(this).data("userpreference");
+	  if(preference!==undefined) {
+    	toggleUserProperty(preference, function () {});
+    	}
+  });
+	
 }; // uiload
 
 function formsavebackbutton(form) {
