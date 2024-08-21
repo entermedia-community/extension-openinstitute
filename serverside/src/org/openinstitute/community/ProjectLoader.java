@@ -76,7 +76,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		
 		//Only works with domains being set. Otherwise use normal page actions to load project pages
 		String[] url = requestedPath.split("/");
-		if(url.length > 1 && (url[1].equals("mediadb") || url[1].equals("app")))
+		if(url.length > 1 && (url[1].equals("mediadb") ))
 		{
 			return null;
 		}
@@ -130,6 +130,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		Data communitydata = findCommunity(domain);
 		if( communitydata == null)
 		{
+			log.info("Couldn't find Community Data: " + domain + " Second part: " + secondpart);
 			return null;
 		}
 		String communityhome = "/" + siteid + communitydata.get("templatepath");  //Use Mask?
@@ -203,6 +204,9 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			//right.putPageValue("projectlink" , "/" + domain + "/" + librarycollection.get("urlname") );
 			right.setRightPage(otherpage);
 			return right;
+		}
+		else {
+			log.info("Couldn't find Collection: " + secondpart);
 		}
 		return null;
 	}
