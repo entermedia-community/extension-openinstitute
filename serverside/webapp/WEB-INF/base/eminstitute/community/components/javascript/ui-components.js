@@ -4348,11 +4348,11 @@ uiload = function () {
 		//$(".emoticonmenu").hide();
 	});
 	
-	lQuery('.pickemoticon .emoticonmenu span').livequery("click",function() 
+	lQuery('.emoticonmenu span').livequery("click",function() 
 	{
 		var menuitem = $(this);
 		
-		var aparent = $(menuitem.parents(".pickemoticon"));
+		var aparent = $(menuitem.closest(".message-menu").find(".pickemoticon"));
 		//console.log(aparent.data());
 
 		var saveurl = aparent.data("toggleurl");
