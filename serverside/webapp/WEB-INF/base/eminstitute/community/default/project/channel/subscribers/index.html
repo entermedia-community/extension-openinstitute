@@ -10,9 +10,7 @@
 			#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
 			#if($followeruser)
 				
-				###set( $userlink = "$communitylink/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
-				
-				#set( $userlink = "$communitylink/users/index.html?id=${followeruser.getId()}")
+				#set( $userlink = "$!{communitylink}/users/index.html?id=${followeruser.getId()}")
 				#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 				#if(!$userimageurl)
 					#set( $userimageurl = "$communitylink/theme/images/user.svg" )

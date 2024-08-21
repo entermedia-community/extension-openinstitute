@@ -6,7 +6,7 @@ $context.putPageValue("view", "user/myaccount")
 #set( $userid = $context.getRequestParameter("userid"))
 #set( $canedit = false)
 
-#if( $user.getId() == $userid || $caneditsettings)
+#if( $user.getId() == $userid || $canviewsettings)
 	#set( $canedit = true)
 #end
 
@@ -16,7 +16,7 @@ $context.putPageValue("view", "user/myaccount")
 $context.putPageValue("data", $selecteduser)
 <form name="dialogform" 
 	id="useraccountform"
-	 action="${communityhome}/users/edit/save.html" 
+	 action="${communitylink}/users/edit/save.html" 
 	 method="post"
 	>
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
