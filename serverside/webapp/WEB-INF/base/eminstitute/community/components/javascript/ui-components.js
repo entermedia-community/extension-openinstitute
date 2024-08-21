@@ -399,8 +399,8 @@ uiload = function () {
 
       var targetid = dpicker.data("targetid");
       dpicker.datepicker({
-		todayBtn: "linked",
-    	autoclose: true,
+        todayBtn: "linked",
+        autoclose: true,
         altField: "#" + targetid,
         format: "dd M, yyyy",
         yearRange: "1900:2050",
