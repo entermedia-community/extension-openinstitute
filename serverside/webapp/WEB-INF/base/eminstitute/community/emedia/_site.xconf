@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-	  <property name="communitytagcategory">3</property>
+	  
 	  <property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/default</property>
 	  <property name="communityhome">/${siteid}/community/emedia</property>
 	  
 	  <property name="shades">#585b77,#4e516a,#45475c</property>
 	  <property name="bgcolor">#626584</property>
 	  <property name="containertype">container</property>
+	  
+	  <property name="communitytagcategory">3</property>
+	  <property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
 	  
 	  
 	  <script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
