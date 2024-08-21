@@ -27,7 +27,12 @@
 	
 	<div class="message-menu">
 		<div class="d-flex align-items-center">
-			<div class="pickemoticon message-menu-link" data-collectionid="$librarycol.getId()" data-messageid="$chat.id" data-showurl="${communityhome}/project/chat/chatterbox/smiles.html" data-toggleurl="${communityhome}/project/chat/chatterbox/smilessave.html">
+			<div class="pickemoticon message-menu-link" 
+			data-collectionid="$!librarycol.getId()" 
+			data-messageid="$chat.id" 
+			data-oemaxlevel="1"
+			data-showurl="$!{projectlink}/chat/chatterbox/smiles.html" 
+			data-toggleurl="${projectlink}/chat/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
 			</div>
 			#if($caneditcollection)

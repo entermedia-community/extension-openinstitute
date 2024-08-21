@@ -3,12 +3,18 @@
 	#set( $appsection = $content.appsection )
 #end
 
-<div id="sidebarreload" class="ajaxsocketautoreload"  data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
+<div id="sidebarreload" 
+class="ajaxsocketautoreload"  
+data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxlevel=1&collectionid=$!librarycol.id" >
 
 <div class="sidebar-box" style="height:auto;"> 
     <div class="sidebar-box-header">
         [[Recent Chats]]        
-        <button class="btn btn-light rounded-0 border-0 sidebar-toggler userOffcanvasToggler" data-action="hide" data-bs-dismiss="offcanvas" title="[[Hide User Sidebar]]">
+        <button class="oi-sidebar-toggler toggleuserpreference userOffcanvasToggler" 
+        	data-action="hide" 
+        	data-bs-dismiss="offcanvas" 
+        	data-userpreference="showsidebar"
+        	title="[[Hide User Sidebar]]">
         	<i class="fas fa-times"></i>
         </button>
     </div>
