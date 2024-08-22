@@ -17,6 +17,7 @@
 	  <path-action name="OiModule.loadCommunityTagFolder" />
 	
 	  <inner-layout>${communityhome}/innerlayout.html</inner-layout>
+	  
 	  <property name="xmledithome">${communityhome}/components/xml</property>
 	
 	<permission name="openeditdirectedit">

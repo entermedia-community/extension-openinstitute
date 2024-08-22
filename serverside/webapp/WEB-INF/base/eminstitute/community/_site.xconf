@@ -4,6 +4,7 @@
   <property name="applicationid">${siteid}/community</property>
   
   <property name="fallbackdirectory">/WEB-INF/base/emfrontend2</property>
+  
   <property name="themeprefix">/${applicationid}/theme</property>
   
   <property name="section">eminstituteapp</property>

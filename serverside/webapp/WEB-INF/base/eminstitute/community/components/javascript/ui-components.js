@@ -886,6 +886,11 @@ uiload = function () {
               window.location.replace(link);
             }
           }
+          
+          var scrolltotop = form.hasClass("scrolltotop");
+	        if (scrolltotop) {
+	          window.scrollTo(0, 0);
+	        }
           $(window).trigger("resize");
 
           //on success execute extra JS
