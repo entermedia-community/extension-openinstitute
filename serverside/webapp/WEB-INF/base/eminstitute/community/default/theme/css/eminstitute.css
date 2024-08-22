@@ -1160,9 +1160,9 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .msg-bubble .msg-avt img {
-  width: 32px;
-  height: 32px;
-  border-radius: 5px;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
 }
 
 .msg-bubble .msg-body {
@@ -1585,6 +1585,11 @@ div.errormsg {
 .teammember:hover {
   background-color: #f5f5f5;
 }
+.teammember img {
+	width: 34px;
+  height: 34px;
+	border-radius: 8px;
+}
 
 .collectivedescription {
   padding: 10px 2px;
@@ -1889,6 +1894,11 @@ a.pick-item:hover .project-item {
     height: 60px;
   }
 }
+
+.projectsettingscontainer .emfield-asset img {
+	max-height: 200px;
+}
+
 
 /* PAGINATION */
 .resultsnumber {
