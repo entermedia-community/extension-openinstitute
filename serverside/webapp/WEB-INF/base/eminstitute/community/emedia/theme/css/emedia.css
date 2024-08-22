@@ -33,10 +33,9 @@
 }
 
 .modal {
-	--bs-modal-bg: #fff;
-  	--bs-modal-color: #000;
+  --bs-modal-bg: #fff;
+  --bs-modal-color: #000;
 }
-
 
 body {
   font-family: "Roboto", sans-serif;
@@ -48,8 +47,8 @@ body {
   overflow-x: hidden;
 }
 .bg-dark {
-	background-color: #3b3d50!important;
-	color: #fff;
+  background-color: #3b3d50 !important;
+  color: #fff;
 }
 p,
 .paragraph {
@@ -82,8 +81,6 @@ h6,
   font-family: "Roboto", sans-serif;
   font-weight: 700;
 }
-
-
 
 @media (max-width: 575px) {
   h2,
@@ -214,15 +211,15 @@ h6,
   transition: 0.2s ease;
 }
 .btn-xxs {
-    padding: 0.15rem 0.25rem;
-    border-radius: 6px;
-    }
+  padding: 0.15rem 0.25rem;
+  border-radius: 6px;
+}
 .btn-sm {
-    padding: 0.8rem 1.2rem;
-    }
+  padding: 0.8rem 1.2rem;
+}
 .btn-xs {
-    padding: 0.4rem 0.6rem;
-    line-height: 1.1;
+  padding: 0.4rem 0.6rem;
+  line-height: 1.1;
 }
 .btn.btn-lg {
   padding: 12px 40px;
@@ -230,18 +227,18 @@ h6,
 }
 
 .btn-primary {
-	  background-color: #626584;
+  background-color: #626584;
   color: #fff;
 }
 .btn-light {
-	background-color:  #b2b4cb!important;;
-	color: #363950!important;
+  background-color: #b2b4cb !important;
+  color: #363950 !important;
 }
 .btn-danger {
-	background-color: #a55261;
+  background-color: #a55261;
 }
 .btn-warning {
-	color: #363950!important;
+  color: #363950 !important;
 }
 .btn.btn-outline-transparent,
 .btn.btn-transparent {
@@ -275,7 +272,7 @@ h6,
   outline: 0;
   box-shadow: none !important;
   background-color: #45485e !important;
-  color:#fff!important;
+  color: #fff !important;
 }
 .themed-btn {
   color: #fff !important;
@@ -353,7 +350,6 @@ a {
   transition: 0.4s;
 }
 a:hover {
-
 }
 
 .text-primary {
@@ -472,7 +468,7 @@ header.navigation {
 }
 .project-list-container,
 .community-layout {
-  min-height: calc(100vh - 98px);
+  min-height: calc(100vh - 140px);
 }
 .preloader {
   width: 100%;
@@ -550,12 +546,11 @@ footer {
   background-color: #45485e;
 }
 .modal-content {
-
 }
 .modal-header {
-	background-color: #45485e;
+  background-color: #45485e;
   border-bottom-color: #626584;
-  color:#fff;
+  color: #fff;
 }
 .modal-footer {
   border-top-color: #626584;
@@ -744,7 +739,7 @@ footer {
   font-weight: 700;
 }
 .btn-searchprojects {
-	margin-top: 28px;
+  margin-top: 28px;
 }
 @media (min-width: 992px) {
   .navigation .dropdown:hover ul.dropdown-menu {
@@ -801,7 +796,7 @@ footer {
   padding: 0.375rem 0.75rem;
 }
 .emdata .tableheader {
-	background: none;
+  background: none;
 }
 .chatterbox-write .chatter-send,
 .emwidget-header,
@@ -815,8 +810,10 @@ footer {
 .project-sidebar-menu li.current a::after {
   border-left-color: #626584;
 }
-#main-results-table th, .emresultstable th, .emdata th {
-	font-size: 0.9rem;
+#main-results-table th,
+.emresultstable th,
+.emdata th {
+  font-size: 0.9rem;
 }
 @media (max-width: 991px) {
   .fixed-menu {
@@ -1516,7 +1513,6 @@ p a {
 .nav-link.active {
   color: #626584;
   font-weight: 700;
-  
 }
 
 @media (max-width: 575px) {
@@ -1684,7 +1680,7 @@ ul > li {
 }
 
 .project-navbar {
-	background-color: #3b3d50e6;
+  background-color: #3b3d50e6;
 }
 
 .sidebar-left h3,
@@ -1693,12 +1689,8 @@ ul > li {
   color: #576f76;
 }
 
-
 .referrallinkbox {
-	background-color: #e6e7f3;
-	border-radius: 0.5rem;
-	padding: 0.75rem;;
+  background-color: #e6e7f3;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
 }
-  
-  
-  
