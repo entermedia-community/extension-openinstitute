@@ -32,9 +32,26 @@ $context.putPageValue("selecteduser", $selecteduser)
 							<div class="profile-imagecontainer">
 									#if($canedituserinfo)
 										<div class="">
-										<a href="#" id="filePicker" class="" title="[[Upload square image for better results]]">
+											<form id="uploaddata" 
+												class="uploadformarea"
+												name="wizard" 
+												method="post" 
+												enctype="multipart/form-data"
+												action="$communityhome/users/uploadsave.html" 
+												>
+												<input type="hidden" name="userid" value="$selecteduser.getId()" />
+												<input type="hidden" name="sourcepath" value="userprofiles/$selecteduser.getId()/" />
+												<input id="upload_field" class="upload_field" name="file" type="file" style="position:absolute; top:-1000px;" >
+												<a href="#" id="filePicker" class="filePicker" title="[[Upload square image for better results]]">
 												<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
-										</a>
+												</a>
+											</form>
+											<script>
+												$('#upload_field').change(function() {
+												  $('#uploaddata').submit();
+												});
+											</script>
+											<span style="font-size: 0.8rem; color: #666;">*[[Click on the image to change profile photo]]</span>
 										</div>
 									#else
 										<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
@@ -43,25 +60,8 @@ $context.putPageValue("selecteduser", $selecteduser)
 					</div>
 					</div>
 					<div class="col-md-7">	
-						#if($canedituserinfo)
-								<form id="uploaddata" 
-									name="wizard" 
-									method="post" 
-									enctype="multipart/form-data"
-									action="$communityhome/users/uploadsave.html" 
-									>
-									<input type="hidden" name="userid" value="$selecteduser.getId()" />
-									<input type="hidden" name="sourcepath" value="userprofiles/$selecteduser.getId()/" />
-									<input id="upload_field" name="file" type="file" style="position:absolute; top:-1000px;" >
-								</form>
-								<script>
-									$('#upload_field').change(function() {
-									  $('#uploaddata').submit();
-									});
-								</script>
-								#end
-								
-								<div class="">
+				
+								<div class="pt-4">
 								#if( $user)
 								<h4>$!selecteduser.getName()</h4>
 								<i class="far fa-user"></i> $selecteduser.getAnonNickName()

@@ -33,6 +33,8 @@
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
 	  <script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
+	  <script id="upload" src="/${applicationid}/components/upload/types/html5/upload.js" />
+	  <script id="html5_upload" src="/${applicationid}/components/javascript/upload/jquery.html5_upload.js" />
 	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 			
