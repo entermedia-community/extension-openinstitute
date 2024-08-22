@@ -2,7 +2,7 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
 
-#set($resultsPage = "${communityhome}/project/chat/chatterbox/messages.html?hitssessionid=${messagesthitracker.sessionId}&collectionid=$collectionid&channel=$channel&pageposition")
+#set($resultsPage = "/${applicationid}/collective/community/chatterbox/messages.html?hitssessionid=${messagesthitracker.sessionId}&collectionid=$collectionid&channel=$channel&pageposition")
 
 $context.putPageValue("hits",$messagesthitracker)
 $context.putPageValue("resultsPage",$resultsPage)
@@ -14,14 +14,14 @@ $context.putPageValue("oemaxlevel","2")
 
 
 <div id="chatterboxmessages" class="chatterbox-messages" data-lastloaded="$lastloaded">
-		$pages.include("$communityhome/project/chat/chatterbox/chatpositions.html", $context)
+		##$pages.include("$communityhome/project/chat/chatterbox/chatpositions.html", $context)
 		<div class="chatterbox-container">
 			<div class="chatterbox-body-inside">
 				<div class="chatterbox-message-list">
 						#foreach($chat in $messages)
 							$context.putPageValue("chat",$chat) 
-							--
-							$pages.include("$communityhome/project/chat/chatterbox/message.html", $context)				
+							
+							$pages.include("/${applicationid}/collective/community/chatterbox/message.html", $context)				
 						#end
 				</div>
 				<div id="newmessagearea"></div>

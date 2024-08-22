@@ -22,7 +22,7 @@
 	</div>
 	
 	#if($chat.attachedassets)
-		$pages.include("${communityhome}/project/chat/chatterbox/attach.html",$context)
+		$pages.include("/${applicationid}/collective/community/chatterbox/attach.html",$context)
 	#end
 	
 	<div class="message-menu">
@@ -35,7 +35,7 @@
 					data-oemaxlevel="1"    
 					onclick='$("#chatter-msg").focus()'
 					data-targetdiv="chatterbox-write"
-					href="${communityhome}/project/chat/chatterbox/replystart.html?collectionid=$librarycol.getId()&replytoid=$chat.id" 
+					href="/${applicationid}/collective/community/chatterbox/replystart.html?collectionid=$librarycol.getId()&replytoid=$chat.id" 
 					title="[[Reply]]">
 					<i class="fas fa-quote-left"></i>
 				</a>
@@ -44,7 +44,7 @@
 				<a class="message-menu-link ajax" 
 					data-oemaxlevel="1"    
 					data-targetdiv="attach-${chat.id}"
-					href="${communityhome}/project/chat/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
+					href="/${applicationid}/collective/community/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
 					title="[[Attachments]]">
 					<i class="fas fa-paperclip"></i>
 				</a>
@@ -53,13 +53,13 @@
 				#if(!$goal)		
 				<a class="message-menu-link ajax"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communityhome}/project/chat/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=0" 
+					href="/${applicationid}/collective/community/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=0" 
 					title="[[Flag as Goal]]">
 					<i class="fas fa-flag"></i>
 				</a>
 				<a class="message-menu-link ajax"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communityhome}/project/chat/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=6" 
+					href="/${applicationid}/collective/community/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=6" 
 					title="[[Make Agenda]]">
 					<i class="fas fa-check-double"></i>
 				</a>
@@ -68,7 +68,7 @@
 				#if($chat.user == $user.id )
 				<a class="message-menu-link ajax-edit-msg"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communityhome}/project/chat/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
+					href="/${applicationid}/collective/community/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
 					title="[[Edit Message]]">
 					<i class="fas fa-pencil-alt"></i>
 				</a>
@@ -105,7 +105,7 @@
 			#if($caneditcollection && $goal)
 				$context.putPageValue("chat",$chat)
 				$context.putPageValue("goal",$goal)
-				$pages.include("${communityhome}/project/chat/chatterbox/goalrow.html",$context)
+				$pages.include("/${applicationid}/collective/community/chatterbox/goalrow.html",$context)
 			#else
 				<div class="msg-body-content">#ifnotnull($chat.message)$url_util.escapeMessage($chat.message)#end</div>
 			#end
