@@ -2,17 +2,17 @@
 
 <div class="chatterbox"
 data-collectionid="$!librarycol.getId()" 
-data-renderurl="$!{communitylink}/project/chat/chatterbox/index.html" 
-data-rendermessageurl="$!{communitylink}/project/chat/chatterbox/message.html"
+data-renderurl="/${applicationid}/collective/community/chatterbox/index.html" 
+data-rendermessageurl="/${applicationid}/collective/community/chatterbox/message.html"
 data-channel="$!{currenttopic.getId()}" 
 data-channeltype="community" 
 data-user="$!{user.id}" 
 data-catalogid="$!{catalogid}">
 	
-	$pages.include("${communityhome}/project/chat/chatterbox/messages.html", $context)				
+	$pages.include("/${applicationid}/collective/community/chatterbox/messages.html", $context)				
 				
 	#if( $caneditcollection)
-			$pages.include("$communityhome/project/chat/chatterbox/editarea.html", $context)				
+			$pages.include("/${applicationid}/collective/community/chatterbox/editarea.html", $context)				
 	#end
 	
 	

@@ -10,7 +10,7 @@
 	#set( $alltopics = $searcher.query().match("parentcollectionid",$collectionid).exact("teamproject","false").sort("name").search($context) )
 #end
 
-<div class="emwidget emwidget-chatterbox">
+<div class="emwidget emwidget-chatterbox" style="max-height: 540px; overflow-y: auto; width: 1200px; margin: 0 auto;">
 	<div class="emwidget-header">
 		<div class="emwidget-name">
 			#if($alltopics.size()>1)
@@ -29,7 +29,7 @@
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					#foreach( $hit in $alltopics)
 					#if ($hit.id != $currenttopic.id)
-					<a href="$communityhome/project/chat/index.html?collectionid=$collectionid&topic=$hit.getId()"
+					<a href="/${applicationid}/collective/community/chatterbox/index.html?collectionid=$collectionid&topic=$hit.getId()"
 						class="dropdown-item">
 						#if($caneditcollection)
 							#if ($hit.teamproject == "true")
@@ -62,6 +62,6 @@
 			</a>
 		</div>	
 	</div>
-	$pages.include("$communityhome/project/chat/index.html", $context)
+	$pages.include("/${applicationid}/collective/community/chatterbox/index.html", $context)
 </div> 
 #end
