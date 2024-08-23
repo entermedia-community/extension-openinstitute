@@ -1,6 +1,6 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollectionusers") )
 #set( $subs = $searcher.query().exact("collectionid",$librarycol.getId()).hitsPerPage(30).sort("ontheteam").search($context))
-<div id="collectiveteamlist">$caneditcollection 
+<div id="collectiveteamlist"> 
 	#if( $subs.isEmpty()) 
 		<p>[[No Likes yet]]</p>
 	#else

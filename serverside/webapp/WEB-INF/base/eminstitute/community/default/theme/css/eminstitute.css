@@ -110,6 +110,29 @@ a.primary:hover .fa-solid {
   color: #000;
 }
 
+.btn {
+  cursor: pointer;
+  padding: 0.275rem 0.75rem;
+  font-size: 0.8rem;
+}
+.btn-xs {
+  padding: 0.25rem 0.35rem;
+  font-size: 0.725rem;
+  font-weight: normal;
+  line-height: 1;
+  border-radius: 0.2rem;
+}
+.btn-xxs {
+  padding: 0.1rem 0.2rem;
+  font-size: 0.725rem;
+  font-weight: normal;
+  line-height: 1.1;
+  border-radius: 0.2rem;
+}
+.table {
+    --bs-table-striped-bg: #e8f1ed;
+    --bs-table-hover-bg: #e7e7e7;
+}
 .table-hover a:hover {
   text-decoration: none;
 }
@@ -2150,11 +2173,6 @@ ul.inlinelist li {
 .goaltask-credit {
   padding: 4px 0;
 }
-.goaltask-credit .btn-xs {
-  padding: 0.2rem 0.4rem;
-  border-radius: 6px;
-}
-
 .oe-dataedit {
   font-size: 0.85rem;
 }
