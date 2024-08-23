@@ -10,12 +10,13 @@
     	 #if( $caneditcollection )
          <a href="${projectlink}/services/expenses/addnew.html?collectionid=${collectionid}"
           class="emdialog btn btn-sm btn-primary"
-          title="[[Add Expense]]"><i class="fa fa-search"></i> [[Add Expense]]</a>
+          title="[[Add Expense]]"><i class="fa fa-plus"></i> [[Add Expense]]</a>
 	    #end
-    	#if($hits && !$hits.isEmpty() ) <a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>#end
+	    
+    	<a onclick="$('#searchform').toggle()" class="btn btn-sm btn-secondary"><i class="fa fa-search"></i> [[Search]]</a>
      </div>
     </div>      
-#if($hits && !$hits.isEmpty() ) 
+ 
 	<form  id="incomesearchform" 
 		class="autosubmit  ajaxform" 
 		data-targetdiv="expensereport" 
@@ -69,6 +70,6 @@
 		</div>
 		
    </form>      
-   #end
+   
 	$pages.include("${communityhome}/project/services/expenses/results.html",$context)
 

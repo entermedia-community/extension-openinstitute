@@ -17,25 +17,33 @@
 	<div class="stations-grid p-4">
 		<div class="project-grid">
 			#foreach( $ohit in $collections )
-						#set($link = false)
-						#set($collection = $mediaarchive.getCachedData("librarycollection", $ohit.getId()))
-						#if($collection.assetportrait)
-							#set($asset = $mediaarchive.getAsset($collection.assetportrait))
-							#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
-						#else
-						#set($link = "$communitylink/theme/images/OI_flower.png")
-						#end
-						#if($collection.urlname)
-						<div class="card-collections">
-						<a href="${communitylink}/${collection.urlname}" 
-							class=" #if($selectedproject==$collection.id) active #end">
+					#set($imagelink = false)
+					
+					#set( $project = $mediaarchive.getCachedData("librarycollection",$ohit.getId()))
+					#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+					#if($project.urlname)
+						#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}")
+					#else
+						#set($hitprojectlink = "/project/chat/index.html?collectionid=${project.id}")
+					#end
+					
+					#if($project.assetportrait)
+						#set($asset = $mediaarchive.getAsset($project.assetportrait))
+						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+					#else
+						#set($imagelink = "$communitylink/theme/images/OI_flower.png")
+					#end
+					
+					<div class="card-collections">
+					<a href="${hitprojectlink}" 
+						class=" #if($selectedproject==$project.id) active #end">
 	
-						<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
-		 				<div class="card-name collectionbox">$collection.name
-								#if( $modcollections.contains($collection.getId())) #end</div>
-						</a>
-						</div>
-						#end
+					<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'></div>
+	 				<div class="card-name collectionbox">$project.name
+							#if( $modcollections.contains($project.getId())) #end</div>
+					</a>
+					</div>
+					
 			#end
 		</div>
 		<div class="clearfix"></div>	
@@ -51,27 +59,34 @@
 	
 		#set( $organizations = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($foids).sort("name").search() )
 
-		<h3> [[Liked]]</h3>
-		<div class="stations-grid ">
+		<h3> [[Liked Projects]]</h3>
+		<div class="stations-grid p-4">
 			<div class="project-grid ">
 				
 					#foreach( $ohit in $organizations )
-						#set($link = "")
-						#set($collection = $mediaarchive.getCachedData("librarycollection", $ohit.getId()))
-						#if($collection.assetportrait)
-							#set($asset = $mediaarchive.getAsset($collection.assetportrait))
-							#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#set($imagelink = false)
+					
+						#set( $project = $mediaarchive.getCachedData("librarycollection",$ohit.getId()))
+						#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+						#if($project.urlname)
+							#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}")
 						#else
-							#set($link = "$applink/theme/images/OI_flower.png")
+							#set($hitprojectlink = "/project/chat/index.html?collectionid=${project.id}")
+						#end
+						#if($project.assetportrait)
+							#set($asset = $mediaarchive.getAsset($project.assetportrait))
+							#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#else
+							#set($imagelink = "$communitylink/theme/images/OI_flower.png")
 						#end
 			
 						<div class="card-collections">
-						<a href="${applink}/collective/channel/${collection.id}/#urlencode($collection.getWebName()).html" 
-							class=" #if($selectedproject==$collection.id) active #end">
-							<div class="card-collections-thumb" style='#if($link) background-image: url("$link") #end'></div>
+						<a href="${hitprojectlink}" 
+							class=" #if($selectedproject==$project.id) active #end">
+							<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'></div>
 			 				<div class="card-name collectionbox">
-			 					$collection.name
-								#if( $modcollections.contains($collection.getId())) * #end
+			 					$project.name
+								#if( $modcollections.contains($project.getId())) * #end
 							</div>
 						</a>
 						</div>

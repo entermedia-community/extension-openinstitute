@@ -1363,6 +1363,7 @@ textarea.blog-comments-input {
   padding: 0 1rem 1rem;
   padding-right: 1rem;
   margin: 1rem auto;
+  position: relative;
 }
 .community-layout.bg-light {
   color: #222;
@@ -1973,5 +1974,10 @@ input.search-primary {
 .filteredinresults {
 	position: relative;
 	top: 0;
+}
+
+.main-content .alert-save {
+	top: 20%;
+	bottom: inherit;
 }
 

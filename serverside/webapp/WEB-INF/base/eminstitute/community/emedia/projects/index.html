@@ -4,7 +4,7 @@
     <div class="container">
       <div class="mx-md-auto text-center">
         <h1 class="text-white mb-0">
-          #text($communitytagcategory) Community Projects
+          #text($communitytagcategory) [[Community Projects]]
         </h1>
       </div>
     </div>
@@ -66,12 +66,12 @@
                 <a href="$link" class="explore themed-btn">Explore</a>
               </div>
               <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
-              #ifnotnull($librarycol.facebooklink)
+              #ifnotnull($project.facebooklink)
                 <a href="$librarycol.facebooklink" class="text-dark">
                   <span><i class="fab fa-facebook-f"></i></span>
                 </a>
               #end
-              #ifnotnull($librarycol.twitterlink)
+              #ifnotnull($project.twitterlink)
                 <a href="$librarycol.twitterlink" class="text-dark">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x"
                     viewBox="0 0 16 16">
@@ -80,24 +80,21 @@
                   </svg>
                 </a>
               #end
-              #ifnotnull($librarycol.instagramlink)
+              #ifnotnull($project.instagramlink)
                 <a href="$librarycol.instagramlink" class="text-dark">
                   <span><i class="fab fa-instagram"></i></span>
                 </a>
               #end
-              #ifnotnull($librarycol.linkedinlink)
+              #ifnotnull($project.linkedinlink)
                 <a href="$librarycol.linkedinlink" class="text-dark">
                   <span><i class="fab fa-linkedin"></i></span>
                 </a>
               #end
-              #ifnotnull($librarycol.githublink)
+              #ifnotnull($project.githublink)
                 <a href="$librarycol.githublink" class="text-dark">
                   <span><i class="fab fa-github"></i></span>
                 </a>
               #end 
-              </div>
-              <div class="px-2 rounded date">
-                <span class="launched">Launched on May, 2024</span>
               </div>
             </div>
           </div>
@@ -107,20 +104,6 @@
 
     <div class="my-5" style="width:100%;border-top:1px solid #efefef;"></div>
 
-<!-- 
-    <div class=" d-flex align-items-center justify-content-center subscription">
-      <div class="p-4" style="background-color: #ffffff;">
-        <h2 class="text-center mb-0">Join the Community</h2>
-        <p class="text-center">Join the community to get updates on the latest projects.</p>
-        <div class="input-group input-group-lg mb-3">
-          <input type="text" class="form-control input-brand mb-0 px-3 py-2"
-            style="min-height: 48px;border-width:2px;" placeholder="Your email">
-          <button class="btn btn-primary rounded-end" type="button">Subscribe</button>
-        </div>
-      </div>
-    </div>
-      -->
-      
   </div>
 </div>
 </div>
