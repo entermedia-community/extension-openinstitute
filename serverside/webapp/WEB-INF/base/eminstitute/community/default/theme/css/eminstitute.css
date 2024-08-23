@@ -2232,10 +2232,11 @@ label.error {
 }
 
 .ui-datepicker-trigger {
-  margin-left: 2px;
-  padding: 6px 6px 0;
+  margin-left: 4px;
+  padding: 0px 4px 0;
   float: left;
   /* display: inline-block; */
+  width: 32px;
 }
 
 .form-control.datepicker {

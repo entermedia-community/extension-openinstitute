@@ -390,17 +390,89 @@ uiload = function () {
     browserlanguage = "en";
   }
 
-  /*
-  //bootstrap 5 no datepicker, using gijgo
-  if ($.fn.datepicker) {
-	  lQuery("input.datepicker").livequery(function () {
-		var dpicker = $(this);
-	  	dpicker.datepicker({ 
-			todayBtn: "linked",
-    		autoclose: true
-		  });
-	});
-  }*/
+
+  lQuery("input.datepicker").livequery("mousedown", function () {
+    var trigger = $(this).parent().find(".ui-datepicker-trigger");
+    trigger.trigger("click");
+  });
+  lQuery("input.datepicker").livequery(function () {
+    if ($.datepicker) {
+      var dpicker = $(this);
+      $.datepicker.setDefaults($.datepicker.regional[browserlanguage]);
+      $.datepicker.setDefaults(
+        $.extend({
+          showOn: "button",
+          buttonImage:
+            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%234d5d80' class='bi bi-calendar-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7'/%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z'/%3E%3C/svg%3E",
+          buttonImageOnly: true,
+          changeMonth: true,
+          changeYear: true,
+          yearRange: "1900:2050",
+        })
+      ); // Move this to the Layouts?
+
+      var targetid = dpicker.data("targetid");
+      dpicker.datepicker({
+        altField: "#" + targetid,
+        altFormat: "yy-mm-dd",
+        yearRange: "1900:2050",
+        beforeShow: function (input, inst) {
+          setTimeout(function () {
+            $("#ui-datepicker-div").css("z-index", 100100);
+            $("#application").append($("#ui-datepicker-div"));
+            // var quickSelect = $("#operationentitydatefindercatalog");
+            // quickSelect.css("display", "block");
+            // $("#ui-datepicker-div").append(quickSelect);
+            //Fix Position if in bootstrap modal
+            var modal = $("#modals");
+            if (modal.length) {
+              var modaltop = $("#modals").offset().top;
+              if (modaltop) {
+                var dpickertop = dpicker.offset().top;
+                dpickertop = dpickertop - modaltop;
+                var dpHeight = inst.dpDiv.outerHeight();
+                var inputHeight = inst.input ? inst.input.outerHeight() : 0;
+                var viewHeight = document.documentElement.clientHeight;
+                if (dpickertop + dpHeight + inputHeight > viewHeight) {
+                  dpickertop = dpickertop - dpHeight;
+                }
+                inst.dpDiv.css({
+                  top: dpickertop + inputHeight,
+                });
+              }
+            }
+          }, 0);
+        },
+      });
+
+      var current = $("#" + targetid).val();
+      if (current != undefined) {
+        // alert(current);
+        var date;
+        if (current.indexOf("-") > 0) {
+          // this is the standard
+          current = current.substring(0, 10);
+          // 2012-09-17 09:32:28 -0400
+          date = $.datepicker.parseDate("yy-mm-dd", current);
+        } else {
+          date = $.datepicker.parseDate("mm/dd/yy", current); // legacy
+        }
+        $(this).datepicker("setDate", date);
+      }
+      $(this).blur(function () {
+        var val = $(this).val();
+        if (val == "") {
+          $("#" + targetid).val("");
+        }
+      });
+    } //datepicker
+  });
+  
+  
+  
+
+
+/*
 
   if ($.fn.datepicker) {
     lQuery("input.datepicker").livequery(function () {
@@ -441,17 +513,20 @@ uiload = function () {
           }, 0);
         },
       });
+      
+
+      console.log($(this));
 
       var current = $("#" + targetid).val();
       var ymdDate = moment(current, "YYYY-MM-DD");
       if (ymdDate.isValid()) {
         ymdDate = ymdDate.format("DD MMM, YYYY"); // equiv to bs datepicker's dd M, yyyy
-        $(this).datepicker("update", ymdDate);
+       dpicker.datepicker("update", ymdDate);
       } else {
-        $(this).datepicker("update", "");
+        dpicker.datepicker("update", "");
       }
 
-      $(this).blur(function () {
+      dpicker.blur(function () {
         var val = $(this).val();
         if (val == "") {
           $("#" + targetid).val("");
@@ -465,6 +540,12 @@ uiload = function () {
       });
     });
   } //datepicker
+*/
+
+
+
+
+
 
   if ($.fn.minicolors) {
     $(".color-picker").minicolors({
@@ -1019,6 +1100,8 @@ uiload = function () {
     }
     console.log("Submit Form " + theform);
     theform.trigger("submit");
+    e.stopPropagation();
+    return;
   });
 
   lQuery(".submitform-oehtml, .dialogsubmitbtn").livequery(

@@ -1,6 +1,6 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollectionusers") )
 #set( $subs = $searcher.query().exact("collectionid",$librarycol.getId()).hitsPerPage(30).sort("ontheteam").search($context))
-<div id="collectiveteamlist">
+<div id="collectiveteamlist">$caneditcollection 
 	#if( $subs.isEmpty()) 
 		<p>[[No Likes yet]]</p>
 	#else
@@ -21,7 +21,7 @@
 							<a href="#" title="[[On The Team]]"><i class="fas fa-users"></i></a>
 							#end
 						</td>
-					    #set( $userlink = "${communityhome}/users/index.html?id=$followeruser.id")
+					    #set( $userlink = "${communitylink}/users/index.html?id=$followeruser.id")
 						#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 						#if(!$userimageurl)
 							#set( $userimageurl = "${communitylink}/theme/images/user.svg" )
@@ -44,12 +44,12 @@
 							  <ul class="dropdown-menu">
 								   <li><a class="dropdown-item emdialog"
 							    		data-dialogid="editteammember"
-				        	 			href="$communityhome/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
+				        	 			href="$!{communitylink}/project/channel/subscribers/edit/edit.html?collectionid=$librarycol.getId()&id=$hit.getId()"
 					               		title="[[Edit Team Config]]">[[Edit]]</a></li>
 							    <li><a class="dropdown-item ajax"  
 							    		data-targetdiv="collectiveteamlist" 
 							    		data-oemaxlevel="1"
-							    		href="${communityhome}/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+							    		href="$!{communitylink}/project/channel/subscribers/teamtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
 							    		#if( $hit.getBoolean("ontheteam"))
 					        	 			[[Remove from team]]
 					        	 		#else
@@ -59,7 +59,7 @@
 							    <li><a class="dropdown-item ajax"
 							     		data-targetdiv="collectiveteamlist" 
 							     		data-oemaxlevel="1"
-							     		href="$communityhome/project/channel/subscribers/billingtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
+							     		href="$!{communitylink}/project/channel/subscribers/billingtoggle.html?collectionid=$librarycol.getId()&userid=$followeruser.getId()">
 							     		#if( $hit.getBoolean("isbillingcontact"))
 					        	 			[[Remove Billing Contact]]
 					        	 		#else
@@ -68,8 +68,7 @@
 							   
 							  </ul>
 							</div>
-			        		#elseif( $hit.getBoolean("ontheteam"))
-			        	   	 <span class="whatsapp">([[On The Team]])</span>
+			        		
 			        		#end
 			        	</td>        	
 			        </tr>

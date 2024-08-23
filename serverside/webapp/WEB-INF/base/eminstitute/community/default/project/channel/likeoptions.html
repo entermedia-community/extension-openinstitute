@@ -20,22 +20,23 @@
 						style="display:inline-block;" 
 						data-targetdivinner="projectlikes" 
 						data-onsuccessreload="true"
-						action="${communityhome}/project/channel/subscribers/unsubscribe.html" 
+						action="$!{communitylink}/project/channel/subscribers/unsubscribe.html" 
 						method="post">
-					<input type="hidden" name="oemaxlevel" value="2" />
+					<input type="hidden" name="oemaxlevel" value="1" />
 					<input type="hidden" name="id" value="${liked.getId()}" />
 					<input type="hidden" name="collectionid" value="$collectionid" />
-					 <a href="" class="btn btn-xs btn-secondary submitform" title="[[Unfollow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Following]]</a>
+					 <a href="#" class="btn btn-xs btn-secondary submitform" title="[[Unfollow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Following]]</a>
 				</form>
 						
 				#set( $onteam = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("collectionid",$collectionid).search($context) )
-				#if(!$onteam)
+				#ifnull($onteam)
 					<form name="saveprojectsidebar" 
 						id="saveprojectsidebar" 
 						class="ajaxform" 
 						style="display:inline-block;" 
-						data-targetdiv="subscriberssidebar" 
-						action="$communityhome/project/channel/subscribers/teamsave.html" method="post">
+						data-targetdiv="subscriberssidebar"
+						data-onsuccessreload="true" 
+						action="$!{communitylink}/project/channel/subscribers/teamsave.html" method="post">
 							<input type="hidden" name="save" value="true" />
 							<input type="hidden" name="field" value="followeruser" />
 							<input type="hidden" name="followeruser.value" value="$user.getId()" />
@@ -50,7 +51,7 @@
 							#else
 							<input type="hidden" name="ontheteam.value" value="false" />
 							#end
-							<a href="" class="submitform request-join">[[Request Join Team]]</a>
+							<a href="#" class="btn btn-xs btn-secondary submitform request-join">[[Request Join Team]]</a>
 					</form>
 				#end
 			#else
@@ -60,7 +61,7 @@
 						style="display:inline-block;" 
 						data-targetdivinner="projectlikes" 
 						data-onsuccessreload="true"
-						action="${communityhome}/project/channel/likesave.html" 
+						action="$!{communitylink}/project/channel/likesave.html" 
 						method="post">
 					<input type="hidden" name="oemaxlevel" value="2" />
 					<input type="hidden" name="save" value="true" />
@@ -71,7 +72,7 @@
 					<input type="hidden" name="field" value="collectionid" />
 					<input type="hidden" name="collectionid.value" value="$collectionid" />
 					<input type="hidden" name="collectionid" value="$collectionid" />
-					 <a href="" class="btn btn-sm btn-follow btn-action submitform" title="[[Follow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Follow]]</a>
+					 <a href="#" class="btn btn-sm btn-follow btn-action submitform" title="[[Follow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Follow]]</a>
 				</form>
 			#end
 			

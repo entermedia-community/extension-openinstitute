@@ -10,7 +10,7 @@
   	<property name="bgcolor">#151515</property>
 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 	  
-	  <script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
+  
 	  <script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
 	  <script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
 	  <script id="jquery-validate" src="/${applicationid}/components/javascript/jquery.validation/jquery.validate.js"/>
@@ -18,13 +18,13 @@
   	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
   	  
   	  
-  	  <script id="multidate" src="${communityhome}/components/javascript/multidate/moment.js"/>
-  	  <!-- <script id="datetimepicker" src="${communityhome}/components/javascript/multidate/jquery.daterangepicker.min.js"/>
-  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/multidate/daterangepicker.css" /> -->
+  	  <script id="multidate" src="/${applicationid}/components/javascript/multidate/moment.js"/>
+  	  <!-- <script id="datetimepicker" src="/${applicationid}/components/javascript/multidate/jquery.daterangepicker.min.js"/>
+  	  <style id="datetimepicker-css" href="/${applicationid}/components/javascript/multidate/daterangepicker.css" /> -->
   	  
   	    	  
-  	  <script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
-  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
+  	  <!-- script id="datetimepicker" src="/${applicationid}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
+  	  <style id="datetimepicker-css" href="/${applicationid}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" / -->
 	  
 	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
@@ -33,8 +33,8 @@
 	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 	  
-	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
-	<style id="tierra" href="${communityhome}/theme/css/tierra.css" />
+	<style id="eminstitute" href="/theme/css/eminstitute.css"/>
+	<style id="oi3" href="/theme/css/oi3.css"/>
+	<style id="tierra" href="/theme/css/tierra.css" />
 
 </page>
