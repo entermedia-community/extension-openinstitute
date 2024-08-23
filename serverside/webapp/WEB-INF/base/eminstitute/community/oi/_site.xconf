@@ -20,8 +20,8 @@
   	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/multidate/daterangepicker.css" /> -->
   	  
   	    	  
-  	  <script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/bootstrap-datepicker.min.js"/>
-  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/bootstrap-datepicker3.min.css" />
+  	  <script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.js"/>
+  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
 	  
 	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>

@@ -408,11 +408,38 @@ uiload = function () {
 
       var targetid = dpicker.data("targetid");
       dpicker.datepicker({
-        todayBtn: "linked",
-        autoclose: true,
-        altField: "#" + targetid,
-        format: "dd M, yyyy",
-        yearRange: "1900:2050",
+		  language:  browserlanguage,
+	      todayBtn: "linked",
+	      autoclose: true,
+	      altField: "#" + targetid,
+	      format: "dd M, yyyy",
+	      beforeShow: function (input, inst) {
+          setTimeout(function () {
+            $("#ui-datepicker-div").css("z-index", 100100);
+            $("#application").append($("#ui-datepicker-div"));
+            // var quickSelect = $("#operationentitydatefindercatalog");
+            // quickSelect.css("display", "block");
+            // $("#ui-datepicker-div").append(quickSelect);
+            //Fix Position if in bootstrap modal
+            var modal = $("#modals");
+            if (modal.length) {
+              var modaltop = $("#modals").offset().top;
+              if (modaltop) {
+                var dpickertop = dpicker.offset().top;
+                dpickertop = dpickertop - modaltop;
+                var dpHeight = inst.dpDiv.outerHeight();
+                var inputHeight = inst.input ? inst.input.outerHeight() : 0;
+                var viewHeight = document.documentElement.clientHeight;
+                if (dpickertop + dpHeight + inputHeight > viewHeight) {
+                  dpickertop = dpickertop - dpHeight;
+                }
+                inst.dpDiv.css({
+                  top: dpickertop + inputHeight,
+                });
+              }
+            }
+          }, 0);
+        },
       });
 
       var current = $("#" + targetid).val();

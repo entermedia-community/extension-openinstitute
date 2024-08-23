@@ -2076,7 +2076,7 @@ ul.posresultsnavright {
   padding: 0 15px 0 0;
   margin: 0;
   list-style: none;
-  float: right;
+  /* float: right; */
 }
 
 ul.posresultsnavright li.textheader {

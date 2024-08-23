@@ -17,8 +17,15 @@
   	  <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
   	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
   	  
-  	  <script id="multidate" src="${communityhome}/components/javascript/multidate/moment.js"/>
   	  
+  	  <script id="multidate" src="${communityhome}/components/javascript/multidate/moment.js"/>
+  	  <!-- <script id="datetimepicker" src="${communityhome}/components/javascript/multidate/jquery.daterangepicker.min.js"/>
+  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/multidate/daterangepicker.css" /> -->
+  	  
+  	    	  
+  	  <script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
+  	  <style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
+	  
 	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
