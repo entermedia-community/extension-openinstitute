@@ -129,6 +129,25 @@ a.primary:hover .fa-solid {
   line-height: 1.1;
   border-radius: 0.2rem;
 }
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 .table {
     --bs-table-striped-bg: #e8f1ed;
     --bs-table-hover-bg: #e7e7e7;
@@ -1078,7 +1097,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   right: 5px;
   /* top: -8px; */
   /* transform: translateY(50%); */
-  display: none;
+  /* display: none; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   z-index: 10;
 }

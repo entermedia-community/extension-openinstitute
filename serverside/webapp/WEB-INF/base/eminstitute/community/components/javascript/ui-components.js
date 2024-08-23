@@ -4433,25 +4433,20 @@ uiload = function () {
 	{
 		//Load div
 		var input = $(this);
-		input.click(function()
-		{
+		input.click(function() {
 			$(".emoticonmenu").hide(); //Hide old ones
 		});
 		
-		input.hover(function()
-		{
+		input.hover(function() {
 			var isattached = input.data("isattached");
-			if(isattached)
-			{
+			if(isattached) {
 				$(".emoticonmenu").hide(); //Hide old ones
 				input.closest(".message-menu").find(".emoticonmenu").show();			
 			}
-			else
-			{
+			else {
 				var options = input.data();
 				$.ajax({ url: options.showurl, async: true, data: options, 
-					success: function(data) 
-					{
+					success: function(data)	{
 						$(".emoticonmenu").hide(); //Hide old ones
 						input.data("isattached",true);
 						
@@ -4463,6 +4458,14 @@ uiload = function () {
 		
 		//On any click hide this:
 		//$(".emoticonmenu").hide();
+	});
+	
+	lQuery('.message-menu-link:not(.pickemoticon)').livequery(function() 
+	{
+		var input = $(this);
+		input.hover(function() {
+			$(".emoticonmenu").hide(); //Hide old ones
+		});
 	});
 	
 	lQuery('.emoticonmenu span').livequery("click",function() 
