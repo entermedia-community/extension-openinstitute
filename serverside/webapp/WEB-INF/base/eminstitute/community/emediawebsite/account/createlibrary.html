@@ -3,23 +3,17 @@
 </div>
 <form class="container js-validate form-request" action="/meetingschedule/save.html" method="post">
 <div class="w-md-80 mx-md-auto text-center mb-5">
-  <div class="row mx-n2 text-start justify-content-center">
-    <div class="col-sm-6 px-2">
-      <div class="js-form-message form-group">
+  <div class="d-flex flex-wrap text-start justify-content-center align-items-center">
+    <div class="px-2">
+      <div class="js-form-message form-group mb-0">
         <label for="libraryName">Library Name</label> 
-        <input type="text" class="form-control" id="libraryName" placeholder="The name of your library" required data-msg="Please enter your library name">
+        <input type="text" class="form-control" style="height: 38px;min-width: 300px;" id="libraryName" placeholder="The name of your library" required data-msg="Please enter your library name">
       </div>
+    </div> 
+    <div class="px-2 d-flex flex-column align-items-start">
+      <label>&nbsp;</label>
+      <button type="submit" class="btn btn-primary">Submit Request</button>
     </div>
-    <!-- <div class="col-sm-6 px-2">
-      <div class="js-form-message form-group">
-        <label for="librarySubDomain">Library Sub-Domain</label> 
-        <input type="text" class="form-control" id="librarySubDomain" placeholder="Sub-domain name for your library" required data-msg="Please enter a sub-domain for your library">
-        <div class="small" style="font-weight: 300;font-style: italic;">
-          <span style="color: #bbb;">e.g.</span> <strong style="font-weight: bold;">yourlibrary</strong><span style="color: #bbb;">.emedialibrary.com</span>
-        </div>
-      </div>
-    </div> -->
   </div>
-  <button type="submit" class="btn btn-primary">Submit Request</button>
 </div>
 </form>
