@@ -6,8 +6,12 @@
 #set( $goaltrackercolumn = $context.getRequestParamater("topic"))
 #set ($collectionid = $context.getRequestParameter("collectionid"))
 
+
 #if(!$goalfolder)
 	#set( $goalfolder = $context.findValue("goalfolder") )
+#end
+#if(!$goalfolder)
+	#set( $goalfolder = "tasks" )
 #end
 
 #set( $searcher = $mediaarchive.getSearcher("projectgoal") )
@@ -35,11 +39,11 @@ $context.putPageValue("searcher",$searcher)
 	method="post" 
 	#if( $data.id)
 		#if($goalfolder=="agentcalendar")
-			action="/$applicationid/users/tasks/goalsave.html" >
+			action="/users/tasks/goalsave.html" >
 		#elseif($goalfolder=="agent")
-			action="${communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
+			action="$!{communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
 		#else
-			action="${communityhome}/project/goals/${goalfolder}/goalsave.html" >
+			action="$!{communityhome}/project/goals/${goalfolder}/goalsave.html" >
 		#end
 	#else
 		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" >
@@ -95,7 +99,7 @@ $context.putPageValue("searcher",$searcher)
 	#end
 
 #else
-	$pages.include("/$applicationid/components/xml/detaileditorcss.html?detailsreadonly=true", $context)
+	$pages.include("$!communityhome}/components/xml/detaileditorcss.html?detailsreadonly=true", $context)
 #end
 
 <div class="float-right mt-2">
