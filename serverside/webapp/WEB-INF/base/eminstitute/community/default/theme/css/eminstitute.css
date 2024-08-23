@@ -1053,8 +1053,8 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   position: absolute;
   padding: 2px 8px;
   right: 5px;
-  top: -8px;
-  transform: translateY(50%);
+  /* top: -8px; */
+  /* transform: translateY(50%); */
   display: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   z-index: 10;

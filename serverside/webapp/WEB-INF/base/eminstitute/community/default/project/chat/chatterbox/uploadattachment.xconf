@@ -2,6 +2,7 @@
 <path-action name="AssetEditModule.handleUploads" >
 	<property name="assigncategory">false</property>
 </path-action>
+
 <path-action name="ProjectModule.loadCollection"/>
 	
 
@@ -13,6 +14,9 @@
 </path-action>
 
 <path-action name="ChatModule.loadRecentChats"/>
+
+<path-action name="ChatModule.loadAttachments"/>
+
 <path-action name="ProjectModule.loadGoalsInMessages"/>
 
    <permission name="editcollection">

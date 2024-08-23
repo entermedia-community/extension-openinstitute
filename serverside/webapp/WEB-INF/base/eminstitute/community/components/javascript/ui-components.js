@@ -2,6 +2,7 @@
 var lwt;
 var trackKeydown = false;
 var exitWarning = false;
+var app;
 var siteroot;
 var apphome;
 
@@ -343,7 +344,7 @@ lQuery(".coverRandom").livequery(function () {
 
 uiload = function () {
   
-  var app = jQuery("#application");
+  app = jQuery("#application");
   siteroot = app.data("siteroot");
   apphome = app.data("apphome");
   var themeprefix = app.data("themeprefix");
@@ -4479,7 +4480,7 @@ showajaxstatus = function (uid) {
     //console.log("Loading " + path );
     if (path && path.length > 1) {
       var entermediakey = "";
-      if (app && app.data("entermediakey") != null) {
+      if (app !== undefined && app.data("entermediakey") != null) {
         entermediakey = app.data("entermediakey");
       }
       var data = cell.data();

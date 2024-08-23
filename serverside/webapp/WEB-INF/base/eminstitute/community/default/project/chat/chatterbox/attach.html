@@ -28,8 +28,10 @@
 	<input type="hidden" name="searchtype" value="chatterbox" />
 	<input type="hidden" name="id" value="$!chat.id" />
 	<input type="hidden" name="messageid" value="$!chat.id" />
+	<input type="hidden" name="messageids" value="$!chat.id" />
 	<!-- <input type="hidden" name="collectionid" value="$collectionid" /> -->
 	<input type="hidden" name="collectionid" value="$librarycol.id" />
+
 	#ifnotnull($attachedasset)
 		<input type="hidden" name="attachedassetid" value="$!{attachedasset.id}" />
 	#end
