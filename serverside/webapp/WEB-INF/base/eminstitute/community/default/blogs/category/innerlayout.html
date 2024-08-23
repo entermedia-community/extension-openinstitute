@@ -22,13 +22,13 @@
       var data = [
         #foreach($project in $projects)
           #set($project = $searcher.loadData($project))
-          #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+          #set($link = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
           #set($logo = false)
           #if($project.assetportrait)
             #set($asset = $mediaarchive.getAsset($project.assetportrait))
             #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
           #else
-            #set($logo = "$applink/theme/images/OI_flower.png")
+            #set($logo = "${communitylink}/theme/images/OI_flower.png")
           #end
           #set($days = $mediaarchive.getProjectManager().calcDaysRemaining($project))
           #if(!$days)

@@ -12,7 +12,7 @@
     #foreach( $ohit in $organizations )
     <p>
       <a
-        href="$applink/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*"
+        href="${communitylink}/collective/community/index.html?collectionid=$ohit.id&goaltrackerstaff=*"
         class="#if($selectedproject==$ohit.id) active #end"
         ><i class="fa-solidfa-sitemap"></i> $ohit.name</a
       >
@@ -20,7 +20,7 @@
     #end #end
     <div style="padding: 20px 0">
       <a
-        href="$applink/site/sitedeployer/add/addorganization.html"
+        href="${communitylink}/site/sitedeployer/add/addorganization.html"
         class="emdialog btn btn-sm btn-primary"
         title="[[Add a Project]]"
         >[[Add a Project]]</a

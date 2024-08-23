@@ -13,7 +13,7 @@
 #set( $opengoalid = $context.getRequestParameter("opengoalid"))
 #if( $opengoalid )
     #set( $goal = $mediaarchive.getData("projectgoal",$opengoalid))
-    #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=$!content.goalfolder")
+    #set( $goallink = "${communitylink}/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=$!content.goalfolder")
     <a href="$goallink" title="$goal.name" class="emdialog editgoalshow openemdialog" style="display: none" >[[Goal link]]</a>	
 #end
 
@@ -63,14 +63,14 @@
 			#if($project.urlname)
 				#set($projectlink = "$!{community.externaldomain}/${project.urlname}/goals/priorities")
 			#else
-				#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+				#set($projectlink = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
 			#end
 			<a href="$projectlink" style="text-decoration:underline;">
 			$!project
 			</a>
 			</td>
 			<td>
-			<a data-cancelsubmit="true" data-hidefooter="true" href="$applink/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$goal.collectionid&goalfolder=agent" 
+			<a data-cancelsubmit="true" data-hidefooter="true" href="${communitylink}/collective/goals/editgoalpanel.html?id=$goal.id&collectionid=$goal.collectionid&goalfolder=agent" 
 				title="" class="emdialog editgoalshow" style="text-decoration:underline;" data-urlbar="${communityhome}/users/tasks/search.html?ticketlevel=$ticketlevel&goaltrackerstaff=*&opengoalid=$goal.id"
 				data-width="900">$!goal.ticketnumber $goal.name</a>
 			</td>
@@ -110,7 +110,7 @@
 		#end
 		</table>
 		#else
-		<img src="$applink/theme/images/cnbnothing.png">
+		<img src="${communitylink}/theme/images/cnbnothing.png">
 		
 		</img>
 		</div>

@@ -5,7 +5,7 @@
 $context.putPageValue("searcher",$searcher)
 #set ($details = $searcher.getDetailsForView("category/searchcategoryresults", $userprofile))
 $context.putPageValue("details",$details)
-$context.putPageValue("clickpath","$applink/views/categories/")
+$context.putPageValue("clickpath","${communitylink}/views/categories/")
 $context.putPageValue("viewpostfix",".html")
 <div  class="tableholder">
 #set( $xmledithome = "$apphome/components/xml")    

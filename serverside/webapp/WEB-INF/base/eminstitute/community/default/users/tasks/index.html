@@ -21,7 +21,7 @@
 		#set( $opengoalid = $context.getRequestParameter("opengoalid"))
 		#if( $opengoalid )
 		    #set( $goal = $mediaarchive.getData("projectgoal",$opengoalid))
-		    #set( $goallink = "$applink/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=agentcalendar")
+		    #set( $goallink = "${communitylink}/collective/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&categoryid=$!selectedcat.getId()&hitssessionid=$!{goalhits.getSessionId()}&goalfolder=agentcalendar")
 		    <a href="$goallink" title="$goal.name" class="emdialog editgoalshow openemdialog" style="display: cnone" >[[Goal link]]</a>	
 		#end	
 	 	
@@ -42,7 +42,7 @@
 			<ul class="projectgoals"
 				data-oemaxlevel="2"  
 				data-categoryid="$!selectedcat.id" 
-				data-savepath="$applink/collective/goals/goalmovepriority.html">  
+				data-savepath="${communitylink}/collective/goals/goalmovepriority.html">  
 				##set a completed date
 				#foreach( $goal in $daygoals )  
 					$context.putPageValue("goal",$goal)

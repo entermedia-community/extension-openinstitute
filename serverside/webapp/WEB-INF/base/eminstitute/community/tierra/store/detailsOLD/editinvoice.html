@@ -48,7 +48,7 @@ $context.putPageValue("view", "${searchtype}/invoiceview${producttype}")
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 
 #if( $canviewsettings)
-	<a href="$applink/views/settings/lists/datamanager/edit/edit.html?id=$id&searchtype=collectiveinvoice">[[Admin Edit]]</a>
+	<a href="${communitylink}/views/settings/lists/datamanager/edit/edit.html?id=$id&searchtype=collectiveinvoice">[[Admin Edit]]</a>
 #end
 
 </form>

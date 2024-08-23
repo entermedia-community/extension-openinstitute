@@ -107,7 +107,6 @@ i.navbar-toggler-icon,
 .dropdown-menu {
     padding: 0;
     top: 500px;
-    background-color: #133939;
 }
 
 .dropdown-item {
@@ -115,9 +114,6 @@ i.navbar-toggler-icon,
     padding: 8px 12px;
 }
 
-.dropdown-item:hover {
-    background-color: #0d2727;
-}
 
 .dropdown-item a {
     text-decoration: none;

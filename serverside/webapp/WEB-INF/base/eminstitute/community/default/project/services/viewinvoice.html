@@ -76,7 +76,7 @@ $invoiceformated.setValue("period", $recurringperiod)) ##--
         #set($logo = $mediaarchive.getAsset($collection.assetportrait) ) #if
         ($logo) #set($logourl =
         "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
-        #else #set($logourl = "$applink/theme/images/invoice-logo.png") #end
+        #else #set($logourl = "${communitylink}/theme/images/invoice-logo.png") #end
         <img src="$logourl" style="max-height: 100px" />
       </div>
       <div

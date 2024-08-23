@@ -50,7 +50,7 @@
   					data-width="900"
   					data-hidefooter="true"
 		 	 		title="[[Ticket Details]]" 
-		 	 		href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
+		 	 		href="${communitylink}/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&nodeID=$selectedcat.id&goalfolder=$content.goalfolder">
 		 	 		#set($collection = $!mediaarchive.getCachedData("librarycollection",$task.collectionid) )
 
 		 	 		#if( $task.get("completedurgent") == "true")
@@ -93,7 +93,7 @@
 					data-width="900"
 					data-hidefooter="true"
 					title="[[Ticket Details]]" 
-					href="$applink/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&goalfolder=$content.goalfolder">
+					href="${communitylink}/collective/goals/editgoalpanel.html?id=$task.projectgoal&collectionid=$task.collectionid&goalfolder=$content.goalfolder">
 
   				#text( $col ) -
   				#set($role = $!mediaarchive.getCachedData("collectiverole",$roleaction.getUserRole().get("collectiverole") ) )

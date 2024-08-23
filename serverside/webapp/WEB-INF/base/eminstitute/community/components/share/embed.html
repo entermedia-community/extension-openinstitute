@@ -3,7 +3,7 @@
     #set( $prefix = $mediaarchive.getCatalogSettingValue("cdn_prefix") )
     #if(!$prefix) #set( $prefix = $context.siteRoot ) #end #set($collectionid =
     $context.getRequestParameter("collectionid")) #set( $sharelink =
-    "$prefix$home/$applink/collective/channel/$collectionid/${librarycol.getWebName()}.html")
+    "$prefix$home/${communitylink}/collective/channel/$collectionid/${librarycol.getWebName()}.html")
 
     <div>
       <strong>[[Select code then right click to copy]]</strong>

@@ -1,5 +1,5 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollectionusers") )
-#set( $subs = $searcher.query().exact("collectionid",$librarycol.getId()).sort("ontheteam").search($context))
+#set( $subs = $searcher.query().exact("collectionid",$librarycol.getId()).hitsPerPage(30).sort("ontheteam").search($context))
 <div id="collectiveteamlist">
 	#if( $subs.isEmpty()) 
 		<p>[[No Likes yet]]</p>
@@ -7,9 +7,9 @@
 	<table class="table table-striped table-hover table-subscribers">
    		<thead>
 			<tr class="tableheader">
-				<th></th>
+				<th>[[Team]]</th>
 				<th>[[User]]</th>
-				<th></th>
+				<th>[[Added]]</th>
 				<th></th>
 			</tr>
    		</thead>
@@ -24,7 +24,7 @@
 					    #set( $userlink = "${communityhome}/users/index.html?id=$followeruser.id")
 						#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 						#if(!$userimageurl)
-							#set( $userimageurl = "$applink/theme/images/user.svg" )
+							#set( $userimageurl = "${communitylink}/theme/images/user.svg" )
 						#end
 			        	<td>
 							<a href="#esc($userlink)" title="$!followeruser.getAnonNickName()  $!followeruser.getEmail()">

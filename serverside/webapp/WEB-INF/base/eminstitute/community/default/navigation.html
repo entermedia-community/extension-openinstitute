@@ -9,7 +9,7 @@
   #end
 #end
 
-#set($homelink = "$applink/home/proposals/index.html")
+#set($homelink = "${communitylink}/home/proposals/index.html")
 
 #set ($action = $content.collectivesection)
 #if( $communitytagcategory)
@@ -67,7 +67,7 @@
 #else
   <nav class="navbar sticky-top navbar-expand-lg" id="superNav">
     <div class="container flex-nowrap"> 
-      <a class="navbar-brand"  href="$applink/index.html" title="Open Institute">
+      <a class="navbar-brand"  href="${communitylink}/index.html" title="Open Institute">
         <img src="$!{communitytagcategory.externaldomain}/theme/images/oi-logo-w.png" alt="Open Institute" class="me-2" />
       </a>
       $pages.include("$apphome/components/quicksearch/navbar.html")	
@@ -78,10 +78,10 @@
         </button>
         <div class="d-none d-md-flex flex-grow-1 align-items-center">
           <div class="navbar-nav flex-row gap-2">
-            <a class="lnk nav-link" href="$applink/about/index.html">[[About]]</a>
-            <a class="lnk nav-link" href="$applink/contact/contact.html">[[Contact]]</a>
+            <a class="lnk nav-link" href="${communitylink}/about/index.html">[[About]]</a>
+            <a class="lnk nav-link" href="${communitylink}/contact/contact.html">[[Contact]]</a>
             #if(!$user) 
-              <a class="lnk nav-link" href="$applink/authentication/login.html" title="[[Login]]">
+              <a class="lnk nav-link" href="${communitylink}/authentication/login.html" title="[[Login]]">
                 [[Login]] <i class="fas fa-sign-in-alt ms-1"></i>
               </a>
             #end
@@ -101,7 +101,7 @@
               </ul>
             </div>
             #if($user)
-              <a class="lnk nav-link" href="$applink/authentication/logout.html" title="[[Logout]]">
+              <a class="lnk nav-link" href="${communitylink}/authentication/logout.html" title="[[Logout]]">
                 <i class="fas fa-sign-out-alt"></i>
               </a>
             #end
@@ -111,7 +111,7 @@
           aria-labelledby="drawerMenuLabel">
           <div class="offcanvas-header">
             <a href="/" class="me-4">
-              <img src="$applink/theme/images/oi-logo-w.png" class="me-2" />
+              <img src="${communitylink}/theme/images/oi-logo-w.png" class="me-2" />
             </a>
             <button type="button" class="btn text-white" data-bs-dismiss="offcanvas" aria-label="Close">
               <i class="fas fa-times"></i>

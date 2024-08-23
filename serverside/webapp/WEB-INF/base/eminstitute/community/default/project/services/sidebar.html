@@ -4,7 +4,7 @@
 	<div class="profile-usermenu">
 					<ul > #set( $section = $content.section)
 						<li id="home" #if($section == "home") class="active" #end>
-							<a href="$applink/advocates/${user.id}/$user" >
+							<a href="${communitylink}/advocates/${user.id}/$user" >
 							<i class="fa fa-home"></i>
 							$user </a>
 						</li>

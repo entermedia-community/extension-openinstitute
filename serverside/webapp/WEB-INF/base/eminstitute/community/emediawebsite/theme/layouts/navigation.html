@@ -19,7 +19,7 @@
     #end
     
     #if( $canviewsettings )
-        <a class="btn btn-xs btn-primary emdialog" data-cancelsubmit="true" data-hidefooter="true" href="$applink/collective/goals/editgoalpanel.html?collectionid=$!collectionid&foreignkeyvalue=$!collectionid&topic=$!topic&categoryid=$!selectedcat.getId()&goaluser=$!goaluser&goalfolder=priorities&userlikes=$user.id">
+        <a class="btn btn-xs btn-primary emdialog" data-cancelsubmit="true" data-hidefooter="true" href="${communitylink}/collective/goals/editgoalpanel.html?collectionid=$!collectionid&foreignkeyvalue=$!collectionid&topic=$!topic&categoryid=$!selectedcat.getId()&goaluser=$!goaluser&goalfolder=priorities&userlikes=$user.id">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Ticket</a>
     #end
 #else

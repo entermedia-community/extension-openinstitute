@@ -52,7 +52,7 @@
 		</div>
 	#else
 		#set($loginok = "$communityhome/project/channel/${librarycol.id}/${librarycol.name}.html")
-		<a href="$applink/authentication/login.html?loginokpage=$!loginok" class="btn btn-sm btn-brand py-1 text-white mx-auto my-2">
+		<a href="${communitylink}/authentication/login.html?loginokpage=$!loginok" class="btn btn-sm btn-brand py-1 text-white mx-auto my-2">
 			[[Login to comment]]
 		</a>
 	#end

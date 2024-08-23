@@ -73,7 +73,7 @@
 					#if($project.urlname)
 						#set($projectlink = "$!{community.externaldomain}/${project.urlname}/goals/priorities")
 					#else
-						#set($projectlink = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+						#set($projectlink = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
 					#end
 					<a href="$projectlink"
 					style="text-decoration:underline;" 

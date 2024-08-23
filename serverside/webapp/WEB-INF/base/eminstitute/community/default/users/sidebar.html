@@ -39,7 +39,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 						#set($asset = $mediaarchive.getAsset($project.assetportrait))
 						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 						#else
-						#set($link = "$applink/theme/images/OI_flower.png")
+						#set($link = "${communitylink}/theme/images/OI_flower.png")
 						#end
 						<div class="card-collections-thumb" style='background-image: url("$link")'></div>
 					#end
@@ -112,10 +112,10 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin Reports]]</div>
 		<ul class="sidebar-list" style="margin-bottom:0px;">
 		<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
-			<a href="$applink/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
+			<a href="${communitylink}/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
 		</li>
 		<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
-			<a href="$applink/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
+			<a href="${communitylink}/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 		</li>
 		#end
 		</ul>
@@ -137,7 +137,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 		</li>
 		
 		##		<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
-		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
+		##	<a href="${communitylink}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>
 		#end
 		

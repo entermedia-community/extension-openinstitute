@@ -14,7 +14,7 @@
 	#if($module.id == "librarycollection")
 		##<h6 class="text-center text-dark">#text($module)</h6>
 	#else
-		#set($entityurl = "$!siteroot$applink/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val")
+		#set($entityurl = "$!siteroot${communitylink}/views/modules/$!{module.id}/index.html?$!{module.id}page=1&field=description&operation=freeform&description.value=$val")
 		<div style="margin-bottom: 10px;">
 			<a href="$entityurl" class="ajax qsresultsEntity" data-targetdiv="applicationmaincontent"
 				data-oemaxlevel="3" data-updateurl="true" data-profilepreference="defaultmodule"

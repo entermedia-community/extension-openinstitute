@@ -23,7 +23,7 @@ $context.putPageValue("data", $communitytag)
 <form name="savecollective" 
 	enctype="multipart/form-data" 
 	id="savecollective"
-	action="$applink/causes/admin/edit/save.html"
+	action="${communitylink}/causes/admin/edit/save.html"
 	class="ajaxform"
 	data-targetdivinner="collectivesettingscontent"
 	data-oemaxlevel="1"
@@ -41,7 +41,7 @@ $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
     <a class="btn btn-sm btn-danger confirm"
     style="margin: 0px 0 0 10px;" 
     data-confirm="[[Are you sure]]?" 
-    href="$applink/causes/admin/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
+    href="${communitylink}/causes/admin/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
     >[[Delete]]</a>
   #end
 

@@ -90,7 +90,7 @@
 				<a href="$sitelink/app/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()"><i class="fas fa-hammer"></i> [[My Tasks]]</a>
 			</li>
 			<li class="#if($appsection == "completed") current #end" >
-				<a href="$applink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
+				<a href="${communitylink}/users/tasks/report.html?collectionid=*&goaltrackerstaff=*"><i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
 			</li>
 			#end
 			</ul>
@@ -111,10 +111,10 @@
 		<div class="sidebar-box-header" style="margin-top:0px;">[[Admin Reports]]</div>
 		<ul class="sidebar-list" style="margin-bottom:0px;">
 		<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
-			<a href="$applink/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
+			<a href="${communitylink}/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
 		</li>
 		<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
-			<a href="$applink/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
+			<a href="${communitylink}/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 		</li>
 		#end
 		</ul>
@@ -137,7 +137,7 @@
 		</li>
 		
 		##	<li class="#if($appsection == "tixreport") current #end" style="width:110px; float:left;">
-		##	<a href="$applink/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
+		##	<a href="${communitylink}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 		</ul>
 	</div>
 	#end

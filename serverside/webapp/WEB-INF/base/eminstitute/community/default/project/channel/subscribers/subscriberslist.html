@@ -18,7 +18,7 @@
 		    #set( $userlink = "${communityhome}/users/${followeruser.getId()}/${followeruser.getAnonNickName()}.html")
 			#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 			#if(!$userimageurl)
-				#set( $userimageurl = "$applink/theme/images/user.svg" )
+				#set( $userimageurl = "${communitylink}/theme/images/user.svg" )
 			#end
 
 			

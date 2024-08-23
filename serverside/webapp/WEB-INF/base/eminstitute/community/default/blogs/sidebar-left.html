@@ -15,7 +15,7 @@
 			#set( $cats = $librarycol.getValues("communitytagcategory"))
 			#foreach( $cat in $cats)
 			#set( $community = $mediaarchive.getCachedData("communitytagcategory",$cat) )
-			#set( $link = "$applink/proposals/category/#dash($community)/${community.getId()}.html")
+			#set( $link = "${communitylink}/proposals/category/#dash($community)/${community.getId()}.html")
 				<a href="$link" style="text-decoration: underline;">#text($community)</a>
 			#end
 			</div>
@@ -43,7 +43,7 @@
 		#if( $caneditcollection)
 			#if($proposalproblem  && $proposalcauses && $proposalempowerment)
 			#else
-				<a href="$applink/collective/edit/editcollective.html?collectionid=$librarycol.getId()&view=proposalsummary">[[Edit The Vision]]</a>
+				<a href="${communitylink}/collective/edit/editcollective.html?collectionid=$librarycol.getId()&view=proposalsummary">[[Edit The Vision]]</a>
 			#end
 		#end	
 		

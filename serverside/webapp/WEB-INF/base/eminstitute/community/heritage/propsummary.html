@@ -1,14 +1,14 @@
 <div class="container py-2 project-container">
   <div class="prop-details">
     <div class="prop-credit">
-      #set($link = "$applink/proposal/${project.id}/#dash($project.getName()).html")
+      #set($link = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
       <a href="$link" class="d-flex flex-column align-items-center p-2 w-100">
         #set($logo = false)
         #if($project.assetportrait)
           #set($asset = $mediaarchive.getAsset($project.assetportrait))
           #set($logo = $mediaarchive.asLinkToPreview($asset,"image200x200.png"))
         #else
-          #set($logo = "$applink/theme/images/OI_flower.png")
+          #set($logo = "${communitylink}/theme/images/OI_flower.png")
         #end
         <img src="$logo" />
         <p>#text($project)</p>
