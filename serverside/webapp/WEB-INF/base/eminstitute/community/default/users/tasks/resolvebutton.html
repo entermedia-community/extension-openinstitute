@@ -1,11 +1,11 @@
 #set( $target = "resolve#eid($goal.id)")
-#set($value = $mediaarchive.getData("projectstatus",$goal.projectstatus))
+#set($value = $mediaarchive.getCachedData("projectstatus",$goal.projectstatus))
 <div id="$target" >
 	#if($value)
 		#if($value == "Completed")
 			<a class="btn btn-xs btn-success" style="color:white">[[Completed]]</a>
 		#else
-			<div>$context.getText($value)</div>
+			<div>#text($value)</div>
 		#end
 	#end
 	

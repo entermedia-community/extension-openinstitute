@@ -350,11 +350,11 @@ h2 {
 }
 
 .thumbnail img {
-    width: 80%;
-    height: 80%;
-    opacity: 0.45;
-    object-fit: contain;
-    transition: all 0.2s ease-in-out
+    /* width: 80%; */
+    /* height: 80%; */
+    /* opacity: 0.45; */
+    /* object-fit: contain; */
+    /* transition: all 0.2s ease-in-out; */
 }
 
 .thumbnail span {
@@ -377,8 +377,8 @@ h2 {
 }
 
 .thumbnail:hover img {
-    width: 90%;
-    height: 90%;
+    /* width: 90%; */
+    /* height: 90%; */
 }
 
 .thumbnail:hover span {
