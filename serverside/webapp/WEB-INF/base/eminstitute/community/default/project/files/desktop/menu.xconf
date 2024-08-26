@@ -6,6 +6,6 @@
 			<searchtype>librarycollection</searchtype>
     </path-action>
 
-	<path-action name="ProjectModule.listConnectedDesktop"/>
+	
 
 </page>
