@@ -1062,11 +1062,11 @@ img.cat-thumb {
   line-height: 20px;
 }
 h1.blog-title {
-  font-size: 1.25em;
+  font-size: 1.5rem;
   line-height: 1.5rem;
   font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 .icon {
   color: #0e1a1c;
@@ -1093,7 +1093,7 @@ h1.blog-title {
   background-color: rgba(0, 0, 0, 0.16);
 }
 .blog-list {
-  max-width: 720px;
+  max-width: 740px;
   flex: 1;
 }
 hr.blog-divider {
@@ -1240,13 +1240,16 @@ textarea.blog-comments-input {
   color: inherit !important;
 }
 .blog-list-container {
-  max-width: 720px;
+  max-width: 780px;
   margin: 0 auto;
   color: #000;
 }
+.blog-post {
+  margin-bottom: 3rem;
+}
 .blog-form-container {
   background-color: #ffffff;
-  margin-bottom: 2rem;
+  margin: 2rem;
 }
 .blog-form-container input.title-input {
   flex: 1;

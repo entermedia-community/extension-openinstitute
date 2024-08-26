@@ -7,9 +7,9 @@ $context.putPageValue("searcher",$searcher)
 		name="wizard" 
 		method="post" 
 		data-targetdiv="channelcontainer" 
-		action="$communityhome/project/channel/upload.html"  ##this is for file uploading
-		data-finishaction="$communityhome/project/channel/uploadsave.html?oemaxlevel=2"  ##this is for normal posts
-		data-linkfinishaction="$communityhome/project/channel/uploadlink.html?oemaxlevel=2" ##this is for link only posts
+		action="$projectlink/channel/upload.html"  ##this is for file uploading
+		data-finishaction="$projectlink/channel/uploadsave.html?oemaxlevel=2"  ##this is for normal posts
+		data-linkfinishaction="$projectlink/channel/uploadlink.html?oemaxlevel=2" ##this is for link only posts
 		class="validate showonselect autofinishaction"
 		data-finishtargetdiv="channelcontainer"
 	>
@@ -96,7 +96,7 @@ $context.putPageValue("searcher",$searcher)
 						
 						
 							<input id="upload_field" type="file" style="position:absolute; top:-1000px;" multiple="multiple">
-							$pages.include("/$applicationid/components/xml/detaileditorcss.html", $context)
+							$pages.include("$communityhome/components/xml/detaileditorcss.html", $context)
 		
 						<ul id="up-files-list" class="up-files-list"></ul>	
 						<ul id="up-files-list-completed" class="up-files-list" ></ul>	
@@ -111,7 +111,7 @@ $context.putPageValue("searcher",$searcher)
 				</div>
 			</div>
 			<div class="float-right" style="padding-right:20px">
-				<a class="btn btn-secondary btn-sm cancel" href="${communitylink}/proposal/${librarycol.id}/#urlencode($librarycol.name).html" >[[Cancel]]</a>
+				<a class="btn btn-secondary btn-sm cancel" href="${projectlink}" >[[Cancel]]</a>
 			</div>
 			<div class="clearfix"></div>
 			</div>		

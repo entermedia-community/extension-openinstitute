@@ -1,5 +1,11 @@
  
 $context.putPageValue("showchannel",true)
+
+#if( $caneditcollection )
+	$pages.include("${communityhome}/project/channel/addnewupload.html")
+#end
+	
+	
  #if( $topuploads.isEmpty() )
 	<p class="text-center text-muted my-5">
 		[[Nothing posted yet]]
