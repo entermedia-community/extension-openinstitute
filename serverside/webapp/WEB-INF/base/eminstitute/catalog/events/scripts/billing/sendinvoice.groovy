@@ -53,7 +53,12 @@ private void sendInvoiceNotifications(MediaArchive mediaArchive, Searcher invoic
 		for (Data invoice: pendingNotificationInvoices)
 		{
 			invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
+
+			//Notify project Admins about invoice
+			invoiceNotifyProject(mediaArchive, invoiceSearcher, invoice, "");
 		}
+		
+		
 	}
 }
 
@@ -100,20 +105,21 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		
 	//Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 	String collectionid = invoice.getValue("collectionid");
-	Data workspace = mediaArchive.getData("librarycollection", collectionid);
+	Data workspace = mediaArchive.getCachedData("librarycollection", collectionid);
 	if( workspace == null)
 	{
 		invoice.setValue(iteratorType, "true");
 		invoiceSearcher.saveData(invoice);
 		
 	}
+	
 	String emails = invoice.getValue("sentto");
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
 	Boolean sent = false;
 	if (emaillist.size()>0) 
 	{
-		log.info("Sending email to  "+emaillist.size()+" members of: "+workspace+ " ("+collectionid+")");
+		//log.info("Sending email to  "+emaillist.size()+" : "+workspace+ " ("+collectionid+")");
 		for (String email : emaillist)
 		 {
 			if (email != null) {
@@ -154,6 +160,47 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 }
 
+
+
+
+private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSearcher, Data invoice, String iteratorType)
+{
+
+	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
+		
+	//Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
+	String collectionid = invoice.getValue("collectionid");
+	Data workspace = mediaArchive.getCachedData("librarycollection", collectionid);
+	
+	String emails = workspace.getValue("contactemail");
+	List<String> emaillist = Arrays.asList(emails.split(","));
+
+	Boolean sent = false;
+	if (emaillist.size()>0)
+	{
+		log.info("Sending email to  "+emaillist.size()+" members of: "+workspace+ " ("+collectionid+")");
+		for (String email : emaillist)
+		 {
+			if (email != null) {
+				if (email) {
+					sendinvoiceEmail(mediaArchive, email, invoice, workspace, "notifyprojectadmins");
+					sent = true; //needs better error handling
+				}
+			}
+		}
+		if (!sent) {
+			invoice.setValue("paymentstatus", "error");
+			log.info("Error sending invoice to addresses: ${emails}");
+		}
+		invoiceSearcher.saveData(invoice);
+		
+	}
+	else
+	{
+		log.info("No email addresses to send Notification for: "+workspace+ " ("+collectionid+")");
+	}
+}
+
 /*
 
 private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String subject, String htmlTemplate) {
@@ -161,10 +208,22 @@ private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, 
 }
 */
 private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String messagetype) {
+	String siteid = context.findValue("siteid");
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
-	String template = "/" + appid + "/theme/emails/";
 
+	Data community = mediaArchive.getData("communitytagcategory", workspace.get("communitytagcategory"));
+	if (community != null) {
+		String communitypath = community.get("templatepath");
+		appid = communitypath;
+	}
+	
+	String template = siteid + appid + "/theme/emails/";
+	
 	String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	
+	if (community != null) {
+		actionUrl = community.get("externaldomain") + "/" + workspace.get("urlname");
+	}
 	
 	//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
 	//actionUrl = actionUrl + "&entermedia.key=" + key;
@@ -181,7 +240,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	switch(messagetype) {
 		case "notificationsent":
-			actionUrl = getSiteRoot() + "/" + appid + "/collective/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
+			actionUrl = actionUrl + "/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
 			subject =  workspace.getName() + " Invoice";
@@ -240,11 +299,21 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_paid_email");
 		}
 		break;
+	case "notifyprojectadmins":
+		subject = "Invoice generated at " + workspace.getName();
+		template = template + "invoice-generated.html";
+		
+		invoiceemailheader = workspace.get("invoicepaidemail");
+		/*if(invoiceemailheader == null || invoiceemailheader.equals("")) {
+			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_notification");
+		}*/
+		break;
 	}
+	
 
 	actionUrl = URLUtilities.urlEscape(actionUrl);
 	
-	String supportUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	String supportUrl = actionUrl;
 	supportUrl = URLUtilities.urlEscape(supportUrl);
 	
 	//Other Pay options
@@ -308,11 +377,11 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("invoicepayoptions", invoicepayoptions);
 	
 	//printurl
-	String printurl = getSiteRoot() + "/" + appid + "/collective/services/printpreview.html?invoiceid="+invoice.getId()+"&collectionid=" + invoice.getValue("collectionid");
+	String printurl = actionUrl+ "/services/printpreview.html?invoiceid="+invoice.getId()+"&collectionid=" + invoice.getValue("collectionid");
 	objects.put("printurl", printurl);
 	
 	templateEmail.send(objects);
-	log.info(workspace.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact);
+	log.info(workspace.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact + " Template: " + template);
 }
 
 private String getSiteRoot() {

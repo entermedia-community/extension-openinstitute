@@ -63,13 +63,13 @@
           $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
           $!context.doubleToMoney($subtotal*30, 2)</span>/
                    ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
-                   Monthly
+                   [[Monthly]]
            </p>
           <p class="price m-0"><span class="currency">
           $!context.getText($!mediaarchive.getCachedData("currencytype", $aproduct.currencytype ))
           $!context.doubleToMoney($subtotal, 2)</span>/
                    ##$!mediaarchive.getCachedData("productrecurringperiod",$aproduct.recurringperiod)
-                   Daily
+                   [[Daily]]
            </p>
         </div>
 
@@ -77,24 +77,24 @@
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkIn" name="checkIn" placeholder="Check-In" required />
+              <input class="form-control" id="checkIn" name="checkIn" placeholder="[[Check-In]]" required autocomplete="off" />
               
-              <label for="checkIn">Request Stay</label>
+              <label for="checkIn">[[Request Stay]]</label>
             </div>
             <div class="form-floating flex-grow-1">
-              <input class="form-control" id="checkOut" name="checkOut" placeholder="Check-Out" autocomplete="off" required
+              <input class="form-control" id="checkOut" name="checkOut" placeholder="[[Check-Out]]" autocomplete="off" required autocomplete="off"
                 data-disableddates='#foreach( $date in $blockeddates.getBlockedDates())$date.toDateString(),#end'
                />
-              <label for="checkOut">Check-Out</label>
+              <label for="checkOut">[[Check-Out]]</label>
             </div>
           </div>
           <div class="form-floating flex-grow-1 guests">
-            <input class="form-control" id="guests" name="guests" placeholder="Guests" value="1" />
-            <label for="guests">Guests</label>
+            <input class="form-control" id="guests" name="guests" placeholder="[[Guests]]" value="1" />
+            <label for="guests">[[Guests]]</label>
             <div id="guestsPicker">
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
-                <p>Adults</p>
-                <small>Age 13+</small>
+                <p>[[Adults]]</p>
+                <small>[[Age 13]]+</small>
                 <div class="d-flex align-items-center">
                   <button class="btn btn-dark g-minus" type="button" data-gt="adult">
                     <i class="fa fa-minus"></i>
@@ -107,8 +107,8 @@
               </div>
               <hr />
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
-                <p class="m-0">Children</p>
-                <small>Age 0 &mdash; 13</small>
+                <p class="m-0">[[Children]]</p>
+                <small>[[Age]] 0 - 13</small>
                 <div class="d-flex align-items-center">
                   <button class="btn btn-dark g-minus" type="button" data-gt="children">
                     <i class="fa fa-minus"></i>
@@ -121,7 +121,7 @@
               </div>
               <hr />
               <div class="d-flex flex-column mx-2 align-items-center gp-inner">
-                <p class="m-0">Pets</p>
+                <p class="m-0">[[Pets]]</p>
                 <div class="d-flex align-items-center">
                   <button class="btn btn-dark g-minus" type="button" data-gt="pet">
                     <i class="fa fa-minus"></i>
@@ -138,12 +138,12 @@
         
         
         <input name="productid" value="$aproduct.getId()" type="hidden" />
-        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">Request Dates</button>
+        <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">[[Request Dates]]</button>
         
       </form>
         <div class="pricing">
           <p class="text-center caption mt-2">
-            You won't be charged yet. <a href="https://www.canva.com/design/DAGIhxVrO0M/v2LK_QPD2t_twhXgbabq8w/view?utm_content=DAGIhxVrO0M&utm_campaign=designshare&utm_medium=link&utm_source=editor" target="_new">Learn more</a>
+            [[You won't be charged yet]]. <a href="https://www.canva.com/design/DAGIhxVrO0M/v2LK_QPD2t_twhXgbabq8w/view?utm_content=DAGIhxVrO0M&utm_campaign=designshare&utm_medium=link&utm_source=editor" target="_new">Learn more</a>
           </p>
           <!-- 
           <div class="d-flex mt-3">

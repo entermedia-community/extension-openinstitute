@@ -1,6 +1,7 @@
-<div class="container storecontainer my-3" id="storeworkarea" style="max-width: 720px;min-height:auto">
 
-	<h2 class="text-center mb-3">
+<div class="container storecontainer my-4" id="storeworkarea" style="max-width: 720px;min-height:auto">
+
+	<h2 class="text-center mt-0 mb-4">
 		[[Reservation Request Form]]
 	</h2>
 	<p>Reservations are subject to confirmation</p>
@@ -19,7 +20,7 @@
 	#if( $user )
 	<form name="inlinesaveproject" 
 		id="inlinesaveproject" 
-		action="/${librarycol.urlname}/rentaldetails/processinvoice.html"
+		action="${projectlink}/rentaldetails/processinvoice.html"
 		method="post"
 		class="ajaxform"
 		data-targetdiv="storeworkarea"
