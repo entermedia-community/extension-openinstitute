@@ -335,7 +335,6 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
 	
-	if( )
 	objects.put("siteroot", getSiteRoot());
 	objects.put("applink","/" + appid); //?
 	objects.put("apphome","/" + appid); //?
