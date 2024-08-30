@@ -105,8 +105,8 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		
 	//Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 	String collectionid = invoice.getValue("collectionid");
-	Data workspace = mediaArchive.getCachedData("librarycollection", collectionid);
-	if( workspace == null)
+	Data librarycol = mediaArchive.getCachedData("librarycollection", collectionid);
+	if( librarycol == null)
 	{
 		invoice.setValue(iteratorType, "true");
 		invoiceSearcher.saveData(invoice);
@@ -119,12 +119,12 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 	Boolean sent = false;
 	if (emaillist.size()>0) 
 	{
-		//log.info("Sending email to  "+emaillist.size()+" : "+workspace+ " ("+collectionid+")");
+		//log.info("Sending email to  "+emaillist.size()+" : "+librarycol+ " ("+collectionid+")");
 		for (String email : emaillist)
 		 {
 			if (email != null) {
 				if (email) {
-					sendinvoiceEmail(mediaArchive, email, invoice, workspace, iteratorType);
+					sendinvoiceEmail(mediaArchive, email, invoice, librarycol, iteratorType);
 					sent = true; //needs better error handling
 				}
 			}
@@ -133,7 +133,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 			//send Copy to bookkeeper@entermediadb.org
 			String ccinvoices = mediaArchive.getCatalogSettingValue("invoice_cc_email");
 			if (ccinvoices != null) {
-				sendinvoiceEmail(mediaArchive, ccinvoices, invoice, workspace, iteratorType);
+				sendinvoiceEmail(mediaArchive, ccinvoices, invoice, librarycol, iteratorType);
 			}
 			
 			Calendar today = Calendar.getInstance();
@@ -156,7 +156,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 		else 
 		{
-			log.info("No email addresses to send Invoice for: "+workspace+ " ("+collectionid+")");
+			log.info("No email addresses to send Invoice for: "+librarycol+ " ("+collectionid+")");
 		}
 }
 
@@ -170,20 +170,20 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 		
 	//Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
 	String collectionid = invoice.getValue("collectionid");
-	Data workspace = mediaArchive.getCachedData("librarycollection", collectionid);
+	Data librarycol = mediaArchive.getCachedData("librarycollection", collectionid);
 	
-	String emails = workspace.getValue("contactemail");
+	String emails = librarycol.getValue("contactemail");
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
 	Boolean sent = false;
 	if (emaillist.size()>0)
 	{
-		log.info("Sending email to  "+emaillist.size()+" members of: "+workspace+ " ("+collectionid+")");
+		log.info("Sending email to  "+emaillist.size()+" members of: "+librarycol+ " ("+collectionid+")");
 		for (String email : emaillist)
 		 {
 			if (email != null) {
 				if (email) {
-					sendinvoiceEmail(mediaArchive, email, invoice, workspace, "notifyprojectadmins");
+					sendinvoiceEmail(mediaArchive, email, invoice, librarycol, "notifyprojectadmins");
 					sent = true; //needs better error handling
 				}
 			}
@@ -197,21 +197,21 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 	}
 	else
 	{
-		log.info("No email addresses to send Notification for: "+workspace+ " ("+collectionid+")");
+		log.info("No email addresses to send Notification for: "+librarycol+ " ("+collectionid+")");
 	}
 }
 
 /*
 
-private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String subject, String htmlTemplate) {
-	sendEmail(mediaArchive, contact, invoice, workspace, subject, htmlTemplate, null);
+private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, Data librarycol, String subject, String htmlTemplate) {
+	sendEmail(mediaArchive, contact, invoice, librarycol, subject, htmlTemplate, null);
 }
 */
-private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data invoice, Data workspace, String messagetype) {
+private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data invoice, Data librarycol, String messagetype) {
 	String siteid = context.findValue("siteid");
 	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
 
-	Data community = mediaArchive.getData("communitytagcategory", workspace.get("communitytagcategory"));
+	Data community = mediaArchive.getData("communitytagcategory", librarycol.get("communitytagcategory"));
 	if (community != null) {
 		String communitypath = community.get("templatepath");
 		appid = communitypath;
@@ -222,7 +222,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
 	
 	if (community != null) {
-		actionUrl = community.get("externaldomain") + "/" + workspace.get("urlname");
+		actionUrl = community.get("externaldomain") + "/" + librarycol.get("urlname");
 	}
 	
 	//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
@@ -234,7 +234,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	String invoiceemailheader;
 	String invoiceemailfooter;
 	
-	String collectionid = workspace.getId();
+	String collectionid = librarycol.getId();
 	
 	String month = "";
 	
@@ -243,7 +243,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			actionUrl = actionUrl + "/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
-			subject =  workspace.getName() + " Invoice";
+			subject =  librarycol.getName() + " Invoice";
 //			if(invoice.getValue("isrecurring")) {
 				if(invoice.getName()!= null) {
 					subject = invoice.getName();
@@ -262,48 +262,48 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		
 			template = template + "send-invoice-event.html";
 			//Invoice Template from collection
-			invoiceemailheader = workspace.get("invoiceemailheader");
+			invoiceemailheader = librarycol.get("invoiceemailheader");
 			if(invoiceemailheader == null || invoiceemailheader.equals("")) {
 				invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_email_header");
 			}
 			
 			
-			invoiceemailfooter = workspace.get("invoiceemailfooter");
+			invoiceemailfooter = librarycol.get("invoiceemailfooter");
 			if(invoiceemailfooter == null || invoiceemailheader.equals("")) {
 				invoiceemailfooter =  mediaArchive.getCatalogSettingValue("invoice_email_footer");
 			}
 		
 		break;
 	case "notificationoverduesent":
-		subject = "Overdue Invoice for " + workspace.getName();
+		subject = "Overdue Invoice for " + librarycol.getName();
 		template = template + "send-overdue-invoice-event.html";
 		//Invoice Template from collection
-		invoiceemailheader = workspace.get("invoiceemailheader");
+		invoiceemailheader = librarycol.get("invoiceemailheader");
 		if(invoiceemailheader == null || invoiceemailheader.equals("")) {
 			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_email_header");
 		}
 		
 		
-		invoiceemailfooter = workspace.get("invoiceemailfooter");
+		invoiceemailfooter = librarycol.get("invoiceemailfooter");
 		if(invoiceemailfooter == null || invoiceemailheader.equals("")) {
 			invoiceemailfooter =  mediaArchive.getCatalogSettingValue("invoice_email_footer");
 		}
 
 		break;
 	case "notificationpaidsent":
-		subject = "Payment Received " + workspace.getName();
+		subject = "Payment Received " + librarycol.getName();
 		template = template + "send-paid-invoice-event.html";
 		
-		invoiceemailheader = workspace.get("invoicepaidemail");
+		invoiceemailheader = librarycol.get("invoicepaidemail");
 		if(invoiceemailheader == null || invoiceemailheader.equals("")) {
 			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_paid_email");
 		}
 		break;
 	case "notifyprojectadmins":
-		subject = "Invoice generated at " + workspace.getName();
+		subject = "Invoice generated at " + librarycol.getName();
 		template = template + "invoice-generated.html";
 		
-		invoiceemailheader = workspace.get("invoicepaidemail");
+		invoiceemailheader = librarycol.get("invoicepaidemail");
 		/*if(invoiceemailheader == null || invoiceemailheader.equals("")) {
 			invoiceemailheader =  mediaArchive.getCatalogSettingValue("invoice_notification");
 		}*/
@@ -317,7 +317,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	supportUrl = URLUtilities.urlEscape(supportUrl);
 	
 	//Other Pay options
-	String invoicepayoptions = workspace.get("invoicepayoptions");
+	String invoicepayoptions = librarycol.get("invoicepayoptions");
 	if(invoicepayoptions == null) {
 		invoicepayoptions =  mediaArchive.getCatalogSettingValue("invoice_pay_options");
 	}
@@ -331,11 +331,24 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("mediaarchive", mediaArchive);
 	objects.put("invoice", invoice);
 	objects.put("invoicenumber", invoice.getValue("invoicenumber"));
-	objects.put("project", workspace.getName());
+	objects.put("project", librarycol.getName());
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
+	
+	if( )
 	objects.put("siteroot", getSiteRoot());
-	objects.put("applink", appid);
+	objects.put("applink","/" + appid); //?
+	objects.put("apphome","/" + appid); //?
+	objects.put("librarycol",librarycol);
+	
+	if( community != null)
+	{
+		objects.put("communitytagcategory" , community);
+		objects.put("communitylink" , community.get("externaldomain"));
+		String communityhome = "/" + siteid + community.get("templatepath");
+		objects.put("communityhome",communityhome);
+	}
+	
 	
 	//recurring
 	objects.put("invoicemonth", month);
@@ -381,7 +394,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("printurl", printurl);
 	
 	templateEmail.send(objects);
-	log.info(workspace.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact + " Template: " + template);
+	log.info(librarycol.getName() + " - Invoice #"+ invoice.getValue("invoicenumber")+" - Sent to: "+contact + " Template: " + template);
 }
 
 private String getSiteRoot() {

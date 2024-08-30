@@ -539,9 +539,9 @@
 											<a    href="$!{linkhome}/${collection.urlname}/rentaldetails/${aproduct.urlname}">
 												#set($productname = $replacer.replace($prod.name, $invoiceformated))
 												#text($productname)
-													      #set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
+											    #set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
 								                <div class="carousel-item active">
-								                  <img src='${sitelink}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
+								                  <img src='${siteroot}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
 								                </div>
 																				
 											</a>
