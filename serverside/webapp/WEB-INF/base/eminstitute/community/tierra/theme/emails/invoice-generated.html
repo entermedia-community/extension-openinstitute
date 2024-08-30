@@ -541,9 +541,11 @@
 												#text($productname)
 												#if($product.primaryimage)
 												    #set( $asset = $mediaarchive.getCachedData("asset",$product.primaryimage))
+												    #ifnotnull($asset)
 									                <div class="carousel-item active">
 									                  <img src='${communitylink}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
 									                </div>
+									                #end
 												#end																				
 											</a>
 											</div> 
