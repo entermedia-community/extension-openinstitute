@@ -528,22 +528,23 @@
                               	</tr>
                                 
                                #set($products = $invoice.getValue("productlist"))
-								#foreach ($product in $products)
-									#set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
+								#foreach ($record in $products)
+									#set ( $product = $mediaarchive.getBean("invoiceManager").getProductById($record.productid) )
 									<tr>
-										<td valign="top" style="vertical-align: top;">$product.productquantity</td>
+										<td valign="top" style="vertical-align: top;">$record.productquantity</td>
 										
 										<td valign="top" style="vertical-align: top;">
 											<div>
 
-											<a    href="$!{linkhome}/${collection.urlname}/rentaldetails/${aproduct.urlname}">
-												#set($productname = $replacer.replace($prod.name, $invoiceformated))
+											<a    href="${communitylink}/${collection.urlname}/rentaldetails/${prod.urlname}">
+												#set($productname = $replacer.replace($record.name, $invoiceformated))
 												#text($productname)
-											    #set( $asset = $mediaarchive.getCachedData("asset",$prod.primaryimage))
-								                <div class="carousel-item active">
-								                  <img src='${communitylink}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
-								                </div>
-																				
+												#if($product.primaryimage)
+												    #set( $asset = $mediaarchive.getCachedData("asset",$product.primaryimage))
+									                <div class="carousel-item active">
+									                  <img src='${communitylink}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
+									                </div>
+												#end																				
 											</a>
 											</div> 
 										</td>
