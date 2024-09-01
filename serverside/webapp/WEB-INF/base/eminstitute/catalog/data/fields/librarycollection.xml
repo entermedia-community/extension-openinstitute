@@ -307,6 +307,7 @@ L
     </name> 
   </property>  
   
+  	<property id="contactname" index="true" stored="true" keyword="true" editable="true" >Contact Name</property>
 
   	<property id="contactemail" index="true" stored="true" keyword="true" editable="true"  indextype="not_analyzed">Email</property>
 	<property id="contactphone" index="true" stored="true" keyword="true" editable="true"  >Phone</property>

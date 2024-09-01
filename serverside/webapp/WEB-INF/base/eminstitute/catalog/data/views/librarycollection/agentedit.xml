@@ -10,6 +10,7 @@
   
     
   <property id="collectivedescription"/>  
+  <property id="contactname" rendermask="${user.name}"/>  
   <property id="contactemail"/> 
   <property id="priviacylevel" />
   
@@ -25,7 +26,6 @@
   <property id="instagramlink" /> 
   <property id="websitelink" />
   
-  <property id="street"/>  
   <property id="city"/>  
   <property id="country"/>
  

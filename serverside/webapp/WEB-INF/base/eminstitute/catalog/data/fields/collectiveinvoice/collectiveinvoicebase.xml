@@ -154,13 +154,6 @@
 		</name>
 	</property>
 
-	<property id="headcount" editable="false" index="true"
-		stored="true" datatype="number" >
-		<name>
-			<language id="en"><![CDATA[Number of people]]></language>
-		</name>
-		
-	</property>
 
 	<property id="customernote" index="true" stored="true"
 		viewtype="textarea" editable="true">

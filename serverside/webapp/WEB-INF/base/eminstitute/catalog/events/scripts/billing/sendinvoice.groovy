@@ -339,7 +339,11 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("applink","/" + appid); //?
 	objects.put("apphome","/" + appid); //?
 	objects.put("librarycol",librarycol);
-	
+	if(librarycol.get("contactname") != null)
+	{
+		templateEmail.setFromName(librarycol.get("contactname"));
+	}
+
 	if( community != null)
 	{
 		objects.put("communitytagcategory" , community);

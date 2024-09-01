@@ -16,7 +16,7 @@
 	#end
 	#set( $data = $searcher.createNewData())
 
-	$data.setValue("name","$user.getEmail() [[Reservation]]")
+	$data.setValue("name","[[Reservation]] $librarycol.getName() $user.getEmail()")
 	#if( $user )
 	<form name="inlinesaveproject" 
 		id="inlinesaveproject" 
