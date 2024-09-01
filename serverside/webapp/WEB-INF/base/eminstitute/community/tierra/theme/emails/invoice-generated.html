@@ -431,16 +431,7 @@
 		<a href="${communitylink}"><img src="$!{communitylink}/theme/emails/tierrasagrada.png" /></a>
 	</div>
 
-    <p >Your reservation request has been received! We will notify you once confirmed.</p>
-
-
-
-        <a href="https://wa.me/+50240224217" class="btn btn-whatsapp"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-            height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-            <path
-              d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-          </svg> <span class="ms-2">Whatsapp</span> us with any questions</a>
-
+    <p >$!invoiceheader</p>
     
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
@@ -453,138 +444,99 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         
-                        
-                        $!invoiceheader
-                        
-                        
-                        
-                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                          <tr>
-                            <td class="attributes_content">
-                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-						              <strong>Amount:</strong> 
-						              $currency $!context.roundDouble($invoice.getValue("totalprice"), 2) 
-						              ($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))
-						            </span>
-                                  </td>
-                                  <td class="attributes_item" style="text-align: right;">
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td valign="top">
-                              <div><strong>Reservation #:</strong> $invoice.getValue("invoicenumber")</div>
+                              <div><strong>Reservation #:</strong> $!invoice.getValue("invoicenumber")</div>
                               <div><strong> #text($invoicename)</strong></div>
-
                             </td>
                             <td  valign="top">
                             </td>
                           </tr>
-                          <tr>
-                            <td colspan="2">
-                            	#if(!$invoicedescription)
-									#set($invoicedescription = $mediaarchive.text($invoice.getValue("invoicedescription"), $invoice.id))
-								#end
-								
-								#set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
-								
-								##For Replace Formating
-									#set($invoiceformated = $invoice)
-									#set($replacer = $mediaarchive.getReplacer())
-									#set($ignore = $invoiceformated.setValue("invoicemonth",$invoicemonth))
-									#set($ignore = $invoiceformated.setValue("project", $collection))
-									#set($startdate = "#date($invoice, 'startdate')")
-									#set($ignore = $invoiceformated.setValue("startdate", $startdate))
-									#set($enddate = "#date($invoice, 'enddate')")
-									#set($ignore = $invoiceformated.setValue("enddate", $enddate))
-								##--
-								
-								
-								
-								#if($invoicedescription)
-									#set($invoicedescription = $replacer.replace($invoicedescription, $invoiceformated))
-								<div class="f-fallback" style="padding-top:10px;">$invoicedescription</div>
-								#end
-                            </td>
-                            </tr>
-                          <tr>
                             <td colspan="2">
                               <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                  <th class="purchase_heading" align="left">
-                                    <p class="f-fallback">Days</p>
-                                  </th>
-                                  <th class="purchase_heading" align="left">
-                                    <p class="f-fallback">Description</p>
-                                  </th>
-                              	</tr>
-                                
-                               #set($products = $invoice.getValue("productlist"))
-								#foreach ($record in $products)
-									#set ( $product = $mediaarchive.getBean("invoiceManager").getProductById($record.productid) )
+                               #set($purchases = $invoice.getValue("productlist"))
+								#foreach ($purchase in $purchases)
+									#set ( $product = $mediaarchive.getBean("invoiceManager").getProductById($purchase.productid) )
 									<tr>
-										<td valign="top" style="vertical-align: top;">$record.productquantity</td>
-										
 										<td valign="top" style="vertical-align: top;">
 											<div>
 
 											<a    href="${communitylink}/${collection.urlname}/rentaldetails/${prod.urlname}">
-												#set($productname = $replacer.replace($record.name, $invoiceformated))
+												#set($productname = $replacer.replace($purchase.name, $invoiceformated))
 												#text($productname)
 												#if($product.primaryimage)
 												    #set( $asset = $mediaarchive.getCachedData("asset",$product.primaryimage))
 												    #ifnotnull($asset)
 									                <div class="carousel-item active">
-									                  <img src='${communitylink}/$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
+									                  <img src='${communitylink}$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
 									                </div>
 									                #end
 												#end																				
 											</a>
 											</div> 
+											
+											#set($totaldays = $purchase.productquantity)
+											
+											##DO not have
+											#set($totalprice = $invoice.getDouble("totalprice") )
+											#set($totalprice = $context.roundDouble($totalprice,2) )
+											
+											###set($guests = $context.getRequestParameter("guests"))
+											#set($dailyrate =  $totaldays / $totalprice)
+											
+											#set($dailyrate = $context.roundDouble($dailyrate,2) )
+											#set($duedate = $invoice.getDate("duedate"))
+											#set($enddate = $invoice.getDate("enddate"))
+											
+											
+											
+											
+											<div class="reservation-date">
+												<div class="d-flex align-items-end"> 
+													<div class="d-flex flex-column">
+														<span class="mb-2">[[Self Check-in]]</span>
+														<strong>#date($duedate)</strong>
+														<small>14:00 &mdash; 24:00</small>
+													</div>
+													<div class="vertical-divider"></div>
+													<div class="d-flex flex-column">
+														<span class="mb-2">[[Check-out]]</span>
+														<strong>#date($enddate)</strong>
+														<small>00:00 &mdash; 10:00</small>
+													</div> 
+												</div>
+												<p class="mt-3 mb-0">Total length of stay: <strong>$totaldays nights</strong></p>
+												<p class="m-0">You selected: <strong>1 room</strong></p>  ## for <strong>$!howmanypeople</strong>
+											</div>
+									
+											<div class="reservation-price">
+												<div class="">
+													#if( $totaldays < 29)
+													<p class="m-0 text-muted ">+Stay is less than one month</p>
+													#end
+														#if( $howmanypeople > 1)
+													<p class="m-0 text-muted ">+More than one person</p>
+														#end
+													<p class="m-0 text-muted ">= $dailyrate Per day</p>
+													<h3>Price</h3>
+													<h3>
+												 		$totaldays x $dailyrate= $$totalprice
+												 		
+														$!context.getText($!mediaarchive.getCachedData("currencytype",$invoice.currencytype ))
+													</h3>
+												</div>
+											</div>
+											
+											
+											
 										</td>
 									</tr>
 								#end
- 
-                                <tr>
-                                  <td width="80%" colspan="2" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total purchase_total--label">Total ($!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</p>
-                                  </td>
-                                  <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">$currency $!context.roundDouble($invoice.getValue("totalprice"),2)</p>
-                                  </td>
-                                </tr>
                               </table>
                             </td>
                           </tr>
                         </table>
-                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                          <tr>
-                            <td align="center">
-                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
-                                <tr>
-                                  <td align="center">
-                                  </td>
-                                </tr>
-                                #if($invoicepayoptions)
-                                <tr>
-                                	<td  style="font-size:0.75rem; padding:10px;">
-                                	$invoicepayoptions
-                                	</td>
-                                </tr>
-                                #end
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-                        
                         
                         $!invoicefooter
                         
