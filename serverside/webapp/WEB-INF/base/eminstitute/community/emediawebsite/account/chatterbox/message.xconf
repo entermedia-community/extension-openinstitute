@@ -4,5 +4,11 @@
 		<property name="searchtype">chatterbox</property>
 		<property name="pageval">chat</property>
 	</path-action>
+	
+	<path-action name="ProjectModule.loadGoalsInMessages"/>
+	
+	<path-action name="ChatModule.getAsset"/>
+	
+	<inner-layout />
 
 </page>

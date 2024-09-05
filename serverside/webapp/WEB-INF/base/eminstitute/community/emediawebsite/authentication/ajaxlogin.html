@@ -1,0 +1,9 @@
+#if($user)	
+	<div class="redirecttopage" data-redirectok="${sitelink}/community/emediawebsite/account/"></div>
+#else
+<div class="login-area" >
+	<div class="container">
+	$pages.include("$content.loginroot/ajaxloginform.html",$context)
+	</div>
+</div>
+#end

@@ -19,8 +19,8 @@
 			<div class="col-sm-12 col-md-8">
 				<div class="profile-credentials">
 					<div class="edit-profile d-flex align-items-center">
-						#if($canedituserinfo)
-						<a href="${communityhome}users/edit/edit.html?userid=$selecteduser.getId()" 
+						#if($canviewsettings)
+						<a href="${communityhome}/users/edit/edit.html?userid=$selecteduser.getId()" 
 							class="btn btn-xs btn-soft-primary emdialog"
 							title="[[Edit User Account]]">
 							<i class="fas fa-edit me-2"></i>

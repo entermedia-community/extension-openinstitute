@@ -1,57 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	
-	#if( $librarycol )
-		#set($metatitle = "#text($librarycol) - #text($communitytagcategory)")
-	#elseif( $communitytagcategory )
-		#set($metatitle = "#text($communitytagcategory)")
-	#end
-	#if( $metatitle )
-		#if( $content.title )
-			#set($metatitle = "$content.title - $metatitle")
-		#else
-			#set($metatitle = "$metatitle")
-		#end	
-	#else
-		#set($metatitle = "$!content.title")
-	#end		
+ 	 #set($sitetitle = $content.title)
+    <title>#if( $librarycol ) $librarycol - #end $!sitetitle</title>
+    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="$sitelink/assets/favicon.ico" />
 
-	<title>$!metatitle</title>
+	$pages.include("${communityhome}/theme/layouts/includes.html", $context)
+  	
+	##$pages.include("${communityhome}/collective/opengraphmetadata.html", $context)
+	
+	##if($content.usemap == "true")
+		##$pages.include("${communityhome}/components/map/includes.html")
+	##end
 
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-	
-	<link rel="stylesheet" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css">
-  
-	$pages.include("${communityhome}/theme/layouts/includes.html")
-	
-	<script src="/assets/js/hs.core.js"></script>   
-  	<script src="/assets/js/hs-header.min.js"></script>
-  	<script src="/assets/js/hs-go-to.min.js"></script>
-  	<script src="/assets/js/hs-mega-menu.min.js"></script>
-	
-	<link rel="stylesheet" href="/assets/css/hs-mega-menu.min.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/font-awesome/all.min.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/hs-mega-menu.min.css" />
+  <link rel="stylesheet" href="$sitelink/assets/css/jquery.datetimepicker.min.css">
 
 </head>
+	
 
-<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
-	
-	$pages.include("/WEB-INF/base/website/views/layouts/header.html", $context)
-	
-	#if($user && !$browser.inApp() && $canshowsidebar)
-		$pages.include("/${communityhome}/components/sidebars/user/index.html")
+    <link rel="Shortcut Icon" type="image/x-icon" href="$apphome/theme/images/em-favicon.ico" />
+
+	</head>
+
+<body id="page-top">
+#if(!$browser.inApp())
+
+	$context.putPageValue("accountpage", "true")
+	$pages.include("/website/views/layouts/header.html", $context)
+
+#end
+
+<div id="application" 
+	class="emedialibraryapplication"
+	data-user="$!user.getId()"
+	data-home="$siteroot"
+	data-siteroot="$siteroot" 
+	data-apphome="$apphome"
+	data-inapp="$browser.inApp()" 
+	data-themeprefix="${communityhome}/theme" 
+	data-browserlanguage="$!{browserlanguage}"
+	data-editmode='$!user.get("oe_edit_mode")' 
+	data-mediadbappid="$!mediaarchive.getMediaDbId()"
+	data-componenthome="$!componenthome"	
+	#if( $showupload)
+	data-showuploadid="${showupload.id}"
 	#end
+	data-viewertemplate="$apphome/collective/channel/show/index.html" 
+	>
 	
-	$pages.includeContent()
-	
-	##$pages.include("/${communityhome}/footer.html")
-	
-	<script src="${communityhome}/theme/js/jquery.datetimepicker.full.min.js"></script>
-	<script src="${communityhome}/theme/js/slick.min.js"></script>
-	<script src="${communityhome}/theme/js/aos.js"></script>
-	<script src="${communityhome}/theme/js/script.js"></script>
+	<div id="applicationcontent" class="bg-emdark applicationcontent applicationcollective #if($browser.inApp()) inapp #end">
+		
+		#if($canviewsettings && !$browser.inApp())
+			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+		#end
+		
+		<div class="emrightcontent emmaincontent" >
+            $pages.includeContent()
+        </div>
+    </div>
+</div>
+
+##$pages.include("${apphome}/googleanalytics.html", $context)
+
 </body>
 </html>
+
+

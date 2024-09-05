@@ -2,18 +2,15 @@
 	<div class="collapse profile-chat supportchat" id="supportchat">
 		<h2 class="pf-chat-header">
 			<i class="fas fa-comments me-2"></i>
-			Support Chat
+			Support Chat ++
 		</h2>
 		
-		<div class="chatterbox h-100" 
-		data-collectionid="$!librarycol.getId()" 
-		data-renderurl="${communityhome}/account/chatterbox/index.html" 
-		data-rendermessageurl="${communityhome}/account/chatterbox/message.html"
-		data-channel="$!{currenttopic.getId()}" 
-		data-channeltype="community" 
-		data-user="$!{user.id}" 
-		data-catalogid="$!{catalogid}">
-		</div>
+		#set($collectionid = $librarycol.getId())
+		#set($channelid = "supportchat" + $user.getId())
+		$pages.include("${communityhome}/account/chatterbox/index.html?collectionid=${collectionid}&channel=${channelid}", $context)
+
+
+</div>
 		
 	</div>
 </div>

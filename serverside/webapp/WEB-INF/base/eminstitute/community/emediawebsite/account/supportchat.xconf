@@ -3,5 +3,5 @@
 <page>
 	<inner-layout />
 	
-	<path-action name="ChatModule.getChatManager"/>
+
 </page>

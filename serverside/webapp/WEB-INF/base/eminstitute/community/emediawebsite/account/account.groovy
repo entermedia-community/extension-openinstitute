@@ -1,15 +1,12 @@
 import org.entermediadb.asset.MediaArchive
-import org.entermediadb.location.Position
-import org.entermediadb.projects.*
 import org.openedit.Data
-import org.openedit.profile.UserProfile
-
 import org.openedit.data.BaseSearcher
-import org.openedit.data.Searcher
+import org.openedit.users.User
 
 public void init()
 {
-
+	User user = context.getUser();
+	
 	if (user == null)
 	{
 		return;

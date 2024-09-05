@@ -1,5 +1,5 @@
 <page>
 
  	
- 	<inner-layout>${communityhome}/theme/layouts/inner-layout.html</inner-layout>
+ 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
  </page>

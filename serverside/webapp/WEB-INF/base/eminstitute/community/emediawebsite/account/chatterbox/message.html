@@ -15,7 +15,7 @@
 	<div class="chat-message-content"> 
 		<div class="message-menu">
 		<div class="d-flex align-items-center">
-			<div class="pickemoticon message-menu-link" data-collectionid="$collectionid" data-messageid="$chat.id" data-showurl="${communitylink}/chatterbox/smiles.html" data-toggleurl="${communitylink}/chatterbox/smilessave.html">
+			<div class="pickemoticon message-menu-link" data-collectionid="$collectionid" data-messageid="$chat.id" data-showurl="${communityhome}/chatterbox/smiles.html" data-toggleurl="${communityhome}/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
 			</div>
 			#if($caneditcollection)
@@ -23,7 +23,7 @@
 					data-oemaxlevel="1"    
 					onclick='$("#chatter-msg").focus()'
 					data-targetdiv="chatterbox-write"
-					href="${communitylink}/chatterbox/replystart.html?collectionid=$collectionid&replytoid=$chat.id" 
+					href="${communityhome}/chatterbox/replystart.html?collectionid=$collectionid&replytoid=$chat.id" 
 					title="[[Reply]]">
 					<i class="fas fa-quote-left"></i>
 				</a>
@@ -32,7 +32,7 @@
 				<a class="message-menu-link ajax" 
 					data-oemaxlevel="1"    
 					data-targetdiv="attach-${chat.id}"
-					href="${communitylink}/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
+					href="${communityhome}/chatterbox/attach.html?collectionid=$librarycol.getId()&messageid=$chat.id" 
 					title="[[Attachments]]">
 					<i class="fas fa-paperclip"></i>
 				</a>
@@ -41,13 +41,13 @@
 				#if(!$goal)		
 				<a class="message-menu-link ajax"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communitylink}/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=0" 
+					href="${communityhome}/chatterbox/makegoal.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=0" 
 					title="[[Flag as Goal]]">
 					<i class="fas fa-flag"></i>
 				</a>
 				<a class="message-menu-link ajax"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communitylink}/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=6" 
+					href="${communityhome}/chatterbox/makeagenda.html?collectionid=$librarycol.getId()&messageid=$chat.id&taskstatus=6" 
 					title="[[Make Agenda]]">
 					<i class="fas fa-check-double"></i>
 				</a>
@@ -56,7 +56,7 @@
 				#if($chat.user == $user.id )
 				<a class="message-menu-link ajax-edit-msg"   
 					data-targetdiv="chatter-message-$chat.id"
-					href="${communitylink}/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
+					href="${communityhome}/chatterbox/editmessage.html?collectionid=$librarycol.getId()&messageid=$chat.id"
 					title="[[Edit Message]]">
 					<i class="fas fa-pencil-alt"></i>
 				</a>
@@ -73,7 +73,7 @@
 	
 	<div class="chat-author d-flex pb-1">
 		#set( $userimageurl = $mediaarchive.asLinkToUserProfile($chatuser))
-		#ifnull($userimageurl) #set( $userimageurl = "${communitylink}/theme/images/user.svg" ) #end
+		#ifnull($userimageurl) #set( $userimageurl = "${communityhome}/theme/images/user.svg" ) #end
 		<a href="#esc($userlink)" title="$!chatuser.getAnonNickName()" class="author-icon">
 			<img src="$userimageurl" alt="$!chatuser.getAnonNickName()"  />
 			</a>

@@ -1,8 +1,19 @@
 <page>
-
-<page-action name="ChatModule.loadRecentChats"/>
-<page-action name="ProjectModule.loadGoalsInMessages"/>
-
-<page-action name="ChatModule.getAsset"/>
+	<path-action name="ChatModule.loadRecentChats"/>
+	
+	<path-action name="DataEditModule.loadPageOfSearch">
+		<property name="hitsname">messagesthitracker</property>
+		<property name="searchtype">chatterbox</property>
+	</path-action>
+	
+	<path-action name="ChatModule.loadPageOfChat">
+		<property name="hitsname">messagesthitracker</property>
+		<property name="searchtype">chatterbox</property>
+	</path-action>
+	
+	<path-action name="ProjectModule.loadGoalsInMessages"/>
+	<path-action name="ChatModule.loadAttachments"/>
+	
+	<inner-layout>${communityhome}/account/chatterbox/index.html</inner-layout>
 
 </page>
