@@ -1,0 +1,6 @@
+<page>
+	<property name="loadAllMessages">true</property>
+	<page-action name="ProjectModule.loadTopMessages"/>
+	<path-action name="ProjectModule.loadCollection"></path-action>
+	
+</page>
