@@ -65,7 +65,8 @@ $context.putPageValue("longform",false)
 			#set( $val = false)
 			#set( $val = $context.getRequestParameter($target))		
 			#if( !$val)
-				#set( $val = $!{data.get($detail_id)} )
+				#set( $val = $searcherManager.getValue($data,$detail,$context.getLocale()) )
+				$!context.putPageValue("value",$val)
 			#end
 		
 			$!context.putPageValue("detail",$detail)
