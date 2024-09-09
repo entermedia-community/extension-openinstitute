@@ -45,9 +45,24 @@ $(document).ready(function () {
   });
 
   lQuery("#checkIn").livequery(function () {
+
+	if( $(this).data("saveformat") !== undefined &&  $(this).val() !== undefined )
+	{
+	    var formatedval = moment($(this).val(), $(this).data("saveformat")).format(dateFormat);
+	    $(this).val(formatedval);
+	}
+
     $(this)
       .dateRangePicker(config)
       .bind("datepicker-change", function (event, obj) {
+		
+		var target = $(this).data("saveto");
+		if( target !== undefined)
+		{
+		    var formatedval = moment($(this).val(), dateFormat).format($(this).data("saveformat") );
+			$("#" + target).val(formatedval);
+		}
+		//$("#checkOut").  this.element.trigger('show.daterangepicker', this);
         $("#checkOut").data("dateRangePicker").destroy();
 
         config.startDate = moment($(this).val(), dateFormat)

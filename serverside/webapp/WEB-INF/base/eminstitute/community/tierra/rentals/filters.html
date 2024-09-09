@@ -1,14 +1,15 @@
 <div class="container search">
   <form class="d-flex flex-column align-items-center" id="search" name="searchform" method=get 
-  		action="${communityhome}/">
+  		action="${communityhome}/rentals/listrentals.html">
 
-#set( $in = $context.getRequestParameter("in"))
+#set( $in = $context.getRequestParameter("checkIn"))
 
 
     <div class="d-flex align-items-center justify-content-center flex-wrap mt-4 w-100 gap-2">
       <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
         <div class="form-floating flex-grow-1">
-          <input class="form-control" id="checkIn" placeholder="Check-In" autocomplete="off" name="in" value="$!in" required />
+          <input class="form-control" id="checkIn" placeholder="Check-In" data-saveto="datevalue" data-saveformat="YYYY-MM-DD" autocomplete="off" value="$!in" required />
+          <input type="hidden" id="datevalue" name="checkIn" value=""  />
           <label for="checkIn">Check-In</label>
         </div>
         <div class="form-floating flex-grow-1 guests">

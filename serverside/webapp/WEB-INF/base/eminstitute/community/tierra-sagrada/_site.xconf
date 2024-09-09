@@ -2,7 +2,7 @@
 
 <page>
   	<property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/tierra</property>
-    <property name="communityhome">${siteid}/community/terraza</property>
+    <property name="communityhome">${siteid}/community/tierra-sagrada</property>
     <property name="communitytagcategory">4za</property>
   
 </page>

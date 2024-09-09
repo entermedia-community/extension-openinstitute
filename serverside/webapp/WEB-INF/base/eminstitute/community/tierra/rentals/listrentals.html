@@ -1,23 +1,5 @@
 $pages.include("${communityhome}/rentals/filters.html", $context)
 
-#set( $query = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).named("collections"))
-#set( $collections = $query.search($context))
-#if( $collections.isEmpty() )
-
-No products
-
-#else
-	#set( $query = $mediaarchive.query("collectiveproduct").hitsPerPage(20).orgroup("collectionid",$collections).exact("producttype","5").named("products").sort("name") )
-	
-	#set( $in = $context.getRequestParameter("in"))
-	#ifnotnull( $in)
-	 #set( $null = $query.not("blockeddates",$in) )  ##//YYYY-MM-DD $in
-	#end
-	
-	#set( $hits = $query.search($context) )
-#end
-
-$context.putPageValue("hits",$hits)
  #if( $hits.isEmpty() )
   
   	[[No availability for ]] $in
