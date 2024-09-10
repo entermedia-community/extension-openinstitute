@@ -46,7 +46,7 @@ $(document).ready(function () {
 
   lQuery("#checkIn").livequery(function () {
 
-	if( $(this).data("saveformat") !== undefined &&  $(this).val() !== undefined )
+	if( $(this).data("saveformat") !== undefined &&  $(this).val() != "" )
 	{
 	    var formatedval = moment($(this).val(), $(this).data("saveformat")).format(dateFormat);
 	    $(this).val(formatedval);

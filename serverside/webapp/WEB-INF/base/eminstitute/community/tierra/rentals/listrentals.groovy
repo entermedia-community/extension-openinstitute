@@ -22,6 +22,7 @@ public void init()
 		if( indate != null)
 		{
 			query.not("blockeddates",indate); 
+			query.exact("fullybooked","false");
 		}
 		
 		Collection hits = query.search(context);

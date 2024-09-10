@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<page>
-  	<property name="fallbackdirectory">/WEB-INF/base/eminstitute/community/tierra</property>
-    <property name="communityhome">${siteid}/community/tierra-sagrada</property>
-    <property name="communitytagcategory">4za</property>
-  
-</page>
