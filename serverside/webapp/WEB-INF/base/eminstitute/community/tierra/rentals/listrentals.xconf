@@ -2,7 +2,8 @@
 
 <page>
 
-<path-action name="Script.run" >
+<page-action name="Script.run" >
 		<script>${communityhome}/rentals/listrentals.groovy</script>
-	</path-action>
+</page-action>
+
 </page>
