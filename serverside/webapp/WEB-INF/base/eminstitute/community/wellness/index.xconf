@@ -1,5 +1,0 @@
-<page>
-	<property name="oisection">home</property>
-		<path-action name="OiModule.loadCommunityBlog" />
-	
-</page>
