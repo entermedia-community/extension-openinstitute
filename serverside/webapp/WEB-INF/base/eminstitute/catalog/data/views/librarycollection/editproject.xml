@@ -5,6 +5,7 @@
   <property id="collectivedescription"/>  
   <property id="communitytagcategory" />
   <property id="communitytag" />
+    <property id="owner" /> 
   
   <property id="assetportrait"/>  
   <property id="assetbanner"/>

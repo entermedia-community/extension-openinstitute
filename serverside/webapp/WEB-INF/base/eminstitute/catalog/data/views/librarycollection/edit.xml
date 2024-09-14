@@ -17,6 +17,8 @@
   <property id="collectivebanner"/>
    <property id="urlname"/>
   
+
+  <property id="owner" /> 
   
   <property id="githublink" /> 
   <property id="linkedinlink" />  

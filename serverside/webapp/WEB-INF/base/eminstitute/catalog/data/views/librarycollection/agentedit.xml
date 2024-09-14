@@ -17,6 +17,7 @@
   <property id="collective"/>  
   <property id="dollarsperpoints" />
   
+    <property id="owner" /> 
   
   <property id="assetportrait"/>
   <property id="assetbanner"/>
