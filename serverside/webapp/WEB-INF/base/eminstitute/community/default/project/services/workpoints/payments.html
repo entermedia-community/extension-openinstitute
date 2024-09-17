@@ -19,7 +19,7 @@
 		class="autosubmit  ajaxform" 
 		data-targetdiv="expensereport" 
 		method="post" 
-		action="$!siteroot${projectlink}/services/transfers/results.html">
+		action="${projectlink}/services/transfers/results.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("currencytransfer") )
 		$context.putPageValue("searcher",$searcher)

@@ -24,7 +24,7 @@
 		class="autosubmit  ajaxform" 
 		data-targetdiv="allreimbursements" 
 		method="post" 
-		action="$!siteroot${projectlink}/services/reimbursements/index.html">
+		action="${projectlink}/services/reimbursements/index.html">
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectivereimbursement") )
 		$context.putPageValue("searcher",$searcher)
