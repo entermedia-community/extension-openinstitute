@@ -2236,6 +2236,7 @@ ul.inlinelist li {
   /* font-size: 0.9rem; */
   /* line-height: 1.85; */
   height: calc(1.85rem + 0.15rem);
+  width: 100%;
 }
 
 label.error {
@@ -2267,11 +2268,11 @@ label.error {
 .form-control.datepicker {
   width: 195px;
 }
-
+.dateinputbox {display: flex;padding-top: 6px;}
 .ui-datepicker-trigger {
   margin-left: 4px;
   padding: 0px 4px 0;
-  float: left;
+  /* float: left; */
   /* display: inline-block; */
   width: 32px;
 }
@@ -2291,6 +2292,9 @@ label.error {
   .select2-selection__rendered {
   font-size: 0.9rem;
   line-height: 1.85;
+}
+select.form-control + .select2-container {
+    width: 100% !important;
 }
 
 textarea.form-control {
