@@ -33,8 +33,7 @@ public void init()
 	query.setAggregation(b);
 	query.setHitsPerPage(50);
 	HitTracker hits = searcher.cachedSearch(context,query);
-
-
+	String sessionid = hits.getSessionId();
 	//hits.enableBulkOperations();  //Breaks aggregations, when logging all searches
 	//hits.getActiveFilterValues();
 	Map currencymap = hits.getAggregationMap("currencytype_total");

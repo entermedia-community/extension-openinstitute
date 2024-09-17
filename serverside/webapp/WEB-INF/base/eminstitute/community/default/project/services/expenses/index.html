@@ -22,7 +22,7 @@
 		data-targetdiv="expensereport" 
 			method="post" 
 			data-oemaxlevel="1"
-			action="$!siteroot${projectlink}/services/expenses/results.html">
+			action="${projectlink}/services/expenses/results.html">
 			#set( $searchtype = "collectiveexpense")
 			#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 			$context.putPageValue("searcher",$searcher)

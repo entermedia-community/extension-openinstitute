@@ -23,7 +23,7 @@
 
 	
 	<div class="emsearchfieldrow">
-		<div id="detail_${detail.id}" align="left" valign="middle" class="emsearchfieldvalue emsearchcomponent-$!viewtype" nowrap >
+		<div id="detail_${detail.id}" class="emsearchfieldvalue emsearchcomponent-$!viewtype" nowrap >
 
 			<input name="field" value="${detail.getId()}" type="hidden">
 	
@@ -52,6 +52,10 @@
 			
 			$context.putPageValue("inlinelabels",true)
 			$context.putPageValue("caneditlists",false)
+			
+			<label class="emdatafield" >
+						$!detail.getText($context):
+			</label>
 			
 			$pages.include("${communityhome}/components/xml/types/${viewtype}.html", $context)
 		</div>
