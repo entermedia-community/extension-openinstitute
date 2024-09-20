@@ -25,25 +25,10 @@
 
 #set( $taskrole = $goalManager.findRole($task,$collectiverole,$roleuserid) )
 
-<style>
-.editrow {
-  display: flex;  /* aligns all child elements (flex items) in a row */
-}
-
-.editname
-{
-	width: 100px;
-}
-.editname
-{
-	widthxx: 400px;
-}
-</style>
-
 <section>
   <div class="editrow">
     <div class="editname">[[Notes]]</div>
-    <div class="editval"><textarea name="name" style="width:500px;height:300px" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
+    <div class="editval"><textarea name="name" style="width:100%;height:160px" class="form-control form-control-sm" >$!taskrole.name</textarea></div>
   </div>
 
   <div class="editrow">
@@ -71,33 +56,24 @@
 
 #set( $actions = $goalManager.listActions($taskid,$collectiverole,$roleuserid) )
 #if($actions.size()>0)
-<h2>[[Action Log]]</h2>
-<section>
-  <div class="editrow">
-    <div class="editname">Count</div>
-    <div class="editval" style="width:200px">
-      <span>[[Date]]</span>
-    </div>
-    <div class="editval">
-      <span>[[Added By]]</span>
-    </div>
-    <div class="editval">
-    	
-    </div>
-   </div>
-
-#foreach( $action in $actions)
-  <div class="editrow py-2" style="border-bottom: 1px solid #ddd;;" >
-    <div class="editname">$foreach.count</div>
-    <div class="editval" style="width:200px">
-      <span> #datetime($action.date)</span>
-    </div>
-    <div class="editval">
-    	$!action.owner
-    </div>
-    <div class="editval">
-    
-	 <a class="ajax btn btn-xs btn-secondary"
+<div class="mt-4">
+<h4>[[Action Log]]</h4>
+<table class="table table-hover table-striped">
+	<thead>
+		<tr>
+			<th>[[Count]]</th>
+			<th>[[Date]]</th>
+			<th>[[Added by]]</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		#foreach( $action in $actions)
+		<tr>
+			<td>$foreach.count</td>
+			<td>#datetime($action.date)</td>
+			<td>$!action.owner</td>
+			<td>	 <a class="ajax btn btn-xs btn-secondary"
 		data-oemaxlevel="1"
 		data-targetdiv="viewrole"
 		data-taskid = "$taskid"
@@ -107,12 +83,15 @@
 		style="margin: 0px 0 0 10px;" 
 		data-confirm="[[Are you sure]]?" 
 		href="$projectlink/goals/task/editrole/deleteaction.html?id=$action.id&collectionid=$librarycol.id" 
-    >[[Delete Action]]</a>
-    </div>
-  </div>
-#end
+    >[[Delete Action]]</a></td>
+		</tr>
+		#end
+	</tbody>
+</table>
 
-</section>
+
+
+</div>
 #end
 
 <div class="my-3">

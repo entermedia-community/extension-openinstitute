@@ -1164,9 +1164,9 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
   scrollbar-color: #dfdfdf #fff;
   scrollbar-width: thin;
   scrollbar-track-color: #fff;
-  overflow-y: auto;
-  height: 100%;
-  max-height: 100%;
+  /* overflow-y: auto; */
+  /* height: 100%; */
+  /* max-height: 100%; */
   padding: 10px 15px;
 }
 
@@ -1633,7 +1633,11 @@ div.errormsg {
   height: 34px;
 	border-radius: 8px;
 }
-
+.teammemberrole {
+  font-size:0.9em;
+  color:#444;
+  padding-top: 4px;
+}
 .collectivedescription {
   padding: 10px 2px;
   color: #666;
