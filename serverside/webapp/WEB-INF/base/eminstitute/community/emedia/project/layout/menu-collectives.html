@@ -38,13 +38,13 @@
 		
 		#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
-			<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html">[[Finances]]</a>
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html"  rel="nofollow">[[Finances]]</a>
 		</li>
 		
 		#end
 		#if( $caneditcollection )
 		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
-			<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]" rel="nofollow">
 				<i class="fas fa-cog mx-auto"></i>
 			</a>
 		</li>
@@ -83,13 +83,13 @@
 				
 				#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 				<li class="#if($collectivesection == "finances") active #end">
-					<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html">[[Finances]]</a>
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html"  rel="nofollow">[[Finances]]</a>
 				</li>
 				#end
 				
 				#if( $caneditcollection )
 				<li class="#if($collectivesection == "settings") active #end">
-					<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]"  rel="nofollow">
 						<i class="fas fa-cog me-1"></i> [[Settings]]
 					</a>
 				</li>
