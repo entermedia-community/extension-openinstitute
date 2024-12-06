@@ -293,6 +293,9 @@ lQuery(".redirecttopage").livequery(function () {
 
 $(document).ready(function () {
 	var userOffcanvas = $("#userOffcanvas").get(0);
+	if (!userOffcanvas) {
+		return;
+	}
 	userOffcanvas.addEventListener("show.bs.offcanvas", function () {
 		$(".community-layout").addClass("offcanvas-open");
 	});
