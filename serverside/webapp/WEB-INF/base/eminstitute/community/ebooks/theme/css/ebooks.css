@@ -290,8 +290,8 @@ h6,
 }
 
 .btn-light {
-	background-color: #b2b4cb !important;
-	color: #363950 !important;
+	background-color: #efefef;
+	color: var(--text-dark);
 }
 .btn-danger {
 	background-color: #a55261;
@@ -361,6 +361,17 @@ h6,
 	background-color: var(--bs-primary-hover) !important;
 	border-color: var(--bs-primary-hover) !important;
 	color: #ffffff;
+}
+.text-golden {
+	color: #eab308 !important;
+}
+.text-indigo {
+	color: var(--bs-indigo) !important;
+}
+.btn-indigo {
+	color: #fff !important;
+	background: var(--bs-indigo);
+	border-color: var(--bs-indigo);
 }
 
 .btn-outline-primary {
@@ -438,13 +449,13 @@ h6,
 	transition: 0.4s;
 	border-radius: var(--bs-border-radius);
 }
+.navigation .navbar-nav .nav-item .nav-link.active,
 .navigation .navbar-nav .nav-item .nav-link:hover {
 	color: var(--text-dark-hover);
 	background: #efefef;
 }
-.navigation .navbar-nav .nav-item .active {
-	color: #ffffff;
-	font-weight: 700;
+.navigation .navbar-nav .nav-item .nav-link.active {
+	font-weight: 600;
 }
 .btn-searchprojects {
 	margin-top: 28px;
@@ -502,7 +513,7 @@ h6,
 	font-style: italic;
 	font-size: 1.3rem;
 	line-height: 1;
-	color: #666666;
+	color: #454545;
 	font-weight: 600;
 	letter-spacing: 0.3px;
 	margin: 0 0 12px;

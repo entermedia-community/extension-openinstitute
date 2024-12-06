@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="mx-md-auto text-center mb-3 mt-2">
+    <h1 class="mb-0">
+      eMedia Store
+    </h1>
+    <p class="text-muted mb-0">Discover your next favorite book</p>
+  </div>
+  <div class="w-lg-50 w-md-75 mx-auto">
+    <div class="position-relative mb-3">
+      <input type="text" placeholder="Search books..." class="form-control form-control-lg" value="">
+    </div>
+    <div class="d-flex flex-wrap gap-2 mb-5"><button
+        class="btn btn-primary rounded-pill">All</button><button
+        class="btn btn-light rounded-pill">Technology</button><button
+        class="btn btn-light rounded-pill">Science</button><button
+        class="btn btn-light rounded-pill">Programming</button>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    #foreach($i in [0..11])
+    <div class="col-4 p-3">
+      <div class="store-item card shadow-sm border-0 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c" alt="The Digital Mind" class="w-100 h-48 object-cover">
+        <div class="p-4">
+          <div class="d-flex justify-content-between align-items-start">
+            <h3 class="flex-grow-1">The Digital Mind</h3>
+            <span class="flex items-center text-golden">
+              <i class="fas fa-star"></i>
+              <span class="ml-1 text-sm">4.5</span>
+            </span>
+          </div>
+          <p class="text-sm text-muted mb-2">Sarah Chen</p>
+          <p class="line-clamp-2">An exploration of artificial intelligence and consciousness.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-lg font-bold text-indigo">$29.99</span>
+            <button class="btn btn-indigo btn-lg">
+              <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    #end
+  </div>
+</div>
