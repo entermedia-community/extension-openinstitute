@@ -68,7 +68,6 @@ footer {
 	border-top: 1px solid #f4f4f4;
 }
 
-/* remove bootstrap focus ring */
 input:focus,
 textarea:focus {
 	outline: none !important;
