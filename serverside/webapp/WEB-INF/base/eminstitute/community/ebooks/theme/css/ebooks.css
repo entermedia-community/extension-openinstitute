@@ -69,7 +69,9 @@ footer {
 }
 
 /* remove bootstrap focus ring */
-*:focus {
+input:focus,
+textarea:focus,
+button:focus {
 	outline: none !important;
 	box-shadow: none !important;
 	border: 2px solid #86b7fe;
