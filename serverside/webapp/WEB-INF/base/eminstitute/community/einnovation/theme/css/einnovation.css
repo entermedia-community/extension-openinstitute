@@ -762,3 +762,16 @@ a.blog-tag:hover {
 	object-fit: contain;
 	margin-bottom: 1rem;
 }
+.footer {
+	margin-top: 2rem;
+	border-top: 1px solid #f4f4f4;
+}
+.footer h3 {
+	font-size: 1rem;
+	text-transform: uppercase;
+	color: #555555;
+}
+.footer a {
+	color: #444444;
+	font-size: 16px;
+}
