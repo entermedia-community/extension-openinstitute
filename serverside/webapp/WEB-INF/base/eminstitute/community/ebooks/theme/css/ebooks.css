@@ -443,7 +443,6 @@ h6,
 	font-size: 26px;
 	line-height: 16px;
 	font-weight: 700;
-	height: 56px;
 }
 .navigation .navbar-brand img {
 	height: 46px;
@@ -476,7 +475,6 @@ h6,
 	color: var(--text-dark);
 	padding: 10px 20px;
 	font-size: 18px;
-	line-height: 14px;
 	transition: 0.4s;
 	border-radius: var(--bs-border-radius);
 }

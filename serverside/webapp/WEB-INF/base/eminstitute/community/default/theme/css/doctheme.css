@@ -12366,7 +12366,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: rgb(92.5, 102.5, 120);
-	padding-top: 69px;
+	padding-top: 62px;
 }
 
 h1,
@@ -12832,7 +12832,7 @@ a.text-link:hover {
 }
 
 .docs-branding {
-	height: 69px;
+	height: 62px;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -12857,6 +12857,12 @@ a.text-link:hover {
 		padding-left: 72px;
 	}
 }
+.navigation .navbar-brand {
+	color: #668cff;
+	font-size: 26px;
+	line-height: 16px;
+	font-weight: 700;
+}
 .navigation .navbar-brand img {
 	height: 46px;
 	margin-right: 8px;
@@ -12868,6 +12874,9 @@ a.text-link:hover {
 	line-height: 20px;
 	transition: 0.4s;
 	border-radius: var(--bs-border-radius);
+}
+.navigation .navbar-nav .nav-item .nav-link.active {
+	font-weight: bold;
 }
 .navigation .navbar-nav .nav-item .nav-link.active,
 .navigation .navbar-nav .nav-item .nav-link:hover {
@@ -12919,8 +12928,8 @@ a.text-link:hover {
 	width: 300px;
 	position: fixed;
 	z-index: 10;
-	top: 69px;
-	height: calc(100% - 69px);
+	top: 62px;
+	height: calc(100% - 62px);
 	background: #fff;
 	overflow-y: auto;
 	/* Forefox scrollbar */
@@ -13040,7 +13049,7 @@ a.text-link:hover {
 .docs-article {
 	padding: 2rem;
 	color: rgb(92.5, 102.5, 120);
-	scroll-margin-top: 69px;
+	scroll-margin-top: 62px;
 }
 .docs-article strong {
 	color: #252930;
@@ -13062,7 +13071,7 @@ a.text-link:hover {
 .docs-article .docs-section {
 	padding: 2rem 0;
 	border-bottom: 1px solid rgb(231, 233, 236.5);
-	scroll-margin-top: 69px;
+	scroll-margin-top: 62px;
 }
 .docs-article .docs-section p:last-child {
 	margin-bottom: 0;
