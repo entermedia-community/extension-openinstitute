@@ -9,10 +9,10 @@
 		<meta name="description" content="eMedia eBooks User Guide and Documentation" />
     <link rel="shortcut icon" href="${communityhome}/theme/images/favicon.ico" />
 
-		<link
-			href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap"
-			rel="stylesheet"
-		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 		<script defer src="${communityhome}/theme/js/fontawesome/js/all.min.js"></script>
 		<link
 			rel="stylesheet"
@@ -22,7 +22,7 @@
 	</head>
 
   <body class="docs-page">
-    $pages.include("./header.html", $context)
+    $pages.include("./header.html")
     <div class="docs-wrapper">
       $pages.include("./sidebar.html", $context)
 			<div class="docs-content">

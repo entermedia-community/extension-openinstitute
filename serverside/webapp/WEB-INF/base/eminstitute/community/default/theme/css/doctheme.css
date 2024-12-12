@@ -1,13 +1,5 @@
 @charset "UTF-8";
-/*************************** Theme Colours****************************/
-/*************************** Variables Section. *****************************/
-/* Override BS5 sass color */
-/*************************** Import Bootstrap  *****************************/
-/*!
- * Bootstrap  v5.3.3 (https://getbootstrap.com/)
- * Copyright 2011-2024 The Bootstrap Authors
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root,
 [data-bs-theme="light"] {
 	--bs-blue: #0d6efd;
@@ -523,6 +515,7 @@ button,
 [type="reset"],
 [type="submit"] {
 	-webkit-appearance: button;
+	appearance: button;
 }
 button:not(:disabled),
 [type="button"]:not(:disabled),
@@ -580,6 +573,7 @@ legend + * {
 
 [type="search"] {
 	-webkit-appearance: textfield;
+	appearance: textfield;
 	outline-offset: -2px;
 }
 
@@ -602,6 +596,7 @@ legend + * {
 ::file-selector-button {
 	font: inherit;
 	-webkit-appearance: button;
+	appearance: button;
 }
 
 output {
@@ -12578,7 +12573,7 @@ a.text-link:hover {
 	-ms-transform: skew(25deg, -10deg);
 	-webkit-transform: skew(25deg, -10deg);
 	transform: skew(25deg, -10deg);
-	moz-transform-origin: top left;
+	-moz-transform-origin: top left;
 	-o-transform-origin: top left;
 	-ms-transform-origin: top left;
 	-webkit-transform-origin: top left;
@@ -12598,7 +12593,7 @@ a.text-link:hover {
 	-ms-transform: skew(25deg, 10deg);
 	-webkit-transform: skew(25deg, 10deg);
 	transform: skew(25deg, 10deg);
-	moz-transform-origin: top left;
+	-moz-transform-origin: top left;
 	-o-transform-origin: top left;
 	-ms-transform-origin: top left;
 	-webkit-transform-origin: top left;
@@ -12627,7 +12622,7 @@ a.text-link:hover {
 	-ms-transform: skew(25deg, -12deg);
 	-webkit-transform: skew(25deg, -12deg);
 	transform: skew(25deg, -12deg);
-	moz-transform-origin: top left;
+	-moz-transform-origin: top left;
 	-o-transform-origin: top left;
 	-ms-transform-origin: top left;
 	-webkit-transform-origin: top left;
@@ -12647,7 +12642,7 @@ a.text-link:hover {
 	-ms-transform: skew(-25deg, 10deg);
 	-webkit-transform: skew(-25deg, 10deg);
 	transform: skew(-25deg, 10deg);
-	moz-transform-origin: top left;
+	-moz-transform-origin: top left;
 	-o-transform-origin: top left;
 	-ms-transform-origin: top left;
 	-webkit-transform-origin: top left;
@@ -12837,41 +12832,60 @@ a.text-link:hover {
 }
 
 .docs-branding {
-	min-height: 69px;
+	height: 69px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	transition: 0.4s;
+	color: var(--text-dark);
+	background-color: #ffffff;
+	border-bottom: 1px solid #f4f4f4;
+	z-index: 999;
 }
-.docs-branding .top-search-box {
-	width: 300px;
+.docs-branding .btn.btn-lg {
+	padding: 6px 12px;
+	font-size: 18px;
 }
-.back-btn {
-	width: 40px;
-	height: 40px;
-	border-radius: 20px;
-	background: #f5f5f5;
-	color: #0d6efd;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background 0.3s ease-in-out;
+.docs-branding header {
+	font-family: "Roboto", sans-serif;
+	font-size: 18px;
+	padding-left: 300px;
 }
-.back-btn:hover {
-	background: #e0e0e0;
+@media (max-width: 1199px) {
+	.docs-branding header {
+		padding-left: 72px;
+	}
 }
-.docs-logo-wrapper {
-	display: flex;
-	align-items: center;
+.navigation .navbar-brand img {
+	height: 46px;
+	margin-right: 8px;
 }
-
-.docs-top-utilities {
-	padding-top: 4px;
+.navigation .navbar-nav .nav-item .nav-link {
+	color: black;
+	padding: 10px 20px;
+	font-size: 18px;
+	line-height: 20px;
+	transition: 0.4s;
+	border-radius: var(--bs-border-radius);
 }
-
+.navigation .navbar-nav .nav-item .nav-link.active,
+.navigation .navbar-nav .nav-item .nav-link:hover {
+	color: black;
+	background: #efefef;
+}
 .docs-sidebar-toggler {
 	display: inline-block;
 	border: none;
 	padding: 0;
 	font-size: inherit;
-	position: relative;
+	position: absolute;
 	background: none;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 72px;
+	padding-left: 24px;
 }
 .docs-sidebar-toggler:focus {
 	outline: none;
@@ -13027,7 +13041,6 @@ a.text-link:hover {
 	padding: 2rem;
 	color: rgb(92.5, 102.5, 120);
 	scroll-margin-top: 69px;
-	scroll-snap-margin-top: 69px;
 }
 .docs-article strong {
 	color: #252930;
@@ -13050,7 +13063,6 @@ a.text-link:hover {
 	padding: 2rem 0;
 	border-bottom: 1px solid rgb(231, 233, 236.5);
 	scroll-margin-top: 69px;
-	scroll-snap-margin-top: 69px;
 }
 .docs-article .docs-section p:last-child {
 	margin-bottom: 0;
