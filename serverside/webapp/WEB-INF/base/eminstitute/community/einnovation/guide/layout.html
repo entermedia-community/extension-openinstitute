@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>eMedia eBooks User Guide and Documentation</title>
+
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="eMedia eBooks User Guide and Documentation" />
+    <link rel="shortcut icon" href="${communityhome}/theme/images/favicon.ico" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+		<script defer src="${communityhome}/theme/js/fontawesome/js/all.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.css"
+		/>
+		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
+	</head>
+
+  <body class="docs-page">
+    $pages.include("./header.html")
+    <div class="docs-wrapper">
+      $pages.include("./sidebar.html", $context)
+			<div class="docs-content">
+				<div class="container">
+          $pages.includeContent()
+
+          $pages.include("./footer.html", $context)
+
+
+          <script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.min.js" ></script>
+          <script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/popper.min.js" ></script>
+
+          <script src="${communityhome}/theme/js/smoothscroll.min.js"></script>
+          <script src="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.js"></script>
+          <script src="${communityhome}/theme/js/gumshoe.polyfills.min.js"></script>
+          <script src="${communityhome}/theme/js/docs.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
