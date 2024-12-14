@@ -2,6 +2,7 @@
 
 :root,
 [data-bs-theme="light"] {
+	--bs-brand: #0d6efd;
 	--bs-blue: #0d6efd;
 	--bs-indigo: #6610f2;
 	--bs-purple: #6f42c1;
@@ -3042,8 +3043,9 @@ textarea.form-control.is-invalid {
 }
 .btn:hover {
 	color: var(--bs-btn-hover-color);
-	background-color: var(--bs-btn-hover-bg);
-	border-color: var(--bs-btn-hover-border-color);
+	background-color: var(--bs-brand);
+	border-color: var(--bs-brand);
+	opacity: 0.95;
 }
 .btn-check + .btn:hover {
 	color: var(--bs-btn-color);
@@ -12494,7 +12496,7 @@ a.text-link:hover {
 }
 
 .btn-primary {
-	background: #0d6efd;
+	background: var(--bs-brand);
 	color: #fff;
 }
 .btn-primary:hover,
@@ -12531,7 +12533,7 @@ a.text-link:hover {
 .theme-icon-holder {
 	display: inline-block;
 	background: #f4fcf6;
-	color: #0d6efd;
+	color: var(--bs-brand);
 	width: 32px;
 	height: 32px;
 	padding-top: 4px;
@@ -12858,7 +12860,7 @@ a.text-link:hover {
 	}
 }
 .navigation .navbar-brand {
-	color: #668cff;
+	color: var(--bs-brand);
 	font-size: 26px;
 	line-height: 16px;
 	font-weight: 700;
@@ -12999,14 +13001,14 @@ a.text-link:hover {
 	display: none;
 }
 .docs-nav .nav-item.active .nav-link {
-	color: #0d6efd;
+	color: var(--bs-brand);
 }
 .docs-nav .nav-item.active .nav-link:before {
 	background-color: #0d6efd;
 }
 .docs-nav .nav-item.active .nav-link .theme-icon-holder {
 	color: #fff;
-	background: #0d6efd;
+	background: var(--bs-brand);
 }
 .docs-nav .nav-link {
 	display: inline-block;
@@ -13072,6 +13074,7 @@ a.text-link:hover {
 	padding: 2rem 0;
 	border-bottom: 1px solid rgb(231, 233, 236.5);
 	scroll-margin-top: 62px;
+	counter-reset: step;
 }
 .docs-article .docs-section p:last-child {
 	margin-bottom: 0;
@@ -13099,6 +13102,15 @@ a.text-link:hover {
 .docs-article .h5 {
 	font-size: 1rem;
 	color: rgb(70.3, 77.9, 91.2);
+}
+.docs-section h5 {
+	counter-increment: step;
+}
+.docs-section h5:before {
+	content: counter(step) ". ";
+}
+#faq .docs-section h5:before {
+	display: none;
 }
 .docs-article h6,
 .docs-article .h6 {
@@ -13203,4 +13215,13 @@ a.text-link:hover {
 		display: block;
 		padding-top: 0.5rem;
 	}
+}
+.simplelightbox-gallery a {
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	cursor: zoom-in;
+}
+.simplelightbox-gallery a small {
+	font-size: 12px;
 }
