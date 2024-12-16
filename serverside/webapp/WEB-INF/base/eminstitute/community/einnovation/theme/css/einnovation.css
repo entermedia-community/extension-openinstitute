@@ -519,6 +519,9 @@ h6,
 	border-radius: 0;
 	transition: none;
 }
+.navigation .navbar-nav {
+	align-items: center;
+}
 .navigation .navbar-toggler:focus {
 	box-shadow: none;
 }
