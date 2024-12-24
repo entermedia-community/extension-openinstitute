@@ -40,7 +40,7 @@
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
-	<style id="customwebsite" href="/assets/css/custom.css"/>
+	<style id="customwebsite" href="/theme/css/custom.css"/>
 	
 	
   <permission name="openeditdirectedit">
