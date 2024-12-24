@@ -377,7 +377,7 @@ a.primary:hover .fa-solid {
 .oi-sidebar-toggler-show {
 	border: 1px solid #c0c0c0;
 	background-color: #e0e0e0 !important;
-	padding: 6px 6px 4px;
+	padding: 6px 6px 4px !important;!i;!;
 	box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.4);
 	opacity: 0.8;
 	z-index: 1000;

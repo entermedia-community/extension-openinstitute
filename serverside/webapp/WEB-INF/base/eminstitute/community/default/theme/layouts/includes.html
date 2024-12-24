@@ -13,9 +13,6 @@
 
 <link rel="stylesheet" href="/${applicationid}/components/javascript/fontawesome-5/css/all.min.css" />
 
-<script type="text/javascript" defer src="/openedit/components/html/ckeditor/ckeditor.js"></script>
-
-
 <script type="text/javascript" src="/${applicationid}/components/javascript/index.js" ></script>
 
 
@@ -24,10 +21,21 @@
 	<script type="text/javascript" src="#if(!$script.startsWith("http"))$home#end$script"></script>
 #end
 
+<script type="importmap">
+	{
+		"imports": {
+			"ckeditor5": "/openedit/components/javascript/ckeditor5/ckeditor5.js",
+			"ckeditor5/": "/openedit/components/javascript/ckeditor5/"
+		}
+	}
+	</script>
+	<script type="module" src="/openedit/components/javascript/ckLoader.js"></script>
 
 #foreach( $style in $pageManager.getStylePathsFor($content) )
 	<link rel="stylesheet" type="text/css" href="$style" />
 #end
+
+<link rel="stylesheet" type="text/css" href="/openedit/components/javascript/ckeditor5/ckeditor5.css" />
 
 <!-- <script type="text/javascript" defer src="/${applicationid}/components/javascript/multidate/moment.js" ></script>
 <script type="text/javascript" defer src="/${applicationid}/components/javascript/multidate/jquery.daterangepicker.min.js" ></script>
