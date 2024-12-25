@@ -1,0 +1,100 @@
+<section class="hero-section d-flex align-items-center text-dark py-5">
+  <div class="container text-center">
+    <h1 class="display-4 mb-2">Innovate Your Content Creation</h1>
+    <p class="lead mb-5">Effortlessly manage your marketing content, collaborate with editors, and publish to all platforms</p>
+    <div class="d-flex justify-content-center gap-3 mb-4">
+      <a class="btn btn-outline-primary rounded-pill btn-lg" href="${communitylink}/guide/">
+        <i class="fas fa-book"></i>
+        <span class="ms-2">Tutorial</span>
+      </a>
+      <a class="btn btn-primary rounded-pill btn-lg mr-3" href="${communitylink}/find/">
+        Start Innovating<i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+<div class="svg-overflow">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg> 
+</div>
+<section id="features" class="py-5">
+  <div class="container text-center">
+    <div id="primary-features" class="d-flex justify-content-center gap-2">
+      <div class="col">
+        <div class="px-2">
+          <img src="${communityhome}/images/upload.svg" />
+          <h3 class="mt-6 text-lg font-semibold">Easy Upload</h3>
+          <p class="mt-2 text-gray-600">Upload and organize your content with just a few clicks or use our Desktop App for a more seamless experience</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="px-2">
+          <img src="${communityhome}/images/share.svg" />
+          <h3 class="mt-6 text-lg font-semibold">Smart Sharing</h3>
+          <p class="mt-2 text-gray-600">Share your content on a scheduled time across multiple platforms reliably</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="px-2">
+          <img src="${communityhome}/images/chart.svg" />
+          <h3 class="mt-6 text-lg font-semibold">Detailed Analytics</h3>
+          <p class="mt-2 text-gray-600">Track your content performance with powerful insights</p>
+        </div>
+      </div>
+    </div>
+    #set($socials = ["Instagram", "Bluesky", "Mastodon", "Discord", "Slack", "X", "Threads", "Pinterest", "Facebook", "TikTok", "Reddit", "Linkedin", "Dribbble", "Youtube"])
+    <div class="d-flex justify-content-center gap-1 mt-6 socials">
+      #foreach($social in $socials) 
+        <img src="${communityhome}/images/${social}.svg" />   
+      #end
+    </div>
+  </div>
+</section>
+
+
+<section id="features" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-2">Everything you need to succeed</h2>
+    <p class="mb-5 text-center text-muted">Powerful features to help you manage, share, and grow your content business</p>
+    <div class="row justify-content-md-center">
+      #set($fts = [
+        ["content", "Content Management", "Organize and manage all your digital content in one place with powerful tools and intuitive interface."],
+        ["monetization", "Monetization Tools", "License your content for distribution and monetize it with our easy-to-use monetization tools."],
+        ["history", "Version Control", "Keep track of all your content versions and share them with your collaborators."],
+        ["clock", "Scheduled Publishing", "Plan and schedule your content releases in advance."],
+        ["server", "Digital Asset Management", "Manage your assets, images, and files all in one place"],
+        ["shield", "Content Protection", "Secure your content with our privately hosted cloud storage and encryption."],
+        ["chart", "Analytics Dashboard", "Track your growth with detailed analytics and audience insights."],
+        ["source", "Proudly Open Source", "Common Roots is powered by eMedia Library, an open source and free to use platform"]
+      ])
+      #foreach($ft in $fts)
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card feature-card h-100 border-0 p-4 shadow-sm">
+          <div class="text-primary">
+            <img src="${communityhome}/images/${ft[0]}.svg">
+          </div>
+          <h5 class="card-title mb-4">${ft[1]}</h5>
+          <p class="card-text text-muted">${ft[2]}</p>
+        </div>
+      </div>
+      #end
+    </div>
+  </div>
+</section>
+<section id="hosting" class="d-flex align-items-center text-dark py-5">
+  <div class="container-sm text-center">
+    <h2 class="h2 mb-3 text-primary">Need a Private Hub for Content Management?</h2>
+    <p class="lead mb-5 mx-auto" style="max-width: 900px;line-height: 24px;">
+      Securely host, manage, and share your creative assets with ease. Tailored for content creators, our private hosting keeps your work organized, accessible, and 100% yours.
+      <br> 
+      <!-- <blockquote>“<u>Your</u> story. <u>Your</u> platform. <u>Your</u> profits.„</blockquote> -->
+      <br>  
+      <!-- Contact us today and turn your independent publishing dreams into reality. -->
+    </p>
+    <div class="d-flex justify-content-center gap-3 mb-3">
+      <button class="btn btn-primary btn-lg">
+        <i class="fas fa-paper-plane"></i>
+        <span class="ms-2">Contact Us</span>
+      </button> 
+    </div>
+  </div>
+</section>
