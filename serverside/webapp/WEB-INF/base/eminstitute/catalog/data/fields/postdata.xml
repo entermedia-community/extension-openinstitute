@@ -90,6 +90,12 @@
       <language id="en"><![CDATA[Meta Title]]></language> 
     </name> 
   </property>  
+
+   <property id="metatags" index="true" deleted="false" editable="true" stored="true"> 
+    <name> 
+      <language id="en"><![CDATA[Meta Tags]]></language> 
+    </name> 
+  </property>  
   <property id="metadescription" editable="true" index="true" stored="true"   >
     <name> 
       <language id="en"><![CDATA[Meta Description]]></language>  
