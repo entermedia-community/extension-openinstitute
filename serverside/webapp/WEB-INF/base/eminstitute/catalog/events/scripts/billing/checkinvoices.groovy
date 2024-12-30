@@ -87,10 +87,10 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 	
 	if (pendingProducts.size() > 0) 
 	{
-		log.info("Creating recurring invoices for " + pendingProducts.size() + " products");
+		log.info("Found " + pendingProducts.size() + " products");
 		for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
-			Data product = productSearcher.loadData(productIterator.next());
-	
+			MultiValued product = productSearcher.loadData(productIterator.next());
+			log.info("Creating recurring invoices for: " + product.getId() + " " + product + " Period: "  +product.getValue("recurringperiod"));
 			Date nextBillOn = product.getValue("nextbillon");
 			Date lastbilldate = product.getValue("lastgeneratedinvoicedate");
 			if (lastbilldate == null || lastbilldate < nextBillOn) { // otherwise assume it's already created
@@ -128,7 +128,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				//invoice.setValue("startdate", nextBillOn);  //use duedate
 				
 				//end
-				Integer recurringperiod = product.getValue("recurringperiod");
+				Integer recurringperiod = product.getInt("recurringperiod");
 				Calendar endbilldate = Calendar.getInstance();
 				endbilldate.setTime(nextBillOn);
 				endbilldate.add(Calendar.MONTH, recurringperiod);
