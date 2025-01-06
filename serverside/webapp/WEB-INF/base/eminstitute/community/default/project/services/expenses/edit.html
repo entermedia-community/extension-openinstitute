@@ -28,9 +28,9 @@
 	<input type="hidden" name="collectionid" value="$collectionid" />
 	
 #if( $canviewsettings)		
-	$context.putPageValue("view", "collectiveexpense/editexpenseadmin")
+	$context.putPageValue("viewid", "collectiveexpenseadminedit")
 #else
-	$context.putPageValue("view", "collectiveexpense/editexpense")
+	$context.putPageValue("viewid", "collectiveexpensegeneral")
 #end	
 	$context.putPageValue("data", $data)
 #if( $caneditcollection ||  $canviewsettings)	 

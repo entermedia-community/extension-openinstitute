@@ -14,6 +14,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>/home/cristobal/git/extension-openinstitute/serverside/src</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1652179182438</id>

@@ -15,6 +15,17 @@
 			<ref bean="exec" />
 		</property>
 	</bean>
+	
+		<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" >
+		<property name="moduleManager">
+			<ref bean="moduleManager" />
+		</property>
+		<property name="pageManager">
+			<ref bean="pageManager" />
+		</property>
+	</bean>
+	
+	
 	<bean id="AutoFailoverModule" class="org.entermedia.autofailover.AutoFailoverModule">
 	</bean>
 	<bean id="autoFailoverManager" class="org.entermedia.autofailover.AutoFailoverManager" scope="prototype">
@@ -37,40 +48,38 @@
 			<ref bean="moduleManager" />
 		</property>
 	</bean>
+
 	<bean id="AssetCountModule" class="org.entermedia.assetcount.AssetCountModule">
 	</bean>
+
 	<bean id="assetCountManager" class="org.entermedia.assetcount.AssetCountManager" scope="prototype">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
 	</bean>
+
 	<bean id="TransactionModule" class="org.entermedia.transactions.TransactionModule">
 	</bean>
+
 	<bean id="PaymentModule" class="org.entermedia.stripe.PaymentModule">
 	</bean>
+
 	<bean id="transactionManager" class="org.entermedia.transactions.TransactionManager">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
 	</bean>
+
 	<bean id="FinanceModule" class="org.openinstitute.finance.FinanceModule">
 	</bean>
+
 	<bean id="financeManager" class="org.openinstitute.finance.FinanceManager">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
 	</bean>
 
-	<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" >
-		<property name="moduleManager">
-			<ref bean="moduleManager" />
-		</property>
-		<property name="pageManager">
-			<ref bean="pageManager" />
-		</property>
-	</bean>
-	
-	
+
 	<bean id="oiServer" class="org.entermediadb.server.sockets.OIServer" scope="singleton">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />

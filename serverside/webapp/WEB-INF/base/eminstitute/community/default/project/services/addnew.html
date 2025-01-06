@@ -22,7 +22,7 @@ $context.putPageValue("searcher",$searcher)
 
 #set( $searcher = $mediaarchive.getSearcher("collectiveproduct") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("view", "collectiveproduct/addnew")
+$context.putPageValue("viewid", "collectiveproductaddnew")
 $context.putPageValue("data", $data)
 $context.putPageValue("fieldcolumnsize", 12)
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)

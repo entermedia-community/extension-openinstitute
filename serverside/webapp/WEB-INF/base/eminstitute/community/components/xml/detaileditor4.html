@@ -17,23 +17,20 @@
 $context.putPageValue("multiedit",$multiedit)
 $context.putPageValue("longform",false)
 
-#if(!$view)
-	#if($viewid)
-		#set($view = "${searcher.searchType}/${viewid}")
-	#end
-#end
-
 ##We need 3 things passed in: $searcher, $view, $data
-#if ($view)
-	#if( $context.getUserProfile() )
-		#set ($details = $searcher.getDetailsForView($view, $context.getUserProfile()))
-	#end
-	#if( !$details)
-		#set ($details = $searcher.getDetailsForView($view)) 
-	#end
+
+#if ($viewid)
+	#ifnull($details)
+		#set( $viewdata = $mediaarchive.getCachedData("view",$viewid) ) 
+		#set ($details = $viewdata.getDetailsForView($context.getUserProfile()))
+		
+	#end	
+	#ifnull($details)
+		#set ($details = $searcher.getDetailsForView($viewid, $context.getUserProfile()))
+	#end	
 	
-	#if( !$details)
-		[[No details available for this view.  Please configure your view settings.]]
+	#ifnull($details)
+		[[No details available for view: $viewid.  Please configure your view settings.]]
 
 	#end
 
