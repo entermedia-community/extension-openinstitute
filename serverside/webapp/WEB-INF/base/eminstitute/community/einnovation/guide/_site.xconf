@@ -3,4 +3,6 @@
 	<inner-layout />
 	<property name="editable">true</property>
 	<property name="currentPage">guide</property>
+
+	<property name="findroot">/${siteid}/find</property>
 </page>
