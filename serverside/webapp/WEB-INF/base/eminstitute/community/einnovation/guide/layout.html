@@ -14,7 +14,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 		<script type="text/javascript"  src="/${applicationid}/components/javascript/jquery-core/jquery-3.7.1.min.js" onload="if (!window.jQuery) window.$ = window.jQuery = module.exports;"></script>		
 		<script id="jquery-liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js"> </script>
-		<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js"> </script>
+		<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js"> </script> 
 	
 		#if($!user.get("oe_edit_mode") == "editing")
 			##<script src="/${content.findroot}/components/javascript/index.js"></script>
@@ -64,6 +64,7 @@
 		data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
 		data-componenthome="$!componenthome" 
+		data-findroot="$!{content.findroot}"
 		#if( $showupload) data-showuploadid="${showupload.id}" #end>
 		
     $pages.include("./header.html")
