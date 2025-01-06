@@ -1,7 +1,7 @@
 <div id="editdataform">
 #set( $searcher = $mediaarchive.getSearcher("librarycollectionusers") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("view", "librarycollectionusers/edit")
+$context.putPageValue("viewid", "librarycollectionusersgeneral")
 $context.putPageValue("data", $data)
 <form name="dialogform" 
 	id="useraccountform"
@@ -14,7 +14,7 @@ $context.putPageValue("data", $data)
 	<input type="hidden" name="id" value="$!data.getId()" />
 	<input type="hidden" name="collectionid" value="$!librarycol.getId()" />
 	 
-	$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
+	$pages.include("${communityhome}/components/xml/detaileditorcss.html", $context)
 	
 	##delete?
 

@@ -13,15 +13,29 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+		<script type="text/javascript"  src="/${applicationid}/components/javascript/jquery-3.7.1.js" onload="if (!window.jQuery) window.$ = window.jQuery = module.exports;"></script>
+		<script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"> </script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"ckeditor5": "/openedit/components/javascript/ckeditor5/ckeditor5.js",
+					"ckeditor5/": "/openedit/components/javascript/ckeditor5/"
+				}
+			}
+		</script>
+		<script type="module" src="/openedit/components/javascript/openedithtmleditor.js" defer></script>
+		<script id="openedit" src="/openedit/components/javascript/openedit.js"></script>
 		<script defer src="${communityhome}/theme/js/fontawesome/js/all.min.js"></script>
+		<link href="/openedit/components/javascript/ckeditor5/ckeditor5.css" rel="stylesheet">
+
 		<link
 			rel="stylesheet"
 			href="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.css"
 		/>
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 	</head>
-
-  <body class="docs-page">
+	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
     $pages.include("./header.html")
     <div class="docs-wrapper">
       $pages.include("./sidebar.html", $context)
