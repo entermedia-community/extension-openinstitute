@@ -12368,7 +12368,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: rgb(92.5, 102.5, 120);
-	padding-top: 62px;
+	padding-top: 72px;
 }
 
 h1,
@@ -12685,7 +12685,7 @@ a.text-link:hover {
 .navbar-brand {
 	font-size: 2rem;
 	font-weight: 600;
-	padding-top: 0;
+	padding: 0;
 	display: flex;
 	align-items: center;
 }
@@ -12834,7 +12834,7 @@ a.text-link:hover {
 }
 
 .docs-branding {
-	height: 62px;
+	height: 72px;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -12844,6 +12844,9 @@ a.text-link:hover {
 	background-color: #ffffff;
 	border-bottom: 1px solid #f4f4f4;
 	z-index: 999;
+	/* display: flex; */
+	/* align-items: center; */
+	/* width: 100%; */
 }
 .docs-branding .btn.btn-lg {
 	padding: 6px 12px;
@@ -12859,6 +12862,9 @@ a.text-link:hover {
 		padding-left: 72px;
 	}
 }
+.docs-branding .navbar {
+	height: 72px;
+}
 .navigation .navbar-brand {
 	color: var(--bs-brand);
 	font-size: 26px;
@@ -12866,7 +12872,7 @@ a.text-link:hover {
 	font-weight: 700;
 }
 .navigation .navbar-brand img {
-	height: 46px;
+	height: 36px;
 	margin-right: 8px;
 }
 .navigation .navbar-nav .nav-item .nav-link {
@@ -12924,13 +12930,16 @@ a.text-link:hover {
 .docs-wrapper {
 	position: relative;
 }
+img.image_resized {
+	object-fit: contain;
+}
 
 .docs-sidebar {
 	display: none;
 	width: 300px;
 	position: fixed;
 	z-index: 10;
-	top: 62px;
+	top: 72px;
 	height: calc(100% - 62px);
 	background: #fff;
 	overflow-y: auto;
@@ -13046,6 +13055,7 @@ a.text-link:hover {
 .docs-content {
 	margin-left: 300px;
 	padding-bottom: 100px;
+	padding-top: 28px;
 }
 
 .docs-article {
