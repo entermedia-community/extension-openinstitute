@@ -36,7 +36,7 @@
   
   <path-action name="ProjectModule.loadCommunityTag"/>
   
-   <permission name="view">
+  <permission name="view">
     <boolean value="true"/>
   </permission>
   

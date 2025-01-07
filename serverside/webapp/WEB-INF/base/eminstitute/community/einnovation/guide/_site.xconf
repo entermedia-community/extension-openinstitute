@@ -3,6 +3,4 @@
 	<inner-layout />
 	<property name="editable">true</property>
 	<property name="currentPage">guide</property>
-
-	<property name="findroot">/${siteid}/blockfind</property>
 </page>

@@ -5,4 +5,5 @@
   <property name="fallbackdirectory">/WEB-INF/base/eminstitute/app/components</property>
  --> 
   <!-- property name="fallbackdirectory">/WEB-INF/base/finder/find/components</property -->
+  <property name="findroot">/${siteid}/blockfind</property>
 </page>
