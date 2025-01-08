@@ -30,8 +30,8 @@
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	<script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 
-	<style id="eminstitute" href="/theme/css/eminstitute.css"/>
+	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<!-- <style id="app-css" href="/${applicationid}/theme/styles/theme.css"/> -->
-	<style id="aos-css" href="/theme/css/aos.css"/>
-	<style id="ebooks" href="/theme/css/ebooks.css" />
+	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
+	<style id="ebooks" href="${communityhome}/theme/css/ebooks.css" />
 </page>

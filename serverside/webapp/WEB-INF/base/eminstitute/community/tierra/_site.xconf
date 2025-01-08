@@ -33,8 +33,8 @@
 	  <script id="results" src="/${applicationid}/components/javascript/results.js"/>
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 	  
-	<style id="eminstitute" href="/theme/css/eminstitute.css"/>
-	<style id="oi3" href="/theme/css/oi3.css"/>
-	<style id="tierra" href="/theme/css/tierra.css" />
+	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
+	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
+	<style id="tierra" href="${communityhome}/theme/css/tierra.css" />
 
 </page>
