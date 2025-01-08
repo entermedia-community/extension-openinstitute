@@ -1668,7 +1668,7 @@ textarea.blog-comments-input {
 	border-bottom: 16px solid transparent;
 	border-left: 16px solid #252525;
 	opacity: 0;
-	transition: all 0.2s ease-in-out;
+	/* transition: all 0.2s ease-in-out; */
 }
 .project-sidebar-menu li.current a::after {
 	opacity: 1;
