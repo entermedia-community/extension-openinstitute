@@ -805,6 +805,7 @@ footer {
 .emresultstable th,
 .emdata th {
 	font-size: 0.9rem;
+	text-align: center;
 }
 @media (max-width: 991px) {
 	.fixed-menu {
