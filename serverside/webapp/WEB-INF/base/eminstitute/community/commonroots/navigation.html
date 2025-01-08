@@ -1,42 +1,29 @@
-<header class="navigation emedia-community-header emedia-header">
-  <nav class="navbar navbar-expand-lg ">
-    <div class="$!content.containertype">
-      <a class="navbar-brand d-flex align-items-center" href="${communitylink}/">
-        <img src="${communityhome}/images/commonroots.svg" alt="logo">
-        <span>
-          Common Roots
-        </span>
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-background-80 backdrop-blur-lg">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="text-2xl font-bold text-black">
+      <a class="d-flex align-items-center navbar-brand" href="/">
+        <img src="$communityhome${communitytagcategory.primaryimagepath}" alt="Common Roots"  class="me-1 me-md-3" style="height:50px;width: auto;" />
+        Common Roots
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link #if($content.currentPage == 'features') active #end" href="${communitylink}/features/">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link #if($content.currentPage == 'support') active #end" href="${communitylink}/support/">Support</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link #if($content.currentPage == 'feed') active #end" href="${communitylink}/feed/">
-              <i class="fas fa-rss me-1"></i> Feed
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link #if($content.currentPage == 'guide') active #end" href="${communitylink}/guide/">
-              Guide
-            </a>
-          </li>
-          <li class="nav-item">
-            <div class="d-flex align-items-center h-100">
-              <a class="btn btn-lg btn-primary rounded ms-lg-3" href="${communitylink}/find/">Open App</a>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
-  </nav>
-</header>
-
+    <div class="hidden md-flex items-center space-x-8">
+      <a href="${communitylink}" class="text-black-80 hover-text-black transition-colors">Home</a>
+      <a href="${communitylink}/development/" class="text-sm hover-text-black transition-colors">Development</a>
+      <a href="${communitylink}/projects" class="text-sm hover-text-black transition-colors">Projects</a>
+      <a href="${communitylink}/blogs/" class="text-sm hover-text-black transition-colors">Blogs</a>
+      #ifnull($user)
+      <button class="btn btn-lg btn-dark rounded-pill px-3">
+        <i class="fas fa-user-plus me-1"></i> Join Us
+      </button>
+      <button class="btn btn-lg rounded-pill bg-yellow  px-3">
+        <i class="fas fa-sign-in-alt me-1"></i> Sign In
+      </button>
+      #end
+      #ifnotnull($user)
+        <a class="nav-link" href="$!{communitylink}/authentication/logout.html" title="[[Logout]]">
+          <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+        </a>
+      #end
+    </div>
+  </div>
+</nav>

@@ -23,14 +23,14 @@
 		<title>$!metatitle</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-		
-		$pages.include("/${communityhome}/theme/layouts/includes.html", $context)
+
+		$pages.include("${communityhome}/theme/layouts/includes.html", $context)
 
 	</head>
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
-	<div id="application" class="eminstitutecollective" 
+	<div id="application" class="min-h-screen" 
 		data-home="$home" 
 		data-user="$!user.id" 
 		data-apphome="$!{apphome}"
