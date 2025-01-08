@@ -15,6 +15,7 @@
 
 		<script type="text/javascript"  src="/${applicationid}/components/javascript/jquery-3.7.1.js" onload="if (!window.jQuery) window.$ = window.jQuery = module.exports;"></script>
 		<script id="jquery-liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js"></script>
+		<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js"> </script>
 
 		<script type="importmap">
 			{
@@ -37,6 +38,22 @@
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 	</head>
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
+		
+		
+		<div id="application" class="eminstitutecollective" 
+				data-home="$home" 
+				data-user="$!user.id" 
+				data-apphome="$!{apphome}"
+				data-communityhome="$!{communityhome}"
+				data-applink="$!{applink}" 
+				data-inapp="$!{browser.inApp()}" 
+				data-themeprefix="/$!{applicationid}/theme"
+				data-browserlanguage="$!{browserlanguage}" 
+				data-editmode='$!user.get("oe_edit_mode")'
+				data-mediadbappid="$!mediaarchive.getMediaDbId()" 
+				data-componenthome="$!componenthome" 
+				#if( $showupload) data-showuploadid="${showupload.id}" #end>		
+		
     $pages.include("./header.html")
     <div class="docs-wrapper">
       $pages.include("./sidebar.html", $context)
@@ -57,5 +74,7 @@
         </div>
       </div>
     </div>
+	
+</div> ##application	
   </body>
 </html>
