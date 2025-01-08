@@ -13,7 +13,7 @@
   
 	  <script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
 	  <script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
-	  <script id="jquery-validate" src="/${applicationid}/components/javascript/jquery.validation/jquery.validate.js"/>
+	  <script id="jquery-validate" src="/${applicationid}/components/javascript/validation/jquery.validate.js"/>
   	  <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
   	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
   	  
@@ -26,7 +26,7 @@
   	  <!-- script id="datetimepicker" src="/${applicationid}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
   	  <style id="datetimepicker-css" href="/${applicationid}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" / -->
 	  
-	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/liveajax/liveajax.js"/>
+	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
 	  <script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
