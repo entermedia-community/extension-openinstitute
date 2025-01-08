@@ -3,7 +3,7 @@
 <page>
   <property name="applicationid">${siteid}/community</property>
   
-  <property name="fallbackdirectory">/WEB-INF/base/system/commonbase</property>
+  <property name="fallbackdirectory">/WEB-INF/base/emfrontend2</property>
   
   <property name="themeprefix">/${applicationid}/theme</property>
   

@@ -16,16 +16,17 @@
 		<script id="jquery-liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js"> </script>
 		<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js"> </script>
 
-	<script type="text/javascript" src="/openedit/components/javascript/formathtml.js" defer></script>
-	<script type="importmap">
-		{
-			"imports": {
-				"ckeditor5": "/openedit/components/javascript/ckeditor5/ckeditor5.js",
-				"ckeditor5/": "/openedit/components/javascript/ckeditor5/"
+		<script type="text/javascript" src="/openedit/components/javascript/formathtml.js" defer></script>
+		<script type="importmap">
+			{
+				"imports": {
+					"ckeditor5": "/openedit/components/javascript/ckeditor5/ckeditor5.js",
+					"ckeditor5/": "/openedit/components/javascript/ckeditor5/"
+				}
 			}
-		}
-	</script>
-	<script type="module" src="/openedit/components/javascript/openedithtmleditor.js" defer></script>
+		</script>
+		<script type="module" src="/openedit/components/javascript/openedithtmleditor.js" defer></script>
+		<link href="/openedit/components/javascript/ckeditor5/ckeditor5.css" rel="stylesheet">
 
 		<script id="openedit" src="/openedit/components/javascript/openedit.js"></script>
 
@@ -35,50 +36,44 @@
 			href="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.css"
 		/>
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
-		<link href="/openedit/components/javascript/ckeditor5/ckeditor5.css" rel="stylesheet">
-
 		<style>:root{--bs-brand: #6610f2;}body.modal-open{height: 100vh;overflow: hidden;}</style>
-		
 	</head>
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
+		<div id="application" class="eminstitutecollective" 
+			data-home="$home" 
+			data-user="$!user.id" 
+			data-apphome="$!{apphome}"
+			data-communityhome="$!{communityhome}"
+			data-applink="$!{applink}" 
+			data-inapp="$!{browser.inApp()}" 
+			data-themeprefix="/$!{applicationid}/theme"
+			data-browserlanguage="$!{browserlanguage}" 
+			data-editmode='$!user.get("oe_edit_mode")'
+			data-mediadbappid="$!mediaarchive.getMediaDbId()" 
+			data-componenthome="$!componenthome" 
+			#if( $showupload) data-showuploadid="${showupload.id}" #end>
+			
+			$pages.include("./header.html")
+			<div class="docs-wrapper">
+				$pages.include("./sidebar.html", $context)
+				<div class="docs-content">
+					<div class="container">
+						$pages.includeContent()
+
+						##$pages.include("./footer.html", $context)
 
 
-<div id="application" class="eminstitutecollective" 
-		data-home="$home" 
-		data-user="$!user.id" 
-		data-apphome="$!{apphome}"
-		data-communityhome="$!{communityhome}"
-		data-applink="$!{applink}" 
-		data-inapp="$!{browser.inApp()}" 
-		data-themeprefix="/$!{applicationid}/theme"
-		data-browserlanguage="$!{browserlanguage}" 
-		data-editmode='$!user.get("oe_edit_mode")'
-		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
-		data-componenthome="$!componenthome" 
-		#if( $showupload) data-showuploadid="${showupload.id}" #end>
-		
-    $pages.include("./header.html")
-    <div class="docs-wrapper">
-      $pages.include("./sidebar.html", $context)
-			<div class="docs-content">
-				<div class="container">
-          $pages.includeContent()
+						<script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/popper.min.js" ></script>
+						<script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.min.js"></script>
 
-          ##$pages.include("./footer.html", $context)
-
-
-          <script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/popper.min.js" ></script>
-          <script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.min.js"></script>
-
-          <script src="${communityhome}/theme/js/smoothscroll.min.js"></script>
-          <script src="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.js"></script>
-          <script src="${communityhome}/theme/js/gumshoe.polyfills.min.js"></script>
-          <script src="${communityhome}/theme/js/docs.js"></script>
-        </div>
-      </div>
-    </div>
- </div>
-    
+						<script src="${communityhome}/theme/js/smoothscroll.min.js"></script>
+						<script src="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.js"></script>
+						<script src="${communityhome}/theme/js/gumshoe.polyfills.min.js"></script>
+						<script src="${communityhome}/theme/js/docs.js"></script>
+					</div>
+				</div>
+			</div>
+		</div>
   </body>
 </html>
