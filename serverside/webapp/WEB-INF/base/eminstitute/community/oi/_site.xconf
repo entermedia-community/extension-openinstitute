@@ -31,7 +31,7 @@
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 			
 
-	<!-- <style id="app-css" href="/${applicationid}/theme/styles/theme.css"/> -->
+	<style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
 	
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
