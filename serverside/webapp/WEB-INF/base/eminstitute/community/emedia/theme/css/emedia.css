@@ -793,6 +793,7 @@ footer {
 .emdata .tableheader,
 .project-sidebar-menu li.current a {
 	background-color: #626584;
+	color: white;
 }
 .project-sidebar-menu li.current a:hover {
 	background-color: #626584;
@@ -1673,7 +1674,7 @@ ul > li {
 .sidebar-left h3,
 .sidebar-right h3,
 .explore-blog-list h3 {
-	color: #576f76;
+	color: #626584;
 }
 
 .referrallinkbox {

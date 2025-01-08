@@ -39,7 +39,7 @@
 	  <script id="eminstitute" src="/${applicationid}/components/javascript/eminstitute.js"/>
 			
 
-	<style id="app-css" href="/${applicationid}/theme/styles/theme.css"/>
+	<!-- <style id="app-css" href="/${applicationid}/theme/styles/theme.css"/> -->
 	
 	<style id="eminstitute" href="/theme/css/eminstitute.css"/>
 	<style id="oi3" href="/theme/css/oi3.css"/>
