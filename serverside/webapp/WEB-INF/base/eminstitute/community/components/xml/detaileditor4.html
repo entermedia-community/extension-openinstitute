@@ -1,4 +1,6 @@
 #set( $xmledithome = $context.getContentProperty("xmledithome"))
+$context.putPageValue("xmledithome",$xmledithome)
+
 #set( $readonly = $context.getRequestParameter("detailsreadonly"))
 #ifnull($readonly)
 	#set( $readonly = "false" )
@@ -22,7 +24,7 @@ $context.putPageValue("longform",false)
 #if ($viewid)
 	#ifnull($details)
 		#set( $viewdata = $mediaarchive.getCachedData("view",$viewid) ) 
-		#set ($details = $viewdata.getDetailsForView($context.getUserProfile()))
+		#set ($details = $viewdata.getDetailsForView($viewdata, $context.getUserProfile()))
 		
 	#end	
 	#ifnull($details)
@@ -73,6 +75,7 @@ $context.putPageValue("longform",false)
 						$detail.getText($context)
 				</label>
 			    <div class="input-wrapper">
+					
 			    	$pages.include("$xmledithome/detailedit.html", $context)
 			    </div>
 			</div>

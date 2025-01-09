@@ -1,7 +1,7 @@
 
 #set($collectionid = $context.getRequestParameter("collectionid"))
  <div style="padding:0px;">
-	#set( $xmledithome  = "$apphome/components/xml")
+	###set( $xmledithome  = "$apphome/components/xml")
 	#set( $searchtype = "collectiveexpense" )
 	#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 	$context.putPageValue("searcher",$searcher)

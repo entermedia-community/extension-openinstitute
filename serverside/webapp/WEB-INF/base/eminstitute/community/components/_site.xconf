@@ -2,4 +2,5 @@
 
 <page>
   <property name="findroot">/${siteid}/blockfind</property>
+  <property name="xmledithome">/${applicationid}/components/xml</property>
 </page>
