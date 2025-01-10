@@ -122,7 +122,8 @@
     <userprofile name="viewrelatedkeywords" value="true"/>
   </permission>
   <permission name="converthistory">
-    <userprofile name="converthistory" value="true"/>
+    <userprofile name="converthistory" value="true"/>UI: CK Editor support in community apps. Make sure it saved the value 
+
   </permission>
   <permission name="viewassetdownloadhistory">
     <userprofile name="viewassetdownloadhistory" value="true"/>

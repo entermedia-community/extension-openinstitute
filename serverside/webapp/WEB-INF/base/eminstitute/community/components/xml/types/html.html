@@ -16,12 +16,14 @@
 
 
 <div style="width:100%;min-height:300px;border: 1px solid #cbd3d5;background:white;" 
+	data-editonly="true"
+
 	class="  oehtmlinput attachtext-textbox #if($isrequired && !$multiedit) required #end" 
 	data-saveto="html${detailid}value"
 	data-placeholder=""
 	>$!val</div>
 	
-<input id="html${detailid}value" name="${detailid}.value" type="hidden" value="#esc($val)" />
+<input id="html${detailid}value"  name="${detailid}.value" type="hidden" value="#esc($val)" />
 
 
 #set($fieldhint = $detail.hint)

@@ -50,7 +50,7 @@ $pages.include("$apphome/components/xml/types/daterange.html",$context)
 #set( $searcher = $mediaarchive.getSearcher($searchtype) )
 $context.putPageValue("searcher",$searcher)
 #set( $producttype = $aproduct.producttype )
-$context.putPageValue("view", "${searchtype}/invoiceadd${producttype}")
+$context.putPageValue("viewid", "${searchtype}invoiceadd${producttype}")
 $context.putPageValue("data",$data)
 $pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 

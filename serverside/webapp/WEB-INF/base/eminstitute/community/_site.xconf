@@ -36,6 +36,14 @@
   
   <path-action name="ProjectModule.loadCommunityTag"/>
   
+  
+  	<script id="liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js" />
+	  <!-- Ajax Plugins -->
+	<script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
+	<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="ajaxformsubmit" src="/${applicationid}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+
+  
   <permission name="view">
     <boolean value="true"/>
   </permission>
