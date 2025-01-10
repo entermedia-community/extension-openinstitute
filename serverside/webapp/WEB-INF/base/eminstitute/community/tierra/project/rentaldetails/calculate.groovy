@@ -1,5 +1,6 @@
 package store;
 
+import org.openedit.util.*
 import org.openedit.Data
 import org.openedit.util.DateStorageUtil
 
@@ -40,9 +41,10 @@ public void runit()
 	{
 		subtotal = subtotal * 1.25;
 	}
+	subtotal = MathUtils.roundDouble(subtotal,2);
 	
 	double total = subtotal * count;
-
+	total = MathUtils.roundDouble(total,2);
 	context.putPageValue("guests",Integer.parseInt(guests));
 
 	context.putPageValue("dailyrate",subtotal);
