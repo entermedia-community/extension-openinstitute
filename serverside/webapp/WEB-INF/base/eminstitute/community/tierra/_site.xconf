@@ -26,7 +26,6 @@
   	  <!-- script id="datetimepicker" src="/${applicationid}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
   	  <style id="datetimepicker-css" href="/${applicationid}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" / -->
 	  
-	  <script id="jquery-liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js"/>
 	  <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	  <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/>
 	  <script id="oicomponents" src="/${applicationid}/components/javascript/oicomponents.js"/>
