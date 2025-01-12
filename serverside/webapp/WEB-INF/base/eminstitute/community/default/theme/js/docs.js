@@ -8,16 +8,18 @@ $(document).ready(function () {
 				return;
 			}
 			if ($(this).is("h1")) {
+				text = text.replace(/^\d+\./g, "");
 				if (!text.startsWith(section + ".")) {
-					$(this).prepend("<span>" + section + ". </span>");
+					$(this).html("<span>" + section + ". </span>" + text);
 				}
 				$(this).attr("id", "section-" + section);
 				section++;
 				chapter = 1;
 			} else {
+				text = text.replace(/^\d+\.\d+\./g, "");
 				if (!text.startsWith(section - 1 + "." + chapter + ".")) {
-					$(this).prepend(
-						"<span>" + (section - 1) + "." + chapter + ". </span>"
+					$(this).html(
+						"<span>" + (section - 1) + "." + chapter + ". </span>" + text
 					);
 				}
 				$(this).attr("id", "section-" + section + "-" + chapter);
@@ -74,7 +76,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		var target = $(e.target).attr("href");
 		if (!target) return;
-		var scrollTop = $(target).offset().top - 72;
+		var scrollTop = $(target).offset().top - 80;
 		window.scrollTo({ behavior: "smooth", top: scrollTop });
 
 		if (sidebar.hasClass("sidebar-visible") && window.innerWidth < 1200) {
