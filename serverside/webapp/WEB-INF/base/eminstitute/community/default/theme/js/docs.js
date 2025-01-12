@@ -7,6 +7,7 @@ $(document).ready(function () {
 			if (!text.length) {
 				return;
 			}
+			text = $(this).text().trim();
 			if ($(this).is("h1")) {
 				text = text.replace(/^\d+\./g, "");
 				if (!text.startsWith(section + ".")) {
