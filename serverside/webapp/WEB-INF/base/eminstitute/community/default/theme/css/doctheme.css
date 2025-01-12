@@ -12933,6 +12933,21 @@ a.text-link:hover {
 img.image_resized {
 	object-fit: contain;
 }
+.ck-content img {
+	max-width: 100%;
+	margin-top: 8px;
+}
+
+.sl-wrapper {
+	backdrop-filter: blur(3px);
+	background: rgba(0, 0, 0, 0.25);
+}
+
+.sl-wrapper .sl-image {
+	border-radius: 4px;
+	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+}
 
 .docs-sidebar {
 	display: none;
