@@ -5,19 +5,19 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
 
-#set( $view = "" )
+#set( $viewid = "" )
 #if($isproposal)
 	##Proposals Settings
-	#set( $view = "proposalgeneral")
+	#set( $viewid = "proposalgeneral")
 #else
 	#if($canviewsettings)
-		#set( $view = "agentedit")
+		#set( $viewid = "agentedit")
 	#else
-		#set( $view = "edit")
+		#set( $viewid = "general")
 	#end
 #end
 
-$context.putPageValue("view", "librarycollection/$view")
+$context.putPageValue("viewid", "librarycollection${viewid}")
 $context.putPageValue("data", $librarycol)
 
 ##Legacy project URL 
