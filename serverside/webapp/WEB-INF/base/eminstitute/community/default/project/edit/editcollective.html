@@ -6,26 +6,26 @@
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
-#set( $view = $context.getRequestParameter("view") )
+#set( $viewid = $context.getRequestParameter("viewid") )
 
-#if(!$view)
+#if(!$viewid)
 	#if($isproposal)
 		##Proposals Settings
-		#set( $view = "proposalgeneral")
+		#set( $viewid = "proposalgeneral")
 	#else
 		#if($canviewsettings)
-			#set( $view = "agentedit")
+			#set( $viewid = "librarycollectionagentedit")
 		#else
-			#set( $view = "edit")
+			#set( $viewid = "librarycollectiongeneral")
 		#end
 	#end
 #end
 
-$context.putPageValue("view", "librarycollection/$view")
+$context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
 	
-#set($view2 = "librarycollection/$view")
+#set($view2 = "$viewid)
 
 #set($details = $searcher.getDetailsForView($view2, $userprofile));
 
@@ -46,7 +46,7 @@ $context.putPageValue("data", $librarycol)
 <input type="hidden" name="searchtype" value="librarycollection" />
 <input type="hidden" name="id" value="$librarycol.id" />
 <input type="hidden" name="collectionid" value="$librarycol.id" />
-<input type="hidden" name="view" value="$!view" />
+<input type="hidden" name="viewid" value="$!viewid" />
 
 ##Set Default Donation Template
 #if(!$librarycol.get("donationemailtemplate"))
@@ -82,7 +82,7 @@ $pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
 	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
 	
-  #if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+  #if($canviewsettings && ($viewid == "librarycollectionagentedit" || $viewid == "librarycollectiongeneral"))	
     <a class="btn btn-sm btn-danger confirm"
     style="margin: 0px 0 0 10px;" 
     data-confirm="[[Are you sure]]?" 

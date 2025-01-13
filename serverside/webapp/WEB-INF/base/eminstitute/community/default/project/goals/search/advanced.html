@@ -1,7 +1,7 @@
 <div id="advsearchpanel" >
 <div class="tanmodule" >
 #set( $moduleid = $context.findValue("module") )
-#set( $view = "${moduleid}/advancedsearch")
+#set( $viewid = "${moduleid}advancedsearch")
 
 #if(!$searcher)
 	#set($searcher  = $mediaarchive.getSearcher("$moduleid"))
@@ -10,7 +10,7 @@
 
 $context.putPageValue("hits", $goalhits)
 
-$context.putPageValue("view", $view)
+$context.putPageValue("viewid", $viewid)
 $context.putPageValue("searcher", $searcher)
 
 #set($usestartswith = $page.isPropertyTrue('usestartswith'))
@@ -27,9 +27,9 @@ class="em-widget-content"
 method="GET">
 ##We need 2 things passed in: $searcher, $view or $searcher $details
 #if (!$details && $userprofile)
-	#set ($details = $searcher.getDetailsForView($view, $userprofile))
+	#set ($details = $searcher.getDetailsForView($viewid, $userprofile))
 #else
-	#set ($details = $searcher.getDetailsForView($view))
+	#set ($details = $searcher.getDetailsForView($viewid))
 #end
 
 $context.putPageValue("idprefix","search")
