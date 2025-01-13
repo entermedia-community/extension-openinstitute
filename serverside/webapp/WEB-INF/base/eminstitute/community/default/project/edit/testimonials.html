@@ -5,8 +5,8 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
 
-#set( $view = "proposaltestimonials" )
-$context.putPageValue("view", "librarycollection/$view")
+#set( $viewid = "librarycollectionproposaltestimonials" )
+$context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
 <div class="card-block">
@@ -23,7 +23,7 @@ $context.putPageValue("data", $librarycol)
     <input type="hidden" name="searchtype" value="librarycollection" />
     <input type="hidden" name="id" value="$librarycol.id" />
     <input type="hidden" name="collectionid" value="$librarycol.id" />
-    <input type="hidden" name="view" value="$!view" />
+    <input type="hidden" name="viewid" value="$!viewid" />
 
     #if(!$librarycol.get("donationemailtemplate"))
       #set($defaultdonationtemplate = $mediaarchive.getCatalogSettingValue("donation_email_body"))
@@ -36,7 +36,7 @@ $context.putPageValue("data", $librarycol)
 
 		<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
 			
-		#if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+		#if($canviewsettings && ($viewid == "librarycollectionagentedit" || $viewid == "librarycollectiongeneral"))	
 		<a class="btn btn-sm btn-danger confirm"
 			style="margin: 0px 0 0 10px;" 
 			data-confirm="[[Are you sure]]?" 

@@ -7,8 +7,8 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
 
-#set( $view = "editinvoicetemplate" )
-$context.putPageValue("view", "librarycollection/$view")
+#set( $viewid = "librarycollectioneditinvoicetemplate" )
+$context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
 
@@ -26,7 +26,7 @@ $context.putPageValue("data", $librarycol)
 <input type="hidden" name="searchtype" value="librarycollection" />
 <input type="hidden" name="id" value="$librarycol.id" />
 <input type="hidden" name="collectionid" value="$librarycol.id" />
-<input type="hidden" name="view" value="$!view" />
+<input type="hidden" name="viewid" value="$!viewid" />
 
 #if(!$librarycol.get("invoiceemailheader"))
 	#set($invoiceemailheader = $mediaarchive.getCatalogSettingValue("invoice_email_header"))
@@ -54,7 +54,7 @@ $pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
 	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
 	
-  #if($canviewsettings && ($view == "agentedit" || $view == "edit"))	
+  #if($canviewsettings && ($viewid == "librarycollectionagentedit" || $viewid == "librarycollectiongeneral"))	
     <a class="btn btn-sm btn-danger confirm"
     style="margin: 0px 0 0 10px;" 
     data-confirm="[[Are you sure]]?" 
