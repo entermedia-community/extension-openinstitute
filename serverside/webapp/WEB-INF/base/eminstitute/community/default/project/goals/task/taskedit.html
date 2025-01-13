@@ -29,14 +29,17 @@
 				<div class="d-flex flex-row">
 					<span><i class="fas fa-check-square me-2" style="width:20px"></i></span> 
 					<div class="mb-2">
-					<select  name="taskstatus" class="form-control" style="width:300px;" >
-						<option value=""></option>
 						#set( $options = $mediaarchive.getList("taskstatus"))
-						#foreach( $option in $options)
-						<option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
-						$context.getText($mediaarchive.getCachedData("taskstatus", $option.id))</option>
-						#end
-					</select> 
+						<select  name="taskstatus" class="form-control" style="width:300px;" >
+							<option value=""></option>
+							
+							#foreach( $option in $options)
+								#set($taskstatus = $mediaarchive.getCachedData("taskstatus", $option.id))
+								<option value="$option.id" #if( $selectedstatus == $option.id) selected #end >
+									#text($taskstatus)
+								</option>
+							#end
+						</select> 
 					</div>
 				</div>		
 				<div class="d-flex flex-row m-1">

@@ -49,5 +49,15 @@
       <language id="es"><![CDATA[Urgente]]></language> 
     </name> 
   </data>  
+     <data id="readytostart"> 
+    <name> 
+      <language id="en"><![CDATA[Ready to Start]]></language>
+    </name> 
+  </data> 
+     <data id="urgent"> 
+    <name> 
+      <language id="en"><![CDATA[Urgent]]></language>
+    </name> 
+  </data> 
     
 </root>
