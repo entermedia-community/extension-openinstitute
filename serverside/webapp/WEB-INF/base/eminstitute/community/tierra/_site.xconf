@@ -14,6 +14,7 @@
 	  <script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
 	  <script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
 	  <script id="jquery-validate" src="/${applicationid}/components/javascript/validation/jquery.validate.js"/>
+	  <script id="validateandedit" src="/${applicationid}/components/javascript/validateandedit.js"/>
   	  <script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
   	  <style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
   	  
