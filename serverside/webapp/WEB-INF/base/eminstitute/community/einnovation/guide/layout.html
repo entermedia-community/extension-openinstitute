@@ -38,7 +38,6 @@
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 		<style>:root{--bs-brand: #6610f2;}body.modal-open{height: 100vh;overflow: hidden;}</style>
 	</head>
-
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
 		<div id="application" class="eminstitutecollective" 
 			data-home="$home" 
@@ -55,14 +54,15 @@
 			#if( $showupload) data-showuploadid="${showupload.id}" #end>
 			
 			$pages.include("./header.html")
-			<div class="docs-wrapper">
+			<div class="docs-wrapper" id="docs-wrapper">
 				$pages.include("./sidebar.html", $context)
 				<div class="docs-content">
 					<div class="container">
-						$pages.includeContent()
+						<div class="ck-content">
+							$pages.includeContent()
+						</div>
 
 						##$pages.include("./footer.html", $context)
-
 
 						<script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/popper.min.js" ></script>
 						<script type="text/javascript" src="/${applicationid}/components/javascript/bootstrap/5.2.1/js/bootstrap.min.js"></script>
