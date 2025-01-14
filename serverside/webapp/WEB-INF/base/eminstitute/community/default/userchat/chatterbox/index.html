@@ -10,11 +10,15 @@ data-catalogid="$!{catalogid}">
 	
 	$pages.include("${communityhome}/userchat/chatterbox/messages.html", $context)				
 	
-	##if( $caneditcollection)
+	#if( $user)
 			
 	$pages.include("${communityhome}/userchat/chatterbox/editarea.html", $context)
+	
+	#else
+	
+	<div class="mx-3">[[Login to chat]]</div>
 					
-	##end
+	#end
 
 
 </div>

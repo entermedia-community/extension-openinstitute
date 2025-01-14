@@ -26,6 +26,7 @@
 	
 	<div class="message-menu">
 		<div class="d-flex align-items-center">
+			#if($user)
 			<div class="pickemoticon message-menu-link" 
 			data-collectionid="$!librarycol.getId()" 
 			data-messageid="$chat.id" 
@@ -34,6 +35,7 @@
 			data-toggleurl="/userchat/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
 			</div>
+			#end
 			#if($caneditcollection)
 				<a class="message-menu-link ajax jumptofocus" 
 					data-oemaxlevel="1"    
