@@ -34,7 +34,7 @@
 			
 			#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 			$context.putPageValue("searcher",$searcher)
-			$context.putPageValue("view", "librarycollection/addnew")
+			$context.putPageValue("viewid", "librarycollectionaddnew")
 			
 			$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 			
