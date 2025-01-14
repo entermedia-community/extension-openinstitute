@@ -28,7 +28,7 @@
 
 </head>
 
-<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
+<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end >
 
 <div id="application" class="eminstitutecollective" 
 		data-home="$home" 
@@ -42,7 +42,8 @@
 		data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
 		data-componenthome="$!componenthome" 
-		#if( $showupload) data-showuploadid="${showupload.id}" #end>
+		#if( $showupload) data-showuploadid="${showupload.id}" #end
+		>
 
 	$pages.include("/${communityhome}/navigation.html", $context)
 	
@@ -53,7 +54,7 @@
 	$pages.includeContent()
 	
 	
-	$pages.include("/${communityhome}/footer.html")
+	$pages.include("/${communityhome}/footer.html", $context)
 </div>
 	<script src="${communityhome}/theme/js/slick.min.js"></script>
 	<script src="${communityhome}/theme/js/aos.js"></script>
