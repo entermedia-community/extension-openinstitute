@@ -35,6 +35,9 @@
 	--text-dark: #151515;
 	--text-dark-hover: #252525;
 	--text-light: #ffffff;
+	
+	--widget-header-bg:#efefef;
+	--widget-header-text:#000;
 }
 
 * {
@@ -610,3 +613,19 @@ input.form-control-lg {
 		margin: 0 auto 1rem;
 	}
 }
+
+.emwidget-chatterbox {
+	height: calc(100vh - 150px)
+}
+.chatterbox-body-inside {
+    max-height: calc(100vh - 90px);
+}
+
+.chatterbox-write .chatter-send, 
+.emwidget-header, .emdata .tableheader, 
+.emwidget-name,
+.project-sidebar-menu li.current a {
+    background-color: var(--widget-header-bg);
+    color: var(--widget-header-text);
+}
+

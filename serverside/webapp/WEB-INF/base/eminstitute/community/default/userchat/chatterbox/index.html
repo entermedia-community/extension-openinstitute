@@ -1,0 +1,20 @@
+
+<div class="chatterbox"
+data-collectionid="$!librarycol.getId()" 
+data-renderurl="/userchat/chatterbox/index.html" 
+data-rendermessageurl="/userchat/chatterbox/message.html"
+data-channel="$!{currenttopic.getId()}" 
+data-channeltype="community" 
+data-user="$!{user.id}" 
+data-catalogid="$!{catalogid}">
+	
+	$pages.include("${communityhome}/userchat/chatterbox/messages.html", $context)				
+	
+	##if( $caneditcollection)
+			
+	$pages.include("${communityhome}/userchat/chatterbox/editarea.html", $context)
+					
+	##end
+
+
+</div>

@@ -60,6 +60,11 @@
   <data id="userprofile">
     <name><![CDATA[User Profile]]></name>
   </data>
+  
+  
+  <data id="userchat">
+    <name><![CDATA[User Chat]]></name>
+  </data>
 
 
 </root>
