@@ -24,7 +24,7 @@
               <div class="carousel-inner">
 				      #set( $asset = $mediaarchive.getCachedData("asset",$aproduct.primaryimage))
                 <div class="carousel-item active">
-                  <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630.jpg")' />
+                  <img src='$mediaarchive.asLinkToPreview($asset,"image1200x630cropped.jpg")' />
                 </div>
               #set( $query = $mediaarchive.query("asset").exact("collectiveproduct",$aproduct.id))
               #set( $assethits = $mediaarchive.getCachedSearch($query))
