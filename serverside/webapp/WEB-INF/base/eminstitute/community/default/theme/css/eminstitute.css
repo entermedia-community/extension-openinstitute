@@ -961,7 +961,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .emwidget-chatterbox {
-	height: calc(100vh - 324px);
+	height: calc(100vh - 310px);
 }
 
 .chatterbox {

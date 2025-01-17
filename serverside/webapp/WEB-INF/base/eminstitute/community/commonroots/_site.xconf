@@ -10,8 +10,6 @@
 
 	<property name="communitytagcategory">commonroots</property>
 	<property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
-	
-	<path-action name="OiModule.loadCommunityTagFolder" />
 
 	<script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
 	<script id="jquery-defaults" src="/${applicationid}/components/javascript/jquery.defaults.js"/>
@@ -36,5 +34,5 @@
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
-	<style id="ebooks" href="${communityhome}/theme/css/commonroots.css" />
+	<style id="commonroots" href="${communityhome}/theme/css/commonroots.css" />
 </page>
