@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<page>
-  <property name="module">dam_program_sched_request</property>
-  <property name="searchtype">dam_program_sched_request</property>
-  <property name="fallbackdirectory">/null/services/module/default</property>
-</page>
