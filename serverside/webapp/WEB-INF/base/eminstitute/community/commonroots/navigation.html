@@ -7,12 +7,12 @@
       </a>
     </div>
     <div class="hidden md-flex items-center space-x-8">
-      <a href="$!{communitylink}/" class="hover-text-black transition-colors">[[Home]]</a>
-      <a href="$!{communitylink}/songs/" class="hover-text-black transition-colors">[[Songs]]</a>
-      <a href="$!{communitylink}/films/" class="hover-text-black transition-colors">[[Films]]</a>
-      <a href="$!{communitylink}/userchat/" class="nav-link #if($content.currentPage == 'userchat') active #end" >[[Community Chat]]</a>
-	  <a href="$!{communitylink}/guide/" class="nav-link #if($content.currentPage == 'guide') active #end" >[[Guide]]</a>
-	  <a href="$!{communitylink}/find/" class="btn btn-lg btn-primary rounded ms-lg-3" >[[Open App]]</a>
+      <a href="/" class="hover-text-black transition-colors">[[Home]]</a>
+      <a href="/songs/" class="hover-text-black transition-colors">[[Songs]]</a>
+      <a href="/films/" class="hover-text-black transition-colors">[[Films]]</a>
+      <a href="/userchat/" class="nav-link #if($content.currentPage == 'userchat') active #end" >[[Community Chat]]</a>
+	  <a href="/guide/" class="nav-link #if($content.currentPage == 'guide') active #end" >[[Guide]]</a>
+	  <a href="/find/" class="btn btn-lg btn-primary rounded ms-lg-3" >[[Open App]]</a>
 	#*
       #ifnull($user)
       <button class="btn btn-lg btn-dark rounded-pill px-3">
