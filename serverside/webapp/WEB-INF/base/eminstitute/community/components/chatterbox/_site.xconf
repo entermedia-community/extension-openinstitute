@@ -1,6 +1,4 @@
 <page>
-	<property name="fallbackdirectory">/system/components/chatterbox</property>
-	
 	
 	<path-action name="DataPermissionModule.loadCustomModulePermissions">
 		<property name="module">asset</property>
