@@ -17,7 +17,7 @@
 		#set( $searcher = $mediaarchive.getSearcher("transaction") )
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("transaction/onlinedonationsearch", $userprofile))
-		$context.putPageValue("view","transaction/onlinedonationsearch")
+		$context.putPageValue("viewid","transactiononlinedonationsearch")
 		<input type="hidden" name="searchtype" value="transaction" />
 
 		<input type="hidden" name="collectionid" value="$collectionid" />

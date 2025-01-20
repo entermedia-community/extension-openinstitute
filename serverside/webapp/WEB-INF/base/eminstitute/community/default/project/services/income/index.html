@@ -27,8 +27,8 @@
 	
 		#set( $searcher = $mediaarchive.getSearcher("collectiveincome") )
 		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("collectiveincome/search", $userprofile))
-		$context.putPageValue("view","collectiveincome/search")
+		#set ($details = $searcher.getDetailsForView("collectiveincomesearch", $userprofile))
+		$context.putPageValue("viewid","collectiveincomesearch")
 		<input type="hidden" name="searchtype" value="collectiveincome" />
 		
 		<input type="hidden" name="field" value="collectionid" />
@@ -40,6 +40,7 @@
 		<div  id="searchform" class="inlinesearch" style="display:none" >
 			<div class="row">
 				$context.putPageValue("autocomplete","off")
+				
 				#foreach( $detail in $details)
 					<div class="col-md-3">
 							$context.putPageValue("detail", $detail)

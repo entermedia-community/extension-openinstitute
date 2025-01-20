@@ -25,7 +25,7 @@
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("currencytransfer/search", $userprofile))
 	
-		$context.putPageValue("view","currencytransfer/search")
+		$context.putPageValue("viewid","currencytransfersearch")
 		<input type="hidden" name="searchtype" value="currencytransfer" />
 		
 		<input type="hidden" name="field" value="collectionid" />

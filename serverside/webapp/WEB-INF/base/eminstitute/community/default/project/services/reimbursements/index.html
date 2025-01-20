@@ -30,7 +30,7 @@
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("collectivereimbursement/search", $userprofile))
 	
-		$context.putPageValue("view","collectivereimbursement/search")
+		$context.putPageValue("viewid","collectivereimbursementsearch")
 		<input type="hidden" name="searchtype" value="collectivereimbursement" />
 		
 		<input type="hidden" name="field" value="collectionid" />
