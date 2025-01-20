@@ -4,15 +4,15 @@ $context.putPageValue("searcher",$searcher)
 #set( $xmledithome  = "$apphome/components/xml")
 <div class="blog-form-container blog-shadow"> 
 	<form id="uploaddata" 
-		name="wizard" 
+		name="wizarduploadpost" 
 		method="post" 
 		data-targetdiv="channelcontainer" 
 		action="$projectlink/channel/upload.html"  ##this is for file uploading
-		data-finishaction="$projectlink/channel/uploadsave.html?oemaxlevel=2"  ##this is for normal posts
-		data-linkfinishaction="$projectlink/channel/uploadlink.html?oemaxlevel=2" ##this is for link only posts
-		class="validate showonselect autofinishaction"
-		data-finishtargetdiv="channelcontainer"
-	>
+		##data-finishaction="$projectlink/channel/uploadsave.html?oemaxlevel=2"  ##this is for normal posts
+		##data-linkfinishaction="$projectlink/channel/uploadlink.html?oemaxlevel=2" ##this is for link only posts
+		class="ajaxform reloadtargets"
+		data-ajaxreloadtargets="bloglistindex"
+		>
 		<div class="card-uploader">
 			<div class="feedupload">
 				<div class="attachtext">
@@ -21,7 +21,7 @@ $context.putPageValue("searcher",$searcher)
 							$context.putPageValue("chatuser", $user)
 							$pages.include("${communityhome}/users/icon.html",$context)
 						</div>
-						<input class="title-input uploaddescription"  
+						<input class="title-input uploadtitle"  
 							autocomplete="off" 
 							name="uploadtitle"  
 							id="uploadtitle" 
@@ -29,10 +29,10 @@ $context.putPageValue("searcher",$searcher)
 					</div>
 
 					<div style="display:none;" class="showonfocus my-2">
-						<div class="description-input oehtmlinput" data-saveto="uploaddescription" data-placeholder="<p>[[Description]]</p>">
-							[[Description]]
-						</div>
-						<input id="uploaddescription" name="uploaddescription" type="hidden" />
+						
+						 
+						<textarea name="uploaddescription" id="uploadpostdescription" cols="40" rows="5" class="htmleditor"></textarea>
+						
 						<div class="text-right d-flex align-items-center justify-content-end my-1">
 							<input class="form-check-input mt-0 me-1" type="checkbox" name="exclusivecontent"  id="exclusivecontent" value="true" /> 
 							<label for="exclusivecontent" class="m-0 text-secondary">

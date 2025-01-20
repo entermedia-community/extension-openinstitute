@@ -37,7 +37,13 @@
 					&middot;
 				</span>
 				<small class="text-muted fw-normal">
-					$context.getAge($upload.getDate("uploaddate")) [[ago]]
+					#set($timestamp = $context.getAge($upload.getDate("uploaddate")))
+					#ifnull($timestamp)
+					[[now]]
+					#end
+					#ifnotnull($timestamp)
+					$timestamp [[ago]]
+					#end
 				</small>
 			</div>
 			#if($project.collectionimage)

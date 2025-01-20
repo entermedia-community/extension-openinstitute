@@ -83,12 +83,11 @@ $(document).ready(function () {
 			//Just submit it?
 			var form = $("#uploaddata");
 			//Submit it to upload the one
-			var finishaction = form.data("linkfinishaction");
-			form.attr("action", finishaction);
-			var targetdiv = form.data("finishtargetdiv");
-			form.ajaxSubmit({
-				target: "#" + $.escapeSelector(targetdiv),
-			});
+			//var finishaction = form.data("linkfinishaction");
+			//form.attr("action", finishaction);
+			//var targetdiv = form.data("finishtargetdiv");
+			form.submit();
+			
 		} else {
 			$("#upload_field").triggerHandler("html5_upload.start");
 		}
@@ -215,8 +214,12 @@ $(document).ready(function () {
 					}
 
 					var form = $(startb.closest("form"));
-
-					if (form.hasClass("autofinishaction")) {
+					form.submit();
+					
+					
+					if (form.hasClass("reloadtargets")) {
+						//$(window).trigger("checkautoreload", [form]);
+						/*
 						var finishaction = form.data("finishaction");
 						form.attr("action", finishaction);
 						//TODO remove the last file?
@@ -226,11 +229,11 @@ $(document).ready(function () {
 						form.ajaxSubmit({
 							type: "get",
 							target: "#" + $.escapeSelector(targetdiv),
-						});
+						});*/
 					}
 					
 					
-					$(window).trigger("autoreload", [$("#bloglistindex")]);
+					
 					
 
 					//$("#uploadsfinishedtrigger").trigger("submit");
