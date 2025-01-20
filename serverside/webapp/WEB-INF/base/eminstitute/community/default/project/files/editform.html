@@ -1,6 +1,6 @@
 #set( $searcher = $mediaarchive.getSearcher("collectiveproject") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("view", "collectiveproject/addnew")
+$context.putPageValue("viewid", "collectiveprojectaddnew")
 #set($collectionid = $context.getRequestParameter("collectionid"))
 #set($projectid = $context.getRequestParameter("id"))
 <div id="editproject">

@@ -18,7 +18,7 @@
 		#set( $searcher = $mediaarchive.getSearcher("collectivelinktracker") )
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("collectivelinktracker/search", $userprofile))
-		$context.putPageValue("view","collectivelinktracker/search")
+		$context.putPageValue("viewid","collectivelinktrackersearch")
 		<input type="hidden" name="searchtype" value="collectiveincome" />
 		
 		<input type="hidden" name="field" value="collectionid" />

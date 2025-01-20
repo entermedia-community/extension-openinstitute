@@ -26,8 +26,8 @@
 			#set( $searchtype = "collectiveexpense")
 			#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 			$context.putPageValue("searcher",$searcher)
-			#set ($details = $searcher.getDetailsForView("${searchtype}/search", $userprofile))
-			$context.putPageValue("view","${$searchtype}/search")
+			#set ($details = $searcher.getDetailsForView("collectiveexpensesearch", $userprofile))
+			$context.putPageValue("viewid","${$searchtype}search")
 			$context.putPageValue("searchform",true)
 			
 		<input type="hidden" name="searchtype" value="$searchtype" />
