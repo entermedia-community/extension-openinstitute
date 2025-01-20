@@ -132,7 +132,7 @@ body[data-aos-delay="550"] [data-aos].aos-animate {
 }
 [data-aos][data-aos][data-aos-duration="600"],
 body[data-aos-duration="600"] [data-aos] {
-  transition-duration: 0.6s;
+  /* transition-duration: 0.6s; */
 }
 [data-aos][data-aos][data-aos-delay="600"],
 body[data-aos-delay="600"] [data-aos] {
@@ -724,7 +724,7 @@ body[data-aos-easing="linear"] [data-aos] {
 }
 [data-aos][data-aos][data-aos-easing="ease"],
 body[data-aos-easing="ease"] [data-aos] {
-  transition-timing-function: ease;
+  /* transition-timing-function: ease; */
 }
 [data-aos][data-aos][data-aos-easing="ease-in"],
 body[data-aos-easing="ease-in"] [data-aos] {

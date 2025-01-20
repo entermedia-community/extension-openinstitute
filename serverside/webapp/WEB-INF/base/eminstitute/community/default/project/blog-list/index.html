@@ -1,12 +1,14 @@
  
 $context.putPageValue("showchannel",true)
 
-<div id="bloglistindex" data-url="${communityhome}/">
+<div id="bloglistindex" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 #if( $caneditcollection )
 	$pages.include("${communityhome}/project/channel/addnewupload.html")
 #end
 	
+
+
 	
  #if( $topuploads.isEmpty() )
 	<p class="text-center text-muted my-5">
