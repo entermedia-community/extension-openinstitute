@@ -26,5 +26,17 @@
   <!--   data name="emautoheight" value="70%" parameterdata="imagepreview" id="pi14477904051024auto"/ -->
   <data name="useoriginalasinput" value="true" parameterdata="shareimage" id="pi144779040origshare"/>
 
+
+  <data name="crop" value="true" parameterdata="blogimage" id="bpi1447790183613share"/>  
+  <data name="background" value="white" parameterdata="blogimage" id="bpi1447789384658share"/>  
+  <data name="layers" value="flatten" parameterdata="blogimage" id="bpi1447790062578share"/>  
+  <data name="gravity" value="Center" parameterdata="blogimage" id="bpi1447790070354share"/>  
+  <data name="prefwidth" value="1300" parameterdata="blogimage" id="bpi1447790100132share"/>  
+  <data name="prefheight" value="1300" parameterdata="blogimage" id="bpi1447790093028share"/>  
+  <data name="x1" value="0" parameterdata="blogimage" id="bpi1447790399176share"/>  
+  <data name="y1" value="0" parameterdata="blogimage" id="bpi1447790405247share"/>
+  <data name="emautoheight" value="50%" parameterdata="blogimage" id="bpi1447790405autoshare"/>
+  <data name="useoriginalasinput" value="true" parameterdata="blogimage" id="bpi144779040origshare"/>
+
   
 </properties>
