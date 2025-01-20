@@ -5647,7 +5647,7 @@ fieldset:disabled .btn {
 	width: 100%;
 	color: var(--bs-modal-color);
 	pointer-events: auto;
-	background-color: var(--bs-modal-bg);
+	background-color: rgba(255, 255, 255, 0.35);
 	background-clip: padding-box;
 	border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
 	border-radius: var(--bs-modal-border-radius);
