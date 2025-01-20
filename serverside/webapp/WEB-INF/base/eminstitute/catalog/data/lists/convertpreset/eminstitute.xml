@@ -7,4 +7,11 @@
     	generatedoutputfile="image1200x630.jpg" outputextension="jpg" 
     	display="true" fileexportformat="${shortfilename}post.jpg" transcoderid="imagemagick" extension="jpg" 
     	inputtype="video|document|image" onimport="true" ordering="40" enforceaspectratio="true"  singlepage="true">Share Image</preset>
+
+    <preset id="blogimage" guid="blogimage" 
+    	generatedoutputfile="image1300x1300.jpg" outputextension="jpg" 
+    	display="true" fileexportformat="${shortfilename}post.jpg" transcoderid="imagemagick" extension="jpg" 
+    	inputtype="video|document|image" onimport="true" ordering="45" enforceaspectratio="true"  singlepage="true">Blog Image</preset>
+
+
 </presets>                                                                                                                                                                                                    
