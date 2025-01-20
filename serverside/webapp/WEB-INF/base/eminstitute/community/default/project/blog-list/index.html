@@ -1,6 +1,8 @@
  
 $context.putPageValue("showchannel",true)
 
+<div id="bloglistindex" data-url="${communityhome}/">
+
 #if( $caneditcollection )
 	$pages.include("${communityhome}/project/channel/addnewupload.html")
 #end
@@ -18,3 +20,4 @@ $context.putPageValue("showchannel",true)
 		#end
 	</div>
 #end
+</div>

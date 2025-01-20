@@ -96,13 +96,13 @@
                              #if ($invoice.getValue("paymentstatus") == "pending")
                              	<a
                                      href="${projectlink}/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
-                                     target="_blank"
+                                     
                                      class="btn btn-xs btn-secondary emdialog"
                                       data-hidefooter="true">[[Preview]]</a>
                              #elseif ($invoice.getValue("paymentstatus") == "paid" || $invoice.getValue("paymentstatus") == "invoiced")
                                  <a
                                      href="${projectlink}/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
-                                     target="_blank"
+                                     
                                      class="btn btn-xs btn-secondary emdialog"
                                       data-hidefooter="true">[[View]]</a>
                              #end

@@ -63,7 +63,7 @@ $(document).ready(function () {
 
 	lQuery("#startbutton").livequery("click", function (e) {
 		e.preventDefault();
-		if (CK5Editor) {
+		if ($.fn.CK5Editor) {
 			CK5Editor.updateSourceElement();
 		}
 		if ($(this).prop("disabled")) {
@@ -228,6 +228,10 @@ $(document).ready(function () {
 							target: "#" + $.escapeSelector(targetdiv),
 						});
 					}
+					
+					
+					$(window).trigger("autoreload", [$("#bloglistindex")]);
+					
 
 					//$("#uploadsfinishedtrigger").trigger("submit");
 					//$(".media_results_tab").data("tabloaded",false);

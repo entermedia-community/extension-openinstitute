@@ -43,7 +43,7 @@ $context.putPageValue("searcher",$searcher)
 				</div>
 				$context.putPageValue("searcher",$mediaarchive.getAssetSearcher() )	
 				#if( $librarycol)
-					$context.putPageValue("view","asset/multipleuploadcollection")	
+					$context.putPageValue("viewid","assetmultipleuploadcollection")	
 					#set( $collection = $mediaarchive.getData("librarycollection",$librarycol.getId()) )
 					$!context.setRequestParameter("libraries.value",$librarycol.library)
 					<input type="hidden" name="collectionid" id="currentcollection" value="$librarycol.getId()"/>
