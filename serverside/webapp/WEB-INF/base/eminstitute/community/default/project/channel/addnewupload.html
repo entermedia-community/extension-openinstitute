@@ -8,8 +8,6 @@ $context.putPageValue("searcher",$searcher)
 		method="post" 
 		data-targetdiv="channelcontainer" 
 		action="$projectlink/channel/upload.html"  ##this is for file uploading
-		##data-finishaction="$projectlink/channel/uploadsave.html?oemaxlevel=2"  ##this is for normal posts
-		##data-linkfinishaction="$projectlink/channel/uploadlink.html?oemaxlevel=2" ##this is for link only posts
 		class="ajaxform reloadtargets"
 		data-ajaxreloadtargets="bloglistindex"
 		>
@@ -31,7 +29,7 @@ $context.putPageValue("searcher",$searcher)
 					<div style="display:none;" class="showonfocus my-2">
 						
 						 
-						<textarea name="uploaddescription" id="uploadpostdescription" cols="40" rows="5" class="htmleditor"></textarea>
+						<textarea name="uploaddescription" id="uploadpostdescription" cols="40" rows="5" class="htmleditor-advanced" data-editonly="true" data-imagepickerhidden="true"></textarea>
 						
 						<div class="text-right d-flex align-items-center justify-content-end my-1">
 							<input class="form-check-input mt-0 me-1" type="checkbox" name="exclusivecontent"  id="exclusivecontent" value="true" /> 
