@@ -40,8 +40,8 @@ jQuery(document).ready(function () {
 		//submit
 		var targetdiv = $(this).data("targetdiv");
 		if (e.keyCode == "13") {
-			if (CK5Editor) {
-				CK5Editor.updateSourceElement();
+			if (window.CK5Editor) {
+				window.CK5Editor.updateSourceElement();
 			}
 			var form = jQuery("#uploaddata");
 			form.ajaxSubmit({
