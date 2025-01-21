@@ -242,7 +242,7 @@ body {
 	max-height: 100vh;
 }
 .min-h-screen {
-	min-height: 100vh;
+	min-height: calc(100vh - 98px);
 }
 .w-10 {
 	width: 2.5rem;
@@ -707,7 +707,6 @@ nav {
 	font-size: 1rem;
 }
 
-
 .chatterbox {
-    height: calc(100% - 156px);
+	height: calc(100% - 156px);
 }
