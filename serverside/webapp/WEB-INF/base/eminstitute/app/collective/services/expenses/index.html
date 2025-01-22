@@ -61,7 +61,7 @@
 		<label>[[Sort by]]</label>
 		<div style="width:200px; display:inline-block;">
 		<select class="select2 	form-control-sm" name="sortby" >
-			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
+			#set ($details = $searcher.getDetailsForView("collectiveexpensegeneral", $userprofile))
 			#foreach( $detail in $details)
 				<option value="$detail.getId()Down">$context.getText($detail)</option>
 				<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
