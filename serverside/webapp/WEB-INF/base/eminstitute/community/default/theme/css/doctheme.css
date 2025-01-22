@@ -12937,6 +12937,8 @@ img.image_resized {
 .ck-content img {
 	max-width: 100%;
 	margin-top: 8px;
+	box-shadow: var(--bs-box-shadow-sm) !important;
+	border-radius: 4px;
 }
 .ck-content ul {
 	margin-left: 24px;
