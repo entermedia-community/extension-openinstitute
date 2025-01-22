@@ -12941,8 +12941,7 @@ img.image_resized {
 .ck-content ul {
 	margin-left: 24px;
 }
-.ck-content li p,
-.ck-content li ul {
+.ck-content li p {
 	margin-bottom: 12px;
 }
 .sl-wrapper {
