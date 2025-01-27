@@ -9,8 +9,8 @@
   <div class="header-section">
     <div id="logoAndNav" class="px-3 w-100">
       <nav class="js-mega-menu navbar navbar-expand-lg">
-        <a class="navbar-brand" href="${communityhome}/index.html" aria-label="Entermedia">
-          <img src="${communityhome}/theme/images/logo.png" alt="Entermedia" />
+        <a class="navbar-brand" href="${communitylink}/index.html" aria-label="Entermedia">
+          <img src="${communitylink}/theme/images/logo.png" alt="Entermedia" />
         </a>
         <!-- <button type="button" class="btn btn-xs btn-soft-secondary text-white ms-3" data-bs-toggle="modal" data-bs-target="#meetingModal">
           <i class="far fa-calendar-alt me-1"></i>
@@ -35,16 +35,16 @@
           <div class="navbar-body header-abs-top-inner">
             <ul class="navbar-nav">
               <li class="navbar-nav-item">
-                <a class="nav-link #if($collectivesection == 'guide') active #end" href="${communityhome}/guide/index.html">Guide</a>
+                <a class="nav-link #if($collectivesection == 'guide') active #end" href="${communitylink}/guide/index.html">Guide</a>
               </li>
               <li class="navbar-nav-item">
-                <a class="nav-link #if($collectivesection == 'pricing') active #end" href="${communityhome}/pricing.html">Pricing</a>
+                <a class="nav-link #if($collectivesection == 'pricing') active #end" href="${communitylink}/pricing.html">Pricing</a>
               </li>
               <li class="navbar-nav-item">
-                <a class="nav-link #if($collectivesection == 'documentation') active #end" href="${communityhome}/knowledge/index.html">Documentation</a>
+                <a class="nav-link #if($collectivesection == 'documentation') active #end" href="${communitylink}/knowledge/index.html">Documentation</a>
               </li>
               <!-- <li class="navbar-nav-item">
-                <a class="nav-link #if($collectivesection == 'hosting') active #end" href="${communityhome}/hosting.html">Hosting</a>
+                <a class="nav-link #if($collectivesection == 'hosting') active #end" href="${communitylink}/hosting.html">Hosting</a>
               </li>
               #if($context.getPageValue("accountpage") != "true")
               <li class="hs-has-mega-menu navbar-nav-item"
@@ -112,18 +112,18 @@
               </li> -->
               <li class="navbar-nav-item action-btn">
                 <div class="d-flex align-items-center flex-wrap">
-					        <a href="${communityhome}/meetingschedule/meeting-form.html" rel="nofollow" class="nav-link emdialog">
+					        <a href="${communitylink}/meetingschedule/meeting-form.html" rel="nofollow" class="nav-link emdialog">
                     Schedule a Meeting            
                   </a> 
                 </div>
               </li>
               <!-- <li class="navbar-nav-item">
-                <a class="nav-link #if($collectivesection == 'downloads') active #end" href="${communityhome}/downloads.html">
+                <a class="nav-link #if($collectivesection == 'downloads') active #end" href="${communitylink}/downloads.html">
                   Desktop App
                 </a>
               </li> -->
               <li class="navbar-nav-item">
-                <a href="${communityhome}/libraries" rel="nofollow" class="btn btn-primary btn-xs mx-2">
+                <a href="${communitylink}/libraries" rel="nofollow" class="btn btn-primary btn-xs mx-2">
                   Free Libraries
                 </a> 
               </li>
@@ -136,16 +136,16 @@
                   <span>My Account</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li class="dropdown-item"><a href="${communityhome}/account/">Profile</a></li>
+                  <li class="dropdown-item"><a href="${communitylink}/account/">Profile</a></li>
                   #if($canviewsettings)
-                    <li class="dropdown-item"><a href="${communityhome}/find/">Finder</a></li>
+                    <li class="dropdown-item"><a href="${communitylink}/find/">Finder</a></li>
                   #end
                   <div class="dropdown-divider"></div>
-                  <li class="dropdown-item"><a href="${communityhome}/authentication/logout.html" class="text-danger">Logout</a></li>
+                  <li class="dropdown-item"><a href="${communitylink}/authentication/logout.html" class="text-danger">Logout</a></li>
                 </ul>
                 #else
                 <a class="btn btn-xs btn-soft-secondary text-white m-1 #if($collectivesection == 'login') active #end" 
-                  href="${communityhome}/authentication/login.html"
+                  href="${communitylink}/authentication/login.html"
                   rel="nofollow">
                   <i class="fas fa-user"></i>
                   <span>Login</span>

@@ -18,16 +18,16 @@
               <a class="nav-link  dropdown-toggle  #if($currentpage.contains("services/support.html")) active #end" href="#" data-toggle="dropdown">[[Products]]</a>
               <ul class="dropdown-menu">
     	        	<li class="dropdown-item">
-                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communityhome}/services/support.html?preview=true">[[Support Plans]]</a>
+                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communitylink}/services/support.html?preview=true">[[Support Plans]]</a>
 	            	</li>
 	            	<li class="dropdown-item">
-                    	<a class="subnav-link  #if($currentpage.contains("cloud-hosted-dam/")) active #end" href="${communityhome}/cloud-hosted-dam/?preview=true">[[Cloud Hosting]]</a>
+                    	<a class="subnav-link  #if($currentpage.contains("cloud-hosted-dam/")) active #end" href="${communitylink}/cloud-hosted-dam/?preview=true">[[Cloud Hosting]]</a>
 	            	</li>
 	            	<li class="dropdown-item">
-                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communityhome}/services/for-developers.html?preview=true">[[For Developers]]</a>
+                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communitylink}/services/for-developers.html?preview=true">[[For Developers]]</a>
 	            	</li>
 	            	<li class="dropdown-item">
-                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communityhome}/services/consulting.html?preview=true">[[Consulting]]</a>
+                    	<a class="subnav-link  #if($currentpage.contains("services/")) active #end" href="${communitylink}/services/consulting.html?preview=true">[[Consulting]]</a>
 	            	</li>
             </ul>
             </li>
@@ -36,16 +36,16 @@
               <a class="nav-link dropdown-toggle #if($currentpage.contains("knowledge/")) active #end" href="#"  data-toggle="dropdown">[[Resources]]</a>
               <ul class="dropdown-menu">
 	              <li class="dropdown-item">
-	              	<a class="subnav-link  #if($currentpage.contains("knowledge/")) active #end" href="${communityhome}/knowledge/10/index.html?preview=true">[[Videos & Documentation]]</a>
+	              	<a class="subnav-link  #if($currentpage.contains("knowledge/")) active #end" href="${communitylink}/knowledge/10/index.html?preview=true">[[Videos & Documentation]]</a>
 	              </li>
 	              <li class="dropdown-item">
-	              	<a class="subnav-link  #if($currentpage.contains("services/contact-us")) active #end" href="${communityhome}/services/contact-us.html?preview=true">[[Contact Us]]</a>
+	              	<a class="subnav-link  #if($currentpage.contains("services/contact-us")) active #end" href="${communitylink}/services/contact-us.html?preview=true">[[Contact Us]]</a>
 	              </li>
               </ul>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link  #if($currentpage.contains("community/")) active #end" href="${communityhome}/?preview=true">[[Community]]</a>
+              <a class="nav-link  #if($currentpage.contains("community/")) active #end" href="${communitylink}/?preview=true">[[Community]]</a>
             </li>
 	  	  	
 	
@@ -54,19 +54,19 @@
 		  		<a class="nav-link dropdown-toggle #if($content.section == "eminstituteapp") active #end" href="#"  data-toggle="dropdown">[[Account]]</a>
 				<ul class="dropdown-menu">
 					<li class="dropdown-item">
-					<a class="subnav-link #if($content.section == "eminstituteapp") active #end" href="${communityhome}/users/$user.getId()/index.html">[[Account]]</a>
+					<a class="subnav-link #if($content.section == "eminstituteapp") active #end" href="${communitylink}/users/$user.getId()/index.html">[[Account]]</a>
 					</li>	
 					<li class="dropdown-item">
-		              <a class="subnav-link #if($content.section == "authentication") active #end" href="${communityhome}/authentication/logout.html" rel="nofollow">[[Log Out]]</a>
+		              <a class="subnav-link #if($content.section == "authentication") active #end" href="${communitylink}/authentication/logout.html" rel="nofollow">[[Log Out]]</a>
 		            </li>	
 				</ul>
             </li>
             #else
             <li class="nav-item ">
-              <a class="nav-link #if($content.section == "authentication") active #end" href="${communityhome}/authentication/login.html" rel="nofollow">[[Login]]</a>
+              <a class="nav-link #if($content.section == "authentication") active #end" href="${communitylink}/authentication/login.html" rel="nofollow">[[Login]]</a>
             </li>
 		    <li class="nav-item">
-              <a class="btn btn-secondary btn-sm" href="${communityhome}/site/sitedeployer/createaccount.html" rel="nofollow">[[Free Account]]</a>
+              <a class="btn btn-secondary btn-sm" href="${communitylink}/site/sitedeployer/createaccount.html" rel="nofollow">[[Free Account]]</a>
             </li>
             #end
           </ul>
