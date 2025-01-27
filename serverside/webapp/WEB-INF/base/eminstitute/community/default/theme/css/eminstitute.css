@@ -2352,3 +2352,6 @@ textarea.form-control {
 	width: 80px;
 	font-size: 1rem;
 }
+.ajaxloginbox .text-contrast {
+	color: #444444;
+}

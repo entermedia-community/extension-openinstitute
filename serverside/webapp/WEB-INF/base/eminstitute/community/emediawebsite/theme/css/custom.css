@@ -12275,3 +12275,6 @@ table.referrals tr:hover td {
 	bottom: 9px;
 	left: 10px;
 }
+.ajaxloginbox .text-contrast {
+	color: #ffffff;
+}
