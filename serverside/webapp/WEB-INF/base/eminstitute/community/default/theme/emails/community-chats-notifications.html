@@ -1,3 +1,5 @@
+$pages.include("${communityhome}/theme/emails/layout-top.html", $context)
+
 #if(!$siteroot)
 	#set($siteroot = $context.siteRoot)
 	#if(!$siteroot)
@@ -40,3 +42,5 @@
 		[[To un-subscribe or change notification preferences edit your]] <a href="$!{community.externaldomain}/users/index.html" style="color: royalblue;text-decoration: none;">[[Account Preferences]]</a>
 	</small>
 </p>
+
+$pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
