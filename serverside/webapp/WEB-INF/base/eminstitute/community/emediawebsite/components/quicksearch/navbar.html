@@ -31,7 +31,7 @@
 				data-quicksearched='$!context.getRequestParameter("quicksearched")'
 				data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
 				data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" ##typeahed
-				data-typeaheadurl="$communityhome/components/quicksearch/results.html"
+				data-typeaheadurl="${communityhome}/components/quicksearch/results.html"
 				data-typeaheadtargetdiv="applicationmaincontent" data-typeaheadoemaxlevel="2"
 				data-hitssessionid="$!hits.sessionId" data-moduleid="$moduleid" data-operation="freeform" />
 			<button class="btn text-white" id="closeSearch">
@@ -56,7 +56,7 @@
 			<div id="searchResult"></div>
 			<div id="searchResultPlaceholder"> 
 				<hr style="border-color: #000000;" />
-				$pages.include("$communityhome/components/quicksearch/results.html", $context)
+				$pages.include("${communityhome}/components/quicksearch/results.html", $context)
 			</div>
 		</div>
 	</div>

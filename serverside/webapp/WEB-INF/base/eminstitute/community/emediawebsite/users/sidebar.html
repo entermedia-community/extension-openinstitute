@@ -78,10 +78,10 @@
 		#if($canviewsettings)
 		##<a href="${communityhome}/users/$user.getId()/index.html" class="" title="[[My Profile]]"><i class="fas fa-user-cog"></i> [[My Profile]]</a>
 		
-		<a href="/website/find/views/settings/status/tools/index.html" class="" title="[[Settings]]"><i class="fas fa-cog"></i> Finder App</a>
+		<a href="${communityhome}/find/views/settings/status/tools/index.html" class="" title="[[Settings]]"><i class="fas fa-cog"></i> Finder App</a>
 		
 		Search Projects: 
-		$pages.include("$communityhome/components/quicksearch/navbar.html")	
+		$pages.include("${communityhome}/components/quicksearch/navbar.html")	
 		
 		#end
 		

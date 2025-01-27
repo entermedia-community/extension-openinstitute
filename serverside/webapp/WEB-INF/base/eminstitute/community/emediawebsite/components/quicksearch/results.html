@@ -40,7 +40,7 @@
 	<div class="row">
 		#foreach( $hit in $hits.getPageOfHits()) 
 			#if($module.id == "librarycollection")
-				#set($link = "$communityhome/project/chat/index.html?collectionid=${hit.id}")
+				#set($link = "${communityhome}/project/chat/index.html?collectionid=${hit.id}")
 				<a class="col-6 col-md-4 result-item" href="$link" class="quickresult">
 					
 					<div>#text($hit)</div>

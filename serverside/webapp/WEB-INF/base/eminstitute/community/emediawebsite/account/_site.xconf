@@ -17,7 +17,7 @@
 	
 	<inner-layout>${communityhome}/account/layout.html</inner-layout>
 	
-	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="chatterbox" src="${communityhome}/components/chatterbox/chatterbox.js" />
 	
 	<permission name="viewmyaccount">
   		<or>

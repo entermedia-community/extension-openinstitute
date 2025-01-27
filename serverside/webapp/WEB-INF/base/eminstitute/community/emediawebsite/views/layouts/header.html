@@ -1,0 +1,165 @@
+#set($collectivesection = $content.collectivesection)
+
+<header id="header"
+  class="header header-box-shadow-on-scroll header-abs-top-lg header-bg-transparent-lg header-show-hide-lg"
+  data-hs-header-options='{
+        "fixMoment": 400,
+        "fixEffect": "slide"
+        }'>
+  <div class="header-section">
+    <div id="logoAndNav" class="px-3 w-100">
+      <nav class="js-mega-menu navbar navbar-expand-lg">
+        <a class="navbar-brand" href="${communityhome}/index.html" aria-label="Entermedia">
+          <img src="${communityhome}/theme/images/logo.png" alt="Entermedia" />
+        </a>
+        <!-- <button type="button" class="btn btn-xs btn-soft-secondary text-white ms-3" data-bs-toggle="modal" data-bs-target="#meetingModal">
+          <i class="far fa-calendar-alt me-1"></i>
+          Schedule a Meeting
+        </button>  -->
+        <button type="button" class="navbar-toggler btn btn-icon btn-sm rounded-circle" aria-label="Toggle navigation"
+          aria-expanded="false" aria-controls="navBar" data-bs-toggle="collapse" data-bs-target="#navBar">
+          <span class="navbar-toggler-default">
+            <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor"
+                d="M17.4,6.2H0.6C0.3,6.2,0,5.9,0,5.5V4.1c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,5.9,17.7,6.2,17.4,6.2z M17.4,14.1H0.6c-0.3,0-0.6-0.3-0.6-0.7V12c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,13.7,17.7,14.1,17.4,14.1z" />
+            </svg>
+          </span>
+          <span class="navbar-toggler-toggled">
+            <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor"
+                d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1 c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z" />
+            </svg>
+          </span>
+        </button>
+        <div id="navBar" class="collapse navbar-collapse">
+          <div class="navbar-body header-abs-top-inner">
+            <ul class="navbar-nav">
+              <li class="navbar-nav-item">
+                <a class="nav-link #if($collectivesection == 'guide') active #end" href="${communityhome}/guide/index.html">Guide</a>
+              </li>
+              <li class="navbar-nav-item">
+                <a class="nav-link #if($collectivesection == 'pricing') active #end" href="${communityhome}/pricing.html">Pricing</a>
+              </li>
+              <li class="navbar-nav-item">
+                <a class="nav-link #if($collectivesection == 'documentation') active #end" href="${communityhome}/knowledge/index.html">Documentation</a>
+              </li>
+              <!-- <li class="navbar-nav-item">
+                <a class="nav-link #if($collectivesection == 'hosting') active #end" href="${communityhome}/hosting.html">Hosting</a>
+              </li>
+              #if($context.getPageValue("accountpage") != "true")
+              <li class="hs-has-mega-menu navbar-nav-item"
+                data-hs-mega-menu-item-options='{
+                    "desktop": {
+                    "position": "right",
+                    "maxWidth": "600px"
+                    }
+                }'>
+                <a id="demosMenu" class="hs-mega-menu-invoker nav-link nav-link-toggle " href="javascript:;"
+                  aria-haspopup="true" aria-expanded="false">Libraries</a>
+                <div class="hs-mega-menu dropdown-menu " aria-labelledby="demosMenu">
+                  <h4 style="margin:12px 12px 0 12px;color: #1e2022;" class="text-center ">
+                    Community Driven Public Libraries<br/><small class="text-muted" style="font-size: 16px;">&mdash;sponsored by eMedia Library</small>
+                  </h4>
+                    <div class="navbar-promo-card navbar-promo-item">
+                      <a class="navbar-promo-link" rel=nofollow target="_blank" href="https://einnovation.com/">
+                        <div class="media align-items-center">
+                          <img class="navbar-promo-icon" src="${communityhome}/theme/images/einnovation.svg" />
+                          <div class="media-body">
+                            <span class="navbar-promo-title">eInnovation</span>
+                            <span class="navbar-promo-text">Effortlessly manage your marketing content, collaborate with editors, and publish to all platforms</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navbar-promo-card navbar-promo-item">
+                      <a class="navbar-promo-link" rel=nofollow target="_blank" href="https://ebooks.emedialibrary.com/">
+                        <div class="media align-items-center">
+                          <img class="navbar-promo-icon" src="${communityhome}/theme/images/ebooks.svg" />
+                          <div class="media-body">
+                            <span class="navbar-promo-title">eBooks</span>
+                            <span class="navbar-promo-text">Professional publishing solutions for authors, by authors. Get your book to market faster with our comprehensive platform.</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navbar-promo-card navbar-promo-item">
+                      <a class="navbar-promo-link" rel=nofollow target="_blank"  href="https://commonroots.emedialibrary.com/">
+                        <div class="media align-items-center">
+                          <img class="navbar-promo-icon" src="${communityhome}/theme/images/commonroots.svg" />
+                          <div class="media-body">
+                            <span class="navbar-promo-title">Common Roots</span>
+                            <span class="navbar-promo-text">Preserve digital heritage and share them with the world</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <!-- <div class="navbar-promo-card navbar-promo-item">
+                      <a class="navbar-promo-link" rel=nofollow target="_blank" href="https://em11.entermediadb.org/marketing/find/authentication/login.html?accountname=admin&password=admin">
+                        <div class="media align-items-center">
+                          <img class="navbar-promo-icon" src="${communityhome}/theme/images/marketing.svg" />
+                          <div class="media-body">
+                            <span class="navbar-promo-title">eMedia Open Sandbox</span>
+                            <span class="navbar-promo-text">A sandbox for testing eMedia Library with full administrative access</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div> 
+                </div>
+              </li>
+              #end
+              <li class="navbar-nav-item">
+                <a class="nav-link ps-0" style="color: #5de34f;" href="https://em11.entermediadb.org/finder/find/authentication/login.html?accountname=admin&password=admin" title="A sandbox for testing eMedia Library with full administrative access">Sandbox</a>
+              </li> -->
+              <li class="navbar-nav-item action-btn">
+                <div class="d-flex align-items-center flex-wrap">
+					        <a href="${communityhome}/meetingschedule/meeting-form.html" rel="nofollow" class="nav-link emdialog">
+                    Schedule a Meeting            
+                  </a> 
+                </div>
+              </li>
+              <!-- <li class="navbar-nav-item">
+                <a class="nav-link #if($collectivesection == 'downloads') active #end" href="${communityhome}/downloads.html">
+                  Desktop App
+                </a>
+              </li> -->
+              <li class="navbar-nav-item">
+                <a href="${communityhome}/libraries" rel="nofollow" class="btn btn-primary btn-xs mx-2">
+                  Free Libraries
+                </a> 
+              </li>
+              <li class="navbar-nav-item action-btn dropdown">
+                #if($user)
+                <a class="btn btn-xs btn-soft-secondary text-white m-1 #if($collectivesection == 'login') active #end dropdown-toggle" 
+                  href="#" role="button" data-bs-toggle="dropdown"
+                  title="[[You are loged in as]] $user">
+                  <i class="fas fa-user"></i>
+                  <span>My Account</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li class="dropdown-item"><a href="${communityhome}/account/">Profile</a></li>
+                  #if($canviewsettings)
+                    <li class="dropdown-item"><a href="${communityhome}/find/">Finder</a></li>
+                  #end
+                  <div class="dropdown-divider"></div>
+                  <li class="dropdown-item"><a href="${communityhome}/authentication/logout.html" class="text-danger">Logout</a></li>
+                </ul>
+                #else
+                <a class="btn btn-xs btn-soft-secondary text-white m-1 #if($collectivesection == 'login') active #end" 
+                  href="${communityhome}/authentication/login.html"
+                  rel="nofollow">
+                  <i class="fas fa-user"></i>
+                  <span>Login</span>
+                </a>
+                #end 
+              </li> 
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="padder"></div>
+
+
+

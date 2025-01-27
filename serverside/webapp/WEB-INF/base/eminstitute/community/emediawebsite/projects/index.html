@@ -23,7 +23,7 @@
           #set($asset = $mediaarchive.getAsset($project.assetportrait))
           #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
         #else
-          #set($logo = "$communityhome/theme/images/OI_flower.png")
+          #set($logo = "${communityhome}/theme/images/OI_flower.png")
         #end
         #set($description = $project.get("collectivedescription"))
 

@@ -7,7 +7,7 @@
     
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="shortcut icon" href="$sitelink/theme/favicon.ico" />
+  <link rel="shortcut icon" href="${communityhome}/theme/favicon.ico" />
 
 	$pages.include("${communityhome}/theme/layouts/includes.html", $context)
   	
@@ -17,9 +17,9 @@
 		##$pages.include("${communityhome}/components/map/includes.html")
 	##end
 
-  <link rel="stylesheet" href="$sitelink/theme/css/font-awesome/all.min.css" />
-  <link rel="stylesheet" href="$sitelink/theme/css/hs-mega-menu.min.css" />
-  <link rel="stylesheet" href="$sitelink/theme/css/jquery.datetimepicker.min.css">
+  <link rel="stylesheet" href="${communityhome}/theme/css/font-awesome/all.min.css" />
+  <link rel="stylesheet" href="${communityhome}/theme/css/hs-mega-menu.min.css" />
+  <link rel="stylesheet" href="${communityhome}/theme/css/jquery.datetimepicker.min.css">
 
 </head>
 	
@@ -28,7 +28,7 @@
 #if(!$browser.inApp())
 
 	$context.putPageValue("accountpage", "true")
-	$pages.include("/website/views/layouts/header.html", $context)
+	$pages.include("${communityhome}/views/layouts/header.html", $context)
 
 #end
 

@@ -1,158 +1,389 @@
- 
-
-<section class="hero-area section">
-    <div class="container">
-        <div class="d-flex flex-column align-items-center w-100 mx-auto" style="max-width: 800px;" data-aos="fade-up">
-            <img src="${communityhome}/images/logo.png" alt="eMedia" style="width: 150px;height: 150px;">
-            <h2 class="text-center mt-4 mb-1">
-                eMedia Community Projects
-            </h2>
-            <h3 class="text-center">Taking control back of our independent media libraries<br>and <span style="font-style:italic">Saving Our Digital Heritage</span>
+<main id="content" role="main">
+  <div class="gradient-y-sm-primary">
+    $pages.include("./animation/index.html")
+  </div>
+  <div class="position-relative">
+    <div class="gradient-bg"></div>
+  </div>
+  <div class="bg-navy space-2 w-100 overflow-hidden">
+    <div class="position-relative">
+      <div class="js-slick-carousel slick" data-aos="fade-left" data-aos-duration="1500"
+        data-hs-slick-carousel-options='{
+            "prevArrow": "<span class=\"fas fa-arrow-left d-none d-sm-inline-block slick-arrow slick-arrow-soft-white slick-arrow-left slick-arrow-centered-y rounded-circle ml-sm-2 ml-xl-4\"></span>",
+            "nextArrow": "<span class=\"fas fa-arrow-right d-none d-sm-inline-block slick-arrow slick-arrow-soft-white slick-arrow-right slick-arrow-centered-y rounded-circle mr-sm-2 mr-xl-4\"></span>",
+            "counterSelector": "#slickCounter",
+            "counterDivider": "/",
+            "slidesToShow": 1,
+            "slidesToScroll": 1,
+            "autoplay": true,
+            "autoplaySpeed": 5000,
+            "dots": true,
+            "dotsClass": "slick-pagination mt-3",
+            "cssEase": "linear",
+            "pauseOnFocus": true,
+            "pauseOnHover": true,
+            "fade": true
+        }'> 
+        #foreach($i in [1..18])
+          <div class="js-slide bg-img-hero-center">
+            <div class="d-flex align-items-center justify-content-center pitch-deck-slide">
+              <img src="${communitylink}/theme/images/pitch-deck/${i}.webp" loading="lazy"  style="height: 100%;object-fit: contain;"/>
+            </div>
+          </div>
+        #end
+      </div>
+    </div>
+  </div>
+  <div class="space-1 overflow-hidden">
+    <div class="w-lg-75 mx-lg-auto">
+      <div class="text-center mb-4 mx-3">
+        <h2 class="divider divider-text text-white">FULLY OPEN SOURCE DAM BUILT IN PARTNERSHIP WITH</h2>
+      </div>
+    </div>
+    <div class="partners" data-aos="fade" data-aos-duration="1500">
+      <div class="js-slick-carousel slick slick-gutters-3 z-index-2" data-hs-slick-carousel-options='{
+        "dots": false,
+        "infinite": true,
+        "arrows": false,
+        "autoplay": true,
+        "autoplaySpeed": 0,
+        "cssEase": "linear",
+        "fade": false,
+        "speed": 3000,
+        "slidesToShow": 5,
+        "slidesToScroll": 1,
+        "pauseOnFocus": false,
+        "pauseOnHover": false,
+        "responsive": [
+          {
+            "breakpoint": 1100,
+            "settings": {
+              "slidesToShow": 4,
+              "slidesToScroll": 1,
+              "dots": false,
+              "infinite": true,
+              "arrows": false
+            }
+          },
+          {
+            "breakpoint": 870,
+            "settings": {
+              "dots": false,
+              "infinite": true,
+              "arrows": false,
+              "slidesToShow": 3,
+              "slidesToScroll": 1
+            }
+          },
+          {
+            "breakpoint": 769,
+            "settings": {
+              "dots": false,
+              "infinite": true,
+              "arrows": false,
+              "slidesToShow": 2,
+              "slidesToScroll": 1
+            }
+          },
+          {
+            "breakpoint": 576,
+            "settings": {
+              "dots": false,
+              "infinite": true,
+              "arrows": false,
+              "slidesToShow": 2,
+              "slidesToScroll": 1
+            }
+          }
+        ]
+      }'>
+        <div class="js-slide mt-1" data-toggle="tooltip" data-toggle="tooltip" data-placement="bottom" title="United Nations">
+          <img style="width: 100px" src="${communitylink}/theme/images/un.svg" alt="United Nations">
+        </div>
+        <div class="js-slide mt-1" data-toggle="tooltip"
+            data-placement="bottom" title="Yale University">
+          <img style="width: 100px" src="${communitylink}/theme/images/yale.svg" alt="Yale University">
+        </div>
+        <div class="js-slide mt-1" data-toggle="tooltip"
+            data-placement="bottom" title="Canadian Brodcasting Network">
+          <img style="width: 200px" src="${communitylink}/theme/images/cbc.svg" alt="Canadian Brodcasting Network">
+        </div>
+        <div class="js-slide mt-1" data-toggle="tooltip"
+            data-placement="bottom" title="ALM">
+          <img style="width: 200px" src="${communitylink}/theme/images/alm.svg" alt="PR Newswire">
+        </div>
+        <div class="js-slide mt-1" data-toggle="tooltip"
+            data-placement="bottom" title="Cision">
+          <img style="width: 180px" src="${communitylink}/theme/images/cision.svg" alt="Cision">
+        </div>
+        <div class="js-slide mt-1" data-toggle="tooltip"
+            data-placement="bottom" title="Alfred Music">
+          <img style="width: 80px" src="${communitylink}/theme/images/alfred.svg" alt="Alfred Music">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overflow-hidden bg-navy">
+    <div class="container space-top-2 space-top-lg-3 space-bottom-3">
+      <div class="w-md-80 text-center mx-md-auto mb-5 mb-md-9">
+        <h2 class="text-capitalize">
+          We make it easy to get organized with expert guidance.
+        </h2>
+        <p class="lead">
+          Get started completely FREE with a
+          full-featured eMedia Library installation.
+         
+        </p>
+      </div>
+      <div class="row space-bottom-2"> 
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded shadow-sm">
+            <figure class="max-w-15rem w-100 mb-4">
+              <img class="img-fluid" src="${communitylink}/theme/images/community.png" alt="Community" data-toggle="tooltip"
+                data-placement="bottom" title="Community" />
+            </figure>
+           <!-- <div class="d-flex align-items-center"> -->
+            <span class="d-inline-block mb-2">See what's new in our </span>
+             <a class="btn btn-sm btn-primary transition-3d-hover" href="http://emedia.openinstitute.org/">
+              <i class="fas fa-users me-2"></i>
+              eMedia Community
+            </a>
+           <!-- </div> -->
+            <p class="text-body text-center mt-5 px-3 small">
+              Our community is an essential
+              element of this open source project.
+              We welcome a growing group of developers
+              in exchanging ideas and discussing
+              potential uses of the software.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="container space-2 bg-navy text-white rounded shadow-sm" data-aos="fade-left" data-aos-duration="1500">
+            <div class="text-center">
+              <h2 class="text-white">
+                Ready to Get Started
+              </h2>
+              <p class="mb-3">
+                Create a free eMedia Library account to chat with us, deploy a server and get started!
+              </p>
+              <span class="d-block mt-5">
+                <a class="btn btn-sm btn-primary transition-3d-hover" href="${communitylink}/users/account.html">
+                  <i class="fas fa-comment-alt me-2"></i>
+                  Chat With Us
+                </a>
+              </span>
+              <div class="text-center my-2">
+                <span class="divider divider-xs divider-text">OR</span>
+              </div>
+              <p class="m-0">
+                 <a href="${communitylink}/meetingschedule/meeting-form.html" rel="nofollow" class="btn btn-sm btn-soft-secondary text-white m-1 emdialog">
+                    <i class="far fa-calendar-alt"></i>
+                    <span class="ms-1">Schedule a Meeting</span>                  
+                  </a>    
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" data-aos="fade-right" data-aos-duration="1500">
+        <div class="col-sm-4 mb-3 mb-sm-7">
+          <div class="pr-lg-5">
+            <figure class="max-w-6rem w-100 mb-4">
+              <img class="img-fluid" src="${communitylink}/theme/images/deploy.png" alt="Deploy" data-toggle="tooltip"
+                data-placement="bottom" title="Deploy" />
+            </figure>
+            <h3 class="h4">
+              Deploy a server
             </h3>
-            <div id="homecreateproject" class="d-flex flex-column align-items-center mt-5">
-                $pages.include("$communityhome/projects/add/addprojectbutton.html")
-            </div>
+            <p class="text-body">
+              Install eMediaLibrary, for free, on any Linux server using these instructions for <a href="https://entermediadb.org/knowledge/10/docker-deployments/">Docker</a> and <a href="https://entermediadb.org/knowledge/9/setup-nginx-load-balancer/">NGINX Web server</a> 
+            </p>
+            <p class="text-body">
+              Or we have can host for you. Just login to your <a href="${communitylink}/users/account.html">My Account</a> area and request a free sever deployment.  
+            </p>
+            <p>Either way, we are happy to get you started on your journey.</p>
+          </div>
         </div>
+        <div class="col-sm-4 mb-3 mb-sm-7">
+          <div class="pr-lg-6">
+            <figure class="max-w-6rem w-100 mb-4">
+              <img class="img-fluid" src="${communitylink}/theme/images/support.png" alt="Support" data-toggle="tooltip"
+                data-placement="bottom" title="Support" />
+            </figure>
+            <h4>Get Support</h4>
+            <p class="text-body">
+              Check out the <a href="${communitylink}/documentation.html">online documentation</a>. 
+            <br>
+              Or we offer also chat support in the <a href="${communitylink}/users/account.html">My Account</a> area. 
+             <br> 
+              Or purchase <a href="${communitylink}/pricing.html">affordable expert support</a> with our team of expert
+              developers and software architects
+              to get the most out of
+              your Digital Asset Management library.
+            </p>
+          </div>
+        </div> 
+        <div class="col-sm-4 mb-sm-0">
+          <div class="pr-lg-6">
+            <figure class="max-w-6rem w-100 mb-4">
+              <img class="img-fluid" src="${communitylink}/theme/images/forum.png" alt="Forum" data-toggle="tooltip"
+                data-placement="bottom" title="Forum" />
+            </figure>
+            <h4>Meet the developers</h4>
+            <p class="text-body">
+               We welcome programmers and integrators creating their own integrations and extentions. We keep all our source code available on <a href="https://github.com/entermedia-community">GitHub EnterMedia Community</a> area. The architect of eMediaLibrary, Christopher Burkey is also available to meet with developers. Just&nbsp;<a href="${communitylink}/meetingschedule/meeting-form.html" rel="nofollow" class="d-inline emdialog"><i class="far fa-calendar-alt"></i><span class="ms-1">Schedule a Meeting</span></a>&nbsp;with him.
+            </p>
+          </div>
+        </div>
+      </div>
+      
     </div>
- 
-    <div class="has-circle">
-        <span class="circle circle-1"></span>
-        <span class="circle circle-2"></span>
-        <span class="circle circle-3"></span>
-        <span class="circle circle-4"></span>
-        <span class="circle circle-5"></span>
-        <span class="circle circle-6"></span>
-        <span class="circle circle-7"></span>
-    </div>
-</section>
-
-<section class="services section">
+  </div> 
+  <div class="space-top-2 space-bottom-2 platforms"> 
     <div class="container">
-        <div class="row mb-5 text-center">
-            <div class="col-lg-6 col-12 mx-auto ">
-                <div class="section-title mb-md-4">
-                    <h2><strong>Featured
-                            <svg width="198" height="21" viewBox="0 0 198 21" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M2 18.7327C13.8854 9.74093 29.4859 8.69377 43.6964 6.03115C65.1095 2.01897 86.6266 1.40829 108.405 2.01061C137.628 2.81881 166.558 7.3721 195.577 11.0296"
-                                    stroke="#FF5733" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </strong> eMedia Projects</h2>
-                </div>
+      <div class="w-md-80 text-center mx-md-auto mb-5 mb-md-9 space-top-2">
+        <h2 class="text-capitalize">
+          Import and Export Media with Any Platform
+        </h2> 
+      </div>
+      <div class="js-slick-carousel slick slick-gutters-3 z-index-2"  data-aos="fade-up" data-aos-duration="1500"
+        data-hs-slick-carousel-options='{
+                "slidesToShow": 5,
+                "dots": true,
+                "dotsClass": "slick-pagination d-lg-none",
+                "responsive": [{
+                  "breakpoint": 1200,
+                    "settings": {
+                      "slidesToShow": 4
+                    }
+                  }, {
+                  "breakpoint": 992,
+                  "settings": {
+                    "slidesToShow": 3
+                    }
+                  }, {
+                  "breakpoint": 768,
+                  "settings": {
+                    "slidesToShow": 2
+                    }
+                  }, {
+                  "breakpoint": 554,
+                  "settings": {
+                    "slidesToShow": 1
+                  }
+                }]
+              }'>
+        <div class="js-slide mt-1">
+          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
+            <div class="card-header text-center rounded-top">
+              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
+                <img class="avatar-img" src="${communitylink}/theme/images/dropbox.svg" alt="Dropbox" data-toggle="tooltip"
+                  data-placement="bottom" title="Dropbox" />
+              </div>
             </div>
+            <div class="card-body">
+              <h2 class="h4 text-center mb-1">Dropbox</h2>
+            </div>
+          </article>
         </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-6 card-item">
-                <div class="card border-0 radius shadow px-3 py-5 h-100" data-aos="fade-right"
-                    data-aos-duration="1500">
-                    <div class="card-icon mb-3 text-center">
-                        <img src="${communityhome}/images/video.svg" alt="img" style="height: 62px;">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title text-center">Video and Photography Production</h4>
-                        <div class="card-text">
-                            <ul>
-                                <li><hr></li>
-                                <li>
-                                    <div class="d-flex align-items-center">
-                                        <img src="${communityhome}/images/cbc.png" alt="img" style="height: 20px;margin-right: 8px;">
-                                        <p class="mb-0">
-                                            <strong>Canadian Broadcasting Corporation (CBC)</strong> &mdash; Archiving news broadcasts
-                                        </p>
-                                    </div>
-                                </li>
-                                <li><hr></li>
-                                <li><strong>American Law Magazine (ALM)</strong> &mdash; Photographer uploads and magazine production</li>
-                                <li><hr></li>
-                                <li><strong>TAE</strong> &mdash; Localized storage and organizer of production video files</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <div class="js-slide mt-1">
+          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
+            <div class="card-header text-center rounded-top">
+              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
+                <img class="avatar-img" src="${communitylink}/theme/images/youtube.svg" alt="YouTube" data-toggle="tooltip"
+                  data-placement="bottom" title="YouTube" />
+              </div>
             </div>
-
-            <div class="col-md-6 card-item">
-                <div class="card border-0 radius shadow px-3 py-5 h-100" data-aos="fade-right"
-                    data-aos-duration="1500">
-                    <div class="card-icon mb-3 text-center">
-                        <img src="${communityhome}/images/media.svg" alt="img" style="height: 62px;">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title text-center">Media Hubs</h4>
-                        <div class="card-text">
-                            <ul>
-                                <li><hr></li>
-                                <li><strong>United Nations</strong> &mdash; Worldwide news photography distribution</li>
-                                <li><hr></li>
-                                <li><strong>Metro East</strong> &mdash; Community broadcast episode tracking for producers</li>
-                                <li><hr></li>
-                                <li><strong>PR Newswire (CISION)</strong> &mdash; Online media uploading and worldwide PR distribution</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body">
+              <h2 class="h4 text-center mb-1">YouTube</h2>
             </div>
-
-            <div class="col-md-6 card-item">
-                <div class="card border-0 radius shadow px-3 py-5 h-100" data-aos="fade-right"
-                    data-aos-duration="1500">
-                    <div class="card-icon mb-3 text-center">
-                        <img src="${communityhome}/images/product.svg" alt="img" style="height: 62px;">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title text-center">Product Information Databases</h4>
-                        <div class="card-text">
-                            <ul>
-                                <li><hr></li>
-                                <li><strong>Exensio</strong> &mdash; Media catalog of pharmaceutical products and packaging</li>
-                                <li><hr></li>
-                                <li><strong>Alfred Music</strong> &mdash; Worlds largest music book publisher. Storing 2 million product files</li>
-                                <li><hr></li>
-                                <li><strong>Music Academy of India</strong> &mdash; World’s Largest archive of the musical heritage of India</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6 card-item">
-                <div class="card border-0 radius shadow px-3 py-5 h-100" data-aos="fade-right"
-                    data-aos-duration="1500">
-                    <div class="card-icon mb-3 text-center">
-                        <img src="${communityhome}/images/marketing.svg" alt="img" style="height: 62px;">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title text-center mb-2">Marketing Departments</h4>
-                        <div class="card-text">
-                            <ul>
-                                <li><hr></li>
-                                <li><strong>Babson College</strong> &mdash; Photography and video storage for marketing assets and events</li>
-                                <li><hr></li>
-                                <li><strong>Yale</strong> &mdash; Marketing collections and event tracking</li>
-                                <li><hr></li>
-                                <li><strong>AGBU</strong> &mdash; Centralized capture of worldwide media</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </article>
         </div>
+        <div class="js-slide mt-1">
+          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
+            <div class="card-header text-center rounded-top">
+              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
+                <img class="avatar-img" src="${communitylink}/theme/images/wordpress.svg" alt="Wordpress" data-toggle="tooltip"
+                  data-placement="bottom" title="Wordpress" />
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="h4 text-center mb-1">Wordpress</h2>
+            </div>
+          </article>
+        </div>
+        <div class="js-slide mt-1">
+          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
+            <div class="card-header text-center rounded-top">
+              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
+                <img class="avatar-img" src="${communitylink}/theme/images/drive.svg" alt="Google Drive" data-toggle="tooltip"
+                  data-placement="bottom" title="Google Drive" />
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="h4 text-center mb-1">Google Drive</h2>
+            </div>
+          </article>
+        </div>
+        <div class="js-slide mt-1">
+          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
+            <div class="card-header text-center rounded-top">
+              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
+                <img class="avatar-img" src="${communitylink}/theme/images/drupal.svg" alt="Drupal" data-toggle="tooltip"
+                  data-placement="bottom" title="Drupal" />
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="h4 text-center mb-1">Drupal</h2>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="text-center  fw-thin" style="font-size: 1.2rem;">
+        and many more...
+      </p>
+    </div> 
+  </div> 
+  <div class="space-2 bg-navy">
+    <div class="d-flex justify-content-center align-items-center space-2" data-aos="fade-right" data-aos-duration="1500">
+ <iframe allowfullscreen="true" width="80%" style="height:600px;border:0px" mozallowfullscreen="true" src="https://entermediadb.org/entermediadb/mediadb/services/module/asset/players/play/AWojCykVBcRirzJYj_Vj.html" style="border: none;" webkitallowfullscreen="true"></iframe>
     </div>
-</section>
-
-<section class="section">
-    <div class="container"> 
-        <div class="d-flex flex-column align-items-center overflow-hidden">
-            <h2 class="text-center mb-2" style="font-size:2.5rem">
-                Saving The World's Digital Heritage
-            </h2>
-            <p style="font-size: 1.2rem;font-weight: 300;">We believe in autonomous ownership of media files. Protecting creative files from censorship or exploitation.</p>
-            <iframe width="720" height="405" src="https://www.youtube.com/embed/GB_DejdC5O8"
-                title="Creating a Worldwide Digital Heritage | Christopher Shanti-Burkey | TEDxSanMigueldeAllende" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+  </div>
+  <!-- <div class="space-2" id="contact">
+    <div class="mb-4 w-md-80 mx-md-auto text-center">
+      <h2>Contact Us</h2>
+      <h3>Fill out the form and we'll be in touch as soon as possible.</h3>
     </div>
-</section>
-
+    <form class="container js-validate">
+      <div class="w-md-80 mx-md-auto">
+        <div class="row mx-n2">
+          <div class="col-sm-6 px-2">
+            <div class="js-form-message form-group">
+              <label class="sr-only" for="firstName2">First name</label>
+              <input type="text" class="form-control" name="firstName2" id="firstName2"
+                placeholder="First name" aria-label="First name" required data-msg="Please enter first your name">
+            </div>
+          </div>
+          <div class="col-sm-6 px-2">
+            <div class="js-form-message form-group">
+              <label class="sr-only" for="lastName2">Last name</label>
+              <input type="text" class="form-control" name="lastName2" id="lastName2"
+                placeholder="Last name" aria-label="Last name" required data-msg="Please enter last your name">
+            </div>
+          </div>
+          <div class="col-sm-12 px-2">
+            <div class="js-form-message form-group">
+              <label class="sr-only" for="aboutProject">Tell us about your project</label>
+              <textarea class="form-control" rows="5" name="aboutProject" id="aboutProject"
+                placeholder="Tell us more about your project, needs, and timeline."
+                aria-label="Tell us more about your project, needs, and timeline." required data-msg="Please enter a reason."></textarea>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary" style="max-width: 150px">Submit</button>
+      </div>
+    </form>
+  </div> -->
+  <hr class="opacity-sm my-0">
+</main>

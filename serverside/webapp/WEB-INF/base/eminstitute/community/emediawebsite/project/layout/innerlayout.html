@@ -3,7 +3,7 @@
 $context.putPageValue("communitylink", "${communityhome}")
 
 <div id="application" class="community-layout bg-light" class="eminstitutecollective" data-home="$home" data-user="$!user.id" data-apphome="$apphome"
-data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
+data-applink="${communitylink}" data-inapp="$browser.inApp()" data-themeprefix="${communityhome}/theme"
 data-browserlanguage="$!{browserlanguage}" data-editmode='$!user.get("oe_edit_mode")'
 data-mediadbappid="$!mediaarchive.getMediaDbId()" data-componenthome="$!componenthome" #if( $showupload)
 data-showuploadid="${showupload.id}" #end data-viewertemplate="${communitylink}/collective/channel/show/index.html">
