@@ -1,24 +1,19 @@
 
 <div class="chatterbox"
-data-collectionid="$!librarycol.getId()" 
-data-renderurl="/userchat/chatterbox/index.html" 
-data-rendermessageurl="/userchat/chatterbox/message.html"
-data-channel="$!{currenttopic.getId()}" 
-data-channeltype="community" 
-data-user="$!{user.id}" 
-data-catalogid="$!{catalogid}">
-	
-	$pages.include("${communityhome}/userchat/chatterbox/messages.html", $context)				
-	
-	#if( $user)
-			
-	$pages.include("${communityhome}/userchat/chatterbox/editarea.html", $context)
-	
-	#else
-	
-	<div class="mx-3">[[Login to chat]]</div>
-					
-	#end
+	data-collectionid="$!librarycol.getId()" 
+	data-renderurl="/userchat/chatterbox/index.html" 
+	data-rendermessageurl="/userchat/chatterbox/message.html"
+	data-channel="$!{currenttopic.getId()}" 
+	data-channeltype="community" 
+	data-user="$!{user.id}" 
+	data-catalogid="$!{catalogid}">
 
+	$pages.include("${communityhome}/userchat/chatterbox/messages.html", $context)				
+
+	#if( $user)	
+		$pages.include("${communityhome}/userchat/chatterbox/editarea.html", $context)
+	#else
+		$pages.include("${communityhome}/authentication/login.html", $context)
+	#end
 
 </div>

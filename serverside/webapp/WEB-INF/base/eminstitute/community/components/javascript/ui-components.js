@@ -297,9 +297,11 @@ $(document).ready(function () {
 		return;
 	}
 	userOffcanvas.addEventListener("show.bs.offcanvas", function () {
+		$("body").addClass("offcanvas-open");
 		$(".community-layout").addClass("offcanvas-open");
 	});
 	userOffcanvas.addEventListener("hide.bs.offcanvas", function () {
+		$("body").removeClass("offcanvas-open");
 		$(".community-layout").removeClass("offcanvas-open");
 	});
 });

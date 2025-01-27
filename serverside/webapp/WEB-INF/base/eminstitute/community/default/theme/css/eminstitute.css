@@ -12,6 +12,10 @@ body {
 	max-width: 100%;
 	font-size: 0.9rem;
 	background-color: #e9ecef;
+	transition: padding-left 0.3s ease-in-out;
+}
+body.offcanvas-open {
+	padding-left: 250px;
 }
 
 #emcontainer {
@@ -159,24 +163,6 @@ a.primary:hover .fa-solid {
 .search-list li:last-child,
 .sidebar-list li:last-child {
 	border-bottom: 1px solid #e5e5e5;
-}
-
-/*Shadows*/
-.collectivebanner,
-.account-sidebar,
-.collective-sidebar,
-.collaborate-sidebar,
-.community-maincol,
-.feedupload,
-.feed-topics,
-.feedupload-uploader,
-.profile-sidebar,
-.contentcolumn,
-.collectivemaincol,
-.collective-grid-logo,
-.shadowbox {
-	/*box-shadow:2px 2px 6px 0 rgba(0,0,0,0.4)*/
-	/* box-shadow: 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3); */
 }
 
 .feed-maincol {
@@ -377,7 +363,7 @@ a.primary:hover .fa-solid {
 .oi-sidebar-toggler-show {
 	border: 1px solid #c0c0c0;
 	background-color: #e0e0e0 !important;
-	padding: 6px 6px 4px !important;!i;!;
+	padding: 6px 6px 4px !important;
 	box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.4);
 	opacity: 0.8;
 	z-index: 1000;
@@ -2312,9 +2298,6 @@ textarea.form-control {
 	vertical-align: top;
 }
 
-.finances-table-sort {
-}
-
 @media (min-width: 640px) {
 	.table-col-totals {
 		width: 15%;
@@ -2360,4 +2343,12 @@ textarea.form-control {
 
 #userOffcanvas .offcanvas-body {
 	padding: 0;
+}
+.ajaxloginbox .row > * {
+	margin-top: 0;
+}
+.ajaxloginbox input[type="submit"] {
+	height: 32px;
+	width: 80px;
+	font-size: 1rem;
 }
