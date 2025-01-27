@@ -5,44 +5,38 @@
 	#end
 #end
 
-<p>[[Chat notifications for User]]: <strong>$!followeruser</strong></p>
+<p>[[Chat notifications for]]: <strong>$!followeruser</strong></p>
 
 #foreach( $topicmod in $topicmods)
+	#set($collectionid = $topicmod.collectionid)
+	#set($topicid = $topicmod.chattopicid)
 
-#set($collectionid = $topicmod.collectionid)
-#set($topicid = $topicmod.chattopicid)
+	#set( $project = $mediaarchive.getCachedData("librarycollection",$collectionid) )
+	#set( $topic = $mediaarchive.getCachedData("collectiveproject",$topicid) )
 
-#set( $project = $mediaarchive.getCachedData("librarycollection",$collectionid) )
-#set( $topic = $mediaarchive.getCachedData("collectiveproject",$topicid) )
-
-#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
-<div style="padding-bottom:10px; border-bottom:1px solid #ddd;">
-	<strong><a href="${projectlink}/chat/index.html">$project.getName() / $topic</a></strong>
-	
-	#set( $messages = $mediaarchive.query("chatterbox").exact("channel",$topicid).after("date",$messagessince).sort("date").search() )
-	#foreach($chat in $messages)
-		<div style="padding-left:20px">
-			#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
-			<strong>$chatuser.getAnonNickName()</strong><br> 
-			#if($chat.message)
-				#if( $chat.message.startsWith("http"))
-					<a href="$chat.message">$chat.message</a>
-				#else
-					$chat.message
+	#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
+	<div style="padding-bottom:10px; border-bottom:1px solid #ddd;">
+		<strong><a href="${projectlink}/chat/index.html" style="color: royalblue;text-decoration: none;">$project.getName() / $topic</a></strong>
+		#set( $messages = $mediaarchive.query("chatterbox").exact("channel",$topicid).after("date",$messagessince).sort("date").search() )
+		#foreach($chat in $messages)
+			<div style="padding-left:20px">
+				#set( $chatuser = $mediaarchive.getUser($chat.user) ) 
+				<b>$chatuser.getAnonNickName()</b><br> 
+				#if($chat.message)
+					#if( $chat.message.startsWith("http"))
+						<a href="$chat.message" style="color: royalblue;text-decoration: none;">$chat.message</a>
+					#else
+						$chat.message
+					#end
 				#end
-			#end			
-			
-		</div>
-	#end 
-	
-	
-</div>	
+			</div>
+		#end
+	</div>
 #end
 
-
-<p>
-[[To un-subscribe or change notification preferences edit your]] <a href="$!{community.externaldomain}/users/index.html">[[Account Preferences]]</a>
+<br>
+<p style="color:#888;text-align:center;margin-bottom: 0;">
+	<small>
+		[[To un-subscribe or change notification preferences edit your]] <a href="$!{community.externaldomain}/users/index.html" style="color: royalblue;text-decoration: none;">[[Account Preferences]]</a>
+	</small>
 </p>
-
-
-

@@ -81,9 +81,8 @@ public void init()
 	context.putPageValue("subscription",subscription);
 	
 //	Set template path with applicationid instead of just 'apphome'
-	String applicationid = context.findValue("applicationid");
-	String apphome = "/" + applicationid;
-	String template = apphome + "/theme/emails/collection-add-teammember.html";
+	String communityhome = context.findValue("communityhome");
+	String template = communityhome + "/theme/emails/collection-add-teammember.html";
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
 	templatemail.setSubject("Added to Team"); //TODO: Translate
