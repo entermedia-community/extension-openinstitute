@@ -84,8 +84,9 @@ public void init() {
 	senderinfo = senderinfo + " Ip: " + ipaddress;
 	context.putPageValue("senderinfo",   senderinfo);
 	
-	//TODO: community link
-	sendEmail(context.getPageMap(), notifyemail,"/website/meetingschedule/notifyemail.html");
+	String communityhome = context.getPageValue("communityhome");
+	String templateSrc = communityhome+"/meetingschedule/notifyemail.html";
+	sendEmail(context.getPageMap(), notifyemail, templateSrc);
 }
 
 protected void sendEmail(Map pageValues, String email, String templatePage){
