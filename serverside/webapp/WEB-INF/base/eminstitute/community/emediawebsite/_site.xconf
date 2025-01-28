@@ -3,6 +3,8 @@
 <page>
   <property name="editable">false</property>
 
+  <property name="loginroot">${communityhome}/authentication</property>
+
   <property name="fallbackdirectory">../default</property>
   <property name="communityhome">/${siteid}/community/emediawebsite</property>
 

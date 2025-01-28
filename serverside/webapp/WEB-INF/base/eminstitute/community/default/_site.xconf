@@ -6,7 +6,7 @@
 
     <property name="loginroot">${communityhome}/authentication</property>
 	
-      <path-action name="Admin.autoLogin"/>
+    <path-action name="Admin.autoLogin"/>
 	  <path-action name="MediaArchiveModule.loadApplicationId"/>
 	  <path-action name="MediaArchiveModule.loadComponentHome" />
 	  
