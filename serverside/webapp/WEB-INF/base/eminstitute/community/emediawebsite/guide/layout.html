@@ -16,32 +16,34 @@
 
 		<script type="text/javascript"  src="${communityhome}/components/javascript/jquery-3.7.1.js" onload="if (!window.jQuery) window.$ = window.jQuery = module.exports;"></script>
 		
-		<script id="jquery-liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js"> </script>
-			<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js"> </script>
+		<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js"></script>
+		<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js"></script>
+		<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js"></script>
+		<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js"></script>
 
-			<script type="importmap">
-				{
-					"imports": {
-						"ckeditor5": "${communityhome}/components/javascript/ckeditor5/ckeditor5.js",
-						"ckeditor5/": "${communityhome}/components/javascript/ckeditor5/",
-						"prettyhtml": "${communityhome}/components/javascript/htmleditor/prettyhtml.js"
-					}
+		<script type="importmap">
+			{
+				"imports": {
+					"ckeditor5": "${communityhome}/components/javascript/ckeditor5/ckeditor5.js",
+					"ckeditor5/": "${communityhome}/components/javascript/ckeditor5/",
+					"prettyhtml": "${communityhome}/components/javascript/htmleditor/prettyhtml.js"
 				}
-			</script>
-			<script type="module" src="${communityhome}/components/javascript/htmleditor/htmleditor.js" defer></script>
-			<link rel="stylesheet" type="text/css" href="${communityhome}/components/javascript/ckeditor5/ckeditor5.css" />
+			}
+		</script>
+		<script type="module" src="${communityhome}/components/javascript/htmleditor/htmleditor.js" defer></script>
+		<link rel="stylesheet" type="text/css" href="${communityhome}/components/javascript/ckeditor5/ckeditor5.css" />
 
-			<script id="openedit" src="/openedit/components/javascript/openedit.js"></script>
+		<script id="openedit" src="/openedit/components/javascript/openedit.js"></script>
 
 		
 		<script defer src="${communityhome}/theme/js/fontawesome/js/all.min.js"></script>
+		<link rel="stylesheet" href="${communityhome}/components/javascript/datetimepicker/jquery.datetimepicker.min.css">
 		<link
 			rel="stylesheet"
 			href="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.css"
 		/>
 		<link rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 		<link rel="stylesheet" href="${communityhome}/theme/css/custom.css" />
-		##$pages.include("${apphome}/theme/layouts/includes.html", $context)
 						
 	</head>
 
@@ -81,6 +83,7 @@
 		<script src="${communityhome}/theme/js/smoothscroll.min.js"></script>
 		<script src="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.js"></script>
 		<script src="${communityhome}/theme/js/gumshoe.polyfills.min.js"></script>
+		<script src="${communityhome}/components/javascript/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 		<script src="${communityhome}/theme/js/docs.js"></script>
 	</div>	
   </body>

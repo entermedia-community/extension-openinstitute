@@ -90,199 +90,6 @@ findalldata = function (inlink) {
 	return options;
 };
 
-runajaxonthis = function (inlink, e) {
-	$(".ajaxprogress").show();
-	var inText = $(inlink).data("confirm");
-	if (e && inText && !confirm(inText)) {
-		e.stopPropagation();
-		e.preventDefault();
-		return false;
-	}
-	inlink.attr("disabled", "disabled");
-
-	if (inlink.hasClass("activelistener")) {
-		$(".activelistener").removeClass("active");
-		inlink.addClass("active");
-	}
-	//for listeners in a container
-	if (inlink.hasClass("activelistenerparent")) {
-		var listenerparent = inlink.closest(".activelistcontainer");
-		if (listenerparent.length > 0) {
-			listenerparent.siblings().removeClass("active");
-			listenerparent.addClass("active");
-		}
-	}
-
-	var nextpage = inlink.attr("href");
-	if (!nextpage) {
-		nextpage = inlink.data("nextpage");
-	}
-
-	var targetDiv = finddata(inlink, "targetdiv");
-	var replaceHtml = true;
-
-	var targetDivInner = finddata(inlink, "targetdivinner");
-	if (targetDivInner) {
-		targetDiv = targetDivInner;
-		replaceHtml = false;
-	}
-
-	var useparent = inlink.data("useparent");
-
-	if (inlink.hasClass("auto-active-link")) {
-		var container = inlink.closest(".auto-active-container");
-
-		jQuery(".auto-active-row", container).removeClass("current");
-		var row = inlink.closest(".auto-active-row");
-		row.addClass("current");
-
-		jQuery("li", container).removeClass("current");
-		var row = inlink.closest("li");
-		row.addClass("current");
-	}
-
-	var options = $(inlink).data();
-	if (options.isEmptyObject || $(inlink).data("findalldata")) {
-		options = findalldata(inlink);
-	}
-
-	var inlinkmodal = inlink.closest(".modal");
-
-	if (targetDiv) {
-		inlink.css("cursor", "wait");
-		$("body").css("cursor", "wait");
-
-		targetDiv = targetDiv.replace(/\//g, "\\/");
-
-		//before ajaxcall
-		if (inlink.data("onbefore")) {
-			var onbefore = inlink.data("onbefore");
-			var fnc = window[onbefore];
-			if (fnc && typeof fnc === "function") {
-				//make sure it exists and it is a function
-				fnc(inlink); //execute it
-			}
-		}
-
-		showLoader();
-
-		jQuery
-			.ajax({
-				url: nextpage,
-				data: options,
-				success: function (data) {
-					var cell;
-					if (useparent && useparent == "true") {
-						cell = $("#" + targetDiv, window.parent.document);
-					} else {
-						cell = findclosest(inlink, "#" + targetDiv);
-					}
-					var onpage;
-					if (replaceHtml) {
-						//Call replacer to pull $scope variables
-						onpage = cell.parent();
-						cell.replaceWith(data); //Cant get a valid dom element
-					} else {
-						onpage = cell;
-						cell.html(data);
-					}
-					cell = findclosest(onpage, "#" + targetDiv);
-
-					setPageTitle(cell);
-
-					//on success execute extra JS
-					if (inlink.data("onsuccess")) {
-						var onsuccess = inlink.data("onsuccess");
-						var fnc = window[onsuccess];
-						if (fnc && typeof fnc === "function") {
-							//make sure it exists and it is a function
-							fnc(inlink); //execute it
-						}
-					}
-
-					checkautoreload(inlink);
-
-					//actions after autoreload?
-					var message = inlink.data("alertmessage");
-					if (message) {
-						$("#resultsmessages").append(
-							'<div class="alert alert-success fader alert-save">' +
-								message +
-								"</div>"
-						);
-					}
-				},
-				type: "POST",
-				dataType: "text",
-				xhrFields: {
-					withCredentials: true,
-				},
-				crossDomain: true,
-			})
-			.always(function () {
-				var scrolltotop = inlink.data("scrolltotop");
-				if (scrolltotop) {
-					window.scrollTo(0, 0);
-				}
-
-				$(".ajaxprogress").hide();
-				//inlink.css("enabled",true);
-				inlink.removeAttr("disabled");
-
-				//Close All Dialogs
-				var closealldialogs = inlink.data("closealldialogs");
-				if (closealldialogs) {
-					closeallemdialogs();
-				} else {
-					//Close Dialog
-					var closedialog = inlink.data("closedialog");
-					if (closedialog && inlinkmodal != null) {
-						closeemdialog(inlinkmodal);
-					}
-					//Close MediaViewer
-					var closemediaviewer = inlink.data("closemediaviewer");
-					if (closemediaviewer) {
-						var overlay = $("#hiddenoverlay");
-						if (overlay.length) {
-							hideOverlayDiv(overlay);
-						}
-					}
-				}
-				//Close Navbar if exists
-				var navbar = inlink.closest(".navbar-collapse");
-				if (navbar) {
-					navbar.collapse("hide");
-				}
-
-				$(window).trigger("resize");
-
-				hideLoader();
-
-				if (
-					typeof global_updateurl !== "undefined" &&
-					global_updateurl == false
-				) {
-					//globaly disabled updateurl
-				} else {
-					var updateurl = inlink.data("updateurl");
-					if (updateurl) {
-						//console.log("Saving state ", updateurl);
-						history.pushState($("#application").html(), null, nextpage);
-					}
-				}
-			});
-	}
-
-	inlink.css("cursor", "");
-	$("body").css("cursor", "");
-};
-runajax = function (e) {
-	e.stopPropagation();
-	e.preventDefault();
-	runajaxonthis($(this), e);
-	return false;
-};
-
 lQuery(".reloadpage").livequery(function () {
 	window.location.reload();
 });
@@ -397,7 +204,11 @@ uiload = function () {
 		}
 	});
 
-	lQuery("a.ajax").livequery("click", runajax);
+	lQuery("a.ajax").livequery("click", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$(this).runAjax();
+	});
 
 	var browserlanguage = app.data("browserlanguage");
 	if (browserlanguage == undefined || browserlanguage == "") {
@@ -1143,313 +954,20 @@ uiload = function () {
 		$("#searchinput").val("");
 	}
 
-	emdialog = function (dialog, event) {
-		if (event) {
-			event.stopPropagation();
-		}
-		var dialog = dialog;
-		var hidescrolling = dialog.data("hidescrolling");
-
-		var width = dialog.data("width");
-		var maxwidth = dialog.data("maxwidth");
-		var id = dialog.data("dialogid");
-		if (!id) {
-			id = dialog.attr("id");
-		}
-		if (!id) {
-			id = "modals";
-		}
-		console.log(id);
-		var modaldialog = $("#" + id);
-		if (modaldialog.length == 0) {
-			jQuery("body").append(
-				'<div class="modal" tabindex="-1" id="' +
-					id +
-					'" style="display:none" ></div>'
-			);
-			modaldialog = jQuery("#" + id);
-		}
-
-		var options = dialog.data();
-		var link = dialog.attr("href");
-		if (!link) {
-			link = dialog.data("targetlink");
-		}
-		if (
-			dialog.hasClass("entity-dialog") &&
-			dialog.closest(".modal").length !== 0
-		) {
-			//link = link.replace("entity.html", "entitytab.html");
-			options.oemaxlevel = 1;
-		}
-		var param = dialog.data("parameterdata");
-		if (param) {
-			var element = jQuery("#" + param);
-			var name = element.prop("name");
-			options[name] = element.val();
-		}
-		var openfrom = window.location.href;
-
-		showLoader();
-		jQuery
-			.ajax({
-				xhrFields: {
-					withCredentials: true,
-				},
-				crossDomain: true,
-				url: link,
-				data: options,
-				success: function (data) {
-					//--Entities
-					if (
-						dialog.hasClass("entity-dialog") &&
-						dialog.closest(".modal").length !== 0
-					) {
-						//find tab
-						var tabid = dialog.data("tabid");
-						if (!tabid) {
-							tabid = "tab_metadata";
-						}
-						if (tabid) {
-							var container = dialog.closest(".entity-body");
-							var tabs = container.find(".entity-tab-content");
-							if (tabs.length >= 8) {
-								alert("Max Tabs Limit");
-								return;
-							}
-
-							//open new entity full
-							var parent = container.closest(".entitydialog");
-							container = dialog.closest(".entity-wraper");
-							container.replaceWith(data);
-							tabbackbutton(parent);
-
-							return;
-						}
-					} else {
-						modaldialog.html(data);
-						if (width) {
-							if (width > $(window).width()) {
-								width = $(window).width();
-							}
-
-							$(".modal-lg", modaldialog).css("min-width", width + "px");
-						}
-						if (maxwidth) {
-							$(".modal-lg", modaldialog).css("max-width", maxwidth + "px");
-						}
-
-						var modalkeyboard = false;
-						var modalbackdrop = true;
-						if ($(".modal-backdrop").length) {
-							modalbackdrop = false;
-						}
-
-						var modalinstance;
-						if (modalkeyboard) {
-							modalinstance = modaldialog.modal({
-								closeExisting: false,
-								show: true,
-								backdrop: modalbackdrop,
-							});
-						} else {
-							modalinstance = modaldialog.modal({
-								keyboard: false,
-								closeExisting: false,
-								show: true,
-								backdrop: modalbackdrop,
-							});
-						}
-
-						var searchpagetitle = modaldialog.find("[data-setpagetitle]");
-						if (searchpagetitle) {
-							setPageTitle(searchpagetitle);
-						}
-
-						//jQuery('.modal-backdrop').insertAfter(modalinstance);
-
-						var firstform = $("form", modaldialog);
-						firstform.data("openedfrom", openfrom);
-						// fix submit button
-						var justok = dialog.data("cancelsubmit");
-						if (justok != null) {
-							$(".modal-footer #submitbutton", modaldialog).hide();
-						} else {
-							var id = $("form", modaldialog).attr("id");
-							$("#submitbutton", modaldialog).attr("form", id);
-						}
-						var hidetitle = dialog.data("hideheader");
-						if (hidetitle == null) {
-							var title = dialog.attr("title");
-							if (title == null) {
-								title = dialog.text();
-							}
-							$(".modal-title", modaldialog).text(title);
-						}
-						var hidefooter = dialog.data("hidefooter");
-						if (hidefooter != null) {
-							$(".modal-footer", modaldialog).hide();
-						}
-
-						if (
-							typeof global_updateurl !== "undefined" &&
-							global_updateurl == false
-						) {
-							//globaly disabled updateurl
-						} else {
-							//backup url
-							var currenturl = window.location.href;
-							modalinstance.data("oldurlbar", currenturl);
-							//Update Address Bar
-							var updateurl = dialog.data("updateurl");
-							if (updateurl) {
-								var urlbar = dialog.data("urlbar");
-								if (!urlbar) {
-									urlbar = link;
-								}
-
-								history.pushState($("#application").html(), null, urlbar);
-								window.scrollTo(0, 0);
-							}
-						}
-
-						//on success execute extra JS
-						if (dialog.data("onsuccess")) {
-							var onsuccess = dialog.data("onsuccess");
-							var fnc = window[onsuccess];
-							if (fnc && typeof fnc === "function") {
-								//make sure it exists and it is a function
-								fnc(dialog); //execute it
-							}
-						}
-
-						adjustzindex(modalinstance);
-
-						$(window).trigger("resize");
-
-						modalinstance.on("hidden.bs.modal", function () {
-							//on close execute extra JS -- Todo: Move it to closedialog()
-							if (dialog.data("onclose")) {
-								var onclose = dialog.data("onclose");
-								var fnc = window[onclose];
-								if (fnc && typeof fnc === "function") {
-									//make sure it exists and it is a function
-									fnc(dialog); //execute it
-								}
-							}
-
-							closeemdialog($(this));
-							$(window).trigger("resize");
-						});
-
-						modalinstance.on("scroll", function () {
-							checkScroll();
-						});
-					}
-				},
-			})
-			.always(function () {
-				hideLoader();
-			});
-
-		$(modaldialog).on("shown.bs.modal", function () {
-			trackKeydown = true;
-			//adjustzindex($(this));
-			var focuselement = modaldialog.data("focuson");
-			if (focuselement) {
-				//console.log(focuselement);
-				var elmnt = document.getElementById(focuselement);
-				elmnt.scrollIntoView();
-			} else {
-				var focusme = modaldialog.find(".focusme");
-				if (focusme.length) {
-					setTimeout(function () {
-						focusme.focus();
-					}, 1000);
-				} else {
-					$("form", modaldialog)
-						.find("*")
-						.filter(":input:visible:first")
-						.focus();
-				}
-			}
-		});
-
-		$(modaldialog).on("hide.bs.modal", function (e) {
-			trackKeydown = false;
-			if (!$(this).hasClass("onfront")) {
-				e.stopPropagation();
-				return;
-			} else {
-				if ($(".modal:visible").length > 0) {
-					// restore the modal-open class to the body element, so that scrolling works
-					// properly after de-stacking a modal.
-					setTimeout(function () {
-						$(document.body).removeClass("modal-open");
-					}, 0);
-				}
-			}
-		});
-
-		//Close drodpown if exists
-		if (dialog.closest(".dropdown-menu").length !== 0) {
-			dialog.closest(".dropdown-menu").removeClass("show");
-		}
-		if (event) {
-			event.preventDefault();
-		}
-
-		return false;
-	}; //emdialog
-
 	lQuery("a.openemdialog").livequery(function () {
 		var link = $(this);
 		//link[0].click();
-		emdialog($(this), event);
+		$(this).emDialog();
 		//link.trigger("click");
 	});
 
 	lQuery("a.emdialog").livequery("click", function (event) {
-		emdialog($(this), event);
+		$(this).emDialog();
 	});
 
 	lQuery(".closemodal").livequery("click", function (event) {
 		closeemdialog($(this).closest(".modal"));
 	});
-
-	closeemdialog = function (modaldialog) {
-		var oldurlbar = modaldialog.data("oldurlbar");
-
-		if (modaldialog.modal) {
-			modaldialog.modal("hide");
-			modaldialog.remove();
-		}
-		//other modals?
-		var othermodal = $(".modal");
-		if (othermodal.length && !othermodal.is(":hidden")) {
-			adjustzindex(othermodal);
-		}
-
-		hideLoader();
-
-		setPageTitle();
-
-		if (oldurlbar !== undefined) {
-			history.pushState($("#application").html(), null, oldurlbar);
-		}
-	};
-
-	closeallemdialogs = function () {
-		$(".modal").each(function () {
-			var modaldialog = $(this);
-			modaldialog.modal("hide");
-			modaldialog.remove();
-		});
-		var overlay = $("#hiddenoverlay");
-		if (overlay.length) {
-			hideOverlayDiv(overlay);
-		}
-	};
 
 	setPageTitle = function (element) {
 		if (element === undefined) {
@@ -1726,7 +1244,7 @@ uiload = function () {
 	});
 
 	lQuery(".autoopenemdialog").livequery(function () {
-		emdialog($(this));
+		$(this).emDialog();
 	});
 
 	lQuery(".mediaboxheader").livequery("click", function (event) {
@@ -2009,7 +1527,7 @@ uiload = function () {
 					"/index.html?entity=" +
 					rowid;
 				row.data("urlbar", urlbar);
-				emdialog(row, event);
+				row.emDialog();
 			}
 		}
 	});
@@ -2178,7 +1696,7 @@ uiload = function () {
 			var targettype = pickerresults.data("clicktargettype");
 
 			if (targettype == "entitydialog") {
-				emdialog(pickerresults, event);
+				pickerresults.emDialog();
 				return;
 			} else {
 				if (targetdiv != "") {

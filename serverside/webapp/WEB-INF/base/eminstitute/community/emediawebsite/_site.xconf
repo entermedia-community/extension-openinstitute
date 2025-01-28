@@ -45,10 +45,15 @@
   <script id="validateandedit" src="${communityhome}/components/javascript/validateandedit.js"/>
   <script id="select2" src="${communityhome}/components/javascript/select2/js/select2.full.js"/>
   <style id="select2-css" href="${communityhome}/components/javascript/select2/css/select2.css"/>
-  <script id="jquery-liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js"/>
+
+  <script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
+	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+
   <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
-  <script id="uicomponents" src="${communityhome}/components/javascript/ui-components.js"/>
-  <script id="results" src="${communityhome}/components/javascript/results.js"/>
+  <!-- <script id="uicomponents" src="${communityhome}/components/javascript/ui-components.js"/> -->
+  <!-- <script id="results" src="${communityhome}/components/javascript/results.js"/> -->
     
 
   <style id="bootstrap" href="${communityhome}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css" />

@@ -1,4 +1,10 @@
 $(document).ready(function () {
+	$("a.emdialog").on("click", function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		$(this).emDialog();
+	});
+
 	function addSections() {
 		var section = 1;
 		var chapter = 1;
