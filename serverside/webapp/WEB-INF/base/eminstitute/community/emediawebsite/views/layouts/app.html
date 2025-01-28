@@ -33,40 +33,26 @@
 
   <link rel="shortcut icon" href="https://emedialibrary.com/theme/favicon.ico" /> <!-- This should be a full URL -->
 
-  <link rel="stylesheet" href="${communityhome}/theme/css/font-awesome/all.min.css" />
-  <link rel="stylesheet" href="${communityhome}/theme/css/hs-mega-menu.min.css" />
+  $pages.include("${communityhome}/theme/layouts/includes.html", $context)
+
   <link rel="stylesheet" href="${communityhome}/theme/css/slick.css" />
-  
-  <link rel="stylesheet" href="${communityhome}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css" />
   
   <link rel="stylesheet" href="${communityhome}/theme/css/jquery.datetimepicker.min.css">
   <link rel="stylesheet" href="${communityhome}/theme/css/aos.css" />
   <link rel="stylesheet" href="${communityhome}/theme/css/custom.css" />
   <link rel="stylesheet" href="${communityhome}/theme/css/desktop-library.css" />
-  
-  <script type="importmap">
-    {
-      "imports": {
-        "ckeditor5": "${communityhome}/components/javascript/ckeditor5/ckeditor5.js",
-        "ckeditor5/": "${communityhome}/components/javascript/ckeditor5/",
-        "prettyhtml": "${communityhome}/components/javascript/htmleditor/prettyhtml.js"
-      }
-    }
-  </script>
-  <script type="module" src="${communityhome}/components/javascript/htmleditor/htmleditor.js" defer></script>
-  <link rel="stylesheet" type="text/css" href="${communityhome}/components/javascript/ckeditor5/ckeditor5.css" />
 </head>
 
 <body>
-	<div id="application" class="bg-emdark" data-editmode='$!user.get("oe_edit_mode")' data-apphome="$!apphome" data-catalogid="$!content.catalogid" >
-	    $pages.include("${communityhome}/views/layouts/header.html")
-	
-	    $pages.includeContent()
-	
-	    $pages.include("${communityhome}/views/layouts/footer.html")
-	
-	    ##$pages.include("${communityhome}/views/meeting-form.html")
-	
+	<div id="application" class="bg-emdark" data-editmode='$!user.get("oe_edit_mode")' data-apphome="$!apphome" data-catalogid="$!content.catalogid">
+    #if($canviewsettings && !$browser.inApp())
+			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+		#end
+
+    $pages.include("${communityhome}/views/layouts/header.html")
+    $pages.includeContent()
+    $pages.include("${communityhome}/views/layouts/footer.html")
+
 	  <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden"
 	    data-hs-go-to-options='{
 	       "offsetTop": 700,
@@ -93,13 +79,10 @@
   <script src="${communityhome}/theme/js/animator.js"></script> 
   <script src="${communityhome}/theme/js/jquery.min.js" onload="if (!window.jQuery) window.$ = window.jQuery = module.exports;"></script>
   <script src="${communityhome}/theme/js/jquery-migrate.min.js"></script>
-  ##<script src="${communityhome}/theme/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" defer src="${communityhome}/components/javascript/bootstrap/5.2.1/js/bootstrap.bundle.min.js" ></script>
   <script src="${communityhome}/theme/js/datetimepicker.full.min.js"></script>
   <script src="${communityhome}/theme/js/hs.core.js"></script>   
   <script src="${communityhome}/theme/js/hs-header.min.js"></script>
   <script src="${communityhome}/theme/js/hs-go-to.min.js"></script>
-  <script src="${communityhome}/theme/js/hs-mega-menu.min.js"></script>
   <script src="${communityhome}/theme/js/jquery.validate.min.js"></script>
   <script src="${communityhome}/theme/js/slick.js"></script>
   <script src="${communityhome}/theme/js/hs.validation.js"></script>

@@ -5120,6 +5120,8 @@ a.badge-soft-navy:focus {
 	font-size: 0.75rem;
 	font-weight: 400;
 	padding: 0.275rem 0.75rem;
+	line-height: unset;
+	border-radius: 0.375rem;
 }
 
 /* Icons */
@@ -11410,6 +11412,7 @@ code {
 .navbar-nav .btn-xs {
 	font-size: 0.9rem;
 	/* font-weight: 700; */
+	color: white;
 }
 .navbar-nav .dropdown-item a {
 	display: block;
@@ -12274,6 +12277,15 @@ table.referrals tr:hover td {
 	position: absolute;
 	bottom: 9px;
 	left: 10px;
+}
+.ajaxloginbox {
+	max-width: 1200px;
+	min-height: calc(100vh - 445px);
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 .ajaxloginbox .text-contrast {
 	color: #ffffff;

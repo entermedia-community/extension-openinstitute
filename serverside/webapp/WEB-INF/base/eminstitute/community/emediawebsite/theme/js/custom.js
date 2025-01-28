@@ -2,11 +2,6 @@
 
 $(document).ready(function () {
 	new HSHeader($("#header")).init();
-	new HSMegaMenu($(".js-mega-menu"), {
-		desktop: {
-			position: "left",
-		},
-	}).init();
 	$(".js-slick-carousel").each(function () {
 		$.HSCore.components.HSSlickCarousel.init($(this));
 	});
