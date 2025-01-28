@@ -24,7 +24,7 @@
 		<title>$!metatitle</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-		$pages.include("/${communityhome}/theme/layouts/includes.html", $context)
+		$pages.include("${communityhome}/theme/layouts/includes.html", $context)
 
 	</head>
 
@@ -44,16 +44,16 @@
 		data-componenthome="$!componenthome" 
 		#if( $showupload) data-showuploadid="${showupload.id}" #end>
 
-		$pages.include("/${communityhome}/navigation.html", $context)
+		$pages.include("${communityhome}/navigation.html", $context)
 		
 		#if($user && !$browser.inApp() && $canviewsettings)
-			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+			$pages.include("${communityhome}/components/sidebars/user/index.html")
 		#end
 		
 		$pages.includeContent()
 		
 		
-		$pages.include("/${communityhome}/footer.html")
+		$pages.include("${communityhome}/footer.html")
 	</div>
 		<script src="${communityhome}/theme/js/slick.min.js"></script>
 		<script src="${communityhome}/theme/js/aos.js"></script>

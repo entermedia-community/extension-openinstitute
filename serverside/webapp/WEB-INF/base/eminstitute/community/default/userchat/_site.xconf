@@ -20,7 +20,12 @@
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/> 
 	
 	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
-    <script id="goals" src="${communityhome}/project/goals/goals.js"/>
+	<script id="goals" src="${communityhome}/project/goals/goals.js"/>
+
+	<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
+	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
 	

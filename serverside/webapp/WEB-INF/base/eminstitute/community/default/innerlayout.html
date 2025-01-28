@@ -23,7 +23,7 @@
 
 	<title>$!metatitle</title>
 
-	$pages.include("/${communityhome}/theme/layouts/includes.html")
+	$pages.include("${communityhome}/theme/layouts/includes.html")
 
 	#if(!$browser.inApp())
 		<link rel="Shortcut Icon" type="image/x-icon" href="$!{communitylink}/theme/images/favicon.ico" />
@@ -46,10 +46,10 @@
 		data-componenthome="$!componenthome" 
 		#if( $showupload) data-showuploadid="${showupload.id}" #end>
 		
-		$pages.include("/${communityhome}/navigation.html")
+		$pages.include("${communityhome}/navigation.html")
 			
 		#if($user && !$browser.inApp() &&$canviewsettings)
-			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+			$pages.include("${communityhome}/components/sidebars/user/index.html")
 		#end
 		
 		$pages.includeContent()

@@ -3,7 +3,7 @@
 	
 	
  	<path-action name="Script.run" alltypes="true" >
-		<script>/${communityhome}/project/rentaldetails/calculate.groovy</script>
+		<script>${communityhome}/project/rentaldetails/calculate.groovy</script>
 	</path-action>
  
 </page>

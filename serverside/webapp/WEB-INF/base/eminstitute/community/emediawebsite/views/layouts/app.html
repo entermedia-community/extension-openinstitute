@@ -45,7 +45,7 @@
 <body>
 	<div id="application" class="bg-emdark" data-editmode='$!user.get("oe_edit_mode")' data-apphome="$!apphome" data-catalogid="$!content.catalogid">
     #if($canviewsettings && !$browser.inApp())
-			$pages.include("/${communityhome}/components/sidebars/user/index.html")
+			$pages.include("${communityhome}/components/sidebars/user/index.html")
 		#end
 
     $pages.include("${communityhome}/views/layouts/header.html")

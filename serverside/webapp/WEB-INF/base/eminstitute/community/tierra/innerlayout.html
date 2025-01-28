@@ -33,7 +33,7 @@
   <script type="text/javascript" defer src="${communityhome}/theme/js/multidate/jquery.daterangepicker.min.js"></script>
   <link rel="stylesheet" type="text/css" href="${communityhome}/theme/js/multidate/daterangepicker.min.css" />
  
-  $pages.include("/${communityhome}/theme/layouts/includes.html")
+  $pages.include("${communityhome}/theme/layouts/includes.html")
   
 
 </head>
@@ -57,7 +57,7 @@
 	$pages.include("${communityhome}/navigation.html", $context)
 	
 	#if($user && !$browser.inApp() && $canviewsettings)
-		$pages.include("/${communityhome}/components/sidebars/user/index.html")
+		$pages.include("${communityhome}/components/sidebars/user/index.html")
 	#end 
 
   	$pages.includeContent()

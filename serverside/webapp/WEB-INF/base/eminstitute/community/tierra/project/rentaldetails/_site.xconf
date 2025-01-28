@@ -9,7 +9,7 @@
 	</path-action>
 
  	<path-action name="Script.run" alltypes="true" >
-		<script>/${communityhome}/project/rentaldetails/availability.groovy</script>
+		<script>${communityhome}/project/rentaldetails/availability.groovy</script>
 	</path-action>
  
 

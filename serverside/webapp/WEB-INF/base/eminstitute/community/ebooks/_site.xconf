@@ -24,10 +24,10 @@
 	<script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
 	<style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
 
-  <script id="liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js" />
-	<script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
-	<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
-	<script id="ajaxformsubmit" src="/${applicationid}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+  <script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
+	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<!-- <script id="uicomponents" src="/${applicationid}/components/javascript/ui-components.js"/> -->

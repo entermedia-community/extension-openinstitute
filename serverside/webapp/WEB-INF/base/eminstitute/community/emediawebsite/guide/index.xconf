@@ -2,7 +2,7 @@
 <page>
 	<property name="editable">false</property>
 
-  	<property name="findroot">/${communityhome}/blockfind</property>
+  	<property name="findroot">${communityhome}/blockfind</property>
 
 	<inner-layout>./layout.html</inner-layout>
 </page>
