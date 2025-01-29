@@ -98,21 +98,6 @@ lQuery(".redirecttopage").livequery(function () {
 	window.location.href = url;
 });
 
-$(document).ready(function () {
-	var userOffcanvas = $("#userOffcanvas").get(0);
-	if (!userOffcanvas) {
-		return;
-	}
-	userOffcanvas.addEventListener("show.bs.offcanvas", function () {
-		$("body").addClass("offcanvas-open");
-		$(".community-layout").addClass("offcanvas-open");
-	});
-	userOffcanvas.addEventListener("hide.bs.offcanvas", function () {
-		$("body").removeClass("offcanvas-open");
-		$(".community-layout").removeClass("offcanvas-open");
-	});
-});
-
 function createElNS(tag) {
 	return $(document.createElementNS("http://www.w3.org/2000/svg", tag));
 }
