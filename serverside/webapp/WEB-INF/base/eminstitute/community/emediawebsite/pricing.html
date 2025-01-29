@@ -1,45 +1,57 @@
 <div class="overflow-hidden">
   <div class="container pb-4 space-3">
     <div class="w-md-80 w-lg-60 text-center mx-md-auto mb-9">
-      <h2 class="h1">Take Back your Digital Freedom!</h2>
-      <h3 class="h3 mt-4 mb-5" style="font-weight: 100;">Create a secure, centralized library with smart organizer</h3>
-      <div class="try-free mb-5">
-        <h4 class="h1">Create Your Library Today!</h4>
-        #if($user)
-        <a class="btn btn-primary" href="${communityhome}/account/">Try for Free!</a>
-        #else
-        <a class="btn btn-primary" href="${communityhome}/authentication/login.html">Try for Free!</a>
-        #end
-        <!-- <a class="small" href="">Learn More</a> -->
-      </div>
+      <h2 class="h1">Save your Digital Knowledge!</h2>
+      <h3 class="h3 mt-4 mb-5" style="font-weight: 100;">With a secure, connected library that you own</h3>
     </div>
-  </div>
-  <div class="container pb-4">
-    <div class="w-md-80 w-lg-60 text-center mx-md-auto mb-5">
-      <h2 class="h1">Our Hosting Packages</h2>
+    ##<div class="w-md-80 w-lg-60 text-center mx-md-auto mb-5">
+     ## <h2 class="h1">We Offer Hosted Versions</h2>
       <!-- <p>Small businesses, non-profit organizations, and enterprises alike can benefit from our cloud-hosted Digital
         Asset Management solution.</p> -->
-    </div>
+    ##</div>
 
     <div class="row justify-content-md-center mb-3">
 		  <div class="col-md-5 h-100 mb-2">
-        <div class="card shadow-lg h-100" style="min-height: 482px;">
+        <div class="card shadow-lg h-100" style="min-height: 350px;">
           <div class="card-header border-0 text-center">
-            <h3 class="h3 mt-2 text-dark font-weight-bold">Individuals</h3>
+            <h3 class="h3 mt-2 text-dark font-weight-bold">For Individuals</h3>
             <span class="d-block">
               <span class="font-size-4 text-primary font-weight-bold">
-                Free
+                Free Community Editions
               </span>
             </span>
             <!-- <span class="d-block h4 mb-0 text-dark">with 1 TB</span> -->
-            <span class=" text-secondary">Supported by the <a href="https://emedia.openinstitute.org/" class="font-weight-bold" style="border-bottom:1px dotted #888;">eMedia Community</a></span>
+##            <span class=" text-secondary">Sponcored by the <a href="https://emedia.openinstitute.org/" class="font-weight-bold" style="border-bottom:1px dotted #888;">eMedia Community</a></span>
+			
           </div>
 
           <div class="card-body px-5 pb-4">
+			
+			#set($librarires = [
+									["eInnovation", "https://einnovation.com", "Create, organize and share your social media content. Store your posts, videos and emails in one place."], 
+								     ["eBooks", "https://ebooks.emedialibrary.com", "Professional publishing solutions for authors, by authors. Get your book to market faster with our comprehensive platform."],
+								     ["Common Roots", "https://commonroots.emedialibrary.com", "Singer song writers connecting across cultures, locations and generations. We celebrate our shared humanity and we share our stories and songs for future generation to build upon."]
+								   ])
+								   #foreach ($library in $librarires)
+								   <div class="media font-size-1 text-secondary mb-2">
+									 <a href="${library[1]}" title="${library[1]}">
+								     <div class="media-body">
+								       <b style="text-decoration: underline;">${library[0]}</b> - ${library[2]}
+								     </div>
+									 </a>
+								   </div>
+								   #end
+			
+								   <div class="media font-size-1 text-secondary mb-2">
+								                <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+								                <div class="media-body">
+								                 Artificial Intelligence Tagging and Content Creation
+								                </div>
+								              </div>								   
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-check-circle text-success mt-1 me-2"></i>
               <div class="media-body">
-                Open Source
+                100% Open Source
               </div>
             </div>
             <div class="media font-size-1 text-secondary mb-2">
@@ -48,6 +60,12 @@
                 Community Support
               </div>
             </div>
+			<div class="media font-size-1 text-secondary mb-2">
+			             <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+			             <div class="media-body">
+			               Desktop Tool for Easy Editing
+			             </div>
+			           </div>
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-check-circle text-success mt-1 me-2"></i>
               <div class="media-body">
@@ -55,12 +73,15 @@
               </div>
             </div>
           </div>
+		  
+		  
+		  
         </div>
       </div>
       <div class="col-md-5 h-100 mb-2">
         <div class="card shadow-lg h-100" style="min-height: 482px;">
           <div class="card-header border-0 text-center">
-            <h3 class="h3 mt-2 text-dark font-weight-bold">Teams</h3>
+            <h3 class="h3 mt-2 text-dark font-weight-bold">For Teams</h3>
             <span class="d-block">
               <span class="font-size-4 text-primary font-weight-bold">
                 <span class="me-n2">$</span>
@@ -73,54 +94,60 @@
           </div>
 
           <div class="card-body px-5 pb-4">
+			
+			
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-plus-circle mt-1 me-2"></i>
               <div class="media-body">
-                Everything in the Free plan, plus
+                Pick and chose any or all features found in Community Sites, plus
+              </div>
+            </div>
+
+			<div class="media font-size-1 text-secondary mb-2">
+			  <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+			  <div class="media-body">
+			    Theme builder and customized corporate branding
+			  </div>
+			</div>
+			
+            <div class="media font-size-1 text-secondary mb-2">
+              <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+              <div class="media-body">
+                Smart Organizer to build custom library relationships
               </div>
             </div>
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-check-circle text-success mt-1 me-2"></i>
               <div class="media-body">
-                Free backups
+                Groups, Roles and User based permissions and Workflows
               </div>
             </div>
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-check-circle text-success mt-1 me-2"></i>
               <div class="media-body">
-                Co-located servers around the world
+                Custom Training sessions over Zoom
               </div>
             </div>
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-check-circle text-success mt-1 me-2"></i>
               <div class="media-body">
-                eMedia Servers provide faster uploads and downloads using GEO DNS
+               24/7 support and 99.999% uptime guarantee
               </div>
             </div>
-            <div class="media font-size-1 text-secondary mb-2">
-              <i class="fas fa-check-circle text-success mt-1 me-2"></i>
-              <div class="media-body">
-                Instant replication between on-premise and cloud hosting
-              </div>
-            </div>
-            <div class="media font-size-1 text-secondary mb-2">
-              <i class="fas fa-check-circle text-success mt-1 me-2"></i>
-              <div class="media-body">
-                24/7 server monitoring
-              </div>
-            </div>
-            <div class="media font-size-1 text-secondary mb-2">
-              <i class="fas fa-check-circle text-success mt-1 me-2"></i>
-              <div class="media-body">
-                99.999% uptime guarantee
-              </div>
-            </div>
-            <div class="media font-size-1 text-secondary mb-2">
-              <i class="fas fa-check-circle text-success mt-1 me-2"></i>
-              <div class="media-body">
-                Secure Data Integrity validation and free multi-level backups.
-              </div>
-            </div>
+			  <div class="media font-size-1 text-secondary mb-2">
+			  <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+			  <div class="media-body">
+			    Integration with DropBox, Google Drive or Lucid Link 
+			  </div>
+			</div>
+			
+			<div class="media font-size-1 text-secondary mb-2">
+						             <i class="fas fa-check-circle text-success mt-1 me-2"></i>
+						             <div class="media-body">
+						               Did we mention 100% Open Source?
+						             </div>
+						           </div>
+			
           </div>
         </div>
       </div>
@@ -130,7 +157,7 @@
 
     <div class="mx-auto pt-5">
       <div class="w-md-80 w-lg-60 text-center mx-md-auto mb-5">
-        <h2 class="h2">Support Packages</h2> 
+        <h2 class="h2">Extras Support and Customization Packages</h2> 
       </div>
       <div class="row mx-n2 mb-5 mb-md-7 text-dark">
         <div class="col-sm-6 col-md-4 px-2 mb-3 mb-md-0">
@@ -142,7 +169,7 @@
                 </svg>
               </figure>
               <h3 class="text-dark">Basic Support</h4>
-              <span class="text-dark font-size-2 font-weight-bold">$299<small>/month</small></span>
+              <span class="text-dark font-size-2 font-weight-bold">Included for Teams</span>
             </div>
             <div class="card-body pt-3 pb-5 px-5 d-flex flex-column">
               <ul class="list-unstyled list-sm-article mb-4 font-size-1 text-left">
@@ -165,7 +192,7 @@
                 </svg>
               </figure>
               <h3 class="text-dark">Business Support</h4>
-              <span class="text-dark font-size-2 font-weight-bold">$649<small>/month</small></span>
+              <span class="text-dark font-size-2 font-weight-bold">$350<small>/month</small></span>
             </div>
             <div class="card-body pt-3 pb-5 px-5 d-flex flex-column">
               <ul class="list-unstyled list-sm-article mb-4 font-size-1 text-left">
@@ -190,7 +217,7 @@
                 </svg>
               </figure>
               <h3 class="text-dark">Extended Support</h4>
-              <span class="text-dark font-size-2 font-weight-bold">$849<small>/month</small></span>
+              <span class="text-dark font-size-2 font-weight-bold">$550<small>/month</small></span>
             </div>
             <div class="card-body pt-3 pb-5 px-5 d-flex flex-column">
 				<strong>Server Support</strong> 
@@ -225,85 +252,84 @@
               <circle fill="#377dff" opacity=".85" cx="80" cy="80" r="24"/>
             </svg>
           </figure>
-          <h3 class="text-dark">Support on Demand</h4>
+          <h3 class="text-dark">Request a Quote</h4>
         </div>
-        <div class="text-left d-flex flex-column p-3">
-          <span class="text-dark font-size-2 font-weight-bold">$299<small>/session</small></span>
-          <small class="d-inline-block mt-auto text-muted">*Discounts apply buying multiple sessions at once</small>
-          <p class="text-dark mt-3 mb-0">This can either be all-hands on team sessions or incident sessions.</p>
+        <div class="text-left d-flex p-3">
+          
+		
+			<div class="text-left d-flex flex-column p-3" id="generatequote">
+			       <form class="js-validate ajaxform" style="width: 800px;"
+			       	data-targetdiv="generatequote"
+			       	data-oemaxlevel="1"
+			       	action="/meetingschedule/savequote.html"
+			       	method="post">
+			         <div class="col-lg-6">
+			           <div class="js-form-message mb-3">
+			             <label class="input-label ">Your name</label>
+			             <input type="text" class="form-control" name="name.value" placeholder="Full Name" required
+			               data-msg="Please enter your name.">
+			           </div>
+
+			           <div class="js-form-message mb-3">
+			             <label class="input-label ">Your email address</label>
+			             <input type="email" class="form-control" name="email.value" placeholder="Email" required
+			               data-msg="Please enter a valid email address.">
+			           </div>
+
+			           <div class="mb-3">
+			             <label class="input-label ">Your company name <span
+			                 class="text-muted font-weight-normal ms-1">(optional)</span></label>
+			             <input type="text" name="company.value" class="form-control" placeholder="Company Name">
+			           </div>
+			           
+			           <div class="mb-3">
+			             <label class="input-label ">Product of Interest </label>
+			             <select class="form-control custom-select" name="product.value" required
+			               data-msg="Please select a product.">
+			               <option value="">Select a product</option>
+			               <option value="Hosting">Hosting + Basic Support</option>
+			               <option value="Bisnes Suspport">Business Support</option>
+			               <option value="Extended Support">Extended Support</option>
+			               <option value="Support on Demand">Support on Demand</option>
+			             </select>
+			           </div>
+
+			           <div class="mb-3">
+			             <label class="input-label ">Starting month </label>
+			             <select class="form-control custom-select" name="month.value" required
+			               data-msg="Please select a starting month.">
+			               <option value="">Select a month</option>
+			               <option value="January">January</option>
+			               <option value="February">February</option>
+			               <option value="March">March</option>
+			               <option value="April">April</option>
+			               <option value="May">May</option>
+			               <option value="June">June</option>
+			         class="bg-white rounded d-flex align-items-center border shadow-none text-center w-lg-80 space-2"      <option value="July">July</option>
+			               <option value="August">August</option>
+			               <option value="September">September</option>
+			               <option value="October">October</option>
+			               <option value="November">November</option>
+			               <option value="December">December</option>
+			             </select>
+			           </div>
+
+			           <div class="text-center">
+			             <div class="mt-4 mb-2">
+			               <button type="submit" class="btn px-5 py-2 btn-primary" style="font-size: 16px;">Send Request</button>
+			             </div>
+			           </div>
+			         </div>
+			          $context.putSessionValue("clientform", "quoterequest")
+			       </form>
+			     </div>
+			 </div>
+			
+			
         </div>
       </div>
   </div> 
 
 
-    <div class="mx-auto w-lg-80 space-2" id="generatequote">
-      <h2 class="h2 text-center">Generate a Quote</h2>
-      <div class="container">
-        <form class="js-validate row justify-content-lg-center ajaxform"
-        	data-targetdiv="generatequote"
-        	data-oemaxlevel="1"
-        	action="/meetingschedule/savequote.html"
-        	method="post">
-          <div class="col-lg-6">
-            <div class="js-form-message mb-3">
-              <label class="input-label text-white">Your name</label>
-              <input type="text" class="form-control" name="name.value" placeholder="Full Name" required
-                data-msg="Please enter your name.">
-            </div>
-
-            <div class="js-form-message mb-3">
-              <label class="input-label text-white">Your email address</label>
-              <input type="email" class="form-control" name="email.value" placeholder="Email" required
-                data-msg="Please enter a valid email address.">
-            </div>
-
-            <div class="mb-3">
-              <label class="input-label text-white">Your company name <span
-                  class="text-muted font-weight-normal ms-1">(optional)</span></label>
-              <input type="text" name="company.value" class="form-control" placeholder="Company Name">
-            </div>
-            
-            <div class="mb-3">
-              <label class="input-label text-white">Product of Interest </label>
-              <select class="form-control custom-select" name="product.value" required
-                data-msg="Please select a product.">
-                <option value="">Select a product</option>
-                <option value="Hosting">Hosting + Basic Support</option>
-                <option value="Bisnes Suspport">Business Support</option>
-                <option value="Extended Support">Extended Support</option>
-                <option value="Support on Demand">Support on Demand</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label class="input-label text-white">Starting month </label>
-              <select class="form-control custom-select" name="month.value" required
-                data-msg="Please select a starting month.">
-                <option value="">Select a month</option>
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-              </select>
-            </div>
-
-            <div class="text-center">
-              <div class="mt-4 mb-2">
-                <button type="submit" class="btn px-5 py-2 btn-primary" style="font-size: 16px;">Generate</button>
-              </div>
-            </div>
-          </div>
-           $context.putSessionValue("clientform", "quoterequest")
-        </form>
-      </div>
-    </div>
-  </div>
+ 
 </div>
