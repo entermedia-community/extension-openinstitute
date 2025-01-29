@@ -19,11 +19,13 @@ MediaArchive archive = context.getPageValue("mediaarchive");
 	if(now.get(Calendar.HOUR_OF_DAY) > 9) {
 		day = 1; //starts next day
 	}
-	while(nextthree.size() < 3 && day < 14)
+	while(nextthree.size() < 6 && day < 14)
 	{
-		today1.set(Calendar.DAY_OF_YEAR,now.get(Calendar.DAY_OF_YEAR) + day);
+		//log.info("before..." + today1.getTime());
+		today1.add(Calendar.DAY_OF_YEAR, day);
+		//log.info("after..." + today1.getTime());
 		int hour = 9;
-		while( nextthree.size() < 3 && hour <= 11) //Search 3 times
+		while( nextthree.size() < 6 && hour <= 16) //Search 3 times
 		{
 			today1.set(Calendar.HOUR_OF_DAY,hour);
 			Data found = archive.query("clientmeeting").exact("time",today1.getTime()).searchOne();
@@ -40,12 +42,13 @@ MediaArchive archive = context.getPageValue("mediaarchive");
 		}
 		day++;
 	}
+	log.info("request processing..." + nextthree);
 	context.putPageValue("founddays", nextthree);
 }
 
 init();
 
 
-log.info("request processing...");
+
 
 
