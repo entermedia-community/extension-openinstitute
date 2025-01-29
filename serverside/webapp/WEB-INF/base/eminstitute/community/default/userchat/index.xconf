@@ -1,6 +1,6 @@
 <page>
 	
-	<path-action name="ChatModule.loadRecentChats"/>
+	<path-action name="ChatModule.loadRecentChatsLibraryCollection"/>
 	<path-action name="DataEditModule.loadPageOfSearch">
 		<property name="hitsname">messagesthitracker</property>
 		<property name="searchtype">chatterbox</property>
