@@ -122,10 +122,6 @@ hr {
 	border-top-width: 1px;
 	border-color: #e5e5e5;
 }
-img,
-svg {
-	display: block;
-}
 .hero .col-6 {
 	padding: 1rem;
 }
@@ -709,4 +705,18 @@ nav {
 
 .chatterbox {
 	height: calc(100% - 156px);
+}
+.video-card {
+	transition: transform 0.3s;
+}
+.video-card:hover {
+	transform: translateY(-5px);
+}
+.search-container {
+	max-width: 600px;
+	margin: 0 auto;
+}
+.video-thumbnail {
+	height: 200px;
+	object-fit: cover;
 }
