@@ -26,7 +26,7 @@
 	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
     <script id="goals" src="${communityhome}/project/goals/goals.js"/>
 
-	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="chatterbox" src="${communityhome}/components/chatterbox/chatterbox.js" />
 	
 	<path-action name="ProjectModule.loadCollection" />
 	
