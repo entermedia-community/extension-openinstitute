@@ -10,7 +10,7 @@ public void init()
 MediaArchive archive = context.getPageValue("mediaarchive");
 	//Search for slots
 	DateStorageUtil util = DateStorageUtil.getStorageUtil();
-	Calendar now = util.getCalendar(new Date());
+	Calendar now = util.getCalendar();
 	Calendar today1 = util.getCalendar(util.getThisMonday());
 	
 	List nextthree = new ArrayList();
