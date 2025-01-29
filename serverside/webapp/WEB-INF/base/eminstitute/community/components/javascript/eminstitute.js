@@ -20,9 +20,7 @@ jQuery(document).ready(function () {
 		//submit
 		var targetdiv = $(this).data("targetdiv");
 		if (e.keyCode == "13") {
-			if (window.CK5Editor) {
-				window.CK5Editor.updateSourceElement();
-			}
+			if ("updateAllCK5" in window) updateAllCK5();
 			var form = jQuery("#uploaddata");
 			form.ajaxSubmit({
 				error: function (data) {
