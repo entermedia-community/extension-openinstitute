@@ -12,15 +12,12 @@
   <property name="bgcolor">#626584</property>
   <property name="containertype">container</property>
   
-	<property name="communitytagcategory">emediawebsite</property>
+  <property name="communitytagcategory">emediawebsite</property>
   <property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
 
-	<property name="oisection">home</property>
-
-  
+  <property name="oisection">home</property>
 
   <inner-layout>${communityhome}/views/layouts/app.html</inner-layout>
-
   
   <property name="title">Smart File Organizer</property>
   <property name="description">eMediaLibrary is a smart file organizer that helps you organize your files in categorized, searchable, and shareable folders.</property>
@@ -47,19 +44,17 @@
   <script id="select2" src="${communityhome}/components/javascript/select2/js/select2.full.js"/>
   <style id="select2-css" href="${communityhome}/components/javascript/select2/css/select2.css"/>
 
-  <script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+    <script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
 	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
   <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
   <script id="uicomponents" src="/${applicationid}/components/javascript/community-global.js"/>
-    
 
-  <style id="bootstrap" href="${communityhome}/components/javascript/bootstrap/5.2.1/css/bootstrap.min.css" />
-	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
-	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
-	<style id="customwebsite" href="${communityhome}/theme/css/custom.css"/>
+  <style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
+  <style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
+  <style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
+  <style id="customwebsite" href="${communityhome}/theme/css/custom.css"/>
 
 </page>

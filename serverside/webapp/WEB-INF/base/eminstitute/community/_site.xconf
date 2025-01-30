@@ -15,12 +15,10 @@
   
   <property name="searchtypeFromRequest">true</property>
 	
-
   <property name="assetviewerlink">/${applicationid}/views/modules/asset/editor/viewer/index.html</property>
-  <property name="asseteditlink">//${applicationid}/views/modules/asset/editor/generalinformation/index.html</property>
+  <property name="asseteditlink">/${applicationid}/views/modules/asset/editor/generalinformation/index.html</property>
   <property name="login-path">/${applicationid}/authentication/login.html</property>
   <property name="collectionroot">/${applicationid}/collective/channel</property>
-
     
   <path-action name="Admin.autoLogin"/>
   <path-action name="MediaArchiveModule.loadApplicationId"/>
@@ -37,11 +35,10 @@
   
   <path-action name="ProjectModule.loadCommunityTag"/>
   
-  
   <script id="liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js" />
-	<script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
-	<script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
-	<script id="ajaxformsubmit" src="/${applicationid}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+  <script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
+  <script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
+  <script id="ajaxformsubmit" src="/${applicationid}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
   
   <permission name="view">
