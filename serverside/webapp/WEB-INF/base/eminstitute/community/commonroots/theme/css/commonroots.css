@@ -143,6 +143,12 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+header .nav-link.active {
+	border-bottom: 2px solid #ffffff;
+}
+header .nav-link.active {
+	border-bottom-color: #444444;
+}
 .card-body {
 	display: flex;
 	flex-direction: column;
