@@ -43,7 +43,14 @@
 </head>
 
 <body>
-	<div id="application" class="bg-emdark" data-editmode='$!user.get("oe_edit_mode")' data-apphome="$!apphome" data-catalogid="$!content.catalogid">
+	<div id="application" 
+		class="bg-emdark" 
+		data-editmode='$!user.get("oe_edit_mode")' 
+		data-apphome="$!apphome" 
+		data-applink="$!{communitylink}"
+		data-catalogid="$!content.catalogid"
+		data-user="$!user.id"
+	>
     #if($canviewsettings && !$browser.inApp())
 			$pages.include("${communityhome}/components/sidebars/user/index.html")
 		#end
