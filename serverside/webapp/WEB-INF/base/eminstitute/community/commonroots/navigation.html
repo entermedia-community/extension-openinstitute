@@ -1,36 +1,19 @@
 <header class="navigation emedia-community-header emedia-header">
-
-<nav class=" z-50 px-6 py-4 bg-background-80 backdrop-blur-lg">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <div class="text-2xl font-bold text-black">
-      <a class="d-flex align-items-center navbar-brand" href="/">
-        <img src="$communityhome${communitytagcategory.primaryimagepath}" alt="Common Roots"  class="me-1 me-md-3" style="height:50px;width: auto;" />
-        Common Roots
-      </a>
-    </div>
-    <div class="hidden md-flex items-center space-x-8">
-      <a href="/" class="hover-text-black transition-colors">[[Home]]</a>
-      <a href="/songs/" class="hover-text-black transition-colors">[[Songs]]</a>
-      <a href="/films/" class="hover-text-black transition-colors">[[Films]]</a>
-      <a href="/userchat/" class="nav-link #if($content.currentPage == 'userchat') active #end" >[[Community Chat]]</a>
-      <a href="/guide/" class="nav-link #if($content.currentPage == 'guide') active #end" >[[Guide]]</a>
-      <a href="/find/" class="btn btn-lg btn-primary rounded ms-lg-4">[[Open App]]</a>
-	#*
-      #ifnull($user)
-      <button class="btn btn-lg btn-dark rounded-pill px-3">
-        <i class="fas fa-user-plus me-1"></i> Join Us
-      </button>
-      <button class="btn btn-lg rounded-pill bg-yellow  px-3">
-        <i class="fas fa-sign-in-alt me-1"></i> Sign In
-      </button>
-      #end
-      #ifnotnull($user)
-        <a class="nav-link" href="$!{communitylink}/authentication/logout.html" title="[[Logout]]">
-          <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+  <nav class="container px-6 py-4">
+    <div class="mx-auto d-flex align-items-center justify-content-between">
+      <div class="text-2xl font-bold text-black">
+        <a class="d-flex align-items-center navbar-brand" href="/">
+          <img src="$communityhome${communitytagcategory.primaryimagepath}" alt="Common Roots"  class="me-1 me-md-3" style="height:50px;width: auto;" />
+          Common Roots
         </a>
-      #end
-	  *#
+      </div>
+      <div class="d-flex align-items-center space-x-8">
+        <a href="/songs/" class="nav-link #if($content.currentPage == 'songs') active #end">[[Songs]]</a>
+        <a href="/films/" class="nav-link #if($content.currentPage == 'films') active #end">[[Films]]</a>
+        <a href="/userchat/" class="nav-link #if($content.currentPage == 'userchat') active #end" >[[Community Chat]]</a>
+        <a href="/guide/" class="nav-link #if($content.currentPage == 'guide') active #end" >[[Guide]]</a>
+        <a href="/find/" class="btn btn-lg btn-primary rounded ms-lg-4">[[Open App]]</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </header>
