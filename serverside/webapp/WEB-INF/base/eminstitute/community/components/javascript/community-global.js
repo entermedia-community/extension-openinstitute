@@ -39,4 +39,18 @@ $(document).ready(function () {
 			$this.remove();
 		});
 	});
+
+	lQuery(".autoclick").livequery("click", function (e) {
+		var target = $(this).data("clicktarget");
+		if (!target) {
+			return;
+		}
+		if (!target.startsWith("#") && !target.startsWith(".")) {
+			target = "." + target;
+		}
+		if (!$(target).is("a")) {
+			return;
+		}
+		window.location.href = $(target).attr("href");
+	});
 });

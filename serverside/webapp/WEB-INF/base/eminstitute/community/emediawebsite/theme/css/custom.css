@@ -621,6 +621,7 @@ svg {
 	vertical-align: baseline;
 }
 a {
+	line-break: anywhere;
 	text-decoration: none;
 }
 sup {
@@ -12289,4 +12290,18 @@ table.referrals tr:hover td {
 }
 .ajaxloginbox .text-contrast {
 	color: #ffffff;
+}
+.template-card {
+	height: 100%;
+	background-color: #ffffff;
+	color: #444444;
+	cursor: pointer;
+}
+.template-card h4 small {
+	opacity: 0.75;
+}
+.template-card:hover a {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-decoration-thickness: 1px;
 }
