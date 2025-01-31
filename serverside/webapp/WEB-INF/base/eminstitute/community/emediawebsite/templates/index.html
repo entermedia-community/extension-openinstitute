@@ -1,71 +1,32 @@
-<div style='background-image: url("./img/stars.webp");background-repeat: no-repeat; background-attachment: fixed;'>
-	<div class="overflow-hidden">
-		<div class="container pb-4 space-top-4 features">
-			<h1 class="text-center space-bottom-1">Smart Folder Templates</h1>
-			<div class="row shadow-sm rounded bg-navy space-2 my-5" data-aos="fade-up" data-aos-duration="1500">
-				<div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-left" data-aos-duration="1500"> 
-					<h2>Video Production</h2>
-					<ul>
-						<li class="list-item">Captures <span class="text-muted">(upload your raw video files from SD cards)</span></li>
-						<li class="list-item">Collections <span class="text-muted">(Build finish pieces)</span></li>
-						<li class="list-item">Post Production <span class="text-muted">(Create new products)</span></li>
-					</ul>
-				</div>
-				<div class="col-lg-7" data-aos="fade-right" data-aos-duration="1500">
-					<div class="shadow-sm template-preview">
-						<img class="img-fluid rounded" src="$apphome/templates/img/video.webp" alt="video">
-						<a href="#" class="btn btn-xs btn-primary"><i class="fas fa-arrow-down me-1"></i>Download</a>
-					</div> 
-				</div>
-			</div>
-			<div class="row shadow-sm rounded bg-navy space-2 my-5" data-aos="fade-up" data-aos-duration="1500">
-				<div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-left" data-aos-duration="1500"> 
-					<h2>Marketing Department</h2>
-					<ul>
-						<li class="list-item"><strong>Automatic Entity Creation</strong></li>
-						<li class="list-item"><strong>Automatic Metadata searching</strong> - By date, author or embedded information from the files.</li>
-						<li class="list-item"><strong>A self-learning platform</strong> - The AI features will learn as you use the platform, automatically organizing your files more efficiently and becoming more and more searchable.</li>
-					</ul>
-				</div>
-				<div class="col-lg-7" data-aos="fade-right" data-aos-duration="1500">
-					<div class="shadow-sm template-preview">
-						<img class="img-fluid rounded" src="$apphome/templates/img/marketing.webp" alt="marketing">
-						<a href="#" class="btn btn-xs btn-primary"><i class="fas fa-arrow-down me-1"></i>Download</a>
-					</div> 
-				</div>
-			</div>
-			<div class="row shadow-sm rounded bg-navy space-2 my-5" data-aos="fade-up" data-aos-duration="1500">
-				<div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-left" data-aos-duration="1500"> 
-					<h2>Photo Studio</h2>
-					<ul>
-						<li class="list-item"><strong>Centralized Storage of high resolution files</strong> - Find a needle in the haystack with AI</li>
-						<li class="list-item"><strong>Multi-Language Metadata</strong> - Make use of entity tracking. Track all data records that are related to the assets such as information, Product details, Project codes, etc. in multiple languages</li>
-						<li class="list-item"><strong>Online Video Playback</strong> - View and stream videos</li>
-					</ul>
-				</div>
-				<div class="col-lg-7" data-aos="fade-right" data-aos-duration="1500">
-					<div class="shadow-sm template-preview">
-						<img class="img-fluid rounded" src="$apphome/templates/img/photostudio.webp" alt="photostudio">
-						<a href="#" class="btn btn-xs btn-primary"><i class="fas fa-arrow-down me-1"></i>Download</a>
-					</div> 
-				</div>
-			</div>
-			<div class="row shadow-sm rounded bg-navy space-2 my-5" data-aos="fade-up" data-aos-duration="1500">
-				<div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-left" data-aos-duration="1500"> 
-					<h2>Publishing</h2>
-					<ul>
-						<li class="list-item"><strong>Built in Media Conversions</strong> - Automatically convert your files online to a desired type</li>
-						<li class="list-item"><strong>Editor</strong> - Crop, add filters, rotate or add text</li>
-						<li class="list-item"><strong>Share</strong> - Or download your custom conversions and cropped images</li>
-					</ul> 
-				</div>
-				<div class="col-lg-7" data-aos="fade-right" data-aos-duration="1500">
-					<div class="shadow-sm template-preview">
-						<img class="img-fluid rounded" src="$apphome/templates/img/publish.webp" alt="publish">
-						<a href="#" class="btn btn-xs btn-primary"><i class="fas fa-arrow-down me-1"></i>Download</a>
-					</div> 
-				</div>
+<div class="text-center my-5">
+	<h1 class="mb-0 h2">Templates</h1>
+	<p class="mb-0">Choose the perfect template for your needs</p>
+</div>
+
+
+<div class="container px-4 mb-5">
+	<div class="row g-4 justify-content-md-center">
+		#set($templates = [
+			["VideoFlow", "einnovation.com", "<b>Enhance Video Editing Workflows</b><br>Upload high-quality videos, edit, and organize them seamlessly in our cloud-based platform. When ready, generate and refine multilingual captions, then export your polished video in any format—simplifying creation, collaboration, and global publishing. Perfect for creators who value efficiency and precision.", "video"],
+			["Team","einnovation.com","<b>Simplify Marketing Collaboration in One Unified Hub</b><br>Store, edit, and organize high-resolution images, brand documents, and marketing materials seamlessly online. Collaborate with teammates using real-time feedback, automated version history, and approval workflows. Effortlessly export polished assets for ads, social media, or presentations—all while maintaining brand integrity across every file. Built for marketing teams to create faster, smarter, and in sync.", "users"],
+			["Creators", "einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
+			["CommonRoots","openinstitute.org", "<b>Bridge Culture and Commerce with Your Creations</b><br>Host, monetize, and share videos, audio narratives, literature, and cultural artifacts in a single space. Sell directly to fans, license content, or crowdfund projects while celebrating your heritage. Equipped with rights management and global distribution, it’s designed for artists, historians, and modern creators to thrive. Transform your work into legacy—and revenue.", "camera-retro"],
+			["TierraSagrada", "openinstitute.org", "<b>Your Journey, Our Purpose</b><br>A people-first home-sharing platform where hosts and guests connect authentically. Enjoy fair pricing, zero hidden fees, and a community-driven model that prioritizes safe, memorable stays over profits. Hosts keep more earnings, travelers get curated local experiences, and everyone benefits from our transparent policies. Redefine travel with trust, respect, and shared values—not just transactions.", "store"]
+		])
+		#foreach($tmp in $templates)
+		<div class="col-sm-12 col-md-6">
+			<div class="template-card p-4 border rounded transition-3d-hover autoclick" data-clicktarget="template-link">
+				<h4 class="text-primary d-flex">
+					<i class="fas fa-${tmp[3]} me-2" style="opacity: 0.75;"></i> 
+					<a href="https://${tmp[0]}.${tmp[1]}/" class="template-link">
+						${tmp[0]}<small>.${tmp[1]}</small>
+					</a>
+				</h4>
+				<p class="text-muted m-0">
+					${tmp[2]}
+				</p>
 			</div>
 		</div>
+		#end
 	</div>
 </div>
