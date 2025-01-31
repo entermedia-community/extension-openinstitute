@@ -39,4 +39,10 @@ $(document).ready(function () {
 			$this.remove();
 		});
 	});
+	
+	lQuery("a.emdialog").livequery("click", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$(this).emDialog();
+	});
 });
