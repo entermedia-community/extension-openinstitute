@@ -189,12 +189,6 @@ uiload = function () {
 		}
 	});
 
-	lQuery("a.ajax").livequery("click", function (e) {
-		e.stopPropagation();
-		e.preventDefault();
-		$(this).runAjax();
-	});
-
 	var browserlanguage = app.data("browserlanguage");
 	if (browserlanguage == undefined || browserlanguage == "") {
 		browserlanguage = "en";

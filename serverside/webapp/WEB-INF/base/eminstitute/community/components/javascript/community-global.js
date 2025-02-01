@@ -16,11 +16,6 @@ $(document).ready(function () {
 		var url = $(this).data("redirectok");
 		window.location.href = url;
 	});
-	lQuery("a.ajax").livequery("click", function (e) {
-		e.stopPropagation();
-		e.preventDefault();
-		$(this).runAjax();
-	});
 
 	lQuery("a.toggleAjax").livequery("click", function (e) {
 		/**
@@ -53,7 +48,7 @@ $(document).ready(function () {
 		}
 		window.location.href = $(target).attr("href");
 	});
-	
+
 	lQuery("a.emdialog").livequery("click", function (e) {
 		e.stopPropagation();
 		e.preventDefault();
