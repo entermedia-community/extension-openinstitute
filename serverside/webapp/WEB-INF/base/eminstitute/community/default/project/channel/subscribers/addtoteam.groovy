@@ -81,7 +81,7 @@ public void init()
 	context.putPageValue("subscription",subscription);
 	
 //	Set template path with applicationid instead of just 'apphome'
-	String communityhome = context.findValue("communityhome");
+	String communityhome = context.getPageValue("communityhome");
 	String template = communityhome + "/theme/emails/collection-add-teammember.html";
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
@@ -93,10 +93,11 @@ public void init()
 	objects.put("teamuser",teamuser);
 	Data librarycol = archive.getData("librarycollection", collectionid);
 	objects.put("librarycol", librarycol);
-	objects.put("apphome", context.findValue("apphome"));
-	objects.put("applink", context.findValue("applink"));
+	objects.put("apphome", context.getPageValue("apphome"));
+	objects.put("applink", context.getPageValue("applink"));
 	objects.put("siteroot", getSiteRoot());
-
+	objects.put("communityhome", communityhome);
+	
 		
 	//log.info("Sending welcome email  " + teamuserid);
 	
