@@ -11739,6 +11739,10 @@ svg#animation {
 	min-width: 800px;
 	height: 100%;
 }
+#freeLibs,
+#createOwn {
+	cursor: pointer;
+}
 #emedia {
 	width: 300px;
 	height: 300px;
