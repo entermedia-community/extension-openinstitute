@@ -20,12 +20,6 @@ $(document).ready(function () {
 		once: true,
 	});
 
-	$("a.emdialog").on("click", function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		$(this).emDialog();
-	});
-
 	$(document).on("submit", ".antibotform", function (e) {
 		e.preventDefault();
 

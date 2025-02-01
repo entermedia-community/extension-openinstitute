@@ -48,10 +48,4 @@ $(document).ready(function () {
 		}
 		window.location.href = $(target).attr("href");
 	});
-
-	lQuery("a.emdialog").livequery("click", function (e) {
-		e.stopPropagation();
-		e.preventDefault();
-		$(this).emDialog();
-	});
 });
