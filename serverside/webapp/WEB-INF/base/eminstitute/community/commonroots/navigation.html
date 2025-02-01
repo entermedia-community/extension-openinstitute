@@ -7,11 +7,29 @@
           Common Roots
         </a>
       </div>
-      <div class="d-flex align-items-center space-x-8">
-        <a href="/songs/" class="nav-link #if($content.currentPage == 'songs') active #end">[[Songs]]</a>
-        <a href="/films/" class="nav-link #if($content.currentPage == 'films') active #end">[[Films]]</a>
-        <a href="/userchat/" class="nav-link #if($content.currentPage == 'userchat') active #end" >[[Community Chat]]</a>
-        <a href="/guide/" class="nav-link #if($content.currentPage == 'guide') active #end" >[[Guide]]</a>
+      <div class="d-flex align-items-center space-x-8 auto-active-container">
+        <a href="/songs/" 
+          class="ajax nav-link #if($content.currentPage == 'songs') current #end auto-active-link" 
+          data-targetdivinner="pageContent" 
+          data-oemaxlevel="1"
+          data-updateurl="true">
+          [[Songs]]
+        </a>
+        <a href="/films/" 
+          class="ajax nav-link #if($content.currentPage == 'films') current #end auto-active-link" 
+          data-targetdivinner="pageContent" 
+          data-oemaxlevel="1"
+          data-updateurl="true">
+          [[Films]]
+        </a>
+        <a href="/userchat/" 
+          class="ajax nav-link #if($content.currentPage == 'userchat') current #end auto-active-link" 
+          data-targetdivinner="pageContent" 
+          data-oemaxlevel="1"
+          data-updateurl="true">
+          [[Community Chat]]
+        </a>
+        <a href="/guide/" class="nav-link #if($content.currentPage == 'guide') current #end">[[Guide]]</a>
         <a href="/find/" class="btn btn-lg btn-primary rounded ms-lg-4">[[Open App]]</a>
       </div>
     </div>

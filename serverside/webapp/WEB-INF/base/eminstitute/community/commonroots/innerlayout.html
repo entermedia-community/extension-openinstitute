@@ -43,11 +43,16 @@
 				$pages.include("${communityhome}/components/sidebars/user/index.html")
 			#end
 			
-			$pages.includeContent()
+			<div id="pageContent">
+				$pages.includeContent()
+			</div>
 
 			$pages.include("${communityhome}/footer.html")
 
-			<script src="${communityhome}/theme/js/commonroots.js"></script>
 		</div>
+
+		$pages.include("${communityhome}/floatingplayer.html")
+		<script src="${communityhome}/theme/js/wavesurfer.min.js"></script>
+		<script src="${communityhome}/theme/js/commonroots.js"></script>
 	</body>
 </html>
