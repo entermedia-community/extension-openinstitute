@@ -1,11 +1,29 @@
 <div class="d-flex flex-column align-items-center">
-  <h3 class="mb-2 text-dark">Community Libraries &mdash; sponsored by eMedia Library</h3>
-	<div id="savedLibraries">
+  <div id="savedLibraries">
 
+		<p class="text-muted lead mb-3 subheader">
+		      These are free web sites that anyone can use. They are managed and supported by an open community of users. 
+		     </p>
+		
+<!--
+		["Content Creators  / Social Influensors", "creators.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
+		["Cultural Heritage Library","commonroots.openinstitute.org", "<b>Bridge Culture and Commerce with Your Creations</b><br>Host, monetize, and share videos, audio narratives, literature, and cultural artifacts in a single space. Sell directly to fans, license content, or crowdfund projects while celebrating your heritage. Equipped with rights management and global distribution, it’s designed for artists, historians, and modern creators to thrive. Transform your work into legacy—and revenue.", "camera-retro"]
+
+
+		<div class="container px-4 mb-5">
+			<div class="row g-4 justify-content-md-center">
+				#set($templates = [
+					["Video Producer", "production.einnovation.com", "<b>Video and Photo Producers with Editing Workflows</b><br>Upload high-quality videos, edit, and organize them seamlessly in our cloud-based platform. When ready, generate and refine multilingual captions, then export your polished video in any format—simplifying creation, collaboration, and global publishing. Perfect for creators who value efficiency and precision.", "video"],
+					["Commerce","commerce.einnovation.com","<b>Business Files and Marketing Files in One Unified Hub</b><br>Store, edit, and organize high-resolution images, brand documents, and marketing materials seamlessly online. Collaborate with teammates using real-time feedback, automated version history, and approval workflows. Effortlessly export polished assets for ads, social media, or presentations—all while maintaining brand integrity across every file. Built for marketing teams to create faster, smarter, and in sync.", "users"],
+					["Studio", "studio.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
+					["Content Creators", "creators.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
+					["Cultural Heritage Library","commonroots.openinstitute.org", "<b>Bridge Culture and Commerce with Your Creations</b><br>Host, monetize, and share videos, audio narratives, literature, and cultural artifacts in a single space. Sell directly to fans, license content, or crowdfund projects while celebrating your heritage. Equipped with rights management and global distribution, it’s designed for artists, historians, and modern creators to thrive. Transform your work into legacy—and revenue.", "camera-retro"]
+				])
+-->		
+		
     #set($librarires = [
-	  ["eInnovation", "https://einnovation.com", "Create, organize and share your social media content. Store your posts, videos and emails in one place."], 
-	  ["eBooks", "https://ebooks.emedialibrary.com", "Professional publishing solutions for authors, by authors. Get your book to market faster with our comprehensive platform."],
-     ["Common Roots", "https://commonroots.emedialibrary.com", "Common Roots - An collection of music and video documenting original works across cultures, locations and generations. We celebrate our shared humanity of stories and songs for future generation to build upon."]
+	  ["Content Creators", "https://einnovation.com", "Create, organize and share your social media content. Store your posts, videos and emails in one place."], 
+     ["Cultural Heritage Library", "https://commonroots.emedialibrary.com", "Common Roots - An collection of music, literature and video documenting original works across cultures, locations and generations. We celebrate our shared humanity of stories and songs for future generation to build upon."]
     ])
     #foreach ($library in $librarires)
     <a class="library-card active" href="${library[1]}" title="${library[1]}">
