@@ -10,6 +10,8 @@
 	<property name="bgcolor">#6a8eff</property>
 	<property name="containertype">container</property>
 
+	<property name="flair">true</property>
+
 	<property name="communitytagcategory">production</property>
 	<property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
 

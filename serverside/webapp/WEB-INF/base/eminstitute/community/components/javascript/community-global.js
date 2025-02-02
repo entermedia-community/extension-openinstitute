@@ -48,4 +48,8 @@ $(document).ready(function () {
 		}
 		window.location.href = $(target).attr("href");
 	});
+
+	lQuery(".top-flair").livequery(function () {
+		$("body").css("padding-top", 62);
+	});
 });

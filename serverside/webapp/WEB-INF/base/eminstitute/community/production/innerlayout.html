@@ -32,6 +32,10 @@
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 
+	#if($content.get("flair") == "true")
+    $pages.include("${communityhome}/theme/layouts/flair.html")
+  #end
+
 	<div id="application" class="eminstitutecollective" 
 		data-home="$home" 
 		data-user="$!user.id" 
