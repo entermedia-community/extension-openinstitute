@@ -6437,7 +6437,7 @@ label.btn {
 }
 
 .input-group-merge .input-group-prepend .input-group-text {
-	padding: 0 0 0 1rem;
+	height: 100%;
 }
 
 .input-group-merge .input-group-prepend .input-group-text:first-child {
