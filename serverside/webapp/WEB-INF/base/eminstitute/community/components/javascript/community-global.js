@@ -50,6 +50,18 @@ $(document).ready(function () {
 	});
 
 	lQuery(".top-flair").livequery(function () {
-		$("body").css("padding-top", 62);
+		$("body").css("padding-top", 74);
+		$(this)
+			.find(".flair-close")
+			.on("click", function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+				$(this)
+					.closest(".top-flair")
+					.fadeOut(function () {
+						$(this).remove();
+					});
+				$("body").css("padding-top", 0);
+			});
 	});
 });
