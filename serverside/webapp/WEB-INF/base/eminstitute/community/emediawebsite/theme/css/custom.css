@@ -11173,13 +11173,16 @@ h6,
 	font-family: Roboto, sans-serif !important;
 	color: var(--text-color);
 }
+.text-dark {
+	color: #444444 !important;
+}
 .text-dark h1,
 .text-dark h2,
 .text-dark h3,
 .text-dark h4,
 .text-dark h5,
 .text-dark h6 {
-	color: #1e2022 !important;
+	color: #444444 !important;
 }
 h1 > u {
 	position: relative;
@@ -11270,9 +11273,6 @@ footer {
 }
 .slick-list .card-body {
 	border-radius: 0 0 0.25rem 0.25rem;
-}
-.shadow-sm {
-	box-shadow: 0px 12px 15px rgb(11 23 44) !important;
 }
 .js-slide .card-body {
 	padding: 1rem;
@@ -12294,4 +12294,19 @@ table.referrals tr:hover td {
 }
 .ajaxloginbox .text-contrast {
 	color: #ffffff;
+}
+.template-card img {
+	aspect-ratio: 16/9;
+	object-fit: cover;
+}
+.card-thumbnail {
+	position: relative;
+}
+.template-card .template-action {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+.pageHeight {
+	min-height: calc(100vh - 450px);
 }

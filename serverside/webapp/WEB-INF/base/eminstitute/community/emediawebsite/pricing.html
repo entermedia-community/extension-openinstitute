@@ -108,7 +108,7 @@
             </div>
           </div>
 
-          <div class="card-body px-5 pb-4">
+          <div class="card-body px-5 pb-2">
             <div class="media font-size-1 text-secondary mb-2">
               <i class="fas fa-plus-circle mt-1 me-2"></i>
               <div class="media-body">
@@ -164,11 +164,11 @@
                 Did we mention 100% Open Source?
               </div>
             </div>
+
+            <div class="w-100 font-size-2 text-center my-4">
+              <button type="submit" class="btn py-2 btn-primary">Choose a Template</button>  ##Go to request a quote below #quote
+            </div>		  
           </div>
-		  
-		  <div class="media font-size-2 text-secondary mb-2" style="text-align:right;">
-		  <button type="submit" class="btn btn-primary">Deploy Your Library</button>  ##Go to request a quote below #quote
-			</div>		  
         </div>
       </div>
     </div>
@@ -262,81 +262,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="bg-white rounded border shadow-none text-center w-md-50 mx-md-auto">
-        <div class="border-right p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 160 160">
-            <circle stroke="#377dff" stroke-width="12" fill="transparent" opacity=".85" cx="80" cy="80" r="48"/>
-            <circle fill="#377dff" opacity=".85" cx="80" cy="80" r="24"/>
-          </svg>
-          <h3 class="text-dark mt-0">Deploy a Library</h4>
-        </div>
-
-        <div class="text-left d-flex flex-column p-3" id="generatequote">
-          <form class="js-validate ajaxform mx-auto" style="width: 100%;max-width: 500px;"
-            data-targetdiv="generatequote"
-            data-oemaxlevel="1"
-            action="/meetingschedule/savequote.html"
-            method="post">
-            <div class="js-form-message mb-3">
-              <label class="input-label ">Your name</label>
-              <input type="text" class="form-control" name="name.value" placeholder="Full Name" required
-                  data-msg="Please enter your name.">
-            </div>
-
-            <div class="js-form-message mb-3">
-              <label class="input-label ">Your email address</label>
-              <input type="email" class="form-control" name="email.value" placeholder="Email" required
-                data-msg="Please enter a valid email address.">
-            </div>
-
-            <div class="mb-3">
-              <label class="input-label ">Your company name <span
-                class="text-muted font-weight-normal ms-1">(optional)</span></label>
-              <input type="text" name="company.value" class="form-control" placeholder="Company Name">
-            </div>
-              
-            <div class="mb-3">
-              <label class="input-label ">Product of Interest </label>
-              <select class="form-control custom-select" name="product.value" required
-                data-msg="Please select a product.">
-                <option value="">Select a product</option>
-                <option value="Hosting">Hosting + Basic Support</option>
-                <option value="Bisnes Suspport">Business Support</option>
-                <option value="Extended Support">Extended Support</option>
-                <option value="Support on Demand">Support on Demand</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label class="input-label ">Starting month </label>
-              <select class="form-control custom-select" name="month.value" required
-                data-msg="Please select a starting month.">
-                <option value="">Select a month</option>
-                <option value="January">January</option>
-                <option value="February" selected>February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-              </select>
-            </div>
-
-            <div class="text-center">
-              <div class="mt-4 mb-2">
-                <button type="submit" class="btn px-5 py-2 btn-primary" style="font-size: 16px;">Send Request</button>
-              </div>
-            </div>
-            $context.putSessionValue("clientform", "quoterequest")
-          </form>
-			  </div>
       </div>
     </div>
   </div>

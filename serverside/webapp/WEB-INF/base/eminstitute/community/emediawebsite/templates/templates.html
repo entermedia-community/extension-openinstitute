@@ -1,0 +1,30 @@
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  #set($templates = [
+    ["Production", "http://production.localhost.com:8080/", "production.png", "video"],
+    ["Marketing","marketing.einnovation.com", "placeholder.svg", "users"],
+    ["Creators", "creators.einnovation.com", "placeholder.svg", "user-edit"],
+    ["CommonRoots","openinstitute.org", "placeholder.svg", "camera-retro"]
+  ])
+  #foreach($template in $templates)
+    <div class="col">
+      <div class="card h-100 template-card shadow-sm transition-3d-hover">
+        <div class="card-thumbnail">
+          <img src="${communityhome}/templates/img/${template[2]}" class="card-img-top" alt="Template 3">
+          <div class="template-action d-flex gap-2">
+            <a class="btn btn-primary shadow-sm" href="${communitylink}/templates/choose.html?template=${template[0]}">
+              Choose Template
+            </button>
+            <a class="btn bg-white border shadow-sm" href="${template[1]}">
+              <i class="fas fa-eye me-1"></i>
+              Live Preview
+            </a>
+          </div>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h5 class="text-dark d-flex align-items-center"><i class="small fas fa-${template[3]} me-2"></i> ${template[0]} Template</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+        </div>
+      </div>
+    </div>
+  #end
+</div>
