@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-lg-7" data-aos="fade-right" data-aos-duration="1500">
 					<div class="shadow-sm template-preview">
-						<img class="img-fluid rounded" src="$apphome/templates/img/video.webp" alt="video">
+						<img class="img-fluid rounded" src="$apphome/gallery-templates/img/video.webp" alt="video">
 						<a href="#" class="btn btn-xs btn-primary"><i class="fas fa-arrow-down me-1"></i>Download</a>
 					</div> 
 				</div>
