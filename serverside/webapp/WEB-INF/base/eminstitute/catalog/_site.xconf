@@ -2,6 +2,6 @@
 
 <page>
   <property name="fallbackdirectory">/WEB-INF/base/finder/catalog</property>
-  <property name="catalogid">eminstitute/catalog</property>
-  <property name="applicationid">eminstitute/catalog</property>
+  <property name="catalogid">${siteid}/catalog</property>
+  <property name="applicationid">${siteid}/catalog</property>
 </page>

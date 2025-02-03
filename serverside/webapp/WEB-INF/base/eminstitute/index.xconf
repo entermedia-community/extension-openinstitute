@@ -1,9 +1,7 @@
 <page>
 
 	<property name="oisection">community</property>
-	
 
-    <Xinner-layout>/${siteid}/app/theme/layouts/application.html</Xinner-layout>
     <style id="oi2" cancel="true" />
     <style id="oi3" cancel="true" />
 </page>

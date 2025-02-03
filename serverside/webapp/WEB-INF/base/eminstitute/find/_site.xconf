@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-  <property name="catalogid">site/catalog</property>
+  <property name="catalogid">${siteid}/catalog</property>
   <property name="themeid">emsharedefault</property>
   <property name="fallbackdirectory">/WEB-INF/base/finder/find</property>
-  <property name="applicationid">site/find</property>
+  <property name="applicationid">${siteid}/find</property>
   <property name="themeprefix">/${applicationid}/theme</property>
+  
   <permission name="view">
   	<group id="administrators"/>
   </permission>

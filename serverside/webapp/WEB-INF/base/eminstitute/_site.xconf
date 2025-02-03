@@ -2,8 +2,8 @@
 
 <page>
   
-  <property name="siteid">site</property>
-  <property name="catalogid">site/catalog</property>
+  
+  <property name="catalogid">${siteid}/catalog</property>
 
   <page-loader loader="projectLoader" />
  
