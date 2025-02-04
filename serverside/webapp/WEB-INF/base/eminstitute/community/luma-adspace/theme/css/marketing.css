@@ -1,14 +1,13 @@
 :root {
 	--accent-color: #5f7aff;
 	--default-color: #444444;
-	--surface-color: #ffffff;
-	--contrast-color: #ffffff;
+	--white: #ffffff;
 	--background-color: #f3f9ff;
 }
 
 body {
 	font-family: "Roboto", sans-serif;
-	background-color: #ffffff;
+	background-color: var(--white);
 }
 h1,
 h2,
@@ -20,15 +19,73 @@ h6 {
 	font-weight: 400;
 	font-style: normal;
 }
+hr {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border: 0;
+	border-top: 0.0625rem solid #e1e1e1;
+}
+h2 {
+	font-size: 1.875rem;
+}
+.space-1 {
+	padding: 1rem 0;
+}
+.space-2 {
+	padding: 2rem 0;
+}
+.space-3 {
+	padding: 3rem 0;
+}
+.avatar-lg {
+	width: 4.25rem;
+	height: 4.25rem;
+}
+.avatar-circle {
+	border-radius: 50%;
+}
+.avatar {
+	position: relative;
+	display: inline-block;
+	width: 3.125rem;
+	height: 3.125rem;
+	border-radius: 0.3125rem;
+}
+.avatar-circle .avatar-img {
+	border-radius: 50%;
+}
+.avatar-img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 0.3125rem;
+}
+.text-cap {
+	text-transform: uppercase;
+	letter-spacing: 0.03125rem;
+}
+.text-lh-sm {
+	line-height: 1.2;
+}
+.font-size-1 {
+	font-size: 0.875rem;
+}
+.card-footer {
+	background-color: rgb(255, 255, 255);
+	padding: 1.5rem;
+	border-top: 0.0625rem solid rgb(231, 234, 243);
+}
+.font-weight-bold {
+	font-weight: 700 !important;
+}
 .navbar-brand {
-	color: #5f7aff;
+	color: var(--accent-color);
 }
 .navbar-brand:hover {
 	color: #738afa;
 }
 .navbar-toggler {
 	border: none;
-	color: #5f7aff;
+	color: var(--accent-color);
 }
 .navbar-toggler:focus {
 	box-shadow: none;
@@ -37,13 +94,28 @@ h6 {
 .navbar-nav .nav-link {
 	font-weight: 500;
 	font-size: 1rem;
-	columns: #444444;
+	color: var(--default-color);
 	padding: 5px 12px !important;
+}
+.display-4 {
+	color: var(--default-color);
+	font-size: 3.5rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+.lead {
+	font-size: 1.25rem;
+	font-weight: 400;
+}
+@media (min-width: 992px) {
+	.w-lg-80 {
+		width: 80% !important;
+	}
 }
 .btn-primary {
 	color: #fff;
-	background-color: #5f7aff;
-	border-color: #5f7aff;
+	background-color: var(--accent-color);
+	border-color: var(--accent-color);
 }
 .btn.btn-primary:hover {
 	color: #fff;
@@ -51,14 +123,20 @@ h6 {
 	border-color: #4967fb !important;
 }
 .navbar-nav .nav-link.active {
-	color: #5f7aff;
+	color: var(--accent-color);
 }
 .navbar-nav .nav-link:hover {
 	color: #738afa;
 }
-
+.form-control {
+	height: auto;
+}
 .bg-blue {
-	background-color: #5f7aff;
+	background-color: var(--accent-color);
+}
+.text-secondary,
+.lead {
+	color: #677788;
 }
 .btn-icon.btn-xs {
 	font-size: 0.75rem;
@@ -89,13 +167,21 @@ h6 {
 	background-color: #71869d;
 	box-shadow: 0 4px 11px rgba(113, 134, 157, 0.1);
 }
+.h-250rem {
+	height: 15.625rem;
+}
+.bg-img-hero {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+}
 .hero {
 	position: relative;
 	padding-top: 160px;
 	background: linear-gradient(
 		135deg,
-		color-mix(in srgb, #5f7aff, transparent 95%) 50%,
-		color-mix(in srgb, #5f7aff, transparent 98%) 25%,
+		color-mix(in srgb, var(--accent-color), transparent 95%) 50%,
+		color-mix(in srgb, var(--accent-color), transparent 98%) 25%,
 		transparent 50%
 	);
 }
@@ -108,7 +194,7 @@ h6 {
 	height: 100%;
 	background: radial-gradient(
 		circle at 90% 10%,
-		color-mix(in srgb, #5f7aff, transparent 92%),
+		color-mix(in srgb, var(--accent-color), transparent 92%),
 		transparent 40%
 	);
 	pointer-events: none;
@@ -132,8 +218,8 @@ h6 {
 	font-size: 1.25rem;
 }
 section {
-	color: #444444;
-	background-color: #ffffff;
+	color: var(--default-color);
+	background-color: var(--white);
 	padding: 60px 0;
 	scroll-margin-top: 90px;
 	overflow: clip;
@@ -172,7 +258,7 @@ section.light-bg {
 	position: relative;
 	z-index: 1;
 	margin-top: 5rem;
-	background-color: #ffffff;
+	background-color: var(--white);
 	border-radius: 20px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 	padding-bottom: 2rem;
@@ -191,7 +277,7 @@ section.light-bg {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: color-mix(in srgb, #5f7aff, transparent 92%);
+	background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
 	border-radius: 50px;
 	transition: 0.3s;
 }
@@ -199,7 +285,7 @@ section.light-bg {
 	flex-grow: 1;
 }
 .hero .stat-item .stat-content h4 {
-	color: #444444;
+	color: var(--default-color);
 	font-size: 1.25rem;
 	margin-bottom: 0.25rem;
 	font-weight: 600;
@@ -211,10 +297,10 @@ section.light-bg {
 }
 .hero .stat-item .stat-icon i {
 	font-size: 1.5rem;
-	color: #5f7aff;
+	color: var(--accent-color);
 }
 .hero .stat-item:hover .stat-icon {
-	background-color: #5f7aff;
+	background-color: var(--accent-color);
 }
 .hero .stat-item:hover .stat-icon i {
 	color: #fff;
@@ -313,7 +399,7 @@ section.light-bg {
 
 .about .contact-info {
 	padding: 1rem 1.5rem;
-	background-color: var(--surface-color);
+	background-color: var(--white);
 	border-radius: 0.5rem;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
 }
@@ -367,7 +453,7 @@ section.light-bg {
 	top: 20%;
 	left: -10%;
 	width: 45%;
-	border: 8px solid var(--surface-color);
+	border: 8px solid var(--white);
 }
 
 @media (max-width: 992px) {
@@ -384,7 +470,7 @@ section.light-bg {
 	bottom: 5%;
 	right: 5%;
 	background-color: var(--accent-color);
-	color: var(--contrast-color);
+	color: var(--white);
 	padding: 1.5rem;
 	border-radius: 0.5rem;
 	text-align: center;
@@ -401,7 +487,7 @@ section.light-bg {
 }
 
 .about .image-wrapper .experience-badge h3 {
-	color: var(--contrast-color);
+	color: var(--white);
 	font-size: 2.5rem;
 	margin: 0;
 	line-height: 0.5;
@@ -498,7 +584,7 @@ section.light-bg {
 }
 
 .features .nav-link.active h4 {
-	color: var(--contrast-color);
+	color: var(--white);
 }
 
 .features .tab-content {
@@ -560,11 +646,11 @@ section.light-bg {
 .call-to-action h3 {
 	font-size: 28px;
 	font-weight: 700;
-	color: #ffffff;
+	color: var(--white);
 }
 
 .call-to-action p {
-	color: #ffffff;
+	color: var(--white);
 	font-size: 1rem;
 }
 
@@ -578,12 +664,12 @@ section.light-bg {
 	border-radius: 50px;
 	transition: 0.5s;
 	margin: 10px;
-	border: 2px solid color-mix(in srgb, var(--contrast-color), transparent 30%);
-	color: var(--contrast-color);
+	border: 2px solid color-mix(in srgb, var(--white), transparent 30%);
+	color: var(--white);
 }
 
 .call-to-action .cta-btn:hover {
-	border-color: var(--contrast-color);
+	border-color: var(--white);
 }
 
 .faq .faq-title {
@@ -604,7 +690,7 @@ section.light-bg {
 }
 
 .faq .faq-container .faq-item {
-	background-color: var(--surface-color);
+	background-color: var(--white);
 	position: relative;
 	padding: 20px;
 	margin-bottom: 15px;
@@ -617,7 +703,7 @@ section.light-bg {
 }
 
 .faq .faq-container .faq-item h3 {
-	color: #444444;
+	color: var(--default-color);
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 24px;
@@ -682,7 +768,7 @@ section.light-bg {
 }
 
 .testimonials .testimonial-item {
-	background-color: var(--surface-color);
+	background-color: var(--white);
 	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.08);
 	padding: 30px;
 	position: relative;
@@ -747,14 +833,14 @@ section.light-bg {
 
 .contact .info-box {
 	background-color: var(--accent-color);
-	color: var(--contrast-color);
+	color: var(--white);
 	padding: 3rem;
 	border-radius: 1rem;
 	height: 100%;
 }
 
 .contact .info-box h3 {
-	color: var(--contrast-color);
+	color: var(--white);
 	font-size: 2rem;
 	margin-bottom: 1rem;
 }
@@ -771,7 +857,7 @@ section.light-bg {
 }
 
 .contact .info-box a {
-	color: var(--contrast-color);
+	color: var(--white);
 }
 
 @media (max-width: 992px) {
@@ -793,7 +879,7 @@ section.light-bg {
 .contact .info-item .icon-box {
 	width: 3.5rem;
 	height: 3.5rem;
-	background-color: color-mix(in srgb, var(--contrast-color), transparent 85%);
+	background-color: color-mix(in srgb, var(--white), transparent 85%);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -804,15 +890,15 @@ section.light-bg {
 
 .contact .info-item .icon-box i {
 	font-size: 1.5rem;
-	color: var(--contrast-color);
+	color: var(--white);
 }
 
 .contact .info-item:hover .icon-box {
-	background-color: color-mix(in srgb, var(--contrast-color), transparent 70%);
+	background-color: color-mix(in srgb, var(--white), transparent 70%);
 }
 
 .contact .info-item .content h4 {
-	color: var(--contrast-color);
+	color: var(--white);
 	font-size: 1.25rem;
 	margin-bottom: 0.5rem;
 	font-weight: 700;
@@ -828,7 +914,7 @@ section.light-bg {
 }
 
 .contact .contact-form {
-	background-color: var(--surface-color);
+	background-color: var(--white);
 	padding: 3rem;
 	border-radius: 1rem;
 	height: 100%;
@@ -862,7 +948,7 @@ section.light-bg {
 	padding: 0.875rem 1.25rem;
 	border-color: color-mix(in srgb, var(--default-color), transparent 90%);
 	border-radius: 0.5rem;
-	background-color: color-mix(in srgb, var(--surface-color) 90%, white 5%);
+	background-color: color-mix(in srgb, var(--white) 90%, white 5%);
 	color: var(--default-color);
 }
 
@@ -879,7 +965,7 @@ section.light-bg {
 
 .contact .contact-form .btn {
 	background-color: var(--accent-color);
-	color: var(--contrast-color);
+	color: var(--white);
 	padding: 1rem 2rem;
 	border-radius: 2rem;
 	display: inline-flex;
@@ -893,9 +979,5 @@ section.light-bg {
 }
 
 .contact .contact-form .btn:hover {
-	background-color: color-mix(
-		in srgb,
-		var(--accent-color),
-		var(--contrast-color) 20%
-	);
+	background-color: color-mix(in srgb, var(--accent-color), var(--white) 20%);
 }

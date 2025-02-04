@@ -1,0 +1,116 @@
+<main id="content" role="main">
+  
+  <div class="container space-3">
+    <div class="w-lg-80 text-center mx-lg-auto" data-aos="fade-up" data-aos-delay="100">
+      <div class="mb-5 mb-md-11">
+        <h1 class="display-4">About Luma AdSpace</h1>
+        <p class="lead">At Luma AdSpace, we believe that great advertising is more than just visuals and words—it’s about creating experiences that connect, engage, and inspire. As a full-service advertising agency, we specialize in crafting innovative campaigns that capture attention, spark conversations, and drive results.</p>
+      </div>
+    </div>
+
+    
+    <div class="row mx-n2" data-aos="zoom-out" data-aos-delay="300">
+      <div class="col-6 col-md px-2 mb-3">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team1.jpg);"></div>
+      </div>
+      <div class="col-md-3 d-none d-md-block px-2 mb-3">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team2.jpg);"></div>
+      </div>
+      <div class="col-6 col-md px-2 mb-3">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team3.jpg);"></div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-6 col-md px-2 mb-3 mb-md-0">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team4.jpg);"></div>
+      </div>
+      <div class="col-md-4 d-none d-md-block px-2 mb-3 mb-md-0">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team5.jpg);"></div>
+      </div>
+      <div class="col-6 col-md px-2">
+        <div class="h-250rem bg-img-hero" style="background-image: url(${communityhome}/images/team6.jpg);"></div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="container">
+    <div class="w-lg-65 mx-lg-auto">
+      <hr>
+    </div>
+  </div>
+  
+  <div class="container space-2" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h2>Who We Are</h2>
+        <p>Founded by a team of passionate marketers, creatives, and strategists, Luma AdSpace is built on a commitment to storytelling, data-driven decision-making, and cutting-edge design. We partner with brands to develop tailored advertising solutions that elevate their presence in a crowded marketplace.</p>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="container">
+    <div class="w-lg-65 mx-lg-auto">
+      <hr>
+    </div>
+  </div>
+  
+
+  
+  <div class="container space-2 space-lg-3">
+    
+    <div class="w-md-80 w-lg-60 text-center mx-md-auto mb-5 mb-md-9">
+      <span class="d-block text-secondary font-weight-bold text-cap mb-2">Our team</span>
+      <h2>Creative mind by people like you</h2>
+    </div>
+
+    #set($teams = [
+      ["Alexander Bennett", "Founder / CEO", "Alexander is a visionary leader with over 20 years of experience in business strategy, innovation, and organizational growth. With a background in finance and technology, he has successfully led multiple companies through digital transformation and market expansion."],
+      ["Daniel Rodríguez", "Sales Director", "With 12 years in B2B sales, Daniel has a proven track record of driving revenue growth and expanding market reach. He excels at building strong client relationships and developing high-performing sales teams. Outside of work, he enjoys networking and speaking at industry events."],
+      ["Sophia Carter", "Marketing Manager", "Sophia has over eight years of experience in digital marketing, specializing in social media strategy and brand storytelling. She has successfully led multiple campaigns that increased brand engagement by over 200%. She enjoys analyzing trends to optimize campaign performance."],
+      ["James Jon", "Software Engineer", "James is a full-stack developer with expertise in JavaScript, Python, and cloud computing. With a background in AI and automation, he has built scalable applications for various industries. In his free time, he contributes to open-source projects and mentors aspiring developers."]
+    ])
+
+    <div class="row mx-n2 mb-5">
+      #foreach($team in $teams)
+      <div class="col-sm-6 col-lg-3 px-2 mb-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 transition-3d-hover">
+          <div class="card-body">
+            <div class="avatar avatar-lg avatar-circle mb-4">
+              <img class="avatar-img" src="${communityhome}/images/teammember${foreach.count}.jpg" alt="Image Description">
+            </div>
+
+            <span class="d-block small text-muted text-cap mb-1">${team[1]}</span>
+            <h4 class="text-lh-sm text-black">${team[0]}</h4>
+            <p class="font-size-1 text-secondary">${team[2]}</p>
+          </div>
+          <div class="card-footer border-0 pt-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a class="btn btn-xs btn-icon btn-soft-secondary rounded" href="#">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-xs btn-icon btn-soft-secondary rounded" href="#">
+                  <i class="fab fa-google"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-xs btn-icon btn-soft-secondary rounded" href="#">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      #end
+    </div>
+    
+  </div>
+  
+</main>
