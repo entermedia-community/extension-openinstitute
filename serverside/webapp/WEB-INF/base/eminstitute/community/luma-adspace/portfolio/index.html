@@ -1,1 +1,23 @@
-<h1>portfolio</h1>
+<main id="content" role="main">
+  <div class="container space-3">
+
+    <div class="container section-title pb-4">
+      <h2>Our Work</h2>
+    </div>
+    <div class="d-block">
+      <div class="masonry-grid">
+        #foreach($i in [1..21])
+        <li class="grid-item">
+          <a href="portfolio-item.html?id=$i">
+            <span class="img-loader"></span>
+            <img src="${communityhome}/images/masonry/masonry${i}.webp" alt="Masonry Image">
+            <div class="hover-details">
+              <h3>Project $i Title &mdash; ClientName</h3>
+            </div>
+          </a>
+        </li>
+        #end
+      </div>
+    </div>
+  </div>
+</main>

@@ -4,10 +4,15 @@
 	--white: #ffffff;
 	--background-color: #f3f9ff;
 }
-
+html,
+body {
+	height: 100%;
+	scroll-behavior: smooth;
+	scroll-padding-top: 4.5rem;
+}
 body {
 	font-family: "Roboto", sans-serif;
-	background-color: var(--white);
+	background-color: var(--white) !important;
 }
 h1,
 h2,
@@ -23,7 +28,8 @@ hr {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 	border: 0;
-	border-top: 0.0625rem solid #e1e1e1;
+	border-top: 0.0625rem solid #e7eaf3;
+	opacity: 1;
 }
 h2 {
 	font-size: 1.875rem;
@@ -229,7 +235,7 @@ section.light-bg {
 }
 .section-title {
 	text-align: center;
-	padding-bottom: 60px;
+	padding-bottom: 50px;
 	position: relative;
 }
 .section-title h2 {
@@ -239,6 +245,7 @@ section.light-bg {
 	padding-bottom: 20px;
 	position: relative;
 }
+h1.display-4:after,
 .section-title h2:after {
 	content: "";
 	position: absolute;
@@ -972,6 +979,7 @@ section.light-bg {
 	align-items: center;
 	gap: 0.5rem;
 	transition: 0.3s;
+	font-size: 1rem;
 }
 
 .contact .contact-form .btn i {
@@ -980,4 +988,100 @@ section.light-bg {
 
 .contact .contact-form .btn:hover {
 	background-color: color-mix(in srgb, var(--accent-color), var(--white) 20%);
+}
+
+.masonry-grid {
+	max-width: 69em;
+	list-style: none;
+	margin: 30px auto;
+	padding: 0;
+	min-height: calc(100vh - 100px);
+}
+
+.masonry-grid li {
+	display: block;
+	float: left;
+	padding: 7px;
+	width: 33%;
+}
+
+.masonry-grid li a,
+.masonry-grid li img {
+	outline: none;
+	border: none;
+	display: block;
+	max-width: 100%;
+}
+.masonry-grid li:nth-child(3n + 1) {
+	clear: both;
+}
+.masonry-grid li a {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.masonry-grid li a .img-loader {
+	position: absolute;
+	z-index: 1;
+}
+.masonry-grid li a .hover-details {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--accent-color);
+	opacity: 0;
+	transition: 0.3s;
+}
+.masonry-grid li a:hover .hover-details {
+	opacity: 1;
+}
+.hover-details h3 {
+	color: var(--white);
+	font-size: 1.25rem;
+	margin-bottom: 0;
+	font-weight: 300;
+}
+.img-loader {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 3px solid #efefef;
+	border-right: 3px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 0.5s linear infinite;
+}
+.masonry-grid li.loaded .img-loader {
+	display: none;
+	animation: rotation 0.5s linear 0.5s forwards;
+}
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.media {
+	display: flex;
+}
+.media-body {
+	flex: 1;
+}
+.media-left {
+	width: 100px;
+}
+.media-left h3 {
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0;
 }
