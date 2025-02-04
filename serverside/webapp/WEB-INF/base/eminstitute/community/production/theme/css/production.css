@@ -283,7 +283,7 @@ h6,
 /* Button style */
 .btn {
 	font-family: "Roboto", sans-serif;
-	border-radius: 9px;
+	/* border-radius: 9px; */
 	border: none;
 	transition: 0.2s ease;
 }

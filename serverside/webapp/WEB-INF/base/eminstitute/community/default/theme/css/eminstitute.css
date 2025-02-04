@@ -2359,3 +2359,7 @@ textarea.form-control {
 .top-flair a:hover {
 	color: #444444 !important;
 }
+.top-flair .btn.bg-primary:hover {
+	opacity: 0.85;
+	color: #fff !important;
+}
