@@ -49,19 +49,15 @@ $(document).ready(function () {
 		window.location.href = $(target).attr("href");
 	});
 
-	lQuery(".top-flair").livequery(function () {
-		$("body").css("padding-top", 74);
+	lQuery(".__top-flair").livequery(function () {
 		$(this)
-			.find(".flair-close")
+			.find("a.__close")
 			.on("click", function (e) {
 				e.preventDefault();
 				e.stopPropagation();
-				$(this)
-					.closest(".top-flair")
-					.fadeOut(function () {
-						$(this).remove();
-					});
-				$("body").css("padding-top", 0);
+				$("#__flair").fadeOut(function () {
+					$(this).remove();
+				});
 			});
 	});
 });
