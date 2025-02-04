@@ -164,15 +164,18 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 		else
 		{
-			page = getPageManager().getPage(fixedpath + "/index.html");
-			if( page.exists())  //Must be a real page
+			Page indexpage = getPageManager().getPage(fixedpath + "/index.html");
+			if( indexpage.exists())  //Must be a real page
+			{
+				right.setRightPage(indexpage);
+				return right;
+			}
+			if( Boolean.parseBoolean( page.get("virtual") ) )
 			{
 				right.setRightPage(page);
 				return right;
-			}
-			
+			}	
 		}
-		
 		
 		//Must be a project with something on the end?		
 		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", secondpart).hitsPerPage(1);
@@ -206,7 +209,9 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 			return right;
 		}
 		else {
-			log.info("Couldn't find Collection: " + secondpart);
+			//log.info("Couldn't find Collection: " + secondpart);
+
+			
 		}
 		return null;
 	}
