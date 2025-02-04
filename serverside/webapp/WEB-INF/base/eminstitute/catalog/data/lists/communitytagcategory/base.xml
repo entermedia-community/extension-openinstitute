@@ -94,7 +94,24 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     ]]>
     </summary>
    
-  </data>    
+  </data> 
+  
+  
+  
+    <data id="luma-adspace"  entitytype="librarycollection" primaryimagepath="/theme/images/logos/atitlan.svg" templatepath="/community/luma-adspace" urlname="luma-adspace" 
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://luma-adspace.entermediadb.org"  domainlist="luma-adspace.entermediadb.org"
+  domaincommunityid="5"
+  > 
+    <name> 
+      <language id="en"><![CDATA[Luma Ad Space]]></language> 
+    </name>
+    <caption><![CDATA[Luma Ad Space]]></caption>
+    
+    <summary>
+    <![CDATA[Luma Ad Space.]]>
+    </summary>
+   
+  </data>      
 
 
 </root>
