@@ -11,6 +11,7 @@
 	<property name="containertype">container</property>
 
 	<property name="flair">true</property>
+	<property name="templatename">Luma AdSpace</property>
 
 	<property name="communitytagcategory">luma-adspace</property>
 	<property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>

@@ -2356,10 +2356,3 @@ textarea.form-control {
 .ajaxloginbox .text-contrast {
 	color: #444444;
 }
-.top-flair a:hover {
-	color: #444444 !important;
-}
-.top-flair .btn.bg-primary:hover {
-	opacity: 0.85;
-	color: #fff !important;
-}
