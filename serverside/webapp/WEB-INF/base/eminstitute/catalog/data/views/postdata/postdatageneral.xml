@@ -3,8 +3,7 @@
 <root> 
   <property id="post_title"/>
   <property id="metaurl"/>
-  <property id="metadescription"/>
   <property id="knowledgebase_category"/>  
   <property id="knowledgebase_tag"/> 
-  <!--property id="metaimage"/ -->
+  <!--property id="metaimage"/ --> 
 </root>
