@@ -111,7 +111,15 @@
     <name> 
       <language id="en"><![CDATA[Canonical URL]]></language>  
     </name> 
-  </property>     
+  </property>  
+  
+    <property id="metaimage" index="true" deleted="false" editable="true" stored="true">New
+    <name>
+      <language id="en"><![CDATA[Meta Image]]></language>
+    </name>
+  </property>
+  
+     
   <property id="post_title" index="true" deleted="false" editable="true" stored="true">New 
     <name> 
       <language id="en"><![CDATA[Title]]></language> 
