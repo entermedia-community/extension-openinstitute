@@ -2,7 +2,7 @@
 
 <root> 
   <property id="post_title"/>
-  <property id="metaurl"/>
+  <property id="sourcepath"/>
   <property id="knowledgebase_category"/>  
   <property id="knowledgebase_tag"/> 
   <!--property id="metaimage"/ --> 
