@@ -136,10 +136,12 @@ h2 {
 }
 .navbar-nav .nav-link.active {
 	color: var(--accent-color);
+	background: #5f7aff11;
+	border: 1px solid var(--accent-color) !important;
 }
-.navbar-nav .nav-link:hover {
-	color: #738afa;
-}
+/* .navbar-nav .nav-link:hover { */
+/* color: #738afa; */
+/* } */
 .form-control {
 	height: auto;
 }
@@ -996,42 +998,53 @@ h1.display-4:after,
 	background-color: color-mix(in srgb, var(--accent-color), var(--white) 20%);
 }
 
-.masonry-grid {
-	max-width: 69em;
+.portfolio-grid {
 	list-style: none;
-	margin: 30px auto;
+	margin: 30px 7px;
 	padding: 0;
-	min-height: calc(100vh - 100px);
+	display: flex;
+	will-change: transform;
+	animation: carousel 60s infinite linear;
 }
 
-.masonry-grid li {
+/* .portfolio-carousel:hover .portfolio-grid, */
+.portfolio-grid.pause {
+	animation-play-state: paused;
+}
+
+@keyframes carousel {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.portfolio-grid li {
 	display: block;
-	float: left;
 	padding: 7px;
-	width: 33%;
+	/* width: 33%; */
 }
 
-.masonry-grid li a,
-.masonry-grid li img {
+.portfolio-grid li a {
 	outline: none;
 	border: none;
 	display: block;
-	max-width: 100%;
 }
-.masonry-grid li:nth-child(3n + 1) {
-	clear: both;
+.portfolio-grid li img {
+	width: 360px;
+	height: auto;
+	object-fit: contain;
+	object-position: top;
 }
-.masonry-grid li a {
+.portfolio-grid li a {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.masonry-grid li a .img-loader {
-	position: absolute;
-	z-index: 1;
-}
-.masonry-grid li a .hover-details {
+.portfolio-grid li a .hover-details {
 	position: absolute;
 	z-index: 2;
 	top: 0;
@@ -1045,7 +1058,7 @@ h1.display-4:after,
 	opacity: 0;
 	transition: 0.3s;
 }
-.masonry-grid li a:hover .hover-details {
+.portfolio-grid li a:hover .hover-details {
 	opacity: 1;
 }
 .hover-details h3 {
@@ -1054,28 +1067,7 @@ h1.display-4:after,
 	margin-bottom: 0;
 	font-weight: 300;
 }
-.img-loader {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	display: inline-block;
-	border-top: 3px solid #efefef;
-	border-right: 3px solid transparent;
-	box-sizing: border-box;
-	animation: rotation 0.5s linear infinite;
-}
-.masonry-grid li.loaded .img-loader {
-	display: none;
-	animation: rotation 0.5s linear 0.5s forwards;
-}
-@keyframes rotation {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
+
 .media {
 	display: flex;
 }
