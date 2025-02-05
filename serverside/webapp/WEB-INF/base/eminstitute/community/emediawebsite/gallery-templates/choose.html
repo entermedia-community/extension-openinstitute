@@ -39,21 +39,13 @@
             </div>
         
             <div class="mb-3">
-              <label class="input-label ">Your company name <span
-                class="text-muted font-weight-normal ms-1">(optional)</span></label>
-              <input type="text" name="company.value" class="form-control" placeholder="Company Name">
+              <label class="input-label ">Your company name</label>
+              <input type="text" name="company.value" class="form-control" placeholder="Company name" required>
             </div>
-              
+
             <div class="mb-3">
-              <label class="input-label">Product of Interest </label>
-              <select class="form-control custom-select" name="product.value" required
-                data-msg="Please select a product.">
-                <option value="">Select a product</option>
-                <option value="Hosting">Hosting + Basic Support</option>
-                <option value="Bisnes Suspport">Business Support</option>
-                <option value="Extended Support">Extended Support</option>
-                <option value="Support on Demand">Support on Demand</option>
-              </select>
+              <label class="input-label">Sub-domain name</label>
+              <input type="text" name="subdomain.value" class="form-control autofill" placeholder="Sub-domain name" data-autofillfrom="company.value" required>
             </div>
         
             <div class="mb-3">

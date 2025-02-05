@@ -60,4 +60,28 @@ $(document).ready(function () {
 				});
 			});
 	});
+
+	lQuery(".autofill").livequery(function () {
+		var $this = $(this);
+		if ($this.val().trim().length > 0) return;
+		var fillFrom = $(this).data("autofillfrom");
+		var form = $(this).closest("form");
+		if (!form.length) {
+			return;
+		}
+		var input = form.find(`[name="${fillFrom}"]`);
+		if (!input.length) {
+			return;
+		}
+		input.on("input", function () {
+			$this.val(
+				$(this)
+					.val()
+					.trim()
+					.replace(/\s/g, "-")
+					.replace(/[^a-zA-Z0-9-]/g, "")
+					.toLowerCase()
+			);
+		});
+	});
 });
