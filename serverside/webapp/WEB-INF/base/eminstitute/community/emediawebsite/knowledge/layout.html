@@ -28,7 +28,7 @@
 		</div>
 		</div>      
 		<div class="col-sm-6 col-lg-6	">
-			<div class="container">
+			<div class="container p-3">
 				#if($postdata.post_title && $user.oe_edit_mode != "postedit")
 					$content.setValue("meta_title", "$postdata.post_title - EnterMediaDB")
 					$content.setValue("meta_canonical", "$siteRoot/$postdata.sourcepath")
@@ -42,7 +42,11 @@
 					$pages.include("./home.html")
 				#end
 				#if($user.oe_edit_mode == "postedit")
-					<form id="edit-$!{postdata.id}" method="post" action="${communityhome}/find/views/modules/postdata/editors/data/save.html" data-targetdiv="savedok">
+					<form id="edit-$!{postdata.id}"
+						 method="post" 
+						 class="ajaxform"
+						 action="${sitelink}/find/views/modules/postdata/editors/data/save.html" 
+						 data-targetdiv="savedok">
 						<input type="hidden" name="oemaxlevel" value="1" />
 
 						<input type="hidden" name="save" value="true" />
@@ -57,22 +61,37 @@
 						<input type="hidden" value="metadescription" name="field">
 						<input type="text" autocomplete="off" class="form-control textinput mb-2" value="$!postdata.metadescription" name="metadescription.value" placeholder="[[Meta Description]]">
 						
-						<input type="hidden" value="metatags" name="field">
-						<input type="text" autocomplete="off" class="form-control textinput mb-2" value="$!postdata.metatags" name="metatags.value" placeholder="[[Meta Tags]]">
+						##<input type="hidden" value="metatags" name="field">
+						##<input type="text" autocomplete="off" class="form-control textinput mb-2" value="$!postdata.metatags" name="metatags.value" placeholder="[[Meta Tags]]">
 						
+						<input type="hidden" value="knowledgebase_category" name="field">
+						#set($kbcategories = $mediaarchive.getList("postdata_category_learning"))
+						<select name="knowledgebase_category.value" class="form-control select2 mb-2" >
+							#foreach($item in $kbcategories)
+							<option value="${item.id}" #if($postdata.knowledgebase_category == $item.id)selected="selected" #end>$item.name</option>
+							#end	
+						</select>
+						
+						<input type="hidden" value="knowledgebase_tag" name="field">
+						<input type="text" autocomplete="off" class="form-control textinput mb-3" value="$!postdata.knowledgebase_tag" name="knowledgebase_tag.value" placeholder="[[Tags]]">
+					
 						<input type="hidden" name="field" value="maincontent" />
 						<textarea class="oe-editable" id="edit-$!{postdata.id}" name="maincontent.value" placeholder="[[Page Content]]" data-editonly="true">#esc($!postdata.maincontent)</textarea>
 					</form>
-				#else 
-					$!postdata.maincontent
-				#end
-				#if( $user.oe_edit_mode == "postedit" )
+					
 					<div class="d-flex align-items-center py-3">
 						<button class="btn btn-success me-2" type="submit" form="edit-$!{postdata.id}">[[Save]]</button>
 						
-						<div id="savedok"></div>
-						#set($editurl = "${communityhome}/find/views/settings/lists/datamanager/edit/edit.html?id=${postdata.id}&searchtype=postdata")
+						
+						#set($editurl = "${sitelink}/find/views/settings/lists/datamanager/edit/edit.html?id=${postdata.id}&searchtype=postdata")
 						<a href="$editurl" class="btn btn-primary">[[Edit]]</a>
+						<div id="savedok"></div>
+					</div>
+				#else 
+					$!postdata.maincontent
+					
+					<div class="post-keywords">
+						$!postdata.knowledgebase_tag
 					</div>
 				#end
 	

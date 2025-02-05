@@ -11459,6 +11459,11 @@ code {
 	margin: 0.5em 0 1em;
 }
 
+.post-keywords {
+	color:#555;
+	font-weight:bold;
+}
+
 #sidebarNav .dropdown-item {
 	white-space: normal;
 	display: block;
