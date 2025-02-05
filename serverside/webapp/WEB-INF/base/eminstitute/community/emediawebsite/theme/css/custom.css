@@ -11464,6 +11464,10 @@ code {
 	font-weight:bold;
 }
 
+.documentation .inputformrow {
+	margin-bottom:0.75rem;
+}
+
 #sidebarNav .dropdown-item {
 	white-space: normal;
 	display: block;
