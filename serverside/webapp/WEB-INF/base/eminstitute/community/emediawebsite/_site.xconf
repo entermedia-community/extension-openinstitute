@@ -50,7 +50,7 @@
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
   <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
-  <script id="uicomponents" src="/${applicationid}/components/javascript/community-global.js"/>
+  <script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
 
   <style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
   <style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
