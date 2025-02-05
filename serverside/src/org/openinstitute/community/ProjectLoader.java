@@ -124,7 +124,11 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 		
 		//TODO: Keep a cached list of sub folders where we always load the page from blogs projects etc and assume .../index.html
-		
+		if( getMediaArchive().getCatalogId().endsWith("notset") )
+		{
+			throw new OpenEditException("Invalid catalog for " + requestedPath  + " " + getMediaArchive().getCatalogId());
+		}
+
 		//Does the page exist or is it a project?
 		String siteid = inPage.get("siteid");
 		Data communitydata = findCommunity(domain);
