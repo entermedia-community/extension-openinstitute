@@ -1,7 +1,5 @@
 <page>
-		<property name="localopencommand">/home/ian/eclipse/jee-2024-06/eclipse/eclipse</property>
 	<property name="editorparams">--launcher.openFile</property>	
 
 	<property name="local">true</property>
-	<property name="siteroot">http://localhost:8080</property>
 </page>
