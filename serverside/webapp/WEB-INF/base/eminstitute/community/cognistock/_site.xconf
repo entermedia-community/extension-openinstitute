@@ -36,8 +36,6 @@
 	
 	<!-- <style href="${communityhome}/theme/js/bootstrap/css/bootstrap.min.css" />
 	<style href="${communityhome}/theme/js/bootstrap-icons/bootstrap-icons.css" /> -->
-	<style id="aos-css" href="${communityhome}/theme/js/aos/aos.css" />
-	<style id="swiper" href="${communityhome}/theme/js/swiper/swiper-bundle.min.css" />
-	<style id="glightbox" href="${communityhome}/theme/js/glightbox/css/glightbox.min.css" />
+	<!-- <style id="aos-css" href="${communityhome}/theme/js/aos/aos.css" /> -->
 	<style id="marketing" href="${communityhome}/theme/css/cognistock.css" />
 </page>

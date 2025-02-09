@@ -1,20 +1,21 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 	#set($templates = [
-    ["Luma AdSpace", "Ad Agency", "https://luma-adspace.emedialibrary.com/", "luma.png", "users", "Gallery of brands and a feed of promotions. Client and Project management approval workflows"],
-    ["CogniStock", "AI Driven Product Library","https://cognistock.emedialibrary.com", "cognistock.png", "camera-retro","Private AI Library to scan your catalog of product specifications and relationships"],
-    ["Kube", "Online Projects Platform","https://kube.emedialibrary.com", "kube.png", "camera-retro","Have users create projects, uploading, blog and chat with one another"],
-    ["CineCraft", "Video Producer", "https://cinecraft.emedialibrary.com", "cinecraft.png", "video", "East downloading of video project folders for editing. Porfolio Gallery. Auto create, translate and edit subtitles. Timeline editor for tagging videos"],
-    ["MetaVault", "Media Preservationist","https://metavault.emedialibrary.com", "metavault.png", "camera-retro","Customize Taxonomy of content based on subject matter. Create rich and complete metadata"],
-    ["VlogSync", "Vlogger", "https://vlogsync.emedialibrary.com", "vlogsync.png", "user-edit","Stream from on your own server or build your private library of every clip ever made. Auto categoryize video content by what was said and dates. Track usage"]
+    ["Luma AdSpace", "Client Portal", "luma-adspace", "building", "Luma crafts brand stories that captivate, engage, and convert. Their team of creative strategists, storytellers, and digital experts design powerful campaigns that leave a lasting impact."],
+    ["FashionWeek", "Fashion Catalog", "cognistock", "camera-retro","Private AI Library to scan your catalog of product specifications and relationships"],
+    ["Courageous Dreamers", "Online Memberships", "kube", "eye","Have users create projects, uploading, blog and chat with one another"],
+    ["CineCraft Productions", "Video Producer", "cinecraft", "video", "East downloading of video project folders for editing. Porfolio Gallery. Auto create, translate and edit subtitles. Timeline editor for tagging videos"],
+    ["Imagine-Nation", "Media Preservationist", "metavault", "camera-retro","Customize Taxonomy of content based on subject matter. Create rich and complete metadata"],
+    ["MrMaverick", "Vlogger/Influencer", "vlogsync", "user-edit","MrMaverick is a YouTuber and TikTok Creator. He brings his high-energy and entertaining content to his audience and followers"],
+    ["YogaNation", "Community Events, Blog & Group Chat", "yoganation", "users","Host and manage your own Yoga classes and events. Blog and chat with your community"]
   ])
 
   #foreach($template in $templates)
     <div class="col">
       <div class="card h-100 template-card shadow-sm transition-3d-hover">
         <div class="card-thumbnail">
-          <img src="${communityhome}/gallery-templates/img/${template[3]}" class="card-img-top" alt="Template $foreach.count">
+          <img src="${communityhome}/gallery-templates/img/${template[2]}.png" class="card-img-top" alt="Template $foreach.count">
           <div class="template-action d-flex gap-2">
-            <a class="btn bg-white border shadow-sm" href="${template[2]}">
+            <a class="btn bg-white border shadow-sm" href="http://${template[2]}.localhost.com:8080">
               <i class="fas fa-eye me-1"></i>
               Live Preview
             </a>
@@ -26,11 +27,11 @@
         <div class="card-body d-flex flex-column">
           <h5 class="text-dark d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <i class="small fas fa-${template[4]} me-2"></i> #if($template[0] != "")${template[0]} #else ${template[1]} #end
+              <i class="small fas fa-${template[3]} me-2"></i> #if($template[0] != "")${template[0]} #else ${template[1]} #end
             </div>
             #if($template[0] != "")<span class="text-muted small">(${template[1]})</span>#end
           </h5>
-          <p class="card-text mt-1">${template[5]}.</p>
+          <p class="card-text mt-1">${template[4]}.</p>
         </div>
       </div>
     </div>
