@@ -15,56 +15,30 @@
         data-aos-delay="100"
       >
         <div class="col-lg-8">
-          <h2>Your All-in-One Cloud Library for Video Production Pipeline</h2>
-          <p>Edit smarter, tag videos faster, and automate subtitles effortlessly.</p>
+          <h2>We craft videos that bring your vision to life</h2>
+          <p>From concept to final cut, we handle it all—filming, editing, motion graphics, and more—so you can focus on your story.</p>
         </div>
       </div>
-
+      #set($keypoints = [
+        ["<strong>Full-Service Production</strong> &mdash; From script to final edit, we handle everything.", "camera-reels"],
+        ["<strong>Cinematic Quality</strong> &mdash; Stunning visuals with pro-level filming and editing.", "film"],
+        ["<strong>Engaging Storytelling</strong> &mdash; Videos that connect, captivate, and convert.", "people"],
+        ["<strong>Fast Turnaround</strong> &mdash; High-quality results, delivered on time.", "clock-history"]
+      ])
       <div
         class="row gy-4 mt-5 justify-content-center"
         data-aos="fade-up"
         data-aos-delay="200"
       >
-        <div
-          class="col-xl-2 col-md-4"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <div class="icon-box">
-            <i class="bi bi-cloud"></i>
-            <h3>Cloud Video Library</h3>
+        #foreach($keypoint in $keypoints)
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <i class="bi bi-${keypoint[1]}"></i>
+              <p>$keypoint[0]</p>
+            </div>
           </div>
-        </div>
-        <div
-          class="col-xl-2 col-md-4"
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          <div class="icon-box">
-            <i class="bi bi-blockquote-right"></i>
-            <h3>AI Subtitles & Translations</h3>
-          </div>
-        </div>
-        <div
-          class="col-xl-2 col-md-4"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          <div class="icon-box">
-            <i class="bi bi-chat-left-quote"></i>
-            <h3>Timeline Editor</h3>
-          </div>
-        </div>
-        <div
-          class="col-xl-2 col-md-4"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          <div class="icon-box">
-            <i class="bi bi-people"></i>
-            <h3>Collaborate With Team</h3>
-          </div>
-        </div>
+        #end
+        
       </div>
     </div>
   </section>
