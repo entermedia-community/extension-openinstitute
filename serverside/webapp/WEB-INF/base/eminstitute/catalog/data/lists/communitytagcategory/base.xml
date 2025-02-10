@@ -131,7 +131,7 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     </name>
   </data>
 
-  <data id="fashionweek" caption="FashionWeek" domainlist="fashionweek.localhost.com|fashionweek.entermediadb.org|fashionweek.emedialibaray.com" externaldomain="https://fashionweek.emedialibrary.com" templatepath="/community/fashionweek" urlname="FashionWeek">
+  <data id="fashionweek" caption="FashionWeek" domainlist="fashionweek.localhost.com|fashionweek.entermediadb.org|fashionweek.emedialibrary.com" externaldomain="https://fashionweek.emedialibrary.com" templatepath="/community/fashionweek" urlname="FashionWeek">
     <name>
       <language id="en"><![CDATA[FashionWeek]]></language>
     </name>
