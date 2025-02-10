@@ -12307,6 +12307,7 @@ table.referrals tr:hover td {
 .template-card img {
 	aspect-ratio: 16/9;
 	object-fit: cover;
+	object-position: center top;
 }
 .card-thumbnail {
 	position: relative;

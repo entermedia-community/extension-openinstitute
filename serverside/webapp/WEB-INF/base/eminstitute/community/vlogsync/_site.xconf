@@ -6,8 +6,6 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/vlogsync</property>
 
-	<property name="shades">#585b77,#4e516a,#45475c</property>
-	<property name="bgcolor">#6a8eff</property>
 	<property name="containertype">container</property>
 
 	<property name="flair">false</property>

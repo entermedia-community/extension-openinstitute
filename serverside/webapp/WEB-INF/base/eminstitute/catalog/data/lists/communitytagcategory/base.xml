@@ -149,5 +149,10 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     </name>
   </data>
 
+  <data id="yoganation" caption="YogaNation" domainlist="yoganation.localhost.com" externaldomain="http://yoganation.localhost.com" templatepath="/community/yoganation" urlname="YogaNation">
+    <name>
+      <language id="en"><![CDATA[YogaNation]]></language>
+    </name>
+  </data>
 
 </root>

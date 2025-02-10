@@ -1,0 +1,100 @@
+#set($collectivesection = $content.collectivesection)
+
+<div class="navbar-container project-navbar mt-0">
+	<button class="btn toggleCommunityDrawer">
+		<i class="fas fa-bars mx-auto" style="font-size: 1rem;"></i>
+	</button>
+	<ul class="navbar-collective">
+		<li id="blog" class="nav-item #if($collectivesection == "blog") active #end">
+			 <a class="nav-link" href="$communitylink/${librarycol.urlname}">[[Blog]]</a>
+		</li>
+		<li id="community"  class="nav-item #if($collectivesection == "community") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/chat/index.html">[[Chat]]</a>
+		</li>
+
+		#if( $caneditcollection)
+		<li id="tasks"  class="nav-item #if($collectivesection == "tasks") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/goals/priorities">[[Goals]]</a>
+		</li>
+		#end
+
+		#if($caneditcollection)
+		<li id="media"  class="nav-item  #if($collectivesection == "media") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/files/index.html">[[Files]]</a>
+		</li>
+		#end
+
+		#if(false && $caneditcollection)
+		<li id="menustore"  class="nav-item #if($collectivesection == "store") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/store/index.html">[[Store]]</a>
+		</li>
+		#end
+	    
+	  #if( $librarycol.contactemail )
+		<li id="contact"  class="nav-item #if($collectivesection == "contact") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html">[[Contact]]</a>
+		</li>
+		#end
+		
+		#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
+		<li id="finances"  class="nav-item #if($collectivesection == "finances") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html"  rel="nofollow">[[Finances]]</a>
+		</li>
+		
+		#end
+		#if( $caneditcollection )
+		<li id="settings"  class="nav-item #if($collectivesection == "settings") active #end">
+			<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]" rel="nofollow">
+				<i class="fas fa-cog mx-auto"></i>
+			</a>
+		</li>
+		#end
+		<li class="dropdown collapsed-menu">
+			<button class="btn btn-transparent dropdown-toggle" data-bs-toggle="dropdown">
+				<i class="fas fa-ellipsis-h mx-auto" style="font-size: 1rem;"></i>
+			</button>
+			<ul class="dropdown-menu">
+				<li class="#if($collectivesection == "blog") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}">[[Blog]]</a>
+				</li>
+				<li class="#if($collectivesection == "community") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/chat/index.html">[[Chat]]</a>
+				</li>
+				#if( $caneditcollection)
+				<li class="#if($collectivesection == "tasks") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/goals/priorities">[[Goals]]</a>
+				</li>
+				#end
+				#if($caneditcollection)
+				<li class=" #if($collectivesection == "media") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/files/index.html">[[Files]]</a>
+				</li>
+				#end
+				#if(false && $caneditcollection)
+				<li class="#if($collectivesection == "store") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/store/index.html">[[Store]]</a>
+				</li>
+				#end
+				#if(false &&  $librarycol.contactemail )
+				<li class="#if($collectivesection == "contact") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html">[[Contact]]</a>
+				</li>
+				#end
+				
+				#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
+				<li class="#if($collectivesection == "finances") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/services/finances/dashboard.html"  rel="nofollow">[[Finances]]</a>
+				</li>
+				#end
+				
+				#if( $caneditcollection )
+				<li class="#if($collectivesection == "settings") active #end">
+					<a class="nav-link" href="$communitylink/${librarycol.urlname}/admin/index.html" title="[[Settings]]"  rel="nofollow">
+						<i class="fas fa-cog me-1"></i> [[Settings]]
+					</a>
+				</li>
+				#end
+			</ul>
+		</li>
+	</ul> 
+</div>
