@@ -32,7 +32,9 @@ h6 {
 	line-height: 1.7;
 	font-weight: 700;
 }
-
+hr {
+	border-top: 1px solid #384861;
+}
 h1 {
 	font-size: 1.7rem;
 }
@@ -49,7 +51,7 @@ p {
 	font-family: var(--font-body);
 	font-size: 18px;
 	line-height: 1.7;
-	padding: 0.5rem 0;
+	/* padding: 0.5rem 0; */
 }
 
 .lg-p {
@@ -115,6 +117,13 @@ a:hover {
 section {
 	padding: var(--padding-lg);
 }
+.form-control {
+	border-color: var(--accent-color-cyan);
+}
+.form-control:focus {
+	border-color: var(--accent-color-cyan);
+	box-shadow: none;
+}
 .logo-container {
 	width: auto;
 	height: 50px;
@@ -139,6 +148,7 @@ section {
 	font-size: 12px;
 	font-weight: bold;
 }
+
 .intro img,
 .productive img {
 	width: 100%;
@@ -362,7 +372,21 @@ button:hover {
 		margin-left: 0;
 	}
 }
-
+@media screen and (max-width: 767px) {
+	.logo-container {
+		height: 40px;
+	}
+	.logo-container img {
+		width: 40px;
+		height: 40px;
+	}
+	.logo-container strong {
+		font-size: 1rem;
+	}
+	header {
+		padding: 1rem;
+	}
+}
 @media (max-width: 375px) {
 	section {
 		padding: var(--padding-sm);
@@ -386,4 +410,69 @@ footer {
 		width: 100%;
 		text-align: right;
 	}
+}
+.video-card {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
+.video-card {
+	transition: transform 0.3s;
+}
+.video-card:hover {
+	transform: translateY(-5px);
+}
+.video-card .media-container {
+	border-radius: 1rem;
+	overflow: hidden;
+}
+.video-card .card-body {
+	padding: 0.5rem 0;
+}
+.video-card h5 {
+	margin: 0 0 4px;
+	/* line-height: 2.2rem; */
+	white-space: pre-wrap;
+}
+.video-card p {
+	padding: 0;
+	margin: 0;
+	color: #aaa;
+	line-height: 1.2;
+	font-size: 15px;
+}
+.video-card small {
+	color: #aaa;
+}
+.line-clamp-2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	line-clamp: 2;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.search-container {
+	max-width: 600px;
+	margin: 0 auto;
+}
+.text-secondary {
+	color: #cdcdcd !important;
+}
+.video-thumbnail {
+	height: 300px;
+	object-fit: cover;
+}
+.suggested-video {
+	margin-bottom: 8px;
+	transition: transform 0.3s;
+}
+.suggested-video:hover {
+	transform: translateX(-4px);
+}
+.comment-avatar {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 50%;
 }

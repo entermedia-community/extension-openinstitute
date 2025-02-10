@@ -12,3 +12,8 @@ $(".faq-item h3, .faq-item .faq-toggle").click(function () {
 		$(this).parent().toggleClass("faq-active");
 	}
 });
+
+lQuery(".video-card").livequery("click", function () {
+	var href = $(this).data("href");
+	window.location.href = href;
+});
