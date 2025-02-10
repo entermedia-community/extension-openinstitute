@@ -8,7 +8,7 @@
 
 	<property name="containertype">container</property>
 
-	<property name="flair">false</property>
+	<property name="flair">true</property>
 	<property name="templatename">YogaNation</property>
 	
 	<property name="communitytagcategory">yoganation</property>
@@ -42,7 +42,7 @@
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
-	<style id="emedia2" href="${communityhome}/theme/css/yoganation.css" />
+	<style id="yoganation" href="${communityhome}/theme/css/yoganation.css" />
 	
 
 </page>

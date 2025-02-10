@@ -1,0 +1,35 @@
+<main>
+  <section style="margin-top: 6rem;">
+    <div class="container">
+      <div style="max-width: 1000px;margin: 0 auto;text-align: center;">
+        <h1 class="intro-title">
+          Imagine-Nation: Art Without Limits
+        </h1>
+        <p class="intro-subtitle mb-4">
+          A collective of voices, visions, and untold stories—Imagine-Nation is a non-profit platform showcasing the raw creativity of artists from underprivileged urban communities. Through bold expression and unfiltered narratives, we amplify talent, empower voices, and redefine the art world, one masterpiece at a time.
+        </p>
+        <a href="/find/" class="button btn btn-lg btn-primary rounded-pill">
+          <i class="fas fa-plus me-2"></i>
+          Get Involved
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container my-5 gallery">
+      <div class="row">
+        #foreach($i in [1..12])
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <a href="https://picsum.photos/seed/${i}img/1200/800" data-lightbox="img${i}" data-title="Image #${i} Description">
+            <img
+              src="https://picsum.photos/seed/${i}img/600/400"
+              class="w-100 shadow-1-strong rounded mb-4 img-fluid"
+            />
+          </a>
+        </div>
+        #end
+      </div> 
+    </div>
+  </section>
+</main>

@@ -119,33 +119,27 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     </name>
   </data>
 
-  <data id="vlogsync" caption="VlogSync" domainlist="vlogsync.localhost.com" externaldomain="http://vlogsync.localhost.com" templatepath="/community/vlogsync" urlname="VlogSync">
+  <data id="mrmaverick" caption="MrMaverick" domainlist="mrmaverick.localhost.com" externaldomain="http://mrmaverick.localhost.com" templatepath="/community/mrmaverick" urlname="MrMaverick">
     <name>
-      <language id="en"><![CDATA[VlogSync]]></language>
+      <language id="en"><![CDATA[MrMaverick]]></language>
     </name>
   </data>
 
-  <data id="kube" caption="Kube" domainlist="kube.localhost.com" externaldomain="http://kube.localhost.com" templatepath="/community/kube" urlname="Kube">
+  <data id="imagine-nation" caption="Imagine-Nation" domainlist="imagine-nation.localhost.com" externaldomain="http://imagine-nation.localhost.com" templatepath="/community/imagine-nation" urlname="Imagine-Nation">
     <name>
-      <language id="en"><![CDATA[Kube]]></language>
+      <language id="en"><![CDATA[Imagine-Nation]]></language>
     </name>
   </data>
 
-  <data id="cognistock" caption="CogniStock" domainlist="cognistock.localhost.com" externaldomain="http://cognistock.localhost.com" templatepath="/community/cognistock" urlname="CogniStock">
+  <data id="fashionweek" caption="FashionWeek" domainlist="fashionweek.localhost.com" externaldomain="http://fashionweek.localhost.com" templatepath="/community/fashionweek" urlname="FashionWeek">
     <name>
-      <language id="en"><![CDATA[CogniStock]]></language>
+      <language id="en"><![CDATA[FashionWeek]]></language>
     </name>
   </data>
 
-  <data id="metavault" caption="MetaVault" domainlist="metavault.localhost.com" externaldomain="http://metavault.localhost.com" templatepath="/community/metavault" urlname="MetaVault">
+  <data id="guidance" caption="GuiDance" domainlist="guidance.localhost.com" externaldomain="http://guidance.localhost.com" templatepath="/community/guidance" urlname="GuiDance">
     <name>
-      <language id="en"><![CDATA[MetaVault]]></language>
-    </name>
-  </data>
-
-  <data id="projecthive" caption="ProjectHive" domainlist="projecthive.localhost.com" externaldomain="http://projecthive.localhost.com" templatepath="/community/projecthive" urlname="ProjectHive">
-    <name>
-      <language id="en"><![CDATA[ProjectHive]]></language>
+      <language id="en"><![CDATA[GuiDance]]></language>
     </name>
   </data>
 

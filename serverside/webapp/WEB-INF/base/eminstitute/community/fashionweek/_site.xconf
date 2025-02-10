@@ -4,14 +4,14 @@
 	<property name="editable">false</property>
 
 	<property name="fallbackdirectory">../default</property>
-	<property name="communityhome">/${siteid}/community/cinecraft</property>
+	<property name="communityhome">/${siteid}/community/fashionweek</property>
 
 	<property name="containertype">container</property>
 
 	<property name="flair">true</property>
 	<property name="templatename">CineCraft</property>
 
-	<property name="communitytagcategory">cinecraft</property>
+	<property name="communitytagcategory">fashionweek</property>
 	<property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
 
 	<script id="jquery-ui-i18n" cancel="true" src="${communityhome}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
@@ -36,8 +36,6 @@
 	
 	<!-- <style href="${communityhome}/theme/js/bootstrap/css/bootstrap.min.css" />
 	<style href="${communityhome}/theme/js/bootstrap-icons/bootstrap-icons.css" /> -->
-	<style id="aos-css" href="${communityhome}/theme/js/aos/aos.css" />
-	<style id="swiper" href="${communityhome}/theme/js/swiper/swiper-bundle.min.css" />
-	<style id="glightbox" href="${communityhome}/theme/js/glightbox/css/glightbox.min.css" />
-	<style id="cinecraft" href="${communityhome}/theme/css/cinecraft.css" />
+	<!-- <style id="aos-css" href="${communityhome}/theme/js/aos/aos.css" /> -->
+	<style id="fashionweek" href="${communityhome}/theme/css/fashionweek.css" />
 </page>
