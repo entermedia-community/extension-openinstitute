@@ -65,7 +65,7 @@
   	</permission>
 
 	<!-- Enables editing and checks for missing pages -->
-	<page-action name="Admin.allowEditing"/>
+	<page-action name="Admin.allowEditing"  allowduplicates="true"/>
 
   <property name="oe.edit.draftedits">false</property>
   

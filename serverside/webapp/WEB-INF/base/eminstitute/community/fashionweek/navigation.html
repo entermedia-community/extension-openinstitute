@@ -2,17 +2,27 @@
   <div class="container">
     <div class="d-flex align-items-center justify-content-between">
       <a class="logo" href="/">
-        <img src="${communityhome}/images/fw.png" />
+        <img src="${communityhome}/images/fw.png" class="img-fluid" />
       </a>
-      <div class="d-flex align-items-center">
-        <a href="/support/" class="me-2">
-          <i class="bi bi-headset me-1"></i>
-          Support
-        </a>
-        <a href="/find/"  class="ms-2 btn btn-primary">
-          <i class="far fa-user me-1"></i>
-          Login
-        </a>
+      <div class="d-flex align-items-center position-relative">
+        <button class="btn custom-navbar-toggler d-md-none" type="button">
+          <i class="fa fa-bars" style="font-size:20px;transform: scaleX(1.2);"></i>
+        </button>
+        <div class="d-none d-md-flex flex-column flex-md-row justify-content-center align-items-center" id="tempNav">
+          <a href="/blogs/" class="mx-md-2 my-1 my-md-0">
+            Blogs
+          </a>
+          <a href="/support/" class="mx-md-2 my-1 my-md-0">
+            Our Mission
+          </a>
+          <a href="/contact/" class="mx-md-2 my-1 my-md-0">
+            Contact
+          </a>
+          <a href="/find/"  class="ms-md-4 mt-1 mt-md-0 btn btn-primary">
+            <i class="far fa-user me-1"></i>
+            Login
+          </a>
+        </div>
       </div>
     </div>
   </div>

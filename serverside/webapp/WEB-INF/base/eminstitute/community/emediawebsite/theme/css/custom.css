@@ -12311,6 +12311,8 @@ table.referrals tr:hover td {
 }
 .card-thumbnail {
 	position: relative;
+	/* object-fit: cover; */
+	/* object-position: center; */
 }
 .template-card .template-action {
 	position: absolute;
