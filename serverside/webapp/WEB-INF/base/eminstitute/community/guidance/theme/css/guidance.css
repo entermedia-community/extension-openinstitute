@@ -1,14 +1,13 @@
-html,
+html {
+	height: 100%;
+}
 body {
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	color: #1f4568;
-}
-body {
 	background-image: url("../../images/bg.webp");
 	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
 }
 .sect {
 	padding: 90px 0;
@@ -163,22 +162,34 @@ body {
 	transform: scale(1.05, 1.05);
 	box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
 }
-.btn {
+.text-primary {
+	color: #3a9fff;
+}
+#tempNav a {
+	width: 100%;
+}
+#tempNav a:hover,
+#tempNav a.active {
+	color: #3a9fff;
+}
+.btn.btn-primary {
 	background-color: #3a9fff;
 	border-radius: 20px;
 	padding: 10px 25px;
 	color: #fff;
 	box-shadow: 0px 18px 13px -6px rgba(0, 0, 0, 0.2);
+	border-color: #3a9fff;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
 	-moz-transition: all 0.4s;
 	-ms-transition: all 0.4s;
 	-o-transition: all 0.4s;
 }
-.btn:hover {
-	box-shadow: 0px 25px 18px -6px rgba(0, 0, 0, 0.2);
-	background-color: #63b2fc !important;
+.btn.btn-primary:hover {
 	color: #fff !important;
+	background-color: #63b2fc !important;
+	border-color: #63b2fc !important;
+	box-shadow: 0px 25px 18px -6px rgba(0, 0, 0, 0.2);
 }
 .price-box-wrap:hover .btn {
 	box-shadow: 0px 25px 18px -6px rgba(0, 0, 0, 0.2);
@@ -395,10 +406,15 @@ body {
 	vertical-align: middle;
 	height: 90px;
 }
-.header-logo {
-	color: #3a9fff;
+.logo {
+	display: block;
+	width: 180px;
 }
-.header-logo,
+@media (max-width: 767px) {
+	.logo {
+		width: 150px;
+	}
+}
 .header-menu {
 	display: flex;
 	align-items: center;
@@ -777,8 +793,14 @@ body {
 		font-size: 14px;
 		margin-bottom: 20px;
 	}
-	.carousel-indicators {
+	.carousel-control-prev,
+	.carousel-control-next {
 		display: none;
+	}
+	.carousel-indicators {
+		top: -8px;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 	.item-name {
 		font-size: 18px;

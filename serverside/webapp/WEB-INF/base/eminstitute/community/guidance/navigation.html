@@ -1,27 +1,28 @@
-<header class="header">
-  <div class="container header-container">
+<header>
+  <div class="container">
     <div class="d-flex align-items-center justify-content-between">
-      <a href="/" class="header-logo">
-        <img src="${communityhome}/images/guidance.png" class="header-img" />
+      <a class="logo" href="/">
+        <img src="${communityhome}/images/guidance.png"  class="img-fluid" />
       </a>
-  
-      <div class="header-menu">
-        <nav id="navbar" class="header-nav">
-          <ul class="header-elenco">
-            <li class="header-el">
-              <a href="/support/" class="header-link">
-                <i class="bi bi-headset me-1"></i>
-                Support
-              </a>
-            </li>
-            <li class="header-el header-el-blue">
-              <a href="/find/" class="btn btn-white">
-                <i class="far fa-user me-1"></i>
-                Sign In
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div class="d-flex align-items-center position-relative">
+        <button class="btn custom-navbar-toggler d-md-none bg-none" type="button" style="line-height: 1;">
+          <i class="fa fa-bars" style="font-size:20px;transform: scaleX(1.2);"></i>
+        </button>
+        <div class="d-none d-md-flex flex-column flex-md-row justify-content-center align-items-center" id="tempNav">
+          <a href="/blogs/" class="py-1 mx-md-2 my-1 my-md-0">
+            Blogs
+          </a>
+          <a href="/support/" class="py-1 mx-md-2 my-1 my-md-0">
+            Our Mission
+          </a>
+          <a href="/contact/" class="py-1 mx-md-2 my-1 my-md-0">
+            Contact
+          </a>
+          <a href="/find/"  class="ms-md-4 mt-2 mt-md-0 btn btn-primary">
+            <i class="far fa-user me-1"></i>
+            Login
+          </a>
+        </div>
       </div>
     </div>
   </div>
