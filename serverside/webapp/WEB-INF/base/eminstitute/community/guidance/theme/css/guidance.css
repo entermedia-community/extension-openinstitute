@@ -165,9 +165,6 @@ body {
 .text-primary {
 	color: #3a9fff;
 }
-#tempNav a {
-	width: 100%;
-}
 #tempNav a:hover,
 #tempNav a.active {
 	color: #3a9fff;
@@ -641,7 +638,6 @@ body {
 	font-size: 20px;
 	color: #8198ae;
 }
-
 @media screen and (max-width: 991px) {
 	.price-box {
 		padding: 0px 10px;

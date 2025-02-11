@@ -2,6 +2,7 @@
 
 <page>
 	<property name="oisection">blogs</property>
+	<property name="currentPage">blogs</property>
 
 	<property name="collectivesection">home</property>
 	<property name="communitytag">true</property>
