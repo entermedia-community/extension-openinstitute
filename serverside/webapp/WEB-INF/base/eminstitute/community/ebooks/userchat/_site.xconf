@@ -3,9 +3,6 @@
 <page> 
 	<property name="currentPage">userchat</property>
 	
-	
-	
 	<property name="collectionid">communitychat</property>
-	
 	
 </page>

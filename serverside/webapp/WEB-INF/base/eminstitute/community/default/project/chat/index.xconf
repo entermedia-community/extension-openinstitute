@@ -1,18 +1,3 @@
 <page>
 	
-	<path-action name="ChatModule.loadRecentChatsLibraryCollection"/>
-	
-	<path-action name="DataEditModule.loadPageOfSearch">
-		<property name="hitsname">messagesthitracker</property>
-		<property name="searchtype">chatterbox</property>
-	</path-action>
-	
-	<path-action name="ChatModule.loadPageOfChat">
-		<property name="hitsname">messagesthitracker</property>
-		<property name="searchtype">chatterbox</property>
-	</path-action>
-	
-	<path-action name="ProjectModule.loadGoalsInMessages"/>
-	<path-action name="ChatModule.getAsset"/>
-
 </page>

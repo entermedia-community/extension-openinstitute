@@ -12,35 +12,38 @@
 	
 	<inner-layout>${communityhome}/project/chat/chatlayout.html</inner-layout>
 	
-	<style id="uploadstyle" href="${themeprefix}/styles/pages/upload.css" />
-	<property name="uploadtab">single</property>
-	<script id="upload" src="/${applicationid}/components/upload/types/html5/upload.js" />
-	<script id="html5_upload" src="/${applicationid}/components/javascript/upload/jquery.html5_upload.js" />
-	
-	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
-	<style  id="videojs-css"  href="/${applicationid}/components/javascript/videojs/8.20.0/video-js.min.css" />
-	
-	<style id="results" href="${themeprefix}/styles/pages/results.css"/>
-	<script id="results" src="/${applicationid}/components/javascript/results.js"/> 
-	
 	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
+
     <script id="goals" src="${communityhome}/project/goals/goals.js"/>
 
 	<script id="chatterbox" src="${communityhome}/components/chatterbox/chatterbox.js" />
 	
+	<property name="module">librarycollection</property>
+	
+	<path-action name="MediaArchiveModule.loadModule" />
+	
 	<path-action name="ProjectModule.loadCollection" />
 	
+	<path-action name="OiModule.loadCommunityCategory" />
+	
+	<page-action name="ProjectModule.loadChatChannel"/>
 
-   <permission name="editcollection">
+	<page-action name="ChatModule.loadRecentChatsLibraryCollection"/>	
+	
+	<property name="chatterboxhome">${communityhome}/project/chat/chatterbox</property>
+
+	<path-action name="Admin.loadPermissions"/>
+	<path-action name="Admin.loadPermissionFinder" />
+	
+	
+  	<path-action name="Admin.allowViewing"/>
+
+	<permission name="editcollection">
 		<or>
 			<action name="ProjectModule.canEditCollection" />
 			<action name="ProjectModule.isOnTeam" />			
 		</or>
 	</permission>
-	<path-action name="Admin.loadPermissions"/>
-  	<path-action name="Admin.allowViewing"/>
-
-  	<path-action name="ChatModule.getChatManager"/>
-	<path-action name="OiModule.loadCommunityCategory" />
+	
 
 </page>

@@ -86,6 +86,22 @@ $(document).ready(function () {
 	});
 	
 	
+	lQuery(".submitform").livequery("click", function (e) {
+		e.preventDefault();
+
+		var theform = $(this).closest("form");
+
+		var clicked = $(this);
+		if (clicked.data("updateaction")) {
+			var newaction = clicked.attr("href");
+			theform.attr("action", newaction);
+		}
+		console.log("Submit Form " + theform);
+		theform.trigger("submit");
+		e.stopPropagation();
+		return;
+	});
+	
 	
 	//Select2 components
 	
@@ -217,8 +233,68 @@ $(document).ready(function () {
 				}
 			});
 		});
+		
+		
 	
-	
-	
+		lQuery(".pickemoticon").livequery(function () {
+				//Load div
+				var input = $(this);
+				input.click(function () {
+					$(".emoticonmenu").hide(); //Hide old ones
+				});
+
+				input.hover(function () {
+					var isattached = input.data("isattached");
+					if (isattached) {
+						$(".emoticonmenu").hide(); //Hide old ones
+						input.closest(".message-menu").find(".emoticonmenu").show();
+					} else {
+						var options = input.data();
+						$.ajax({
+							url: options.showurl,
+							async: true,
+							data: options,
+							success: function (data) {
+								$(".emoticonmenu").hide(); //Hide old ones
+								input.data("isattached", true);
+
+								input.closest(".message-menu").append(data);
+							},
+						});
+					}
+				});
+
+				//On any click hide this:
+				//$(".emoticonmenu").hide();
+			});
+
+			lQuery(".message-menu-link:not(.pickemoticon)").livequery(function () {
+				var input = $(this);
+				input.hover(function () {
+					$(".emoticonmenu").hide(); //Hide old ones
+				});
+			});
+
+			lQuery(".emoticonmenu span").livequery("click", function () {
+				var menuitem = $(this);
+
+				var aparent = $(menuitem.closest(".message-menu").find(".pickemoticon"));
+				//console.log(aparent.data());
+
+				var saveurl = aparent.data("toggleurl");
+				//Save
+				var options = aparent.data();
+				options.reactioncharacter = menuitem.data("hex");
+				$.ajax({
+					url: saveurl,
+					async: true,
+					data: options,
+					success: function (data) {
+						$(".emoticonmenu").hide();
+						$("#chatter-message-" + aparent.data("messageid")).html(data);
+						//reload message
+					},
+				});
+			});
 	
 });

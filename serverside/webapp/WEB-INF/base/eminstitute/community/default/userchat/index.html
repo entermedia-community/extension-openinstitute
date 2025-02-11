@@ -1,2 +1,3 @@
-
-$pages.include("$!{communityhome}/userchat/chatterbox/index.html", $context)
+#set($module = $mediaarchive.getCachedData("module", "librarycollection"))
+$context.putPageValue("module", $module)
+$pages.include("./chatterbox/index.html", $context)
