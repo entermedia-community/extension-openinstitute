@@ -32,9 +32,9 @@
 				<div class="about_img"><img src="${communityhome}/images/about.svg" /></div>
 			</div>
 			<div class="col-md-6">
-				<h1 class="about_title">Revolutionizing Product Data Management with AI</h1>
+				<h1 class="about_title">License Out Your Fashion Style</h1>
 				<p class="about_text">
-					FashionWeek is your private AI-powered product library that organizes, scans, and understands product specifications and relationships at scale. Our AI ensures your catalog remains structured, searchable, and always up to date.
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Consectetur adipisicing elit.
 				</p>
 				<div class="read_more"><a href="#">Read More</a></div>
 			</div>
@@ -55,30 +55,22 @@
 		</div>
 		<div class="product_section_2">
 			<div class="row">
+				#foreach($i in [1..3])
 				<div class="col-md-4">
 					<div class="product_box">
 						<div class="product_img"><img src="${communityhome}/images/placeholder.svg" /></div>
-						<div class="price_text">$10</div>
 						<h6 class="strawberry_text">Strawberry FashionWeek</h6>
-						<div class="cart_bt"><a href="#">Add To Cart</a></div>
+						<div class="d-flex align-items-center"> 
+							<div class="cart_bt">
+								<a href="#">
+									<span>$10</span>
+									<span>Buy License</span>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="product_box">
-						<div class="product_img"><img src="${communityhome}/images/placeholder.svg" /></div>
-						<div class="price_text">$10</div>
-						<h6 class="strawberry_text">Strawberry FashionWeek</h6>
-						<div class="cart_bt"><a href="#">Add To Cart</a></div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="product_box">
-						<div class="product_img"><img src="${communityhome}/images/placeholder.svg" /></div>
-						<div class="price_text">$10</div>
-						<h6 class="strawberry_text">Strawberry FashionWeek</h6>
-						<div class="cart_bt"><a href="#">Add To Cart</a></div>
-					</div>
-				</div>
+				#end
 			</div>
 		</div>
 	</div>

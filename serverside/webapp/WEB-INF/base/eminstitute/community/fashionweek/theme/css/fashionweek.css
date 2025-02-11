@@ -66,13 +66,6 @@ h6 a {
 button:focus {
 	outline: none;
 }
-ul,
-li,
-ol {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
 p {
 	margin: 20px;
 	font-weight: 300;
@@ -291,16 +284,6 @@ button {
 	font-weight: bold;
 	padding-top: 120px;
 }
-.about_title::after {
-	position: absolute;
-	content: "";
-	width: 80px;
-	height: 6px;
-	background-color: #ffd6e1;
-	bottom: 20px;
-	right: 0px;
-	border-radius: 4px;
-}
 .about_text {
 	width: 100%;
 	/*  */
@@ -342,16 +325,6 @@ button {
 	color: #373736;
 	font-weight: bold;
 }
-.product_title::after {
-	position: absolute;
-	content: "";
-	width: 80px;
-	height: 6px;
-	background-color: #ffd6e1;
-	bottom: 20px;
-	right: 160px;
-	border-radius: 4px;
-}
 .product_text {
 	width: 100%;
 	font-size: 16px;
@@ -371,7 +344,11 @@ button {
 	margin-bottom: 1rem;
 }
 .product_box:hover {
-	background-image: linear-gradient(0deg, #ffffff 37%, #faf0c7 37%);
+	background-image: linear-gradient(
+		0deg,
+		#ffffff 37%,
+		rgba(252, 149, 196, 0.25) 37%
+	);
 }
 .product_img {
 	width: 100%;
@@ -398,24 +375,29 @@ button {
 	font-weight: bold;
 }
 .cart_bt {
-	/* width: 150px; */
 	margin: 0 auto;
 	text-align: center;
 	padding: 10px;
 }
 .cart_bt a {
-	width: 100%;
+	display: flex;
 	font-size: 16px;
-	text-align: center;
 	border: 1px solid #fc95c4;
 	color: #fc95c4;
-	padding: 8px 12px;
 	border-radius: 40px;
+	overflow: hidden;
+}
+.cart_bt a span {
+	display: inline-block;
+	padding: 8px 12px;
 	line-height: 1;
 }
-.cart_bt a:hover {
-	border: 1px solid #373736;
-	color: #373736;
+.cart_bt a span:first-child {
+	padding-right: 7px;
+}
+.cart_bt a span:last-child {
+	background-color: #fc95c4;
+	color: #ffffff;
 }
 .seemore_bt {
 	width: 180px;
@@ -451,16 +433,6 @@ button {
 	color: #373736;
 	font-weight: bold;
 }
-.services_title::after {
-	position: absolute;
-	content: "";
-	width: 80px;
-	height: 6px;
-	background-color: #ffd6e1;
-	bottom: 25px;
-	right: 160px;
-	border-radius: 4px;
-}
 .services_text {
 	width: 100%;
 	font-size: 16px;
@@ -477,6 +449,9 @@ button {
 	padding: 20px 30px;
 	height: auto;
 	margin-bottom: 12px;
+}
+.services_box:hover {
+	background-color: rgba(252, 149, 196, 0.05);
 }
 .tasty_text {
 	width: 100%;
@@ -673,6 +648,7 @@ button {
 footer {
 	margin-top: 4rem;
 	padding: 2rem;
+	background: rgba(252, 151, 196, 0.1);
 }
 footer .fab {
 	color: #fa7eb6;

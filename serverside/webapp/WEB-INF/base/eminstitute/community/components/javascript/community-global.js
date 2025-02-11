@@ -3,6 +3,7 @@ $(document).ready(function () {
 		$("body").addClass("offcanvas-open");
 		$(".community-layout").addClass("offcanvas-open");
 	});
+
 	$("#userOffcanvas").on("hide.bs.offcanvas", function () {
 		$("body").removeClass("offcanvas-open");
 		$(".community-layout").removeClass("offcanvas-open");
@@ -15,24 +16,6 @@ $(document).ready(function () {
 	lQuery(".redirecttopage").livequery(function () {
 		var url = $(this).data("redirectok");
 		window.location.href = url;
-	});
-
-	lQuery("a.toggleAjax").livequery("click", function (e) {
-		/**
-		 * Runs an ajax call and removes the element from the DOM on ajax success
-		 * Optionally checks for a focus parent
-		 **/
-		e.stopPropagation();
-		e.preventDefault();
-		var $this = $(this);
-		$this.data("noToast", true);
-		$this.runAjax(function () {
-			var focusParent = $this.closest(`.${$this.data("focusparent")}`);
-			if (focusParent.length) {
-				focusParent.find("input:visible:first").focus();
-			}
-			$this.remove();
-		});
 	});
 
 	lQuery(".autoclick").livequery("click", function (e) {
@@ -84,27 +67,11 @@ $(document).ready(function () {
 			);
 		});
 	});
-	
-	
-	
-	//Select2 components
 
 	function select2formatResult(emdata) {
-		/*
-		 * var element = $(this.element); var showicon =
-		 * element.data("showicon"); if( showicon ) { var type =
-		 * element.data("searchtype"); var html = "<img
-		 * class='autocompleteicon' src='" + themeprefix + "/images/icons/" +
-		 * type + ".png'/>" + emdata.name; return html; } else { return
-		 * emdata.name; }
-		 */
 		return emdata.name;
 	}
 	function select2Selected(selectedoption) {
-		// "#list-" + foreignkeyid
-		// var id = container.closest(".select2-container").attr("id");
-		// id = "list-" + id.substring(5); //remove sid2_
-		// container.closest("form").find("#" + id ).val(emdata.id);
 		return selectedoption.name || selectedoption.text;
 	}
 
@@ -220,7 +187,7 @@ $(document).ready(function () {
 	lQuery(".custom-navbar-toggler").livequery("click", function () {
 		if ($("#tempNav").hasClass("d-none")) {
 			$("#tempNav").removeClass("d-none");
-			$("#tempNav").addClass("d-flex bg-white shadow");
+			$("#tempNav").addClass("d-flex bg-white rounded shadow");
 			$("#tempNav").css({
 				position: "absolute",
 				top: "100%",
@@ -238,14 +205,16 @@ $(document).ready(function () {
 			});
 		}
 	});
+
 	$(window).on("resize", function () {
 		if (window.innerWidth >= 768) {
-			$("#tempNav").removeClass("d-none bg-white shadow");
+			$("#tempNav").removeClass("d-none bg-white rounded shadow");
 			$("#tempNav").attr("style", "");
 		} else {
 			$("#tempNav").addClass("d-none");
 		}
 	});
+
 	$(document).on("click", function (e) {
 		if (window.innerWidth >= 768) {
 			return;
@@ -258,69 +227,65 @@ $(document).ready(function () {
 			});
 		}
 	});
+
+	lQuery(".pickemoticon").livequery(function () {
+		//Load div
+		var input = $(this);
+		input.click(function () {
+			$(".emoticonmenu").hide(); //Hide old ones
 		});
-		
-		
-	
-		lQuery(".pickemoticon").livequery(function () {
-				//Load div
-				var input = $(this);
-				input.click(function () {
-					$(".emoticonmenu").hide(); //Hide old ones
-				});
 
-				input.hover(function () {
-					var isattached = input.data("isattached");
-					if (isattached) {
-						$(".emoticonmenu").hide(); //Hide old ones
-						input.closest(".message-menu").find(".emoticonmenu").show();
-					} else {
-						var options = input.data();
-						$.ajax({
-							url: options.showurl,
-							async: true,
-							data: options,
-							success: function (data) {
-								$(".emoticonmenu").hide(); //Hide old ones
-								input.data("isattached", true);
-
-								input.closest(".message-menu").append(data);
-							},
-						});
-					}
-				});
-
-				//On any click hide this:
-				//$(".emoticonmenu").hide();
-			});
-
-			lQuery(".message-menu-link:not(.pickemoticon)").livequery(function () {
-				var input = $(this);
-				input.hover(function () {
-					$(".emoticonmenu").hide(); //Hide old ones
-				});
-			});
-
-			lQuery(".emoticonmenu span").livequery("click", function () {
-				var menuitem = $(this);
-
-				var aparent = $(menuitem.closest(".message-menu").find(".pickemoticon"));
-				//console.log(aparent.data());
-
-				var saveurl = aparent.data("toggleurl");
-				//Save
-				var options = aparent.data();
-				options.reactioncharacter = menuitem.data("hex");
+		input.hover(function () {
+			var isattached = input.data("isattached");
+			if (isattached) {
+				$(".emoticonmenu").hide(); //Hide old ones
+				input.closest(".message-menu").find(".emoticonmenu").show();
+			} else {
+				var options = input.data();
 				$.ajax({
-					url: saveurl,
+					url: options.showurl,
 					async: true,
 					data: options,
 					success: function (data) {
-						$(".emoticonmenu").hide();
-						$("#chatter-message-" + aparent.data("messageid")).html(data);
-						//reload message
+						$(".emoticonmenu").hide(); //Hide old ones
+						input.data("isattached", true);
+
+						input.closest(".message-menu").append(data);
 					},
 				});
-			});
-	
+			}
+		});
+
+		//On any click hide this:
+		//$(".emoticonmenu").hide();
+	});
+
+	lQuery(".message-menu-link:not(.pickemoticon)").livequery(function () {
+		var input = $(this);
+		input.hover(function () {
+			$(".emoticonmenu").hide(); //Hide old ones
+		});
+	});
+
+	lQuery(".emoticonmenu span").livequery("click", function () {
+		var menuitem = $(this);
+
+		var aparent = $(menuitem.closest(".message-menu").find(".pickemoticon"));
+		//console.log(aparent.data());
+
+		var saveurl = aparent.data("toggleurl");
+		//Save
+		var options = aparent.data();
+		options.reactioncharacter = menuitem.data("hex");
+		$.ajax({
+			url: saveurl,
+			async: true,
+			data: options,
+			success: function (data) {
+				$(".emoticonmenu").hide();
+				$("#chatter-message-" + aparent.data("messageid")).html(data);
+				//reload message
+			},
+		});
+	});
 });
