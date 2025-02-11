@@ -11,5 +11,5 @@
     <property name="idlevel">0</property>
     
     </path-action>
-    <inner-layout>${communityhome}/templates/details/layout.html</inner-layout>
+    <inner-layout>${communityhome}/library-templates/details/layout.html</inner-layout>
 </page>
