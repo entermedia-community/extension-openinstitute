@@ -6,9 +6,6 @@
 	<property name="communityhome">/${siteid}/community/tierra</property>
 	<property name="communitytagcategory">4</property>
 
-	<property name="shades">#333,#444,#555</property>
-	<property name="bgcolor">#151515</property>
-
 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 
 	<script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>

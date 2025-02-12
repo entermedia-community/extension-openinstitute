@@ -6,10 +6,6 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/emedia</property>
 	
-	<property name="shades">#585b77,#4e516a,#45475c</property>
-	<property name="bgcolor">#626584</property>
-	<property name="containertype">container</property>
-	
 	<property name="communitytagcategory">3</property>
 	
 	<script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
