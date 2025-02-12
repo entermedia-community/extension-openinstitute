@@ -95,7 +95,7 @@ footer ul {
 .nav-bar ul li,
 footer ul li {
 	display: inline-block;
-	margin-left: 1rem;
+	/* margin-left: 1rem; */
 	font-size: 1rem;
 }
 a:hover {
@@ -380,8 +380,8 @@ footer {
 		padding: 2rem;
 	}
 	footer ul li {
-		width: 100%;
-		text-align: right;
+		/* width: 100%; */
+		/* text-align: right; */
 	}
 }
 .video-card {

@@ -5,14 +5,8 @@ AOS.init({
 	mirror: false,
 });
 
-$(".faq-item h3, .faq-item .faq-toggle").click(function () {
-	var isActive = $(this).parent().hasClass("faq-active");
-	$(".faq-item").removeClass("faq-active");
-	if (!isActive) {
-		$(this).parent().toggleClass("faq-active");
-	}
-});
-
 $(document).ready(function () {
-	new bootstrap.Carousel("#projectCarousel");
+	if ($("#projectCarousel").length > 0) {
+		new bootstrap.Carousel("#projectCarousel");
+	}
 });

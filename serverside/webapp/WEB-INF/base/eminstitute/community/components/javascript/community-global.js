@@ -292,4 +292,18 @@ $(document).ready(function () {
 			},
 		});
 	});
+
+	lQuery("footer").livequery(function () {
+		var offset = 0;
+		if ($(".__top-flair").length > 0) {
+			offset = 46;
+		}
+		if ($("#application")[0].scrollHeight - offset < $(window).height()) {
+			$(this).css({
+				position: "fixed",
+				bottom: 0,
+				width: "100%",
+			});
+		}
+	});
 });
