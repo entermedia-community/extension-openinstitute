@@ -187,7 +187,11 @@ $(document).ready(function () {
 	lQuery(".custom-navbar-toggler").livequery("click", function () {
 		if ($("#tempNav").hasClass("d-none")) {
 			$("#tempNav").removeClass("d-none");
-			$("#tempNav").addClass("d-flex bg-white rounded shadow");
+			var bg = "bg-white";
+			if ($(this).data("dark")) {
+				bg = "bg-dark";
+			}
+			$("#tempNav").addClass(`d-flex rounded shadow ${bg}`);
 			$("#tempNav").css({
 				position: "absolute",
 				top: "100%",
@@ -208,7 +212,7 @@ $(document).ready(function () {
 
 	$(window).on("resize", function () {
 		if (window.innerWidth >= 768) {
-			$("#tempNav").removeClass("d-none bg-white rounded shadow");
+			$("#tempNav").removeClass("d-none bg-white bg-dark rounded shadow");
 			$("#tempNav").attr("style", "");
 		} else {
 			$("#tempNav").addClass("d-none");
