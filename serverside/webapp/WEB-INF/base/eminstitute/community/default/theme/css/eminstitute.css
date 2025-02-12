@@ -165,6 +165,16 @@ a.primary:hover .fa-solid {
 	border-bottom: 1px solid #e5e5e5;
 }
 
+.pickfromiframe {
+    display: none;
+}
+.emthumbimage {
+    display: inline-block;
+    margin: 0 auto;
+    vertical-align: middle;
+    padding: 0 0 4px 0;
+}
+
 .feed-maincol {
 	box-shadow: none;
 }

@@ -231,16 +231,15 @@ $(document).ready(function () {
 			});
 		}
 	});
-		});
-		
+	
 		
 	
-		lQuery(".pickemoticon").livequery(function () {
-				//Load div
-				var input = $(this);
-				input.click(function () {
-					$(".emoticonmenu").hide(); //Hide old ones
-				});
+	lQuery(".pickemoticon").livequery(function () {
+			//Load div
+			var input = $(this);
+			input.click(function () {
+				$(".emoticonmenu").hide(); //Hide old ones
+			});
 
 		input.hover(function () {
 			var isattached = input.data("isattached");
@@ -309,4 +308,37 @@ $(document).ready(function () {
 			});
 		}
 	});
-});
+	
+	
+	lQuery("form.autosubmit").livequery(function () {
+			var form = $(this);
+
+			$("select", form).change(function (e) {
+				e.stopPropagation();
+				$(form).trigger("submit");
+			});
+			/* Todo: use onblur
+			$("input", form).on("focusout", function (event) {
+				$(form).trigger("submit");
+			});
+			*/
+			$("input", form).on("keyup", function (e) {
+				//Enter Key handled by default the submit
+				if (e.keyCode == 13) {
+					return;
+				}
+				e.preventDefault();
+				e.stopPropagation();
+				$(form).trigger("submit");
+			});
+			$(
+				'input[type="file"],input[name="date.after"],input[type="checkbox"]',
+				form
+			).on("change", function (e) {
+				e.stopPropagation();
+				$(form).trigger("submit");
+			});
+		});
+	
+	
+}); //document (ready)
