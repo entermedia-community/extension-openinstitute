@@ -511,99 +511,9 @@ body {
 .article-pre-arrow-purple {
 	color: #8a3aff;
 }
-.contacts_title-ag {
-	margin: 0;
-	margin-left: 0px;
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 22px;
-	margin-left: 10px;
-}
-.contacts-link {
-	color: #1f4568;
-}
-.contacts-light {
-	color: #8198ae;
-}
-.contacts-address {
-	margin-top: 20px;
-	color: #8198ae;
-	font-size: 16px;
-	line-height: 27px;
-	padding-bottom: 12px;
-	margin-bottom: 17px;
-	position: relative;
-}
-.contacts-address:after {
-	content: "";
-	position: absolute;
-	width: 20px;
-	height: 1px;
-	background-color: #8198ae;
-	bottom: 0;
-	left: 0;
-}
-.contacts-info {
-	color: #8198ae;
-	font-size: 16px;
-	margin-bottom: 2px;
-}
-.contacts-info-link {
-	color: #3a9fff;
-	text-decoration: none;
-}
-.form-group {
-	margin-bottom: 20px;
-	display: table;
-	width: 100%;
-	position: relative;
-}
-.form-field {
-	height: 50px;
-	position: relative;
-	border: none;
-	padding: 10px 12px;
-	width: 100%;
-	border-radius: 6px;
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-	-moz-transition: all 0.4s;
-	-ms-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	z-index: 2;
-}
-.form-select {
-	background-image: url("http://www.austinlawrencepartners.com/wp-content/uploads/arrow-down-gray-hi.png");
-	background-repeat: no-repeat;
-	background-size: 10px;
-	background-position-x: 97%;
-	width: 100%;
-	padding-right: 30px;
-	background-position-y: center;
-	background-color: #fff;
-	color: #8198ae;
-}
-.form-field-half {
-	width: 50%;
-	float: left;
-}
-.form-field-half:first-of-type {
-	padding-right: 15px;
-}
-.form-textarea {
-	height: 200px;
-}
-.btn-up {
-	position: absolute;
-	bottom: -15px;
-	right: 25px;
-	z-index: 3;
+#contactUs {
+	--muted-color: #8198ae;
+	--primary-color: #3a9fff;
 }
 .career_title {
 	color: #fff;
@@ -623,7 +533,7 @@ body {
 	left: 20%;
 }
 .footer {
-	background-color: #1f4467;
+	background-color: rgba(58, 159, 255, 0.1);
 	padding: 40px 0;
 }
 .footer-light {
@@ -636,7 +546,7 @@ body {
 	margin-left: 15px;
 	vertical-align: middle;
 	font-size: 20px;
-	color: #8198ae;
+	color: #3a9fff;
 }
 @media screen and (max-width: 991px) {
 	.price-box {
@@ -691,6 +601,10 @@ body {
 	}
 	.form-group {
 		margin-bottom: 10px;
+	}
+	.carousel-control-prev,
+	.carousel-control-next {
+		display: none;
 	}
 }
 @media screen and (max-width: 480px) {
@@ -788,10 +702,6 @@ body {
 	.career_sub {
 		font-size: 14px;
 		margin-bottom: 20px;
-	}
-	.carousel-control-prev,
-	.carousel-control-next {
-		display: none;
 	}
 	.carousel-indicators {
 		top: -8px;

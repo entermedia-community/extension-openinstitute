@@ -741,3 +741,7 @@ footer .fab {
 		padding: 20px;
 	}
 }
+#contactUs {
+	--muted-color: #8198ae;
+	--primary-color: #fc95c4;
+}

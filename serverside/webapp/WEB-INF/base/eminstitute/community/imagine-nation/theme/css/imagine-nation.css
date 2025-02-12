@@ -684,3 +684,7 @@ a {
 #tempNav a.active {
 	color: var(--pink);
 }
+#contactUs {
+	--muted-color: #8198ae;
+	--primary-color: var(--pink);
+}
