@@ -71,7 +71,7 @@ main.container {
 }
 #savedLibraries {
 	width: 100%;
-	max-width: 840px;
+	max-width: 940px;
 	padding: 16px;
 	margin: 0 auto;
 	display: flex;
@@ -175,4 +175,7 @@ a.library-card:hover {
 	.pad-right {
 		width: 0px;
 	}
+}
+hr.light {
+	border-color: #c1c1c1;
 }

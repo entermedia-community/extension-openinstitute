@@ -1,53 +1,53 @@
 <div class="d-flex flex-column align-items-center">
   <div id="savedLibraries">
+		<p class="text-muted text-center lead subheader" style="max-width: 720px;">
+			These are free web sites that anyone can use. They are managed and supported by an open community of users. 
+		</p>
 
-		<p class="text-muted lead mb-3 subheader">
-		      These are free web sites that anyone can use. They are managed and supported by an open community of users. 
-		     </p>
-		
-<!--
-		["Content Creators  / Social Influensors", "creators.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
-		["Cultural Heritage Library","commonroots.openinstitute.org", "<b>Bridge Culture and Commerce with Your Creations</b><br>Host, monetize, and share videos, audio narratives, literature, and cultural artifacts in a single space. Sell directly to fans, license content, or crowdfund projects while celebrating your heritage. Equipped with rights management and global distribution, it’s designed for artists, historians, and modern creators to thrive. Transform your work into legacy—and revenue.", "camera-retro"]
-
-
-		<div class="container px-4 mb-5">
-			<div class="row g-4 justify-content-md-center">
-				#set($templates = [
-					["Video Producer", "production.einnovation.com", "<b>Video and Photo Producers with Editing Workflows</b><br>Upload high-quality videos, edit, and organize them seamlessly in our cloud-based platform. When ready, generate and refine multilingual captions, then export your polished video in any format—simplifying creation, collaboration, and global publishing. Perfect for creators who value efficiency and precision.", "video"],
-					["Commerce","commerce.einnovation.com","<b>Business Files and Marketing Files in One Unified Hub</b><br>Store, edit, and organize high-resolution images, brand documents, and marketing materials seamlessly online. Collaborate with teammates using real-time feedback, automated version history, and approval workflows. Effortlessly export polished assets for ads, social media, or presentations—all while maintaining brand integrity across every file. Built for marketing teams to create faster, smarter, and in sync.", "users"],
-					["Studio", "studio.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
-					["Content Creators", "creators.einnovation.com", "<b>Empower Your Content Creation</b><br>Store, manage, and tweak your visual content effortlessly in one cloud workspace. Collaborate with teams, repurpose assets across platforms, and ensure every post aligns with your brand. Export ready-to-publish files in seconds—ideal for Reels, Stories, or feeds. Streamline your creative process so you can spend less time managing files and more time growing your audience.", "user-edit"],
-					["Cultural Heritage Library","commonroots.openinstitute.org", "<b>Bridge Culture and Commerce with Your Creations</b><br>Host, monetize, and share videos, audio narratives, literature, and cultural artifacts in a single space. Sell directly to fans, license content, or crowdfund projects while celebrating your heritage. Equipped with rights management and global distribution, it’s designed for artists, historians, and modern creators to thrive. Transform your work into legacy—and revenue.", "camera-retro"]
-				])
--->		
-		
-    #set($librarires = [
-	  ["Content Creators", "https://einnovation.com", "Create, organize and share your social media content. Store your posts, videos and emails in one place."], 
-     ["Cultural Heritage Library", "https://commonroots.emedialibrary.com", "Common Roots - An collection of music, literature and video documenting original works across cultures, locations and generations. We celebrate our shared humanity of stories and songs for future generation to build upon."]
-    ])
-    #foreach ($library in $librarires)
-    <a class="library-card active" href="${library[1]}" title="${library[1]}">
-      <div class="library-thumb">
-        <img src="${library[1]}/find/theme/lighttheme/logo.png" alt="${library[0]}">
-      </div>
-      <h3>${library[0]}</h3>
-      <p>${library[2]}</p>
-    </a>
-    #end
-    
+		<div class="row row-cols-1 row-cols-md-2 g-4 justify-content-md-center mt-1">
+			#set($librarires = [
+				["eInnovation","Content Creators", "https://einnovation.com", "einnovation", "Create, organize and share your social media content. Store your posts, videos and emails in one place."], 
+				["Common Roots", "Cultural Heritage Library", "https://commonroots.emedialibrary.com", "commonroots", "A collection of music, literature and video, documenting original works across cultures, locations and generations. We celebrate our shared humanity of stories and songs for future generation to build upon."]
+			])
+			#foreach ($library in $librarires)
+				<div class="col mb-4">
+					<div class="card h-100 template-card shadow">
+						<div class="card-thumbnail">
+							<img src="${communityhome}/images/${library[3]}.png" class="card-img-top" alt="${library[0]} preview">
+						</div>
+						<hr class="light m-0">
+						<div class="card-body d-flex flex-column">
+							<h5 class="text-dark d-flex align-items-center justify-content-between">
+								<div class="d-flex align-items-center">
+									${library[0]}
+								</div>
+								<span class="text-muted small">(${library[1]})</span>
+							</h5>
+							<p class="card-text mt-1">${library[4]}</p>
+							<a class="btn py-2 btn-lg btn-primary shadow-sm mt-auto align-self-center transition-3d-hover" href="${library[2]}" #ifnull($desktop) target="_blank" #end>
+								Open Library <i class="bi bi-box-arrow-right fas fa-arrow-right small ms-1"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			#end
+		</div>
   </div>
   
 
 	<div class="h4 text-center mt-5 fw-light text-dark">
-		Need a Private Hub of Your Own?
+		Need a Private Library of Your Own?
 	</div>
 	<p class="text-center text-muted px-3" style="max-width: 800px">
 		We provide services to help you securely host, manage, and share creative
 		assets with ease. Tailored to your specific needs, our private hosting keeps
 		your work organized, accessible, and 100% in your control.
-	</p> 
+	</p>
+	<p class="text-muted mb-1 text-center">
+		You can choose from a wide range of templates to get started&mdash;
+	</p>
 	<a href="https://emedialibrary.com" class="btn btn-success fs-6" target="_blank">
-		<i class="bi bi-send-fill me-1"></i>
-		Contact Us
+		Explore eMedia Library Templates
+		<i class="bi bi-link-45deg fas fa-external-link-alt small ms-1"></i>
   </a>
 </div>
