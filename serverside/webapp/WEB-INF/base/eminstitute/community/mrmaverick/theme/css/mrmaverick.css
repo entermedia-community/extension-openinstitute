@@ -102,8 +102,20 @@ a:hover {
 	color: var(--accent-color-cyan);
 	transition: 600ms;
 }
+a.active {
+	color: var(--accent-color-cyan);
+	font-weight: bold;
+}
 section {
 	padding: var(--padding-lg);
+}
+#contactUs {
+	--muted-color: #efefff;
+	--primary-color: var(--accent-color-cyan);
+}
+
+.text-primary {
+	color: var(--accent-color-cyan) !important;
 }
 .form-control {
 	border-color: var(--accent-color-cyan);
