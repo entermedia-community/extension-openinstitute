@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <page>
 	<property name="virtual">true</property>
 	<property name="oisection">stations</property>
 	<property name="collectivesection">tasks</property>
 	<property name="fullwidth">true</property>
-	<property name="containertype">container-fluid</property>
 	<property name="goalfolder">search</property>
 	
 	<path-action name="ProjectModule.loadCollection"/>

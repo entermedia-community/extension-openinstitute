@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <page>
 		
 	<property name="collectivesection">finances</property>
-	<property name="collectiveadminsection">invoices</property>
-	<property name="containertype">container-fluid</property>
+	<property name="collectiveadminsection">invoices</property> 
 	
 	<property name="invoicepayment">true</property>
 	

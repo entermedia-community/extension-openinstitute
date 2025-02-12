@@ -1314,7 +1314,7 @@ textarea.blog-comments-input {
 	transition: margin-left 0.25s ease-in-out;
 }
 .community-layout.offcanvas-open {
-	margin-left: 220px;
+	/* margin-left: 220px; */
 }
 .community-layout .sidebar-left,
 .community-layout .sidebar-right {

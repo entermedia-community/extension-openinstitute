@@ -7,13 +7,8 @@
 
   <property name="fallbackdirectory">../default</property>
   <property name="communityhome">/${siteid}/community/emediawebsite</property>
-
-  <property name="shades">#585b77,#4e516a,#45475c</property>
-  <property name="bgcolor">#626584</property>
-  <property name="containertype">container</property>
   
   <property name="communitytagcategory">emediawebsite</property>
-  <property name="defaultcommunitytag">AY_jtx2r9HHjyJ06-yjY</property>
 
   <property name="oisection">home</property>
 

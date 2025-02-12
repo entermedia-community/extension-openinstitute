@@ -8,8 +8,6 @@
 	
 	<property name="fullwidth">true</property>
 	
-	<property name="containertype">container-fluid</property>
-	
 	<inner-layout>${communityhome}/project/chat/chatlayout.html</inner-layout>
 	
 	<style id="tasks" href="${communityhome}/project/goals/goals.css" />
