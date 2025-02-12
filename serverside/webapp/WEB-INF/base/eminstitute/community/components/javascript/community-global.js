@@ -1,4 +1,11 @@
 $(document).ready(function () {
+	
+	var appdiv = $('#application');
+			var apphome = appdiv.data('apphome');
+			var finderhome = appdiv.data('finderhome');
+			var home = appdiv.data('home') + apphome;
+			
+			
 	$("#userOffcanvas").on("show.bs.offcanvas", function () {
 		$("body").addClass("offcanvas-open");
 		$(".community-layout").addClass("offcanvas-open");
@@ -339,6 +346,23 @@ $(document).ready(function () {
 				$(form).trigger("submit");
 			});
 		});
+		
+		
+	//open assets on finder on new window
+	lQuery('a.stackedplayer').livequery('click',function(e)
+	{
+		e.preventDefault();
+		var link = $(this);
+		var assetid = link.data("assetid");
+		
+		var url = finderhome+"/?assetid="+assetid;
+		
+		window.open(url, '_blank').focus();
+		
+		return false;
+	});
+	
+	
 	
 	
 }); //document (ready)
