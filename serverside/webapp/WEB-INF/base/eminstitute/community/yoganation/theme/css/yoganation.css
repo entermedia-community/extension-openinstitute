@@ -1684,3 +1684,7 @@ ul > li {
 	border-radius: 0.5rem;
 	padding: 0.75rem;
 }
+#contactUs {
+	--muted-color: #8198ae;
+	--primary-color: #626584;
+}
