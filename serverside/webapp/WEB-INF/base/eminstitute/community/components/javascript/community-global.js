@@ -231,13 +231,16 @@ $(document).ready(function () {
 			});
 		}
 	});
-
-	lQuery(".pickemoticon").livequery(function () {
-		//Load div
-		var input = $(this);
-		input.click(function () {
-			$(".emoticonmenu").hide(); //Hide old ones
 		});
+		
+		
+	
+		lQuery(".pickemoticon").livequery(function () {
+				//Load div
+				var input = $(this);
+				input.click(function () {
+					$(".emoticonmenu").hide(); //Hide old ones
+				});
 
 		input.hover(function () {
 			var isattached = input.data("isattached");
