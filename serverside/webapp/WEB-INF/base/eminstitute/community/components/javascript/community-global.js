@@ -216,6 +216,8 @@ $(document).ready(function () {
 			});
 		}
 	});
+	
+	
 
 	$(window).on("resize", function () {
 		if (window.innerWidth >= 768) {
@@ -384,3 +386,14 @@ $(document).ready(function () {
 	
 	
 }); //document (ready)
+
+
+function isInViewport(cell) {
+	const rect = cell.getBoundingClientRect();
+	var isin =
+		rect.top >= 0 &&
+		rect.top <= (window.innerHeight || document.documentElement.clientHeight);
+	return isin;
+}
+
+
