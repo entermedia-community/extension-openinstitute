@@ -6,7 +6,7 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/guidance</property>
 
-	<property name="flair">true</property>
+	
 	<property name="templatename">guidance</property>
 
 	<property name="communitytagcategory">guidance</property>
