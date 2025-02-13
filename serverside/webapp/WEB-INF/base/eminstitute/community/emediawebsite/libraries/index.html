@@ -17,12 +17,12 @@
       #end
     </div>
     <div class="d-flex h-100">
-      <div class="d-flex flex-column" style="min-width: 200px">
-        <a class="btn btn-wide" href="#" data-targetdivinner="configcontent" id="privateLibraries" data-blocked-libs="einnovation.com|ebooks.emedialibrary.com|commonroots.emedialibrary.com">
+      <div class="d-flex flex-column">
+        <a class="btn btn-wide" style="min-width: 200px" href="#" data-targetdivinner="configcontent" id="privateLibraries" data-blocked-libs="einnovation.com|ebooks.emedialibrary.com|commonroots.emedialibrary.com">
           <i class="bi bi-shield-lock fas fa-shield-alt"></i>
           <span>Your Libraries</span>
         </a>
-        <a class="btn btn-wide #if($tab == 'communitylibrarylist') active #end" href="${communitylink}/libraries?tab=communitylibrarylist" data-targetdivinner="configcontent" id="communityLibraries">
+        <a class="btn btn-wide #if($tab == 'communitylibrarylist') active #end" style="min-width: 200px" href="${communitylink}/libraries?tab=communitylibrarylist" data-targetdivinner="configcontent" id="communityLibraries">
           <i class="bi bi-people fas fa-users"></i>
           <span>Community Libraries</span>
         </a>
