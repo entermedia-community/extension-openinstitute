@@ -24,17 +24,23 @@
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
-	<script id="uicomponents" src="${communityhome}/components/javascript/results.js"/>
+	
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
 	
 	<script id="multidate" src="${communityhome}/components/javascript/multidate/moment.js"/>
 	<!-- <script id="datetimepicker" src="${communityhome}/components/javascript/multidate/jquery.daterangepicker.min.js"/>
 	<style id="datetimepicker-css" href="${communityhome}/components/javascript/multidate/daterangepicker.css" /> -->
-		
+	
+	
+	<style id="customfindercolors" href="${finderhome}/theme/defaulttheme/custom.css"/>
+	<style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>	
 
 	<style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
 	
+	
+	
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
+	
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
 	<style id="emedia2" href="${communityhome}/theme/css/emedia.css" />
