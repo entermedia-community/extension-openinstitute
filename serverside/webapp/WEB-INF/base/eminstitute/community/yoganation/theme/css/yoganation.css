@@ -715,8 +715,7 @@ footer {
 	/* margin-top: 35px; */
 	/* margin-bottom: 30px; */
 	color: #ffffff;
-	padding: 16px;
-	line-height: 14px;
+	padding: 4px 12px;
 	font-weight: normal;
 	transition: 0.4s;
 }

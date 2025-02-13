@@ -139,7 +139,7 @@ footer .logo small {
 .header .btn-getstarted:focus {
 	color: var(--contrast-color);
 	font-size: 14px;
-	padding: 8px 30px;
+	padding: 8px 16px;
 	margin: 0 0 0 30px;
 	border-radius: 4px;
 	transition: 0.3s;
