@@ -98,57 +98,6 @@ lQuery(".redirecttopage").livequery(function () {
 	window.location.href = url;
 });
 
-function createElNS(tag) {
-	return $(document.createElementNS("http://www.w3.org/2000/svg", tag));
-}
-lQuery(".coverRandom").livequery(function () {
-	var bgColor = $(this).data("bgcolor");
-	if (!bgColor) {
-		bgColor = "#000";
-	}
-	var shades = ["#222", "#333", "#444"];
-	var shadesString = $(this).data("shades");
-	if (shadesString) {
-		var _shades = shadesString.split(",");
-		if (_shades.length === 3) {
-			shades = _shades;
-		}
-	}
-	var svg = createElNS("svg");
-	svg.attr("xmlns", "http://www.w3.org/2000/svg");
-	svg.attr("width", "900");
-	svg.attr("height", "70");
-
-	var rectBG = createElNS("rect");
-	rectBG.attr("x", "0");
-	rectBG.attr("y", "0");
-	rectBG.attr("width", "900");
-	rectBG.attr("height", "70");
-	rectBG.attr("fill", bgColor);
-	svg.append(rectBG);
-
-	var delta = 150;
-	for (var i = 0; i < 3; i++) {
-		var width = delta * (3 - i);
-		for (var j = 0; j < 7; j++) {
-			var rect = createElNS("rect");
-			rect.attr("x", 0);
-			rect.attr("y", j * 10);
-			rect.attr("width", width + Math.random() * delta);
-			rect.attr("height", 10);
-			rect.attr("fill", shades[i]);
-			svg.append(rect);
-		}
-	}
-
-	var base64 = window.btoa(svg[0].outerHTML);
-
-	$(this).css(
-		"background-image",
-		'url("data:image/svg+xml;base64,' + base64 + '")'
-	);
-});
-
 uiload = function () {
 	app = jQuery("#application");
 	siteroot = app.data("siteroot");
@@ -270,76 +219,6 @@ uiload = function () {
 			});
 		} //datepicker
 	});
-
-	/*
-
-  if ($.fn.datepicker) {
-    lQuery("input.datepicker").livequery(function () {
-      var dpicker = $(this);
-
-      var targetid = dpicker.data("targetid");
-      dpicker.datepicker({
-		  language:  browserlanguage,
-	      todayBtn: "linked",
-	      autoclose: true,
-	      altField: "#" + targetid,
-	      format: "dd M, yyyy",
-	      beforeShow: function (input, inst) {
-          setTimeout(function () {
-            $("#ui-datepicker-div").css("z-index", 100100);
-            $("#application").append($("#ui-datepicker-div"));
-            // var quickSelect = $("#operationentitydatefindercatalog");
-            // quickSelect.css("display", "block");
-            // $("#ui-datepicker-div").append(quickSelect);
-            //Fix Position if in bootstrap modal
-            var modal = $("#modals");
-            if (modal.length) {
-              var modaltop = $("#modals").offset().top;
-              if (modaltop) {
-                var dpickertop = dpicker.offset().top;
-                dpickertop = dpickertop - modaltop;
-                var dpHeight = inst.dpDiv.outerHeight();
-                var inputHeight = inst.input ? inst.input.outerHeight() : 0;
-                var viewHeight = document.documentElement.clientHeight;
-                if (dpickertop + dpHeight + inputHeight > viewHeight) {
-                  dpickertop = dpickertop - dpHeight;
-                }
-                inst.dpDiv.css({
-                  top: dpickertop + inputHeight,
-                });
-              }
-            }
-          }, 0);
-        },
-      });
-      
-
-      console.log($(this));
-
-      var current = $("#" + targetid).val();
-      var ymdDate = moment(current, "YYYY-MM-DD");
-      if (ymdDate.isValid()) {
-        ymdDate = ymdDate.format("DD MMM, YYYY"); // equiv to bs datepicker's dd M, yyyy
-       dpicker.datepicker("update", ymdDate);
-      } else {
-        dpicker.datepicker("update", "");
-      }
-
-      dpicker.blur(function () {
-        var val = $(this).val();
-        if (val == "") {
-          $("#" + targetid).val("");
-        } else {
-          var ymdDate = moment(val, "DD MMM, YYYY");
-          if (ymdDate.isValid()) {
-            ymdDate = ymdDate.format("YYYY-MM-DD");
-            $("#" + targetid).val(ymdDate);
-          }
-        }
-      });
-    });
-  } //datepicker
-*/
 
 	if ($.fn.minicolors) {
 		$(".color-picker").minicolors({
@@ -760,14 +639,7 @@ uiload = function () {
 		if (element === undefined || $(element).data("setpagetitle") == null) {
 			element = $("#application");
 		}
-		/*
-    var elements =  $(element).find('[data-setpagetitle]');
-    var setpagetitle = elements.last().data("setpagetitle");
-    if (!setpagetitle)
-    {
-		setpagetitle = $(element).data("setpagetitle");	
-	}
-    */
+
 		var setpagetitle = $(element).data("setpagetitle");
 		var titlepostfix = $("#application").data("titlepostfix");
 		var title = "";
@@ -869,12 +741,6 @@ uiload = function () {
 					});
 			},
 		});
-		/*
-    var container = link.attr("href");
-    container = $(container);
-    container.data("currenttab", currenttab); //me
-    $(".entity-tab-content").hide();
-    */
 
 		var entitydialog = link.closest(".entitydialog");
 		var entityshare = entitydialog.find(".entityshare");
@@ -1220,23 +1086,11 @@ uiload = function () {
 				form.find(".emneedselection").each(function () {
 					clicked.removeAttr("disabled");
 				});
-				//form.submit();
-				var targetdiv = form.data("targetdiv");
-				/*if ((typeof targetdiv) != "undefined") {
-					$(form).ajaxSubmit({
-						target : "#" + $.escapeSelector(targetdiv), 
-						data:data
-						
-					});
-				} else {
-					*/
 				$(form).trigger("submit");
-				//}
 				if (form.hasClass("autoclose")) {
 					closeemdialog(form.closest(".modal"));
 				}
 			} else if (url != undefined) {
-				//-- table clickpath
 				if (url == "") {
 					return true;
 				}
@@ -1338,8 +1192,6 @@ uiload = function () {
 
 		var tabletype = emselectable.data("tabletype"); //make this earlier?
 		if (tabletype == "subentity") {
-			var targetdiv = "";
-			var options = null;
 			var entityid = rowid;
 			if (entityid) {
 				var container = emselectable.closest(".entity-wraper");
@@ -1353,7 +1205,6 @@ uiload = function () {
 				if (!tabexists) {
 					var options1 = emselectable.data();
 					var targetcomponenthome = emselectable.data("targetcomponenthome");
-					var targetrendertype = emselectable.data("targetrendertype");
 					var clickurl =
 						targetcomponenthome + "/gridsample/preview/entity.html";
 					options1.oemaxlevel = 1;
@@ -1392,25 +1243,11 @@ uiload = function () {
 			targetdiv = emselectable.data("targetdiv");
 
 			var row = $(clicked.closest("tr"));
-			var rowid = row.attr("rowid");
 			clickurl = finddata(emselectable, "clickurl");
 			var targetdiv = finddata(emselectable, "targetdiv");
 			var options = emselectable.data();
 			options.id = row.attr("rowid");
 
-			/*
-		if (clickurl && clickurl != "") {
-			//Get everything from domadatacontext
-			options = findalldata(emselectable);
-			targetdiv = finddata(emselectable, "targetdiv");
-			if (!targetdiv) {
-				targetdiv = finddata(emselectable, "targetdivinner");
-			}
-			//options = row.data();
-			options.id = row.attr("rowid");
-			options.oemaxlevel =  finddata(emselectable, "oemaxlevel");
-		}
-		*/
 			if (targetdiv != "") {
 				jQuery.ajax({
 					url: clickurl,
@@ -1627,10 +1464,6 @@ uiload = function () {
 		return emdata.name;
 	}
 	function select2Selected(selectedoption) {
-		// "#list-" + foreignkeyid
-		// var id = container.closest(".select2-container").attr("id");
-		// id = "list-" + id.substring(5); //remove sid2_
-		// container.closest("form").find("#" + id ).val(emdata.id);
 		return selectedoption.name || selectedoption.text;
 	}
 

@@ -27,7 +27,7 @@ body.offcanvas-open {
 }
 @media (min-width: 992px) {
 	.container-fluid {
-		margin: 0 1%;
+		padding: 0 1%;
 	}
 }
 
@@ -41,7 +41,7 @@ body.offcanvas-open {
 		max-width: 1460px;
 	}
 	.container-fluid {
-		margin: 0 2%;
+		padding: 0 2%;
 	}
 }
 

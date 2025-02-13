@@ -16,9 +16,7 @@ $context.putPageValue("collectionid",$librarycol.getId() )
 #end
 
 <div class="project-header">
-    <div  
-        #ifnotnull($content.shades)data-shades="$content.shades"#end
-        #ifnotnull($content.bgcolor)data-bgcolor="$content.bgcolor"#end
+    <div
         #if($bannerurl)
             class="bg-white banner"
             style="background-image: url('$bannerurl')" 
