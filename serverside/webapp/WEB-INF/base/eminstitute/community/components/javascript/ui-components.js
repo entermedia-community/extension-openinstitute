@@ -3501,22 +3501,7 @@ uiload = function () {
 		}
 	});
 
-	lQuery(".copytoclipboard").livequery("click", function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		var btn = $(this);
-		var copytextcontainer = btn.data("copytext");
-		var copyText = $("#" + copytextcontainer);
-		copyText.select();
-		document.execCommand("copy");
-		var alertdiv = btn.data("targetdiv");
-		if (alertdiv) {
-			console.log(copyText);
-			$("#" + alertdiv)
-				.show()
-				.fadeOut(2000);
-		}
-	});
+
 
 	lQuery(".favclick").livequery("click", function (e) {
 		e.preventDefault();

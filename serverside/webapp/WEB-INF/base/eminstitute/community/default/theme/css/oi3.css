@@ -1917,8 +1917,9 @@ input.search-primary {
 	font-weight: bold;
 	font-style: italic;
 	padding: 0.25rem;
-
 	display: none;
+	position:absolute;
+	bottom: 0px;
 }
 
 .referrallink {

@@ -1020,6 +1020,12 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	text-align: center;
 }
 
+.chatterbox-editorarea {
+border: 1px solid #cccccc;
+border-bottom-left-radius: 12px;
+border-bottom-right-radius: 12px;
+}
+
 .chatterbox-write .chatterbox-text {
 	height: 60px;
 	width: 100%;
@@ -1031,28 +1037,45 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	background-color: #fff;
 	background-image: none;
 	background-clip: padding-box;
-	border: 1px solid #cccccc;
-	border-bottom-left-radius: 12px;
-	border-bottom-right-radius: 12px;
+	border: 1px solid #fff;
 }
 
-.chatterbox-write .chatter-send {
-	position: absolute;
+.chatterbox-write .chatterbox-text:focus {
+    border: 0;
+}
+
+.chatterbox-editactions {
+	right:0.5rem;
+	padding: 0.5rem 0.5rem 0 0;
 	bottom: 12px;
-	right: 0.95rem;
+	display: flex;
+}
+
+.chatterbox-write .chatter-btn {
 	border-radius: 8px;
 	background-color: #277371;
-	width: 88px;
 	color: #fff;
 	font-size: 1rem;
+}
+.chatterbox-write .chatter-btn:hover {
+	background-color: #1a4c4a;
+	color: #fff;
+}
+
+
+.chatterbox-write .chatter-send {
+	width: 88px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.chatterbox-write .chatter-send:hover {
-	background-color: #1a4c4a;
-	color: #fff;
+.chatterbox-write .chatter-attachfile {
+	margin-left:0.25rem;
+	width: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .chatterbox-write .btn-sm {
@@ -1067,6 +1090,13 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 .chatterbox-chat {
 	position: relative;
 }
+
+.attachfileonchat {
+	position: absolute;
+	top: -85px;
+	right: 2px;
+}
+
 
 .chatterbox-chat .goalstatus {
 	padding: 10px 12px;
@@ -1113,7 +1143,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 }
 
 .message-attach-box {
-	width: 250px;
+	width: 260px;
 	background-color: #fff;
 	float: right;
 	padding: 10px;
