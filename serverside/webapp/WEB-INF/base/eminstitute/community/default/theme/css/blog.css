@@ -1,0 +1,239 @@
+.blog-shadow {
+	box-shadow: 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
+		0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	border-radius: 16px;
+	overflow: hidden;
+}
+.blog-list-item {
+	background-color: #ffffff;
+	padding: 0.5rem 1rem 0.25rem;
+}
+.blog-list-item .dropdown-item:hover,
+.blog-list-item .dropdown-item:focus {
+	color: #000;
+	background-color: #f2f4f5;
+}
+
+.blog-list-item button.icon {
+	font-size: 14px;
+}
+.blog-credit {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+.blog-credit a {
+	color: #444444;
+}
+.blog-credit .blog-avatar {
+	border-radius: 12px;
+	height: 24px;
+	width: 24px;
+	background-color: #f2f4f5;
+	margin-right: 0.5rem;
+}
+.blog-avatar-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	overflow: hidden;
+	background-color: #f2f4f5;
+}
+.comment-avatar {
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	border-radius: 16px;
+}
+.blog-avatar a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 24px;
+	width: 24px;
+	overflow: hidden;
+	border-radius: 16px;
+}
+.comment-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.blog-body p {
+	font-size: 14px;
+	line-height: 20px;
+}
+h1.blog-title {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	font-weight: 700;
+	margin-top: 0.5rem;
+	margin-bottom: 0.75rem;
+}
+.icon {
+	color: #0e1a1c;
+	min-width: 32px;
+	height: 32px;
+	border-radius: 16px;
+	background-color: transparent;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icon span {
+	display: inline-block;
+	padding-left: 0.5rem;
+	line-height: 1;
+}
+.icon:hover {
+	background-color: #e2e7e9;
+}
+.icon:focus,
+.icon:active {
+	outline: none;
+	background-color: rgba(0, 0, 0, 0.16);
+}
+.blog-list {
+	max-width: 900px;
+	flex: 1;
+	margin: 0 auto;
+}
+
+hr.blog-divider {
+	margin: 0;
+	border: 0;
+	background-color: transparent;
+	border: 0;
+	border-bottom: 0.0625rem rgba(0, 0, 0, 0.1);
+}
+.blog-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+.blog-tags a.blog-tag {
+	background-color: #e4e4e4;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.75rem;
+	font-size: 0.75rem;
+	color: #1b1c1f;
+	text-decoration: none;
+	cursor: pointer;
+}
+a.blog-tag:hover {
+	background-color: #d4d4d4;
+}
+.blog-footer {
+	display: flex;
+	align-items: center;
+	margin: 1rem 0 0.75rem;
+}
+.blog-footer .icon {
+	height: auto;
+	background-color: #eaedef;
+	margin-right: 0.5rem;
+	padding: 0.5rem 0.75rem;
+	line-height: 1;
+	font-size: 14px;
+}
+.blog-footer .icon:hover {
+	background-color: #e2e7e9;
+}
+.blog-comments {
+	margin-bottom: -0.25rem;
+	padding: 0.25rem 1rem;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+}
+.blog-media .thumbimagecontainer {
+	overflow: hidden;
+}
+textarea.blog-comments-input {
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	border: 0.0625rem solid #e4e4e4;
+	margin-top: 0.25rem;
+	margin-bottom: 1rem;
+	font-size: 14px;
+	resize: none;
+}
+.blog-comment {
+	margin: 8px 0;
+}
+.blog-comment-content {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	color: #444444;
+	margin-left: 24px;
+	padding: 8px 12px;
+	border-radius: 16px;
+	background-color: #f2f4f5;
+}
+.blog-community {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5rem;
+}
+.blog-community-img {
+	width: 24px;
+	height: 24px;
+	border-radius: 23px;
+	overflow: hidden;
+	object-fit: contain;
+	background-color: #f2f4f5;
+}
+.blog-community-header {
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	color: #1b1c1f;
+}
+.blog-list-container a:hover {
+	color: inherit !important;
+}
+.blog-list-container {
+	max-width: 1460px;
+	margin: 0 auto;
+	color: #000;
+}
+.blog-post {
+	margin-bottom: 3rem;
+}
+
+.blog-form-container {
+	background-color: #ffffff;
+	margin: 2rem;
+}
+.blog-form-container input.title-input {
+	flex: 1;
+	margin-left: 8px;
+	padding: 8px 12px;
+	border-radius: 1.5rem;
+	border: 0.0625rem solid #e4e4e4;
+	font-weight: 600;
+	color: #353535;
+}
+.description-input {
+	width: 100%;
+	padding: 8px;
+	min-height: 300px;
+	border: 0.0625rem solid #e4e4e4;
+	border-radius: 0.5rem;
+	background: white;
+}
+.blog-form-avatar img {
+	width: 46px;
+	height: 46px;
+	border-radius: 23px;
+	overflow: hidden;
+	background-color: #f2f4f5;
+}

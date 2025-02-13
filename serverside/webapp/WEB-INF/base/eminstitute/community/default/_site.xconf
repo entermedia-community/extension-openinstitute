@@ -23,6 +23,8 @@
 	  <inner-layout>${communityhome}/innerlayout.html</inner-layout>
 	  
 	  <property name="xmledithome">${communityhome}/components/xml</property>
+
+  <style id="blog" href="${communityhome}/theme/css/blog.css"/>
 	
 	<permission name="openeditdirectedit">
     <group id="administrators"/>
