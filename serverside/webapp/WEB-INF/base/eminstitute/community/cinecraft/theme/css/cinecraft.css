@@ -110,17 +110,19 @@ h6 {
 	--contrast-color: #ffffff;
 	color: var(--default-color);
 	background-color: var(--background-color);
-	padding: 10px 0;
+	padding: 8px 0;
 	transition: all 0.5s;
 	z-index: 997;
 }
 .header .logo,
 footer .logo {
 	line-height: 1;
+	/* height: 55px; */
+	width: 150px;
 }
 .header .logo img,
 footer .logo img {
-	max-height: 36px;
+	/* max-height: 36px; */
 	margin-right: 8px;
 }
 .header .logo h1,
