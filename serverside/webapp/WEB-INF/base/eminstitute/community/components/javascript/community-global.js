@@ -1,11 +1,8 @@
 $(document).ready(function () {
-	
-	var appdiv = $('#application');
-			var apphome = appdiv.data('apphome');
-			var finderhome = appdiv.data('finderhome');
-			var home = appdiv.data('home') + apphome;
-			
-			
+	var appdiv = $("#application");
+	var apphome = appdiv.data("apphome");
+	var finderhome = appdiv.data("finderhome");
+
 	$("#userOffcanvas").on("show.bs.offcanvas", function () {
 		$("body").addClass("offcanvas-open");
 		$(".community-layout").addClass("offcanvas-open");
@@ -216,8 +213,6 @@ $(document).ready(function () {
 			});
 		}
 	});
-	
-	
 
 	$(window).on("resize", function () {
 		if (window.innerWidth >= 768) {
@@ -240,15 +235,13 @@ $(document).ready(function () {
 			});
 		}
 	});
-	
-		
-	
+
 	lQuery(".pickemoticon").livequery(function () {
-			//Load div
-			var input = $(this);
-			input.click(function () {
-				$(".emoticonmenu").hide(); //Hide old ones
-			});
+		//Load div
+		var input = $(this);
+		input.click(function () {
+			$(".emoticonmenu").hide(); //Hide old ones
+		});
 
 		input.hover(function () {
 			var isattached = input.data("isattached");
@@ -309,7 +302,7 @@ $(document).ready(function () {
 		if ($(".__top-flair").length > 0) {
 			offset = 46;
 		}
-		if ($("#application")[0].scrollHeight - offset < $(window).height()) {
+		if ($("#application")[0].scrollHeight - offset <= $(window).height()) {
 			$(this).css({
 				position: "fixed",
 				bottom: 0,
@@ -317,76 +310,67 @@ $(document).ready(function () {
 			});
 		}
 	});
-	
-	
-	lQuery("form.autosubmit").livequery(function () {
-			var form = $(this);
 
-			$("select", form).change(function (e) {
-				e.stopPropagation();
-				$(form).trigger("submit");
-			});
-			/* Todo: use onblur
+	lQuery("form.autosubmit").livequery(function () {
+		var form = $(this);
+
+		$("select", form).change(function (e) {
+			e.stopPropagation();
+			$(form).trigger("submit");
+		});
+		/* Todo: use onblur
 			$("input", form).on("focusout", function (event) {
 				$(form).trigger("submit");
 			});
 			*/
-			$("input", form).on("keyup", function (e) {
-				//Enter Key handled by default the submit
-				if (e.keyCode == 13) {
-					return;
-				}
-				e.preventDefault();
-				e.stopPropagation();
-				$(form).trigger("submit");
-			});
-			$(
-				'input[type="file"],input[name="date.after"],input[type="checkbox"]',
-				form
-			).on("change", function (e) {
-				e.stopPropagation();
-				$(form).trigger("submit");
-			});
-		});
-		
-		
-		lQuery(".copytoclipboard").livequery("click", function (e) {
+		$("input", form).on("keyup", function (e) {
+			//Enter Key handled by default the submit
+			if (e.keyCode == 13) {
+				return;
+			}
 			e.preventDefault();
 			e.stopPropagation();
-			var btn = $(this);
-			var copytextcontainer = btn.data("copytext");
-			var copyText = $("#" + copytextcontainer);
-			copyText.select();
-			document.execCommand("copy");
-			var alertdiv = btn.data("targetdiv");
-			if (alertdiv) {
-				console.log(copyText);
-				$("#" + alertdiv)
-					.show()
-					.fadeOut(2000);
-			}
+			$(form).trigger("submit");
 		});
-		
-		
+		$(
+			'input[type="file"],input[name="date.after"],input[type="checkbox"]',
+			form
+		).on("change", function (e) {
+			e.stopPropagation();
+			$(form).trigger("submit");
+		});
+	});
+
+	lQuery(".copytoclipboard").livequery("click", function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		var btn = $(this);
+		var copytextcontainer = btn.data("copytext");
+		var copyText = $("#" + copytextcontainer);
+		copyText.select();
+		document.execCommand("copy");
+		var alertdiv = btn.data("targetdiv");
+		if (alertdiv) {
+			console.log(copyText);
+			$("#" + alertdiv)
+				.show()
+				.fadeOut(2000);
+		}
+	});
+
 	//open assets on finder on new window
-	lQuery('a.stackedplayer').livequery('click',function(e)
-	{
+	lQuery("a.stackedplayer").livequery("click", function (e) {
 		e.preventDefault();
 		var link = $(this);
 		var assetid = link.data("assetid");
-		
-		var url = finderhome+"/?assetid="+assetid;
-		
-		window.open(url, '_blank').focus();
-		
+
+		var url = finderhome + "/?assetid=" + assetid;
+
+		window.open(url, "_blank").focus();
+
 		return false;
 	});
-	
-	
-	
-	
 }); //document (ready)
-
 
 function isInViewport(cell) {
 	const rect = cell.getBoundingClientRect();
@@ -395,5 +379,3 @@ function isInViewport(cell) {
 		rect.top <= (window.innerHeight || document.documentElement.clientHeight);
 	return isin;
 }
-
-
