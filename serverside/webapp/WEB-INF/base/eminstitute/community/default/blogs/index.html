@@ -1,55 +1,18 @@
 #if( $user.oe_edit_mode == "postedit" )
-<div class="row">
-  <div
-    class="oe-editable bodywebsite"
-    id="edit-$postdata.id"
-    data-dataid="$!postdata.id"
-    data-field="maincontent"
-    data-searchtype="postdata"
-    data-viewtype="html"
-  >
-    $!postdata.maincontent
-  </div>
-  <div class="editpostbtn">
-    <a
-      href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true"
-      class="btn btn-xs btn-light"
-      >Edit Post</a
-    >
-  </div>
-</div>
-
-#end #set( $communitytagid = $context.getPageName())
-$context.putPageValue("curentcommunitytagid", $communitytagid)
-<header>
-  <img src="${communitylink}/theme/images/oi-home-banner.svg" />
-  <h1 id="type-out">Fundraising, Accountability and Transparency</h1>
-  <a
-    href="${communitylink}/browse/add/addnew.html?libraryid=collectives"
-    class="emdialog proposal-btn"
-  >
-    <i class="fa-solidfa-plus me-1"></i>
-    [[Create a Project]]
-  </a>
-  <button class="scroll-btn" id="sc-btn">
-    <div class="scroll-down" role="button">
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-      <span>Explore</span>
+  <div class="row">
+    <div class="oe-editable bodywebsite"
+      id="edit-$postdata.id"
+      data-dataid="$!postdata.id"
+      data-field="maincontent"
+      data-searchtype="postdata"
+      data-viewtype="html">
+      $!postdata.maincontent
     </div>
-  </button>
-</header>
-
-
-<div class="container-fluid">
-	<div class="d-flex justify-content-center flex-wrap">
-		<div class="d-flex justify-content-end align-items-start me-4 pt-3">
-			$pages.include("${communityhome}/blogs/right-sidebar.html",$context)
-		</div>
-		<div class="blog-list">
-			$pages.include("${communityhome}/blogs/channelfeed.html",$context)
-		</div>
-		<div></div>
-	</div>
-</div>
+    <div class="editpostbtn">
+      <a href="${sitelink}/emshare2/views/modules/postdata/edit/edit.html?id=$!{postdata.id}&viewid=postdatageneral&viewpath=postdata/postdatageneral&searchtype=postdata&detailsreadonly=false&preview=true"
+        class="btn btn-xs btn-light">
+        Edit Post
+      </a>
+    </div>
+  </div>
+#end
