@@ -2,8 +2,7 @@
 
 <page>
   <property name="catalogid">${siteid}/catalog</property>
-  <property name="themeid">emsharedefault</property>
-  <property name="fallbackdirectory">/WEB-INF/base/mediadb</property>
+  <property name="fallbackdirectory">/WEB-INF/base/finder/mediadb</property>
   <property name="appmodule">asset</property>
   <property name="applicationid">${siteid}/mediadb</property>
   <property name="allowguestregistration">true</property>
