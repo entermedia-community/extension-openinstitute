@@ -66,7 +66,8 @@ main.container {
 	margin: 0 auto;
 	text-align: center;
 }
-#privateLibraries {
+#privateLibraries,
+#communityLibraries {
 	display: none;
 }
 #savedLibraries {

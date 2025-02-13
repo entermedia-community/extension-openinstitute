@@ -15,34 +15,25 @@
             $pages.include("${communityhome}/components/quicksearch/navbar.html")
           </li>
           <li class="nav-item">
-            <a class="nav-link #if($content.oisection == 'project') active #end" href="$communitylink/projects/">
+            <a class="nav-link #if($content.oisection == 'project') active #end" href="/projects/">
               Members
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link #if($content.oisection == 'blogs') active #end" href="$communitylink/blogs/">
+            <a class="nav-link #if($content.oisection == 'blogs') active #end" href="/blogs/">
               Blogs
             </a>
           </li> 
           <li class="nav-item">
-            <a class="nav-link #if($content.oisection == 'blogs') active #end" href="$communitylink/contact/">
+            <a class="nav-link #if($content.oisection == 'blogs') active #end" href="/contact/">
               Contact
             </a>
-          </li> 
-          #ifnull($user)
+          </li>
           <li class="nav-item">
-            <a class="nav-link #if($content.oisection == 'login') active #end" href="$communitylink/find/">
-              <i class="me-1 fs-small far fa-user"></i> Login / Register
-            </a>
-          </li> 
-          #end
-          #ifnotnull($user)
-          <li class="nav-item">
-            <a class="nav-link" href="$!{communitylink}/authentication/logout.html" title="[[Logout]]">
-              <i class="ml-1 fs-small fas fa-sign-out-alt"></i>
+            <a class="nav-link btn-primary rounded" href="/find/?entermedia.key=adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc">
+              Open App <i class="ms-1 fs-small fas fa-sign-in-alt"></i> 
             </a>
           </li>
-          #end
         </ul>
       </div>
     </div>
