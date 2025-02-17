@@ -71,7 +71,7 @@ body {
 }
 #application {
 	height: auto !important;
-	min-height: calc(100vh - 84px);
+	min-height: calc(100vh - 72px);
 }
 
 .w-25 {
