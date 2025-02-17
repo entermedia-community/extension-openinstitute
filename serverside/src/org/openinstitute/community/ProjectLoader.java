@@ -214,9 +214,9 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 		}
 		else {
 			//log.info("Couldn't find Collection: " + secondpart);
-
-			
 		}
+		if( log.isDebugEnabled() )
+			log.debug("Couldn't find any content: Orinal path: " + requestedPath + " Community Home:" + communityhome );
 		return null;
 	}
 
