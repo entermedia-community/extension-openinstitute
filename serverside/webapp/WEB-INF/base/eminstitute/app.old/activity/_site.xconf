@@ -20,12 +20,14 @@
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/> 
 	
 	<style id="tasks" href="/${applicationid}/collective/goals/goals.css" />
-    <script id="goals" src="/${applicationid}/collective/goals/goals.js"/>
+	<script id="goals" src="/${applicationid}/collective/goals/goals.js"/>
 
- 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<style id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.css" />
+	<script id="twemoji" src="/${applicationid}/components/javascript/twemoji/twemoji.js" defer="true" />
 	
-  	<path-action name="ChatModule.getChatManager"/>
+	<path-action name="ChatModule.getChatManager"/>
 
-  	<inner-layout min-width="1024">/${applicationid}/activity/messagelayout.html</inner-layout>
+	<inner-layout min-width="1024">/${applicationid}/activity/messagelayout.html</inner-layout>
   
 </page>

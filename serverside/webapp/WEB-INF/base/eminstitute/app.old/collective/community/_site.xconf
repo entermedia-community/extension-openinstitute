@@ -24,6 +24,8 @@
     <script id="goals" src="/${applicationid}/collective/community/goals/goals.js"/>
 
 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<style id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.css" />
+	<script id="twemoji" src="/${applicationid}/components/javascript/twemoji/twemoji.js" defer="true" />
 	
 	<path-action name="ProjectModule.loadCollection" />
 	

@@ -14,10 +14,12 @@
 	
 
 	<!-- move to exact page where needed -->
- 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<style id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.css" />
+	<script id="twemoji" src="/${applicationid}/components/javascript/twemoji/twemoji.js" defer="true" />
    
    
-    <path-action name="Admin.loadPermissions"/>
+	<path-action name="Admin.loadPermissions"/>
 	
 	<path-action name="DataPermissionModule.loadCustomModulePermissions">
 		<property name="parameterid">collectionid</property>
