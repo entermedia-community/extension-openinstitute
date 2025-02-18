@@ -10,6 +10,7 @@
 	<inner-layout>${communityhome}/userchat/chatlayout.html</inner-layout>
 	
 	<script id="chatterbox" src="/${applicationid}/components/chatterbox/chatterbox.js" />
+	<script id="twemoji" src="${communityhome}/components/javascript/twemoji/twemoji.js" defer="true" />
 	
 	<property name="module">librarycollection</property>
 	
