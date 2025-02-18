@@ -18,7 +18,7 @@
 	<inner-layout>${communityhome}/account/layout.html</inner-layout>
 	
 	<script id="chatterbox" src="${communityhome}/components/chatterbox/chatterbox.js" />
-	<style id="chatterbox" src="${communityhome}/components/chatterbox/chatterbox.css" />
+	<style id="chatterbox" href="${communityhome}/components/chatterbox/chatterbox.css" />
 	<script id="twemoji" src="${communityhome}/components/javascript/twemoji/twemoji.js" defer="true" />
 	
 	<permission name="viewmyaccount">
