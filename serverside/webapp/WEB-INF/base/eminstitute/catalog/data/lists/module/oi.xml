@@ -1,18 +1,6 @@
 
 <root>
 
-  <data id="entityband" autocreatedeep="0" showonsearch="true" securityenabled="false" ordering="1" isentity="true" enableuploading="true" showonnav="true"
-   autocreateentities="false" uploadsourcepath="Bands/${entityband.name}"> 
-    <name> 
-      <language id="en"><![CDATA[Bands]]></language> 
-    </name> 
-  </data>  
-  <data id="entityrental" autocreatedeep="0" showonsearch="true" securityenabled="false" ordering="1" isentity="true" enableuploading="true" 
-  showonnav="true"  autocreateentities="false" uploadsourcepath="Renals/${entityrenatal.name}"> 
-    <name> 
-      <language id="en"><![CDATA[Rental Property]]></language> 
-    </name> 
-  </data>  
 
   <data id="user">
     <name><![CDATA[Users]]></name>

@@ -21,7 +21,7 @@
   </data>
 
   
-    <data id="entityproduct" showonsearch="true" securityenabled="false" ordering="3" modulerendertype="entity" isentity="true" showonnav="false" moduleicon="product"> 
+    <data id="entityproduct" showonsearch="true" securityenabled="false" ordering="3" modulerendertype="entity"  showonnav="false" moduleicon="product"> 
     <name><![CDATA[Entity: Products]]></name> 
   </data>  
  
