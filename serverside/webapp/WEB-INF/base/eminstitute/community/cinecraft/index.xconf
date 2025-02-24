@@ -1,3 +1,4 @@
 <page>
 	<property name="oisection">home</property>
+	<property name="editable">true</property>
 </page>
