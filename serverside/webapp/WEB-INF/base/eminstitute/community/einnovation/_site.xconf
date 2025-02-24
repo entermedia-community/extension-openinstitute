@@ -6,6 +6,8 @@
 
 	<property name="communitytagcategory">einnovation</property>
 
+	<property name="editable">false</property>
+
 	<script id="jquery-ui-i18n" cancel="true" src="/${applicationid}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
 	<script id="jquery-form" src="/${applicationid}/components/javascript/jquery.form.js"/>
 	<script id="jquery-validate" src="/${applicationid}/components/javascript/validation/jquery.validate.js"/>
