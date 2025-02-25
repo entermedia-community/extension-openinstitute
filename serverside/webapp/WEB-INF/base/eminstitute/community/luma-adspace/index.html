@@ -2,21 +2,7 @@
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row align-items-center">
       <div class="col-lg-6">
-        <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-          <h1 class="mb-4">
-            <span class="text-primary">Client Content Portal</span>
-            <br />
-            Luma AdSpace
-          </h1>
-
-          <p class="mb-4 mb-md-5 text-muted">
-            We don’t just create ads—we craft brand stories that captivate, engage, and convert. Our team of creative strategists, storytellers, and digital experts design powerful campaigns that leave a lasting impact. 
-          </p>
-
-          <div class="hero-buttons">
-            <a href="/find/" class="btn btn-primary me-0 me-sm-2 mx-1"><i class="far fa-user me-1"></i> Log In</a>
-          </div>
-        </div>
+        $pages.include("./index-components/hero.html")
       </div>
 
       <div class="col-lg-6">
@@ -29,47 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="row stats-row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="500">
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="bi bi-award"></i>
-          </div>
-          <div class="stat-content">
-            <h4>Creative Excellence</h4>
-            <p class="mb-0">
-              We craft visually stunning, emotionally engaging, and strategically driven ads that make your brand unforgettable.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="bi bi-graph-up"></i>
-          </div>
-          <div class="stat-content">
-            <h4>Results-Driven Approach</h4>
-            <p class="mb-0">
-              Every campaign is backed by data, ensuring maximum reach, engagement, and ROI for your brand.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="bi bi-signpost-2"></i>
-          </div>
-          <div class="stat-content">
-            <h4>Tailored Strategies</h4>
-            <p class="mb-0">
-              No cookie-cutter solutions—just custom advertising that aligns perfectly with your brand’s goals and audience.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    $pages.include("./index-components/section2.html")
   </div>
 </section>
 
@@ -77,44 +23,10 @@ $pages.include("./portfolio/index.html")
 
 <section id="about" class="about section">
   <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="container section-title pb-4">
-      <h2>Services</h2>
-    </div>
+    $pages.include("./index-components/section3header.html")
     <div class="row gy-4 align-items-center justify-content-between">
       <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
-        <h2 class="about-title">Elevating Brands, Driving Results</h2>
-        <p class="about-description">
-          At Luma AdSpace, we turn ideas into impactful campaigns that drive results. From creative storytelling to data-driven marketing, we offer a full suite of services to elevate your brand and connect with your audience. Here’s how we can help:
-        </p>
-
-        <div class="row feature-list-wrapper">
-          <div class="col-md-6">
-            <ul class="feature-list">
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Brand Strategy & Positioning
-              </li>
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Creative Advertising
-              </li>
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Video Production
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <ul class="feature-list">
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Social Media Marketing
-              </li>
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Data-driven Campaigns
-              </li>
-              <li>
-                <i class="bi bi-check-circle-fill"></i> Influencer & Brand Partnerships
-              </li>
-            </ul>
-          </div>
-        </div>
+        $pages.include("./index-components/section3.html")
       </div>
 
       <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
@@ -142,69 +54,17 @@ $pages.include("./portfolio/index.html")
 </section>
 
 <section id="features" class="features section">
-
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Features</h2>
-    <p>
-      Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-      consectetur velit
-    </p>
-  </div>
-
-
+  $pages.include("./index-components/section4header.html")
   <div class="container">
     <div class="d-flex justify-content-center">
-      <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
-        <li class="nav-item">
-          <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
-            <h4>Modisit</h4>
-          </a>
-        </li>
-
-
-        <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
-            <h4>Praesenti</h4>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
-            <h4>Explica</h4>
-          </a>
-        </li>
-
-      </ul>
+      $pages.include("./index-components/section4nav.html")
     </div>
 
     <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
       <div class="tab-pane fade active show" id="features-tab-1">
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-            <h3>Voluptatem dignissimos provident</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
-            <ul>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Duis aute irure dolor in reprehenderit in voluptate
-                  velit.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in
-                  voluptate trideta storacalaperda mastiro dolore eu
-                  fugiat nulla pariatur.</span>
-              </li>
-            </ul>
+            $pages.include("./index-components/section4-one.html")
           </div>
           <div class="col-lg-6 order-1 order-lg-2 text-center">
             <img src="${communityhome}/images/undraw_collaborators_rgw4.svg" alt="" class="img-fluid" />
@@ -216,36 +76,7 @@ $pages.include("./portfolio/index.html")
       <div class="tab-pane fade" id="features-tab-2">
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-            <h3>Neque exercitationem debitis</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
-            <ul>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Duis aute irure dolor in reprehenderit in voluptate
-                  velit.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Provident mollitia neque rerum asperiores dolores quos
-                  qui a. Ipsum neque dolor voluptate nisi sed.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in
-                  voluptate trideta storacalaperda mastiro dolore eu
-                  fugiat nulla pariatur.</span>
-              </li>
-            </ul>
+            $pages.include("./index-components/section4-two.html")
           </div>
           <div class="col-lg-6 order-1 order-lg-2 text-center">
             <img src="${communityhome}/images/undraw_instant-support_oav0.svg" alt="" class="img-fluid" />
@@ -257,29 +88,7 @@ $pages.include("./portfolio/index.html")
       <div class="tab-pane fade" id="features-tab-3">
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-            <h3>Voluptatibus commodi accusamu</h3>
-            <ul>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Duis aute irure dolor in reprehenderit in voluptate
-                  velit.</span>
-              </li>
-              <li>
-                <i class="bi bi-check2-all"></i>
-                <span>Provident mollitia neque rerum asperiores dolores quos
-                  qui a. Ipsum neque dolor voluptate nisi sed.</span>
-              </li>
-            </ul>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
+            $pages.include("./index-components/section4-three.html")
           </div>
           <div class="col-lg-6 order-1 order-lg-2 text-center">
             <img src="${communityhome}/images/undraw_upload_cucu.svg" alt="" class="img-fluid" />
@@ -295,11 +104,7 @@ $pages.include("./portfolio/index.html")
   <div class="container">
     <div class="row">
       <div class="col-lg-5" data-aos="fade-up">
-        <h2 class="faq-title">Frequently Asked Questions</h2>
-        <p class="faq-description">
-          Maecenas tempus tellus eget condimentum rhoncus sem quam semper
-          libero sit amet adipiscing sem neque sed ipsum.
-        </p>
+        $pages.include("./index-components/faq-header.html")
         <div class="faq-arrow d-none d-lg-block" data-aos="fade-up" data-aos-delay="200">
           <svg class="faq-arrow" width="200" height="211" viewBox="0 0 200 211" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -311,98 +116,7 @@ $pages.include("./portfolio/index.html")
       </div>
 
       <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
-        <div class="faq-container">
-          <div class="faq-item faq-active">
-            <h3>What services does your agency offer?</h3>
-            <div class="faq-content">
-              <p>
-                We specialize in a wide range of advertising and marketing
-                services, including digital marketing, social media
-                management, brand strategy, content creation, SEO, PPC
-                campaigns, influencer marketing, and traditional
-                advertising such as print, TV, and radio.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3>
-              How do you determine the best marketing strategy for my
-              business?
-            </h3>
-            <div class="faq-content">
-              <p>
-                We start with a thorough consultation to understand your
-                brand, target audience, goals, and industry landscape.
-                Based on this analysis, we create a customized marketing
-                strategy designed to maximize your reach and ROI.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3>What industries do you work with?</h3>
-            <div class="faq-content">
-              <p>
-                Our agency serves clients across various industries,
-                including retail, e-commerce, healthcare, technology, real
-                estate, hospitality, and more. We tailor our approach to
-                meet the unique needs of each industry.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3>How do you measure the success of a campaign?</h3>
-            <div class="faq-content">
-              <p>
-                We use key performance indicators (KPIs) such as
-                engagement rates, conversion rates, website traffic,
-                return on ad spend (ROAS), and brand awareness metrics to
-                track and evaluate the effectiveness of each campaign.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3>
-              What is the typical timeline for a marketing campaign?
-            </h3>
-            <div class="faq-content">
-              <p>
-                The timeline varies based on the campaign type and
-                objectives. A social media campaign may take a few weeks
-                to launch, while a full-scale brand campaign may require
-                months of planning and execution. We provide a clear
-                timeline during the strategy phase.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-
-          <div class="faq-item">
-            <h3>How much does it cost to work with your agency?</h3>
-            <div class="faq-content">
-              <p>
-                Pricing depends on the scope of services, campaign
-                complexity, and duration. We offer flexible packages
-                tailored to your budget and goals. Contact us for a
-                consultation to get a detailed quote.
-              </p>
-            </div>
-            <i class="faq-toggle bi bi-chevron-right"></i>
-          </div>
-          <!-- End Faq item-->
-        </div>
+        $pages.include("./index-components/faqs.html")
       </div>
     </div>
   </div>
