@@ -45,6 +45,7 @@ body {
 	background-color: #fff;
 	font-weight: 500;
 	overflow-x: hidden;
+	height: unset;
 }
 .bg-dark {
 	background-color: #3b3d50 !important;
