@@ -297,20 +297,6 @@ $(document).ready(function () {
 		});
 	});
 
-	lQuery("footer").livequery(function () {
-		var offset = 0;
-		if ($(".__top-flair").length > 0) {
-			offset = 46;
-		}
-		if ($("#application")[0].scrollHeight - offset <= $(window).height()) {
-			$(this).css({
-				position: "fixed",
-				bottom: 0,
-				width: "100%",
-			});
-		}
-	});
-
 	lQuery("form.autosubmit").livequery(function () {
 		var form = $(this);
 
@@ -370,6 +356,29 @@ $(document).ready(function () {
 
 		return false;
 	});
+
+	// start observing a DOM node
+	function handleFooterPosition() {
+		var offset = 0;
+		if ($(".__top-flair").length > 0) {
+			offset = 46;
+		}
+		if (document.body.clientHeight + offset < $(window).height()) {
+			$("footer").css({
+				position: "fixed",
+				bottom: 0,
+				width: "100%",
+			});
+		} else {
+			$("footer").css({
+				position: "relative",
+				bottom: "auto",
+			});
+		}
+	}
+	handleFooterPosition();
+	var resizeObserver = new ResizeObserver(handleFooterPosition);
+	resizeObserver.observe(document.body);
 }); //document (ready)
 
 function isInViewport(cell) {

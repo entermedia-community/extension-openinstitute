@@ -1,7 +1,7 @@
-/* emfrontent2 */
-/*Color*/
 body {
 	background-color: #d5d5d5;
+	font-size: 0.9rem;
+	height: unset;
 }
 #header .navlinks,
 #header .dropdown-menu,
@@ -318,9 +318,7 @@ ul.list-group.list-group-hover li:hover,
 }
 
 /*Bootsrap Overwrites*/
-body {
-	font-size: 0.9rem;
-}
+
 a {
 	outline: 0;
 }
@@ -667,8 +665,6 @@ select.form-control + .select2-container {
 }
 
 /*Main Columns*/
-html,
-body,
 #application {
 	height: 100%;
 }
