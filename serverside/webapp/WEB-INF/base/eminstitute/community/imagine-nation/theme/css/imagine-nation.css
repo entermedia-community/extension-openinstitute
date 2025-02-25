@@ -26,6 +26,7 @@ body {
 	background-color: var(--lightGrey);
 	font-family: var(--familyRoboto);
 	line-height: 1.6;
+	height: unset;
 }
 ul {
 	margin: 0;
@@ -33,8 +34,12 @@ ul {
 	list-style-type: none;
 }
 a {
+	color: var(--darkPurple);
 	text-decoration: none;
 	outline-color: var(--yellow);
+}
+a:hover {
+	color: var(--pink);
 }
 /* Header */
 .header {

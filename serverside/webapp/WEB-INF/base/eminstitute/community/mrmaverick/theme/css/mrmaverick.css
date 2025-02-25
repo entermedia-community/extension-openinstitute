@@ -19,6 +19,7 @@ body {
 	background-color: var(--primary-color-dark-blue-2);
 	color: var(--neutral-color-white);
 	font-family: var(--font-body);
+	height: unset;
 }
 h1,
 h2,
