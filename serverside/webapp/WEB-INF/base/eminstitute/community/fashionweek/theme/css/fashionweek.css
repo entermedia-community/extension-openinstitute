@@ -12,6 +12,7 @@ body {
 	font-weight: normal;
 	overflow-x: hidden;
 	background-color: #fff;
+	height: unset;
 }
 h1,
 h2,
