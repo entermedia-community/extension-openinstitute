@@ -9,276 +9,40 @@
     </video>
 
     <div class="container">
-      <div
-        class="row justify-content-center text-center"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        <div class="col-lg-8">
-          <h2>We craft videos that bring your vision to life</h2>
-          <p>From concept to final cut, we handle it all—filming, editing, motion graphics, and more—so you can focus on your story.</p>
-        </div>
-      </div>
-      #set($keypoints = [
-        ["<strong>Full-Service Production</strong> &mdash; From script to final edit, we handle everything.", "camera-reels"],
-        ["<strong>Cinematic Quality</strong> &mdash; Stunning visuals with pro-level filming and editing.", "film"],
-        ["<strong>Engaging Storytelling</strong> &mdash; Videos that connect, captivate, and convert.", "people"],
-        ["<strong>Fast Turnaround</strong> &mdash; High-quality results, delivered on time.", "clock-history"]
-      ])
-      <div
-        class="row gy-4 mt-5 justify-content-center"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        #foreach($keypoint in $keypoints)
-          <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon-box">
-              <i class="bi bi-${keypoint[1]}"></i>
-              <p>$keypoint[0]</p>
-            </div>
-          </div>
-        #end
-        
-      </div>
+      $pages.include("./index-components/hero.html")
+      $pages.include("./index-components/section2.html")
     </div>
   </section>
   
-
-  
   <section id="features" class="features section">
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Features</h2>
-      <p>Check our Features</p>
-    </div>
+    $pages.include("./index-components/section3header.html")
     <div class="container">
       <div class="row gy-4">
-        <div
-          class="features-image col-lg-4"
+        <div class="features-image col-lg-4"
           data-aos="fade-up"
           data-aos-delay="100"
         >
           <img src="${communityhome}/images/cineft.svg" alt="" />
         </div>
         <div class="col-lg-8">
-          <div
-            class="features-item d-flex ps-0 ps-lg-3 pt-4 pt-lg-0"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <i class="bi bi-archive flex-shrink-0"></i>
-            <div>
-              <h4>Access a vast collection of pre-organized video project folders</h4>
-              <ul>
-                <li>Browse, preview, and download full project files</li>
-                <li>Cloud-based storage, accessible anywhere</li>
-                <li>Compatible with all major video editing software</li>
-              </ul>
-            </div>
-          </div>
-          
-
-          <div
-            class="features-item d-flex mt-5 ps-0 ps-lg-3"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <i class="bi bi-basket flex-shrink-0"></i>
-            <div>
-              <h4>Auto-generate, translate, and edit subtitles</h4>
-              <ul>
-                <li>AI-powered speech-to-text transcription</li>
-                <li>Real-time editing & formatting tools</li>
-                <li>Export subtitles in SRT, VTT, and other formats</li>
-              </ul>
-            </div>
-          </div>
-          
-
-          <div
-            class="features-item d-flex mt-5 ps-0 ps-lg-3"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <i class="bi bi-broadcast flex-shrink-0"></i>
-            <div>
-              <h4>Tag, annotate, and organize video clips effortlessly</h4>
-              <ul>
-                <li>Frame-by-frame navigation</li>
-                <li>Add metadata, keywords, and markers</li>
-                <li>Sync tags with subtitles for smooth editing</li>
-              </ul>
-            </div>
-          </div>
-          
-
-          <div
-            class="features-item d-flex mt-5 ps-0 ps-lg-3"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <i class="bi bi-camera-reels flex-shrink-0"></i>
-            <div>
-              <h4>Work smarter with your team</h4>
-              <ul>
-                <li>Multi-user access & shared workspaces</li>
-                <li>Version control & project history</li>
-                <li>Seamless cloud syncing</li>
-              </ul>
-            </div>
-          </div>
-          
+          $pages.include("./index-components/section3.html")
         </div>
       </div>
     </div>
   </section>
-  
-
   
   <section id="services" class="services section">
     
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Services</h2>
-      <p>Check our Services</p>
-    </div>
+    $pages.include("./index-components/section4header.html")
 
     <div class="container">
-      <div class="row gy-4">
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-activity"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Nesciunt Mete</h3>
-            </a>
-            <p>
-              Provident nihil minus qui consequatur non omnis maiores. Eos
-              accusantium minus dolores iure perferendis tempore et
-              consequatur.
-            </p>
-          </div>
-        </div>
-        
-
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-broadcast"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Eosle Commodi</h3>
-            </a>
-            <p>
-              Ut autem aut autem non a. Sint sint sit facilis nam iusto
-              sint. Libero corrupti neque eum hic non ut nesciunt dolorem.
-            </p>
-          </div>
-        </div>
-        
-
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-easel"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Ledo Markt</h3>
-            </a>
-            <p>
-              Ut excepturi voluptatem nisi sed. Quidem fuga consequatur.
-              Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.
-            </p>
-          </div>
-        </div>
-        
-
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-bounding-box-circles"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Asperiores Commodit</h3>
-            </a>
-            <p>
-              Non et temporibus minus omnis sed dolor esse consequatur.
-              Cupiditate sed error ea fuga sit provident adipisci neque.
-            </p>
-            <a href="service-details.html" class="stretched-link"></a>
-          </div>
-        </div>
-        
-
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-calendar4-week"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Velit Doloremque</h3>
-            </a>
-            <p>
-              Cumque et suscipit saepe. Est maiores autem enim facilis ut
-              aut ipsam corporis aut. Sed animi at autem alias eius labore.
-            </p>
-            <a href="service-details.html" class="stretched-link"></a>
-          </div>
-        </div>
-        
-
-        <div
-          class="col-lg-4 col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="600"
-        >
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-chat-square-text"></i>
-            </div>
-            <a href="service-details.html" class="stretched-link">
-              <h3>Dolori Architecto</h3>
-            </a>
-            <p>
-              Hic molestias ea quibusdam eos. Fugiat enim doloremque aut
-              neque non et debitis iure. Corrupti recusandae ducimus enim.
-            </p>
-            <a href="service-details.html" class="stretched-link"></a>
-          </div>
-        </div>
-        
-      </div>
+      $pages.include("./index-components/section4.html")
     </div>
   </section>
-  
 
-  
   <section id="portfolio" class="portfolio section">
     
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Portfolio</h2>
-      <p>CineCraft Projects</p>
-    </div>
-    
+    $pages.include("./index-components/section5header.html")
 
     <div class="container">
       <div
