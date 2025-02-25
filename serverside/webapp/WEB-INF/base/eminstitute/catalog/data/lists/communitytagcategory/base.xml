@@ -113,7 +113,7 @@ A directory of mindful and inspired practitioners who inspire, support and serve
    
   </data>
 
-  <data id="cinecraft" caption="CineCraft" domainlist="cinecraft.localhost|cinecraft.entermediadb.org|cinecraft.emedialibrary.com" externaldomain="https://cinecraft.emedialibrary.com" templatepath="/community/cinecraft" urlname="CineCraft">
+  <data id="cinecraft" caption="CineCraft" domainlist="cinecraft.localhost|cinecraft.entermediadb.org|cinecraft.emedialibrary.com" externaldomain="https://cinecraft.entermediadb.org" templatepath="/community/cinecraft" urlname="CineCraft">
     <name>
       <language id="en"><![CDATA[CineCraft]]></language>
     </name>
