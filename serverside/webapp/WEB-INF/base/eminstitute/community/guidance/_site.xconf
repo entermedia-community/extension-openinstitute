@@ -30,7 +30,7 @@
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
 
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
+	<!-- <style id="app-css" href="${communityhome}/theme/styles/theme.css"/> -->
 	<style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
 	<style id="guidance" href="${communityhome}/theme/css/guidance.css" />
 </page>
