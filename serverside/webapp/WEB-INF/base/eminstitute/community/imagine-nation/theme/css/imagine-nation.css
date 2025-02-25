@@ -26,7 +26,6 @@ body {
 	background-color: var(--lightGrey);
 	font-family: var(--familyRoboto);
 	line-height: 1.6;
-	/* padding-top: 80px; */
 }
 ul {
 	margin: 0;
@@ -45,10 +44,6 @@ a {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	/* position: fixed; */
-	/* top: 0; */
-	/* right: 0; */
-	/* left: 0; */
 	z-index: 10;
 }
 .nav-toggle {
@@ -329,14 +324,14 @@ a {
 		font-size: 2.25rem;
 	}
 }
+.mission .ft-img {
+	width: 100%;
+}
 /* Grow */
 .grow {
 	padding: 0 1em;
 	position: relative;
 	margin-top: 2.5rem;
-}
-.grow img {
-	width: 100%;
 }
 .grow p {
 	font-size: 0.9rem;
@@ -389,9 +384,6 @@ a {
 .get-feedback p {
 	font-size: 0.9rem;
 }
-.get-feedback img {
-	width: 100%;
-}
 @media (min-width: 32em) {
 	.get-feedback {
 		display: grid;
@@ -432,9 +424,6 @@ a {
 .learning p {
 	font-size: 0.9rem;
 }
-.learning img {
-	width: 100%;
-}
 @media (min-width: 32em) {
 	.learning {
 		display: grid;
@@ -465,22 +454,6 @@ a {
 	.learning p {
 		font-size: 1.1rem;
 	}
-}
-/* get-started */
-.get-started li {
-	width: 250px;
-	height: 250px;
-	padding: 2rem;
-	margin: 1.5rem auto;
-	background-image: url(https://res.cloudinary.com/alexandracaulea/image/upload/v1583497341/circle-shape_fbgxd9.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
 }
 .get-started strong {
 	font-size: 2.2rem;
@@ -613,15 +586,13 @@ a {
 }
 .arrow-1,
 .arrow-2 {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	height: 90px;
 	background-image: url(../../images/ls.svg);
 	background-repeat: no-repeat;
 	background-position: center;
 }
-.arrow-2 {
-	margin-top: -20px;
-}
+
 @media (min-width: 32em) {
 	.arrow-1,
 	.arrow-2 {
@@ -630,7 +601,7 @@ a {
 		background-position: center;
 	}
 	.arrow-1 {
-		margin-top: 70px;
+		/* margin-top: 70px; */
 		background-image: url(../../images/l2l.svg);
 	}
 	.arrow-2 {
@@ -643,7 +614,7 @@ a {
 		height: 283px;
 	}
 	.arrow-1 {
-		margin-top: 110px;
+		/* margin-top: 110px; */
 		background-image: url(../../images/l1.svg);
 	}
 	.arrow-2 {
@@ -663,7 +634,7 @@ a {
 }
 .footer {
 	margin-top: 4rem;
-	padding: 4rem;
+	padding: 1rem;
 	background-color: #fff5f5;
 }
 .footer .fab {
