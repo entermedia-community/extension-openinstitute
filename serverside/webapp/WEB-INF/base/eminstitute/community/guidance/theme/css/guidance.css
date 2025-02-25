@@ -9,6 +9,13 @@ body {
 	background-image: url("../../images/bg.webp");
 	background-size: cover;
 }
+a {
+	color: #3a9fff;
+	text-decoration: none;
+}
+a:hover {
+	color: #63b2fc;
+}
 .sect {
 	padding: 90px 0;
 	position: relative;
@@ -161,6 +168,9 @@ body {
 .text-primary {
 	color: #3a9fff;
 }
+#tempNav a {
+	color: #8198ae;
+}
 #tempNav a:hover,
 #tempNav a.active {
 	color: #3a9fff;
@@ -169,7 +179,7 @@ body {
 	background-color: #3a9fff;
 	border-radius: 20px;
 	padding: 8px 16px;
-	color: #fff;
+	color: #fff !important;
 	box-shadow: 0px 18px 13px -6px rgba(0, 0, 0, 0.2);
 	border-color: #3a9fff;
 	transition: all 0.4s;
