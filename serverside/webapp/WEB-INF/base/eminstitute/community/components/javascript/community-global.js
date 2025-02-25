@@ -361,9 +361,9 @@ $(document).ready(function () {
 	function handleFooterPosition() {
 		var offset = 0;
 		if ($(".__top-flair").length > 0) {
-			offset = 46;
+			offset = $(".__top-flair").height();
 		}
-		if (document.body.clientHeight + offset < $(window).height()) {
+		if (document.body.clientHeight - offset <= $(window).height()) {
 			$("footer").css({
 				position: "fixed",
 				bottom: 0,
