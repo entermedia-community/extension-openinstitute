@@ -8,13 +8,12 @@ import org.openedit.Data;
 import org.openedit.ModuleManager;
 import org.openedit.OpenEditException;
 import org.openedit.data.QueryBuilder;
-import org.openedit.data.SearcherManager;
 import org.openedit.hittracker.HitTracker;
 import org.openedit.page.Page;
 import org.openedit.page.PageLoader;
 import org.openedit.page.manage.PageManager;
 import org.openedit.servlet.RightPage;
-import org.openedit.servlet.SiteData;
+import org.openedit.servlet.Site;
 import org.openedit.util.PathUtilities;
 import org.openedit.util.URLUtilities;
 
@@ -51,9 +50,9 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	}
 	
 	@Override
-	public RightPage getRightPage( URLUtilities util, SiteData sitedata, Page inPage, String requestedPath)
+	public RightPage getRightPage( URLUtilities util, Site site, Page inPage, String requestedPath)
 	{
-		if( sitedata == null)
+		if( site == null)
 		{
 			RightPage right = new RightPage();
 			right.setRightPage(inPage);
