@@ -149,4 +149,10 @@ A directory of mindful and inspired practitioners who inspire, support and serve
     </name>
   </data>
 
+  <data id="courageous-dreamers" caption="Courageous Dreamers" domainlist="courageous-dreamers.localhost.com|courageous-dreamers.entermediadb.org|courageous-dreamers.emedialibrary.com" externaldomain="https://courageous-dreamers.emedialibrary.com" templatepath="/community/courageous-dreamers" urlname="Courageous Dreamers">
+    <name>
+      <language id="en"><![CDATA[Courageous Dreamers]]></language>
+    </name>
+  </data>
+
 </root>
