@@ -1,22 +1,35 @@
 <main>
   <section style="margin-top: 6rem;">
     <div class="container">
-      $pages.include("./index-components/hero.html")
+      $pages.include("./index-components/hero.html", $context)
     </div>
   </section>
 
   <section>
     <div class="container my-5 gallery">
       <div class="row">
-        #foreach($i in [1..12])
-        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-          <a href="https://picsum.photos/seed/${i}img/1200/800" data-lightbox="img${i}" data-title="Image #${i} Description">
-            <img
-              src="https://picsum.photos/seed/${i}img/600/400"
-              class="w-100 shadow-1-strong rounded mb-4 img-fluid"
-            />
-          </a>
-        </div>
+		
+		#set($entityid = "AZVdco0UKJKyPj2p3R5M")
+		#set($moduleid = "increation")
+		
+		#set($entity = $mediaarchive.getCachedData($moduleid, $entityid))
+		#set($category = $mediaarchive.getEntityManager().createDefaultFolder($entity, $context.getUser()))
+		#set($query = $mediaarchive.getAssetSearcher().createSearchQuery() )
+		#set($nill = $query.addMatches("category", $category.getId() ) )
+		#set($assets = $mediaarchive.getAssetSearcher().cachedSearch($context,$query) )
+
+		#set($imagesize = "image3000x3000.jpg")
+				
+        #foreach($hit in $assets)
+			#set($imagepath = $mediaarchive.asLinkToGenerated($hit, $imagesize))
+	        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+	          <a href="$imagepath" data-lightbox="img${i}" data-title="#text($hit)">
+	            <img
+	              src="$imagepath"
+	              class="w-100 shadow-1-strong rounded mb-4 img-fluid"
+	            />
+	          </a>
+	        </div>
         #end
       </div> 
     </div>
