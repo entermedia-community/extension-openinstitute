@@ -68,6 +68,7 @@ body {
 	color: #ffffff;
 	background-color: #0c223b !important;
 	font-family: Roboto, sans-serif !important;
+	height: unset;
 }
 #application {
 	height: auto !important;
