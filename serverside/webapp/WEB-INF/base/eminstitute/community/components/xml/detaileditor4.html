@@ -21,10 +21,14 @@ $context.putPageValue("longform",false)
 
 ##We need 3 things passed in: $searcher, $view, $data
 
+
 #if ($viewid)
 	#ifnull($details)
 		#set( $viewdata = $mediaarchive.getCachedData("view",$viewid) ) 
-		#set ($details = $viewdata.getDetailsForView($viewdata, $context.getUserProfile()))
+		#ifnull($viewdata)
+			ViewData not found $viewid
+		#end
+		#set ($details = $searcher.getDetailsForView($viewdata, $context.getUserProfile()))
 		
 	#end	
 	#ifnull($details)

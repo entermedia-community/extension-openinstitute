@@ -2,7 +2,7 @@
 <div id="dialoguserform">
 #set( $searcher = $mediaarchive.getSearcher("user") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("viewid", "usermyaccount")
+$context.putPageValue("viewid", "editmyaccount")
 #set( $userid = $context.getRequestParameter("userid"))
 #set( $canedit = false)
 
@@ -19,22 +19,14 @@ $context.putPageValue("data", $selecteduser)
 	 action="${communitylink}/users/edit/save.html" 
 	 method="post"
 	>
+	
 $pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
-
-#set( $searcher = $mediaarchive.getSearcher("userprofile"))
-$context.putPageValue("searcher",$searcher)
-$context.putPageValue("view", "userprofilemyaccount")
-#set( $data = $mediaarchive.getUserProfile($userid))
 $context.putPageValue("data", $data)
 <input type="hidden" name="save" value="true" />
-<input type="hidden" name="searchtype" value="userprofile" />
+<input type="hidden" name="searchtype" value="user" />
 <input type="hidden" name="id" value="$selecteduser.getId()" />
 <input type="hidden" name="userid" value="$selecteduser.getId()" />
-
- 
-
-$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
 </form>
 
