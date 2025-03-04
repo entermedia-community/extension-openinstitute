@@ -26,6 +26,9 @@
 		#ifnotnull($assets)			
 	        #foreach($hit in $assets)
 				#set($imagepath = $mediaarchive.asLinkToGenerated($hit, $imagesize))
+				#set($assetwidth = $mediaarchive.getRealImageWidth($hit)) 
+				#set($assetheight = $mediaarchive.getRealImageHeight($hit)) 
+			
 		        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
 		          <a href="$imagepath" data-lightbox="img${i}" data-title="#text($hit)">
 		            <img
