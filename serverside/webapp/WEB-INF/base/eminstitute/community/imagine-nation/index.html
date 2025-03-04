@@ -8,11 +8,21 @@
   <section>
     <div class="container my-5 gallery">
       <div class="row">
+	
+		## Selects the assets in the rootcategory of given Entity
+		## - Requires the Entity Searchtype ($moduleid)
+		## - Requires a boolean field defined in this Entity to set the fetaured condition (featuredinhomepage)
 		
-		#set($entityid = "AZVdco0UKJKyPj2p3R5M")
+		
 		#set($moduleid = "increation")
 		
-		#set($entity = $mediaarchive.getCachedData($moduleid, $entityid))
+		
+		##get specific, hardcoded entity
+		##set($entity = $mediaarchive.getCachedData($moduleid, $entityid))
+				
+		##search for first entity with featuredinhome=true 
+		#set($entity = $mediaarchive.query($moduleid).exact("featuredinhomepage",true).searchOne() )
+		
 		#ifnotnull($entity)
 			#set($category = $mediaarchive.getEntityManager().createDefaultFolder($entity, $context.getUser()))
 			#ifnotnull($category)
