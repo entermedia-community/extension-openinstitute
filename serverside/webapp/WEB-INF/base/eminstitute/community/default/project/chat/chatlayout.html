@@ -48,19 +48,7 @@
 			<span class="text-white">$currenttopic</span>
 			#end
 		</div>
-		<div class="emwidget-actions">
-			#if( $caneditcollection )
-			<a href="${projectlink}/projects/edit.html?collectionid=$librarycol.getId()&id=${currenttopic.getId()}&collectionroot=${projectlink}/community/index.html" 
-					class="emdialog" 
-					title="[[Edit a Topic]]"
-					data-hidefooter="true">
-				<i class="fas fa-cog text-white"></i>
-			</a>
-			#end
-			<a href="#mobileSidebarRight" role="button" class="d-inline d-md-none ms-2" title="[[Team Circle]]" data-bs-toggle="offcanvas">
-				<i class="fas fa-users text-white"></i>
-			</a>
-		</div>	
+			
 	</div>
 	$pages.include("$communityhome/project/chat/index.html", $context)
 </div> 

@@ -1739,3 +1739,7 @@ input.search-primary {
 	top: 20%;
 	bottom: inherit;
 }
+
+.chatterbox-container {
+    height: calc(100% - 1px)!important;!i;!;
+}
