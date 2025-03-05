@@ -62,7 +62,7 @@ of media Files
    
   </data>    
   <data id="4"  entitytype="entityrental" primaryimagepath="/theme/images/logos/tierrasagrada.svg" templatepath="/community/tierra" urlname="Tierra" 
-  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"  domainlist="tierra.openinstitute.org|tierra-sagrada.org|tierra.local.org|local.org"
+  primaryimagepathwide="/theme/images/home-technology-wide.jpg" externaldomain="https://tierra.openinstitute.org"  domainlist="tierra.localhost.com|tierra.openinstitute.org|tierra-sagrada.org|tierra.local.org|local.org"
   domaincommunityid="4"
   > 
     <name> 
