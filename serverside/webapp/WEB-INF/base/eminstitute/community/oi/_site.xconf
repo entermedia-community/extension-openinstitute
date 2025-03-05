@@ -26,7 +26,7 @@
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
-	<script id="oicomponents" src="${communityhome}/theme/js/oicomponents.js" />
+	<script id="oicomponents" src="${communityhome}/components/javascript/oicomponents.js" />
 
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<script id="uicomponents" src="/${applicationid}/components/javascript/community-global.js"/>
