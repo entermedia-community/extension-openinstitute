@@ -15,8 +15,10 @@
       <h6 class="modal-title">Modal title</h6>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-    <div class="d-flex flex-column align-items-center justify-content-center p-3 gallery-preview">
-      <img src="$imagepath" alt="#text($hit)" title="#text($hit)" class="img-fluid object-fit-contain"  />
+    <div class="d-flex flex-column align-items-center justify-content-center p-3">
+      <div class="w-100 flex-grow-1 gallery-preview">
+        <img src="$imagepath" alt="#text($hit)" title="#text($hit)"/>
+      </div>
       <a href="/find?assetid=$hit.getId()" class="btn btn-primary mt-3">View details</a>
     </div>
   </div>
