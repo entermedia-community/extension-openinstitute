@@ -6,7 +6,7 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/imagine-nation</property>
 
-	<property name="flair">true</property>
+	
 	<property name="templatename">imagine-nation</property>
 
 	<property name="communitytagcategory">imagine-nation</property>
@@ -17,6 +17,11 @@
 	<script id="validateandedit" src="${communityhome}/components/javascript/validateandedit.js"/>
 	<script id="select2" src="${communityhome}/components/javascript/select2/js/select2.full.js"/>
 	<style id="select2-css" href="${communityhome}/components/javascript/select2/css/select2.css"/>
+	
+	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
+	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/videojs-quality-selector.min.js" defer="true" />
+	<style  id="videojs-css"  href="/${applicationid}/components/javascript/videojs/8.20.0/video-js.min.css" />
+	
 
 	<script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
 	<style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
