@@ -1743,3 +1743,7 @@ input.search-primary {
 .chatterbox-container {
     height: calc(100% - 1px)!important;!i;!;
 }
+.resultspositions a.disabled {
+	opacity: 0.3;
+	pointer-events: none !important;
+}
