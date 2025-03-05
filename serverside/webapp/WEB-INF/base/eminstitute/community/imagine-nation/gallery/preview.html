@@ -19,15 +19,12 @@ $context.putPageValue("asset", $asset)
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center p-3">
       <div class="w-100 flex-grow-1 gallery-preview">
-        ##<img src="$imagepath" alt="#text($asset)" title="#text($asset)"/>
-		 
-		
-		#set($searchhome = "${finderhome}/views/modules/asset/results/default")
-		$context.putPageValue("searchhome", $searchhome)
-		$context.putPageValue("thumbsize", "largepreview")
-		$pages.include("${searchhome}/thumbnails/${rendertype}.html", $context)
-      
-	</div>
+        #set($searchhome = "${finderhome}/views/modules/asset/results/default")
+        $context.putPageValue("searchhome", $searchhome)
+        $context.putPageValue("thumbsize", "largepreview")
+        $pages.include("${searchhome}/thumbnails/${rendertype}.html", $context)
+
+      </div>
       <a href="/find?assetid=$asset.getId()" class="btn btn-primary mt-3">[[View details]]</a>
     </div>
   </div>
