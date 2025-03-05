@@ -1,0 +1,33 @@
+#set( $entityid = $context.getRequestParameter("entityid") )
+<div id="homegallery">
+  <div class="row"> 
+    #set($entity = $mediaarchive.getCachedData("increation", $entityid))
+    
+    #ifnotnull($entity)
+      #set($category = $mediaarchive.getEntityManager().createDefaultFolder($entity, $context.getUser()))
+      #ifnotnull($category)
+        #set($query = $mediaarchive.getAssetSearcher().createSearchQuery() )
+        #set($nill = $query.addMatches("category", $category.getId() ) )
+        #set($assets = $mediaarchive.getAssetSearcher().cachedSearch($context,$query) )
+        #set($imagesize = "image3000x3000.jpg")
+      #end
+    #end
+
+    #ifnotnull($assets)			
+      #foreach($hit in $assets)
+        #set($imagepath = $mediaarchive.asLinkToGenerated($hit, $imagesize))
+        #set($assetwidth = $mediaarchive.getRealImageWidth($hit)) 
+        #set($assetheight = $mediaarchive.getRealImageHeight($hit)) 
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <a href="$imagepath" data-lightbox="img${i}" data-title="#text($hit)">
+            <img
+              src="$imagepath"
+              class="w-100 shadow-1-strong rounded mb-4 img-fluid"
+            />
+          </a>
+        </div>
+      #end
+    #end
+
+  </div> 
+</div>

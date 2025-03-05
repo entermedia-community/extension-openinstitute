@@ -7,49 +7,24 @@
 
   <section>
     <div class="container my-5 gallery">
-      <div class="row">
-	
-		## Selects the assets in the rootcategory of given Entity
-		## - Requires the Entity Searchtype ($moduleid)
-		## - Requires a boolean field defined in this Entity to set the fetaured condition (featuredinhomepage)
-		
-		
-		#set($moduleid = "increation")
-		
-		
-		##get specific, hardcoded entity
-		##set($entity = $mediaarchive.getCachedData($moduleid, $entityid))
-				
-		##search for first entity with featuredinhome=true 
-		#set($entity = $mediaarchive.query($moduleid).exact("featuredinhomepage",true).searchOne() )
-		
-		#ifnotnull($entity)
-			#set($category = $mediaarchive.getEntityManager().createDefaultFolder($entity, $context.getUser()))
-			#ifnotnull($category)
-				#set($query = $mediaarchive.getAssetSearcher().createSearchQuery() )
-				#set($nill = $query.addMatches("category", $category.getId() ) )
-				#set($assets = $mediaarchive.getAssetSearcher().cachedSearch($context,$query) )
-		
-				#set($imagesize = "image3000x3000.jpg")
+			#set($entities = $mediaarchive.query("increation").exact("featuredinhomepage",true).search())
+
+			#ifnotnull($entities)
+				#if($entities.size() > 0)
+					<div class="d-flex align-items-center justify-content-center flex-wrap mb-4">
+						#foreach($entity in $entities)
+							<a class="btn btn-outline-primary rounded-pill mx-1 ajax" 
+								data-targetdiv="homegallery" 
+								data-oemaxlevel="1" 
+								href="./gallery.html?entityid=$entity.getId()">
+								#text($entity)
+							</a>
+						#end
+					</div>
+
+					$pages.include("./gallery.html?entityid=${entities.get(0).getId()}", $context)
+				#end
 			#end
-		#end	
-		#ifnotnull($assets)			
-	        #foreach($hit in $assets)
-				#set($imagepath = $mediaarchive.asLinkToGenerated($hit, $imagesize))
-				#set($assetwidth = $mediaarchive.getRealImageWidth($hit)) 
-				#set($assetheight = $mediaarchive.getRealImageHeight($hit)) 
-			
-		        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-		          <a href="$imagepath" data-lightbox="img${i}" data-title="#text($hit)">
-		            <img
-		              src="$imagepath"
-		              class="w-100 shadow-1-strong rounded mb-4 img-fluid"
-		            />
-		          </a>
-		        </div>
-	        #end
-		#end
-      </div> 
     </div>
   </section>
 </main>

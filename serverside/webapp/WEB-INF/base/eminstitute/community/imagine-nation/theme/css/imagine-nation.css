@@ -130,6 +130,15 @@ a:hover {
 	background-color: var(--darkPurple) !important;
 	color: var(--white) !important;
 }
+.btn.btn-outline-primary {
+	color: var(--pink);
+	border-color: var(--pink);
+}
+.btn.btn-outline-primary:hover {
+	color: var(--pink);
+	border-color: var(--pink);
+	background-color: #b52b6533 !important;
+}
 .logo-container {
 	display: flex;
 	align-items: center;
