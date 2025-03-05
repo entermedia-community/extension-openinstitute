@@ -28,7 +28,6 @@
 	
 	<page-action name="ProjectModule.loadChatChannel"/>
 
-	<page-action name="ChatModule.loadRecentChatsLibraryCollection"/>	
 	
 	<property name="chatterboxhome">${communityhome}/project/chat/chatterbox</property>
 

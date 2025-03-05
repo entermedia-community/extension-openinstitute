@@ -2,9 +2,8 @@
 	
 	
 	<property name="fallbackdirectoryX">${communityhome}/components/chatterbox</property>
+
 	<property name="fallbackdirectory">/WEB-INF/base/system/commonbase/components/chatterbox</property>
-	
-	
 
 
 </page>
