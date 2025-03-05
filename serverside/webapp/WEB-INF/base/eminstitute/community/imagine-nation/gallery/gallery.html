@@ -26,7 +26,7 @@
 
           $context.putPageValue("hit", $hit)
           <a href="${communityhome}/gallery/preview.html" 
-            class="gallery-item emdialog"
+            class="gallery-item gallery-item-${rendertype} emdialog"
             data-oemaxlevel="1" 
             data-assetid="$hit.getId()"
             title="#text($hit)"
@@ -42,7 +42,14 @@
               data-imgwidth="250"
               data-imgheight="110"
             #end>
-            <img src="$imagepath" alt="#text($hit)" title="#text($hit)"   />
+            #if($rendertype == "audio")
+              <div class="audio-thumb">
+                <i class="fas fa-music"></i>
+                <span>#text($hit)</span>
+              </div>
+            #else
+              <img src="$imagepath" alt="#text($hit)" title="#text($hit)"   />
+            #end
           </a> 
         #end
       #end

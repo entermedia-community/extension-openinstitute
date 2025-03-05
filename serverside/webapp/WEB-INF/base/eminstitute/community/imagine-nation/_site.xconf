@@ -18,9 +18,12 @@
 	<script id="select2" src="${communityhome}/components/javascript/select2/js/select2.full.js"/>
 	<style id="select2-css" href="${communityhome}/components/javascript/select2/css/select2.css"/>
 	
-	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
-	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/videojs-quality-selector.min.js" defer="true" />
-	<style  id="videojs-css"  href="/${applicationid}/components/javascript/videojs/8.20.0/video-js.min.css" />
+	<script id="videojs" src="${communityhome}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
+	<script id="videojs" src="${communityhome}/components/javascript/videojs/8.20.0/videojs-quality-selector.min.js" defer="true" />
+	<style  id="videojs-css"  href="${communityhome}/components/javascript/videojs/8.20.0/video-js.min.css" />
+
+	<script id="jplayer" src="${communityhome}/components/javascript/jplayer/jquery.jplayer.min.js"/>
+  <style id="jplayer-css" href="${communityhome}/components/javascript/jplayer/premium.pixels/premium-pixels.css"/>
 	
 
 	<script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
