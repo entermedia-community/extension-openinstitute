@@ -689,3 +689,9 @@ a:hover {
 	width: 100%;
 	margin-bottom: 10px;
 }
+.gallery-preview {
+	max-height: calc(100vh - 110px);
+}
+.gallery-preview img {
+	object-fit: contain;
+}

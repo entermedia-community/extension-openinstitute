@@ -18,4 +18,10 @@ $(function () {
 		e.preventDefault();
 		$(this).runAjax();
 	});
+	lQuery("a.emdialog").livequery("click", function (e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$(this).emDialog();
+		$("#__flair").remove();
+	});
 });

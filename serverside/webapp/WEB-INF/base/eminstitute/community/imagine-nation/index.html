@@ -12,18 +12,18 @@
 			#ifnotnull($entities)
 				#if($entities.size() > 0)
 					<h2 class="text-center mb-4">Gallery</h2>
-					<div class="d-flex align-items-center justify-content-center flex-wrap mb-4">
+					<div class="d-flex align-items-center justify-content-center flex-wrap mb-4 auto-active-container">
 						#foreach($entity in $entities)
-							<a class="btn btn-outline-primary rounded-pill mx-1 ajax" 
+							<a class="btn btn-outline-primary rounded-pill mx-1 ajax auto-active-link #if($foreach.count == 1)current#end" 
 								data-targetdiv="homegallery" 
 								data-oemaxlevel="1" 
-								href="./gallery.html?entityid=$entity.getId()">
+								href="./gallery/gallery.html?entityid=$entity.getId()">
 								#text($entity)
 							</a>
 						#end
 					</div>
 
-					$pages.include("./gallery.html?entityid=${entities.get(0).getId()}", $context)
+					$pages.include("./gallery/gallery.html?entityid=${entities.get(0).getId()}", $context)
 				#end
 			#end
     </div>
