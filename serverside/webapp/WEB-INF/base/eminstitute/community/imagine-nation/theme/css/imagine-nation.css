@@ -121,13 +121,16 @@ a:hover {
 	background-color: #f4eeff;
 	transform: translateX(-200%);
 }
+.btn.btn-outline-primary.current,
 .btn.btn-primary {
 	background-color: var(--pink);
 	border-color: var(--pink);
 	color: var(--white);
 }
+.btn.btn-outline-primary.current:hover,
 .btn.btn-primary:hover {
-	background-color: var(--darkPurple) !important;
+	border-color: var(--pink) !important;
+	background-color: var(--pink) !important;
 	color: var(--white) !important;
 }
 .btn.btn-outline-primary {
@@ -139,6 +142,7 @@ a:hover {
 	border-color: var(--pink);
 	background-color: #b52b6533 !important;
 }
+
 .logo-container {
 	display: flex;
 	align-items: center;
@@ -672,4 +676,16 @@ a:hover {
 #contactUs {
 	--muted-color: #8198ae;
 	--primary-color: var(--pink);
+}
+#homegallery {
+	position: relative;
+	min-height: 600px;
+	margin: 0 auto;
+}
+#homegallery .gallery-item {
+	width: 240px;
+}
+#homegallery .gallery-item img {
+	width: 100%;
+	margin-bottom: 10px;
 }
