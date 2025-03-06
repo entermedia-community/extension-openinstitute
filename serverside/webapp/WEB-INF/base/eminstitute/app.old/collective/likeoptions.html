@@ -6,7 +6,6 @@
 #set( $subscribers = $mediaarchive.query("librarycollectionlikes").exact("collectionid",$collectionid).search($context) )
 #set( $subscriberssize = $subscribers.size())
 <div class="project-likes" id="projectlikes">
-	<div class="project-likes-count">$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end</div>
 		#if( $user )
 			#set( $likesearcher = $mediaarchive.getSearcher("librarycollectionlikes") )
 			#set( $liked = $likesearcher.query().exact("followeruser",$user.getId()).exact("collectionid",$collectionid).searchOne() )
@@ -23,7 +22,10 @@
 					<input type="hidden" name="oemaxlevel" value="2" />
 					<input type="hidden" name="id" value="${liked.getId()}" />
 					<input type="hidden" name="collectionid" value="$collectionid" />
-					 <a href="" class="btn btn-xs btn-secondary submitform" title="[[Unfollow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Following]]</a>
+					<div class="d-flex align-items-center">
+						<div class="project-likes-count">$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end</div>
+						<a href="" class="btn btn-xs btn-secondary submitform" title="[[Unfollow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Following]]</a>
+					</div>
 				</form>
 						
 				#set( $onteam = $mediaarchive.query("librarycollectionusers").exact("followeruser",$user.getId()).exact("collectionid",$collectionid).search($context) )
@@ -64,7 +66,10 @@
 					<input type="hidden" name="field" value="collectionid" />
 					<input type="hidden" name="collectionid.value" value="$collectionid" />
 					<input type="hidden" name="collectionid" value="$collectionid" />
-					 <a href="" class="btn btn-xs btn-success btn-action submitform" title="[[Follow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Follow]]</a>
+					<div class="d-flex align-items-center">
+						<div class="project-likes-count">$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end</div>
+						<a href="" class="btn btn-xs btn-success btn-action submitform" title="[[Follow this Project]]"><i class="fas fa-thumbs-up"></i> &nbsp;[[Follow]]</a>
+					</div>
 				</form>
 			#end
 			

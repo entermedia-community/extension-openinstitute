@@ -339,6 +339,16 @@ a {
 	padding: 0.275rem 0.75rem;
 	font-size: 0.8rem;
 }
+.btn-accent {
+	color: var(--themed-btn-acc-text, #fff) !important;
+	border: 1px solid var(--themed-btn-acc, #3884fd) !important;
+	background: var(--themed-btn-acc, #3884fd) !important;
+}
+.btn-accent:hover {
+	color: var(--themed-btn-acc-text, #fff) !important;
+	border-color: var(--themed-btn-acc-hover, #6a8fff) !important;
+	background: var(--themed-btn-acc-hover, #6a8fff) !important;
+}
 .btn-xs {
 	padding: 0.25rem 0.35rem;
 	font-size: 0.725rem;
