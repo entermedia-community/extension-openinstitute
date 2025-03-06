@@ -109,7 +109,13 @@ public class FinanceManager  implements CatalogEnabled
 				bycurrency.put(currency, currencytotal);
 	
 			}
-			currencytotal = currencytotal + (Double)data.getValue("total");
+			Double total =  (Double)data.getValue("total");
+			if( total == null )
+			{
+				log.error("Make sure totals are set: collectiveincome " + data.getId());
+				continue;
+			}
+			currencytotal = currencytotal + total;
 			bycurrency.replace(currency, currencytotal);
 		}
 		
