@@ -36,6 +36,8 @@
 
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
+	
+	<style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>
 
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="imagine-nation" href="${communityhome}/theme/css/imagine-nation.css" />
