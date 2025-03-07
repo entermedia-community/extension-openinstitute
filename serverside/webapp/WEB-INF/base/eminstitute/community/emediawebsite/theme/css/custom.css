@@ -11469,6 +11469,12 @@ code {
 	margin-bottom:0.75rem;
 }
 
+.documentation pre {
+	background-color:hsla(0,0%,78%,.3);
+	padding: 1rem;
+	
+}
+
 #sidebarNav .dropdown-item {
 	white-space: normal;
 	display: block;
@@ -11917,7 +11923,7 @@ select.form-control:not([size]):not([multiple]) {
 	height: 100%;
 }
 .supportchat .chatterbox-messages {
-	height: 100%;
+	height: calc(100% - 90px)!important;!i;!;
 	min-height: 250px;
 }
 
@@ -12057,7 +12063,7 @@ h2.pf-chat-header {
 	text-align: center;
 }
 .supportchat .chatterbox {
-	height: calc(100% - 129px);
+	height: calc(100% - 40px);
 }
 
 .supportchat .chat-msg {
@@ -12093,8 +12099,8 @@ h2.pf-chat-header {
 .supportchat .msg-body-content {
 	text-align: left;
 }
-.supportchat .chat-message .timestamp {
-	font-size: smaller;
+.supportchat .chat-message .chat-timestamp {
+	font-size: 0.75em;
 	color: #eee;
 	line-height: 1;
 	margin-top: 8px;

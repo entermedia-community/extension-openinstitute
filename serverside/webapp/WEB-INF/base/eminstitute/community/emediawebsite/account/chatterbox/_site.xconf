@@ -1,4 +1,6 @@
 <page>
-	<inner-layout />
+	
+		<property name="fallbackdirectory">/WEB-INF/base/system/commonbase/components/chatterbox</property>
+	
 		
 </page>

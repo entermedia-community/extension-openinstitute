@@ -41,7 +41,7 @@ public void init()
 		
 		//add client Support local user agent
 		
-		String localclientsupportuser = "dienekes";
+		String localclientsupportuser = "105";
 		Data lcu2 = lcusearcher.createNewData();
 		lcu2.setValue("collectionid",usercollection.getId());
 		lcu2.setValue("followeruser", localclientsupportuser);
@@ -52,7 +52,7 @@ public void init()
 		//Send Welcome Message
 		BaseSearcher cbsearcher = mediaArchive.getSearcher("chatterbox");
 		Data chat = cbsearcher.createNewData();
-		chat.setValue("message", "Hi there! I'm Dieneke, your account manager here at eMedia Library. How can I assist you today? Whether you have questions about our services, need help with your account, I'm here to help. Feel free to ask me anything.");
+		chat.setValue("message", "Hi there! I'm your account manager here at eMedia Library. How can I assist you today? Whether you have questions about our services, need help with your account, I'm here to help. Feel free to ask me anything.");
 		chat.setValue("user", localclientsupportuser);
 		chat.setValue("collectionid", usercollection.getId());
 		chat.setValue("channel", "supportchat" + user.getId());
