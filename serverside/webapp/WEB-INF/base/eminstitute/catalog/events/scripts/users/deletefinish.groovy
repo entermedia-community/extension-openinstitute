@@ -9,11 +9,14 @@ public void init()
 	MediaArchive archive = context.getPageValue("mediaarchive");
 
 	String id = context.getRequestParameter("userid");
-	
+	if (id == null)
+	{
+		return;
+	}
 	UserProfile profile = context.getPageValue("userprofile");
 	if( !profile.hasPermission("viewsettings") )
 	{
-		if( !id.equals(context.getUserId()) )
+		if( !id.equals(context.getUser().getId()) )
 		{
 			throw new OpenEditException("No permission to delete other users");
 		}
