@@ -131,9 +131,10 @@ public void init()
 					objects.put("mediaarchive",mediaArchive);
 					objects.put("messagessince",since);
 					objects.put("community",community);
-					
+			
+					objects.put("siteid", siteid);
 					objects.put("applink","/" + appid);
-					objects.put("siteroot",getSiteRoot());
+					//objects.put("siteroot",getSiteRoot());
 					
 					templatemail.send(objects);
 					//log.info("Email to: " + followeruser.getEmail() + " Subject: " + subject + " Template: "+template);

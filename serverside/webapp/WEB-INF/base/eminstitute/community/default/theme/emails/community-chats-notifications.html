@@ -1,11 +1,5 @@
-$pages.include("${communityhome}/theme/emails/layout-top.html", $context)
+$pages.include("layout-top.html", $context)
 
-#if(!$siteroot)
-	#set($siteroot = $context.siteRoot)
-	#if(!$siteroot)
-		#set($siteroot = $url_util.buildRoot())
-	#end
-#end
 
 <p>[[Chat notifications for]]: <strong>$!followeruser</strong></p>
 
@@ -43,4 +37,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 	</small>
 </p>
 
-$pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
+$pages.include("layout-bottom.html", $context)
+
+
+
