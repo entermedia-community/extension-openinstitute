@@ -1,27 +1,20 @@
 <main class="main">
   
   <section id="hero" class="hero section dark-background">
-    <video autoplay muted loop>
-      <source src="${communityhome}/videos/bg506.mp4" type="video/mp4" />
-      <source src="${communityhome}/videos/bg720.mp4" type="video/mp4" />
-      <source src="${communityhome}/videos/bg1080.mp4" type="video/mp4" />
-      <source src="${communityhome}/videos/bg2160.mp4" type="video/mp4" />
-    </video>
-
     <div class="container">
       $pages.include("./index-components/hero.html")
       $pages.include("./index-components/section2.html")
     </div>
+    <video autoplay muted loop>
+      <source src="${communityhome}/videos/bg506.mp4" type="video/mp4" />
+    </video>
   </section>
   
   <section id="features" class="features section">
     $pages.include("./index-components/section3header.html")
     <div class="container">
       <div class="row gy-4">
-        <div class="features-image col-lg-4"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
+        <div class="features-image col-lg-4">
           <img src="${communityhome}/images/cineft.svg" alt="" />
         </div>
         <div class="col-lg-8">
@@ -51,11 +44,7 @@
         data-layout="masonry"
         data-sort="original-order"
       >
-        <div
-          class="row gy-4 isotope-container"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
+        <div class="row gy-4 isotope-container">
         #foreach($i in [1..21])
           <div
             class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
