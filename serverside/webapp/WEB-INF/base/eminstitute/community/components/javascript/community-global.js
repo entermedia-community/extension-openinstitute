@@ -296,262 +296,69 @@ $(document).ready(function () {
 			},
 		});
 	});
-	
-	
+
 	lQuery("select.listautocomplete").livequery(function () // select2
-		{
-			var theinput = $(this);
-			var searchtype = theinput.data("searchtype");
-			if (searchtype != undefined) {
-				// called twice due to
-				// the way it reinserts
-				// components
-				var searchfield = theinput.data("searchfield");
+	{
+		var theinput = $(this);
+		var searchtype = theinput.data("searchtype");
+		if (searchtype != undefined) {
+			// called twice due to
+			// the way it reinserts
+			// components
+			var searchfield = theinput.data("searchfield");
 
-				var foreignkeyid = theinput.data("foreignkeyid");
-				var sortby = theinput.data("sortby");
+			var foreignkeyid = theinput.data("foreignkeyid");
+			var sortby = theinput.data("sortby");
 
-				var defaulttext = theinput.data("showdefault");
-				if (!defaulttext) {
-					defaulttext = "Search";
-				}
-				var defaultvalue = theinput.data("defaultvalue");
-				var defaultvalueid = theinput.data("defaultvalueid");
-				if (apphome === undefined) {
-					apphome = "";
-				}
-				var url =
-					apphome +
-					"/components/xml/types/autocomplete/datasearch.txt?" +
-					"field=" +
-					searchfield +
-					"&operation=contains&searchtype=" +
-					searchtype;
-				if (defaultvalue != undefined) {
-					url =
-						url +
-						"&defaultvalue=" +
-						defaultvalue +
-						"&defaultvalueid=" +
-						defaultvalueid;
-				}
-
-				var dropdownParent = theinput.data("dropdownparent");
-				if (dropdownParent && $("#" + dropdownParent).length) {
-					dropdownParent = $("#" + dropdownParent);
-				} else {
-					dropdownParent = $(this).parent();
-				}
-				var parent = theinput.closest("#main-media-container");
-				if (parent.length) {
-					dropdownParent = parent;
-				}
-				var parent = theinput.parents(".modal-content");
-				if (parent.length) {
-					dropdownParent = parent;
-				}
-
-				var allowClear = theinput.data("allowclear");
-				if (allowClear == undefined) {
-					allowClear = true;
-				}
-				if ($.fn.select2) {
-					theinput.select2({
-						placeholder: defaulttext,
-						allowClear: allowClear,
-						minimumInputLength: 0,
-						dropdownParent: dropdownParent,
-						ajax: {
-							// instead of writing the
-							// function to execute the
-							// request we use Select2's
-							// convenient helper
-							url: url,
-							dataType: "json",
-							data: function (params) {
-								var fkv = theinput
-									.closest("form")
-									.find("#list-" + foreignkeyid + "value")
-									.val();
-								if (fkv == undefined) {
-									fkv = theinput
-										.closest("form")
-										.find("#list-" + foreignkeyid)
-										.val();
-								}
-								var search = {
-									page_limit: 15,
-									page: params.page,
-								};
-								search[searchfield + ".value"] = params.term; // search
-								// term
-								if (fkv) {
-									search["field"] = foreignkeyid; // search
-									// term
-									search["operation"] = "matches"; // search
-									// term
-									search[foreignkeyid + ".value"] = fkv; // search
-									// term
-								}
-								if (sortby) {
-									search["sortby"] = sortby; // search
-									// term
-								}
-								return search;
-							},
-							processResults: function (data, params) {
-								// parse the
-								// results into
-								// the format
-								// expected by
-								// Select2.
-								var rows = data.rows;
-								if (theinput.hasClass("selectaddnew")) {
-									if (params.page == 1 || !params.page) {
-										var addnewlabel = theinput.data("addnewlabel");
-										var addnewdata = {
-											name: addnewlabel,
-											id: "_addnew_",
-										};
-										rows.unshift(addnewdata);
-									}
-								}
-								// addnew
-								params.page = params.page || 1;
-								return {
-									results: rows,
-									pagination: {
-										more: false,
-										// (params.page * 30) <
-										// data.total_count
-									},
-								};
-							},
-						},
-						escapeMarkup: function (m) {
-							return m;
-						},
-						templateResult: select2formatResult,
-						templateSelection: select2Selected,
-					});
-				}
-				// TODO: Remove this?
-				theinput.on("change", function (e) {
-					if (e.val == "") {
-						// Work around for a bug
-						// with the select2 code
-						var id = "#list-" + theinput.attr("id");
-						$(id).val("");
-					} else {
-						// Check for "_addnew_" show ajax form
-						var selectedid = theinput.val();
-
-						if (selectedid == "_addnew_") {
-							var clicklink = $("#" + theinput.attr("id") + "add");
-							clicklink.trigger("click");
-
-							e.preventDefault();
-							theinput.select2("val", "");
-							return false;
-						}
-						if (theinput.hasClass("uifilterpicker")) {
-							//Not used?
-							//$entry.getId()${fieldname}_val
-							var fieldname = theinput.data("fieldname");
-							var targethidden = $("#" + selectedid + fieldname + "_val");
-							targethidden.prop("checked", true);
-						}
-						// Check for "_addnew_" show ajax form
-						if (theinput.hasClass("selectautosubmit")) {
-							if (selectedid) {
-								//var theform = $(this).closest("form");
-								var theform = $(this).parent("form");
-								if (theform.hasClass("autosubmitform")) {
-									theform.trigger("submit");
-								}
-							}
-						}
-					}
-				});
-
-				theinput.on("select2:open", function (e) {
-					console.log("open");
-					var selectId = $(this).attr("id");
-					if (selectId) {
-						$(
-							".select2-search__field[aria-controls='select2-" +
-								selectId +
-								"-results']"
-						).each(function (key, value) {
-							value.focus();
-						});
-					} else {
-						document
-							.querySelector(".select2-container--open .select2-search__field")
-							.focus();
-					}
-				});
+			var defaulttext = theinput.data("showdefault");
+			if (!defaulttext) {
+				defaulttext = "Search";
 			}
-		});
-		//-
-		//List autocomplete multiple and accepting new options
-		lQuery("select.listautocompletemulti").livequery(function () // select2
-		{
-			var theinput = $(this);
-			var searchtype = theinput.data("searchtype");
-			if (searchtype != undefined) {
-				var searchfield = theinput.data("searchfield");
+			var defaultvalue = theinput.data("defaultvalue");
+			var defaultvalueid = theinput.data("defaultvalueid");
+			if (apphome === undefined) {
+				apphome = "";
+			}
+			var url =
+				apphome +
+				"/components/xml/types/autocomplete/datasearch.txt?" +
+				"field=" +
+				searchfield +
+				"&operation=contains&searchtype=" +
+				searchtype;
+			if (defaultvalue != undefined) {
+				url =
+					url +
+					"&defaultvalue=" +
+					defaultvalue +
+					"&defaultvalueid=" +
+					defaultvalueid;
+			}
 
-				var foreignkeyid = theinput.data("foreignkeyid");
-				var sortby = theinput.data("sortby");
+			var dropdownParent = theinput.data("dropdownparent");
+			if (dropdownParent && $("#" + dropdownParent).length) {
+				dropdownParent = $("#" + dropdownParent);
+			} else {
+				dropdownParent = $(this).parent();
+			}
+			var parent = theinput.closest("#main-media-container");
+			if (parent.length) {
+				dropdownParent = parent;
+			}
+			var parent = theinput.parents(".modal-content");
+			if (parent.length) {
+				dropdownParent = parent;
+			}
 
-				var defaulttext = theinput.data("showdefault");
-				if (!defaulttext) {
-					defaulttext = "Search";
-				}
-				var defaultvalue = theinput.data("defaultvalue");
-				var defaultvalueid = theinput.data("defaultvalueid");
-
-				var url =
-					apphome +
-					"/components/xml/types/autocomplete/datasearch.txt?" +
-					"field=" +
-					searchfield +
-					"&operation=contains&searchtype=" +
-					searchtype;
-				if (defaultvalue != undefined) {
-					url =
-						url +
-						"&defaultvalue=" +
-						defaultvalue +
-						"&defaultvalueid=" +
-						defaultvalueid;
-				}
-
-				var dropdownParent = theinput.data("dropdownparent");
-				if (dropdownParent && $("#" + dropdownParent).length) {
-					dropdownParent = $("#" + dropdownParent);
-				} else {
-					dropdownParent = $(this).parent();
-				}
-				var parent = theinput.closest("#main-media-container");
-				if (parent.length) {
-					dropdownParent = parent;
-				}
-				var parent = theinput.parents(".modal-content");
-				if (parent.length) {
-					dropdownParent = parent;
-				}
-
-				var allowClear = theinput.data("allowclear");
-				if (allowClear == undefined) {
-					allowClear = true;
-				}
+			var allowClear = theinput.data("allowclear");
+			if (allowClear == undefined) {
+				allowClear = true;
+			}
+			if ($.fn.select2) {
 				theinput.select2({
 					placeholder: defaulttext,
 					allowClear: allowClear,
 					minimumInputLength: 0,
-					tags: true,
 					dropdownParent: dropdownParent,
 					ajax: {
 						// instead of writing the
@@ -598,6 +405,18 @@ $(document).ready(function () {
 							// expected by
 							// Select2.
 							var rows = data.rows;
+							if (theinput.hasClass("selectaddnew")) {
+								if (params.page == 1 || !params.page) {
+									var addnewlabel = theinput.data("addnewlabel");
+									var addnewdata = {
+										name: addnewlabel,
+										id: "_addnew_",
+									};
+									rows.unshift(addnewdata);
+								}
+							}
+							// addnew
+							params.page = params.page || 1;
 							return {
 								results: rows,
 								pagination: {
@@ -614,51 +433,231 @@ $(document).ready(function () {
 					templateResult: select2formatResult,
 					templateSelection: select2Selected,
 				});
-
-				// TODO: Remove this?
-				theinput.on("change", function (e) {
-					if (e.val == "") {
-						// Work around for a bug
-						// with the select2 code
-						var id = "#list-" + theinput.attr("id");
-						$(id).val("");
-					}
-				});
-
-				theinput.on("select2:open", function (e) {
-					var selectId = $(this).attr("id");
-					if (selectId) {
-						$(
-							".select2-search__field[aria-controls='select2-" +
-								selectId +
-								"-results']"
-						).each(function (key, value) {
-							value.focus();
-						});
-					} else {
-						document
-							.querySelector(".select2-container--open .select2-search__field")
-							.focus();
-					}
-				});
 			}
-		});
-	
-		lQuery(".submitform").livequery("click", function (e) {
-			e.preventDefault();
+			// TODO: Remove this?
+			theinput.on("change", function (e) {
+				if (e.val == "") {
+					// Work around for a bug
+					// with the select2 code
+					var id = "#list-" + theinput.attr("id");
+					$(id).val("");
+				} else {
+					// Check for "_addnew_" show ajax form
+					var selectedid = theinput.val();
 
-			var theform = $(this).closest("form");
+					if (selectedid == "_addnew_") {
+						var clicklink = $("#" + theinput.attr("id") + "add");
+						clicklink.trigger("click");
 
-			var clicked = $(this);
-			if (clicked.data("updateaction")) {
-				var newaction = clicked.attr("href");
-				theform.attr("action", newaction);
+						e.preventDefault();
+						theinput.select2("val", "");
+						return false;
+					}
+					if (theinput.hasClass("uifilterpicker")) {
+						//Not used?
+						//$entry.getId()${fieldname}_val
+						var fieldname = theinput.data("fieldname");
+						var targethidden = $("#" + selectedid + fieldname + "_val");
+						targethidden.prop("checked", true);
+					}
+					// Check for "_addnew_" show ajax form
+					if (theinput.hasClass("selectautosubmit")) {
+						if (selectedid) {
+							//var theform = $(this).closest("form");
+							var theform = $(this).parent("form");
+							if (theform.hasClass("autosubmitform")) {
+								theform.trigger("submit");
+							}
+						}
+					}
+				}
+			});
+
+			theinput.on("select2:open", function (e) {
+				console.log("open");
+				var selectId = $(this).attr("id");
+				if (selectId) {
+					$(
+						".select2-search__field[aria-controls='select2-" +
+							selectId +
+							"-results']"
+					).each(function (key, value) {
+						value.focus();
+					});
+				} else {
+					document
+						.querySelector(".select2-container--open .select2-search__field")
+						.focus();
+				}
+			});
+		}
+	});
+	//-
+	//List autocomplete multiple and accepting new options
+	lQuery("select.listautocompletemulti").livequery(function () // select2
+	{
+		var theinput = $(this);
+		var searchtype = theinput.data("searchtype");
+		if (searchtype != undefined) {
+			var searchfield = theinput.data("searchfield");
+
+			var foreignkeyid = theinput.data("foreignkeyid");
+			var sortby = theinput.data("sortby");
+
+			var defaulttext = theinput.data("showdefault");
+			if (!defaulttext) {
+				defaulttext = "Search";
 			}
-			console.log("Submit Form " + theform);
-			theform.trigger("submit");
-			e.stopPropagation();
-			return;
-		});
+			var defaultvalue = theinput.data("defaultvalue");
+			var defaultvalueid = theinput.data("defaultvalueid");
+
+			var url =
+				apphome +
+				"/components/xml/types/autocomplete/datasearch.txt?" +
+				"field=" +
+				searchfield +
+				"&operation=contains&searchtype=" +
+				searchtype;
+			if (defaultvalue != undefined) {
+				url =
+					url +
+					"&defaultvalue=" +
+					defaultvalue +
+					"&defaultvalueid=" +
+					defaultvalueid;
+			}
+
+			var dropdownParent = theinput.data("dropdownparent");
+			if (dropdownParent && $("#" + dropdownParent).length) {
+				dropdownParent = $("#" + dropdownParent);
+			} else {
+				dropdownParent = $(this).parent();
+			}
+			var parent = theinput.closest("#main-media-container");
+			if (parent.length) {
+				dropdownParent = parent;
+			}
+			var parent = theinput.parents(".modal-content");
+			if (parent.length) {
+				dropdownParent = parent;
+			}
+
+			var allowClear = theinput.data("allowclear");
+			if (allowClear == undefined) {
+				allowClear = true;
+			}
+			theinput.select2({
+				placeholder: defaulttext,
+				allowClear: allowClear,
+				minimumInputLength: 0,
+				tags: true,
+				dropdownParent: dropdownParent,
+				ajax: {
+					// instead of writing the
+					// function to execute the
+					// request we use Select2's
+					// convenient helper
+					url: url,
+					dataType: "json",
+					data: function (params) {
+						var fkv = theinput
+							.closest("form")
+							.find("#list-" + foreignkeyid + "value")
+							.val();
+						if (fkv == undefined) {
+							fkv = theinput
+								.closest("form")
+								.find("#list-" + foreignkeyid)
+								.val();
+						}
+						var search = {
+							page_limit: 15,
+							page: params.page,
+						};
+						search[searchfield + ".value"] = params.term; // search
+						// term
+						if (fkv) {
+							search["field"] = foreignkeyid; // search
+							// term
+							search["operation"] = "matches"; // search
+							// term
+							search[foreignkeyid + ".value"] = fkv; // search
+							// term
+						}
+						if (sortby) {
+							search["sortby"] = sortby; // search
+							// term
+						}
+						return search;
+					},
+					processResults: function (data, params) {
+						// parse the
+						// results into
+						// the format
+						// expected by
+						// Select2.
+						var rows = data.rows;
+						return {
+							results: rows,
+							pagination: {
+								more: false,
+								// (params.page * 30) <
+								// data.total_count
+							},
+						};
+					},
+				},
+				escapeMarkup: function (m) {
+					return m;
+				},
+				templateResult: select2formatResult,
+				templateSelection: select2Selected,
+			});
+
+			// TODO: Remove this?
+			theinput.on("change", function (e) {
+				if (e.val == "") {
+					// Work around for a bug
+					// with the select2 code
+					var id = "#list-" + theinput.attr("id");
+					$(id).val("");
+				}
+			});
+
+			theinput.on("select2:open", function (e) {
+				var selectId = $(this).attr("id");
+				if (selectId) {
+					$(
+						".select2-search__field[aria-controls='select2-" +
+							selectId +
+							"-results']"
+					).each(function (key, value) {
+						value.focus();
+					});
+				} else {
+					document
+						.querySelector(".select2-container--open .select2-search__field")
+						.focus();
+				}
+			});
+		}
+	});
+
+	lQuery(".submitform").livequery("click", function (e) {
+		e.preventDefault();
+
+		var theform = $(this).closest("form");
+
+		var clicked = $(this);
+		if (clicked.data("updateaction")) {
+			var newaction = clicked.attr("href");
+			theform.attr("action", newaction);
+		}
+		console.log("Submit Form " + theform);
+		theform.trigger("submit");
+		e.stopPropagation();
+		return;
+	});
 
 	lQuery("form.autosubmit").livequery(function () {
 		var form = $(this);
@@ -705,6 +704,86 @@ $(document).ready(function () {
 				.show()
 				.fadeOut(2000);
 		}
+	});
+	var browserlanguage = appdiv.data("browserlanguage");
+	if (browserlanguage == undefined || browserlanguage == "") {
+		browserlanguage = "en";
+	}
+	lQuery("input.datepicker").livequery("mousedown", function () {
+		var trigger = $(this).parent().find(".ui-datepicker-trigger");
+		trigger.trigger("click");
+	});
+	lQuery("input.datepicker").livequery(function () {
+		if ($.datepicker) {
+			var dpicker = $(this);
+			$.datepicker.setDefaults($.datepicker.regional[browserlanguage]);
+			$.datepicker.setDefaults(
+				$.extend({
+					showOn: "button",
+					buttonImage:
+						"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%234d5d80' class='bi bi-calendar-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7'/%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z'/%3E%3C/svg%3E",
+					buttonImageOnly: true,
+					changeMonth: true,
+					changeYear: true,
+					yearRange: "1900:2050",
+				})
+			); // Move this to the Layouts?
+
+			var targetid = dpicker.data("targetid");
+			dpicker.datepicker({
+				altField: "#" + targetid,
+				altFormat: "yy-mm-dd",
+				yearRange: "1900:2050",
+				beforeShow: function (input, inst) {
+					setTimeout(function () {
+						$("#ui-datepicker-div").css("z-index", 100100);
+						$("#application").append($("#ui-datepicker-div"));
+						// var quickSelect = $("#operationentitydatefindercatalog");
+						// quickSelect.css("display", "block");
+						// $("#ui-datepicker-div").append(quickSelect);
+						//Fix Position if in bootstrap modal
+						var modal = $("#modals");
+						if (modal.length) {
+							var modaltop = $("#modals").offset().top;
+							if (modaltop) {
+								var dpickertop = dpicker.offset().top;
+								dpickertop = dpickertop - modaltop;
+								var dpHeight = inst.dpDiv.outerHeight();
+								var inputHeight = inst.input ? inst.input.outerHeight() : 0;
+								var viewHeight = document.documentElement.clientHeight;
+								if (dpickertop + dpHeight + inputHeight > viewHeight) {
+									dpickertop = dpickertop - dpHeight;
+								}
+								inst.dpDiv.css({
+									top: dpickertop + inputHeight,
+								});
+							}
+						}
+					}, 0);
+				},
+			});
+
+			var current = $("#" + targetid).val();
+			if (current != undefined) {
+				// alert(current);
+				var date;
+				if (current.indexOf("-") > 0) {
+					// this is the standard
+					current = current.substring(0, 10);
+					// 2012-09-17 09:32:28 -0400
+					date = $.datepicker.parseDate("yy-mm-dd", current);
+				} else {
+					date = $.datepicker.parseDate("mm/dd/yy", current); // legacy
+				}
+				$(this).datepicker("setDate", date);
+			}
+			$(this).blur(function () {
+				var val = $(this).val();
+				if (val == "") {
+					$("#" + targetid).val("");
+				}
+			});
+		} //datepicker
 	});
 
 	//open assets on finder on new window

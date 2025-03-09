@@ -9,14 +9,13 @@
 	#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 	$context.putPageValue("searcher",$searcher)
 	<form name="saveproject" 
-			id="saveproject" 
-			action="$communityhome/project/services/expenses/addsave.html" 
-			method="post"
-			class="ajaxform autocloseform"
-			data-targetdivinner="collectivesettingscontent"
-			data-oemaxlevel="1">
-	
-	
+		id="saveproject" 
+		action="$communityhome/project/services/expenses/addsave.html" 
+		method="post"
+		class="ajaxform autocloseform"
+		data-targetdivinner="collectivesettingscontent"
+		data-oemaxlevel="1">
+
 	<input type="hidden" name="save" value="true" />
 	<input type="hidden" name="searchtype" value="$searchtype" />
 	
@@ -33,7 +32,7 @@
 	$data.setValue("date",$now)
 	
 	$context.putPageValue("data", $data)
-	 
+	
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 </form>
 </div>

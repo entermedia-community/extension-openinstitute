@@ -27,7 +27,7 @@
 
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	
-	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
+	<script id="communityglobal" src="${communityhome}/components/javascript/community-global.js"/>
 	
 	<script id="multidate" src="${communityhome}/components/javascript/multidate/moment.js"/>
 	<!-- <script id="datetimepicker" src="${communityhome}/components/javascript/multidate/jquery.daterangepicker.min.js"/>
