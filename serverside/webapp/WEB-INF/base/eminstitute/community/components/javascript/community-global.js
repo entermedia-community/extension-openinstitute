@@ -725,6 +725,15 @@ $(document).ready(function () {
 		}
 	}
 
+	lQuery(".toggleCommunityDrawer").livequery("click", function () {
+		$(".sidebar-left").toggleClass("active");
+		$("#community-drawer-mask").show();
+	});
+	lQuery(".community-drawer-close").livequery("click", function () {
+		$(".sidebar-left").removeClass("active");
+		$("#community-drawer-mask").hide();
+	});
+
 	lQuery("#uploadtitle").livequery("change", function () {
 		var title = $(this).val();
 		var slug = slugify(title);

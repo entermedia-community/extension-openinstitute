@@ -82,30 +82,21 @@ h6,
 	h2,
 	.h2 {
 		font-size: 26px;
-		line-height: 36px;
 	}
 }
 @media (max-width: 767px) {
 	h2,
 	.h2 {
 		font-size: 28px;
-		line-height: 45px;
 	}
 }
 @media (max-width: 991px) {
 	h2,
 	.h2 {
 		font-size: 30px;
-		line-height: 48px;
 	}
 }
-@media (max-width: 1199px) {
-	h2,
-	.h2 {
-		font-size: 28px;
-		line-height: 40px;
-	}
-}
+
 h3,
 .h3 {
 	font-size: 1.25rem;
@@ -316,12 +307,6 @@ h6,
 	background-color: #626584;
 	color: #fff;
 }
-ol,
-ul {
-	/* list-style-type: none; */
-	/* margin: 0; */
-	/* padding: 0; */
-}
 a,
 a:hover,
 a:focus {
@@ -500,10 +485,6 @@ header.navigation {
 }
 footer {
 	background-color: #45485e;
-}
-.modal-header .btn-close,
-.modal-header .btn-close:hover {
-	/* filter: invert(1); */
 }
 .content p {
 	color: #222222;

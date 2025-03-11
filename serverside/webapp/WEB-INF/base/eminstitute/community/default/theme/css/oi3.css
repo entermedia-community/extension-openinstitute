@@ -1146,7 +1146,7 @@ h1.blog-title {
 	padding: 4px 12px;
 	line-height: 30px;
 	margin-right: 8px;
-	background-color: rgba(255, 255, 255, 0.15) !important;
+	/* background-color: rgba(255, 255, 255, 0.15) !important; */
 }
 .btn.toggleCommunityDrawer:active {
 	background-color: rgba(255, 255, 255, 0.2) !important;

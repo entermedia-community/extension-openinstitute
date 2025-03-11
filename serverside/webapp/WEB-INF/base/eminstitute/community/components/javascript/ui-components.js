@@ -122,15 +122,6 @@ uiload = function () {
 		});
 	}
 
-	lQuery(".toggleCommunityDrawer").livequery("click", function () {
-		$(".sidebar-left").toggleClass("active");
-		$("#community-drawer-mask").show();
-	});
-	lQuery(".community-drawer-close").livequery("click", function () {
-		$(".sidebar-left").removeClass("active");
-		$("#community-drawer-mask").hide();
-	});
-
 	lQuery(".setpagetitleX").livequery(function () {
 		var setpagetitle = $(this).data("setpagetitle");
 		if (setpagetitle) {
@@ -3333,8 +3324,6 @@ uiload = function () {
 			});
 		}
 	});
-
-
 
 	lQuery(".favclick").livequery("click", function (e) {
 		e.preventDefault();
