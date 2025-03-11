@@ -2,7 +2,13 @@
 
 
 <page>
-	<inner-layout>${communityhome}/project/blog/innerlayout.html</inner-layout>
+	<inner-layout>${communityhome}/project/blog/layout.html</inner-layout>
+	
 	<property name="virtual">true</property>
+
+	<property name="route-template">${communityhome}/project/blog/:slug</property>
+
+	<path-action name="ProjectModule.loadCollection" />
+	<path-action name="ProjectModule.loadPathParams" />
 	
 </page>

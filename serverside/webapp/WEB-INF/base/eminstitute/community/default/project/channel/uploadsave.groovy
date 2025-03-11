@@ -16,7 +16,7 @@ public void init()
 	log.info("Uploading Post Content: " + sourcepath);
 	Category defaultcat = archive.getCategorySearcher().createCategoryPath(sourcepath);
 	
-	Searcher searcher = archive.getSearcher("userupload");
+	Searcher searcher = archive.getSearcher("userpost");
 	Data upload = searcher.createNewData();
 	upload.setValue("uploaddate",new Date());
 	upload.setValue("owner",context.getUserName());
