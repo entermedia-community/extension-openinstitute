@@ -18,7 +18,7 @@ public void init()
 	
 	String projectlink = context.getPageValue("projectlink");
 	
-	context.redirect("/${projectlink}/channel/${upload.urlname}");
+	context.redirect("${projectlink}/blog/${upload.urlname}");
 		
 }
 

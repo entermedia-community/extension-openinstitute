@@ -13,8 +13,9 @@ $context.putPageValue("searcher",$searcher)
 			<div class="blog-form-container blog-shadow"> 
 				<form id="blogForm"
 					method="post"
+					enctype="multipart/form-data" 
 					action="$projectlink/channel/save.html"
-					class="ajaxform feedupload d-flex flex-column">
+					class="feedupload d-flex flex-column">
 					
 					<input name="save" value="true" type="hidden" />
 
@@ -29,19 +30,22 @@ $context.putPageValue("searcher",$searcher)
 					</div>
 		
 					<div class="my-2">
-						<input name="field" value="uploaddescription" type="hidden" />
-						<textarea name="uploaddescription.value" id="uploadpostdescription" cols="40" rows="5" class="htmleditor-advanced" data-editonly="true" data-imagepickerhidden="true"></textarea>
-						<div class="text-right d-flex align-items-center justify-content-end my-1">
-							<input name="field" value="exclusivecontent" type="hidden" />
-							<input class="form-check-input mt-0 me-1" type="checkbox" name="exclusivecontent.value"  id="exclusivecontent" value="true" /> 
-							<label for="exclusivecontent" class="m-0 text-secondary small">
-								[[Private Post]] ([[Team Only]])
-							</label>
-						</div>
+						<input name="field" value="maincontent" type="hidden" />
+						<textarea name="maincontent.value" id="maincontent" cols="40" rows="5" class="htmleditor-advanced" data-editonly="true" data-imagepickerhidden="true"></textarea>
 					</div>
-					<input name="field" value="collectionid" type="hidden" />
-					<input type="hidden" name="collectionid.value" id="currentcollection" value="$librarycol.getId()"/>
+					
+					<input name="field" value="librarycollection" type="hidden" />
+					<input type="hidden" name="librarycollection.value" id="currentcollection" value="$librarycol.getId()"/>
 					<input name="collectionid" type="hidden" value="$librarycol.getId()"/>
+										
+					<div class="text-right d-flex align-items-center justify-content-end my-1">
+						<input name="field" value="poststatus" type="hidden" />
+						<input class="form-check-input mt-0 me-1" type="checkbox" name="poststatus.value"  id="poststatus" value="published" checked="checked" /> 
+						<label for="exclusivecontent" class="m-0 text-secondary small">
+							[[Auto Published]]
+						</label>
+					</div>
+					
 					
 					<label for="urlname" class="form-label">[[Post URL]]</label> 
 					<input name="field" value="urlname" type="hidden" />
@@ -50,7 +54,8 @@ $context.putPageValue("searcher",$searcher)
 					<label for="thumbnailPicker" class="form-label mt-3">[[Choose a Thumbnail]]</label>
 					<div class="d-flex">
 						<input type="hidden" name="field" value="primarymedia" />
-						<input class="form-control" name="primarymedia.value" id="thumbnailPicker" type="file" required>
+						<input class="form-control" name="primarymedia.value" id="thumbnailPicker" type="file">
+						
 						<button class="btn btn-danger ms-2" id="removeThumbnail" type="button" style="display:none;">
 							<i class="fas fa-times me-1"></i>
 							[[Remove]]

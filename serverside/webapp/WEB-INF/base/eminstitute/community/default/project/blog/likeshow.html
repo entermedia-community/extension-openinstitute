@@ -1,0 +1,13 @@
+<a href="${projectlink}/blog/liketoggle.html"
+	data-userpostid="${userpostid}"
+	data-userid="$context.getUserName()"
+	data-targetdiv="userpostlike${userpostid}" 
+	data-oemaxlevel="1"
+	class="icon ajax "
+	id="userpostlike${userpostid}"
+	title="#if($userpostlikes.size() > 0) ${userpostlikes.size()} Likes #end">
+	#if($likedbyme)<i class="fas fa-heart" style="color:red;" ></i>
+	#else<i class="far fa-heart" ></i>
+	#end
+	<span>[[Like]]</span>
+</a>

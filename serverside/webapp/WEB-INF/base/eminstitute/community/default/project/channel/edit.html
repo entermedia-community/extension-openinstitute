@@ -1,11 +1,14 @@
-#set( $searcher = $mediaarchive.getSearcher("userupload") )
+#set( $searcher = $mediaarchive.getSearcher("userpost") )
 $context.putPageValue("searcher",$searcher)
-$context.putPageValue("viewid", "useruploadgeneral")
+$context.putPageValue("viewid", "userpostgeneral")
 
-<form name="saveproject" id="saveproject" action="$communityhome/project/channel/editupload/save.html" method="post">
+<form name="saveproject" 
+	id="saveproject"
+	enctype="multipart/form-data"  
+	action="$communityhome/project/channel/save.html" 
+	method="post">
 
 	<input type="hidden" name="save" value="true" />
-	<input type="hidden" name="searchtype" value="userupload" />
 	<input type="hidden" name="id" value="$data.id" />
 	<input type="hidden" name="collectionid" value="$librarycol.id" />
 

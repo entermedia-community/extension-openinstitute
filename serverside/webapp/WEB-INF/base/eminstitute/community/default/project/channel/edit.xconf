@@ -5,8 +5,7 @@
 
 	<path-action name="DataEditModule.loadData" allowduplicates="true">
 			<pageval>data</pageval>
-			<idname>uploadid</idname>
-			<searchtype>userupload</searchtype>
+			<searchtype>userpost</searchtype>
     </path-action>
 
 

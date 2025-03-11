@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <property id="name" />
+  <property id="longdescription" />
+  <property id="maincontent" />
+  <property id="keywords" />
+  <property id="poststatus" />
+  <property id="urlname" />
+  <property id="primarymedia" />
+  
+</properties>

@@ -1,14 +1,14 @@
  
 $context.putPageValue("showchannel",true)
 
-#set( $userposts = $mediaarchive.query("userpost").exact("poststatus", "published").sort("entity_date").search() )
+#set( $userposts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "published").sort("entity_dateDown").search() )
 
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 	<div class="d-flex align-items-center justify-content-between mb-5">
 		<h2 class="h6 text-secondary">[[Recent Blogs]]</h2>
 		<a class="btn btn-primary emdialog" 
-			href="${communitylink}/project/channel/addnewupload.html" 
+			href="${communitylink}/project/channel/addnew.html" 
 			data-collectionid="$librarycol.id" data-oemaxlevel="1" data-dialogid="blogform">
 			<i class="fa fa-plus me-1"></i>
 			[[Create a New Blog]]
@@ -22,7 +22,7 @@ $context.putPageValue("showchannel",true)
 	#else
 		<div class="blog-list-container">
 			#foreach( $userpost in $userposts.getPageOfHits())
-				$context.putPageValue("upload",$userpost)
+				$context.putPageValue("userpost",$userpost)
 				$pages.include("${communityhome}/project/blog-list/blog-item.html",$context)
 			#end
 		</div>

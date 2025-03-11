@@ -11,7 +11,20 @@
 	#set($projectlink = "${communitylink}/#dash($project.getName())")
 #end
 
-<div class="blog-post">
+#if($userpost.urlname)
+  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.urlname}")
+#else
+  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.id}")
+#end
+
+#set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
+#set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image730x480cropped.jpg"))
+
+<div id="$postasset.id" 
+	class='blog-post #if($postasset.previewstatus!="2") ajaxstatus #end' 
+	data-reloadspeed="2000"
+	data-oemaxlevel="2"
+	ajaxpath="$bloglink" >
 	<div class="blog-list-item">
 		<div class="w-100 d-flex align-items-center justify-content-between mb-3">
 			<div class="blog-credit">
@@ -58,28 +71,26 @@
 					<ul class="dropdown-menu bg-white">
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
-								data-librarycol="${project.getId()}" data-uploadid="${userpost.id}"
+								data-librarycol="${librarycol.getId()}" data-uploadid="${userpost.id}"
 								href="$projectlink/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
 								<i class="fas fa-share-alt me-2"></i> [[Share]]
 							</a>
 						</li>
-						<li>
-							<a class="dropdown-item" href="#">
-								<i class="far fa-bookmark me-2"></i> [[Bookmark]]
-							</a>
-						</li>
+						
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
-								data-collectionid="${project.getId()}" data-uploadid="${upload.id}"
-								href="$projectlink/channel/report/index.html?uploadid=${upload.id}">
+								data-collectionid="${librarycol.getId()}" data-uploadid="${userpost.id}"
+								href="$projectlink/channel/report/index.html?uploadid=${userpost.id}">
 								<i class="far fa-flag me-2"></i> [[Report]]
 							</a>
 						</li>
 						#if($caneditcollection)
 							<li>
-								<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
-									data-collectionid="${project.getId()}" data-uploadid="${upload.id}"
-									href="$projectlink/channel/editupload/edit.html?uploadid=${upload.id}">
+								<a class="dropdown-item emdialog" data-width="900" 
+									data-hidefooter="true"
+									data-collectionid="${librarycol.getId()}" 
+									data-id="${userpost.id}"
+									href="$projectlink/channel/edit.html">
 									<i class="fas fa-edit me-2"></i> [[Edit]]
 								</a>
 							</li>
@@ -90,25 +101,35 @@
 		</div>
 
 		<div class="blog-container">
-			#if($userpost.title)
+			#if($userpost.name)
 				<h1 class="blog-title">
-					#esc($!upload.title)
+					#esc($!userpost.name)
 					#if($userpost.getBoolean("exclusivecontent"))
 						<i class="fas fa-lock"></i>
 					#end
 				</h1>
 			#end
-
-			<div class="blog-body">$!upload.longdescription</div>
 			
-			<div class="blog-media" data-uploadid="${upload.id}">
+			
+			
+
+			#ifnotnull($postasset)
+			<div class="mb-4">
+				<img loading="lazy" src="${postimagesrc}" >
+								
+			</div>
+			#end
+			
+			<div class="blog-body">$!userpost.maincontent</div>
+			
+			<div class="blog-media" data-uploadid="${userpost.id}">
 				$context.putPageValue("upload",$userpost)
 				$pages.include("${communityhome}/project/channel/images.html", $context)
 			</div>
 	
-			#if(!$userpost.title)
+			#if(!$userpost.name)
 				<div>
-					$pages.include("${communityhome}/project/channel/showpostmetadata.html",$context)
+					$pages.include("${communityhome}/project/blog/showpostmetadata.html",$context)
 				</div>
 			#end
 	
@@ -124,15 +145,16 @@
 			</div>
 	
 			<div class="blog-footer">
-				<button class="icon">
-					<i class="far fa-heart"></i>
-					<span>[[Like]]</span>
-				</button>
-				<button class="icon" data-bs-toggle="collapse" data-bs-target="#blog${upload.id}">
+				$context.putPageValue("userpostid", $userpost.getId())
+				$pages.include("./likeshow.html?userpostid=$userpost.getId()", $context)
+				
+				#*
+				<button class="icon" data-bs-toggle="collapse" data-bs-target="#blog${userpost.id}">
 					<i class="far fa-comment"></i>
 					<span>[[Comment]]</span>
 				</button>
-				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
+				*#
+				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${userpost.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
 					<i class="fas fa-share-alt"></i>
 					<span>[[Share]]</span>
 				</a>
@@ -140,7 +162,7 @@
 		</div>
 	</div>
 
-	<div class="collapse" id="blog${upload.id}">
+	<div class="collapse" id="blog${userpost.id}">
 		$pages.include("${communityhome}/project/channel/comments/comments.html",$context)
 	</div>
 
