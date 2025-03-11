@@ -10,20 +10,18 @@ $context.putPageValue("showchannel",true)
 			[[Create a New Blog]]
 		</a>
 	</div>
-	
 
+	#if( $topuploads.isEmpty() )
+		<p class="text-center text-muted my-5">
+			[[Nothing posted yet]]
+		</p>
+	#else
+		<div class="blog-list-container">
+			#foreach( $upload in $topuploads.getPageOfHits())
+				$context.putPageValue("upload",$upload)
+				$pages.include("${communityhome}/project/blog-list/blog-item.html",$context)
+			#end
+		</div>
+	#end
 
-	
- #if( $topuploads.isEmpty() )
-	<p class="text-center text-muted my-5">
-		[[Nothing posted yet]]
-	</p>
- #else
-	<div class="blog-list-container">
-		#foreach( $upload in $topuploads.getPageOfHits())
-			$context.putPageValue("upload",$upload)
-			$pages.include("${communityhome}/project/blog-list/blog-item.html",$context)
-		#end
-	</div>
-#end
 </div>
