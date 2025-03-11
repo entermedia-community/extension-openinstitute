@@ -1,7 +1,7 @@
  
 $context.putPageValue("showchannel",true)
 
-#set( $userposts = $mediaarchive.query("userupload").exact("poststaus", "published").sort("entity_date").search() )
+#set( $userposts = $mediaarchive.query("userpost").exact("poststatus", "published").sort("entity_date").search() )
 
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
