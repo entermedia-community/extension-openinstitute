@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+
+	<permission name="view">
+		<not>
+			<pagevalue name="canviewupload" equals="false"/>
+		</not>
+	</permission>
+
+	<property name="threadedupload">true</property>
+
+	<path-action name="DataEditModule.parseMultPart" />
+	
+	<path-action name="DataEditModule.saveData">
+		<property name="searchtype">userpost</property>
+		<property name="pageval">entity</property>
+	</path-action>
+	
+	<path-action name="EntityModule.getEntity">
+		<property name="entitymoduleid">userpost</property>
+	</path-action>
+	
+	<path-action name="AssetEditModule.handleUploads">
+		<property name="pageval">entity</property>
+	</path-action>
+	
+	<path-action name="Script.run">
+		<script>./uploadsave.groovy</script>
+	</path-action>
+
+	<property name="hitsname">hits</property>
+ 	<property name="assetshowonly"></property>
+ 	
+	<inner-layout />
+ 	
+</page>
