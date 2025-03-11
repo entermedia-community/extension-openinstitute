@@ -1,9 +1,7 @@
-#set( $searcher = $mediaarchive.getSearcher("user") ) #set($collectionid =
-$context.getRequestParameter("collectionid"))
-$context.putPageValue("searcher",$searcher) #set($targetdiv =
-"subscriberssidebar")
+#set( $searcher = $mediaarchive.getSearcher("user") ) 
+#set($collectionid = $context.getRequestParameter("collectionid"))
+$context.putPageValue("searcher",$searcher) #set($targetdiv = "subscriberssidebar")
 <div id="search-collections">
-	
 
   <div id="searcharea">
     #set($viewid = "usersearch") #set($viewpath = "user/${viewid}")
@@ -65,6 +63,7 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv =
       data-targetdiv="subscriberssidebar"
       data-oemaxlevel="1"
       data-collectionid="$!{collectionid}"
+	  data-communityid="${communitytagcategory.getId()}"
       data-hitssessionid="$!hits.sessionId"
 	  data-addtoteam="true"
       data-url="$communityhome/project/channel/subscribers/addsave.html"

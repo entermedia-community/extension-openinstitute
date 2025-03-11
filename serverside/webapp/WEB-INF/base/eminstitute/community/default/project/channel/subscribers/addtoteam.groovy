@@ -84,10 +84,14 @@ public void init()
 	String communityhome = context.getPageValue("communityhome");
 	String template = communityhome + "/theme/emails/collection-add-teammember.html";
 	
+	
+	String communityid = context.getRequestParameter("communityid");
+	Data community = archive.getCachedData("communitytagcategory", communityid);
+	
 	log.info("Sending notification to: " + teamuser);
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
-	templatemail.setSubject("Added to Team"); //TODO: Translate
+	templatemail.setSubject("[OI]" + community.getName() + ": Added to Team"); //TODO: Translate
 	Map objects = new HashMap();
 	String entermediakey = archive.userManager.getEnterMediaKey(teamuser);
 	objects.put("entermediakey",entermediakey);
@@ -99,7 +103,7 @@ public void init()
 	objects.put("applink", context.getPageValue("applink"));
 	objects.put("siteroot", getSiteRoot());
 	objects.put("communityhome", communityhome);
-	
+	objects.put("community",community);
 		
 	//log.info("Sending welcome email  " + teamuserid);
 	
