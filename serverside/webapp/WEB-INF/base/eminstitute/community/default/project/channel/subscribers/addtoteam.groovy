@@ -19,7 +19,7 @@ public void init()
 	if(email) {
 		email = email.trim().toLowerCase();
 	}
-	String teamuserid = context.getRequestParameter("teamuserid");
+	String teamuserid = context.getRequestParameter("dataid");
 	String addtoteam = context.getRequestParameter("addtoteam");
 	
 	//log.info("Adding used to team " + teamuserid + " and " + email);
@@ -83,6 +83,8 @@ public void init()
 //	Set template path with applicationid instead of just 'apphome'
 	String communityhome = context.getPageValue("communityhome");
 	String template = communityhome + "/theme/emails/collection-add-teammember.html";
+	
+	log.info("Sending notification to: " + teamuser);
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
 	templatemail.setSubject("Added to Team"); //TODO: Translate

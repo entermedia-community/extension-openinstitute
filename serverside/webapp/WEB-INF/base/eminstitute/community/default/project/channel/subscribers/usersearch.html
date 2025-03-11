@@ -3,6 +3,8 @@ $context.getRequestParameter("collectionid"))
 $context.putPageValue("searcher",$searcher) #set($targetdiv =
 "subscriberssidebar")
 <div id="search-collections">
+	
+
   <div id="searcharea">
     #set($viewid = "usersearch") #set($viewpath = "user/${viewid}")
     #set($details = $searcher.getDetailsForView($viewpath, $userprofile))
@@ -59,11 +61,13 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv =
 
     <div
       id="adduserpicker"
-      data-targetdiv="$!{targetdiv}"
+	  class="pickerresultsgeneral"
+      data-targetdiv="subscriberssidebar"
       data-oemaxlevel="1"
       data-collectionid="$!{collectionid}"
       data-hitssessionid="$!hits.sessionId"
-      data-saveurl="$communityhome/project/channel/subscribers/addsave.html"
+	  data-addtoteam="true"
+      data-url="$communityhome/project/channel/subscribers/addsave.html"
     >
       <div class="clearfix"></div>
     </div>

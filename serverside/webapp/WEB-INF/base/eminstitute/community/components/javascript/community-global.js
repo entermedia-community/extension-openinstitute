@@ -821,7 +821,46 @@ $(document).ready(function () {
 	handleFooterPosition();
 	var resizeObserver = new ResizeObserver(handleFooterPosition);
 	resizeObserver.observe(document.body);
+	
+	
+	//Standard Picker (old emselectresults?)
+	
+	lQuery(".pickerresultsgeneral .resultsdivdata").livequery("click", function (e) {
+		if (!isValidTarget(e)) {
+			return true;
+		}
+		var row = $(this);
+		var clickableresultlist = row.closest(".pickerresultsgeneral");
+		var rowid = row.data("dataid");
+		clickableresultlist.data("dataid", rowid);
+		clickableresultlist.runAjax();
+		
+		closeemdialog(clickableresultlist.closest(".modal"));
+		
+	});
+	
+	
+	
+	
 }); //document (ready)
+
+
+function isValidTarget(clickEvent) {
+	var target = $(clickEvent.target);
+	if (
+		target.attr("noclick") == "true" ||
+		target.is("input") ||
+		target.is("a") ||
+		target.closest(".jp-audio").length
+	) {
+		return false;
+	}
+
+	clickEvent.preventDefault();
+	clickEvent.stopImmediatePropagation();
+
+	return true;
+}
 
 function isInViewport(cell) {
 	const rect = cell.getBoundingClientRect();

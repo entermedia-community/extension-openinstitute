@@ -1,23 +1,13 @@
  
-<div id="emresultscontent">
+<div id="emresultscontent" class="">
 	
   $context.putPageValue("searchtype", "user") 
   #set( $searcher =  $mediaarchive.getSearcher("user") )
   $context.putPageValue("searcher",$searcher) 
   #set($viewid = "userpickerresults")
   $context.putPageValue("viewid", $viewid) 
-
-    $context.putPageValue("module","user") 
+  $context.putPageValue("module","user") 
   $context.putPageValue("hits",$collhits)
   $pages.include("${communityhome}/components/table/results.html", $context)
 </div>
 
-#set($collectionid = $context.getRequestParameter("collectionid"))
-
-<a
-  href="$communityhome/project/channel/subscribers/addnew.html?collectionid=${collectionid}"
-  class="emdialog btn btn-sm btn-primary"
-  title="[[Add New User to Project]]"
->
-  <i class="fa-solidfa-plus"></i> [[Create New User]]
-</a>

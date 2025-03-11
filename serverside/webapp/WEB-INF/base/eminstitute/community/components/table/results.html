@@ -123,7 +123,7 @@
 		</thead>
 		<tbody>
 			#foreach( $hit in $hits.getPageOfHits() )
-				<tr  #if($candelete != "false") rowid="$hit.id" #end class="rowclick #if($selectedid == $hit.id) emhighlight #end">
+				<tr  #if($candelete != "false") data-dataid="$hit.id" #end class="resultsdivdata rowclick #if($selectedid == $hit.id) emhighlight #end">
 				#foreach( $detail in $details)
 					<td style="padding:4px;">
 							#set($values = false)
