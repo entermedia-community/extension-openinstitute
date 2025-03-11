@@ -54,8 +54,8 @@
         <div class="d-flex align-items-center">
           <a class="author-name" href='#urlescape("${communityhome}/users/index.html?id=${postuser.getId()}")'>$postuser.getAnonNickName()</a>
           <span class="mx-2">•</span>
-          <time datetime='$upload.getDate("uploaddate")' class="text-muted">
-            #set($timestamp = $context.getAge($upload.getDate("uploaddate")))
+          <time datetime='$upload.getDate("entity_date")' class="text-muted">
+            #set($timestamp = $context.getAge($upload.getDate("entity_date")))
             #ifnull($timestamp)
             [[Today]]
             #end

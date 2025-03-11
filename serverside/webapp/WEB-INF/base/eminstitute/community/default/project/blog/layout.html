@@ -1,8 +1,8 @@
-#set( $upload = $mediaarchive.query("userupload").exact("urlname", $params.slug).searchOne() )
+#set( $userpost = $mediaarchive.query("userpost").exact("urlname", $params.slug).searchOne() )
 
-#ifnull( $upload )
-  #set( $upload = $mediaarchive.query("userupload").exact("id", $params.slug).searchOne() )
+#ifnull( $userpost )
+  #set( $userpost = $mediaarchive.query("userpost").exact("id", $params.slug).searchOne() )
 #end
 
-$context.putPageValue("upload", $upload)
+$context.putPageValue("userpost", $userpost)
 $pages.include("${communityhome}/project/channel/showpost.html", $context)

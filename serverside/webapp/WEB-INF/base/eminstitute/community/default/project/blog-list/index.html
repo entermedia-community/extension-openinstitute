@@ -1,6 +1,8 @@
  
 $context.putPageValue("showchannel",true)
 
+#set( $userposts = $mediaarchive.query("userupload").exact("poststaus", "published").sort("entity_date").search() )
+
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 	<div class="d-flex align-items-center justify-content-between mb-5">
@@ -17,11 +19,13 @@ $context.putPageValue("showchannel",true)
 		</p>
 	#else
 		<div class="blog-list-container">
-			#foreach( $upload in $topuploads.getPageOfHits())
-				$context.putPageValue("upload",$upload)
+			#foreach( $userpost in $userposts.getPageOfHits())
+				$context.putPageValue("upload",$userpost)
 				$pages.include("${communityhome}/project/blog-list/blog-item.html",$context)
 			#end
 		</div>
 	#end
+
+	## $pages.include("${communityhome}/project/blog-list/pagination.html", $context)
 
 </div>
