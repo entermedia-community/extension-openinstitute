@@ -689,6 +689,48 @@ $(document).ready(function () {
 		});
 	});
 
+	lQuery("#thumbnailPicker").livequery("change", function () {
+		var input = $(this);
+		var file = input[0].files[0];
+		var reader = new FileReader();
+		reader.onloadend = function () {
+			var img = new Image();
+			img.src = reader.result;
+			img.onload = function () {
+				$("#thumbPreview").html(`<img src="${reader.result}" />`);
+				$("#removeThumbnail").show();
+			};
+		};
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+			$("#thumbPreview").html("");
+			$("#thumbnailPicker").val("");
+		}
+	});
+
+	lQuery("#removeThumbnail").livequery("click", function () {
+		$("#thumbPreview").html("");
+		$("#thumbnailPicker").val("");
+		$(this).hide();
+	});
+
+	function slugify(string) {
+		if (string) {
+			string = string.trim();
+			string = string.replace(/[^a-z0-9]+/gi, "-");
+			string = string.replace(/^-+|-+$/g, "");
+			string = string.toLowerCase();
+			return string.substring(0, 100);
+		}
+	}
+
+	lQuery("#uploadtitle").livequery("change", function () {
+		var title = $(this).val();
+		var slug = slugify(title);
+		$(this).closest("form").find("#urlname").val(slug);
+	});
+
 	lQuery(".copytoclipboard").livequery("click", function (e) {
 		e.preventDefault();
 		e.stopPropagation();

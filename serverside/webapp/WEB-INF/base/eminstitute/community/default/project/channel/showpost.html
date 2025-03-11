@@ -2,27 +2,18 @@
 	#set( $project = $mediaarchive.getData("librarycollection",$upload.librarycollection) )
 	$context.putPageValue("librarycol",$project)
 #end
+
 #set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+
 #if($project.urlname)
 	#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
 #else
-	#set($projectlink = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
+	#set($projectlink = "${communitylink}/#dash($project.getName())")
 #end
 
-#set( $shortdescription = "")
-#ifnotnull($upload.longdescription)
-	#set($shortdescription = $upload.longdescription.substring(0, $mathutil.getMinValue(640, $upload.longdescription.length())))
-	#if($shortdescription.length() < $upload.longdescription.length())
-		#set($shortdescription = $shortdescription + "...")
-	#end
-#end
-
-
-
-
-<div class="blog-post blog-shadow">
+<div class="blog-post">
 	<div class="blog-list-item">
-		<div class="w-100 d-flex align-items-center justify-content-between mb-2">
+		<div class="w-100 d-flex align-items-center justify-content-between mb-3">
 			<div class="blog-credit">
 				<div class="blog-avatar">
 					#set( $postuser = $userManager.getUser($upload.owner, true))
@@ -30,7 +21,7 @@
 					$pages.include("${communityhome}/users/icon.html",$context)
 				</div>
 				<a class="text-brand"
-					href='#urlescape("${communityhome}/users/${postuser.getId()}/${postuser.getAnonNickName()}.html")'>
+					href='#urlescape("${communityhome}/users/index.html?id=${postuser.getId()}")'>
 					$postuser.getAnonNickName()
 				</a>
 				<span class="d-inline-block mx-2">
@@ -57,7 +48,7 @@
 				<a href="${projectlink}">
 					<img src="$projectlogo" class="blog-community-img" alt="#text($project)" />
 				</a>
-				<a href="${projectlink}" class="blog-community-header">
+				<a href="${projectlink}" class="blog-community-name">
 					#text($project)
 				</a>
 				<div class="dropdown">
@@ -84,64 +75,73 @@
 								<i class="far fa-flag me-2"></i> [[Report]]
 							</a>
 						</li>
+						#if($caneditcollection)
+							<li>
+								<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
+									data-collectionid="${project.getId()}" data-uploadid="${upload.id}"
+									href="$projectlink/channel/editupload/edit.html?uploadid=${upload.id}">
+									<i class="fas fa-edit me-2"></i> [[Edit]]
+								</a>
+							</li>
+						#end
 					</ul>
 				</div>
 			</div>
 		</div>
-		#if($upload.title)
-			<div class="blog-container">
+
+		<div class="blog-container">
+			#if($upload.title)
 				<h1 class="blog-title">
 					#esc($!upload.title)
 					#if($upload.getBoolean("exclusivecontent"))
 						<i class="fas fa-lock"></i>
 					#end
 				</h1>
-			</div>
-		#end
-		#if ($shortdescription)
-			<div class="blog-body">$shortdescription</div>
-		#else
-			<div class="blog-body">$!upload.longdescription</div>
-		#end
-
-		<div class="blog-media" data-uploadid="${upload.id}">
-			$context.putPageValue("upload",$upload)
-			$pages.include("${communityhome}/project/channel/images.html", $context)
-		</div>
-
-		#if(!$upload.title)
-			<div>
-				$pages.include("${communityhome}/project/channel/showpostmetadata.html",$context)
-			</div>
-		#end
-
-		<div class="blog-tags">
-			#set( $tags = $upload.getValues("usertags") )
-			#if($tags && !$tags.isEmpty() )
-				#foreach( $tag in $tags )
-					<a href="#" class="blog-tag" title="#esc($tag)">
-						#esc($tag)
-					</a>
-				#end
 			#end
-		</div>
 
-		<div class="blog-footer">
-			<button class="icon">
-				<i class="far fa-heart"></i>
-				<span>[[Like]]</span>
-			</button>
-			<button class="icon" data-bs-toggle="collapse" data-bs-target="#blog${upload.id}">
-				<i class="far fa-comment"></i>
-				<span>[[Comment]]</span>
-			</button>
-			<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$upload.id">
-				<i class="fas fa-share-alt"></i>
-				<span>[[Share]]</span>
-			</a>
+			<div class="blog-body">$!upload.longdescription</div>
+			
+			<div class="blog-media" data-uploadid="${upload.id}">
+				$context.putPageValue("upload",$upload)
+				$pages.include("${communityhome}/project/channel/images.html", $context)
+			</div>
+	
+			#if(!$upload.title)
+				<div>
+					$pages.include("${communityhome}/project/channel/showpostmetadata.html",$context)
+				</div>
+			#end
+	
+			<div class="blog-tags">
+				#set( $tags = $upload.getValues("usertags") )
+				#if($tags && !$tags.isEmpty() )
+					#foreach( $tag in $tags )
+						<a href="#" class="blog-tag" title="#esc($tag)">
+							#esc($tag)
+						</a>
+					#end
+				#end
+			</div>
+	
+			<div class="blog-footer">
+				<button class="icon">
+					<i class="far fa-heart"></i>
+					<span>[[Like]]</span>
+				</button>
+				<button class="icon" data-bs-toggle="collapse" data-bs-target="#blog${upload.id}">
+					<i class="far fa-comment"></i>
+					<span>[[Comment]]</span>
+				</button>
+				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$upload.id">
+					<i class="fas fa-share-alt"></i>
+					<span>[[Share]]</span>
+				</a>
+			</div>
 		</div>
 	</div>
+
 	<div class="collapse" id="blog${upload.id}">
 		$pages.include("${communityhome}/project/channel/comments/comments.html",$context)
 	</div>
+
 </div>

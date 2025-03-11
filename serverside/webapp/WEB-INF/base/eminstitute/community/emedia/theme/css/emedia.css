@@ -37,8 +37,8 @@
 }
 body {
 	font-family: "Roboto", sans-serif;
-	font-size: 1.15rem;
-	line-height: 1.5;
+	font-size: 1rem;
+	/* line-height: 1.5; */
 	color: #111;
 	background-color: #fff;
 	font-weight: 500;
@@ -108,7 +108,7 @@ h6,
 }
 h3,
 .h3 {
-	font-size: 26px;
+	font-size: 1.25rem;
 	line-height: 32px;
 }
 @media (max-width: 575px) {
@@ -140,7 +140,7 @@ h3,
 }
 h4,
 .h4 {
-	font-size: 24px;
+	font-size: 1.1rem;
 	line-height: 24px;
 }
 @media (max-width: 575px) {
@@ -207,7 +207,7 @@ h6,
 	border-radius: 2px;
 }
 .btn-sm {
-	padding: 0.8rem 1.2rem;
+	padding: 0.5rem 1rem;
 }
 .btn-xs {
 	padding: 0.4rem 0.6rem;
@@ -318,9 +318,9 @@ h6,
 }
 ol,
 ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+	/* list-style-type: none; */
+	/* margin: 0; */
+	/* padding: 0; */
 }
 a,
 a:hover,
@@ -503,7 +503,7 @@ footer {
 }
 .modal-header .btn-close,
 .modal-header .btn-close:hover {
-	filter: invert(1);
+	/* filter: invert(1); */
 }
 .content p {
 	color: #222222;
