@@ -1,0 +1,13 @@
+ 
+<div id="emresultscontent" class="">
+	
+  $context.putPageValue("searchtype", "librarycollectionlikes") 
+  #set( $searcher =  $mediaarchive.getSearcher("librarycollectionlikes") )
+  $context.putPageValue("searcher",$searcher) 
+  #set($viewid = "librarycollectionlikesresultstable")
+  $context.putPageValue("viewid", $viewid) 
+  $context.putPageValue("module","librarycollectionlikes") 
+  $context.putPageValue("hits",$collhits)
+  $pages.include("${communityhome}/components/table/results.html", $context)
+</div>
+

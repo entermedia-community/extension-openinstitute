@@ -1,0 +1,16 @@
+<page>
+
+	<inner-layout />
+	<property name="enforcesecurity">true</property>
+	
+	<page-action name="DataEditModule.search" >
+		<property name="searchtype">librarycollectionlikes</property>
+		<property name="sortby">addeddate</property>
+		<property name="hitsname">collhits</property>
+	</page-action>
+	
+	<permission name="edittablecolumns"> 
+			<not />
+	</permission>
+
+</page>

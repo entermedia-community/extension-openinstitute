@@ -1,0 +1,5 @@
+
+<root>
+  <property id="followeruser" rendermask="$data.name ($data.email)" />
+  <property id="addeddate"/>
+</root>

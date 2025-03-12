@@ -63,7 +63,7 @@ $context.putPageValue("selecteduser", $selecteduser)
 									<h4>$selecteduser.getAnonNickName()</h4>						
 									#end
 									#if( $user  && $selecteduser.getId() != $user.getId())
-										$pages.include("$apphome/users/block/toggle.html")
+										$pages.include("${communityhome}/users/block/toggle.html")
 										<br>
 									#end
 									#if($canedituserinfo) 
