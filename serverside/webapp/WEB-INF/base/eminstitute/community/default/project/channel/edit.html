@@ -14,7 +14,7 @@ $context.putPageValue("viewid", "userpostgeneral")
 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 	
-	<div class="d-flex">
+	<div class="d-flex mt-4">
 		<input class="btn btn-sm btn-primary me-2" type="submit" value="[[Save]]" />
 		<a class="btn btn-sm btn-danger confirm"  data-confirm="[[Are you sure]]?" href="${projectlink}/edit/delete.html?id=$data.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1&collectionid=$librarycol.id">[[Delete]]</a>
 	</div>

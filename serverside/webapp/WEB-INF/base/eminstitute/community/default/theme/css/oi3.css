@@ -1746,3 +1746,7 @@ input.search-primary {
 	opacity: 0.3;
 	pointer-events: none !important;
 }
+
+.detail-input .render-type-thumbnail {
+	display: inline-block;
+}

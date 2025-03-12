@@ -6,16 +6,16 @@ $context.putPageValue("showchannel",true)
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 	<div class="d-flex align-items-center justify-content-between mb-5">
-		<h2 class="h6 text-secondary">[[Recent Blogs]]</h2>
+		<h2 class="h6 text-secondary flex-grow-1">[[Recent Blogs]]</h2>
 		#if($caneditcollection)
 		
 		#set( $drafts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "draft").search() )
 				
 		#if($drafts)
-			<a class="btn btn-primary" 
+			<a class="btn btn-light mx-2" 
 					href="${projectlink}/blog-list/index-pending.html" 
 					data-collectionid="$librarycol.id">
-					
+					<i class="fa fa-file me-1"></i>
 					[[Draft & Pending Posts]]
 			</a>
 		#end
