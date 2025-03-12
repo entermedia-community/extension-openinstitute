@@ -3,7 +3,7 @@ $context.putPageValue("collectionid",$librarycol.getId() )
 #set($logo = $mediaarchive.getAsset($librarycol.assetportrait) )
 
 #if ($logo)
-    #set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
+    #set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
 #else
     #set($logourl = "$communityhome/theme/images/OI_flower.png")
 #end
