@@ -1,7 +1,6 @@
 <page>
 
-	<path-action name="ProjectModule.loadCollection">
-	</path-action>
+	<path-action name="ProjectModule.loadCollection" />
 
 	<path-action name="DataEditModule.loadData" allowduplicates="true">
 			<pageval>data</pageval>

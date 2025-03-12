@@ -1,73 +1,22 @@
-##if( $caneditcollection )
 #set( $searcher = $mediaarchive.getSearcher("userpost") )
 $context.putPageValue("searcher",$searcher)
-#set( $xmledithome  = "$apphome/components/xml")
+$context.putPageValue("viewid", "userpostgeneral")
 
-<div class="modal-dialog modal-lg">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">[[Upload a File]]</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-			<div class="blog-form-container blog-shadow"> 
-				<form id="blogForm"
-					method="post"
-					enctype="multipart/form-data" 
-					action="$projectlink/channel/save.html"
-					class="feedupload d-flex flex-column">
-					
-					<input name="save" value="true" type="hidden" />
+<form name="saveproject" 
+	id="saveproject"
+	clasS="userpostform"
+	enctype="multipart/form-data"  
+	action="$communityhome/project/channel/save.html" 
+	method="post">
 
-					
-					<div class="d-flex align-items-center">
-						<div class="blog-form-avatar"> 
-							$context.putPageValue("chatuser", $user)
-							$pages.include("${communityhome}/users/icon.html",$context)
-						</div>
-						<input name="field" value="name" type="hidden" />
-						<input class="title-input uploadtitle" autocomplete="off" name="name.value" id="uploadtitle" placeholder="[[Post Title]]" required />
-					</div>
-		
-					<div class="my-2">
-						<input name="field" value="maincontent" type="hidden" />
-						<textarea name="maincontent.value" id="maincontent" cols="40" rows="5" class="htmleditor-advanced" data-editonly="true" data-imagepickerhidden="true"></textarea>
-					</div>
-					
-					<input name="field" value="librarycollection" type="hidden" />
-					<input type="hidden" name="librarycollection.value" id="currentcollection" value="$librarycol.getId()"/>
-					<input name="collectionid" type="hidden" value="$librarycol.getId()"/>
-										
-					<div class="text-right d-flex align-items-center justify-content-end my-1">
-						<input name="field" value="poststatus" type="hidden" />
-						<input class="form-check-input mt-0 me-1" type="checkbox" name="poststatus.value"  id="poststatus" value="published" checked="checked" /> 
-						<label for="exclusivecontent" class="m-0 text-secondary small">
-							[[Auto Published]]
-						</label>
-					</div>
-					
-					
-					<label for="urlname" class="form-label">[[Post URL]]</label> 
-					<input name="field" value="urlname" type="hidden" />
-					<input class="form-control" autocomplete="off" name="urlname.value" id="urlname" placeholder="[[Post URL Slug]]" required />
+	<input type="hidden" name="save" value="true" />
+	<input type="hidden" name="collectionid" value="$librarycol.id" />
 
-					<label for="thumbnailPicker" class="form-label mt-3">[[Choose a Thumbnail]]</label>
-					<div class="d-flex">
-						<input type="hidden" name="field" value="primarymedia" />
-						<input class="form-control" name="primarymedia.value" id="thumbnailPicker" type="file">
-						
-						<button class="btn btn-danger ms-2" id="removeThumbnail" type="button" style="display:none;">
-							<i class="fas fa-times me-1"></i>
-							[[Remove]]
-						</button>
-					</div>
-					<div id="thumbPreview"></div>
-				</form> 
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary btn-sm" form="blogForm" type="submit">[[Post]]</button>
-			<button class="btn btn-secondary btn-sm cancel" data-bs-dismiss="modal">[[Cancel]]</button>
-		</div>
+	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
+	
+	<div class="d-flex mt-4">
+		<input class="btn btn-sm btn-primary me-2" type="submit" value="[[Save]]" />
+		<a class="btn btn-sm btn-danger confirm"  data-confirm="[[Are you sure]]?" href="${projectlink}/edit/delete.html?id=$data.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1&collectionid=$librarycol.id">[[Delete]]</a>
 	</div>
-</div>
+</form>
+

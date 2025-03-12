@@ -20,8 +20,8 @@
 #set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
 #set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image730x480cropped.jpg"))
 
-<div id="$postasset.id" 
-	class='blog-post #if($postasset.previewstatus!="2") ajaxstatus #end' 
+<div id="$!{postasset.id}" 
+	class='blog-post #if($postasset && $postasset.previewstatus!="2") ajaxstatus #end' 
 	data-reloadspeed="2000"
 	data-oemaxlevel="2"
 	ajaxpath="$bloglink" >
@@ -64,6 +64,7 @@
 				<a href="${projectlink}" class="blog-community-name mb-0">
 					#text($librarycol)
 				</a>
+				#if($user)
 				<div class="dropdown">
 					<button class="icon text-brand ms-1" data-bs-toggle="dropdown">
 						<i class="fas fa-ellipsis-h"></i>
@@ -97,8 +98,13 @@
 						#end
 					</ul>
 				</div>
+				#end
 			</div>
 		</div>
+		
+		#if($caneditcollection && $userpost.poststatus != "published")
+			  		<div class="badge text-bg-warning mb-2">[[Status]]: $userpost.poststatus</div>
+		#end
 
 		<div class="blog-container">
 			#if($userpost.name)
@@ -113,7 +119,7 @@
 			
 			
 
-			#ifnotnull($postasset)
+			#ifnotnull($postimagesrc)
 			<div class="mb-4">
 				<img loading="lazy" src="${postimagesrc}" >
 								

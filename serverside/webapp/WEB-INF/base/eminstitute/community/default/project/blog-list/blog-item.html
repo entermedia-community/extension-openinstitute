@@ -23,18 +23,35 @@
 	
   <div class="article-thumbnail-wrap">
     <a href="${bloglink}">
+		#if($postimagesrc)
       <img loading="lazy" src="${postimagesrc}" >
+	  #end
     </a>
   </div>
   <div class="article-article">
-    <div class="d-flex align-items-center justify-content-end">
+    <div class="d-flex align-items-center justify-content-between">
       ##<a href="${projectlink}" class="blog-community-name">
       ##  #text($librarycol)
       ##</a>
+	  <div>
+	  #if($caneditcollection && $userpost.poststatus != "published")
+	  		<div class="badge text-bg-warning mb-2">[[Status]]: $userpost.poststatus</div>
+			<a class="btn btn-xs btn-primary emdialog" data-width="900" 
+												data-hidefooter="true"
+												data-collectionid="${librarycol.getId()}" 
+												data-id="${userpost.id}"
+												href="$projectlink/channel/edit.html">
+												<i class="fas fa-edit me-2"></i> [[Edit]]
+											</a>
+	  #end
+	  </div>
       <a class="emdialog text-muted small ml-auto" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$userpost.id">
         <i class="fas fa-share-alt"></i>
       </a>
     </div>
+	
+	
+	
     #ifnotnull($userpost.name)
       <h2>
         <a href="${bloglink}">$userpost.name</a>
