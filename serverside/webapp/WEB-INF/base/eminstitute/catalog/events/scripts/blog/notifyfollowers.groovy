@@ -1,6 +1,7 @@
 package blog;
 
 import org.apache.commons.collections.map.HashedMap
+import org.entermediadb.asset.Asset
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
 import org.openedit.*
@@ -31,7 +32,7 @@ public void init()
 			log.error("Error sending notifications: " + userpost.get("name"), e);
 			userpost.setValue("poststatus", "error");
 		}
-		archive.getSearcher("userposts").saveData(userpost);
+		archive.getSearcher("userpost").saveData(userpost);
 	}
 	
 }
@@ -81,13 +82,15 @@ public void notifyfollowers(String userpostid, String collectionid)
 	Data collection = archive.getCachedData("librarycollection", collectionid);
 	Data community = archive.getCachedData("communitytagcategory", collection.get("communitytagcategory"));
 	
+	Data blogpost = archive.getCachedData("userpost", userpostid);
+	
 	
 	if (collection == null || community == null)
 	{
 		log.error("Skiping post: " + userpostid + " No Collection or Community " + collection + " " + community);
 	}
 	
-	String emailSubject = "[OI]" + community.getName() + ": Added to Team";
+	String emailSubject = "[OI] " + community.getName() + " New Blog Post";
 	String siteid = context.findValue("siteid");
 	String template = siteid + community.get("templatepath") + "/theme/emails/newpostnotifyfollowers.html";
 	
@@ -107,10 +110,16 @@ public void notifyfollowers(String userpostid, String collectionid)
 		objects.put("apphome", context.getPageValue("apphome"));
 		objects.put("applink", context.getPageValue("applink"));
 		objects.put("siteroot", getSiteRoot());
-		objects.put("communityhome", community.get("templatepath"));
+		objects.put("communityhome", "/" + siteid + community.get("templatepath"));
 		objects.put("community",community);
+		
+		objects.put("blogpost",blogpost);
+		
+		Asset postasset = archive.getAsset(blogpost.primarymedia);
+		String postimage = community.get("externaldomain") + archive.asLinkToGenerated(postasset, "image730x480cropped.jpg");
+		objects.put("postimage", postimage);
 			
-		//	templatemail.send(objects);
+		 templatemail.send(objects);
 	}
 }
 

@@ -1,20 +1,20 @@
-#if(!$project)
-	#set( $project = $mediaarchive.getData("librarycollection",$userpost.librarycollection) )
-	$context.putPageValue("librarycol",$project)
+#if(!$librarycol)
+	#set( $librarycol = $mediaarchive.getData("librarycollection",$userpost.librarycollection) )
+	$context.putPageValue("librarycol",$librarycol)
 #end
 
-#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+#set( $community = $mediaarchive.getCachedData("communitytagcategory",$librarycol.communitytagcategory))
 
-#if($project.urlname)
-	#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
+#if($librarycol.urlname)
+	#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
 #else
-	#set($projectlink = "${communitylink}/#dash($project.getName())")
+	#set($projectlink = "${communitylink}/#dash($librarycol.getName())")
 #end
 
 #if($userpost.urlname)
-  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.urlname}")
+  #set($bloglink = "${projectlink}/blog/${userpost.urlname}")
 #else
-  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.id}")
+  #set($bloglink = "${projectlink}/blog/${userpost.id}")
 #end
 
 #set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
@@ -50,8 +50,8 @@
 					#end
 				</small>
 			</div>
-			#if($project.collectionimage)
-				#set($asset = $mediaarchive.getAsset($project.collectionimage))
+			#if($librarycol.collectionimage)
+				#set($asset = $mediaarchive.getAsset($librarycol.collectionimage))
 				#set( $projectlogo = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
 			#else
 				#set($projectlogo = "$communityhome/theme/images/OI_flower.png")
@@ -59,10 +59,10 @@
 			
 			<div class="blog-community">
 				<a href="${projectlink}">
-					<img src="$projectlogo" class="blog-community-img" alt="#text($project)" />
+					<img src="$projectlogo" class="blog-community-img" alt="#text($librarycol)" />
 				</a>
 				<a href="${projectlink}" class="blog-community-name mb-0">
-					#text($project)
+					#text($librarycol)
 				</a>
 				<div class="dropdown">
 					<button class="icon text-brand ms-1" data-bs-toggle="dropdown">
@@ -72,7 +72,7 @@
 						<li>
 							<a class="dropdown-item emdialog" data-width="900" data-hidefooter="true"
 								data-librarycol="${librarycol.getId()}" data-uploadid="${userpost.id}"
-								href="$projectlink/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
+								href="$projectlink/channel/share.html?collectionid=${librarycol.getId()}&showupload=$userpost.id">
 								<i class="fas fa-share-alt me-2"></i> [[Share]]
 							</a>
 						</li>
@@ -154,7 +154,7 @@
 					<span>[[Comment]]</span>
 				</button>
 				*#
-				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${userpost.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
+				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${userpost.id}" href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$userpost.id">
 					<i class="fas fa-share-alt"></i>
 					<span>[[Share]]</span>
 				</a>

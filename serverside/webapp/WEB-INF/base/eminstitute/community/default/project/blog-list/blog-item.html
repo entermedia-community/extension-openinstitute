@@ -1,20 +1,19 @@
-#if(!$project)
-	#set( $project = $mediaarchive.getData("librarycollection",$userpost.librarycollection) )
-  ##$context.putPageValue("librarycol",$project)
+#if(!$librarycol)
+  #set( $librarycol = $mediaarchive.getData("librarycollection",$userpost.librarycollection) )
 #end
 
-#set( $community = $mediaarchive.getCachedData("communitytagcategory", $project.communitytagcategory))
+#set( $community = $mediaarchive.getCachedData("communitytagcategory", $librarycol.communitytagcategory))
 
-#if($project.urlname)
-	#set($projectlink = "$!{community.externaldomain}/${project.urlname}")
+#if($librarycol.urlname)
+	#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
 #else
-	#set($projectlink = "${communitylink}/#dash($project.getName())")
+	#set($projectlink = "${communitylink}/#dash($librarycol.getName())")
 #end
 
 #if($userpost.urlname)
-  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.urlname}")
+  #set($bloglink = "${projectlink}/blog/${userpost.urlname}")
 #else
-  #set($bloglink = "${communitylink}/${project.urlname}/blog/${userpost.id}")
+  #set($bloglink = "${projectlink}/blog/${userpost.id}")
 #end
 
 <article class="article-card">
@@ -30,9 +29,9 @@
   <div class="article-article">
     <div class="d-flex align-items-center justify-content-end">
       ##<a href="${projectlink}" class="blog-community-name">
-      ##  #text($project)
+      ##  #text($librarycol)
       ##</a>
-      <a class="emdialog text-muted small ml-auto" data-width="900" data-hidefooter="true" data-librarycol="${project.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${project.getId()}&showupload=$userpost.id">
+      <a class="emdialog text-muted small ml-auto" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${upload.id}" href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$userpost.id">
         <i class="fas fa-share-alt"></i>
       </a>
     </div>

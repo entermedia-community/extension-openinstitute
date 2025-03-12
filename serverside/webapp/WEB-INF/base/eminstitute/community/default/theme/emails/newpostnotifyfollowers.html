@@ -1,6 +1,50 @@
 $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 
-<p>[[Hello]] $teamuser.getScreenName(),</p>
+<div>
+  <style type="text/css">
+    * {
+      font-size: 14px;
+      font-family: AtlasGrotesk,'Open Sans','Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
+      line-height: 21px;
+      color: #444;
+    }
+    h1 {
+      margin: 0.5rem 0 1rem;;
+    } 
+    h2, h3, h4, h5, h6, p, ul, ol {
+      margin: 0.5rem 0;
+    }
+    a {
+      color: #626584;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  
+  #if($librarycol.urlname)
+  	#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
+  #else
+  	#set($projectlink = "${communitylink}/#dash($librarycol.getName())")
+  #end
 
+  #if($blogpost.urlname)
+    #set($bloglink = "${projectlink}/blog/${blogpost.urlname}")
+  #else
+    #set($bloglink = "${projectlink}/blog/${blogpost.id}")
+  #end
+
+  <h1><a href="${bloglink}">$blogpost.getName()</a></h1>
+  
+ 
+  #if($postimage)
+  <div style="margin-bottom:1rem;"><img loading="lazy" src="${postimage}" ></div>
+  #end
+  <div>
+  $blogpost.get("maincontent")
+  </div>
+
+</div>
 
 $pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
