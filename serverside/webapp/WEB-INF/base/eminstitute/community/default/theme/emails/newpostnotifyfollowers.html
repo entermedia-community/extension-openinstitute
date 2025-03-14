@@ -3,9 +3,9 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 <div>
   <style type="text/css">
     * {
-      font-size: 14px;
+      font-size: 16px;
       font-family: AtlasGrotesk,'Open Sans','Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
-      line-height: 21px;
+      line-height: 1.7;
       color: #444;
     }
     h1 {
@@ -42,12 +42,12 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
   #if($postimage)
   <div style="margin-bottom:1rem;"><img loading="lazy" src="${postimage}" ></div>
   #end
-  <div style="margin-bottom:1rem;">
+  <div style="margin-bottom:1rem; font-size:16px; line-height: 1.7;">
   $blogpost.get("maincontent")
   </div>
   
   
-  <div class="blog-tags">
+  <div style=" font-size:14px; line-height: 1.7;">
 		#set( $tags = $blogpost.getValues("keywords") )
 		#if($tags && !$tags.isEmpty() )
 		
@@ -57,7 +57,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 		#end
 	</div>
 	
-	<div style="margin-bottom:1rem;">
+	<div style="margin-bottom:1rem;  font-size:14px; line-height: 1.7;">
 	By: $postuser.getAnonNickName()<br>
 	<a href="${bloglink}" title="View $blogpost.getName()">View online</a>
 	</div>

@@ -101,7 +101,8 @@
 	margin: 1rem auto;
 }
 .blog-body p {
-	line-height: 20px;
+	line-height: 1.65;
+	margin-bottom: 1.6rem;
 }
 .blog-post h1.blog-title {
 	position: relative;
