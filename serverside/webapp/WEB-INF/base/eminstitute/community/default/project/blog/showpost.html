@@ -121,7 +121,7 @@
 				$context.putPageValue("userpostid", $userpost.getId())
 				$pages.include("./likebutton.html?userpostid=$userpost.getId()", $context)
 				
-				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-uploadid="${userpost.id}" href="$communityhome/project/channel/share.html?collectionid=${librarycol.getId()}&showupload=$userpost.id">
+				<a class="icon emdialog" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-userpostid="${userpost.id}" href="$communityhome/project/channel/share.html">
 					<i class="fas fa-share-alt"></i>
 					<span>[[Share]]</span>
 				</a>
