@@ -292,6 +292,9 @@ h6,
 	border-color: #626584 !important;
 	color: #fff !important;
 }
+.select2-container {
+	line-height: unset !important;
+}
 .project-card a.name {
 	color: #626584 !important;
 }
@@ -1560,9 +1563,7 @@ ul > li {
 .donate:hover {
 	background-color: #45485e;
 }
-.blog-footer .icon:hover {
-	color: #626584 !important;
-}
+
 .project-navbar .dropdown-menu {
 	background-color: #626584;
 }

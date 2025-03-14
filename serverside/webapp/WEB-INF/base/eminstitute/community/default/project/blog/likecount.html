@@ -1,8 +1,6 @@
-<span
-#if($likedbyme)<i class="fas fa-heart" style="color:red;" ></i>
-#else<i class="far fa-heart" ></i>
-#end
-</span>
-<span class="ps-1">
-${userpostlikes.size()}
+<span class="blog-likes #if($likedbyme) active #end">
+  <i class="#if($likedbyme) fas #else far #end fa-heart"></i>
+  <span class="ps-1">
+    ${userpostlikes.size()}
+  </span>
 </span>

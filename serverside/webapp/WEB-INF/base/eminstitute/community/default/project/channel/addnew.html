@@ -2,21 +2,31 @@
 $context.putPageValue("searcher",$searcher)
 $context.putPageValue("viewid", "userpostgeneral")
 
-<form name="saveproject" 
-	id="saveproject"
-	clasS="userpostform"
+<form name="savecommunityblog" 
+	id="savecommunityblog"
+	class="userpostform"
 	enctype="multipart/form-data"  
 	action="$communityhome/project/channel/save.html" 
 	method="post">
 
 	<input type="hidden" name="save" value="true" />
+
+	<input type="hidden" name="field" value="librarycollection" />
+	<input type="hidden" name="librarycollection.value" value="$librarycol.id" />
+
+	<input type="hidden" name="field" value="poststatus" />
+	<input type="hidden" id="poststatus" name="poststatus.value" value="draft" />
+
 	<input type="hidden" name="collectionid" value="$librarycol.id" />
 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 	
-	<div class="d-flex mt-4">
-		<input class="btn btn-sm btn-primary me-2" type="submit" value="[[Save]]" />
-		<a class="btn btn-sm btn-danger confirm"  data-confirm="[[Are you sure]]?" href="${projectlink}/edit/delete.html?id=$data.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1&collectionid=$librarycol.id">[[Delete]]</a>
+	<div class="d-flex justify-content-between mt-4">
+		<div class="d-flex">
+			<button class="btn btn-sm btn-primary me-2" id="savePublish" type="button" data-poststatus="readytopublish">[[Publish]]</button>
+			<button class="btn btn-sm btn-light me-2" id="saveDraft" type="button" data-poststatus="draft">[[Save as draft]]</button>
+		</div>
+		<button class="btn btn-sm btn-secondary closemodal" data-dismiss="modal">[[Cancel]]</button>
 	</div>
 </form>
 

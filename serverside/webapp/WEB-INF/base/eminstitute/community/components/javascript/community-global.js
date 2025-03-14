@@ -733,15 +733,17 @@ $(document).ready(function () {
 		$(".sidebar-left").removeClass("active");
 		$("#community-drawer-mask").hide();
 	});
-	
-	
+
 	//Blog Post
 
-	lQuery('.userpostform input[name="name.value"]').livequery("change", function () {
-		var title = $(this).val();
-		var slug = slugify(title);
-		$(this).closest("form").find('input[name="urlname.value"]').val(slug);
-	});
+	lQuery('.userpostform input[name="name.value"]').livequery(
+		"change",
+		function () {
+			var title = $(this).val();
+			var slug = slugify(title);
+			$(this).closest("form").find('input[name="urlname.value"]').val(slug);
+		}
+	);
 
 	lQuery(".copytoclipboard").livequery("click", function (e) {
 		e.preventDefault();
@@ -875,86 +877,93 @@ $(document).ready(function () {
 	handleFooterPosition();
 	var resizeObserver = new ResizeObserver(handleFooterPosition);
 	resizeObserver.observe(document.body);
-	
-	
+
 	//Standard Picker (old emselectresults?)
-	
-	lQuery(".pickerresultsgeneral .resultsdivdata").livequery("click", function (e) {
-		if (!isValidTarget(e)) {
-			return true;
-		}
-		var row = $(this);
-		var clickableresultlist = row.closest(".pickerresultsgeneral");
-		var rowid = row.data("dataid");
-		clickableresultlist.data("dataid", rowid);
-		clickableresultlist.runAjax();
-		
-		closeemdialog(clickableresultlist.closest(".modal"));
-		
-	});
-	
-	//Asset picker
-	
-	lQuery(".assetpicker .assetInput").livequery("change", function () {
-			var input = $(this);
-			var detailId = input.data("detailid");
-			var assetName = input.val();
-			var assets = input.prop("files");
-			if (assets.length == 0) return;
-			var asset = assets[0];
-			if (asset.name) assetName = asset.name;
-			var fileReader = new FileReader();
-			fileReader.onload = function (e) {
-				if (!assetName && e.target.fileName) {
-					assetName = e.target.fileName;
-				}
-				var preview = input
-					.closest(".assetpicker")
-					.find(".render-type-thumbnail");
-				preview.html("");
-				if (/\.(jpe?g|png|gif|webp)$/i.test(assetName)) {
-					var img = $("<img>");
-					img.attr("src", e.target.result);
-					img.attr("height", "140px");
-					img.attr("width", "auto");
-					preview.append(img);
-				} else if (/\.(mp4|mov|mpeg|avi)$/i.test(assetName)) {
-					var img = $("<i>");
-					img.attr("class", "bi bi-film");
-					preview.append(img);
-				}
 
-				preview.append(
-					`<div class="p-1"><span class="mr-2">${assetName}</span><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`
-				);
-			};
-			fileReader.readAsDataURL(asset);
-		});
-
-		
-		lQuery(".assetpicker .removefieldassetvalue").livequery(
-			"click",
-			function (e) {
-				e.preventDefault();
-				var picker = $(this).closest(".assetpicker");
-				var detailid = $(this).data("detailid");
-
-				picker.find("#" + detailid + "-preview").html("");
-				picker.find("#" + detailid + "-value").val("");
-				picker.find("#" + detailid + "-file").val("");
-
-				var theform = $(picker).closest("form");
-				theform = $(theform);
-				if (theform.hasClass("autosubmit")) {
-					theform.trigger("submit");
-				}
+	lQuery(".pickerresultsgeneral .resultsdivdata").livequery(
+		"click",
+		function (e) {
+			if (!isValidTarget(e)) {
+				return true;
 			}
-		);
-	
-	
-	
-}); //document (ready)
+			var row = $(this);
+			var clickableresultlist = row.closest(".pickerresultsgeneral");
+			var rowid = row.data("dataid");
+			clickableresultlist.data("dataid", rowid);
+			clickableresultlist.runAjax();
 
+			closeemdialog(clickableresultlist.closest(".modal"));
+		}
+	);
+
+	//Asset picker
+
+	lQuery(".assetpicker .assetInput").livequery("change", function () {
+		var input = $(this);
+		var detailId = input.data("detailid");
+		var assetName = input.val();
+		var assets = input.prop("files");
+		if (assets.length == 0) return;
+		var asset = assets[0];
+		if (asset.name) assetName = asset.name;
+		var fileReader = new FileReader();
+		fileReader.onload = function (e) {
+			if (!assetName && e.target.fileName) {
+				assetName = e.target.fileName;
+			}
+			var preview = input
+				.closest(".assetpicker")
+				.find(".render-type-thumbnail");
+			preview.html("");
+			if (/\.(jpe?g|png|gif|webp)$/i.test(assetName)) {
+				var img = $("<img>");
+				img.attr("src", e.target.result);
+				img.attr("height", "140px");
+				img.attr("width", "auto");
+				preview.append(img);
+			} else if (/\.(mp4|mov|mpeg|avi)$/i.test(assetName)) {
+				var img = $("<i>");
+				img.attr("class", "bi bi-film");
+				preview.append(img);
+			}
+
+			preview.append(
+				`<div class="p-1"><span class="mr-2">${assetName}</span><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`
+			);
+		};
+		fileReader.readAsDataURL(asset);
+	});
+
+	lQuery(".assetpicker .removefieldassetvalue").livequery(
+		"click",
+		function (e) {
+			e.preventDefault();
+			var picker = $(this).closest(".assetpicker");
+			var detailid = $(this).data("detailid");
+
+			picker.find("#" + detailid + "-preview").html("");
+			picker.find("#" + detailid + "-value").val("");
+			picker.find("#" + detailid + "-file").val("");
+
+			var theform = $(picker).closest("form");
+			theform = $(theform);
+			if (theform.hasClass("autosubmit")) {
+				theform.trigger("submit");
+			}
+		}
+	);
+
+	lQuery("#savecommunityblog button").livequery("click", function (e) {
+		var btn = $(this);
+		if (btn.attr("id") == "savePublish" || btn.attr("id") == "saveDraft") {
+			e.preventDefault();
+			var form = $("#savecommunityblog");
+			var poststatus = btn.data("poststatus");
+			form.find("#poststatus").val(poststatus);
+			form.submit();
+		}
+	});
+}); //document (ready)
 
 function isValidTarget(clickEvent) {
 	var target = $(clickEvent.target);
