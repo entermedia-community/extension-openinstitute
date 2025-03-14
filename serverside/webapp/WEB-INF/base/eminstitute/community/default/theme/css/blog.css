@@ -397,7 +397,7 @@ textarea.blog-comments-input {
 	opacity: 0.66;
 }
 .blog-likes-btn.active,
-.blog-likes.active {
+.blog-likes {
 	color: #6e72b4;
 	font-weight: bold;
 }
