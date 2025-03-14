@@ -64,6 +64,16 @@
 .blog-container {
 	position: relative;
 }
+.blog-header {
+	position: relative;
+}
+.blog-cover {
+	position: absolute;
+	bottom: 0;
+	padding-bottom: 1rem;
+	background-color: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(4px);
+}
 .blog-thumbnail {
 	width: 100%;
 }
@@ -72,9 +82,13 @@
 }
 .blog-thumbnail img {
 	width: 100%;
-	max-height: 350px;
+	max-height: 450px;
 	object-fit: cover;
 	border-radius: 1rem;
+}
+
+.blog-author {
+	padding: 0 1rem;
 }
 .blog-body {
 	position: relative;
@@ -84,7 +98,7 @@
 	border-radius: 0.5rem;
 	overflow: hidden;
 	/* box-shadow: 0 -8px 12px 0 rgba(0, 0, 0, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.1); */
-	margin: 0 auto;
+	margin: 1rem auto;
 }
 .blog-body p {
 	line-height: 20px;
@@ -96,7 +110,7 @@
 	line-height: 1;
 	font-weight: 700;
 	margin: 0.5rem auto;
-	padding: 1.5rem 0 1rem;
+	padding: 1rem 1rem 0.5rem;
 	/* max-width: 800px; */
 }
 .blog-post h1 {
@@ -414,6 +428,7 @@ textarea.blog-comments-input {
 @media screen and (max-width: 575px) {
 	.blog-body {
 		box-shadow: none;
+		padding: 1rem 0.25rem;
 	}
 	.blog-post h1.blog-title {
 		font-size: 1.75rem;
