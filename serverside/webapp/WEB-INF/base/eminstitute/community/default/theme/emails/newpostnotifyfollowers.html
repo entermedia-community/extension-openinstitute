@@ -26,7 +26,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
   #if($librarycol.urlname)
   	#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
   #else
-  	#set($projectlink = "${communitylink}/#dash($librarycol.getName())")
+  	#set($projectlink = "$!{community.externaldomain}/#dash($librarycol.getName())")
   #end
 
   #if($blogpost.urlname)
@@ -35,8 +35,9 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
     #set($bloglink = "${projectlink}/blog/${blogpost.id}")
   #end
 
-  <h1><a href="${bloglink}">$blogpost.getName()</a></h1>
+  <h1 style="margin-bottom:0.5rem;">$blogpost.getName()</h1>
   
+
  
   #if($postimage)
   <div style="margin-bottom:1rem;"><img loading="lazy" src="${postimage}" ></div>
@@ -49,14 +50,25 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
   <div class="blog-tags">
 		#set( $tags = $blogpost.getValues("keywords") )
 		#if($tags && !$tags.isEmpty() )
+		
 			#foreach( $tag in $tags )
-				<a href="#" class="blog-tag" title="#esc($tag)">
-					#esc($tag)
-				</a>
+				#<span style="padding-right:0.rem;"><em>#esc($tag)</em></span>
 			#end
 		#end
 	</div>
+	
+	<div style="margin-bottom:1rem;">
+	By: $postuser.getAnonNickName()<br>
+	<a href="${bloglink}" title="View $blogpost.getName()">View online</a>
+	</div>
 
 </div>
+
+#ifnotnull($followerid)
+<div  style="margin:1.5rem 0 0.5rem;">
+	Click <a href="${community.externaldomain}/project/channel/subscribers/unsubscribe.html?id=${followerid}&collectionid=${librarycol.getId()}">here</a> to Unfollow/Unsuscribe.
+	
+</div>
+#end
 
 $pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)

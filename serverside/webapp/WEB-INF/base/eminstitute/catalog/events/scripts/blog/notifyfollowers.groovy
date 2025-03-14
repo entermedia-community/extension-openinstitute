@@ -53,28 +53,32 @@ public void notifyfollowers(String userpostid, String collectionid)
 	}
 	
 	HashMap<String, User> notifyusers = new HashedMap();
+	Set userids = new HashSet();
 	
 	//loop Team Members
 	for (Iterator followerIterator = teammembers.iterator(); followerIterator.hasNext();) {
 		MultiValued follower = (MultiValued)followerIterator.next();
-		if (notifyusers.get(follower.get("followeruser")) != null)
-		{
-			continue;
-		}
 		User user = archive.getUser(follower.get("followeruser"));
-		notifyusers.put(follower.get("followeruser"), user);
+		if(user != null)
+		{
+			notifyusers.put(follower.get("id"), user);
+			userids.add(user.getId());
+		}
 	}
 
 	
 	//loop likes
 	for (Iterator followerIterator2 = followers.iterator(); followerIterator2.hasNext();) {
 		MultiValued follower = (MultiValued)followerIterator2.next();
-		if (notifyusers.get(follower.get("followeruser")) != null)
+		if (userids.contains(follower.get("followeruser")))
 		{
 			continue;
 		}
 		User user = archive.getUser(follower.get("followeruser"));
-		notifyusers.put(follower.get("followeruser"), user);
+		if(user != null)
+		{
+			notifyusers.put(follower.get("id"), user);
+		}
 	} 
 	
 	log.info("Notify Users: " + notifyusers);
@@ -100,7 +104,13 @@ public void notifyfollowers(String userpostid, String collectionid)
 	{
 		String key = keys.next();
 		User user = notifyusers.get(key);
-			
+		
+		if (user.get("email") == null)
+		{
+			log.error("User with no email address: " + user);
+			continue;
+		}
+		
 		WebEmail templatemail = archive.createSystemEmail(user, template);
 		templatemail.setSubject(emailSubject); //TODO: Translate
 		Map objects = new HashMap();
@@ -113,8 +123,12 @@ public void notifyfollowers(String userpostid, String collectionid)
 		objects.put("siteroot", getSiteRoot());
 		objects.put("communityhome", "/" + siteid + community.get("templatepath"));
 		objects.put("community",community);
-		
+		objects.put("followerid",key);
 		objects.put("blogpost",blogpost);
+		
+		User postuser = archive.getUser(blogpost.get("owner"));
+		objects.put("postuser",postuser);
+		
 		
 		Asset postasset = archive.getAsset(blogpost.primarymedia);
 		String postimage = community.get("externaldomain") + archive.asLinkToGenerated(postasset, "image730x480cropped.jpg");

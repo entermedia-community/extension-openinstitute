@@ -22,13 +22,11 @@
 				#if ($liked)
 					<form name="followproject" 
 							id="followproject" 
-							class="ajaxform w-100" 
+							class="w-100" 
 							style="display:inline-block;" 
-							data-targetdivinner="projectlikes" 
-							data-onsuccessreload="true"
 							action="$!{communitylink}/project/channel/subscribers/unsubscribe.html" 
 							method="post">
-						<input type="hidden" name="oemaxlevel" value="1" />
+						<input type="hidden" name="oemaxlevel" value="3" />
 						<input type="hidden" name="id" value="${liked.getId()}" />
 						<input type="hidden" name="collectionid" value="$collectionid" />
 							
