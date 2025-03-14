@@ -81,7 +81,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 		}
 	} 
 	
-	log.info("Notify Users: " + notifyusers);
+//	log.info("Notify Users: " + notifyusers);
 	
 	Data collection = archive.getCachedData("librarycollection", collectionid);
 	Data community = archive.getCachedData("communitytagcategory", collection.get("communitytagcategory"));
@@ -134,7 +134,9 @@ public void notifyfollowers(String userpostid, String collectionid)
 		String postimage = community.get("externaldomain") + archive.asLinkToGenerated(postasset, "image730x480cropped.jpg");
 		objects.put("postimage", postimage);
 			
-		 templatemail.send(objects);
+		templatemail.send(objects);
+		
+		log.info("User Notified: " + user.get("email"));
 	}
 }
 
