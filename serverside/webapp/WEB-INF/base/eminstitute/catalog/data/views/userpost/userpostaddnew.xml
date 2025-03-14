@@ -4,7 +4,6 @@
   <property id="name" />
   <property id="longdescription" />
   <property id="maincontent" />
-  <property id="poststatus" />
   <property id="keywords" />
   <property id="urlname" />
   <property id="primarymedia" />

@@ -29,12 +29,14 @@
     </a>
   </div>
   <div class="article-article">
-    ## <div class="d-flex align-items-center justify-content-end">
-      ##<a href="${projectlink}" class="blog-community-name">
-      ##  #text($librarycol)
-      ##</a>
-    ## </div>
 	
+	#if($showchannel)
+     <div class="d-flex align-items-center justify-content-end">
+      <a href="${projectlink}" class="blog-community-name">
+        #text($librarycol)
+      </a>
+     </div>
+	#end
 	
 	
     #ifnotnull($userpost.name)
@@ -50,6 +52,18 @@
         #end
       </div>
     </div>
+	
+	
+	<div class="blog-tags">
+					#set( $tags = $userpost.getValues("keywords") )
+					#if($tags && !$tags.isEmpty() )
+						#foreach( $tag in $tags )
+							<a href="#" class="blog-tag" title="#esc($tag)">
+								#esc($tag)
+							</a>
+						#end
+					#end
+				</div>
 
     <div class="d-flex align-items-center justify-content-between mt-auto">
       <div class="author-row">

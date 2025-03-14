@@ -1,13 +1,13 @@
  
 $context.putPageValue("showchannel",true)
- #if( $topuploads.isEmpty() )
+ #if( $userpost.isEmpty() )
 	<p class="text-center text-muted my-5">
 		[[Nothing posted yet]]
 	</p>
  #else
 	<div class="blog-list-container">
-		#foreach( $upload in $topuploads.getPageOfHits())
-			$context.putPageValue("upload",$upload)
+		#foreach( $userpost in $userpost.getPageOfHits())
+			$context.putPageValue("userpost",$userpost)
 			$pages.include("${communityhome}/project/blog-list/blog-item.html",$context)
 		#end
 	</div>

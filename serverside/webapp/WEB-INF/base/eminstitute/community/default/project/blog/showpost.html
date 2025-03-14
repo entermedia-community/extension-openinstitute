@@ -50,9 +50,8 @@
 				<a href="${projectlink}">
 					<img src="$projectlogo" class="blog-community-img" alt="#text($librarycol)" />
 				</a>
-				<a href="${projectlink}" class="blog-community-name mb-0">
-					#text($librarycol)
-				</a>
+				
+
 				#if($caneditcollection)
 					<a class="emdialog ms-2 text-muted small" data-width="900" 
 						data-hidefooter="true"
@@ -108,7 +107,7 @@
 			#end
 	
 			<div class="blog-tags">
-				#set( $tags = $userpost.getValues("usertags") )
+				#set( $tags = $userpost.getValues("keywords") )
 				#if($tags && !$tags.isEmpty() )
 					#foreach( $tag in $tags )
 						<a href="#" class="blog-tag" title="#esc($tag)">

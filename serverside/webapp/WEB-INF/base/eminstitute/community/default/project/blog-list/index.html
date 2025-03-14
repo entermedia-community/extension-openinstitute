@@ -1,5 +1,5 @@
  
-$context.putPageValue("showchannel",true)
+$context.putPageValue("showchannel",false)
 
 #if($caneditcollection)
 	#set( $userposts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).sort("entity_dateDown").search() )

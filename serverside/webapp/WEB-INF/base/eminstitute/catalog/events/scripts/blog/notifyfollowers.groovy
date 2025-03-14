@@ -87,7 +87,8 @@ public void notifyfollowers(String userpostid, String collectionid)
 	
 	if (collection == null || community == null)
 	{
-		log.error("Skiping post: " + userpostid + " No Collection or Community " + collection + " " + community);
+		log.error("Skiping post: " + userpostid + " No Collection: " + collection + " Community:" + community);
+		return;
 	}
 	
 	String emailSubject = "[OI] " + community.getName() + " New Blog Post";
