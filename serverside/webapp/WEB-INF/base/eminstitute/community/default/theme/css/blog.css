@@ -180,7 +180,7 @@ hr.blog-divider {
 	align-items: center;
 	justify-content: end;
 }
-.blog-tags a.blog-tag {
+a.blog-tag {
 	background-color: #e4e4e4;
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.75rem;
@@ -192,6 +192,16 @@ hr.blog-divider {
 }
 a.blog-tag:hover {
 	background-color: #d4d4d4;
+}
+.blog-list-title h2 {
+	font-weight: normal;
+}
+.blog-tag-filter {
+	padding: 2px 8px;
+	border-radius: 4px;
+	background-color: #e4e4e4;
+	margin-left: 4px;
+	color: #626584;
 }
 .blog-footer {
 	display: flex;

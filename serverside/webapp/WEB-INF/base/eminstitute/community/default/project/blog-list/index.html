@@ -17,8 +17,12 @@ $context.putPageValue("showchannel",false)
 
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
-	<div class="d-flex align-items-center justify-content-between mb-5">
-		<h2 class="h6 text-secondary flex-grow-1">[[Recent Blogs]]</h2>
+	<div class="d-flex align-items-center justify-content-between mb-5 blog-list-title">
+		#if($tag)
+			<h2 class="h6 text-secondary flex-grow-1">[[Blogs tagged with ]] <span class="blog-tag-filter">#esc($tag)</span> <a class="ms-1 text-muted small" href="${projectlink}"><i class="fa fa-times"></i></a></h2>
+		#else
+			<h2 class="h6 text-secondary flex-grow-1">[[Recent Blogs]]</h2>
+		#end
 		#if($caneditcollection)
 		
 		#set( $drafts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "draft").search() )
