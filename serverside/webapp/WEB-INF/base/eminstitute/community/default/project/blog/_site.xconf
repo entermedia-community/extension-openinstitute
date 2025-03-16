@@ -9,6 +9,6 @@
 	<property name="route-template">${communityhome}/project/blog/:slug</property>
 
 	<path-action name="ProjectModule.loadCollection" />
-	<path-action name="ProjectModule.loadPathParams" />
+	<path-action name="ProjectModule.loadUserPostFromPathParams" />
 	
 </page>
