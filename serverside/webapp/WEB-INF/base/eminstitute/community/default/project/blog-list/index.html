@@ -2,10 +2,19 @@
 $context.putPageValue("showchannel",false)
 
 #if($caneditcollection)
-	#set( $userposts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).sort("entity_dateDown").search() )
+	#set( $query = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).sort("entity_dateDown") )
 #else
-	#set( $userposts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "published").sort("entity_dateDown").search() )
+	#set( $query = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "published").sort("entity_dateDown") )
 #end
+
+#set( $tag = $context.getRequestParameter("tag") )
+
+#ifnotnull($tag)
+	#set( $query = $query.exact("keywords", $tag) )
+#end
+
+#set( $userposts = $query.search() )
+
 <div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 	<div class="d-flex align-items-center justify-content-between mb-5">

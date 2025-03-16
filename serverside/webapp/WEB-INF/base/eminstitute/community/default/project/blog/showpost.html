@@ -110,7 +110,7 @@
 				#set( $tags = $userpost.getValues("keywords") )
 				#if($tags && !$tags.isEmpty() )
 					#foreach( $tag in $tags )
-						<a href="#" class="blog-tag" title="#esc($tag)">
+						<a href="${projectlink}?tag=${tag}" class="blog-tag" title="#esc($tag)">
 							#esc($tag)
 						</a>
 					#end
