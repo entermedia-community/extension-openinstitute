@@ -1,6 +1,5 @@
 <page>
 	<property name="vitual">true</property>
-	<path-action name="DataEditModule.changeFilters"/>
 	<path-action name="TaskModule.searchGoals" >
 		<property name="hitsname">goalhits</property>
 	</path-action>
