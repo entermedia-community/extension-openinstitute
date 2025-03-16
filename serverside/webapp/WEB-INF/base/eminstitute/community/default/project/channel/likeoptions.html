@@ -9,7 +9,7 @@
 	<hr class="mt-0 mb-1" style="opacity: 0.1">
 	
 	<div class="d-flex align-items-center justify-content-between">
-		<div class="project-likes-count" style="width:65%">
+		<div class="project-likes-count">
 			#if($user)<a href="${communityhome}/project/channel/subscribers/likessearch.html?field=collectionid&collectionid.value=${collectionid}&operation=exact" class="emdialog">#end
 				$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end
 			#if($user)</a>#end

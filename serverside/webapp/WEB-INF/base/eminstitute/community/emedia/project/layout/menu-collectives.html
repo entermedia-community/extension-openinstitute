@@ -1,9 +1,6 @@
 #set($collectivesection = $content.collectivesection)
 
 <div class="navbar-container project-navbar mt-0">
-	<button class="btn toggleCommunityDrawer">
-		<i class="fas fa-bars mx-auto" style="font-size: 1rem;"></i>
-	</button>
 	<ul class="navbar-collective">
 		<li id="blog" class="nav-item #if($collectivesection == "blog") active #end">
 			 <a class="nav-link" href="$communitylink/${librarycol.urlname}">[[Blog]]</a>
@@ -29,8 +26,8 @@
 			<a class="nav-link" href="$communitylink/${librarycol.urlname}/store/index.html">[[Store]]</a>
 		</li>
 		#end
-	    
-	  #if( $librarycol.contactemail )
+			
+		#if( $librarycol.contactemail )
 		<li id="contact"  class="nav-item #if($collectivesection == "contact") active #end">
 			<a class="nav-link" href="$communitylink/${librarycol.urlname}/contact/index.html">[[Contact]]</a>
 		</li>
@@ -97,4 +94,7 @@
 			</ul>
 		</li>
 	</ul> 
+	<button class="btn toggleCommunityDrawer">
+		<i class="fas fa-bars mx-auto" style="font-size: 1rem;"></i>
+	</button>
 </div>
