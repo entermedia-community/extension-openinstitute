@@ -1,27 +1,7 @@
 $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 
 <div>
-  <style type="text/css">
-    * {
-      font-size: 16px;
-      font-family: AtlasGrotesk,'Open Sans','Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
-      line-height: 1.7;
-      color: #444;
-    }
-    h1 {
-      margin: 0.5rem 0 1rem;;
-    } 
-    h2, h3, h4, h5, h6, p, ul, ol {
-      margin: 0.5rem 0;
-    }
-    a {
-      color: #626584;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  
   
   #if($librarycol.urlname)
   	#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
@@ -40,7 +20,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 
  
   #if($postimage)
-  <div style="margin-bottom:1rem;"><img loading="lazy" src="${postimage}" ></div>
+  <div style="margin-bottom:1rem;"><img src="${postimage}" ></div>
   #end
   <div style="margin-bottom:1rem; font-size:16px; line-height: 1.7;">
   $blogpost.get("maincontent")
@@ -72,3 +52,5 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 #end
 
 $pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
+
+

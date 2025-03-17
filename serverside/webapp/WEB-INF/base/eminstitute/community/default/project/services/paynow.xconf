@@ -6,5 +6,5 @@
     
 	<path-action name="PaymentModule.getStripeUser"/>
 	
-	<inner-layout>/${applicationid}/theme/layouts/collectivelayout.html</inner-layout>
+	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
 </page>
