@@ -13,7 +13,7 @@
 
   #set( $postuser = $userManager.getUser($userpost.owner, true))
 
-  #set( $timestamp = $userpost.getISO8601('entity_date') )
+  #set( $timestamp = $context.getDateUtil().getISO8601($userpost.getValue('entity_date')) )
 
   <script type="application/ld+json">
     {
