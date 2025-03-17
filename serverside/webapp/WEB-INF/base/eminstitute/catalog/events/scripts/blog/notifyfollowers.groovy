@@ -131,7 +131,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 		
 		
 		Asset postasset = archive.getAsset(blogpost.primarymedia);
-		String postimage = community.get("externaldomain") + archive.asLinkToGenerated(postasset, "image12000x628.jpg");
+		String postimage = community.get("externaldomain") + archive.asLinkToGenerated(postasset, "image1200x628.jpg");
 		objects.put("postimage", postimage);
 			
 		templatemail.send(objects);
