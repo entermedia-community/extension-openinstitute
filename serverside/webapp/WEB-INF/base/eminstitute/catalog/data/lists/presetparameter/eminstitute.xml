@@ -23,6 +23,7 @@
   <data name="prefwidth" value="1200" parameterdata="shareimage" id="share1447790100132"/>  
   <data name="prefheight" value="628" parameterdata="shareimage" id="share1447790093028"/>  
   <data name="useoriginalasinput" value="true" parameterdata="shareimage" id="share144779040orig"/>
+  <data name="scaleup" value="true" parameterdata="shareimage" id="sharescale1447790093028"/>  
  
   
 </properties>
