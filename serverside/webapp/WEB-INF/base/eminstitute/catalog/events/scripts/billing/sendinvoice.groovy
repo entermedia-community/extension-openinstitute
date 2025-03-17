@@ -209,21 +209,21 @@ private void sendEmail(MediaArchive mediaArchive, String contact, Data invoice, 
 */
 private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data invoice, Data librarycol, String messagetype) {
 	String siteid = context.findValue("siteid");
-	String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
+	
+	
+	//String appid = mediaArchive.getCatalogSettingValue("events_billing_notify_invoice_appid");
 
 	Data community = mediaArchive.getData("communitytagcategory", librarycol.get("communitytagcategory"));
-	if (community != null) {
-		String communitypath = community.get("templatepath");
-		appid = communitypath;
+	if (community == null) {
+		log.error("Missing Community Tag for Project: " + librarycol);
+		return;
 	}
 	
-	String template = siteid + appid + "/theme/emails/";
+	String communitypath = community.get("templatepath");
 	
-	String actionUrl = getSiteRoot() + "/" + appid + "/collective/services/index.html?collectionid=" + invoice.getValue("collectionid");
+	String template = siteid + communitypath + "/theme/emails/";
 	
-	if (community != null) {
-		actionUrl = community.get("externaldomain") + "/" + librarycol.get("urlname");
-	}
+	String actionUrl = community.get("externaldomain") + "/" + librarycol.get("urlname");
 	
 	//String key = mediaArchive.getUserManager().getEnterMediaKey(contact);
 	//actionUrl = actionUrl + "&entermedia.key=" + key;
@@ -336,21 +336,17 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("actionurl", actionUrl);
 	
 	objects.put("siteroot", getSiteRoot());
-	objects.put("applink","/" + appid); //?
-	objects.put("apphome","/" + appid); //?
 	objects.put("librarycol",librarycol);
 	if(librarycol.get("contactname") != null)
 	{
 		templateEmail.setFromName(librarycol.get("contactname"));
 	}
 
-	if( community != null)
-	{
-		objects.put("communitytagcategory" , community);
-		objects.put("communitylink" , community.get("externaldomain"));
-		String communityhome = "/" + siteid + community.get("templatepath");
-		objects.put("communityhome",communityhome);
-	}
+	
+	objects.put("community" , community);
+	objects.put("communitylink" , community.get("externaldomain"));
+	objects.put("communityhome","/" + siteid + community.get("templatepath"));
+
 	
 	
 	//recurring

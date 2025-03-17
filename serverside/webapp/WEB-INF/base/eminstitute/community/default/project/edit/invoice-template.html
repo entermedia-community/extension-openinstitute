@@ -12,12 +12,12 @@ $context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
 
-<h2 class="mb-3">Update Invoice Template</h2>
+<h2 class="mb-3">[[Update Invoice Template]]</h2>
 
 <form name="savecollective" 
 	enctype="multipart/form-data" 
 	id="savecollective"
-	action="${projectlink}/edit/save.html"
+	action="${projectlink}/edit/invoice-template-save.html"
 	class="ajaxform scrolltotop"
 	data-targetdivinner="collectivesettingscontent"
 	data-oemaxlevel="1"
@@ -27,6 +27,8 @@ $context.putPageValue("data", $librarycol)
 <input type="hidden" name="id" value="$librarycol.id" />
 <input type="hidden" name="collectionid" value="$librarycol.id" />
 <input type="hidden" name="viewid" value="$!viewid" />
+<input type="hidden" name="editform" value="invoice-template.html" />
+
 
 #if(!$librarycol.get("invoiceemailheader"))
 	#set($invoiceemailheader = $mediaarchive.getCatalogSettingValue("invoice_email_header"))
@@ -52,23 +54,8 @@ $context.putPageValue("data", $librarycol)
 
 $pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 
-	<a class="btn btn-sm btn-primary submitform-oehtml ">[[Save]]</a>
+	<a class="btn btn-sm btn-primary submitform ">[[Save]]</a>
 	
-  #if($canviewsettings && ($viewid == "librarycollectionagentedit" || $viewid == "librarycollectiongeneral"))	
-    <a class="btn btn-sm btn-danger confirm"
-    style="margin: 0px 0 0 10px;" 
-    data-confirm="[[Are you sure]]?" 
-    href="${projectlink}/edit/delete.html?id=$librarycol.id&collectionid=$librarycol.id&catalogid=$searcher.catalogId&searchtype=$searcher.searchType&viewid=$viewid&viewpath=$viewpath&oemaxlevel=1" 
-    >[[Delete]]</a>
-  #end
-
-#if($canviewsettings)
-<a class="btn btn-sm btn-light float-right"
-    style="margin: 0px 0 0 10px;" 
-    target="_blank"
-    href="${applink}/views/settings/lists/datamanager/edit/edit.html?id=$librarycol.id&searchtype=librarycollection" 
-    ><i class="fa fa-database"></i></a>
-#end
 
 </form>
 </div>

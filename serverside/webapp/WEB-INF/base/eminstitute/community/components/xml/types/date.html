@@ -8,8 +8,11 @@
 #if(!$idcount)
 	#set($idcount = "")
 #end
+
+
 <div class="d-flex flex-row">
 #set( $val = $context.getLocaleManager().getDateStorageUtil().formatDateObj($value, "YYYY-MM-dd"))
+
 <input name="$!{detailprefix}${detail.getId()}.value" id="${detail.id}${idcount}value" value="#esc($!val)"  type="hidden" >
 <input type="text" class="datepicker form-control #if($detail.isRequired()  && !$multiedit) required #end " data-targetid="${detail.id}${idcount}value" /> 
 

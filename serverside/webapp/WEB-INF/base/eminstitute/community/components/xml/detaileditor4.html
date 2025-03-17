@@ -63,17 +63,15 @@ $context.putPageValue("longform",false)
 		
 			#set($detail_id = $detail.getId())
 		
-			#set( $val = false)
+			#set( $value = false)
 			#set( $target = "${detail.id}.value")
-			#set( $val = false)
-			#set( $val = $context.getRequestParameter($target))		
-			#if( !$val)
-				#set( $val = $searcherManager.getValue($data,$detail,$context.getLocale()) )
-				$!context.putPageValue("value",$val)
+			#set( $value = $context.getRequestParameter($target))		
+			#if( !$value)
+				#set( $value = $searcherManager.getValue($data, $detail, $context.getLocale()) )
 			#end
 		
 			$!context.putPageValue("detail",$detail)
-			$!context.putPageValue("val",$val)
+			$!context.putPageValue("value",$value)
 		 	<div class="form-group detail-input input-$detail_id p-2" >
 			    <label for="$detail_id" class="input-label">
 						$detail.getText($context)
