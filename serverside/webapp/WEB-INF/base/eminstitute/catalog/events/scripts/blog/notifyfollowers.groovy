@@ -45,7 +45,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 	MediaArchive archive = context.getPageValue("mediaarchive");
 	
 	HitTracker teammembers = archive.query("librarycollectionusers").exact("ontheteam", "true").exact("collectionid", collectionid).search();
-	HitTracker followers = archive.query("librarycollectionlikes").exact("collectionid", collectionid).search();
+	HitTracker followers = archive.query("librarycollectionlikes").exact("collectionid", collectionid).exact("enabled", true).search();
 	if (followers == null)
 	{
 		log.info("No Followers in this Project. " + collectionid)
@@ -124,6 +124,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 		objects.put("communityhome", "/" + siteid + community.get("templatepath"));
 		objects.put("community",community);
 		objects.put("followerid",key);
+		objects.put("followeremail", user.getEmail());
 		objects.put("blogpost",blogpost);
 		
 		User postuser = archive.getUser(blogpost.get("owner"));

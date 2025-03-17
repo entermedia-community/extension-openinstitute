@@ -1,8 +1,9 @@
 <page>
+	<property name="virtual">true</property>
 	
 	<path-action name="Script.run">
 	
-		<script>./liketoggle.groovy</script>
+		<script>./addfollowers.groovy</script>
 		
 	</path-action>
 	<inner-layout />

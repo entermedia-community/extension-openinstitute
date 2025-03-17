@@ -39,14 +39,14 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 	
 	<div style="margin-bottom:1rem;  font-size:14px; line-height: 1.7;">
 	By: $postuser.getAnonNickName()<br>
-	<a href="${bloglink}" title="View $blogpost.getName()">View online</a>
+	<a href="${bloglink}?entermedia.key=${entermediakey}" title="View $blogpost.getName()">View online</a>
 	</div>
 
 </div>
 
-#ifnotnull($followerid)
+#ifnotnull($followeremail)
 <div  style="margin:1.5rem 0 0.5rem;">
-	Click <a href="${community.externaldomain}/project/channel/subscribers/unsubscribe.html?id=${followerid}&collectionid=${librarycol.getId()}">here</a> to Unfollow/Unsuscribe.
+	Click <a href="${community.externaldomain}/project/channel/subscribers/unsubscribe.html?email=${followeremail}&collectionid=${librarycol.getId()}&entermedia.key=${entermediakey}">here</a> to Unfollow/Unsuscribe.
 	
 </div>
 #end
