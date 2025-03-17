@@ -11,7 +11,7 @@
   </div>
   <div class="container my-5">
     #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-    #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","AY_jtx2r9HHjyJ06-yjY").sort("name").search($context) )
+    #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).sort("name").search($context) )
     
     <div class="row justify-content-md-center">
       #foreach($project in $projects)
