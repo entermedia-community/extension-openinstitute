@@ -17,6 +17,12 @@
   <data name="useoriginalasinput" value="true" parameterdata="blogimage" id="bpi144779040origshare"/>
 
 
+  <data name="crop" value="false" parameterdata="shareimage" id="share1447790183613"/>  
+  <data name="background" value="white" parameterdata="shareimage" id="share1447789384658"/>  
+  <data name="layers" value="flatten" parameterdata="shareimage" id="share1447790062578"/>  
+  <data name="prefwidth" value="1200" parameterdata="shareimage" id="share1447790100132"/>  
+  <data name="prefheight" value="628" parameterdata="shareimage" id="share1447790093028"/>  
+  <data name="useoriginalasinput" value="true" parameterdata="shareimage" id="share144779040orig"/>
  
   
 </properties>

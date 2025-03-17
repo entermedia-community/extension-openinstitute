@@ -1,7 +1,7 @@
 <presets>
 
 	<preset id="postimage" guid="postimage" 
-		generatedoutputfile="image1200x628cropped.webp" outputextension="webp" 
+		generatedoutputfile="image1200x628.webp" outputextension="webp" 
 		display="true" fileexportformat="${shortfilename}post.webp" transcoderid="imagemagick" extension="webp" 
 		inputtype="video|document|image" onimport="true" ordering="40" enforceaspectratio="true"  singlepage="true">Post Image</preset>
 
@@ -13,6 +13,6 @@
 	<preset id="shareimage" guid="shareimage" 
 		generatedoutputfile="image1200x628.jpg" outputextension="jpg" 
 		display="true" fileexportformat="${shortfilename}post.jpg" transcoderid="imagemagick" extension="jpg" 
-		inputtype="video|document|image" onimport="true" ordering="40" enforceaspectratio="true"  singlepage="true">Share Image</preset>
+		inputtype="video|document|image" onimport="true" ordering="50" enforceaspectratio="true"  singlepage="true">og:image jpeg</preset>
 
 </presets>
