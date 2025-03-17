@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <page>
-	<property name="alltypes">true</property>
+	<generator name="velocityGenerator" />
+	
+    <path-action name="MediaArchiveModule.loadApplicationId" alltypes="true"/>
+	<path-action name="ProjectModule.loadCollection" alltypes="true"/>
+
 	<inner-layout />
 </page>
