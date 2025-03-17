@@ -1636,6 +1636,12 @@ ul.inlinelist li {
 	height: calc(1.85rem + 0.15rem);
 	width: 100%;
 }
+.input-group-text {
+	padding: 0.25rem 0.75rem;
+		font-size: 0.9rem;
+		line-height: 1.85;
+		height: calc(1.85rem + 0.15rem);
+}
 label.error {
 	font-size: 0.85em;
 }

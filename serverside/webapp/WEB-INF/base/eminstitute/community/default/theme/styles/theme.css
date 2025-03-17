@@ -401,6 +401,10 @@ a {
 .input-group-text {
 	padding: 0.15rem 0.75rem;
 }
+.creditcardform .input-group-text {
+	border-top-right-radius:0;
+	border-bottom-right-radius:0;
+}
 .btn-file {
 	position: relative;
 	overflow: hidden;
