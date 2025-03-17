@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  #set( $prefix = $context.siteRoot )
+
+   <url>
+      <loc>$context.siteRoot</loc>
+      <priority>1.0</priority>
+   </url>
+
+   <url>
+      <loc>${context.siteRoot}/development/</loc>
+      <priority>0.5</priority>
+   </url>
+
+   <url>
+      <loc>${context.siteRoot}/projects/</loc>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>${context.siteRoot}/blogs/</loc>
+      <priority>0.8</priority>
+   </url>
+
+  #if($librarycol.urlname)
+    #set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
+  #else
+    #set($projectlink = "${communitylink}/#dash($librarycol.getName())")
+  #end
+
+  #set( $userposts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "published").sort("entity_dateDown").search() )
+
+  #foreach( $userpost in $userposts )
+    #if($userpost.urlname)
+      #set($bloglink = "${projectlink}/blog/${userpost.urlname}")
+    #else
+      #set($bloglink = "${projectlink}/blog/${userpost.id}")
+    #end
+    <url>
+        <loc>${bloglink}</loc>
+        <priority>0.9</priority>
+    </url>
+  #end
+
+</urlset> 
