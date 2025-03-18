@@ -27,7 +27,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
   </div>
   
   
-  <div style=" font-size:14px; line-height: 1.7;">
+  <div style=" font-size:15px; line-height: 1.7; margin-bottom:0.75rem">
 		#set( $tags = $blogpost.getValues("keywords") )
 		#if($tags && !$tags.isEmpty() )
 		
@@ -37,7 +37,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 		#end
 	</div>
 	
-	<div style="margin-bottom:1rem;  font-size:14px; line-height: 1.7;">
+	<div style="margin-bottom:1rem;  font-size:15px; line-height: 1.7;">
 	By: $postuser.getAnonNickName()<br>
 	<a href="${bloglink}?entermedia.key=${entermediakey}&fbclid=blog${postuser.getId()}" title="View $blogpost.getName()">View online</a>
 	</div>
@@ -45,7 +45,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 </div>
 
 #ifnotnull($followeremail)
-<div  style="margin:1.5rem 0 0.5rem;">
+<div  style="margin:2rem 0 1rem; font-size:13px;">
 	Click <a href="${community.externaldomain}/project/channel/subscribers/unsubscribe.html?email=${followeremail}&collectionid=${librarycol.getId()}&entermedia.key=${entermediakey}">here</a> to Unfollow/Unsuscribe.
 	
 </div>
