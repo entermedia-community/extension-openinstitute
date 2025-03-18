@@ -24,6 +24,9 @@
 		<script>./uploadsave.groovy</script>
 	</path-action>
 
+	<path-action name="PathEventModule.runSharedEvent"
+		 runpath="/${catalogid}/events/blog/userpostnotifyfollowers.html"  allowduplicates="true"/>
+
 	<property name="hitsname">hits</property>
  	<property name="assetshowonly"></property>
  	
