@@ -3,15 +3,17 @@
 <properties> 
   <property id="name"/>
   <property id="organizationstatus"/>
-    <property id="communitytagcategory" />  
-   <property id="urlname"/>
+  <property id="communitytagcategory" />  
+  <property id="urlname"/>
   <property id="communitytag" />
   <property id="collectivetags" />
   
     
   <property id="collectivedescription"/>  
   <property id="contactname" rendermask="${user.name}"/>  
-  <property id="contactemail"/> 
+  <property id="contactemail"/>
+  
+   
   <property id="priviacylevel" />
   
   <property id="collective"/>  

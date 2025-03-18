@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <properties> 
-  <property id="name"/>  
-  <property id="collectivedescription"/>
-  <property id="contactemail"/> 
-    <property id="communitytagcategory" />
-  <property id="communitytag" />
+  <property id="name"/>
+  <property id="organizationstatus"/>
+  <property id="urlname"/>
   <property id="collectivetags" />
+    
+  <property id="collectivedescription"/>  
+  <property id="contactname" rendermask="${user.name}"/>  
+  <property id="contactemail"/> 
   <property id="priviacylevel" />
   
   <property id="collective"/>  
   <property id="dollarsperpoints" />
-
+  
+    <property id="owner" /> 
+  
   <property id="assetportrait"/>
   <property id="assetbanner"/>
   <property id="collectivebanner"/>
-   <property id="urlname"/>
   
-
-  <property id="owner" /> 
-  
-  <property id="githublink" /> 
-  <property id="linkedinlink" />  
-  <property id="facebooklink" /> 
-  <property id="instagramlink" />
+  <property id="facebooklink" />
+  <property id="instagramlink" /> 
   <property id="websitelink" />
   
-  <property id="street"/>  
+  <property id="street"/>
   <property id="city"/>  
   <property id="country"/>
+  
   
   
 </properties>
