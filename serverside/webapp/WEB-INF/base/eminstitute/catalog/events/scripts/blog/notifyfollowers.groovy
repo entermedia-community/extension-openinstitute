@@ -96,6 +96,12 @@ public void notifyfollowers(String userpostid, String collectionid)
 	}
 	
 	String emailSubject = "[OI] " + community.getName() + " New Blog Post";
+	
+	if (blogpost.get("name") != null)
+	{
+		emailSubject = blogpost.getName();
+	}
+	
 	String siteid = context.findValue("siteid");
 	String template = siteid + community.get("templatepath") + "/theme/emails/newpostnotifyfollowers.html";
 	
