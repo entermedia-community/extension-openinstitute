@@ -84,20 +84,25 @@ public void init()
 	String communityhome = context.getPageValue("communityhome");
 	String template = communityhome + "/theme/emails/collection-add-teammember.html";
 	
+	Data librarycol = archive.getCachedData("librarycollection", collectionid);
+	Data community = archive.getCachedData("communitytagcategory", librarycol.get("communitytagcategory"));
 	
-	String communityid = context.getRequestParameter("communityid");
-	Data community = archive.getCachedData("communitytagcategory", communityid);
+	if (librarycol == null || community == null)
+		{
+			log.error("No Collection: " + librarycol + " or Community:" + community);
+			return;
+		}
 	
 	log.info("Sending notification to: " + teamuser);
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
-	templatemail.setSubject("[OI]" + community.getName() + ": Added to Team"); //TODO: Translate
+	templatemail.setSubject("[OI] " + community.getName() + ": Added to Team"); //TODO: Translate
 	Map objects = new HashMap();
 	String entermediakey = archive.userManager.getEnterMediaKey(teamuser);
 	objects.put("entermediakey",entermediakey);
 	objects.put("user", context.getUser());
 	objects.put("teamuser",teamuser);
-	Data librarycol = archive.getData("librarycollection", collectionid);
+	
 	objects.put("librarycol", librarycol);
 	objects.put("apphome", context.getPageValue("apphome"));
 	objects.put("applink", context.getPageValue("applink"));

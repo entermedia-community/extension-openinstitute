@@ -16,7 +16,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 
 <p>
 	#set( $link = "$!{community.externaldomain}/authentication/login.html" )
-	<a href="#urlescape($link)">[[Login here]]</a>
+	<a href="#urlescape($link)" style="text-decoration:none;color:white;background:#3297d5;padding:8px 12px;border-radius:4px;display:inline-block;">[[Login here]]</a>
 </p>
 
 $pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
