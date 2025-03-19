@@ -22,17 +22,21 @@ public void init()
 		MultiValued userpost =  (MultiValued) iterator.next();
 		try 
 		{
-			log.info("Sending Notifications for: " +userpost);
-			notifyfollowers(userpost.getId(), userpost.get("librarycollection"));
 			userpost.setValue("poststatus", "published");
+			archive.getSearcher("userpost").saveData(userpost);
+			log.info(userpost + " Published.");
+			
+			notifyfollowers(userpost.getId(), userpost.get("librarycollection"));
+			
 			
 		}
 		catch (Throwable e)
 		{
 			log.error("Error sending notifications: " + userpost.get("name"), e);
 			userpost.setValue("poststatus", "error");
+			archive.getSearcher("userpost").saveData(userpost);
 		}
-		archive.getSearcher("userpost").saveData(userpost);
+		
 	}
 	
 }
@@ -81,8 +85,6 @@ public void notifyfollowers(String userpostid, String collectionid)
 		}
 	} 
 	
-//	log.info("Notify Users: " + notifyusers);
-	
 	Data collection = archive.getCachedData("librarycollection", collectionid);
 	Data community = archive.getCachedData("communitytagcategory", collection.get("communitytagcategory"));
 	
@@ -104,6 +106,8 @@ public void notifyfollowers(String userpostid, String collectionid)
 	
 	String siteid = context.findValue("siteid");
 	String template = siteid + community.get("templatepath") + "/theme/emails/newpostnotifyfollowers.html";
+	
+	log.info("Sending notifications for: " +blogpost + " To:" + notifyusers.size() + " users");
 	
 	Iterator<String> keys = notifyusers.keySet().iterator();
 	while(keys.hasNext())
