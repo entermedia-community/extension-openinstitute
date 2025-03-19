@@ -22,6 +22,19 @@ public class LlmTest extends BaseEnterMediaTest
 	
 	public void testOpenAi() throws Exception
 	{
+		String functionName = aisearch("Search for dogs");
+		assertEquals("searchall", functionName);
+		
+		functionName = aisearch("Search for Larry");
+		assertEquals("searchentityperson", functionName);
+		
+		functionName = aisearch("Search for an image of nature");
+		assertEquals("searchasset", functionName);
+	
+	}
+	
+	public String aisearch(String message)
+	{
 		String model = "gpt-4o";
 		String channeltype = "chatstreamer";
 		String channelid = "aichattest";
@@ -32,7 +45,7 @@ public class LlmTest extends BaseEnterMediaTest
 		req.getUserProfile().setModules(modules);
 		
 		Data chat = getMediaArchive().getSearcher("chatterbox").createNewData();
-		chat.setValue("message","Search for Larry");
+		chat.setValue("message",message);
 		chat.setValue("channel", channelid);
 		chat.setValue("userid", "admin");
 		HitTracker recent = new ListHitTracker();
@@ -48,11 +61,15 @@ public class LlmTest extends BaseEnterMediaTest
 		assertEquals(response.isToolCall(),true);
 
 		String functionName = response.getFunctionName();
+		
 		JSONObject arguments = response.getArguments();
 		String json = arguments.toJSONString();
+		log.info("Execute: " + functionName + " with Args: " + arguments);
+		
 		assertNotNull(json,"Missing json");
 		
-		log.info("Execute: " + functionName + " with Args: " + arguments);
+		return functionName;
+		
 	}
 	@Override
 	protected void oneTimeSetup() throws Exception
