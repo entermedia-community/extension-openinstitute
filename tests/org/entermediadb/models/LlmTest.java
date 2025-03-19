@@ -1,21 +1,30 @@
 package org.entermediadb.models;
 
-import java.util.ArrayList;
+import static org.entermediadb.asset.BaseEnterMediaTest.log;
+
 import java.util.Collection;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.entermedia.elasticsearch.locks.ClusterLockTest;
 import org.entermediadb.asset.BaseEnterMediaTest;
 import org.entermediadb.llm.LLMManager;
 import org.entermediadb.llm.LLMResponse;
 import org.json.simple.JSONObject;
 import org.openedit.Data;
 import org.openedit.WebPageRequest;
+import org.openedit.hittracker.HitTracker;
+import org.openedit.hittracker.ListHitTracker;
 
 public class LlmTest extends BaseEnterMediaTest
 {
+	protected static final Log log = LogFactory.getLog(ClusterLockTest.class);
+	
 	public void testOpenAi() throws Exception
 	{
 		String model = "gpt-4o";
 		String channeltype = "chatstreamer";
+		String channelid = "aichattest";
 		
 		WebPageRequest req = getFixture().createPageRequest();
 		
@@ -23,9 +32,13 @@ public class LlmTest extends BaseEnterMediaTest
 		req.getUserProfile().setModules(modules);
 		
 		Data chat = getMediaArchive().getSearcher("chatterbox").createNewData();
-		chat.setValue("message","Search for a dog");
+		chat.setValue("message","Search for Larry");
+		chat.setValue("channel", channelid);
+		chat.setValue("userid", "admin");
+		HitTracker recent = new ListHitTracker();
+		recent.add(chat);
 		
-		req.putPageValue("recent", chat);
+		req.putPageValue("recent", recent);
 		req.putPageValue("chatprofile", req.getUserProfile());
 				
 		LLMManager manager = getMediaArchive().getLLM(model);
@@ -38,6 +51,8 @@ public class LlmTest extends BaseEnterMediaTest
 		JSONObject arguments = response.getArguments();
 		String json = arguments.toJSONString();
 		assertNotNull(json,"Missing json");
+		
+		log.info("Execute: " + functionName + " with Args: " + arguments);
 	}
 	@Override
 	protected void oneTimeSetup() throws Exception
