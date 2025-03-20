@@ -52,6 +52,10 @@ main.container {
 	display: flex;
 	flex-direction: column;
 }
+#configcontent .card-thumbnail {
+	max-height: 250px;
+	object-fit: cover;
+}
 .library-container .btn {
 	border: none !important;
 }
