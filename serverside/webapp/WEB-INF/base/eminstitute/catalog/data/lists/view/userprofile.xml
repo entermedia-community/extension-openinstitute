@@ -2,6 +2,8 @@
 	
 	<property id="userprofilemyaccount" moduleid="user" systemdefined="true" byassettype="false">User Profile Account</property>
 	
+	<property id="usereditmyaccount" moduleid="user" systemdefined="true" byassettype="false">User My Account</property>
+	
 	
 	
 </properties>

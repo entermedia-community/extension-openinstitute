@@ -1,27 +1,10 @@
-#if(!$selecteduser)
-	#set($selecteduser = $user)
-	$context.putPageValue("selecteduser", $selecteduser)
-#end
 
 <div class="container oicontainer">
-	#if($selecteduser)
-		<div class="userprofilecontent">
-			<div class="maincontent">
-				
-				<div class="row" style="margin-top:30px;">
-				
-					<div class="col-md-12">
-					 
-					
+		<div class="userprofilecontent pt-4">
+			<div class="maincontent pt-4">
 					$pages.includeContent()
-					</div>
-				
-					
-				</div>
 			</div>
 		</div>
-	#end
-
 </div>
 
 

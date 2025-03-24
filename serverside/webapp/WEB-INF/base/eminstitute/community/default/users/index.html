@@ -23,15 +23,7 @@ $context.putPageValue("selecteduser", $selecteduser)
 							
 							<div class="profile-username">
 								<div class="profile-imagecontainer">
-										#if($canedituserinfo)
-											<div class="">
-											<a href="#" id="filePicker" class="" title="[[Upload square image for better results]]">
-													<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
-											</a>
-											</div>
-										#else
-											<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
-										#end
+									<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
 								</div>
 						</div>
 						</div>
@@ -55,12 +47,13 @@ $context.putPageValue("selecteduser", $selecteduser)
 									#end
 									
 									<div class="">
+										<h4>$!selecteduser.getName()</h4>
+										<i class="far fa-user"></i> $selecteduser.getAnonNickName()
 									#if( $user)
-									<h4>$!selecteduser.getName()</h4>
-									<i class="far fa-user"></i> $selecteduser.getAnonNickName()
-									<i class="far fa-envelope"></i> $selecteduser.email<br>
+										
+										<i class="far fa-envelope"></i> $selecteduser.email<br>
 									#else
-									<h4>$selecteduser.getAnonNickName()</h4>						
+																
 									#end
 									#if( $user  && $selecteduser.getId() != $user.getId())
 										$pages.include("${communityhome}/users/block/toggle.html")

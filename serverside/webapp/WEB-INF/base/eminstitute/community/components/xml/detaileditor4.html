@@ -23,6 +23,7 @@ $context.putPageValue("longform",false)
 
 
 #if ($viewid)
+
 	#ifnull($details)
 		#set( $viewdata = $mediaarchive.getCachedData("view",$viewid) ) 
 		#ifnull($viewdata)
@@ -39,13 +40,14 @@ $context.putPageValue("longform",false)
 		[[No details available for view: $viewid.  Please configure your view settings.]]
 
 	#end
-
 #else
 	##leagacy check. We used to pass in the $details
 	#if( !$details)
 	#set ($details = $searcher.getPropertyDetails())
 	#end
 #end
+
+
 
   #set ($mode = $user.get("oe_edit_mode"))
    #if($viewid)
