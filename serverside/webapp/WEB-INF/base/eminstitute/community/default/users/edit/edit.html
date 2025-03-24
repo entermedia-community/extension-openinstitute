@@ -15,6 +15,9 @@ $context.putPageValue("viewid", "usereditmyaccount")
 
 $context.putPageValue("data", $selecteduser)
 <form name="dialogform" 
+	class="ajaxform autocloseform"
+	data-targetdiv="application"
+	data-oemaxlevel="3"
 	id="useraccountform"
 	 action="${communitylink}/users/edit/save.html" 
 	 enctype="multipart/form-data"  
