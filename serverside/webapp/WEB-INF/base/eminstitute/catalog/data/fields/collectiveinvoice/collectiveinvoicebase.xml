@@ -3,7 +3,7 @@
 <properties beanname="dataSearcher">
 
 	<property id="invoicenumber" editable="false" index="true"
-		stored="true" datatype="number" viewtype="autoincrement"
+		stored="true" datatype="number" viewtype="autoincrement" autoincrement="true" 
 		indextype="not_analyzed">
 		Invoice Number
 	</property>
