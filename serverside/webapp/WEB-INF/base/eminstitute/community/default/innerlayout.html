@@ -33,17 +33,18 @@
 <body id="page-top" #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
 	<div id="errordiv"></div>
 	<div id="application" class="eminstitutecollective" 
-		data-home="$home" 
-		data-user="$!user.id" 
-		data-apphome="$apphome"
+		data-home="$!{home}" 
+		data-user="$!{user.id}" 
+		data-apphome="$!{apphome}"
+		data-finderhome="$!{finderhome}"
 		data-communityhome="$!{communityhome}"
-		data-applink="$applink" 
-		data-inapp="$browser.inApp()" 
-		data-themeprefix="/${applicationid}/theme"
+		data-applink="$!{applink}" 
+		data-inapp="$!{browser.inApp()}" 
+		data-themeprefix="/$!{applicationid}/theme"
 		data-browserlanguage="$!{browserlanguage}" 
-		data-editmode='$!user.get("oe_edit_mode")'
-		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
-		data-componenthome="$!componenthome" 
+		data-editmode='$!{user.get("oe_edit_mode")}'
+		data-mediadbappid="$!{mediaarchive.getMediaDbId()}" 
+		data-componenthome="$!{componenthome}" 
 		#if( $showupload) data-showuploadid="${showupload.id}" #end
 		>
 		

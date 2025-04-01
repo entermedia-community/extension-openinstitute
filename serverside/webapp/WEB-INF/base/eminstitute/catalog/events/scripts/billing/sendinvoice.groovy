@@ -331,7 +331,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("mediaarchive", mediaArchive);
 	objects.put("invoice", invoice);
 	objects.put("invoicenumber", invoice.getValue("invoicenumber"));
-	objects.put("project", librarycol.getName());
+	objects.put("project", librarycol);
 	objects.put("supporturl", supportUrl);
 	objects.put("actionurl", actionUrl);
 	
