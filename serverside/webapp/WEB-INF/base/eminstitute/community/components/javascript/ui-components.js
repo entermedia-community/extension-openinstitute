@@ -3589,22 +3589,7 @@ uiload = function () {
 		});
 	});
 
-	toggleUserProperty = function (property, onsuccess) {
-		jQuery.ajax({
-			url:
-				apphome +
-				"/components/userprofile/toggleprofileproperty.html?field=" +
-				property,
-			success: onsuccess,
-		});
-	};
 
-	lQuery(".toggleuserpreference").livequery("click", function () {
-		var preference = $(this).data("userpreference");
-		if (preference !== undefined) {
-			toggleUserProperty(preference, function () {});
-		}
-	});
 }; // uiload
 
 function formsavebackbutton(form) {
