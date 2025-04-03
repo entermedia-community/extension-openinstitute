@@ -75,11 +75,11 @@ $(document).ready(function () {
 	lQuery(".fader").livequery(function () {
 		var _this = $(this);
 		if (_this.hasClass("alert-save")) {
-		//	_this.prepend('<span class="bi bi-check-circle-fill ns"></span>');
-		//	_this.append('<button><span class="bi bi-x-circle ns"></span>');
+			//	_this.prepend('<span class="bi bi-check-circle-fill ns"></span>');
+			//	_this.append('<button><span class="bi bi-x-circle ns"></span>');
 		} else if (_this.hasClass("alert-error")) {
-		//	_this.prepend('<span class="bi bi-info-circle-fill ns"></span>');
-		//	_this.append('<button><span class="bi bi-x ns"></span>');
+			//	_this.prepend('<span class="bi bi-info-circle-fill ns"></span>');
+			//	_this.append('<button><span class="bi bi-x ns"></span>');
 		}
 		var timeout = 4000;
 		if (_this.hasClass("fade-quick")) {
@@ -1135,8 +1135,7 @@ $(document).ready(function () {
 			form.submit();
 		}
 	});
-	
-	
+
 	toggleUserProperty = function (property, onsuccess) {
 		jQuery.ajax({
 			url:
@@ -1153,8 +1152,6 @@ $(document).ready(function () {
 			toggleUserProperty(preference, function () {});
 		}
 	});
-	
-	
 }); //document (ready)
 
 function isValidTarget(clickEvent) {
