@@ -3,7 +3,6 @@
 <page>
 	<property name="title">Chat</property>
 	<property name="virtual">true</property>
-	<property name="oisection">stations</property>
 	<property name="collectivesection">community</property>
 	
 	<property name="fullwidth">true</property>
@@ -28,12 +27,12 @@
 	
 	<page-action name="ProjectModule.loadChatChannel"/>
 
-	
 	<property name="chatterboxhome">${communityhome}/project/chat/chatterbox</property>
+	<property name="chatterboxgoalsenabled">true</property>
 
 	<path-action name="Admin.loadPermissions"/>
-	<path-action name="Admin.loadPermissionFinder" />
 	
+	<path-action name="Admin.loadPermissionFinder" />
 	
   	<path-action name="Admin.allowViewing"/>
 

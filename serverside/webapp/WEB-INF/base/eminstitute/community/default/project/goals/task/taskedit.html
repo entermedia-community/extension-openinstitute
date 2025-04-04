@@ -52,7 +52,8 @@
 						$context.putPageValue("detail",$detail)
 						$context.putPageValue("values", $task.getValues("keywords"))	
 						$context.putPageValue("data",$task)	
-						$pages.include("$componenthome/xml/types/tageditor.html", $context)
+						
+						$pages.include("${page.xmledithome}/types/tageditor.html", $context)
 					</div>
 				</div>
 				<div class="d-flex flex-row m-1">

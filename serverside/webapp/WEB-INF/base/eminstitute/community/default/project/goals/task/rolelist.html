@@ -1,7 +1,7 @@
 #set( $rolesarray = $task.getValues("taskroles") )
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
-<div id="roleeditor" class="rolelist">
+<div id="roleeditor${task.id}" class="rolelist">
 	##USE AJAX
 	#foreach( $role in $rolesarray )
 		#set($link = "${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
@@ -31,7 +31,7 @@
 			 
 			 #if( $role.roleuserid )  ##default user
 			 <a	class="btn btn-sm btn-secondary ajax" style="padding:.275rem .35rem"  
-			 	data-targetdivinner="roleeditor" 
+			 	data-targetdivinner="roleeditor${task.id}" 
 			 	data-taskid="$task.id" 
 			 	data-collectionid="$!collectionid"
 			 	data-collectiverole="$role.collectiverole"
