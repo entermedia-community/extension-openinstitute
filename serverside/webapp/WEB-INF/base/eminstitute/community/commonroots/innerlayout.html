@@ -23,6 +23,10 @@
 	</head>
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
+		#if($desktop)
+			$pages.include("${apphome}/components/desktop/titlebar.html")
+			$pages.include("${apphome}/components/desktop/loading.html")
+		#end
 		<div id="application"
 			data-home="$home" 
 			data-user="$!user.id" 

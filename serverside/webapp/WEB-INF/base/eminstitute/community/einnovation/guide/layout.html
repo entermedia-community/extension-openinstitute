@@ -40,8 +40,16 @@
 		/>
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 		<style>:root{--bs-brand: #6610f2;}body.modal-open{height: 100vh;overflow: hidden;}</style>
+
+		#if( $desktop)
+			<script type="text/javascript" src="/${applicationid}/components/javascript/emedia/electron-renderer.js"></script>
+		#end
 	</head>
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
+		#if($desktop)
+			$pages.include("${apphome}/components/desktop/titlebar.html")
+			$pages.include("${apphome}/components/desktop/loading.html")
+		#end
 		<div id="application" class="eminstitutecollective" 
 			data-home="$home" 
 			data-user="$!user.id" 

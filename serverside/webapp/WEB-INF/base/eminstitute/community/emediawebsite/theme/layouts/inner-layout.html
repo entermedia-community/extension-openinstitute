@@ -25,6 +25,10 @@
 	
 
 <body id="page-top">
+#if($desktop)
+	$pages.include("${apphome}/components/desktop/titlebar.html")
+	$pages.include("${apphome}/components/desktop/loading.html")
+#end
 #if(!$browser.inApp())
 
 	$context.putPageValue("accountpage", "true")

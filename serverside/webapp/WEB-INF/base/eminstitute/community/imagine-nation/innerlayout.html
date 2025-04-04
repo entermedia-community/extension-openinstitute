@@ -31,7 +31,10 @@
 	</head>
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
-
+		#if($desktop)
+			$pages.include("${apphome}/components/desktop/titlebar.html")
+			$pages.include("${apphome}/components/desktop/loading.html")
+		#end
 		#if($content.get("flair") == "true")
 			$pages.include("${communityhome}/theme/layouts/flair.html")
 		#end

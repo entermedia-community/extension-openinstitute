@@ -35,6 +35,8 @@
   
   <path-action name="ProjectModule.loadCommunityTag"/>
   
+  <path-action name="DesktopModule.loadDesktop" />
+  
   <script id="liveajax" src="/${applicationid}/components/javascript/emedia/liveajax.js" />
   <script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
   <script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
@@ -43,7 +45,6 @@
   
   <permission name="view">
     <boolean value="true"/>
-  </permission>
-  
+  </permission>  
   	
 </page>

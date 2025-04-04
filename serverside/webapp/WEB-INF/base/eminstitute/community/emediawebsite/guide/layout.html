@@ -44,12 +44,18 @@
 		/>
 		<link rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
 		<link rel="stylesheet" href="${communityhome}/theme/css/custom.css" />
-						
+		
+		#if( $desktop)
+		<script type="text/javascript" src="/${applicationid}/components/javascript/emedia/electron-renderer.js"></script>
+		#end
 	</head>
 
 
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
-
+		#if($desktop)
+			$pages.include("${apphome}/components/desktop/titlebar.html")
+			$pages.include("${apphome}/components/desktop/loading.html")
+		#end
 	<div id="application" class="docs-page bg-white"
 		data-home="$home" 
 		data-user="$!user.id" 

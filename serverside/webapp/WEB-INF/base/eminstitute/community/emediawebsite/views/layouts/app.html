@@ -43,6 +43,10 @@
 </head>
 
 <body>
+  #if($desktop)
+    $pages.include("${apphome}/components/desktop/titlebar.html")
+    $pages.include("${apphome}/components/desktop/loading.html")
+  #end
 	<div id="application" 
 		class="bg-emdark" 
 		data-editmode='$!user.get("oe_edit_mode")' 

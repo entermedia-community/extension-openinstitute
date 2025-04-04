@@ -40,8 +40,15 @@
 			href="${communityhome}/theme/js/simplelightbox/simple-lightbox.min.css"
 		/>
 		<link id="theme-style" rel="stylesheet" href="${communityhome}/theme/css/doctheme.css" />
+		#if( $desktop)
+		<script type="text/javascript" src="/${applicationid}/components/javascript/emedia/electron-renderer.js"></script>
+		#end
 	</head>
 	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
+		#if($desktop)
+			$pages.include("${apphome}/components/desktop/titlebar.html")
+			$pages.include("${apphome}/components/desktop/loading.html")
+		#end
 		<div id="application" class="eminstitutecollective" 
 			data-home="$home" 
 			data-user="$!user.id" 

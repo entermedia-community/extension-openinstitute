@@ -30,6 +30,10 @@
 </head>
 
 <body id="page-top" #if($browser.inApp()) data-hidetoolbar="true" #end>
+	#if($desktop)
+		$pages.include("${apphome}/components/desktop/titlebar.html")
+		$pages.include("${apphome}/components/desktop/loading.html")
+	#end
 	<div id="errordiv"></div>
 	<div id="application" class="eminstitutecollective" data-home="$home" data-user="$!user.id" data-apphome="$apphome"
 		data-applink="$applink" data-inapp="$browser.inApp()" data-themeprefix="/${applicationid}/theme"
