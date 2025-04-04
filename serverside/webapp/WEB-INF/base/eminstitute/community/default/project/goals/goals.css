@@ -513,7 +513,7 @@ ul.projectgoals {
 }
 
 .goalstatusopen {
-	background: #ededed;
+	/* background: #ededed; */
 }
 
 .goalstatusclosed {

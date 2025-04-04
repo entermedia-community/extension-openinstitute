@@ -11472,7 +11472,11 @@ code {
 .documentation pre {
 	background-color:hsla(0,0%,78%,.3);
 	padding: 1rem;
-	
+}
+
+.documentation a {
+	color:#377dff;
+	text-decoration:underline;
 }
 
 #sidebarNav .dropdown-item {

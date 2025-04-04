@@ -2,4 +2,5 @@
 
 <page>
   <property name="xmledithome">/${applicationid}/components/xml</property>
+  
 </page>
