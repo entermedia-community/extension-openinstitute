@@ -2,6 +2,10 @@ html,
 body {
 	height: 100%;
 }
+body.desktop {
+	position: relative !important;
+	margin-top: 32px !important;
+}
 #application {
 	height: auto;
 	min-height: 100%;
@@ -1638,9 +1642,9 @@ ul.inlinelist li {
 }
 .input-group-text {
 	padding: 0.25rem 0.75rem;
-		font-size: 0.9rem;
-		line-height: 1.85;
-		height: calc(1.85rem + 0.15rem);
+	font-size: 0.9rem;
+	line-height: 1.85;
+	height: calc(1.85rem + 0.15rem);
 }
 label.error {
 	font-size: 0.85em;
@@ -1760,4 +1764,3 @@ textarea.form-control {
 .chatterbox-messages {
 	height: calc(100% - 188px) !important;
 }
-
