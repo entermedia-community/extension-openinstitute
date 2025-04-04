@@ -105,7 +105,7 @@
 			<zipfileset dir="${lib}" prefix="lib" excludes="compile/**"/>
 			<zipfileset dir="${deployDir}/builds/" includes="${branch}${appname}-${version}.jar" prefix="lib"/>
 			<zipfileset dir="${webapp}/WEB-INF/base/eminstitute" prefix="base/eminstitute">
-				<exclude name="courageous-dreamers"/>
+				<exclude name="community/courageous-dreamers"/>
 			</zipfileset>	
 			<zipfileset dir="${etc}" includes="install.xml"/>			
 		</zip>
