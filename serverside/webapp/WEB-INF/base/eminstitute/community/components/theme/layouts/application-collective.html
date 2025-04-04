@@ -47,7 +47,7 @@
 			background-image:url($backgroundurl); 
 			background-size: cover;
 			background-attachment: fixed;
-			background-position:  0 50px;" #end>
+			background-position:  0 50px;" #end #if($desktop) class="desktop" #end>
 			
 		#if($desktop)
 			$pages.include("${apphome}/components/desktop/titlebar.html")

@@ -24,7 +24,7 @@
 </head>
 	
 
-<body id="page-top">
+<body id="page-top" #if($desktop) class="desktop" #end>
 #if($desktop)
 	$pages.include("${apphome}/components/desktop/titlebar.html")
 	$pages.include("${apphome}/components/desktop/loading.html")

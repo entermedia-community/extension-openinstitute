@@ -44,7 +44,7 @@
 		<script type="text/javascript" src="/${applicationid}/components/javascript/emedia/electron-renderer.js"></script>
 		#end
 	</head>
-	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page">
+	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end  class="docs-page #if($desktop) desktop #end">
 		#if($desktop)
 			$pages.include("${apphome}/components/desktop/titlebar.html")
 			$pages.include("${apphome}/components/desktop/loading.html")

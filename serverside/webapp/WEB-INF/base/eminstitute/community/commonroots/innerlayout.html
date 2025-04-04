@@ -22,7 +22,7 @@
 		$pages.include("${communityhome}/theme/layouts/includes.html", $context)
 	</head>
 
-	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end>
+	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end #if($desktop) class="desktop" #end>
 		#if($desktop)
 			$pages.include("${apphome}/components/desktop/titlebar.html")
 			$pages.include("${apphome}/components/desktop/loading.html")
