@@ -25,7 +25,7 @@ const glightbox = GLightbox({
 	selector: ".glightbox",
 });
 
-window.addEventListener("load", function () {
+$(document).ready(function () {
 	aosInit();
 	initSwiper();
 
