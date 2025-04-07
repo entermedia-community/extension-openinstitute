@@ -3,5 +3,5 @@
 <page>
   <property name="module">purpose</property>
   <property name="searchtype">purpose</property>
-  <property name="fallbackdirectory">/site/mediadb/services/module/default</property>
+	<property name="fallbackdirectory">../default</property>
 </page>
