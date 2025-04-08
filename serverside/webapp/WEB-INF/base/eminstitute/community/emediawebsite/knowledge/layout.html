@@ -28,7 +28,7 @@
 		</div>
 		</div>      
 		<div class="col-sm-6 col-lg-6	">
-			<div class="container p-3">
+			<div class="container p-3 documentation-post">
 				#if($postdata.post_title && $user.oe_edit_mode != "postedit")
 					$content.setValue("meta_title", "$postdata.post_title - EnterMediaDB")
 					$content.setValue("meta_canonical", "$siteRoot/$postdata.sourcepath")

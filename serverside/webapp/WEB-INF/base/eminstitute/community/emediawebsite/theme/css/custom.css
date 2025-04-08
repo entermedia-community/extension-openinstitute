@@ -687,6 +687,11 @@ button:focus {
 	box-shadow: 0 0 0 0 transparent;
 }
 
+.btn-primary {
+	color:var(--bs-btn-active-color)!important;
+	text-decoration: none;
+}
+
 .btn:focus,
 .btn.focus,
 .btn:not(:disabled):not(.disabled):active:focus,
@@ -694,6 +699,7 @@ button:focus {
 .btn:not([disabled]):not(.disabled):active,
 .btn:not([disabled]):not(.disabled).active {
 	box-shadow: 0 0 0 0 transparent;
+
 }
 
 .btn:not(:disabled):not(.disabled):active:focus,
@@ -11449,18 +11455,23 @@ code {
 .js-header-fix-moment .action-btn i.fas {
 	margin-right: 0;
 }
-.documentation {
+.documentation-post {
 	color: #111;
 }
-.documentation h1,
-.documentation h2,
-.documentation h3,
-.documentation h4 {
+.documentation-post h1,
+.documentation-post h2,
+.documentation-post h3,
+.documentation-post h4 {
 	color: #000;
 	margin: 0.5em 0 1em;
 }
 
+.documentation-post img {
+	max-width:100%;
+}
+
 .post-keywords {
+	padding:1rem 0;
 	color:#555;
 	font-weight:bold;
 }
@@ -11469,12 +11480,12 @@ code {
 	margin-bottom:0.75rem;
 }
 
-.documentation pre {
+.documentation-post pre {
 	background-color:hsla(0,0%,78%,.3);
 	padding: 1rem;
 }
 
-.documentation a {
+.documentation-post a:not(.btn) {
 	color:#377dff;
 	text-decoration:underline;
 }
