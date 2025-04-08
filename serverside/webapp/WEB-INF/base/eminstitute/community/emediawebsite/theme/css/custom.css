@@ -11468,12 +11468,16 @@ code {
 
 .documentation-post img {
 	max-width:100%;
+	height: 100%;
 }
 
 .post-keywords {
 	padding:1rem 0;
 	color:#555;
-	font-weight:bold;
+}
+.post-keywords i {
+	font-size:90%;
+	color:#777;
 }
 
 .documentation .inputformrow {

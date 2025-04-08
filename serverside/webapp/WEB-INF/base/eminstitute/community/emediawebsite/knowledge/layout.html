@@ -77,8 +77,14 @@
 				#else 
 					$!postdata.maincontent
 					
-					<div class="post-keywords">
-						$!postdata.knowledgebase_tag
+					<div class="post-keywords d-flex">
+						#set($tags = $postdata.knowledgebase_tag)
+						#ifnotnull($tags)
+							#set( $tags = $tags.split("\s*\|\s*") )
+							#foreach($vtag in $tags)
+								<div class="pe-3"><i class="fas fa-tag"></i> $!vtag</div>
+							#end
+						#end
 					</div>
 				#end
 	
