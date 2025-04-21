@@ -15,7 +15,7 @@
             <i class="fab fa-windows extra-large-icon"></i> 
           </div>
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadwindows))
-		  #set( $original = $mediaarchive.getCachedData("convertpreset","0") )
+		  #set( $preset = $mediaarchive.getCachedData("convertpreset","0") )
 		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
 		  
           <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for Windows</a>
@@ -41,8 +41,7 @@
           </div>
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadlinux64))
 		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
-          <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for AMD64</a>
-          <a class="small text-primary mt-2" href="$download">Download for ARM64</a>
+          <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for x64</a>
         </div> 
       </div>
     </div>
