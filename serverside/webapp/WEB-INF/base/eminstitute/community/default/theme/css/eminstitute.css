@@ -419,8 +419,9 @@ a.primary:hover .fa-solid {
 }
 .sidebar-box-header {
 	background-color: #ddd;
+	border-bottom:1px solid #bbb;
 	color: #333;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	font-weight: bold;
 	line-height: 2;
 	padding: 0 20px;
@@ -467,11 +468,16 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	background-color: #ddd;
 }
 .card-collections-thumb {
-	height: 28px;
-	width: 28px;
-	margin: 6px;
+	height: 108px;
+	width: 108px;
+	margin: 4px;
 	background-size: contain;
 	background-repeat: no-repeat;
+}
+.sidebar-box .card-collections-thumb {
+	height: 100%;
+	width: 32px;
+	margin: 2px;
 }
 .messagetimestamp {
 	font-size: 0.7em;

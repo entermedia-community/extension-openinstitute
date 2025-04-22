@@ -25,6 +25,13 @@
 	<property name="openchat">true</property>
 	
 	
+	<permission name="view">
+  		<or>
+			<userprofile name="viewmyaccount" value="true"/>
+			<group id="administrators"/>
+		</or>
+  	</permission>
+	
 	<permission name="viewmyaccount">
 		<or>
 			<userprofile name="viewmyaccount" value="true"/>

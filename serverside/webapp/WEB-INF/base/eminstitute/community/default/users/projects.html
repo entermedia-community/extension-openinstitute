@@ -27,6 +27,8 @@
 						#set($hitprojectlink = "/project/chat/index.html?collectionid=${project.id}")
 					#end
 					
+					
+					
 					#if($project.assetportrait)
 						#set($asset = $mediaarchive.getAsset($project.assetportrait))
 						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))

@@ -55,17 +55,17 @@
 	src: url("../fonts/Roboto-Italic.ttf") format("truetype");
 }
 :root {
-	--text-color: #ffffff;
+	--text-color: #444444;
 }
 .bg-emdark {
 	--bg-color: #0c223b;
-	--text-color: #ffffff;
+/*	--text-color: #ffffff;*/
 	--text-color-dim: #d3d6d9;
 
 	color: var(--text-color);
 }
 body {
-	color: #ffffff;
+	color:#444444;
 	background-color: #0c223b !important;
 	font-family: Roboto, sans-serif !important;
 	height: unset;
@@ -596,21 +596,6 @@ body {
 ------------------------------------*/
 main {
 	position: relative;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-	color: #1e2022;
 }
 
 figure {
@@ -5127,7 +5112,7 @@ a.badge-soft-navy:focus {
 .btn-xs {
 	font-size: 0.75rem;
 	font-weight: 400;
-	padding: 0.275rem 0.75rem;
+	padding: 0.275rem 0.5rem;
 	line-height: unset;
 	border-radius: 0.375rem;
 }
@@ -11178,7 +11163,7 @@ h6,
 .h6,
 .nav-link {
 	font-family: Roboto, sans-serif !important;
-	color: var(--text-color);
+	
 }
 .text-dark {
 	color: #444444 !important;
@@ -11191,6 +11176,18 @@ h6,
 .text-dark h6 {
 	color: #444444 !important;
 }
+
+.mainwebsitedark,
+.modal-website,
+.mainwebsitedark h1,
+.mainwebsitedark h2, .modal-website h2,
+.mainwebsitedark h3,
+.mainwebsitedark h4,
+.mainwebsitedark h5,
+.mainwebsitedark h6 {
+	color: #fff;
+}
+
 h1 > u {
 	position: relative;
 	text-decoration: none;
@@ -12028,7 +12025,6 @@ select.form-control:not([size]):not([multiple]) {
 .profile-credentials h1 {
 	font-size: 2.2rem;
 	margin: 0 !important;
-	font-family: Roboto, sans-serif !important;
 	line-height: 1;
 	border-left: 8px solid #2962a1;
 	padding-left: 16px;
@@ -12197,7 +12193,7 @@ h2.pf-chat-header {
 	margin-right: 12px;
 }
 
-.modal-content {
+.modal-website .modal-content {
 	background-color: #0d2847;
 }
 .modal-header {
@@ -12239,8 +12235,7 @@ h2.pf-chat-header {
 }
 
 .maincontent {
-	background-color: #0d2847;
-	color: #eee;
+
 }
 
 .try-free {
@@ -12319,9 +12314,9 @@ table.referrals tr:hover td {
 	left: 10px;
 }
 .ajaxloginbox {
-	max-width: 1200px;
+	max-width: 980px;
 	min-height: calc(100vh - 445px);
-	margin: 0 auto;
+	margin: 2rem auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -12347,4 +12342,20 @@ table.referrals tr:hover td {
 }
 .pageHeight {
 	min-height: calc(100vh - 450px);
+}
+
+.sidebar-searchprojects {
+	cursor:pointer;
+}
+
+.qs-project {
+	width:24.5%;
+	}
+.qs-project:hover {
+	width:24.5%;
+	background-color:#f1f1f1;
+}
+
+.card-collections {
+	display:inline-block;
 }

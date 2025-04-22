@@ -82,10 +82,12 @@ $invoiceformated.setValue("period", $recurringperiod))
     #end
     <div class="row">
       <div class="col-sm-4 invoicecompanylogo">
-        #set($logo = $mediaarchive.getAsset($collection.assetportrait) ) #if
-        ($logo) #set($logourl =
-        "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.png")
-        #else #set($logourl = "${communitylink}/theme/images/invoice-logo.png") #end
+        #set($logo = $mediaarchive.getAsset($collection.assetportrait) ) 
+		#if ($logo) 
+			#set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
+        #else 
+			#set($logourl = "${communitylink}/theme/images/invoice-logo.png") 
+		#end
         <img src="$logourl" style="max-height: 100px" />
       </div>
       <div
@@ -175,14 +177,13 @@ $invoiceformated.setValue("period", $recurringperiod))
             </td>
             <td valign="top" style="text-align: right; vertical-align: top">
               <span
-                >$currency $!context.doubleToMoney($product.productprice,
-                2)</span
+                >$currency $!context.doubleToMoney($product.productprice, 2)</span
               >
             </td>
           </tr>
           #end
           <tr>
-            <td class="text-right" colspan="2">
+            <td style="text-align:right" colspan="2">
               <b
                 >[[Total]]
                 <span class="currencysmall"
@@ -193,9 +194,9 @@ $invoiceformated.setValue("period", $recurringperiod))
             </td>
             <td style="text-align: right">
               <b>
-                $currency
-                $context.doubleToMoney($invoice.getValue("totalprice"), 2)
                 ##$currency
+                ##$context.doubleToMoney($invoice.getValue("totalprice"), 2)
+                $currency
                 $!context.doubleToMoney($invoice.getValue("totalprice"), 2)
               </b>
             </td>

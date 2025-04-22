@@ -6,7 +6,7 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/fashionweek</property>
 
-	<property name="flair">true</property>
+	
 	<property name="templatename">CineCraft</property>
 
 	<property name="communitytagcategory">fashionweek</property>

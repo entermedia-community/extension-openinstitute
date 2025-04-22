@@ -11,7 +11,9 @@ import org.entermediadb.email.TemplateWebEmail
 public void init() {
 
 	//Notify to Email:
-	String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
+	//String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
+	
+	String notifyemail = "cristobal@entermediadb.org";  //get it from catalog settings?
 
 	//prevent re-submition
 	 String clientform = context.getSessionValue("clientform");
