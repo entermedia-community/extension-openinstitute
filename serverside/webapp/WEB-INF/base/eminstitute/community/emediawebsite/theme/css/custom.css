@@ -12354,10 +12354,11 @@ table.referrals tr:hover td {
 }
 
 .qs-project {
-	width:24.5%;
+	height: 45px;
+	align-items:center;
+	
 	}
 .qs-project:hover {
-	width:24.5%;
 	background-color:#f1f1f1;
 }
 
