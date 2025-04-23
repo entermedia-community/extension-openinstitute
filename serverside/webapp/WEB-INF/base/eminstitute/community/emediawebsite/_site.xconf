@@ -14,7 +14,7 @@
 
   <inner-layout>${communityhome}/views/layouts/app.html</inner-layout>
   
-  <property name="title">Smart File Organizer</property>
+  <property name="title">eMedia Library</property>
   <property name="description">eMediaLibrary is a smart file organizer that helps you organize your files in categorized, searchable, and shareable folders.</property>
   <property name="keywords">file organizer, smart file organizer, file manager, file sharing, file categorization, file search, file storage</property>
   	

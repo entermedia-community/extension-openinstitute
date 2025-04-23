@@ -34,7 +34,7 @@
       #set($logo = false)
       #if($project.assetportrait)
         #set($asset = $mediaarchive.getAsset($project.assetportrait))
-        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.jpg"))
       #else
         #set($logo = "$communityhome/theme/images/OI_flower.png")
       #end
