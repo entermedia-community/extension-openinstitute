@@ -2,19 +2,21 @@
 
 
 
-#set( $projects = $mediaarchive.query("librarycollection").exact("library", "clientcollections").sort("name").search($context) )
+#set( $projects = $mediaarchive.query("librarycollection").exact("library", "clientcollections").exact("organizationstatus", "active").sort("name").search($context) )
 #if($projects.size()> 0)
 	<h6 class="text-center text-dark mb-3">Libraries</h6>
 	<div class="row">
 	#foreach($project in $projects)
-		#if($project.urlname)
-			#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
-		#else
-			#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+		#if( $foreach.count <= 15)
+			#if($project.urlname)
+				#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
+			#else
+				#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+			#end
+			<div class="py-1 px-2 mb-2 qs-project col-sm-4 d-flex">
+				<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
+			</div>
 		#end
-		<div class="py-1 px-2 mb-2 qs-project col-sm-4 d-flex">
-			<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
-		</div>
 	#end
 	</div>
 #end
@@ -24,14 +26,16 @@
 	<h6 class="text-center text-dark mb-3">Users</h6>
 	<div class="row">
 	#foreach($project in $projects)
-		#if($project.urlname)
-			#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
-		#else
-			#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+		#if( $foreach.count <= 15)
+			#if($project.urlname)
+				#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
+			#else
+				#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+			#end
+			<div class="py-1 px-2 mb-2 qs-project col-sm-4 d-flex">
+				<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
+			</div>
 		#end
-		<div class="py-1 px-2 mb-2 qs-project col-sm-4 d-flex">
-			<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
-		</div>
 	#end
 	</div>
 #end

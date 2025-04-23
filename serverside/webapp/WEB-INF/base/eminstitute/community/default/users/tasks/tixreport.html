@@ -33,8 +33,8 @@
 			<tr>
 			</a>
 			<td>
-			#set( $project= $mediaarchive.getData("librarycollection",$hit.collectionid) )
-			<a href="$sitelink/app/collective/community/index.html?collectionid=$hit.collectionid&goaltrackerstaff=*">$project</a>
+			#set( $project= $mediaarchive.getCachedData("librarycollection",$hit.collectionid) )
+			<a href="$sitelink/app/collective/community/index.html?collectionid=$hit.collectionid&goaltrackerstaff=*">#text($project)</a>
 			</td>
 			<td align="center">
 			#set($open = $mediaarchive.query("projectgoal").orgroup("collectionid",$hit.collectionid).orgroup("projectstatus","open").enduser(true).search() )

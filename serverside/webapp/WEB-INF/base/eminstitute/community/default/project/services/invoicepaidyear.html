@@ -102,6 +102,7 @@
 	                		###set( $invoices = $mediaarchive.query("collectiveinvoice").search())
 	                		
 	                		#set( $invoices = $mediaarchive.getBean("invoiceManager").getInvoiceFromMonth($status, $year, $month) )
+							$invoices
 	                		#foreach($invoice in $invoices)
                                     #if ($invoice.instance_status == "active")
                                         #set($instancescount = $instancescount+1)
