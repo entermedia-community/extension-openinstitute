@@ -55,7 +55,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 		
 		
 		<div class="sidebar-box-header"  >
-			<span class="sidebar-searchprojects" id="searchBtn"><i class="fas fa-search"></i> Search Projects</span>
+			<span class="sidebar-searchprojects" id="searchBtn"><i class="fas fa-search"></i> [[Search Projects]]</span>
 		</div>
 </div>
 
@@ -158,35 +158,33 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 			<a href="$!{communitylink}/projects/allcthatsactivity/index.html"  >
 			<i class="fa fa-comments"></i> [[All Chats]]</a>
 		</li>
-		
-		
-		</ul>		
+	</ul>		
 
 
 		
 		#if($canviewsettings)
-		<div class="sidebar-box-header d-flex justify-content-between" style="margin-top:0px;">
-		<div>[[Admin]]</div>
-		<a href="$sitelink/find/views/settings/status/tools/index.html" class="" title="[[Finder Settings]]"><i class="fas fa-cog"></i></a>
-		</div>
-		<ul class="sidebar-list" style="margin-bottom:10px;">
-			
-			<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
-				<a href="${communitylink}/projects/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
-			</li>
-			#*
-			<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
-				<a href="${communitylink}/projects/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
-			</li>
-			*#
-		
-			<li class="#if($appsection == "tixreport") current #end" >
-				<a href="${communitylink}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
-			
-			<li class="#if($appsection == "invoices") current #end">
-				<a href="${communitylink}/project/services/invoicepaidyear.html" ><i class="fas fa-file-invoice-dollar"></i> [[Invoices]]</a>
-			</li>
-		</ul>
+			<div class="sidebar-box-header d-flex justify-content-between" style="margin-top:0px;">
+			<div>[[Admin]]</div>
+			<a href="$sitelink/find/views/settings/status/tools/index.html" class=""  target="_blank" title="[[Finder Settings]]"><i class="fas fa-cog"></i></a>
+			</div>
+			<ul class="sidebar-list" style="margin-bottom:10px;">
+				
+				<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
+					<a href="${communitylink}/projects/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
+				</li>
+				#*
+				<li class="#if($content.getPageName() == "allprojectsbalances") current #end" >
+					<a href="${communitylink}/projects/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
+				</li>
+				*#
+				#*
+				<li class="#if($appsection == "tixreport") current #end" >
+					<a href="${communitylink}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
+				*#
+				<li class="#if($appsection == "invoices") current #end">
+					<a href="${communitylink}/projects/reports/invoices/invoicepaidyear.html" ><i class="fas fa-file-invoice-dollar"></i> [[Invoices]]</a>
+				</li>
+			</ul>
 		#end
 		
     </div> 

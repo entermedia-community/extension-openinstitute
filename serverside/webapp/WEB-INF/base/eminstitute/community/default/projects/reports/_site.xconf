@@ -6,4 +6,8 @@
       <settingsgroup id="administrator"/>
     </or>
   </permission>
+  
+  <inner-layout min-width="1024">/${communityhome}/projects/reports/layout.html</inner-layout>
+  
+  
 </page>  

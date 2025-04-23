@@ -12361,7 +12361,9 @@ table.referrals tr:hover td {
 .qs-project:hover {
 	background-color:#f1f1f1;
 }
-
+.qs-project a {
+	display:block;
+}
 .card-collections {
 	display:inline-block;
 }

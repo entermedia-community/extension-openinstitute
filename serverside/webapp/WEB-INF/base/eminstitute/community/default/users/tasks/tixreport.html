@@ -1,4 +1,6 @@
 <div class="maincontent">
+	
+	<h2>[[Tix Report]]</h2>
 	#if($canviewsettings)
 	<!--  $collectionid will be changed and looped from list of all active clients.-->
 		#set( $hits = $mediaarchive.query("librarycollectionusers").orgroup("followeruser",$user.getId()).enduser(true).search() )

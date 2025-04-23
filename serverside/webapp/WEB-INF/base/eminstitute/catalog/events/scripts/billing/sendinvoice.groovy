@@ -24,7 +24,7 @@ public void init() {
 				invoiceSearcher.saveData(invoice);
 		
 			}
-			else if(invoice.get("paymentstatus").equals("error") {
+			else if(invoice.get("paymentstatus").equals("error")) {
 				//notifiy about error?
 			}
 			else if(invoice.get("paymentstatus").equals("paid") && !Boolean.valueOf(invoice.get("notificationpaidsent"))) {
