@@ -131,9 +131,9 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 		#set($userprojects = $mediaarchive.getProjectManager().listCollectionsOnTeam($user))
 
 	    	<ul class="sidebar-list">
-			<li class="#if($appsection == "wallet") current #end">
-			<a href="${communitylink}/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
-			</li>
+			##<li class="#if($appsection == "wallet") current #end">
+			##<a href="${communitylink}/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
+			##</li>
 			#if(!$userprojects.isEmpty() )
 			<li class="#if($appsection == "mytasks") current #end" >
 				<a href="$communitylink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
