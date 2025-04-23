@@ -27,6 +27,7 @@ public void init()
 		usercollection.setValue("name", user.getName());
 		usercollection.setValue("owner", user.getId());
 		usercollection.setValue("library","userscollections");
+		usercollection.setValue("collectiontype","7"); //User Library
 		collectionsearcher.saveData(usercollection);
 
 		log.info("User collection created: " + usercollection.getId());
