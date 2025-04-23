@@ -100,7 +100,7 @@
 					#set($products = $invoice.getValue("productlist"))
 					
 					#foreach ($product in $products)
-						###set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
+						#set ( $prod = $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
 					<tr>
 						<td valign="top" style="vertical-align: top;">
 							##<input type="text" class="form-control" name="productquantity[]" value="$product.productquantity" /></td>
@@ -110,7 +110,9 @@
 								##<input type="text" class="form-control" name="productname[]" value="$!product.productname" />
 								$!product.productname
 							</div>
-							<div style="font-size: 0.9em;">$!product.productdescription</div>
+							<div style="font-size: 0.9em;">
+								$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)
+							</div>
 						</td>
 						<td  valign="top" style="text-align: right; vertical-align: top;">
 							##$currency <input type="text" class="form-control form-control-sm" style="width: 90px;" name="productprice[]" value="$!context.doubleToMoney($product.productprice, 2)" />

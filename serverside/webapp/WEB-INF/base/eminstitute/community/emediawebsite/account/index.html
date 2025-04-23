@@ -64,10 +64,10 @@
 					
 					
 					#if( $user)
-						<h1>$!selecteduser.get("firstName") $!selecteduser.get("lastName")</h1>
+						<h2>$!selecteduser.get("firstName") $!selecteduser.get("lastName")</h2>
 					#else
 					
-						<h1>$selecteduser.getAnonNickName()</h1>						
+						<h2>$selecteduser.getAnonNickName()</h2>						
 					#end
 					<a class="email d-flex align-items-center">
 						<i class="fas fa-envelope me-2"></i>
@@ -87,18 +87,17 @@
 					
 					
 					#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser", $selecteduser.getId()).search($context) )
-						#set($oids = [])
-						#foreach( $ohit in $ids )
-							#set($x = $oids.add($ohit.collectionid))
-						#end
-						
-						#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
+					#set($oids = [])
+					#foreach( $ohit in $ids )
+						#set($x = $oids.add($ohit.collectionid))
+					#end
+					
+					#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
 
-						#set( $modcollections = $chatManager.loadCollectionsModified($collections, $selecteduser.getId() ) )
-						
-						#if($collections.size()>0)
-						<h3>[[Projects]]</h3>
-
+					#if($collections.size()>0)
+					<div class="my-4">
+						<h3>[[Libraries]]</h3>
+	
 						<div class="stations-grid p-4">
 							<div class="project-grid">
 								#foreach( $ohit in $collections )
@@ -133,12 +132,11 @@
 							</div>
 							<div class="clearfix"></div>	
 						</div>
-					#else
-						$pages.include("${communityhome}/account/createlibrary.html", $context)
+					</div>
 					#end
 					
 					
-					
+					$pages.include("${communityhome}/account/createlibrary.html", $context)
 					
 					
 					

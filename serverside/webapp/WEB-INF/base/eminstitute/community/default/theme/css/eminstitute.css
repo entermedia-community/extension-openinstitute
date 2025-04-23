@@ -468,7 +468,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	background-color: #ddd;
 }
 .card-collections-thumb {
-	height: 108px;
+	height: 88px;
 	width: 108px;
 	margin: 4px;
 	background-size: contain;

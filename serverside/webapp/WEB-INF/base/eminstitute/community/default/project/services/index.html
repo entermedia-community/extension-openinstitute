@@ -114,8 +114,7 @@
                              #elseif ($invoice.getValue("paymentstatus") == "autopayfailed" || $invoice.getValue("paymentstatus") == "error")
                                  <a
                                      href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
-                                     class="btn btn-xs btn-primary ajax"
-                                     data-targetdiv="collectivebilling">[[Pay Now]]</a>
+                                     class="btn btn-xs btn-primary">[[Pay Now]]</a>
                                  #if ($invoice.paymentstatusreason != "")
                                      <div class="alert alert-danger">$invoice.paymentstatusreason</div>
                                  #end

@@ -6383,13 +6383,18 @@ label.btn {
 	z-index: 4;
 }
 
+.input-group-prepend .input-group-text {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
 .custom-select:focus,
 .form-control:focus {
 	box-shadow: 0 0 10px rgba(55, 125, 255, 0.1);
 }
 
 .input-group-text {
-	border-color: #e7eaf3;
+	border-color: #ced4da;
 }
 
 /* Input Label */
@@ -12358,4 +12363,15 @@ table.referrals tr:hover td {
 
 .card-collections {
 	display:inline-block;
+}
+
+.contentcolumn {
+	background-color:transparent;
+}
+.emdatatable {
+	background-color:#fff;
+}
+
+.card-header {
+	background-color:#fff;
 }

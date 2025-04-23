@@ -24,6 +24,8 @@
 <input type="hidden" name="collectionid" value='$invoice.getValue("collectionid")' />
 	
 		$pages.include("$communityhome/project/services/viewinvoice.html", $context)
+		
+		
 		<div class="text-right" style="padding:15px 10px;">
 		<button id="closebutton" type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">[[Close]]</button>
 		#if( $canviewsettings )

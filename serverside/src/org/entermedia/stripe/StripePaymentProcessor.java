@@ -108,6 +108,8 @@ public class StripePaymentProcessor {
 	private String getItemId(CloseableHttpResponse response)
 			throws JsonParseException, JsonMappingException, IOException {
 		if (response.getStatusLine().getStatusCode() != 200) {
+			log.error("Stripe response code: " + response.getStatusLine().getStatusCode());
+			log.error(response);
 			return "";
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -116,7 +118,7 @@ public class StripePaymentProcessor {
 		return (String) map.get("id");
 	}
 
-	protected boolean createCharge(MediaArchive inArchive, Data payment, String customer, Data invoice, String email)
+	protected boolean createCharge(MediaArchive inArchive, Data payment, String customer, String source, Data invoice, String email)
 			throws IOException, InterruptedException, URISyntaxException {
 		log.info("Charging with stripe to invoice: " + invoice.getId() + " by user: " + email);
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/charges");
@@ -127,11 +129,13 @@ public class StripePaymentProcessor {
 				: "usd";
 		URI uri = new URIBuilder(http.getURI()).addParameter("amount", amountstring).addParameter("currency", currency)
 				.addParameter("customer", customer)
+				.addParameter("source", source)
 				.addParameter("description", "Payment Invoice: " + invoice.getValue("invoicenumber") + " Id: " + invoice.getId() + " by " + email).build();
 		log.info("Stripe amount: " + totalprice);
 		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
 		// TODO: log this somewhere
 		if (response.getStatusLine().getStatusCode() != 200) {
+			log.error("Stripe Charge Error: " + response);
 			return false;
 		}
 		return true;
@@ -187,20 +191,19 @@ public class StripePaymentProcessor {
 		return getCustomerId(inArchive, email, null);
 	}
 
-	protected String getCustomerId(MediaArchive inArchive, String email, String source)
+	protected String getCustomerId(MediaArchive inArchive, String email, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
 		ArrayList<Map<String, Object>> users = getCustomers(inArchive, email);
 		String userId = "";
 		String sourceId = "";
 		for (Map<String, Object> x : users) {
-			if (x.get("email").equals(email)) {
+			if (x.get("email").equals(email)) 
+			{
 				userId = (String) x.get("id");
 				sourceId = (String) x.get("source");
 			}
 		}
-		if (source != null && sourceId != source) {
-			updateCustomersSource(inArchive, userId, source);
-		}
+		
 		// TODO if source is different, update source?
 		return userId;
 	}
@@ -211,6 +214,7 @@ public class StripePaymentProcessor {
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email).build();
 		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
 		if (response.getStatusLine().getStatusCode() != 200) {
+			log.error("Error getting Stripe customers: " + response);
 			return null;
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -219,23 +223,43 @@ public class StripePaymentProcessor {
 		ArrayList<Map<String, Object>> users = (ArrayList) map.get("data");
 		return users;
 	}
-
-	protected String createCustomer2(MediaArchive inArchive, String collectionId, String source)
+	
+	public Map<String, Object> getCustomerById(MediaArchive inArchive, String customerId)
 			throws URISyntaxException, IOException, InterruptedException {
+		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers/" + customerId);
+		URI uri = new URIBuilder(http.getURI()).build();
+		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
+		if (response.getStatusLine().getStatusCode() != 200) {
+			log.error("Error getting Stripe customer: " + response);
+			return null;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		HttpEntity entity = response.getEntity();
+		Map<String, Object> map = mapper.readValue(EntityUtils.toString(entity), Map.class);
+		return map;
+	}
+
+	protected String createCustomer2(MediaArchive inArchive, String collectionId, String tokenid)
+			throws URISyntaxException, IOException, InterruptedException {
+		
+		/*
 		if (source.isEmpty()) {
 			return "";
 		}
+		*/
 		String email = "billing+" + collectionId + "@entermediadb.com";
-		String emailExists = getCustomerId(inArchive, email, source);
+		String emailExists = getCustomerId(inArchive, email, tokenid);
+		
 		log.info("customer exists in stripe: "+ emailExists);
 		Data workspace = getInvoiceManager(inArchive).getWorkspaceById(collectionId);
 		if (emailExists != null && !emailExists.isEmpty()) {
-			log.info("Creating customer in stripe: " + emailExists);	
+			log.error("Error creating customer in stripe: " + emailExists);	
 			return emailExists;
 		}
+		
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email)
-				.addParameter("description", "Workspace:" + workspace.getName()).addParameter("source", source).build();
+				.addParameter("description", "Workspace:" + workspace.getName()).addParameter("source", tokenid).build();
 		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
 		return getItemId(response);
 	}

@@ -43,13 +43,13 @@
 	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
 	#end
 
-	<div class="card" style="max-width:1000px; margin:0 auto;">
+	<div class="card" style="max-width:1100px; margin:0 auto;">
     <div class="card-header">
         <div class="row" style="border-bottom:1px solidc ">
             <div class="col-sm-9">
                 <h5>
                     <i class="fa-solidfa-credit-card mr-4" style="font-size: 1.4em"></i>
-                    [[All major Credit Cards Accepted]]
+                    [[All major credit cards accepted]]
                 </h5>
             </div>
 
@@ -96,7 +96,7 @@
                         <table class="table">
                             <col span="1" style="width: 5%;">
                             <col span="1" style="width: 60%;">
-                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 25%;">
                             <tr>
                                 <th class="purchase_heading" align="left">
                                     [[Qty]]
@@ -119,7 +119,9 @@
 										#set($productname = $replacer.replace($prod.name, $invoiceformated))
 										
 										#text($productname)
-										
+										<div style="font-size: 0.9em;">
+										$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)
+										</div>
 									</td>
 									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
 								</tr>
@@ -129,7 +131,7 @@
 					
 					
                             <tr>
-                                <td class="text-right" colspan="2"><b>[[Total]] <span class="currencysmall">($context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
+                                <td style="text-align:right" colspan="2"><b>[[Total]] <span class="currencysmall">($context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
                                 <td  style="text-align: right"><b>$currency $!context.doubleToMoney($invoice.getValue("totalprice"), 2)</b></td>
                             </tr>
                         </table>
@@ -137,10 +139,11 @@
 
             </div>
             
-            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed" || 1==1)
 
 	        	##Disable for not USD
-            	#if($invoice.currencytype!='1')
+				
+            	#if($invoice.currencytype != "usd" )
             	<div class="col-sm-5" style="text-align:center; padding:40px 30px 0;">
             		<div class="alert alert-warning">[[Online payment disabled temporarily for current invoice currency type]].</div>
             	</div>
@@ -151,48 +154,48 @@
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="${projectlink}/services/payfinish.html" 
 	                        		method="post" 
-	                        		id="payment-form"
-	                        		class="form ajaxformX"
+	                        		id="paymentform"
+	                        		class="form "
 	                        		data-targetdiv="collectivecheckout"
 	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
 	                            
-	                             #if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
+	                             #if ($customer.sources.data.size() > 0)
 	                            <div class="row">
 	                                <div class="col-md-12 mb-3">
 	                                    <label>[[Card Options]]:</label>
-		                            	<select id="creditcardselect" class="form-control">
-		                            		<option value="0">New Credit Card</option>
+		                            	<select id="creditcardselect" class="form-control" name="selectedsource">
+		                            		<option value="">New Credit Card</option>
 		                            		#foreach ($s in $customer.sources.data)
-		                            		<option value="$s.id">$s.brand (****-$s.last4)</option>
-		                            		#set( $custsource = $s.id )
+			                            		<option value="$s.id">$s.brand (****-$s.last4)</option>
+			                            		#set( $custsource = $s.id )
 		                            		#end
 		                            	</select>
 	                            	</div>
 	                            </div>
+								
+								
 								#end  
 								<div id="allcreditcardform" class="creditcardform">	
 								
-		                            <div class="row">
-		                                <div class="col">
-		                                    <div class="float-right" style="margin-top:-4px"><img
-		                                            src="${communitylink}/theme/icons/creditcard.png" /></div>
-		                                    <div class="form-group">
-		                                        <label for="staticEmail">[[Card Info]]:</label>
-		                                        
-		                                                                              
-		                                        
-		                                        <div class="form-control">
-		                                            <div id="card-element" style="width: 100%">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                                
-		                            </div>
+		                            <div class="d-flex justify-content-between mb-1">
+											<div>
+												<label for="staticEmail">[[Card Info]]:</label>
+											</div>
+		                                    <div>
+												<img src="${communitylink}/theme/icons/creditcard.png" style="margin-top:-10px;" />
+										    </div>
+		                             </div>
+											
+									<div class="form-group">
+										<div class="form-control">
+                                            <div id="card-element" style="width: 100%"></div>
+										</div>
+                                    </div>
+								</div>
 		
-		                            <div class="row">
-		                                <div class="col-md-6">
+		                        <div class="row">
+		                                <div class="col-md-8">
 		                                    <div class="form-group">
 		                                        <label for="staticEmail">[[Amount]]:</label>
 		                                        <div class="input-group">
@@ -214,7 +217,7 @@
 		                               	</div>
 		                        	   
 		                            </div>
-		 						</div>
+		 						
 	                            <div class="row mt-2">                            	
 	                                <div class="col-md-6">
 	                                <div id="card-errors" class="donateformerror" role="alert"></div>
@@ -224,7 +227,7 @@
 	                                </div>
 	                                <div class="col-md-6 text-right">
 	                                    <div style=" margin: 0px auto;">
-	                                        <a href="#" onclick='$("#payment-form").submit()' class="btn btn-success"><i
+	                                        <a href="#" onclick='$("#paymentform").submit()' class="btn btn-success"><i
 	                                        
 	                                                class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
 	                                    </div>
@@ -241,8 +244,9 @@
 	                            <input type="hidden" name="field" value="totalprice" /> 
 	                            <input type="hidden" name="field" value="userid" /> 
 	                            <input type="hidden" name="userid.value" value="$!user.getId()" />
-	                            <input type="hidden" name="customerselected" id="customerselected" value="0" />
-	                            <input type="text" name="stripecustomer" id="stripecustomer" value="$customer.id" hidden="" />
+								<input type="hidden" name="stripetokenid" id="stripetokenid" />
+								<input type="hidden" name="stripenewsource" id="stripenewsource" />
+	                            <input type="text" name="stripecustomer" id="stripecustomer" value="$!{customer.id}" hidden="" />
 	                        </form>
 	
 	                    </div>
@@ -314,33 +318,35 @@
 	    }
 	});
 	document.getElementById('issavecard').checked = true;
-	
-	#if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
-	let element = document.getElementById("creditcardselect");
-	element.value = "0";
-
-	$("#creditcardselect").change(function() {
-		document.getElementById('customerselected').value = $("#creditcardselect").val() !== "0";
-		$("#allcreditcardform").attr('hidden', $("#creditcardselect").val() !== "0");
-	});
-	#end
-	
-	
-	
-	document.getElementById('customerselected').value = false;
-	
+		
     $(document).ready(function () {
-    	#if ($collection.savestripecreditcard == true && $customer.sources.data.size() > 0)
-	    	element.value = "$custsource";
-		    $("#allcreditcardform").attr('hidden', $("#creditcardselect").val() !== "0");
-		    document.getElementById("customerselected").value = "true";
-		#end
-	    
-	  	  #if($mediaarchive.isCatalogSettingTrue("productionmode"))
-        console.log('Production');
+		
+		 
+		#if ($customer.sources.data.size() > 0) 
+		 
+
+		$("#creditcardselect").change(function() { 
+			var selected = $("#creditcardselect").val();
+			if (selected != "") { 
+				$("#allcreditcardform").attr('hidden', true);
+			} 
+			else {
+				$("#allcreditcardform").attr('hidden', false);
+			}
+		}); 
+		#end 
+		 
+		 
+		 
+		document.getElementById('customerselected').value = false; 
+		 
+
+		
+	  	 #if($mediaarchive.isCatalogSettingTrue("productionmode"))
+        	console.log('Production');
 	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
 	  	 #else
-        console.log('Test Publishkey');
+	        console.log('Test Publishkey');
 	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
 	  	 #end
         var stripe = Stripe("$publishkey");
@@ -363,7 +369,7 @@
             }
         });
 
-        var form = document.getElementById('payment-form');
+        var form = document.getElementById('paymentform');
         $(form).validate({
             rules: {
                 "totalprice.value": {
@@ -372,8 +378,9 @@
                 }
             },
             submitHandler: function (form) {
-            	var isCustomer = document.getElementById("customerselected").value;
-            	if (isCustomer != "true") {
+            	var selectedsource = $("#selectedsource").val();
+				
+            	if (selectedsource === undefined) {
 	                stripe.createToken(card).then(function (result) {
 	                    if (result.error) {
 	                        var errorElement = document.getElementById('card-errors');
@@ -396,13 +403,12 @@
         });
 
         stripeResponseHandler = function (response) {
-            var form = document.getElementById('payment-form');
-            // var hiddenInput = document.createElement('input');
-            hiddenInput = document.getElementById('stripecustomer');
-            hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'stripecustomer');
-            hiddenInput.setAttribute('value', response.token.id);
-            $(form).appendChild(hiddenInput);
+            var form = document.getElementById('paymentform');
+			$("#stripetokenid").val(response.token.id);
+			
+			
+			$("#stripenewsource").val(response.token.card.id);
+			
             //$(form).trigger("submit");
             $(form).submit();
         }

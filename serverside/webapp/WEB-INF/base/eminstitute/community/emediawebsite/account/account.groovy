@@ -12,7 +12,7 @@ public void init()
 		return;
 	}
 
-	MediaArchive mediaArchive = context.getPageValue("mediaarchive");//Search for all files looking for videos
+	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
 	
 	BaseSearcher collectionsearcher = mediaArchive.getSearcher("librarycollection");
 	

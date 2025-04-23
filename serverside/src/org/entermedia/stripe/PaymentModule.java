@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import org.entermedia.invoice.InvoiceManager;
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.asset.modules.BaseMediaModule;
 import org.openedit.Data;
+import org.openedit.OpenEditException;
 import org.openedit.WebPageRequest;
 import org.openedit.data.Searcher;
 import org.openedit.data.SearcherManager;
@@ -77,7 +79,7 @@ public class PaymentModule extends BaseMediaModule
 	}
 	
 	public void createCheckoutUser(WebPageRequest inReq)
-	{
+	{ 
 		User user = inReq.getUser();
 		if(user != null) {
 			return;
@@ -90,7 +92,8 @@ public class PaymentModule extends BaseMediaModule
 	//*Process Regular Payments (EM Portal) *//
 	
 	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
-		String source = inReq.getRequestParameter("stripecustomer");		
+
+		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
 		
 		MediaArchive archive = getMediaArchive(inReq);
@@ -125,27 +128,40 @@ public class PaymentModule extends BaseMediaModule
 
 		String userid = payment.get("userid");
 		User user = archive.getUser(userid);
-		String customerId = "";
 		
-		if (isRecurring == true)
+		String source = inReq.getRequestParameter("selectedsource");		
+		if(source == null)
 		{
-			customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);
+			source = inReq.getRequestParameter("stripenewsource");
+		}
+		
+		String customerId = (String) inReq.getRequestParameter("stripecustomer");
+		String tokenid = inReq.getRequestParameter("stripetokenid");
+		
+		
+		
+		if (customerId == null)
+		{
 			
-		} else {
-			if (!stripeCust) {
-				customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), source);
-			} else {
-				customerId = (String) inReq.getRequestParameter("stripecustomer");
+			customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), tokenid);
+		}
+		else 
+		{
+			if (tokenid != null) 
+			{
+				getOrderProcessor().updateCustomersSource(archive, userid, tokenid);
 			}
 		}
+
 		if (customerId.isEmpty()) {
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Stripe error, please contact your admin");
 			invoiceSearcher.saveData(invoice);
 			inReq.putPageValue("invoice", invoice);
+			log.error("Error creating Stripe Customer for invoice: " + invoice.getValue("invoicenumber"));
 			return;
 		}
-		isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, invoice, user.getEmail());
+		isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, source, invoice, user.getEmail());
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
@@ -153,6 +169,7 @@ public class PaymentModule extends BaseMediaModule
 		} else {
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Credit Card failed");
+			log.error("Error creating Charge for Stripe invoice: " + invoice.getValue("invoicenumber"));
 		}	
 		
 		payments.saveData(payment);
