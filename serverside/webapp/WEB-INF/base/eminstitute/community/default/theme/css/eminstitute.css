@@ -475,6 +475,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	margin: 4px;
 	background-size: contain;
 	background-repeat: no-repeat;
+	background-position: center;
 }
 .sidebar-box .card-collections-thumb {
 	height: 100%;

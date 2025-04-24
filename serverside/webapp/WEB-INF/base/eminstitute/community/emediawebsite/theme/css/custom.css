@@ -4381,6 +4381,7 @@ a.badge-soft-navy:focus {
 .btn-secondary:not(label.btn):not([href]):not(:disabled):not(.disabled),
 .btn-secondary:not([href]),
 .btn-secondary:not([href]):not([href]):not(:disabled):not(.disabled) {
+	color:#fff;
 	background-color: #71869d;
 	border-color: #71869d;
 }

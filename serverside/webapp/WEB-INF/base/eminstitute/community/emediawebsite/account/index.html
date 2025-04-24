@@ -12,14 +12,14 @@
 	#set( $userimageurl = "${communityhome}/theme/images/user.svg" )
 #end
 
-<div class="p-2 p-lg-4 mx-auto mt-3" style="max-width: 1400px;" id="useraccount">
+<div id="useraccount" class="p-2 p-lg-4 mx-auto mt-3" style="max-width: 1400px;" >
 	<div class="container-fluid">
 		<div class="row acc-row">
 			<div class="col-sm-12 col-md-8">
 				<div class="profile-credentials">
 					<div class="edit-profile d-flex align-items-center">
 						#if($canviewsettings)
-						<a href="${communityhome}/users/edit/edit.html?userid=$selecteduser.getId()" 
+						<a href="${communityhome}/account/edit/edit.html?userid=$selecteduser.getId()" 
 							class="btn btn-xs btn-soft-primary emdialog"
 							title="[[Edit User Account]]">
 							<i class="fas fa-edit me-2"></i>
@@ -34,33 +34,8 @@
 						</button>
 					</div>
 					
-					#if($canedituserinfo)
-						<div id="userprofileimage" class="">
-							<a href="#" id="filePicker" class="" title="[[Upload square image for better results]]">
-								<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-image" />
-							</a>
-						</div>
-						<form id="uploaddata"
-							class="ajaxform"
-							data-targetdiv="useraccount" 
-							data-oemaxlevel="1"
-							name="wizard" 
-							method="post" 
-							enctype="multipart/form-data"
-							action="${communityhome}/account/uploadsave.html" 
-							>
-							<input type="hidden" name="userid" value="$selecteduser.getId()" />
-							<input type="hidden" name="sourcepath" value="userprofiles/$selecteduser.getId()/" />
-							<input id="upload_field" name="file" type="file" style="position:absolute; top:-1000px;" >
-						</form>
-						<script>
-							$('#upload_field').change(function() {
-								$('#uploaddata').submit();
-							});
-						</script>
-					#else
-						<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-image" />
-					#end
+
+					<img src="${userimageurl}" alt="$selecteduser.getAnonNickName()" class="profile-image" />
 					
 					
 					#if( $user)
@@ -122,8 +97,8 @@
 										<a href="${hitprojectlink}" 
 											class=" #if($selectedproject==$project.id) active #end">
 						
-										<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'></div>
-						 				<div class="card-name collectionbox">$project.name
+										<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink"); #end background-color:#fff;'></div>
+						 				<div class="card-name collectionbox" style="text-align:center">$project.name
 												#if( $modcollections.contains($project.getId())) #end</div>
 										</a>
 										</div>
