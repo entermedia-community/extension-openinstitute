@@ -12,13 +12,17 @@ public void init2()
 	
 	//Save profile
 	Searcher profilesearcher = archive.getSearcher("userprofile");
-	String[] profiledetails = ["sendchatnotifications"];
+	
+	String[] profiledetails = ["sendchatnotifications", "assetportrait"];
 
 	//get this users profile and only this user
 	String userid = context.getRequestParameter("userid");	
+
 	UserProfile profile = archive.getUserProfile(userid);
 	profilesearcher.updateData(context, profiledetails, profile);
 	archive.saveData("userprofile",profile);
+	
+	
 	//Save user 
 	String[] userdetails2 = ["lastName","firstName","email"];
 	Searcher usersearcher = archive.getSearcher("user");

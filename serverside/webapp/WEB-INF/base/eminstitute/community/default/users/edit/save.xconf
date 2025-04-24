@@ -6,4 +6,6 @@
 		<script>${communityhome}/users/edit/saveuser.groovy</script>
 	</path-action>
 	
+	<property name="reloadprofile">true</property>
+	
 </page>

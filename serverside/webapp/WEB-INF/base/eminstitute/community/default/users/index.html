@@ -16,6 +16,7 @@ $context.putPageValue("selecteduser", $selecteduser)
 							#end
 						
 							#set( $userimageurl = $mediaarchive.asLinkToUserProfile($selecteduser) )
+							
 							#if(!$userimageurl)
 								#set( $userimageurl = "${communityhome}/theme/images/user.svg" )
 							#end
