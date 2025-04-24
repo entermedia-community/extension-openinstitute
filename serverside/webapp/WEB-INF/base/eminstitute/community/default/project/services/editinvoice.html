@@ -67,9 +67,10 @@
 	<div style="margin:20px 0 20px;">
 		<strong>[[Invoice Description]]:</strong>
 		#set($invoicedescription = $invoice.getValue("invoicedescription"))
-
-		$context.putPageValue("detailid", "invoicedescription")
-		$context.putPageValue("detailisrequired", "false")
+		
+		#set( $searcher  = $mediaarchive.getSearcher("collectiveinvoice"))
+		#set( $detail = $searcher.getDetail("invoicedescription") ) 
+		$context.putPageValue("detail", $detail)
 		$context.putPageValue("val", $!invoicedescription)
 		$pages.include("$apphome/components/xml/types/html.html", $context)
 		

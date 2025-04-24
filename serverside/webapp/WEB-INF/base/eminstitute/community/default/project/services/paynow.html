@@ -139,7 +139,7 @@
 
             </div>
             
-            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed" || 1==1)
+            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
 
 	        	##Disable for not USD
 				
@@ -334,12 +334,7 @@
 				$("#allcreditcardform").attr('hidden', false);
 			}
 		}); 
-		#end 
-		 
-		 
-		 
-		document.getElementById('customerselected').value = false; 
-		 
+		#end  
 
 		
 	  	 #if($mediaarchive.isCatalogSettingTrue("productionmode"))
