@@ -69,6 +69,12 @@
     </name> 
   </property>  
   
+  <property id="primaryimagepathpng" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[PNG Image]]></language>  
+    </name> 
+  </property>
+  
   <property id="primaryimagepathwide" index="true" stored="true" editable="true"  > 
     <name> 
       <language id="en"><![CDATA[Image Wide]]></language>  
