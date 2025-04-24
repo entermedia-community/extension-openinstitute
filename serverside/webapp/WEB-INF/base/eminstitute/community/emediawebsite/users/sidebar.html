@@ -123,6 +123,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 	
 </div>
 
+<div class="sidebar-box" >
    <div class="sidebar-box-header  d-flex justify-content-between" >
 	<div>[[Profile]]</div>
    <a href="${communitylink}/users/index.html?id=$user.getId()" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
@@ -159,16 +160,16 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 			<i class="fa fa-comments"></i> [[All Chats]]</a>
 		</li>
 	</ul>		
-
+</div>
 
 		
-		#if($canviewsettings)
+	#if($canviewsettings)
+	<div class="sidebar-box">
 			<div class="sidebar-box-header d-flex justify-content-between" style="margin-top:0px;">
-			<div>[[Admin]]</div>
-			<a href="$sitelink/find/views/settings/status/tools/index.html" class=""  target="_blank" title="[[Finder Settings]]"><i class="fas fa-cog"></i></a>
+				<div>[[Admin]]</div>
+				<a href="$sitelink/find/views/settings/status/tools/index.html" class="" title="[[Finder Settings]]" target="_blank"><i class="fas fa-cog"></i></a>
 			</div>
-			<ul class="sidebar-list" style="margin-bottom:10px;">
-				
+			<ul class="sidebar-list" style="margin-bottom:0px;">
 				<li class="#if($content.getPageName() == "reportpendingpayments") current #end" >
 					<a href="${communitylink}/projects/reports/reportpendingpayments.html"><i class="fas fa-chart-line"></i> [[Payments Pending]]</a>
 				</li>
@@ -177,15 +178,16 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 					<a href="${communitylink}/projects/reports/allprojectsbalances.html"><i class="fas fa-chart-line"></i> [[All Transactions]]</a>
 				</li>
 				*#
-				#*
-				<li class="#if($appsection == "tixreport") current #end" >
+			
+				#*<li class="#if($appsection == "tixreport") current #end" >
 					<a href="${communitylink}/users/tasks/tixreport.html?goaltrackerstaff=$user.getId()"><i class="fas fa-chart-line"></i> [[Tix Report]]</a>
 				*#
 				<li class="#if($appsection == "invoices") current #end">
 					<a href="${communitylink}/projects/reports/invoices/invoicepaidyear.html" ><i class="fas fa-file-invoice-dollar"></i> [[Invoices]]</a>
 				</li>
 			</ul>
-		#end
+	</div>
+	#end
 		
     </div> 
 	

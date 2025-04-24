@@ -1568,18 +1568,9 @@ ul > li {
 .project-navbar .dropdown-menu {
 	background-color: #626584;
 }
-.project-navbar a.dropdown-item {
-	color: #ffffff;
-}
 .project-navbar a.dropdown-item:hover,
 .project-navbar a.dropdown-item:active {
 	background-color: rgba(0, 0, 0, 0.15) !important;
-}
-.project-navbar .dropdown-menu li a {
-	color: #ffffff;
-}
-.project-navbar .dropdown-menu li a.nav-link:hover {
-	color: #ffffff !important;
 }
 .project-navbar {
 	background-color: #3b3d50e6;

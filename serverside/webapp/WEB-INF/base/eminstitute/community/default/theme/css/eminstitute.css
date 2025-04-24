@@ -453,10 +453,12 @@ a.primary:hover .fa-solid {
 	background-color: rgb(0, 0, 0, 0.1);
 }
 .sidebar-list a {
+	color:#333;
 	padding: 9px 10px 8px 20px;
 	display: block;
 }
 .sidebar-list a:hover {
+	color:#111;
 	background-color: #c9e8f2;
 }
 .sidebar-list .badge {

@@ -73,6 +73,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 	
 </div>
 
+<div class="sidebar-box">
    <div class="sidebar-box-header" >[[Profile]]
    <a href="${communitylink}/users/index.html?id=$user.getId()" class="float-right" title="[[My Profile]]"><i class="fas fa-user-cog"></i></a>
    </div>
@@ -109,8 +110,10 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 		</li>
 		
 		
-		</ul>		
-		#if($canviewsettings)
+		</ul>
+</div>		
+#if($canviewsettings)
+<div class="sidebar-box">
 		<div class="sidebar-box-header d-flex justify-content-between" style="margin-top:0px;">
 			<div>[[Admin]]</div>
 			<a href="$sitelink/find/views/settings/status/tools/index.html" class="" title="[[Finder Settings]]" target="_blank"><i class="fas fa-cog"></i></a>
@@ -132,7 +135,8 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 				<a href="${communitylink}/projects/reports/invoices/invoicepaidyear.html" ><i class="fas fa-file-invoice-dollar"></i> [[Invoices]]</a>
 			</li>
 		</ul>
-		#end
+</div>
+#end
 		
     </div> 
     
