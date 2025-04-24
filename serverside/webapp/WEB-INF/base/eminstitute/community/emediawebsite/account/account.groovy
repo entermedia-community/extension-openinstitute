@@ -27,6 +27,7 @@ public void init()
 		usercollection.setValue("name", user.getName());
 		usercollection.setValue("owner", user.getId());
 		usercollection.setValue("library","userscollections");
+		usercollection.setValue("communitytagcategory","emediawebsite");
 		usercollection.setValue("collectiontype","7"); //User Library
 		collectionsearcher.saveData(usercollection);
 

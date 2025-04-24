@@ -60,6 +60,7 @@ public void init() {
 	newcollection.setValue("name", requiredlibraryname);
 	newcollection.setValue("owner", user.getId());
 	newcollection.setValue("library","clientcollections");
+	newcollection.setValue("communitytagcategory","emediawebsite");
 	newcollection.setValue("collectiontype","6"); //Client Library
 	collectionsearcher.saveData(newcollection);
 
