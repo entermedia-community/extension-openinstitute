@@ -12317,7 +12317,10 @@ table.referrals tr:hover td {
 	bottom: 9px;
 	left: 10px;
 }
-.ajaxloginbox {
+.login-area {
+	color:#fff;
+}
+.loginbox {
 	max-width: 980px;
 	min-height: calc(100vh - 445px);
 	margin: 2rem auto;
