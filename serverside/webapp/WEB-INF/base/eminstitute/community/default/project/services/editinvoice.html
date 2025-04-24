@@ -71,7 +71,7 @@
 		#set( $searcher  = $mediaarchive.getSearcher("collectiveinvoice"))
 		#set( $detail = $searcher.getDetail("invoicedescription") ) 
 		$context.putPageValue("detail", $detail)
-		$context.putPageValue("val", $!invoicedescription)
+		$context.putPageValue("value", $!invoicedescription)
 		$pages.include("$apphome/components/xml/types/html.html", $context)
 		
 		##<textarea class="form-control" name="invoicedescription">$!invoicedescription</textarea>
