@@ -64,6 +64,7 @@
 
 	color: var(--text-color);
 }
+
 body {
 	color:#444444;
 	background-color: #0c223b !important;
@@ -705,6 +706,7 @@ button:focus {
 }
 .btn:first-child:hover,
 .btn:first-child:active {
+	color: white;
 	border-color: #0059ff;
 	background-color: #0059ff;
 }
@@ -5110,10 +5112,6 @@ a.badge-soft-navy:focus {
 
 /* Extra Small */
 .btn-xs {
-	font-size: 0.75rem;
-	font-weight: 400;
-	padding: 0.275rem 0.5rem;
-	line-height: unset;
 	border-radius: 0.375rem;
 }
 
@@ -12367,7 +12365,9 @@ table.referrals tr:hover td {
 .card-collections {
 	display:inline-block;
 }
-
+.emwidget-header {
+	background-color: #0c223b;
+}
 .contentcolumn {
 	background-color:transparent;
 }

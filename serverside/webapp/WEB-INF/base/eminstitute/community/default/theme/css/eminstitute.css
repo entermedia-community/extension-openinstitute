@@ -1660,6 +1660,9 @@ label.error {
 	display: flex;
 	flex-direction: column;
 }
+.emfield-list .addnewitem {
+	margin-top:0.5em;;
+}
 .inlinesearch {
 	padding: 20px;
 	margin: 20px 0;
