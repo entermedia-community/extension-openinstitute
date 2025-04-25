@@ -14,9 +14,9 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 	<br>$templogincode</p>
 </div>
 
-<p>
-	#set( $link = "$!{community.externaldomain}/authentication/login.html" )
-	<a href="#urlescape($link)" style="text-decoration:none;color:white;background:#3297d5;padding:8px 12px;border-radius:4px;display:inline-block;">[[Login here]]</a>
-</p>
+<div style="text-align:center; margin:10px 0 ;">
+	#set( $link = "$!{community.externaldomain}/authentication/loginwithcode.html?email=$!{mail}" )
+	<a href="#urlescape($link)" style="text-decoration:none;color:white;background:#3297d5;padding:8px 12px;border-radius:4px;display:inline-block;">[[Enter Login Code Here]]</a>
+</div>
 
 $pages.include("${communityhome}/theme/emails/layout-bottom.html", $context)
