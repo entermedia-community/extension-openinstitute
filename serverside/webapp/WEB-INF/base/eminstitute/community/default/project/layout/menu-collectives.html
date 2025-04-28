@@ -49,11 +49,9 @@
 		
 		#set($menu_store = $content.isPropertyTrue("menu_store",true))
 		#if($menu_store)
-			#if($caneditcollection)
 			<li class="nav-item #if($collectivesection == "store") active #end">
 				<a class="nav-link" href="${projectlink}/store/index.html" title="[[Store]]">[[Store]]</a>
 			</li>
-			#end
 		#end
 		
 		#set($menu_contact = $content.isPropertyTrue("menu_contact",true))

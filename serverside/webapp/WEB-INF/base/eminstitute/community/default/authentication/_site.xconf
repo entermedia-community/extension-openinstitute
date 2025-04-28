@@ -6,7 +6,7 @@
   </permission>
   
   <property name="loginroot">${communityhome}/authentication</property>
-
+  
   <property name="sectiontitle">Authentication</property>
   <property name="shownav">false</property>
   <property name="usemap">false</property>
