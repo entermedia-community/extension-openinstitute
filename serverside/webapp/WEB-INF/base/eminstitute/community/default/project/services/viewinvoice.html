@@ -43,7 +43,7 @@
 		      #elseif($status.equals("pending")) [[Pending]]
 		      #elseif($status.equals("payd")) [[Payd]] #end
 		    </div>
-		    #if($status.equals("invoiced"))
+		    #if($status.equals("invoiced") && $invoice.getValue("sentdate"))
 		    <div style="padding: 0 0 5px 0">
 		      <strong>[[Sent Date]]</strong>: $invoice.getValue("sentdate")
 		    </div>

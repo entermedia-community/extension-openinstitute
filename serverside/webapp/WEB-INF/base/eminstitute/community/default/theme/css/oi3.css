@@ -1093,6 +1093,7 @@ img.cat-thumb {
 	font-size: 0.95rem;
 	margin-left: 0;
 	transition: margin-left 0.25s ease-in-out;
+	padding-bottom: 60px;
 }
 .community-layout .sidebar-left,
 .community-layout .sidebar-right {
