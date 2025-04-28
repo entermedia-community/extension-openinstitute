@@ -39,10 +39,12 @@
     #set( $hit = false)
     $context.putPageValue("aproduct",$aproduct)
     <div class="product-container">
+		#if($caneditcollection)
       <a class="emdialog btn btn-sm themed-btn edit-product" href="${projectlink}/store/edit.html?collectionid=${collectionid}&id=${aproduct.getId()}">
         <i class="fas fa-edit me-1"></i>
         [[Edit]]
       </a>
+	  #end
       <a href="/${librarycol.urlname}/rentaldetails/$aproduct.urlname" title="#text($aproduct.name)">
         <div class="product-card">
           <div class="product-img">

@@ -811,7 +811,7 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 #storeworkarea,
 #financesdashboard,
 #goaleditor {
-	min-height: calc(100vh - 338px);
+	 min-height: calc(100vh - 338px); 
 }
 .feedcard-author a {
 	text-decoration: underline;
