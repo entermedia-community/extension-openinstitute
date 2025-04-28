@@ -1,3 +1,4 @@
+
 #set( $hit = $mediaarchive.getAsset( $aproduct.primaryimage) )
 
 #if( $hit )
@@ -17,8 +18,8 @@
 	#elseif( $rendertype =="video")
 		#set( $rendertype = "videothumbnail" )
 	#end
-	   	
-	$pages.include("$componenthome/results/thumbnails/${rendertype}.html", $context)
+	
+	$pages.include("${communityhome}/components/results/thumbnails/${rendertype}.html", $context)
 #else
 	#set( $userimageurl = "${communitylink}/theme/images/product-image.png" )
 	<img class="imagethumb img-fluid d-block w-100" src="$userimageurl" />

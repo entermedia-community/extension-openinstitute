@@ -146,7 +146,7 @@
 		editable="true" type="boolean">Automatic Payments</property>
 
   <property id="primaryimage" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false"
-  	 datatype="list" sourcepath="/uploads/${data.collectiveid}/products/${formattedyear}/${shortguid}">
+  	 datatype="list" sourcepath="/uploads/${data.collectionid}/products/${formattedyear}/${shortguid}">
    	<name>
    		<language id="en"><![CDATA[Primary Attachment]]></language>
    	</name>
