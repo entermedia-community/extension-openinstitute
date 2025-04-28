@@ -1,5 +1,5 @@
 #set($currency = '$' )
-#set( $catalagDB = $mediaarchive.query("catalogsettings").exact("id", "events_billing_notify_invoice_appid").searchOne() ) 
+#set( $catalagDB = $mediaarchive.query("catalogsettings").exact("id", "events_billing_notify_invoice_appid").sort("createdon").searchOne() ) 
 #set( $db = "entermediadb" ) 
 #if ( $catalagDB )
 	#set( $db = "$catalagDB.value" ) 
