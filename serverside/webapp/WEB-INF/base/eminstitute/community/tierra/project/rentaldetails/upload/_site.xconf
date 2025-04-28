@@ -3,7 +3,7 @@
 	
 	<inner-layout>${communityhome}/innerlayout.html</inner-layout>
 
-	<script id="html5_upload" src="/${applicationid}/components/javascript/upload/jquery.html5_upload.js" />
+		
 	
 	<permission name="view">
 		<userprofile property="viewupload" equals="true" />
