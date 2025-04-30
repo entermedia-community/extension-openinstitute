@@ -1436,6 +1436,14 @@ img.cat-thumb {
 	background-color: #267271;
 	color: #ffffff;
 }
+.themed-btn:hover,
+.btn.btn-follow:hover,
+.btn.add-product:hover,
+.btn.themed-btn:first-child:hover {
+	background-color: #368281;
+	color: #ffffff;
+}
+
 .themed-btn[type="submit"] {
 	min-width: 100px;
 }

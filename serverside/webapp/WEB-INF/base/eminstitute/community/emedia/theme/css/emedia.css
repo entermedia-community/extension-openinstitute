@@ -1480,21 +1480,6 @@ ul > li {
 .fs-small {
 	font-size: 14px !important;
 }
-.login-area {
-	min-height: calc(100vh - 148px);
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-.login-area .container {
-	height: 100%;
-	flex: 1;
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
 .login-area a {
 	color: #a7a9be;
 	font-size: inherit;
@@ -1504,43 +1489,7 @@ ul > li {
 	font-size: 14px;
 	font-weight: 400;
 }
-.login-area .page-title {
-	font-size: 24px;
-	font-weight: 700;
-}
-.login-area form {
-	width: 720px;
-	max-width: 100%;
-	margin: 0 auto;
-}
-.login-area form label {
-	font-size: 14px;
-	font-weight: 500;
-}
-.login-area form input[type="submit"] {
-	min-width: 100px;
-	height: 100%;
-	min-height: 40px;
-	font-size: 1rem;
-}
-.login-area form .form-control {
-	margin-bottom: 0;
-	padding: 18px 12px;
-}
-.login-area .oauthproviderbtn img {
-	width: 160px;
-	height: auto;
-	object-fit: contain;
-	filter: brightness(0.8);
-	border-radius: 16px;
-	overflow: hidden;
-}
-.login-area .oauthproviderbtn:hover img {
-	filter: brightness(1);
-}
-.login-area .row > * {
-	margin-top: 0;
-}
+
 .project-form {
 	width: 480px;
 	margin: 0 auto;
