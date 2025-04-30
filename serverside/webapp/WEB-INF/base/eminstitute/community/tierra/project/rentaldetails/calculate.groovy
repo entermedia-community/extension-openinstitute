@@ -15,6 +15,11 @@ public void runit()
     Date startdate = util.parseFromStorage(duedate);
 	Date enddate = util.parseFromStorage(checkout);
 	
+	if(startdate == null || enddate == null)
+	{
+		return;
+	}
+	
     int count = util.daysBetweenDates(enddate, startdate);
 
     context.putPageValue("totaldays",count);
