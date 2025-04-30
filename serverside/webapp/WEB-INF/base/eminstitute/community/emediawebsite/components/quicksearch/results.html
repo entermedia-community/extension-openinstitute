@@ -12,8 +12,8 @@
 	#end
 	#set( $val = $hits.getInput("description"))
 	#if($module.id == "librarycollection")
-		<h6 class="text-center text-dark mb-3">Projects</h6>
-		<div class="row p-3">
+		<h6 class="text-center text-dark mb-3">All Libraries</h6>
+		<div class="d-flex flex-wrap">
 			#foreach( $project in $hits.getPageOfHits())
 			
 			
@@ -28,5 +28,7 @@
 			
 			#end	
 		</div> 
+	#else
+		$hits
 	#end
 #end

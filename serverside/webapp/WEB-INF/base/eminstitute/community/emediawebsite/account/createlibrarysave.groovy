@@ -1,11 +1,11 @@
 import org.entermediadb.asset.MediaArchive
-import org.openedit.Data
-import org.openedit.data.Searcher
-import org.openedit.BaseWebPageRequest
-import org.openedit.util.DateStorageUtil
-import org.openedit.util.RequestUtils
 import org.entermediadb.email.PostMail
 import org.entermediadb.email.TemplateWebEmail
+import org.openedit.BaseWebPageRequest
+import org.openedit.Data
+import org.openedit.data.BaseSearcher
+import org.openedit.users.User
+import org.openedit.util.RequestUtils
 
 
 public void init() {
@@ -79,7 +79,7 @@ public void init() {
 		
 	String localclientsupportuser = "105";  //CB
 	Data lcu2 = lcusearcher.createNewData();
-	lcu2.setValue("collectionid",usercollection.getId());
+	lcu2.setValue("collectionid",newcollection.getId());
 	lcu2.setValue("followeruser", localclientsupportuser);
 	lcu2.setValue("ontheteam",true);
 	lcusearcher.saveData(lcu2);

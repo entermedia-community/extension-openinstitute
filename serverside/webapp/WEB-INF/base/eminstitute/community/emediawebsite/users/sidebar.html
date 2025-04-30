@@ -17,14 +17,13 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 						value="#esc($input)" autocomplete="off" placeholder="[[Search Projects]]" 
 						data-resultheight="600"
 						data-updateurl="true" 
-						data-field="description" ##regularsearch
-						data-maxhitsperpage="10"
+						data-maxhitsperpage="20"
 						data-quicksearched='$!context.getRequestParameter("quicksearched")'
 						data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
 						data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" 
 						data-typeaheadurl="${communityhome}/components/quicksearch/results.html"
 						data-typeaheadtargetdiv="applicationmaincontent" data-typeaheadoemaxlevel="2"
-						data-hitssessionid="$!hits.sessionId" data-moduleid="$moduleid" data-operation="freeform" />
+						 />
 						
 					<button class="btn text-white" id="closeSearch">
 						<i class="fas fa-times"></i>
@@ -197,18 +196,6 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 	#end
 		
    
-	
-	
-	
-	#if($canviewsettings)
-		<div class="sidebar-box my-3" style="text-align:center">
-		<a href="/projects/add/addnew.html" class="emdialog btn btn-primary m-1">
-			    <i class="fas fa-plus me-1"></i>
-			    [[Create a Project]]
-			  </a>
-		</div>
-	#end
-	
 	</div> 
 	
 </div>
