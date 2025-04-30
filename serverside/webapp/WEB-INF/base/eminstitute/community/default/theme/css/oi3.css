@@ -1646,6 +1646,7 @@ h1.project-h1 {
 	backdrop-filter: blur(4px);
 	padding-top: 40px;
 	font-size: 0.9rem;
+	z-index: 100;
 }
 
 input.search-primary {

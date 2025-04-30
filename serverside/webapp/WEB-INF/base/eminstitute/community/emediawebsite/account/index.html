@@ -74,7 +74,7 @@
 						<h3>[[Libraries]]</h3>
 	
 						<div class="stations-grid p-4">
-							<div class="project-grid">
+							<div class="project-grid d-flex">
 								#foreach( $ohit in $collections )
 										#set($imagelink = false)
 										
@@ -93,7 +93,7 @@
 											#set($imagelink = "$communitylink/theme/images/OI_flower.png")
 										#end
 										
-										<div class="card-collections">
+										<div class="card-collections me-2">
 										<a href="${hitprojectlink}" 
 											class=" #if($selectedproject==$project.id) active #end">
 						

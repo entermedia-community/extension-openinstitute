@@ -12368,6 +12368,7 @@ table.referrals tr:hover td {
 }
 .card-collections {
 	display:inline-block;
+	width: 120px;
 }
 .emwidget-header {
 	background-color: #0c223b;

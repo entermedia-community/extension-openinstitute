@@ -304,11 +304,11 @@ a.primary:hover .fa-solid {
 	right: 0;
 	width: 32px;
 	padding: 0 10px;
-	line-height: 36px;
+	line-height: 32px;
 	color: #666 !important;
 	background-color: #e0e0e0 !important;
 	font-size: 1.1rem;
-	line-height: 2;
+	/* line-height: 2; */
 	border-radius: 0 !important;
 	border: 0 none !important;
 }
@@ -425,6 +425,7 @@ a.primary:hover .fa-solid {
 	font-weight: bold;
 	line-height: 2;
 	padding: 0 20px;
+	position: relative;
 }
 .sidebar-box a {
 	color: #444;
@@ -466,8 +467,14 @@ a.primary:hover .fa-solid {
 	padding: 0.25em 0.35em;
 	font-size: 0.8rem;
 }
-usersidebartopmessages .messageselection:nth-of-type(odd) {
-	background-color: #ddd;
+.usersidebartopmessages .messageselection {
+	background-color: #fff;
+}
+.usersidebartopmessages .messageselection:nth-of-type(odd) {
+	background-color: #eee;
+}
+.usersidebartopmessages .messageselection:hover {
+	background-color: #c9e8f2;
 }
 .card-collections-thumb {
 	height: 88px;
@@ -477,10 +484,19 @@ usersidebartopmessages .messageselection:nth-of-type(odd) {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+.card-name.collectionbox
+{
+	display: -webkit-box;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		overflow: hidden;
+}
 .sidebar-box .card-collections-thumb {
-	height: 100%;
+	height: 32px;
 	width: 32px;
-	margin: 2px;
+	padding: 1rem;
 }
 .messagetimestamp {
 	font-size: 0.7em;
