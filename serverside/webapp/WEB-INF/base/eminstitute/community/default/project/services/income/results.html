@@ -73,7 +73,9 @@
 	                		<td class="text-right">
 	                			#set($subtotal = 0)
 	                			#foreach($entry in $entries)
-	                				#set($subtotal = $mathutil.addition($subtotal, $entry))
+									#ifnotnull($entry))
+	                					#set($subtotal = $mathutil.addition($subtotal, $entry))
+									#end
 	                			#end
 								#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
 								#ifnotnull($convertedtotal)
