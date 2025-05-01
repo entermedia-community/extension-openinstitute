@@ -1,12 +1,13 @@
 <div id="investmentreport">
                   <div class="emdata emdatatable">
+					#set($sortedby= $hits.getSortBy())
                       <table class="table table-striped">
                           <thead>
                               <tr class="tableheader">
-                                  <th>[[Name]]</th>
-                                  <th>[[Currency]]</th>
+                                  <th>[[Name]] #if($sortedby.startsWith("name")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                                  <th style="width:90px;">[[Currency]] #if($sortedby.startsWith("currencytype")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
                                   <th>[[Owner]]</th>
-                                  <th></th>
+                                  <th style="width:350px"></th>
                               </tr>
                           </thead>
                           #foreach($hit in $hits.getPageOfHits())

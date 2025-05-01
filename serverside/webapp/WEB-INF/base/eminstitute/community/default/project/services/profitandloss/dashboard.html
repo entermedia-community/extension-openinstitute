@@ -33,12 +33,12 @@
 		<input type="hidden" name="oemaxlevel" value="1" />
 		<input type="hidden" name="collectionid" value="$collectionid" />
 		
-		<div  id="dashsearchform" class="row inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
+		<div  id="dashsearchform" class="d-flex mb-2 inlinesearch" style="padding:10px 0; margin:10px 0 20px; background-color: #f0f0f0;" >
 			$context.putPageValue("autocomplete","off")
-			<div class="col-md-1">
+			<div class="px-2">
 			[[Filter by]]:
 			</div>
-			<div class="col-sm-6 col-md-2" style="margin-bottom:5px;">
+			<div class="px-2">
 				<select name="year" class="select2 form-control-sm " style="width:120px;">
 					<option value="-1" #if($daterange.getYearPicked() == -1) selected #end>[[All]]</option>
 					<option value="0"  #if($daterange.getYearPicked() == 0) selected #end>[[YTD]]</option>
@@ -46,7 +46,7 @@
 					<option value="2"  #if($daterange.getYearPicked() == 2) selected #end>[[Two Years Ago]]</option>
 				</select>
 			</div>
-			<div class="col-sm-6  col-md-2" style="margin-bottom:5px;">
+			<div class="px-2">
 				<select name="month" class="select2 form-control-sm" style="width:120px;">
 					<option value="0" #if($daterange.getMonthPicked() == 0) selected #end>[[Month]]</option>
 					<option value="1" #if($daterange.getMonthPicked() == 1) selected #end>[[Jan]]</option>

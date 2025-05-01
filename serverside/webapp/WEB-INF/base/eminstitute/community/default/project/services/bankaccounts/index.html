@@ -34,11 +34,12 @@
 	<form  id="colsearchform" class="autosubmit  ajaxform" data-targetdiv="investmentreport" method="post"
 			 action="${projectlink}/services/${content.collectiveadminsection}/results.html">
 	
+		#set($searchtype = "bankaccount")
 		#set( $searcher = $mediaarchive.getSearcher($content.searchtype) )
 		$context.putPageValue("searcher",$searcher)
-		#set ($details = $searcher.getDetailsForView("bankaccount/search", $userprofile))
+		#set ($details = $searcher.getDetailsForView("bankaccountsearch", $userprofile))
 	
-		<input type="hidden" name="searchtype" value="collectiveinvestment" />
+		<input type="hidden" name="searchtype" value="$!searchtype" />
 		
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$librarycol.id" />
@@ -67,8 +68,8 @@
 		<div class="finances-table-sort d-flex flex-rows justify-content-end mb-2">
 			<label>[[Sort by]]:</label>
 			<div style="padding-left:10px; width:220px; display:inline-block;">
-				<select class="select2 form-control" name="sortby" >
-					#set ($details = $searcher.getDetailsForView("bankaccount/addnew", $userprofile))
+				<select class="select2 form-control" name="$!{searchtype}sortby" >
+					#set ($details = $searcher.getDetailsForView("bankaccountaddnew", $userprofile))
 					#foreach( $detail in $details)
 						<option value="$detail.getId()Down">$!context.getText($detail)</option>
 						<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>
