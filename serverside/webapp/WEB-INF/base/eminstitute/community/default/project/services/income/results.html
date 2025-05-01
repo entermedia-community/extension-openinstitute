@@ -76,7 +76,9 @@
 	                				#set($subtotal = $mathutil.addition($subtotal, $entry))
 	                			#end
 								#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
-								#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+								#ifnotnull($convertedtotal)
+									#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+								#end
 								
 								#if ($currencyid != "1")
 									$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
