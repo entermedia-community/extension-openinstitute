@@ -73,7 +73,7 @@
 	                		<td class="text-right">
 	                			#set($subtotal = 0)
 	                			#foreach($entry in $entries)
-									#ifnotnull($entry))
+									#ifnotnull($entry)
 	                					#set($subtotal = $mathutil.addition($subtotal, $entry))
 									#end
 	                			#end
