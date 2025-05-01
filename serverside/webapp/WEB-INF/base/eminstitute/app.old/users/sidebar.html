@@ -14,7 +14,7 @@
     </div>
 	#set( $chatmanager = $mediaarchive.getBean("chatManager"))
 	#set($selectedproject = $librarycol.getId())
-	<div style="max-height: 370px; overflow-y:auto;">
+	<div style="max-height: 400px; min-height:150px; overflow-y:auto;overflow-x: hidden;">
 	<div class="container usersidebartopmessages" >
 		#foreach( $message in $messages )
 			#set( $topic = $mediaarchive.getCachedData("collectiveproject",$message.channel))
