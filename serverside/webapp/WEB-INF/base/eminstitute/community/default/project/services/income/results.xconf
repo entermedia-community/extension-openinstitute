@@ -1,11 +1,18 @@
 <page>
-  <page-action name="PageValue.loadPageVariable" bean="mathutil" />
   
-  <path-action name="DataEditModule.searchFields" >
+  
+  <property name="hitsperpage">20</property>
+  <property name="searchtype">collectiveincome</property>
+  
+  <page-action name="DataEditModule.search" >
 		<property name="searchtype">collectiveincome</property>
 		<property name="hitsname">income</property>
-  </path-action>
+		
+  </page-action>
   
-  <path-action name="DataEditModule.loadPageOfSearch"/>
+  <page-action name="DataEditModule.loadPageOfSearch">
+  		<property name="searchtype">collectiveincome</property>
+		<property name="hitsname">income</property>
+  </page-action>
 
 </page>

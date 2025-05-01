@@ -1,4 +1,4 @@
-#set($collectionid = $context.getRequestParameter("collectionid"))
+#set($collectionid = $librarycol.getId())
 
 #if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 <div  id="financesdashboard">
@@ -28,7 +28,7 @@
 		class="autosubmit  ajaxform" 
 		data-targetdiv="financesdashboard" 
 		method="post" 
-		action="${projectlink}/services/finances/dashboard.html">
+		action="${projectlink}/services/profitandloss/dashboard.html">
 	
 		<input type="hidden" name="oemaxlevel" value="1" />
 		<input type="hidden" name="collectionid" value="$collectionid" />
@@ -77,14 +77,14 @@
 				#end				
 			</div>		
 			<div class="col-md-5 text-right">
-				<a href="dashboard.html?collectionid=$collectionid&clearfilters=true&oemaxlevel=1" class="btn btn-sm btn-light ajax" data-targetdiv="financesdashboard">[[Clear Filters]]</a>
+				<a href="${projectlink}/services/profitandloss/dashboard.html?collectionid=$collectionid&clearfilters=true&oemaxlevel=1" class="btn btn-sm btn-light ajax" data-targetdiv="financesdashboard">[[Clear Filters]]</a>
 			</div>		
 			
 			
 		</div>	
 	</form>
-	
-		#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $projectid) )
+
+	#set( $netincome = $financeManager.getNetIncomeByCurrency($collectionid, $daterange, $projectid) )
 	<h4>[[Profit]]</h4>
 		#set( $total = 0.0)
 			<table class="table tablefinances" >

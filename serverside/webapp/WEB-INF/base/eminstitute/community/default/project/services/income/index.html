@@ -25,11 +25,12 @@
 		method="post" 
 		action="${projectlink}/services/income/results.html">
 	
-		#set( $searcher = $mediaarchive.getSearcher("collectiveincome") )
+		#set( $searchtype = "collectiveincome") 
+		#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 		$context.putPageValue("searcher",$searcher)
 		#set ($details = $searcher.getDetailsForView("collectiveincomesearch", $userprofile))
 		$context.putPageValue("viewid","collectiveincomesearch")
-		<input type="hidden" name="searchtype" value="collectiveincome" />
+		
 		
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$collectionid" />
@@ -38,33 +39,24 @@
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
 		<div  id="searchform" class="inlinesearch" style="display:none" >
-			<div class="row">
+			<div class="d-flex flex-wrap">
 				$context.putPageValue("autocomplete","off")
 				
 				#foreach( $detail in $details)
-					<div class="col-md-3">
+					<div class="searchfield">
 							$context.putPageValue("detail", $detail)
 							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
 					</div>
-					#if( $counter == 4)
-						</div>
-						<div  class="row" >
-					#end	
+						
 				#end
 			</div>	
 		</div>
-
-	
-	#ifnull( $income)
-              #set( $income = $mediaarchive.query("collectiveincome").hitsPerPage(500).exact("collectionid",$collectionid).named("income").sort("dateDown").search($context))
-              $context.putPageValue("income",$income)
-	#end
    
    		<div class="finances-table-sort d-flex flex-rows justify-content-end mb-2">
 		<label>[[Sort by]]:</label>
 		<div style="padding-left:10px; width:220px; display:inline-block;">
-			<select class="select2 	form-control" name="sortby" >
-				#set ($details = $searcher.getDetailsForView("collectiveincome/addnew", $userprofile))
+			<select class="select2 	form-control" name="$!{searchtype}sortby" >
+				#set ($details = $searcher.getDetailsForView("collectiveincomeaddnew", $userprofile))
 				#foreach( $detail in $details)
 					<option value="$detail.getId()Down">$context.getText($detail)</option>
 					<option value="$detail.getId()Up">$context.getText($detail) [[Reverse]]</option>

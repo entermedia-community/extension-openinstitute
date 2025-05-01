@@ -1,5 +1,5 @@
 <div id="incomereport">
-                 
+	<div id="emresultscontent">        
         <div id="resultsdiv">
    
          <div class="emdata emdatatable">
@@ -8,75 +8,104 @@
 			$context.putPageValue("hits",$hits)
 			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
 			$context.putPageValue("resultsLink",$resultsLink)
-            $pages.include("${apphome}/components/table/pages.html", $context)
-         
-         
+			
+			
+            $pages.include("${communityhome}/components/table/pages.html", $context)
+         	
+			#set($sortedby= $hits.getSortBy())
+			
              <table class="table table-striped">
                  <thead>
                      <tr class="tableheader">
-                         <th>[[Date]]</th>
-                         <th>[[Account]]</th>
-                         <th>[[Topic]]</th>
-                         <th>[[Type]]</th>
-                         <th>[[Description]]</th>
-                         <th>[[Total]]</th>
+                         <th>[[Date]] #if($sortedby.startsWith("date")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                         <th>[[Account]] #if($sortedby.startsWith("bankaccount")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                         <th>[[Topic]] #if($sortedby.startsWith("collectiveproject")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                         <th>[[Type]] #if($sortedby.startsWith("incometype")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                         <th>[[Description]] #if($sortedby.startsWith("incomedescription")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+                         <th>[[Total]] #if($sortedby.startsWith("total")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
                          
                          <th></th>
                      </tr>
                  </thead>
                  #set($totalarray = {})
-                 #foreach($hit in $hits.getPageOfHits())
-                 	#if(!$totalarray.get($hit.currencytype))
-                 		#set($totalarray[$hit.currencytype] = [])
-                 	#end
-                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
-                     <tr>
-                         <td>$!context.getDate($hit.date)</td>
-                         <td>$!mediaarchive.getCachedData("bankaccount", $hit.paidfromaccount)</td>
-                         <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
-                         <td>$!context.getText($!mediaarchive.getCachedData("incometype", $hit.incometype))</td>
-                         <td>#esc($hit.incomedescription)</td>
-                         <td style="text-align: right; width:140px;">
-                         $!context.doubleToMoney($!hit.total, 2) $context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
-                         </td>
-                                  
-                        <td style="text-align: center">
-                            #if( $caneditcollection )
-                                <a
-                                    href="${projectlink}/services/income/edit.html?id=$hit.id&searchtype=collectiveincome&collectionid=$librarycol.id&librarycol=$librarycol.id"
-                                    class="btn btn-xs btn-warning emdialog"
-                                    data-hidefooter="true"
-									title="[[Edit]]"
-                                    ><i class="fa fa-edit"></i></a>
-                                    
-                            #end
-                        </td>
-                    </tr>
-                #end
+				 #set($count = 0)
+				 <tbody>
+	                 #foreach($hit in $hits.getPageOfHits())
+					 	#set($count = $count +1)
+	                 	#if(!$totalarray.get($hit.currencytype))
+	                 		#set($totalarray[$hit.currencytype] = [])
+	                 	#end
+	                 	#set($dumb = $totalarray[$hit.currencytype].add($hit.total))
+	                     <tr>
+	                         <td>$!context.getDate($hit.date)</td>
+	                         <td>$!mediaarchive.getCachedData("bankaccount", $hit.paidfromaccount)</td>
+	                         <td>$!mediaarchive.getCachedData("collectiveproject", $hit.collectiveproject)</td>
+	                         <td>$!context.getText($!mediaarchive.getCachedData("incometype", $hit.incometype))</td>
+	                         <td>#esc($hit.incomedescription)</td>
+	                         <td style="text-align: right; width:140px;">
+	                         $!context.doubleToMoney($!hit.total, 2) $context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
+	                         </td>
+	                                  
+	                        <td style="text-align: center">
+	                            #if( $caneditcollection )
+	                                <a
+	                                    href="${projectlink}/services/income/edit.html?id=$hit.id&searchtype=collectiveincome&collectionid=$librarycol.id&librarycol=$librarycol.id"
+	                                    class="btn btn-xs btn-warning emdialog"
+	                                    data-hidefooter="true"
+										title="[[Edit]]"
+	                                    ><i class="fa fa-edit"></i></a>
+	                                    
+	                            #end
+	                        </td>
+	                    </tr>
+	                #end
+				</tdbody>
+				#set($ustotal = 0)
+				
                 #if($totalarray.size())
                 	#set($firstrow = true)
-                	#foreach( $total_ in $totalarray.keySet())
-						#set($total = $totalarray.get($total_))
-	                	<tr class="table-totals #if($firstrow)table-totalfirst #set($firstrow=false) #end">
+					<tfoot>
+                	#foreach( $currencyid in $totalarray.keySet())
+						#set($entries = $totalarray.get($currencyid))
+	                	<tr class="table-row-subtotals">
 	                		<td colspan="3"></td>
-	                		<td class="text-right">[[Total]]:</td>
+	                		<td class="text-right">[[Sub Total]]:</td>
 	                		<td class="text-right">
-	                			#set($totaltotal = 0)
-	                			#foreach($t in $total)
-	                				#set($totaltotal = $mathutil.addition($totaltotal, $t))
+	                			#set($subtotal = 0)
+	                			#foreach($entry in $entries)
+	                				#set($subtotal = $mathutil.addition($subtotal, $entry))
 	                			#end
-	                			$!context.doubleToMoney($!totaltotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $total_)) 
+								#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+								#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+								
+								#if ($currencyid != "1")
+									$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
+								#end 
+								
 	                		</td>
-	                		<td></td>
+	                		<td class="text-right">
+								$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))
+							</td>
+							<td></td>
 	                	</tr>
                 	#end
-                #end
+				
+					<tr class="table-row-totals">
+                		<td colspan="4"></td>
+                		<td class="text-right"><strong>[[Total]]:</strong></td>
+                		<td class="text-right">
+                			<strong>$!context.doubleToMoney($!ustotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</strong> 
+                		</td>
+                		<td></td>
+                	</tr>
+					</tfoot>
+				#end
             </table>
             
         </div>
      
      #if($income.size() > 0)
-     	<div>$!income.size() [[hits]]</div>
+     	<div class="mb-2">$count of $!income.size() [[hits]]</div>
         <div>
         <a href="${projectlink}/services/income/export/income.csv?collectionid=${librarycol.id}&hitssessionid=$hits.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>
@@ -87,4 +116,5 @@
         #end
                       
         </div>
+		</div>
 </div>

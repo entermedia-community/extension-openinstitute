@@ -1,8 +1,5 @@
 <page>
 
-  <path-action name="DataEditModule.searchFields" >
-		<property name="searchtype">collectiveincome</property>
-		<property name="hitsname">income</property>
-  </path-action>
+	<property name="collectiveincomesortby">dateDown</property>
 
  </page>

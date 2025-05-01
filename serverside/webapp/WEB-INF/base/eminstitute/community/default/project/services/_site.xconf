@@ -9,7 +9,9 @@
 	
 	<path-action name="FinanceModule.loadFinanceManager" />
 	
-	 <page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
+	<page-action bean="dateStorageUtil2" name="PageValue.loadPageVariable"  class="org.openedit.util.DateStorageUtil" />
+	 
+	<page-action name="PageValue.loadPageVariable" bean="mathutil" />
 	
 	
 	<inner-layout>${communityhome}/project/services/layout.html</inner-layout>

@@ -1711,7 +1711,7 @@ label.error {
 	width: 32px;
 }
 .form-control.datepicker {
-	width: 190px;
+	width: 120px;
 }
 .select2-container .select2-search--inline .select2-search__field {
 	margin-top: 0;
@@ -1851,3 +1851,12 @@ textarea.form-control {
 .chatterbox-messages {
 	height: calc(100% - 188px) !important;
 }
+
+table.table-striped tr.table-row-subtotals:first-of-type td {
+	border-top:2px solid #c5c5c5;
+}
+
+table.table-striped tr.table-row-totals td {
+	border-top:2px solid #999;
+}
+

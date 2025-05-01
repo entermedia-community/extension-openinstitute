@@ -1,10 +1,10 @@
 <page>
 
-<path-action name="FinanceModule.loadDateRange" />
-
-<path-action name="FinanceModule.loadFinanceManager" />
-
-<property name="collectiveadminsection">finances</property>
+	<page-action name="FinanceModule.loadDateRange" />
+	
+	<page-action name="FinanceModule.loadFinanceManager" />
+	
+	<property name="collectiveadminsection">finances</property>
 
 </page>
 

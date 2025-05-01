@@ -8,8 +8,7 @@
 		               href="${projectlink}/services/${content.collectiveadminsection}/index.html?collectionid=${collectionid}"
 		               class="btn btn-sm btn-primary float-right">[[Go Back]]</a>
 			#end
-				<h3>[[Transactions]] - #text($account)
-				</h3>
+				<h3>[[Transactions]] - #text($account)</h3>
 				<form  id="searchform" 
 						class="autosubmit  ajaxform" 
 						data-oemaxlevel="1"
@@ -71,11 +70,12 @@
                          <th>[[Date]]</th>
                          <th>[[Type]]</th>
                          <th>[[Label]]</th>
-                         <th>[[Currency]]</th>
                          <th >[[Total]]</th>
+						 <th>[[Currency]]</th>
                          <th ></th>
                      </tr>
                  </thead>
+				 <tbody>
                  #foreach($transaction in $all)
                      <tr>
                      	#set( $collective  = $mediaarchive.getCachedData("librarycollection", $transaction.getCollectionId()) )
@@ -95,40 +95,67 @@
 							#datatext( $!mediaarchive.getCachedData("incometype", $transaction.getData().incometype),"name")</a>
                          #end
                          </td>
-                         <td>$transaction.getName()</td>
-                         <td style="text-align: right; width:140px;">$!context.doubleToMoney($!hit.total, 2) 
-                         $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
-                         </td>
-                         <td>$transaction.getAmount() </td>
+                         <td>$!transaction.getName()</td>
                          
+                         <td style="text-align: right; width:140px;">$transaction.getAmount() </td>
+						 <td style="text-align: center; width:40px;">$!context.doubleToMoney($!hit.total, 2) 
+                          $!context.getText($!mediaarchive.getCachedData("currencytype", $transaction.getCurrencyType()) )
+                          </td>
                          #set( $link = "${projectlink}/services/$section/edit.html?id=$transaction.getData().getId()&collectionid=$transaction.getCollectionId()")
                          <td><a class="emdialog" href="$link"><i class="fa fa-edit"></i></a></td>
-					
+					</tr>
                 #end
+				</tbody>
 				#set( $totals = $financeManager.getTotalsByCurrencyType($all)) 
-                #foreach($currency in $totals.keySet())
-	                	<tr>
-	                		<td></td>
-	                		<td></td>
-	                		<td></td>
-	                		<td></td>
-	                		<td class="text-right" style="width:150px">
-	                		<strong>[[Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))):</strong>
-	                		</td>
-	                		<td class="text-right">
-	                			<strong>
-	                			#set($subtotal = $totals.get($currency))
-	                			$!context.doubleToMoney($subtotal, 2)
-	                			</strong> 
-	                		</td>
-	                		<td></td>
-                		</tr>
+				#set($ustotal = 0)
+				<tfoot>
+                #foreach($currencyid in $totals.keySet())
+                	<tr class="table-row-subtotals">
+                		<td></td>
+                		<td></td>
+                		
+                		<td class="text-right">
+                		[[Sub Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid )))
+                		</td>
+                		<td class="text-right">
+                			
+                			#set($subtotal = $totals.get($currencyid))
+							#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+							#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+							
+							#if ($currencyid != "1")
+								$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
+							#end 
+							 
+                		</td>
+						<td class="text-right" >$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</td>
+                		<td></td>
+						<td></td>
+            		</tr>
 				#end
-
+				
+				<tr class="table-row-totals">
+            		<td></td>
+            		<td></td>
+            		<td></td>
+            		<td class="text-right" style="width:150px">
+            		<strong>[[Total]]
+            		</td>
+            		<td class="text-right">
+            			<strong>
+            			$!context.doubleToMoney($!ustotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))
+            			</strong> 
+            		</td>
+            		<td></td>
+					<td></td>
+        		</tr>
+				</tfoot>
 
 			</table>
-			$all.size() [[transactions]]
 			
+			<div class="my-2">
+			$all.size() [[Transactions]]
+			</div>
 			#set( $tracker = $financeManager.createTracker($all) )
 			$context.putSessionValue($$tracker.getSessionId(),$tracker)
 			#set( $bank = $mediaarchive.getCachedData("bankaccount",$paidfromaccount) )
