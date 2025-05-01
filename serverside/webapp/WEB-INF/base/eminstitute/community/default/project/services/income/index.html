@@ -68,6 +68,14 @@
    </form>
    
    
+   
+   #ifnull( $income)
+		 
+		 #set( $income = $searcher.query().exact("collectionid",$collectionid).hitsPerPage(20).named("income").search($context))
+		 #set( $n = $income.setHitsPerPage(20))
+	     $context.putPageValue("income",$income)
+   	#end
+   
    $pages.include("$communityhome/project/services/income/results.html",$context)
 
 
