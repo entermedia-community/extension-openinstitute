@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openedit.util.DateStorageUtil;
 
 public class DateRange
 {
@@ -84,15 +85,11 @@ public class DateRange
 	{
 		setYearPicked(yearsback);
 		setMonthPicked(inMonth);
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		Calendar cal = DateStorageUtil.getStorageUtil().createCalendar(); //Use the server time. That is what they are searching for on the server
 		int year = cal.get(Calendar.YEAR);
 		cal.set(Calendar.YEAR,year - yearsback);
 		cal.set(Calendar.MONTH, inMonth - 1);
 		cal.set(Calendar.DAY_OF_MONTH,1);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
 
 		Date start = cal.getTime();
 		setStartDate(start);
@@ -108,15 +105,12 @@ public class DateRange
 	{
 		setYearPicked(yearsback);
 		setMonthPicked(0);
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = DateStorageUtil.getStorageUtil().createCalendar();
 		
 		int year = cal.get(Calendar.YEAR);
 		cal.set(Calendar.YEAR,year - yearsback);
 		cal.set(Calendar.MONTH, 0);
 		cal.set(Calendar.DAY_OF_MONTH,1);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
 		Date start = cal.getTime();
 		setStartDate(start);
 		int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
