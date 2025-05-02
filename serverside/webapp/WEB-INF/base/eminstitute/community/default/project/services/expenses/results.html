@@ -30,6 +30,7 @@
                                   <th></th>
                               </tr>
                           </thead>
+						  <tbody>
                           #foreach($hit in $hits.getPageOfHits())
                               <tr>
                                   #if($showcollections )
@@ -73,13 +74,13 @@
 			                                    
 			                            #end
 			                      </td>
-                    </tr>
-                #end
-                
+			                    </tr>
+			                #end
+			                </tbody>
                 
                 ##Totals moved down
                 #if($pendingexpensesreimburseuser_total || $currencytype_total)
-			    	
+			    		<tfoot>
 			               #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
 				                	<tr>
 				                		<td></td>
@@ -95,27 +96,45 @@
 				                		<td></td>
 			                		</tr>
 							#end   
-				
-			                #foreach($currency in $currencytype_total.keySet())
+							
+							#set($ustotal = 0)
+			                #foreach($currencyid in $currencytype_total.keySet())
+									#set($subtotal = $currencytype_total.get($currencyid))
+									#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+									#ifnotnull($convertedtotal)
+										#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+									#end
 				                	<tr>
 				                		<td></td>
 				                		<td></td>
 				                		<td></td>
 				                		<td class="text-right" style="width:150px">
-				                		<strong>[[Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))):</strong>
+				                			[[Sub Total]]
 				                		</td>
 				                		<td class="text-right">
-				                			<strong>
-				                			#set($subtotal = $currencytype_total.get($currency))
-				                			$ $!context.doubleToMoney($subtotal, 2)
-				                			</strong> 
+				                			
+				                			##$ $!context.doubleToMoney($subtotal, 2)
+											
+											#if ($currencyid != "1")
+												$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
+											#end  
 				                		</td>
-				                		<td></td>
+										<td class="text-right">
+											$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))
+										</td>
 				                		<td></td>
 				                		<td></td>
 			                		</tr>
 							#end
-			     	
+							<tr class="table-row-totals">
+		                		<td colspan="4"></td>
+		                		<td class="text-right"><strong>[[Total]]:</strong></td>
+		                		<td class="text-right">
+		                			<strong>$!context.doubleToMoney($!ustotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</strong> 
+		                		</td>
+		                		<td></td>
+		                	</tr>
+			     	</tfoot>
 			     #end  
                 
                 

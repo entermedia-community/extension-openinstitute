@@ -30,7 +30,6 @@
 			$context.putPageValue("viewid","${$searchtype}search")
 			$context.putPageValue("searchform",true)
 			
-		<input type="hidden" name="searchtype" value="$searchtype" />
 		<input type="hidden" name="oemaxlevel" value="1" />
 		
 		<input type="hidden" name="field" value="collectionid" />
@@ -40,16 +39,15 @@
 		<input type="hidden" name="${searchtype}hitsname" value="expenses" />
 		
 		<div  id="searchform" class="inlinesearch" style="display:none" >
-			<div class="row">
+			<div class="d-flex">
 				$context.putPageValue("autocomplete","off")
 				#foreach( $detail in $details)
-					<div class="col-md-3">
+					<div>
 							$context.putPageValue("detail", $detail)
 							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
 					</div>
 					#if( $counter == 4)
-						</div>
-						<div  class="row" >
+						
 					#end	
 				#end
 			</div>	
@@ -59,7 +57,7 @@
    		<div class="finances-table-sort d-flex flex-rows justify-content-end mb-2">
 		<label>[[Sort by]]:</label>
 		<div style="padding-left:10px; width:220px; display:inline-block;">
-		<select class="select2 	form-control" name="sortby" >
+		<select class="select2 	form-control" name="${searchtype}sortby" >
 			#set ($details = $searcher.getDetailsForView("collectiveexpense/editexpense", $userprofile))
 			#foreach( $detail in $details)
 				<option value="$detail.getId()Down">$context.getText($detail)</option>
