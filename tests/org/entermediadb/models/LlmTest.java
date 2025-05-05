@@ -1,7 +1,5 @@
 package org.entermediadb.models;
 
-import static org.entermediadb.asset.BaseEnterMediaTest.log;
-
 import java.util.Collection;
 
 import org.apache.commons.logging.Log;
