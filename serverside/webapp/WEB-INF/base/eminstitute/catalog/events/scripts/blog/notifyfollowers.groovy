@@ -24,7 +24,7 @@ public void init()
 		{
 			userpost.setValue("poststatus", "published");
 			archive.getSearcher("userpost").saveData(userpost);
-			log.info(userpost + " Published.");
+			log.info("Published: " + userpost);
 			
 			notifyfollowers(userpost.getId(), userpost.get("librarycollection"));
 			
