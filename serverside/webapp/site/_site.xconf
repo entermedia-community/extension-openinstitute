@@ -1,7 +1,0 @@
-<page>
-
-  	<property name="fallbackdirectory">/WEB-INF/base/eminstitute</property>
-    <property name="catalogid">site/catalog</property>
-	<property name="siteid">site</property>
-	
-</page>
