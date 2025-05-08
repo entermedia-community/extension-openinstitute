@@ -17,10 +17,5 @@ serverside/webapp/WEB-INF/data
 
 .DS_Store
 *.DS_Store
-serverside/webapp/site/*
-serverside/webapp/website/*
-serverside/webapp/assets/*
-serverside/webapp/manager/*
-serverside/webapp/openedit/*
-serverside/webapp/_site.xconf
-serverside/webapp/WEB-INF/pluginoverrides10.xml
+serverside/webapp/*
+!serverside/webapp/WEB-INF/
