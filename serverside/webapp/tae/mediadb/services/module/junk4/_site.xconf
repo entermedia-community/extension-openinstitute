@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<page>
-  <property name="module">junk4</property>
-  <property name="searchtype">junk4</property>
-  <property name="fallbackdirectory">/tae/mediadb/services/module/default</property>
-</page>
