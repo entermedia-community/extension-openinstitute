@@ -92,6 +92,8 @@ public void init() {
 	htmlfields.put("libraryname", requiredlibraryname);
 	htmlfields.put("currentproject", context.getRequestParameter("project"));
 	
+	//Message requester info
+	context.putPageValue("messagetime", new Date() );
 	context.putPageValue("fields", htmlfields);
 	
 	//Message requester info
