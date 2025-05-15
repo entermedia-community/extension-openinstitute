@@ -13,7 +13,7 @@ public void init() {
 	//Notify to Email:
 	//String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
 	
-	String notifyemail = "cristobal@entermediadb.org";  //get it from catalog settings?
+	String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
 
 	//prevent re-submition
 	 String clientform = context.getSessionValue("clientform");
@@ -122,8 +122,9 @@ public void init() {
 protected void sendEmail(Map pageValues, String email, String templatePage){
 	//send e-mail
 	//Page template = getPageManager().getPage(templatePage);
+	User user = context.getUser();
 	RequestUtils rutil = moduleManager.getBean("requestUtils");
-	BaseWebPageRequest newcontext = rutil.createVirtualPageRequest(templatePage, null, null);
+	BaseWebPageRequest newcontext = rutil.createVirtualPageRequest(templatePage, user, null);
 	
 	newcontext.putPageValues(pageValues);
 

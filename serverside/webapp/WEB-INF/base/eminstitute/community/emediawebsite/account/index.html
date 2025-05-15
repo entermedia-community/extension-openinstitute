@@ -67,7 +67,7 @@
 						#set($x = $oids.add($ohit.collectionid))
 					#end
 					
-					#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
+					#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).exact("collectiontype", "6").ids($oids).sort("name").search($context) )
 
 					#if($collections.size()>0)
 					<div class="my-4">
