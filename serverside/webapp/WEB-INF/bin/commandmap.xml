@@ -3,11 +3,11 @@
 <commandmaps>
 	<commandmap os="MAC OS X">
 		<commandbase>./WEB-INF/bin/mac</commandbase>
-		<exiftool>/Users/hi/homebrew/bin/exiftool</exiftool>
+		<exiftool>/opt/homebrew/bin/exiftool</exiftool>
 		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
 		<asperaupload>./aspera/upload.sh</asperaupload>
-		<convert>/Users/hi/homebrew/bin/convert</convert>
-		<composite>/Users/hi/homebrew/bin/composite</composite>
+		<convert>/opt/homebrew/bin/convert</convert>
+		<composite>/opt/homebrew/bin/composite</composite>
 		<ffmpeg>/Applications/ffmpeg</ffmpeg>
 		<avconv>/Applications/ffmpeg</avconv>
 		<avprobe>/Applications/ffprobe</avprobe>
