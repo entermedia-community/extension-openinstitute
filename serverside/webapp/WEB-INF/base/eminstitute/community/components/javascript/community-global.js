@@ -1152,6 +1152,25 @@ $(document).ready(function () {
 			toggleUserProperty(preference, function () {});
 		}
 	});
+	
+	jQuery(window).on("ajaxsocketautoreload", function () {
+		$(".ajaxsocketautoreload").each(function () {
+			var cell = $(this);
+			var path = cell.data("ajaxpath");
+			jQuery.ajax({
+				url: path,
+				async: false,
+				data: {},
+				success: function (data) {
+					cell.replaceWith(data);
+				},
+				xhrFields: {
+					withCredentials: true,
+				},
+				crossDomain: true,
+			});
+		});
+	});
 }); //document (ready)
 
 function isValidTarget(clickEvent) {
