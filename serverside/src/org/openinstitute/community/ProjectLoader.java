@@ -50,7 +50,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 	}
 	
 	@Override
-	public RightPage getRightPage( URLUtilities util, Site site, Page inPage, String requestedPath)
+	public RightPage getRightPage( URLUtilities util, Site site, Page inPage)
 	{
 		if( site == null)
 		{
@@ -72,7 +72,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 //				return right;
 //			}
 //		}
-		
+		String requestedPath = util.getOriginalPath();
 		//Only works with domains being set. Otherwise use normal page actions to load project pages
 		String[] url = requestedPath.split("/");
 		if(url.length > 1 && (url[1].equals("mediadb") ))
