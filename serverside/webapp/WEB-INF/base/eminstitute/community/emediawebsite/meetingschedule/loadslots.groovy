@@ -16,15 +16,25 @@ MediaArchive archive = context.getPageValue("mediaarchive");
 	Calendar startofday = util.createCalendar(TZ);
 	List nextthree = new ArrayList();
 	
-	int day = 0;
+	int day = startofday.get(Calendar.DAY_OF_YEAR);
 	if(now.get(Calendar.HOUR_OF_DAY) > 12) {
-		day = 1; //starts next day
+		day++;
 	}
-	while(nextthree.size() < 12 && day < 14)
+	while(nextthree.size() < 12)
 	{
 		//log.info("before..." + today1.getTime());
-		startofday.add(Calendar.DAY_OF_YEAR, day);
+		startofday.set(Calendar.DAY_OF_YEAR, day);
 		//log.info("after..." + today1.getTime());
+		if( startofday.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY )
+		{
+			day++;
+			startofday.set(Calendar.DAY_OF_YEAR, day);
+		}
+		if( startofday.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY )
+		{
+			day += 2;
+			startofday.set(Calendar.DAY_OF_YEAR, day);
+		}
 		int hour = 9;
 		while( nextthree.size() < 12 && hour <= 16) //Search 3 times
 		{
@@ -37,10 +47,7 @@ MediaArchive archive = context.getPageValue("mediaarchive");
 			}
 			hour++;
 		}
-		if( startofday.get(Calendar.DAY_OF_WEEK) == 5 )
-		{
-			day = day + 2; //Go to monday
-		}
+		
 		day++;
 	}
 	log.info("request processing..." + nextthree);
