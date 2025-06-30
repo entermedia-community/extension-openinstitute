@@ -13,6 +13,8 @@ $context.putPageValue("viewid", "userpostgeneral")
 	<input type="hidden" name="id" value="$data.id" />
 	<input type="hidden" name="collectionid" value="$librarycol.id" />
 
+	$context.putPageValue("pickerurl", "${content.findroot}/blockiframe.html?targetfieldid=primarymedia-value")
+
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 	
 	<div class="d-flex mt-4">
