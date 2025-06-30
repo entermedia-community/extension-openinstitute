@@ -105,13 +105,16 @@ $(document).ready(function () {
       event.data.name === "eMediaAssetPicked" &&
       event.data.target !== "htmleditor"
     ) {
-      var target = $("#" + event.data.target);
-      if (!target.length) return;
+      var target = event.data.target;
+      if (!target) return;
+
+      var targetEl = $("#" + target);
+      if (!targetEl.length) return;
       var assetid = event.data.assetid;
-      target.val(assetid);
-      if (event.data.target.startsWith("primarymedia")) {
-        var detailId = target.data("detailid");
-        var preview = target
+      targetEl.val(assetid);
+      if (target.startsWith("primarymedia")) {
+        var detailId = targetEl.data("detailid");
+        var preview = targetEl
           .closest(".assetpicker")
           .find(".render-type-thumbnail");
         preview.html("");
