@@ -117,6 +117,13 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 	}
 	
 	String emails = invoice.getValue("sentto");
+	if( emails == null)
+	{
+		log.info("Error sending invoice to email: ${emails} in invoice ${invoice.getId()} ${invoice.getName()}" );
+		invoice.setValue("paymentstatus", "error");
+		invoiceSearcher.saveData(invoice);
+		return;
+	}
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
 	Boolean sent = false;
@@ -176,6 +183,15 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 	Data librarycol = mediaArchive.getCachedData("librarycollection", collectionid);
 	
 	String emails = librarycol.getValue("contactemail");
+	
+	if( emails == null)
+	{
+		log.info("Error sending invoice to email: ${emails} in invoice ${invoice.getId()} ${invoice.getName()} invoiceNotifyProject" );
+		invoice.setValue("paymentstatus", "error");
+		invoiceSearcher.saveData(invoice);
+		return;
+	}
+	
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
 	Boolean sent = false;
