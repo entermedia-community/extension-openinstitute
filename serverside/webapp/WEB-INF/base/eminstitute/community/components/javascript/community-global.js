@@ -97,6 +97,25 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on("submit", ".antibotform", function (e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var action = form.attr("action");
+
+    if (action == undefined || action == "/fake") {
+      action = form.find("button[type=submit]").data("action");
+      if (action == undefined) {
+        action = form.find("input[type=submit]").data("action");
+      }
+      if (action != undefined) {
+        form.attr("action", action);
+      }
+    }
+
+    form.get(0).submit();
+  });
+
   // blockfind iframe picker listener
   window.addEventListener("message", function (event) {
     if (event.origin !== window.location.origin) return;
