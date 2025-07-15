@@ -26,8 +26,12 @@
 	
 	<div class="message-menu">
 		<div class="d-flex align-items-center">
-			<div class="pickemoticon message-menu-link" data-collectionid="$collectionid" data-messageid="$chat.id" data-showurl="$applink/collective/community/chatterbox/smiles.html" data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
+			<div class="pickemoticon message-menu-link"
+				data-collectionid="$collectionid"
+				data-messageid="$chat.id"
+				data-toggleurl="$applink/collective/community/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
+				$pages.include("$apphome/collective/community/chatterbox/smiles.html")
 			</div>
 			#if($caneditcollection)
 				<a class="message-menu-link ajax jumptofocus" 

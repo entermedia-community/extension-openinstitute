@@ -648,6 +648,7 @@ ul.projectgoals {
 
 .goallike {
 	display: inline-block;
+	color: #626684;
 }
 
 .editgoallike:hover {

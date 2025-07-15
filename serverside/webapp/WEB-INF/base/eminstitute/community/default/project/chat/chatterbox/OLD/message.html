@@ -31,9 +31,9 @@
 			data-collectionid="$!librarycol.getId()" 
 			data-messageid="$chat.id" 
 			data-oemaxlevel="1"
-			data-showurl="$!{projectlink}/chat/chatterbox/smiles.html" 
 			data-toggleurl="${projectlink}/chat/chatterbox/smilessave.html">
 				<i class="fas fa-grin"></i>
+				$pages.include("${projectlink}/chat/chatterbox/smiles.html")
 			</div>
 			#if($caneditcollection)
 				<a class="message-menu-link ajax jumptofocus" 

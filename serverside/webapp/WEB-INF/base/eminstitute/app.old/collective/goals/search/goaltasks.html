@@ -131,11 +131,13 @@
 				</a>
 			 -->	
 <div id="rolepicker" style="display:inline">
-			<a class="addroletolist ajax" data-targetdivinner="rolepicker" 
-			data-collectionid = "$collectionid"
-			data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">+ add role</a>
-</div>					
-					
+	<a class="addroletolist ajax" data-targetdivinner="rolepicker" 
+		data-collectionid = "$collectionid"
+		data-taskid="$task.id" href="$applink/collective/goals/task/pickrole.html">
+		<i class="fas fa-plus me-1"></i> Add Role
+	</a>
+</div>
+
 #if($caneditgoal)
 						#if($task.taskstatus != "3")
 							  	<form id="someform" class="ajaxform" data-targetdiv="$target" data-oemaxlevel="1" action="" >
@@ -179,7 +181,7 @@
 			data-dialogid="picktask"
 			href="$applink/collective/goals/task/taskedit.html"
 		>
-			<i class="fas fa-clipboard-check"></i> [[Add Action]]
+			<i class="fas fa-clipboard-check me-1"></i> [[Add Action]]
 		</a>
 	#end
 	#if (!$onlyopen && $points>0)
