@@ -97,6 +97,49 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on("submit", ".antibotform", function (e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var action = form.attr("action");
+
+    if (action == undefined || action == "/fake") {
+      action = form.find("button[type=submit]").data("action");
+      if (action == undefined) {
+        action = form.find("input[type=submit]").data("action");
+      }
+      if (action != undefined) {
+        form.attr("action", action);
+      }
+    }
+
+    form.get(0).submit();
+  });
+
+  $("#meetingtime").on("change", function () {
+    var timeSlot = $("#meetingtime option:selected").val();
+    if (timeSlot === "custom") {
+      $("#customTimeSlot").collapse("show");
+      $(this).prop("required", false);
+      $("#datetimepicker").prop("required", true);
+    } else {
+      $("#customTimeSlot").collapse("hide");
+      $(this).prop("required", true);
+      $("#datetimepicker").prop("required", false);
+    }
+  });
+
+  var datetimepicker = $("#datetimepicker");
+  if (datetimepicker.length > 0) {
+    datetimepicker.datetimepicker({
+      inline: true,
+      format: "Y-m-d H:i:00 O",
+      showTimezone: true,
+      minDate: new Date(),
+      maxDate: new Date(new Date().setDate(new Date().getDate() + 30)),
+    });
+  }
+
   // blockfind iframe picker listener
   window.addEventListener("message", function (event) {
     if (event.origin !== window.location.origin) return;
@@ -449,45 +492,6 @@ $(document).ready(function () {
     }
   });
 
-  lQuery(".pickemoticon").livequery(function () {
-    //Load div
-    var input = $(this);
-    input.click(function () {
-      $(".emoticonmenu").hide(); //Hide old ones
-    });
-
-    input.hover(function () {
-      var isattached = input.data("isattached");
-      if (isattached) {
-        $(".emoticonmenu").hide(); //Hide old ones
-        input.closest(".message-menu").find(".emoticonmenu").show();
-      } else {
-        var options = input.data();
-        $.ajax({
-          url: options.showurl,
-          async: true,
-          data: options,
-          success: function (data) {
-            $(".emoticonmenu").hide(); //Hide old ones
-            input.data("isattached", true);
-
-            input.closest(".message-menu").append(data);
-          },
-        });
-      }
-    });
-
-    //On any click hide this:
-    //$(".emoticonmenu").hide();
-  });
-
-  lQuery(".message-menu-link:not(.pickemoticon)").livequery(function () {
-    var input = $(this);
-    input.hover(function () {
-      $(".emoticonmenu").hide(); //Hide old ones
-    });
-  });
-
   lQuery(".emoticonmenu span").livequery("click", function () {
     var menuitem = $(this);
 
@@ -503,7 +507,6 @@ $(document).ready(function () {
       async: true,
       data: options,
       success: function (data) {
-        $(".emoticonmenu").hide();
         $("#chatter-message-" + aparent.data("messageid")).html(data);
         //reload message
       },
