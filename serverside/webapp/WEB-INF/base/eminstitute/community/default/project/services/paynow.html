@@ -43,7 +43,7 @@
 	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
 	#end
 
-	<div class="card" style="max-width:1100px; margin:0 auto;">
+	<div class="card" style="max-width:900px; margin:0 auto;">
     <div class="card-header">
         <div class="row" style="border-bottom:1px solidc ">
             <div class="col-sm-9">
@@ -52,13 +52,21 @@
                     [[All major credit cards accepted]]
                 </h5>
             </div>
-
+			<div class="col-sm-3 printinvoicebtn text-right">
+					      <a
+					        href="${projectlink}/services/printpreview.html?invoiceid=$!invoice.id"
+					        target="_blank"
+					        class="btn btn-sm btn-light " style="float: right;"
+					        ><i class="fa-solidfa-print"></i> [[Print]]</a>
+					</div>
 
         </div>
     </div>
     <div class="card-body" style="padding:10px 15px;">
+		
+		$pages.include("viewinvoiceheader.html", $context)
 		<div class="row" style="margin-bottom:30px;">
-			<div class="col-sm-7">
+			<div class="col-sm-8">
 			<div>
 					<strong>[[Invoice Number]]: $invoice.getValue("invoicenumber")</strong>
 					<br>

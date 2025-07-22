@@ -5,7 +5,6 @@ import org.entermediadb.asset.MediaArchive
 import org.openedit.*
 import org.openedit.data.Searcher
 import org.openedit.users.User
-import org.openedit.util.DateStorageUtil
 
 public void init() {
 	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
@@ -89,13 +88,14 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 			MultiValued product = productSearcher.loadData(productIterator.next());
 			Date nextBillOn = product.getValue("nextbillon");
 			Date lastbilleddate = product.getDate("lastgeneratedinvoicedate");  //Save for what bill date it goes with
-			if( lastbilleddate != null )
+			if( lastbilleddate != null ) 
 			{
+				
 				Calendar within15ofduedate = Calendar.getInstance();
 				within15ofduedate.setTime(nextBillOn);
 				within15ofduedate.add(Calendar.DAY_OF_YEAR, -15);
 				
-				if( lastbilleddate.getTime().after(within15ofduedate.getTime()) ) 
+				if( lastbilleddate.after(within15ofduedate.getTime()) ) 
 				{
                     log.info("Already recently sent invoice for this one, skipping: " + lastbilleddate.getTime());
                     continue; // skip if end date is before today
