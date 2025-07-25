@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+	<property name="editable">false</property>
+
+	<property name="fallbackdirectory">../default</property>
+	<property name="communityhome">/${siteid}/community/impact-bank</property>
+
+	<property name="falir">false</property>
+
+	<property name="templatename">impact-bank</property>
+
+	<property name="communitytagcategory">impact-bank</property>
+
+	<script id="jquery-ui-i18n" cancel="true" src="${communityhome}/components/javascript/jquery-ui/i18n/jquery-ui-i18n.js"/>
+	<script id="jquery-form" src="${communityhome}/components/javascript/jquery.form.js"/>
+	<script id="jquery-validate" src="${communityhome}/components/javascript/validation/jquery.validate.js"/>
+
+	<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
+	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+
+	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
+	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
+
+	<style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>
+
+	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
+	<style id="impact-bank" href="${communityhome}/theme/css/impact-bank.css" />
+</page>
