@@ -1,28 +1,66 @@
-<header>
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-between">
-      <a class="logo" href="/">
-        Logo
-      </a>
-      <div class="d-flex align-items-center position-relative">
-        <button class="btn custom-navbar-toggler d-md-none" type="button">
-          <i class="fa fa-bars" style="font-size:20px;transform: scaleX(1.2);"></i>
-        </button>
-        <div class="d-none d-md-flex flex-column flex-md-row justify-content-center align-items-center" id="tempNav">
-          <a href="/blogs/" class="mx-md-2 my-1 my-md-0 #if($content.get('currentPage') == 'blogs') active #end">
-            Blogs
+<header id="header" class="header header-sticky-top-lg">
+  <div class="header-section header-section-divider">
+    <div id="logoAndNav" class="container">
+      <nav class="js-mega-menu navbar navbar-expand-lg">
+        <a class="logo navbar-brand my-3" href="/">
+          <img src="${communityhome}/assets/logo.svg" class="me-3" style="height:50px;width: auto;" />
+        </a>
+        <div class="d-flex align-items-center">
+          <a href="/projects/" class="d-tab nav-link #if($content.get('currentPage') == 'projects') active #end">
+            <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle">
+              <i class="fas fa-search"></i>
+            </button>
           </a>
-          <a href="/mission/" class="mx-md-2 my-1 my-md-0 #if($content.get('currentPage') == 'mission') active #end">
-            Our Mission
-          </a>
-          <a href="/contact/" class="mx-md-2 my-1 my-md-0 #if($content.get('currentPage') == 'contact') active #end">
-            Contact
-          </a>
-          <a href="/find/?entermedia.key=adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc"  class="ms-md-4 mt-1 mt-md-0 btn btn-primary">
-            Open App <i class="ms-1 fas fa-sign-in-alt"></i> 
-          </a>
+          <button type="button"
+            class="navbar-toggler btn btn-icon btn-sm rounded-circle"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            aria-controls="navBar"
+            data-toggle="collapse"
+            data-target="#navBar">
+            <span class="navbar-toggler-default">
+              <i class="fas fa-bars"></i>
+            </span>
+            <span class="navbar-toggler-toggled">
+              <i class="fas fa-times"></i>
+            </span>
+          </button>
         </div>
-      </div>
+
+        <div id="navBar" class="collapse navbar-collapse">
+          <div class="navbar-body header-sticky-top-inner">
+            <ul class="navbar-nav">
+              <li class="navbar-nav-item d-com">
+                <a href="/projects/" class="nav-link #if($content.get('currentPage') == 'projects') active #end">
+                  <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </a>
+              </li>
+              <li class="navbar-nav-item">
+                <a href="/projects/" class="nav-link #if($content.get('currentPage') == 'projects') active #end">
+                  Projects
+                </a>
+              </li>
+              <li class="navbar-nav-item">
+                <a href="/blogs/" class="nav-link #if($content.get('currentPage') == 'blogs') active #end">
+                  Blogs
+                </a>
+              </li>
+              <li class="navbar-nav-item">
+                <a href="#open-schedule-meeting" data-url="${communitylink}/meetingschedule/meeting-form.html#open-schedule-meeting" data-urlbar="/#open-schedule-meeting" data-updateurl="true" rel="nofollow" class="nav-link emdialog #if($content.get('currentPage') == 'contact') active #end">
+                  <i class="fas fa-video mr-1"></i> Schedule a Meeting
+                </a>
+              </li>
+              <li class="navbar-nav-item">
+                <a href="/find/?entermedia.key=adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc"  class="ms-md-4 mt-1 mt-md-0 btn btn-sm btn-primary transition-3d-hover">
+                  <i class="mr-1 fas fa-user-plus"></i> Sign Up
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
 </header>

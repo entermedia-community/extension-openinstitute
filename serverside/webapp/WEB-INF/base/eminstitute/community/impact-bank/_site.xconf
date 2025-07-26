@@ -16,6 +16,9 @@
 	<script id="jquery-form" src="${communityhome}/components/javascript/jquery.form.js"/>
 	<script id="jquery-validate" src="${communityhome}/components/javascript/validation/jquery.validate.js"/>
 
+	<script id="select2" src="/${applicationid}/components/javascript/select2/js/select2.full.js"/>
+	<style id="select2-css" href="/${applicationid}/components/javascript/select2/css/select2.css"/>
+
 	<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
 	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
@@ -27,5 +30,4 @@
 	<style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>
 
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	<style id="impact-bank" href="${communityhome}/theme/css/impact-bank.css" />
 </page>
