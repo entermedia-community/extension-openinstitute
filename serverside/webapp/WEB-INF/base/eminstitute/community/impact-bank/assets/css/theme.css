@@ -50,6 +50,7 @@
 html {
   font-family: sans-serif;
   line-height: 1.15;
+  font-size: 14px; 
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -13639,7 +13640,7 @@ button:focus {
 .header-section {
   position: relative;
   z-index: 1;
-  background-color: #fff;
+  background-color: #050505;
 }
 
 .header-section-divider {
@@ -13699,7 +13700,7 @@ button:focus {
 }
 
 .nav-link {
-  color: #677788;
+  color: #f8fafd;
 }
 
 .nav-link-toggle {
