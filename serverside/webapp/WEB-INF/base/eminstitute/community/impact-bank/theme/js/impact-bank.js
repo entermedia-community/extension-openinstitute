@@ -12,14 +12,16 @@ $(document).ready(function () {
     var videoBg = new HSVideoBg($(this)).init();
   });
 
-  $(".js-text-animation").text("");
-  var typed = new Typed(".js-text-animation", {
-    strings: ["Innovation", "Solutions", "Ideas", "Success"],
-    typeSpeed: 70,
-    loop: true,
-    backSpeed: 40,
-    backDelay: 2000,
-  });
+  if ($(".js-text-animation").length > 0) {
+    $(".js-text-animation").text("");
+    var typed = new Typed(".js-text-animation", {
+      strings: ["Innovation", "Solutions", "Ideas", "Success"],
+      typeSpeed: 70,
+      loop: true,
+      backSpeed: 40,
+      backDelay: 2000,
+    });
+  }
 
   // initialization of text animation (typing)
 
@@ -32,6 +34,20 @@ $(document).ready(function () {
   AOS.init({
     duration: 650,
     once: true,
+  });
+
+  $(".cbp").each(function () {
+    var cbp = $.HSCore.components.HSCubeportfolio.init($(this), {
+      layoutMode: "grid",
+      displayTypeSpeed: 0,
+    });
+  });
+
+  $(".cbp").on("initComplete.cbp", function () {
+    // initialization of sticky blocks
+    $(".js-sticky-block").each(function () {
+      var stickyBlock = new HSStickyBlock($(this)).init();
+    });
   });
 });
 if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
