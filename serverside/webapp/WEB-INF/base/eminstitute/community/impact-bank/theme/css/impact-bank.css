@@ -170,3 +170,26 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px !important;
 }
+.project-list-container {
+  margin-top: 100px;
+}
+.emwidget-header {
+  background-color: #252525;
+}
+.chatterbox-messages {
+  height: calc(100% - 196px) !important;
+}
+.project-navbar {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.project-navbar .dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+.project-navbar .dropdown-menu li a {
+  color: #fff;
+}
+.project-navbar .dropdown-menu li a:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}

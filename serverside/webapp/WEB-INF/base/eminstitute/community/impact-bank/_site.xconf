@@ -24,10 +24,12 @@
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
+	<script id="oicomponents" src="${communityhome}/components/javascript/oicomponents.js" />
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
 
 	<style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>
 
+	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 </page>

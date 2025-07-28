@@ -6,11 +6,11 @@
           <img src="${communityhome}/assets/impactbank.webp"  style="height:60px;width: auto;" />
         </a>
         <div class="d-flex align-items-center">
-          <a href="/projects/" class="d-tab nav-link #if($content.get('currentPage') == 'projects') active #end">
-            <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle">
-              <i class="fas fa-search"></i>
-            </button>
-          </a>
+          <button class="d-tab btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn mr-3">
+            <i class="fas fa-search"></i>
+          </button>
+          $context.putPageValue("hidedefaultbtn",true)
+          $pages.include("${communityhome}/components/quicksearch/navbar.html", $context)
           <button type="button"
             class="navbar-toggler btn btn-icon btn-sm rounded-circle"
             aria-label="Toggle navigation"
@@ -31,11 +31,9 @@
           <div class="navbar-body header-sticky-top-inner">
             <ul class="navbar-nav">
               <li class="navbar-nav-item d-com">
-                <a href="/services/" class="nav-link #if($content.get('currentPage') == 'services') active #end">
-                  <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </a>
+                <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn">
+                  <i class="fas fa-search"></i>
+                </button>
               </li>
               <li class="navbar-nav-item">
                 <a href="/services/" class="nav-link #if($content.get('currentPage') == 'services') active #end">

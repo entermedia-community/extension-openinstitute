@@ -2779,7 +2779,7 @@ textarea.form-control.is-invalid {
   }
 }
 
-.btn {
+.btn,.themed-btn {
   display: inline-block;
   font-weight: 600;
   color: #677788;
@@ -2795,7 +2795,7 @@ textarea.form-control.is-invalid {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   line-height: 1.6;
-  border-radius: 0;
+  border-radius: 0 !important;
   transition: all 0.2s ease-in-out;
 }
 
@@ -2825,9 +2825,9 @@ a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none;
 }
-
+.themed-btn,
 .btn-primary {
-  color: #fff;
+  color: #fff !important;
   background: linear-gradient(
     45deg,
     hsl(219, 100%, 40%) 0%,
@@ -2836,6 +2836,7 @@ fieldset:disabled a.btn {
   ); 
 }
 
+.themed-btn:hover ,
 .btn-primary:hover {
   color: #fff;
   background: linear-gradient(
@@ -2845,7 +2846,30 @@ fieldset:disabled a.btn {
     hsl(219, 100%, 60%) 100%
   );
 }
+.btn-follow,
+.chatter-btn {
+  border: none !important;
+  color: #fff;
+  background: linear-gradient(
+    45deg,
+    hsl(178, 49%, 32%) 0%,
+    hsl(178, 49%, 44%) 70%,
+    hsl(178, 49%, 55%) 100%
+  );
+}
+.btn-follow,
+.chatter-btn:hover {
+  border: none !important;
+  color: #fff;
+  background: linear-gradient(
+    -45deg,
+    hsl(178, 49%, 32%) 0%,
+    hsl(178, 49%, 44%) 70%,
+    hsl(178, 49%, 55%) 100%
+  );
+}
 
+.themed-btn:focus,
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
@@ -3081,7 +3105,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-light {
-  color: #1e2022; 
+  color: #1e2022 !important; 
   background: linear-gradient(
     90deg,
     #efefef 0%,
@@ -17840,6 +17864,7 @@ a.badge-soft-navy:focus {
 }
 
 /* Extra Small */
+.btn-xxs,
 .btn-xs {
   font-size: 0.75rem;
   font-weight: 400;
