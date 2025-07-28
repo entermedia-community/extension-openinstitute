@@ -128,8 +128,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoice.setValue("notificationsent", "false");
 				invoice.setValue("createdon", today.getTime());
 				
+				
 				//end
-				invoice.setValue("enddate", endbilldate.getTime());
 
 				//name -subject
 				String collectionid = product.getValue("collectionid");
@@ -172,6 +172,11 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				invoiceSearcher.saveData(invoice);
 				log.info("Invoice Created for recurring product for: " +collection);
 				
+				Integer recurringperiod = product.getValue("recurringperiod");
+				Calendar endbilldate = Calendar.getInstance();
+				endbilldate.setTime(nextBillOn);
+				endbilldate.add(Calendar.MONTH, recurringperiod);
+				//invoice.setValue("enddate", endbilldate.getTime()); //Not used anymore?
 				product.setValue("nextbillon", endbilldate);
 				product.setValue("lastgeneratedinvoicedate", nextBillOn);
 				productSearcher.saveData(product);
