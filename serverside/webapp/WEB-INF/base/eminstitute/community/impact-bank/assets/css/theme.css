@@ -50,7 +50,7 @@
 html {
   font-family: sans-serif;
   line-height: 1.15;
-  font-size: 14px; 
+  font-size: 14px;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -282,6 +282,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
+  appearance: button;
   -webkit-appearance: button;
 }
 
@@ -310,6 +311,7 @@ input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
+  appearance: listbox;
   -webkit-appearance: listbox;
 }
 
@@ -354,6 +356,7 @@ progress {
 
 [type="search"] {
   outline-offset: -2px;
+  appearance: none;
   -webkit-appearance: none;
 }
 
@@ -2788,11 +2791,11 @@ textarea.form-control.is-invalid {
   -ms-user-select: none;
   user-select: none;
   background-color: transparent;
-  border: 0.0625rem solid transparent;
+  border: none;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   line-height: 1.6;
-  border-radius: 0.3125rem;
+  border-radius: 0;
   transition: all 0.2s ease-in-out;
 }
 
@@ -2825,14 +2828,22 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #377dff;
-  border-color: #377dff;
+  background: linear-gradient(
+    45deg,
+    hsl(219, 100%, 40%) 0%,
+    hsl(219, 100%, 50%) 70%,
+    hsl(219, 100%, 60%) 100%
+  ); 
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #1164ff;
-  border-color: #045cff;
+  background: linear-gradient(
+    -45deg,
+    hsl(219, 100%, 40%) 0%,
+    hsl(219, 100%, 50%) 70%,
+    hsl(219, 100%, 60%) 100%
+  );
 }
 
 .btn-primary:focus,
@@ -3070,15 +3081,23 @@ fieldset:disabled a.btn {
 }
 
 .btn-light {
-  color: #1e2022;
-  background-color: #f7faff;
-  border-color: #f7faff;
+  color: #1e2022; 
+  background: linear-gradient(
+    90deg,
+    #efefef 0%,
+    #ffffff 70%,
+    #efefef 100%
+  );
 }
 
 .btn-light:hover {
   color: #1e2022;
-  background-color: #d1e2ff;
-  border-color: #c4daff;
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #efefef 70%,
+    #ffffff 100%
+  );
 }
 
 .btn-light:focus,
@@ -3621,7 +3640,7 @@ fieldset:disabled a.btn {
   padding: 1.125rem 1.125rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0.5rem;
+  border-radius: 0;
 }
 
 .btn-sm,
@@ -3629,7 +3648,7 @@ fieldset:disabled a.btn {
   padding: 0.625rem 1.125rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: 0;
 }
 
 .btn-block {
@@ -5356,6 +5375,7 @@ input[type="button"].btn-block {
 .card-img-top {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+  overflow: hidden;
 }
 
 .card-img,

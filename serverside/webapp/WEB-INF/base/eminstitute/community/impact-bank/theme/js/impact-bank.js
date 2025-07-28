@@ -14,7 +14,7 @@ $(document).ready(function () {
 
   $(".js-text-animation").text("");
   var typed = new Typed(".js-text-animation", {
-    strings: ["Innovation", "Ideas", "Solutions", "Success"],
+    strings: ["Innovation", "Solutions", "Ideas", "Success"],
     typeSpeed: 70,
     loop: true,
     backSpeed: 40,
