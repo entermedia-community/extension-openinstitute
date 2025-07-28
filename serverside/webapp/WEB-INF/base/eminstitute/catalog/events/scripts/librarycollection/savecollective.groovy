@@ -64,7 +64,7 @@ public void init()
 	
 	collectionsearcher.saveData(collection);
 	
-	mediaArchive.getProjectManager().getRootCategory(mediaArchive,collection);
+	//mediaArchive.getProjectManager().getRootCategory(mediaArchive,collection);
 		
 	BaseSearcher colectivesearcher = mediaArchive.getSearcher("collectiveproject");
 	Data newproject = colectivesearcher.query().exact("parentcollectionid",collection.getId()).match("name","General").searchOne();
