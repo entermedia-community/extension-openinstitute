@@ -27,7 +27,7 @@
 	<script id="oicomponents" src="${communityhome}/components/javascript/oicomponents.js" />
 	<script id="openedit" src="/openedit/components/javascript/openedit.js"/>
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
-	
+	<style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
 	<style id="oi3" href="${communityhome}/theme/css/oi3.css"/>
 

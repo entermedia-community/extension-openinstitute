@@ -31,7 +31,9 @@
           <div class="navbar-body header-sticky-top-inner">
             <ul class="navbar-nav">
               <li class="navbar-nav-item d-com">
-                $pages.include("${communityhome}/components/quicksearch/navbar.html")
+                <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn">
+                  <i class="fas fa-search"></i>
+                </button>
               </li>
               <li class="navbar-nav-item">
                 <a href="/services/" class="nav-link #if($content.get('currentPage') == 'services') active #end">
@@ -43,6 +45,7 @@
                   Blogs
                 </a>
               </li>
+			  
               <li class="navbar-nav-item">
                 <a href="#open-schedule-meeting" data-url="${communitylink}/meetingschedule/meeting-form.html#open-schedule-meeting" data-urlbar="/#open-schedule-meeting" data-updateurl="true" rel="nofollow" class="nav-link emdialog #if($content.get('currentPage') == 'contact') active #end">
                   <i class="fas fa-video mr-1"></i> Schedule a Meeting
@@ -56,12 +59,12 @@
               </li>
 			  #end
 			  #ifnotnull($user)
-	           <li class="navbar-nav-item">
-	             <a href="$!{communitylink}/authentication/logout.html" title="[[Logout]]"  class="ms-md-4 mt-1 mt-md-0 btn btn-sm btn-primary transition-3d-hover">
-	               <i class="ml-1 fs-small fas fa-sign-out-alt"></i> Logout
-	             </a>
-	           </li>
-	           #end
+			  <li class="navbar-nav-item">
+	                 <a href="/users/index.html?id=${user.getId()}" rel="nofollow" class="nav-link #if($content.get('currentPage') == 'myaccount') active #end">
+	                   <i class="fas fa-user"></i> My Account
+	                 </a>
+			  </li>
+				#end
             </ul>
           </div>
         </div>
