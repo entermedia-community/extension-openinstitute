@@ -12,7 +12,7 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv = "subscriberssideba
       style="margin-bottom: 10px"
       class="autosubmit ajaxform"
       data-targetdivinner="adduserpicker"
-      action="$communityhome/project/channel/subscribers/usersearchresults.html"
+      action="$!{communityhome}/project/channel/subscribers/usersearchresults.html"
     >
       <input type="hidden" name="collectionid" value="$collectionid" />
       <input type="hidden" name="searchtype" value="user" />

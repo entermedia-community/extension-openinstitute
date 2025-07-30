@@ -494,12 +494,9 @@ $(document).ready(function () {
 
   lQuery(".emoticonmenu span").livequery("click", function () {
     var menuitem = $(this);
-
     var aparent = $(menuitem.closest(".message-menu").find(".pickemoticon"));
-    //console.log(aparent.data());
-
     var saveurl = aparent.data("toggleurl");
-    //Save
+    var messageid =  aparent.data("messageid");
     var options = aparent.data();
     options.reactioncharacter = menuitem.data("hex");
     $.ajax({
@@ -507,8 +504,7 @@ $(document).ready(function () {
       async: true,
       data: options,
       success: function (data) {
-        $("#chatter-message-" + aparent.data("messageid")).html(data);
-        //reload message
+        $("#chatter-message-" + messageid).replaceWith(data);
       },
     });
   });
