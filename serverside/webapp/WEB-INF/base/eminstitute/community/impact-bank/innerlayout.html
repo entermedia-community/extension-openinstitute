@@ -43,7 +43,7 @@
 
 	</head>
 
-	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end #if($desktop) class="desktop" #end>
+	<body #if(!$user || $browser.inApp()) data-hidetoolbar="true" #end #if($desktop) class="desktop" #end >
 		#if($desktop)
 			
 			$pages.include("${apphome}/components/desktop/loading.html")
@@ -64,12 +64,13 @@
 			data-editmode='$!user.get("oe_edit_mode")'
 			data-mediadbappid="$!mediaarchive.getMediaDbId()" 
 			data-componenthome="$!componenthome" 
-			#if( $showupload) data-showuploadid="${showupload.id}" #end>
+			#if( $showupload) data-showuploadid="${showupload.id}" #end
+			>
 
 			$pages.include("${communityhome}/navigation.html", $context)
 			
 
-			<div class="space-top-0 mt-lg-6">
+			<div class="" style="margin-top: 80px;">
 				$pages.includeContent()
 			</div>
 

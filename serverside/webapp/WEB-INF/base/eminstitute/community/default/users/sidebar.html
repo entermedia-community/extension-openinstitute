@@ -50,7 +50,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 					#else
 						#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
 					#end	
-					<a href="${projectlink}">		
+					<a href="${projectlink}" title="[[Messages on]] ${project}">		
 					 	#ifnotnull($otherperson)
 						<b>  $otherperson.getScreenName() </b>
 						#end
@@ -63,7 +63,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 							#end
 						</div>
 						#set($chatuser = $mediaarchive.getUser($message.user))
-						<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / $context.getAge($message.getDate("date")) [[ago]]</div>
+						<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / #if($message.getDate("date"))$context.getAge($message.getDate("date")) [[ago]]#end</div>
 					</a>	
 				</div>
 	 		 </div>

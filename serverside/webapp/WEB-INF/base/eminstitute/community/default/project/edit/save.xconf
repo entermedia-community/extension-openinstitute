@@ -10,9 +10,9 @@
 
   	<path-action name="AssetEditModule.handleUploads"/>
   
-    <path-action name="ProjectModule.searchForAssetsOnCollection">
+    <!--path-action name="ProjectModule.searchForAssetsOnCollection">
 		<searchtype>librarycollection</searchtype>
-	</path-action>
+	</path-action-->
 	
 	
 	

@@ -31,9 +31,7 @@
           <div class="navbar-body header-sticky-top-inner">
             <ul class="navbar-nav">
               <li class="navbar-nav-item d-com">
-                <button class="btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn">
-                  <i class="fas fa-search"></i>
-                </button>
+                $pages.include("${communityhome}/components/quicksearch/navbar.html")
               </li>
               <li class="navbar-nav-item">
                 <a href="/services/" class="nav-link #if($content.get('currentPage') == 'services') active #end">
@@ -50,11 +48,20 @@
                   <i class="fas fa-video mr-1"></i> Schedule a Meeting
                 </a>
               </li>
+			  #ifnull($user)
               <li class="navbar-nav-item">
                 <a href="/find/"  class="ms-md-4 mt-1 mt-md-0 btn btn-sm btn-primary transition-3d-hover">
                   <i class="mr-1 fas fa-user-plus"></i> Sign In
                 </a>
               </li>
+			  #end
+			  #ifnotnull($user)
+	           <li class="navbar-nav-item">
+	             <a href="$!{communitylink}/authentication/logout.html" title="[[Logout]]"  class="ms-md-4 mt-1 mt-md-0 btn btn-sm btn-primary transition-3d-hover">
+	               <i class="ml-1 fs-small fas fa-sign-out-alt"></i> Logout
+	             </a>
+	           </li>
+	           #end
             </ul>
           </div>
         </div>

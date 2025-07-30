@@ -13,10 +13,10 @@ public void init() {
 	//Notify to Email:
 	//String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
 	
-	String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
+	String notifyemail = "cristobal@entermediadb.org";  //get it from catalog settings?
 
 	//prevent re-submition
-	 String clientform = context.getSessionValue("clientform");
+	/* String clientform = context.getSessionValue("clientform");
 	 if (clientform != null) {
 	 	context.putSessionValue("clientform", null);
 	 }
@@ -25,7 +25,7 @@ public void init() {
 	 	log.info("Form re-submit prevented");
 	 	return;
 	 }
-
+*/
 	MediaArchive archive = context.getPageValue("mediaarchive");
 	Boolean valid = true;
 	String field1 = context.getRequestParameter("username"); //Fake fields for spamm control
@@ -62,6 +62,8 @@ public void init() {
 	newcollection.setValue("library","clientcollections");
 	newcollection.setValue("communitytagcategory","emediawebsite");
 	newcollection.setValue("collectiontype","6"); //Client Library
+	newcollection.setValue("serverstatus","requested");
+	newcollection.setValue("creationdate", new Date());
 	collectionsearcher.saveData(newcollection);
 
 	log.info("User collection created: " + newcollection.getId());
