@@ -2,11 +2,10 @@
 #set($collectionid = $context.getRequestParameter("collectionid"))
 $context.putPageValue("searcher",$searcher) #set($targetdiv = "subscriberssidebar")
 <div id="search-collections">
-
   <div id="searcharea">
     #set($viewid = "usersearch") #set($viewpath = "user/${viewid}")
     #set($details = $searcher.getDetailsForView($viewpath, $userprofile))
-
+	
     <form
       id="dialogsearchform"
       style="margin-bottom: 10px"
@@ -66,7 +65,7 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv = "subscriberssideba
 	  data-communityid="${communitytagcategory.getId()}"
       data-hitssessionid="$!hits.sessionId"
 	  data-addtoteam="true"
-      data-url="$communityhome/project/channel/subscribers/addsave.html"
+      data-url="$!{communityhome}/project/channel/subscribers/addsave.html"
     >
       <div class="clearfix"></div>
     </div>
