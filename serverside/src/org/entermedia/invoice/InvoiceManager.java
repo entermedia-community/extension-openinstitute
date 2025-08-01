@@ -269,5 +269,14 @@ public class InvoiceManager implements CatalogEnabled
 		}
 		return workspace;
 	}
+	
+	public Date getEndDate(MultiValued product)
+	{
+		Calendar endbilldate = Calendar.getInstance();
+		Date nextBillOn = product.getDate("nextbillon");
+		endbilldate.setTime(nextBillOn);
+		endbilldate.add(Calendar.DAY_OF_YEAR, -1);
+		return endbilldate.getTime();
+	}
 
 }
