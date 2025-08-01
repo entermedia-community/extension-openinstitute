@@ -115,7 +115,7 @@
                                  <a
                                      href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-primary">[[Pay Now]]</a>
-                                 #if ($invoice.paymentstatusreason != "")
+                                 #ifnotnull($invoice.paymentstatusreason)
                                      <div class="alert alert-danger">$invoice.paymentstatusreason</div>
                                  #end
 							 #end

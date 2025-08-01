@@ -254,8 +254,8 @@ public class InvoiceManager implements CatalogEnabled
 	}
 	*/
 	
-	public Data getProductById (String productId) {
-		Data product = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
+	public MultiValued getProductById (String productId) {
+		MultiValued product = (MultiValued)getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
 		if (product == null) {
 			return null;
 		}
@@ -275,7 +275,15 @@ public class InvoiceManager implements CatalogEnabled
 		Calendar endbilldate = Calendar.getInstance();
 		Date nextBillOn = product.getDate("nextbillon");
 		endbilldate.setTime(nextBillOn);
-		endbilldate.add(Calendar.DAY_OF_YEAR, -1);
+		if (product.getInt("recurringperiod") == 0)
+		{
+			//Daily endbilldate is nextbillon
+		}
+		if (product.getInt("recurringperiod") == 1)
+		{
+			endbilldate.add(Calendar.DAY_OF_YEAR, -1);
+		}
+
 		return endbilldate.getTime();
 	}
 

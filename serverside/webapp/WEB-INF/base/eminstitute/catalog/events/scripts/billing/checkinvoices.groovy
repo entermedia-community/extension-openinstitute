@@ -75,6 +75,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 	//from today and 15 up
 	Calendar since = Calendar.getInstance();
 	since.add(Calendar.DAY_OF_YEAR, +daysToExpire);
+	
+	// 04-01  04-16
 
 	Collection pendingProducts = productSearcher.query()
 			.exact("recurring","true")
@@ -99,7 +101,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				
 				if( lastbilleddate.after(within15ofduedate.getTime()) ) 
 				{
-                    log.info("Already recently sent invoice for this one, skipping: " + lastbilleddate.getTime());
+                    log.info("Already recently sent invoice for " + product.getId() + " one on: " + lastbilleddate + " next bill on:" + nextBillOn);
                     continue; // skip if end date is before today
                 }
 			}
@@ -172,6 +174,9 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				}
 				invoice.setValue("sentto", contactsstring);
 				invoiceSearcher.saveData(invoice);
+				
+				product.setValue("lastgeneratedinvoicedate", nextBillOn);
+				
 				log.info("Invoice Created for recurring product for: " +collection);
 				
 				Integer recurringperiod = product.getValue("recurringperiod");
@@ -179,10 +184,10 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				endbilldate.setTime(nextBillOn);
 				endbilldate.add(Calendar.MONTH, recurringperiod);
 				//invoice.setValue("enddate", endbilldate.getTime()); //Not used anymore?
-				product.setValue("nextbillon", endbilldate);
-				product.setValue("lastgeneratedinvoicedate", nextBillOn);
+				product.setValue("nextbillon", endbilldate.getTime());
+				
 				productSearcher.saveData(product);
-				log.info("Next Invoice for: "+collection+", will be generated: " +nextBillOn);
+				log.info("Next Invoice for: "+collection+", will be generated: " +endbilldate.getTime());
 		}
 	}
 }

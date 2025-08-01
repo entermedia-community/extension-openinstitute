@@ -20,6 +20,7 @@
                            <th style="width: 120px;">[[Created On]]</th>
                         <th>[[Product]]</th>
                         <th>[[Price]]</th>
+						<th style="width: 120px;">[[Next Bill Date]]</th>
                         <th style="width: 280px;"></th>
                     </tr>
                 </thead>
@@ -62,6 +63,7 @@
                             <td style="text-align: right;">
                             <span class="currencysmall">$!context.getText($!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))</span>
                             $ $!context.doubleToMoney($!hit.productprice,2)</td>
+							<td style="text-align: center;">$!context.getDate($hit.nextbillon)</td>
                             <td>
                                 #if( $canviewsettings )
            

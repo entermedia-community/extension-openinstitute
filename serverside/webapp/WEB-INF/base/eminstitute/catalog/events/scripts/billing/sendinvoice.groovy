@@ -116,11 +116,14 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		
 	}
 	
+	invoice.setValue("paymentstatusreason", null);
+	
 	String emails = invoice.getValue("sentto");
 	if( emails == null)
 	{
-		log.info("Error sending invoice to email: ${emails} in invoice ${invoice.getId()} ${invoice.getName()}" );
+		log.info("Error no email address to send invoice. Invoice: ${invoice.getId()} ${invoice.getName()}" );
 		invoice.setValue("paymentstatus", "error");
+		invoice.setValue("paymentstatusreason", "Empty Send To");
 		invoiceSearcher.saveData(invoice);
 		return;
 	}
@@ -159,6 +162,7 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		}
 		else {
 			invoice.setValue("paymentstatus", "error");
+			invoice.setValue("paymentstatusreason", "Send email error");
 			log.info("Error sending invoice to addresses: ${emails}");
 		}
 		invoiceSearcher.saveData(invoice);
@@ -188,13 +192,14 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 	{
 		log.info("Error sending invoice to email: ${emails} in invoice ${invoice.getId()} ${invoice.getName()} invoiceNotifyProject" );
 		invoice.setValue("paymentstatus", "error");
+		invoice.setValue("paymentstatusreason", "No contact email set on project");
 		invoiceSearcher.saveData(invoice);
 		return;
 	}
 	
 	List<String> emaillist = Arrays.asList(emails.split(","));
 
-	Boolean sent = false;
+	StringBuffer errorEmails = new StringBuffer();
 	if (emaillist.size()>0)
 	{
 		log.info("Sending email to  "+emaillist.size()+" members of: "+librarycol+ " ("+collectionid+")");
@@ -202,14 +207,23 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 		 {
 			if (email != null) {
 				if (email) {
-					sendinvoiceEmail(mediaArchive, email, invoice, librarycol, "notifyprojectadmins");
-					sent = true; //needs better error handling
+					try
+					{
+						sendinvoiceEmail(mediaArchive, email, invoice, librarycol, "notifyprojectadmins");
+						
+					}
+					catch(Throwable ex)
+					{
+						errorEmails.append(email + " " + ex.getMessage());
+					}
+					
 				}
 			}
 		}
-		if (!sent) {
+		if (!errorEmails.isEmpty()) {
 			invoice.setValue("paymentstatus", "error");
-			log.info("Error sending invoice to addresses: ${emails}");
+			invoice.setValue("paymentstatusreason", "Error sending email to: " +errorEmails);
+			log.info("Error sending invoice to addresses: ${errorEmails}");
 		}
 		invoiceSearcher.saveData(invoice);
 		
@@ -278,8 +292,16 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 					month = context.getLocaleManager().getMonthName(duedate, context.getLocale());
 				}
 			//}
-		
-			template = template + "send-invoice-event.html";
+			
+			if (invoice.getInt("recurringperiod") == 1) 
+			{
+				template = template + "invoice-to-client-monthly.html";
+			}
+			else 
+			{
+				template = template + "invoice-to-client.html";
+			}
+			
 			//Invoice Template from collection
 			invoiceemailheader = librarycol.get("invoiceemailheader");
 			if(invoiceemailheader == null || invoiceemailheader.equals("")) {
@@ -320,7 +342,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 		break;
 	case "notifyprojectadmins":
 		subject = "Invoice generated at " + librarycol.getName();
-		template = template + "invoice-generated.html";
+		template = template + "invoice-to-notify-team.html";
 		
 		invoiceemailheader = librarycol.get("invoicepaidemail");
 		/*if(invoiceemailheader == null || invoiceemailheader.equals("")) {

@@ -15,5 +15,6 @@
 	<property id="recurring" />
 	<property id="recurringperiod" />
 	<property id="startbillingdate" />
+	<property id="nextbillon" />
 	<property id="sentto" />
 </properties>

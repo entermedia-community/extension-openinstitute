@@ -134,26 +134,27 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			
 			//Old startdate Used as Due Date Now
 			invoice.setValue("duedate", startbillingdate);
+			
+			invoiceSearcher.saveData(invoice);
+			log.info("New Invoice generated for " + collection.getName());
 
-			//end date
 			Calendar endbilldate = Calendar.getInstance();
 			endbilldate.setTime(startbillingdate);
-			endbilldate.add(Calendar.MONTH, recurringperiod);
-			invoice.setValue("enddate", endbilldate.getTime());
+			if (recurringperiod == 0)
+			{
+				endbilldate.add(Calendar.DAY_OF_YEAR, +1);
+			}
+			else if (recurringperiod == 1)
+			{
+				endbilldate.add(Calendar.MONTH, recurringperiod);
+			}
+			product.setValue("nextbillon", endbilldate.getTime());
+			log.info("Next bill on: " + endbilldate.getTime());	
 			
 			Boolean isrecurring = product.getValue("recurring");
 			if (isrecurring) {
 				invoice.setValue("isrecurring", "true");
-
-				Calendar nextBillOn = Calendar.getInstance();
-				nextBillOn.setTime(startbillingdate);
-				int currentMonth = nextBillOn.get(Calendar.MONTH);
-				nextBillOn.set(Calendar.MONTH, currentMonth + recurringperiod);
-				product.setValue("nextbillon", nextBillOn.getTime());
-				//invoice.setValue("billdate", today.getTime()); //use createdon					
 			}
-					
-			invoiceSearcher.saveData(invoice);
 			
 			product.setValue("lastgeneratedinvoicedate", today.getTime());
 			product.setValue("billingstatus", "active");
@@ -161,7 +162,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			
 			context.putPageValue("invoiceid", invoice.getId())
 			
-			log.info("New Invoice generated for " + collection.getName());
+			
 		}
 		
 //	}
