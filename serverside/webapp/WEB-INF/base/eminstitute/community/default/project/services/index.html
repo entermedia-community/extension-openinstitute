@@ -112,12 +112,13 @@
                                      class="btn btn-xs btn-primary">
                                      [[Pay Now]]</a>
                              #elseif ($invoice.getValue("paymentstatus") == "autopayfailed" || $invoice.getValue("paymentstatus") == "error")
-                                 <a
+							 			#ifnotnull($invoice.paymentstatusreason)
+							            	<div class="billinginvoiceerror">$invoice.paymentstatusreason</div>
+							            #end   
+							  		<a
                                      href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      class="btn btn-xs btn-primary">[[Pay Now]]</a>
-                                 #ifnotnull($invoice.paymentstatusreason)
-                                     <div class="alert alert-danger">$invoice.paymentstatusreason</div>
-                                 #end
+                                
 							 #end
 							 
 	                       	 #if( $canviewsettings )
