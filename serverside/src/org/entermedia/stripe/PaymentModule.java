@@ -108,6 +108,12 @@ public class PaymentModule extends BaseMediaModule
 		Searcher invoiceSearcher = archive.getSearcher("collectiveinvoice");
 		Data invoice = getInvoiceManager(inReq).getInvoiceById(invoiceId);
 		
+		if (invoice == null )
+		{
+			log.info("Payment fail, Invoice "+ invoiceId+" not found");
+			return;
+		}
+		
 		if (invoice.get("paymentstatus").equals("paid")) {
 			log.info("Invoice "+ invoiceId+" already Paid");
 			return;
