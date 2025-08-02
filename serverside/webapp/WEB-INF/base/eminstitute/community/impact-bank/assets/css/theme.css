@@ -7579,7 +7579,12 @@ button.bg-navy:focus {
 .border-primary {
   border-color: #377dff !important;
 }
-
+.border-soft-primary {
+  border-color: rgba(55, 125, 255, 0.1);
+}
+a.border-soft-primary:hover {
+  border-color: #377dff;
+}
 .border-secondary {
   border-color: #71869d !important;
 }
