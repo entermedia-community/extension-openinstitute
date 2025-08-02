@@ -6,13 +6,13 @@
           <img src="${communityhome}/assets/logo.png" class="p-1" style="height:60px;width: auto;" />
         </a>
         <div class="d-flex align-items-center">
-          <button class="d-tab btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn mr-3">
+          <button class="d-tab btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn mr-3 X">
             <i class="fas fa-search"></i>
           </button>
           $context.putPageValue("hidedefaultbtn",true)
           $pages.include("${communityhome}/components/quicksearch/navbar.html", $context)
           <button type="button"
-            class="navbar-toggler btn btn-icon btn-sm rounded-circle"
+            class="navbar-toggler btn btn-icon btn-sm btn-soft-primary rounded-circle"
             aria-label="Toggle navigation"
             aria-expanded="false"
             aria-controls="navBar"
@@ -36,8 +36,13 @@
                 </button>
               </li>
               <li class="navbar-nav-item">
-                <a href="/services/" class="nav-link #if($content.get('currentPage') == 'services') active #end">
-                  Services
+                <a href="/capital-funds/" class="nav-link #if($content.get('currentPage') == 'capital-funds') active #end">
+                  Capital Funds
+                </a>
+              </li>
+              <li class="navbar-nav-item">
+                <a href="/partnerships/" class="nav-link #if($content.get('currentPage') == 'partnerships') active #end">
+                  Partnerships
                 </a>
               </li>
               <li class="navbar-nav-item">
