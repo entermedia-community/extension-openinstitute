@@ -113,52 +113,17 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			}
 			invoice.setValue("sentto", contactsstring);
 			
-			
-			
 			//Start Billing Date
-			Date startbillingdate = product.getValue("startbillingdate");
-			if (startbillingdate == null) {
-				startbillingdate = today.getTime();
+			Date nextbillon = product.getValue("nextbillon");
+			if (nextbillon == null) {
+				nextbillon = today.getTime();
 			}
-		
-			//invoiceSearcher.saveData(invoice);
-			
-			int recurringperiod = product.getInt("recurringperiod");
-			if(recurringperiod == null)
-			{
-				//recurring default to 1 month
-				recurringperiod = 1;
-				product.setValue("recurringperiod", "1"); //put it back to product
-			}
-			invoice.setValue("recurringperiod", recurringperiod);
-			
-			//Old startdate Used as Due Date Now
-			invoice.setValue("duedate", startbillingdate);
+	
+			invoice.setValue("duedate", nextbillon);
 			
 			invoiceSearcher.saveData(invoice);
 			log.info("New Invoice generated for " + collection.getName());
-
-			Calendar endbilldate = Calendar.getInstance();
-			endbilldate.setTime(startbillingdate);
-			if (recurringperiod == 0)
-			{
-				endbilldate.add(Calendar.DAY_OF_YEAR, +1);
-			}
-			else if (recurringperiod == 1)
-			{
-				endbilldate.add(Calendar.MONTH, recurringperiod);
-			}
-			product.setValue("nextbillon", endbilldate.getTime());
-			log.info("Next bill on: " + endbilldate.getTime());	
 			
-			Boolean isrecurring = product.getValue("recurring");
-			if (isrecurring) {
-				invoice.setValue("isrecurring", "true");
-			}
-			
-			product.setValue("lastgeneratedinvoicedate", today.getTime());
-			product.setValue("billingstatus", "active");
-			productSearcher.saveData(product);
 			
 			context.putPageValue("invoiceid", invoice.getId())
 			

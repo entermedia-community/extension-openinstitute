@@ -32,15 +32,15 @@
                         <tr>
                             <td style="text-align: center;">$!context.getDate($hit.createdon)</td>
                             <td>
-                            #if($hit.getValue("startbillingdate"))
-								#set($invoicemonth = $context.getLocaleManager().getMonthName($hit.getValue("startbillingdate"), $context.getLocale()))
+                            #if($hit.getValue("nextbillon"))
+								#set($invoicemonth = $context.getLocaleManager().getMonthName($hit.getValue("nextbillon"), $context.getLocale()))
 							#end
 							##For Replace Formating
 								#set($productformated = $hit)
 								#set($replacer = $mediaarchive.getReplacer())
 								#set($ignore = $productformated.setValue("invoicemonth",$invoicemonth))
 								#set($ignore = $productformated.setValue("project", $collection))
-								#set($startdate = "#date($hit, 'startbillingdate')")
+								#set($startdate = "#date($hit, 'nextbillon')")
 								#set($ignore = $productformated.setValue("duedate", $startdate))
 								#set($ignore = $productformated.setValue("startdate", $startdate))  ####legacy??
 								#set($enddate = "#date($hit, 'enddate')")
@@ -99,13 +99,11 @@
 	                                 #end
 	                                 
 	                                 <div style="padding:5px 0 0;">
-	                                                                     
                                     <a
                                         href="${projectlink}/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
                                         title="[[Invoice Product or Service]]"
                                         class="emdialog btn btn-xs btn-primary"
                                         data-hidefooter="true">[[Create Invoice]]</a>
-	                                 
 	                                 
 	                                <a
                                         href="/find/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveproduct"
@@ -113,6 +111,7 @@
                                         target="_blank">
                                         <i class="fa fa-database"></i>
                                     </a>
+									
                                     </div>
                                 #end
                             </td>

@@ -90,18 +90,19 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 		log.info("Found " + pendingProducts.size() + " products");
 		for (Iterator productIterator = pendingProducts.iterator(); productIterator.hasNext();) {
 			MultiValued product = productSearcher.loadData(productIterator.next());
-			Date nextBillOn = product.getValue("nextbillon");
-			Date lastbilleddate = product.getDate("lastgeneratedinvoicedate");  //Save for what bill date it goes with
+			Date nextBillOn = product.getValue("nextbillon");  // July 01
+			Date lastbilleddate = product.getDate("lastgeneratedinvoicedate"); // Aug 01    //Save for what bill date it goes with
 			if( lastbilleddate != null ) 
 			{
 				
 				Calendar within15ofduedate = Calendar.getInstance();
 				within15ofduedate.setTime(nextBillOn);
+			 
 				within15ofduedate.add(Calendar.DAY_OF_YEAR, -15);
 				
 				if( lastbilleddate.after(within15ofduedate.getTime()) ) 
 				{
-                    log.info("Already recently sent invoice for " + product.getId() + " one on: " + lastbilleddate + " next bill on:" + nextBillOn);
+                    log.info("Already recently sent invoice for " + product.getName() + " one on: " + lastbilleddate + " next bill on:" + nextBillOn);
                     continue; // skip if end date is before today
                 }
 			}
@@ -179,7 +180,8 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 				
 				log.info("Invoice Created for recurring product for: " +collection);
 				
-				Integer recurringperiod = product.getValue("recurringperiod");
+				Integer recurringperiod = product.getInt("recurringperiod");
+				
 				Calendar endbilldate = Calendar.getInstance();
 				endbilldate.setTime(nextBillOn);
 				endbilldate.add(Calendar.MONTH, recurringperiod);

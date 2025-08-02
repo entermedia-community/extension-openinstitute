@@ -83,13 +83,6 @@
 		type="date" index="true">Creation Date
 	</property>
 	
-	<property id="startbillingdate" editable="true" stored="true" type="date" index="true">
-		<name>
-			<language id="en"><![CDATA[Starting Due Date]]></language>
-		</name>
-	</property>
-	
-
 	<property id="nextbillon" editable="true" stored="true"
 		type="date" index="true">Next Bill Date
 	</property>
