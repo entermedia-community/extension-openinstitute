@@ -334,7 +334,8 @@ textarea.blog-comments-input {
 	overflow: hidden;
 }
 .article-thumbnail-wrap {
-	width: 375px;
+	width: 100%;
+	max-width: 480px;
 	height: 300px;
 	overflow: hidden;
 }
@@ -377,7 +378,7 @@ textarea.blog-comments-input {
 	line-height: 1;
 }
 .author-row time {
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 1;
 }
 .blog-credit time span,

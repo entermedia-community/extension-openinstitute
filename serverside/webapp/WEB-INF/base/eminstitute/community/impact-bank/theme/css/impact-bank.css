@@ -192,7 +192,7 @@
 	background-color: #252525;
 }
 .chatterbox-messages {
-	height: calc(100% - 196px) !important;
+	height: calc(100% - 185px) !important;
 }
 .project-navbar {
 	background-color: rgba(0, 0, 0, 0.8);
@@ -219,4 +219,29 @@
 .cbp-filter-item-active:hover {
 	color: #fff !important;
 	background-color: #71869d !important;
+}
+.project-navbar,
+.emwidget {
+	border-radius: 4px;
+}
+.chatterbox-editorarea {
+	box-shadow: none;
+	border-radius: 0 0 4px 4px;
+	border: none;
+}
+.chatterbox-write {
+	padding: 1px;
+	border-top: 1px solid #ddd;
+}
+.chatterbox-editorarea:focus-within {
+	outline: none !important;
+}
+.message-attach-box {
+	width: 346px;
+}
+.chatter-send {
+	border-radius: 4px !important;
+}
+.community-layout .sidebar-right {
+	padding: 1rem 0.25rem;
 }
