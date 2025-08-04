@@ -3,14 +3,14 @@ $context.putPageValue("collectionid",$librarycol.getId() )
 #set($logo = $mediaarchive.getAsset($librarycol.assetportrait) )
 
 #if ($logo)
-    #set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
+    #set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/generated/${logo.sourcepath}/image200x200.webp")
 #else
     #set($logourl = "$communityhome/theme/images/OI_flower.png")
 #end
 
 #if ($librarycol.collectivebanner)
     #set( $banner= $mediaarchive.getAsset($librarycol.collectivebanner) )
-    #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
+    #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/generate/$!{banner.sourcepath}/image1920x500cropped.webp/banner.webp")
 #end
 
 <div class="project-header">
