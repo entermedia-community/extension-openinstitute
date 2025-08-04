@@ -2,6 +2,7 @@
 
 <section class="mainsection space-top-1">
 	<div class="container">
+		$pages.include("${communityhome}/project/layout/project-header.html",$context)
 		<div class="community-layout bg-white"> 
 
 				#if($collectivesection == "settings")
@@ -15,8 +16,7 @@
 					</div>
 				#end
 				
-			<div class="main-content">
-				$pages.include("${communityhome}/project/layout/project-header.html",$context)
+			<div class="main-content"> 
 				<div id="maincontent">
 					$pages.includeContent()	
 				</div>

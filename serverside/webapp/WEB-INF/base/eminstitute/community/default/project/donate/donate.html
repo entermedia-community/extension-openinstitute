@@ -1,6 +1,6 @@
 #set($paypalclientid = $mediaarchive.getCatalogSettingValue("paypalclientid"))
-<div class="currentcampaign">		
-	<div class="team-list-header">
+<div class="currentcampaign pt-3 pb-1">		
+	<div class="sidebar-list-header text-center">
 		<h3>[[Donate]]</h3>
 	</div>
 	<div class="d-flex align-items-center justify-content-between mb-3">
@@ -26,6 +26,6 @@
 			<i class="fas fa-credit-card mr-1"></i> [[Donate]]
 		</a> 
 	</div>
+	<hr style="opacity: 0.8;">
+	$pages.include("$communityhome/project/donate/donationlist.html", $context)
 </div>
-<hr>
-$pages.include("$communityhome/project/donate/donationlist.html", $context)

@@ -15,7 +15,7 @@ $context.putPageValue("showchannel",false)
 
 #set( $userposts = $query.search() )
 
-<div id="bloglistindex" class="bloglistindex pt-5" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
+<div id="bloglistindex" class="bloglistindex" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
 	<div class="d-flex align-items-center justify-content-between mb-5 blog-list-title">
 		#if($tag)
