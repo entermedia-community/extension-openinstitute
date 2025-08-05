@@ -39,10 +39,10 @@
 		<input type="hidden" name="${searchtype}hitsname" value="expenses" />
 		
 		<div  id="searchform" class="inlinesearch" style="display:none" >
-			<div class="d-flex">
+			<div class="d-flex flex-wrap" >
 				$context.putPageValue("autocomplete","off")
 				#foreach( $detail in $details)
-					<div>
+					<div style="min-width: 200px; margin-right: 10px;">
 							$context.putPageValue("detail", $detail)
 							$pages.include("/${applicationid}/components/advancedsearch/detaileditinline.html", $context)
 					</div>
