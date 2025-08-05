@@ -260,3 +260,6 @@
 .project-container:hover .project-explore {
 	opacity: 1;
 }
+.pretty-list {
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 0 2px;
+}

@@ -330,7 +330,7 @@ textarea.blog-comments-input {
 	display: flex;
 	margin: 0 0 3rem;
 	border-radius: 16px;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
 	overflow: hidden;
 }
 .article-thumbnail-wrap {
