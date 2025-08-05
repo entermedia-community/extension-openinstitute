@@ -8,6 +8,8 @@
     <property id="reimbursedstatus" />
 	<property id="reimburseuser" viewtype="user" />  
  	<property id="paidfromaccount" />
- 	<property id="description" />
+ 	<property id="expensedescription" />
+ 	
+ 	
   
 </properties>

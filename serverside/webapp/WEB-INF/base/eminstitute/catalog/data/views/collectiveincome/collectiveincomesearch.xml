@@ -5,6 +5,8 @@
 	<property id="date"  />
 	<property id="incometype" />
   	<property id="paidfromaccount" />
+  	<property id="incomedescription" />
+  	
       
   
 </properties>
