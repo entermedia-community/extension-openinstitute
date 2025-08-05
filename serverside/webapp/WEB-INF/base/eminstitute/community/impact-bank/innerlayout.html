@@ -70,9 +70,11 @@
 			$pages.include("${communityhome}/navigation.html", $context)
 			
 
-			<div class="" style="margin-top: 70px;">
-				$pages.includeContent()
-			</div>
+			#if($user && !$browser.inApp() && $canviewsettings)
+				$pages.include("${communityhome}/components/sidebars/user/index.html")
+			#end
+			
+			$pages.includeContent()
 
 			$pages.include("${communityhome}/footer.html")
 			

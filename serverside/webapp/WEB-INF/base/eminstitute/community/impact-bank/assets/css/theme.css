@@ -16010,7 +16010,7 @@ button:focus {
 
 @media (min-width: 992px) {
   .header-sticky-top-lg {
-    position: fixed;
+    position: sticky;
     bottom: auto;
     top: 0;
   }
