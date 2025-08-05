@@ -1,7 +1,8 @@
 #set($collectivesection = $content.collectivesection)
 
-<section class="mainsection space-top-2">
+<section class="mainsection space-top-1">
 	<div class="container">
+		$pages.include("${communityhome}/project/layout/project-header.html",$context)
 		<div class="community-layout bg-white"> 
 
 				#if($collectivesection == "settings")
@@ -15,8 +16,7 @@
 					</div>
 				#end
 				
-			<div class="main-content">
-				$pages.include("${communityhome}/project/layout/project-header.html",$context)
+			<div class="main-content"> 
 				<div id="maincontent">
 					$pages.includeContent()	
 				</div>
@@ -24,25 +24,7 @@
 			
 			#if($collectivesection != "settings")
 			<div class="sidebar-right">
-				<div class="mb-4">
-					<div class="referrallinkbox">
-						#set($sharinglink = "${communitytagcategory.externaldomain}/?fbclid=$!librarycol.getId()")
-						<h3>[[Link eMedia]]</h3>
-						<div class="d-inline">
-							<i class="fas fa-link fa-sm me-1"></i> [[Help our community and share our referral link]]: 
-							<div class="referrallink">$sharinglink</div> 
-							<a href="#" 
-								class="copytoclipboard btn btn-xxs btn-light ms-1" 
-								data-targetdiv="referrallinkboxcopied" data-copytext="copyreferral" title="[[Copy to Clipboard]]"><i class="far fa-copy"></i> [[Copy]]</a>
-								<input style="position:absolute; top:-1000px;" 
-								id="copyreferral" 
-								value="$sharinglink">
-						</div>
-					</div>
-					<div id="referrallinkboxcopied" class="refferralcopied">[[Link copied to clipboard, thank you!]]</div>
-				</div>
-				
-				
+
 				$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
 				
 			</div>

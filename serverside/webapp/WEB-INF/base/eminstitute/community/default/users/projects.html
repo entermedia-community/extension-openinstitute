@@ -31,7 +31,7 @@
 					
 					#if($project.assetportrait)
 						#set($asset = $mediaarchive.getAsset($project.assetportrait))
-						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.webp"))
 					#else
 						#set($imagelink = "$communitylink/theme/images/OI_flower.png")
 					#end
@@ -40,7 +40,7 @@
 					<a href="${hitprojectlink}" 
 						class=" #if($selectedproject==$project.id) active #end">
 	
-					<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'></div>
+					<div class="card-collections-thumb" style='border:5px solid #fff;#if($imagelink) background-image: url("$imagelink") #end'></div>
 	 				<div class="card-name collectionbox">$project.name
 							#if( $modcollections.contains($project.getId())) #end</div>
 					</a>
@@ -85,7 +85,7 @@
 						<div class="card-collections">
 						<a href="${hitprojectlink}" 
 							class=" #if($selectedproject==$project.id) active #end">
-							<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'></div>
+							<div class="card-collections-thumb" style='border:5px solid #fff;#if($imagelink) background-image: url("$imagelink") #end'></div>
 			 				<div class="card-name collectionbox">
 			 					$project.name
 								#if( $modcollections.contains($project.getId())) * #end

@@ -1,0 +1,31 @@
+<div class="proposalcontainer-out">	
+  <div class="" id="donationcontainer">
+    <div class="contentcolumn">
+      #if($paymenterror)
+        <div style="padding:20px;" class="errormsg">$paymenterror <br>[[Please use another card]]</div>
+      #end
+      #if(!$user)
+        <div style="padding:20px ">
+          #set($loginok =	"$applink/collective/donate/$!librarycol.id/donate.html")
+          <i class="fas fa-credit-card"></i> [[Please Login to Donate with Credit Card]] 
+          <div style="padding:20px 0 10px;">
+            <a href="$applink/authentication/logon.html?loginokpage=$!loginok" class="btn btn-success">
+              [[Login to Donate With Credit Card]]
+            </a>
+          </div>
+        </div>
+        #if($paypalclientid)
+        <p style="text-align:center;padding-top:5px;"><strong>[[Or Use]] PayPal:</strong></p>
+          $pages.include("${communityhome}/project/donate/paypalform.html",$context)
+        #end 
+      #else
+          $pages.include("${communityhome}/project/donate/creditcardform.html",$context)
+          
+          #if($paypalclientid)
+          <p style="text-align:center;padding-top:20px;"><strong>[[Or Use]] PayPal:</strong></p>
+          $pages.include("${communityhome}/project/donate/paypalform.html",$context)
+        #end
+      #end
+    </div>
+  </div>
+</div>

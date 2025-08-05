@@ -5,9 +5,10 @@
 	<property name="collectivesection">blog</property>
 	<path-action name="ProjectModule.loadCollection"></path-action>
 	<property name="module">librarycollection</property>
-	
+
 	<property name="menu_referrals">false</property>
 	<property name="menu_files">false</property>
 	<property name="menu_store">false</property>
-	
+
+	<script id="stripe" src="https://js.stripe.com/basil/stripe.js"/>
 </page>

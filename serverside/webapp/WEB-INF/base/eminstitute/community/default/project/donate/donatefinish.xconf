@@ -1,0 +1,5 @@
+<page>
+	<path-action name="PaymentModule.processPaymentDonation"/>
+	<inner-layout>/${applicationid}/theme/layouts/collectivelayout.html</inner-layout>
+
+</page>
