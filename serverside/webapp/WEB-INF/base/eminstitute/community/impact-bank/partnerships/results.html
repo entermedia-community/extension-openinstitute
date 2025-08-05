@@ -1,0 +1,65 @@
+#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).exact("communitytag","ibstartup").sort("name").cachedSearch() )
+
+
+  #set( $tags = $projects.collectValues("communitytag") )
+  
+		<div id="filterControls" class="text-center mb-5 mb-md-7">
+			<a class="cbp-filter-item cbp-filter-item-active btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter="*">All</a>
+
+      #foreach($tag in $tags)
+        <a class="cbp-filter-item btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter=".$!{tag}">$!{tag}</a>
+      #end 
+		</div>
+		
+	<div class="cbp"
+			data-filters="#filterControls"
+			data-hs-cbp-options='{
+				"animationType": "quicksand",
+				"caption": "zoom",
+				"gapHorizontal": 40,
+				"gapVertical": 40,
+				"mediaQueries": [
+					{"width": 1500, "cols": 4},
+					{"width": 1100, "cols": 4},
+					{"width": 800, "cols": 3},
+					{"width": 480, "cols": 2},
+					{"width": 380, "cols": 1}
+				]
+			}'>
+
+      
+<!-- <h2 class="text-center my-4">Projects</h2> -->
+  #foreach($project in $projects)
+    #set($link = "${communitylink}/${project.urlname}")
+    #set($logo = false)
+    #if($project.assetportrait)
+      #set($asset = $mediaarchive.getAsset($project.assetportrait))
+      #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+    #else
+      #set($logo = "${communityhome}/assets/logo.png")
+    #end
+    #set($description = $project.get("collectivedescription"))
+
+    #if ($project.collectivebanner)
+      #set( $banner= $mediaarchive.getAsset($project.collectivebanner) )
+      #set ($bannerurl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/$!{banner.sourcepath}/image1920x500cropped.jpg")
+    #end
+
+    #set( $tags = $project.getValues("communitytag") )
+			<div class="cbp-item rounded #foreach($tag in $tags) $!{tag} #end">
+				<a class="cbp-caption" href="#">
+					<div class="cbp-caption-defaultWrap">
+						<img class="rounded" src="$logo" alt="Image Description">
+					</div>
+					<div class="cbp-caption">
+						<div class="d-flex justify-content-end flex-column h-100 p-4">
+							<span class="d-block small font-weight-bold text-cap">#foreach($tag in $tags) #text( $mediaarchive.getCachedData("communitytag",$tag) ) #end</span>
+							<span class="d-block h3 mb-0">#text($project)</span>
+						</div>
+					</div>
+				</a>
+			</div>
+    #end
+			
+	</div>
