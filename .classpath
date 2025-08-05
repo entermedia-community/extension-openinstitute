@@ -10,9 +10,9 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="serverside/lib/openedit-money-5.626.jar"/>
 	<classpathentry kind="lib" path="serverside/lib/stripe-java-5.25.0.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-server"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/extension-openedit"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/extension-openedit"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tomcat9"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
