@@ -35,7 +35,7 @@
 					#ifnull($otherperson)
 						#if($collective.assetportrait)
 						#set($asset = $mediaarchive.getAsset($collective.assetportrait))
-						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 						#else
 						#set($link = "${communityhome}/theme/images/OI_flower.png")
 						#end

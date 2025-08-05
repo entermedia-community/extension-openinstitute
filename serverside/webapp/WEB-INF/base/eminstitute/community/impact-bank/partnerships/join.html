@@ -10,7 +10,6 @@
 			<input type="hidden" name="communitytagcategory.value" value="$!content.communitytagcategory" />
 
 			<input type="hidden" name="save" value="true" />
-			<input type="hidden" name="searchtype" value="librarycollection" />
 
 			<input type="hidden" name="field" value="owner" />
 			<input type="hidden" name="owner.value" value="$user.getId()" />
@@ -24,7 +23,7 @@
 						<div class="js-form-message form-group">
 							<label class="sr-only" for="projectname">Project name</label>
 							<input type="hidden" name="field" value="name" />
-							<input type="text" class="form-control" name="name.en.value" id="projectname" placeholder="Project name"
+							<input type="text" class="form-control" name="name.value" id="projectname" placeholder="Project name"
 							aria-label="Project name" required data-msg="Please enter your project name">
 						</div>
 					</div>
@@ -33,9 +32,10 @@
 							<label class="sr-only" for="communitytag">Project name</label>
 							<input type="hidden" name="field" value="communitytag" /> 
 							<select class="form-control custom-select" id="communitytag" name="communitytag.value" required>
-								<option value="artificial-intelligence">Artificial Intelligence</option>
-								<option value="business-development">Business Development</option>
-								<option value="social-impact">Social Impact</option>
+								<option value="ibstartup">Startup Partnership</option>
+								<option value="ibcapitalfund">Investment Fund</option>
+								<option value="ibsocial">Social Development</option>
+								<option value="ibproject">Operational Project</option>
 								<option value="other">Other</option>
 							</select>
 						</div>

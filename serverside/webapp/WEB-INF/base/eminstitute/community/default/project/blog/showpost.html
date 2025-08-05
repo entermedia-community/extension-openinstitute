@@ -41,7 +41,7 @@
 			</div>
 			#if($librarycol.collectionimage)
 				#set($asset = $mediaarchive.getAsset($librarycol.collectionimage))
-				#set( $projectlogo = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+				#set( $projectlogo = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 			#else
 				#set($projectlogo = "$communityhome/theme/images/OI_flower.png")
 			#end

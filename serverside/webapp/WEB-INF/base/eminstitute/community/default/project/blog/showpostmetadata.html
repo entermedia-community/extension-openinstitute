@@ -26,7 +26,7 @@
 			#set($asset = false )
 			#if($librarycol.assetportrait)
 				#set($asset = $mediaarchive.getAsset($librarycol.assetportrait))
-				#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+				#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 			#end
 
 		#end
