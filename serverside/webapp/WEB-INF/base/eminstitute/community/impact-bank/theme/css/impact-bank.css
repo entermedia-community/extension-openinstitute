@@ -246,3 +246,17 @@
 .community-layout .sidebar-right {
 	padding: 1rem 0.25rem;
 }
+.project-cover {
+	border-top-left-radius: 0.3125rem;
+	border-top-right-radius: 0.3125rem;
+}
+.project-container .project-explore {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+.project-container:hover .project-explore {
+	opacity: 1;
+}

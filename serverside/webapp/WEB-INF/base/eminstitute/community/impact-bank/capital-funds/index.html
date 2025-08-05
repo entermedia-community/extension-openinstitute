@@ -1,5 +1,5 @@
 <main id="content" role="main">
-	<div id="featuresSection" class="container space-2 space-lg-3">
+	<div id="featuresSection" class="container space-md-1 space-lg-3">
 		<div class="row justify-content-lg-between align-items-lg-center">
 			<div class="col-lg-5 mb-9 mb-lg-0">
 				<div class="mb-3">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-6 col-xl-5">
+			<div class="col-lg-6 col-xl-5 d-none d-lg-block">
 				
 				<div class="position-relative min-h-500rem mx-auto" style="max-width: 28rem;">
 					<figure class="position-absolute top-0 right-0 z-index-2 mr-11" data-aos="fade-up">
@@ -45,7 +45,7 @@
 									<use xlink:href="#circleImgID2"/>
 								</clipPath>
 								<g clip-path="url(#circleImgID1)">
-									<image width="450" height="450" xlink:href="https://placehold.co/450x450" ></image>
+									<image width="450" height="450" xlink:href="${communityhome}/assets/h-3.webp" ></image>
 								</g>
 							</g>
 						</svg>
@@ -68,7 +68,7 @@
 									<use xlink:href="#circleImgID4"/>
 								</clipPath>
 								<g clip-path="url(#circleImgID3)">
-									<image width="515" height="515" xlink:href="https://placehold.co/515x515" transform="matrix(1 0 0 1 1.639390e-02 2.880859e-02)"></image>
+									<image width="515" height="515" xlink:href="${communityhome}/assets/h-2.webp" transform="matrix(1 0 0 1 1.639390e-02 2.880859e-02)"></image>
 								</g>
 							</g>
 						</svg>
@@ -97,7 +97,7 @@
 									<use xlink:href="#circleImgID6"/>
 								</clipPath>
 								<g clip-path="url(#circleImgID5)">
-									<image width="900" height="900" xlink:href="https://placehold.co/900x900" transform="matrix(1 0 0 1 -64.8123 -64.8055)"></image>
+									<image width="900" height="900" xlink:href="${communityhome}/assets/h-1.webp" transform="matrix(1 0 0 1 -64.8123 -64.8055)"></image>
 								</g>
 							</g>
 						</svg>
@@ -108,76 +108,18 @@
 		</div>
 	</div>
 
-
-	<div class="container space-bottom-1 space-bottom-lg-2">
-		<div class="mb-9">
-			<h2 class="h1 text-center mb-3">Investment Opportunities</h2>
-		</div>
-		<div class="row justify-content-lg-center">
-			<div class="col-md-6 col-lg-5 mb-5">
-				
-				<a class="media border-dashed border-soft-primary rounded p-5 h-100 shadow" data-aos="fade-up" href="$!{communitylink}/capital-funds/artificial-intelligence.html">
-					<figure class="w-100 max-w-8rem mr-4">
-						<img class="img-fluid" src="https://placehold.co/120x120" alt="SVG">
-					</figure>
-					<div class="media-body">
-						<div class="d-flex align-items-center justify-content-between mb-2">
-							<h4 class="text-primary mb-0">Artificial Intelligence</h4>
-							<i class="fas fa-arrow-right"></i>
-						</div>
-						<p class="text-default mb-0">Advancing ethical, practical AI tools that power real-world solutions.</p>
-					</div>
-				</a>
-				
-			</div>
-
-			<div class="col-md-6 col-lg-5 mb-5">
-				
-				<a class="media border-dashed border-soft-primary rounded p-5 h-100 shadow" data-aos="fade-up" data-aos-delay="100" href="$!{communitylink}/capital-funds/business-development.html">
-					<figure class="w-100 max-w-8rem mr-4">
-						<img class="img-fluid" src="https://placehold.co/120x120" alt="SVG">
-					</figure>
-					<div class="media-body">
-						<div class="d-flex align-items-center justify-content-between mb-2">
-							<h4 class="text-primary mb-0">Business Development</h4>
-							<i class="fas fa-arrow-right"></i>
-						</div>
-						<p class="text-default mb-0">Fueling innovative platforms that help creators and entrepreneurs thrive.</p>
-					</div>
-				</a>
-				
-			</div>
-
-			<div class="col-md-6 col-lg-5 mb-5">
-				
-				<a class="media border-dashed border-soft-primary rounded p-5 h-100 shadow" data-aos="fade-up" href="$!{communitylink}/capital-funds/social-impact.html">
-					<figure class="w-100 max-w-8rem mr-4">
-						<img class="img-fluid" src="https://placehold.co/120x120" alt="SVG">
-					</figure>
-					<div class="media-body">
-						<div class="d-flex align-items-center justify-content-between mb-2">
-							<h4 class="text-primary mb-0">Social Impact</h4>
-							<i class="fas fa-arrow-right"></i>
-						</div>
-						<p class="text-default mb-0">Supporting open, inclusive tech that empowers underserved communities.</p>
-					</div>
-				</a>
-				
-			</div>
-
-		</div>
-	</div>
-
+	$pages.include("./results.html")
+	<hr>
 	<div class="container">
 		<div class="card p-5 w-lg-75 mx-lg-auto">
-			<h3>A Return That Goes Beyond ROI</h3>
-			<p>We offer flexible funding models for:</p>
+			<h3>Chose a Fund to Support</h3>
 			<ul class="list-unstyled">
-				<li><i class="fas fa-check text-success mr-2"></i> Philanthropic donors supporting digital equity</li>
-				<li><i class="fas fa-check text-success mr-2"></i> Impact investors aligned with tech for good</li>
-				<li><i class="fas fa-check text-success mr-2"></i> Strategic partners looking to co-build the future of online platforms</li>
+				<li><i class="fas fa-check text-success mr-2"></i> Build open, community-owned platforms</li>
+				<li><i class="fas fa-check text-success mr-2"></i> Empower people with free or low-cost digital tools</li>
+				<li><i class="fas fa-check text-success mr-2"></i> Promote equity and access in tech</li>
 			</ul>
-			<p>Together, we can create a digital ecosystem that’s open, ethical, and empowering—at scale.</p>
+			<p>Help us build a digital future that includes everyone.</p>
+			</div>
 		</div>
 	</div>
 

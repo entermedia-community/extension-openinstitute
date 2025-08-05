@@ -17567,7 +17567,7 @@ a.badge-soft-navy:focus {
 .btn-soft-primary:focus,
 .btn-soft-primary:active,
 .btn-soft-primary.active {
-  color: #fff;
+  color: #fff !important;
   background-color: #377dff;
   box-shadow: 0 4px 11px rgba(55, 125, 255, 0.1);
 }
