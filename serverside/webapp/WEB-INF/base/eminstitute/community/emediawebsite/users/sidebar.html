@@ -93,7 +93,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 							#ifnull($otherperson)
 								#if($project.assetportrait)
 								#set($asset = $mediaarchive.getAsset($project.assetportrait))
-								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+								#set($link = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 								#else
 								#set($link = "${communitylink}/theme/images/OI_flower.png")
 								#end

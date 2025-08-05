@@ -522,7 +522,7 @@
 												#if($product.primaryimage)
 												    #set( $asset = $mediaarchive.getCachedData("asset",$product.primaryimage))
 												    #ifnotnull($asset)
-									                  <img  ALIGN="left"  HSPACE="50" VSPACE="50" src='${communitylink}$mediaarchive.asLinkToPreview($asset,"image200x200.jpg")'  style="border-radius: 16px;"/>
+									                  <img  ALIGN="left"  HSPACE="50" VSPACE="50" src='${communitylink}$mediaarchive.asLinkToPreview($asset,"image200x200")'  style="border-radius: 16px;"/>
 									                #end
 												#end																				
 											</a>

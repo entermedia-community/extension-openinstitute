@@ -14,20 +14,20 @@
 	#set ( $sourcepath = $urlutils.encode($sourcepath))
 	#set ( $sourcepath = $sourcepath.replace("%2F", "/") )
 #end
-#set( $imagesize = "image200x200.jpg")
+#set( $imagesize = "image200x200")
 
 	#if($thumbsize == "mediumplus")
 		#if( $type == "video" )
-			#set($imagesize = "image640x480.jpg")
+			#set($imagesize = "image640x480")
 		#else
-			#set($imagesize = "image550x350.jpg")
+			#set($imagesize = "image550x350")
 		#end
 	#elseif($thumbsize == "imagelarge")
-		#set($imagesize = "image1300x1300.jpg")
+		#set($imagesize = "image1300x1300")
 	#elseif($thumbsize == "postsize")
-		#set($imagesize = "image730x480cropped.jpg")
+		#set($imagesize = "image730x480cropped")
 	#elseif($thumbsize == "crop")
-		#set($imagesize = "image110x62cropped.jpg")
+		#set($imagesize = "image110x62cropped")
 	#end
 	
 

@@ -88,7 +88,7 @@
 										
 										#if($project.assetportrait)
 											#set($asset = $mediaarchive.getAsset($project.assetportrait))
-											#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+											#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 										#else
 											#set($imagelink = "$communitylink/theme/images/OI_flower.png")
 										#end
