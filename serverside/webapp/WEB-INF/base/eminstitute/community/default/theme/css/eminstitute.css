@@ -1864,7 +1864,8 @@ table.table-striped tr.table-row-totals td {
 }
 
 .space-2 {
-  padding: 4rem 0 !important;
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
 }
 @media (min-width: 768px) {
   .w-md-80 {
