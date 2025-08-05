@@ -8,7 +8,10 @@
 			<a class="cbp-filter-item cbp-filter-item-active btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter="*">All</a>
 
       #foreach($tag in $tags)
-        <a class="cbp-filter-item btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter=".$!{tag}">$!{tag}</a>
+        <a class="cbp-filter-item btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter=".$!{tag}">
+          #set( $data = $mediaarchive.getCachedData("communitytag",$tag) )
+          #text( $data)          
+          </a>
       #end 
 		</div>
 		
