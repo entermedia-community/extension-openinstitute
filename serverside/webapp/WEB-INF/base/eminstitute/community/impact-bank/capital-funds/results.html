@@ -1,5 +1,5 @@
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
-#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).orgroup("communitytag", $communitytags).sort("name").cachedSearch() )
+#set( $projects = $mediaarchive.query("librarycollection").orgroup("communitytag", "ibcapitalfund").sort("name").cachedSearch() )
 
 #set( $tags = $projects.collectValues("communitytag") )
   
