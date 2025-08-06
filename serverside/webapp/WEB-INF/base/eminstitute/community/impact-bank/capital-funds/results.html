@@ -1,14 +1,18 @@
-#set($communitytags = $mediaarchive.query("communitytag").exact("communitytagcategory",$communitytagcategory.id).sort("name").cachedSearch())
-
-<div id="filterControls" class="text-center mb-5">
-  <a class="cbp-filter-item cbp-filter-item-active btn btn-xs btn-soft-secondary py-2 px-3 m-1" href="javascript:;" data-filter="*">All</a>
-  #foreach($tag in $communitytags)
-   <a class="cbp-filter-item btn btn-xs btn-soft-secondary py-2 px-3 m-1" href="javascript:;" data-filter=".${tag.id}">$tag</a>
-  #end
-</div>
-
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 #set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory",$communitytagcategory.id).orgroup("communitytag", $communitytags).sort("name").cachedSearch() )
+
+#set( $tags = $projects.collectValues("communitytag") )
+  
+		<div id="filterControls" class="text-center mb-5 mb-md-7">
+			<a class="cbp-filter-item cbp-filter-item-active btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter="*">All</a>
+
+      #foreach($tag in $tags)
+        <a class="cbp-filter-item btn btn-xs btn-soft-secondary btn-pill py-2 px-3 m-1" href="javascript:;" data-filter=".$!{tag}">
+          #set( $data = $mediaarchive.getCachedData("communitytag",$tag) )
+          #text( $data)          
+          </a>
+      #end 
+		</div>
 
 
 <div class="container px-3">
@@ -46,8 +50,10 @@
       #else
         #set ($bannerurl = false)
       #end
-  
-      <div class="cbp-item rounded $!{project.communitytag}">
+
+      #set( $tags = $project.getValues("communitytag") )
+
+      <div class="cbp-item rounded #foreach($tag in $tags) $!{tag} #end"">
         <div class="m-4 text-center rounded h-100 shadow project-container">
           <div
             #if($bannerurl)
@@ -64,9 +70,7 @@
             <a href="$link">
               <h2 class="h3 mb-0">#text($project)</h2>
             </a>
-
-            <div class="badge badge-pill badge-secondary my-1">$project.communitytag</div>
-            
+           
             #set($owner = $mediaarchive.getUser($project.owner))
             <small class="creator">by #text($owner)</small>
           </div>
@@ -78,6 +82,14 @@
               $!{description}
             #end
           </p>
+            <div >
+
+              #foreach($tag in $tags)             
+              <span class="badge badge-pill badge-secondary my-1">
+              #text( $mediaarchive.getCachedData("communitytag",$tag) ) 
+              </span>
+              #end
+            </div>
 
           <div class="gap-2 icons d-flex flex-row justify-content-center align-items-center">
             #ifnotnull($project.facebooklink)
