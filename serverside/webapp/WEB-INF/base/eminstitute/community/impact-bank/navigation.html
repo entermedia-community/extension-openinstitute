@@ -6,16 +6,16 @@
 					<img src="${communityhome}/assets/logo.png" class="p-1" style="height:60px;width: auto;" />
 				</a>
 				<div class="d-flex align-items-center">
-					<button class="d-tab btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn mr-3 X">
+					<button class="d-tab btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn mr-3">
 						<i class="fas fa-search"></i>
 					</button>
-					$context.putPageValue("hidedefaultbtn",true)
-					$pages.include("${communityhome}/components/quicksearch/navbar.html", $context)
 					<button type="button"
-						class="navbar-toggler btn btn-icon btn-sm btn-soft-primary rounded-circle"
+						class="navbar-toggler btn btn-sm btn-soft-primary btn-icon rounded-circle"
 						aria-label="Toggle navigation"
 						aria-expanded="false"
 						aria-controls="navBar"
+						data-bs-toggle="collapse"
+						data-bs-target="#navBar"
 						data-toggle="collapse"
 						data-target="#navBar">
 						<span class="navbar-toggler-default">
@@ -25,12 +25,14 @@
 							<i class="fas fa-times"></i>
 						</span>
 					</button>
+					$context.putPageValue("hidedefaultbtn", true)
+					$pages.include("${communityhome}/components/quicksearch/navbar.html", $context)
 				</div>
 
 				<div id="navBar" class="collapse navbar-collapse">
 					<div class="navbar-body header-sticky-top-inner">
 						<ul class="navbar-nav">
-							<li class="navbar-nav-item d-com">
+							<li class="navbar-nav-item d-com mr-3">
 								<button class="btn btn-sm btn-soft-primary btn-icon rounded-circle searchBtn">
 									<i class="fas fa-search"></i>
 								</button>
@@ -53,7 +55,7 @@
 				
 							<li class="navbar-nav-item">
 								<a href="#open-schedule-meeting" data-url="${communitylink}/meetingschedule/meeting-form.html#open-schedule-meeting" data-urlbar="/#open-schedule-meeting" data-updateurl="true" rel="nofollow" class="nav-link emdialog">
-									<i class="fas fa-video mr-1"></i> Schedule a Meeting
+									<i class="fas fa-video"></i> Schedule a Meeting
 								</a>
 							</li>
 				#ifnull($user)
