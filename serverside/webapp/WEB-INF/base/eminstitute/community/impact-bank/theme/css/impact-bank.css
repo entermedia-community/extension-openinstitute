@@ -252,14 +252,24 @@
 }
 .project-container .project-explore {
 	display: flex;
-	justify-content: center;
+	justify-content: end;
 	align-items: center;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
+.project-container .project-explore .fas {
+	margin-left: 0.2rem;
+	transition: margin-left 0.3s ease-in-out;
+}
 .project-container:hover .project-explore {
 	opacity: 1;
 }
+.project-container:hover .project-explore .fas {
+	margin-left: 0.5rem;
+}
 .pretty-list {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 0 2px;
+}
+.cbp .badge {
+	pointer-events: none;
 }
