@@ -34,7 +34,7 @@
       #set($logo = false)
       #if($project.assetportrait)
         #set($asset = $mediaarchive.getAsset($project.assetportrait))
-        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.webp"))
+        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200"))
       #else
         #set($logo = "${communityhome}/assets/dp.png")
       #end

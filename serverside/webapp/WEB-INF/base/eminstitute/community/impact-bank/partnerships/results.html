@@ -38,7 +38,7 @@
     #set($logo = false)
     #if($project.assetportrait)
       #set($asset = $mediaarchive.getAsset($project.assetportrait))
-      #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200.png"))
+      #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200"))
     #else
       #set($logo = "${communityhome}/assets/logo.png")
     #end
@@ -51,14 +51,27 @@
 
     #set( $tags = $project.getValues("communitytag") )
 			<div class="cbp-item rounded #foreach($tag in $tags) $!{tag} #end">
-				<a class="cbp-caption" href="#">
+				<a class="cbp-caption" href="$link">
 					<div class="cbp-caption-defaultWrap">
 						<img class="rounded" src="$logo" alt="Image Description">
 					</div>
 					<div class="cbp-caption">
 						<div class="d-flex justify-content-end flex-column h-100 p-4">
-							<span class="d-block small font-weight-bold text-cap">#foreach($tag in $tags) #text( $mediaarchive.getCachedData("communitytag",$tag) ) #end</span>
 							<span class="d-block h3 mb-0">#text($project)</span>
+               <p class="my-3 px-3">
+                #if($description.length() > 300)
+                  $!{description.substring(0,300)}...
+                #else 
+                  $!{description}
+                #end
+                </p>
+            <div>
+              #foreach($tag in $tags)             
+                <span class="d-block small font-weight-bold text-cap">
+                #text( $mediaarchive.getCachedData("communitytag",$tag) ) 
+                </span>
+              #end
+            </div>
 						</div>
 					</div>
 				</a>
