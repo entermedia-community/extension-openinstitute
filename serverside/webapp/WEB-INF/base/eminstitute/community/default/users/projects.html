@@ -14,41 +14,38 @@
 	#if($collections.size()>0)
 	<h3>[[Team Projects]]</h3>
 
-	<div class="stations-grid p-4">
-		<div class="project-grid">
+	<div class="d-flex flex-wrap justify-content-center p-4">
 			#foreach( $ohit in $collections )
-					#set($imagelink = false)
+				#set($imagelink = false)
+				
+				#set( $project = $mediaarchive.getCachedData("librarycollection",$ohit.getId()))
+				#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+				#if($project.urlname)
+					#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}")
+				#else
+					#set($hitprojectlink = "/project/chat/index.html?collectionid=${project.id}")
+				#end
+				
+				
+				
+				#if($project.assetportrait)
+					#set($asset = $mediaarchive.getAsset($project.assetportrait))
+					#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200"))
+				#else
+					#set($imagelink = "$communitylink/theme/images/OI_flower.png")
+				#end
 					
-					#set( $project = $mediaarchive.getCachedData("librarycollection",$ohit.getId()))
-					#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
-					#if($project.urlname)
-						#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}")
-					#else
-						#set($hitprojectlink = "/project/chat/index.html?collectionid=${project.id}")
-					#end
-					
-					
-					
-					#if($project.assetportrait)
-						#set($asset = $mediaarchive.getAsset($project.assetportrait))
-						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200"))
-					#else
-						#set($imagelink = "$communitylink/theme/images/OI_flower.png")
-					#end
-					
-					<div class="card-collections">
-					<a href="${hitprojectlink}" 
-						class=" #if($selectedproject==$project.id) active #end">
-	
-					<div class="card-collections-thumb" style='border:5px solid #fff;#if($imagelink) background-image: url("$imagelink") #end'></div>
-	 				<div class="card-name collectionbox">$project.name
-							#if( $modcollections.contains($project.getId())) #end</div>
+				<div class="card-collections">
+					<a href="${hitprojectlink}" class="d-flex flex-column h-100 #if($selectedproject==$project.id) active #end">
+						<div class="card-collections-thumb" style='border:5px solid #fff;#if($imagelink) background-image: url("$imagelink") #end'>
+						</div>
+						<div class="collectionbox">
+							$project.name
+							#if( $modcollections.contains($project.getId())) #end
+						</div>
 					</a>
-					</div>
-					
+				</div>
 			#end
-		</div>
-		<div class="clearfix"></div>	
 	</div>
 	#end
 		
