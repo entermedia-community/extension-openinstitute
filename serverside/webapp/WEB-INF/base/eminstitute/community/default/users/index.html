@@ -9,22 +9,19 @@ $context.putPageValue("selecteduser", $selecteduser)
 	#set( $subscriptions = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).sort("isbillingcontact").search())
 	$context.putPageValue("subscriptions", $subscriptions)
 	<h2>#if( $user.getId() == $selecteduser.getId()) [[Your Profile]]#else [[User Profile]] #end</h2>
-					<div class="row">
+					<div class="row mb-4">
 						<div class="col-md-3">
 						#if( $user.getId() == $selecteduser.getId() || $canviewsettings)
 								#set($canedituserinfo = true)
 							#end
-						
-							#set( $userimageurl = $mediaarchive.asLinkToUserProfile($selecteduser) )
 							
-							#if(!$userimageurl)
-								#set( $userimageurl = "${communityhome}/theme/images/user.svg" )
-							#end
-						
+										
 							
 							<div class="profile-username">
 								<div class="profile-imagecontainer">
-									<img src="$userimageurl" alt="$selecteduser.getAnonNickName()" class="profile-userimage" />
+									#set($assetprofile = $mediaarchive.getUserProfileAssetPortrait($selecteduser))
+									#set($thumbsize = "image200x200")
+									$pages.include("${communityhome}/users/userprofileimage.html?assetid=$!{assetprofile.id}&thumbsize=$!{thumbsize}", $context)
 								</div>
 						</div>
 						</div>
@@ -62,13 +59,20 @@ $context.putPageValue("selecteduser", $selecteduser)
 									#end
 									#if($canedituserinfo) 
 										<br>
-										<a href="${communityhome}/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Edit User Profile]]">
+										<a href="${communityhome}/users/edit/edit.html?userid=$selecteduser.getId()" class="emdialog btn btn-sm btn-primary " title="[[Edit User Profile]]">
 										<i class="fas fa-user"></i> [[Edit Profile]]
 										</a>
-										<a href="${communityhome}/users/preferences/delete.html?userid=$selecteduser.getId()" class="emdialog btn btn-xs btn-light " title="[[Delete Account]]">
+										<a href="${communityhome}/users/preferences/delete.html?userid=$selecteduser.getId()" class="emdialog btn btn-sm btn-primary " title="[[Delete Account]]">
 										<i class="fas fa-cog"></i> [[Delete Account]]
 										</a>
 									#end
+								#if( $user.getId() == $selecteduser.getId())
+								<div class="row my-4">
+									<div class="col-12">
+									<a href="${communitylink}/authentication/logout.html" class="btn btn-sm btn-primary"><i class="fas fa-sign-out-alt"></i>  [[Logout]]</a>
+									</div>
+								</div>
+								#end	
 							</div>
 						
 						</div>
