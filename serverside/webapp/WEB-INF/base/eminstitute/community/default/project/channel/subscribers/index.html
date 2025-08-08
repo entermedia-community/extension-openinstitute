@@ -23,7 +23,7 @@
 					#set( $userlink = "$!{communitylink}/users/index.html?id=${followeruser.getId()}")
 					#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 					#if(!$userimageurl)
-						#set( $userimageurl = "$communitylink/theme/images/user.svg" )
+						#set( $userimageurl = "$!{communitylink}/theme/images/user.svg" )
 					#end 
 					<div class="d-flex flex-row teammember pretty-list">
 						<a href="#esc($userlink)" class="d-flex align-items-center flex-grow-1">

@@ -1,9 +1,8 @@
 
-
-#set( $projects = $mediaarchive.query("librarycollection").exact("collectiontype", "6").exact("organizationstatus", "active").sort("name").search($context) )
+#set( $projects = $mediaarchive.query("librarycollection").exact("communitytagcategory", "impact-bank").sort("name").search($context) )
 
 #if($projects.size()> 0)
-	<h6 class="text-center text-dark mb-3">Active Libraries</h6>
+	<h6 class="text-center text-dark mb-3">Active Projects</h6>
 	<div class="d-flex flex-wrap">
 	#foreach($project in $projects)
 		#if( $foreach.count <= 15)

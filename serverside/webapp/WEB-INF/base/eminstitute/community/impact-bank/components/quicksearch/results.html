@@ -1,4 +1,6 @@
-
+#ifnull($organizedModules)
+	$pages.include("${communityhome}/components/quicksearch/projects.html", $context)
+#end
 #foreach($module in $organizedModules)
 	#set($hits = $organizedHits.get($module.id))
 
@@ -12,20 +14,24 @@
 	#end
 	#set( $val = $hits.getInput("description"))
 	#if($module.id == "librarycollection")
-		<h6 class="text-center text-dark mb-3">All Libraries</h6>
+		<h6 class="text-center text-dark mb-3">[[All Libraries]]</h6>
 		<div class="d-flex flex-wrap">
 			#foreach( $project in $hits.getPageOfHits())
-			
-			
-			#if($project.urlname)
-				#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
-			#else
-				#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
-			#end
-			<div class="py-1 px-2 mb-2 qs-project">
-				<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
-			</div> 
-			
+				#set($communityprojectid = $project.get("communitytagcategory"))
+				
+				#if($communityprojectid)
+                    #set($communityproject = $mediaarchive.getCachedData("communitytagcategory", $communityprojectid))
+				#else
+					#set($communityproject = $community)
+				#end
+				#if($project.urlname)
+					#set($projectlink = "$!{communityproject.externaldomain}/${project.urlname}/chat/index.html")
+				#else
+					#set($projectlink = "/project/chat/index.html?collectionid=${project.id}")
+				#end
+				<div class="py-1 px-2 mb-2 qs-project">
+					<a href="${projectlink}" title="[[Open]] $project"><i class="fas fa-folder"></i> $project</a>
+				</div> 
 			#end	
 		</div> 
 	#else

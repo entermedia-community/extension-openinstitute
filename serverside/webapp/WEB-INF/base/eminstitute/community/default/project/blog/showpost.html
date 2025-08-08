@@ -18,7 +18,7 @@
 #end
 
 #set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
-#set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image1200x628.webp"))
+
 
 <div id="$!{postasset.id}" 
 	class='blog-post #if($postasset && $postasset.previewstatus!="2") ajaxstatus #end' 
@@ -90,10 +90,19 @@
 						$postuser.getAnonNickName()
 					</a>
 				</div>
-
-				#ifnotnull($postimagesrc)
+				
+				
+				
+				#ifnotnull($postasset)
 					<div class="blog-thumbnail">
-						<img loading="lazy" src="${postimagesrc}">
+						
+						#set( $type = $mediaarchive.getMediaRenderType($postasset.fileformat))
+						#set ($thumbsize = "postsize")
+						$context.putPageValue("thumbsize", $thumbsize)
+						$context.putPageValue("asset", $postasset)
+						$context.putPageValue("componenthome", "$!{communityhome}/components")
+						
+						$pages.include("$!{communityhome}/components/results/thumbnails/${type}.html", $context)
 					</div>
 				#end
 			</div>

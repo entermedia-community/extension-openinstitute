@@ -5,7 +5,7 @@
 #set( $source = $mediaarchive.asLinkToGenerated($asset,"video.m3u8")) 
 #set( $sourcemp4 = $mediaarchive.asLinkToGenerated($asset,"video.mp4")) 
 #set( $streams = $hit.getValues("hlsstreams"))
-#set( $thumb = $mediaarchive.asLinkToPreview($hit,"image1900x1080.jpg"))
+#set( $thumb = $mediaarchive.asLinkToPreview($hit,"image1900x1080"))
 #set( $autoplay = $context.getRequestParameter("autoplay") ) 
 #set( $loop = $context.getRequestParameter("loop") ) 
 #set( $embed = $context.getRequestParameter("embed") )
@@ -28,15 +28,16 @@
 					style="position:relative; width:100%!important;    height: 100%!important; " 
 					poster='$!thumb'
 					#if( $loop && $loop == "true") loop #end
-					data-setup='{ "controls": true, "autoplay": #if( $autoplay)$autoplay#else false #end, "preload": "auto" }'>
+					data-setup='{ "controls": true, "autoplay": #if( $autoplay)$autoplay#else false #end, "preload": "auto" }'
+				>
 				#if( $streams )
 					#foreach( $size in $streams)
 					<source src="$source/$size/video.m3u8" type="application/x-mpegURL" label="$size" />
 					#end				
 				#else	
-					<source type="video/mp4" src="$sourcemp4" label="$!hit.width">
+					<source type="video/mp4" src="$sourcemp4" label="$!hit.width" />
 					#set( $short = $url_util.getPathUtilities().extractPagePath($sourcemp4) )
-					<source type="video/flash" src="mp4:$short" label="$!hit.width">
+					<source type="video/flash" src="mp4:$short" label="$!hit.width" />
 				#end	
 				#if( $tracks && !$tracks.isEmpty() )
 					#foreach( $track in $tracks)

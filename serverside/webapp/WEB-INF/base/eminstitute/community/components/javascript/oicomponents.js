@@ -59,16 +59,17 @@ $(document).ready(function () {
         searchNoResult.css("display", "none");
         searchResult.html("");
         searchResultPlaceholder.css("display", "block");
-        return;
+        //return;
       } else {
         searchInputEmpty.css("display", "none");
+		options["description.value"] = query;
       }
 
       var loaderTimeout = setTimeout(function () {
         searchLoading.css("display", "flex");
       }, 250);
 
-      options["description.value"] = query;
+      
 
       if (lastTypeahead) {
         lastTypeahead.abort();

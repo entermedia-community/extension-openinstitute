@@ -43,7 +43,7 @@
 
    <property id="primarymedia" index="true" stored="true" editable="true" type="list" viewtype="asset" listid="asset" internalfield="false" datatype="list" sourcepath="${data.uploadsourcepath}/${filename}" note="Recommended image size: 1200px x 628px">
    	<name>
-   		<language id="en"><![CDATA[Post Thumbnail]]></language>
+   		<language id="en"><![CDATA[Post Media]]></language>
    	</name>
    </property>
   
