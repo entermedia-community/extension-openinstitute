@@ -880,10 +880,6 @@ img.cat-thumb {
 	background: #fffcdd;
 }
 
-.goalstatus {
-	/* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2); */
-}
-
 .goallevel1.goalstatuscompleted {
 	background: #ddffdd;
 }
@@ -1747,4 +1743,7 @@ input.search-primary {
 
 .detail-input .render-type-thumbnail {
 	display: inline-block;
+}
+.dotted-underline {
+	text-decoration: underline dotted;
 }
