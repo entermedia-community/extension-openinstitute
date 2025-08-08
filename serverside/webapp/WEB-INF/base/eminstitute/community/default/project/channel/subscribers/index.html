@@ -1,4 +1,4 @@
-<div class="team-list">
+<div class="team-list"  id="subscriberssidebar">
 	<div class="d-flex align-items-center justify-content-between sidebar-list-header">
 		<h3>[[Team Circle]]</h3> 
 		#if($user)
@@ -10,7 +10,7 @@
 		#end
 	</div> 
 	#set($collectionid = $librarycol.getId())
-	<div id="subscriberssidebar">
+	<div>
 		#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
 		
 		#if( $team.isEmpty()) 

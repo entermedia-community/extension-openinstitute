@@ -63,12 +63,16 @@ public void init()
 			Map<String,List> usertopics = new HashMap();
 			
 			if(alltopicsmodified.size() > 0) {
-				log.info("New Chats fond at: " + alltopicsmodified);
+				
 				
 				for (Data topicmod in alltopicsmodified)
 				{
 					String collectionid = topicmod.get("collectionid");
 					String chattopicid = topicmod.get("chattopicid");
+					
+					Data project = mediaArchive.getCachedData("librarycollection", collectionid);
+					
+					log.info("New chats found at: " + project);
 					
 					Collection users = mediaArchive.query("librarycollectionusers").exact("collectionid", collectionid).exact("ontheteam", "true").search();
 					for(Data auser in users)
@@ -116,13 +120,13 @@ public void init()
 					
 					if( topicmods.size() > 1)
 					{
-						subject =  "[OI] " +community.getName() + ": " + topicmods.size() + " Projects Notifications"; //TODO: Translate
+						subject =  community.getName() + ": " + topicmods.size() + " Projects Notifications"; //TODO: Translate
 					}
 					else
 					{
 						Data oneitem = topicmods.iterator().next();
 						Data topic = mediaArchive.getCachedData("collectiveproject", oneitem.get("chattopicid") );
-						subject = "[OI] " + community.getName() + ": " + collection.getName() + " Notifications";
+						subject = community.getName() + ": " + collection.getName() + " Chat Notifications";
 					}
 					templatemail.setSubject(subject); //TODO: Translate
 					Map objects = new HashMap();
@@ -139,7 +143,7 @@ public void init()
 					templatemail.send(objects);
 					//log.info("Email to: " + followeruser.getEmail() + " Subject: " + subject + " Template: "+template);
 				
-					log.info("Chat Notified " + followeruser.getEmail() + " " + templatemail.getSubject());
+					log.info("Chat notifications sent to: " + followeruser.getEmail());
 				}
 			} 
 			catch (Exception ex)
