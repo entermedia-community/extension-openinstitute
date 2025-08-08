@@ -96,7 +96,7 @@ public void init()
 	log.info("Sending notification to: " + teamuser);
 
 	WebEmail templatemail = archive.createSystemEmail(teamuser, template);
-	templatemail.setSubject("[OI] " + community.getName() + ": Added to Team"); //TODO: Translate
+	templatemail.setSubject(community.getName() + ": Added to Team"); //TODO: Translate
 	Map objects = new HashMap();
 	String entermediakey = archive.userManager.getEnterMediaKey(teamuser);
 	objects.put("entermediakey",entermediakey);
