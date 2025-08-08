@@ -63,7 +63,12 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 							#end
 						</div>
 						#set($chatuser = $mediaarchive.getUser($message.user))
-						<div style="font-size:.7em;font-style:italic;">$chatuser #datatext($topic, "name") / #if($message.getDate("date"))$context.getAge($message.getDate("date")) [[ago]]#end</div>
+						<div style="font-size:.7em;font-style:italic;">
+							$chatuser #datatext($topic, "name") / 
+							#set($since = $context.getAge($message.getDate("date")))
+							#ifnotnull($since) $since [[ago]]#end
+							#ifnull($since)[[now]]#end
+						</div>
 					</a>	
 				</div>
 	 		 </div>

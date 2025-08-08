@@ -102,7 +102,7 @@
 	background-color: var(--bs-offcanvas-bg);
 	background-clip: padding-box;
 	outline: 0;
-	transition: transform 0.3s ease-in-out;
+	
 }
 
 @media (prefers-reduced-motion: reduce) {
