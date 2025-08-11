@@ -1,7 +1,7 @@
 <div class="d-flex flex-column">
 	$pages.include("$communityhome/project/channel/subscribers/index.html", $context)
 	
-	#if(true)
+	#if($librarycol.priviacylevel == "community")
 		$pages.include("$communityhome/project/donate/donate.html", $context)
 	#end
 	
