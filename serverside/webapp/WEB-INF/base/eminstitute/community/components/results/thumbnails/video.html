@@ -52,14 +52,12 @@
 			</video>
 		</div>
 		<script>
-			videojs('videopreview-$hit.id$!assetidpostfix', {
-				controls: true,
-				plugins: {
-					videoJsResolutionSwitcher: {
-						default: 'high',
-						dynamicLabel: true
-					}
-				}
+			var player = videojs.getPlayer('videopreview-$hit.id$!assetidpostfix');
+			if(player){
+				player.dispose();
+			}
+			player = videojs('videopreview-$hit.id$!assetidpostfix', { controls: true }, function() {
+				this.controlBar.addChild('QualitySelector');
 			});
 		</script>
 	#end
