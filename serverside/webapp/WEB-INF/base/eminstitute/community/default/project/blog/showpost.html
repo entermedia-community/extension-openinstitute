@@ -94,9 +94,9 @@
 				
 				
 				#ifnotnull($postasset)
-					<div class="blog-thumbnail">
+					#set( $type = $mediaarchive.getMediaRenderType($postasset.fileformat))
+					<div class="blog-thumbnail $type">
 						
-						#set( $type = $mediaarchive.getMediaRenderType($postasset.fileformat))
 						#set ($thumbsize = "postsize")
 						$context.putPageValue("thumbsize", $thumbsize)
 						$context.putPageValue("asset", $postasset)

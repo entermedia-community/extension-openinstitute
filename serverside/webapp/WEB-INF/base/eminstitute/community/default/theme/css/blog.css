@@ -70,6 +70,9 @@
 	width: 100%;
 	aspect-ratio: 600/314;
 }
+.blog-thumbnail.video {
+	aspect-ratio: 16 / 9;
+}
 .blog-container hr {
 	border-color: #a6a6a6;
 }
@@ -338,7 +341,7 @@ textarea.blog-comments-input {
 	width: 100%;
 	max-width: 480px;
 	overflow: hidden;
-	aspect-ratio: 3 / 2;
+	aspect-ratio: 600 / 314;
 }
 .article-thumbnail-wrap img {
 	width: 100%;
@@ -352,6 +355,7 @@ textarea.blog-comments-input {
 	display: flex;
 	flex-direction: column;
 	box-shadow: -1px 0 4px rgba(50, 50, 50, 0.1);
+	min-width: 240px;
 }
 .article-article h2 {
 	font-size: 1.4rem;
