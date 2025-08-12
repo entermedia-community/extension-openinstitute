@@ -4,14 +4,14 @@
 	<commandmap os="MAC OS X">
 		<commandbase>./WEB-INF/bin/mac</commandbase>
 		<exiftool>/opt/homebrew/bin/exiftool</exiftool>
-		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
-		<asperaupload>./aspera/upload.sh</asperaupload>
 		<convert>/opt/homebrew/bin/convert</convert>
 		<composite>/opt/homebrew/bin/composite</composite>
 		<ffmpeg>/Applications/ffmpeg</ffmpeg>
 		<avconv>/Applications/ffmpeg</avconv>
 		<avprobe>/Applications/ffprobe</avprobe>
 		<ghostscript>/opt/homebrew/bin/gs</ghostscript>
+		<asperaupload>./aspera/upload.sh</asperaupload>
+		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
 		<qt-faststart>./qt-faststart</qt-faststart>
 	</commandmap>
 	<commandmap os="LINUX">
