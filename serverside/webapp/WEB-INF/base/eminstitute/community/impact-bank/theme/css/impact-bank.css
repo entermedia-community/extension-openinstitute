@@ -102,7 +102,6 @@
 	background-color: var(--bs-offcanvas-bg);
 	background-clip: padding-box;
 	outline: 0;
-	
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -199,17 +198,20 @@
 	margin-top: 100px;
 }
 .emwidget-header {
-	background-color: #252525;
+	background-color: #ffffff;
+	border-bottom: 1px solid #ddd;
+}
+.emwidget-name {
+	color: #444;
 }
 .chatterbox-messages {
 	height: calc(100% - 185px) !important;
 }
 .project-navbar {
-	background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(5px);
 }
 .project-navbar .dropdown-menu {
-	background-color: rgba(0, 0, 0, 0.8);
-	backdrop-filter: blur(5px);
+	background-color: rgba(0, 0, 0, 0.9);
 }
 .project-navbar .dropdown-menu li a {
 	color: #fff;
@@ -219,9 +221,9 @@
 	background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-.project-navbar {
+.project-header .banner {
 	backdrop-filter: blur(5px);
-	background-color: rgba(5, 5, 5, 0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .cbp-filter-item-active {
 	color: #fff;
@@ -282,4 +284,13 @@
 }
 .cbp .badge {
 	pointer-events: none;
+}
+.msg-body .chatterboxreplyto {
+	border-left: 4px solid #669cff;
+}
+.message-menu-link {
+	color: #669cff;
+}
+.message-menu-link:hover {
+	color: #4586fe;
 }

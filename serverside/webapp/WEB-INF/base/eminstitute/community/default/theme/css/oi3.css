@@ -1188,6 +1188,10 @@ img.cat-thumb {
 	}
 }
 
+.project-header {
+	position: relative;
+	z-index: 1;
+}
 .project-header .banner {
 	display: flex;
 	width: 100%;
@@ -1196,6 +1200,7 @@ img.cat-thumb {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	position: relative;
 	margin-bottom: 66px;
+	background: #fff;
 }
 .project-header .header-logo {
 	width: 100px;
