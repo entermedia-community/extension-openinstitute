@@ -2,6 +2,7 @@
 #set( $currrentversion = $mediaarchive.query("desktopversions").all().sort("orderingDown").searchOne() )
 #set( $version = $currrentversion.versionnumber )
 
+#set( $preset = $mediaarchive.getCachedData("convertpreset","0") )
 
 <div class="container space-2 space-lg-3"> 
 <div class="bg-navy rounded mx-3 mx-md-8">
@@ -15,8 +16,7 @@
             <i class="fab fa-windows extra-large-icon"></i> 
           </div>
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadwindows))
-		  #set( $preset = $mediaarchive.getCachedData("convertpreset","0") )
-		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
+		  #set( $download = $mediaarchive.asLinkToShare("",$asset,$preset))
 		  
           <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for Windows</a>
         </div> 
@@ -27,11 +27,15 @@
             <i class="fab fa-apple extra-large-icon"></i> 
           </div>
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadapple64))
-		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
+		  #set( $download = $mediaarchive.asLinkToShare("",$asset,$preset))
+		  #ifnotnull($download)
           <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for Apple chip</a>
+		  #end
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadappleintel))
-		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
+		  #set( $download = $mediaarchive.asLinkToShare("",$asset,$preset))
+		  #ifnotnull($download)
           <a class="small text-primary mt-2" href="$download">Download for Intel chip</a>
+		  #end
         </div> 
       </div>
       <div class="col-md-4 mb-3 pb-4 mb-md-0 os" id="linuxOS">
@@ -40,8 +44,10 @@
             <i class="fab fa-linux extra-large-icon"></i> 
           </div>
 		  #set( $asset = $mediaarchive.getAsset($currrentversion.downloadlinux64))
-		  #set( $download = $mediaarchive.asLinkToDownload( $asset, $preset ) )
+		  #set( $download = $mediaarchive.asLinkToShare("",$asset,$preset))
+		  #ifnotnull($download)
           <a class="btn btn-primary rounded-pill transition-3d-hover" href="$download">Download for x64</a>
+		  #end
         </div> 
       </div>
     </div>
