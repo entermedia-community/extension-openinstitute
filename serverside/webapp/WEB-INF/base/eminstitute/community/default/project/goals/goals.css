@@ -1,12 +1,10 @@
 .goals-sidebar {
 	width: 100%;
-
 }
 
 .goals-content {
 	border-left: 1px solid #eee;
 }
-
 
 .dragoverselected {
 	border: 1px #3423e1 solid;
@@ -14,7 +12,6 @@
 
 .editgoalshow {
 	display: block;
-
 }
 
 .editgoalshow:hover {
@@ -40,7 +37,7 @@
 	border: 1px solid #d1d1d1;
 	background-color: #fcfcfc;
 	margin: 0 5px 0 0;
-	min-height: 450px
+	min-height: 450px;
 }
 
 .goals-column-0 {
@@ -78,7 +75,6 @@
 
 .card-goal:hover {
 	background-color: #fafafa;
-	;
 }
 
 .card-goal .goalheader {
@@ -114,7 +110,7 @@
 
 .dragicon {
 	display: none;
-	color: #AAA;
+	color: #aaa;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -143,7 +139,7 @@ ul.projectgoals {
 }
 
 .card-task-body hr {
-	margin: .75rem 0;
+	margin: 0.75rem 0;
 }
 
 .card-task-body.taskcomplete {
@@ -175,7 +171,7 @@ ul.projectgoals {
 }
 
 .card-task select.form-control-sm {
-	padding: .175rem .5rem !important;
+	padding: 0.175rem 0.5rem !important;
 	width: 180px;
 }
 
@@ -190,9 +186,8 @@ ul.projectgoals {
 	border: 1px solid #333;
 	background-color: #fcfcfc;
 	color: #666;
-	font-size: .8em;
+	font-size: 0.8em;
 	width: 100%;
-
 }
 
 .goal-delete {
@@ -217,7 +212,7 @@ ul.projectgoals {
 
 .goal-comments-container {
 	margin: 5px 5px 5px 0;
-	font-size: .8em;
+	font-size: 0.8em;
 }
 
 .goal-comments-scroll {
@@ -237,7 +232,6 @@ ul.projectgoals {
 
 .goals-sidebar {
 	margin-top: 30px;
-
 }
 
 @media (min-width: 992px) {
@@ -246,15 +240,9 @@ ul.projectgoals {
 	}
 }
 
-
-.taskcomplete a {
-	/*color:#333;*/
-}
-
 .taskedit {
 	display: block;
 	height: 100%;
-	;
 	line-height: 30px;
 	text-align: center;
 	text-decoration: none;
@@ -273,7 +261,6 @@ ul.projectgoals {
 
 .goalstatus-0:hover {
 	background-color: #888;
-
 }
 
 .goalstatus-0 a {
@@ -287,12 +274,10 @@ ul.projectgoals {
 	color: #333 !important;
 	background-color: #ffc107;
 	border-color: #ffc107;
-
 }
 
 .goalstatus-1:hover {
 	color: white;
-
 }
 
 /* RED */
@@ -302,7 +287,6 @@ ul.projectgoals {
 	color: #fff;
 	background-color: #dc3545;
 	border-color: #dc3545;
-
 }
 
 .goalstatus-2:hover {
@@ -320,7 +304,6 @@ ul.projectgoals {
 	color: #fff !important;
 	background-color: #28a745;
 	border-color: #28a745;
-
 }
 
 .goalstatus-3:hover {
@@ -337,12 +320,10 @@ ul.projectgoals {
 	color: #333 !important;
 	background-color: #ffcb86;
 	border-color: #ffcb86;
-
 }
 
 .goalstatus-4:hover {
 	color: black;
-
 }
 
 /* NOTE */
@@ -350,13 +331,12 @@ ul.projectgoals {
 .taskstatus-5,
 .taskstatus-5 a {
 	color: #fff;
-	background-color: #459CAA;
-	border-color: #459CAA;
-
+	background-color: #459caa;
+	border-color: #459caa;
 }
 
 .goalstatus-5:hover {
-	background-color: #459CAA;
+	background-color: #459caa;
 }
 
 .goalstatus-5 a {
@@ -382,7 +362,6 @@ ul.projectgoals {
 	font-size: 12px;
 }
 
-
 .col-form-label {
 	text-align: right;
 }
@@ -397,8 +376,6 @@ ul.projectgoals {
 	height: 200px;
 	margin: 0 10px 10px 10px;
 }
-
-.goalstaskcontainer {}
 
 .table-goaltaskstable tr {
 	background-color: #bbb !important;
@@ -421,7 +398,7 @@ ul.projectgoals {
 	color: #757575;
 }
 
-.goaltaskrow>div {
+.goaltaskrow > div {
 	margin: 0 4px 2px;
 }
 
@@ -468,11 +445,11 @@ ul.projectgoals {
 }
 
 .taskdetails {
-
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
+	line-clamp: 4;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 }
@@ -486,19 +463,18 @@ ul.projectgoals {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
+	line-clamp: 4;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
-
 }
 
 .goal-title {
-
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
+	line-clamp: 4;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
-
 }
 
 @media (min-width: 992px) {
@@ -510,10 +486,6 @@ ul.projectgoals {
 	.taskdetails {
 		display: inline-block;
 	}
-}
-
-.goalstatusopen {
-	/* background: #ededed; */
 }
 
 .goalstatusclosed {
@@ -532,10 +504,9 @@ ul.projectgoals {
 
 .goalstatus3,
 .goalstatus3:hover {
-	background: #93bb93;
+	background: #02c9a72e;
 	padding: 0.5rem;
 }
-
 
 .goalstatusactive {
 	background: #fdffd2;
@@ -546,16 +517,11 @@ ul.projectgoals {
 	background-color: beige !important;
 }
 
-.goalstatuscritical a {
-	/*	color:#333!important;*/
-}
-
 .taskgoaledit {
 	padding: 10px 10px 20px;
 	margin-bottom: 10px;
 	background-color: #d5d5d5;
 }
-
 
 .taskgoaledit #textarea {
 	min-height: 110px;
@@ -575,7 +541,6 @@ ul.projectgoals {
 	margin-top: 5px;
 }
 
-
 .goals-sidebar .ui-widget-content {
 	border: 0 none;
 	background: 0 none;
@@ -591,7 +556,6 @@ ul.projectgoals {
 
 .goal-tabs .emtabs {
 	background-color: #d1d1d1;
-
 }
 
 .goal-tabs .emtabs li {
@@ -614,7 +578,6 @@ ul.projectgoals {
 		padding: 0.8rem 0.8rem;
 		font-size: 0.9rem;
 	}
-
 }
 
 .goal-tabs .emtabs li.emtabselected a {
@@ -644,8 +607,6 @@ ul.projectgoals {
 	height: 100%;
 }
 
-.maketicket {}
-
 .goallike {
 	display: inline-block;
 	color: #626684;
@@ -655,12 +616,12 @@ ul.projectgoals {
 	text-decoration: none;
 }
 
-.taskstatus>div,
-.taskstatus>p {
+.taskstatus > div,
+.taskstatus > p {
 	min-width: 100px;
 }
 
-.taskstatus>p>i {
+.taskstatus > p > i {
 	display: inline-block;
 	margin-right: 4px;
 }
@@ -692,12 +653,10 @@ ul.projectgoals {
 	}
 }
 
-.rolemyself
-{
+.rolemyself {
 	background-color: #da0000 !important;
 }
 
-.roleselected
-{
+.roleselected {
 	background-color: #a08b01 !important;
 }
