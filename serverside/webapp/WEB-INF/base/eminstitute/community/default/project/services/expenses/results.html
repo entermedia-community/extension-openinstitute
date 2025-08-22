@@ -83,7 +83,7 @@
 			    		<tfoot>
 			               #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
 				                	<tr>
-				                		<td></td>
+				                		#if($showcollections )<td></td>#end
 				                		<td></td>
 				                		<td></td>
 			                			#set($subtotal = $pendingexpensesreimburseuser_total.get($userid))
@@ -105,7 +105,7 @@
 										#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
 									#end
 				                	<tr>
-				                		<td></td>
+				                		#if($showcollections )<td></td>#end
 				                		<td></td>
 				                		<td></td>
 				                		<td class="text-right" style="width:150px">
@@ -144,7 +144,7 @@
             
         </div>
        
-       #if($expenses.size() > 0)
+       #if($canviewsettings && $expenses.size() > 0)
         <div>
 	        <a href="${projectlink}/services/expenses/export/expenses.csv?collectionid=$!{librarycol.id}&hitssessionid=$expenses.getSessionId()"
 	           class="btn btn-sm btn-primary mb-4">[[Download CSV]]</a>

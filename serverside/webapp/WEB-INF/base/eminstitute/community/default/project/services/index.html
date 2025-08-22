@@ -1,7 +1,12 @@
 #set($collectionid = $librarycol.getId())
 <div id="collectivebilling">
+	
 #if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
-	<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+	#if( $caneditcollection )
+		<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
+	#else
+		
+	#end
 #end
 <div class="collectivecontent" style="margin-bottom:40px;">
 	

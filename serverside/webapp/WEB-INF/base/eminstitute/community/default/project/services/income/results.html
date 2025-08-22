@@ -110,13 +110,16 @@
      
      #if($income.size() > 0)
      	<div class="mb-2">$count of $!income.size() [[hits]]</div>
-        <div>
+        
+		#if( $caneditcollection )
+		<div>
         <a href="${projectlink}/services/income/export/income.csv?collectionid=${librarycol.id}&hitssessionid=$hits.getSessionId()"
                       class="btn btn-sm btn-primary mb-4">[[Download]]</a>
                       
         <a href="${projectlink}/services/income/import/index.html?collectionid=$!{librarycol.id}"
            class="btn btn-sm btn-primary mb-4 emdialog" title="[[Import Income]]">[[Import CSV]]</a>
         </div>
+		#end
         #end
                       
         </div>
