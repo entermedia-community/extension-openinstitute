@@ -15,7 +15,7 @@
 		$(".search-primary").on("focus", showSearch);
 		$(".search-primary").on("click", showSearch);
 
-		$(".search-primary").on("keyup", function () {
+		$(".search-primary").on("keyup input", function () {
 			var value = $(this).val().toLowerCase();
 			$("#primary-search-results .content").filter(function () {
 				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
