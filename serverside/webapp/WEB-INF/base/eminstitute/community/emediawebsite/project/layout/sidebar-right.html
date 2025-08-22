@@ -1,21 +1,9 @@
 <div class="d-flex flex-column">
-<div class="team-list">	
-	<div class="d-flex align-items-center justify-content-between team-list-header">
-		<h3>[[Team Circle]]</h3> 
-		#if($user)
-			<a class="btn btn-light emdialog" data-cancelsubmit="true"
-				title="[[View Members]]"
-				href="$communityhome/project/channel/subscribers/teamlist.html?collectionid=$librarycol.getId()">
-				<i class="fas fa-list"></i>
-			</a>
-		#end
-	</div> 
-		
+	
 	$pages.include("$communityhome/project/channel/subscribers/index.html", $context)
-</div>
 
 
-##$pages.include("$communityhome/project/channel/likeoptions.html", $context)
+	##$pages.include("$communityhome/project/channel/likeoptions.html", $context)
 
 
 #if ($librarycol.facebooklink || $librarycol.instagramlink || $librarycol.websitelink)
