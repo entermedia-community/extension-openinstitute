@@ -62,58 +62,7 @@
 	#foreach($goal in $hits)
 		#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($goal))
 		$context.putPageValue("goal",$goal)
-		<tr class="goalstatus$!{goal.projectstatus} goallevel$!{goal.ticketlevel}" >
-
-##		<td >
-##		#set( $project= $!mediaarchive.getData("librarycollection",$goal.collectionid) )
-##		<a href="$sitelink/app/collective/goals/priorities/index.html?collectionid=$goal.collectionid"	style="text-decoration:underline;" >
-##		$!project
-##		</a>
-##		</td>
-	
-		<td>
-		<div class="goal-title">
-		<a href="${communityhome}/project/goals//editgoalpanel.html?id=$goal.id&collectionid=$goal.collectionid&goalfolder=agent" 
-			title="[[Edit Goal]]" 
-			class="emdialog editgoalshow" 
-			style="text-decoration:underline;" 
-			data-hidefooter="true"
-			data-urlbar="${communityhome}/project/goals/$goalfolder/index.html?collectionid=$goal.collectionid&opengoalid=$goal.id"
-			data-width="900">#if( $goal.ticketnumber ) #$goal.ticketnumber #end<b>$goal.name</b></a>
-			</div>
-		</td>
-	
-		<td class="goal-description" >
-			<div class="goal-details-pre">
-			$!url_util.escapeMessage($goal.details ) 	
-			</div>
-			#if( $goal.response)
-				<hr><i>
-				#esc($goal.response)
-				</i>
-			#end	
-			<div class="goal-body">
-			$pages.include("${communityhome}/project/goals/search/goaltasks.html?indialog=true",$context)
-			</div>
-			
-		</td>
-		<td class="text-center" >
-			$pages.include("${communityhome}/users/tasks/resolvebutton.html",$context) 
-			<div class="clearfix" style="padding:5px;"> </div>
-			<span class="headersubtext">
-			
-				$!context.getText($!mediaarchive.getCachedData("tickettype",$goal.tickettype))
-				$!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()
-				
-			</span>
-			<br>
-			
-			#if ($goal.deliverydate)
-				<span style="color:red">[[Due on]]: $goal.deliverydate.substring(0, 10)</span>
-			#end
-		</td>
-	
-	</tr>
+		$pages.include("${communityhome}/project/goals/priorities/goalsearchrow.html",$context)
 	#end
 	</tbody>
 	</table>

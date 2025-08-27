@@ -1849,6 +1849,10 @@ textarea.form-control {
 .ajaxloginbox .text-contrast {
   color: #444444;
 }
+.emwidget-chatterbox {
+	height: calc(100vh - 240px)!important;
+    
+}
 .chatterbox-messages-readonly {
   height: calc(100% - 48px) !important;
 }

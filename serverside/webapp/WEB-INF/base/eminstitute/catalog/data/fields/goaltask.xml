@@ -149,6 +149,13 @@
   </property>  
 	  
 	  
-  </property> 
+  </property>  
+  
+  <property id="comment" index="true" stored="true" editable="true"  > 
+    <name> 
+      <language id="en"><![CDATA[Comment]]></language>  
+      <language id="es"><![CDATA[Comentario]]></language>  
+    </name> 
+  </property>  
 
 </properties>

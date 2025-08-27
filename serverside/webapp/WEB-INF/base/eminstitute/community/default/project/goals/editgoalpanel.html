@@ -5,7 +5,7 @@
 #set( $goalfolder = $context.getRequestParameter("goalfolder"))
 #set( $goaltrackercolumn = $context.getRequestParamater("topic"))
 #set ($collectionid = $context.getRequestParameter("collectionid"))
-
+#set( $targetdiv = $context.getRequestParameter("targetdiv"))
 
 #if(!$goalfolder)
 	#set( $goalfolder = $context.findValue("goalfolder") )
@@ -26,8 +26,6 @@ $context.putPageValue("searcher",$searcher)
 	$context.putPageValue("viewid", "projectgoaladdnew")
 #end
 
-
-
 #set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
 	<h4 class="mb-2"><a href="${projectlink}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></h4>
@@ -37,8 +35,13 @@ $context.putPageValue("searcher",$searcher)
 	class ="ajaxform autocloseform showwaiting autoreloadsource" 
 	id="saveproject" 
 	method="post" 
+	data-targetdiv="$!targetdiv"
+	
 	#if( $data.id)
-		#if($goalfolder=="agentcalendar")
+		
+		#if($targetdiv)
+			action="$!{communityhome}/project/goals/priorities/goalsearchrowsave.html" >
+		#elseif($goalfolder=="agentcalendar")
 			action="/users/tasks/goalsave.html" >
 		#elseif($goalfolder=="agent")
 			action="$!{communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
@@ -106,35 +109,6 @@ $context.putPageValue("searcher",$searcher)
 <input class="btn btn-sm btn-primary" type="submit" value="[[Save & Close]]"></input>
 </div>
 </form>
-##Show tasks when viewing from points report
-
-#if( $data)
-	<div class="clearfix"></div>
-	<hr>
-	$context.putPageValue("goal",$data)
-	$context.putPageValue("container","editgoalpanel")
-	<div class="goal-body">
-			<div class="goal-footerX"> 
-				$pages.include("${communityhome}/project/goals/search/goaltasks.html?indialog=true",$context)
-			</div>
-	</div>
-#end
-
-<div class="clearfix"></div>
-
 
 </div>
-<script>
-$(document).ready(function(){
-	$("#btn-next").click(function(event)
-	{
-		event.preventDefault();
-		$("#saveproject").attr("action", "${communityhome}/project/goals/${goalfolder}/goalsaveedit.html");
-		$("#saveproject").removeClass("autocloseform");
-		$("#saveproject").data("targetdiv","editgoaldialog");
-		$("#saveproject").submit();
-	})
 
-});
-
-</script>
