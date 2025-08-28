@@ -39,20 +39,20 @@
 			$pages.include("${apphome}/components/desktop/loading.html")
 		#end
 		<div id="application" class="eminstitutecollective" 
-		data-home="$!{home}" 
-		data-user="$!{user.id}" 
-		data-apphome="$!{apphome}"
-		data-finderhome="$!{finderhome}"
-		data-communityhome="$!{communityhome}"
-		data-applink="$!{applink}" 
-		data-inapp="$!{browser.inApp()}" 
-		data-themeprefix="/$!{applicationid}/theme"
-		data-browserlanguage="$!{browserlanguage}" 
-		data-editmode='$!{user.get("oe_edit_mode")}'
-		data-mediadbappid="$!{mediaarchive.getMediaDbId()}" 
-		data-componenthome="$!{componenthome}"
-		#if( $showupload) data-showuploadid="${showupload.id}" #end
-		>
+			data-home="$!{home}" 
+			data-user="$!{user.id}" 
+			data-apphome="$!{apphome}"
+			data-finderhome="$!{finderhome}"
+			data-communityhome="$!{communityhome}"
+			data-applink="$!{applink}" 
+			data-inapp="$!{browser.inApp()}" 
+			data-themeprefix="/$!{applicationid}/theme"
+			data-browserlanguage="$!{browserlanguage}" 
+			data-editmode='$!{user.get("oe_edit_mode")}'
+			data-mediadbappid="$!{mediaarchive.getMediaDbId()}" 
+			data-componenthome="$!{componenthome}"
+			#if( $showupload) data-showuploadid="${showupload.id}" #end
+			>
 
 			$pages.include("${communityhome}/navigation.html", $context)
 			

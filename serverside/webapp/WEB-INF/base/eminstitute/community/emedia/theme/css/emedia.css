@@ -615,7 +615,7 @@ footer {
 }
 .navigation .navbar-brand {
 	color: #efefef;
-	font-size: 26px;
+	font-size: 24px;
 	line-height: 16px;
 	font-weight: 700;
 }
@@ -653,8 +653,8 @@ footer {
 	}
 }
 .navigation .navbar-nav .nav-item .nav-link {
-	margin-top: 35px;
-	margin-bottom: 30px;
+	margin-top: 25px;
+	margin-bottom: 20px;
 	color: #c1c1c1;
 	padding: 0 20px;
 	font-size: 18px;
@@ -671,7 +671,7 @@ footer {
 	font-weight: 700;
 }
 .btn-searchprojects {
-	margin-top: 28px;
+	margin-top: 18px;
 }
 @media (min-width: 992px) {
 	.navigation .dropdown:hover ul.dropdown-menu {
