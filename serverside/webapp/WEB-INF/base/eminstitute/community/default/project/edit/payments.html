@@ -1,0 +1,34 @@
+#if($librarycol.get("collectiontype") == "5")
+	#set($isproposal = "true")
+#end
+
+
+#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
+$context.putPageValue("searcher",$searcher)
+
+#set( $viewid = "librarycollectionpaymentmethods" )
+$context.putPageValue("viewid", $viewid)
+$context.putPageValue("data", $librarycol)
+
+
+<div class="card-block">
+	<h2 class="mb-3">[[Update Payment Methods]]</h2>
+	<form name="savecollective" 
+		id="savecollective"
+		action="${projectlink}/edit/payments-save.html"
+		class="ajaxform scrolltotop"
+		data-targetdivinner="collectivesettingscontent"
+		data-oemaxlevel="1"
+		method="post">
+		<input type="hidden" name="save" value="true" />
+		<input type="hidden" name="searchtype" value="librarycollection" />
+		<input type="hidden" name="id" value="$librarycol.id" />
+		<input type="hidden" name="collectionid" value="$librarycol.id" />
+		<input type="hidden" name="viewid" value="$!viewid" />
+
+		$pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
+
+		<a class="btn btn-sm btn-primary submitform ">[[Save]]</a>
+			
+	</form>
+</div>

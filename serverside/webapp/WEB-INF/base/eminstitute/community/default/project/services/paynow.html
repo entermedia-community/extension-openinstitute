@@ -14,11 +14,6 @@
 	#set($user = $checkoutuser)
 #end
 
-#ifnull($user)
-	[[No user]]
-#end
-
-
 #set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
 
 ##For Replace Formating
@@ -37,10 +32,12 @@
 <strong>[[Invoice]] #$!invoice.invoicenumber</strong> [[Status is Paid]].
 #else
 
-
-
 	#if(!$mediaarchive.isCatalogSettingTrue("productionmode"))
-	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
+		#if($caneditcollection)
+			<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
+		#else
+		<div class="alert alert-warning">[[Project Payment Method is in test mode. For assistance, please reach out to a Project Team Member or OI Administrator.]].</div>
+		#end
 	#end
 
 	<div class="card" style="max-width:900px; margin:0 auto;">
@@ -330,49 +327,72 @@
 	document.getElementById('issavecard').checked = true;
 		
     $(document).ready(function () {
-		
 		 
 		#if ($customer.sources.data.size() > 0) 
-		 
-
-		$("#selectedsource").change(function() { 
-			var selected = $("#selectedsource").val();
-			if (selected != "") { 
-				$("#allcreditcardform").attr('hidden', true);
-			} 
-			else {
-				$("#allcreditcardform").attr('hidden', false);
-			}
-		}); 
+			$("#selectedsource").change(function() { 
+				var selected = $("#selectedsource").val();
+				if (selected != "") { 
+					$("#allcreditcardform").attr('hidden', true);
+				} 
+				else {
+					$("#allcreditcardform").attr('hidden', false);
+				}
+			}); 
 		#end  
-
 		
-	  	 #if($mediaarchive.isCatalogSettingTrue("productionmode"))
-        	console.log('Production');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
-	  	 #else
-	        console.log('Test Publishkey');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
-	  	 #end
-        var stripe = Stripe("$publishkey");
-        var elements = stripe.elements();
-        var style = { base: { fontSize: '18px', color: "#495057" } };
-
-        // Create an instance of the card Element.
-        var card = elements.create('card', { style: style });
-
-        // Add an instance of the card Element into the `card-element` <div>
-        card.mount('#card-element');
-
-        // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function (event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
-            } else {
-                displayError.textContent = '';
-            }
-        });
+		
+		#set($stripestatus = $librarycol.stripestatus)
+		#if($stripestatus == "disabled")
+			#set($stripepublishkey = $publiskeynull)
+		#elseif($stripestatus == "live")
+			#set($stripepublishkey = $librarycol.stripelivekey)
+			#ifnotnull($stripepublishkey)
+				console.log('Stripe Live Mode - Project Credentials');
+			#end
+			#ifnull($stripepublishkey)
+				console.log('Stripe Live Mode - Missing Project Credentials');
+			#end
+		#else
+			##Verify Global Settings
+			#if($mediaarchive.isCatalogSettingTrue("productionmode"))
+				#set($stripepublishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
+				#ifnotnull($stripepublishkey)
+					console.log('Stripe Live Mode - Global Credentials');
+				#end
+				#ifnull($stripepublishkey)
+					console.log('Stripe Live Mode - Missing Global Credentials');
+				#end
+				
+			#else
+				#set($stripepublishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
+				console.log('Stripe Test Mode - Global Test Credentials');
+			#end	
+		#end
+		 
+		var stripe = null;
+		#ifnotnull($stripepublishkey)
+        	   stripe = Stripe("${stripepublishkey}");
+			   var elements = stripe.elements();
+		       var style = { base: { fontSize: '18px', color: "#495057" } };
+	
+		       // Create an instance of the card Element.
+		       var card = elements.create('card', { style: style });
+	
+		       // Add an instance of the card Element into the `card-element` <div>
+		       card.mount('#card-element');
+	
+		       // Handle real-time validation errors from the card Element.
+		       card.addEventListener('change', function (event) {
+		           var displayError = document.getElementById('card-errors');
+		           if (event.error) {
+		               $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
+		           } else {
+		               displayError.textContent = '';
+		           }
+		       });
+		#end
+		
+       
 
         var form = document.getElementById('paymentform');
         $(form).validate({
@@ -383,21 +403,23 @@
                 }
             },
             submitHandler: function (form) {
-            	var selectedsource = $("#selectedsource").val();
-				
-            	if (selectedsource === undefined || selectedsource == "") {
-	                stripe.createToken(card).then(function (result) {
-	                    if (result.error) {
-	                        var errorElement = document.getElementById('card-errors');
-	                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
-	                    } else {
-	                        stripeResponseHandler(result);
-	                    }
-                	});
-            	} else {
-            		//$(form).trigger("submit");
-            		form.submit();
-            	}
+				#ifnotnull($stripepublishkey)
+	            	var selectedsource = $("#selectedsource").val();
+					
+	            	if (selectedsource === undefined || selectedsource == "") {
+		                stripe.createToken(card).then(function (result) {
+		                    if (result.error) {
+		                        var errorElement = document.getElementById('card-errors');
+		                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
+		                    } else {
+		                        stripeResponseHandler(result);
+		                    }
+	                	});
+	            	} else {
+	            		//$(form).trigger("submit");
+	            		form.submit();
+	            	}
+				#end
             },
             errorElement: "div",
             errorClass: "errormsg",
@@ -406,17 +428,16 @@
                 //$("#card-errors").html('<div class="errormsg">'+error.html()+'</div>');
             }
         });
-
-        stripeResponseHandler = function (response) {
-            var form = document.getElementById('paymentform');
-			$("#stripetokenid").val(response.token.id);
-			
-			
-			$("#stripenewsource").val(response.token.card.id);
-			
-            //$(form).trigger("submit");
-            $(form).submit();
-        }
+		
+		#ifnotnull($stripepublishkey)
+	        stripeResponseHandler = function (response) {
+	            var form = document.getElementById('paymentform');
+				$("#stripetokenid").val(response.token.id);
+				$("#stripenewsource").val(response.token.card.id);
+	            //$(form).trigger("submit");
+	            $(form).submit();
+	        }
+		#end
 
     });
 </script>
