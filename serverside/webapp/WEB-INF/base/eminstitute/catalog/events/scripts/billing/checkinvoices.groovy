@@ -26,7 +26,7 @@ public void init() {
 }
 
 private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSearcher) {
-	StripePaymentProcessor stripe = new StripePaymentProcessor();
+	
 	Calendar today = Calendar.getInstance();
 	Collection invoices = invoiceSearcher.query()
 			.exact("paymentstatus","invoiced")
@@ -35,7 +35,8 @@ private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSear
 		log.info("Auto-Paid pending invoices " + invoices.size() + " found");
 		for (Iterator invoiceIterator = invoices.iterator(); invoiceIterator.hasNext();) {
 			Data invoice = invoiceSearcher.loadData(invoiceIterator.next());
-			Map<String, Object> customer = stripe.getCustomer(mediaArchive,  "billing+" + invoice.getValue("collectionid") + "@entermediadb.com")
+			String collectionid = invoice.getValue("collectionid");
+			Map<String, Object> customer = stripe.getCustomer(mediaArchive,  "billing+" + collectionid + "@entermediadb.com")
 			if (customer != null) {
 				Map<String, Object> sourcesData = customer.get("sources");
 				ArrayList<Map<String, Object>> sources = sourcesData.get("data");
@@ -45,7 +46,10 @@ private void payAutoPaidInvoices(MediaArchive mediaArchive, Searcher invoiceSear
 					Data payment = payments.createNewData();
 					payment.setValue("paymenttype","stripe" );
 					payment.setValue("totalprice", invoice.getValue("totalprice"));
-					Boolean chargeSuccess = stripe.createCharge(mediaArchive, payment, customer.get("id"));
+					StripePaymentProcessor stripe = new StripePaymentProcessor();
+					stripe.setCollectionId(collectionid);
+					stripe.setMediaArchive(mediaArchive);
+					Boolean chargeSuccess = stripe.createCharge(payment, customer.get("id"));
 	
 					if (chargeSuccess) {
 						invoice.setValue("paymentstatus", "paid");

@@ -175,7 +175,8 @@
 		                            	</select>
 	                            	</div>
 	                            </div>
-								
+								#else
+								new Customer ??
 								
 								#end  
 								<div id="allcreditcardform" class="creditcardform">	
@@ -340,34 +341,7 @@
 			}); 
 		#end  
 		
-		
-		#set($stripestatus = $librarycol.stripestatus)
-		#if($stripestatus == "disabled")
-			#set($stripepublishkey = $publiskeynull)
-		#elseif($stripestatus == "live")
-			#set($stripepublishkey = $librarycol.stripelivekey)
-			#ifnotnull($stripepublishkey)
-				console.log('Stripe Live Mode - Project Credentials');
-			#end
-			#ifnull($stripepublishkey)
-				console.log('Stripe Live Mode - Missing Project Credentials');
-			#end
-		#else
-			##Verify Global Settings
-			#if($mediaarchive.isCatalogSettingTrue("productionmode"))
-				#set($stripepublishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
-				#ifnotnull($stripepublishkey)
-					console.log('Stripe Live Mode - Global Credentials');
-				#end
-				#ifnull($stripepublishkey)
-					console.log('Stripe Live Mode - Missing Global Credentials');
-				#end
-				
-			#else
-				#set($stripepublishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
-				console.log('Stripe Test Mode - Global Test Credentials');
-			#end	
-		#end
+		#set($stripepublishkey = $paymentprocessor.getPublicApiKey())
 		 
 		var stripe = null;
 		#ifnotnull($stripepublishkey)
@@ -403,16 +377,21 @@
                 }
             },
             submitHandler: function (form) {
+				debugger;
 				#ifnotnull($stripepublishkey)
 	            	var selectedsource = $("#selectedsource").val();
 					
 	            	if (selectedsource === undefined || selectedsource == "") {
+						console.log("Creating stripe token");
 		                stripe.createToken(card).then(function (result) {
 		                    if (result.error) {
 		                        var errorElement = document.getElementById('card-errors');
 		                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
 		                    } else {
-		                        stripeResponseHandler(result);
+		                        //stripeResponseHandler(result);
+								$("#stripetokenid").val(result.token.id);
+								$("#stripenewsource").val(result.token.card.id);
+								form.submit();
 		                    }
 	                	});
 	            	} else {
@@ -431,6 +410,7 @@
 		
 		#ifnotnull($stripepublishkey)
 	        stripeResponseHandler = function (response) {
+				debugger;
 	            var form = document.getElementById('paymentform');
 				$("#stripetokenid").val(response.token.id);
 				$("#stripenewsource").val(response.token.card.id);

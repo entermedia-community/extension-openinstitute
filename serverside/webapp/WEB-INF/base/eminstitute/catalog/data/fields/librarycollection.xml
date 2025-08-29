@@ -498,20 +498,14 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
   	</property>
   	
   	
-  	<property id="stripelivekey" index="true" stored="true" editable="true"   > 
+  	<property id="stripepublickey" index="true" stored="true" editable="true"   > 
 	    <name> 
-	      <language id="en"><![CDATA[Stripe Live Key]]></language>  
+	      <language id="en"><![CDATA[Stripe Public Key]]></language>  
 	    </name> 
 	 </property>
- 	 <property id="stripelivetoken" index="true" stored="true" editable="true"   > 
+ 	 <property id="stripeprivatekey" index="true" stored="true" editable="true"   > 
 	    <name> 
-	      <language id="en"><![CDATA[Stripe Live Token]]></language>  
-	    </name> 
-	 </property>
-    
-    <property id="stripestatus" index="true" stored="true" editable="true" type="list" listid="stripestatus"   > 
-	    <name> 
-	      <language id="en"><![CDATA[Stripe Status]]></language>  
+	      <language id="en"><![CDATA[Stripe Private Key]]></language>  
 	    </name> 
 	 </property>
     

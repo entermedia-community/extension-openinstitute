@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,8 +20,8 @@ import org.entermedia.invoice.InvoiceManager;
 import org.entermediadb.asset.MediaArchive;
 import org.entermediadb.asset.modules.BaseMediaModule;
 import org.openedit.Data;
-import org.openedit.OpenEditException;
 import org.openedit.WebPageRequest;
+import org.openedit.cache.CacheManager;
 import org.openedit.data.Searcher;
 import org.openedit.data.SearcherManager;
 import org.openedit.hittracker.HitTracker;
@@ -38,21 +37,50 @@ public class PaymentModule extends BaseMediaModule
 	protected HttpClient fieldHttpClient;
 	protected StripePaymentProcessor fieldOrderProcessor;
 
+	protected CacheManager fieldCacheManager;
+	
+	public CacheManager getCacheManager()
+	{
+		return fieldCacheManager;
+	}
+
+
+	public void setCacheManager(CacheManager inCacheManager)
+	{
+		fieldCacheManager = inCacheManager;
+	}
+
+
 	protected InvoiceManager getInvoiceManager(WebPageRequest inReq)
 	{
 		InvoiceManager manager = (InvoiceManager)getMediaArchive(inReq).getBean("invoiceManager");
 		return manager;
 	}
 	
-	public StripePaymentProcessor getOrderProcessor()
+	public StripePaymentProcessor getPaymentProcessor(WebPageRequest inReq)
 	{
-		if (fieldOrderProcessor == null)
+		MediaArchive archive = getMediaArchive(inReq);
+		String collectionId = inReq.getRequestParameter("collectionid");
+		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
+		inReq.putPageValue("paymentprocessor", processor);
+		return processor;
+	}
+	
+	
+	public StripePaymentProcessor getPaymentProcessor(String inCatalogId, String inCollectionId)
+	{
+		StripePaymentProcessor processor = (StripePaymentProcessor) getCacheManager().get("paymentprocessor", inCollectionId);
+		
+		if (processor == null)
 		{
-			fieldOrderProcessor = new StripePaymentProcessor();
-
+			processor = new StripePaymentProcessor();
+			getCacheManager().put("paymentprocessor", inCollectionId, processor);
+			processor.setCollectionId(inCollectionId);
+			MediaArchive mediaArchive = (MediaArchive) getModuleManager().getBean(inCatalogId, "mediaArchive");
+			processor.setMediaArchive(mediaArchive);
 		}
-
-		return fieldOrderProcessor;
+	
+		return processor;
 	}
 
 	public HttpClient getHttpClient()
@@ -126,6 +154,11 @@ public class PaymentModule extends BaseMediaModule
 			workspaceSearcher.saveData(workspace);
 		}
 		
+		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), workspace.getId());
+		
+		
+
+		
 		payment.setValue("totalprice", invoice.getValue("totalprice")); // safer to get value from database
 		log.info(payment);
 		
@@ -144,18 +177,16 @@ public class PaymentModule extends BaseMediaModule
 		String customerId = (String) inReq.getRequestParameter("stripecustomer");
 		String tokenid = inReq.getRequestParameter("stripetokenid");
 		
-		
-		
 		if (customerId == null)
 		{
 			
-			customerId = getOrderProcessor().createCustomer2(archive, (String)invoice.getValue("collectionid"), tokenid);
+			customerId = processor.createCustomer2((String)invoice.getValue("collectionid"), tokenid);
 		}
 		else 
 		{
 			if (tokenid != null) 
 			{
-				getOrderProcessor().updateCustomersSource(archive, userid, tokenid);
+				processor.updateCustomersSource(userid, tokenid);
 			}
 		}
 
@@ -167,7 +198,7 @@ public class PaymentModule extends BaseMediaModule
 			log.error("Error creating Stripe Customer for invoice: " + invoice.getValue("invoicenumber"));
 			return;
 		}
-		isSuccess = getOrderProcessor().createCharge(archive, payment, customerId, source, invoice, user.getEmail());
+		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
@@ -203,8 +234,14 @@ public class PaymentModule extends BaseMediaModule
 		MediaArchive archive = getMediaArchive(inReq);
 		String email = inReq.getUser().getEmail();
 		try {
-			String customer = getOrderProcessor().getCustomerId(archive, email, null);
-			ArrayList<Map<String, Object>> subs = getOrderProcessor().getSubscriptions(archive, customer);
+			String collectionId = inReq.getRequestParameter("collectionid");
+			if (collectionId == null) {
+				throw new IllegalArgumentException("Collectionid is required");
+			}
+			
+			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
+			String customer = processor.getCustomerId(email, null);
+			ArrayList<Map<String, Object>> subs = processor.getSubscriptions(customer);
 			inReq.putPageValue("subs", subs);
 			return subs;
 		} catch (URISyntaxException | IOException | InterruptedException e) {
@@ -219,7 +256,8 @@ public class PaymentModule extends BaseMediaModule
 		String collectionId = inReq.getRequestParameter("collectionid");
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		try {
-			ArrayList<Map<String, Object>> customers = getOrderProcessor().getCustomers(archive, email);
+			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
+			ArrayList<Map<String, Object>> customers = processor.getCustomers(email);
 			if (customers!= null && customers.size() > 0) {
 				inReq.putPageValue("customer", customers.get(0));
 				return (Map<String, Object>) customers.get(0);
@@ -241,7 +279,9 @@ public class PaymentModule extends BaseMediaModule
 		MediaArchive archive = getMediaArchive(inReq);
 		String subscription = (String) inReq.getRequestParameter("subid");
 		try {
-			Boolean resp = getOrderProcessor().cancelSubscriptions(archive, subscription);
+			String collectionId = inReq.getRequestParameter("collectionid");
+			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
+			Boolean resp = processor.cancelSubscriptions(subscription);
 			inReq.putPageValue("status", resp);
 			return resp;
 		} catch (URISyntaxException | IOException | InterruptedException e) {
@@ -257,7 +297,9 @@ public class PaymentModule extends BaseMediaModule
 		String subscription = (String) inReq.getRequestParameter("subid");
 		
 		try {
-			ArrayList<Map<String, Object>> invoices = getOrderProcessor().getInvoices(archive, customer, subscription);
+			String collectionId = inReq.getRequestParameter("collectionid");
+			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
+			ArrayList<Map<String, Object>> invoices = processor.getInvoices(customer, subscription);
 			inReq.putPageValue("invoices", invoices);
 			return invoices;
 		} catch (URISyntaxException | IOException | InterruptedException e) {
@@ -294,7 +336,7 @@ public class PaymentModule extends BaseMediaModule
 		payment.setValue("isdonation", isdonation );
 		
 		try {
-			boolean success = getOrderProcessor().process(archive, user, payment, token);
+			boolean success = getPaymentProcessor(archive.getCatalogId(), collectionid).process(user, payment, token);
 			if (success)
 			{
 				Date paymentdate = new Date();
@@ -550,7 +592,8 @@ public class PaymentModule extends BaseMediaModule
 			}
 			payment.setValue("totalprice", amount);
 			payment.setValue("paymentplan", paymentplan.getId());
-			getOrderProcessor().process(archive, user, payment, null);
+			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), payment.get("collectionid"));
+			processor.process(user, payment, null);
 			payments.saveData(payment);
 			paymentplan.setValue("lastprocessed", new Date());
 			paymentplans.saveData(paymentplan);

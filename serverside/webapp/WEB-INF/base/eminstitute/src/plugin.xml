@@ -62,6 +62,7 @@
 	</bean>
 
 	<bean id="PaymentModule" class="org.entermedia.stripe.PaymentModule">
+		<property name="cacheManager"><ref bean="systemExpireCacheManager"/></property>
 	</bean>
 
 	<bean id="transactionManager" class="org.entermedia.transactions.TransactionManager">

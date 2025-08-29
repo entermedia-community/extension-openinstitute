@@ -6,6 +6,8 @@
     
     <property name="autocreatetempuser">true</property>
     
+    <path-action name="PaymentModule.getPaymentProcessor" />
+    
     <path-action name="PaymentModule.createCheckoutUser" />
     
 	<path-action name="PaymentModule.getStripeUser"/>
