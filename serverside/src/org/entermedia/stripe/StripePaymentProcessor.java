@@ -274,6 +274,9 @@ public class StripePaymentProcessor {
 	protected String getCustomerId( String email, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
 		ArrayList<Map<String, Object>> users = getCustomers(email);
+		if ()users == null || users.size() == 0) {
+			return null;
+		}
 		String userId = "";
 		String sourceId = "";
 		for (Map<String, Object> x : users) {
