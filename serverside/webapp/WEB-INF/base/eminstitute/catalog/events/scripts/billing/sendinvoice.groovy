@@ -286,7 +286,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 				}
 			//}
 //			else {
-				Date duedate = invoice.getValue("duedate");
+				Date duedate = invoice.getDate("duedate");
 				if( duedate != null)
 				{
 					month = context.getLocaleManager().getMonthName(duedate, context.getLocale());
