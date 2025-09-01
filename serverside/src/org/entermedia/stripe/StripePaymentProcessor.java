@@ -333,11 +333,15 @@ public class StripePaymentProcessor {
 		*/
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		String emailExists = getCustomerId(email, tokenid);
-		
-		log.info("customer exists in stripe: "+ emailExists);
 		Data workspace = getInvoiceManager().getWorkspaceById(collectionId);
+		
+		if (emailExists == null)
+		{
+			log.info("Customer doesn't exists in stripe: "+ emailExists + " for Project: " + workspace);	
+		}
+		
 		if (emailExists != null && !emailExists.isEmpty()) {
-			log.error("Error creating customer in stripe: " + emailExists);	
+			log.error("Error creating customer in stripe: " + emailExists + " for Project: " + workspace);	
 			return emailExists;
 		}
 		

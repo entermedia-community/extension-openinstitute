@@ -175,9 +175,6 @@
 		                            	</select>
 	                            	</div>
 	                            </div>
-								#else
-								new Customer ??
-								
 								#end  
 								<div id="allcreditcardform" class="creditcardform">	
 								
@@ -377,7 +374,6 @@
                 }
             },
             submitHandler: function (form) {
-				debugger;
 				#ifnotnull($stripepublishkey)
 	            	var selectedsource = $("#selectedsource").val();
 					
@@ -410,7 +406,6 @@
 		
 		#ifnotnull($stripepublishkey)
 	        stripeResponseHandler = function (response) {
-				debugger;
 	            var form = document.getElementById('paymentform');
 				$("#stripetokenid").val(response.token.id);
 				$("#stripenewsource").val(response.token.card.id);
