@@ -274,18 +274,20 @@ public class StripePaymentProcessor {
 	protected String getCustomerId( String email, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
 		ArrayList<Map<String, Object>> users = getCustomers(email);
-		if (users == null || users.size() == 0) 
-		{
+		
+		if (users == null || users.size() == 0) {
 			return null;
 		}
 		String userId = "";
 		String sourceId = "";
-		for (Map<String, Object> x : users) {
-			if (x.get("email").equals(email)) 
+		for(int iterator = 0; iterator < users.size(); iterator++)
+		{
+			Map<String, Object> user = users.get(iterator);
+			if(user.get("email").equals(email))
 			{
-				userId = (String) x.get("id");
-				sourceId = (String) x.get("source");
+				userId = (String) user.get("id");
 			}
+			
 		}
 		
 		// TODO if source is different, update source?
@@ -325,12 +327,6 @@ public class StripePaymentProcessor {
 
 	protected String createCustomer2( String collectionId, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
-		
-		/*
-		if (source.isEmpty()) {
-			return "";
-		}
-		*/
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		String emailExists = getCustomerId(email, tokenid);
 		Data workspace = getInvoiceManager().getWorkspaceById(collectionId);

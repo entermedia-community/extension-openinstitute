@@ -156,9 +156,6 @@ public class PaymentModule extends BaseMediaModule
 		
 		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), workspace.getId());
 		
-		
-
-		
 		payment.setValue("totalprice", invoice.getValue("totalprice")); // safer to get value from database
 		log.info(payment);
 		
@@ -167,6 +164,7 @@ public class PaymentModule extends BaseMediaModule
 
 		String userid = payment.get("userid");
 		User user = archive.getUser(userid);
+		inReq.putSessionValue("checkoutuser", user);
 		
 		String source = inReq.getRequestParameter("selectedsource");		
 		if(source == null)
