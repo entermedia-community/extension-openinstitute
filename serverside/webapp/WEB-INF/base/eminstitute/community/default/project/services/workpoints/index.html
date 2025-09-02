@@ -1,8 +1,6 @@
 #set($collectionid = $librarycol.getId())
 
-#ifnull( $collectionid )
-	#set($collectionid = $context.getRequestParameter("collectionid"))
-#end
+#if($user) 
 
 <div id="serviceworkarea">
 	<div class="d-flex justify-content-between mb-2">
@@ -147,3 +145,4 @@
 #end
 </div>
 
+#end
