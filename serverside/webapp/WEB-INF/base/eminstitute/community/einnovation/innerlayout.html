@@ -44,7 +44,8 @@
 		data-browserlanguage="$!{browserlanguage}" 
 		data-editmode='$!user.get("oe_edit_mode")'
 		data-mediadbappid="$!mediaarchive.getMediaDbId()" 
-		data-componenthome="$!componenthome" 
+		data-componenthome="$!componenthome"
+		data-findroot="$content.findroot"
 		#if( $showupload) data-showuploadid="${showupload.id}" #end>
 
 		$pages.include("${communityhome}/navigation.html", $context)
