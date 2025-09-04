@@ -1,0 +1,44 @@
+<div class="container mt-5">
+	<div class="search-container w-100">
+		<form class="input-group rounded-pill mb-3">
+			<input type="text" class="form-control form-control-lg py-3" type="search" 
+			placeholder="Search products..." aria-label="Search"">
+			<button class="btn btn-primary px-4" type="submit">
+				<i class="fas fa-search"></i>
+			</button>
+		</form>
+	</div>
+</div>
+
+<main class="container mt-2 pt-4">
+	
+	<h2>Products</h2>
+	
+	<div class="d-flex align-items-center justify-content-center flex-wrap mb-4 auto-active-container">
+		#foreach( $collection in $collectionhits.getPageOfHits())
+			<a class="btn btn-outline-primary  mx-1 ajax auto-active-link" data-targetdiv="homegallery" data-oemaxlevel="1" href="#">#text($collection)</a>
+		#end
+		</div>
+	
+	<div class="row g-4">
+		
+		#foreach( $product in $hits.getPageOfHits())
+			#set($collection = $mediaarchive.getCachedData("librarycollection",$product.collectionid))
+				<div class="col-md-6 col-lg-3 h-100">
+					<div class="card video-card h-100" data-href="/${collection.urlname}/details/${product.urlname}">
+						<div class="media-container">
+							<img src="${communityhome}/images/products/image002.jpg" class="card-img-top video-thumbnail" alt="">
+						</div>
+						<div class="card-body line-clamp-2">
+							<h5 class="card-title">Utensil Holder</h5>
+							<p class="card-text line-clamp-2">Stoneware Utensil Holder.</p>
+							<p class="card-text line-clamp-2">$15.</p>
+							
+						</div>
+					</div>
+				</div>
+		#end
+			
+	</div>
+
+</main>
