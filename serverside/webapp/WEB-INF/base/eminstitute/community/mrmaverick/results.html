@@ -20,19 +20,32 @@
 		#end
 		</div>
 	
-	<div class="row g-4">
-		
+	<div class="row mb-4 g-4">
 		#foreach( $product in $hits.getPageOfHits())
 			#set($collection = $mediaarchive.getCachedData("librarycollection",$product.collectionid))
 				<div class="col-md-6 col-lg-3 h-100">
 					<div class="card video-card h-100" data-href="/${collection.urlname}/details/${product.urlname}">
 						<div class="media-container">
-							<img src="${communityhome}/images/products/image002.jpg" class="card-img-top video-thumbnail" alt="">
+						
+							#set($productimage = $product.get("primarymedia"))
+							#ifnull($productimage) 
+								#set($productimage = $product.get("primaryimage"))
+                            #end
+							#set($asset = $mediaarchive.getAsset($productimage))
+							#ifnotnull($asset)
+								#set( $productimageurl = $mediaarchive.asLinkToPreview($asset, "image550x350"))
+							#end
+							
+							<img src="${productimageurl}" class="card-img-top video-thumbnail" alt="">
 						</div>
 						<div class="card-body line-clamp-2">
-							<h5 class="card-title">Utensil Holder</h5>
-							<p class="card-text line-clamp-2">Stoneware Utensil Holder.</p>
-							<p class="card-text line-clamp-2">$15.</p>
+							<h5 class="card-title">#text($product)</h5>
+							<p class="card-text line-clamp-2">$product.productdescription</p>
+							<p class="card-text line-clamp-2">
+								#set($subtotal = $product.getDouble("productprice"))
+								$!context.getText($!mediaarchive.getCachedData("currencytype", $product.currencytype ))
+								$$!context.doubleToMoney($subtotal, 2)
+							</p>
 							
 						</div>
 					</div>
