@@ -5,11 +5,21 @@
 
 #set( $community = $mediaarchive.getCachedData("communitytagcategory",$librarycol.communitytagcategory))
 
+#set($canviewpost = true)
+
 #ifnull($userpost)
-	[[Post does not exist.]]
+	#set($canviewpost = false)
 #end
 
-#ifnotnull($userpost) 
+#if(!$user && $userpost.poststatus != "published")
+	#set($canviewpost = false)
+#end
+
+
+#if(!$canviewpost)
+	[[Post not found]].
+#end
+#if($canviewpost) 
 	
 	#if($librarycol.urlname)
 		#set($projectlink = "$!{community.externaldomain}/${librarycol.urlname}")
@@ -30,11 +40,11 @@
 		class='blog-post #if($postasset && $postasset.previewstatus!="2") ajaxstatus #end' 
 		data-reloadspeed="2000"
 		data-oemaxlevel="2"
-		ajaxpath="$bloglink" >
+		ajaxpath="$!{bloglink}" >
 		<div class="blog-list-item">
 			<div class="w-100 d-flex align-items-center justify-content-between mb-3">
 				<div class="blog-credit">
-					<time class="text-muted fw-normal" datetime="$userpost.getDate('entity_date')">
+					<time class="text-muted fw-normal" datetime="$!userpost.getDate('entity_date')">
 						[[Posted]]
 						#set($timestamp = $context.getAge($userpost.getDate("entity_date")))
 						#ifnull($timestamp)
@@ -53,7 +63,7 @@
 				#end
 				
 				<div class="blog-community">
-					<a href="${projectlink}">
+					<a href="${projectlink}" title="#text($librarycol)" >
 						<img src="$projectlogo" class="blog-community-img" alt="#text($librarycol)" />
 					</a>
 					
@@ -63,7 +73,8 @@
 							data-hidefooter="true"
 							data-collectionid="${librarycol.getId()}" 
 							data-id="${userpost.id}"
-							href="$projectlink/channel/edit.html">
+							href="$projectlink/channel/edit.html"
+							title="[[Edit Post]]">
 							<i class="fas fa-edit"></i>
 						</a>
 					#end
@@ -71,7 +82,8 @@
 			</div>
 			
 			#if($caneditcollection && $userpost.poststatus != "published")
-				<div class="badge text-bg-warning badge-sm mb-2">$userpost.poststatus</div>
+				#set($poststatus = $mediaarchive.getCachedData("poststatus",$userpost.poststatus))
+				<div class="badge text-bg-warning badge-sm mb-2">#text($poststatus)</div>
 			#end
 	
 			<div class="blog-container">
@@ -92,7 +104,8 @@
 							$pages.include("${communityhome}/users/icon.html",$context)
 						</div>
 						<a class="text-brand"
-							href='#urlescape("${communityhome}/users/index.html?id=${postuser.getId()}")'>
+							href='${communityhome}/users/index.html?id=$!{postuser.getId()}'
+							title="[[View User Profile]]">
 							$postuser.getAnonNickName()
 						</a>
 					</div>
@@ -144,7 +157,7 @@
 			</div>
 		</div>
 	
-		<div class="collapse" id="blog${userpost.id}">
+		<div class="collapse" id="blog$!{userpost.id}">
 			$pages.include("${communityhome}/project/channel/comments/comments.html",$context)
 		</div>
 	
