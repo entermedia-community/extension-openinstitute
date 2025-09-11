@@ -15,8 +15,11 @@
 	<meta name="twitter:card" content="summary_large_image">
 	
 	#ifnotnull($userpost.maincontent)
-		<meta property="description" content="$url_util.xmlFirstParagraph($userpost.maincontent)">
-		<meta property="og:description" content="$url_util.xmlFirstParagraph($userpost.maincontent)">
+		#set($description = $url_util.xmlFirstParagraph($userpost.maincontent))
+		#ifnotnull($description)
+			<meta property="description" content="$description">
+			<meta property="og:description" content="$description">
+		#end
 	#end
 	
 	#set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
