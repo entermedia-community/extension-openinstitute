@@ -1,11 +1,8 @@
 package librarycollection;
 
-import org.apache.commons.collections.IteratorUtils
 import org.entermediadb.asset.MediaArchive
 import org.entermediadb.email.WebEmail
 import org.openedit.Data
-import org.openedit.MultiValued
-import org.openedit.data.Searcher
 import org.openedit.hittracker.HitTracker
 import org.openedit.users.User
 import org.openedit.util.DateStorageUtil
@@ -120,13 +117,15 @@ public void init()
 					
 					if( topicmods.size() > 1)
 					{
-						subject =  community.getName() + ": " + topicmods.size() + " Projects Notifications"; //TODO: Translate
+						subject = "[" + community.getName() + "] Multiple Project Notifications (" + topicmods.size() + ")"; //TODO: Translate
 					}
 					else
 					{
 						Data oneitem = topicmods.iterator().next();
 						Data topic = mediaArchive.getCachedData("collectiveproject", oneitem.get("chattopicid") );
-						subject = community.getName() + ": " + collection.getName() + " Chat Notifications";
+						
+						String now_string = DateStorageUtil.getStorageUtil().getTodayForDisplay();
+						subject = "[" + collection.getName() + "] Chat Notifications for " + now_string ;
 					}
 					templatemail.setSubject(subject); //TODO: Translate
 					Map objects = new HashMap();
