@@ -47,9 +47,7 @@
 
     <div class="article-content">
       <div class="blog-item-body">
-        #ifnotnull($userpost.maincontent)
-          $url_util.xmlFirstParagraph($userpost.maincontent)
-        #end
+        $!userpost.maincontent
       </div>
     </div>
 	
