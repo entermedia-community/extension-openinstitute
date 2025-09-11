@@ -9,7 +9,7 @@
 		<ffmpeg>/Applications/ffmpeg</ffmpeg>
 		<avconv>/Applications/ffmpeg</avconv>
 		<avprobe>/Applications/ffprobe</avprobe>
-		<ghostscript>/opt/homebrew/bin/gs</ghostscript>
+		<gs>/opt/homebrew/bin/gs</gs>
 		<asperaupload>./aspera/upload.sh</asperaupload>
 		<exiftoolthumb>./exiftoolthumb.sh</exiftoolthumb>
 		<qt-faststart>./qt-faststart</qt-faststart>
@@ -41,7 +41,7 @@
 		<ffprobe>.\ffmpeg\ffprobe.exe</ffprobe>
 		<convert>.\im\convert.exe</convert>
 		<composite>.\im\composite.exe</composite>
-		<ghostscript>.\gs\bin\gswin64c.exe</ghostscript>
+		<gs>.\gs\bin\gswin64c.exe</gs>
 		<exiftool>.\exiftool\exiftool.exe</exiftool>
 		<exiftoolthumb>.\exiftool\exiftoolthumb.bat</exiftoolthumb>
 		<qt-faststart>.\ffmpeg\qt-faststart.exe</qt-faststart>
