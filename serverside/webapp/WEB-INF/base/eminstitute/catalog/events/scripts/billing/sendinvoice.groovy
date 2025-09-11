@@ -282,7 +282,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 					subject = invoice.getName();
 				}
 				else {
-					subject = "\${project} - \${invoicemonth} Invoice";
+					subject = "[\${project}] \${invoicemonth} Invoice";
 				}
 			//}
 //			else {
