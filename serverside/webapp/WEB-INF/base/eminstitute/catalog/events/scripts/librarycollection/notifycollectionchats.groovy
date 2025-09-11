@@ -115,6 +115,7 @@ public void init()
 					WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 					String subject = community.getName() + " Project Notifications";
 					
+					
 					if( topicmods.size() > 1)
 					{
 						subject = "[" + community.getName() + "] Multiple Project Notifications (" + topicmods.size() + ")"; //TODO: Translate
@@ -126,7 +127,12 @@ public void init()
 						
 						String now_string = DateStorageUtil.getStorageUtil().getTodayForDisplay();
 						subject = "[" + collection.getName() + "] Chat Notifications for " + now_string ;
+						
+						templatemail.setFromName(collection.getName());
 					}
+					
+					
+					
 					templatemail.setSubject(subject); //TODO: Translate
 					Map objects = new HashMap();
 					objects.put("topicmods",topicmods);
