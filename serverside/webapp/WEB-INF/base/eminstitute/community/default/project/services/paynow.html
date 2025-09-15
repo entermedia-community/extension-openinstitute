@@ -144,7 +144,7 @@
 
             </div>
             
-            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "error" || $invoice.paymentstatus == "autopayfailed")
 
 	        	##Disable for not USD
 				

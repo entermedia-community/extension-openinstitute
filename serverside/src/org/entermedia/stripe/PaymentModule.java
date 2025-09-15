@@ -196,6 +196,9 @@ public class PaymentModule extends BaseMediaModule
 			log.info("Error creating Stripe Customer for invoice: " + invoice.getValue("invoicenumber"));
 			return;
 		}
+		
+		log.info("Creating Charge - Invoice: "+ invoice.getValue("invoicenumber")+" Customer: " + customerId + " Source: "+ source);
+		
 		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
