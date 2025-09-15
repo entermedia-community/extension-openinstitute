@@ -198,8 +198,10 @@ public class StripePaymentProcessor {
 	}
 
 	protected boolean createCharge(Data payment, String customer, String source, Data invoice, String email)
-			throws IOException, InterruptedException, URISyntaxException {
+			throws IOException, InterruptedException, URISyntaxException 
+	{
 		log.info("Charging with stripe to invoice: " + invoice.getId() + " by user: " + email);
+		
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/charges");
 		Money totalprice = new Money(payment.get("totalprice"));
 		String amountstring = totalprice.toShortString().replace(".", "").replace("$", "").replace(",", "");
@@ -273,9 +275,13 @@ public class StripePaymentProcessor {
 
 	protected String getCustomerId( String email, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
+		
+		log.info("Searching Stripe Customer for user: " + email);
+		
 		ArrayList<Map<String, Object>> users = getCustomers(email);
 		
 		if (users == null || users.size() == 0) {
+			log.info("User list from Stripe null or empty");
 			return null;
 		}
 		String userId = "";
@@ -326,20 +332,20 @@ public class StripePaymentProcessor {
 	}
 
 	protected String createCustomer2( String collectionId, String tokenid)
-			throws URISyntaxException, IOException, InterruptedException {
+			throws URISyntaxException, IOException, InterruptedException 
+	{
 		String email = "billing+" + collectionId + "@entermediadb.com";
 		String emailExists = getCustomerId(email, tokenid);
-		Data workspace = getInvoiceManager().getWorkspaceById(collectionId);
-		
-		if (emailExists == null)
-		{
-			log.info("Customer doesn't exists in stripe: "+ emailExists + " for Project: " + workspace);	
-		}
 		
 		if (emailExists != null && !emailExists.isEmpty()) {
-			log.error("Error creating customer in stripe: " + emailExists + " for Project: " + workspace);	
+			//log.error("Error creating customer in stripe: " + emailExists + " for Project: " + workspace);	
 			return emailExists;
 		}
+		
+		
+		Data workspace = getInvoiceManager().getWorkspaceById(collectionId);
+		
+		log.info("Customer doesn't exists in stripe: "+ email + " for Project: " + workspace);	
 		
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email)

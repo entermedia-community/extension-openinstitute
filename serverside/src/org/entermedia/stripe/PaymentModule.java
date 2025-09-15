@@ -157,7 +157,7 @@ public class PaymentModule extends BaseMediaModule
 		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), workspace.getId());
 		
 		payment.setValue("totalprice", invoice.getValue("totalprice")); // safer to get value from database
-		log.info(payment);
+		//log.info(payment);
 		
 		Boolean isRecurring = Boolean.valueOf(inReq.getRequestParameter("recurring"));
 		Boolean isSuccess = false;
@@ -188,12 +188,12 @@ public class PaymentModule extends BaseMediaModule
 			}
 		}
 
-		if (customerId.isEmpty()) {
+		if (customerId == null || customerId.isEmpty()) {
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Stripe error, please contact your admin");
 			invoiceSearcher.saveData(invoice);
 			inReq.putPageValue("invoice", invoice);
-			log.error("Error creating Stripe Customer for invoice: " + invoice.getValue("invoicenumber"));
+			log.info("Error creating Stripe Customer for invoice: " + invoice.getValue("invoicenumber"));
 			return;
 		}
 		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());

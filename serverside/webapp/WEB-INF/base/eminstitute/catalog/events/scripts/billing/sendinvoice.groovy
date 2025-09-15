@@ -17,15 +17,16 @@ public void init() {
 		Data invoice = mediaArchive.getBean("invoiceManager").getInvoiceById(invoiceid);
 		if(invoice != null) {
 
-			if (!invoice.get("paymentstatus").equals("paid")) {
+			if(invoice.get("paymentstatus").equals("error")) {
+				//notifiy about error?
+				
+			}
+			else if (!invoice.get("paymentstatus").equals("paid")) {
 				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
 				invoice.setValue("paymentstatus", "invoiced");
 				invoice.setValue("notificationsent", "true")
 				invoiceSearcher.saveData(invoice);
 		
-			}
-			else if(invoice.get("paymentstatus").equals("error")) {
-				//notifiy about error?
 			}
 			else if(invoice.get("paymentstatus").equals("paid") && !Boolean.valueOf(invoice.get("notificationpaidsent"))) {
 				log.info("Sending Paid Notification for ${invoiceid}");
