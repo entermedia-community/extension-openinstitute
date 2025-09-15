@@ -337,10 +337,18 @@ public class StripePaymentProcessor {
 		return map;
 	}
 
-	protected String createCustomer2( String collectionId, String tokenid)
+	protected String createCustomer2( String collectionId, User inCheckOutUser, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException 
 	{
-		String email = "billing+" + collectionId + "@entermediadb.com";
+		String email  = null;
+		if (inCheckOutUser != null && inCheckOutUser.get("email") != null)
+		{
+			email = inCheckOutUser.get("email");
+		}
+		else
+		{
+			email = "billing+" + collectionId + "@entermediadb.com";
+		}
 		String emailExists = getCustomerId(email, tokenid);
 		
 		if (emailExists != null && !emailExists.isEmpty()) {

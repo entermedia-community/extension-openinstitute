@@ -106,15 +106,20 @@ public class PaymentModule extends BaseMediaModule
 		fieldSearcherManager = inSearcherManager;
 	}
 	
-	public void createCheckoutUser(WebPageRequest inReq)
+	public User createCheckoutUser(WebPageRequest inReq)
 	{ 
 		User user = inReq.getUser();
 		if(user != null) {
-			return;
+			return user;
 		}
 		String email = inReq.getRequestParameter("contactemail");
-		user = getUserManager(inReq).createTempUserFromEmail(email);
-		inReq.putSessionValue("checkoutuser", user);
+		if (email != null)
+		{
+			user = getUserManager(inReq).createTempUserFromEmail(email);
+			inReq.putSessionValue("checkoutuser", user);
+		}
+		user = (User) inReq.getPageValue("checkoutuser");
+		return user;
 	}
 	
 	//*Process Regular Payments (EM Portal) *//
@@ -185,7 +190,7 @@ public class PaymentModule extends BaseMediaModule
 		if (customerId == null)
 		{
 			
-			customerId = processor.createCustomer2((String)invoice.getValue("collectionid"), tokenid);
+			customerId = processor.createCustomer2((String)invoice.getValue("collectionid"), user, tokenid);
 		}
 		else 
 		{
@@ -210,7 +215,7 @@ public class PaymentModule extends BaseMediaModule
 		
 		log.info("Creating Charge - Invoice: "+ invoice.getValue("invoicenumber")+" Customer: " + customerId + " Source: "+ source);
 		
-//		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
+		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
 		
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
@@ -267,7 +272,17 @@ public class PaymentModule extends BaseMediaModule
 	public Map<String, Object> getStripeUser(WebPageRequest inReq) {
 		MediaArchive archive = getMediaArchive(inReq);
 		String collectionId = inReq.getRequestParameter("collectionid");
-		String email = "billing+" + collectionId + "@entermediadb.com";
+		User user = inReq.getUser();
+		String email = null;
+		if (user != null && user.getEmail() != null)
+			{
+				email = user.getEmail();
+			}
+		else 
+			{
+				email = "billing+" + collectionId + "@entermediadb.com";
+			}
+		
 		try {
 			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
 			ArrayList<Map<String, Object>> customers = processor.getCustomers(email);
