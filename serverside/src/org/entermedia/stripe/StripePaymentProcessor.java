@@ -187,8 +187,8 @@ public class StripePaymentProcessor {
 	private String getItemId(CloseableHttpResponse response)
 			throws JsonParseException, JsonMappingException, IOException {
 		if (response.getStatusLine().getStatusCode() != 200) {
-			log.error("Stripe response code: " + response.getStatusLine().getStatusCode());
-			log.error(response);
+			log.info("Stripe response code: " + response.getStatusLine().getStatusCode());
+			log.info(response);
 			return "";
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -351,7 +351,16 @@ public class StripePaymentProcessor {
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email)
 				.addParameter("description", "Workspace:" + workspace.getName()).addParameter("source", tokenid).build();
 		CloseableHttpResponse response = httpPostRequest(uri);
-		return getItemId(response);
+		String newuser =  getItemId(response);
+		if (newuser != null)
+		{
+			log.info("Created new user: " +newuser);
+			return newuser;
+		}
+		else {
+			log.info("Error creating new User on Stripe.");
+		}
+		return null;
 	}
 
 	protected String createSubscription( User inUser, String customer, String price)
