@@ -135,6 +135,14 @@ a.primary:hover .fa-solid {
   cursor: inherit;
   display: block;
 }
+.btn-paynow {
+	background-color:#b8dfcd!important;
+	cursor:wait;
+}
+.btn-paynow.submitform {
+	background-color:#198754!important;
+	cursor:default;
+}
 .table {
   --bs-table-striped-bg: #e8f1ed;
   --bs-table-hover-bg: #e7e7e7;
@@ -1077,6 +1085,7 @@ a.collectivetag:hover {
 div.errormsg {
   padding-bottom: 10px;
   color: #cc0000;
+  font-weight:bold;
 }
 .masonry-grid {
   background-color: #fff;

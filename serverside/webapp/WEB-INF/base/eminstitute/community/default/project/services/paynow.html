@@ -40,7 +40,7 @@
 		#end
 	#end
 
-	<div class="card" style="max-width:900px; margin:0 auto;">
+	<div class="card" style="max-width:980px; margin:0 auto;">
     <div class="card-header">
         <div class="row" style="border-bottom:1px solidc ">
             <div class="col-sm-9">
@@ -152,7 +152,7 @@
             	
 	            <div class="col-sm-5">
 	            
-	                <div class="card donatecard">
+	                <div class="card donatecard cardpaymentcontainer">
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="${projectlink}/services/payfinish.html" 
 	                        		method="post" 
@@ -219,17 +219,16 @@
 		                            </div>
 		 						
 	                            <div class="row mt-2">                            	
-	                                <div class="col-md-6">
+	                                <div class="col-md-8">
 	                                <div id="card-errors" class="donateformerror" role="alert"></div>
 	                                    <div class="donate-secure ">
 	                                        <i class="fa-solidfa-lock"></i> [[Secure payment]]
 	                                    </div>
 	                                </div>
-	                                <div class="col-md-6 text-right">
+	                                <div class="col-md-4 text-right">
 	                                    <div style=" margin: 0px auto;">
-	                                        <a href="#" class="btn btn-success submitform"><i
-	                                        
-	                                                class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
+	                                        <a href="#" class="btn btn-success btn-paynow submitform" id="paynowbtn">
+												<i class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -261,27 +260,27 @@
 	            #end
 	            
 	          #elseif ($invoice.paymentstatus == 'paid')
-	          <div class="col-sm-4">
-	          	<div class="card">
-		          	<div class="card-header alert-success">
-		          	   [[Invoice already paid]]
+		          <div class="col-sm-4">
+		          	<div class="card">
+			          	<div class="card-header alert-success">
+			          	   [[Invoice already paid]]
+			          	</div>
+			          	<div class="card-body">
+			          		[[Thank you for your preference]]
+			          	</div>
 		          	</div>
-		          	<div class="card-body">
-		          		[[Thank you for your preference]]
-		          	</div>
-	          	</div>
-	          </div>
+		          </div>
 	          #elseif ($invoice.paymentstatus == 'canceled')
-	          <div class="col-sm-4">
-	          	<div class="card">
-		          	<div class="card-header alert-danger">
-		          	   [[This invoice was canceled]]
+		          <div class="col-sm-4">
+		          	<div class="card">
+			          	<div class="card-header alert-danger">
+			          	   [[This invoice was canceled]]
+			          	</div>
+			          	<div class="card-body">
+			          		[[Please contact support or reach us via chat]]
+			          	</div>
 		          	</div>
-		          	<div class="card-body">
-		          		[[Please contact support or reach us via chat]]
-		          	</div>
-	          	</div>
-	          </div>          
+		          </div>          
 	          #end
 	          
         </div> <!-- end row -->
@@ -376,13 +375,17 @@
             submitHandler: function (form) {
 				#ifnotnull($stripepublishkey)
 	            	var selectedsource = $("#selectedsource").val();
+					//$("#paynowbtn").hide();
+					$("#paynowbtn").removeClass("submitform");
+					$(".cardpaymentcontainer").css("cursor", "wait");
 					
 	            	if (selectedsource === undefined || selectedsource == "") {
-						console.log("Creating stripe token");
 		                stripe.createToken(card).then(function (result) {
 		                    if (result.error) {
 		                        var errorElement = document.getElementById('card-errors');
 		                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
+								$(".cardpaymentcontainer").css("cursor", "default");
+								$("#paynowbtn").addClass("submitform");
 		                    } else {
 								$("#stripetokenid").val(result.token.id);
 								$("#stripenewsource").val(result.token.card.id);
@@ -392,7 +395,6 @@
 	                	});
 	            	} else {
 	            		//$(form).trigger("submit");
-						console.log("Selectedsoource: " + selectedsource)
 						$(form).addClass("ajaxform");
 	            		form.submit();
 						
