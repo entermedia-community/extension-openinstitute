@@ -247,16 +247,19 @@ public class StripePaymentProcessor {
 		return getItemId(response);
 	}
 
-	protected void updateCustomersSource( String customerId, String source)
-			throws URISyntaxException, IOException, InterruptedException {
+	protected boolean updateCustomersSource( String customerId, String source)
+			throws URISyntaxException, IOException, InterruptedException 
+	{
 		if (!source.isEmpty() && !customerId.isEmpty()) {
 			HttpPost http = new HttpPost("https://api.stripe.com/v1/customers/" + customerId);
 			URI uri = new URIBuilder(http.getURI()).addParameter("source", source).build();
 			CloseableHttpResponse response = httpPostRequest(uri);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				log.info("Updated Source on User: " + customerId);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	protected Map<String, Object> getCustomer( String email)
@@ -280,6 +283,8 @@ public class StripePaymentProcessor {
 		
 		ArrayList<Map<String, Object>> users = getCustomers(email);
 		
+		log.info("Stripe user list: " +users);
+		
 		if (users == null || users.size() == 0) {
 			log.info("User list from Stripe null or empty");
 			return null;
@@ -301,7 +306,8 @@ public class StripePaymentProcessor {
 	}
 
 	protected ArrayList<Map<String, Object>> getCustomers(String email)
-			throws URISyntaxException, IOException, InterruptedException {
+			throws URISyntaxException, IOException, InterruptedException 
+	{
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email).build();
 		CloseableHttpResponse response = httpGetRequest(uri);

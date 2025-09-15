@@ -184,7 +184,11 @@ public class PaymentModule extends BaseMediaModule
 		{
 			if (tokenid != null) 
 			{
-				processor.updateCustomersSource(userid, tokenid);
+				if(!processor.updateCustomersSource(customerId, tokenid))
+				{
+					log.info("Error updating user payment method on Stripe. " + customerId);
+					return;
+				}
 			}
 		}
 
@@ -200,6 +204,7 @@ public class PaymentModule extends BaseMediaModule
 		log.info("Creating Charge - Invoice: "+ invoice.getValue("invoicenumber")+" Customer: " + customerId + " Source: "+ source);
 		
 		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
+		
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");

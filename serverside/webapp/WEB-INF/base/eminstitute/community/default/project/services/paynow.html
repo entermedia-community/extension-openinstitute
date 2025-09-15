@@ -157,7 +157,7 @@
 	                        <form action="${projectlink}/services/payfinish.html" 
 	                        		method="post" 
 	                        		id="paymentform"
-	                        		class="form ajaxform "
+	                        		class="form  "
 	                        		data-targetdiv="collectivecheckout"
 	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
@@ -227,7 +227,7 @@
 	                                </div>
 	                                <div class="col-md-6 text-right">
 	                                    <div style=" margin: 0px auto;">
-	                                        <a href="#" onclick='$("#paymentform").submit()' class="btn btn-success"><i
+	                                        <a href="#" class="btn btn-success submitform"><i
 	                                        
 	                                                class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
 	                                    </div>
@@ -362,10 +362,9 @@
 		           }
 		       });
 		#end
-		
-       
 
-        var form = document.getElementById('paymentform');
+        var form = $("#paymentform");
+			
         $(form).validate({
             rules: {
                 "totalprice.value": {
@@ -384,15 +383,18 @@
 		                        var errorElement = document.getElementById('card-errors');
 		                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
 		                    } else {
-		                        //stripeResponseHandler(result);
 								$("#stripetokenid").val(result.token.id);
 								$("#stripenewsource").val(result.token.card.id);
+								$(form).addClass("ajaxform");
 								form.submit();
 		                    }
 	                	});
 	            	} else {
 	            		//$(form).trigger("submit");
+						console.log("Selectedsoource: " + selectedsource)
+						$(form).addClass("ajaxform");
 	            		form.submit();
+						
 	            	}
 				#end
             },
@@ -403,16 +405,7 @@
                 //$("#card-errors").html('<div class="errormsg">'+error.html()+'</div>');
             }
         });
-		
-		#ifnotnull($stripepublishkey)
-	        stripeResponseHandler = function (response) {
-	            var form = document.getElementById('paymentform');
-				$("#stripetokenid").val(response.token.id);
-				$("#stripenewsource").val(response.token.card.id);
-	            //$(form).trigger("submit");
-	            $(form).submit();
-	        }
-		#end
+
 
     });
 </script>
