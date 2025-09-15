@@ -11,9 +11,9 @@
 
 	<meta property="og:url" content="$bloglink" />
 	<meta property="og:title" content="#esc($!userpost.name)">
-	
+
 	<meta name="twitter:card" content="summary_large_image">
-	
+
 	#ifnotnull($userpost.maincontent)
 		#set($description = $url_util.xmlFirstParagraph($userpost.maincontent))
 		#ifnotnull($description)
@@ -21,7 +21,7 @@
 			<meta property="og:description" content="$description">
 		#end
 	#end
-	
+
 	#set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
 	#set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image1200x628.jpg"))
 	<meta property="og:image" itemprop="image" content="${prefix}${postimagesrc}">
@@ -39,30 +39,30 @@
 			#set($logourl = "$prefix/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
 		#else
 			#set($logourl = "https://openinstitute.org/site/app/theme/oi/OpenInstitute-400x400.png")
-		#end	
+		#end
 		<meta property="og:image" content="$!logourl" />
-		
+
 #elseif($postdata)
 
 	<meta property="og:type" content="article" />
-	#if ($postdata.post_title) 
+	#if ($postdata.post_title)
 		<meta property="og:title" content="$postdata.post_title" />
 	#else
-		#if ($postdata.name) 
+		#if ($postdata.name)
 			<meta property="og:title" content="$postdata.name" />
 		#end
 	#end
-	#if ($postdata.metadescription) 
+	#if ($postdata.metadescription)
 		<meta property="og:description" content="$postdata.metadescription" />
 	#end
-	#if ($postdata.metaimage) 
+	#if ($postdata.metaimage)
 		<meta property="og:img" content="$postdata.metaimage" />
 	#end
-	#if ($postdata.metaurl) 
+	#if ($postdata.metaurl)
 		<meta property="og:url" content="$postdata.metaurl" />
 	#end
 
-	#if ($postdata.metadescription) 
+	#if ($postdata.metadescription)
 		<meta name="description" content="$postdata.metadescription" />
 	#end
 
@@ -78,5 +78,5 @@
 #end
 
 
-	
-	
+
+
