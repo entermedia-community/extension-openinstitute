@@ -132,6 +132,13 @@ public class PaymentModule extends BaseMediaModule
 		payment.setValue("paymenttype","stripe" );
 		Calendar today = Calendar.getInstance();
 		
+		String paymentintent = (String) inReq.getSessionValue("payinginvoice");
+		if (paymentintent == null) {
+			log.info("Payment resubmition prevented");
+			return;
+		}
+		inReq.putSessionValue("payinginvoice", null);		
+		
 		String invoiceId = inReq.getRequestParameter("invoiceid");
 		Searcher invoiceSearcher = archive.getSearcher("collectiveinvoice");
 		Data invoice = getInvoiceManager(inReq).getInvoiceById(invoiceId);
@@ -203,7 +210,7 @@ public class PaymentModule extends BaseMediaModule
 		
 		log.info("Creating Charge - Invoice: "+ invoice.getValue("invoicenumber")+" Customer: " + customerId + " Source: "+ source);
 		
-		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
+//		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
 		
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));

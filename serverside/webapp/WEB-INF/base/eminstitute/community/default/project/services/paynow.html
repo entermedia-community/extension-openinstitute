@@ -247,6 +247,7 @@
 								<input type="hidden" name="stripetokenid" id="stripetokenid" />
 								<input type="hidden" name="stripenewsource" id="stripenewsource" />
 	                            <input type="text" name="stripecustomer" id="stripecustomer" value="$!{customer.id}" hidden="" />
+								$context.putSessionValue("payinginvoice", $id)
 	                        </form>
 	
 	                    </div>

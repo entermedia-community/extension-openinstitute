@@ -13,7 +13,7 @@ public void init() {
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 	String invoiceid = context.getRequestParameter("invoiceid");
 	if(invoiceid!=null) {
-		log.info("Sending Individual Invoice: ${invoiceid}");
+		log.info("Individual Invoice: ${invoiceid}");
 		Data invoice = mediaArchive.getBean("invoiceManager").getInvoiceById(invoiceid);
 		if(invoice != null) {
 
