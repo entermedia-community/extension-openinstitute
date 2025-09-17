@@ -1,7 +1,17 @@
 #
-#Mon Apr 21 12:44:26 CST 2025
+#Wed Sep 17 15:01:34 CST 2025
 Testimonials=Testimonios
-Team\ Circle=C\u00EDrculo de equipo
-Follow\ Us=S\u00EDganos
-Visit\ Us=Vis\u00EDtanos
+Referrals=Referencias
+Store=Almacenar
 View\ Members=Ver miembros
+Contact=Contacto
+Team\ Circle=C\u00EDrculo de equipo
+Chat=Charlar
+Finances=Finanzas
+Follow\ Us=S\u00EDganos
+Goals=Objetivos
+Files=Archivos
+Blog=Blog
+Project\ Files=Archivos del proyecto
+Visit\ Us=Vis\u00EDtanos
+Settings=Ajustes

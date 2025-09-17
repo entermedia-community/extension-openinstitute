@@ -30,7 +30,7 @@
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					#foreach( $hit in $alltopics)
 					#if ($hit.id != $currentchannel.id)
-					<a href="$communityhome/project/chat/index.html?collectionid=$collectionid&topic=$hit.getId()"
+					<a href="$communityhome/project/chat/index.html?collectionid=${collectionid}&topic=${hit.getId()}"
 						class="dropdown-item">
 						#if($caneditcollection)
 							#if ($hit.teamproject == "true")
