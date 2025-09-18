@@ -2,7 +2,7 @@
 
 <properties> 
 
-  <property id="stripelivekey"/>
-  <property id="stripelivetoken"/>  
+  <property id="stripepublickey"/>
+  <property id="stripeprivatekey"/>  
 
 </properties>
