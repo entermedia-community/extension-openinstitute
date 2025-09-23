@@ -36,7 +36,7 @@ public class LlmTest extends BaseEnterMediaTest
 //	public String aisearch(String message)
 //	{
 //		String model = "gpt-4o";
-//		String channeltype = "chatstreamer";
+//		String channeltype = "agentchat";
 //		String channelid = "aichattest";
 //		
 //		Map req = new HashMap();
