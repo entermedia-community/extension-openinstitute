@@ -281,9 +281,18 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			actionUrl = actionUrl + "/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
-//			if(invoice.getValue("isrecurring")) {
 
 			subject = "[${project}] Invoice #${invoicenumber}";
+			
+			if(invoice.getValue("isrecurring")) {
+				if(invoice.getName()!= null) {
+					subject = "[${project}] " + invoice.getName();
+				}
+				else {
+					subject = "[${project}] ${invoicemonth} Invoice";
+				}
+			}
+
 
 //			else {
 			Date duedate = invoice.getDate("duedate");
@@ -393,7 +402,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	objects.put("communitylink" , community.get("externaldomain"));
 	objects.put("communityhome","/" + siteid + community.get("templatepath"));
 
-	
+	 
 	
 	//recurring
 	objects.put("invoicemonth", month);
