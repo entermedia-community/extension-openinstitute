@@ -4,10 +4,9 @@
 	<property name="editable">false</property>
 
 	<property name="fallbackdirectory">../default</property>
-	<property name="communityhome">/${siteid}/community/mrmaverick</property>
+	<property name="communityhome">/${siteid}/community/homedesign</property>
 
 	<property name="flair">true</property>
-	<property name="templatename">MrMaverick</property>
 
 	<property name="communitytagcategory">homedesign</property>
 
