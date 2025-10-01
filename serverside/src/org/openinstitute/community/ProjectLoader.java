@@ -206,6 +206,7 @@ public class ProjectLoader implements PageLoader, CatalogEnabled
 //				//log.info("Cant find " + template);
 //			}
 			right.putParam("collectionid" , librarycollection.getId());
+			librarycollection = getMediaArchive().getSearcher("librarycollection").loadData(librarycollection);
 			right.putPageValue("librarycol" , librarycollection);
 			//right.putPageValue("projectlink" , "/" + domain + "/" + librarycollection.get("urlname") );
 			right.setRightPage(otherpage);

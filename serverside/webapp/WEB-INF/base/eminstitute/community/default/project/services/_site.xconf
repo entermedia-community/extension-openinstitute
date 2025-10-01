@@ -17,10 +17,9 @@
 		<or>
 			<action name="ProjectModule.canEditCollection" />
 			<action name="ProjectModule.isOnTeam" />		
-			<group id="administrators"/>	
 		</or>
 	</permission>
-	
+		
 	
 	<inner-layout>${communityhome}/project/services/layout.html</inner-layout>
 </page>
