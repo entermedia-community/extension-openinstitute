@@ -16,7 +16,7 @@
 		</property>
 	</bean>
 	
-		<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" >
+		<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" scope="prototype">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
