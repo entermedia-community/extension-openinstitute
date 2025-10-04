@@ -4,6 +4,11 @@
 	<property name="virtual">true</property>
 
 	<property name="fullwidth">true</property>
+	
+	<permission name="view">
+		<boolean value="true" />
+	</permission>
+	
 	<inner-layout>${communityhome}/project/donate/donate.html</inner-layout>
 
 </page>

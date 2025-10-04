@@ -38,8 +38,8 @@
 								<div class="teammemberrole"> 
 									#foreach($urole in $roles)
 										#set( $role = $mediaarchive.getCachedData("collectiverole",$urole) )
-										#if( $foreach.count > 1 ), #end
-										<span>$role</span>
+										
+										<div class="pl-2" style="display:block;">${role}</div>
 									#end 
 								</div>
 							#end

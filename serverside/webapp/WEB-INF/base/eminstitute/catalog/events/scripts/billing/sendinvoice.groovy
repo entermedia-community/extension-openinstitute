@@ -13,19 +13,20 @@ public void init() {
 	Searcher invoiceSearcher = mediaArchive .getSearcher("collectiveinvoice");
 	String invoiceid = context.getRequestParameter("invoiceid");
 	if(invoiceid!=null) {
-		log.info("Sending Individual Invoice: ${invoiceid}");
+		log.info("Individual Invoice: ${invoiceid}");
 		Data invoice = mediaArchive.getBean("invoiceManager").getInvoiceById(invoiceid);
 		if(invoice != null) {
 
-			if (!invoice.get("paymentstatus").equals("paid")) {
+			if(invoice.get("paymentstatus").equals("error")) {
+				//notifiy about error?
+				
+			}
+			else if (!invoice.get("paymentstatus").equals("paid")) {
 				invoiceContactIterate(mediaArchive, invoiceSearcher, invoice, "notificationsent");
 				invoice.setValue("paymentstatus", "invoiced");
 				invoice.setValue("notificationsent", "true")
 				invoiceSearcher.saveData(invoice);
 		
-			}
-			else if(invoice.get("paymentstatus").equals("error")) {
-				//notifiy about error?
 			}
 			else if(invoice.get("paymentstatus").equals("paid") && !Boolean.valueOf(invoice.get("notificationpaidsent"))) {
 				log.info("Sending Paid Notification for ${invoiceid}");
@@ -269,6 +270,10 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	String collectionid = librarycol.getId();
 	
+	String invoicenumber = invoice.getValue("invoicenumber");
+	
+	String project = librarycol.getName();
+	
 	String month = "";
 	
 	switch(messagetype) {
@@ -276,21 +281,25 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 			actionUrl = actionUrl + "/services/paynow.html?invoiceid=" + invoice.getValue("id") + "&collectionid=" + collectionid;
 			actionUrl = actionUrl + "&contactemail="+contact;
 			
-			subject =  librarycol.getName() + " Invoice";
-//			if(invoice.getValue("isrecurring")) {
+
+			subject = "[${project}] Invoice #${invoicenumber}";
+			
+			if(invoice.getValue("isrecurring")) {
 				if(invoice.getName()!= null) {
-					subject = invoice.getName();
+					subject = "[${project}] " + invoice.getName();
 				}
 				else {
-					subject = "\${project} - \${invoicemonth} Invoice";
+					subject = "[${project}] ${invoicemonth} Invoice";
 				}
-			//}
+			}
+
+
 //			else {
-				Date duedate = invoice.getValue("duedate");
-				if( duedate != null)
-				{
-					month = context.getLocaleManager().getMonthName(duedate, context.getLocale());
-				}
+			Date duedate = invoice.getDate("duedate");
+			if( duedate != null)
+			{
+				month = context.getLocaleManager().getMonthName(duedate, context.getLocale());
+			}
 			//}
 			
 			if (invoice.getInt("recurringperiod") == 1) 
@@ -378,17 +387,22 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	
 	objects.put("siteroot", getSiteRoot());
 	objects.put("librarycol",librarycol);
-	if(librarycol.get("contactname") != null)
+	
+	String emailname = librarycol.get("contactname"); 
+	
+	if(emailname == null)
 	{
-		templateEmail.setFromName(librarycol.get("contactname"));
+		emailname = librarycol.getName();
 	}
+	
+	templateEmail.setFromName(emailname);
 
 	
 	objects.put("community" , community);
 	objects.put("communitylink" , community.get("externaldomain"));
 	objects.put("communityhome","/" + siteid + community.get("templatepath"));
 
-	
+	 
 	
 	//recurring
 	objects.put("invoicemonth", month);

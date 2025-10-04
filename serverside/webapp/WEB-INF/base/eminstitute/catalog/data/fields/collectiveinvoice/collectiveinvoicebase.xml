@@ -58,7 +58,7 @@
 	<property id="owner" index="true" listid="user" filter="true"
 		deleted="false" editable="true" stored="true" listcatalogid="system"
 		viewtype="user" keyword="true" datatype="list">
-		New
+		
 		<name>
 			<language id="en"><![CDATA[Created By]]></language>
 			<language id="es"><![CDATA[Creada por]]></language>
@@ -126,7 +126,7 @@
 	<property id="isautopaid" index="true" stored="true"
 		editable="true" type="boolean">Automatic Payments</property>
 
-	<property id="sentto" index="true" stored="true" editable="true">
+	<property id="sentto" index="true" stored="true" editable="true" hint="Comma-separated list">
 		<name>
 			<language id="en"><![CDATA[Notification Sent to]]></language>
 		</name>

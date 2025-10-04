@@ -491,12 +491,22 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
 
 
 
-<property id="serverstatus" index="true" stored="true" editable="true" type="list" viewtype="list"  datatype="list"  > 
-    <name> 
-      <language id="en"><![CDATA[Server Status]]></language>  
-    </name> 
-  </property>
-  
-    
+	<property id="serverstatus" index="true" stored="true" editable="true" type="list" viewtype="list"  datatype="list"  > 
+    	<name> 
+      		<language id="en"><![CDATA[Server Status]]></language>  
+    	</name> 
+  	</property>
+  	
+  	
+  	<property id="stripepublickey" index="true" stored="true" editable="true"   > 
+	    <name> 
+	      <language id="en"><![CDATA[Stripe Public Key]]></language>  
+	    </name> 
+	 </property>
+ 	 <property id="stripeprivatekey" index="true" stored="true" editable="true"   > 
+	    <name> 
+	      <language id="en"><![CDATA[Stripe Private Key]]></language>  
+	    </name> 
+	 </property>
     
 </properties>

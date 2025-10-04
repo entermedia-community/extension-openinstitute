@@ -154,10 +154,7 @@
     <userprofile name="viewmap" value="true"/>
   </permission>
   <permission name="viewsettings">
-    <or>
-      <group id="administrators"/>
       <userprofile name="viewsettings" value="true"/>
-    </or>
   </permission>
   <permission name="viewmodulesettings">
     <or>

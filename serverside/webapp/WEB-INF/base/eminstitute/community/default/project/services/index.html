@@ -1,6 +1,7 @@
 #set($collectionid = $librarycol.getId())
 <div id="collectivebilling">
 	
+#if($user) 
 #if($mediaarchive.getCatalogSettingValue("productionmode") != "true")
 	#if( $caneditcollection )
 		<div class="alert alert-warning"><b>Site is in TEST mode. Add your keys to catalog settings and switch to production mode to take credit cards.</b></div>
@@ -15,7 +16,7 @@
      #if ($invoices)
      	
      	<div class="d-flex justify-content-between mb-2">
-         	<h3 style="margin-bottom:10px;">[[Invoices]]</h3>
+         	<h2 style="margin-bottom:10px;">[[Invoices]]</h2>
          </div>
          
          <div class="emdata emdatatable">
@@ -150,4 +151,7 @@
  
  $pages.include("$communityhome/project/services/products/results.html",$context)
  
+ #end
  </div>
+ 
+ 

@@ -14,11 +14,6 @@
 	#set($user = $checkoutuser)
 #end
 
-#ifnull($user)
-	[[No user]]
-#end
-
-
 #set($invoicemonth = $context.getLocaleManager().getMonthName($invoice.getValue("duedate"), $context.getLocale()))
 
 ##For Replace Formating
@@ -37,13 +32,15 @@
 <strong>[[Invoice]] #$!invoice.invoicenumber</strong> [[Status is Paid]].
 #else
 
-
-
 	#if(!$mediaarchive.isCatalogSettingTrue("productionmode"))
-	<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
+		#if($caneditcollection)
+			<div class="alert alert-warning">[[Site is in test mode. Credit card is 4242 4242 4242 4242 any expiration date. Add your keys to catalog settings and switch to production mode to take credit cards]].</div>
+		#else
+		<div class="alert alert-warning">[[Project Payment Method is in test mode. For assistance, please reach out to a Project Team Member or OI Administrator.]].</div>
+		#end
 	#end
 
-	<div class="card" style="max-width:900px; margin:0 auto;">
+	<div class="card" style="max-width:980px; margin:0 auto;">
     <div class="card-header">
         <div class="row" style="border-bottom:1px solidc ">
             <div class="col-sm-9">
@@ -147,7 +144,7 @@
 
             </div>
             
-            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "autopayfailed")
+            #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "error" || $invoice.paymentstatus == "autopayfailed")
 
 	        	##Disable for not USD
 				
@@ -155,12 +152,12 @@
             	
 	            <div class="col-sm-5">
 	            
-	                <div class="card donatecard">
+	                <div class="card donatecard cardpaymentcontainer">
 	                    <div class="card-block" style="padding: 20px 21px;">
 	                        <form action="${projectlink}/services/payfinish.html" 
 	                        		method="post" 
 	                        		id="paymentform"
-	                        		class="form "
+	                        		class="form  "
 	                        		data-targetdiv="collectivecheckout"
 	                        		data-oemaxlevel="1">
 	                            <input type="hidden" name="collectionid" value="$!librarycol.id" />
@@ -178,8 +175,6 @@
 		                            	</select>
 	                            	</div>
 	                            </div>
-								
-								
 								#end  
 								<div id="allcreditcardform" class="creditcardform">	
 								
@@ -224,17 +219,16 @@
 		                            </div>
 		 						
 	                            <div class="row mt-2">                            	
-	                                <div class="col-md-6">
+	                                <div class="col-md-8">
 	                                <div id="card-errors" class="donateformerror" role="alert"></div>
 	                                    <div class="donate-secure ">
 	                                        <i class="fa-solidfa-lock"></i> [[Secure payment]]
 	                                    </div>
 	                                </div>
-	                                <div class="col-md-6 text-right">
+	                                <div class="col-md-4 text-right">
 	                                    <div style=" margin: 0px auto;">
-	                                        <a href="#" onclick='$("#paymentform").submit()' class="btn btn-success"><i
-	                                        
-	                                                class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
+	                                        <a href="#" class="btn btn-success btn-paynow submitform" id="paynowbtn">
+												<i class="fa-solidfa-credit-card"></i> [[Pay Now]] </a>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -252,6 +246,7 @@
 								<input type="hidden" name="stripetokenid" id="stripetokenid" />
 								<input type="hidden" name="stripenewsource" id="stripenewsource" />
 	                            <input type="text" name="stripecustomer" id="stripecustomer" value="$!{customer.id}" hidden="" />
+								$context.putSessionValue("payinginvoice", $id)
 	                        </form>
 	
 	                    </div>
@@ -265,27 +260,27 @@
 	            #end
 	            
 	          #elseif ($invoice.paymentstatus == 'paid')
-	          <div class="col-sm-4">
-	          	<div class="card">
-		          	<div class="card-header alert-success">
-		          	   [[Invoice already paid]]
+		          <div class="col-sm-4">
+		          	<div class="card">
+			          	<div class="card-header alert-success">
+			          	   [[Invoice already paid]]
+			          	</div>
+			          	<div class="card-body">
+			          		[[Thank you for your preference]]
+			          	</div>
 		          	</div>
-		          	<div class="card-body">
-		          		[[Thank you for your preference]]
-		          	</div>
-	          	</div>
-	          </div>
+		          </div>
 	          #elseif ($invoice.paymentstatus == 'canceled')
-	          <div class="col-sm-4">
-	          	<div class="card">
-		          	<div class="card-header alert-danger">
-		          	   [[This invoice was canceled]]
+		          <div class="col-sm-4">
+		          	<div class="card">
+			          	<div class="card-header alert-danger">
+			          	   [[This invoice was canceled]]
+			          	</div>
+			          	<div class="card-body">
+			          		[[Please contact support or reach us via chat]]
+			          	</div>
 		          	</div>
-		          	<div class="card-body">
-		          		[[Please contact support or reach us via chat]]
-		          	</div>
-	          	</div>
-	          </div>          
+		          </div>          
 	          #end
 	          
         </div> <!-- end row -->
@@ -308,7 +303,7 @@
   
 
 #end
-#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
+#if($caneditcollection  || $user )
 	<div style="padding:20px 0">
 	<a href="${projectlink}/services/index.html?collectionid=${invoice.collectionid}" class="btn btn-secondary">[[Back to Invoices]]</a>
 	</div>
@@ -330,51 +325,46 @@
 	document.getElementById('issavecard').checked = true;
 		
     $(document).ready(function () {
-		
 		 
 		#if ($customer.sources.data.size() > 0) 
-		 
-
-		$("#selectedsource").change(function() { 
-			var selected = $("#selectedsource").val();
-			if (selected != "") { 
-				$("#allcreditcardform").attr('hidden', true);
-			} 
-			else {
-				$("#allcreditcardform").attr('hidden', false);
-			}
-		}); 
+			$("#selectedsource").change(function() { 
+				var selected = $("#selectedsource").val();
+				if (selected != "") { 
+					$("#allcreditcardform").attr('hidden', true);
+				} 
+				else {
+					$("#allcreditcardform").attr('hidden', false);
+				}
+			}); 
 		#end  
-
 		
-	  	 #if($mediaarchive.isCatalogSettingTrue("productionmode"))
-        	console.log('Production');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_publishable_key"))
-	  	 #else
-	        console.log('Test Publishkey');
-	  		#set($publishkey = $mediaarchive.getCatalogSettingValue("stripe_test_publishable_key"))
-	  	 #end
-        var stripe = Stripe("$publishkey");
-        var elements = stripe.elements();
-        var style = { base: { fontSize: '18px', color: "#495057" } };
+		#set($stripepublishkey = $paymentprocessor.getPublicApiKey())
+		 
+		var stripe = null;
+		#ifnotnull($stripepublishkey)
+        	   stripe = Stripe("${stripepublishkey}");
+			   var elements = stripe.elements();
+		       var style = { base: { fontSize: '18px', color: "#495057" } };
+	
+		       // Create an instance of the card Element.
+		       var card = elements.create('card', { style: style });
+	
+		       // Add an instance of the card Element into the `card-element` <div>
+		       card.mount('#card-element');
+	
+		       // Handle real-time validation errors from the card Element.
+		       card.addEventListener('change', function (event) {
+		           var displayError = document.getElementById('card-errors');
+		           if (event.error) {
+		               $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
+		           } else {
+		               displayError.textContent = '';
+		           }
+		       });
+		#end
 
-        // Create an instance of the card Element.
-        var card = elements.create('card', { style: style });
-
-        // Add an instance of the card Element into the `card-element` <div>
-        card.mount('#card-element');
-
-        // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function (event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
-            } else {
-                displayError.textContent = '';
-            }
-        });
-
-        var form = document.getElementById('paymentform');
+        var form = $("#paymentform");
+			
         $(form).validate({
             rules: {
                 "totalprice.value": {
@@ -383,21 +373,33 @@
                 }
             },
             submitHandler: function (form) {
-            	var selectedsource = $("#selectedsource").val();
-				
-            	if (selectedsource === undefined || selectedsource == "") {
-	                stripe.createToken(card).then(function (result) {
-	                    if (result.error) {
-	                        var errorElement = document.getElementById('card-errors');
-	                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
-	                    } else {
-	                        stripeResponseHandler(result);
-	                    }
-                	});
-            	} else {
-            		//$(form).trigger("submit");
-            		form.submit();
-            	}
+				#ifnotnull($stripepublishkey)
+	            	var selectedsource = $("#selectedsource").val();
+					//$("#paynowbtn").hide();
+					$("#paynowbtn").removeClass("submitform");
+					$(".cardpaymentcontainer").css("cursor", "wait");
+					
+	            	if (selectedsource === undefined || selectedsource == "") {
+		                stripe.createToken(card).then(function (result) {
+		                    if (result.error) {
+		                        var errorElement = document.getElementById('card-errors');
+		                        $(errorElement).html('<div class="errormsg">' + result.error.message + '</div>');
+								$(".cardpaymentcontainer").css("cursor", "default");
+								$("#paynowbtn").addClass("submitform");
+		                    } else {
+								$("#stripetokenid").val(result.token.id);
+								$("#stripenewsource").val(result.token.card.id);
+								$(form).addClass("ajaxform");
+								form.submit();
+		                    }
+	                	});
+	            	} else {
+	            		//$(form).trigger("submit");
+						$(form).addClass("ajaxform");
+	            		form.submit();
+						
+	            	}
+				#end
             },
             errorElement: "div",
             errorClass: "errormsg",
@@ -407,16 +409,6 @@
             }
         });
 
-        stripeResponseHandler = function (response) {
-            var form = document.getElementById('paymentform');
-			$("#stripetokenid").val(response.token.id);
-			
-			
-			$("#stripenewsource").val(response.token.card.id);
-			
-            //$(form).trigger("submit");
-            $(form).submit();
-        }
 
     });
 </script>

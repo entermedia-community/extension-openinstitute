@@ -16,7 +16,7 @@
 		</property>
 	</bean>
 	
-		<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" >
+		<bean id="projectLoader" class="org.openinstitute.community.ProjectLoader" scope="prototype">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
@@ -62,6 +62,7 @@
 	</bean>
 
 	<bean id="PaymentModule" class="org.entermedia.stripe.PaymentModule">
+		<property name="cacheManager"><ref bean="systemExpireCacheManager"/></property>
 	</bean>
 
 	<bean id="transactionManager" class="org.entermedia.transactions.TransactionManager">

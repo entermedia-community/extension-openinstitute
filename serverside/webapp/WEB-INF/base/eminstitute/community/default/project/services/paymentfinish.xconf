@@ -1,4 +1,8 @@
 <page>
-<path-action name="PaymentModule.processPayment"/>
-<path-action name="TaskModule.recalculateSessions"/>
+	<path-action name="PaymentModule.processPayment"/>
+	<path-action name="TaskModule.recalculateSessions"/>
+
+	<permission name="view">
+		<boolean value="true" />
+	</permission>
 </page>

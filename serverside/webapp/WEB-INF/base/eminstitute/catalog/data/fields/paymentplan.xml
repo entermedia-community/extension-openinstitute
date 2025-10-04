@@ -45,5 +45,14 @@
       <language id="fr"><![CDATA[Identité]]></language> 
     </name> 
   </property>  
+  
+    <property id="collectionid" index="true" filter="false" editable="false" stored="true" sortable="true" type="list" keyword="false">
+    <name>
+      <language id="de"><![CDATA[Sammlung ID]]></language>
+      <language id="en"><![CDATA[Collection Id]]></language>
+      <language id="es"><![CDATA[colección Id]]></language>
+      <language id="fr"><![CDATA[Id Collection]]></language>
+    </name>
+  </property>
    
 </properties>

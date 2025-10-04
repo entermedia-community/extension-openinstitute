@@ -44,8 +44,8 @@
 	</property>
 
 	<property id="productattachment" listid="asset" index="true"
-		stored="true" editable="true" viewtype="asset" type="list"
-		sourcepath="/uploads/${data.collectiveid}/products/${formattedyear}/${shortguid}">
+		stored="true" editable="true" viewtype="asset" type="list"		
+		sourcepath="${data.uploadsourcepath}/${formattedyear}/${filename}">
 		<name>
 			<language id="en"><![CDATA[Attachment]]></language>
 		</name>

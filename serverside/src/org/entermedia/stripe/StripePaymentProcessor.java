@@ -50,22 +50,106 @@ public class StripePaymentProcessor {
 	private static final Log log = LogFactory.getLog(StripePaymentProcessor.class);
 	protected PageManager fieldPageManager;
 	protected XmlUtil fieldXmlUtil;
+	protected String fieldPrivateApiKey;
+	protected String fieldPublicApiKey;
+	protected String fieldCollectionId;
+	
+	
+	public String getPublicApiKey()
+	{
+		if (fieldPublicApiKey != null) 
+		{
+			return fieldPublicApiKey;
+		}
+		else {
+			Data collection = getMediaArchive().getCachedData("librarycollection", getCollectionId());
+			boolean productionmode = getMediaArchive().isCatalogSettingTrue("productionmode");
+			if (productionmode) {
+				String workspacekey = (String)collection.getValue("stripepublickey");
+				fieldPublicApiKey = workspacekey;
+			}
+			if (fieldPublicApiKey == null) 
+			{
+				fieldPublicApiKey = productionmode ? getMediaArchive().getCatalogSettingValue("stripe_publishable_key")
+					: getMediaArchive().getCatalogSettingValue("stripe_test_publishable_key");
+			}
+			return fieldPublicApiKey;
+		}
+	}
+
+
+	public void setPublicApiKey(String inPublicApiKey)
+	{
+		fieldPublicApiKey = inPublicApiKey;
+	}
 
 	
-	protected InvoiceManager getInvoiceManager(MediaArchive inArchive)
+	public String getCollectionId()
 	{
-		InvoiceManager manager = (InvoiceManager)inArchive.getBean("invoiceManager");
+		return fieldCollectionId;
+	}
+
+
+	public void setCollectionId(String inCollectionId)
+	{
+		fieldCollectionId = inCollectionId;
+	}
+
+	protected MediaArchive mediaArchive;
+
+	public MediaArchive getMediaArchive()
+	{
+		return mediaArchive;
+	}
+
+
+	public void setMediaArchive(MediaArchive inMediaArchive)
+	{
+		mediaArchive = inMediaArchive;
+	}
+
+
+	protected InvoiceManager getInvoiceManager()
+	{
+		InvoiceManager manager = (InvoiceManager)getMediaArchive().getBean("invoiceManager");
 		return manager;
 	}
 	
-	private CloseableHttpResponse httpPostRequest(MediaArchive inArchive, URI uri) throws ParseException, IOException {
-		boolean productionmode = inArchive.isCatalogSettingTrue("productionmode");
+	
+	public String getPrivateKey()
+	{
+		if (fieldPrivateApiKey != null) 
+		{
+			return fieldPrivateApiKey;
+		}
+		else {
+			Data collection = getMediaArchive().getCachedData("librarycollection", getCollectionId());
+			boolean productionmode = getMediaArchive().isCatalogSettingTrue("productionmode");
+			if (productionmode) {
+				String workspacekey = (String)collection.getValue("stripeprivatekey");
+				fieldPrivateApiKey = workspacekey;
+			}
+			if (fieldPrivateApiKey == null) 
+			{
+				fieldPrivateApiKey = productionmode ? getMediaArchive().getCatalogSettingValue("stripe_private_key")
+					: getMediaArchive().getCatalogSettingValue("stripe_test_private_key");
+			}
+			return fieldPrivateApiKey;
+		}
+	}
+	
+	public void setApiKey(String inApiKey)
+	{
+		fieldPrivateApiKey = inApiKey;
+		
+	}
+
+	private CloseableHttpResponse httpPostRequest(URI uri) throws ParseException, IOException {
+		
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		String apiKey = productionmode ? inArchive.getCatalogSettingValue("stripe_access_token")
-				: inArchive.getCatalogSettingValue("stripe_test_access_token");
 		try {
 			HttpPost request = new HttpPost(uri);
-			request.addHeader("Authorization", "Bearer " + apiKey);
+			request.addHeader("Authorization", "Bearer " + getPrivateKey());
 			CloseableHttpResponse response = httpClient.execute(request);
 			return response;
 		} catch (Exception e) {
@@ -74,14 +158,12 @@ public class StripePaymentProcessor {
 		}
 	}
 
-	private CloseableHttpResponse httpGetRequest(MediaArchive inArchive, URI uri) throws ParseException, IOException {
-		boolean productionmode = inArchive.isCatalogSettingTrue("productionmode");
+	private CloseableHttpResponse httpGetRequest(URI uri) throws ParseException, IOException {
+
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		String apiKey = productionmode ? inArchive.getCatalogSettingValue("stripe_access_token")
-				: inArchive.getCatalogSettingValue("stripe_test_access_token");
 		try {
 			HttpGet request = new HttpGet(uri);
-			request.addHeader("Authorization", "Bearer " + apiKey);
+			request.addHeader("Authorization", "Bearer " + getPrivateKey());
 			CloseableHttpResponse response = httpClient.execute(request);
 			return response;
 		} catch (Exception e) {
@@ -89,14 +171,11 @@ public class StripePaymentProcessor {
 			return null;
 		}
 	}
-	private CloseableHttpResponse httpDeleteRequest(MediaArchive inArchive, URI uri) throws ParseException, IOException {
-		boolean productionmode = inArchive.isCatalogSettingTrue("productionmode");
+	private CloseableHttpResponse httpDeleteRequest(URI uri) throws ParseException, IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		String apiKey = productionmode ? inArchive.getCatalogSettingValue("stripe_access_token")
-				: inArchive.getCatalogSettingValue("stripe_test_access_token");
 		try {
 			HttpDelete request = new HttpDelete(uri);
-			request.addHeader("Authorization", "Bearer " + apiKey);
+			request.addHeader("Authorization", "Bearer " + getPrivateKey());
 			CloseableHttpResponse response = httpClient.execute(request);
 			return response;
 		} catch (Exception e) {
@@ -108,8 +187,8 @@ public class StripePaymentProcessor {
 	private String getItemId(CloseableHttpResponse response)
 			throws JsonParseException, JsonMappingException, IOException {
 		if (response.getStatusLine().getStatusCode() != 200) {
-			log.error("Stripe response code: " + response.getStatusLine().getStatusCode());
-			log.error(response);
+			log.info("Stripe response code: " + response.getStatusLine().getStatusCode());
+			log.info(response);
 			return "";
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -118,21 +197,24 @@ public class StripePaymentProcessor {
 		return (String) map.get("id");
 	}
 
-	protected boolean createCharge(MediaArchive inArchive, Data payment, String customer, String source, Data invoice, String email)
-			throws IOException, InterruptedException, URISyntaxException {
+	protected boolean createCharge(Data payment, String customer, String source, Data invoice, String email)
+			throws IOException, InterruptedException, URISyntaxException 
+	{
 		log.info("Charging with stripe to invoice: " + invoice.getId() + " by user: " + email);
+		
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/charges");
 		Money totalprice = new Money(payment.get("totalprice"));
 		String amountstring = totalprice.toShortString().replace(".", "").replace("$", "").replace(",", "");
-		String currency = inArchive.getCatalogSettingValue("currency") != null
-				? inArchive.getCatalogSettingValue("currency")
+		String currency = getMediaArchive().getCatalogSettingValue("currency") != null
+				? getMediaArchive().getCatalogSettingValue("currency")
 				: "usd";
 		URI uri = new URIBuilder(http.getURI()).addParameter("amount", amountstring).addParameter("currency", currency)
 				.addParameter("customer", customer)
 				.addParameter("source", source)
 				.addParameter("description", "Payment Invoice: " + invoice.getValue("invoicenumber") + " Id: " + invoice.getId() + " by " + email).build();
 		log.info("Stripe amount: " + totalprice);
-		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
+		
+		CloseableHttpResponse response = httpPostRequest(uri);
 		// TODO: log this somewhere
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Stripe Charge Error: " + response);
@@ -141,78 +223,94 @@ public class StripePaymentProcessor {
 		return true;
 	}
 
-	protected String createProduct(MediaArchive inArchive, String productId)
+	protected String createProduct( String productId)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/products");
-		Data product = getInvoiceManager(inArchive).getProductById(productId);
+		Data product = getInvoiceManager().getProductById(productId);
 
 		URI uri = new URIBuilder(http.getURI()).addParameter("name", product.getName())
 				.addParameter("description", (String) product.getValue("productdescription")).build();
-		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
+		CloseableHttpResponse response = httpPostRequest(uri);
 		return getItemId(response);
 	}
 
-	protected String createPrice(MediaArchive inArchive, String amount, String intervalCount, String productId)
+	protected String createPrice( String amount, String intervalCount, String productId)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/prices");
-		String currency = inArchive.getCatalogSettingValue("currency") != null
-				? inArchive.getCatalogSettingValue("currency")
+		String currency = getMediaArchive().getCatalogSettingValue("currency") != null
+				? getMediaArchive().getCatalogSettingValue("currency")
 				: "usd";
 		URI uri = new URIBuilder(http.getURI()).addParameter("unit_amount", amount).addParameter("currency", currency)
 				.addParameter("recurring[interval]", "month").addParameter("recurring[interval_count]", intervalCount)
 				.addParameter("product", productId).build();
-		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
+		CloseableHttpResponse response = httpPostRequest(uri);
 		return getItemId(response);
 	}
 
-	protected void updateCustomersSource(MediaArchive inArchive, String customerId, String source)
-			throws URISyntaxException, IOException, InterruptedException {
+	protected boolean updateCustomersSource( String customerId, String source)
+			throws URISyntaxException, IOException, InterruptedException 
+	{
 		if (!source.isEmpty() && !customerId.isEmpty()) {
 			HttpPost http = new HttpPost("https://api.stripe.com/v1/customers/" + customerId);
 			URI uri = new URIBuilder(http.getURI()).addParameter("source", source).build();
-			CloseableHttpResponse response = httpPostRequest(inArchive, uri);
+			CloseableHttpResponse response = httpPostRequest(uri);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				log.info("Updated Source on User: " + customerId);
+				return true;
 			}
 		}
+		return false;
 	}
 
-	protected Map<String, Object> getCustomer(MediaArchive inArchive, String email)
+	protected Map<String, Object> getCustomer( String email)
 			throws URISyntaxException, IOException, InterruptedException {
-		ArrayList<Map<String, Object>> customers = getCustomers(inArchive, email);
+		ArrayList<Map<String, Object>> customers = getCustomers(email);
 		if (customers.size() > 0) {
 			return customers.get(0);
 		}
 		return null;
 	}
 
-	protected String getCustomerId(MediaArchive inArchive, String email)
+	protected String getCustomerId( String email)
 			throws URISyntaxException, IOException, InterruptedException {
-		return getCustomerId(inArchive, email, null);
+		return getCustomerId(email, null);
 	}
 
-	protected String getCustomerId(MediaArchive inArchive, String email, String tokenid)
+	protected String getCustomerId( String email, String tokenid)
 			throws URISyntaxException, IOException, InterruptedException {
-		ArrayList<Map<String, Object>> users = getCustomers(inArchive, email);
+		
+		log.info("Searching Stripe Customer for user: " + email);
+		
+		ArrayList<Map<String, Object>> users = getCustomers(email);
+		
+		log.info("Stripe user list: " +users);
+		
+		if (users == null || users.size() == 0) {
+			log.info("User list from Stripe null or empty");
+			return null;
+		}
 		String userId = "";
 		String sourceId = "";
-		for (Map<String, Object> x : users) {
-			if (x.get("email").equals(email)) 
+		for(int iterator = 0; iterator < users.size(); iterator++)
+		{
+			Map<String, Object> user = users.get(iterator);
+			if(user.get("email").equals(email))
 			{
-				userId = (String) x.get("id");
-				sourceId = (String) x.get("source");
+				userId = (String) user.get("id");
 			}
+			
 		}
 		
 		// TODO if source is different, update source?
 		return userId;
 	}
 
-	protected ArrayList<Map<String, Object>> getCustomers(MediaArchive inArchive, String email)
-			throws URISyntaxException, IOException, InterruptedException {
+	protected ArrayList<Map<String, Object>> getCustomers(String email)
+			throws URISyntaxException, IOException, InterruptedException 
+	{
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email).build();
-		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
+		CloseableHttpResponse response = httpGetRequest(uri);
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Error getting Stripe customers: " + response);
 			return null;
@@ -224,11 +322,11 @@ public class StripePaymentProcessor {
 		return users;
 	}
 	
-	public Map<String, Object> getCustomerById(MediaArchive inArchive, String customerId)
+	public Map<String, Object> getCustomerById(String customerId)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers/" + customerId);
 		URI uri = new URIBuilder(http.getURI()).build();
-		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
+		CloseableHttpResponse response = httpGetRequest(uri);
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Error getting Stripe customer: " + response);
 			return null;
@@ -239,45 +337,60 @@ public class StripePaymentProcessor {
 		return map;
 	}
 
-	protected String createCustomer2(MediaArchive inArchive, String collectionId, String tokenid)
-			throws URISyntaxException, IOException, InterruptedException {
-		
-		/*
-		if (source.isEmpty()) {
-			return "";
+	protected String createCustomer2( String collectionId, User inCheckOutUser, String tokenid)
+			throws URISyntaxException, IOException, InterruptedException 
+	{
+		String email  = null;
+		if (inCheckOutUser != null && inCheckOutUser.get("email") != null)
+		{
+			email = inCheckOutUser.get("email");
 		}
-		*/
-		String email = "billing+" + collectionId + "@entermediadb.com";
-		String emailExists = getCustomerId(inArchive, email, tokenid);
+		else
+		{
+			email = "billing+" + collectionId + "@entermediadb.com";
+		}
+		String emailExists = getCustomerId(email, tokenid);
 		
-		log.info("customer exists in stripe: "+ emailExists);
-		Data workspace = getInvoiceManager(inArchive).getWorkspaceById(collectionId);
 		if (emailExists != null && !emailExists.isEmpty()) {
-			log.error("Error creating customer in stripe: " + emailExists);	
+			//log.error("Error creating customer in stripe: " + emailExists + " for Project: " + workspace);	
 			return emailExists;
 		}
+		
+		
+		Data workspace = getInvoiceManager().getWorkspaceById(collectionId);
+		
+		log.info("Customer doesn't exists in stripe: "+ email + " for Project: " + workspace);	
 		
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email)
 				.addParameter("description", "Workspace:" + workspace.getName()).addParameter("source", tokenid).build();
-		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
-		return getItemId(response);
+		CloseableHttpResponse response = httpPostRequest(uri);
+		String newuser =  getItemId(response);
+		if (newuser != null)
+		{
+			log.info("Created new user: " +newuser);
+			return newuser;
+		}
+		else {
+			log.info("Error creating new User on Stripe.");
+		}
+		return null;
 	}
 
-	protected String createSubscription(MediaArchive inArchive, User inUser, String customer, String price)
+	protected String createSubscription( User inUser, String customer, String price)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/subscriptions");
 		URI uri = new URIBuilder(http.getURI()).addParameter("customer", customer)
 				.addParameter("items[0][price]", price).build();
-		CloseableHttpResponse response = httpPostRequest(inArchive, uri);
+		CloseableHttpResponse response = httpPostRequest(uri);
 		return getItemId(response);
 	}
 
-	protected ArrayList<Map<String, Object>> getSubscriptions(MediaArchive inArchive, String customer)
+	protected ArrayList<Map<String, Object>> getSubscriptions(String customer)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/subscriptions");
 		URI uri = new URIBuilder(http.getURI()).addParameter("customer", customer).build();
-		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
+		CloseableHttpResponse response = httpGetRequest(uri);
 		if (response.getStatusLine().getStatusCode() != 200) {
 			return null;
 		}
@@ -287,13 +400,13 @@ public class StripePaymentProcessor {
 		return (ArrayList<Map<String, Object>>) map.get("data");
 	}
 
-	protected ArrayList<Map<String, Object>> getInvoices(MediaArchive inArchive, String customer, String subscription)
+	protected ArrayList<Map<String, Object>> getInvoices(String customer, String subscription)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/invoices");
 		URI uri = new URIBuilder(http.getURI()).addParameter("customer", customer)
 				.addParameter("subscription", subscription).build();
 		log.info("URI:" + uri);
-		CloseableHttpResponse response = httpGetRequest(inArchive, uri);
+		CloseableHttpResponse response = httpGetRequest(uri);
 		if (response.getStatusLine().getStatusCode() != 200) {
 			return null;
 		}
@@ -303,15 +416,15 @@ public class StripePaymentProcessor {
 		return (ArrayList<Map<String, Object>>) map.get("data");
 	}
 
-	protected Boolean cancelSubscriptions(MediaArchive inArchive, String subId)
+	protected Boolean cancelSubscriptions(String subId)
 			throws URISyntaxException, IOException, InterruptedException {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/subscriptions/" + subId);
 		URI uri = new URIBuilder(http.getURI()).build();
-		CloseableHttpResponse response = httpDeleteRequest(inArchive, uri);
+		CloseableHttpResponse response = httpDeleteRequest(uri);
 		return response.getStatusLine().getStatusCode() == 200;
 	}
 
-	protected boolean process(MediaArchive inArchive, User inUser, Data payment, String inToken) 
+	public boolean process(User inUser, Data payment, String inToken) 
 	{
 		log.info("Payment: Processing order with Stripe");
 
@@ -320,22 +433,17 @@ public class StripePaymentProcessor {
 		// stripe connect: use access_token generated by oauth in place of
 		// secretkey; also define application fee (application_fee parameter)
 		boolean forcetestmode = Boolean.parseBoolean(payment.get("forcetestmode"));
-		boolean productionmode = inArchive.isCatalogSettingTrue("productionmode");
-		if (productionmode && !forcetestmode) {
-			log.debug("Passing in prod mode");
-			Stripe.apiKey = inArchive.getCatalogSettingValue("stripe_access_token");
-		} else {
-			log.debug("Passing in test mode: " + String.valueOf(forcetestmode));
-			Stripe.apiKey = inArchive.getCatalogSettingValue("stripe_test_access_token");
-		}
+		
+		Stripe.apiKey = getPublicApiKey();
+		
 		String amountstring = totalprice.toShortString().replace(".", "").replace("$", "").replace(",", "");
 		chargeParams.put("amount", amountstring);
-		String currency = inArchive.getCatalogSettingValue("currency");
+		String currency = getMediaArchive().getCatalogSettingValue("currency");
 		if (currency == null) {
 			currency = "usd";
 		}
 		chargeParams.put("currency", currency);
-		String descriptor = inArchive.getCatalogSettingValue("statement_descriptor");
+		String descriptor = getMediaArchive().getCatalogSettingValue("statement_descriptor");
 		if (descriptor != null) {
 			chargeParams.put("statement_descriptor", descriptor);
 		}
@@ -350,11 +458,11 @@ public class StripePaymentProcessor {
 			// but a live mode key was used to make this request.
 			if (customerid == null) 
 			{
-				customerid = createCustomer(inArchive, inUser, inToken);
+				customerid = createCustomer(inUser, inToken);
 			}
 			else 
 			{
-				customerid = updateSource(inArchive, inUser,customerid, inToken);
+				customerid = updateSource(inUser,customerid, inToken);
 			}
 			
 			chargeParams.put("customer", customerid); // obtained via https://stripe.com/docs/saving-cards
@@ -366,7 +474,7 @@ public class StripePaymentProcessor {
 				// : No such customer: cus_GyDBm8HUKk4U6p
 				if (ex.getMessage().startsWith("No such customer")) // Customer was deleted or this is a new account
 				{
-					customerid = createCustomer(inArchive, inUser, inToken);
+					customerid = createCustomer(inUser, inToken);
 					chargeParams.put("customer", customerid); // obtained via js
 					c = Charge.create(chargeParams);
 				} else {
@@ -415,7 +523,7 @@ public class StripePaymentProcessor {
 
 	}
 
-	private String updateSource(MediaArchive inArchive, User inUser, String inStripeId, String inToken) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException
+	private String updateSource(User inUser, String inStripeId, String inToken) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException
 	{
 		Map<String, Object> customerParams = new HashMap<String, Object>();
 		try 
@@ -428,13 +536,13 @@ public class StripePaymentProcessor {
 		catch (Exception ex)
 		{
 			log.error("Could not find customer. Creating new ID",ex);
-			createCustomer(inArchive,inUser,inToken);
+			createCustomer(inUser,inToken);
 		}
 		return inUser.get("stripeid");
 		
 	}
 
-	protected String createCustomer(MediaArchive inArchive, User inUser, String inToken) throws AuthenticationException,
+	protected String createCustomer(User inUser, String inToken) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException, APIException {
 		String customerid;
 		Map<String, Object> customerParams = new HashMap<String, Object>();
@@ -444,7 +552,7 @@ public class StripePaymentProcessor {
 		Customer customer = Customer.create(customerParams);
 		customerid = customer.getId();
 		inUser.setValue("stripeid", customer.getId());
-		inArchive.getUserManager().saveUser(inUser);
+		getMediaArchive().getUserManager().saveUser(inUser);
 		return customerid;
 	}
 

@@ -2,8 +2,6 @@
 #set( $collectionid = $context.getRequestParameter("collectionid"))
 #set( $topicid = $context.getRequestParameter("topicid"))
 
-
-
 #if ($collectionid)
 	#set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 	#set( $currentcollection = $searcher.query().exact("id",$collectionid).searchOne() )

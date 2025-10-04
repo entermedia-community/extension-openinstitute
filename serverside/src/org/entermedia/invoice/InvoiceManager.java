@@ -226,7 +226,7 @@ public class InvoiceManager implements CatalogEnabled
 	
 	public Data getInvoiceById(String invoiceId)
 	{
-		Data invoice = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveinvoice", invoiceId);
+		Data invoice = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveinvoice", invoiceId);
 		return invoice;
 	}
 	
@@ -234,7 +234,7 @@ public class InvoiceManager implements CatalogEnabled
 
 	public ArrayList getInvoiceProductList(String invoiceId)
 	{
-		Data invoice = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveinvoice", invoiceId);
+		Data invoice = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveinvoice", invoiceId);
 		if (invoice == null) {
 			return null;
 		}
@@ -255,7 +255,7 @@ public class InvoiceManager implements CatalogEnabled
 	*/
 	
 	public MultiValued getProductById (String productId) {
-		MultiValued product = (MultiValued)getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
+		MultiValued product = (MultiValued)getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveproduct", productId);
 		if (product == null) {
 			return null;
 		}
@@ -263,7 +263,7 @@ public class InvoiceManager implements CatalogEnabled
 	}
 	
 	public Data getWorkspaceById (String workspaceId) {
-		Data workspace = getMediaArchive().getSearcherManager().getData(getCatalogId(), "librarycollection", workspaceId);		
+		Data workspace = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "librarycollection", workspaceId);		
 		if (workspace == null) {
 			return null;
 		}

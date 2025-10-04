@@ -25,11 +25,12 @@ $context.putPageValue("longform",false)
 #if ($viewid)
 
 	#ifnull($details)
-		#set( $viewdata = $mediaarchive.getCachedData("view",$viewid) ) 
+		#set( $viewdata = $mediaarchive.getCachedData("view", $viewid) ) 
 		#ifnull($viewdata)
-			ViewData not found $viewid
+			ViewData not found <strong>$viewid</strong>
 		#end
 		#set ($details = $searcher.getDetailsForView($viewdata, $context.getUserProfile()))
+		
 		
 	#end	
 	#ifnull($details)
@@ -37,7 +38,7 @@ $context.putPageValue("longform",false)
 	#end	
 	
 	#ifnull($details)
-		[[No details available for view: $viewid.  Please configure your view settings.]]
+		[[No details available for view: <strong>$viewid</strong>.  Please configure your view fields.]]
 
 	#end
 #else

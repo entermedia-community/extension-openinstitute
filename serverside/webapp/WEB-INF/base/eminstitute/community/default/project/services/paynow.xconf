@@ -6,9 +6,14 @@
     
     <property name="autocreatetempuser">true</property>
     
+    <path-action name="PaymentModule.getPaymentProcessor" />
+    
     <path-action name="PaymentModule.createCheckoutUser" />
     
-	<path-action name="PaymentModule.getStripeUser"/>
+	<permission name="view">
+		<boolean value="true" />
+	</permission>
+	
 	
 	<inner-layout>${communityhome}/project/layout/innerlayout.html</inner-layout>
 </page>

@@ -22,6 +22,7 @@
 	<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
 	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
+	<script id="dataentryfields" src="/${applicationid}/components/javascript/emedia/dataentryfields.js" />
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
 	<script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />

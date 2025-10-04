@@ -25,6 +25,7 @@
 		
 		#set($points = 0)
 		#foreach($task in $tasks)
+		
 			#set( $tree = $mediaarchive.getCachedData("projectdepartment",$task.projectdepartment) )
 			#if($tree)
 				#set( $c = $tree.getInt("goalpoints") )
@@ -38,6 +39,7 @@
 			<div id="taskrow#eid(${task.id})" class="goaltaskbox goalstatus${task.taskstatus}">
 			
 				<div>$!tree</div>
+				
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
 					<span class="trim-text" data-max="400">$url_util.escapeMessage($task.comment,900)</span>

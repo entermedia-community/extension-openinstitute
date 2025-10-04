@@ -392,6 +392,7 @@ footer {
 }
 .video-card {
 	transition: transform 0.3s;
+	cursor: pointer;
 }
 .video-card:hover {
 	transform: translateY(-5px);

@@ -386,6 +386,7 @@ ul.projectgoals {
 }
 .goaltaskbox {
 	background-color: #ffffff;
+	color:#111;
 	padding: 6px;
 	border-radius: 6px;
 	align-items: start;

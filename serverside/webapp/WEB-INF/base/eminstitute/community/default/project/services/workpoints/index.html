@@ -1,12 +1,10 @@
 #set($collectionid = $librarycol.getId())
 
-#ifnull( $collectionid )
-	#set($collectionid = $context.getRequestParameter("collectionid"))
-#end
+#if($user) 
 
 <div id="serviceworkarea">
 	<div class="d-flex justify-content-between mb-2">
-		<h3>[[Pending Work Points]]</h3>
+		<h2>[[Pending Work Points]]</h2>
 		<div>
 		     #if( $caneditcollection )
 		         <a href="${projectlink}/services/transfers/send.html?collectionid=${collectionid}"
@@ -147,3 +145,4 @@
 #end
 </div>
 
+#end

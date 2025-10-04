@@ -1,8 +1,6 @@
 #set($collectionid = $librarycol.getId())
 
-#ifnull( $collectionid )
-	###set($collectionid = $context.getRequestParameter("collectionid"))
-#end
+#if($user) 
 
 
 <div >
@@ -97,6 +95,6 @@ $collectionid).sort("createdonDown").search())
 	 $pages.include("$communityhome/project/services/invoices/results.html", $context)
 #end
    
-   
-   
-   
+  
+#end
+

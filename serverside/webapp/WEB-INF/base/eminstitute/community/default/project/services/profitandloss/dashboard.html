@@ -1,10 +1,10 @@
 #set($collectionid = $librarycol.getId())
 
-#if($caneditcollection  || $librarycol.priviacylevel != "commercial" )
 <div  id="financesdashboard">
 	<div class="d-flex justify-content-between mb-2">
 		<h2>[[Profit and Loss]]</h2>
-		<div class="dontprintme text-right">    
+		<div class="dontprintme text-right">   
+			#* 
 		    #if( $caneditcollection )
 		         <a
 		          href="${projectlink}/services/transfers/send.html?collectionid=$collectionid"
@@ -19,7 +19,7 @@
 		          class="emdialog btn btn-sm btn-primary">[[Receive Money]]</a>
 		
 		    #end      
-		   
+		   *#
 		</div>		    
 	</div>
 		
@@ -131,6 +131,6 @@
 			
 	</div>
 </div>	 	    
-#end			
+	
 			
 			

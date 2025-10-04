@@ -13,6 +13,13 @@
 	 
 	<page-action name="PageValue.loadPageVariable" bean="mathutil" />
 	
+	<permission name="view">
+		<or>
+			<action name="ProjectModule.canEditCollection" />
+			<action name="ProjectModule.isOnTeam" />		
+		</or>
+	</permission>
+		
 	
 	<inner-layout>${communityhome}/project/services/layout.html</inner-layout>
 </page>
