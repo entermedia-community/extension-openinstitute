@@ -1,7 +1,0 @@
-<page>
-
-	<page-action name="Script.run" >
-		<script>/${applicationid}/collective/services/investments/totalbyaccount.groovy</script>
-	</page-action>
-
-</page>

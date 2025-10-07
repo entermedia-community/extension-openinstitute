@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<page>
-
-	<property name="oisection">community</property>
-    <inner-layout>/${applicationid}/theme/layouts/application.html</inner-layout>
-    <style id="oi2" cancel="true" />
-    <style id="oi3" cancel="true" />
-</page>
