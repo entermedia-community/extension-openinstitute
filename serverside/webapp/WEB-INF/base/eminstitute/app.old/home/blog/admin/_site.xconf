@@ -1,7 +1,0 @@
-<page>
-	<property name="collectivesection">settings</property>
-	<property name="collectiveadminsection">general</property>
-	<inner-layout>/${applicationid}/causes/admin/layout.html</inner-layout>
-	
-	
-</page>

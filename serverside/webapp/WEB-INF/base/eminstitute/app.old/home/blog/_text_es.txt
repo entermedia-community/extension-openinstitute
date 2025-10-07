@@ -1,9 +1,0 @@
-#
-#Mon Jun 27 19:36:21 CDT 2022
-We\ have\ raised=Hemos acumulado
-Please\ Login\ to\ Donate\ with\ Credit\ Card=Inicie sesi\u00F3n para donar con tarjeta de cr\u00E9dito
-Contact\ Campaign=Contactar
-No\ goals\ yet=A\u00FAn no hay metas
-Login\ to\ Donate\ With\ Credit\ Card=Iniciar sesi\u00F3n para donar con tarjeta de cr\u00E9dito
-Our\ Goal=Nuestro objetivo
-Or\ Use=O usar
