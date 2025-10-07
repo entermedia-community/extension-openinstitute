@@ -52,11 +52,14 @@
 	#set( $organizationsuser = $mediaarchive.query("librarycollectionlikes").exact("followeruser", $selecteduser.getId()).search($context) )
 	#set($foids = [])
 	#foreach( $ohit in $organizationsuser )
-		#set($x = $foids.add($ohit.collectionid))
+		#set($fcid = $ohit.collectionid)
+		#if(!$oids.contains($fcid))
+			#set($x = $foids.add($fcid))
+		#end
 	#end
 		#if($foids.size()>0)
 	
-		#set( $organizations = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($foids).sort("name").search() )
+		#set( $organizations = $mediaarchive.query("librarycollection").ids($foids).sort("name").search() )
 
 		<h3 class="mt-4"> [[Liked Projects]]</h3>
 		<div class="stations-grid p-4">
