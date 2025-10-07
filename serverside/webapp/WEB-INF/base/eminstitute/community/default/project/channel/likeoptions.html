@@ -10,8 +10,8 @@
 	
 	<div class="d-flex align-items-center justify-content-between">
 		<div class="project-likes-count">
-			#if($user)<a href="${communityhome}/project/channel/subscribers/likessearch.html?collectionid=${collectionid}&field=collectionid&collectionid.value=${collectionid}&operation=exact&field=enabled&enabled.value=true&operation=exact" class="emdialog">#end
-				$subscriberssize #if($subscriberssize==1)[[Like]] #else [[Followers]]#end
+			#if($user)<a href="${projectlink}/channel/subscribers/likessearch.html" title="[[View Followers]]" class="emdialog">#end
+				$subscriberssize #if($subscriberssize==1)[[Follow]] #else [[Followers]]#end
 			#if($user)</a>#end
 			</div>
 		<div>
