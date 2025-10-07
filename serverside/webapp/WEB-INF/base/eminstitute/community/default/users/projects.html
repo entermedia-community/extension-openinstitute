@@ -7,7 +7,7 @@
 		#set($x = $oids.add($ohit.collectionid))
 	#end
 	
-	#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
+	#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
 
 	#set( $modcollections = $chatManager.loadCollectionsModified($collections, $selecteduser.getId() ) )
 	
