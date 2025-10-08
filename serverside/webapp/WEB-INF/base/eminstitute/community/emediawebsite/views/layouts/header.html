@@ -30,11 +30,11 @@
         <div id="navBar" class="collapse navbar-collapse">
           <div class="navbar-body header-abs-top-inner">
             <ul class="navbar-nav">
-				
+				#if($canviewsettings)
 				<li class="nav-item">
 					$pages.include("${communityhome}/components/quicksearch/navbar.html")
 				</li>
-				
+				#end
               <li class="navbar-nav-item">
                 <a class="nav-link #if($collectivesection == 'guide') active #end" href="${communitylink}/guide/">Guide</a>
               </li>

@@ -53,16 +53,17 @@ $(document).ready(function () {
         return;
       }
       var query = input.val().trim();
+	  options["query"] = query;
       if (!query || query.length < 2) {
         searchInputEmpty.css("display", "block");
         searchLoading.css("display", "none");
         searchNoResult.css("display", "none");
         searchResult.html("");
         searchResultPlaceholder.css("display", "block");
-        //return;
+        return;
       } else {
         searchInputEmpty.css("display", "none");
-		options["query"] = query;
+		
       }
 
       var loaderTimeout = setTimeout(function () {
