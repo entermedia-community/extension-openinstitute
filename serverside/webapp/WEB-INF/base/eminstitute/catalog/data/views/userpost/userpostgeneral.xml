@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<properties> 
+<properties>
   <property id="name" />
-  <property id="longdescription" />
   <property id="maincontent" />
-  <property id="poststatus" />
+  <property id="primarymedia" />
   <property id="keywords" />
   <property id="urlname" />
-  <property id="primarymedia" />
-  
+  <property id="poststatus" />
+
 </properties>

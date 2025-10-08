@@ -50,41 +50,41 @@ $context.putPageValue("longform",false)
 
 
 
-  #set ($mode = $user.get("oe_edit_mode"))
-   #if($viewid)
-   #if($mode && ($mode == "debug" || $mode == "editing" ))
+#set ($mode = $user.get("oe_edit_mode"))
+#if($viewid)
+	#if($mode && ($mode == "debug" || $mode == "editing" ))
 		<span class="widget-header-edit">
 		<a class="ir emdialog" data-autoclose="false" href="$apphome/views/settings/lists/datamanager/views/indexdialog.html?viewpath=$view&searchtype=$searcher.searchType&viewid=$viewid">
 		[[Edit]]
 		</a>
 		</span>
 	#end
-	#end
-	<div id="allerrors"></div>
-	<div class="d-flex flex-column">
-		#foreach( $detail in $details )
-		
-			#set($detail_id = $detail.getId())
-		
-			#set( $value = false)
-			#set( $target = "${detail.id}.value")
-			#set( $value = $context.getRequestParameter($target))		
-			#if( !$value)
-				#set( $value = $searcherManager.getValue($data, $detail, $context.getLocale()) )
-			#end
-		
-			$!context.putPageValue("detail",$detail)
-			$!context.putPageValue("value",$value)
-			$!context.putPageValue("val",$value)
-			
-		 	<div class="form-group detail-input input-$detail_id p-2" >
-			    <label for="$detail_id" class="input-label">
-						$detail.getText($context)
-				</label>
-			    <div class="input-wrapper">
-					
-			    	$pages.include("$xmledithome/detailedit.html", $context)
-			    </div>
-			</div>
+#end
+
+<div id="allerrors"></div>
+<div class="d-flex flex-column">
+	#foreach( $detail in $details )
+	
+		#set($detail_id = $detail.getId())
+	
+		#set( $value = false)
+		#set( $target = "${detail.id}.value")
+		#set( $value = $context.getRequestParameter($target))		
+		#if( !$value)
+			#set( $value = $searcherManager.getValue($data, $detail, $context.getLocale()) )
 		#end
-	</div>
+	
+		$!context.putPageValue("detail",$detail)
+		$!context.putPageValue("value",$value)
+		$!context.putPageValue("val",$value)
+		
+		<div class="form-group detail-input input-$detail_id p-2 mb-1" >
+			<label for="$detail_id" class="input-label">
+					$detail.getText($context)
+			</label>
+			<div class="input-wrapper">
+				$pages.include("$xmledithome/detailedit.html", $context)
+			</div>
+		</div>
+	#end
+</div>

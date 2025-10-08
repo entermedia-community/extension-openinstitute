@@ -487,8 +487,12 @@ h3 {
 .modal-backdrop {
 	z-index: 24999;
 }
+.modal-header {
+	padding: 0.5rem 1rem;
+}
 .modal-title {
 	display: inline-block;
+	font-size: 18px;
 }
 .dropdown-menu {
 	padding: 0;
