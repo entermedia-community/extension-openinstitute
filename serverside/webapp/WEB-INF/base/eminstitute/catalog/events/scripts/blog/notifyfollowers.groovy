@@ -97,7 +97,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 		return;
 	}
 	
-	String emailSubject = "[OI] " + community.getName() + " New Blog Post";
+	String emailSubject = "["+ collection.getName() +"] " + blogpost.getName();
 	
 	if (blogpost.get("name") != null)
 	{
@@ -122,17 +122,10 @@ public void notifyfollowers(String userpostid, String collectionid)
 		}
 		
 		String emailfromname = collection.get("contactname");
-		String emailfrom = collection.get("contactemail");
+	
+		WebEmail templatemail = archive.createSystemEmail(user, template);
+		templatemail.setFromName(emailfromname);
 		
-		WebEmail templatemail = null;
-		
-		if (emailfrom == null || emailfromname == null)
-		{
-			templatemail  = archive.createSystemEmail( user, template);
-		}
-		else {
-			templatemail = archive.createEmailFrom(emailfrom, emailfromname,user, template);
-		}
 		templatemail.setSubject(emailSubject); //TODO: Translate
 		Map objects = new HashMap();
 		String entermediakey = archive.userManager.getEnterMediaKey(user);
