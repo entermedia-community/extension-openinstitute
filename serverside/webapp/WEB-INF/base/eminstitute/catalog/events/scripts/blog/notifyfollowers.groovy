@@ -121,7 +121,17 @@ public void notifyfollowers(String userpostid, String collectionid)
 			continue;
 		}
 		
-		String emailfromname = collection.get("contactname");
+		User postuser = archive.getUser(blogpost.get("owner"));
+		
+		String emailfromname = null;
+		
+		if (postuser.getFirstName() != null && postuser.getLastName() != null)
+		{
+			emailfromname = postuser.getFirstName() + " " + postuser.getLastName();
+		}
+		else {
+			emailfromname = postuser.getShortDescription();
+		}
 	
 		WebEmail templatemail = archive.createSystemEmail(user, template);
 		templatemail.setFromName(emailfromname);
@@ -141,7 +151,7 @@ public void notifyfollowers(String userpostid, String collectionid)
 		objects.put("followeremail", user.getEmail());
 		objects.put("blogpost",blogpost);
 		
-		User postuser = archive.getUser(blogpost.get("owner"));
+		
 		objects.put("postuser",postuser);
 		
 		
