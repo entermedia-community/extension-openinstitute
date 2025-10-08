@@ -62,7 +62,7 @@ $(document).ready(function () {
         //return;
       } else {
         searchInputEmpty.css("display", "none");
-		options["description.value"] = query;
+		options["query"] = query;
       }
 
       var loaderTimeout = setTimeout(function () {
