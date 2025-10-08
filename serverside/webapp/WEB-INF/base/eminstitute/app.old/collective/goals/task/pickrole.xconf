@@ -1,9 +1,0 @@
-<page>
-
-	<path-action name="DataEditModule.loadData" >
-			<pageval>task</pageval>
-			<idname>taskid</idname>
-			<searchtype>goaltask</searchtype>
-    </path-action>
-
-    </page>

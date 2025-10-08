@@ -24,17 +24,18 @@
 <div class="" style="position: relative;">
 	<div class="search-popup">
 		<div class="d-flex align-items-center">
-			<input class="search-primary active" type="text" id="searchInput" name="description.value"
+			<input class="search-primary active" type="text" id="searchInput" name="query"
 				value="#esc($input)" autocomplete="off" placeholder="[[Search Open Institute]]" data-resultheight="600"
-				data-updateurl="true" data-field="description" ##regularsearch
+				data-updateurl="true" 
 				data-maxhitsperpage="10"
+				data-mainsearchmodule="librarycollection"
 				
 				data-quicksearched='$!context.getRequestParameter("quicksearched")'
 				data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
 				data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" ##typeahed
 				data-typeaheadurl="$!{communitylink}/components/quicksearch/results.html"
 				data-typeaheadtargetdiv="applicationmaincontent" data-typeaheadoemaxlevel="2"
-				data-hitssessionid="$!hits.sessionId" data-moduleid="$moduleid" data-operation="freeform" />
+				data-hitssessionid="$!hits.sessionId"  />
 			<button class="btn text-white" id="closeSearch">
 				<i class="fas fa-times"></i>
 			</button>

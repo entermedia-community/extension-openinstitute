@@ -1,4 +1,0 @@
-#
-#Mon Jun 27 19:33:39 CDT 2022
-donations\ received\ so\ far\!=donaciones recibidas hasta ahora\!
-Donate=Donar

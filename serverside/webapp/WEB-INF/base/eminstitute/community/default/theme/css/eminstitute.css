@@ -1860,7 +1860,6 @@ textarea.form-control {
 }
 .emwidget-chatterbox {
 	height: calc(100vh - 240px)!important;
-    
 }
 .chatterbox-messages-readonly {
   height: calc(100% - 48px) !important;
@@ -1868,6 +1867,12 @@ textarea.form-control {
 .chatterbox-messages {
   height: calc(100% - 188px) !important;
 }
+
+.msg-bubble .msg-body.me {
+	background: #e1e1e1!important;
+	color:#000!important;
+}
+
 
 table.table-striped tr.table-row-subtotals:first-of-type td {
   border-top: 2px solid #c5c5c5;

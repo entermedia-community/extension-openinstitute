@@ -1,5 +1,5 @@
-#foreach($module in $organizedModules)
-	#set($hits = $organizedHits.get($module.id))
+#foreach($module in $organizedResults.getModules())
+	#set($hits = $organizedResults.getByType($module.id, $context))
 
 	$context.putPageValue("hits", $hits)
 	$context.putPageValue("module", $module)
@@ -52,8 +52,11 @@
 				
 				#if($project.assetportrait)
 			        #set($asset = $mediaarchive.getAsset($project.assetportrait))
-			        #set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200"))
-			      #else
+					#ifnotnull($asset)
+			        	#set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200"))
+					#end
+			      #end
+				  #ifnull($logo)
 			        #set($logo = "$communityhome/theme/images/OI_flower.png")
 			      #end
 			      <div class="col-6 col-md-4 result-item ">

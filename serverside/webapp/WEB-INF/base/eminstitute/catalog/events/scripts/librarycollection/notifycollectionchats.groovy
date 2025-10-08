@@ -156,11 +156,12 @@ public void init()
 				log.error("Could not process " ,ex);
 			}	
 			
-			notificationsent.setValue("value", started);
-			mediaArchive.saveData("catalogsettings",notificationsent);
+			
 		}
 	}
-
+	//Save notification last sent date
+	notificationsent.setValue("value", started);
+	mediaArchive.saveData("catalogsettings",notificationsent);
 }
 
 private String getSiteRoot() {

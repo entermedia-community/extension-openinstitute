@@ -1,9 +1,0 @@
-<page>
-
-  	<page-action name="PageValue.loadPageVariable" bean="mathutil" />
-
-	<page-action name="Script.run" >
-		<script>/${applicationid}/collective/services/expenses/totalbycurrency.groovy</script>
-	</page-action>
-
-</page>

@@ -9,65 +9,6 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 
 
 
-<div class="sidebar-box">
-	
-	<div class="search-popup">
-				<div class="d-flex align-items-center">
-					<input class="search-primary active" type="text" id="searchInput" name="description.value"
-						value="#esc($input)" autocomplete="off" placeholder="[[Search Projects]]" 
-						data-resultheight="600"
-						data-updateurl="true" 
-						data-maxhitsperpage="20"
-						data-quicksearched='$!context.getRequestParameter("quicksearched")'
-						data-searchurltargetdiv="applicationmaincontent" data-oemaxlevel="2" ##enterkeyaction?
-						data-searchurlentertargetdiv="applicationmaincontent" data-searchurlenteroemaxlevel="2" 
-						data-typeaheadurl="${communityhome}/components/quicksearch/results.html"
-						data-typeaheadtargetdiv="applicationmaincontent" data-typeaheadoemaxlevel="2"
-						 />
-						
-					<button class="btn text-white" id="closeSearch">
-						<i class="fas fa-times"></i>
-					</button>
-				</div>
-				<div id="searchResultContainer">
-					<p class="m-0 small text-center text-secondary" id="searchInputEmpty">
-						Start typing to search for Projects.
-					</p>
-					<p class="m-0 fw-bold small text-center text-danger" id="searchNoResult">
-						No results found.
-					</p>
-					<div class="align-items-center flex-column" id="searchLoading">
-						<div class="spinner-border text-secondary" role="status">
-							<span class="visually-hidden">Searching...</span>
-						</div>
-						<p class="mb-0 mt-1 small text-center text-secondary">
-							<span class="d-none">...</span>Searching...
-						</p>
-					</div>
-					<div id="searchResult"></div>
-					<div id="searchResultPlaceholder"> 
-						<hr style="border-color: #000000;" />
-						$pages.include("${communityhome}/components/quicksearch/projects.html")
-					</div>
-				</div>
-		</div>
-		
-		
-		<div class="sidebar-box-header"  >
-			<span class="sidebar-searchprojects" id="searchBtn"><i class="fas fa-search"></i> [[Search Projects]]</span>
-			<button class="oi-sidebar-toggler toggleuserpreference userOffcanvasToggler" 
-				        	data-action="hide" 
-				        	data-bs-dismiss="offcanvas" 
-				        	data-userpreference="showsidebar"
-				        	title="[[Hide User Sidebar]]">
-				        	<i class="fas fa-times"></i>
-				        </button>
-		</div>
-</div>
-
-
-
-
 <div class="sidebar-box" style="height:auto;"> 
 		
 	

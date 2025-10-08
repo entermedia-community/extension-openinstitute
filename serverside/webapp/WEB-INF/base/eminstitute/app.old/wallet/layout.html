@@ -1,6 +1,0 @@
-#if( !$canviewsettings && !$selecteduser.getId().equals( $user.getId() ))
-
-	<p>No permission</p>
-#else	
-$pages.include("$apphome/wallet/${content.getPageName()}.html")
-#end

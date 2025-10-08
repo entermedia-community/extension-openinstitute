@@ -1,8 +1,0 @@
-<page>
-<property name="alwaysresetpage">true</property>
-<path-action name="ChatModule.loadRecentChats"/>
-<path-action name="ProjectModule.loadGoalsInMessages"/>
-
-<path-action name="ChatModule.getAsset"/>
-
-</page>
