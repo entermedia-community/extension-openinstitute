@@ -6,6 +6,7 @@
 #set( $goaltrackercolumn = $context.getRequestParamater("topic"))
 #set ($collectionid = $context.getRequestParameter("collectionid"))
 #set( $targetdiv = $context.getRequestParameter("targetdiv"))
+#set( $newgoal = $context.getRequestParameter("newgoal"))
 
 #if(!$goalfolder)
 	#set( $goalfolder = $context.findValue("goalfolder") )
@@ -37,8 +38,10 @@ $context.putPageValue("searcher",$searcher)
 	method="post" 
 	data-targetdiv="$!targetdiv"
 	
-	#if( $data.id)
-		
+	#if($newgoal == "true")
+		##New Goal
+		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" >	
+	#else
 		#if($targetdiv)
 			action="$!{communityhome}/project/goals/priorities/goalsearchrowsave.html" >
 		#elseif($goalfolder=="agentcalendar")
@@ -48,8 +51,7 @@ $context.putPageValue("searcher",$searcher)
 		#else
 			action="$!{communityhome}/project/goals/${goalfolder}/goalsave.html" >
 		#end
-	#else
-		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" >
+	
 	#end
 
 
@@ -65,7 +67,6 @@ $context.putPageValue("searcher",$searcher)
 	<input type="hidden" name="save" value="true" />
 #end
 
-<input type="hidden" name="searchtype" value="projectgoal" />
 
 <input type="hidden" name="field" value="lasteditedby" />
 <input type="hidden" name="lasteditedby.value" value="$user.getId()" />

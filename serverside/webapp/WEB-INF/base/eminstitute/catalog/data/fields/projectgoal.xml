@@ -63,7 +63,7 @@
     </name> 
   </property>  
   
-  <property id="chatparentid" required="true" index="true" stored="true" editable="true"  type="list"  listid="chatterbox" datatype="list" > 
+  <property id="chatparentid" required="false" index="true" stored="true" editable="true"  type="list"  listid="chatterbox" datatype="list" > 
     <name> 
       <language id="en"><![CDATA[Chat Message Id]]></language>  
     </name> 

@@ -18,15 +18,16 @@
 
  	
  	<div style="float:left; line-height: 2;">
-	  	<a class="btn btn-primary emdialog" 
+	  	<a class="btn btn-primary emdialog mr-3" 
  		title="[[New Goal]]" 
  		data-width="900"
  		data-hidefooter="true"
  		style="margin-left: 10px;"
- 		href="${communityhome}/project/goals/editgoalpanel.html?collectionid=$!collectionid&categoryid=$!selectedcat.getId()&goalfolder=priorities&userlikes=$user.id" >
+ 		href="${projectlink}/goals/editgoalpanel.html?newgoal=true&categoryid=$!selectedcat.getId()&goalfolder=priorities&userlikes=$user.id&targetdiv=goalresultsdiv" >
  	<i class="fas fa-plus"></i> [[New Goal]]</a>
 
-		[[Total Priorities]]: <strong>$totallikes</strong> [[Open]]: <strong>$totalopen</strong> [[Closed]]: <strong>$totalclosed</strong> [[Sessions Purchased]] <strong>$!librarycol.totalsessionspurchased</strong> [[Sessions Completed]]  <strong>$!librarycol.totalsessionsused </strong> [[as of]] <strong>$!context.getDate($librarycol.sessioncalcdate)</strong>
+		<strong>$totallikes</strong> [[Total Priorities]]:  <strong>$totalopen</strong> [[Open]] | <strong>$totalclosed</strong> [[Closed]] 
+		##[[Sessions Purchased]] <strong>$!librarycol.totalsessionspurchased</strong> [[Sessions Completed]]  <strong>$!librarycol.totalsessionsused </strong> [[as of]] <strong>$!context.getDate($librarycol.sessioncalcdate)</strong>
 
 	</div>
 	<div class="clearfix"></div>
