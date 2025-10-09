@@ -909,20 +909,16 @@ header {
 	overflow: hidden;
 	margin-top: -0.125rem;
 }
-<<<<<<< HEAD ======= #header .navlinks,
+#header .navlinks,
 #header .dropdown-menu,
 #header .navlinks .dropdown-item {
 	background-color: #1d4c87;
 }
-
 #header .navbar-nav .dropdown-item:focus,
 #header .navbar-nav .dropdown-item:hover {
 	background-color: #71869d !important;
 }
->>>>>>>bdbfc23a078608a3140231d6f2ee102242dc3329
-	.header
-	.navbar-nav
-	.dropdown-menu.hs-mega-menu {
+.header .navbar-nav .dropdown-menu.hs-mega-menu {
 	padding-top: 0;
 	padding-bottom: 0;
 }
