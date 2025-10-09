@@ -909,12 +909,26 @@ header {
 	overflow: hidden;
 	margin-top: -0.125rem;
 }
-.header .navbar-nav .dropdown-menu.hs-mega-menu {
+<<<<<<< HEAD ======= #header .navlinks,
+#header .dropdown-menu,
+#header .navlinks .dropdown-item {
+	background-color: #1d4c87;
+}
+
+#header .navbar-nav .dropdown-item:focus,
+#header .navbar-nav .dropdown-item:hover {
+	background-color: #71869d !important;
+}
+>>>>>>>bdbfc23a078608a3140231d6f2ee102242dc3329
+	.header
+	.navbar-nav
+	.dropdown-menu.hs-mega-menu {
 	padding-top: 0;
 	padding-bottom: 0;
 }
 .header .navbar-nav .dropdown-item {
 	padding: 0;
+	color: #fff;
 }
 .header .navbar-nav .dropdown-item a {
 	padding: 0.75rem 1rem;
@@ -9861,7 +9875,9 @@ h6,
 .mainwebsitedark h3,
 .mainwebsitedark h4,
 .mainwebsitedark h5,
-.mainwebsitedark h6 {
+.mainwebsitedark h6,
+.card-collections a .collectionbox,
+.card-collections a:hover .collectionbox {
 	color: #fff;
 }
 h1 > u {
@@ -10996,6 +11012,10 @@ table.referrals tr:hover td {
 .card-collections {
 	display: inline-block;
 	width: 120px;
+	background: #1d4c87;
+}
+.card-collections .collectionbox {
+	width: 100%;
 }
 .emwidget-header {
 	background-color: #0c223b;

@@ -2,5 +2,7 @@
 <page>
 	<property name="editable">false</property>
 
-	<inner-layout>./layout.html</inner-layout>
+	<inner-layout>${communityhome}/guide/layout.html</inner-layout>
+	
+	
 </page>
