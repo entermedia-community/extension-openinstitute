@@ -1001,12 +1001,21 @@ header {
 	margin-top: -0.125rem;
 }
 
+#header .navlinks, #header .dropdown-menu, #header .navlinks .dropdown-item {
+	background-color:#1d4c87;
+}
+
+#header .navbar-nav  .dropdown-item:focus, 
+#header .navbar-nav  .dropdown-item:hover {
+	background-color:#71869d!important;
+}
 .header .navbar-nav .dropdown-menu.hs-mega-menu {
 	padding-top: 0;
 	padding-bottom: 0;
 }
 .header .navbar-nav .dropdown-item {
 	padding: 0;
+	color:#fff;
 }
 .header .navbar-nav .dropdown-item a {
 	padding: 0.75rem 1rem;
@@ -11188,7 +11197,9 @@ h6,
 .mainwebsitedark h3,
 .mainwebsitedark h4,
 .mainwebsitedark h5,
-.mainwebsitedark h6 {
+.mainwebsitedark h6,
+.card-collections a .collectionbox,
+.card-collections a:hover .collectionbox {
 	color: #fff;
 }
 
@@ -12368,7 +12379,11 @@ table.referrals tr:hover td {
 }
 .card-collections {
 	display:inline-block;
-	width: 120px;
+	width: 200px;
+	background:#1d4c87;
+}
+.card-collections .collectionbox {
+	width:100%;
 }
 .emwidget-header {
 	background-color: #0c223b;
