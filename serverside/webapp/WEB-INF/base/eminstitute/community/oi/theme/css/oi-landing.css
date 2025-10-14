@@ -6,6 +6,18 @@ body {
 	padding: 0;
 	margin: 0;
 }
+body.offcanvas-open {
+	padding-left: 250px;
+}
+#userOffcanvas.offcanvas {
+	transition: none;
+}
+#userOffcanvas .offcanvas-body {
+	padding: 0;
+}
+#emcontainer {
+	min-height: 480px;
+}
 .navbar {
 	background-color: #267371;
 }
@@ -82,9 +94,6 @@ i.navbar-toggler-icon,
 }
 #drawerMenu .offcanvas-body {
 	padding-top: 50px;
-}
-#userOffcanvas .offcanvas-body {
-	padding: 0;
 }
 .dropdown-menu {
 	padding: 0;
