@@ -488,6 +488,12 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
       <language id="en"><![CDATA[Testimonials]]></language>  
     </name> 
   </property>
+  
+    <property id="featuredcollection" index="true" type="boolean" keyword="false" filter="false" editable="true">
+    <name>
+      <language id="en"><![CDATA[Featured]]></language>
+    </name>
+  </property>
 
 
 
