@@ -208,6 +208,7 @@
       <language id="en"><![CDATA[Portrait Photo]]></language> 
     </name> 
   </property>  
+
   <property id="assetbanner" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" rendertype="asset" 
   	required="false" filter="false" multilanguage="false" datatype="list" autocreatefromexif="false" keyword="false" 
   	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}"
@@ -306,6 +307,16 @@ L
       <language id="en"><![CDATA[Business Info (Invoice)]]></language>  
     </name> 
   </property>  
+  
+   <property id="invoicelogo" index="true" editable="true" stored="true" internalfield="false" isbadge="false" viewtype="asset" 
+	   	rendertype="asset" required="false" filter="false" multilanguage="false" datatype="list"
+	   	sourcepath="/uploads/${id}/settings/${formattedyear}/${shortguid}" 
+	   	autocreatefromexif="false" keyword="false" writenametoexif="false"> 
+	    <name> 
+	      <language id="en"><![CDATA[Invoice Logo]]></language> 
+	    </name> 
+	</property>  
+
   
   	<property id="contactname" index="true" stored="true" keyword="true" editable="true" >Contact Name</property>
 

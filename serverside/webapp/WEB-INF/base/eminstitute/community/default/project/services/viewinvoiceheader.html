@@ -12,12 +12,18 @@
 
 <div class="row">
 	  <div class="col-sm-4 invoicecompanylogo">
-	    #set($logo = $mediaarchive.getAsset($collection.assetportrait) ) 
+		#set($logo = $mediaarchive.getAsset($collection.invoicelogo) )
+		#ifnull($logo)
+		    #set($logo = $mediaarchive.getAsset($collection.assetportrait) )
+		#end 
 		#if ($logo) 
-			#set($logourl = "/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
+			#set($imagesize = "image200x200")
+			#set( $logourl = $mediaarchive.asLinkToPreview($logo, "",$imagesize, true)) 
+			
 	    #else 
 			#set($logourl = "${communitylink}/theme/images/invoice-logo.png") 
 		#end
+		
 	    <img src="$logourl" style="max-height: 100px" />
 	  </div>
 	  <div
