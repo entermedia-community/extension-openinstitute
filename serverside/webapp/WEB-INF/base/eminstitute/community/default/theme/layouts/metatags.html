@@ -36,7 +36,7 @@
 		<meta property="og:description" content="#esc($!librarycol.collectivedescription)" />
 		#set( $logo = $mediaarchive.getAsset($librarycol.assetportrait) )
 		#if($logo)
-			#set($logourl = "$prefix/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${logo.sourcepath}/image200x200.jpg")
+			#set($logourl = $mediaarchive.asLinkToGenerated($logo,"image200x200"") ) 
 		#else
 			#set($logourl = "https://openinstitute.org/site/app/theme/oi/OpenInstitute-400x400.png")
 		#end
