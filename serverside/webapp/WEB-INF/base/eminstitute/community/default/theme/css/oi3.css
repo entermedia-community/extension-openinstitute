@@ -1522,9 +1522,10 @@ img.cat-thumb {
 	background-color: #fff;
 }
 .detail-input .input-label {
-	font-size: 1rem;
-	color: #444444;
+	font-size: 0.9rem;
+	color: #606060;
 	margin-bottom: 0.35rem;
+	/* font-weight: 700; */
 }
 .coverRandom {
 	background-size: 100% 70px;

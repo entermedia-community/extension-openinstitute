@@ -1,6 +1,6 @@
 <types>
 	<type id="draft">Draft</type>
-	<type id="readytopublish">Ready To Publish</type>
-	<type id="published">Published</type>
+	<type id="readytopublish">Publish &amp; Notify</type>
+	<type id="published">Published Completed</type>
 	<type id="error">Error</type>  
 </types>
