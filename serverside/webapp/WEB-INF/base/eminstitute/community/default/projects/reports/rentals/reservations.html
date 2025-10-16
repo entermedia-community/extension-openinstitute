@@ -102,16 +102,16 @@
 		#foreach($rental in $rentals)
 			#set( $project = $mediaarchive.getCachedData("librarycollection",$rental.collectionid) )
 			#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+			#if( $project ) 
+				#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/store")
+			#end
 			<tr>
 				<td>
-					
-					
-                    #if( $project ) 
-						#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/store")
-                        <a href="$hitprojectlink">
+                    
+                        <a href="$!hitprojectlink">
                             #text($project)
                         </a>
-                    #end
+                    
 				</td>
 					
 				<td>
@@ -121,7 +121,7 @@
 	                #set( $product = $mediaarchive.getCachedData("collectiveproduct",$prod.productid) )
 	                #if( $product ) 
 					#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/rentaldetails/${product.urlname}")
-	                    <a href="$hitprojectlink">
+	                    <a href="$!hitprojectlink">
 	                        #text($product)
 	                    </a>
 	                #end	
@@ -136,7 +136,7 @@
 					<td>$rental.paymentstatus</td>
 					
 					<td>
-						<a href="${projectlink}/store/reservations/previewinvoice.html?invoiceid=$rental.getId()" 
+						<a href="$!{hitprojectlink}/store/reservations/previewinvoice.html?invoiceid=$rental.getId()" 
 							class="emdialog btn btn-secondary btn-sm"
 							data-hidefooter="true"><i class="fas fa-edit"></i> [[Edit]]</a>
 						
