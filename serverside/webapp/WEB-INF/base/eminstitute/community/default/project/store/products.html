@@ -15,16 +15,16 @@
 *#
 
 
-<h2 class="text-center mb-3">[[Rental Products]]</h2>
+<h2 class="text-center mb-3">[[Rentals]]</h2>
 <hr/>
 
 <div class="d-flex justify-content-between my-3">
 #if( $caneditcollection)
-  <a href="${projectlink}/store/addnew.html?collectionid=${collectionid}" class="emdialog btn add-product" title="$library.name [[Product]]">
+  <a href="${projectlink}/store/addnew.html" class="emdialog btn add-product" title="$library.name [[Product]]">
     <i class="fas fa-cart-plus me-1"></i>
       [[Add A Product]]
   </a> 
-  <a href="${projectlink}/store/reservations.html?collectionid=${collectionid}" class="ajax btn view-reservation" title="$library.name [[Reservations]]" data-targetdivinner="storeworkarea" data-oemaxlevel="1">
+  <a href="${projectlink}/store/reservations.html" class="btn view-reservation" title="$library.name [[Reservations]]" data-targetdivinner="storeworkarea" data-oemaxlevel="1">
     <i class="fas fa-house-user me-1"></i>
       [[View All Reservations]]
   </a> 

@@ -27,6 +27,7 @@ import org.openedit.data.SearcherManager;
 import org.openedit.hittracker.HitTracker;
 import org.openedit.money.Money;
 import org.openedit.users.User;
+import org.openedit.util.DateStorageUtil;
 
 public class PaymentModule extends BaseMediaModule
 {
@@ -642,6 +643,21 @@ public class PaymentModule extends BaseMediaModule
 		
 		String invoicename = inReq.getRequestParameter("name.value");
 		invoice.setValue("name", invoicename);
+		
+		
+		String duedate = inReq.getRequestParameter("duedate");
+		if (duedate != null)
+		{
+			Date start = DateStorageUtil.getStorageUtil().parseFromStorage(duedate);
+			invoice.setValue("duedate", start);
+		}
+		
+		String enddate = inReq.getRequestParameter("enddate");
+		if (enddate != null)
+		{
+			Date end = DateStorageUtil.getStorageUtil().parseFromStorage(enddate);
+			invoice.setValue("enddate", end);
+		}
 		
 		mediaArchive.saveData("collectiveinvoice", invoice);
 		

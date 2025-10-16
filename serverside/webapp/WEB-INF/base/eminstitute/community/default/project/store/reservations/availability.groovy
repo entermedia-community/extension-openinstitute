@@ -1,21 +1,25 @@
 package store;
 
-import org.entermediadb.asset.MediaArchive
-import org.entermediadb.google.GoogleManager
-import org.entermediadb.projects.LibraryCollection
 import org.openedit.Data
-import org.openedit.MultiValued
-import org.openedit.event.WebEvent
-import org.openedit.users.User
 import org.openinstitute.finance.DateRange
  
 
 public void runit()
 {
+	String invoiceid = context.getRequestParameter("invoiceid");
+	
+	
 	//Search for dates
-	if( context.getPageValue("collectiveproduct") != null )
+	if( invoiceid != null )
 	{
-		Data product = context.getPageValue("collectiveproduct");
+		Data invoicedata = mediaarchive.getData("collectiveinvoice",invoiceid);
+		ArrayList products = (ArrayList)invoicedata.getValue("productlist");
+		String productid = products.get(0).productid;
+		Data product = mediaarchive.getData("collectiveproduct",productid);
+		if ( product == null)
+        {
+            return;
+        }
 		log.info("On " + product);
         Date now = new Date();
         Date from = mediaarchive.getBean("dateStorageUtil").addDaysToDate(now,-31);

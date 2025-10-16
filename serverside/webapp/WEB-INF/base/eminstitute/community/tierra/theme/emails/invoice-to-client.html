@@ -473,8 +473,9 @@
 											
 											#set($dailyrate = $context.roundDouble($dailyrate,2) )
 											#set($duedate = $invoice.getDate("duedate"))
-											#set($enddate = $invoiceManager.getEndDate($product))
-
+											###set($enddate = $invoiceManager.getEndDate($product))
+											#set($enddate = $invoice.getDate("enddate"))
+											
 											<div class="reservation-date">
 												<div class="d-flex align-items-end"> 
 													<div class="d-flex flex-column">

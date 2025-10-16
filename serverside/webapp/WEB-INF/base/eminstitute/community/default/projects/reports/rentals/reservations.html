@@ -7,11 +7,7 @@
 	  </h2>
 	</div>
 	<hr />
-	<div class="mb-3">
-	<a class="btn add-product md-1" href="${projectlink}/store/index.html">
-	  <i class="fas fa-arrow-left"></i> [[Rentals]]
-	</a>
-	</div>
+
 	#if ($!context.getRequestParameter("year")) 
 		#set( $year = $!context.getRequestParameter("year"))
 	#else
@@ -93,6 +89,7 @@
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
+		  <th>[[Project]]</th>
 	      <th>[[Rental]]</th>
 	      <th>[[Dates]]</th>
 		  <th>[[Guest]]</th>
@@ -103,14 +100,28 @@
 	  </thead>
 	  <tbody>
 		#foreach($rental in $rentals)
+			#set( $project = $mediaarchive.getCachedData("librarycollection",$rental.collectionid) )
+			#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
 			<tr>
+				<td>
+					
+					
+                    #if( $project ) 
+						#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/store")
+                        <a href="$hitprojectlink">
+                            #text($project)
+                        </a>
+                    #end
+				</td>
+					
 				<td>
 					#set($products = $rental.getValue("productlist"))
 					
 					#foreach ($prod    in $products) 
 	                #set( $product = $mediaarchive.getCachedData("collectiveproduct",$prod.productid) )
 	                #if( $product ) 
-	                    <a href="${projectlink}/rentaldetails/${product.urlname}">
+					#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/rentaldetails/${product.urlname}")
+	                    <a href="$hitprojectlink">
 	                        #text($product)
 	                    </a>
 	                #end	

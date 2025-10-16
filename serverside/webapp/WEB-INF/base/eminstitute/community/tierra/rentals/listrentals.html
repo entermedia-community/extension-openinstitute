@@ -1,3 +1,13 @@
+<div class="main container-fluid text-center">
+#if($canviewsettings)
+<div class="p-4">
+<a href="/projects/reports/rentals/reservations.html" class="btn view-reservation" title="$library.name [[Reservations]]" data-targetdivinner="storeworkarea" data-oemaxlevel="1">
+  <i class="fas fa-house-user me-1"></i>
+    [[View All Reservations]]
+</a> 
+</div>
+#end
+
 $pages.include("${communityhome}/rentals/filters.html", $context)
 
  #if( $hits.isEmpty() )
@@ -6,7 +16,10 @@ $pages.include("${communityhome}/rentals/filters.html", $context)
   	
   #end
 
-<div class="main container-fluid text-center">
+  
+  
+  
+
   <div class="d-flex justify-content-center flex-wrap">
   	$pages.include("$communityhome/rentals/listrentalresults.html",$context)	
   </div>
@@ -23,15 +36,15 @@ $pages.include("${communityhome}/rentals/filters.html", $context)
         <div class="d-flex justify-content-around w-100 stats">
           <p class="reviews">
             <strong></strong>
-            <small>Reviews</small>
+            <small>[[Reviews]]</small>
           </p>
           <p class="rating">
             <strong></strong>
-            <small>Rating</small>
+            <small>[[Rating]]</small>
           </p>
           <p class="duration">
             <strong></strong>
-            <small>Years hosting</small>
+            <small>[[Years hosting]]</small>
           </p>
         </div>
       </div>

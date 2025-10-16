@@ -120,6 +120,9 @@ button {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
+.btn-searchprojects {
+	height: 40px;
+}
 .nav-link#navbarDropdown i.fas {
   font-size: 1.25rem;
 }
@@ -379,7 +382,7 @@ p.h5,
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 998;
+  z-index: 999999;
   display: none;
   background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(1px);
@@ -397,7 +400,7 @@ p.h5,
   background-color: #ffffff;
   min-width: 292px;
   padding: 8px !important;
-  z-index: 9999;
+  z-index: 999999;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 8px rgba(88, 88, 88, 0.5);

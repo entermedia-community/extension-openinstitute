@@ -286,5 +286,8 @@ public class InvoiceManager implements CatalogEnabled
 
 		return endbilldate.getTime();
 	}
+	
+
+	
 
 }

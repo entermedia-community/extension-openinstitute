@@ -23,7 +23,7 @@
 	#end
 
 	#set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
-	#set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image1200x628.jpg"))
+	#set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image1200x628"))
 	<meta property="og:image" itemprop="image" content="${prefix}${postimagesrc}">
 	<meta property="og:image:type" content="image/jpeg">
 	<meta property="og:image:width" content="1200" />

@@ -38,8 +38,8 @@
 	    <div class=" d-flex justify-content-between">
 		<div>
 		    <div style="padding: 0 0 5px">
-		      <strong>[[Invoice Status]]:</strong>
-		      #if($status.equals("invoiced")) [[Invoice sent]]
+		      <strong>[[Status]]:</strong>
+		      #if($status.equals("invoiced")) [[Confirmation Sent]]
 		      #elseif($status.equals("pending")) [[Pending]]
 		      #elseif($status.equals("payd")) [[Payd]] #end
 		    </div>
@@ -50,19 +50,19 @@
 		    #end ##contacts
 		</div>
 		
-		<div class="printinvoicebtn text-right">
+		#*<div class="printinvoicebtn text-right">
 		      <a
-		        href="${projectlink}/services/printpreview.html?invoiceid=$!invoice.id"
+		        href="${projectlink}/store/reservations/printpreview.html?invoiceid=$!invoice.id"
 		        target="_blank"
 		        class="btn btn-sm btn-light"
 		        ><i class="fa-solidfa-print"></i> [[Print]]</a>
 		    </div>
-		</div>
+		</div>*#
 	    <div style="margin: 0 0 20px">
 	      #if($status.equals("invoiced"))
 	      <strong>[[Sent to]]:</strong>
 	      #else
-	      <strong>[[Send invoice to]]:</strong>
+	      <strong>[[Send to]]:</strong>
 	      #end
 	      <div
 	        style="
@@ -73,16 +73,19 @@
 	        "
 	      >
 	        #if($invoice.getValue("sentto")) $invoice.getValue("sentto") #else
-	        --[[Edit invoice to add contacts]]-- #end
+	        --[[Edit to add contacts]]-- #end
 	      </div>
 	    </div>
 	  </div>
 	
 	  <div class="viewinvoicebody" style="position: relative">
 		
+		
 	    $pages.include("viewinvoiceheader.html", $context)
-
-		<div style="background-color: #efefef; padding: 10px; margin: 10px 0">
+		
+		
+	
+	    <div style="background-color: #efefef; padding: 10px; margin: 10px 0">
 	      <table style="width: 100%">
 	        <tr>
 	          <td>
@@ -90,26 +93,22 @@
 	            #set($invoicename = $replacer.replace($invoiceoriginalname,
 	            $invoiceformated))
 	
-	            <strong>[[Invoice Number]]:</strong>
+	            <strong>[[Reservation Number]]:</strong>
 	            $invoice.getValue("invoicenumber")
 	            <br />
-	            <strong>$!invoicename</strong>
+	            ##<strong>$!invoicename</strong>
 	            #if($invoicemonth) ##
 	            <div><strong>Month:</strong> $invoicemonth</div>
 	            #end
 	          </td>
 	          <td style="width: 240px; text-align: right; vertical-align: top">
-	            <strong>[[Due Date]]:</strong> $!duedate
+	            
 	          </td>
 	        </tr>
 	      </table>
 	    </div>
 	    <div style="margin-top: 10px">
-	      ##<strong>[[Invoiced to]]:</strong> 
-		  ###set($invoicedto = $collection.getValue("invoicedto")) 
-		  ###if($invoicedto) 
-		  ##<div style="line-height: 1">$invoicedto</div>
-	      ###else ## <br />$!collection ###end 
+
 		  #set($invoicedescription = $invoice.getValue("invoicedescription")) 
 		  #if($invoicedescription)
 		      #set($invoicedescription = $replacer.replace($invoicedescription, $invoiceformated)) 
@@ -118,75 +117,86 @@
 	    </div>
 	
 	    <div style="padding-top: 10px">
-	      <h4>[[Products]]</h4>
-	      <div class="table-responsive">
-	        <table class="d-print-table table">
-	          <col span="1" style="width: 10%" />
-	          <col span="1" style="width: 70%" />
-	          <col span="1" style="width: 20%" />
-	          <tr>
-	            <th class="purchase_heading" align="left">
-	              <p class="f-fallback">[[Quantity]]</p>
-	            </th>
-	            <th class="purchase_heading" align="left">
-	              <p class="f-fallback">[[Description]]</p>
-	            </th>
-	            <th
-	              class="purchase_heading"
-	              align="right"
-	              style="text-align: right"
-	            >
-	              <p class="f-fallback">[[Amount]]</p>
-	            </th>
-	          </tr>
-	          #set($products = $invoice.getValue("productlist"))
-	          #foreach ($product    in $products) #set ( $prod =  $mediaarchive.getBean("invoiceManager").getProductById($product.productid) )
-	          <tr>
-	            <td valign="top" style="vertical-align: top">
-	              $product.productquantity
-	            </td>
-	
-	            <td valign="top" style="vertical-align: top">
-	              
-	              <div>
-					#set($productname = $replacer.replace($prod.name, $invoiceformated)) 
-					#text($productname)
-				  </div>
-	              
-	              <div style="font-size: 0.9em">
-	                $!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)
-	              </div>
-	
-	              
-	            </td>
-	            <td valign="top" style="text-align: right; vertical-align: top">
-	              <span
-	                >$currency $!context.doubleToMoney($product.productprice, 2)</span
-	              >
-	            </td>
-	          </tr>
-	          #end
-	          <tr>
-	            <td style="text-align:right" colspan="2">
-	              <b
-	                >[[Total]]
-	                <span class="currencysmall"
-	                  >($!context.getText($!mediaarchive.getCachedData("currencytype",
-	                  $invoice.getValue("currencytype"))))</span
-	                ></b
-	              >
-	            </td>
-	            <td style="text-align: right">
-	              <b>
-	                ##$currency
-	                ##$context.doubleToMoney($invoice.getValue("totalprice"), 2)
-	                $currency
-	                $!context.doubleToMoney($invoice.getValue("totalprice"), 2)
-	              </b>
-	            </td>
-	          </tr>
-	        </table>
-	      </div>
+	      
+			<table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
+			   #set($invoiceManager = $mediaarchive.getBean("invoiceManager"))
+               #set($purchases = $invoice.getValue("productlist"))
+				#foreach ($purchase in $purchases)
+					#set ( $product = $invoiceManager.getProductById($purchase.productid) )
+					<tr>
+						<td valign="top" style="vertical-align: top;">
+							
+							#set($totaldays = $purchase.productquantity)
+							
+							##DO not have
+							#set($totalprice = $invoice.getDouble("totalprice") )
+							#set($totalprice = $context.roundDouble($totalprice,2) )
+							
+							#set($guests = $invoice.getInt("headcount") )
+							#set($dailyrate =  $totalprice / $totaldays)
+							
+							#set($dailyrate = $context.roundDouble($dailyrate,2) )
+							#set($duedate = $invoice.getDate("duedate"))
+							###set($enddate = $invoiceManager.getEndDate($product))
+							#set($enddate = $invoice.getDate("enddate"))
+							
+							<div class="reservation-date">
+								<div class="d-flex align-items-end"> 
+									<div class="d-flex flex-column">
+										<span class="mb-2">[[Self Check-in]]:</span>
+										<strong>$context.getDate($duedate)</strong>
+										<small>14:00 &mdash; 24:00</small>
+									</div>
+									<div class="vertical-divider"></div>
+									<div class="d-flex flex-column">
+										<span class="mb-2">[[Check-out]]:</span>
+										<strong>$context.getDate($enddate)</strong>
+										<small>00:00 &mdash; 10:00</small>
+									</div> 
+								</div>
+								
+								<p class="mt-3 mb-0">Total length of stay: <strong>$totaldays nights</strong></p>
+								
+								<p class="m-0">You selected: <strong>1 room</strong>
+								#if($guests != "0")
+								for <strong>$guests</strong>
+								#end
+								</p>
+							</div>
+					
+							<div class="reservation-price">
+								<div class="">
+									#if( $totaldays < 29)
+									<p class="m-0 text-muted ">+Stay is less than one month</p>
+									#end
+										#if( $howmanypeople && $howmanypeople > 1)
+									<p class="m-0 text-muted ">+More than one person</p>
+										#end
+									<p class="m-0 text-muted ">Daily rate: $$dailyrate $!context.getText($!mediaarchive.getCachedData("currencytype",$invoice.currencytype )) Per day</p>
+									<h3>
+										Price: $totaldays x $dailyrate= $$totalprice $!context.getText($!mediaarchive.getCachedData("currencytype",$invoice.currencytype ))
+									</h3>
+								</div>
+							</div>
+							
+							<div>
+
+							
+							#ifnotnull( $invoice.customernote )
+							<p>Customer Note:</p>
+							<p>#esc($invoice.customernote)</p>
+							#end
+
+	                        $!invoicefooter
+
+
+							</div> 
+							
+						</td>
+					</tr>
+				#end
+              </table>
+			
 	    </div>
 	  </div>
 	</div>
