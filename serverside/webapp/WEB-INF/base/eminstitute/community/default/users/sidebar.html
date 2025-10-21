@@ -55,7 +55,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 						<b>  $otherperson.getScreenName() </b>
 						#end
 						#ifnull($otherperson)
-						<b> #datatext($project,"name") </b>
+						<b> #text($project) </b>
 						#end
 						<div class="messagearea">
 							#if($message.message)
