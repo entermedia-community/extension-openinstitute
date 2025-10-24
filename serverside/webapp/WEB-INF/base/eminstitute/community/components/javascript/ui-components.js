@@ -231,20 +231,7 @@ uiload = function () {
 
 	lQuery("select.select2").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
+
 		var allowClear = $(this).data("allowclear");
 		if (allowClear == undefined) {
 			allowClear = true;
@@ -257,7 +244,7 @@ uiload = function () {
 			theinput.select2({
 				allowClear: allowClear,
 				placeholder: placeholder,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 			});
 		}
 
@@ -285,20 +272,6 @@ uiload = function () {
 	*/
 	lQuery("select.listdropdown").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
 
 		//console.log(theinput.attr("id")+"using: "+dropdownParent.attr("id"));
 		var placeholder = theinput.data("placeholder");
@@ -311,52 +284,52 @@ uiload = function () {
 			allowClear = true;
 		}
 		if ($.fn.select2) {
-			theinput = theinput.select2({
+			theinput.select2({
 				placeholder: placeholder,
 				allowClear: allowClear,
 				minimumInputLength: 0,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 			});
-		}
-		theinput.on("change", function (e) {
-			//console.log("XX changed")
-			if (theinput.hasClass("uifilterpicker")) {
-				var selectedids = theinput.val();
-				if (selectedids) {
-					//console.log("XX has class" + selectedids);
-					var parent = theinput.closest(".filter-box-options");
-					//console.log(parent.find(".filtercheck"));
-					parent.find(".filtercheck").each(function () {
-						var filter = $(this);
-						filter.prop("checked", false); //remove?
-					});
-					for (i = 0; i < selectedids.length; i++) {
-						//$entry.getId()${fieldname}_val
-						var selectedid = selectedids[i];
-						var fieldname = theinput.data("fieldname");
-						var targethidden = $("#" + selectedid + fieldname + "_val");
-						targethidden.prop("checked", true);
+			theinput.on("change", function (e) {
+				//console.log("XX changed")
+				if (theinput.hasClass("uifilterpicker")) {
+					var selectedids = theinput.val();
+					if (selectedids) {
+						//console.log("XX has class" + selectedids);
+						var parent = theinput.closest(".filter-box-options");
+						//console.log(parent.find(".filtercheck"));
+						parent.find(".filtercheck").each(function () {
+							var filter = $(this);
+							filter.prop("checked", false); //remove?
+						});
+						for (i = 0; i < selectedids.length; i++) {
+							//$entry.getId()${fieldname}_val
+							var selectedid = selectedids[i];
+							var fieldname = theinput.data("fieldname");
+							var targethidden = $("#" + selectedid + fieldname + "_val");
+							targethidden.prop("checked", true);
+						}
 					}
 				}
-			}
-		});
+			});
 
-		theinput.on("select2:open", function (e) {
-			var selectId = $(this).attr("id");
-			if (selectId) {
-				$(
-					".select2-search__field[aria-controls='select2-" +
-						selectId +
-						"-results']"
-				).each(function (key, value) {
-					value.focus();
-				});
-			} else {
-				document
-					.querySelector(".select2-container--open .select2-search__field")
-					.focus();
-			}
-		});
+			theinput.on("select2:open", function (e) {
+				var selectId = $(this).attr("id");
+				if (selectId) {
+					$(
+						".select2-search__field[aria-controls='select2-" +
+							selectId +
+							"-results']"
+					).each(function (key, value) {
+						value.focus();
+					});
+				} else {
+					document
+						.querySelector(".select2-container--open .select2-search__field")
+						.focus();
+				}
+			});
+		}
 	});
 
 	lQuery(".select2editable").livequery(function () {
@@ -1441,23 +1414,10 @@ uiload = function () {
 
 	lQuery("select.listtags").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
+
 		var searchtype = theinput.data("searchtype");
 		var searchfield = theinput.data("searchfield");
-		var catalogid = theinput.data("listcatalogid");
+
 		var sortby = theinput.data("sortby");
 		var defaulttext = theinput.data("showdefault");
 		if (!defaulttext) {
@@ -1478,7 +1438,7 @@ uiload = function () {
 				tags: true,
 				placeholder: defaulttext,
 				allowClear: allowClear,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 				selectOnBlur: true,
 				delay: 150,
 				minimumInputLength: 1,
@@ -1535,38 +1495,23 @@ uiload = function () {
 				tokenSeparators: ["|"],
 				separator: "|",
 			});
+			theinput.on("select2:select", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+				}
+			});
+			theinput.on("select2:unselect", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+				}
+			});
 		}
-		theinput.on("select2:select", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-			}
-		});
-		theinput.on("select2:unselect", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-			}
-		});
 	});
 
 	lQuery("select.searchtags").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
 
 		var searchfield = theinput.data("searchfield");
-		var sortby = theinput.data("sortby");
 		var defaulttext = theinput.data("showdefault");
 		if (!defaulttext) {
 			defaulttext = "Search";
@@ -1588,7 +1533,7 @@ uiload = function () {
 				tags: true,
 				placeholder: defaulttext,
 				allowClear: allowClear,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 				selectOnBlur: true,
 				delay: 150,
 				minimumInputLength: 2,
@@ -1639,31 +1584,31 @@ uiload = function () {
 				tokenSeparators: ["|"],
 				separator: "|",
 			});
+			theinput.on("select2:select", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+					var selected = $(this).select2("data");
+					var terms = "";
+					selected.forEach(function (item, index, arr) {
+						terms = terms + " " + item["id"] + "";
+					});
+					$("#descriptionvalue", form).val(terms);
+					form.trigger("submit");
+				}
+			});
+			theinput.on("select2:unselect", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+					var selected = $(this).select2("data");
+					var terms = "";
+					selected.forEach(function (item, index, arr) {
+						terms = terms + " " + item["id"] + "";
+					});
+					$("#descriptionvalue", form).val(terms);
+					form.trigger("submit");
+				}
+			});
 		}
-		theinput.on("select2:select", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-				var selected = $(this).select2("data");
-				var terms = "";
-				selected.forEach(function (item, index, arr) {
-					terms = terms + " " + item["id"] + "";
-				});
-				$("#descriptionvalue", form).val(terms);
-				form.trigger("submit");
-			}
-		});
-		theinput.on("select2:unselect", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-				var selected = $(this).select2("data");
-				var terms = "";
-				selected.forEach(function (item, index, arr) {
-					terms = terms + " " + item["id"] + "";
-				});
-				$("#descriptionvalue", form).val(terms);
-				form.trigger("submit");
-			}
-		});
 	});
 
 	lQuery(".grabfocus").livequery(function () {
@@ -1840,21 +1785,6 @@ uiload = function () {
 					defaultvalueid;
 			}
 
-			var dropdownParent = theinput.data("dropdownparent");
-			if (dropdownParent && $("#" + dropdownParent).length) {
-				dropdownParent = $("#" + dropdownParent);
-			} else {
-				dropdownParent = $(this).parent();
-			}
-			var parent = theinput.closest("#main-media-container");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-			var parent = theinput.parents(".modal-content");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-
 			var allowClear = theinput.data("allowclear");
 			if (allowClear == undefined) {
 				allowClear = true;
@@ -1864,7 +1794,7 @@ uiload = function () {
 					placeholder: defaulttext,
 					allowClear: allowClear,
 					minimumInputLength: 0,
-					dropdownParent: dropdownParent,
+					dropdownParent: getDropdownParent(theinput),
 					ajax: {
 						// instead of writing the
 						// function to execute the
@@ -1938,63 +1868,62 @@ uiload = function () {
 					templateResult: select2formatResult,
 					templateSelection: select2Selected,
 				});
-			}
-			// TODO: Remove this?
-			theinput.on("change", function (e) {
-				if (e.val == "") {
-					// Work around for a bug
-					// with the select2 code
-					var id = "#list-" + theinput.attr("id");
-					$(id).val("");
-				} else {
-					// Check for "_addnew_" show ajax form
-					var selectedid = theinput.val();
+				// TODO: Remove this?
+				theinput.on("change", function (e) {
+					if (e.val == "") {
+						// Work around for a bug
+						// with the select2 code
+						var id = "#list-" + theinput.attr("id");
+						$(id).val("");
+					} else {
+						// Check for "_addnew_" show ajax form
+						var selectedid = theinput.val();
 
-					if (selectedid == "_addnew_") {
-						var clicklink = $("#" + theinput.attr("id") + "add");
-						clicklink.trigger("click");
+						if (selectedid == "_addnew_") {
+							var clicklink = $("#" + theinput.attr("id") + "add");
+							clicklink.trigger("click");
 
-						e.preventDefault();
-						theinput.select2("val", "");
-						return false;
-					}
-					if (theinput.hasClass("uifilterpicker")) {
-						//Not used?
-						//$entry.getId()${fieldname}_val
-						var fieldname = theinput.data("fieldname");
-						var targethidden = $("#" + selectedid + fieldname + "_val");
-						targethidden.prop("checked", true);
-					}
-					// Check for "_addnew_" show ajax form
-					if (theinput.hasClass("selectautosubmit")) {
-						if (selectedid) {
-							//var theform = $(this).closest("form");
-							var theform = $(this).parent("form");
-							if (theform.hasClass("autosubmitform")) {
-								theform.trigger("submit");
+							e.preventDefault();
+							theinput.select2("val", "");
+							return false;
+						}
+						if (theinput.hasClass("uifilterpicker")) {
+							//Not used?
+							//$entry.getId()${fieldname}_val
+							var fieldname = theinput.data("fieldname");
+							var targethidden = $("#" + selectedid + fieldname + "_val");
+							targethidden.prop("checked", true);
+						}
+						// Check for "_addnew_" show ajax form
+						if (theinput.hasClass("selectautosubmit")) {
+							if (selectedid) {
+								//var theform = $(this).closest("form");
+								var theform = $(this).parent("form");
+								if (theform.hasClass("autosubmitform")) {
+									theform.trigger("submit");
+								}
 							}
 						}
 					}
-				}
-			});
+				});
 
-			theinput.on("select2:open", function (e) {
-				console.log("open");
-				var selectId = $(this).attr("id");
-				if (selectId) {
-					$(
-						".select2-search__field[aria-controls='select2-" +
-							selectId +
-							"-results']"
-					).each(function (key, value) {
-						value.focus();
-					});
-				} else {
-					document
-						.querySelector(".select2-container--open .select2-search__field")
-						.focus();
-				}
-			});
+				theinput.on("select2:open", function (e) {
+					var selectId = $(this).attr("id");
+					if (selectId) {
+						$(
+							".select2-search__field[aria-controls='select2-" +
+								selectId +
+								"-results']"
+						).each(function (key, value) {
+							value.focus();
+						});
+					} else {
+						document
+							.querySelector(".select2-container--open .select2-search__field")
+							.focus();
+					}
+				});
+			}
 		}
 	});
 	//-
@@ -2032,31 +1961,17 @@ uiload = function () {
 					defaultvalueid;
 			}
 
-			var dropdownParent = theinput.data("dropdownparent");
-			if (dropdownParent && $("#" + dropdownParent).length) {
-				dropdownParent = $("#" + dropdownParent);
-			} else {
-				dropdownParent = $(this).parent();
-			}
-			var parent = theinput.closest("#main-media-container");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-			var parent = theinput.parents(".modal-content");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-
 			var allowClear = theinput.data("allowclear");
 			if (allowClear == undefined) {
 				allowClear = true;
 			}
+
 			theinput.select2({
 				placeholder: defaulttext,
 				allowClear: allowClear,
 				minimumInputLength: 0,
 				tags: true,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 				ajax: {
 					// instead of writing the
 					// function to execute the

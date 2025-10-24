@@ -236,11 +236,7 @@ jQuery(document).ready(function () {
 
 	lQuery(".autosubmitlink").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = $("body");
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		}
+
 		var placeholder = $(this).data("placeholder");
 		theinput
 			.select2({
@@ -248,7 +244,7 @@ jQuery(document).ready(function () {
 				allowClear: false,
 				minimumInputLength: 0,
 				placeholder: placeholder,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 			})
 			.on("select2:select", function (e) {
 				var data = e.params.data;

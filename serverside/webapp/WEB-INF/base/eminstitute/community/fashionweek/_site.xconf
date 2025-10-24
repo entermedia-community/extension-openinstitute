@@ -6,7 +6,7 @@
 	<property name="fallbackdirectory">../default</property>
 	<property name="communityhome">/${siteid}/community/fashionweek</property>
 
-	
+
 	<property name="templatename">CineCraft</property>
 
 	<property name="communitytagcategory">fashionweek</property>
@@ -21,7 +21,9 @@
 	<script id="datetimepicker" src="${communityhome}/components/javascript/datepicker/js/bootstrap-datepicker.min.js"/>
 	<style id="datetimepicker-css" href="${communityhome}/components/javascript/datepicker/css/bootstrap-datepicker3.min.css" />
 
-    <script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="liveajax" src="${communityhome}/components/javascript/emedia/liveajax.js" />
+	<script id="utility-plugins" src="${communityhome}/components/javascript/emedia/utility-plugins.js" />
+
 	<script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
 	<script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
 	<script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
@@ -30,7 +32,7 @@
 	<script id="uicomponents" src="${communityhome}/components/javascript/community-global.js"/>
 
 	<style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
-	
+
 	<!-- <style href="${communityhome}/theme/js/bootstrap/css/bootstrap.min.css" />
 	<style href="${communityhome}/theme/js/bootstrap-icons/bootstrap-icons.css" /> -->
 	<!-- <style id="aos-css" href="${communityhome}/theme/js/aos/aos.css" /> -->

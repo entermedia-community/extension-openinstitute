@@ -213,20 +213,7 @@ $(document).ready(function () {
 
 	lQuery("select.select2").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
+
 		var allowClear = $(this).data("allowclear");
 		if (allowClear == undefined) {
 			allowClear = true;
@@ -236,26 +223,25 @@ $(document).ready(function () {
 			theinput.select2({
 				allowClear: allowClear,
 				placeholder: placeholder,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
+			});
+			theinput.on("select2:open", function (e) {
+				var selectId = $(this).attr("id");
+				if (selectId) {
+					$(
+						".select2-search__field[aria-controls='select2-" +
+							selectId +
+							"-results']"
+					).each(function (key, value) {
+						value.focus();
+					});
+				} else {
+					document
+						.querySelector(".select2-container--open .select2-search__field")
+						.focus();
+				}
 			});
 		}
-
-		theinput.on("select2:open", function (e) {
-			var selectId = $(this).attr("id");
-			if (selectId) {
-				$(
-					".select2-search__field[aria-controls='select2-" +
-						selectId +
-						"-results']"
-				).each(function (key, value) {
-					value.focus();
-				});
-			} else {
-				document
-					.querySelector(".select2-container--open .select2-search__field")
-					.focus();
-			}
-		});
 	});
 	/*
 		$(".select2simple").select2({
@@ -264,20 +250,6 @@ $(document).ready(function () {
 		*/
 	lQuery("select.listdropdown").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
 
 		var placeholder = getSelect2Placeholder.call(this);
 
@@ -291,66 +263,53 @@ $(document).ready(function () {
 				placeholder: placeholder,
 				allowClear: allowClear,
 				minimumInputLength: 0,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 			});
-		}
-		theinput.on("change", function (e) {
-			//console.log("XX changed")
-			if (theinput.hasClass("uifilterpicker")) {
-				var selectedids = theinput.val();
-				if (selectedids) {
-					//console.log("XX has class" + selectedids);
-					var parent = theinput.closest(".filter-box-options");
-					//console.log(parent.find(".filtercheck"));
-					parent.find(".filtercheck").each(function () {
-						var filter = $(this);
-						filter.prop("checked", false); //remove?
-					});
-					for (i = 0; i < selectedids.length; i++) {
-						//$entry.getId()${fieldname}_val
-						var selectedid = selectedids[i];
-						var fieldname = theinput.data("fieldname");
-						var targethidden = $("#" + selectedid + fieldname + "_val");
-						targethidden.prop("checked", true);
+			theinput.on("change", function (e) {
+				//console.log("XX changed")
+				if (theinput.hasClass("uifilterpicker")) {
+					var selectedids = theinput.val();
+					if (selectedids) {
+						//console.log("XX has class" + selectedids);
+						var parent = theinput.closest(".filter-box-options");
+						//console.log(parent.find(".filtercheck"));
+						parent.find(".filtercheck").each(function () {
+							var filter = $(this);
+							filter.prop("checked", false); //remove?
+						});
+						for (i = 0; i < selectedids.length; i++) {
+							//$entry.getId()${fieldname}_val
+							var selectedid = selectedids[i];
+							var fieldname = theinput.data("fieldname");
+							var targethidden = $("#" + selectedid + fieldname + "_val");
+							targethidden.prop("checked", true);
+						}
 					}
 				}
-			}
-		});
+			});
 
-		theinput.on("select2:open", function (e) {
-			var selectId = $(this).attr("id");
-			if (selectId) {
-				$(
-					".select2-search__field[aria-controls='select2-" +
-						selectId +
-						"-results']"
-				).each(function (key, value) {
-					value.focus();
-				});
-			} else {
-				document
-					.querySelector(".select2-container--open .select2-search__field")
-					.focus();
-			}
-		});
+			theinput.on("select2:open", function (e) {
+				var selectId = $(this).attr("id");
+				if (selectId) {
+					$(
+						".select2-search__field[aria-controls='select2-" +
+							selectId +
+							"-results']"
+					).each(function (key, value) {
+						value.focus();
+					});
+				} else {
+					document
+						.querySelector(".select2-container--open .select2-search__field")
+						.focus();
+				}
+			});
+		}
 	});
 
 	lQuery("select.listtags").livequery(function () {
 		var theinput = $(this);
-		var dropdownParent = theinput.data("dropdownparent");
-		if (dropdownParent && $("#" + dropdownParent).length) {
-			dropdownParent = $("#" + dropdownParent);
-		} else {
-			dropdownParent = $(this).parent();
-		}
-		var parent = theinput.closest("#main-media-container");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
-		var parent = theinput.parents(".modal-content");
-		if (parent.length) {
-			dropdownParent = parent;
-		}
+
 		var searchtype = theinput.data("searchtype");
 		var searchfield = theinput.data("searchfield");
 		var catalogid = theinput.data("listcatalogid");
@@ -374,7 +333,7 @@ $(document).ready(function () {
 				tags: true,
 				placeholder: defaulttext,
 				allowClear: allowClear,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 				selectOnBlur: true,
 				delay: 150,
 				minimumInputLength: 1,
@@ -431,17 +390,17 @@ $(document).ready(function () {
 				tokenSeparators: ["|"],
 				separator: "|",
 			});
+			theinput.on("select2:select", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+				}
+			});
+			theinput.on("select2:unselect", function () {
+				if ($(this).parents(".ignore").length == 0) {
+					$(this).valid();
+				}
+			});
 		}
-		theinput.on("select2:select", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-			}
-		});
-		theinput.on("select2:unselect", function () {
-			if ($(this).parents(".ignore").length == 0) {
-				$(this).valid();
-			}
-		});
 	});
 
 	lQuery(".custom-navbar-toggler").livequery("click", function () {
@@ -547,21 +506,6 @@ $(document).ready(function () {
 					defaultvalueid;
 			}
 
-			var dropdownParent = theinput.data("dropdownparent");
-			if (dropdownParent && $("#" + dropdownParent).length) {
-				dropdownParent = $("#" + dropdownParent);
-			} else {
-				dropdownParent = $(this).parent();
-			}
-			var parent = theinput.closest("#main-media-container");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-			var parent = theinput.parents(".modal-content");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-
 			var allowClear = theinput.data("allowclear");
 			if (allowClear == undefined) {
 				allowClear = true;
@@ -571,7 +515,7 @@ $(document).ready(function () {
 					placeholder: defaulttext,
 					allowClear: allowClear,
 					minimumInputLength: 0,
-					dropdownParent: dropdownParent,
+					dropdownParent: getDropdownParent(theinput),
 					ajax: {
 						// instead of writing the
 						// function to execute the
@@ -686,7 +630,6 @@ $(document).ready(function () {
 			});
 
 			theinput.on("select2:open", function (e) {
-				console.log("open");
 				var selectId = $(this).attr("id");
 				if (selectId) {
 					$(
@@ -739,31 +682,17 @@ $(document).ready(function () {
 					defaultvalueid;
 			}
 
-			var dropdownParent = theinput.data("dropdownparent");
-			if (dropdownParent && $("#" + dropdownParent).length) {
-				dropdownParent = $("#" + dropdownParent);
-			} else {
-				dropdownParent = $(this).parent();
-			}
-			var parent = theinput.closest("#main-media-container");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-			var parent = theinput.parents(".modal-content");
-			if (parent.length) {
-				dropdownParent = parent;
-			}
-
 			var allowClear = theinput.data("allowclear");
 			if (allowClear == undefined) {
 				allowClear = true;
 			}
+
 			theinput.select2({
 				placeholder: defaulttext,
 				allowClear: allowClear,
 				minimumInputLength: 0,
 				tags: true,
-				dropdownParent: dropdownParent,
+				dropdownParent: getDropdownParent(theinput),
 				ajax: {
 					// instead of writing the
 					// function to execute the
