@@ -1484,6 +1484,7 @@ li.assettabnav {
 .videothumb {
 	height: 100%;
 }
+.assetedittabs,
 .assethistorytabs {
 	background: var(--light-bg);
 	color: var(--default-text);
