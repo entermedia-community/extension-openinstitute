@@ -2,4 +2,5 @@
 
 <page>
   <property name="catalogid">finder/catalog</property>
+  <property name="fallbackdirectory">/WEB-INF/base/finder/catalog</property>
 </page>

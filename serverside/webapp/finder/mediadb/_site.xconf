@@ -4,6 +4,6 @@
   <property name="themeid">lighttheme</property>
   <property name="allowguestregistration">true</property>
   <property name="catalogid">finder/catalog</property>
-  <property name="applicationid">finder/find</property>
-  <property name="fallbackdirectory">/WEB-INF/base/finder/find</property>
+  <property name="applicationid">finder/mediadb</property>
+  <property name="fallbackdirectory">/WEB-INF/base/finder/mediadb</property>
 </page>
