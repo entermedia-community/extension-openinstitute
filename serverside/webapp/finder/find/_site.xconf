@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="themeid">lighttheme</property>
+  <property name="allowguestregistration">true</property>
+  <property name="catalogid">finder/catalog</property>
+  <property name="applicationid">finder/find</property>
+</page>

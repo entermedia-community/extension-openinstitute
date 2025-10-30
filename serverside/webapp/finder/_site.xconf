@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <property name="siteid">homedesign</property>
+  <property name="fallbackdirectory">/WEB-INF/base/eminstitute</property>
+  <property name="catalogid">finder/catalog</property>
+  <property name="applicationid">finder</property>
+</page>
