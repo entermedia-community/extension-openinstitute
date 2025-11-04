@@ -56,7 +56,7 @@ public class LlmTest extends BaseEnterMediaTest
 //				
 //		LlmConnection manager = getMediaArchive().getLlmConnection(model);
 //		String chattemplate = "/" + getMediaArchive().getMediaDbId() + "/gpt/inputs/" + manager.getServerName() + "/" + channeltype + ".html";
-//		LlmResponse response = manager.runPageAsInput(req, model, chattemplate);
+//		LlmResponse response = manager.runPageAsInput(req, chattemplate);
 //
 //		assertEquals(response.isToolCall(),true);
 //
