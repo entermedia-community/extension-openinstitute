@@ -103,12 +103,12 @@
 			#set( $project = $mediaarchive.getCachedData("librarycollection",$rental.collectionid) )
 			#set( $projectcommunity = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
 			#if( $project ) 
-				#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}/store")
+				#set($hitprojectlink = "$!{projectcommunity.externaldomain}/${project.urlname}")
 			#end
 			<tr>
 				<td>
                     
-                        <a href="$!hitprojectlink">
+                        <a href="$!{hitprojectlink}/store">
                             #text($project)
                         </a>
                     
