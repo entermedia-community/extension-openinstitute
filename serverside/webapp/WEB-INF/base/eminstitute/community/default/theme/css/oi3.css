@@ -1339,7 +1339,7 @@ img.cat-thumb {
 		display: none;
 	}
 }
-@container (min-width: 640px) {
+@container (min-width: 340px) {
 	.project-navbar .navbar-collective li.nav-item {
 		display: inline-block;
 	}
