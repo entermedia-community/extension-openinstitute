@@ -1,6 +1,6 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-md-center">
 
-  #set( $templates = $mediaarchive.query("gallerytemplate").all().sort("name").search($context)) 
+  #set( $templates = $mediaarchive.query("gallerytemplate").all().sort("ordering").search($context)) 
   
   #foreach($template in $templates)
     <div class="col mb-4">
