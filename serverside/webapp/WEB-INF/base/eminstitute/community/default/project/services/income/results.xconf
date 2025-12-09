@@ -4,15 +4,13 @@
   <property name="hitsperpage">20</property>
   <property name="searchtype">collectiveincome</property>
   
-  <path-action name="DataEditModule.search" >
-		<property name="searchtype">collectiveincome</property>
+  <page-action name="DataEditModule.search" >
 		<property name="hitsname">income</property>
 		
-  </path-action>
+  </page-action>
   
-  <path-action name="DataEditModule.loadPageOfSearch">
-  		<property name="searchtype">collectiveincome</property>
+  <page-action name="DataEditModule.loadPageOfSearch">
 		<property name="hitsname">income</property>
-  </path-action>
+  </page-action>
 
 </page>

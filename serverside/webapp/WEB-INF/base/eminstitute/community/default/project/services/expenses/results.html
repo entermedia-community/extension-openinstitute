@@ -1,35 +1,36 @@
 #set( $showreimburst = $context.getRequestParameter("showreimburst"))
 <div id="expensereport">
-	
+	<div id="emresultscontent">
 	<div id="resultsdiv">  
-     
      	<div class="emdata emdatatable">
             #set($hits = $expenses)
 			$context.putPageValue("hits",$hits)
 			
+			#set($sortedby= $hits.getSortBy())
+			
 			#if( !$hits.isEmpty() ) 
-			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&collectionid=$!librarycol.id&pageposition")
-			$context.putPageValue("resultsPage",$resultsLink)
-			$context.putPageValue("targetdiv","resultsdiv")
-			$context.putPageValue("oemaxlevel","1")
-            $pages.include("${communityhome}/components/results/positions.html", $context)
+				#set($resultsLink = "${projectlink}/services/expenses/results.html?hitssessionid=$hits.sessionId&oemaxlevel=1&pageposition")
+				$context.putPageValue("resultsLink",$resultsLink)
+	            $pages.include("${communityhome}/components/table/pages.html", $context)
 			#end
                   
                       <table class="table table-striped table-hover">
                           <thead>
                               <tr class="tableheader">
                                   #if($showcollections )
-                                  <th>[[Collection]]</th>
+                                  	<th>[[Collection]]</th>
                                   #end
-                                  <th>[[Date]]</th>
-                                  <th>[[Account]]</th>
-                                  <th>[[Type]]</th>
-                                  <th>[[Description]]</th>
-                                  <th>[[Paid]]</th>
-                                  <th>[[Total]]</th>
+								  
+								  <th>[[Date]] #if($sortedby.startsWith("date")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+		                           <th>[[Account]] #if($sortedby.startsWith("bankaccount")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+		                           <th>[[Type]] #if($sortedby.startsWith("incometype")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+		                           <th>[[Description]] #if($sortedby.startsWith("incomedescription")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+								   <th>[[Paid]] #if($sortedby.startsWith("ispaid")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
+								   <th>[[Total]] #if($sortedby.startsWith("total")) #if($sortedby.endsWith("Down")) <i class="fas fa-arrow-down"></i> #else <i class="fas fa-arrow-up"></i>  #end #end</th>
                                   <th></th>
                               </tr>
                           </thead>
+						  
 						  <tbody>
                           #foreach($hit in $hits.getPageOfHits())
                               <tr>
@@ -81,6 +82,7 @@
                 ##Totals moved down
                 #if($pendingexpensesreimburseuser_total || $currencytype_total)
 			    		<tfoot>
+							##*
 			               #foreach($userid in $pendingexpensesreimburseuser_total.keySet())
 				                	<tr>
 				                		#if($showcollections )<td></td>#end
@@ -96,8 +98,9 @@
 				                		<td></td>
 			                		</tr>
 							#end   
-							
+							*##
 							#set($ustotal = 0)
+							$currencytype_total.keySet() ---
 			                #foreach($currencyid in $currencytype_total.keySet())
 									#set($subtotal = $currencytype_total.get($currencyid))
 									#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
@@ -108,6 +111,7 @@
 				                		#if($showcollections )<td></td>#end
 				                		<td></td>
 				                		<td></td>
+										<td></td>
 				                		<td class="text-right" style="width:150px">
 				                			[[Sub Total]]
 				                		</td>
@@ -165,4 +169,5 @@
         #end
 
       </div>  
+	  </div>
 </div>

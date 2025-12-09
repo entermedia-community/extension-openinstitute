@@ -15,6 +15,7 @@
 	
 	<permission name="view">
 		<or>
+			<group id="administrators"/>
 			<action name="ProjectModule.canEditCollection" />
 			<action name="ProjectModule.isOnTeam" />		
 		</or>

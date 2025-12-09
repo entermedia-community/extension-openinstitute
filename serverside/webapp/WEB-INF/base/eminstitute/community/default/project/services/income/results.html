@@ -1,18 +1,21 @@
 <div id="incomereport">
 	<div id="emresultscontent">        
         <div id="resultsdiv">
-   
          <div class="emdata emdatatable">
-         
-            #set($hits = $income)
-			$context.putPageValue("hits",$hits)
-			#set($resultsLink = "${page.path}?hitssessionid=$hits.sessionId&searchtype=$hits.getSearchType()&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
-			$context.putPageValue("resultsLink",$resultsLink)
-			
-			
-            $pages.include("${communityhome}/components/table/pages.html", $context)
          	
+            #set($hits = $income)
+			
 			#set($sortedby= $hits.getSortBy())
+			
+			$context.putPageValue("hits",$hits)
+			
+			#if( !$hits.isEmpty() ) 
+				#set($resultsLink = "${projectlink}/services/income/results.html?hitssessionid=$hits.sessionId&oemaxlevel=1&sortedby=$sortedby")
+				$context.putPageValue("resultsLink",$resultsLink)
+	            $pages.include("${communityhome}/components/table/pages.html", $context)
+			#end
+         	
+			
 			
              <table class="table table-striped">
                  <thead>

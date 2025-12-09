@@ -22,6 +22,7 @@
 			data-oemaxlevel="1"
 			action="${projectlink}/services/expenses/results.html">
 			#set( $searchtype = "collectiveexpense")
+			$context.putPageValue("searchtype",$searchtype)
 			#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 			$context.putPageValue("searcher",$searcher)
 			#set ($details = $searcher.getDetailsForView("collectiveexpensesearch", $userprofile))
@@ -55,7 +56,7 @@
    		<div class="finances-table-sort d-flex flex-rows justify-content-end mb-2">
 		<label>[[Sort by]]:</label>
 		<div style="padding-left:10px; width:220px; display:inline-block;">
-		<select class="select2 	form-control" name="${searchtype}sortby" >
+		<select class="select2 	form-control" name="$!{searchtype}sortby" >
 			#set ($details = $searcher.getDetailsForView("collectiveexpensegeneral", $userprofile))
 			#foreach( $detail in $details)
 				<option value="$detail.getId()Down">$context.getText($detail)</option>

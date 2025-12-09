@@ -1,16 +1,14 @@
-	#ifnull($targetdiv)
+#ifnull($targetdiv)
 	#set($targetdiv = "resultsdiv")
-	#end
-	#ifnull($resultsLink)
+#end
+#ifnull($resultsLink)
 	#set( $searchhome = "$home$apphome/components/table")
 	#set($resultsLink = "${searchhome}/results.html?hitssessionid=$hits.sessionId&hitsperpage=$!hits.hitsPerPage&oemaxlevel=1")
-	#end
-	#set($resultsPage = "$resultsLink&page")
-	#set($thispage = $hits.getPage())
-	
-	
-	
-		#if( $hits && $hits.getTotalPages() >  1  )
+#end
+#set($resultsPage = "$resultsLink&page")
+#set($thispage = $hits.getPage())
+
+#if( $hits && $hits.getTotalPages() >  1  )
 	
 	
 	<div id="pages" class="pages smartpages">
@@ -57,7 +55,7 @@
 		</ul>
 	</div>
 
-		#end	
+#end	
 
 
 
