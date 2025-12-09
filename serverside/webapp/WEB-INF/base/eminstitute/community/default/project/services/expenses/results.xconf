@@ -5,16 +5,6 @@
   	<property name="hitsperpage">20</property>
     <property name="searchtype">collectiveexpense</property>
   	
-  	  <page-action name="DataEditModule.search" >
-		<property name="hitsname">expenses</property>
-	  </page-action>
-	  
-	  <page-action name="DataEditModule.loadPageOfSearch">
-			<property name="hitsname">expenses</property>
-	  </page-action>
-
-	<page-action name="Script.run" >
-		<script>${communityhome}/project/services/expenses/totalbycurrency.groovy</script>
-	</page-action>
+ <page-action name="ProjectModule.loadCollectiveExpenses" />
 
 </page>

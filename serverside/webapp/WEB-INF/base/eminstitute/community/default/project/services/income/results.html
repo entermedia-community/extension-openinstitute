@@ -10,7 +10,7 @@
 			$context.putPageValue("hits",$hits)
 			
 			#if( !$hits.isEmpty() ) 
-				#set($resultsLink = "${projectlink}/services/income/results.html?hitssessionid=$hits.sessionId&oemaxlevel=1&sortedby=$sortedby")
+				#set($resultsLink = "${projectlink}/services/income/results.html?hitssessionid=$hits.sessionId&oemaxlevel=1&collectiveincomesortby=$!sortedby")
 				$context.putPageValue("resultsLink",$resultsLink)
 	            $pages.include("${communityhome}/components/table/pages.html", $context)
 			#end
@@ -64,29 +64,22 @@
 	                #end
 				</tdbody>
 				#set($ustotal = 0)
-
-                #if($totalarray.size())
-                	#set($firstrow = true)
+                #if($totalsbycurrency)
 					<tfoot>
-                	#foreach( $currencyid in $totalarray.keySet())
-						#set($entries = $totalarray.get($currencyid))
+                	#foreach( $currency in $totalsbycurrency.keySet())
+						#set($subtotal = $totalsbycurrency.get($currency))
 	                	<tr class="table-row-subtotals">
 	                		<td colspan="3"></td>
 	                		<td class="text-right">[[Sub Total]]:</td>
 	                		<td class="text-right">
-	                			#set($subtotal = 0)
-	                			#foreach($entry in $entries)
-									#ifnotnull($entry)
-	                					#set($subtotal = $mathutil.addition($subtotal, $entry))
-									#end
-	                			#end
-								#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+	       
+								#set( $convertedtotal = $financeManager.inDollars($currency,$subtotal))
 								#ifnotnull($convertedtotal)
 									#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
 								#end
 								
-								#if ($currencyid != "1")
-									$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
+								#if ($currency != "1")
+									$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currency))
 								#end 
 								
 	                		</td>
