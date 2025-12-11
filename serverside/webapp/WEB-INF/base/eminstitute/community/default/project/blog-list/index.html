@@ -20,9 +20,9 @@ $context.putPageValue("showchannel",false)
 	<div class="d-flex align-items-center justify-content-between mb-5 blog-list-title">
 		#if( !$userposts.isEmpty() )
 			#if($tag)
-				<h2 class="h3 flex-grow-1">[[Blogs tagged with ]] <span class="blog-tag-filter">#esc($tag)</span> <a class="ms-1 text-muted small" href="${projectlink}"><i class="fa fa-times"></i></a></h2>
+				<h1 class="h3 flex-grow-1">[[Blogs tagged with ]] <span class="blog-tag-filter">#esc($tag)</span> <a class="ms-1 text-muted small" href="${projectlink}"><i class="fa fa-times"></i></a></h1>
 			#else
-				<h2 class="h3  flex-grow-1">[[Recent Blogs]]</h2>
+				<h1 class="h3  flex-grow-1">[[Recent Blogs]]</h1>
 			#end
 		#end
 		#if($caneditcollection)
