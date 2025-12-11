@@ -58,13 +58,20 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 						<b> #text($project) </b>
 						#end
 						<div class="messagearea">
-							#if($message.message)
-							$url_util.escapeMessage($message.message,26)
+							#set($msg = $message.message)
+							#if($msg)
+								$url_util.escapeMessage($msg,26, true)
 							#end
 						</div>
 						#set($chatuser = $mediaarchive.getUser($message.user))
-						<div style="font-size:.7em;font-style:italic;">
-							$chatuser #datatext($topic, "name") / 
+						#set($ownmessage = false)
+						
+						#if($message.user == $user)
+							#set($ownmessage = true)
+						#end
+						<div style="font-size:.8em;font-style:italic;">
+							<span style="#if(!$ownmessage) font-weight:bold;#end">$chatuser</span>,
+							###datatext($topic, "name") 
 							#set($since = $context.getAge($message.getDate("date")))
 							#ifnotnull($since) $since [[ago]]#end
 							#ifnull($since)[[now]]#end

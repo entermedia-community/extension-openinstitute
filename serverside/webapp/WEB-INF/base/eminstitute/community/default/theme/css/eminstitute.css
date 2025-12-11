@@ -480,11 +480,17 @@ a.primary:hover .fa-solid {
 	padding: 0.25em 0.35em;
 	font-size: 0.8rem;
 }
+.usersidebartopmessages {
+	font-size: 0.8rem;
+}
+.usersidebartopmessages .messagearea {
+	margin-bottom:5px;
+}
 .usersidebartopmessages .messageselection {
 	background-color: #fff;
 }
 .usersidebartopmessages .messageselection:nth-of-type(odd) {
-	background-color: #eee;
+	background-color: #f2f2f2;
 }
 .usersidebartopmessages .messageselection:hover {
 	background-color: #c9e8f2;
