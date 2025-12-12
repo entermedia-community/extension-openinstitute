@@ -222,6 +222,33 @@ public class StripePaymentProcessor {
 		}
 		return true;
 	}
+	
+	
+	protected boolean createChargeDonation(Data payment, String customer, String source, Data collection, String email)
+			throws IOException, InterruptedException, URISyntaxException 
+	{
+		log.info("Submiting a Donation for : " + collection.getName() + " by user: " + email);
+		
+		HttpPost http = new HttpPost("https://api.stripe.com/v1/charges");
+		Money totalprice = new Money(payment.get("totalprice"));
+		String amountstring = totalprice.toShortString().replace(".", "").replace("$", "").replace(",", "");
+		String currency = getMediaArchive().getCatalogSettingValue("currency") != null
+				? getMediaArchive().getCatalogSettingValue("currency")
+				: "usd";
+		URI uri = new URIBuilder(http.getURI()).addParameter("amount", amountstring).addParameter("currency", currency)
+				.addParameter("customer", customer)
+				.addParameter("source", source)
+				.addParameter("description", "Donation for Project: " + collection.getName() + "  by " + email).build();
+		log.info("Stripe amount: " + totalprice);
+		
+		CloseableHttpResponse response = httpPostRequest(uri);
+		// TODO: log this somewhere
+		if (response.getStatusLine().getStatusCode() != 200) {
+			log.error("Stripe Charge Error: " + response);
+			return false;
+		}
+		return true;
+	}
 
 	protected String createProduct( String productId)
 			throws URISyntaxException, IOException, InterruptedException {

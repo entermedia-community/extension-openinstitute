@@ -9,6 +9,6 @@
 		<boolean value="true" />
 	</permission>
 	
-	<inner-layout>${communityhome}/project/donate/donate.html</inner-layout>
+
 
 </page>

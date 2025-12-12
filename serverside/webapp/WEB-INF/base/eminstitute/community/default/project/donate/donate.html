@@ -1,7 +1,7 @@
 #set($paypalclientid = $mediaarchive.getCatalogSettingValue("paypalclientid"))
 <div class="currentcampaign py-3">		
-	$pages.include("$communityhome/project/donate/donationlist.html", $context)
-	<hr style="opacity: 0.8;">
+	##$pages.include("$communityhome/project/donate/donationlist.html", $context)
+	##<hr style="opacity: 0.8;">
 	<div class="sidebar-list-header text-center">
 		<h3>[[Donate]]</h3>
 	</div>
@@ -24,7 +24,7 @@
 		#end
 	</div>
 	<div class="d-flex justify-content-center">
-		<a href="${communitylink}/project/donate/donatedialog.html" class="btn btn-donate emdialog" id="donatecheckout" data-hidefooter="true">
+		<a href="${projectlink}/donate/index.html" class="btn btn-sm btn-follow btn-donate">
 			<i class="fas fa-credit-card mr-1"></i> [[Donate]]
 		</a> 
 	</div>

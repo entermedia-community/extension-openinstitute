@@ -126,8 +126,6 @@ public class PaymentModule extends BaseMediaModule
 	//*Process Regular Payments (EM Portal) *//
 	
 	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
-
-		
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
 		
 		MediaArchive archive = getMediaArchive(inReq);
@@ -238,6 +236,139 @@ public class PaymentModule extends BaseMediaModule
 		inReq.putPageValue("invoice", invoice);
 	}
 	
+	
+
+	public void processPaymentDonation(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException 
+	{
+		String token = inReq.getRequestParameter("stripetokenid");
+		if( token == null)
+		{
+			log.error("No token found");
+			return;
+		}
+		MediaArchive archive = getMediaArchive(inReq);
+		String username =  inReq.getUserName();
+		User user = inReq.getUser();
+		String collectionid = inReq.findValue("collectionid");
+		inReq.putPageValue("collectionid", collectionid);
+		Data workspace = archive.getCachedData("librarycollection", collectionid);
+		
+		if (workspace == null)
+		{
+			//can't continue without Collection
+			log.info("Collection not found: " + collectionid);
+			return;
+		}
+		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), workspace.getId());
+		
+		String source = inReq.getRequestParameter("selectedsource");		
+		if(source == null)
+		{
+			source = inReq.getRequestParameter("stripenewsource");
+		}
+		
+		String customerId = (String) inReq.getRequestParameter("stripecustomer");
+		String tokenid = inReq.getRequestParameter("stripetokenid");
+		
+		if (customerId == null)
+		{
+			
+			customerId = processor.createCustomer2(collectionid, user, tokenid);
+		}
+		else 
+		{
+			if (tokenid != null) 
+			{
+				if(!processor.updateCustomersSource(customerId, tokenid))
+				{
+					log.info("Error updating user payment method on Stripe. " + customerId);
+					return;
+				}
+			}
+		}
+
+		if (customerId == null || customerId.isEmpty()) {
+			log.info("Error creating Stripe Customer for Donation on " + workspace.getName());
+			return;
+		}
+		
+		//Update Transactions Table
+		Searcher payments = archive.getSearcher("transaction");
+		Data payment = payments.createNewData();
+		payments.updateData(inReq, inReq.getRequestParameters("field"), payment);
+		
+		payment.setValue("collectionid", collectionid );
+		payment.setValue("paymentemail", user.getEmail());  //match pp
+		payment.setValue("name", user.getName());  //match pp
+		payment.setValue("paymenttype","stripe" );
+		payment.setValue("isdonation", true );
+			
+		
+		try {
+			//boolean success = getPaymentProcessor(archive.getCatalogId(), collectionid).process(user, payment, token);
+			boolean success = processor.createChargeDonation(payment, customerId, source, workspace, user.getEmail());
+			if (success)
+			{
+				Date paymentdate = new Date();
+				payment.setValue("paymentdate", paymentdate);
+				payment.setValue("userid", username);
+				
+				String frequency = inReq.findValue("frequency");
+				if ( frequency != null && frequency != "")
+				{
+					Searcher plans = archive.getSearcher("paymentplan");
+					Data plan = plans.createNewData();
+					plan.setValue("userid", inReq.getUserName());
+					plan.setValue("frequency", frequency);
+					plan.setValue("amount", payment.getValue("totalprice"));
+					plan.setValue("lastprocessed", new Date());
+					plan.setValue("planstatus", "active");
+					plans.saveData(plan);
+					
+					payment.setValue("paymentplan", plan.getId());
+				}
+				
+				payment.setValue("receiptstatus", "new");
+				
+				payments.saveData(payment);
+				inReq.putPageValue("payment", payment);
+				
+				//TODO: in case different receipt required.
+				//Donation Receipt
+				Searcher donationreceipt = archive.getSearcher("donationreceipt");
+				Data receipt = donationreceipt.createNewData();
+				receipt.setValue("paymentid", payment.getId());
+				receipt.setValue("amount", payment.getValue("totalprice"));
+				receipt.setValue("donor", user.getName());
+				receipt.setValue("donoremail", user.getEmail());
+				receipt.setValue("collectionid", collectionid);
+				//receipt.setValue("paymentdate", paymentdate);
+				receipt.setValue("receiptstatus", "new");
+				
+				donationreceipt.saveData(receipt);
+				
+				inReq.putPageValue("receipt", receipt);
+				
+			}
+			else {
+				log.debug("Payment: failed.");
+				inReq.putPageValue("paymenterror", "Payment Error");
+			}
+			
+			payments.saveData(payment);
+			inReq.putPageValue("payment", payment);
+			
+		}
+		catch (Throwable e) {
+			// TODO: handle exception
+			log.error(e.getMessage(), e);
+			inReq.putPageValue("paymenterror", e.getMessage());
+		}
+		
+
+	}
+	
+	
 	public Boolean cancelService(WebPageRequest inReq) {
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher payments = archive.getSearcher("collectiveproduct");
@@ -336,112 +467,6 @@ public class PaymentModule extends BaseMediaModule
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	public void processPaymentDonation(WebPageRequest inReq)
-	{
-		String token = inReq.getRequestParameter("stripeToken");
-		if( token == null)
-		{
-			log.error("No token found");
-			return;
-		}
-		String username =  inReq.getUserName();
-		User user = inReq.getUser();
-		String collectionid = inReq.findValue("collectionid");
-		inReq.putPageValue("collectionid", collectionid);
-		
-		MediaArchive archive = getMediaArchive(inReq);
-		Searcher payments = archive.getSearcher("transaction");
-		Data payment = payments.createNewData();
-		payments.updateData(inReq, inReq.getRequestParameters("field"), payment);
-		
-		payment.setValue("paymentemail", user.getEmail());  //match pp
-		payment.setValue("name", user.getName());  //match pp
-
-		payment.setValue("paymenttype","stripe" );
-		
-		Boolean isdonation = Boolean.parseBoolean(inReq.getRequestParameter("isdonation"));
-		payment.setValue("isdonation", isdonation );
-		
-		try {
-			boolean success = getPaymentProcessor(archive.getCatalogId(), collectionid).process(user, payment, token);
-			if (success)
-			{
-				Date paymentdate = new Date();
-				payment.setValue("paymentdate", paymentdate);
-				payment.setValue("userid", username);
-				
-				String frequency = inReq.findValue("frequency");
-				if (isdonation && frequency != null && frequency != "")
-				{
-					Searcher plans = archive.getSearcher("paymentplan");
-					Data plan = plans.createNewData();
-					plan.setValue("userid", inReq.getUserName());
-					plan.setValue("frequency", frequency);
-					plan.setValue("amount", payment.getValue("totalprice"));
-					plan.setValue("lastprocessed", new Date());
-					plan.setValue("planstatus", "active");
-					plans.saveData(plan);
-					
-					payment.setValue("paymentplan", plan.getId());
-				}
-				
-				payment.setValue("receiptstatus", "new");
-				
-				payments.saveData(payment);
-				inReq.putPageValue("payment", payment);
-				
-
-				/*
-				//TODO: in case different receipt required.
-				//Donation Receipt
-				if (isdonation) {
-					Searcher donationreceipt = archive.getSearcher("donationreceipt");
-					Data receipt = donationreceipt.createNewData();
-					receipt.setValue("paymentid", payment.getId());
-					receipt.setValue("amount", payment.getValue("totalprice"));
-					receipt.setValue("donor", user.getName());
-					receipt.setValue("donoremail", user.getEmail());
-					receipt.setValue("collectionid", collectionid);
-					//receipt.setValue("paymentdate", paymentdate);
-					receipt.setValue("receiptstatus", "new");
-					
-					donationreceipt.saveData(receipt);
-					
-					inReq.putPageValue("receipt", receipt);
-				}
-				*/
-				
-				
-				String invoicepayment = inReq.findValue("invoicepayment");
-				if ("true".equals(invoicepayment))
-				{
-					Data invoice = loadCurrentCart(inReq);
-					invoice.setValue("paymentstatus", "paid");
-					invoice.setValue("paymentdate", new Date());
-					invoice.setValue("owner", inReq.getUserName());
-					invoice.setValue("transaction", payment.getId());
-					
-					invoice.setValue("collectionid", collectionid);
-					
-					archive.saveData("collectioninvoice", invoice);
-					inReq.removeSessionValue("current-cart");
-				}
-
-				
-			}
-			else {
-				log.debug("Payment: failed.");
-			}
-		}
-		catch (Throwable e) {
-			// TODO: handle exception
-			log.error(e.getMessage(), e);
-			inReq.putPageValue("paymenterror", e.getMessage());
-		}
-		
-
 	}
 
 	public void createInvoice(WebPageRequest inReq)
