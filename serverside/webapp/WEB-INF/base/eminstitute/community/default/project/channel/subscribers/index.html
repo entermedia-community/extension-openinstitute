@@ -22,10 +22,11 @@
 			#foreach( $hit in $team)
 				#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
 				#if($followeruser)
-					#set( $userlink = "$!{communitylink}/users/index.html?id=${followeruser.getId()}")
+					#set( $userlink = "$!{communityhome}/users/index.html?id=${followeruser.getId()}")
 					#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
+					
 					#if(!$userimageurl)
-						#set( $userimageurl = "$!{communitylink}/theme/images/user.svg" )
+						#set( $userimageurl = "$!{communityhome}/theme/images/user.svg" )
 					#end 
 					<div class="d-flex flex-row teammember pretty-list">
 						<a href="#esc($userlink)" class="d-flex align-items-center flex-grow-1">

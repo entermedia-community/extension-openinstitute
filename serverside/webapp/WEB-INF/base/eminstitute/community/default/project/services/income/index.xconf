@@ -1,5 +1,5 @@
 <page>
 
-	<property name="collectiveincomesortby">dateDown</property>
+	<property name="collectiveincomesortby">dateUp</property>
 
  </page>
