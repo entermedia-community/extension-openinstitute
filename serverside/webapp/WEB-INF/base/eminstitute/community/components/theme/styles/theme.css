@@ -3582,12 +3582,6 @@ label.error {
   display: table-cell;
 }
 
-.chatterbox-container {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-}
-
 .assetpanel-chatterbox {
   display: table-row;
 }
