@@ -119,8 +119,8 @@ public class PaymentModule extends BaseMediaModule
 			}
 			user = (User) inReq.getPageValue("checkoutuser");
 		}
-		
-		String stripeUser = getStripeUser(inReq);
+
+		Map<String, Object> stripeUser = getStripeUser(inReq);
 		
 		return user;
 	}
@@ -186,7 +186,6 @@ public class PaymentModule extends BaseMediaModule
 		}
 		
 		String customerId = (String) inReq.getRequestParameter("stripecustomer");
-		
 		String tokenid = inReq.getRequestParameter("stripetokenid");
 		
 		if (customerId == null)
@@ -404,7 +403,7 @@ public class PaymentModule extends BaseMediaModule
 		}
 	}
 	
-	public String getStripeUser(WebPageRequest inReq) {
+	public Map<String, Object> getStripeUser(WebPageRequest inReq) {
 		MediaArchive archive = getMediaArchive(inReq);
 		String collectionId = inReq.getRequestParameter("collectionid");
 		User user = inReq.getUser();
@@ -420,16 +419,17 @@ public class PaymentModule extends BaseMediaModule
 		
 		try {
 			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
-			String customerid = processor.getCustomerId(email);
-			inReq.putPageValue("customer", customerid);
-			log.info("Stripe user found for "+email+": " + customerid);
-			return customerid;
+			ArrayList<Map<String, Object>> customers = processor.getCustomers(email);
+			if (customers!= null && customers.size() > 0) {
+				inReq.putPageValue("customer", customers.get(0));
+				return (Map<String, Object>) customers.get(0);
+			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		
+		return null;
 	}
 	
 	public void getIds(WebPageRequest inReq) {
