@@ -342,7 +342,7 @@ public class PaymentModule extends BaseMediaModule
 				receipt.setValue("donor", user.getName());
 				receipt.setValue("donoremail", user.getEmail());
 				receipt.setValue("collectionid", collectionid);
-				//receipt.setValue("paymentdate", paymentdate);
+				receipt.setValue("donationdate", paymentdate);
 				receipt.setValue("receiptstatus", "new");
 				
 				donationreceipt.saveData(receipt);

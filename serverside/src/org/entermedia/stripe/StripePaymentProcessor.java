@@ -3,6 +3,7 @@ package org.entermedia.stripe;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,15 +18,18 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.entermedia.invoice.InvoiceManager;
 import org.entermediadb.asset.MediaArchive;
+import org.entermediadb.net.HttpSharedConnection;
+import org.json.simple.JSONObject;
 import org.openedit.Data;
 import org.openedit.OpenEditException;
-import org.openedit.WebPageRequest;
 import org.openedit.money.Money;
 import org.openedit.page.manage.PageManager;
 import org.openedit.users.User;
@@ -200,21 +204,40 @@ public class StripePaymentProcessor {
 	protected boolean createCharge(Data payment, String customer, String source, Data invoice, String email)
 			throws IOException, InterruptedException, URISyntaxException 
 	{
-		log.info("Charging with stripe to invoice: " + invoice.getId() + " by user: " + email);
+		String stripeChargeUrl = "https://api.stripe.com/v1/charges";
 		
-		HttpPost http = new HttpPost("https://api.stripe.com/v1/charges");
 		Money totalprice = new Money(payment.get("totalprice"));
 		String amountstring = totalprice.toShortString().replace(".", "").replace("$", "").replace(",", "");
 		String currency = getMediaArchive().getCatalogSettingValue("currency") != null
 				? getMediaArchive().getCatalogSettingValue("currency")
 				: "usd";
-		URI uri = new URIBuilder(http.getURI()).addParameter("amount", amountstring).addParameter("currency", currency)
-				.addParameter("customer", customer)
-				.addParameter("source", source)
-				.addParameter("description", "Payment Invoice: " + invoice.getValue("invoicenumber") + " Id: " + invoice.getId() + " by " + email).build();
-		log.info("Stripe amount: " + totalprice);
+		String paymentdescription = "Payment Invoice: " + invoice.getValue("invoicenumber") + " Id: " + invoice.getId() + " by " + email;
 		
+		log.info("Stripe Payment attempt Invoice: " +invoice.getValue("invoicenumber")+ " To: " +stripeChargeUrl+ " Customer: " +customer+ " Source: " + source+ " Amount: " + amountstring + " Currency: "+currency);
+		
+		/*
+		 * 
+		HttpPost http = new HttpPost(stripeChargeUrl);
+		URI uri = new URIBuilder(http.getURI())
+				.addParameter("amount", amountstring)
+				.addParameter("currency", currency)
+				//.addParameter("customer", customer)
+				.addParameter("source", source)
+				.addParameter("description", paymentdescription).build();
 		CloseableHttpResponse response = httpPostRequest(uri);
+		*/
+		
+		JSONObject payLoad = new JSONObject();
+		payLoad.put("amount", amountstring);
+		payLoad.put("currency", currency);
+		payLoad.put("source", source);
+		payLoad.put("description", paymentdescription);
+		
+		HttpSharedConnection connection = new HttpSharedConnection();
+		connection.addSharedHeader("Authorization", "Bearer " + getPrivateKey());
+		CloseableHttpResponse response = connection.sharedPostWithJson(stripeChargeUrl, payLoad);
+		connection.parseJson(response);
+		
 		// TODO: log this somewhere
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Stripe Charge Error: " + response);
