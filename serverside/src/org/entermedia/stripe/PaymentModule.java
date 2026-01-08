@@ -120,6 +120,9 @@ public class PaymentModule extends BaseMediaModule
 			inReq.putSessionValue("checkoutuser", user);
 		}
 		user = (User) inReq.getPageValue("checkoutuser");
+		
+		Map<String, Object> stripeUser = getStripeUser(inReq);
+		
 		return user;
 	}
 	

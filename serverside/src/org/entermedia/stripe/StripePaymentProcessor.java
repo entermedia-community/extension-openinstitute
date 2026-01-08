@@ -219,7 +219,7 @@ public class StripePaymentProcessor {
 		URI uri = new URIBuilder(http.getURI())
 				.addParameter("amount", amountstring)
 				.addParameter("currency", currency)
-				//.addParameter("customer", customer)
+				.addParameter("customer", customer)
 				.addParameter("source", source)
 				.addParameter("description", paymentdescription).build();
 		CloseableHttpResponse response = httpPostRequest(uri);
