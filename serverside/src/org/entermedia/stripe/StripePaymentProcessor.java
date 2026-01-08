@@ -215,8 +215,6 @@ public class StripePaymentProcessor {
 		
 		log.info("Stripe Payment attempt Invoice: " +invoice.getValue("invoicenumber")+ " To: " +stripeChargeUrl+ " Customer: " +customer+ " Source: " + source+ " Amount: " + amountstring + " Currency: "+currency);
 		
-		/*
-		 * 
 		HttpPost http = new HttpPost(stripeChargeUrl);
 		URI uri = new URIBuilder(http.getURI())
 				.addParameter("amount", amountstring)
@@ -225,19 +223,8 @@ public class StripePaymentProcessor {
 				.addParameter("source", source)
 				.addParameter("description", paymentdescription).build();
 		CloseableHttpResponse response = httpPostRequest(uri);
-		*/
-		
-		JSONObject payLoad = new JSONObject();
-		payLoad.put("amount", amountstring);
-		payLoad.put("currency", currency);
-		payLoad.put("source", source);
-		payLoad.put("description", paymentdescription);
-		
-		HttpSharedConnection connection = new HttpSharedConnection();
-		connection.addSharedHeader("Authorization", "Bearer " + getPrivateKey());
-		CloseableHttpResponse response = connection.sharedPostWithJson(stripeChargeUrl, payLoad);
-		connection.parseJson(response);
-		
+
+
 		// TODO: log this somewhere
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Stripe Charge Error: " + response);
