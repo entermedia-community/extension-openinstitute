@@ -348,6 +348,7 @@ public class StripePaymentProcessor {
 		HttpPost http = new HttpPost("https://api.stripe.com/v1/customers");
 		URI uri = new URIBuilder(http.getURI()).addParameter("email", email).build();
 		CloseableHttpResponse response = httpGetRequest(uri);
+		log.info("Searching for user: " +email);
 		if (response.getStatusLine().getStatusCode() != 200) {
 			log.error("Error getting Stripe customers: " + response);
 			return null;
