@@ -110,16 +110,15 @@ public class PaymentModule extends BaseMediaModule
 	public User createCheckoutUser(WebPageRequest inReq)
 	{ 
 		User user = inReq.getUser();
-		if(user != null) {
-			return user;
+		if(user == null) {
+			String email = inReq.getRequestParameter("contactemail");
+			if (email != null)
+			{
+				user = getUserManager(inReq).createTempUserFromEmail(email);
+				inReq.putSessionValue("checkoutuser", user);
+			}
+			user = (User) inReq.getPageValue("checkoutuser");
 		}
-		String email = inReq.getRequestParameter("contactemail");
-		if (email != null)
-		{
-			user = getUserManager(inReq).createTempUserFromEmail(email);
-			inReq.putSessionValue("checkoutuser", user);
-		}
-		user = (User) inReq.getPageValue("checkoutuser");
 		
 		String stripeUser = getStripeUser(inReq);
 		
