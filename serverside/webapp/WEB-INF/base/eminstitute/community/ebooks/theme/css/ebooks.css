@@ -628,9 +628,6 @@ input.form-control-lg {
 .guestchat .chatterbox-messages {
 	height: calc(100% - 148px);
 }
-.guestchat .chatterbox-container {
-	height: calc(100% - 150px);
-}
 .guestchat .chatterbox-body-inside {
 	max-height: calc(100% - 100px);
 }

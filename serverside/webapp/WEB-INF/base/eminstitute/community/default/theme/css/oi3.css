@@ -1737,9 +1737,6 @@ input.search-primary {
 	bottom: inherit;
 }
 
-.chatterbox-container {
-	height: calc(100%) !important;
-}
 .resultspositions a.disabled {
 	opacity: 0.3;
 	pointer-events: none !important;
