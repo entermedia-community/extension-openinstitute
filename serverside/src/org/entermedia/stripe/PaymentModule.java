@@ -222,9 +222,12 @@ public class PaymentModule extends BaseMediaModule
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
 			invoice.setValue("invoicepaidon", today.getTime());
+			
+			payment.setValue("paymentstatus", "success");
 		} else {
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Credit Card failed");
+			payment.setValue("paymentstatus", "error");
 			log.error("Error creating Charge for Stripe invoice: " + invoice.getValue("invoicenumber"));
 		}	
 		
@@ -242,13 +245,7 @@ public class PaymentModule extends BaseMediaModule
 
 	public void processPaymentDonation(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException 
 	{
-		String token = inReq.getRequestParameter("stripetokenid");
-		if( token == null)
-		{
-			inReq.putPageValue("paymenterror", "Error: Stripe Token.");
-			log.error("No token found");
-			return;
-		}
+
 		MediaArchive archive = getMediaArchive(inReq);
 		String username =  inReq.getUserName();
 		User user = inReq.getUser();
@@ -300,6 +297,7 @@ public class PaymentModule extends BaseMediaModule
 		Data payment = payments.createNewData();
 		payments.updateData(inReq, inReq.getRequestParameters("field"), payment);
 		
+		payment.setValue("userid", username);
 		payment.setValue("collectionid", collectionid );
 		payment.setValue("paymentemail", user.getEmail());  //match pp
 		payment.setValue("name", user.getName());  //match pp
@@ -312,16 +310,14 @@ public class PaymentModule extends BaseMediaModule
 			boolean success = processor.createChargeDonation(payment, customerId, source, workspace, user.getEmail());
 			if (success)
 			{
-				Date paymentdate = new Date();
-				payment.setValue("paymentdate", paymentdate);
-				payment.setValue("userid", username);
+				payment.setValue("paymentstatus", "success");
 				
 				String frequency = inReq.findValue("frequency");
 				if ( frequency != null && frequency != "")
 				{
 					Searcher plans = archive.getSearcher("paymentplan");
 					Data plan = plans.createNewData();
-					plan.setValue("userid", inReq.getUserName());
+					plan.setValue("userid", username);
 					plan.setValue("frequency", frequency);
 					plan.setValue("amount", payment.getValue("totalprice"));
 					plan.setValue("lastprocessed", new Date());
@@ -333,9 +329,6 @@ public class PaymentModule extends BaseMediaModule
 				
 				payment.setValue("receiptstatus", "new");
 				
-				payments.saveData(payment);
-				inReq.putPageValue("payment", payment);
-				
 				//TODO: in case different receipt required.
 				//Donation Receipt
 				Searcher donationreceipt = archive.getSearcher("donationreceipt");
@@ -345,21 +338,23 @@ public class PaymentModule extends BaseMediaModule
 				receipt.setValue("donor", user.getName());
 				receipt.setValue("donoremail", user.getEmail());
 				receipt.setValue("collectionid", collectionid);
-				receipt.setValue("donationdate", paymentdate);
+				receipt.setValue("donationdate", new Date());
 				receipt.setValue("receiptstatus", "new");
-				
 				donationreceipt.saveData(receipt);
-				
 				inReq.putPageValue("receipt", receipt);
 				
 			}
 			else {
+				payment.setValue("paymentstatus", "error");
 				log.debug("Payment: failed.");
 				inReq.putPageValue("paymenterror", "Payment Error");
 			}
 			
+			payment.setValue("paymentdate", new Date());
+			
 			payments.saveData(payment);
 			inReq.putPageValue("payment", payment);
+			
 			
 		}
 		catch (Throwable e) {

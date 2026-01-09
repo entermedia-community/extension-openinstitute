@@ -64,7 +64,7 @@
     </name> 
   </property>  
   
-  <property id="collectionid" index="true" filter="false" editable="false" stored="true" sortable="true" type="list" keyword="false">
+  <property id="collectionid" index="true" filter="false" editable="false" stored="true" sortable="true" type="list" lisstid="librarycollection" keyword="false">
     <name>
       <language id="de"><![CDATA[Sammlung ID]]></language>
       <language id="en"><![CDATA[Collection Id]]></language>
@@ -122,6 +122,9 @@
       <language id="en"><![CDATA[Topic]]></language>  
     </name> 
   </property> 
+  
+  	<property id="paymentstatus" index="true" stored="true"
+		editable="true" type="list">Payment Status</property>
   
   
 </properties>
