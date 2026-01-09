@@ -342,29 +342,23 @@
 		 
 		var stripe = null;
 		#ifnotnull($stripepublishkey)
-        	   stripe = Stripe("${stripepublishkey}");
-			   var elements = stripe.elements();
-		       var style = { base: { fontSize: '18px', color: "#495057" } };
-	
-		       // Create an instance of the card Element.
-		       var card = elements.create('card', { style: style });
-	
-		       // Add an instance of the card Element into the `card-element` <div>
-		       card.mount('#card-element');
-	
-		       // Handle real-time validation errors from the card Element.
-		       card.addEventListener('change', function (event) {
-		           var displayError = document.getElementById('card-errors');
-		           if (event.error) {
-		               $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
-		           } else {
-		               displayError.textContent = '';
-		           }
-		       });
+		   stripe = Stripe("${stripepublishkey}");
+		   var elements = stripe.elements();
+	       var style = { base: { fontSize: '18px', color: "#495057" } };
+	       var card = elements.create('card', { style: style });
+	       card.mount('#card-element');
+	       card.addEventListener('change', function (event) {
+	           var displayError = document.getElementById('card-errors');
+	           if (event.error) {
+	               $(displayError).html('<div class="errormsg">' + event.error.message + '</div>');
+	           } else {
+	               displayError.textContent = '';
+	           }
+	       });
 		#end
 
         var form = $("#paymentform");
-			
+		var readytosubmit = false;
         $(form).validate({
             rules: {
                 "totalprice.value": {
@@ -375,7 +369,6 @@
             submitHandler: function (form) {
 				#ifnotnull($stripepublishkey)
 	            	var selectedsource = $("#selectedsource").val();
-					//$("#paynowbtn").hide();
 					$("#paynowbtn").removeClass("submitform");
 					$(".cardpaymentcontainer").css("cursor", "wait");
 					
@@ -389,16 +382,26 @@
 		                    } else {
 								$("#stripetokenid").val(result.token.id);
 								$("#stripenewsource").val(result.token.card.id);
-								$(form).addClass("ajaxform");
-								form.submit();
+								readytosubmit = true;
 		                    }
 	                	});
 	            	} else {
-	            		//$(form).trigger("submit");
-						$(form).addClass("ajaxform");
-	            		form.submit();
-						
+						readytosubmit = true;
 	            	}
+					if (readytosubmit) 
+					{
+						var targetdiv = $("#" + $(form).data("targetdiv"));
+						var toastUid = $(form).data("uid");
+						$(form).ajaxSubmit({
+							success: function (result) {
+								$(window).trigger("successToast", [toastUid]);
+								targetdiv.replaceWith(result);
+							},
+							error: function () {
+								$(window).trigger("errorToast", [toastUid]);
+							},
+						});
+					}
 				#end
             },
             errorElement: "div",
