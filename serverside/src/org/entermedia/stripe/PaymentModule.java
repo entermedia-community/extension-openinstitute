@@ -245,6 +245,7 @@ public class PaymentModule extends BaseMediaModule
 		String token = inReq.getRequestParameter("stripetokenid");
 		if( token == null)
 		{
+			inReq.putPageValue("paymenterror", "Error: Stripe Token.");
 			log.error("No token found");
 			return;
 		}

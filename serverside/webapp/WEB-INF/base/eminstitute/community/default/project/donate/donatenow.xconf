@@ -1,7 +1,5 @@
 <page>
     
-    <!-- script id="stripe" src="https://js.stripe.com/v3/"/ -->
- 	
  	<script id="stripe" src="https://js.stripe.com/basil/stripe.js"/>
     
     <property name="autocreatetempuser">true</property>
