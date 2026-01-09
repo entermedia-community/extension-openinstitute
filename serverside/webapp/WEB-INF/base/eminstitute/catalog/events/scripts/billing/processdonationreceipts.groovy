@@ -76,7 +76,14 @@ private void sendReceipt(MediaArchive mediaArchive, Searcher transactionSearcher
 			objects.put("amount", "\$" + context.doubleToMoney(receipt.getValue("totalprice"), 2) );
 			
 			Data currencytype = mediaArchive.getCachedData("currencytype", receipt.getValue("currencytype"));
-			objects.put("currency", currencytype.getText("name", context));
+			if (currencytype != null)
+			{
+				objects.put("currency", currencytype.getText("name", context));
+			}
+			else 
+			{
+				objects.put("currency", "USD");
+			}
 			
 			String collection_url = '';
 			String collection_url_donation = '';
