@@ -38,15 +38,6 @@
 			#end
 		#end
 		
-		#set($menu_files = $content.isPropertyTrue("menu_files",true))
-		#if($menu_files)
-			#if($caneditcollection)
-			<li class="nav-item  #if($collectivesection == "media") active #end">
-				<a class="nav-link" href="${projectlink}/files/index.html" title="[[Project Files]]">[[Files]]</a>
-			</li>
-			#end
-		#end
-		
 		#set($menu_store = $content.isPropertyTrue("menu_store",true))
 		#if($menu_store)
 			<li class="nav-item #if($collectivesection == "store") active #end">
@@ -83,6 +74,19 @@
 			#end
 		#end
 		
+		#if( $canviewsettings )
+		##/site/find/views/modules/librarycollection/editors/default/tabs/index.html
+			<li class="">
+				<a class="nav-link emdialog" 
+					href="${finderhome}/views/modules/librarycollection/editors/default/tabs/index.html" title="[[Data Base]]"
+					data-dialogid="entitydialog"
+					data-entityid="$librarycol.getId()"  
+					rel="nofollow">
+					<i class="fas fa-database me-1"></i>
+				</a>
+			</li>
+		#end
+		
 		<li class="dropdown collapsed-menu">
 			<button class="btn btn-transparent dropdown-toggle" data-bs-toggle="dropdown" data-toggle="dropdown">
 				<i class="fas fa-ellipsis-h mx-auto" style="font-size: 1rem;"></i>
@@ -117,16 +121,7 @@
 					</li>
 					#end
 				#end
-				
-				#set($menu_files = $content.isPropertyTrue("menu_files",true))
-				#if($menu_files)
-					#if($caneditcollection)
-					<li class=" #if($collectivesection == "media") active #end">
-						<a class="nav-link" href="${projectlink}/files/index.html">[[Files]]</a>
-					</li>
-					#end
-				#end
-				
+								
 				#set($menu_store = $content.isPropertyTrue("menu_store",true))
 				#if($menu_store)
 					#if($caneditcollection)
@@ -154,6 +149,8 @@
 					#end
 				#end
 				
+
+				
 				#set($menu_settings = $content.isPropertyTrue("menu_settings",true))
 				#if($menu_settings)
 					#if( $caneditcollection )
@@ -164,6 +161,18 @@
 					</li>
 					#end
 				#end
+				
+				
+				#if( $caneditcollection )
+					<li class="">
+						<a class="nav-link" href="${projectlink}/admin/index.html" title="[[Data Base]]"  rel="nofollow">
+							<i class="fas fa-database me-1"></i> [[Data Base]]
+						</a>
+					</li>
+				#end
+				
+								
+								
 			</ul>
 		</li>
 	</ul> 
