@@ -1,5 +1,8 @@
-#set( $searcher = $mediaarchive.getSearcher("collectiveproject") )
-#set( $subs = $searcher.query().match("parentcollectionid",$librarycol.getId()).search())
-#if( $subs.isEmpty()) <p>No projects started</p> #end
+#set($module = $mediaarchive.getCachedData("module", "librarycollection"))
+$context.putPageValue("module", $module)
+$context.putPageValue("entity", $librarycol)
+$context.putPageValue("entityid", $librarycol.getId())
+$context.putPageValue("apphome", $finderhome)
 
-$pages.include("./viewassets.html",$context)
+$context.putPageValue("edithome", "$finderhome/views/modules/$module.getId()/editors/entitymedia")
+$pages.include("$finderhome/views/modules/$module.getId()/editors/entitymedia/index.html", $context)	
