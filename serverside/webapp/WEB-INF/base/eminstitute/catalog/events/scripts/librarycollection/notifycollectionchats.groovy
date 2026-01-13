@@ -114,24 +114,22 @@ public void init()
 						
 					WebEmail templatemail = mediaArchive.createSystemEmail(followeruser, template);
 					String subject = community.getName() + " Project Notifications";
-					
+					String now_string = DateStorageUtil.getStorageUtil().getTodayForDisplay();
 					
 					if( topicmods.size() > 1)
 					{
-						subject = "[" + community.getName() + "] Multiple Project Notifications (" + topicmods.size() + ")"; //TODO: Translate
+						subject = "[" + community.getName() + "] " +now_string+" Multiple Project Notifications (" + topicmods.size() + ")"; //TODO: Translate
 					}
 					else
 					{
 						Data oneitem = topicmods.iterator().next();
 						Data topic = mediaArchive.getCachedData("collectiveproject", oneitem.get("chattopicid") );
 						
-						String now_string = DateStorageUtil.getStorageUtil().getTodayForDisplay();
-						subject = "[" + collection.getName() + "] Chat Notifications for " + now_string ;
+						
+						subject = "[" + collection.getName() + "] " + now_string + " Chat Notifications"  ;
 						
 						templatemail.setFromName(collection.getName());
 					}
-					
-					
 					
 					templatemail.setSubject(subject); //TODO: Translate
 					Map objects = new HashMap();
