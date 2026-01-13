@@ -41,6 +41,9 @@
   <script id="runajax" src="/${applicationid}/components/javascript/emedia/ajax/runajax.js" />
   <script id="emdialog" src="/${applicationid}/components/javascript/emedia/ajax/emdialog.js" />
   <script id="ajaxformsubmit" src="/${applicationid}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
+  
+  <script id="html5_upload" src="/${applicationid}/components/javascript/jquery.html5_upload.js" defer="true" />
+  <script id="upload" src="/${applicationid}/components/javascript/emedia/upload.js" defer="true" />
 
   
   <permission name="view">
