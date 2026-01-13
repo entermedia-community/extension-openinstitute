@@ -4,7 +4,7 @@
 #set( $hitssessionid = $context.getRequestParameter("hitssessionid"))
 #set( $goalfolder = $context.getRequestParameter("goalfolder"))
 #set( $goaltrackercolumn = $context.getRequestParamater("topic"))
-#set ($collectionid = $context.getRequestParameter("collectionid"))
+#set( $collectionid = $context.getRequestParameter("collectionid"))
 #set( $targetdiv = $context.getRequestParameter("targetdiv"))
 #set( $newgoal = $context.getRequestParameter("newgoal"))
 
@@ -29,31 +29,40 @@ $context.putPageValue("searcher",$searcher)
 
 #set($projectname = $mediaarchive.getData("librarycollection", $!collectionid))
 #if ($projectname)
-	<h4 class="mb-2"><a href="${projectlink}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a></h4>
+	<h4 class="mb-2">
+		<a href="${projectlink}/goals/priorities" style="text-decoration: underline;" title="[[Goals]]: $projectname">$projectname</a>
+	</h4>
 #end
 <div class="clearfix"></div>
 <form name="saveproject" 
 	class ="ajaxform autocloseform showwaiting autoreloadsource" 
 	id="saveproject" 
 	method="post" 
-	data-targetdiv="$!targetdiv"
+	
 	
 	#if($newgoal == "true")
 		##New Goal
-		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" >	
+		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" 	
+		data-targetdiv="$!{targetdiv}"
 	#else
-		#if($targetdiv)
-			action="$!{communityhome}/project/goals/priorities/goalsearchrowsave.html" >
+		#if($goalfolder=="agent")
+			##action="$!{communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}"
+			action="$!{communityhome}/project/goals/priorities/goalsearchrowsave.html"
+			data-targetdiv="$!{targetdiv}"
+		#elseif($goalfolder=="chat")
+			action="$!{communityhome}/project/goals/priorities/goalsave.html" 
+			data-targetdiv="editgoaldialog"
+			data-ajaxreloadtargets="$!{targetdiv}"
 		#elseif($goalfolder=="agentcalendar")
-			action="/users/tasks/goalsave.html" >
-		#elseif($goalfolder=="agent")
-			action="$!{communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}" >
+			action="/users/tasks/goalsave.html"  
+			data-targetdiv="$!{targetdiv}"
 		#else
-			action="$!{communityhome}/project/goals/${goalfolder}/goalsave.html" >
+			action="$!{communityhome}/project/goals/${goalfolder}/goalsave.html" 
+			data-targetdiv="$!{targetdiv}"
 		#end
 	
 	#end
-
+>
 
 
 #if($collectionid)
