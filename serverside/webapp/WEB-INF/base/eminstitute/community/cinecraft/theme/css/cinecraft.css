@@ -34,7 +34,7 @@ body {
 	font-family: var(--default-font);
 	height: unset;
 }
-a {
+.main a {
 	color: var(--accent-color);
 	text-decoration: none;
 	transition: 0.3s;
@@ -58,7 +58,6 @@ h6 {
 	border-color: var(--accent-color) !important;
 	background-color: var(--accent-color) !important;
 	color: #444444;
-	font-size: 16px;
 	transition: 0.3s;
 }
 .themed-btn:hover, .btn.btn-follow:hover, .btn.add-product:hover,

@@ -2,7 +2,7 @@
 	#set( $hits = $opentickets)
 
 	#ifnull($user)
-		<p> [[Must be logged in to view your pending tasks]] </p>
+		<p> [[Must be logged in to view goals]] </p>
 	#end	
 	
 	
@@ -47,7 +47,7 @@
 	##if($canviewsettings)
 	#if($hits)
 	
-	#set($projectManager = $mediaarchive.getProjectManager())
+		#set($projectManager = $mediaarchive.getProjectManager())
 		
 		<div class="emdata" style="overflow-x:auto;">
 		<table width="100%" class="table table-striped goalstable">
@@ -70,6 +70,7 @@
 				$context.putPageValue("goal",$goal)
 				$context.putPageValue("tasks",$tasks)
 				<td >
+					
 					#set( $project= $!mediaarchive.getCachedData("librarycollection", $goal.collectionid) )
 					#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
 					#if($project.urlname)
@@ -114,9 +115,10 @@
 					
 				</td>
 				<td class="text-center" >
+					
 					#if ($caneditproject)
-					$pages.include("${communityhome}/users/tasks/resolvebutton.html",$context) 
-					#end
+					$pages.include("${communityhome}/users/tasks/resolvebutton.html",$context)
+					 #end
 					<div class="clearfix" style="padding:5px;"> </div>
 					<span class="headersubtext">
 						$!context.getText($!mediaarchive.getData("tickettype",$goal.tickettype)) $!goal.getAge() [[ago]] [[by]] $!mediaarchive.getUser($goal.owner).getAnonNickName()

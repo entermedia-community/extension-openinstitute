@@ -661,3 +661,15 @@ ul.projectgoals {
 .roleselected {
 	background-color: #a08b01 !important;
 }
+
+
+table.goalstable tbody td {
+	align-content: start;
+	padding: 1rem 0.75rem;
+}
+.goalstable .goal-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* Limits the text to 3 lines */
+  overflow: hidden;
+}

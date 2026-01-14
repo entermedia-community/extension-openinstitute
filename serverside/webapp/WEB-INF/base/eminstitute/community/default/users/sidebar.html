@@ -97,17 +97,17 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 					<a href="${communitylink}/wallet/$user.id/index.html"><i class="fas fa-clipboard-check"></i> [[My Wallet]]</a>
 					</li>*#
 					#if(!$userprojects.isEmpty() )
-					<li class="#if($appsection == "mytasks") current #end" >
-						<a href="$communitylink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
+					<li class="#if($appsection == "mygoals") current #end" >
+						<a href="$communitylink/users/tasks/mygoals.html?goaltrackerstaff=$user.getId()">
 							<i class="fas fa-tasks me-1"></i> [[My Goals]]</a>
 					</li>
 					<li class="#if($appsection == "mytasks") current #end" >
-						<a href="$communitylink/users/tasks/myactions.html?goaltrackerstaff=$user.getId()">
-							<i class="fas fa-tools me-1"></i> [[My Actions]]</a>
+						<a href="$communitylink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
+							<i class="fas fa-tools me-1"></i> [[Pending Actions]]</a>
 					</li>
 					<li class="#if($appsection == "completed") current #end" >
 						<a href="$communitylink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*">
-							<i class="fas fa-chart-line"></i> [[Completed Tasks]]</a>
+							<i class="fas fa-chart-line me-1"></i> [[Completed Tasks]]</a>
 					</li>
 					#end
 				</ul>

@@ -43,6 +43,7 @@
 				#set( $comment = $mediaarchive.query("goaltaskcomments").exact("goaltaskid",$task.id) )
 				<div class="taskdetails">
 					<span class="trim-text" data-max="400">$url_util.escapeMessage($task.comment,900)</span>
+					<button class="see-more-btn see-more" data-seemore="(...[[see more]])" data-seeless="(...[[see less]])"></button>
 					
 				</div>
 				#set( $type = "goaltask" )

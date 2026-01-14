@@ -100,15 +100,84 @@ $(document).ready(function () {
   		confirmModalClose(targetModal);
   	});
 
-  lQuery(".trim-text").livequery(function () {
-    var maxLength = $(this).data("max");
-    var text = $(this).text();
-    if (text.length <= maxLength) return;
-    var minimizedText = text.substring(0, maxLength).trim();
-    $(this).text(minimizedText);
-    $(this).data("text", text);
-    $(this).append('<button class="see-more">(...see more)</button>');
-  });
+
+  lQuery(".trim-text").livequery(function (e) {
+  		var text = $(this).text();
+  		var check = $(this).closest(".entitymetadatamodal");
+  		if (check.length > 0) {
+  			text = text.replace(/</g, "&lt;");
+  			text = text.replace(/>/g, "&gt;");
+  			text = text.replace(/(\r\n|\n|\r)/gm, "<br>");
+  			$(this).html(text);
+  			return;
+  		}
+  		$(this).click(function (e) {
+  			if (
+  				e.target.classList.contains("see-more") ||
+  				e.target.classList.contains("see-less")
+  			) {
+  				e.stopPropagation();
+  			}
+  		});
+  		var maxLength = $(this).data("max");
+  		if (text.length <= maxLength) return;
+  		var minimizedText = text.substring(0, maxLength).trim();
+  		minimizedText = minimizedText.replace(/</gm, "&lt;");
+  		minimizedText = minimizedText.replace(/>/gm, "&gt;");
+  		minimizedText = minimizedText.replace(/(\r\n|\n|\r)/gm, "<br>");
+  		$(this).html(minimizedText);
+  		$(this).data("text", text);
+  		var btn = $(this).parent().find(".see-more");
+  		btn.html(btn.data("seemore"));
+  	});
+
+  	lQuery(".see-more-btn").livequery("click", function (e) {
+  		e.preventDefault();
+  		e.stopImmediatePropagation();
+  		var textParent = $(this).prev(".trim-text");
+  		var text = textParent.data("text");
+  		if (!text) {
+  			$(this).remove();
+  			return;
+  		}
+  		if ($(this).hasClass("see-more")) {
+  			text = text.replace(/</gm, "&lt;");
+  			text = text.replace(/>/gm, "&gt;");
+  			textParent.html(text.replace(/(\r\n|\n|\r)/gm, "<br>"));
+  			//textParent.append('<button class="see-less">(...see less)</button>');
+  			$(this).removeClass("see-more").addClass("see-less");
+  			$(this).html($(this).data("seeless"));
+  		} else {
+  			var maxLength = textParent.data("max");
+  			if (!maxLength || !text) {
+  				$(this).remove();
+  				return;
+  			}
+  			var minimizedText = text.substring(0, maxLength).trim();
+  			minimizedText = minimizedText.replace(/<br>/gm, "\n");
+  			minimizedText = minimizedText.replace(/</gm, "&lt;");
+  			minimizedText = minimizedText.replace(/>/gm, "&gt;");
+  			minimizedText = minimizedText.replace(/(\r\n|\n|\r)/gm, "<br>");
+  			textParent.html(minimizedText);
+  			$(this).removeClass("see-less").addClass("see-more");
+  			$(this).html($(this).data("seemore"));
+  		}
+  	});
+
+  	lQuery(".see-more-tags-btn").livequery("click", function (e) {
+  		e.preventDefault();
+  		e.stopImmediatePropagation();
+  		var tagsParent = $(this).prev(".tageditor-viewer");
+  		if ($(this).hasClass("see-more")) {
+  			$(".seelesstags", tagsParent).css("display", "inline-block");
+  			$(this).removeClass("see-more").addClass("see-less");
+  			$(this).html($(this).data("seeless"));
+  		} else {
+  			$(".seelesstags", tagsParent).hide();
+  			$(this).removeClass("see-less").addClass("see-more");
+  			$(this).html($(this).data("seemore"));
+  		}
+  	});
 
   lQuery("#searchInput").livequery(function () {
     var input = $(this);

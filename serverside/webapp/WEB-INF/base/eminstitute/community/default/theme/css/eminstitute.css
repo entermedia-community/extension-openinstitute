@@ -107,9 +107,16 @@ a.primary:hover .fa-solid {
 	padding: 0.275rem 0.75rem;
 	font-size: 0.8rem;
 }
+.btn-sm {
+	padding: 0.25rem 0.35rem;
+	font-size: 0.70rem;
+	font-weight: normal;
+	line-height: 1;
+	border-radius: 0.2rem;
+}
 .btn-xs {
 	padding: 0.25rem 0.35rem;
-	font-size: 0.725rem;
+	font-size: 0.68rem;
 	font-weight: normal;
 	line-height: 1;
 	border-radius: 0.2rem;

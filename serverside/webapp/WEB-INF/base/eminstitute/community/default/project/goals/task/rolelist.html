@@ -1,4 +1,5 @@
 #set( $rolesarray = $task.getValues("taskroles") )
+
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
 <div id="roleeditor${task.id}" class="rolelist">
@@ -8,7 +9,7 @@
 		#set($collectiverole = $mediaarchive.getCachedData("collectiverole",$role.collectiverole))
 		#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 		<div class="btn-group" role="group">
-			<a href="${communityhome}/project/goals/task/editrole/editrole.html"
+			<a href="#if($caneditcollection)${communityhome}/project/goals/task/editrole/editrole.html#end"
 				title="#text($collectiverole)"
 			 	data-taskid="$task.id" 
 			 	data-collectionid="$!collectionid"
@@ -17,7 +18,10 @@
 				class="#if( $task.taskstatus != "3" )
 				 #if( $selectedcollectiverole == $collectiverole.id)roleselected#elseif( $!role.roleuserid == $user.id )rolemyself#end
 				#end
-				 emdialog btn btn-xs btn-secondary	"
+				#if($caneditcollection)
+				 emdialog 
+				#end
+				 btn btn-sm btn-secondary	"
 				 data-hidefooter="true"
 				 >#text($collectiverole) ($!collectiveuser)
 			 #ifnotnull($role.name)
@@ -30,13 +34,13 @@
 			 </a>
 			 
 			 #if( $role.roleuserid )  ##default user
-			 <a	class="btn btn-sm btn-secondary ajax" style="padding:.275rem .35rem"  
+			 <a	class="btn btn-sm btn-secondary #if($caneditcollection)ajax#end" style="padding:.475rem .35rem"  
 			 	data-targetdivinner="roleeditor${task.id}" 
 			 	data-taskid="$task.id" 
 			 	data-collectionid="$!collectionid"
 			 	data-collectiverole="$role.collectiverole"
 			 	data-roleuserid="$!role.roleuserid"
-			 	href="${communityhome}/project/goals/task/rolelistaddone.html" 
+			 	href="#if($caneditcollection)${communityhome}/project/goals/task/rolelistaddone.html#end" 
 			 	title="#esc($val)">#if($role.actioncount)($!role.actioncount)#end +</a>
 			 #end	
 		 
