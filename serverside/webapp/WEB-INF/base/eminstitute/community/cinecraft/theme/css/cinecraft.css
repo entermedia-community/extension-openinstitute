@@ -52,13 +52,16 @@ h6 {
 	color: var(--heading-color);
 	font-family: var(--heading-font);
 }
+.themed-btn, .btn.btn-follow, .btn.add-product,
+.chatterbox-write .chatter-btn,
 .btn-primary {
 	border-color: var(--accent-color) !important;
-	background-color: var(--accent-color);
+	background-color: var(--accent-color) !important;
 	color: #444444;
 	font-size: 16px;
 	transition: 0.3s;
 }
+.themed-btn:hover, .btn.btn-follow:hover, .btn.add-product:hover,
 .btn-primary:hover {
 	background-color: color-mix(
 		in srgb,
@@ -343,6 +346,9 @@ footer .logo small {
 	}
 }
 
+.emwidget-header {
+	background-color: #111;
+}
 
 
 .fillpage {
