@@ -76,7 +76,7 @@
 		
 		#if( $canviewsettings )
 		##/site/find/views/modules/librarycollection/editors/default/tabs/index.html
-			<li class="">
+			<li class="nav-item">
 				<a class="nav-link emdialog" 
 					href="${finderhome}/views/modules/librarycollection/editors/default/tabs/index.html" title="[[Data Base]]"
 					data-dialogid="entitydialog"
@@ -89,7 +89,7 @@
 		
 		<li class="dropdown collapsed-menu">
 			<button class="btn btn-transparent dropdown-toggle" data-bs-toggle="dropdown" data-toggle="dropdown">
-				<i class="fas fa-ellipsis-h mx-auto" style="font-size: 1rem;"></i>
+				<i class="fas fa-bars mx-auto" style="font-size: 1rem;"></i>
 			</button>
 			<ul class="dropdown-menu">
 				#set($menu_blog = $content.isPropertyTrue("menu_blog",true))
@@ -177,6 +177,6 @@
 		</li>
 	</ul> 
 	<button class="btn toggleCommunityDrawer">
-		<i class="fas fa-bars mx-auto" style="font-size: 1rem;"></i>
+		<i class="fas fa-chevron-circle-left mx-auto" style="font-size: 1rem;"></i>
 	</button>
 </div>
