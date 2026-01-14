@@ -99,7 +99,11 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 					#if(!$userprojects.isEmpty() )
 					<li class="#if($appsection == "mytasks") current #end" >
 						<a href="$communitylink/users/tasks/mytasks.html?goaltrackerstaff=$user.getId()">
-							<i class="fas fa-hammer"></i> [[My Tasks]]</a>
+							<i class="fas fa-tasks me-1"></i> [[My Goals]]</a>
+					</li>
+					<li class="#if($appsection == "mytasks") current #end" >
+						<a href="$communitylink/users/tasks/myactions.html?goaltrackerstaff=$user.getId()">
+							<i class="fas fa-tools me-1"></i> [[My Actions]]</a>
 					</li>
 					<li class="#if($appsection == "completed") current #end" >
 						<a href="$communitylink/users/tasks/report.html?collectionid=*&goaltrackerstaff=*">
@@ -115,14 +119,12 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 			</div>
 			#end
 			
-	   	<ul class="sidebar-list">
-			<li class="#if($appsection == "activity") current #end" >
-						<a href="$!{communitylink}/projects/allcthatsactivity/index.html"  >
-						<i class="fa fa-comments"></i> [[All Chats]]</a>
-			</li>
-			
-			
-			</ul>
+	    ##	<ul class="sidebar-list">
+		##	<li class="#if($appsection == "activity") current #end" >
+		##				<a href="$!{communitylink}/projects/allcthatsactivity/index.html"  >
+		##				<i class="fa fa-comments"></i> [[All Chats]]</a>
+		##	</li>
+		##	</ul>
 	</div>		
 	#if($canviewsettings)
 	<div class="sidebar-box">

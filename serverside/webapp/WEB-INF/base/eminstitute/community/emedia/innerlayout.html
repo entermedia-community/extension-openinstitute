@@ -58,7 +58,7 @@
 
 			$pages.include("${communityhome}/navigation.html", $context)
 			
-			#if($user && !$browser.inApp() && $canviewsettings)
+			#if($user && !$browser.inApp())
 				$pages.include("${communityhome}/components/sidebars/user/index.html")
 			#end
 			

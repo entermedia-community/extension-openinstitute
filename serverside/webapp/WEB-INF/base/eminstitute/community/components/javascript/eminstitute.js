@@ -163,13 +163,14 @@ jQuery(document).ready(function () {
 			switch (e.which) {
 				// TODO: background window.scrollTo the .masonry-grid-cell we view, so we can reload hits
 				case 27: // esc
+				
 					hideOIOverlayDiv();
 					break;
 
 				default:
 					return; // exit this handler for other keys
 			}
-			e.preventDefault(); // prevent the default action (scroll / move caret)
+			//e.preventDefault(); // prevent the default action (scroll / move caret)
 		});
 	};
 	OIdisposevideos = function () {

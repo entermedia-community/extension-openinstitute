@@ -474,6 +474,7 @@ $(document).ready(function(url,params)
 		        // TODO: background window.scrollTo the .masonry-grid-cell we view, so we can reload hits
 		        
 		        case 27: // esc
+				
 		        	var ismodal = $('#modals, #inlineedit, .modal');
 		        	if (ismodal.hasClass('show')) {
 		        		//Close modal only

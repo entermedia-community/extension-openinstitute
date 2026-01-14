@@ -33,6 +33,72 @@ $(document).ready(function () {
       closeSearchPopup();
     }
   });
+  function confirmModalClose(modal) {
+  		var checkForm = modal.find("form.checkCloseDialog");
+  		if (!checkForm) {
+  			closeemdialog(modal);
+  			trackKeydown = false;
+  			return true;
+  		} else {
+  			var prevent = false;
+  			$(checkForm)
+  				.find("input, textarea, select")
+  				.each(function () {
+  					if ($(this).attr("type") == "hidden") {
+  						return true;
+  					}
+  					var value = $(this).val();
+  					if (value) {
+  						prevent = value.length > 0;
+  						return false;
+  					}
+  				});
+
+  			if (prevent && exitWarning) {
+  				$("#exitConfirmationModal").css("display", "flex");
+  				return false;
+  			} else {
+  				closeemdialog(modal);
+  				trackKeydown = false;
+  				return true;
+  			}
+  		}
+  	}
+
+  	lQuery("form.checkCloseDialog").livequery(function () {
+  		trackKeydown = true;
+  		var modal = $(this).closest(".modal");
+  		if (modal.length) {
+  			if (typeof modal.modal == "function") {
+  				modal.modal({
+  					backdrop: "static",
+  					keyboard: false,
+  				});
+  			}
+  			modal.on("mousedown", function (e) {
+  				e.stopPropagation();
+  				e.stopImmediatePropagation();
+  				if (e.currentTarget === e.target) {
+  					confirmModalClose(modal);
+  				}
+  			});
+  		}
+  	});
+
+  	lQuery("#closeExit").livequery("click", function () {
+  		$("#exitConfirmationModal").hide();
+  	});
+  	lQuery("#confirmExit").livequery("click", function () {
+  		$("#exitConfirmationModal").hide();
+  		closeallemdialogs();
+  		trackKeydown = false;
+  	});
+  
+  lQuery(".entityclose").livequery("mousedown", function (event) {
+  		event.preventDefault();
+  		var targetModal = $(this).closest(".modal");
+  		confirmModalClose(targetModal);
+  	});
 
   lQuery(".trim-text").livequery(function () {
     var maxLength = $(this).data("max");

@@ -3084,26 +3084,7 @@ uiload = function () {
 		return;
 	});
 
-	$(document).keydown(function (e) {
-		switch (e.which) {
-			case 27: //esckey
-				var ismodal = $(".modal.onfront");
-				if (ismodal.length) {
-					// Close modal only
-					closeemdialog(ismodal);
-					e.stopPropagation();
-					e.preventDefault();
-				} else {
-					hideOverlayDiv(getOverlay());
-				}
 
-				return;
-				break;
-
-			default:
-				return; // exit this handler for other keys
-		}
-	});
 
 	lQuery(".emcarousel-link").livequery("click", function (e) {
 		e.preventDefault();
