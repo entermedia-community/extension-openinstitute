@@ -42,55 +42,8 @@
 		data-oemaxlevel="2"
 		ajaxpath="$!{bloglink}" >
 		<div class="blog-list-item">
-			<div class="w-100 d-flex align-items-center justify-content-between mb-3">
-				<div class="blog-credit">
-					<time class="text-muted fw-normal" datetime="$!userpost.getDate('entity_date')">
-						[[Posted]]
-						#set($timestamp = $context.getAge($userpost.getDate("entity_date")))
-						#ifnull($timestamp)
-							[[today]]
-						#end
-						#ifnotnull($timestamp)
-							<span>$timestamp [[ago]]</span>
-						#end
-					</time>
-				</div>
-				#if($librarycol.collectionimage)
-					#set($asset = $mediaarchive.getAsset($librarycol.collectionimage))
-					#set( $projectlogo = $mediaarchive.asLinkToPreview($asset,"image200x200"))
-				#else
-					#set($projectlogo = "$communityhome/theme/images/OI_flower.png")
-				#end
-				
-				<div class="blog-community">
-					<a href="${projectlink}" title="#text($librarycol)" >
-						<img src="$projectlogo" class="blog-community-img" alt="#text($librarycol)" />
-					</a>
-					
-	
-					#if($caneditcollection)
-						<a class="emdialog ms-2 text-muted small"
-							data-width="900"
-							data-dialogid="editPostDialog"
-							data-hidefooter="true"
-							data-collectionid="${librarycol.getId()}"
-							data-id="${userpost.id}"
-							href="$projectlink/channel/edit.html"
-							title="[[Edit Post]]">
-							<i class="fas fa-edit"></i>
-						</a>
-					#end
-				</div>
-			</div>
-			
-			#if($caneditcollection && $userpost.poststatus != "published")
-				#set($poststatus = $mediaarchive.getCachedData("poststatus",$userpost.poststatus))
-				<div class="badge text-bg-warning badge-sm mb-2">#text($poststatus)</div>
-			#end
-	
 			<div class="blog-container">
 				<div class="blog-header">
-	
 					#if($userpost.name)
 						<h1 class="blog-title">
 							#if($userpost.getBoolean("exclusivecontent"))
@@ -99,6 +52,55 @@
 							#esc($!userpost.name)
 						</h1>
 					#end
+					
+					<div class="w-100 d-flex align-items-center justify-content-between mb-3">
+									<div class="blog-credit">
+										#if($caneditcollection && $userpost.poststatus != "published")
+											#set($poststatus = $mediaarchive.getCachedData("poststatus",$userpost.poststatus))
+											<div class="badge text-bg-warning badge-sm me-2">#text($poststatus)</div>
+										#end
+										<time class="text-muted fw-normal" datetime="$!userpost.getDate('entity_date')">
+											[[Posted]]
+											#set($timestamp = $context.getAge($userpost.getDate("entity_date")))
+											#ifnull($timestamp)
+												[[today]]
+											#end
+											#ifnotnull($timestamp)
+												<span>$timestamp [[ago]]</span>
+											#end
+										</time>
+									</div>
+									#if($librarycol.collectionimage)
+										#set($asset = $mediaarchive.getAsset($librarycol.collectionimage))
+										#set( $projectlogo = $mediaarchive.asLinkToPreview($asset,"image200x200"))
+									#else
+										#set($projectlogo = "$communityhome/theme/images/OI_flower.png")
+									#end
+									
+									<div class="blog-community">
+										<a href="${projectlink}" title="#text($librarycol) [[Recent Blogs]]" >
+											<img src="$projectlogo" class="blog-community-img" alt="#text($librarycol)" />
+										</a>
+										
+						
+										#if($caneditcollection)
+											<a class="emdialog ms-2 text-muted small"
+												data-width="900"
+												data-dialogid="editPostDialog"
+												data-hidefooter="true"
+												data-collectionid="${librarycol.getId()}"
+												data-id="${userpost.id}"
+												href="$projectlink/channel/edit.html"
+												title="[[Edit Post]]">
+												<i class="fas fa-edit"></i>
+											</a>
+										#end
+									</div>
+								</div>
+								
+								
+								
+								
 					<div class="d-flex align-items-center blog-author">
 						<div class="blog-avatar">
 							#set( $postuser = $userManager.getUser($userpost.owner, true))

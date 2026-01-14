@@ -17,34 +17,35 @@ $context.putPageValue("showchannel",false)
 
 <div id="bloglistindex" class="bloglistindex" data-url="${page.path}" data-collectionid="$librarycol.id" data-oemaxlevel="1">
 
-	<div class="d-flex align-items-center justify-content-between mb-5 blog-list-title">
+	<div class="d-flex flex-column mb-3 blog-list-title">
 		#if( !$userposts.isEmpty() )
 			#if($tag)
-				<h1 class="h3 flex-grow-1">[[Blogs tagged with ]] <span class="blog-tag-filter">#esc($tag)</span> <a class="ms-1 text-muted small" href="${projectlink}"><i class="fa fa-times"></i></a></h1>
+				<h1 class="h3 mb-2">[[Blogs tagged with ]] <span class="blog-tag-filter">#esc($tag)</span> <a class="ms-1 text-muted small" href="${projectlink}"><i class="fa fa-times"></i></a></h1>
 			#else
-				<h1 class="h3  flex-grow-1">[[Recent Blogs]]</h1>
+				<h1 class="h3 mb-2">[[Recent Blogs]]</h1>
 			#end
 		#end
 		#if($caneditcollection)
-		
-		#set( $drafts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "draft").search() )
-				
-		#if($drafts)
-			<a class="btn btn-light mx-2" 
-					href="${projectlink}/blog-list/index-pending.html" 
-					data-collectionid="$librarycol.id">
-					<i class="fa fa-file me-1"></i>
-					[[Draft & Pending Posts]]
+			<div>
+			#set( $drafts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "draft").search() )
+					
+			#if($drafts)
+				<a class="btn btn-light mx-2" 
+						href="${projectlink}/blog-list/index-pending.html" 
+						data-collectionid="$librarycol.id">
+						<i class="fa fa-file me-1"></i>
+						[[Draft & Pending Posts]]
+				</a>
+			#end
+			<a class="btn btn-sm btn-primary emdialog"
+				href="${communitylink}/project/channel/addnew.html"
+				data-collectionid="$librarycol.id"
+				data-dialogid="createPostDialog"
+				data-hidefooter="true">
+				<i class="fa fa-plus me-1"></i>
+				[[Create a New Blog]]
 			</a>
-		#end
-		<a class="btn btn-sm btn-primary emdialog"
-			href="${communitylink}/project/channel/addnew.html"
-			data-collectionid="$librarycol.id"
-			data-dialogid="createPostDialog"
-			data-hidefooter="true">
-			<i class="fa fa-plus me-1"></i>
-			[[Create a New Blog]]
-		</a>
+			</div>
 		#end
 	</div>
 

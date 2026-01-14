@@ -127,7 +127,7 @@ h3,
 @media (max-width: 1199px) {
 	h3,
 	.h3 {
-		font-size: 32px;
+		font-size: 1.5rem;
 	}
 }
 h4,
@@ -617,13 +617,10 @@ footer {
 	line-height: 16px;
 	font-weight: 700;
 }
-.navigation .navbar-brand i {
+.navigation .navbar-brand img {
 	width: 50px;
 	height: 50px;
-	border-radius: 50px;
 	color: #ffffff;
-	/* border: 1px solid #626584; */
-	background-color: transparent;
 	text-align: center;
 	line-height: 50px;
 	margin-right: 10px;
@@ -760,6 +757,17 @@ footer {
 		background-color: #f1f2f4;
 		padding: 5px 8px;
 	}
+	.navigation  .navbar {
+		padding: 0;
+	}
+	.navigation .navbar-brand {
+		font-size:20px;
+	}
+	.navigation .navbar-brand img {
+		width: 50px;
+		height: 32px;
+		font-size: 16px;
+	}
 	.navigation .navbar-nav .nav-item .nav-link {
 		line-height: 0px;
 		font-size: 14px;
@@ -768,7 +776,7 @@ footer {
 		text-align: center;
 	}
 	.navigation .navbar-toggler i {
-		font-size: 28px;
+		font-size: 18px;
 	}
 }
 @media (max-width: 767px) {
