@@ -205,10 +205,12 @@
 	color: #444;
 }
 .chatterbox-messages {
-	height: calc(100% - 185px) !important;
+	height: calc(100% - 168px) !important;
 }
-.project-navbar {
-	backdrop-filter: blur(5px);
+@media screen and (max-width: 1199px) {
+	.chatterbox-messages {
+	    height: calc(100% - 132px) !important;
+	}
 }
 .project-navbar .dropdown-menu {
 	background-color: rgba(0, 0, 0, 0.9);
@@ -222,8 +224,8 @@
 }
 
 .project-header .banner {
+	background-color:#555;
 	backdrop-filter: blur(5px);
-	background-color: rgba(0, 0, 0, 0.5);
 }
 .cbp-filter-item-active {
 	color: #fff;
@@ -233,7 +235,7 @@
 	color: #fff !important;
 	background-color: #71869d !important;
 }
-.project-navbar,
+.project-navbar .banner,
 .emwidget {
 	border-radius: 4px;
 }

@@ -376,6 +376,7 @@ a:focus {
 }
 header.navigation {
 	background-color: #2b2d3b;
+	color:#fff;
 }
 .form-check-input:checked {
 	background-color: #626584;
@@ -417,10 +418,7 @@ header.navigation {
 	text-align: center;
 	line-height: 50px;
 }
-.project-list-container,
-.community-layout {
-	min-height: calc(100vh - 140px);
-}
+
 .preloader {
 	width: 100%;
 	height: 100vh;
@@ -647,16 +645,14 @@ footer {
 .navigation .navbar-toggler:focus {
 	box-shadow: none;
 }
-@media (min-width: 992px) {
-	.navigation .navbar-nav .nav-item:not(:last-child) {
-		margin-right: 12px;
-	}
+.navbar .btn-searchprojects {
+	color:#eee;
 }
 .navigation .navbar-nav .nav-item .nav-link {
-	margin-top: 25px;
-	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 15px;
 	color: #c1c1c1;
-	padding: 0 20px;
+	padding: 0 10px;
 	font-size: 18px;
 	line-height: 14px;
 	font-weight: 600;
@@ -671,9 +667,12 @@ footer {
 	font-weight: 700;
 }
 .btn-searchprojects {
-	margin-top: 18px;
+	margin-top: 14px;
 }
 @media (min-width: 992px) {
+	.navigation .navbar-nav .nav-item:not(:last-child) {
+			margin-right: 12px;
+		}
 	.navigation .dropdown:hover ul.dropdown-menu {
 		opacity: 1;
 		visibility: visible;
@@ -685,6 +684,11 @@ footer {
 		visibility: hidden;
 		transform: translateY(20px);
 		margin-top: -8px;
+	}
+}
+@media (min-width: 1200px) {
+	.navigation .navbar-nav .nav-item .nav-link {
+		padding: 0 20px;
 	}
 }
 .navigation .dropdown-menu {
@@ -724,9 +728,7 @@ footer {
 .card-block h2 {
 	color: #626584;
 }
-.chatterbox-write .btn.chatter-send {
-	padding: 0.375rem 0.75rem;
-}
+
 .emdata .tableheader {
 	background: none;
 }
@@ -1526,7 +1528,7 @@ ul > li {
 .project-navbar a.dropdown-item:active {
 	background-color: rgba(0, 0, 0, 0.15) !important;
 }
-.project-navbar {
+.project-header .banner {
 	background-color: #3b3d50e6;
 }
 .sidebar-left h3,

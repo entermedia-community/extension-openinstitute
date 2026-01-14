@@ -1198,7 +1198,7 @@ img.cat-thumb {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	position: relative;
 	margin-bottom: 60px;
-	background: #fff;
+	background: #e3e3e3;
 }
 .project-header .header-logo {
 	width: 100px;
@@ -1213,11 +1213,6 @@ img.cat-thumb {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border: 8px solid #ffffff;
 	z-index: 100;
-}
-@media screen and (max-width: 576px) {
-	.project-header .header-logo {
-		left: 24px;
-	}
 }
 .header-logo img {
 	width: 100%;
@@ -1239,10 +1234,9 @@ img.cat-thumb {
 	display: flex !important;
 	align-items: center;
 	justify-content: flex-end;
-	height: 70px;
-	padding-right: 16px;
-	border-radius: 16px;
-	background-color: rgba(0, 0, 0, 0.5);
+	/*height: 70px;*/
+	padding-right: 14px;
+	border-radius: 14px;
 	padding-left: 164px;
 	container-type: inline-size;
 	z-index: 1;
@@ -1315,6 +1309,67 @@ img.cat-thumb {
 .collapsed-menu .dropdown-toggle::after {
 	display: none;
 }
+.navigation i.fas {
+	margin-top:-5px;
+}
+.project-list-container,
+.community-layout {
+	min-height: calc(100vh - 110px);
+}
+.chatterbox-write .btn.chatter-send {
+	padding: 0.375rem 0.75rem;
+}
+@media screen and (max-width: 1199px) {
+	.project-navbar {
+		padding-left: 100px;
+	}
+	.project-header .banner {
+		width: 100%;
+		height: 50px;
+		margin-bottom:15px;
+	}
+	.project-header .header-logo {
+		left: 24px;
+		bottom: -10px;
+		width: 68px;
+		height: 68px;
+	}
+	.project-header h1.project-title {
+		font-size: 1.3rem;
+		bottom: 0;
+		line-height:50px;
+		left:110px;
+		color:#ffffff;
+	}
+	.project-navbar .nav-link, .project-navbar .dropdown-menu li a
+	{
+		font-size:0.9rem;
+	}
+	.navigation .navbar-nav .nav-item .nav-link {
+		margin: 0 10px;
+	}
+	.project-list-container,
+	.community-layout {
+		min-height: calc(100vh - 50px);
+	}
+	.emwidget-chatterbox {
+		height: calc(100vh - 180px) !important
+	}
+	.chatterbox-write .chatterbox-text {
+		height: 40px;
+	}
+	.chatterbox-write .btn.chatter-send {
+		padding: 0.175rem 0.5rem;
+	}
+}
+@media screen and (max-width: 576px) {
+	.project-header .header-logo {
+		left: 24px;
+		
+	}
+}
+
+
 @container (min-width: 340px) {
 	.project-navbar .navbar-collective li.nav-item:nth-child(-n + 3) {
 		display: inline-block;
