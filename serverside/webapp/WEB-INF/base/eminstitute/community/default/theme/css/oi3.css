@@ -1250,10 +1250,10 @@ img.cat-thumb {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 .project-navbar .navbar-collective li.nav-item {
-	display: none;
+	display: inline-block;
 }
 .project-navbar .navbar-collective .collapsed-menu {
-	display: inline-block;
+	display: none;
 }
 .collapsed-menu button.btn {
 	padding: 8px 12px;
@@ -1296,7 +1296,7 @@ img.cat-thumb {
 		height: 68px;
 	}
 	.project-header h1.project-title {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 		bottom: 0;
 		line-height:50px;
 		left:110px;
@@ -1360,16 +1360,16 @@ img.cat-thumb {
 	.community-layout .sidebar-right.active {
 		right: 0;
 	}
-	.project-navbar .navbar-collective li.nav-item {
-			display: inline-block;
-	}
-	.project-navbar .navbar-collective .collapsed-menu {
-		display: none;
-	}
-
+	
 }
 
 @media screen and (max-width: 1200px) {
+	.project-navbar .navbar-collective .collapsed-menu {
+		display: block;
+	}
+	.project-navbar .navbar-collective li.nav-item {
+			display: none;
+	}
 	#community-drawer-mask,
 	.btn.toggleCommunityDrawer {
 		display: block;
