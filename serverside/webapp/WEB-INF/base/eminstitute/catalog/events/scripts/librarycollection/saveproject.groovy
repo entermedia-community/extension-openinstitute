@@ -29,7 +29,7 @@ public void init()
 	Searcher librarysearcher = mediaArchive.getSearcher("library");
 
 
-	log.info("User is: " + user.getId() );
+	log.info("User saving librarycollection: " + user.getId() );
 
 	/*
 	if( data.getValue("library") == null )
@@ -49,11 +49,19 @@ public void init()
 	{
 		data.setValue("owner",user.getId());
 	}	
+	
+	if( data.get("creationdate") == null )
+	{
+		data.setValue("creationdate", new Date());
+	}
+	
 	if( data.get("urlname") == null )
-		{
-			String name = URLUtilities.dash(data.getName());
-			data.setValue("urlname",name);
-		}
+	{
+		
+		String name = URLUtilities.dash(data.getName()); 
+		name = URLUtilities.urlEscape(name);
+		data.setValue("urlname",name);
+	}
 	
 //	org.entermediadb.asset.Category root = mediaArchive.getProjectManager().createRootCategory(mediaArchive,data);
 //	data.getRootCategoryId(root.getId();
