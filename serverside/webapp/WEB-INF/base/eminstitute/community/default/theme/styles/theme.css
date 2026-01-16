@@ -183,7 +183,7 @@ body {
 .select2-container--default .select2-selection--multiple .select2-selection__choice,
 .select2-selection__choice  /* Selected Tag Style in Select2 Objects*/ {
 	color: #fff;
-	background-color: #dfefff;
+	background-color: #7a9cbd;
 }
 .edit-icon {
 	color: #666;
