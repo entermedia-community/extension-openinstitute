@@ -461,7 +461,9 @@ $(document).ready(function () {
 		$.ajax({
 			url: saveurl,
 			async: true,
-			data: options,
+			data: {
+				...options
+			},
 			success: function (data) {
 				$("#chatter-message-" + messageid).replaceWith(data);
 			},

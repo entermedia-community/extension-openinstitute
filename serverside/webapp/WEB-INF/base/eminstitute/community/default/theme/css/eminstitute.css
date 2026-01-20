@@ -98,6 +98,12 @@ a.primary:hover .fa-solid {
 .h-100-80 {
 	height: calc(100% - 80px);
 }
+.no-gutters {
+	margin:0;
+}
+.no-gutters .col-* {
+	padding:0;
+}
 .bg-white,
 .bg-light {
 	color: #000;

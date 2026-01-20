@@ -1412,20 +1412,6 @@ select.form-control + .select2-container {
 	width: calc(100%);
 	margin-left: 0px;
 }
-.languagesaddform {
-	min-height: 30px;
-	margin-bottom: 5px;
-}
-.languagesaddform .languageselector {
-	position: absolute;
-	margin-right: 5px;
-	width: 120px;
-}
-
-.insearchform .languagesaddform .languageselector {
-	position: relative;
-	margin-bottom: 5px;
-}
 
 #advsearchpanel .insearchform .languagesaddform .languageselector .select2 {
 	max-width: 120px;

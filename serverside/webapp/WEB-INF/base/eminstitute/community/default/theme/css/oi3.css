@@ -30,7 +30,10 @@ h2 {
 .fa-sm {
 	font-size: 0.9em;
 }
-
+.bi {
+	transform: scale(1.2);
+	display: inline-block;
+}
 .secondary-header {
 	display: flex;
 	justify-content: space-between;

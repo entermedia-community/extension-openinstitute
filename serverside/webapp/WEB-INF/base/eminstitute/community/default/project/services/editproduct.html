@@ -18,7 +18,7 @@ $context.putPageValue("data", $data)
 
 #if($data.getValue("locked")=="true")
 	$pages.include("/$applicationid/components/xml/detaileditor.html?detailsreadonly=true", $context)
-	<div style="padding:15px 10px; font-size:0.9em;">
+	<div class="p-3">
 	*[[You can't edit an invoiced product/service]]
 	</div>
 #else
@@ -34,7 +34,7 @@ $context.putPageValue("data", $data)
 		<input type="hidden" name="field" value="collectionid" />
 		<input type="hidden" name="collectionid.value" value="$librarycol.getId()" />
 		<input type="hidden" name="collectionid" value="$librarycol.getId()" />
-		
+
 		$context.putPageValue("fieldcolumnsize", 12)
 		$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 		
