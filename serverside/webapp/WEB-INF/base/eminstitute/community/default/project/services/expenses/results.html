@@ -35,15 +35,26 @@
                   #foreach($hit in $hits.getPageOfHits())
                       <tr>
                           #if($showcollections )
+						  
+						 	#set( $project= $!mediaarchive.getCachedData("librarycollection", $hit.collectionid) )
+		  					#set( $community = $mediaarchive.getCachedData("communitytagcategory",$project.communitytagcategory))
+		  					#if($project.urlname)
+		  						#set($projectlink = "$!{community.externaldomain}/${project.urlname}/goals/priorities")
+		  					#else
+		  						#set($projectlink = "${communitylink}/proposal/${project.id}/#dash($project.getName()).html")
+		  					#end
+											
                           <td>
+							#ifnotnull($project)
 							<a
-                                href="${projectlink}/services/expenses/index.html?collectionid=$hit.collectionid"
-                                class="btn btn-xs btn-secondary"
+                                href="$!{projectlink}/services/expenses/index.html?collectionid=$hit.collectionid"
+                                class=""
                                 target="_new"income
                                 data-hidefooter="true"
                                 >
-                                  $!mediaarchive.getCachedData("librarycollection", $hit.collectionid)
+                                  $!project
                              </a>
+							 #end
                           </td>
                           #end
                           <td>$!context.getDate($hit.date)</td>
@@ -104,6 +115,7 @@
 		                	#foreach( $currency in $totalsbycurrency.keySet())
 								#set($subtotal = $totalsbycurrency.get($currency))
 			                	<tr class="table-row-subtotals">
+									#if($showcollections )<td></td>#end
 			                		<td colspan="3"></td>
 			                		<td class="text-right">[[Sub Total]]:</td>
 			                		<td class="text-right">
@@ -126,6 +138,7 @@
 		                	#end
 						
 							<tr class="table-row-totals">
+								#if($showcollections )<td></td>#end
 		                		<td colspan="4"></td>
 		                		<td class="text-right"><strong>[[Total]]:</strong></td>
 		                		<td class="text-right">

@@ -1440,7 +1440,7 @@ select.form-control + .select2-container {
 .emdata th {
 	padding: 0px 3px;
 	border-top: 0 none;
-	border-right: 1px solid #fff;
+	border-right: 1px solid #efefef;
 	white-space: nowrap;
 	font-size: 0.8rem;
 	line-height: 2;
