@@ -8,6 +8,8 @@
 * Copyright 2020 Htmlstream
 */
 
+var type = typeof value;
+
 ;(function ($) {
 	'use strict';
 
