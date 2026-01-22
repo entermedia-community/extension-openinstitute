@@ -11002,11 +11002,18 @@ table.referrals tr:hover td {
 }
 .card-collections {
 	display: inline-block;
-	width: 120px;
+	width: 150px;
 	background: #1d4c87;
 }
 .card-collections .collectionbox {
 	width: 100%;
+	font-size:1rem;
+}
+.card-collections .card-collections-thumb
+{
+	width:100px;
+	height: 100px;
+	background-color:#fff;
 }
 .emwidget-header {
 	background-color: #0c223b;
