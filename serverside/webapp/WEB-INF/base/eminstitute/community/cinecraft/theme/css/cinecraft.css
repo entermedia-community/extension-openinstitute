@@ -62,6 +62,7 @@ h6 {
 }
 .themed-btn:hover, .btn.btn-follow:hover, .btn.add-product:hover,
 .btn-primary:hover {
+	border-color: var(--accent-color) !important;
 	background-color: color-mix(
 		in srgb,
 		var(--accent-color),

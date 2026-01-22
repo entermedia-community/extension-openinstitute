@@ -27,20 +27,13 @@
               Blog
             </a>
           </li> 
-          #ifnull($user)
-          <li class="nav-item">
-            <a class="nav-link #if($content.oisection == 'login') active #end" href="$communitylink/authentication/login.html">
-              Login / Register <i class="ml-1 fs-small fas fa-user"></i>
-            </a>
-          </li> 
-          #end
+		  <li class="nav-item pt-3">
+		  <form action="/find/index.html" method="post">
+		  	<input type="hidden" name="entermedia.key" value="adminmd5421c0af185908a6c0c40d50fd5e3f16760d5580bc" />
+		      	<a href="#" class=" btn btn-primary submitform">Open App</a>
+		  </form>
+		  </li>
           #ifnotnull($user)
-		  <li class="nav-item">
-		              <a class="nav-link #if($content.oisection == 'blogs') active #end" href="/find/?entermedia.key=adminmd5426e65294b0bf240a00d50c60da390f541710cd3d">
-		                Open App
-		              </a>
-		            </li> 
-		  
           <li class="nav-item">
             <a class="nav-link" href="/site/community/cinecraft/users/index.html?id=$user" title="[[Logout]] ($user)">
               My Account
