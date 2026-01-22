@@ -5,6 +5,6 @@
 	"localversion": "$localversion",
 	"needupgrade": "$needsupgrade",
 	"provider_name": "eMediaLibrary",
-	"provider_url": "http://eMediaLibrary.com/downloads.html"
+	"provider_url": "http://emedialibrary.org/downloads.html"
 		
 }
