@@ -11,7 +11,7 @@ import org.entermediadb.email.TemplateWebEmail
 public void init() {
 	
 	//Notify to Email:
-	String notifyemail = "sales@entermediadb.org";  //get it from catalog settings?
+	String notifyemail = "cristobal@entermediadb.org";  //get it from catalog settings?
 
 
 	//prevent re-submition
@@ -42,13 +42,18 @@ public void init() {
 	
 	
 	
-	context.putPageValue("subject", "Quote Request");
+	context.putPageValue("subject", "Library Request");
 	HashMap htmlfields = new HashMap();
 	htmlfields.put("name", context.getRequestParameter("name.value"));
 	htmlfields.put("email", context.getRequestParameter("email.value"));
 	htmlfields.put("company", context.getRequestParameter("company.value"));
-	htmlfields.put("product", context.getRequestParameter("product.value"));
-	htmlfields.put("month", context.getRequestParameter("month.value"));
+	htmlfields.put("subdomain", context.getRequestParameter("subdomain.value"));
+	
+	htmlfields.put("template", context.getRequestParameter("template"));
+	
+	
+	//htmlfields.put("product", context.getRequestParameter("product.value"));
+	//htmlfields.put("month", context.getRequestParameter("month.value"));
 	
 	//Message requester info
 	context.putPageValue("messagetime", new Date() );
@@ -59,13 +64,13 @@ public void init() {
 		senderinfo = senderinfo + " Refering page: "+context.getPageValue("referringPage");
 	}
 	if (context.getPageValue("page") != null) {
-		senderinfo = senderinfo + " Page: "+context.getPageValue("page");
+		senderinfo = senderinfo + " | Page: "+context.getPageValue("page");
 	}
-	senderinfo = senderinfo + " Ip: " + ipaddress;
+	senderinfo = senderinfo + " | Ip: " + ipaddress;
 	context.putPageValue("senderinfo",   senderinfo);
 	
 	String communityhome = context.getPageValue("communityhome");
-	String templateSrc = communityhome+"/meetingschedule/notifyemailquote.html";
+	String templateSrc = communityhome+"/meetingschedule/notifyemailrequestlibrary.html";
 	sendEmail(context.getPageMap(), notifyemail, templateSrc);
 }
 

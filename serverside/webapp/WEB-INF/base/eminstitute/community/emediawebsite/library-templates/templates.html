@@ -7,7 +7,8 @@
       <div class="card h-100 template-card shadow-sm transition-3d-hover">
         <div class="card-thumbnail">
 			    #set( $hero = $mediaarchive.getAsset($template.primarymedia) )
-			    <img src="/$mediaarchive.getMediaDbId()/services/module/asset/downloads/preset/${hero.sourcepath}/image3000x3000.png" class="card-img-top" alt="#text($template) template preview">
+				#set($imagelink = $mediaarchive.asLinkToPreview($hero,"image550x550"))
+			    <img src="$imagelink" class="card-img-top" alt="#text($template) template preview">
           <div class="template-action d-flex gap-2">
             <a class="btn bg-white border shadow-sm" href="${template.url}">
               <i class="fas fa-eye me-1"></i>

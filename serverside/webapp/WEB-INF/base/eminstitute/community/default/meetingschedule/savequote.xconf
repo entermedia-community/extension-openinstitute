@@ -1,8 +1,9 @@
 <page>
 	<inner-layout>${communityhome}/views/layouts/app.html</inner-layout>
+	
 	<page-action name="Script.run">
 	
-	<script>./savequote.groovy</script>
+	<script>./requestlibrary.groovy</script>
 
 	</page-action>
 	
