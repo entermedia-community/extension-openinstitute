@@ -1886,11 +1886,6 @@ textarea.form-control {
 .chatterbox-messages {
 	height: calc(100% - 188px) !important;
 }
-@media screen and (max-width: 1199px) {
-	.chatterbox-messages {
-		height: calc(100% - 132px) !important;
-	}
-	}
 .msg-bubble .msg-body.me {
 	background: #eff1ff !important;
 	color: #000 !important;

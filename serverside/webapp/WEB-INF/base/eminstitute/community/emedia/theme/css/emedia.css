@@ -682,11 +682,8 @@ footer {
 		margin-top: -8px;
 	}
 }
-@media (min-width: 1200px) {
-	.navigation .navbar-nav .nav-item .nav-link {
-		padding: 0 20px;
-	}
-}
+
+
 .navigation .dropdown-menu {
 	border: 0;
 	background: #fff;
@@ -747,7 +744,12 @@ footer {
 	font-size: 0.9rem;
 	text-align: center;
 }
-@media (max-width: 1200px) {
+@media (min-width: 1439px) {
+	.navigation .navbar-nav .nav-item .nav-link {
+		padding: 0 20px;
+	}
+}
+@media (max-width: 1440px) {
 	.navigation  .navbar {
 			padding: 0;
 		}
@@ -756,12 +758,12 @@ footer {
 		}
 		.navigation .navbar-brand img {
 			width: 50px;
-			height: 32px;
+			height: 30px;
 			font-size: 16px;
 		}
 		.navigation .navbar-nav .nav-item .nav-link {
-			line-height: 18px;
-			font-size: 18px;
+			line-height: 16px;
+			font-size: 16px;
 			font-weight: 400;
 			margin: 20px 0 !important;
 			text-align: center;
@@ -770,7 +772,7 @@ footer {
 			font-weight: 400;
 			}
 		.navigation .navbar-toggler i {
-			font-size: 18px;
+			font-size: 16px;
 		}
 	}
 @media (max-width: 991px) {
