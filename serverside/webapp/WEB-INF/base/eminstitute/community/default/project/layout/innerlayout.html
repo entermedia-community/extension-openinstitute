@@ -4,22 +4,9 @@
 	<div class="container pt-3">
 		$pages.include("${communityhome}/project/layout/project-header.html",$context)
 		<div class="community-layout bg-white"> 
-
-				#if($collectivesection == "settings")
-					<div  class="sidebar-left">
-					<button class="btn btn-sm community-drawer-close">
-						<i class="fas fa-times text-muted"></i>
-					</button>
-					#if($collectivesection == "settings")
-						$pages.include("${communityhome}/project/admin/sidebar.html",$context)
-					#end
-					</div>
-				#end
-								
-			<div class="main-content">
-				<div id="maincontent">
+	
+			<div id="maincontent" class="main-content">
 					$pages.includeContent()	
-				</div>
 			</div>
 			
 			#if($collectivesection != "settings" && $collectivesection != "finances")

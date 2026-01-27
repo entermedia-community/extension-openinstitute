@@ -218,11 +218,12 @@
 	margin-top: 100px;
 }
 .emwidget-header {
-	background-color: #ffffff;
+	background-color:#111;
+	color: #ffffff;
 	border-bottom: 1px solid #ddd;
 }
 .emwidget-name {
-	color: #444;
+	color: #fff;
 }
 .project-navbar .dropdown-menu {
 	background-color: rgba(0, 0, 0, 0.9);

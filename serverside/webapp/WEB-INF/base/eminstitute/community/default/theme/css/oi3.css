@@ -1102,7 +1102,6 @@ img.cat-thumb {
 .community-layout .sidebar-left,
 .community-layout .sidebar-right {
 	min-height: 100%;
-	width: 300px;
 	padding: 1rem 0.5rem 1rem 1rem;
 	margin:1rem 0;
 	background-color: #ffffff;
@@ -1308,7 +1307,7 @@ img.cat-thumb {
 
 @media screen and (min-width: 992px) {
 
-	.community-layout .sidebar-left {
+	.community-layoutX .sidebar-left {
 		left: -100%;
 	}
 	.community-layout .sidebar-left.active {

@@ -2,7 +2,6 @@
 	#set($isproposal = "true")
 #end
 
-<div class="card-block">
 
 #set( $searcher = $mediaarchive.getSearcher("librarycollection") )
 $context.putPageValue("searcher",$searcher)
@@ -12,7 +11,11 @@ $context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
 
-<h2 class="mb-3">[[Update Invoice Template]]</h2>
+<div class="emwidget">
+	<div class="emwidget-header">
+		<div class="emwidget-name">[[Invoices Template]]</div>
+	</div>
+	<div class="emwidget-content">
 
 <form name="savecollective" 
 	enctype="multipart/form-data" 
@@ -58,6 +61,7 @@ $pages.include("${communityhome}/components/xml/detaileditor4.html", $context)
 	
 
 </form>
+</div>
 </div>
 
 

@@ -4,5 +4,7 @@
 
   <property id="stripepublickey"/>
   <property id="stripeprivatekey"/>  
+  
+  <property id="invoicepayoptions"/>  
 
 </properties>

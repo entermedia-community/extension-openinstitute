@@ -9,9 +9,12 @@ $context.putPageValue("searcher",$searcher)
 $context.putPageValue("viewid", $viewid)
 $context.putPageValue("data", $librarycol)
 
-<div class="card-block">
-	<h2 class="mb-3">[[Update Testimonials]]</h2>
-<form name="savecollective" 
+<div class="emwidget">
+	<div class="emwidget-header">
+		<div class="emwidget-name">[[Testimonials]]</div>
+	</div>
+	<div class="emwidget-content">
+	<form name="savecollective" 
 	enctype="multipart/form-data" 
 	id="savecollective"
 	action="${projectlink}/edit/testimonials-save.html"
@@ -38,6 +41,7 @@ $context.putPageValue("data", $librarycol)
 			
 	
 	</form>
+</div>
 </div>
 
 
