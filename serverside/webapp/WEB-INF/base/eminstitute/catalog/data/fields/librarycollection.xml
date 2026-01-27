@@ -339,15 +339,6 @@ L
     </name> 
   </property>  
   
-   <property id="sessioncalcdate" index="true" deleted="false" editable="true" stored="true" type="date">Session Calc Date
-  </property>  
-  <property id="totalsessionspurchased" index="true" deleted="false" editable="true" stored="true" type="number">Total Sessions Purchased
-  </property>  
-  <property id="totalsessionsused" index="true" deleted="false" editable="true" stored="true" type="number">Total Sessions Used
-  </property>
-  <property id="remainingsessions" index="true" deleted="false" editable="true" stored="true" type="number">Remaining Sessions
-  </property>
-  
 <!-- 
 https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/208?fullscreen=true&showtabssearch=false&autostart=true
  -->
@@ -394,67 +385,7 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
       <language id="en"><![CDATA[Status]]></language>
     </name>
   </property> 
-  <property id="goaldate" index="true" stored="true" editable="true"  type="date" datatype="date" >
-    <name> 
-      <language id="en"><![CDATA[Goal Date]]></language>  
-      <language id="es"><![CDATA[Fecha de Objetivo]]></language>  
-    </name> 
-  </property>
-  <property id="goalamount" index="true" stored="true" editable="true" type="number"> 
-    <name> 
-      <language id="en"><![CDATA[Goal Amount]]></language>  
-      <language id="es"><![CDATA[Cuenta de Objetivo]]></language>  
-    </name> 
-  </property>
-  <property id="distributedtotal" index="true" stored="true" editable="true" type="number"> 
-    <name> 
-      <language id="en"><![CDATA[Distributed Total]]></language>  
-    </name> 
-  </property>
-  
-  <property id="donationemailsubject" index="true" stored="true" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Donation Email Subject]]></language>  
-    </name> 
-  </property>    
-  
-  
-   <property id="donationemailtemplate" index="true" stored="true" viewtype="html" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Donation Email Template]]></language>  
-    </name> 
-  </property>
-  
-  <property id="invoiceemailheader" index="true" stored="true" viewtype="html" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Invoice Email Header]]></language>  
-    </name> 
-  </property>
-  
-    <property id="invoiceemailfooter" index="true" stored="true" viewtype="html" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Invoice Email Footer]]></language>  
-    </name> 
-  </property>     
-  
-  <property id="invoicepaidemail" index="true" stored="true" viewtype="html" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Payd Invoice Email Message]]></language>  
-    </name> 
-  </property>   
-  
-    <property id="invoicepayoptions" index="true" stored="true" viewtype="html" editable="true"   > 
-    <name> 
-      <language id="en"><![CDATA[Other Pay Options for Invoices]]></language>  
-    </name> 
-  </property>     
-  
-  
-  <property id="dollarsperpoints" index="true" stored="true"  editable="true" type="double" defaultvalue="1">
-    <name> 
-      <language id="en"><![CDATA[Dollars Per Points]]></language>  
-    </name> 
-  </property>
+ 
 
 <property id="priviacylevel" index="true" stored="true" type="list" listid="projectprivacylevel" editable="true" defaultvalue="community" > 
     <name> 
@@ -474,10 +405,6 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
       <language id="en"><![CDATA[Campaign Highlights]]></language>  
     </name> 
   </property>
-  
-  
-  
-  
   
   <property id="proposalproblem" index="true" stored="true" viewtype="html" editable="true"   > 
     <name> 
@@ -506,30 +433,10 @@ https://videoplayer.telvue.com/player/5QlcS026fQy98qR8aFzKSh5DvYNq1NKn/stream/20
     </name>
   </property>
 
-
-
 	<property id="serverstatus" index="true" stored="true" editable="true" type="list" viewtype="list"  datatype="list"  > 
     	<name> 
       		<language id="en"><![CDATA[Server Status]]></language>  
     	</name> 
   	</property>
-  	
-  	
-  	<property id="stripepublickey" index="true" stored="true" editable="true"   > 
-	    <name> 
-	      <language id="en"><![CDATA[Stripe Public Key]]></language>  
-	    </name> 
-	 </property>
- 	 <property id="stripeprivatekey" index="true" stored="true" editable="true"   > 
-	    <name> 
-	      <language id="en"><![CDATA[Stripe Private Key]]></language>  
-	    </name> 
-	 </property>
-
- <property id="featuredcollection" index="true" type="boolean" keyword="false" filter="false" editable="true">
-    <name>
-      <language id="en"><![CDATA[Featured]]></language>
-    </name>
-  </property>
-    
+  	   
 </properties>
