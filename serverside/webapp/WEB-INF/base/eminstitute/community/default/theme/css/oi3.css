@@ -1099,14 +1099,21 @@ img.cat-thumb {
 	transition: margin-left 0.25s ease-in-out;
 	padding-bottom: 60px;
 }
-.community-layout .sidebar-left,
-.community-layout .sidebar-right {
+.community-layout .sidebar-left{
 	min-height: 100%;
 	padding: 1rem 0.5rem 1rem 1rem;
 	margin:1rem 0;
 	background-color: #ffffff;
 	position: relative;
 }
+.community-layout .sidebar-right {
+	width:300px;
+	min-height: 100%;
+	padding: 0 0.5rem 1rem 1rem;
+	margin:1rem 0;
+	background-color: #ffffff;
+	position: relative;
+	}
 .community-layout .main-content {
 	flex: 1;
 	padding: 0 1rem 1rem;
@@ -1802,3 +1809,8 @@ input.search-primary {
 .dotted-underline {
 	text-decoration: underline dotted;
 }
+
+
+#swapCheckbox:checked ~ #container2 { display: block !important; }
+#swapCheckbox:checked ~ #container1 { display: none !important; }
+#swapCheckbox:not(:checked) ~ #container2 { display: none !important; }

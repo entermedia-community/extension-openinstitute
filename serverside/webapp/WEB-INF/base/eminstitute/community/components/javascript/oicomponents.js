@@ -235,4 +235,12 @@ $(document).ready(function () {
       });
     });
   });
+  
+  
+  lQuery('.toggleCheckbox').livequery("change", function (e) {
+	  var container1 = $(this).data("container1");
+	  var container2 = $(this).data("container2");
+      $('#'+container1 +", #"+container2).toggleClass('d-none');
+  });
+  
 });
