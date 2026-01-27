@@ -15,15 +15,14 @@ data-showuploadid="${showupload.id}" #end data-viewertemplate="${communitylink}/
 	<div class="main-content">
 		$pages.include("${communityhome}/project/layout/project-header.html",$context)
 		<div id="maincontent">
-			
-			
 			$pages.includeContent()	
 		</div>
 	</div>
-	
+	#if($collectivesection != "settings" && $collectivesection != "finances")
 	<div class="sidebar-right">
 		$pages.include("${communityhome}/project/layout/sidebar-right.html",$context)
 	</div>
+	#end
 	<div id="community-drawer-mask" class="community-drawer-close" role="button" style="display: none;"></div>
 </div>
 

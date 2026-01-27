@@ -3323,6 +3323,11 @@ header {
 	-webkit-animation-name: fadeOutRight;
 	animation-name: fadeOutRight;
 }
+
+
+.mainsection-project {
+	background-color:#fff;
+}
 /*------------------------------------
   Alert Styles
 ------------------------------------*/
@@ -3361,7 +3366,7 @@ header {
 }
 .alert-info {
 	color: #fff;
-	background-color: #09a5be;
+	background-color: #29acc1;
 	border-color: #09a5be;
 }
 .alert-info hr {
