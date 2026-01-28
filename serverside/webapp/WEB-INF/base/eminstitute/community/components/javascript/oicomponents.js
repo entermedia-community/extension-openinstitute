@@ -214,7 +214,9 @@ $(document).ready(function () {
       lastTypeahead = $.ajax({
         url: options.typeaheadurl,
         async: true,
-        data: options,
+        data: {
+			...options
+			},
         timeout: 5000,
         success: function (data) {
           data = data.trim();
