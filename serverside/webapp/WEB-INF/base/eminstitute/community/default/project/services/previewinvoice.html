@@ -27,13 +27,12 @@
 		
 		
 		<div class="text-right" style="padding:15px 10px;">
-		<button id="closebutton" type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">[[Close]]</button>
 		#if( $canviewsettings )
 			#set($status = $invoice.getValue("paymentstatus"))
 			
 			#if(!$status.equals("paid"))
 			<a href="${projectlink}/services/editinvoice.html?invoiceid=$id" 
-				class="btn btn-secondary ajax" 
+				class="btn btn-sm btn-secondary ajax" 
 				data-targetdiv="invoicecontainer"
 				title="[[Edit Invoice Details]]"
 				>[[Edit Invoice]]</a>
@@ -41,9 +40,9 @@
 			
 			#if($invoiceready == "true")
 				#if($status.equals("invoiced"))
-					<input type="submit" class="btn btn-primary" value="[[Re-send Invoice]]"/>
+					<input type="submit" class="btn btn-sm btn-primary" value="[[Re-send Invoice]]"/>
 				#elseif(!$status.equals("paid"))
-					<input type="submit" class="btn btn-primary" value="[[Send Invoice]]"/>
+					<input type="submit" class="btn btn-sm btn-primary" value="[[Send Invoice]]"/>
 				#end
 			#end
 		

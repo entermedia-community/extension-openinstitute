@@ -6,7 +6,7 @@
        <h3>[[Products]]</h3>
 		<div>
 			 <a href="${projectlink}/services/addnew.html?collectionid=${collectionid}"
-			 class="emdialog btn btn-sm btn-primary">[[Add Product or Service]]</a>
+			 class="emdialog btn  btn-primary">[[Add Product or Service]]</a>
         </div>
 	
      </div>
@@ -66,15 +66,19 @@
 							<td style="text-align: center;">$!context.getDate($hit.nextbillon)</td>
                             <td>
                                 #if( $canviewsettings )
-           
+								<a
+                                    href="${projectlink}/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
+                                    title="[[Invoice Product or Service]]"
+                                    class="emdialog btn btn-xs btn-secondary"
+                                    data-hidefooter="true">[[Create Invoice]]</a>
                                     <a
                                         href="${projectlink}/services/editproduct.html?collectionid=${collectionid}&id=${hit.id}"
                                         title="[[Edit Product or Service]]"
-                                        class="emdialog btn btn-xs btn-warning "><i class="fa fa-edit"></i></a>
+                                        class="emdialog btn btn-xs btn-secondary "><i class="fa fa-edit"></i></a>
                                     <a
                                         href="${projectlink}/services/copyproduct.html?collectionid=${collectionid}&id=${hit.id}"
                                         title="[[Copy Product or Service]]"
-                                        class="emdialog btn btn-xs btn-secondary">[[Copy]]</a>
+                                        class="emdialog btn btn-xs btn-secondary"><i class="fa fa-copy"></i></a>
 
                                         
 
@@ -98,12 +102,8 @@
 	                                     #end
 	                                 #end
 	                                 
-	                                 <div style="padding:5px 0 0;">
-                                    <a
-                                        href="${projectlink}/services/generateinvoice.html?collectionid=${collectionid}&id=${hit.id}"
-                                        title="[[Invoice Product or Service]]"
-                                        class="emdialog btn btn-xs btn-primary"
-                                        data-hidefooter="true">[[Create Invoice]]</a>
+	                                 ##<div style="padding:5px 0 0;">
+                                    
 	                                 
 	                                <a
                                         href="/find/views/settings/lists/datamanager/edit/edit.html?id=$hit.id&searchtype=collectiveproduct"
@@ -112,7 +112,7 @@
                                         <i class="fa fa-database"></i>
                                     </a>
 									
-                                    </div>
+                                    ##</div>
                                 #end
                             </td>
                         </tr>

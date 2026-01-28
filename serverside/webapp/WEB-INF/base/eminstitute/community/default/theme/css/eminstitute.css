@@ -110,29 +110,29 @@ a.primary:hover .fa-solid {
 }
 .btn {
 	cursor: pointer;
-	padding: 0.275rem 0.75rem;
-	font-size: 0.8rem;
+	padding: 0.5rem 0.95rem;
+	font-size: 0.95rem;
 }
 .btn-sm {
-	padding: 0.25rem 0.35rem;
-	font-size: 0.70rem;
+	padding: 0.3rem 0.75rem;
+	font-size: 0.85rem;
 	font-weight: normal;
-	line-height: 1;
+	line-height: 1.25;
 	border-radius: 0.2rem;
 }
 .btn-xs {
-	padding: 0.25rem 0.35rem;
-	font-size: 0.68rem;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.7rem;
 	font-weight: normal;
-	line-height: 1;
-	border-radius: 0.2rem;
+	line-height: 1.1;
+	border-radius: 0.1rem;
 }
 .btn-xxs {
 	padding: 0.1rem 0.2rem;
-	font-size: 0.725rem;
+	font-size: 0.65rem;
 	font-weight: normal;
 	line-height: 1.1;
-	border-radius: 0.2rem;
+	border-radius: 0.1rem;
 }
 .btn-file {
 	position: relative;
