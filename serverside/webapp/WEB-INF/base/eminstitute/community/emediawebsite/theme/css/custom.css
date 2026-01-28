@@ -4774,8 +4774,8 @@ a.badge-soft-navy:focus {
 .btn-light:not(label.btn):not([href]):not(:disabled):not(.disabled),
 .btn-light:not([href]),
 .btn-light:not([href]):not([href]):not(:disabled):not(.disabled) {
-	background-color: #f7faff;
-	border-color: #f7faff;
+	background-color: #e7eefb;
+	border-color: #b7bdc9;
 }
 
 .btn-light:hover {
