@@ -98,14 +98,25 @@ body {
 	$pages.include("$communityhome/project/services/viewinvoice.html", $context)
 	</div>
 	
-		#if($collection.invoicepayoptions)
-       		#set( $invoicepayoptions = $collection.invoicepayoptions)
-       	#else
-        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
-        #end
-      #if($invoicepayoptions != "")
-      <div style="padding:20px">$!invoicepayoptions</div>
-      #end
+	#ifnotnull($collection.parentprojectinvoicing)
+			
+			#set($parentcollectionivoice = $mediaarchive.getCachedData("librarycollection", $collection.parentprojectinvoicing))
+			
+			#ifnotnull($parentcollectionivoice)
+				#set( $invoicepayoptions = $parentcollectionivoice.get("invoicepayoptions"))
+				
+			#end
+		#end
+		#if(!$invoicepayoptions)
+			#if($collection.invoicepayoptions)
+				#set( $invoicepayoptions = $collection.invoicepayoptions)
+			#else
+				#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
+			#end
+		#end
+	      #ifnotnull($invoicepayoptions)
+	      <div style="padding:20px">$!invoicepayoptions</div>
+	      #end
 	        
 	        
 </div>

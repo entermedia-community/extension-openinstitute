@@ -8,8 +8,8 @@
 	#set( $invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id))
 #end
 #if ($invoice)
-	#if(!$collectionid)
-		#set( $collection = $mediaarchive.query("librarycollection").exact("id", $invoice.getValue("collectionid")).searchOne() )
+	#ifnull($collection)
+		#set( $collection = $mediaarchive.getCachedData("librarycollection", $invoice.getValue("collectionid") ))
 		#set( $collectionid = $collection.getId())
 	#end
 
@@ -98,12 +98,23 @@ body {
 	$pages.include("$communityhome/project/services/viewinvoice.html", $context)
 	</div>
 	
+	#ifnotnull($collection.parentprojectinvoicing)
+		
+		#set($parentcollectionivoice = $mediaarchive.getCachedData("librarycollection", $collection.parentprojectinvoicing))
+		
+		#ifnotnull($parentcollectionivoice)
+			#set( $invoicepayoptions = $parentcollectionivoice.get("invoicepayoptions"))
+			
+		#end
+	#end
+	#if(!$invoicepayoptions)
 		#if($collection.invoicepayoptions)
-       		#set( $invoicepayoptions = $collection.invoicepayoptions)
-       	#else
-        	#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
-        #end
-      #if($invoicepayoptions != "")
+			#set( $invoicepayoptions = $collection.invoicepayoptions)
+		#else
+			#set( $invoicepayoptions = $mediaarchive.getCatalogSettingValue("invoice_pay_options"))
+		#end
+	#end
+      #ifnotnull($invoicepayoptions)
       <div style="padding:20px">$!invoicepayoptions</div>
       #end
 	        

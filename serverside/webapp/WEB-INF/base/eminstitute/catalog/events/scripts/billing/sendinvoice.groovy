@@ -367,7 +367,20 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 	supportUrl = URLUtilities.urlEscape(supportUrl);
 	
 	//Other Pay options
-	String invoicepayoptions = librarycol.get("invoicepayoptions");
+	String invoicepayoptions = null;
+	String parentprojectinvoicing = librarycol.get("parentprojectinvoicing");
+	if (parentprojectinvoicing != null)
+	{
+		Data parentcollectioninvoice = mediaArchive.getCachedData("librarycollection", parentprojectinvoicing);
+		if (parentcollectioninvoice != null)
+		{
+			invoicepayoptions = parentcollectioninvoice.get("invoicepayoptions");
+		}
+	}
+	if (invoicepayoptions == null)
+	{
+		invoicepayoptions = librarycol.get("invoicepayoptions");
+	}
 	if(invoicepayoptions == null) {
 		invoicepayoptions =  mediaArchive.getCatalogSettingValue("invoice_pay_options");
 	}
