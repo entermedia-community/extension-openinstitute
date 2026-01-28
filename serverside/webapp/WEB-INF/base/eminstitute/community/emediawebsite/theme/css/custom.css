@@ -11949,7 +11949,8 @@ code {
 }
 
 .navbar-nav .nav-link,
-.navbar-nav .btn-xs {
+.navbar-nav .btn-xs,
+.navbar-nav .btn-searchprojects {
 	font-size: 0.9rem;
 	/* font-weight: 700; */
 	color: white;
