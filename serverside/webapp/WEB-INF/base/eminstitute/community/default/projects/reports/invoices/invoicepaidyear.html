@@ -94,6 +94,7 @@
                                        ##<th>[[Name]]</th>
                                        <th>[[Description]]</th>
                                        <th style="width:115px;">[[Total Price]]</th>
+									   <th style="width:115px;">[[Currency]]</th>
                                        <th>[[Status]]</th>
                                   </tr>
 	                		</thead>	
@@ -161,7 +162,9 @@
                                             #end
                                             
                                         </td>
-                                        <td style="text-align: center;">$ $!context.doubleToMoney($!invoice.totalprice, 2)</td>
+										#set($currency = $mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))
+                                        <td style="text-align: center;">$!{currency.currencysymbol}$!context.doubleToMoney($!invoice.totalprice, 2)</td>
+										<td style="text-align: center;">$!{currency.currencycode}</td>
                                         <td>
                                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$invoice.paymentstatus").searchOne())
                                             $context.getText($status)
