@@ -1,6 +1,6 @@
-#set($currency = '$' )
 #set($id = $context.getRequestParameter('invoiceid'))
 #set($invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id))
+#set($currency = $mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))
 #set($products = $mediaarchive.getBean("invoiceManager").getInvoiceProductList($id))
 #set($collection = $mediaarchive.getBean("invoiceManager").getWorkspaceById($invoice.collectionid))
 
@@ -128,16 +128,16 @@
 										##$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)
 										##</div>
 									</td>
-									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$currency $!context.doubleToMoney($product.productprice, 2)</span></td>
+									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$!{currency.currencysymbol}$!context.doubleToMoney($product.productprice, 2)</span></td>
 								</tr>
 								#set($lastproduct = $mediaarchive.getBean("invoiceManager").getProductById($product.productid))
 							#end
 					
-					
-					
                             <tr>
-                                <td style="text-align:right" colspan="2"><b>[[Total]] <span class="currencysmall">($context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))))</span></b></td>
-                                <td  style="text-align: right"><b>$currency $!context.doubleToMoney($invoice.getValue("totalprice"), 2)</b></td>
+                                <td style="text-align:right" colspan="2">
+									<b>[[Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end</b>
+								</td>
+                                <td  style="text-align: right"><b>$!{currency.currencysymbol}$!context.doubleToMoney($invoice.getValue("totalprice"), 2)</b></td>
                             </tr>
                         </table>
                     </div>
@@ -147,12 +147,9 @@
             #if ($invoice.paymentstatus == "invoiced" || $invoice.paymentstatus == "error" || $invoice.paymentstatus == "autopayfailed")
 			
 				#ifnotnull($collection.parentprojectinvoicing)
-	
 					#set($parentcollectionivoice = $mediaarchive.getCachedData("librarycollection", $collection.parentprojectinvoicing))
-					
 					#ifnotnull($parentcollectionivoice)
 						#set( $invoicepayoptions = $parentcollectionivoice.get("invoicepayoptions"))
-						
 					#end
 				#end
 				#if(!$invoicepayoptions)
@@ -192,7 +189,7 @@
 									$pages.include("./paynow-stripe.html", $context)
 								#else
 									<div style="text-align:center; ">
-								    	[[Credit Card payment not available for]] $context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype"))).
+								    	[[Credit Card payment not available for currency]] $!{currency.currencycode}.
 								    </div>
 								            	
 					            #end

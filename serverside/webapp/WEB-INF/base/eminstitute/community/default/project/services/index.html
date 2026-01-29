@@ -28,7 +28,8 @@
                          <th style="width: 115px; text-align:center">[[Paid On]]</th>
                          <th>[[Name]]</th>
                          ##<th>[[Description]]</th>
-                         <th style="width: 115px; text-align:right">[[Total Price]]</th>
+                         <th style="width: 145px; text-align:right">[[Total Price]]</th>
+						 <th style="width: 65px; text-align:center">[[Currency]]</th>
                          <th style="text-align:center;">[[Status]]</th>
                          <th style="width: 250px;"></th>
                      </tr>
@@ -90,10 +91,14 @@
                      ##            $!mediaarchive.text($prod.productdescription, $invoice.id)<br>
                      ##        #end
                      ##    </td>
+					 	 
+					 	 #set($currency = $mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))
                          <td style="text-align: right;">
-                         <span class="currencysmall">$!context.getText($!mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))</span>
-                         $ $!context.doubleToMoney($!invoice.totalprice, 2)
+	                        $!{currency.currencysymbol}$!context.doubleToMoney($!invoice.totalprice, 2)
                          </td>
+						 <td style="text-align: center;">
+							<span class="currencysmall">$!{currency.currencycode}</span>
+						 </td>
                          <td style="text-align: center;">
                              #set($status = $mediaarchive.query("paymentstatus").match("id", "$invoice.paymentstatus").searchOne())
                              $!context.getText($status)

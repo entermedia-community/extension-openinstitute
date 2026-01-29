@@ -99,19 +99,20 @@
 					
                 #end
 				#set( $totals = $financeManager.getTotalsByCurrencyType($all)) 
-                #foreach($currency in $totals.keySet())
+                #foreach($currencyid in $totals.keySet())
+					#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
 	                	<tr>
 	                		<td></td>
 	                		<td></td>
 	                		<td></td>
 	                		<td></td>
 	                		<td class="text-right" style="width:150px">
-	                		<strong>[[Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currency ))):</strong>
+	                		<strong>[[Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end:</strong>
 	                		</td>
 	                		<td class="text-right">
 	                			<strong>
-	                			#set($subtotal = $totals.get($currency))
-	                			$!context.doubleToMoney($subtotal, 2)
+	                			#set($subtotal = $totals.get($currencyid))
+	                			$!{currency.currencysymbol}$!context.doubleToMoney($subtotal, 2)
 	                			</strong> 
 	                		</td>
 	                		<td></td>

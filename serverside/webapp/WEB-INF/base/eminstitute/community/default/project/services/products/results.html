@@ -20,6 +20,7 @@
                            <th style="width: 120px;">[[Created On]]</th>
                         <th>[[Product]]</th>
                         <th>[[Price]]</th>
+						<th style="width:65px;">[[Cur]]</th>
 						<th style="width: 120px;">[[Next Bill Date]]</th>
                         <th style="width: 280px;"></th>
                     </tr>
@@ -61,8 +62,13 @@
                             ##<div style="font-size: 0.9em;">$!mediaarchive.text($hit.productdescription, $hit.id)</div>
                             </td>
                             <td style="text-align: right;">
-                            <span class="currencysmall">$!context.getText($!mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))</span>
-                            $ $!context.doubleToMoney($!hit.productprice,2)</td>
+								#set($currency = $mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))
+		                        
+		                        $!{currency.currencysymbol}$!context.doubleToMoney($!hit.productprice, 2)
+							</td>
+							<td style="text-align: center;">
+								<span class="currencysmall">$!{currency.currencycode}</span>
+							</td>
 							<td style="text-align: center;">$!context.getDate($hit.nextbillon)</td>
                             <td>
                                 #if( $canviewsettings )

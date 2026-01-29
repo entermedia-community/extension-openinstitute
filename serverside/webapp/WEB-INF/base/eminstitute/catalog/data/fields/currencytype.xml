@@ -24,6 +24,19 @@
       <language id="en"><![CDATA[Exchange To USD]]></language> 
     </name> 
   </property> 
+  
+  <property id="currencycode" index="true" stored="true" editable="true"> 
+    <name> 
+      <language id="en"><![CDATA[Code]]></language>  
+    </name> 
+  </property> 
+   
+
+  <property id="currencysymbol" index="true" stored="true" editable="true"> 
+    <name> 
+      <language id="en"><![CDATA[Symbol]]></language>  
+    </name> 
+  </property> 
    
    
 </properties>

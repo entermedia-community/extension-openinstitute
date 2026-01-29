@@ -110,25 +110,28 @@
 				#set($ustotal = 0)
 				<tfoot>
                 #foreach($currencyid in $totals.keySet())
+					#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
                 	<tr class="table-row-subtotals">
                 		<td></td>
                 		<td></td>
                 		
                 		<td class="text-right">
-                		[[Sub Total]] ($!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid )))
+                		[[Sub Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end
                 		</td>
                 		<td class="text-right">
                 			
                 			#set($subtotal = $totals.get($currencyid))
-							#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+							#set($convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
 							#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
 							
 							#if ($currencyid != "1")
-								$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currencyid))
+								$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
+								$!{currency.currencycode}
 							#end 
 							 
                 		</td>
-						<td class="text-right" >$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</td>
+						##always USD
+						<td class="text-right" >$$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</td>
                 		<td></td>
 						<td></td>
             		</tr>

@@ -89,23 +89,23 @@
 		#set( $total = 0.0)
 			<table class="table tablefinances" >
 			
-			<tr>
-				<td colspan="3" style="text-align: left;">[[Currency]]
+			<tr class="tablefinances-header">
+				<td colspan="2" style="text-align: left;">[[Currency]]
 				</td>
-				<td class="table-col-totals"> [[USD]]
+				<td class="table-col-totals"  style="width:200px"> [[USD]]
 				</td>
 			</tr>
 			
 			#foreach( $currencytype in $netincome.keySet())
 				#set($net = $netincome.get($currencytype))
 				<tr>
-				<td style="width:10%">$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
-				<td style="width:20%; text-align: right;">
+				<td >$!context.getText($!mediaarchive.getCachedData("currencytype", $currencytype))</td>
+				<td style="width:200px; text-align: right;">
 					#if( $currencytype != "1") 
 						$!context.doubleToMoney($!net, 2)
 					#end	</td>
-				<td></td>
-				<td  class="table-col-totals">
+				
+				<td class="table-col-totals" style="width:200px; ">
 				#if( $currencytype != "2") 
 				#set( $subtotal = $financeManager.inDollars($currencytype,$net))
 				$$!context.doubleToMoney($subtotal, 2) 
@@ -116,10 +116,9 @@
 			#end
 			
 			<tr>
-				<td colspan="3" style="text-align: right;">[[Total]]: <br>
-				</td>
+				<td colspan="2" style="text-align: right;"><strong>[[Total]]:</strong></td>
 				<td class="table-col-totals">
-			 	$$!context.doubleToMoney($total, 2) 
+			 	<strong>$$!context.doubleToMoney($total, 2)</strong> 
 			</td>
 			</tr>
 			</table>

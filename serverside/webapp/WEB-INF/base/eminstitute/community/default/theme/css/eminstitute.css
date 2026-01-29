@@ -1674,6 +1674,23 @@ ul.inlinelist li {
 .table-striped tbody tr:nth-of-type(odd).table-totals {
 	background-color: #fff;
 }
+
+.tablefinances {
+  width:900px!important;
+  margin-bottom: 30px;
+}
+
+.tablefinances td {
+  padding: 0.5rem;
+}
+
+.tablefinances-header td {
+  background-color: #f5f5f5;
+  font-weight:bold;
+}
+
+.currencysmall { font-size: 0.85rem;}
+
 .viewinvoice .card-body {
 	padding: 0.75rem;
 	font-size: 0.9rem;

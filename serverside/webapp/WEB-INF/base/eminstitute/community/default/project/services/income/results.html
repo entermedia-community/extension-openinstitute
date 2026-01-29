@@ -34,6 +34,7 @@
 				 #set($count = 0)
 				 <tbody>
 	                 #foreach($hit in $hits.getPageOfHits())
+						#set($currency = $mediaarchive.getCachedData("currencytype", $hit.getValue("currencytype")))
 					 	#set($count = $count +1)
 	                 	#if(!$totalarray.get($hit.currencytype))
 	                 		#set($totalarray[$hit.currencytype] = [])
@@ -46,7 +47,7 @@
 	                         <td>$!context.getText($!mediaarchive.getCachedData("incometype", $hit.incometype))</td>
 	                         <td>#esc($hit.incomedescription)</td>
 	                         <td style="text-align: right; width:140px;">
-	                         $!context.doubleToMoney($!hit.total, 2) $context.getText($!mediaarchive.getCachedData("currencytype", $hit.currencytype))
+	                         $!context.doubleToMoney($!hit.total, 2) $!{currency.currencycode}
 	                         </td>
 	                                  
 	                        <td style="text-align: center">
@@ -63,28 +64,31 @@
 	                    </tr>
 	                #end
 				</tdbody>
+				#set($currencyusd = $mediaarchive.getCachedData("currencytype", "1"))
 				#set($ustotal = 0)
                 #if($totalsbycurrency)
 					<tfoot>
-                	#foreach( $currency in $totalsbycurrency.keySet())
-						#set($subtotal = $totalsbycurrency.get($currency))
+                	#foreach( $currencyid in $totalsbycurrency.keySet())
+						#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
+						#set($subtotal = $totalsbycurrency.get($currencyid))
 	                	<tr class="table-row-subtotals">
 	                		<td colspan="3"></td>
 	                		<td class="text-right">[[Sub Total]]:</td>
 	                		<td class="text-right">
 	       
-								#set( $convertedtotal = $financeManager.inDollars($currency,$subtotal))
+								#set( $convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
 								#ifnotnull($convertedtotal)
 									#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
 								#end
 								
-								#if ($currency != "1")
-									$!context.doubleToMoney($!subtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", $currency))
+								#if ($currencyid != "1")
+									$!context.doubleToMoney($!subtotal, 2) 
+									$!{currency.currencycode}
 								#end 
 								
 	                		</td>
 	                		<td class="text-right">
-								$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))
+								$!context.doubleToMoney($!convertedtotal, 2) $!{currencyusd.currencycode}
 							</td>
 							<td></td>
 	                	</tr>
@@ -94,7 +98,7 @@
                 		<td colspan="4"></td>
                 		<td class="text-right"><strong>[[Total]]:</strong></td>
                 		<td class="text-right">
-                			<strong>$!context.doubleToMoney($!ustotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</strong> 
+                			<strong>$!context.doubleToMoney($!ustotal, 2) $!{currencyusd.currencycode}</strong> 
                 		</td>
                 		<td></td>
                 	</tr>
