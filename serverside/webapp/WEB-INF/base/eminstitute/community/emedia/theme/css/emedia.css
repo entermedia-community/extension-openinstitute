@@ -663,7 +663,7 @@ footer {
 	font-weight: 700;
 }
 .btn-searchprojects {
-	margin-top: 14px;
+	margin-top: 9px;
 }
 @media (min-width: 992px) {
 	.navigation .navbar-nav .nav-item:not(:last-child) {
@@ -1109,6 +1109,7 @@ footer {
 .services .card {
 	transition: 0.6s;
 	background-color: #595b77;
+	color:#eee;
 }
 .services .card:hover {
 	transform: scale(0.97);
@@ -1123,6 +1124,9 @@ footer {
 .services .card .card-body .card-link {
 	font-size: 16px;
 	line-height: 15px;
+}
+.services ul {
+	list-style:none;
 }
 @media (max-width: 575px) {
 	.services {

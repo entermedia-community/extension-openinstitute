@@ -49,15 +49,12 @@
 				#else
 					#set($link = "${communitylink}/app/collective/community/${project.id}/#dash($project.getName()).html")
 				#end
-				
+				#set($logo = "$communityhome/theme/images/OI_flower.png")
 				#if($project.assetportrait)
 			        #set($asset = $mediaarchive.getAsset($project.assetportrait))
 					#ifnotnull($asset)
 			        	#set($logo = $mediaarchive.asLinkToPreview($asset, "image200x200"))
 					#end
-			      #end
-				  #ifnull($logo)
-			        #set($logo = "$communityhome/theme/images/OI_flower.png")
 			      #end
 			      <div class="col-6 col-md-4 result-item ">
 					<a class="project-thumb-link" href="$link" title="[[View]]: #text($hit)" >

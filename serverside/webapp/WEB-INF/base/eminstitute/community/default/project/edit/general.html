@@ -21,11 +21,7 @@ $context.putPageValue("viewid", "librarycollection${viewid}")
 $context.putPageValue("data", $librarycol)
 
 ##Legacy project URL 
-#if($librarycol.urlname)
-	#set($savelink = "${projectlink}/edit/save.html")
-#else
-	#set($savelink = "/project/edit/save.html")
-#end
+#set($savelink = "/project/edit/save.html")
 			
 <div class="emwidget">
 	<div class="emwidget-header">
@@ -39,6 +35,7 @@ $context.putPageValue("data", $librarycol)
 		class="ajaxform scrolltotop"
 		data-targetdivinner="collectivesettingscontent"
 		data-oemaxlevel="1"
+		data-scrolltotop="true"
 		method="post"
 		data-toastsuccess="[[Project Saved]]">
 		<input type="hidden" name="save" value="true" />

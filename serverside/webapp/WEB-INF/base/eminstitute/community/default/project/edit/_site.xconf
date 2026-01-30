@@ -15,7 +15,7 @@
 	<style id="results" href="${themeprefix}/styles/pages/results.css"/>
 	<script id="results" src="/${applicationid}/components/javascript/results.js"/> 
 	
-	<path-action name="ProjectModule.loadCollection" />
+	<page-action name="ProjectModule.loadCollection" />
 	
 	
 	<permission name="view">
