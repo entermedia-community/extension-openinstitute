@@ -49,9 +49,12 @@
     <name><![CDATA[User Profile]]></name>
   </data>
   
-  
   <data id="userchat">
     <name><![CDATA[User Chat]]></name>
+  </data>
+  
+  <data id="entitywebcontent"  isentity="true" >
+    <name><![CDATA[Web Content]]></name>
   </data>
 
 
