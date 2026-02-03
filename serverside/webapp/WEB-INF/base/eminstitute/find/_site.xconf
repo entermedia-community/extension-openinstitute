@@ -2,7 +2,7 @@
 
 <page>
   <property name="catalogid">${siteid}/catalog</property>
-  <property name="themeid">emsharedefault</property>
+  <property name="themeid">defaulttheme</property>
   <property name="fallbackdirectory">/WEB-INF/base/finder/find</property>
   <property name="applicationid">${siteid}/find</property>
   <property name="themeprefix">/${applicationid}/theme</property>
