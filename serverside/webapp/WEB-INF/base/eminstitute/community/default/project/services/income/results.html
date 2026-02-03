@@ -82,13 +82,13 @@
 								#end
 								
 								#if ($currencyid != "1")
-									$!context.doubleToMoney($!subtotal, 2) 
+									$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
 									$!{currency.currencycode}
 								#end 
 								
 	                		</td>
 	                		<td class="text-right">
-								$!context.doubleToMoney($!convertedtotal, 2) $!{currencyusd.currencycode}
+								$!{currencyusd.currencysymbol}$!context.doubleToMoney($!convertedtotal, 2) $!{currencyusd.currencycode}
 							</td>
 							<td></td>
 	                	</tr>
@@ -98,7 +98,7 @@
                 		<td colspan="4"></td>
                 		<td class="text-right"><strong>[[Total]]:</strong></td>
                 		<td class="text-right">
-                			<strong>$!context.doubleToMoney($!ustotal, 2) $!{currencyusd.currencycode}</strong> 
+                			<strong>$!{currencyusd.currencysymbol}$!context.doubleToMoney($!ustotal, 2) $!{currencyusd.currencycode}</strong> 
                 		</td>
                 		<td></td>
                 	</tr>

@@ -2255,22 +2255,6 @@ pre code {
   border: 0;
 }
 
-.form-control {
-  display: block;
-  width: 100%;
-  height: calc(1.6em + 1.625rem);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #1e2022;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 0.0625rem solid #e7eaf3;
-  border-radius: 0.3125rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -2912,7 +2896,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-secondary {
-  color: #fff;
+  color: #fff!important;
   background-color: #71869d;
   border-color: #71869d;
 }

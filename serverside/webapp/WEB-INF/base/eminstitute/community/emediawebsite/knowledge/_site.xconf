@@ -8,7 +8,9 @@
   <inner-layout>${communityhome}/knowledge/layout.html</inner-layout> 
     
   <property name="virtual">true</property>
+  
   <path-action name="PostModule.loadPost"/>
+  
   <path-action alltypes="true" name="MediaArchiveModule.getMediaArchive"/>
   
   

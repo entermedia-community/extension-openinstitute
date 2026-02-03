@@ -1734,6 +1734,12 @@ label.error {
 	margin: 20px 0;
 	background-color: #efefef;
 }
+.inlinesearch .searchfield {
+	margin-right:6px;
+}
+.inlinesearch .searchfield .form-control {
+	padding:0.15rem 0.25rem;
+}
 .inlinesearch .emsearchfieldrow {
 	margin-bottom: 5px;
 }
