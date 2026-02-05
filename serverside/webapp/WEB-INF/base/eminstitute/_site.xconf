@@ -5,7 +5,6 @@
   <property name="catalogid">${siteid}/catalog</property>
   <property name="finderhome">/${siteid}/find</property>
   
-
   <page-loader loader="projectLoader" />
  
   <property name="allowguestregistration">true</property>
