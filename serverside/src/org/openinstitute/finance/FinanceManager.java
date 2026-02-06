@@ -458,9 +458,9 @@ public class FinanceManager  implements CatalogEnabled
 		for (Iterator iterator = inExpensesOfOneCurrency.iterator(); iterator.hasNext();) {
 			Data expense = (Data) iterator.next();
 			String currenttypeid = (String) expense.getValue(valuetype);
-			SearchHitData totalbyexpense = (SearchHitData)byexpensetype.get(currenttypeid);
+			Data totalbyexpense = (SearchHitData)byexpensetype.get(currenttypeid);
 			if (totalbyexpense == null) {
-				totalbyexpense = new SearchHitData();
+				totalbyexpense = new BaseData();
 				totalbyexpense.setValue("total", 0.0);
 				Data type = getMediaArchive().getCachedData(valuetype, currenttypeid );
 				totalbyexpense.setValue(valuetype,type);
