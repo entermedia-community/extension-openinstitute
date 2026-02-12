@@ -77,7 +77,15 @@
 		##<textarea class="form-control" name="invoicedescription">$!invoicedescription</textarea>
 	</div>
 	
-	
+	<div style="margin:20px 0 20px;">
+		<strong>[[Invoice Total]]:</strong>
+
+		<div class="emfield-default">
+			<input type="hidden" value="totalprice" name="field">
+			<input type="text" class="form-control detail_name textinput autosubmited " value='$!invoice.getValue("totalprice")' id="totalprice.value" name="totalprice.value">
+		</div>
+
+	</div>
 
 		
 		<div style="margin: 20px 0; ">		
@@ -117,7 +125,7 @@
 						</td>
 						<td  valign="top" style="text-align: right; vertical-align: top;">
 							##$currency <input type="text" class="form-control form-control-sm" style="width: 90px;" name="productprice[]" value="$!context.doubleToMoney($product.productprice, 2)" />
-							$!context.doubleToMoney($product.productprice, 2)
+							$!context.doubleToMoney($invoice.totalprice, 2)
 							</td>
 					</tr>
 					#end

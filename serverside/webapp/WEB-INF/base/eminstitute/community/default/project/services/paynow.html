@@ -128,7 +128,7 @@
 										##$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)
 										##</div>
 									</td>
-									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$!{currency.currencysymbol}$!context.doubleToMoney($product.productprice, 2)</span></td>
+									<td  valign="top" style="text-align: right; vertical-align: top;"><span>$!{currency.currencysymbol}$!context.doubleToMoney($invoice.totalprice, 2)</span></td>
 								</tr>
 								#set($lastproduct = $mediaarchive.getBean("invoiceManager").getProductById($product.productid))
 							#end

@@ -112,7 +112,7 @@ $pages.include("${communityhome}/theme/emails/layout-top.html", $context)
 											##<div style="font-size: 0.9em;">$!mediaarchive.text($prod.getValue("productdescription"), $invoice.id)</div>
 										</td>
 										<td  valign="top" style="text-align: right; vertical-align: top; font-size:0.9rem;">
-											<span>$!{currency.currencysymbol}$!context.doubleToMoney($product.productprice, 2)</span>
+											<span>$!{currency.currencysymbol}$!context.doubleToMoney($invoice.totalprice, 2)</span>
 										</td>
 									</tr>
 								#end

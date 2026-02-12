@@ -1,5 +1,5 @@
 <root>
-  <data id="entityasset" showonsearch="true" securityenabled="false" ordering="0" autocreateentities="false" semanticenabled="false" isentity="true" enableuploading="true" moduleicon="image-fill">
+  <data id="entityasset" showonsearch="true" securityenabled="false" ordering="0" autocreateentities="false" semanticenabled="true" isentity="true" enableuploading="true" moduleicon="image-fill">
     <name><![CDATA[Entity Assets]]></name>
   </data>
   <data id="entityassetpage" autocreatedeep="0" showonsearch="true" securityenabled="false" ordering="300" autocreateentities="false" semanticenabled="true" isentity="true" enableuploading="true" moduleicon="file-earmark-richtext">

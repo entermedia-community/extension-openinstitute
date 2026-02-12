@@ -667,6 +667,8 @@ public class PaymentModule extends BaseMediaModule
 		String invoicename = inReq.getRequestParameter("name.value");
 		invoice.setValue("name", invoicename);
 		
+		String totalprice = inReq.getRequestParameter("totalprice.value");
+		invoice.setValue("totalprice", totalprice);
 		
 		String duedate = inReq.getRequestParameter("duedate");
 		if (duedate != null)
