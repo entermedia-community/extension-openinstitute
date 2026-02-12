@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.entermedia.transactions.TransactionManager;
 import org.entermediadb.asset.MediaArchive;
-import org.entermediadb.elasticsearch.SearchHitData;
 import org.openedit.CatalogEnabled;
 import org.openedit.Data;
 import org.openedit.ModuleManager;
@@ -99,7 +98,7 @@ public class FinanceManager  implements CatalogEnabled
 		hits.setHitsPerPage(1000);
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
 			Double currencytotal = (Double) bycurrency.get(currency);
@@ -131,7 +130,7 @@ public class FinanceManager  implements CatalogEnabled
 		hits = incomesSearcher.search(query.getQuery());
 		hits.setHitsPerPage(1000);
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
 			Double currencytotal = (Double) bycurrency.get(currency);
@@ -183,7 +182,7 @@ public class FinanceManager  implements CatalogEnabled
 		hits.setHitsPerPage(1000);
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			if( currency == null)
 			{
@@ -235,7 +234,7 @@ public class FinanceManager  implements CatalogEnabled
 		hits.enableBulkOperations();
 	
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
 			Collection values = (Collection) bycurrency.get(currency);
@@ -264,7 +263,7 @@ public class FinanceManager  implements CatalogEnabled
 //		hits.setHitsPerPage(1000);
 //		
 //		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-//			SearchHitData data = (SearchHitData) iterator.next();
+//			MultiValued data = (MultiValued) iterator.next();
 //			String currency = (String) data.getValue("currencytype");
 //			
 //			Collection values = (Collection) bycurrency.get(currency);
@@ -292,7 +291,7 @@ public class FinanceManager  implements CatalogEnabled
 //		hits.setHitsPerPage(1000);
 //		
 //		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-//			SearchHitData data = (SearchHitData) iterator.next();
+//			MultiValued data = (MultiValued) iterator.next();
 //			String currency =  "1";//(String) data.getValue("currencytype");  //TODO: Support currencies
 //			
 //			Collection values = (Collection) bycurrency.get(currency);
@@ -328,7 +327,7 @@ public class FinanceManager  implements CatalogEnabled
 //			HashMap<String, Object> currenttype = new HashMap<String, Object>();
 //			String currenttypeid = "";
 //			for (Iterator iterator = data.iterator(); iterator.hasNext();) {
-//				SearchHitData row = (SearchHitData) iterator.next();
+//				MultiValued row = (MultiValued) iterator.next();
 //				String incometype = (String) row.getValue("incometype");
 //				if( incometype == null)
 //				{
@@ -411,7 +410,7 @@ public class FinanceManager  implements CatalogEnabled
 		Map<String, List> bycurrency = new HashMap<String, List>();
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			if( currency == null)
 			{
@@ -458,7 +457,7 @@ public class FinanceManager  implements CatalogEnabled
 		for (Iterator iterator = inExpensesOfOneCurrency.iterator(); iterator.hasNext();) {
 			Data expense = (Data) iterator.next();
 			String currenttypeid = (String) expense.getValue(valuetype);
-			Data totalbyexpense = (SearchHitData)byexpensetype.get(currenttypeid);
+			Data totalbyexpense = (MultiValued)byexpensetype.get(currenttypeid);
 			if (totalbyexpense == null) {
 				totalbyexpense = new BaseData();
 				totalbyexpense.setValue("total", 0.0);
@@ -540,7 +539,7 @@ public class FinanceManager  implements CatalogEnabled
 		HashMap<String, Object> bycurrency = new HashMap<String, Object>();
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) {
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			if(currency == null)
 			{
@@ -847,7 +846,7 @@ public class FinanceManager  implements CatalogEnabled
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
 		{
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			Double currencytotal = (Double) bycurrency.get(currency);
 			if( currencytotal == null || currencytotal == 0.0)
@@ -891,7 +890,7 @@ public class FinanceManager  implements CatalogEnabled
 		
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
 		{
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			boolean addit = false;
 			if( inEntityId.equals( data.get("paymententitydest")) )
 			{
@@ -970,7 +969,7 @@ public class FinanceManager  implements CatalogEnabled
 
 		for (Iterator iterator = hits.iterator(); iterator.hasNext();) 
 		{
-			SearchHitData data = (SearchHitData) iterator.next();
+			MultiValued data = (MultiValued) iterator.next();
 			String currency = (String) data.getValue("currencytype");
 			
 			Double currencytotal = (Double) bycurrency.get(currency);
