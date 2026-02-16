@@ -67,7 +67,7 @@ $(document).ready(function () {
 					.trim()
 					.replace(/\s/g, "-")
 					.replace(/[^a-zA-Z0-9-]/g, "")
-					.toLowerCase()
+					.toLowerCase(),
 			);
 		});
 	});
@@ -169,7 +169,7 @@ $(document).ready(function () {
 				preview.append(img);
 
 				preview.append(
-					`<div class="p-1"><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`
+					`<div class="p-1"><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`,
 				);
 			}
 			var pickermodal = $("#dialogpickerassetpicker");
@@ -231,7 +231,7 @@ $(document).ready(function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -294,7 +294,7 @@ $(document).ready(function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -462,7 +462,7 @@ $(document).ready(function () {
 			url: saveurl,
 			async: true,
 			data: {
-				...options
+				...options,
 			},
 			success: function (data) {
 				$("#chatter-message-" + messageid).replaceWith(data);
@@ -470,8 +470,8 @@ $(document).ready(function () {
 		});
 	});
 
-	lQuery("select.listautocomplete").livequery(function () // select2
-	{
+	lQuery("select.listautocomplete").livequery(function () {
+		// select2
 		var theinput = $(this);
 		var searchtype = theinput.data("searchtype");
 		if (searchtype != undefined) {
@@ -637,7 +637,7 @@ $(document).ready(function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -651,8 +651,8 @@ $(document).ready(function () {
 	});
 	//-
 	//List autocomplete multiple and accepting new options
-	lQuery("select.listautocompletemulti").livequery(function () // select2
-	{
+	lQuery("select.listautocompletemulti").livequery(function () {
+		// select2
 		var theinput = $(this);
 		var searchtype = theinput.data("searchtype");
 		if (searchtype != undefined) {
@@ -773,7 +773,7 @@ $(document).ready(function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -824,7 +824,7 @@ $(document).ready(function () {
 		});
 		$(
 			'input[type="file"],input[name="date.after"],input[type="checkbox"]',
-			form
+			form,
 		).on("change", function (e) {
 			e.stopPropagation();
 			$(form).trigger("submit");
@@ -884,7 +884,7 @@ $(document).ready(function () {
 			var title = $(this).val();
 			var slug = slugify(title);
 			$(this).closest("form").find('input[name="urlname.value"]').val(slug);
-		}
+		},
 	);
 
 	lQuery(".copytoclipboard").livequery("click", function (e) {
@@ -893,7 +893,8 @@ $(document).ready(function () {
 		var btn = $(this);
 		var copytextcontainer = btn.data("copytext");
 		var copyText = $("#" + copytextcontainer);
-		copyText.select();
+		copyText.trigger("focus");
+		copyText.trigger("select");
 		document.execCommand("copy");
 		var alertdiv = btn.data("targetdiv");
 		if (alertdiv) {
@@ -924,7 +925,7 @@ $(document).ready(function () {
 					changeMonth: true,
 					changeYear: true,
 					yearRange: "1900:2050",
-				})
+				}),
 			); // Move this to the Layouts?
 
 			var targetid = dpicker.data("targetid");
@@ -1035,7 +1036,7 @@ $(document).ready(function () {
 			clickableresultlist.runAjax();
 
 			closeemdialog(clickableresultlist.closest(".modal"));
-		}
+		},
 	);
 
 	//Asset picker
@@ -1070,7 +1071,7 @@ $(document).ready(function () {
 			}
 
 			preview.append(
-				`<div class="p-1"><span class="mr-2">${assetName}</span><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`
+				`<div class="p-1"><span class="mr-2">${assetName}</span><a href="#" class="removefieldassetvalue" title="Remove Selected Asset" data-detailid="${detailId}"><i class="bi bi-x"></i> Remove</a></div>`,
 			);
 		};
 		fileReader.readAsDataURL(asset);
@@ -1092,7 +1093,7 @@ $(document).ready(function () {
 			if (theform.hasClass("autosubmit")) {
 				theform.trigger("submit");
 			}
-		}
+		},
 	);
 
 	lQuery("#savecommunityblog button").livequery("click", function (e) {

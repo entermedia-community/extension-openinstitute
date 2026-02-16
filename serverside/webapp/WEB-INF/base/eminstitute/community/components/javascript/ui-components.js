@@ -151,7 +151,7 @@ uiload = function () {
 					changeMonth: true,
 					changeYear: true,
 					yearRange: "1900:2050",
-				})
+				}),
 			); // Move this to the Layouts?
 
 			var targetid = dpicker.data("targetid");
@@ -254,7 +254,7 @@ uiload = function () {
 				$(
 					".select2-search__field[aria-controls='select2-" +
 						selectId +
-						"-results']"
+						"-results']",
 				).each(function (key, value) {
 					value.focus();
 				});
@@ -319,7 +319,7 @@ uiload = function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -390,7 +390,7 @@ uiload = function () {
 				$(
 					".select2-search__field[aria-controls='select2-" +
 						selectId +
-						"-results']"
+						"-results']",
 				).each(function (key, value) {
 					value.focus();
 				});
@@ -502,7 +502,7 @@ uiload = function () {
 		});
 		$(
 			'input[type="file"],input[name="date.after"],input[type="checkbox"]',
-			form
+			form,
 		).on("change", function () {
 			$(form).trigger("submit");
 		});
@@ -560,7 +560,7 @@ uiload = function () {
 				theform.trigger("submit");
 			}
 			e.preventDefault();
-		}
+		},
 	);
 
 	lQuery(".selectsubmitform").livequery("change", function (e) {
@@ -688,7 +688,7 @@ uiload = function () {
 		saveProfileProperty(
 			topmoduleid + "_entitytabopen",
 			link.data("currenttab"),
-			function () {}
+			function () {},
 		);
 
 		var url =
@@ -719,7 +719,7 @@ uiload = function () {
 			open.addClass("current-entity");
 			tabcontainer.remove();
 			$(
-				'div[data-id="' + $(this).data("entityid") + '"].entity-tab-content'
+				'div[data-id="' + $(this).data("entityid") + '"].entity-tab-content',
 			).remove();
 			$(".entity-tab-content").hide();
 			$('div[data-id="' + entityid + '"].entity-tab-content').show();
@@ -1199,7 +1199,7 @@ uiload = function () {
 				});
 			}
 			return;
-		}
+		},
 	);
 
 	lQuery(".pickcategorylink").livequery("click", function () {});
@@ -1292,7 +1292,7 @@ uiload = function () {
 			$("#emcontainer").append(
 				'<div class="modal " tabindex="-1" id="' +
 					id +
-					'" style="display:none" ></div>'
+					'" style="display:none" ></div>',
 			);
 			modaldialog = $("#" + id);
 		}
@@ -1325,7 +1325,7 @@ uiload = function () {
 				c.split("?")[0];
 				var intval = setInterval(
 					"nextFrame('" + this.id + "', '" + path + "')",
-					1000
+					1000,
 				);
 				$(this).data("intval", intval);
 			},
@@ -1334,7 +1334,7 @@ uiload = function () {
 				this.src = path + "?frame=0";
 				var intval = $(this).data("intval");
 				clearInterval(intval);
-			}
+			},
 		);
 	});
 
@@ -1659,7 +1659,7 @@ uiload = function () {
 			var tab = $("#" + panelid);
 			if (tab.length == 0) {
 				tab = tabcontent.append(
-					'<div class="tab-pane" id="' + panelid + '" ></div>'
+					'<div class="tab-pane" id="' + panelid + '" ></div>',
 				);
 				tab = $("#" + panelid);
 			}
@@ -1694,7 +1694,7 @@ uiload = function () {
 							$(">.tab-pane", tabcontent).hide();
 							tab.show();
 							$(window).trigger("resize");
-						}
+						},
 					);
 				} else {
 					$(">.tab-pane", tabcontent).hide();
@@ -1721,7 +1721,7 @@ uiload = function () {
 				if (prevtab.hasClass("firstab")) {
 					tab.closest("li").remove();
 				}
-			}
+			},
 		);
 		return false;
 	});
@@ -1737,7 +1737,7 @@ uiload = function () {
 			},
 			function (data) {
 				collection.closest("li").remove();
-			}
+			},
 		);
 		return false;
 	});
@@ -1747,8 +1747,8 @@ uiload = function () {
 		$(this).closest(".createmedia-tab").addClass("createmedia-selected");
 	});
 
-	lQuery("select.listautocomplete").livequery(function () // select2
-	{
+	lQuery("select.listautocomplete").livequery(function () {
+		// select2
 		var theinput = $(this);
 		var searchtype = theinput.data("searchtype");
 		if (searchtype != undefined) {
@@ -1913,7 +1913,7 @@ uiload = function () {
 						$(
 							".select2-search__field[aria-controls='select2-" +
 								selectId +
-								"-results']"
+								"-results']",
 						).each(function (key, value) {
 							value.focus();
 						});
@@ -1928,8 +1928,8 @@ uiload = function () {
 	});
 	//-
 	//List autocomplete multiple and accepting new options
-	lQuery("select.listautocompletemulti").livequery(function () // select2
-	{
+	lQuery("select.listautocompletemulti").livequery(function () {
+		// select2
 		var theinput = $(this);
 		var searchtype = theinput.data("searchtype");
 		if (searchtype != undefined) {
@@ -2050,7 +2050,7 @@ uiload = function () {
 					$(
 						".select2-search__field[aria-controls='select2-" +
 							selectId +
-							"-results']"
+							"-results']",
 					).each(function (key, value) {
 						value.focus();
 					});
@@ -2191,7 +2191,7 @@ uiload = function () {
 				dist1 = Math.hypot(
 					//get rough estimate of distance between two fingers
 					e.touches[0].pageX - e.touches[1].pageX,
-					e.touches[0].pageY - e.touches[1].pageY
+					e.touches[0].pageY - e.touches[1].pageY,
 				);
 			} else {
 				div.data("touchstartx", touch.pageX);
@@ -2219,7 +2219,7 @@ uiload = function () {
 				var dist2 = Math.hypot(
 					//get rough estimate of new distance between fingers
 					e.touches[0].pageX - e.touches[1].pageX,
-					e.touches[0].pageY - e.touches[1].pageY
+					e.touches[0].pageY - e.touches[1].pageY,
 				);
 				//alert(dist);
 				var w = mainimage.width();
@@ -2369,7 +2369,7 @@ uiload = function () {
 		function (e) {
 			$(this).parents(".dropdown-menu.show").removeClass("show");
 			return false;
-		}
+		},
 	);
 
 	lQuery(".sidetoggle").livequery("click", function () {
@@ -2560,7 +2560,7 @@ uiload = function () {
 			if (theform.hasClass("autosubmit")) {
 				theform.trigger("submit");
 			}
-		}
+		},
 	);
 
 	//$('[data-toggle="tooltipb"]').tooltip();
@@ -2717,7 +2717,7 @@ uiload = function () {
 		}
 		$("#datamanager-workarea").load(
 			apphome + "/views/settings/lists/datamanager/list/columnsort.html",
-			args
+			args,
 		);
 		e.stopPropagation();
 	});
@@ -2746,7 +2746,7 @@ uiload = function () {
 				url + "addnew.html?oemaxlevel=1&groupname=New",
 				function () {
 					$(window).trigger("resize");
-				}
+				},
 			);
 			$("#module-picker").hide();
 		} else {
@@ -2758,7 +2758,7 @@ uiload = function () {
 					val,
 				function () {
 					$(window).trigger("resize");
-				}
+				},
 			);
 			$("#module-picker").show();
 		}
@@ -2975,7 +2975,7 @@ uiload = function () {
 		"click",
 		function (e) {
 			var launcher = jQuery("#search-collections-dialog").data(
-				"searchcollectinolauncher"
+				"searchcollectinolauncher",
 			);
 			if (launcher != "") {
 				launcher = $("#" + launcher);
@@ -2999,7 +2999,7 @@ uiload = function () {
 					}
 				}
 			}
-		}
+		},
 	);
 	lQuery("a.clear-bookmarks").livequery("click", function (e) {
 		e.preventDefault();
@@ -3015,7 +3015,7 @@ uiload = function () {
 			var rowid = $(this).attr("rowid");
 			$("#submitcollectionid").val(rowid);
 			$("#colelectform").trigger("submit");
-		}
+		},
 	);
 
 	lQuery(".copyembed").livequery("click", function (e) {
@@ -3027,7 +3027,8 @@ uiload = function () {
 			$("#" + loaddiv).html(data);
 			var copyText = $("#" + loaddiv).children("textarea");
 			if (typeof copyText != "undefined") {
-				copyText.select();
+				copyText.trigger("focus");
+				copyText.trigger("select");
 				document.execCommand("copy");
 			}
 			$(window).trigger("resize"); //need this?
@@ -3083,8 +3084,6 @@ uiload = function () {
 		}
 		return;
 	});
-
-
 
 	lQuery(".emcarousel-link").livequery("click", function (e) {
 		e.preventDefault();
