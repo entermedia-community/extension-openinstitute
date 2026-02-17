@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
 		"click",
 		function () {
 			$(".showonfocus").show();
-		}
+		},
 	);
 
 	lQuery("#feed-add-btn ").livequery("click", function (e) {
@@ -152,7 +152,7 @@ jQuery(document).ready(function () {
 	};
 
 	initOIKeyBindings = function (hidden) {
-		$(document).keydown(function (e) {
+		$(document).on("keydown", function (e) {
 			if (hidden && !hidden.is(":visible")) {
 				return;
 			}
@@ -163,7 +163,6 @@ jQuery(document).ready(function () {
 			switch (e.which) {
 				// TODO: background window.scrollTo the .masonry-grid-cell we view, so we can reload hits
 				case 27: // esc
-				
 					hideOIOverlayDiv();
 					break;
 
@@ -180,7 +179,7 @@ jQuery(document).ready(function () {
 				if (this.id) {
 					videojs(this.id).dispose();
 				}
-			}
+			},
 		);
 	};
 
@@ -260,7 +259,7 @@ jQuery(document).ready(function () {
 				$(
 					".select2-search__field[aria-controls='select2-" +
 						selectId +
-						"-results']"
+						"-results']",
 				).each(function (key, value) {
 					value.focus();
 				});
@@ -288,12 +287,12 @@ jQuery(document).ready(function () {
 				input.val(removelink);
 
 				$("#" + targetdiv).load(
-					targeturl + "?fetchfrom=youtube&videoID=" + videoID
+					targeturl + "?fetchfrom=youtube&videoID=" + videoID,
 				);
 
 				$("#uploaddata").attr(
 					"action",
-					home + "/collective/channel/uploadlink.html?oemaxlevel=2"
+					home + "/collective/channel/uploadlink.html?oemaxlevel=2",
 				);
 				$("#uploaddata").addClass("ajaxform");
 			} else {
@@ -305,12 +304,12 @@ jQuery(document).ready(function () {
 					input.val(removelink);
 
 					$("#" + targetdiv).load(
-						targeturl + "?fetchfrom=vimeo&videoID=" + videoID
+						targeturl + "?fetchfrom=vimeo&videoID=" + videoID,
 					);
 
 					$("#uploaddata").attr(
 						"action",
-						home + "/collective/channel/uploadlink.html?oemaxlevel=2"
+						home + "/collective/channel/uploadlink.html?oemaxlevel=2",
 					);
 					$("#uploaddata").addClass("ajaxform");
 				}
@@ -431,7 +430,7 @@ stripeinit = function () {
 								// Inform the user if there was an error
 								var errorElement = document.getElementById("card-errors");
 								$(errorElement).html(
-									'<div class="errormsg">' + result.error.message + "</div>"
+									'<div class="errormsg">' + result.error.message + "</div>",
 								);
 								$("#donatecheckout").removeClass("disabled");
 								$("#donatecheckout").text("Check Out");
@@ -467,7 +466,7 @@ stripeinit = function () {
 					var displayError = document.getElementById("card-errors");
 					if (event.error) {
 						$(displayError).html(
-							'<div class="errormsg">' + event.error.message + "</div>"
+							'<div class="errormsg">' + event.error.message + "</div>",
 						);
 					} else {
 						displayError.textContent = "";

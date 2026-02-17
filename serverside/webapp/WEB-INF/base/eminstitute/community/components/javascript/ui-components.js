@@ -870,7 +870,7 @@ uiload = function () {
 			$(this).html(text);
 			return;
 		}
-		$(this).click(function (e) {
+		$(this).on("click", function (e) {
 			if (
 				e.target.classList.contains("see-more") ||
 				e.target.classList.contains("see-less")
@@ -1716,7 +1716,7 @@ uiload = function () {
 			},
 			function (data) {
 				var prevtab = tab.closest("li").prev();
-				prevtab.find("a").click();
+				prevtab.find("a").on("click");
 
 				if (prevtab.hasClass("firstab")) {
 					tab.closest("li").remove();
@@ -2806,7 +2806,7 @@ uiload = function () {
 		}
 	});
 
-	$("#renderastable").click(function () {
+	$("#renderastable").on("click", function () {
 		if ($("#renderastable").is(":checked")) {
 			$("#rendertableoptions").show();
 		} else {
