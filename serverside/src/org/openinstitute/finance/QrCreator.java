@@ -57,13 +57,23 @@ public class QrCreator implements CatalogEnabled {
 
     public Collection createQrCodes() throws Exception
     {
+    	
+    	
+    	
+    	
+    	
+    	
+    	
         // Placeholder for QR code generation logic
         // In a real implementation, you would use a library like ZXing to generate the QR code image
-        Collection<Data> missingcodes = getMediaArchive().query("bankaccountlookup").exact("cardmade", "false").exists("bankaccount").search();
+        Collection<Data> missingcodes = getMediaArchive().query("bankaccountlookup").exact("cardmade", false).exists("bankaccount").sort("idUp").search();
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
         File saveto = new File(getMediaArchive().getRootDirectory(),"/cards/");
         saveto.mkdirs();
+        
+        Collection tosave = new ArrayList();
+        
         for (Data data : missingcodes) 
         {
             // Generate QR code for the bank account
@@ -80,17 +90,19 @@ public class QrCreator implements CatalogEnabled {
             Path path = new File(saveto,"qr_" +  bankAccountNumber + ".png").toPath();
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
-            data.setValue("cardmade", "true");
+            data.setValue("cardmade", true);
 
             makeImage(qr);
 
             User user = getMediaArchive().getUser( data.get("user") );
             
             addName(user, qr);
+            tosave.add(data);
         }
-        getMediaArchive().saveData("bankaccountlookup", missingcodes);
+        getMediaArchive().saveData("bankaccountlookup", tosave);
 
-        return missingcodes;
+        Collection<Data> donecards= getMediaArchive().query("bankaccountlookup").exact("cardmade", true).exists("bankaccount").sort("idUp").search();
+        return donecards;
     }
 
     protected void makeImage(String inQr) throws Exception
