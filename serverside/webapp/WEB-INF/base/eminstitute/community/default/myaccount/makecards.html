@@ -1,0 +1,5 @@
+
+#set( $made = $mediaarchive.getBean("qrCreator").createQrCodes() )
+#foreach( $card in $made)
+	$foreach.count <img src="/catalog/cards/carddone_${card.id}.png" width="300">$card.user <br>
+#end

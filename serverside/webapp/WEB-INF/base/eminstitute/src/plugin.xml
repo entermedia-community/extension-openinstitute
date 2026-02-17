@@ -80,6 +80,11 @@
 		</property>
 	</bean>
 
+	<bean id="qrCreator" class="org.openinstitute.finance.QrCreator">
+		<property name="moduleManager">
+			<ref bean="moduleManager" />
+		</property>
+	</bean>
 
 	<bean id="oiServer" class="org.entermediadb.server.sockets.OIServer" scope="singleton">
 		<property name="moduleManager">
