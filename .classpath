@@ -14,5 +14,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/extension-openedit"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tomcat9"/>
+	<classpathentry kind="lib" path="serverside/lib/zxingcore-3.5.4.jar"/>
+	<classpathentry kind="lib" path="serverside/lib/zxingjavase-3.5.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
