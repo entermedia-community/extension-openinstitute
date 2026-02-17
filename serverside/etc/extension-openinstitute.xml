@@ -52,5 +52,8 @@
       <fileset file="${basedir}/lib/eminstitute**.jar"/>
     </copy>
   	-->
+    <copy todir="${dockerlib}" overwrite="false" preservelastmodified="true">
+      <fileset file="${basedir}/lib/*.jar"/>
+    </copy>
   </target>
 </project>
