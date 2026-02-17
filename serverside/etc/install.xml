@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." default="default" name="upgrade">
+<project basedir="." default="default" name="extend">
 
-  <target name="default" depends="clean, update-dependencies, unwar, upgrade"/>
+  <target name="default" depends="clean, update-dependencies, unwar, extend"/>
    
     <property name="appname" value="${ant.project.name}"/>
     <property name="org" value="eInnovation, inc."/>
@@ -47,35 +47,6 @@
     <unzip dest="${build}/unpacked" src="${build}/extension-openinstitute.zip" />
   </target>
   
-  <target name="upgrade">
-  	<echo>Delete old open edit libs</echo>
-    <delete>
-        <!--<fileset dir="./lib" includes="@BRANCH@extension-openedit**.jar"/>-->
-        <fileset dir="./lib" includes="stripe-java*.jar"/>
-    	<fileset dir="./lib" includes="openedit-money*.jar"/>
-    </delete>
-  	
-    <copy todir="./lib" overwrite="false" preservelastmodified="true">
-        <!--<fileset file="${build}/unpacked/lib/@BRANCH@extension-openedit*.jar"/>-->
-        <fileset file="${build}/unpacked/lib/*.jar"/>
-    </copy>
-
-    <!--<delete failonerror="false">
-      <fileset dir="../WEB-INF/base/system/components/openedit/"/>
-    </delete>-->
-
-    <!--<delete failonerror="false">
-       <fileset dir="../WEB-INF/base/openedit/"/>
-     </delete>
-     <copy todir="../WEB-INF/base/openedit" preservelastmodified="true">
-       <fileset dir="${build}/unpacked/base/openedit"/>
-     </copy>-->
-
-  	
-    <delete dir="${build}"/>
-    
-  </target>
-  
   <target name="extend">
   	<echo>Reinstall plugin(s)</echo>
  	 <delete failonerror="false">
@@ -88,12 +59,14 @@
     	<fileset file="${dockerlib}/extension-openinstitute**.jar"/>
       <fileset file="${dockerlib}/openedit-money**.jar"/>
       <fileset file="${dockerlib}/stripe-java**.jar"/>
+      <fileset file="${dockerlib}/zxing**.jar"/>
     </delete>
   	
     <copy todir="${dockerlib}" overwrite="false" preservelastmodified="true">
         <fileset file="${basedir}/lib/extension-openinstitute**.jar"/>
     	<fileset file="${basedir}/lib/openedit-money**.jar"/>
         <fileset file="${basedir}/lib/stripe-java**.jar"/>
+    	<fileset file="${basedir}/lib/zxing**.jar"/>
     </copy>
   </target>
 </project>
