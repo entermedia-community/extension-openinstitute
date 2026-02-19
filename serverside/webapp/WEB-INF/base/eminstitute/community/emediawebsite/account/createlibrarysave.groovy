@@ -88,9 +88,10 @@ public void init() {
 	
 	
 	//Notify Email
-	context.putPageValue("subject", "Library Created");
+	context.putPageValue("subject", "Library Created in Website");
 	HashMap htmlfields = new HashMap();
-	htmlfields.put("user", context.getRequestParameter("user"));
+	htmlfields.put("user", user.getScreenName());
+	htmlfields.put("useremail", user.getEmail());
 	htmlfields.put("libraryname", requiredlibraryname);
 	htmlfields.put("currentproject", context.getRequestParameter("project"));
 	
