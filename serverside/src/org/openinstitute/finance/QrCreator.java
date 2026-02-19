@@ -78,9 +78,9 @@ public class QrCreator implements CatalogEnabled {
         {
             // Generate QR code for the bank account
             String bankAccountNumber = data.getId();
-             String url = "https://impactbank.world/myaccount/?l=" + bankAccountNumber;
-            int width = 240; //3.37 * 300
-            int height = 240; //2.14
+             String url = "https://impactbank.world/card/?l=" + bankAccountNumber;
+            int width = 460; //3.37 * 300
+            int height = 460; //2.14
 
             Map<EncodeHintType, Object> hints = new HashMap<>();
             hints.put(EncodeHintType.MARGIN, 0);
@@ -121,9 +121,9 @@ public class QrCreator implements CatalogEnabled {
         args.add(input.getAbsolutePath());
         args.add(qrcode.getAbsolutePath());
         args.add("-gravity");
-        args.add("southeast");
+        args.add("northeast");
         args.add("-geometry");
-        args.add("+30+30");
+        args.add("+20+20");
         args.add("-composite");
         args.add("-quality");
         args.add("90");
