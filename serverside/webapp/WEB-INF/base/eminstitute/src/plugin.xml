@@ -58,6 +58,13 @@
 		</property>
 	</bean>
 
+	<bean id="oiServer" class="org.entermediadb.server.sockets.OIServer" scope="singleton">
+		<property name="moduleManager">
+			<ref bean="moduleManager" />
+		</property>
+	</bean>
+	
+
 	<bean id="TransactionModule" class="org.entermedia.transactions.TransactionModule">
 	</bean>
 
@@ -80,17 +87,20 @@
 		</property>
 	</bean>
 
+	<bean id="BankAccountModule" class="org.openinstitute.finance.BankAccountModule">
+	</bean>
+
+	<bean id="bankAccountManager" class="org.openinstitute.finance.BankAccountManager">
+		<property name="moduleManager">
+			<ref bean="moduleManager" />
+		</property>
+	</bean>
+
+	
 	<bean id="qrCreator" class="org.openinstitute.finance.QrCreator">
 		<property name="moduleManager">
 			<ref bean="moduleManager" />
 		</property>
 	</bean>
 
-	<bean id="oiServer" class="org.entermediadb.server.sockets.OIServer" scope="singleton">
-		<property name="moduleManager">
-			<ref bean="moduleManager" />
-		</property>
-	</bean>
-	
-	
 </beans>

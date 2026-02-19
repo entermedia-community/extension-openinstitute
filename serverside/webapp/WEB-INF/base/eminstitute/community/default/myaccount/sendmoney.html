@@ -1,0 +1,226 @@
+<div class="send-money-form">
+  <h2>Send Money</h2>
+
+  <!-- QR Code Scanner Section -->
+  <div class="qr-scanner-section">
+    <label for="qrInput">Scan QR Code to get recipient address:</label>
+    <input
+      type="file"
+      accept="image/*"
+      capture="environment"
+      id="qrInput"
+    >
+    <p id="scanResult"></p>
+  </div>
+
+  <canvas id="canvas" hidden></canvas>
+
+  <!-- Send Money Form -->
+  <form id="sendMoneyForm">
+    <div class="form-group">
+      <label for="recipientName">Recipient Name:</label>
+      <input
+        type="text"
+        id="recipientName"
+        name="recipientName"
+        disabled
+        required
+      >
+    </div>
+
+	<input
+	  type="hidden"
+	  id="recipientUrl"
+	  name="recipientUrl"
+	>
+
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        min="0.01"
+        step="0.01"
+        placeholder="0.00"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="memo">Memo (optional):</label>
+      <input
+        type="text"
+        id="memo"
+        name="memo"
+        placeholder="What's this for?"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="securityCode">Security Code:</label>
+      <input
+        type="text"
+        id="securityCode"
+        name="securityCode"
+        maxlength="3"
+        placeholder="3-digit code"
+        required
+      >
+    </div>
+
+    <button type="submit" id="sendButton">Send Money</button>
+  </form>
+
+  <p id="formResult"></p>
+</div>
+
+<style>
+  .send-money-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .qr-scanner-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  #sendButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  #sendButton:hover {
+    background-color: #45a049;
+  }
+  #scanResult {
+    color: #2196F3;
+    font-weight: bold;
+  }
+  #formResult {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .success {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  .error {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+</style>
+
+<script src="jsQR.js"></script>
+<script>
+  const qrInput = document.getElementById("qrInput");
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const scanResult = document.getElementById("scanResult");
+  const recipientName = document.getElementById("recipientName");
+  const sendMoneyForm = document.getElementById("sendMoneyForm");
+  const formResult = document.getElementById("formResult");
+
+  // Function to look up screen name from URL via REST API
+  function findscreenname(linkid) {
+    $.ajax({
+      url: './api/screenname.json',
+      type: 'GET',
+      dataType: 'json',
+      data: { "l": linkid },
+      success: function(response) {
+        if (response && response.screenname) {
+          recipientName.value = response.screenname;
+          scanResult.textContent = "✓ Recipient found: " + response.screenname;
+        } else {
+          scanResult.textContent = "✗ Could not find recipient for this address.";
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error("Error looking up screen name:", error);
+        scanResult.textContent = "✗ Error looking up recipient. Please enter manually.";
+      }
+    });
+  }
+
+  // QR Code Scanner
+  qrInput.addEventListener("change", () => {
+    const file = qrInput.files[0];
+    if (!file) return;
+
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+
+      if (qrCode) {
+        scanResult.textContent = "✓ QR Code scanned successfully!";
+        //recipientName.value = qrCode.data;
+		
+        const recipientUrl = document.getElementById("recipientUrl");
+        recipientUrl.value = qrCode.data;
+    		//Use REST to get the name of the person
+			  const url = new URL(qrCode.data);
+			  const linkid = url.searchParams.get('l');
+		    findscreenname(linkid);
+		
+      } else {
+        scanResult.textContent = "✗ No QR code detected. Please try again.";
+      }
+    };
+
+    img.src = URL.createObjectURL(file);
+  });
+
+  // Form Submission
+  sendMoneyForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formData = {
+      recipientName: recipientName.value,
+      amount: document.getElementById("amount").value,
+      memo: document.getElementById("memo").value,
+      securityCode: document.getElementById("securityCode").value
+    };
+
+    // TODO: Replace with actual API call
+    console.log("Sending money:", formData);
+
+    formResult.textContent = "Processing transaction...";
+    formResult.className = "";
+
+    // Simulated API call - replace with actual implementation
+    setTimeout(() => {
+      formResult.textContent = "Transaction submitted successfully!";
+      formResult.className = "success";
+    }, 1000);
+  });
+</script>

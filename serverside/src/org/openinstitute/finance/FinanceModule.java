@@ -55,4 +55,7 @@ public class FinanceModule extends BaseMediaModule
 		inReq.putPageValue("financeManager",manager);
 		return manager;
 	}
+	
+	
+	
 }
