@@ -2,35 +2,62 @@
   <div class="account-header">
     <h2 class="account-owner">#text( $accountuser )</h2>
     <div class="balance-display">
-      <span class="balance-label">Available Balance</span>
-      <span class="balance-amount">$accountbalance</span>
+      <span class="balance-label">[[Available Balance]]</span>
     </div>
+	<table>
+		#set($ustotal = 0)
+		#foreach($currencyid in $totals.keySet())
+						#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
+		             	<tr class="table-row-subtotals">
+		             		<td></td>
+		             		<td></td>
+		             		
+		             		<td class="text-right">
+		             		[[Sub Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end
+		             		</td>
+		             		<td class="text-right">
+		             			
+		             			#set($subtotal = $totals.get($currencyid))
+								#set($convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+								#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+								
+								#if ($currencyid != "1")
+									$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
+									$!{currency.currencycode}
+								#end 
+								 
+		             		</td>
+							##always USD
+							<td class="text-right" >$$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</td>
+		             		<td></td>
+							<td></td>
+		         		</tr>
+			#end
+		</table>	
+	
+	
   </div>
 
   <div class="action-buttons">
-    <a href="sendmoney.html?l=$linkid" class="action-btn primary" id="sendmoney">
-      <span class="btn-icon">💸</span>
-      <span class="btn-text">Send Money</span>
-    </a>
-    <a href="receivemoney.html" class="action-btn primary" id="receivemoney">
-      <span class="btn-icon">📥</span>
-      <span class="btn-text">Receive Money</span>
-    </a>
     <a href="deposit.html" class="action-btn secondary" id="deposit">
       <span class="btn-icon">🏦</span>
-      <span class="btn-text">Deposit</span>
+      <span class="btn-text">[[Deposit To Myself]]</span>
     </a>
-    <a href="withdrawcash.html" class="action-btn secondary" id="withdrawcash">
+	<a href="deposit.html" class="action-btn secondary" id="deposit">
+	  <span class="btn-icon">🏦</span>
+	  <span class="btn-text">[[Deposit To Someone]]</span>
+	</a>
+    <a href="cashwithdraw.html" class="action-btn secondary" id="withdrawcash">
       <span class="btn-icon">💵</span>
-      <span class="btn-text">Withdraw Cash</span>
+      <span class="btn-text">[[Withdraw Cash]]</span>
     </a>
     <a href="changepin.html" class="action-btn tertiary" id="changepin">
       <span class="btn-icon">🔐</span>
-      <span class="btn-text">Change Pin</span>
+      <span class="btn-text">[[Change Pin]]</span>
     </a>
     <a href="history.html" class="action-btn tertiary" id="history">
       <span class="btn-icon">📜</span>
-      <span class="btn-text">History</span>
+      <span class="btn-text">[[History]]</span>
     </a>
   </div>
 </div>
