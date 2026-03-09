@@ -29,7 +29,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 				#set( $otherperson =  $chatManager.getOtherChatUser($project,$user) )
 				
 			  <div class="d-flex messageselection #if($selectedproject==$project.id) current #end pb-1">
-				<div class="d-flex" >
+				<div class="d-flex p-1" >
 						#ifnotnull($otherperson)
 							$context.putPageValue("chatuser",$otherperson)
 							$pages.include("${communityhome}/users/icon.html",$context)
@@ -44,7 +44,7 @@ data-ajaxpath="$communitylink/users/sidebar.html?appsection=$!appsection&oemaxle
 							<div class="card-collections-thumb" style='background-image: url("$link")'></div>
 						#end
 				</div>
-				<div class="flex-grow-1" style="">
+				<div class="flex-grow-1 p-1" style="">
 					#if($project.urlname)
 						#set($projectlink = "$!{community.externaldomain}/${project.urlname}/chat/index.html")
 					#else

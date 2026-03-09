@@ -258,10 +258,12 @@ h6,
 	background: #626584 !important;
 	border-color: #626584;
 }
-.btn-primary {
+
+.btn-primary,
+.chatterbox-write .chatter-btn  {
 	color: #fff !important;
-	background: #626584;
-	border-color: #626584;
+	background: #626584!important;
+	border-color: #626584!important;
 }
 .themed-btn:hover,
 .themed-btn:active,
@@ -725,7 +727,6 @@ footer {
 .emdata .tableheader {
 	background: none;
 }
-.chatterbox-write .chatter-btn,
 .emwidget-header,
 .emdata .tableheader,
 .project-sidebar-menu li.current a {
