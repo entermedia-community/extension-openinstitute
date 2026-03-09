@@ -37,7 +37,7 @@
 					
 				<div class="card-collections">
 					<a href="${hitprojectlink}" class="d-flex flex-column h-100 #if($selectedproject==$project.id) active #end">
-						<div class="card-collections-thumb" style='border:5px solid #fff;#if($imagelink) background-image: url("$imagelink") #end'>
+						<div class="card-collections-thumb" style='#if($imagelink) background-image: url("$imagelink") #end'>
 						</div>
 						<div class="collectionbox">
 							$project.name

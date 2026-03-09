@@ -1816,3 +1816,6 @@ input.search-primary {
 #swapCheckbox:checked ~ #container2 { display: block !important; }
 #swapCheckbox:checked ~ #container1 { display: none !important; }
 #swapCheckbox:not(:checked) ~ #container2 { display: none !important; }
+
+
+

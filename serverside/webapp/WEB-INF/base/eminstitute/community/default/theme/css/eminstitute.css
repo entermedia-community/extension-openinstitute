@@ -508,18 +508,36 @@ a.primary:hover .fa-solid {
 .usersidebartopmessages .messageselection:hover {
 	background-color: #c9e8f2;
 }
+.card-collections {
+  width: 200px;
+  float: none;
+  text-align:center;
+  margin:5px;
+}
+.card-collections:hover {
+	background-color: #f5f5f5;
+	}
 .card-collections-thumb {
 	height: 88px;
 	width: 108px;
-	margin: 4px;
+	margin: 4px auto;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	border: 2px solid #fff;
 }
-.card-collections:hover .card-collections-thumb {
-	border: 2px solid #1d4c87;
+
+.card-collections a .collectionbox {
+  color: #009da4;
 }
+
+.card-collections .collectionbox {
+  padding: 4px 8px;
+  background-color: transparent;
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
 .card-name.collectionbox {
 	display: -webkit-box;
 	text-overflow: ellipsis;
