@@ -686,8 +686,6 @@ public class FinanceManager  implements CatalogEnabled
 		return transactions;
 	}
 
-	
-
 	public List<BankTransaction> getAllTransactionByBank(String inBankId, DateRange inDateRange)
 	{
 		List<BankTransaction> results = getTransactionsByAccount(null,inBankId,inDateRange);

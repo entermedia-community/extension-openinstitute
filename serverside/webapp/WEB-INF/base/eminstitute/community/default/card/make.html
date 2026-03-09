@@ -1,10 +1,10 @@
 <div style="padding:10px">
 #set( $made = $mediaarchive.getBean("qrCreator").createQrCodes() )
-<ol>
+<div style="display: grid; grid-template-columns: repeat(3, auto); gap: 1px;">
 #foreach( $card in $made)
-	<li  style="padding:2px"> <a class="copylink" href="https://impactbank.world/card/?l=${card.id}" ><img src="/catalog/cards/carddone_${card.id}.png" width="300" download="${card.id}.png"> </a> </li> 
+	<div> <a class="copylink" href="https://impactbank.world/card/?l=${card.id}" ><img src="/catalog/cards/carddone_${card.id}.png" download="${card.id}.png" style="display: block;"> </a> </div> 
 #end
-</ol>
+</div>
 
 </div>
 

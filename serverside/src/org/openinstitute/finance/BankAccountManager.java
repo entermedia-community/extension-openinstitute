@@ -15,6 +15,24 @@ public class BankAccountManager implements CatalogEnabled
 	protected ModuleManager fieldModuleManager;
 	protected MediaArchive fieldMediaArchive;
 	protected String fieldCatalogId;
+	protected FinanceManager fieldFinanceManager;
+	
+	public FinanceManager getFinanceManager()
+	{
+		if (fieldFinanceManager == null)
+		{
+			fieldFinanceManager = (FinanceManager)getModuleManager().getBean(getCatalogId(), "financeManager");
+		}
+
+		return fieldFinanceManager;
+	}
+
+
+	public void setFinanceManager(FinanceManager inFinanceManager)
+	{
+		fieldFinanceManager = inFinanceManager;
+	}
+
 
 	public String getCatalogId()
 	{
@@ -83,5 +101,6 @@ public class BankAccountManager implements CatalogEnabled
 		return user;
 	}
 
+	
 
 }
