@@ -1,8 +1,11 @@
 
 import org.apache.http.StatusLine
 import org.apache.http.client.methods.CloseableHttpResponse
+import org.entermediadb.asset.Asset
 import org.entermediadb.asset.MediaArchive
+import org.entermediadb.asset.pull.OriginalPuller
 import org.json.simple.JSONObject
+import org.openedit.Data
 import org.openedit.data.*
 import org.openedit.util.HttpSharedConnection
 import org.openedit.util.JSONParser
@@ -88,6 +91,7 @@ public void init()
 		downloadData(connection, "userpost", "librarycollection", collectionid, newid)
 		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, newid)
 		
+		downloadAssets(connection, collectionid, map.rootcategory)
 	}
 	
 	for (map in results) {
@@ -172,6 +176,74 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 			downloadData(inConnection, "chatterboxattachment", "messageid", foreignkeyid, null)
 		}
 	}
+}
+
+
+void downloadAssets(HttpSharedConnection inConnection, String inCollectionid, String inCategoryid)
+{
+
+	
+	def search = '''{
+		"page": "1",
+		"hitsperpage": "1000",
+		"query": {
+		  "terms": [
+			{
+			  "field": "category",
+			  "operation": "exact",
+			  "value": "'''+ inCategoryid + '''"
+			}
+		  ]
+		}
+	  }'''
+	//log.info("searching ${search}");
+	
+	JSONParser json_parser = new JSONParser();
+	JSONObject searchparams =json_parser.parse(search);
+	
+	String inSearchtype = "asset"
+	
+	String baseurl = "https://openinstitute.org/site/mediadb";
+	String url = baseurl + "/services/lists/export/" + inSearchtype
+	
+	CloseableHttpResponse response = inConnection.sharedPostWithJson(url, searchparams)
+	
+	StatusLine filestatus = response.getStatusLine();
+	if (filestatus.getStatusCode() != 200)
+	{
+		//Problem
+		log.info( filestatus.getStatusCode() + " URL issue " + " " + url);
+		return null;
+	}
+	MediaArchive mediaArchive = context.getPageValue("mediaarchive");
+	Searcher searcher = mediaArchive.getSearcher(inSearchtype);
+	Map responsemap = inConnection.parseJson(response)
+	Collection results = responsemap.get("results");
+	for (data in results) {
+		data.put("importstatus", "created")
+	}
+	searcher.saveJson(results)
+	
+	if (results.size() <= 0)
+	{
+		return
+	}
+	
+	OriginalPuller originalpuller = (OriginalPuller)mediaArchive.getBean("originalPuller")
+	Data remotenode = mediaArchive.getCachedData("editingcluster", "AZzjQMTWwrmEy5JXqA0x")
+	for (data in results) {
+		Asset asset = mediaArchive.getAsset(data.id)
+		String assetpath = mediaArchive.getOriginalContent(asset).getAbsolutePath()
+		File assetfile = new File(assetpath)
+		
+		originalpuller.downloadOriginalFromSource(mediaArchive, inConnection, remotenode, asset, assetfile, true)
+		
+		
+	}
+	
+	log.info("saved ${results.size()} assets");
+	
+	
 }
 
 
