@@ -76,14 +76,14 @@ public void init()
 	Map responsemap = connection.parseJson(response)
 	Collection results = responsemap.get("results");
 	
-	searcher.saveJson(results)
+	//searcher.saveJson(results)
 	
 	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
 	//Loop auxiliar tables
 	// uploads, assets, goals, tasks, chatterbox, userposts, librarycollectionusers
 	
-	for (map in results) {
+	/*for (map in results) {
 		String collectionid = map.id;
 		//String newid = replacemap.get(collectionid)
 		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
@@ -92,7 +92,11 @@ public void init()
 		downloadData(connection, "channel", "collectionid", collectionid, collectionid)
 		downloadData(connection, "userpost", "librarycollection", collectionid, collectionid)
 		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, collectionid)
-		
+	}
+	*/
+	
+	for (map in results) {
+		String collectionid = map.id;
 		downloadAssets(connection, collectionid, map.rootcategory)
 	}
 	
@@ -226,6 +230,8 @@ void downloadAssets(HttpSharedConnection inConnection, String inCollectionid, St
 	}
 	searcher.saveJson(results)
 	
+	log.info("saved ${results.size()} assets for collection ${inCollectionid}");
+	
 	if (results.size() <= 0)
 	{
 		return
@@ -237,13 +243,15 @@ void downloadAssets(HttpSharedConnection inConnection, String inCollectionid, St
 		Asset asset = mediaArchive.getAsset(data.id)
 		String assetpath = mediaArchive.getOriginalContent(asset).getAbsolutePath()
 		File assetfile = new File(assetpath)
-		
-		originalpuller.downloadOriginalFromSource(mediaArchive, inConnection, remotenode, asset, assetfile, true)
-		
-		
+		if (!assetfile.exists())
+		{
+			log.info("Downloading file: ${asset.name} size: $asset.filesize" )
+			originalpuller.downloadOriginalFromSource(mediaArchive, inConnection, remotenode, asset, assetfile, true)
+			log.info("Downloading file finish: ${asset.name}" )
+		}
 	}
 	
-	log.info("saved ${results.size()} assets");
+	log.info("downloaded ${results.size()} assets");
 	
 	
 }
