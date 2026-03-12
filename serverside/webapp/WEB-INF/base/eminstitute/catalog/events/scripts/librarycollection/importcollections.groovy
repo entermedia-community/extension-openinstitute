@@ -76,7 +76,9 @@ public void init()
 	Map responsemap = connection.parseJson(response)
 	Collection results = responsemap.get("results");
 	
-	def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
+	searcher.saveJson(results)
+	
+	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
 	//Loop auxiliar tables
 	// uploads, assets, goals, tasks, chatterbox, userposts, librarycollectionusers
@@ -94,16 +96,16 @@ public void init()
 		downloadAssets(connection, collectionid, map.rootcategory)
 	}
 	
-	for (map in results) {
+	/*for (map in results) {
 		String collectionid = map.id;
 		String newid =replacemap.get(collectionid)
 		if (newid != null)
 		{
 			map.put("id", newid)
 		}
-	}
+	}*/
 	
-	searcher.saveJson(results)
+	
 	
 	log.info("saved ${results.size()} Collections");
 }
