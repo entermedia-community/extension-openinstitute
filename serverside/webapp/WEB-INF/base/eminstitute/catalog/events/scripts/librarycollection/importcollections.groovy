@@ -85,13 +85,13 @@ public void init()
 	
 	for (map in results) {
 		String collectionid = map.id;
-		String newid = replacemap.get(collectionid)
-		downloadData(connection, "projectgoal", "collectionid", collectionid, newid)
-		downloadData(connection, "goaltask", "collectionid", collectionid, newid)
-		downloadData(connection, "chatterbox", "collectionid", collectionid, newid)
-		downloadData(connection, "channel", "collectionid", collectionid, newid)
-		downloadData(connection, "userpost", "librarycollection", collectionid, newid)
-		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, newid)
+		//String newid = replacemap.get(collectionid)
+		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
+		downloadData(connection, "goaltask", "collectionid", collectionid, collectionid)
+		downloadData(connection, "chatterbox", "collectionid", collectionid, collectionid)
+		downloadData(connection, "channel", "collectionid", collectionid, collectionid)
+		downloadData(connection, "userpost", "librarycollection", collectionid, collectionid)
+		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, collectionid)
 		
 		downloadAssets(connection, collectionid, map.rootcategory)
 	}
@@ -149,12 +149,12 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 	Map responsemap = inConnection.parseJson(response)
 	Collection results = responsemap.get("results");
 	
-	if (inNewcollectionid != null)
+	/*if (inNewcollectionid != null)
 	{
 		for (map in results) {
 			map.put(inForeignkey, inNewcollectionid)
 		}
-	}
+	}*/
 	
 	searcher.saveJson(results)
 	
