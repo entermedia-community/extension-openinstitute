@@ -1,4 +1,5 @@
-
+package librarycollection
+import java.util.*
 import org.apache.http.StatusLine
 import org.apache.http.client.methods.CloseableHttpResponse
 import org.entermediadb.asset.Asset
@@ -177,6 +178,8 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 			
 		}
 	}
+	
+	
 	
 	searcher.saveJson(results)
 	
