@@ -1,11 +1,9 @@
-
-#if($communitytagcategory)
-
 	#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser", $selecteduser.getId()).search($context) )
-	#set($oids = [])
+	#set($oids = ["none"])
 	#foreach( $ohit in $ids )
 		#set($x = $oids.add($ohit.collectionid))
 	#end
+	
 	
 	#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
 
@@ -98,5 +96,5 @@
 				<div class="clearfix"></div>	
 		</div>
 	#end
-#end		
+		
 

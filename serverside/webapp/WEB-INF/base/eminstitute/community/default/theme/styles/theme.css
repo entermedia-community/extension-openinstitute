@@ -1876,10 +1876,9 @@ th.firstheader input {
 	display: block;
 	margin-top: 16px;
 	font-weight: 700;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	text-align: center;
 	margin-top: auto;
-	width: 234px;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	line-clamp: 2;
@@ -1892,7 +1891,6 @@ th.firstheader input {
 
 .card-collections a:hover .collectionbox,
 .card-collections a:hover {
-	/* color: white; */
 	text-decoration: none;
 }
 .card-body {

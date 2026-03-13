@@ -13035,12 +13035,16 @@ table.referrals tr:hover td {
 	width: 150px;
 	background: #1d4c87;
 }
-
+.card-collections:hover {
+	background-color: #0a172c;
+	}
 .card-collections .collectionbox {
 	width: 100%;
-	font-size: 1rem;
+	font-size: 0.90rem;
 }
-
+.card-collections:hover a .collectionbox {
+    color: #fff;
+}
 .card-collections .card-collections-thumb {
 	width: 100px;
 	height: 100px;

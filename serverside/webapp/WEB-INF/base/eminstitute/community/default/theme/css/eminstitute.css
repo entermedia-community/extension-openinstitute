@@ -515,7 +515,7 @@ a.primary:hover .fa-solid {
   margin:5px;
 }
 .card-collections:hover {
-	background-color: #f5f5f5;
+	background-color: #eee;
 	}
 .card-collections-thumb {
 	height: 88px;
@@ -527,9 +527,11 @@ a.primary:hover .fa-solid {
 }
 
 .card-collections a .collectionbox {
-  color: #009da4;
+  color: #444;
 }
-
+.card-collections:hover a .collectionbox {
+	color: #000;
+	}
 .card-collections .collectionbox {
   padding: 4px 8px;
   background-color: transparent;

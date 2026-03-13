@@ -1,13 +1,14 @@
 
-#if($communitytagcategory)
+
 
 	#set( $ids = $mediaarchive.query("librarycollectionusers").exact("followeruser", $selecteduser.getId()).search($context) )
-	#set($oids = [])
+	#set($oids = ["none"])
 	#foreach( $ohit in $ids )
 		#set($x = $oids.add($ohit.collectionid))
 	#end
 	
-	#set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
+	####set( $collections = $mediaarchive.query("librarycollection").exact("communitytagcategory", $communitytagcategory).ids($oids).sort("name").search($context) )
+	#set( $collections = $mediaarchive.query("librarycollection").ids($oids).sort("name").search($context) )
 
 	#set( $modcollections = $chatManager.loadCollectionsModified($collections, $selecteduser.getId() ) )
 	
@@ -31,7 +32,7 @@
 					
 					#if($project.assetportrait)
 						#set($asset = $mediaarchive.getAsset($project.assetportrait))
-						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200.jpg"))
+						#set($imagelink = $mediaarchive.asLinkToPreview($asset,"image200x200"))
 					#else
 						#set($imagelink = "$communitylink/theme/images/OI_flower.png")
 					#end
@@ -53,5 +54,3 @@
 	#end
 		
 	
-#end		
-
