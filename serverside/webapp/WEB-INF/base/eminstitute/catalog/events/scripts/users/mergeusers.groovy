@@ -106,12 +106,15 @@ public void update(String inTable, String inField,String oldvalue,  String newVa
 	
 	Collection toupdate = searcher.fieldSearch(inField, oldvalue);
 	toupdate = new ArrayList(toupdate);
+	Collection tosave = new ArrayList()
 	toupdate.each {
-		log.info("Moving User data ${inTable}: ${inField} => ${newValue}")
+		
 		Data hit = searcher.loadData(it);
 		hit.setValue(inField, newValue);
-		searcher.saveData(hit);
+		tosave.add(hit)
 	}
+	log.info("${inTable} moved ${oldvalue}  to ${newValue}  ${tosave.size()} records")
+	searcher.saveAllData(tosave, null)
 }
 
 init();
