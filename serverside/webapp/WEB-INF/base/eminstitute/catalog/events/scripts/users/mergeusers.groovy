@@ -17,7 +17,7 @@ public void init() {
 	UserSearcher usersearch = archive.getSearcherManager().getSearcher("system","user");
 	
 	HitTracker allusers = usersearch.query().exact("enabled", true).exists("email").sort("email").sort("creationdateUp").search();
-	
+	 
 	log.info(allusers)
 	
 	String currentuserid  = ""
