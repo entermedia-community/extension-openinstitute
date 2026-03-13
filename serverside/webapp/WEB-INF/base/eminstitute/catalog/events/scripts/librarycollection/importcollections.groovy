@@ -153,12 +153,30 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 	Map responsemap = inConnection.parseJson(response)
 	Collection results = responsemap.get("results");
 	
-	/*if (inNewcollectionid != null)
-	{
-		for (map in results) {
-			map.put(inForeignkey, inNewcollectionid)
+	HashSet dependants = new HashSet();
+	
+	dependants.add("owner");
+	dependants.add("user");
+	dependants.add("startedby");
+	dependants.add("completedby");
+	dependants.add("followeruser");
+	dependants.add("userid");
+	dependants.add("reimburseuser");
+	dependants.add("investmentuser");
+	
+	
+	
+	for (map in results) {
+		dependants.each {
+			String field = it;
+			String oldvalue = map.get(field)
+			if (oldvalue != null)
+			{
+				map.put(field, "ib_"+oldvalue)
+			}
+			
 		}
-	}*/
+	}
 	
 	searcher.saveJson(results)
 	
