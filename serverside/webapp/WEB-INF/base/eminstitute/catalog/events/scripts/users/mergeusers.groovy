@@ -3,15 +3,40 @@ package users;
 import org.entermediadb.asset.MediaArchive
 import org.openedit.Data
 import org.openedit.data.Searcher
+import org.openedit.hittracker.HitTracker
 import org.openedit.users.User
 import org.openedit.users.UserSearcher
 
 
+
+public void init() {
+	//String useridA = context.getRequestParameter("copytoid"); //will be keept//
+	//String useridB = context.getRequestParameter("copyid"); //move from//
+	
+	MediaArchive archive = context.getPageValue("mediaarchive");
+	UserSearcher usersearch = archive.getSearcherManager().getSearcher("system","user");
+	
+	HitTracker allusers = usersearch.query().exact("enabled", true).exists("email").sort("email").sort("creationdateUp").search();
+	
+	log.info(allusers)
+	
+	String currentuserid  = ""
+	String currentuseremail  = ""
+	for (user in allusers) {
+		if (currentuseremail == user.email)
+		{
+			merge(currentuserid, user.id)
+		}	
+		currentuserid = user.id
+		currentuseremail = user.email
+	}
+	 
+}
+
  
-public void init()
+public void merge(String useridA, String useridB)
 {
-	String useridA = context.getRequestParameter("copytoid"); //will be keept//
-	String useridB = context.getRequestParameter("copyid"); //move from//
+	
 	
 	//useridA = "userA"; //will be keept//
 	//useridB = "userB";
@@ -65,8 +90,9 @@ public void init()
 		update(table, field, useridB, useridA);
 		
 	}
-	
-	
+	//Disable the user
+	userB.setEnabled(false);
+	usersearch.saveData(userB)
 	
 }
 
