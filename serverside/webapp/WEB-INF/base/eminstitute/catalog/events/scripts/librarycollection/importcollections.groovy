@@ -76,15 +76,22 @@ public void init()
 	Searcher searcher = mediaArchive.getSearcher(exportsearchtype);
 	Map responsemap = connection.parseJson(response)
 	Collection results = responsemap.get("results");
-	
-	//searcher.saveJson(results)
+	for (map in results) {
+		String field = "owner";
+		String oldvalue = map.get(field)
+		if (oldvalue != null)
+		{
+			map.put(field, "ib_"+oldvalue)
+		}
+	}
+	searcher.saveJson(results)
 	
 	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
 	//Loop auxiliar tables
 	// uploads, assets, goals, tasks, chatterbox, userposts, librarycollectionusers
 	
-	/*for (map in results) {
+	for (map in results) {
 		String collectionid = map.id;
 		//String newid = replacemap.get(collectionid)
 		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
@@ -94,7 +101,7 @@ public void init()
 		downloadData(connection, "userpost", "librarycollection", collectionid, collectionid)
 		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, collectionid)
 	}
-	*/
+	
 	
 	for (map in results) {
 		String collectionid = map.id;
@@ -120,7 +127,7 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 	
 	def search = '''{
 		"page": "1",
-		"hitsperpage": "1000",
+		"hitsperpage": "5000",
 		"query": {
 		  "terms": [
 			{

@@ -17,7 +17,7 @@ public void init() {
 	UserSearcher usersearch = archive.getSearcherManager().getSearcher("system","user");
 	
 	HitTracker allusers = usersearch.query().exact("enabled", true).exists("email").sort("email").sort("creationdateUp").search();
-	 
+	allusers.enableBulkOperations()
 	log.info(allusers)
 	
 	String currentuserid  = ""
@@ -27,8 +27,10 @@ public void init() {
 		{
 			merge(currentuserid, user.id)
 		}	
-		currentuserid = user.id
-		currentuseremail = user.email
+		else {
+			currentuserid = user.id
+			currentuseremail = user.email
+		}
 	}
 	 
 }
