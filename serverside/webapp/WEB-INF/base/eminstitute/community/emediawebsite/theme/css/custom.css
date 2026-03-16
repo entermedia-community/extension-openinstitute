@@ -1091,7 +1091,8 @@ header {
 .nav-link:focus,
 .nav-link:hover,
 .navbar-nav-item:hover .nav-link,
-.navbar-nav-item:focus .nav-link {
+.navbar-nav-item:focus .nav-link,
+.login-area a:hover {
 	color: #377dff;
 }
 
@@ -12980,7 +12981,7 @@ table.referrals tr:hover td {
 }
 
 .loginbox {
-	max-width: 980px;
+	width: 550px;
 	min-height: calc(90vh - 600px);
 	margin: 1rem auto 2rem auto;
 	display: flex;

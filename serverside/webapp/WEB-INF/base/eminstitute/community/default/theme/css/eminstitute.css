@@ -1870,7 +1870,6 @@ textarea.form-control {
 	font-weight: 700;
 }
 .login-area form {
-	Xwidth: 720px;
 	max-width: 100%;
 	margin: 0 auto;
 }
@@ -1879,7 +1878,7 @@ textarea.form-control {
 	font-weight: 500;
 }
 .login-area form input[type="submit"] {
-	min-width: 100px;
+	min-width: 80px;
 	height: 100%;
 	min-height: 40px;
 	font-size: 1rem;
@@ -1906,6 +1905,7 @@ textarea.form-control {
 	margin-bottom: 2rem;
 	min-height: 360px;
 }
+.loginoptions,
 .login-area a:hover {
 	text-decoration: underline;
 }
@@ -1920,6 +1920,7 @@ textarea.form-control {
 .ajaxloginbox .text-contrast {
 	color: #444444;
 }
+
 .emwidget-chatterbox {
 	height: calc(100vh - 275px) !important;
 }
