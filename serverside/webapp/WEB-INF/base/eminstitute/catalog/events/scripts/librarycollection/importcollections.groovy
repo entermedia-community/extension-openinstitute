@@ -84,7 +84,7 @@ public void init()
 			map.put(field, "ib_"+oldvalue)
 		}
 	}
-	searcher.saveJson(results)
+	//searcher.saveJson(results)
 	
 	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
@@ -94,6 +94,8 @@ public void init()
 	for (map in results) {
 		String collectionid = map.id;
 		//String newid = replacemap.get(collectionid)
+		
+		/*
 		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
 		downloadData(connection, "goaltask", "collectionid", collectionid, collectionid)
 		downloadData(connection, "chatterbox", "collectionid", collectionid, collectionid)
@@ -101,13 +103,30 @@ public void init()
 		downloadData(connection, "collectiveproject", "parentcollectionid", collectionid, collectionid)
 		downloadData(connection, "userpost", "librarycollection", collectionid, collectionid)
 		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, collectionid)
+		*/
+		
+		downloadData(connection, "bankaccount", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectiveinvoice", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectiveproduct", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectiveincome", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectiveexpense", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectiveinvestment", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectivelinkreferralcode", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectivelinktracker", "collectionid", collectionid, collectionid)
+		downloadData(connection, "collectivereimbursement", "collectionid", collectionid, collectionid)
+		downloadData(connection, "donationreceipt", "collectionid", collectionid, collectionid)
+		downloadData(connection, "transaction", "collectionid", collectionid, collectionid)
 	}
 	
-	
+	/*
+	//Download Assets
 	for (map in results) {
 		String collectionid = map.id;
 		downloadAssets(connection, collectionid, map.rootcategory)
 	}
+	*/
+	
+	
 	
 	/*for (map in results) {
 		String collectionid = map.id;
