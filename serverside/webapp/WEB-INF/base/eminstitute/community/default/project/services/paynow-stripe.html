@@ -165,26 +165,15 @@
 		                    } else {
 								$("#stripetokenid").val(result.token.id);
 								$("#stripenewsource").val(result.token.card.id);
-								readytosubmit = true;
+								
+								submitform(form);
 		                    }
 	                	});
 	            	} else {
-						readytosubmit = true;
+						
+						submitform(form);
 	            	}
-					if (readytosubmit) 
-					{
-						var targetdiv = $("#" + $(form).data("targetdiv"));
-						var toastUid = $(form).data("uid");
-						$(form).ajaxSubmit({
-							success: function (result) {
-								$(window).trigger("successToast", [toastUid]);
-								targetdiv.replaceWith(result);
-							},
-							error: function () {
-								$(window).trigger("errorToast", [toastUid]);
-							},
-						});
-					}
+					
 				#end
             },
             errorElement: "div",
@@ -194,6 +183,21 @@
                 //$("#card-errors").html('<div class="errormsg">'+error.html()+'</div>');
             }
         });
+		
+		function submitform(form)
+		{
+			var targetdiv = $("#" + $(form).data("targetdiv"));
+			var toastUid = $(form).data("uid");
+			$(form).ajaxSubmit({
+				success: function (result) {
+					$(window).trigger("successToast", [toastUid]);
+					targetdiv.replaceWith(result);
+				},
+				error: function () {
+					$(window).trigger("errorToast", [toastUid]);
+				},
+			});
+		}
 
 
     });
