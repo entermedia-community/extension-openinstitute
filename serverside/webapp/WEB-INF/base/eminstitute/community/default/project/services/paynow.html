@@ -1,8 +1,11 @@
 #set($id = $context.getRequestParameter('invoiceid'))
 #set($invoice = $mediaarchive.getBean("invoiceManager").getInvoiceById($id))
+$context.putPageValue("invoice", $invoice)
 #set($currency = $mediaarchive.getCachedData("currencytype", $invoice.getValue("currencytype")))
 #set($products = $mediaarchive.getBean("invoiceManager").getInvoiceProductList($id))
+$context.putPageValue("products", $products)
 #set($collection = $mediaarchive.getBean("invoiceManager").getWorkspaceById($invoice.collectionid))
+$context.putPageValue("collection", $collection)
 
 <div class="container">
 <div class="contentcolumn">
@@ -132,6 +135,8 @@
 								</tr>
 								#set($lastproduct = $mediaarchive.getBean("invoiceManager").getProductById($product.productid))
 							#end
+							
+							$context.putPageValue("lastproduct", $lastproduct)
 					
                             <tr>
                                 <td style="text-align:right" colspan="2">

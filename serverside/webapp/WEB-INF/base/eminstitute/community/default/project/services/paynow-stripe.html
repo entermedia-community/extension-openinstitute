@@ -38,7 +38,6 @@
 						</div>
                     </div>
 				</div>
-
                 <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -48,7 +47,8 @@
                                         <div class="input-group-text">$</div>
                                     </div>
                                     <input type="text" class="form-control" name="totalprice.value"
-                                        id="totalprice" #if($invoice.totalprice) value="$invoice.totalprice"
+                                        id="totalprice" 
+										#if($invoice.totalprice) value="$invoice.totalprice"
                                         disabled #end>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                 <input type="hidden" name="field" value="collectionid" /> 
                 <input type="hidden" name="collectionid.value" value="$!librarycol.getId()" /> 
                 <input type="hidden" name="collectionid" value="$!librarycol.getId()" />
-                <input type="hidden" name="invoiceid" value="$id" /> 
+                <input type="hidden" name="invoiceid" value="$invoice.id" /> 
                 <input type="hidden" name="field" value="totalprice" /> 
                 <input type="hidden" name="field" value="userid" /> 
                 <input type="hidden" name="userid.value" value="$!user.getId()" />
