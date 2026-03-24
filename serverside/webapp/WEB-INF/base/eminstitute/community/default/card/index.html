@@ -6,36 +6,57 @@
     </div>
 	<table>
 		#set($ustotal = 0)
-		#foreach($currencyid in $totals.keySet())
-						#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
-		             	<tr class="table-row-subtotals">
-		             		<td></td>
-		             		<td></td>
-		             		
-		             		<td class="text-right">
-		             		[[Sub Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end
-		             		</td>
-		             		<td class="text-right">
-		             			
-		             			#set($subtotal = $totals.get($currencyid))
-								#set($convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
-								#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
-								
-								#if ($currencyid != "1")
-									$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
-									$!{currency.currencycode}
-								#end 
-								 
-		             		</td>
-							##always USD
-							<td class="text-right" >$$!context.doubleToMoney($!convertedtotal, 2) $!context.getText($!mediaarchive.getCachedData("currencytype", "1"))</td>
-		             		<td></td>
-							<td></td>
-		         		</tr>
+		#if( $totals.size() == 1)
+			#set($currencyid = $totals.keySet().iterator().next())
+			#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
+			<tr>
+				<td>[[Total]]</td>
+				<td></td>
+				<td class="text-right">
+					#if( $currencyid != "1" )
+						#set($subtotal = $totals.get($currencyid))
+						#set($convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+						$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
+						$!{currency.currencycode}
+					#end	
+				</td>
+				<td class="text-right">( $$!context.doubleToMoney($!convertedtotal, 2) 
+					 #text($!mediaarchive.getCachedData("currencytype", "1")) )</td>	
+			</tr>
+			#set($ustotal = $convertedtotal)
+		#else
+			#foreach($currencyid in $totals.keySet())
+				#set($currency = $mediaarchive.getCachedData("currencytype", $currencyid))
+				<tr class="table-row-subtotals">
+					<td></td>
+					
+					<td class="text-right">
+					[[Sub Total]] #if($currency.currencycode)<span class="currencysmall">(${currency.currencycode})</span>#end
+					</td>
+					<td class="text-right">
+						
+						#set($subtotal = $totals.get($currencyid))
+						#set($convertedtotal = $financeManager.inDollars($currencyid,$subtotal))
+						#set($ustotal = $mathutil.addition($ustotal, $convertedtotal) )
+						
+						#if ($currencyid != "1")
+							$!{currency.currencysymbol}$!context.doubleToMoney($!subtotal, 2) 
+							$!{currency.currencycode}
+						#end 
+							
+					</td>
+					##always USD
+					<td class="text-right" >$$!context.doubleToMoney($!convertedtotal, 2) #text($!mediaarchive.getCachedData("currencytype", "1"))</td>
+				</tr>
 			#end
+			<tr>
+				<td>[[Total]]</td>
+				<td></td>
+				<td></td>
+				<td class="text-right">$$!context.doubleToMoney($!ustotal, 2) #text($!mediaarchive.getCachedData("currencytype", "1"))</td>	
+			</tr>
+		#end
 		</table>	
-	
-	
   </div>
 
   <div class="action-buttons">
