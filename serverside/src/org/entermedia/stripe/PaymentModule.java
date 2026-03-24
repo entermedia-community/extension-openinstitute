@@ -216,7 +216,13 @@ public class PaymentModule extends BaseMediaModule
 		
 		log.info("Creating Charge - Invoice: "+ invoice.getValue("invoicenumber")+" Customer: " + customerId + " Source: "+ source);
 		
-		isSuccess = processor.createCharge(payment, customerId, source, invoice, user.getEmail());
+		String useremail = "";
+		if (user != null)
+		{
+			useremail = user.getEmail();
+		}
+		
+		isSuccess = processor.createCharge(payment, customerId, source, invoice, useremail);
 		
 		if (isSuccess) {
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
