@@ -4,4 +4,9 @@
 	 <path-action name="Script.run">
 	    <script>/${catalogid}/events/scripts/billing/sendinvoice.groovy</script>
 	 </path-action>
+	 
+	 	
+	<permission name="view">
+		<boolean value="true" />
+	</permission>
 </page>

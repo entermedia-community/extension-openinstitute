@@ -5,4 +5,5 @@
 	<permission name="view">
 		<boolean value="true" />
 	</permission>
+	
 </page>
