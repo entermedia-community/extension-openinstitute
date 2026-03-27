@@ -191,7 +191,7 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 	
 	if( emails == null)
 	{
-		log.info("Error sending invoice to email: ${emails} in invoice ${invoice.getId()} ${invoice.getName()} invoiceNotifyProject" );
+		log.info("Error sending invoice to email to Project Team, missing contactemail. Invoice: ${invoice.getId()} Client: ${invoice.getName()} invoiceNotifyProject" );
 		invoice.setValue("paymentstatus", "error");
 		invoice.setValue("paymentstatusreason", "No contact email set on project");
 		invoiceSearcher.saveData(invoice);
