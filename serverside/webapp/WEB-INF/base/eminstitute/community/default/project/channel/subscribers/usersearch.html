@@ -16,6 +16,9 @@ $context.putPageValue("searcher",$searcher) #set($targetdiv = "subscriberssideba
       <input type="hidden" name="collectionid" value="$collectionid" />
       <input type="hidden" name="searchtype" value="user" />
       <input type="hidden" name="sortby" value="firstName" />
+	  <input type="hidden" name="field" value="enabled" />
+	  <input type="hidden" name="enabled.value" value="true" />
+	  <input name="operation" value="exact" type="hidden" />
       <table style="width: 100%">
         <tr>
           <td>

@@ -22,5 +22,11 @@
 	 </name>
 	</property>
 	
+	<property id="guests" index="true" stored="true" editable="true" >
+		<name>
+			<language id="en"><![CDATA[Guests]]></language>
+		</name>
+	</property>
+	
 
 </properties>

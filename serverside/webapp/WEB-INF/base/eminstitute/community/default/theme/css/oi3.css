@@ -1537,7 +1537,7 @@ img.cat-thumb {
 .store-products .product-img {
 	margin-bottom: 0.5rem;
 }
-.store-products .product-img img {
+.store-products .product-img .imagethumb {
 	width: 300px;
 	height: 300px;
 	object-fit: cover;

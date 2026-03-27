@@ -2,7 +2,7 @@
   #set( $aproduct = $collectiveproduct)
 #end
 
-<div class="container no-gutters" id="storedetailarea">
+<div class="container mx-auto no-gutters" id="storedetailarea">
 <div class="my-4 px-4">
   <h2 class="mt-2 mb-1 text-dark">#text($!aproduct)</h2>
   <div class="d-flex flex-wrap justify-content-between mb-4">
@@ -13,15 +13,17 @@
       <button class="btn btn-sm m-1" id="shareProperty" title="[[Click to Copy the Link]]"><i class="fas fa-share-alt"></i> <span>[[Share]]</span></button>
       #if( $caneditcollection)
         <a class="emdialog btn btn-sm btn-outline-success m-1" title="[[Edit Product]]"
-          href="${communityhome}/project/rentaldetails/admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
+          href="admin/edit.html?id=${aproduct.id}&collectionid=$librarycol.id">
           <i class="fas fa-edit"></i> [[Edit Product]]
         </a>
-        #set($uploadlink = "${communityhome}/project/rentaldetails/upload/start.html?collectiveproduct=$aproduct.id&collectionid=$librarycol.id")
+        #set($uploadlink = "upload/start.html?collectiveproduct=$aproduct.id&collectionid=$librarycol.id")
         <a href="$uploadlink" class="moreactions btn btn-sm btn-outline-primary m-1 ajax" data-targetdiv="productscontent"
           data-updateurl="false" data-oemaxlevel="1"
           title="[[Upload Product Images]]">
           <i class="fas fa-plus"></i> [[Add Images]]
         </a>
+
+										
       #end
     </div>
   </div>
@@ -73,7 +75,8 @@
            </p>
         </div>
 
-      <form  name="startinvoice" method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">
+      <form  name="startinvoice" 		
+	  		  method="get" action="/${librarycol.urlname}/rentaldetails/startinvoice.html">
         <div class="d-flex flex-column mt-3">
           <div class="d-flex align-items-center flex-wrap">
             <div class="form-floating flex-grow-1">
@@ -134,8 +137,7 @@
             </div>
           </div>
         </div>
-        
-        
+       
         <input name="productid" value="$aproduct.getId()" type="hidden" />
         <button type="submit" class="btn btn-lg themed-btn w-100 mt-3">[[Request Dates]]</button>
         
