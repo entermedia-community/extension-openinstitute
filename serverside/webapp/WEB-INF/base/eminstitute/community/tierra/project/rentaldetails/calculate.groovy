@@ -50,7 +50,9 @@ public void runit()
 	
 	double total = subtotal * count;
 	total = MathUtils.roundDouble(total,2);
-	context.putPageValue("guests",Integer.parseInt(guests));
+	//context.putPageValue("guests",Integer.parseInt(guests));
+	
+	context.putPageValue("guests", guests);
 
 	context.putPageValue("dailyrate",subtotal);
 	context.putPageValue("totalcost",total);

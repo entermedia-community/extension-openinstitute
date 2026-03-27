@@ -1,26 +1,31 @@
 
-<div class="container p-4">
+<div class="container mx-auto  p-4">
 
 #set( $duedate = $context.getRequestParameter("checkIn"))
 #set( $enddate = $context.getRequestParameter("checkOut"))
 #set( $guests = $context.getRequestParameter("guests"))
 #set( $productid  = $context.getRequestParameter("productid"))
 
-
 #if($duedate && $enddate && $guests && $productid)	
+#ifnull( $aproduct)
+	#set($aproduct = $mediaarchive.getData("collectiveproduct", $productid))
+#end
+
 <div id="storeworkarea" class="storecontainer" style="max-width: 720px; margin:0 auto;">
+	<div class="d-flex justify-content-between">
 	<h2 class="text-center mt-0 mb-4">
 		[[Reservation Request Form]]
 	</h2>
+	<a href="${projectlink}/rentaldetails/$!aproduct.urlname" class=""><span title="[[Esc to Close]]" class="bi bi-x-lg ns"></span></a>
+	</div>
+	
 	<p>[[Reservations are subject to confirmation]]</p>
 	
 	#set( $searchtype = "collectiveinvoice")
 	#set( $searcher = $mediaarchive.getSearcher($searchtype) )
 	#set( $xmledithome  = "$apphome/components/xml")
 	$context.putPageValue("searcher",$searcher)
-	#ifnull( $aproduct)
-		#set($aproduct = $mediaarchive.getData("collectiveproduct", $productid))
-	#end
+
 	#set( $data = $searcher.createNewData())
 
 	$data.setValue("name","[[Reservation]] $librarycol.getName() $user.getEmail()")
