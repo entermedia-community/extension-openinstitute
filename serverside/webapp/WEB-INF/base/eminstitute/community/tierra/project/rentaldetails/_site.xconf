@@ -17,7 +17,6 @@
 
 	<property name="loginroot">${communityhome}/authentication</property>
 	
-	<script id="html5_upload" src="${communityhome}/components/javascript/upload/jquery.html5_upload.js" />
-	<script id="upload" src="${communityhome}/components/javascript/emedia/upload.js" defer="true" />
+	
 	
 </page>
