@@ -135,7 +135,7 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-		<Context path="/" docBase="${catalina.home}/serverside/webapp"  reloadable="true"  >
+		<Context path="/" docBase="../serverside/webapp"  reloadable="true"  >
 		</Context>
 
       </Host>
