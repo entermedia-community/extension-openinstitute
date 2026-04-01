@@ -22,7 +22,8 @@
 		<div class="d-flex flex-column">
 			#foreach( $hit in $team)
 				#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
-				#if($followeruser)
+				
+				#if($followeruser && $followeruser.enabled == "true")
 					#set( $userlink = "$!communityhome/users/index.html?id=${followeruser.getId()}")
 					#set( $userimageurl = $mediaarchive.asLinkToUserProfile($followeruser) )
 					

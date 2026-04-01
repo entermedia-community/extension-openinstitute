@@ -6,7 +6,7 @@
 
 $context.putPageValue("selecteduser", $selecteduser)
 
-#if( $selecteduser )	
+#if( $selecteduser && $selecteduser.enabled == "true")	
 	#set( $subscriptions = $mediaarchive.query("librarycollectionusers").exact("followeruser",$selecteduser.getId()).sort("isbillingcontact").search())
 	$context.putPageValue("subscriptions", $subscriptions)
 	<div class="d-flex flex-wrap mb-5 bg-light align-items-center shadow">
@@ -80,4 +80,6 @@ $context.putPageValue("selecteduser", $selecteduser)
 	</div>
 	
 	$pages.include("${communityhome}/users/projects.html", $context)
+#else
+	<p class="text-center text-muted my-4">[[User not found]]</p>
 #end	
