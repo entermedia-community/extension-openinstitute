@@ -20,7 +20,7 @@ public void init()
 	String entermediakey = "1106md5420940dd427e0a60de560b00f00de530d2380b93208d";
 
 	String exportsearchtype = "librarycollection";		
-	
+	/*
 	def search = '''{
 		"page": "1",
 		"hitsperpage": "100",
@@ -34,6 +34,25 @@ public void init()
 		  ]
 		}
 	  }'''
+*/
+
+/*
+//Bring just one specific collection
+def search = '''{
+		"page": "1",
+		"hitsperpage": "100",
+		"query": {
+		  "terms": [
+			{
+			  "field": "id",
+			  "operation": "exact",
+			  "value": "1106-messages"
+			}
+		  ]
+		}
+	  }'''
+	  
+*/
 	
 	  
   //local
@@ -84,7 +103,9 @@ public void init()
 			map.put(field, "ib_"+oldvalue)
 		}
 	}
-	//searcher.saveJson(results)
+
+	//Save the Collections
+	searcher.saveJson(results)
 	
 	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
@@ -95,7 +116,7 @@ public void init()
 		String collectionid = map.id;
 		//String newid = replacemap.get(collectionid)
 		
-		/*
+		
 		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
 		downloadData(connection, "goaltask", "collectionid", collectionid, collectionid)
 		downloadData(connection, "chatterbox", "collectionid", collectionid, collectionid)
@@ -103,7 +124,6 @@ public void init()
 		downloadData(connection, "collectiveproject", "parentcollectionid", collectionid, collectionid)
 		downloadData(connection, "userpost", "librarycollection", collectionid, collectionid)
 		downloadData(connection, "librarycollectionusers", "collectionid", collectionid, collectionid)
-		*/
 		
 		downloadData(connection, "bankaccount", "collectionid", collectionid, collectionid)
 		downloadData(connection, "collectiveinvoice", "collectionid", collectionid, collectionid)
