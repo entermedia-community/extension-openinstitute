@@ -17,6 +17,8 @@
 		<property name="entitymoduleid">userpost</property>
 	</path-action>
 
+	<path-action name="EntityModule.loadDefaultFolder" />
+
 	<path-action name="AssetEditModule.handleUploads">
 		<property name="module">userpost</property>
 		<property name="pageval">entity</property>

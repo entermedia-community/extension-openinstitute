@@ -17,7 +17,16 @@ $context.putPageValue("viewid", "userpostaddnew")
 	<input type="hidden" name="field" value="poststatus" />
 	<input type="hidden" id="poststatus" name="poststatus.value" value="draft" />
 
+	##<input type="hidden" name="field" value="sourcepath" />
+	##<input type="hidden" id="poststatus" name="sourcepath.value" value="User Post/$!{librarycol.name}" />
+
 	<input type="hidden" name="collectionid" value="$librarycol.id" />
+
+	<input type="hidden" name="entitymoduleid" value="userpost" />
+
+	<input type="hidden" name="field" value="entitysourcetype" />
+	<input type="hidden" name="entitysourcetype.value" value="userpost" />
+	
 
 	$pages.include("/$applicationid/components/xml/detaileditor4.html", $context)
 	

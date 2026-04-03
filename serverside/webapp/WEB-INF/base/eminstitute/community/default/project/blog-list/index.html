@@ -30,7 +30,7 @@ $context.putPageValue("showchannel",false)
 			#set( $drafts = $mediaarchive.query("userpost").exact("librarycollection", $librarycol.getId()).exact("poststatus", "draft").search() )
 					
 			#if($drafts)
-				<a class="btn btn-light mx-2" 
+				<a class="btn btn-sm  btn-light mx-2" 
 						href="${projectlink}/blog-list/index-pending.html" 
 						data-collectionid="$librarycol.id">
 						<i class="fa fa-file me-1"></i>
