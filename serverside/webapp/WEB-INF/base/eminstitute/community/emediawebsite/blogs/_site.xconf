@@ -5,11 +5,14 @@
 	<property name="currentPage">blogs</property>
 
 	<property name="collectivesection">home</property>
+
+	<property name="communitytagcategory">emedia</property>
+
 	<property name="communitytag">true</property>
 	<property name="virtual">true</property>
 
 	<inner-layout>${communityhome}/blogs/layout.html</inner-layout>
-	
+	 	
  	<page-action name="Date.now"/>
 	<page-action name="TransactionModule.loadTransactionManager"/>
 	<page-action name="PageValue.loadPageVariable" bean="mathutil" />	

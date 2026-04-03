@@ -19,12 +19,13 @@
 <article class="article-card">
 
   #set($postasset = $mediaarchive.getAsset($userpost.primarymedia))
-  #set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image600x314.webp"))
+  
+  #set($postimagesrc = $mediaarchive.asLinkToGenerated($postasset, "image600x314"))
 
   <div class="article-thumbnail-wrap">
-    <a href="${bloglink}">
+    <a href="${bloglink}" title="$!userpost.name">
 		#if($postimagesrc)
-      <img loading="lazy" src="${postimagesrc}" >
+      <img loading="lazy" src="${postimagesrc}" alt="$!userpost.name" />
 	  #end
     </a>
   </div>
@@ -32,16 +33,14 @@
 
 	#if($showchannel)
      <div class="d-flex align-items-center justify-content-end">
-      <a href="${projectlink}" class="blog-community-name">
+      <a href="${projectlink}" class="blog-community-name" title="[[Project]]: #text($librarycol)">
         #text($librarycol)
       </a>
      </div>
 	#end
-
-
-    #ifnotnull($userpost.name)
+    #ifnotnull($!userpost.name)
       <h2>
-        <a href="${bloglink}">$userpost.name</a>
+        <a href="${bloglink}" title="$!userpost.name">$!userpost.name</a>
       </h2>
     #end
 
@@ -70,7 +69,8 @@
             data-hidefooter="true"
             data-collectionid="${librarycol.getId()}"
             data-id="${userpost.id}"
-            href="$projectlink/channel/edit.html">
+            href="$projectlink/channel/edit.html"
+            title="[[Edit]]: $!userpost.name">
             <i class="fas fa-pen"></i>
           </a>
           #if($userpost.poststatus != "published")
@@ -85,7 +85,7 @@
           $context.putPageValue("chatuser",$postuser)
           $pages.include("${communityhome}/users/icon.html",$context)
           <div class="d-flex flex-column">
-            <a class="author-name" href='#urlescape("${communityhome}/users/index.html?id=${postuser.getId()}")'>$postuser.getAnonNickName()</a>
+            <a class="author-name" href='#urlescape("${communityhome}/users/index.html?id=${postuser.getId()}")' title="[[Author]]: $postuser.getAnonNickName()">$postuser.getAnonNickName()</a>
             <time datetime='$userpost.getDate("entity_date")' class="text-muted small">
               [[Posted]]
               #set($timestamp = $context.getAge($userpost.getDate("entity_date")))
@@ -101,11 +101,11 @@
         <div class="d-flex align-items-center">
           $context.putPageValue("userpostid", $userpost.getId())
 
-          <a href="${bloglink}">
+          <a href="${bloglink}" title="[[Like]]: $!userpost.name">
             $pages.include("${communityhome}/project/blog/likecount.html?userpostid=$userpost.getId()", $context)
           </a>
 
-          <a class="emdialog text-muted small ms-3" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-userpostid="${userpost.id}" href="$communityhome/project/channel/share.html">
+          <a class="emdialog text-muted small ms-3" data-width="900" data-hidefooter="true" data-librarycol="${librarycol.getId()}" data-userpostid="${userpost.id}" href="$communityhome/project/channel/share.html" title="[[Share]]: $!userpost.name">
             <i class="fas fa-share-alt"></i>
           </a>
         </div>

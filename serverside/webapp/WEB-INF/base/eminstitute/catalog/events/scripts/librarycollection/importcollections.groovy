@@ -20,7 +20,7 @@ public void init()
 	String entermediakey = "1106md5420940dd427e0a60de560b00f00de530d2380b93208d";
 
 	String exportsearchtype = "librarycollection";		
-	/*
+	
 	def search = '''{
 		"page": "1",
 		"hitsperpage": "100",
@@ -34,7 +34,7 @@ public void init()
 		  ]
 		}
 	  }'''
-*/
+
 
 /*
 //Bring just one specific collection
@@ -105,7 +105,7 @@ def search = '''{
 	}
 
 	//Save the Collections
-	searcher.saveJson(results)
+	//searcher.saveJson(results)
 	
 	//def replacemap = ["AZqnEhttnrYY6bRGwPRw":"AZpgFZ_vQC-UlD66sXgS" ];
 	
@@ -116,7 +116,7 @@ def search = '''{
 		String collectionid = map.id;
 		//String newid = replacemap.get(collectionid)
 		
-		
+		/*
 		downloadData(connection, "projectgoal", "collectionid", collectionid, collectionid)
 		downloadData(connection, "goaltask", "collectionid", collectionid, collectionid)
 		downloadData(connection, "chatterbox", "collectionid", collectionid, collectionid)
@@ -136,6 +136,7 @@ def search = '''{
 		downloadData(connection, "collectivereimbursement", "collectionid", collectionid, collectionid)
 		downloadData(connection, "donationreceipt", "collectionid", collectionid, collectionid)
 		downloadData(connection, "transaction", "collectionid", collectionid, collectionid)
+		*/
 	}
 	
 	/*
@@ -145,6 +146,9 @@ def search = '''{
 		downloadAssets(connection, collectionid, map.rootcategory)
 	}
 	*/
+
+	//Download Assets from a specific category
+	downloadAssets(connection, null, "AZtcRpF9AtO-rTscxHxm")  //Blog images category
 	
 	
 	
@@ -255,8 +259,6 @@ void downloadData(HttpSharedConnection inConnection, String inSearchtype, String
 
 void downloadAssets(HttpSharedConnection inConnection, String inCollectionid, String inCategoryid)
 {
-
-	
 	def search = '''{
 		"page": "1",
 		"hitsperpage": "1000",
