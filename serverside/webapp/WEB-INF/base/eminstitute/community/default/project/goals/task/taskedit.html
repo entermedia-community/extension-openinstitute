@@ -103,7 +103,7 @@
 				#if( $task.id && $caneditcollection )
 					<a class="btn btn-xs btn-danger ml-1 ajax" 
 					 data-confirm="[[Are you sure?]]"
-					targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
+					data-targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
 					href="${communityhome}/project/goals/taskdelete.html?collectionid=$!collectionid&goalid=$selectedgoal.id&taskid=$task.id">
 					[[Delete]]</a> 
     			#end
