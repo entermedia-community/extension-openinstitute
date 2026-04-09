@@ -1,9 +1,11 @@
-#if(!$task)
+#ifnull($task)
 	#set( $taskid = $context.getRequestParameter("taskid"))
 	#if( $taskid)
 		#set( $task = $mediaarchive.getData("goaltask",$taskid) )
 	#end
 #end
+
+#set($collectionid = $context.getRequestParameter("collectionid"))
 
 #set($target = $context.getRequestParameter("targetdiv"))
 
@@ -14,7 +16,7 @@
 	    	<input type="hidden" name="goalid" value="$selectedgoal.id" />
 	    	<input type="hidden" name="onlyopen" value="false" />
 	    	<input type="hidden" name="taskid" value="$!task.id" />
-	    	<input type="hidden" name="collectionid" value="$librarycol.getId()" />
+	    	<input type="hidden" name="collectionid" value="$collectionid" />
 
 			<div style="margin-bottom:10px;">
   				<textarea id="commenttext" class="form-control grabfocus" name="comment" placeholder="[[Task Comment/Description]]" required>$!task.comment</textarea>
@@ -66,7 +68,7 @@
 					<div style="min-width:300px;">
 					<select class="form-control form-control-sm"  name="completedby">
 						<option value=""></option>
-						#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$librarycol.getId()).exact("ontheteam",true).search($context) )
+						#set( $team = $mediaarchive.query("librarycollectionusers").exact("collectionid",$collectionid).exact("ontheteam",true).search($context) )
 						#foreach( $hit in $team)
 							#set( $followeruser = $mediaarchive.getUser($hit.followeruser) )
 							#if( $followeruser)
@@ -102,12 +104,12 @@
 					<a class="btn btn-xs btn-danger ml-1 ajax" 
 					 data-confirm="[[Are you sure?]]"
 					targetdiv="goalrow#eid($selectedgoal.id)" title="[[Remove task]]"
-					href="${communityhome}/project/goals/taskdelete.html?collectionid=$!librarycol.getId()&goalid=$selectedgoal.id&taskid=$task.id">
+					href="${communityhome}/project/goals/taskdelete.html?collectionid=$!collectionid&goalid=$selectedgoal.id&taskid=$task.id">
 					[[Delete]]</a> 
     			#end
     	
 				##set( $targetdiv = "tasklist#eid($selectedgoal.id)")
-				#set( $cancellink = "${communityhome}/project/goals/search/goaltasks.html?collectionid=$librarycol.getId()&goalid=$selectedgoal.id")
+				#set( $cancellink = "${communityhome}/project/goals/search/goaltasks.html?collectionid=$collectionid&goalid=$selectedgoal.id")
 				<a href="$cancellink" 
 					data-focuson="$task.id" 
 					id="task$task.getId()" 
