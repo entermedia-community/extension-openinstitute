@@ -1,5 +1,6 @@
 package org.openinstitute.finance;
 
+import org.elasticsearch.cluster.routing.allocation.decider.Decision.Multi;
 import org.openedit.Data;
 import org.openedit.MultiValued;
 import org.openedit.data.BaseData;
@@ -40,17 +41,18 @@ public class BankTransaction extends BaseData
 		fieldSearchType = inSearchType;
 	}
 
-	Data fieldData;
+	MultiValued fieldData;
 
-	public Data getData()
+	public MultiValued getData()
 	{
 		return fieldData;
 	}
 
-	public void setData(Data inData)
+	public void setData(MultiValued inData)
 	{
 		fieldData = inData;
-		setProperties(inData.getProperties());
+		Data data = (Multi) inData;
+		setProperties(data.getProperties());
 	}
 
 	public Date getDate()
