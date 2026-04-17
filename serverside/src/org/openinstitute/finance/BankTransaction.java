@@ -1,9 +1,10 @@
 package org.openinstitute.finance;
 
-import java.util.Date;
 import org.openedit.Data;
 import org.openedit.MultiValued;
+import org.openedit.data.BaseData;
 import org.openedit.util.DateStorageUtil;
+import java.util.Date;
 
 public class BankTransaction extends BaseData
 {
@@ -20,7 +21,7 @@ public class BankTransaction extends BaseData
 		fieldBePositive = inBePositive;
 	}
 
-	public BankTransaction(String inSearchType, MultiValued inData) {
+	public BankTransaction(String inSearchType, Data inData) {
 		setSearchType(inSearchType);
 		setData(inData);
 	}
@@ -39,7 +40,7 @@ public class BankTransaction extends BaseData
 		fieldSearchType = inSearchType;
 	}
 
-	MultiValued fieldData;
+	Data fieldData;
 
 	public Data getData()
 	{
