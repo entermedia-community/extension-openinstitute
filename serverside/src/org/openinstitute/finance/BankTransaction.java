@@ -1,11 +1,10 @@
 package org.openinstitute.finance;
 
-import org.elasticsearch.cluster.routing.allocation.decider.Decision.Multi;
+import java.util.Date;
 import org.openedit.Data;
 import org.openedit.MultiValued;
 import org.openedit.data.BaseData;
 import org.openedit.util.DateStorageUtil;
-import java.util.Date;
 
 public class BankTransaction extends BaseData
 {
@@ -51,8 +50,7 @@ public class BankTransaction extends BaseData
 	public void setData(MultiValued inData)
 	{
 		fieldData = inData;
-		Data data = (Data) inData;
-		setProperties(data.getProperties());
+		// setProperties(fieldData.getProperties());
 	}
 
 	public Date getDate()
