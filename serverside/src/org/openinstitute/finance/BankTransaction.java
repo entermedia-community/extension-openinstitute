@@ -1,9 +1,8 @@
 package org.openinstitute.finance;
 
 import java.util.Date;
-
+import org.openedit.Data;
 import org.openedit.MultiValued;
-import org.openedit.data.BaseData;
 import org.openedit.util.DateStorageUtil;
 
 public class BankTransaction extends BaseData
