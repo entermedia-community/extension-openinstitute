@@ -22,7 +22,7 @@ public class BankTransaction extends BaseData
 		fieldBePositive = inBePositive;
 	}
 
-	public BankTransaction(String inSearchType, Data inData) {
+	public BankTransaction(String inSearchType, MultiValued inData) {
 		setSearchType(inSearchType);
 		setData(inData);
 	}
@@ -51,7 +51,7 @@ public class BankTransaction extends BaseData
 	public void setData(MultiValued inData)
 	{
 		fieldData = inData;
-		Data data = (Multi) inData;
+		Data data = (Data) inData;
 		setProperties(data.getProperties());
 	}
 
