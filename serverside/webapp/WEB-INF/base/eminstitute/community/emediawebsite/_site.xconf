@@ -69,4 +69,10 @@
   <style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
   <style id="customwebsite" href="${communityhome}/theme/css/custom.css"/>
 
+	 <script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
+	<script id="videojs-qs" src="/${applicationid}/components/javascript/videojs/8.20.0/videojs-quality-selector.min.js" defer="true" />
+	<style id="videojs-css" href="/${applicationid}/components/javascript/videojs/8.20.0/video-js.min.css" />
+
+
+
 </page>
