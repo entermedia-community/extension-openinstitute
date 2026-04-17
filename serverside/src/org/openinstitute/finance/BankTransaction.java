@@ -42,7 +42,7 @@ public class BankTransaction extends BaseData
 
 	MultiValued fieldData;
 
-	public MultiValued getData()
+	public Data getData()
 	{
 		return fieldData;
 	}
