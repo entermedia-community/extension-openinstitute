@@ -115,6 +115,10 @@ h2 {
 	height: 40px;
 	margin: 0 12px;
 }
+.hero-bg {
+	user-select: none;
+	pointer-events: none;
+}
 .hero-bg img {
 	transform: scale(1.2);
 	width: 100vw;
