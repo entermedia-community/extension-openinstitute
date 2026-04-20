@@ -1,389 +1,315 @@
-<main id="content" role="main" class="mainwebsitedark">
-  <div class="gradient-y-sm-primary">
-    $pages.include("./animation/index.html")
-  </div>
-  <div class="position-relative">
-    <div class="gradient-bg"></div>
-  </div>
-  <div class="bg-navy space-2 w-100 overflow-hidden">
-    <div class="position-relative">
-      <div class="js-slick-carousel slick" data-aos="fade-left" data-aos-duration="1500"
-        data-hs-slick-carousel-options='{
-            "prevArrow": "<span class=\"fas fa-arrow-left d-none d-sm-inline-block slick-arrow slick-arrow-soft-white slick-arrow-left slick-arrow-centered-y rounded-circle ml-sm-2 ml-xl-4\"></span>",
-            "nextArrow": "<span class=\"fas fa-arrow-right d-none d-sm-inline-block slick-arrow slick-arrow-soft-white slick-arrow-right slick-arrow-centered-y rounded-circle mr-sm-2 mr-xl-4\"></span>",
-            "counterSelector": "#slickCounter",
-            "counterDivider": "/",
-            "slidesToShow": 1,
-            "slidesToScroll": 1,
-            "autoplay": true,
-            "autoplaySpeed": 5000,
-            "dots": true,
-            "dotsClass": "slick-pagination mt-3",
-            "cssEase": "linear",
-            "pauseOnFocus": true,
-            "pauseOnHover": true,
-            "fade": true
-        }'> 
-        #foreach($i in [1..18])
-          <div class="js-slide bg-img-hero-center">
-            <div class="d-flex align-items-center justify-content-center pitch-deck-slide">
-              <img src="${communitylink}/theme/images/pitch-deck/${i}.webp" loading="lazy"  style="height: 100%;object-fit: contain;"/>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eMe | Your Digital Memory, Organized</title>
+  <meta name="description"
+    content="eMe turns scattered personal and business data into a private, searchable digital memory that stays fully under your control." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bree+Serif&Manrope:wght@400;500;600;700;800&family=Syne:wght@500;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="eMe home">
+        <!-- <span class="brand__mark">e</span>
+        <span class="brand__text">eMe</span> -->
+        <img class="brand__logo" src="$communityhome/theme/images/logo.svg" alt="eMe logo" />
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#memory">Memory</a>
+        <a href="#archive">Archive</a>
+        <a href="#engines">Engines</a>
+        <a href="#ownership">Ownership</a>
+      </nav>
+
+      <a class="button button--ghost" href="#cta">Request Access</a>
+    </header>
+
+    <main id="top">
+      <section class="section hero section--deep" style="--next-bg: var(--sand)">
+        <div class="section__content hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow reveal">Private AI memory infrastructure</p>
+            <h1 class="hero__title reveal">
+              From information slurry to a living archive that thinks with you.
+            </h1>
+            <p class="hero__lede reveal">
+              eMe automatically collects, organizes, and activates your digital memory so you can
+              retrieve truth faster, reduce cognitive overload, and stay in full control of your
+              data.
+            </p>
+
+            <div class="hero__actions reveal">
+              <a class="button" href="#cta">Build Your eMemory</a>
+              <a class="button button--ghost button--light" href="#engines">Explore The System</a>
             </div>
+            
           </div>
-        #end
-      </div>
-    </div>
-  </div>
-  <div class="space-1 overflow-hidden">
-    <div class="w-lg-75 mx-lg-auto">
-      <div class="text-center mb-4 mx-3">
-        <h2 class="divider divider-text text-white">FULLY OPEN SOURCE DAM BUILT IN PARTNERSHIP WITH</h2>
-      </div>
-    </div>
-    <div class="partners" data-aos="fade" data-aos-duration="1500">
-      <div class="js-slick-carousel slick slick-gutters-3 z-index-2" data-hs-slick-carousel-options='{
-        "dots": false,
-        "infinite": true,
-        "arrows": false,
-        "autoplay": true,
-        "autoplaySpeed": 0,
-        "cssEase": "linear",
-        "fade": false,
-        "speed": 3000,
-        "slidesToShow": 5,
-        "slidesToScroll": 1,
-        "pauseOnFocus": false,
-        "pauseOnHover": false,
-        "responsive": [
-          {
-            "breakpoint": 1100,
-            "settings": {
-              "slidesToShow": 4,
-              "slidesToScroll": 1,
-              "dots": false,
-              "infinite": true,
-              "arrows": false
-            }
-          },
-          {
-            "breakpoint": 870,
-            "settings": {
-              "dots": false,
-              "infinite": true,
-              "arrows": false,
-              "slidesToShow": 3,
-              "slidesToScroll": 1
-            }
-          },
-          {
-            "breakpoint": 769,
-            "settings": {
-              "dots": false,
-              "infinite": true,
-              "arrows": false,
-              "slidesToShow": 2,
-              "slidesToScroll": 1
-            }
-          },
-          {
-            "breakpoint": 576,
-            "settings": {
-              "dots": false,
-              "infinite": true,
-              "arrows": false,
-              "slidesToShow": 2,
-              "slidesToScroll": 1
-            }
-          }
-        ]
-      }'>
-        <div class="js-slide mt-1" data-toggle="tooltip" data-toggle="tooltip" data-placement="bottom" title="United Nations">
-          <img style="width: 100px" src="${communitylink}/theme/images/un.svg" alt="United Nations">
-        </div>
-        <div class="js-slide mt-1" data-toggle="tooltip"
-            data-placement="bottom" title="Yale University">
-          <img style="width: 100px" src="${communitylink}/theme/images/yale.svg" alt="Yale University">
-        </div>
-        <div class="js-slide mt-1" data-toggle="tooltip"
-            data-placement="bottom" title="Canadian Brodcasting Network">
-          <img style="width: 200px" src="${communitylink}/theme/images/cbc.svg" alt="Canadian Brodcasting Network">
-        </div>
-        <div class="js-slide mt-1" data-toggle="tooltip"
-            data-placement="bottom" title="ALM">
-          <img style="width: 200px" src="${communitylink}/theme/images/alm.svg" alt="PR Newswire">
-        </div>
-        <div class="js-slide mt-1" data-toggle="tooltip"
-            data-placement="bottom" title="Cision">
-          <img style="width: 180px" src="${communitylink}/theme/images/cision.svg" alt="Cision">
-        </div>
-        <div class="js-slide mt-1" data-toggle="tooltip"
-            data-placement="bottom" title="Alfred Music">
-          <img style="width: 80px" src="${communitylink}/theme/images/alfred.svg" alt="Alfred Music">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="overflow-hidden bg-navy">
-    <div class="container space-top-2 space-top-lg-3 space-bottom-3">
-      <div class="w-md-80 text-center mx-md-auto mb-5 mb-md-9">
-        <h2 class="text-capitalize">
-          We make it easy to get organized with AI powered SMART Folders.
-        </h2>
-        <p class="lead">
-          Get started completely FREE with a
-          fully-featured eMedia Library installation.
-         
-        </p>
-      </div>
-      <div class="row space-bottom-2"> 
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded shadow-sm">
-            <figure class="max-w-15rem w-100 mb-4">
-              <img class="img-fluid" src="${communitylink}/theme/images/community.png" alt="Community" data-toggle="tooltip"
-                data-placement="bottom" title="Community" />
-            </figure>
-           <!-- <div class="d-flex align-items-center"> -->
-            <span class="d-inline-block mb-2">See what's new in our </span>
-             <a class="btn btn-sm btn-primary transition-3d-hover" href="http://emedia.openinstitute.org/">
-              <i class="fas fa-users me-2"></i>
-              eMedia Community
-            </a>
-           <!-- </div> -->
-            <p class="text-body text-center mt-5 px-3 small">
-              Our community is an essential
-              element of this open source project.
-              We welcome a growing group of developers
-              in exchanging ideas and discussing
-              potential uses of the software.
-            </p>
+
+          <div class="hero__visual">
+            $pages.include("${communityhome}/animation/index.html")
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="container space-2 bg-navy text-white rounded shadow-sm" data-aos="fade-left" data-aos-duration="1500">
-            <div class="text-center">
-              <h2 class="text-white">
-                Ready to Get Started
-              </h2>
-              <p class="mb-3">
-                Create a free eMedia Library account to chat with us, deploy a server and get started!
-              </p>
-              <span class="d-block mt-5">
-                <a class="btn btn-sm btn-primary transition-3d-hover" href="${communitylink}/account/">
-                  <i class="fas fa-comment-alt me-2"></i>
-                  Chat With Us
-                </a>
-              </span>
-              <div class="text-center my-2">
-                <span class="divider divider-xs divider-text">OR</span>
-              </div>
-              <p class="m-0">
-                 <a href="${communitylink}/meetingschedule/meeting-form.html" rel="nofollow" class="btn btn-sm btn-soft-secondary text-white m-1 emdialog">
-                    <i class="far fa-calendar-alt"></i>
-                    <span class="ms-1">Schedule a Meeting</span>                  
-                  </a>    
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row" data-aos="fade-right" data-aos-duration="1500">
-        <div class="col-sm-4 mb-3 mb-sm-7">
-          <div class="pr-lg-5">
-            <figure class="max-w-6rem w-100 mb-4">
-              <img class="img-fluid" src="${communitylink}/theme/images/deploy.png" alt="Deploy" data-toggle="tooltip"
-                data-placement="bottom" title="Deploy" />
-            </figure>
-            <h3 class="h4">
-              Deploy a server
-            </h3>
-            <p class="text-body">
-              Install eMediaLibrary, for free, on any Linux server using these instructions for <a href="https://entermediadb.org/knowledge/10/docker-deployments/">Docker</a> and <a href="https://entermediadb.org/knowledge/9/setup-nginx-load-balancer/">NGINX Web server</a> 
-            </p>
-            <p class="text-body">
-              Or we have can host for you. Just login to your <a href="${communitylink}/users/account.html" class="fw-bold dotted-underline">My Account</a> area and request a free server deployment.  
-            </p>
-            <p>Either way, we are happy to get you started on your journey.</p>
-          </div>
-        </div>
-        <div class="col-sm-4 mb-3 mb-sm-7">
-          <div class="pr-lg-6">
-            <figure class="max-w-6rem w-100 mb-4">
-              <img class="img-fluid" src="${communitylink}/theme/images/support.png" alt="Support" data-toggle="tooltip"
-                data-placement="bottom" title="Support" />
-            </figure>
-            <h4>Get Support</h4>
-            <p class="text-body">
-              Check out the <a href="${communitylink}/documentation.html">online documentation</a>. 
-            <br>
-              Or we offer also chat support in the <a href="${communitylink}/users/account.html" class="fw-bold dotted-underline">My Account</a> area. 
-             <br> 
-              Or purchase <a href="${communitylink}/pricing.html">affordable expert support</a> with our team of expert
-              developers and software architects
-              to get the most out of
-              your Digital Asset Management library.
-            </p>
-          </div>
+
+          <!-- <div class="hero-badge glass reveal">
+            <span class="hero-badge__label">Always yours</span>
+            <strong>Open source, self-hosted, private by default</strong>
+          </div> -->
         </div> 
-        <div class="col-sm-4 mb-sm-0">
-          <div class="pr-lg-6">
-            <figure class="max-w-6rem w-100 mb-4">
-              <img class="img-fluid" src="${communitylink}/theme/images/forum.png" alt="Forum" data-toggle="tooltip"
-                data-placement="bottom" title="Forum" />
-            </figure>
-            <h4>Meet the developers</h4>
-            <p class="text-body">
-              We welcome programmers and integrators creating their own integrations and extensions. We keep all our source code available on <a href="https://github.com/entermedia-community">GitHub EnterMedia Community</a> area. The architect of eMediaLibrary, Christopher Burkey is also available to meet with developers.<br/>Just&nbsp;<a href="${communitylink}/meetingschedule/meeting-form.html" rel="nofollow" class="d-inline emdialog dotted-underline"><i class="far fa-calendar-alt"></i><span class="ms-1">Schedule a Meeting</span></a>&nbsp;with him.
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="sandGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#f8e8dd" />
+                <stop offset="18%" stop-color="#f8f4ea" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#sandGrad)" />
+          </svg>
+        </div>
+      </section>
+
+      <section id="memory" class="section section--sand" style="--next-bg: var(--paper)">
+        <div class="section__content">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Reducing cognitive overload</p>
+            <h2>Bring scattered inputs into one calm, searchable memory layer.</h2>
+            <p>
+              eMe turns disconnected files, notes, recordings, and company history into a unified
+              catalog you can question like a specialist instead of hunting through tabs.
             </p>
           </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <h3>Overcome information scatter</h3>
+              <p>
+                Transform overwhelming fragments into one organized, accessible archive built
+                around your own materials.
+              </p>
+            </article>
+
+            <article class="feature-card reveal">
+              <h3>Auto-organize digital memory</h3>
+              <p>
+                Structure the things you have already gathered so knowledge stays usable, current,
+                and easy to revisit.
+              </p>
+            </article>
+
+            <article class="feature-card reveal">
+              <h3>Directional advice in your voice</h3>
+              <p>
+                Ask direct questions and receive context-aware guidance shaped by your catalog,
+                not generic internet summaries.
+              </p>
+            </article>
+          </div>
         </div>
-      </div>
-      
-    </div>
-  </div> 
-  <div class="space-top-2 space-bottom-2 platforms"> 
-    <div class="container">
-      <div class="w-md-80 text-center mx-md-auto mb-5 mb-md-9 space-top-2">
-        <h2 class="text-capitalize">
-          Import and Export Media with Any Platform
-        </h2> 
-      </div>
-      <div class="js-slick-carousel slick slick-gutters-3 z-index-2"  data-aos="fade-up" data-aos-duration="1500"
-        data-hs-slick-carousel-options='{
-                "slidesToShow": 5,
-                "dots": true,
-                "dotsClass": "slick-pagination d-lg-none",
-                "responsive": [{
-                  "breakpoint": 1200,
-                    "settings": {
-                      "slidesToShow": 4
-                    }
-                  }, {
-                  "breakpoint": 992,
-                  "settings": {
-                    "slidesToShow": 3
-                    }
-                  }, {
-                  "breakpoint": 768,
-                  "settings": {
-                    "slidesToShow": 2
-                    }
-                  }, {
-                  "breakpoint": 554,
-                  "settings": {
-                    "slidesToShow": 1
-                  }
-                }]
-              }'>
-        <div class="js-slide mt-1">
-          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
-            <div class="card-header text-center rounded-top">
-              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
-                <img class="avatar-img" src="${communitylink}/theme/images/dropbox.svg" alt="Dropbox" data-toggle="tooltip"
-                  data-placement="bottom" title="Dropbox" />
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="h4 text-center mb-1">Dropbox</h2>
-            </div>
-          </article>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="paperGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#fffcf7" />
+                <stop offset="18%" stop-color="#f4f2ef" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#paperGrad)" />
+          </svg>
         </div>
-        <div class="js-slide mt-1">
-          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
-            <div class="card-header text-center rounded-top">
-              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
-                <img class="avatar-img" src="${communitylink}/theme/images/youtube.svg" alt="YouTube" data-toggle="tooltip"
-                  data-placement="bottom" title="YouTube" />
-              </div>
+      </section>
+
+      <section id="archive" class="section section--paper" style="--next-bg: var(--mint)">
+        <div class="section__content archive-layout">
+          <div class="archive-copy">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Personal business assistant</p>
+              <h2>A universal archival catalog across every format that matters.</h2>
+              <p>
+                Feed eMe your history, media, business records, and structured systems. It parses,
+                transcribes, indexes, and connects everything into one private knowledge base.
+              </p>
             </div>
-            <div class="card-body">
-              <h2 class="h4 text-center mb-1">YouTube</h2>
+
+            <div class="media-list">
+              <article class="media-item reveal">
+                <span>PDFs</span>
+                <p>OCR, semantic parsing, and searchable insight extraction.</p>
+              </article>
+              <article class="media-item reveal">
+                <span>Images</span>
+                <p>Visual understanding, object context, and retrievable memory cues.</p>
+              </article>
+              <article class="media-item reveal">
+                <span>Audio</span>
+                <p>Transcription, theme detection, and fast recall from spoken content.</p>
+              </article>
+              <article class="media-item reveal">
+                <span>Video</span>
+                <p>Key frames, speech capture, and indexed scene-level understanding.</p>
+              </article>
+              <article class="media-item reveal">
+                <span>Databases</span>
+                <p>Structured records merged with unstructured memory for richer answers.</p>
+              </article>
             </div>
-          </article>
+          </div>
+
+          <div class="archive-visual">
+            <div class="mosaic">
+              <figure class="mosaic-card parallax reveal" data-speed="0.16">
+                <img src="https://placehold.co/640x760/eadfd0/12344d?text=PDFs" alt="Placeholder document preview" />
+              </figure>
+              <figure class="mosaic-card parallax reveal" data-speed="0.24">
+                <img src="https://placehold.co/640x760/adc9c2/12344d?text=Images"
+                  alt="Placeholder image archive preview" />
+              </figure>
+              <figure class="mosaic-card parallax reveal" data-speed="0.2">
+                <img src="https://placehold.co/640x760/f4b860/12344d?text=Audio+%26+Video"
+                  alt="Placeholder audio and video archive preview" />
+              </figure>
+              <figure class="mosaic-card parallax reveal" data-speed="0.3">
+                <img src="https://placehold.co/640x760/12344d/f8f4ea?text=Connected+Knowledge"
+                  alt="Placeholder connected knowledge base preview" />
+              </figure>
+            </div>
+          </div>
         </div>
-        <div class="js-slide mt-1">
-          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
-            <div class="card-header text-center rounded-top">
-              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
-                <img class="avatar-img" src="${communitylink}/theme/images/wordpress.svg" alt="Wordpress" data-toggle="tooltip"
-                  data-placement="bottom" title="Wordpress" />
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="h4 text-center mb-1">Wordpress</h2>
-            </div>
-          </article>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#dceee6" />
+          </svg>
         </div>
-        <div class="js-slide mt-1">
-          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
-            <div class="card-header text-center rounded-top">
-              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
-                <img class="avatar-img" src="${communitylink}/theme/images/drive.svg" alt="Google Drive" data-toggle="tooltip"
-                  data-placement="bottom" title="Google Drive" />
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="h4 text-center mb-1">Google Drive</h2>
-            </div>
-          </article>
+      </section>
+
+      <section id="engines" class="section section--mint" style="--next-bg: var(--deep)">
+        <div class="section__content">
+          <div class="section-heading reveal">
+            <p class="eyebrow">eMeVerse harmony</p>
+            <h2>Four engines, one environment, zero platform dependency.</h2>
+            <p>
+              Each part of the system strengthens the others, creating a private loop between
+              memory, assistance, publishing, and creation.
+            </p>
+          </div>
+
+          <div class="engines-grid">
+            <article class="engine-card reveal">
+              <h3>eMemory</h3>
+              <p>
+                The intelligence foundation that captures and organizes your files, records,
+                experiences, and insights.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>eAssistant</h3>
+              <p>
+                A companion that answers with real context from your own archive, not borrowed
+                assumptions.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>ePublishing</h3>
+              <p>
+                Turn your stored knowledge into publishable output while keeping ownership in your
+                hands.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>eContent Creator</h3>
+              <p>
+                Generate authentic content from your perspective so the system amplifies your
+                voice instead of replacing it.
+              </p>
+            </article>
+          </div>
         </div>
-        <div class="js-slide mt-1">
-          <article class="card shadow-sm transition-3d-hover mx-auto mb-5">
-            <div class="card-header text-center rounded-top">
-              <div class="avatar d-flex align-items-center rounded p-2 mx-auto">
-                <img class="avatar-img" src="${communitylink}/theme/images/drupal.svg" alt="Drupal" data-toggle="tooltip"
-                  data-placement="bottom" title="Drupal" />
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="h4 text-center mb-1">Drupal</h2>
-            </div>
-          </article>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#0d2537" />
+                <stop offset="18%" stop-color="#132839" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#deepGrad)" />
+          </svg>
         </div>
-      </div>
-      <p class="text-center  fw-thin" style="font-size: 1.2rem;">
-        and many more...
-      </p>
-    </div> 
-  </div> 
-  <div class="space-2 bg-navy">
-    <div class="d-flex justify-content-center align-items-center space-2" data-aos="fade-right" data-aos-duration="1500">
- <iframe allowfullscreen="true" width="80%" style="height:600px;border:0px" mozallowfullscreen="true" src="https://entermediadb.org/entermediadb/mediadb/services/module/asset/players/play/AWojCykVBcRirzJYj_Vj.html" style="border: none;" webkitallowfullscreen="true"></iframe>
-    </div>
+      </section>
+
+      <section id="ownership" class="section section--deep" style="--next-bg: var(--sand)">
+        <div class="section__content ownership-layout">
+          <div class="ownership-panel glass reveal">
+            <p class="eyebrow eyebrow--light">Ownership and independence</p>
+            <h2>The archive belongs to you. The infrastructure does too.</h2>
+            <p>
+              eMe is designed for people and teams who want durable intelligence without handing
+              over their memory, business context, or publishing future.
+            </p>
+          </div>
+
+          <div class="ownership-list">
+            <article class="ownership-item reveal">
+              <h3>Fully open source</h3>
+              <p>Your tools cannot be taken away or switched off by someone else’s roadmap.</p>
+            </article>
+            <article class="ownership-item reveal">
+              <h3>Self-hosted freedom</h3>
+              <p>Run locally or in efficient data centers with complete control over access.</p>
+            </article>
+            <article class="ownership-item reveal">
+              <h3>Your catalog of truth</h3>
+              <p>Build a knowledge base shaped by human input and curation, not platform feeds.</p>
+            </article>
+            <article class="ownership-item reveal">
+              <h3>Energy efficient and eternal</h3>
+              <p>Designed for sustainable long-term operation without subscriptions or lock-in.</p>
+            </article>
+          </div>
+        </div>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="sand" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#f8e8dd" />
+                <stop offset="18%" stop-color="#f8f4ea" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#sand)" />
+          </svg>
+        </div>
+      </section>
+
+      <section id="cta" class="section section--sand section--cta">
+        <div class="section__content cta-card reveal">
+          <p class="eyebrow">Build your private memory system</p>
+          <h2>Stop renting access to your own knowledge.</h2>
+          <p>
+            eMe helps you collect the media, records, and insight you already have into a private
+            AI environment that remembers with you and works for you.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="#memory">See How It Works</a>
+            <a class="button button--ghost" href="#top">Back To Top</a>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-  <!-- <div class="space-2" id="contact">
-    <div class="mb-4 w-md-80 mx-md-auto text-center">
-      <h2>Contact Us</h2>
-      <h3>Fill out the form and we'll be in touch as soon as possible.</h3>
-    </div>
-    <form class="container js-validate">
-      <div class="w-md-80 mx-md-auto">
-        <div class="row mx-n2">
-          <div class="col-sm-6 px-2">
-            <div class="js-form-message form-group">
-              <label class="sr-only" for="firstName2">First name</label>
-              <input type="text" class="form-control" name="firstName2" id="firstName2"
-                placeholder="First name" aria-label="First name" required data-msg="Please enter first your name">
-            </div>
-          </div>
-          <div class="col-sm-6 px-2">
-            <div class="js-form-message form-group">
-              <label class="sr-only" for="lastName2">Last name</label>
-              <input type="text" class="form-control" name="lastName2" id="lastName2"
-                placeholder="Last name" aria-label="Last name" required data-msg="Please enter last your name">
-            </div>
-          </div>
-          <div class="col-sm-12 px-2">
-            <div class="js-form-message form-group">
-              <label class="sr-only" for="aboutProject">Tell us about your project</label>
-              <textarea class="form-control" rows="5" name="aboutProject" id="aboutProject"
-                placeholder="Tell us more about your project, needs, and timeline."
-                aria-label="Tell us more about your project, needs, and timeline." required data-msg="Please enter a reason."></textarea>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-sm btn-primary" style="max-width: 150px">Submit</button>
-      </div>
-    </form>
-  </div> -->
-  <hr class="opacity-sm my-0">
-</main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/MotionPathPlugin.min.js"></script>
+  <script src="./main.js"></script>
+  <script src="./animator.js"></script>
+</body>
+
+</html>

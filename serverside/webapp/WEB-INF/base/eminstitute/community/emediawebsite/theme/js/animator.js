@@ -45,15 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			transformOrigin: "center",
 			duration: 1,
 			ease: "bounce.out",
-		}
+		},
 	);
-	initTL.fromTo(
-		"#caption",
-		{ y: 200, opacity: 0 },
-		{ y: 50, opacity: 1, duration: 1 },
-		"<"
-	);
-	initTL.to("#caption", { y: 100, duration: 1, ease: "expo.in" }, "+=1");
+	// initTL.fromTo(
+	// 	"#caption",
+	// 	{ y: 200, opacity: 0 },
+	// 	{ y: 50, opacity: 1, duration: 1 },
+	// 	"<",
+	// );
+	// initTL.to("#caption", { y: 100, duration: 1, ease: "expo.in" }, "+=1");
 	initTL.to(
 		"#emlogo",
 		{
@@ -63,35 +63,32 @@ document.addEventListener("DOMContentLoaded", function () {
 			duration: 1,
 			ease: "expo.in",
 		},
-		"<"
+		"<",
 	);
-
-	gsap.to(".anBG", { opacity: 0, delay: 3 });
-	gsap.to(".anBG", { opacity: 0.05, delay: 18 });
 
 	initTL.set("#images", { opacity: 1 });
 	initTL.set("#folders", { opacity: 1 });
 
-	initTL.to("#intro_1", { opacity: 0, duration: 0.5 });
-	initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
+	// initTL.to("#intro_1", { opacity: 0, duration: 0.5 });
+	// initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
 
-	initTL.to("#intro_2", { opacity: 1, duration: 0.5 }, "+=2.2");
-	initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
+	// initTL.to("#intro_2", { opacity: 1, duration: 0.5 }, "+=2.2");
+	// initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
 
-	initTL.to("#intro_2", { opacity: 0, duration: 0.5 }, "+=4");
-	initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
+	// initTL.to("#intro_2", { opacity: 0, duration: 0.5 }, "+=4");
+	// initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
 
-	initTL.to("#intro_3", { opacity: 1, duration: 0.5 }, "+=1");
-	initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
+	// initTL.to("#intro_3", { opacity: 1, duration: 0.5 }, "+=1");
+	// initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
 
-	initTL.to("#intro_3", { opacity: 0, duration: 0.5 }, "+=3");
-	initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
+	// initTL.to("#intro_3", { opacity: 0, duration: 0.5 }, "+=3");
+	// initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
 
-	initTL.to("#intro_4", { opacity: 1, duration: 0.5 }, "+=1");
-	initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
+	// initTL.to("#intro_4", { opacity: 1, duration: 0.5 }, "+=1");
+	// initTL.to("#intro_rect", { opacity: 1, duration: 0.5 }, "<");
 
-	initTL.to("#intro_4", { opacity: 0, duration: 0.5 }, "+=2");
-	initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
+	// initTL.to("#intro_4", { opacity: 0, duration: 0.5 }, "+=2");
+	// initTL.to("#intro_rect", { opacity: 0, duration: 0.5 }, "<");
 
 	var images = document.querySelectorAll("#images image");
 
@@ -114,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					image.classList.add("glow");
 				},
 			},
-			"-=0.85"
+			"-=0.85",
 		);
 	});
 	images.forEach((image, i) => {
@@ -147,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				yoyo: true,
 				ease: "none",
 			},
-			"-=4.75"
+			"-=4.75",
 		);
 	});
 
@@ -168,20 +165,20 @@ document.addEventListener("DOMContentLoaded", function () {
 			endTL.to(
 				"#emlogo",
 				{
-					y: -500,
-					scale: 0.8,
+					// y: -500,
+					scale: 2.5,
 					transformOrigin: "center",
 					duration: 1,
 					ease: "expo.in",
 				},
-				"<"
+				"<",
 			);
-			endTL.to("#introHero", { y: -50, opacity: 1, duration: 1 }, "+=0.5");
-			endTL.to(
-				"#introHero text",
-				{ opacity: 1, stagger: 0.1, duration: 0.25 },
-				"<"
-			);
+			// endTL.to("#introHero", { y: -50, opacity: 1, duration: 1 }, "+=0.5");
+			// endTL.to(
+			// 	"#introHero text",
+			// 	{ opacity: 1, stagger: 0.1, duration: 0.25 },
+			// 	"<",
+			// );
 		},
 	});
 	var folders = [
@@ -204,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				},
 				ease: "none",
 			},
-			"<"
+			"<",
 		);
 	}
 
@@ -270,14 +267,14 @@ document.addEventListener("DOMContentLoaded", function () {
 						img.remove();
 					},
 				},
-				"-=0.75"
+				"-=0.75",
 			);
 			if (idx === 0) {
 				imTL.fromTo(
 					cc.target,
 					{ scale: 1.1 },
 					{ scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" },
-					"-=0.2"
+					"-=0.2",
 				);
 			}
 		});
@@ -294,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				duration: 30,
 				yPercent: 0,
 				ease: "none",
-			}
+			},
 		);
 		bgTl.fromTo(
 			"#bg2",
@@ -306,13 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				yPercent: 100,
 				ease: "none",
 			},
-			"<"
+			"<",
 		);
-	});
-	$("#createOwn").click(function () {
-		window.location.href = "/builder/";
-	});
-	$("#freeLibs").click(function () {
-		window.location.href = "/libraries/";
 	});
 });
