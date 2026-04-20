@@ -115,13 +115,20 @@ h2 {
 	height: 40px;
 	margin: 0 12px;
 }
-
+.hero-bg img {
+	transform: scale(1.2);
+	width: 100vw;
+	height: 100vh;
+	opacity: 0.05;
+	object-fit: contain;
+	position: absolute;
+}
 .site-nav {
 	display: inline-flex;
 	align-items: center;
 	gap: 1.5rem;
 	color: var(--muted);
-	font-size: 0.95rem;
+	font-size: 1.15rem;
 }
 
 .site-nav a:hover,

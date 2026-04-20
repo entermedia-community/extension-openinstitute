@@ -278,32 +278,5 @@ document.addEventListener("DOMContentLoaded", function () {
 				);
 			}
 		});
-
-		gsap.to("#bg1", { duration: 3 });
-		gsap.to("#bg2", { duration: 3 });
-		var bgTl = gsap.timeline({ repeat: -1 });
-		bgTl.fromTo(
-			"#bg1",
-			{
-				yPercent: -100,
-			},
-			{
-				duration: 30,
-				yPercent: 0,
-				ease: "none",
-			},
-		);
-		bgTl.fromTo(
-			"#bg2",
-			{
-				yPercent: 0,
-			},
-			{
-				duration: 30,
-				yPercent: 100,
-				ease: "none",
-			},
-			"<",
-		);
 	});
 });
