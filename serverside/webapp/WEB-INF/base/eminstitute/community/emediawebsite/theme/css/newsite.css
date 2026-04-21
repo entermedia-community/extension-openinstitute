@@ -31,16 +31,12 @@ body {
 	font-family: "Manrope", sans-serif !important;
 	color: var(--ink);
 	background:
-		radial-gradient(
-			circle at top left,
+		radial-gradient(circle at top left,
 			rgba(245, 191, 83, 0.2),
-			transparent 30%
-		),
-		radial-gradient(
-			circle at top right,
+			transparent 30%),
+		radial-gradient(circle at top right,
 			rgba(100, 190, 170, 0.18),
-			transparent 32%
-		),
+			transparent 32%),
 		var(--paper);
 }
 
@@ -78,9 +74,11 @@ h2 {
 	background: transparent !important;
 	box-shadow: none !important;
 }
+
 #spirals path {
 	display: none;
 }
+
 .site-header::before {
 	content: "";
 	position: absolute;
@@ -110,15 +108,18 @@ h2 {
 	color: var(--sand);
 	background: linear-gradient(135deg, var(--deep-soft), var(--coral));
 }
+
 .brand__logo {
 	width: auto;
 	height: 40px;
 	margin: 0 12px;
 }
+
 .hero-bg {
 	user-select: none;
 	pointer-events: none;
 }
+
 .hero-bg img {
 	transform: scale(1.2);
 	width: 100vw;
@@ -127,6 +128,7 @@ h2 {
 	object-fit: contain;
 	position: absolute;
 }
+
 .site-nav {
 	display: inline-flex;
 	align-items: center;
@@ -177,6 +179,7 @@ h2 {
 	bottom: 0;
 	height: 130px;
 }
+
 .wave-bottom svg {
 	display: block;
 	width: 100%;
@@ -207,11 +210,9 @@ h2 {
 
 .section--mint {
 	background:
-		radial-gradient(
-			circle at bottom left,
+		radial-gradient(circle at bottom left,
 			rgba(18, 52, 77, 0.08),
-			transparent 24%
-		),
+			transparent 24%),
 		var(--mint);
 }
 
@@ -265,8 +266,8 @@ h2 {
 }
 
 .hero {
-	min-height: calc(100vh + 1px);
-	padding-top: 8.5rem;
+	min-height: calc(50vh + 1px);
+	padding-top: 6.5rem;
 }
 
 .hero__grid {
@@ -452,11 +453,9 @@ h2 {
 .engine-card {
 	min-height: 17rem;
 	background:
-		linear-gradient(
-			180deg,
+		linear-gradient(180deg,
 			rgba(255, 255, 255, 0.62),
-			rgba(255, 255, 255, 0.4)
-		),
+			rgba(255, 255, 255, 0.4)),
 		rgba(255, 255, 255, 0.55);
 }
 
@@ -504,6 +503,7 @@ h2 {
 }
 
 @media (max-width: 1080px) {
+
 	.hero__grid,
 	.archive-layout,
 	.ownership-layout,

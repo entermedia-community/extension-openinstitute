@@ -24,14 +24,7 @@
         <img class="brand__logo" src="$communityhome/theme/images/logo.svg" alt="eMe logo" />
       </a>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="#memory">Memory</a>
-        <a href="#archive">Archive</a>
-        <a href="#engines">Engines</a>
-        <a href="#ownership">Ownership</a>
-      </nav>
-
-      <a class="button button--ghost" href="#cta">Request Access</a>
+      $pages.include("${communityhome}/navigation.html")
     </header>
 
     
@@ -43,19 +36,25 @@
         </div>
         <div class="section__content hero__grid">
           <div class="hero__copy">
-            <p class="eyebrow reveal">Private AI memory infrastructure</p>
+            <p class="eyebrow reveal">Designed for Your Digital Freedom</p>
             <h1 class="hero__title reveal">
-              From information slurry to a living archive that thinks with you.
+              Your Digital AI Twin That You Own Forever             
             </h1>
             <p class="hero__lede reveal">
-              eMe automatically collects, organizes, and activates your digital memory so you can
-              retrieve truth faster, reduce cognitive overload, and stay in full control of your
-              data.
+             eME is your customizable, open, AI memory for individuals and teams to manage and trully own their digital memory, business processes,
+              and creative catalog. 
+              <br>
+              Benefits include <b>More Efficiency</b>, <b>Cognitive Clarity</b>, <b>More Privacy</b>,  <b>More Free Time</b> and <b>Increased Valuation</b>  
+              for your organization, all running on the server of your choice.
+
+      ##              without renting access to someone else’s platform or roadmap. 
+
+              ##eMe automatically collects, organizes, and activates your digital memory so you can               retrieve truth faster, reduce cognitive overload, and stay in full control of your              data.
             </p>
 
             <div class="hero__actions reveal">
-              <a class="button" href="#cta">Build Your eMemory</a>
-              <a class="button button--ghost button--light" href="#engines">Explore The System</a>
+              <a class="button" href="#cta">Build your private eME Server</a>
+              ##<a class="button button--ghost button--light" href="#engines">Explore The System</a>
             </div>
             
           </div>
@@ -82,11 +81,12 @@
         </div>
       </section>
 
-      <section id="memory" class="section section--sand" style="--next-bg: var(--paper)">
+
+      <section id="memory" class="section section--sand" style="--next-bg:  var(--paper)">
         <div class="section__content">
           <div class="section-heading reveal">
             <p class="eyebrow">Reducing cognitive overload</p>
-            <h2>Bring scattered inputs into one calm, searchable memory layer.</h2>
+            <h2>Have Your Own Autonomous AI Powered Server.</h2>
             <p>
               eMe turns disconnected files, notes, recordings, and company history into a unified
               catalog you can question like a specialist instead of hunting through tabs.
@@ -127,17 +127,74 @@
                 <stop offset="18%" stop-color="#f4f2ef" />
               </linearGradient>
             </defs>
-            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#paperGrad)" />
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--mint)" />
           </svg>
         </div>
       </section>
 
-      <section id="archive" class="section section--paper" style="--next-bg: var(--mint)">
+
+        <section id="engines" class="section section--mint" style="--next-bg: var(--deep)">
+        <div class="section__content">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Personal business assistant</p>
+            <h2>Extendable Agent Automation</h2>
+            <p>
+              Each part of the system strengthens the others, creating private loops between
+              memory, assistance, publishing, creation and custom agents.
+            </p>
+          </div>
+
+          <div class="engines-grid">
+            <article class="engine-card reveal">
+              <h3>eMemory</h3>
+              <p>
+                The intelligence foundation that captures and organizes your files, records,
+                experiences, and insights.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>eAssistant</h3>
+              <p>
+                A companion that answers with real context from your own archive, not borrowed
+                assumptions.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>ePublishing</h3>
+              <p>
+                Turn your stored knowledge into publishable output while keeping ownership in your
+                hands.
+              </p>
+            </article>
+            <article class="engine-card reveal">
+              <h3>eContent Creator</h3>
+              <p>
+                Generate authentic content from your perspective so the system amplifies your
+                voice instead of replacing it.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#0d2537" />
+                <stop offset="18%" stop-color="#132839" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--paper)" />
+          </svg>
+        </div>
+      </section>
+
+
+      <section id="archive" class="section section--paper" style="--next-bg: var(--deep)">
         <div class="section__content archive-layout">
           <div class="archive-copy">
             <div class="section-heading reveal">
-              <p class="eyebrow">Personal business assistant</p>
-              <h2>A universal archival catalog across every format that matters.</h2>
+                <p class="eyebrow">eMEVerse harmony</p>
+              <h2>Archival storage of all your knowledge.</h2>
               <p>
                 Feed eMe your history, media, business records, and structured systems. It parses,
                 transcribes, indexes, and connects everything into one private knowledge base.
@@ -190,65 +247,11 @@
         </div>
         <div class="wave-bottom">
           <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
-            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#dceee6" />
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--ink)" />
           </svg>
         </div>
       </section>
 
-      <section id="engines" class="section section--mint" style="--next-bg: var(--deep)">
-        <div class="section__content">
-          <div class="section-heading reveal">
-            <p class="eyebrow">eMeVerse harmony</p>
-            <h2>Four engines, one environment, zero platform dependency.</h2>
-            <p>
-              Each part of the system strengthens the others, creating a private loop between
-              memory, assistance, publishing, and creation.
-            </p>
-          </div>
-
-          <div class="engines-grid">
-            <article class="engine-card reveal">
-              <h3>eMemory</h3>
-              <p>
-                The intelligence foundation that captures and organizes your files, records,
-                experiences, and insights.
-              </p>
-            </article>
-            <article class="engine-card reveal">
-              <h3>eAssistant</h3>
-              <p>
-                A companion that answers with real context from your own archive, not borrowed
-                assumptions.
-              </p>
-            </article>
-            <article class="engine-card reveal">
-              <h3>ePublishing</h3>
-              <p>
-                Turn your stored knowledge into publishable output while keeping ownership in your
-                hands.
-              </p>
-            </article>
-            <article class="engine-card reveal">
-              <h3>eContent Creator</h3>
-              <p>
-                Generate authentic content from your perspective so the system amplifies your
-                voice instead of replacing it.
-              </p>
-            </article>
-          </div>
-        </div>
-        <div class="wave-bottom">
-          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
-            <defs>
-              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
-                <stop offset="0%" stop-color="#0d2537" />
-                <stop offset="18%" stop-color="#132839" />
-              </linearGradient>
-            </defs>
-            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#deepGrad)" />
-          </svg>
-        </div>
-      </section>
 
       <section id="ownership" class="section section--deep" style="--next-bg: var(--sand)">
         <div class="section__content ownership-layout">
