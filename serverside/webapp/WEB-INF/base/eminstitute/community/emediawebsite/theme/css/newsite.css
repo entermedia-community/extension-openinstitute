@@ -1,12 +1,12 @@
 :root {
-	--deep: #0b1f2e;
-	--deep-soft: #12344d;
+	--deep: #344700;
+	--deep-soft: #445d00;
 	--sand: #f8f4ea;
 	--paper: #fffdf8;
 	--mint: #dceee6;
 	--gold: #f5bf53;
 	--coral: #f48f75;
-	--ink: #10202d;
+	--ink: #445d00;
 	--muted: #5d6b76;
 	--line: rgba(16, 32, 45, 0.1);
 	--shadow: 0 32px 80px rgba(9, 21, 31, 0.18);
@@ -14,11 +14,11 @@
 	--radius-lg: 24px;
 	--radius-md: 18px;
 	--container: min(1180px, calc(100vw - 2rem));
-	--panel: rgba(255, 255, 255, 0.7);
+	--panel: rgb(249 255 231 / 20%);
 	--accent: #f5bf53;
 	--accent-soft: #f4a971;
 	--user: #ffffff;
-	--bot: #2c4c66;
+	--bot: #b4df70;
 	--msg-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
 }
 
@@ -36,9 +36,6 @@ body {
 	margin: 0;
 	font-family: "Manrope", sans-serif !important;
 	color: var(--ink);
-	background:
-		radial-gradient(circle at top left, #e0f4cf, transparent 30%),
-		radial-gradient(circle at top right, #94c809, transparent 32%), var(--paper);
 }
 
 img {
@@ -158,8 +155,8 @@ h2 {
 	padding: 0.9rem 1.35rem;
 	border-radius: 999px;
 	border: 1px solid transparent;
-	background: linear-gradient(135deg, var(--gold), #f8d788) !important;
-	box-shadow: 0 14px 35px rgba(244, 143, 117, 0.24) !important;
+	background: linear-gradient(135deg, #c2ee9e, rgb(148, 200, 9)) !important;
+	box-shadow: 0 14px 35px rgba(148, 200, 9, 0.24) !important;
 	color: var(--ink) !important;
 	font-weight: 700;
 }
@@ -189,7 +186,7 @@ h2 {
 .chat-shell {
 	width: min(900px, 100%);
 	min-height: min(80vh, 600px);
-	border: 1px solid var(--line);
+	border: 2px solid #e9ffae;
 	border-radius: 28px;
 	background: var(--panel);
 	box-shadow: var(--shadow);
@@ -212,6 +209,7 @@ h2 {
 	margin: 0;
 	font-family: "Bree Serif", serif;
 	font-size: clamp(1rem, 2.8vw, 1.25rem);
+	color: #445d00;
 }
 
 .chat-subtitle {
@@ -239,11 +237,8 @@ h2 {
 	flex-direction: column;
 	gap: 0.8rem;
 	scroll-behavior: smooth;
-	background-color: rgba(255, 255, 255, 0.86);
+	background-color: #ffffff;
 	max-height: 400px;
-}
-
-.chat-messages {
 	overflow: auto;
 	scrollbar-width: thin;
 	scrollbar-color: #e0e0e0 #fff;
@@ -275,7 +270,7 @@ h2 {
 
 .msg.assistant {
 	align-self: flex-start;
-	color: #f6f8fa;
+	color: var(--ink);
 	background: var(--bot);
 	border: 1px solid rgba(16, 32, 45, 0.08);
 }
@@ -343,7 +338,7 @@ h2 {
 	padding: 0.78rem 0.85rem;
 	outline: none;
 	line-height: 1.45;
-	background: #fff;
+	background: #ffffff;
 }
 
 .chat-input textarea:focus {
@@ -358,8 +353,6 @@ h2 {
 	width: 100px;
 	height: 40px;
 	border-radius: 20px;
-	background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-	color: #132637;
 	font: inherit;
 	font-weight: 800;
 	padding: 0.8rem 1.2rem;
@@ -410,7 +403,7 @@ h2 {
 	max-width: 7.5rem;
 }
 #footer .nav-link {
-	color: var(--paper);
+	color: var(--ink);
 	padding: 0.25rem 0;
 	font-size: 0.95rem;
 	margin-bottom: 0.25rem;
@@ -436,12 +429,12 @@ h2 {
 }
 
 .section--deep {
-	color: var(--paper) !important;
-	background: linear-gradient(180deg, #0d2537, #132839);
+	color: #445d00 !important;
+	background: linear-gradient(180deg, rgba(229, 248, 178, 0.8), #fcfcfc);
 }
 
 .section--deep .eyebrow {
-	color: rgba(248, 244, 234, 0.68);
+	color: #445d00;
 }
 
 .section--sand {
@@ -519,7 +512,7 @@ h2 {
 .hero__grid {
 	display: grid;
 	grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-	align-items: center;
+	align-items: start;
 	gap: 3.5rem;
 }
 
@@ -531,7 +524,7 @@ h2 {
 .hero__lede {
 	max-width: 38rem;
 	margin: 1.6rem 0 0;
-	color: rgba(248, 244, 234, 0.78);
+	color: #445d00;
 }
 
 .hero__actions {
@@ -556,11 +549,16 @@ h2 {
 	border-radius: 999px;
 	background: rgba(255, 255, 255, 0.05);
 	color: rgba(248, 244, 234, 0.9);
+	width: 100vw;
 }
 
 .hero__visual {
 	position: relative;
 	min-height: 38rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 6rem;
 }
 
 .hero-card,
@@ -825,10 +823,6 @@ h2 {
 		font-size: clamp(3rem, 14vw, 4.6rem);
 	}
 
-	.hero__visual {
-		min-height: auto;
-	}
-
 	.hero-card--primary,
 	.hero-card--secondary {
 		position: relative;
@@ -877,10 +871,9 @@ h2 {
 }
 
 svg#animation {
-	position: absolute;
+	/* position: absolute; */
 	/* background-color: red; */
 	width: 800px;
-	z-index: -1;
 }
 @media (max-width: 850px) {
 	.hero__visual {
