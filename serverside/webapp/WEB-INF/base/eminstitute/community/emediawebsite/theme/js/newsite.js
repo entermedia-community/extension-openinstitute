@@ -3,6 +3,101 @@ document.addEventListener("DOMContentLoaded", function () {
 		"(prefers-reduced-motion: reduce)",
 	).matches;
 
+	const chatMessages = document.getElementById("chatMessages");
+	const chatForm = document.getElementById("chatForm");
+	const chatBox = document.getElementById("chatBox");
+	const firstMessage = document.getElementById("firstMessage");
+	const choiceButtons = firstMessage.querySelectorAll(".choice");
+
+	const starterThreads = {
+		Personal: [
+			{ role: "user", text: "Create a Personal eMe" },
+			{
+				role: "assistant",
+				text: "Great choice. We will prioritize private notes, media memories, and reflection prompts.",
+			},
+			{
+				role: "user",
+				text: "I want weekly summaries and better recall of my notes.",
+			},
+			{
+				role: "assistant",
+				text: "Perfect. I will set your first workflow as: capture, summarize weekly, and surface key moments every Monday.",
+			},
+		],
+		Commercial: [
+			{ role: "user", text: "Create a Commercial eMe" },
+			{
+				role: "assistant",
+				text: "Great. We will begin with team knowledge, SOPs, and role-based access controls.",
+			},
+			{
+				role: "user",
+				text: "Start with onboarding docs and support transcripts.",
+			},
+			{
+				role: "assistant",
+				text: "Excellent. I will create a workspace for onboarding and customer support with searchable response templates.",
+			},
+		],
+	};
+
+	function appendMessage(role, text) {
+		const bubble = document.createElement("article");
+		bubble.className = `msg ${role}`;
+		bubble.textContent = text;
+		chatMessages.appendChild(bubble);
+		chatMessages.scrollTop = chatMessages.scrollHeight;
+	}
+
+	function playThread(mode) {
+		const selected = starterThreads[mode] || [];
+		let delay = 120;
+
+		selected.forEach((item) => {
+			delay += item.role === "assistant" ? 520 : 260;
+			setTimeout(() => appendMessage(item.role, item.text), delay);
+		});
+	}
+
+	choiceButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			if (firstMessage.dataset.locked === "true") {
+				return;
+			}
+
+			const mode = button.dataset.mode;
+			firstMessage.dataset.locked = "true";
+
+			choiceButtons.forEach((choice) => {
+				choice.classList.toggle("active", choice === button);
+				choice.disabled = true;
+			});
+
+			playThread(mode);
+			chatBox.focus();
+		});
+	});
+
+	chatForm.addEventListener("submit", (event) => {
+		event.preventDefault();
+		const text = chatBox.value.trim();
+
+		if (!text) {
+			return;
+		}
+
+		appendMessage("user", text);
+		chatBox.value = "";
+
+		setTimeout(() => {
+			appendMessage(
+				"assistant",
+				"Received. I can turn that into onboarding steps, priorities, and your first AI memory routines.",
+			);
+		}, 360);
+	});
+
 	if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {
 		gsap.registerPlugin(ScrollTrigger);
 
