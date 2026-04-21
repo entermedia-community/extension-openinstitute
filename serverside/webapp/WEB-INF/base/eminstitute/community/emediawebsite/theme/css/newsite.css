@@ -31,12 +31,16 @@ body {
 	font-family: "Manrope", sans-serif !important;
 	color: var(--ink);
 	background:
-		radial-gradient(circle at top left,
+		radial-gradient(
+			circle at top left,
 			rgba(245, 191, 83, 0.2),
-			transparent 30%),
-		radial-gradient(circle at top right,
+			transparent 30%
+		),
+		radial-gradient(
+			circle at top right,
 			rgba(100, 190, 170, 0.18),
-			transparent 32%),
+			transparent 32%
+		),
 		var(--paper);
 }
 
@@ -68,8 +72,9 @@ h2 {
 	justify-content: space-between;
 	gap: 1.25rem;
 	width: var(--container);
+	max-width: calc(100vw - 4rem);
 	margin: 0 auto;
-	padding: 1rem 0;
+	padding: 0.75rem 0 0.75rem 0.25rem;
 	mix-blend-mode: normal;
 	background: transparent !important;
 	box-shadow: none !important;
@@ -82,12 +87,18 @@ h2 {
 .site-header::before {
 	content: "";
 	position: absolute;
-	inset: 0 -1rem;
+	inset: 0 -0.75rem;
 	background: rgba(255, 253, 248, 0.7);
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	border-radius: 999px;
 	backdrop-filter: blur(20px);
 	z-index: -1;
+}
+
+.site-header .navbar-nav {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .brand {
@@ -156,6 +167,11 @@ h2 {
 	font-weight: 700;
 }
 
+.navbar-nav .button {
+	padding: 0.5rem 1rem;
+	min-height: auto;
+}
+
 .button--ghost {
 	border-color: rgba(16, 32, 45, 0.14);
 	background: transparent;
@@ -170,6 +186,20 @@ h2 {
 .section {
 	position: relative;
 	padding: 4rem 0 12rem;
+}
+#footer.section {
+	padding: 6rem 0 4rem;
+}
+
+#footer .brand {
+	width: 100%;
+	max-width: 7.5rem;
+}
+#footer .nav-link {
+	color: var(--paper);
+	padding: 0.25rem 0;
+	font-size: 0.95rem;
+	margin-bottom: 0.25rem;
 }
 
 .wave-bottom {
@@ -210,9 +240,11 @@ h2 {
 
 .section--mint {
 	background:
-		radial-gradient(circle at bottom left,
+		radial-gradient(
+			circle at bottom left,
 			rgba(18, 52, 77, 0.08),
-			transparent 24%),
+			transparent 24%
+		),
 		var(--mint);
 }
 
@@ -453,9 +485,11 @@ h2 {
 .engine-card {
 	min-height: 17rem;
 	background:
-		linear-gradient(180deg,
+		linear-gradient(
+			180deg,
 			rgba(255, 255, 255, 0.62),
-			rgba(255, 255, 255, 0.4)),
+			rgba(255, 255, 255, 0.4)
+		),
 		rgba(255, 255, 255, 0.55);
 }
 
@@ -503,7 +537,6 @@ h2 {
 }
 
 @media (max-width: 1080px) {
-
 	.hero__grid,
 	.archive-layout,
 	.ownership-layout,
@@ -533,16 +566,35 @@ h2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
-
+@media (max-width: 991px) {
+	.site-header .navbar-toggler {
+		border: none !important;
+		font-size: 20px;
+	}
+	.navbar-toggler:focus {
+		box-shadow: none !important;
+	}
+	.site-header .navbar-collapse {
+		position: absolute;
+		right: 14px;
+		top: 50px;
+		width: max-content;
+		padding: 16px;
+		background: rgba(255, 253, 248, 0.7);
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		backdrop-filter: blur(20px);
+		border-radius: 16px;
+	}
+}
 @media (max-width: 720px) {
 	.site-header {
 		width: min(100vw - 1rem, var(--container));
 		gap: 0.75rem;
+		padding: 0.75rem 0.85rem;
 	}
 
 	.site-header::before {
 		inset: 0;
-		border-radius: 24px;
 	}
 
 	.hero__actions .button,
@@ -614,4 +666,12 @@ svg#animation {
 	/* background-color: red; */
 	width: 800px;
 	z-index: -1;
+}
+@media (max-width: 850px) {
+	.hero__visual {
+		display: none;
+	}
+	.anBG {
+		display: none;
+	}
 }

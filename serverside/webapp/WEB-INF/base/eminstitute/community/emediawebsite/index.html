@@ -178,12 +178,12 @@
         <div class="wave-bottom">
           <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
             <defs>
-              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
-                <stop offset="0%" stop-color="#0d2537" />
-                <stop offset="18%" stop-color="#132839" />
+              <linearGradient id="paperGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#fffcf7" />
+                <stop offset="18%" stop-color="#f4f2ef" />
               </linearGradient>
             </defs>
-            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--paper)" />
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#paperGrad)" />
           </svg>
         </div>
       </section>
@@ -247,7 +247,13 @@
         </div>
         <div class="wave-bottom">
           <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
-            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--ink)" />
+            <defs>
+              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#0d2537" />
+                <stop offset="18%" stop-color="#132839" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#deepGrad)" />
           </svg>
         </div>
       </section>
@@ -309,7 +315,21 @@
             <a class="button button--ghost" href="#top">Back To Top</a>
           </div>
         </div>
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> 
+            <defs>
+              <linearGradient id="deepGrad" x1="0" y1="0" x2="100%" y2="100%" gradientUnits="userSpaceOnUse" gradientTransform="rotate(180)">
+                <stop offset="0%" stop-color="#0d2537" />
+                <stop offset="18%" stop-color="#132839" />
+              </linearGradient>
+            </defs>
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="url(#deepGrad)" />
+          </svg>
+        </div>
       </section>
+
+      $pages.include("${communityhome}/footer.html")
+
     </main>
   </div>
 
