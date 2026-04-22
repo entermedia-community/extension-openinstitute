@@ -106,17 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			opacity: 0,
 		});
 
-		gsap.to(".site-header", {
-			y: 16,
-			opacity: 1,
-			duration: 0.8,
-			ease: "power2.out",
-			scrollTrigger: {
-				trigger: ".site-header",
-				start: "top top",
-				scrub: true,
-			},
-		});
+		// gsap.to(".site-header", {
+		// 	y: 16,
+		// 	opacity: 1,
+		// 	duration: 0.8,
+		// 	ease: "power2.out",
+		// 	scrollTrigger: {
+		// 		trigger: ".site-header",
+		// 		start: "top top",
+		// 		scrub: true,
+		// 	},
+		// });
 
 		// gsap.to(".site-header", {
 		// 	y: 0,

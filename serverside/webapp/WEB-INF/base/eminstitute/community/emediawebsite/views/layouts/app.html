@@ -13,7 +13,8 @@
   <meta name="description" content="$content.description">
   <meta name="keywords" content="$content.keywords">
   <meta name="og:title" content="$title">
-  <meta name="og:description" content="$content.description">
+  <meta name="description"
+    content="eMe turns scattered personal and business data into a private, searchable digital memory that stays fully under your control." />
   <meta name="og:image" content="https://emedialibrary.org/theme/emedia-banner.png"> <!-- This needs to be full URL -->
   <meta name="og:url" content="https://emedialibrary.org">
   <meta name="og:site_name" content="eMediaLibrary">
@@ -63,15 +64,19 @@
 			$pages.include("${communityhome}/components/sidebars/user/index.html")
 		#end
 
-    ##$pages.include("${communityhome}/views/layouts/header.html")
-    $pages.includeContent()
-    ##$pages.include("${communityhome}/views/layouts/footer.html")
+    <div class="page-shell">
+
+      $pages.include("${communityhome}/views/layouts/header.html")
+      $pages.includeContent()
+      $pages.include("${communityhome}/views/layouts/footer.html")
+    </div>
 
   </div>
   
   
   
   <script src="${communityhome}/theme/js/gsap.min.js"></script>
+  <script src="${communityhome}/theme/js/ScrollTrigger.min.js"></script>
   <script src="${communityhome}/theme/js/MotionPathPlugin.min.js"></script>
   <script src="${communityhome}/theme/js/animator.js"></script> 
   <script src="${communityhome}/theme/js/newsite.js"></script> 

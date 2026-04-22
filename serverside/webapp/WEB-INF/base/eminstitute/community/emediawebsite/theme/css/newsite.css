@@ -14,11 +14,11 @@
 	--radius-lg: 24px;
 	--radius-md: 18px;
 	--container: min(1180px, calc(100vw - 2rem));
-	--panel: rgb(249 255 231 / 20%);
+	--panel: #ecf8f1;
 	--accent: #f5bf53;
 	--accent-soft: #f4a971;
 	--user: #ffffff;
-	--bot: #b4df70;
+	--bot: #47bb78;
 	--msg-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
 }
 
@@ -35,6 +35,12 @@ html {
 body {
 	margin: 0;
 	font-family: "Manrope", sans-serif !important;
+	color: var(--ink);
+}
+
+h1,
+h2,
+h3 {
 	color: var(--ink);
 }
 
@@ -73,6 +79,13 @@ h2 {
 	background: transparent !important;
 	box-shadow: none !important;
 }
+.site-header .nav-link {
+	color: var(--paper);
+	font-size: 1rem;
+}
+.site-header .nav-link.active {
+	color: #7cc700;
+}
 
 #spirals path {
 	display: none;
@@ -80,11 +93,11 @@ h2 {
 
 .site-header::before {
 	content: "";
-	position: absolute;
-	inset: 0 -0.75rem;
-	background: rgba(255, 253, 248, 0.7);
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	border-radius: 999px;
+	position: fixed;
+	width: 100vw;
+	height: 80px;
+	left: 0;
+	background: rgba(60, 60, 60, 0.95);
 	backdrop-filter: blur(20px);
 	z-index: -1;
 }
@@ -104,19 +117,9 @@ h2 {
 	font-weight: 700;
 }
 
-.brand__mark {
-	display: grid;
-	place-items: center;
-	width: 2.5rem;
-	aspect-ratio: 1;
-	border-radius: 50%;
-	color: var(--sand);
-	background: linear-gradient(135deg, var(--deep-soft), var(--coral));
-}
-
 .brand__logo {
 	width: auto;
-	height: 40px;
+	height: 50px;
 	margin: 0 12px;
 }
 
@@ -154,11 +157,13 @@ h2 {
 	min-height: 3.2rem;
 	padding: 0.9rem 1.35rem;
 	border-radius: 999px;
-	border: 1px solid transparent;
-	background: linear-gradient(135deg, #c2ee9e, rgb(148, 200, 9)) !important;
+	background: linear-gradient(135deg, #8fd6ad, #37955e) !important;
 	box-shadow: 0 14px 35px rgba(148, 200, 9, 0.24) !important;
-	color: var(--ink) !important;
+	color: #ffffff !important;
 	font-weight: 700;
+}
+.button:hover {
+	background: linear-gradient(135deg, #37955e, #8fd6ad) !important;
 }
 
 .navbar-nav .button {
@@ -186,7 +191,7 @@ h2 {
 .chat-shell {
 	width: min(900px, 100%);
 	min-height: min(80vh, 600px);
-	border: 2px solid #e9ffae;
+	border: 2px solid rgb(195 233 211);
 	border-radius: 28px;
 	background: var(--panel);
 	box-shadow: var(--shadow);
@@ -270,7 +275,7 @@ h2 {
 
 .msg.assistant {
 	align-self: flex-start;
-	color: var(--ink);
+	color: var(--paper);
 	background: var(--bot);
 	border: 1px solid rgba(16, 32, 45, 0.08);
 }
@@ -408,13 +413,19 @@ h2 {
 	font-size: 0.95rem;
 	margin-bottom: 0.25rem;
 }
-
+.wave-top,
 .wave-bottom {
 	position: absolute;
 	right: 0;
 	left: 0;
-	bottom: 0;
 	height: 130px;
+}
+.wave-bottom {
+	bottom: 0;
+}
+.wave-top {
+	height: auto;
+	transform: translateY(-99%);
 }
 
 .wave-bottom svg {
@@ -882,4 +893,28 @@ svg#animation {
 	.anBG {
 		display: none;
 	}
+}
+.blog-list-page,
+#documentation,
+#pricing {
+	padding-bottom: 130px;
+}
+#pricing .media {
+	display: flex;
+	align-items: center;
+}
+#pricing .list-unstyled li {
+	text-align: left;
+}
+#pricing .list-unstyled span {
+	text-align: left;
+}
+#pricing .fa-check-circle {
+	color: #7cc700;
+}
+.font-size-4 {
+	font-size: 1.5rem;
+}
+.font-weight-bold {
+	font-weight: 700;
 }
