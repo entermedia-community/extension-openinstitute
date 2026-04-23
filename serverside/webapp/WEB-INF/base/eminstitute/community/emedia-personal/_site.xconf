@@ -6,9 +6,9 @@
   <property name="loginroot">${communityhome}/authentication</property>
 
   <property name="fallbackdirectory">../default</property>
-  <property name="communityhome">/${siteid}/community/emediawebsite</property>
+  <property name="communityhome">/${siteid}/community/emedia-personal</property>
 
-  <property name="communitytagcategory">emediawebsite</property>
+  <property name="communitytagcategory">emedia-personal</property>
 
   <property name="oisection">home</property>
 

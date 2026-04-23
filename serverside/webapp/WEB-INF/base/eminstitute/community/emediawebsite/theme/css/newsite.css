@@ -60,6 +60,13 @@ h2 {
 	color: inherit;
 }
 
+.offcanvas-open .pricing-nav,
+.offcanvas-open .blogs-nav,
+.offcanvas-open .libraries-nav,
+.offcanvas-open .schedule-nav {
+	display: none !important;
+}
+
 .page-shell {
 	overflow: clip;
 }
@@ -72,7 +79,7 @@ h2 {
 	align-items: center;
 	justify-content: space-between;
 	gap: 1.25rem;
-	width: calc(1600px - 64px);
+	width: min(calc(100% - 4rem), calc(1600px - 64px));
 	max-width: calc(100vw - 4rem);
 	margin: 0 auto;
 	mix-blend-mode: normal;
@@ -826,7 +833,7 @@ h2 {
 	}
 }
 .navbar-toggler {
-	color: white;
+	color: white !important;
 }
 @media (max-width: 991px) {
 	.site-header .navbar-toggler {
