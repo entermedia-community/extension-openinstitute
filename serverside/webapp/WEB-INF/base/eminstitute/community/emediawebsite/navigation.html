@@ -43,11 +43,19 @@
           </li> 
         #end
         #ifnotnull($user)
-          <li class="nav-item">
-            <a class="nav-link" href="$communitylink/authentication/logout.html" title="[[Logout]]">
-              <i class="ms-1 fs-small fas fa-sign-out-alt"></i>
+          <li class="nav-item dropdown">
+            <a class="btn text-white m-md-1 dropdown-toggle" 
+              href="#" role="button" data-bs-toggle="dropdown"
+              title="You are loged in as #text($user)">
+              <i class="fas fa-user"></i>
             </a>
-          </li>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="dropdown-item"><a href="$communitylink/account/">Profile</a></li>
+              <li class="dropdown-item"><a href="$communitylink/find/">Finder</a></li>
+              <div class="dropdown-divider"></div>
+              <li class="dropdown-item text-danger"><a href="$communitylink/authentication/logout.html">Logout</a></li>
+            </ul>
+          </li> 
         #end
       </ul>
     </div>
