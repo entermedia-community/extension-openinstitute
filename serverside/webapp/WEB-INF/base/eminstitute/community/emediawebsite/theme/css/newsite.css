@@ -75,7 +75,6 @@ h2 {
 	width: var(--container);
 	max-width: calc(100vw - 4rem);
 	margin: 0 auto;
-	padding: 0.75rem 0 0.75rem 0.25rem;
 	mix-blend-mode: normal;
 	background: transparent !important;
 	box-shadow: none !important;
@@ -110,9 +109,9 @@ h2 {
 	content: "";
 	position: fixed;
 	width: 100vw;
-	height: 80px;
-	left: 0;
+	height: 64px;
 	top: 0;
+	left: 0;
 	background: #0a172c;
 	backdrop-filter: blur(20px);
 	z-index: -1;
