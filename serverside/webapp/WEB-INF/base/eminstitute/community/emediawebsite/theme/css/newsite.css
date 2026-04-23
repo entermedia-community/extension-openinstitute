@@ -112,6 +112,7 @@ h2 {
 	width: 100vw;
 	height: 80px;
 	left: 0;
+	top: 0;
 	background: #0a172c;
 	backdrop-filter: blur(20px);
 	z-index: -1;
