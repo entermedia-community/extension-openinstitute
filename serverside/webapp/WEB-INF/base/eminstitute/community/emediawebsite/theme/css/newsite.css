@@ -561,6 +561,11 @@ h2 {
 	min-height: calc(100vh + 10px);
 	padding-top: 6.5rem;
 }
+@media (min-width: 1921px) {
+	.hero {
+		min-height: calc(100vh + 40px);
+	}
+}
 
 .hero__grid {
 	display: flex;
