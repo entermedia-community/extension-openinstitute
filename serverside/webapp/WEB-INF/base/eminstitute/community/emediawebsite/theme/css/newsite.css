@@ -617,7 +617,7 @@ h2 {
 .hero-card,
 .mosaic-card {
 	overflow: hidden;
-	border-radius: var(--radius-xl);
+	border-radius: 8px;
 	box-shadow: var(--shadow);
 }
 
@@ -731,17 +731,13 @@ h2 {
 }
 
 .mosaic {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 4rem;
 }
 
 .mosaic-card:nth-child(1) {
 	margin-top: 2rem;
-}
-
-.mosaic-card:nth-child(3) {
-	margin-top: -2rem;
 }
 
 .engines-grid {
@@ -826,8 +822,7 @@ h2 {
 		left: 1rem;
 	}
 
-	.ownership-list,
-	.mosaic {
+	.ownership-list {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
