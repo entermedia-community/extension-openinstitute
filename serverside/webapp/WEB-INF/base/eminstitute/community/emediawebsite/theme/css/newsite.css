@@ -13,7 +13,7 @@
 	--radius-xl: 32px;
 	--radius-lg: 24px;
 	--radius-md: 18px;
-	--container: min(1180px, calc(100vw - 2rem));
+	--container: min(1600px, calc(100vw - 2rem));
 	--panel: #ecf8f1;
 	--accent: #f5bf53;
 	--accent-soft: #f4a971;
@@ -72,7 +72,7 @@ h2 {
 	align-items: center;
 	justify-content: space-between;
 	gap: 1.25rem;
-	width: var(--container);
+	width: calc(1600px - 64px);
 	max-width: calc(100vw - 4rem);
 	margin: 0 auto;
 	mix-blend-mode: normal;
@@ -126,16 +126,19 @@ h2 {
 .brand {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.7rem;
-	font-family: "Bree Serif", serif !important;
-	font-size: 1.1rem;
-	font-weight: 700;
+	font-family: Arial, "Bree Serif", serif !important;
+	font-size: 2rem;
+	font-style: italic;
+	color: var(--paper);
+}
+.brand:hover {
+	color: var(--paper);
 }
 
 .brand__logo {
 	width: auto;
 	height: 50px;
-	margin: 0 12px;
+	margin: 0 8px;
 }
 
 .hero-bg {
@@ -688,7 +691,7 @@ h2 {
 .cta-card {
 	border: 1px solid var(--line);
 	border-radius: var(--radius-lg);
-	background: rgba(255, 255, 255, 0.55);
+	background: rgba(255, 255, 255, 0.75);
 }
 
 .feature-card,
@@ -722,6 +725,9 @@ h2 {
 	grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
 	gap: 2rem 3rem;
 	align-items: start;
+}
+.archive-layout.reverse {
+	grid-template-columns: minmax(320px, 1.1fr) minmax(0, 0.9fr);
 }
 
 .media-list {
@@ -1425,14 +1431,17 @@ table.referrals tr:hover td {
 .image-card {
 	height: 100%;
 	width: auto;
-	margin: 4rem auto;
-	max-height: 400px;
+	margin: 2rem auto 0.5rem;
 	overflow: hidden;
 }
 .image-card img {
 	width: 100%;
 	max-width: calc(100vw - 32px);
 	height: 100%;
-	max-height: 400px;
+	max-height: 500px;
 	object-fit: contain;
+}
+
+.image-card-caption {
+	text-align: center;
 }
