@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	"#caption",
 	// 	{ y: 200, opacity: 0 },
 	// 	{ y: 50, opacity: 1, duration: 1 },
-	// 	"<",
+	// 	"<"
 	// );
 	// initTL.to("#caption", { y: 100, duration: 1, ease: "expo.in" }, "+=1");
 	initTL.to(
@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		},
 		"<",
 	);
+
+	// gsap.to(".anBG", { opacity: 0, delay: 3 });
+	// gsap.to(".anBG", { opacity: 0.05, delay: 18 });
 
 	initTL.set("#images", { opacity: 1 });
 	initTL.set("#folders", { opacity: 1 });
@@ -177,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			// endTL.to(
 			// 	"#introHero text",
 			// 	{ opacity: 1, stagger: 0.1, duration: 0.25 },
-			// 	"<",
+			// 	"<"
 			// );
 		},
 	});
@@ -278,5 +281,38 @@ document.addEventListener("DOMContentLoaded", function () {
 				);
 			}
 		});
+
+		// 	gsap.to("#bg1", { duration: 3 });
+		// 	gsap.to("#bg2", { duration: 3 });
+		// 	var bgTl = gsap.timeline({ repeat: -1 });
+		// 	bgTl.fromTo(
+		// 		"#bg1",
+		// 		{
+		// 			yPercent: -100,
+		// 		},
+		// 		{
+		// 			duration: 30,
+		// 			yPercent: 0,
+		// 			ease: "none",
+		// 		}
+		// 	);
+		// 	bgTl.fromTo(
+		// 		"#bg2",
+		// 		{
+		// 			yPercent: 0,
+		// 		},
+		// 		{
+		// 			duration: 30,
+		// 			yPercent: 100,
+		// 			ease: "none",
+		// 		},
+		// 		"<"
+		// 	);
 	});
+	// $("#createOwn").click(function () {
+	// 	window.location.href = "/builder/";
+	// });
+	// $("#freeLibs").click(function () {
+	// 	window.location.href = "/libraries/";
+	// });
 });

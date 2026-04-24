@@ -50,7 +50,6 @@
   <script id="runajax" src="${communityhome}/components/javascript/emedia/ajax/runajax.js" />
   <script id="emdialog" src="${communityhome}/components/javascript/emedia/ajax/emdialog.js" />
   <script id="dataentryfields" src="/${applicationid}/components/javascript/emedia/dataentryfields.js" />
-  <script id="dataentrypickers" src="/${applicationid}/components/javascript/emedia/dataentrypickers.js" />
   <script id="ajaxformsubmit" src="${communityhome}/components/javascript/emedia/ajax/ajaxformsubmit.js" />
 
 
@@ -58,6 +57,7 @@
   <script id="openedit" src="/openedit/components/javascript/openedit.js"/>
   <script id="communityglobal" src="${communityhome}/components/javascript/community-global.js"/>
 
+  <style id="customfindercolors" href="${finderhome}/theme/defaulttheme/custom.css"/>
   <style id="mediaplayer" href="${finderhome}/theme/styles/pages/mediaplayer.css"/>
   <style id="app-css" href="${communityhome}/theme/styles/theme.css"/>
   <style id="eminstitute" href="${communityhome}/theme/css/eminstitute.css"/>
@@ -65,10 +65,7 @@
   <!-- Base Community JS & CSS -->
 
 
-  <script id="videojs" src="/${applicationid}/components/javascript/videojs/8.20.0/video.min.js" defer="true" />
-  <script id="videojs-qs" src="/${applicationid}/components/javascript/videojs/8.20.0/videojs-quality-selector.min.js" defer="true" />
-  <style id="videojs-css" href="/${applicationid}/components/javascript/videojs/8.20.0/video-js.min.css" />
-
-
+  <style id="aos-css" href="${communityhome}/theme/css/aos.css"/>
+  <style id="customwebsite" href="${communityhome}/theme/css/custom.css"/>
 
 </page>

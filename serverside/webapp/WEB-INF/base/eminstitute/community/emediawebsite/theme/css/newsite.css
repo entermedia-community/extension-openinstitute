@@ -60,12 +60,12 @@ h2 {
 	color: inherit;
 }
 
-.offcanvas-open .pricing-nav,
+/* .offcanvas-open .pricing-nav,
 .offcanvas-open .blogs-nav,
 .offcanvas-open .libraries-nav,
 .offcanvas-open .schedule-nav {
 	display: none !important;
-}
+} */
 
 .page-shell {
 	overflow: clip;
@@ -74,17 +74,20 @@ h2 {
 .site-header {
 	position: sticky;
 	top: 0;
-	z-index: 30;
+	z-index: 1000;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1.25rem;
-	width: min(calc(100% - 4rem), calc(1600px - 64px));
+	width: min(calc(100% - 4rem), calc(1600px - 72px));
 	max-width: calc(100vw - 4rem);
 	margin: 0 auto;
 	mix-blend-mode: normal;
 	background: transparent !important;
 	box-shadow: none !important;
+}
+.offcanvas-open .site-header {
+	max-width: calc(100vw - 2rem);
 }
 .site-header .dropdown-menu {
 	overflow: hidden;
@@ -108,6 +111,10 @@ h2 {
 	color: #47bb78;
 }
 
+.site-header .nav-link.active::after {
+	background-color: #47bb78;
+}
+
 #spirals path {
 	display: none;
 }
@@ -116,7 +123,7 @@ h2 {
 	content: "";
 	position: fixed;
 	width: 100vw;
-	height: 64px;
+	height: 72px;
 	top: 0;
 	left: 0;
 	background: #0a172c;
@@ -523,6 +530,7 @@ h2 {
 .section__content.hero__grid {
 	width: calc(100vw - 160px);
 	max-width: 1600px;
+	color: var(--paper);
 }
 
 .eyebrow {
@@ -1432,7 +1440,7 @@ table.referrals tr:hover td {
 .card-header {
 	background-color: #fff;
 }
-.chatterbox-messages {
+#useraccount .chatterbox-messages {
 	height: calc(100% - 166px) !important;
 }
 .image-card {

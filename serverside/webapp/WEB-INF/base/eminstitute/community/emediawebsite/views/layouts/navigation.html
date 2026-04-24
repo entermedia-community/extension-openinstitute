@@ -7,20 +7,20 @@
     <div class="collapse navbar-collapse" id="libNavbar">
       <ul class="navbar-nav ms-auto mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link #if($content.oisection == 'guide') active #end" href="$communitylink/guide">Guide</a>
+          <a class="nav-link #if($content.collectivesection == 'guide') active #end" href="$communitylink/guide">Guide</a>
         </li> 
         <li class="nav-item pricing-nav">
-          <a class="nav-link #if($content.oisection == 'pricing') active #end" href="$communitylink/pricing.html">
+          <a class="nav-link #if($content.collectivesection == 'pricing') active #end" href="$communitylink/pricing.html">
             Pricing
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link #if($content.oisection == 'knowledge') active #end" href="$communitylink/knowledge/">
+          <a class="nav-link #if($content.collectivesection == 'documentation') active #end" href="$communitylink/knowledge/">
             Documentation
           </a>
         </li>
         <li class="nav-item blogs-nav">
-          <a class="nav-link #if($content.oisection == 'blogs') active #end" href="$communitylink/blogs/">
+          <a class="nav-link #if($content.collectivesection == 'blogs') active #end" href="$communitylink/blogs/">
             Blogs
           </a>
         </li>
@@ -37,7 +37,7 @@
         </li>
         #ifnull($user)
           <li class="nav-item">
-            <a class="nav-link  #if($content.oisection == 'login') active #end" href="$communitylink/authentication/login.html">
+            <a class="nav-link  #if($content.collectivesection == 'login') active #end" href="$communitylink/authentication/login.html">
               Login / Register <i class="ms-1 fs-small fas fa-user"></i>
             </a>
           </li> 
