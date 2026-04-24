@@ -71,6 +71,10 @@ h2 {
 	overflow: clip;
 }
 
+.main-content {
+	max-width: 1200px;
+}
+
 .site-header {
 	position: sticky;
 	top: 0;
