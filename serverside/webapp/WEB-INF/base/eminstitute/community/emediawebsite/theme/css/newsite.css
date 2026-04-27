@@ -84,6 +84,10 @@ h2 {
 	mix-blend-mode: normal;
 	background: transparent !important;
 	box-shadow: none !important;
+	height: 72px;
+}
+.site-header #searchBtn {
+	color: var(--paper) !important;
 }
 .offcanvas-open .site-header {
 	max-width: calc(100vw - 2rem);
@@ -112,6 +116,24 @@ h2 {
 
 .site-header .nav-link.active::after {
 	background-color: #47bb78;
+}
+
+@media (max-width: 1440px) {
+	.site-header .nav-link {
+		font-size: 0.9rem;
+		padding: 1.5rem 0.25rem !important;
+	}
+}
+
+@media (max-width: 1300px) {
+	.offcanvas-open .site-header .nav-link {
+		font-size: 0.8rem;
+	}
+}
+@media (max-width: 1260px) {
+	.offcanvas-open .site-header .brand span {
+		display: none;
+	}
 }
 
 #spirals path {
