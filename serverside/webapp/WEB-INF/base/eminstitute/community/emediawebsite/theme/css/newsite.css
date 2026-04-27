@@ -45,11 +45,6 @@ h3 {
 	color: var(--paper);
 }
 
-img {
-	display: block;
-	width: 100%;
-	height: auto;
-}
 
 a {
 	color: inherit;
