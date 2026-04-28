@@ -22,39 +22,45 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-public class QrCreator implements CatalogEnabled {
+public class QrCreator implements CatalogEnabled
+{
 
     protected ModuleManager fieldModuleManager;
 
-    public ModuleManager getModuleManager() {
+    public ModuleManager getModuleManager()
+    {
         return fieldModuleManager;
     }
 
-    public void setModuleManager(ModuleManager inModuleManager) {
+    public void setModuleManager(ModuleManager inModuleManager)
+    {
         fieldModuleManager = inModuleManager;
     }
 
     protected String fieldCatalogId;
 
-    public String getCatalogId() {
+    public String getCatalogId()
+    {
         return fieldCatalogId;
     }
 
-    public void setCatalogId(String inCatalogId) {
+    public void setCatalogId(String inCatalogId)
+    {
         fieldCatalogId = inCatalogId;
     }
 
-    public MediaArchive getMediaArchive() {
+    public MediaArchive getMediaArchive()
+    {
         return (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
     }
 
-    public Collection createQrCodes() throws Exception {
+    public Collection createQrCodes() throws Exception
+    {
 
         // Placeholder for QR code generation logic
         // In a real implementation, you would use a library like ZXing to generate the
         // QR code image
-        Collection<Data> missingcodes = getMediaArchive().query("bankaccountlookup").exact("cardmade", false)
-                .exists("bankaccount").sort("idUp").search();
+        Collection<Data> missingcodes = getMediaArchive().query("bankaccountlookup").exact("cardmade", false).exists("bankaccount").sort("idUp").search();
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
         File saveto = new File(getMediaArchive().getRootDirectory(), "/cards/");
@@ -62,7 +68,8 @@ public class QrCreator implements CatalogEnabled {
 
         Collection tosave = new ArrayList();
 
-        for (Data data : missingcodes) {
+        for (Data data : missingcodes)
+        {
             // Generate QR code for the bank account
             String bankAccountNumber = data.getId();
             String url = "https://impactbank.world/card/?l=" + bankAccountNumber;
@@ -88,12 +95,12 @@ public class QrCreator implements CatalogEnabled {
         }
         getMediaArchive().saveData("bankaccountlookup", tosave);
 
-        Collection<Data> donecards = getMediaArchive().query("bankaccountlookup").exact("cardmade", true)
-                .exists("bankaccount").sort("idUp").search();
+        Collection<Data> donecards = getMediaArchive().query("bankaccountlookup").exact("cardmade", true).exists("bankaccount").sort("idUp").search();
         return donecards;
     }
 
-    protected void makeImage(String inQr) throws Exception {
+    protected void makeImage(String inQr) throws Exception
+    {
         File input = new File(getMediaArchive().getRootDirectory(), "/cards/input.jpeg");
         File qrcode = new File(getMediaArchive().getRootDirectory(), "/cards/" + inQr);
         String outputName = inQr.replace("qr_", "card_");
@@ -121,19 +128,22 @@ public class QrCreator implements CatalogEnabled {
 
         Exec exec = (Exec) getMediaArchive().getBean("exec");
         ExecResult result = exec.runExec("convert", args, true);
-        if (!result.isRunOk()) {
+        if (!result.isRunOk())
+        {
             throw new OpenEditException("Error compositing image: " + result.getReturnValue());
         }
     }
 
-    protected void addName(User inUser, String inQr) throws Exception {
+    protected void addName(User inUser, String inQr) throws Exception
+    {
         String inputName = inQr.replace("qr_", "card_");
         File input = new File(getMediaArchive().getRootDirectory(), "/cards/" + inputName);
         String outputName = inQr.replace("qr_", "carddone_");
         File output = new File(getMediaArchive().getRootDirectory(), "/cards/" + outputName);
 
         String screenname = inUser.getScreenName();
-        if (screenname == null) {
+        if (screenname == null)
+        {
             screenname = inUser.toString();
         }
         String email = inUser.getEmail();
@@ -162,7 +172,8 @@ public class QrCreator implements CatalogEnabled {
 
         Exec exec = (Exec) getMediaArchive().getBean("exec");
         ExecResult result = exec.runExec("convert", args, true);
-        if (!result.isRunOk()) {
+        if (!result.isRunOk())
+        {
             throw new OpenEditException("Error compositing image: " + result.getReturnValue());
         }
     }

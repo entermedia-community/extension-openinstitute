@@ -18,13 +18,17 @@ import org.openedit.profile.UserProfile;
 import org.openedit.servlet.SiteData;
 import org.openedit.util.PathUtilities;
 
-public class OpenInstituteModule extends BaseMediaModule {
+public class OpenInstituteModule extends BaseMediaModule
+{
 
-	public void loadCommunityCategory(WebPageRequest inReq) {
+	public void loadCommunityCategory(WebPageRequest inReq)
+	{
 		LibraryCollection col = (LibraryCollection) inReq.getPageValue("librarycol");
-		if (col != null) {
+		if (col != null)
+		{
 			Collection all = col.getValues("communitytagcategory");
-			if (all != null && !all.isEmpty()) {
+			if (all != null && !all.isEmpty())
+			{
 				String communitytagcategory = (String) all.iterator().next();
 				Data data = getMediaArchive(inReq).getCachedData("communitytagcategory", communitytagcategory);
 				inReq.putPageValue("communitytagcategory", data);
@@ -53,14 +57,17 @@ public class OpenInstituteModule extends BaseMediaModule {
 	//
 	// }
 
-	public Data loadCommunityTagByDomain(WebPageRequest inReq) {
+	public Data loadCommunityTagByDomain(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Collection tags = archive.getList("communitytagcategory");
 		String url = inReq.getSiteRoot();
-		for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = tags.iterator(); iterator.hasNext();)
+		{
 			Data tag = (Data) iterator.next();
 			String domain = tag.get("externaldomain");
-			if (domain != null && url.contains(domain)) {
+			if (domain != null && url.contains(domain))
+			{
 				inReq.putPageValue("communitytagcategory", tag);
 				return tag;
 			}
@@ -68,14 +75,17 @@ public class OpenInstituteModule extends BaseMediaModule {
 		return null;
 	}
 
-	public void loadCommunityTagFolder(WebPageRequest inReq) {
+	public void loadCommunityTagFolder(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String tagid = inReq.findPathValue("communitytagcategory");
 		Data tag = null;
-		if (tagid != null) {
+		if (tagid != null)
+		{
 			tag = archive.getCachedData("communitytagcategory", tagid);
 		}
-		if (tag != null) {
+		if (tag != null)
+		{
 			inReq.putPageValue("communitytagcategory", tag);
 			String siteid = inReq.findPathValue("siteid");
 
@@ -83,7 +93,8 @@ public class OpenInstituteModule extends BaseMediaModule {
 			inReq.putPageValue("communityhome", communityhome);
 
 			String communitylink = communityhome;
-			if (tag.get("externaldomain") != null) {
+			if (tag.get("externaldomain") != null)
+			{
 				SiteData sitedata = (SiteData) inReq.getPageValue("sitedata");
 				if (sitedata != null) // We are on a domain
 				{
@@ -95,45 +106,55 @@ public class OpenInstituteModule extends BaseMediaModule {
 		}
 	}
 
-	public Data loadCommunityTagCategory(WebPageRequest inReq) {
+	public Data loadCommunityTagCategory(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String communitytagcategory = inReq.getRequestParameter("communitytagcategory");
 		Data tag = null;
-		if (communitytagcategory != null) {
+		if (communitytagcategory != null)
+		{
 			tag = archive.getCachedData("communitytagcategory", communitytagcategory);
 		}
-		if (tag == null) {
+		if (tag == null)
+		{
 			SiteData data = (SiteData) inReq.getPageValue("sitedata");
-			if (data != null) {
+			if (data != null)
+			{
 				String tagid = data.get("domaincommunityid");
-				if (tagid != null) {
+				if (tagid != null)
+				{
 					tag = archive.getCachedData("communitytagcategory", tagid);
 				}
 			}
 		}
-		if (tag != null) {
+		if (tag != null)
+		{
 			inReq.putPageValue("communitytagcategory", tag);
 			inReq.putPageValue("communitytagcategoryid", tag.getId());
 		}
 		return tag;
 	}
 
-	public void loadCommunityBlog(WebPageRequest inReq) {
+	public void loadCommunityBlog(WebPageRequest inReq)
+	{
 		Data tag = (Data) inReq.getPageValue("communitytagcategory");
-		if (tag == null) {
+		if (tag == null)
+		{
 			tag = loadCommunityTagByDomain(inReq);
 		}
 
-		Collection collections = getMediaArchive(inReq).query("librarycollection").exact("communitytagcategory", tag)
-				.search(inReq);
+		Collection collections = getMediaArchive(inReq).query("librarycollection").exact("communitytagcategory", tag).search(inReq);
 
 		QueryBuilder builder = getMediaArchive(inReq).query("userupload");
 
 		HitTracker topuploads = null;
 		builder.exact("exclusivecontent", false);
-		if (collections.isEmpty()) {
+		if (collections.isEmpty())
+		{
 			builder.exact("librarycollection", "NONE");
-		} else {
+		}
+		else
+		{
 			builder.orgroup("librarycollection", collections);
 		}
 		builder.all();

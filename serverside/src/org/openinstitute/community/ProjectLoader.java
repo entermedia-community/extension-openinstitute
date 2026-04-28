@@ -17,35 +17,43 @@ import org.openedit.servlet.Site;
 import org.openedit.util.PathUtilities;
 import org.openedit.util.URLUtilities;
 
-public class ProjectLoader implements PageLoader, CatalogEnabled {
+public class ProjectLoader implements PageLoader, CatalogEnabled
+{
 	protected ModuleManager fieldModuleManager;
 	protected PageManager fieldPageManager;
 	protected String fieldCatalogId;
 	private static final Log log = LogFactory.getLog(ProjectLoader.class);
 
-	public PageManager getPageManager() {
+	public PageManager getPageManager()
+	{
 		return fieldPageManager;
 	}
 
-	public void setPageManager(PageManager inPageManager) {
+	public void setPageManager(PageManager inPageManager)
+	{
 		fieldPageManager = inPageManager;
 	}
 
-	public ModuleManager getModuleManager() {
+	public ModuleManager getModuleManager()
+	{
 		return fieldModuleManager;
 	}
 
-	public void setModuleManager(ModuleManager inModuleManager) {
+	public void setModuleManager(ModuleManager inModuleManager)
+	{
 		fieldModuleManager = inModuleManager;
 	}
 
-	protected MediaArchive getMediaArchive() {
+	protected MediaArchive getMediaArchive()
+	{
 		return (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
 	}
 
 	@Override
-	public RightPage getRightPage(URLUtilities util, Site site, Page inPage) {
-		if (site == null) {
+	public RightPage getRightPage(URLUtilities util, Site site, Page inPage)
+	{
+		if (site == null)
+		{
 			RightPage right = new RightPage();
 			right.setRightPage(inPage);
 			return right;
@@ -68,13 +76,15 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		// Only works with domains being set. Otherwise use normal page actions to load
 		// project pages
 		String[] url = requestedPath.split("/");
-		if (url.length > 1 && (url[1].equals("mediadb"))) {
+		if (url.length > 1 && (url[1].equals("mediadb")))
+		{
 			return null;
 		}
 
 		// Check that we are actually going to the page /site/community/...
 		String appid = inPage.getProperty("applicationid");
-		if (appid != null && url.length > 0 && appid.startsWith(url[1])) {
+		if (appid != null && url.length > 0 && appid.startsWith(url[1]))
+		{
 			return null;
 		}
 
@@ -93,12 +103,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		if (url.length > 1) // Might be a virtual project
 		{
 			secondpart = url[1]; // might be wrong
-			if (url.length > 2) {
+			if (url.length > 2)
+			{
 				anythingelse = requestedPath.substring(requestedPath.indexOf(secondpart) + secondpart.length());
 			}
 		}
 
-		if (secondpart == null) {
+		if (secondpart == null)
+		{
 			RightPage page = goHome(inPage, domain);
 			// if( page == null)
 			// {
@@ -113,15 +125,16 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 
 		// TODO: Keep a cached list of sub folders where we always load the page from
 		// blogs projects etc and assume .../index.html
-		if (getMediaArchive().getCatalogId().endsWith("notset")) {
-			throw new OpenEditException(
-					"Invalid catalog for " + requestedPath + " " + getMediaArchive().getCatalogId());
+		if (getMediaArchive().getCatalogId().endsWith("notset"))
+		{
+			throw new OpenEditException("Invalid catalog for " + requestedPath + " " + getMediaArchive().getCatalogId());
 		}
 
 		// Does the page exist or is it a project?
 		String siteid = inPage.get("siteid");
 		Data communitydata = findCommunity(domain);
-		if (communitydata == null) {
+		if (communitydata == null)
+		{
 			log.info("Couldn't find Community Data: " + domain + " Second part: " + secondpart);
 			return null;
 		}
@@ -130,9 +143,12 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 
 		Page page = null;
 
-		if (anythingelse == null) {
+		if (anythingelse == null)
+		{
 			page = getPageManager().getPage(fixedpath);
-		} else {
+		}
+		else
+		{
 			fixedpath = fixedpath + anythingelse;
 			page = getPageManager().getPage(fixedpath);
 		}
@@ -144,19 +160,23 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		right.putPageValue("communityhome", communityhome);
 		if (page.exists()) // Must be a real page
 		{
-			if (page.isFolder()) {
+			if (page.isFolder())
+			{
 				page = getPageManager().getPage(fixedpath + "/index.html");
 			}
 			right.setRightPage(page);
 			return right;
-		} else {
+		}
+		else
+		{
 			Page indexpage = getPageManager().getPage(fixedpath + "/index.html");
 			if (indexpage.exists()) // Must be a real page
 			{
 				right.setRightPage(indexpage);
 				return right;
 			}
-			if (Boolean.parseBoolean(page.get("virtual"))) {
+			if (Boolean.parseBoolean(page.get("virtual")))
+			{
 				right.setRightPage(page);
 				return right;
 			}
@@ -166,15 +186,20 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		QueryBuilder query = getMediaArchive().query("librarycollection").exact("urlname", secondpart).hitsPerPage(1);
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
 		Data librarycollection = (Data) hits.first();
-		if (librarycollection != null) {
+		if (librarycollection != null)
+		{
 			String template = null;
-			if (anythingelse == null) {
+			if (anythingelse == null)
+			{
 				template = communityhome + "/project/blog-list/index.html";
-			} else {
+			}
+			else
+			{
 				template = communityhome + "/project" + anythingelse;
 			}
 			String justname = PathUtilities.extractFileName(template);
-			if (!justname.contains(".")) {
+			if (!justname.contains("."))
+			{
 				template = template + "/index.html";
 			}
 			Page otherpage = getPageManager().getPage(template);
@@ -189,7 +214,9 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 			// librarycollection.get("urlname") );
 			right.setRightPage(otherpage);
 			return right;
-		} else {
+		}
+		else
+		{
 			// log.info("Couldn't find Collection: " + secondpart);
 		}
 		if (log.isDebugEnabled())
@@ -197,12 +224,15 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		return null;
 	}
 
-	protected RightPage goHome(Page inPage, String domain) {
+	protected RightPage goHome(Page inPage, String domain)
+	{
 		Data first = findCommunity(domain);
 		String siteid = inPage.get("siteid");
 
-		if (first != null) {
-			if (first.get("templatepath") == null) {
+		if (first != null)
+		{
+			if (first.get("templatepath") == null)
+			{
 				throw new OpenEditException("templatepath is required for " + domain);
 			}
 			String communityhome = "/" + siteid + first.get("templatepath");
@@ -223,7 +253,8 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 		return null;
 	}
 
-	protected Data findCommunity(String domain) {
+	protected Data findCommunity(String domain)
+	{
 		QueryBuilder query = getMediaArchive().query("communitytagcategory").match("domainlist", domain).hitsPerPage(1); // Move
 																															// to
 																															// use
@@ -231,7 +262,8 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 																															// domain
 
 		HitTracker hits = getMediaArchive().getCachedSearch(query);
-		if (hits.isEmpty()) {
+		if (hits.isEmpty())
+		{
 			log.info("Not Found community:" + hits + " for " + domain + " in " + getMediaArchive().getCatalogId());
 		}
 		Data first = (Data) hits.first();
@@ -239,12 +271,14 @@ public class ProjectLoader implements PageLoader, CatalogEnabled {
 	}
 
 	@Override
-	public void setCatalogId(String inId) {
+	public void setCatalogId(String inId)
+	{
 		fieldCatalogId = inId;
 
 	}
 
-	protected String getCatalogId() {
+	protected String getCatalogId()
+	{
 		return fieldCatalogId;
 	}
 

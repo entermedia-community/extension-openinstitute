@@ -29,7 +29,8 @@ import org.openedit.money.Money;
 import org.openedit.users.User;
 import org.openedit.util.DateStorageUtil;
 
-public class PaymentModule extends BaseMediaModule {
+public class PaymentModule extends BaseMediaModule
+{
 
 	private static final Log log = LogFactory.getLog(PaymentModule.class);
 
@@ -39,20 +40,24 @@ public class PaymentModule extends BaseMediaModule {
 
 	protected CacheManager fieldCacheManager;
 
-	public CacheManager getCacheManager() {
+	public CacheManager getCacheManager()
+	{
 		return fieldCacheManager;
 	}
 
-	public void setCacheManager(CacheManager inCacheManager) {
+	public void setCacheManager(CacheManager inCacheManager)
+	{
 		fieldCacheManager = inCacheManager;
 	}
 
-	protected InvoiceManager getInvoiceManager(WebPageRequest inReq) {
+	protected InvoiceManager getInvoiceManager(WebPageRequest inReq)
+	{
 		InvoiceManager manager = (InvoiceManager) getMediaArchive(inReq).getBean("invoiceManager");
 		return manager;
 	}
 
-	public StripePaymentProcessor getPaymentProcessor(WebPageRequest inReq) {
+	public StripePaymentProcessor getPaymentProcessor(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String collectionId = inReq.getRequestParameter("collectionid");
 		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
@@ -60,11 +65,12 @@ public class PaymentModule extends BaseMediaModule {
 		return processor;
 	}
 
-	public StripePaymentProcessor getPaymentProcessor(String inCatalogId, String inCollectionId) {
-		StripePaymentProcessor processor = (StripePaymentProcessor) getCacheManager().get("paymentprocessor",
-				inCollectionId);
+	public StripePaymentProcessor getPaymentProcessor(String inCatalogId, String inCollectionId)
+	{
+		StripePaymentProcessor processor = (StripePaymentProcessor) getCacheManager().get("paymentprocessor", inCollectionId);
 
-		if (processor == null) {
+		if (processor == null)
+		{
 			processor = new StripePaymentProcessor();
 			getCacheManager().put("paymentprocessor", inCollectionId, processor);
 			processor.setCollectionId(inCollectionId);
@@ -75,30 +81,37 @@ public class PaymentModule extends BaseMediaModule {
 		return processor;
 	}
 
-	public HttpClient getHttpClient() {
+	public HttpClient getHttpClient()
+	{
 		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).build();
 		HttpClient client = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
 		return client;
 
 	}
 
-	public void setHttpClient(HttpClient inHttpClient) {
+	public void setHttpClient(HttpClient inHttpClient)
+	{
 		fieldHttpClient = inHttpClient;
 	}
 
-	public SearcherManager getSearcherManager() {
+	public SearcherManager getSearcherManager()
+	{
 		return fieldSearcherManager;
 	}
 
-	public void setSearcherManager(SearcherManager inSearcherManager) {
+	public void setSearcherManager(SearcherManager inSearcherManager)
+	{
 		fieldSearcherManager = inSearcherManager;
 	}
 
-	public User createCheckoutUser(WebPageRequest inReq) {
+	public User createCheckoutUser(WebPageRequest inReq)
+	{
 		User user = inReq.getUser();
-		if (user == null) {
+		if (user == null)
+		{
 			String email = inReq.getRequestParameter("contactemail");
-			if (email != null) {
+			if (email != null)
+			{
 				user = getUserManager(inReq).createTempUserFromEmail(email);
 				inReq.putSessionValue("checkoutuser", user);
 			}
@@ -112,7 +125,8 @@ public class PaymentModule extends BaseMediaModule {
 
 	// *Process Regular Payments (EM Portal) *//
 
-	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException {
+	public void processPayment(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException
+	{
 		Boolean stripeCust = inReq.getRequestParameter("customerselected") == "true";
 
 		MediaArchive archive = getMediaArchive(inReq);
@@ -124,7 +138,8 @@ public class PaymentModule extends BaseMediaModule {
 		Calendar today = Calendar.getInstance();
 
 		String paymentintent = (String) inReq.getSessionValue("payinginvoice");
-		if (paymentintent == null) {
+		if (paymentintent == null)
+		{
 			log.info("Payment resubmition prevented");
 			return;
 		}
@@ -134,19 +149,22 @@ public class PaymentModule extends BaseMediaModule {
 		Searcher invoiceSearcher = archive.getSearcher("collectiveinvoice");
 		Data invoice = getInvoiceManager(inReq).getInvoiceById(invoiceId);
 
-		if (invoice == null) {
+		if (invoice == null)
+		{
 			log.info("Payment fail, Invoice " + invoiceId + " not found");
 			return;
 		}
 
-		if (invoice.get("paymentstatus").equals("paid")) {
+		if (invoice.get("paymentstatus").equals("paid"))
+		{
 			log.info("Invoice " + invoiceId + " already Paid");
 			return;
 		}
 
 		Searcher workspaceSearcher = archive.getSearcher("librarycollection");
 		Data workspace = getInvoiceManager(inReq).getWorkspaceById((String) invoice.getValue("collectionid"));
-		if (Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard"))) {
+		if (Boolean.parseBoolean(inReq.getRequestParameter("savestripecreditcard")))
+		{
 			workspace.setValue("savestripecreditcard", "true");
 			workspaceSearcher.saveData(workspace);
 		}
@@ -164,26 +182,33 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.putSessionValue("checkoutuser", user);
 
 		String source = inReq.getRequestParameter("selectedsource");
-		if (source == null) {
+		if (source == null)
+		{
 			source = inReq.getRequestParameter("stripenewsource");
 		}
 
 		String customerId = (String) inReq.getRequestParameter("stripecustomer");
 		String tokenid = inReq.getRequestParameter("stripetokenid");
 
-		if (customerId == null) {
+		if (customerId == null)
+		{
 
 			customerId = processor.createCustomer2((String) invoice.getValue("collectionid"), user, tokenid);
-		} else {
-			if (tokenid != null) {
-				if (!processor.updateCustomersSource(customerId, tokenid)) {
+		}
+		else
+		{
+			if (tokenid != null)
+			{
+				if (!processor.updateCustomersSource(customerId, tokenid))
+				{
 					log.info("Error updating user payment method on Stripe. " + customerId);
 					return;
 				}
 			}
 		}
 
-		if (customerId == null || customerId.isEmpty()) {
+		if (customerId == null || customerId.isEmpty())
+		{
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Stripe error, please contact your admin");
 			invoiceSearcher.saveData(invoice);
@@ -192,23 +217,26 @@ public class PaymentModule extends BaseMediaModule {
 			return;
 		}
 
-		log.info("Creating Charge - Invoice: " + invoice.getValue("invoicenumber") + " Customer: " + customerId
-				+ " Source: " + source);
+		log.info("Creating Charge - Invoice: " + invoice.getValue("invoicenumber") + " Customer: " + customerId + " Source: " + source);
 
 		String useremail = "";
-		if (user != null) {
+		if (user != null)
+		{
 			useremail = user.getEmail();
 		}
 
 		isSuccess = processor.createCharge(payment, customerId, source, invoice, useremail);
 
-		if (isSuccess) {
+		if (isSuccess)
+		{
 			log.info("Paid Stripe invoice: " + invoice.getValue("invoicenumber"));
 			invoice.setValue("paymentstatus", "paid");
 			invoice.setValue("invoicepaidon", today.getTime());
 
 			payment.setValue("paymentstatus", "success");
-		} else {
+		}
+		else
+		{
 			invoice.setValue("paymentstatus", "error");
 			invoice.setValue("paymentstatusreason", "Credit Card failed");
 			payment.setValue("paymentstatus", "error");
@@ -225,8 +253,8 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.putPageValue("invoice", invoice);
 	}
 
-	public void processPaymentDonation(WebPageRequest inReq)
-			throws IOException, InterruptedException, URISyntaxException {
+	public void processPaymentDonation(WebPageRequest inReq) throws IOException, InterruptedException, URISyntaxException
+	{
 
 		MediaArchive archive = getMediaArchive(inReq);
 		String username = inReq.getUserName();
@@ -235,7 +263,8 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.putPageValue("collectionid", collectionid);
 		Data workspace = archive.getCachedData("librarycollection", collectionid);
 
-		if (workspace == null) {
+		if (workspace == null)
+		{
 			// can't continue without Collection
 			log.info("Collection not found: " + collectionid);
 			return;
@@ -243,26 +272,33 @@ public class PaymentModule extends BaseMediaModule {
 		StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), workspace.getId());
 
 		String source = inReq.getRequestParameter("selectedsource");
-		if (source == null) {
+		if (source == null)
+		{
 			source = inReq.getRequestParameter("stripenewsource");
 		}
 
 		String customerId = (String) inReq.getRequestParameter("stripecustomer");
 		String tokenid = inReq.getRequestParameter("stripetokenid");
 
-		if (customerId == null) {
+		if (customerId == null)
+		{
 
 			customerId = processor.createCustomer2(collectionid, user, tokenid);
-		} else {
-			if (tokenid != null) {
-				if (!processor.updateCustomersSource(customerId, tokenid)) {
+		}
+		else
+		{
+			if (tokenid != null)
+			{
+				if (!processor.updateCustomersSource(customerId, tokenid))
+				{
 					log.info("Error updating user payment method on Stripe. " + customerId);
 					return;
 				}
 			}
 		}
 
-		if (customerId == null || customerId.isEmpty()) {
+		if (customerId == null || customerId.isEmpty())
+		{
 			log.info("Error creating Stripe Customer for Donation on " + workspace.getName());
 			return;
 		}
@@ -279,15 +315,18 @@ public class PaymentModule extends BaseMediaModule {
 		payment.setValue("paymenttype", "stripe");
 		payment.setValue("isdonation", true);
 
-		try {
+		try
+		{
 			// boolean success = getPaymentProcessor(archive.getCatalogId(),
 			// collectionid).process(user, payment, token);
 			boolean success = processor.createChargeDonation(payment, customerId, source, workspace, user.getEmail());
-			if (success) {
+			if (success)
+			{
 				payment.setValue("paymentstatus", "success");
 
 				String frequency = inReq.findValue("frequency");
-				if (frequency != null && frequency != "") {
+				if (frequency != null && frequency != "")
+				{
 					Searcher plans = archive.getSearcher("paymentplan");
 					Data plan = plans.createNewData();
 					plan.setValue("userid", username);
@@ -316,7 +355,9 @@ public class PaymentModule extends BaseMediaModule {
 				donationreceipt.saveData(receipt);
 				inReq.putPageValue("receipt", receipt);
 
-			} else {
+			}
+			else
+			{
 				payment.setValue("paymentstatus", "error");
 				log.debug("Payment: failed.");
 				inReq.putPageValue("paymenterror", "Payment Error");
@@ -327,7 +368,9 @@ public class PaymentModule extends BaseMediaModule {
 			payments.saveData(payment);
 			inReq.putPageValue("payment", payment);
 
-		} catch (Throwable e) {
+		}
+		catch (Throwable e)
+		{
 			// TODO: handle exception
 			log.error(e.getMessage(), e);
 			inReq.putPageValue("paymenterror", e.getMessage());
@@ -335,7 +378,8 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public Boolean cancelService(WebPageRequest inReq) {
+	public Boolean cancelService(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher payments = archive.getSearcher("collectiveproduct");
 		String productId = (String) inReq.getRequestParameter("productid");
@@ -346,12 +390,15 @@ public class PaymentModule extends BaseMediaModule {
 		return true;
 	}
 
-	public ArrayList<Map<String, Object>> getSubscriptions(WebPageRequest inReq) {
+	public ArrayList<Map<String, Object>> getSubscriptions(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String email = inReq.getUser().getEmail();
-		try {
+		try
+		{
 			String collectionId = inReq.getRequestParameter("collectionid");
-			if (collectionId == null) {
+			if (collectionId == null)
+			{
 				throw new IllegalArgumentException("Collectionid is required");
 			}
 
@@ -360,32 +407,42 @@ public class PaymentModule extends BaseMediaModule {
 			ArrayList<Map<String, Object>> subs = processor.getSubscriptions(customer);
 			inReq.putPageValue("subs", subs);
 			return subs;
-		} catch (URISyntaxException | IOException | InterruptedException e) {
+		}
+		catch (URISyntaxException | IOException | InterruptedException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public Map<String, Object> getStripeUser(WebPageRequest inReq) {
+	public Map<String, Object> getStripeUser(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String collectionId = inReq.getRequestParameter("collectionid");
 		User user = inReq.getUser();
 		String email = null;
-		if (user != null && user.getEmail() != null) {
+		if (user != null && user.getEmail() != null)
+		{
 			email = user.getEmail();
-		} else {
+		}
+		else
+		{
 			email = "billing+" + collectionId + "@entermediadb.com";
 		}
 
-		try {
+		try
+		{
 			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
 			ArrayList<Map<String, Object>> customers = processor.getCustomers(email);
-			if (customers != null && customers.size() > 0) {
+			if (customers != null && customers.size() > 0)
+			{
 				inReq.putPageValue("customer", customers.get(0));
 				return (Map<String, Object>) customers.get(0);
 			}
-		} catch (URISyntaxException | IOException | InterruptedException e) {
+		}
+		catch (URISyntaxException | IOException | InterruptedException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
@@ -393,46 +450,56 @@ public class PaymentModule extends BaseMediaModule {
 		return null;
 	}
 
-	public void getIds(WebPageRequest inReq) {
+	public void getIds(WebPageRequest inReq)
+	{
 		inReq.putPageValue("collectionid", inReq.getRequestParameter("collectionid"));
 		inReq.putPageValue("productid", inReq.getRequestParameter("productid"));
 	}
 
-	public Boolean cancelSubscription(WebPageRequest inReq) {
+	public Boolean cancelSubscription(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String subscription = (String) inReq.getRequestParameter("subid");
-		try {
+		try
+		{
 			String collectionId = inReq.getRequestParameter("collectionid");
 			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
 			Boolean resp = processor.cancelSubscriptions(subscription);
 			inReq.putPageValue("status", resp);
 			return resp;
-		} catch (URISyntaxException | IOException | InterruptedException e) {
+		}
+		catch (URISyntaxException | IOException | InterruptedException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public ArrayList<Map<String, Object>> getInvoices(WebPageRequest inReq) {
+	public ArrayList<Map<String, Object>> getInvoices(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String customer = (String) inReq.getRequestParameter("customerid");
 		String subscription = (String) inReq.getRequestParameter("subid");
 
-		try {
+		try
+		{
 			String collectionId = inReq.getRequestParameter("collectionid");
 			StripePaymentProcessor processor = getPaymentProcessor(archive.getCatalogId(), collectionId);
 			ArrayList<Map<String, Object>> invoices = processor.getInvoices(customer, subscription);
 			inReq.putPageValue("invoices", invoices);
 			return invoices;
-		} catch (URISyntaxException | IOException | InterruptedException e) {
+		}
+		catch (URISyntaxException | IOException | InterruptedException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public void createInvoice(WebPageRequest inReq) {
+	public void createInvoice(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Data invoice = loadCurrentCart(inReq);
 		invoice.setValue("paymentstatus", "invoiced");
@@ -445,11 +512,13 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.removeSessionValue("current-cart");
 	}
 
-	public Data loadCurrentCart(WebPageRequest inReq) {
+	public Data loadCurrentCart(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher invoicesearcher = archive.getSearcher("collectioninvoice");
 		Data invoice = (Data) inReq.getSessionValue("current-cart");
-		if (invoice == null) {
+		if (invoice == null)
+		{
 			invoice = invoicesearcher.createNewData();
 			inReq.putSessionValue("current-cart", invoice);
 		}
@@ -460,22 +529,27 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public void cancelInvoice(WebPageRequest inReq) {
+	public void cancelInvoice(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		String invoiceid = inReq.getRequiredParameter("id");
 		Data invoice = (Data) getInvoiceManager(inReq).getInvoiceById(invoiceid);
-		if (invoice != null) {
+		if (invoice != null)
+		{
 			String status = (String) invoice.getValue("paymentstatus");
-			if (status == null || status.equals("pending") || status.equals("invoiced")) {
+			if (status == null || status.equals("pending") || status.equals("invoiced"))
+			{
 				// only pending and invoiced can be canceled
 				invoice.setValue("paymentstatus", "canceled");
 				archive.saveData("collectiveinvoice", invoice);
 				// Unlock products
 				List products = (List) invoice.getValues("productlist");
-				if (products == null) {
+				if (products == null)
+				{
 					return;
 				}
-				for (Iterator iterator = products.iterator(); iterator.hasNext();) {
+				for (Iterator iterator = products.iterator(); iterator.hasNext();)
+				{
 					Map productinfo = (Map) iterator.next();
 					String productid = (String) productinfo.get("productid");
 					Data product = archive.getData("collectiveproduct", productid);
@@ -488,7 +562,8 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.removeSessionValue("current-cart");
 	}
 
-	public void addProductsToInvoice(WebPageRequest inReq) {
+	public void addProductsToInvoice(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 
 		Data invoice = loadCurrentCart(inReq);
@@ -496,15 +571,18 @@ public class PaymentModule extends BaseMediaModule {
 		String[] ids = inReq.getRequestParameters("productid");
 
 		List products = (List) invoice.getValues("productlist");
-		if (products == null) {
+		if (products == null)
+		{
 			products = new ArrayList();
 			invoice.setValue("productlist", products);
 		}
-		for (String id : ids) {
+		for (String id : ids)
+		{
 			HashMap codemap = new HashMap();
 			codemap.put("productid", id);
 			String quantity = inReq.getRequestParameter(id + ".quantity");
-			if (quantity == null) {
+			if (quantity == null)
+			{
 				quantity = "1";
 			}
 			codemap.put("quantity", quantity);
@@ -516,19 +594,23 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public Money getInvoiceTotal(MediaArchive inArchive, Data invoice) {
+	public Money getInvoiceTotal(MediaArchive inArchive, Data invoice)
+	{
 		Money money = new Money();
 
 		List products = (List) invoice.getValues("productlist");
-		if (products == null) {
+		if (products == null)
+		{
 			return money;
 		}
-		for (Iterator iterator = products.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = products.iterator(); iterator.hasNext();)
+		{
 			Map productinfo = (Map) iterator.next();
 			String productid = (String) productinfo.get("productid");
 			Data product = inArchive.getData("collectiveproduct", productid);
 			String pricestring = product.get("productprice");
-			if (pricestring != null) {
+			if (pricestring != null)
+			{
 				money = money.add(pricestring);
 			}
 			// Need to do quantity multiplication
@@ -538,7 +620,8 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public void processRecurringPayments(WebPageRequest inReq) {
+	public void processRecurringPayments(WebPageRequest inReq)
+	{
 
 		MediaArchive archive = getMediaArchive(inReq);
 
@@ -548,22 +631,19 @@ public class PaymentModule extends BaseMediaModule {
 		Calendar now = Calendar.getInstance();
 		now.add(now.DAY_OF_YEAR, -7);
 
-		HitTracker toprocess = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "weekly")
-				.exact("planstatus", "active").search();
+		HitTracker toprocess = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "weekly").exact("planstatus", "active").search();
 
 		processTransactions(inReq, toprocess);
 
 		now = Calendar.getInstance();
 		now.add(now.MONTH, -1);
-		HitTracker monthly = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "monthly")
-				.exact("planstatus", "active").search();
+		HitTracker monthly = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "monthly").exact("planstatus", "active").search();
 
 		processTransactions(inReq, monthly);
 
 		now = Calendar.getInstance();
 		now.add(now.YEAR, -1);
-		HitTracker yearly = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "yearly")
-				.exact("planstatus", "active").search();
+		HitTracker yearly = plans.query().before("lastprocessed", now.getTime()).exact("frequency", "yearly").exact("planstatus", "active").search();
 
 		processTransactions(inReq, yearly);
 
@@ -576,19 +656,22 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public void processTransactions(WebPageRequest inReq, HitTracker inYearly) {
+	public void processTransactions(WebPageRequest inReq, HitTracker inYearly)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher payments = archive.getSearcher("transaction");
 
 		Searcher paymentplans = archive.getSearcher("paymentplan");
 
-		for (Iterator iterator = inYearly.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = inYearly.iterator(); iterator.hasNext();)
+		{
 			Data paymentplan = (Data) iterator.next();
 			String userid = paymentplan.get("userid");
 			User user = archive.getUserManager().getUser(userid);
 			Data payment = payments.createNewData();
 			String amount = paymentplan.get("amount");
-			if (amount == null) {
+			if (amount == null)
+			{
 				continue;
 			}
 			payment.setValue("totalprice", amount);
@@ -602,7 +685,8 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public void saveInvoice(WebPageRequest inReq) {
+	public void saveInvoice(WebPageRequest inReq)
+	{
 		MediaArchive mediaArchive = getMediaArchive(inReq);
 		Data invoice = getInvoiceManager(inReq).getInvoiceById(inReq.getRequestParameter("id"));
 
@@ -620,13 +704,15 @@ public class PaymentModule extends BaseMediaModule {
 		invoice.setValue("totalprice", totalprice);
 
 		String duedate = inReq.getRequestParameter("duedate");
-		if (duedate != null) {
+		if (duedate != null)
+		{
 			Date start = DateStorageUtil.getStorageUtil().parseFromStorage(duedate);
 			invoice.setValue("duedate", start);
 		}
 
 		String enddate = inReq.getRequestParameter("enddate");
-		if (enddate != null) {
+		if (enddate != null)
+		{
 			Date end = DateStorageUtil.getStorageUtil().parseFromStorage(enddate);
 			invoice.setValue("enddate", end);
 		}
@@ -634,24 +720,17 @@ public class PaymentModule extends BaseMediaModule {
 		mediaArchive.saveData("collectiveinvoice", invoice);
 
 		/*
-		 * List products = (List) invoice.getValues("productlist");
-		 * if (products == null)
-		 * {
-		 * return;
-		 * }
-		 * for (Iterator iterator = products.iterator(); iterator.hasNext();)
-		 * {
-		 * Map productinfo = (Map) iterator.next();
-		 * String productid = (String) productinfo.get("productid");
-		 * Data product = mediaArchive.getData("collectiveproduct", productid);
-		 * product.setValue("locked", "true");
-		 * mediaArchive.saveData("collectiveproduct", product);
-		 * }
+		 * List products = (List) invoice.getValues("productlist"); if (products == null) { return; } for
+		 * (Iterator iterator = products.iterator(); iterator.hasNext();) { Map productinfo = (Map)
+		 * iterator.next(); String productid = (String) productinfo.get("productid"); Data product =
+		 * mediaArchive.getData("collectiveproduct", productid); product.setValue("locked", "true");
+		 * mediaArchive.saveData("collectiveproduct", product); }
 		 */
 
 	}
 
-	public void createProductService(WebPageRequest inReq) {
+	public void createProductService(WebPageRequest inReq)
+	{
 		MediaArchive mediaArchive = getMediaArchive(inReq);
 		Searcher collectiveproductsearcher = mediaArchive.getSearcher("collectiveproduct");
 		Calendar today = Calendar.getInstance();
@@ -668,7 +747,8 @@ public class PaymentModule extends BaseMediaModule {
 		inReq.putPageValue("id", saved.getId());
 	}
 
-	public void copyProductService(WebPageRequest inReq) {
+	public void copyProductService(WebPageRequest inReq)
+	{
 		MediaArchive mediaArchive = getMediaArchive(inReq);
 		Searcher collectiveproductsearcher = mediaArchive.getSearcher("collectiveproduct");
 		Calendar today = Calendar.getInstance();
@@ -690,14 +770,16 @@ public class PaymentModule extends BaseMediaModule {
 
 	}
 
-	public void toggleAutoPay(WebPageRequest inReq) {
+	public void toggleAutoPay(WebPageRequest inReq)
+	{
 		MediaArchive archive = getMediaArchive(inReq);
 		Searcher searcher = archive.getSearcher("collectiveproduct");
 		String productId = inReq.getRequestParameter("id");
 		Data product = getInvoiceManager(inReq).getProductById(productId);
 
 		Boolean isPayment = (Boolean) product.getValue("isautopaid");
-		if (isPayment == null) {
+		if (isPayment == null)
+		{
 			isPayment = false;
 		}
 		product.setValue("isautopaid", !isPayment);

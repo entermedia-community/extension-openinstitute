@@ -29,7 +29,8 @@ import org.openedit.servlet.OpenEditEngine;
 import org.openedit.users.User;
 import org.openedit.users.UserManager;
 
-public class OIConnection extends Endpoint implements MessageHandler.Partial<String> {
+public class OIConnection extends Endpoint implements MessageHandler.Partial<String>
+{
 	private static final Log log = LogFactory.getLog(OIConnection.class);
 	private RemoteEndpoint.Basic remoteEndpointBasic;
 	protected JSONParser fieldJSONParser;
@@ -41,11 +42,13 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 	protected String fieldUserId;
 	protected String fieldCatalogId;
 
-	public User getUser() {
+	public User getUser()
+	{
 		return fieldUser;
 	}
 
-	public void setUser(User inUser) {
+	public void setUser(User inUser)
+	{
 		fieldUser = inUser;
 	}
 
@@ -56,29 +59,36 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 	protected Date fieldLastConnection;
 	protected ValuesMap fieldValues;
 
-	public Map getProperties() {
-		if (fieldValues == null) {
+	public Map getProperties()
+	{
+		if (fieldValues == null)
+		{
 			fieldValues = new ValuesMap();
 		}
 		return fieldValues;
 	}
 
-	public void setProperties(ValuesMap inProperties) {
+	public void setProperties(ValuesMap inProperties)
+	{
 		fieldValues = inProperties;
 	}
 
-	public Date getLastConnection() {
+	public Date getLastConnection()
+	{
 		return fieldLastConnection;
 	}
 
-	public void setLastConnection(Date inLastConnection) {
+	public void setLastConnection(Date inLastConnection)
+	{
 		fieldLastConnection = inLastConnection;
 	}
 
 	protected OpenEditEngine fieldEngine;
 
-	public OpenEditEngine getEngine() {
-		if (fieldEngine == null) {
+	public OpenEditEngine getEngine()
+	{
+		if (fieldEngine == null)
+		{
 			fieldEngine = (OpenEditEngine) getModuleManager().getBean("OpenEditEngine");
 
 		}
@@ -86,8 +96,10 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		return fieldEngine;
 	}
 
-	public PageManager getPageManager() {
-		if (fieldPageManager == null) {
+	public PageManager getPageManager()
+	{
+		if (fieldPageManager == null)
+		{
 			fieldPageManager = (PageManager) getModuleManager().getBean("pageManager");
 
 		}
@@ -95,12 +107,15 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		return fieldPageManager;
 	}
 
-	public void setPageManager(PageManager inPageManager) {
+	public void setPageManager(PageManager inPageManager)
+	{
 		fieldPageManager = inPageManager;
 	}
 
-	public UserManager getUserManager(String inCatalogId) {
-		if (fieldUserManager == null) {
+	public UserManager getUserManager(String inCatalogId)
+	{
+		if (fieldUserManager == null)
+		{
 			fieldUserManager = (UserManager) getModuleManager().getBean(inCatalogId, "userManager");
 
 		}
@@ -109,62 +124,76 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 	}
 
-	public void setUserManager(UserManager inUserManager) {
+	public void setUserManager(UserManager inUserManager)
+	{
 		fieldUserManager = inUserManager;
 	}
 
-	public String getUserId() {
+	public String getUserId()
+	{
 		return fieldUserId;
 	}
 
-	public void setUserId(String inUserId) {
+	public void setUserId(String inUserId)
+	{
 		fieldUserId = inUserId;
 	}
 
-	public OIServer getOiServer() {
-		if (fieldOiServer == null) {
+	public OIServer getOiServer()
+	{
+		if (fieldOiServer == null)
+		{
 			fieldOiServer = (OIServer) getModuleManager().getBean("system", "oiServer");
 		}
 
 		return fieldOiServer;
 	}
 
-	public void setChatServer(OIServer fieldChatServer) {
+	public void setChatServer(OIServer fieldChatServer)
+	{
 		this.fieldOiServer = fieldChatServer;
 	}
 
-	public SearcherManager getSearcherManager() {
-		if (fieldSearcherManager == null) {
+	public SearcherManager getSearcherManager()
+	{
+		if (fieldSearcherManager == null)
+		{
 			fieldSearcherManager = (SearcherManager) getModuleManager().getBean("searcherManager");
 		}
 		return fieldSearcherManager;
 	}
 
-	public void setSearcherManager(SearcherManager inSearcherManager) {
+	public void setSearcherManager(SearcherManager inSearcherManager)
+	{
 		fieldSearcherManager = inSearcherManager;
 	}
 
-	public ModuleManager getModuleManager() {
+	public ModuleManager getModuleManager()
+	{
 		return fieldModuleManager;
 	}
 
-	public void setModuleManager(ModuleManager inModuleManager) {
+	public void setModuleManager(ModuleManager inModuleManager)
+	{
 		fieldModuleManager = inModuleManager;
 	}
 
 	protected StringBuffer fieldBufferedMessage;
 
 	@Override
-	public void onError(Session session, Throwable throwable) {
+	public void onError(Session session, Throwable throwable)
+	{
 		// TODO Auto-generated method stub
 		super.onError(session, throwable);
 	}
 
 	@Override
-	public void onClose(Session session, CloseReason closeReason) {
+	public void onClose(Session session, CloseReason closeReason)
+	{
 
 		getOiServer().removeConnection(this);
-		if (fieldCatalogId != null) {
+		if (fieldCatalogId != null)
+		{
 			MediaArchive archive = (MediaArchive) getModuleManager().getBean(fieldCatalogId, "mediaArchive");
 
 			User user = archive.getUser(fieldUserId);
@@ -177,9 +206,9 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 	}
 
 	@Override
-	public void onOpen(Session session, EndpointConfig endpointConfig) {
-		javax.servlet.http.HttpSession http = (javax.servlet.http.HttpSession) session.getUserProperties()
-				.get("javax.servlet.http.HttpSession");
+	public void onOpen(Session session, EndpointConfig endpointConfig)
+	{
+		javax.servlet.http.HttpSession http = (javax.servlet.http.HttpSession) session.getUserProperties().get("javax.servlet.http.HttpSession");
 
 		fieldConnectionTime = new Date();
 
@@ -189,7 +218,8 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		fieldSessionID = (String) params.get("sessionid");
 		fieldCatalogId = (String) params.get("catalogid");
 		ModuleManager modulemanager = (ModuleManager) session.getUserProperties().get("moduleManager");
-		if (modulemanager == null) {
+		if (modulemanager == null)
+		{
 			throw new RuntimeException("modulemanager did not get set, Web site must be accessed with a session");
 		}
 
@@ -199,23 +229,28 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		Map props = endpointConfig.getUserProperties();
 		User user = getUser();
 
-		if (user == null) {
+		if (user == null)
+		{
 			String entermediakey = (String) params.get("entermedia.key");
 			log.info("Entermedia key was " + entermediakey);
 			String catalogtotry = fieldCatalogId;
-			if (catalogtotry == null) {
+			if (catalogtotry == null)
+			{
 				catalogtotry = "system";
 			}
-			if (entermediakey != null) {
+			if (entermediakey != null)
+			{
 				String account = entermediakey.substring(0, entermediakey.indexOf("md5"));
 				log.info("Got here - testing more");
 				MediaArchive archive = (MediaArchive) getModuleManager().getBean(catalogtotry, "mediaArchive");
 				User target = archive.getUser(account);
-				if (target != null) {
+				if (target != null)
+				{
 					log.info("Got here -found a user");
 
 					String emkey = archive.getUserManager().getEnterMediaKey(target);
-					if (entermediakey.equals(emkey)) {
+					if (entermediakey.equals(emkey))
+					{
 						log.info("Got here -found using " + target);
 
 						user = target;
@@ -224,7 +259,8 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 			}
 		}
 
-		if (user != null) {
+		if (user != null)
+		{
 			setUserId(user.getId());
 			setUser(user);
 		}
@@ -238,23 +274,29 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 	}
 
-	public String getSessionId() {
+	public String getSessionId()
+	{
 		return fieldSessionID;
 	}
 
-	public void setSessionId(String inSessionID) {
+	public void setSessionId(String inSessionID)
+	{
 		fieldSessionID = inSessionID;
 	}
 
-	public JSONParser getJSONParser() {
-		if (fieldJSONParser == null) {
+	public JSONParser getJSONParser()
+	{
+		if (fieldJSONParser == null)
+		{
 			fieldJSONParser = new JSONParser();
 		}
 		return fieldJSONParser;
 	}
 
-	protected StringBuffer getBufferedMessage() {
-		if (fieldBufferedMessage == null) {
+	protected StringBuffer getBufferedMessage()
+	{
+		if (fieldBufferedMessage == null)
+		{
 			fieldBufferedMessage = new StringBuffer();
 		}
 
@@ -262,15 +304,18 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 	}
 
 	@Override
-	public synchronized void onMessage(String inData, boolean completed) {
+	public synchronized void onMessage(String inData, boolean completed)
+	{
 
 		getBufferedMessage().append(inData);
-		if (!completed) {
+		if (!completed)
+		{
 			return;
 		}
 
 		String message = getBufferedMessage().toString();
-		if ("keepalive".equals(message) || message.length() == 0 || message.contains("keepalive")) {
+		if ("keepalive".equals(message) || message.length() == 0 || message.contains("keepalive"))
+		{
 			setLastConnection(new Date());
 			JSONObject ok = new JSONObject();
 			ok.put("status", "ok");
@@ -281,8 +326,10 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		}
 		fieldBufferedMessage = null;
 
-		try {
-			if (inData.length() == 0) {
+		try
+		{
+			if (inData.length() == 0)
+			{
 				return;
 			}
 			JSONObject map = (JSONObject) getJSONParser().parse(new StringReader(message));
@@ -290,24 +337,36 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 			PathEventManager manager = (PathEventManager) getModuleManager().getBean(catalogId, "pathEventManager");
 
 			String runpath = (String) map.get("runpath");
-			if (runpath != null) {
+			if (runpath != null)
+			{
 
 				String username = getUserId();
 				User user = (User) getUserManager(catalogId).getUser(username);
 
 				WebPageRequest request = manager.getRequestUtils().createPageRequest(runpath, user);
-				for (Iterator iterator = map.keySet().iterator(); iterator.hasNext();) {
+				for (Iterator iterator = map.keySet().iterator(); iterator.hasNext();)
+				{
 					String key = (String) iterator.next();
 					Object value = map.get(key);
-					if (value instanceof String) {
+					if (value instanceof String)
+					{
 						request.setRequestParameter(key, (String) value);
-					} else if (value instanceof Long) {
-						request.setRequestParameter(key, Long.toString((Long) value));
-					} else if (value instanceof Boolean) {
-						request.setRequestParameter(key, Boolean.toString((Boolean) value));
-					} else if (value instanceof Integer) {
-						request.setRequestParameter(key, Integer.toString((Integer) value));
 					}
+					else
+						if (value instanceof Long)
+						{
+							request.setRequestParameter(key, Long.toString((Long) value));
+						}
+						else
+							if (value instanceof Boolean)
+							{
+								request.setRequestParameter(key, Boolean.toString((Boolean) value));
+							}
+							else
+								if (value instanceof Integer)
+								{
+									request.setRequestParameter(key, Integer.toString((Integer) value));
+								}
 					request.putPageValue(key, value);
 				}
 				request.putPageValue("websocket", this);
@@ -320,8 +379,10 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 			}
 
 			String catalogid = (String) map.get("catalogid");
-			if (catalogid != null) {
-				for (Iterator iterator = map.keySet().iterator(); iterator.hasNext();) {
+			if (catalogid != null)
+			{
+				for (Iterator iterator = map.keySet().iterator(); iterator.hasNext();)
+				{
 					String key = (String) iterator.next();
 					Object value = map.get(key);
 					getProperties().put(key, value);
@@ -329,32 +390,42 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 			}
 
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			log.error("Could not parse: ", e);
 		}
 		fieldBufferedMessage = null;
 
 	}
 
-	public void sendMessage(JSONObject json) {
-		try {
+	public void sendMessage(JSONObject json)
+	{
+		try
+		{
 			remoteEndpointBasic.sendText(json.toJSONString());
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			log.error(e);
 			// throw new OpenEditException(e);
 		}
 	}
 
-	public RemoteEndpoint.Basic getRemoteEndpointBasic() {
+	public RemoteEndpoint.Basic getRemoteEndpointBasic()
+	{
 		return remoteEndpointBasic;
 
 	}
 
-	private Map<String, String> getQueryMap(String query) {
-		if (query != null) {
+	private Map<String, String> getQueryMap(String query)
+	{
+		if (query != null)
+		{
 			String[] params = query.split("&");
 			Map<String, String> map = new HashMap<String, String>();
-			for (String param : params) {
+			for (String param : params)
+			{
 				String name = param.split("=")[0];
 				String value = param.split("=")[1];
 				map.put(name, value);

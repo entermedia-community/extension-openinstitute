@@ -12,15 +12,18 @@ import org.openedit.ModuleManager;
 import org.openedit.MultiValued;
 import org.openedit.data.Searcher;
 
-public class TransactionManager implements CatalogEnabled {
+public class TransactionManager implements CatalogEnabled
+{
 	private static final Log log = LogFactory.getLog(TransactionManager.class);
 	protected String fieldCatalogId;
 	protected MediaArchive fieldMediaArchive;
 	protected ModuleManager fieldModuleManager;
 	protected DecimalFormat df = new DecimalFormat("#.00");
 
-	public String getCombinedTotalIncome(String inCollectionId, String currency) {
-		if (inCollectionId == null) {
+	public String getCombinedTotalIncome(String inCollectionId, String currency)
+	{
+		if (inCollectionId == null)
+		{
 			return "0";
 		}
 		double total = getTransactionTotal(inCollectionId);
@@ -29,12 +32,16 @@ public class TransactionManager implements CatalogEnabled {
 		return formatCurrency(combined, currency);
 	}
 
-	private String formatCurrency(double inCombined, String inCurrency) {
+	private String formatCurrency(double inCombined, String inCurrency)
+	{
 		double combined = inCombined;
 		// Convert to local currency
-		if (inCurrency == null || inCurrency.equals("1")) {
+		if (inCurrency == null || inCurrency.equals("1"))
+		{
 
-		} else {
+		}
+		else
+		{
 			MultiValued currencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", inCurrency);
 			double extchange = currencyType.getFloat("exchangetousd");
 
@@ -44,17 +51,22 @@ public class TransactionManager implements CatalogEnabled {
 		return df.format(combined); // TODO Handle Qs
 	}
 
-	private double getOtherDonationTotal(String inCollectionId) {
+	private double getOtherDonationTotal(String inCollectionId)
+	{
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("collectiveincome");
 		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
 		double amount = 0;
 
-		for (Data it : clientinvoices) {
+		for (Data it : clientinvoices)
+		{
 			MultiValued real = (MultiValued) invoiceSearcher.loadData(it);
 			String type = real.get("currencytype");
-			if (type == null || type.equals("1")) {
+			if (type == null || type.equals("1"))
+			{
 				amount = amount + real.getFloat("total");
-			} else {
+			}
+			else
+			{
 				MultiValued othercurrencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", type);
 				double extchange = othercurrencyType.getFloat("exchangetousd");
 				// Convert to dollars first
@@ -66,22 +78,29 @@ public class TransactionManager implements CatalogEnabled {
 		return amount;
 	}
 
-	public double getTransactionTotal(String inCollectionId) {
-		if (inCollectionId == null) {
+	public double getTransactionTotal(String inCollectionId)
+	{
+		if (inCollectionId == null)
+		{
 			return 0D;
 		}
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("transaction");
 		Collection<Data> clientinvoices = invoiceSearcher.query().exact("collectionid", inCollectionId).search();
 		double amount = 0;
 
-		for (Data it : clientinvoices) {
+		for (Data it : clientinvoices)
+		{
 			MultiValued real = (MultiValued) invoiceSearcher.loadData(it);
 
-			try {
+			try
+			{
 				String type = real.get("currencytype");
-				if (type == null || type.equals("1")) {
+				if (type == null || type.equals("1"))
+				{
 					amount = amount + real.getFloat("totalprice");
-				} else {
+				}
+				else
+				{
 					MultiValued othercurrencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", type);
 					double extchange = othercurrencyType.getFloat("exchangetousd");
 					// Convert to dollars first
@@ -89,7 +108,9 @@ public class TransactionManager implements CatalogEnabled {
 					amount = amount + inusd;
 				}
 
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				log.error("Can't retrieve/parse invoice " + real.get("name") + " amount", e);
 			}
 		}
@@ -98,30 +119,37 @@ public class TransactionManager implements CatalogEnabled {
 
 	}
 
-	public String getCatalogId() {
+	public String getCatalogId()
+	{
 		return fieldCatalogId;
 	}
 
-	public void setCatalogId(String inCatalogId) {
+	public void setCatalogId(String inCatalogId)
+	{
 		fieldCatalogId = inCatalogId;
 	}
 
-	public MediaArchive getMediaArchive() {
-		if (fieldMediaArchive == null) {
+	public MediaArchive getMediaArchive()
+	{
+		if (fieldMediaArchive == null)
+		{
 			fieldMediaArchive = (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
 		}
 		return fieldMediaArchive;
 	}
 
-	public void setMediaArchive(MediaArchive inMediaArchive) {
+	public void setMediaArchive(MediaArchive inMediaArchive)
+	{
 		fieldMediaArchive = inMediaArchive;
 	}
 
-	public ModuleManager getModuleManager() {
+	public ModuleManager getModuleManager()
+	{
 		return fieldModuleManager;
 	}
 
-	public void setModuleManager(ModuleManager inModuleManager) {
+	public void setModuleManager(ModuleManager inModuleManager)
+	{
 		fieldModuleManager = inModuleManager;
 	}
 
