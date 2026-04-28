@@ -9,98 +9,73 @@ import org.openedit.Data;
 import org.openedit.ModuleManager;
 import org.openedit.users.User;
 
-public class BankAccountManager implements CatalogEnabled
-{
+public class BankAccountManager implements CatalogEnabled {
 	private static final Log log = LogFactory.getLog(BankAccountManager.class);
 	protected ModuleManager fieldModuleManager;
 	protected MediaArchive fieldMediaArchive;
 	protected String fieldCatalogId;
 	protected FinanceManager fieldFinanceManager;
-	
-	public FinanceManager getFinanceManager()
-	{
-		if (fieldFinanceManager == null)
-		{
-			fieldFinanceManager = (FinanceManager)getModuleManager().getBean(getCatalogId(), "financeManager");
+
+	public FinanceManager getFinanceManager() {
+		if (fieldFinanceManager == null) {
+			fieldFinanceManager = (FinanceManager) getModuleManager().getBean(getCatalogId(), "financeManager");
 		}
 
 		return fieldFinanceManager;
 	}
 
-
-	public void setFinanceManager(FinanceManager inFinanceManager)
-	{
+	public void setFinanceManager(FinanceManager inFinanceManager) {
 		fieldFinanceManager = inFinanceManager;
 	}
 
-
-	public String getCatalogId()
-	{
+	public String getCatalogId() {
 		return fieldCatalogId;
 	}
 
-
-	public void setCatalogId(String inCatalogId)
-	{
+	public void setCatalogId(String inCatalogId) {
 		fieldCatalogId = inCatalogId;
 	}
 
-
-	public ModuleManager getModuleManager()
-	{
+	public ModuleManager getModuleManager() {
 		return fieldModuleManager;
 	}
 
-
-	public void setModuleManager(ModuleManager inModuleManager)
-	{
+	public void setModuleManager(ModuleManager inModuleManager) {
 		fieldModuleManager = inModuleManager;
 	}
-	
-	public MediaArchive getMediaArchive()
-	{
-		if (fieldMediaArchive == null)
-		{
-			fieldMediaArchive = (MediaArchive)getModuleManager().getBean(getCatalogId(), "mediaArchive");
+
+	public MediaArchive getMediaArchive() {
+		if (fieldMediaArchive == null) {
+			fieldMediaArchive = (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
 		}
 		return fieldMediaArchive;
 	}
 
-	public void setMediaArchive(MediaArchive inMediaArchive)
-	{
+	public void setMediaArchive(MediaArchive inMediaArchive) {
 		fieldMediaArchive = inMediaArchive;
 	}
 
-
-	public Data getBankAccountByLink(String inLinkid)
-	{
+	public Data getBankAccountByLink(String inLinkid) {
 		return null;
 	}
 
-
-	public void sendMoney(Data inBankaccount)
-	{
+	public void sendMoney(Data inBankaccount) {
 	}
 
+	public Data loadBankAccountLink(String inLinkid) {
+		Data lookup = getMediaArchive().getCachedData("bankaccountlookup", inLinkid);
 
-	public Data loadBankAccountLink(String inLinkid)
-	{
-		Data lookup = getMediaArchive().getCachedData("bankaccountlookup",inLinkid);
-		
 		return lookup;
 	}
 
-
-	public User loadBankAccountUser(String inLinkid)
-	{
+	public User loadBankAccountUser(String inLinkid) {
 		Data lookup = loadBankAccountLink(inLinkid);
 		String bankaccountid = lookup.get("bankaccount");
 		String userid = lookup.get("user");
 		User user = getMediaArchive().getUser(userid);
-		//Data bankaccount = getMediaArchive().getCachedData("bankaccount",bankaccountid);
+		// Data bankaccount =
+		// getMediaArchive().getCachedData("bankaccount",bankaccountid);
 		return user;
 	}
-
-	
 
 }

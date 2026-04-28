@@ -2,53 +2,47 @@ package org.openinstitute.finance;
 
 import java.time.LocalDate;
 
-public class BookingDate
-{
+public class BookingDate {
 	protected LocalDate fieldLocalDate;
-	
-	public LocalDate getLocalDate()
-	{
+
+	public LocalDate getLocalDate() {
 		return fieldLocalDate;
 	}
-	public void setLocalDate(LocalDate inLocalDate)
-	{
+
+	public void setLocalDate(LocalDate inLocalDate) {
 		fieldLocalDate = inLocalDate;
 	}
+
 	protected boolean isAvailable;
-	
-	
-	public BookingDate()
-	{
+
+	public BookingDate() {
 		// TODO Auto-generated constructor stub
 	}
-	public BookingDate(LocalDate inDate)
-	{
+
+	public BookingDate(LocalDate inDate) {
 		setLocalDate(inDate);
 	}
-	
-	public boolean isAvailable()
-	{
+
+	public boolean isAvailable() {
 		return isAvailable;
 	}
-	public void setAvailable(boolean inIsAvailable)
-	{
+
+	public void setAvailable(boolean inIsAvailable) {
 		isAvailable = inIsAvailable;
 	}
-	
-	public String toDateString()
-	{
+
+	public String toDateString() {
 		StringBuffer formated = new StringBuffer();
-		formated.append( getLocalDate().getYear());
+		formated.append(getLocalDate().getYear());
 		formated.append("-");
 		formated.append(String.format("%02d", getLocalDate().getMonthValue()));
 		formated.append("-");
 		formated.append(String.format("%02d", getLocalDate().getDayOfMonth()));
-		
+
 		return formated.toString();
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "[" + toDateString() + "]";
 	}
 }

@@ -176,15 +176,13 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 
 	}
 
-
 	@Override
 	public void onOpen(Session session, EndpointConfig endpointConfig) {
 		javax.servlet.http.HttpSession http = (javax.servlet.http.HttpSession) session.getUserProperties()
 				.get("javax.servlet.http.HttpSession");
 
-	
 		fieldConnectionTime = new Date();
-	
+
 		String query = session.getQueryString();
 		Map params = getQueryMap(query);
 
@@ -200,7 +198,7 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		log.info(session.getId());
 		Map props = endpointConfig.getUserProperties();
 		User user = getUser();
-		
+
 		if (user == null) {
 			String entermediakey = (String) params.get("entermedia.key");
 			log.info("Entermedia key was " + entermediakey);
@@ -263,11 +261,6 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 		return fieldBufferedMessage;
 	}
 
-	
-	
-	
-	
-	
 	@Override
 	public synchronized void onMessage(String inData, boolean completed) {
 
@@ -367,10 +360,10 @@ public class OIConnection extends Endpoint implements MessageHandler.Partial<Str
 				map.put(name, value);
 				return map;
 			}
-			
-		} 
-		
-		return new <String, String> HashMap();
+
+		}
+
+		return new <String, String>HashMap();
 	}
 
 	// public
