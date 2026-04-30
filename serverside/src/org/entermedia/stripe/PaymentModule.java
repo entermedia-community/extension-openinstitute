@@ -914,7 +914,7 @@ public class PaymentModule extends BaseMediaModule
 	//
 	// public void generateTestKey(WebPageRequest inReq){
 	//// curl -X POST https://connect.stripe.com/oauth/token \
-	//// -d client_secret=sk_test_1UN7JHJIQxTA4wsBeXgyHj8u \
+	//// -d client_secret= \
 	//// -d refresh_token=REFRESH_TOKEN \
 	//// -d grant_type=refresh_token
 	// Store store = (Store) inReq.getPageValue("store");
