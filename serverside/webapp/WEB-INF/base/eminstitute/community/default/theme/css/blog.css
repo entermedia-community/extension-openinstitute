@@ -356,6 +356,7 @@ textarea.blog-comments-input {
 	flex-direction: column;
 	box-shadow: -1px 0 4px rgba(50, 50, 50, 0.1);
 	min-width: 240px;
+	background-color: #ffffff;
 }
 .article-article h2 {
 	font-size: 1.4rem;

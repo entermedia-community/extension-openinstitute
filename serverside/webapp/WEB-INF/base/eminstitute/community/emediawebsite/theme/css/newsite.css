@@ -62,6 +62,11 @@ h2 {
 	display: none !important;
 } */
 
+.bg-white  h1, .bg-white h2, .bg-white h3, .bg-white p {
+	color: var(--deep) !important;
+	
+}	
+
 .page-shell {
 	overflow: clip;
 }
@@ -1039,7 +1044,7 @@ svg#animation {
 }
 
 .profile-credentials .email {
-	margin: 16px 0 4px;
+	margin: 10px 0 4px 4px;
 	font-size: 1rem;
 }
 
