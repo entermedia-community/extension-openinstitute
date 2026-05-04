@@ -41,7 +41,11 @@
 		      <strong>[[Invoice Status]]:</strong>
 		      #if($status.equals("invoiced")) [[Invoice sent]]
 		      #elseif($status.equals("pending")) [[Pending]]
-		      #elseif($status.equals("payd")) [[Payd]] #end
+		      #elseif($status.equals("payd")) [[Payd]] 
+			  #elseif($status.equals("error")) <span class="billinginvoiceerror">[[Error]]#ifnotnull($invoice.paymentstatusreason): $invoice.paymentstatusreason
+				#end
+				</span>
+			  #end
 		    </div>
 		    #if($status.equals("invoiced") && $invoice.getValue("sentdate"))
 		    <div style="padding: 0 0 5px 0">
@@ -82,7 +86,7 @@
 		
 	    $pages.include("viewinvoiceheader.html", $context)
 
-		<div style="background-color: #efefef; padding: 10px; margin: 10px 0">
+		<div style="background-color: #efefef; color:#333!important; padding: 10px; margin: 10px 0">
 	      <table style="width: 100%">
 	        <tr>
 	          <td>

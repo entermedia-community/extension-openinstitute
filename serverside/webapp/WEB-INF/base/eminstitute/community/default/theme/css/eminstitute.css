@@ -161,10 +161,14 @@ a.primary:hover .fa-solid {
 	background-color: #198754 !important;
 	cursor: default;
 }
+table {
+  color: inherit;
+}
 .table {
 	--bs-table-striped-bg: #e8f1ed;
 	--bs-table-hover-bg: #e7e7e7;
 }
+
 .table-hover a:hover {
 	text-decoration: none;
 }
