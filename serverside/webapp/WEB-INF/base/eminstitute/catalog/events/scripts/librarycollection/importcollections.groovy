@@ -137,6 +137,7 @@ def search = '''{
 		downloadData(connection, "donationreceipt", "collectionid", collectionid, collectionid)
 		downloadData(connection, "transaction", "collectionid", collectionid, collectionid)
 		*/
+		downloadData(connection, "userupload", "librarycollection", collectionid, collectionid)
 	}
 	
 	/*
@@ -148,7 +149,7 @@ def search = '''{
 	*/
 
 	//Download Assets from a specific category
-	downloadAssets(connection, null, "AZtcRpF9AtO-rTscxHxm")  //Blog images category
+	//downloadAssets(connection, null, "AZtcRpF9AtO-rTscxHxm")  //Blog images category
 	
 	
 	

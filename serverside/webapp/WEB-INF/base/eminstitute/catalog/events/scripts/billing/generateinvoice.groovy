@@ -54,6 +54,7 @@ private void generateInvoice(MediaArchive mediaArchive, Searcher productSearcher
 			//--
 			
 			invoice.setValue("productlist", items);
+			invoice.setValue("invoicesentstatus", "pending");
 			invoice.setValue("paymentstatus", "pending");
 			invoice.setValue("isautopaid", product.getValue("isautopaid"));
 			invoice.setValue("collectionid", product.getValue("collectionid"));

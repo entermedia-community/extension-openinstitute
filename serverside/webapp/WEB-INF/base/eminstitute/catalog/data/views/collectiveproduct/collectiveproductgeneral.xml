@@ -12,9 +12,12 @@
 	<property id="currencytype" />
 	<property id="productprice" />
 	<property id="paymentstatus" />
+	<property id="sentto" />
+	
 	<property id="recurring" />
 	<property id="recurringperiod" />
 	<property id="nextbillon" /> 
+	<property id="billingstatus" />
 	
-	<property id="sentto" />
+	
 </properties>

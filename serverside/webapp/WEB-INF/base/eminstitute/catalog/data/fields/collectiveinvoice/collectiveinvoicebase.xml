@@ -131,6 +131,15 @@
 			<language id="en"><![CDATA[Notification Sent to]]></language>
 		</name>
 	</property>
+
+	<property id="invoicesentstatus" index="true" stored="true"
+		editable="true" type="list">Sent Status</property>
+
+	<property id="invoicesentstatusreason" index="true" stored="true" editable="true">
+		<name>
+			<language id="en"><![CDATA[Sent Status Reason]]></language>
+		</name>
+	</property>
   
   	<property id="startdate" editable="true" stored="true"
 		type="date" index="true">

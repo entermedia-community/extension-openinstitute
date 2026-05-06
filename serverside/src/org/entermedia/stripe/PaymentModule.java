@@ -512,9 +512,12 @@ public class PaymentModule extends BaseMediaModule
 		if (invoice != null) 
 		{
 			String status = (String) invoice.getValue("paymentstatus");
-			if (status == null || status.equals("pending") || status.equals("invoiced")) {
+			if (!"paid".equals(status)) 
+			{
+			
 				//only pending and invoiced can be canceled
 				invoice.setValue("paymentstatus", "canceled");
+				invoice.setValue("invoicesentstatus", "canceled");
 				archive.saveData("collectiveinvoice", invoice);
 				//Unlock products
 				List products = (List) invoice.getValues("productlist");
@@ -731,6 +734,9 @@ public class PaymentModule extends BaseMediaModule
 		//saved.setValue("billingstatus", "active");
 		//saved.setValue("nextbillon", today.getTime());
 		collectiveproductsearcher.saveData(saved, null);
+
+		mediaArchive.getEventManager().fireDataSavedEvent(inReq, collectiveproductsearcher, saved);
+		log.info("Created Product/Service: " + saved.getName());
 		inReq.putPageValue("id", saved.getId());
 	}
 	
@@ -753,6 +759,8 @@ public class PaymentModule extends BaseMediaModule
 		//saved.setValue("nextbillon", today.getTime());
 		collectiveproductsearcher.saveData(saved, null);
 		inReq.putPageValue("data", saved);
+		
+		mediaArchive.getEventManager().fireDataSavedEvent(inReq, collectiveproductsearcher, saved);
 		
 	}
 	

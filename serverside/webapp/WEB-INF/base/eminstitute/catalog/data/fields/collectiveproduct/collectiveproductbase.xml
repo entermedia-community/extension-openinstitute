@@ -161,7 +161,7 @@
    		
 	<property id="sentto" index="true" stored="true" editable="true">
 		<name>
-			<language id="en"><![CDATA[Notification Sent to]]></language>
+			<language id="en"><![CDATA[Send Invoice to]]></language>
 		</name>
 	</property>
 		

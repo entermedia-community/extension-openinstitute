@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	<data id="sendinvoice">
+	    <name> 
+      <language id="en"><![CDATA[Sending Invoice]]></language> 
+      <language id="es"><![CDATA[Enviando Factura]]></language>
+    </name> 
+    </data>
+	<data id="pending">
+	<name> 
+      <language id="en"><![CDATA[Pending]]></language> 
+      <language id="es"><![CDATA[Pendiente]]></language>
+    </name>
+    </data>
+	<data id="sent">
+		<name> 
+      <language id="en"><![CDATA[Invoiced]]></language> 
+      <language id="es"><![CDATA[Facturada]]></language>
+    </name>
+	</data>
+	
+  
+	<data id="canceled">
+		<name> 
+      <language id="en"><![CDATA[Canceled]]></language> 
+      <language id="es"><![CDATA[Cancelada]]></language>
+    </name>
+	</data>	
+
+	<data id="error">
+		<name> 
+      <language id="en"><![CDATA[Error]]></language> 
+      <language id="es"><![CDATA[Error]]></language>
+    </name>
+	</data>
+</root>

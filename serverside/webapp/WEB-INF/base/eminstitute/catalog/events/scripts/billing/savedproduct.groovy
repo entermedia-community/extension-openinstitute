@@ -15,16 +15,7 @@ public void init() {
 		String dash = PathUtilities.dash(product.getName());
 		product.setValue("urlname",dash)
 	}
-	
-	//always set product active?
-	log.info(product.get("billingstatus") + "  "+ product.get("nextbillon"));
-	if (product.get("billingstatus") == null && product.get("nextbillon") != null)
-	{
-		product.setValue("billingstatus", "active");
-		log.info("Set to active");
-	}
-	
-	
+
 	productSearcher.saveData(product);
 } 
 

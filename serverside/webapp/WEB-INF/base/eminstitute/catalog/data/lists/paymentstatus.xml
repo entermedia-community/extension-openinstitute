@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-	<data id="sendinvoice">
-	    <name> 
-      <language id="en"><![CDATA[Sending Invoice]]></language> 
-      <language id="es"><![CDATA[Enviando Factura]]></language>
-    </name> 
-    </data>
-	<data id="pending">
-	<name> 
-      <language id="en"><![CDATA[Pending]]></language> 
-      <language id="es"><![CDATA[Pendiente]]></language>
-    </name>
-    </data>
+  <!-- Handled now with the invoicepaidstatus     -->
+    <data id="sendinvoice">
+        <name> 
+        <language id="en"><![CDATA[Sending Invoice]]></language> 
+        <language id="es"><![CDATA[Enviando Factura]]></language>
+      </name> 
+      </data>
+  <!-- -->
 	<data id="invoiced">
 		<name> 
       <language id="en"><![CDATA[Invoiced]]></language> 
       <language id="es"><![CDATA[Facturada]]></language>
     </name>
 	</data>
+	<data id="pending">
+	<name> 
+      <language id="en"><![CDATA[Pending]]></language> 
+      <language id="es"><![CDATA[Pendiente]]></language>
+    </name>
+    </data>
+
 	<data id="paid">
 		<name> 
       <language id="en"><![CDATA[Paid]]></language> 

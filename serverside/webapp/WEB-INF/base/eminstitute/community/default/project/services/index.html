@@ -107,37 +107,47 @@
 							<span class="currencysmall">$!{currency.currencycode}</span>
 						 </td>
                          <td style="text-align: center;">
-                             #set($status = $mediaarchive.query("paymentstatus").match("id", "$invoice.paymentstatus").searchOne())
-                             $!context.getText($status)
-                             #if ($invoice.getValue("paymentstatus") == "autopayfailed" || $invoice.getValue("paymentstatus") == "error")
-							 			#ifnotnull($invoice.paymentstatusreason)
-							            	<div class="billinginvoiceerror">$invoice.paymentstatusreason</div>
-							            #end
+                            
+                            #set($paymentstatus = $mediaarchive.getCachedData("paymentstatus", $invoice.getValue("paymentstatus"))) 
+                            #if($invoice.getValue("paymentstatus") == "paid")
+                            	[[Paid]]
+                            #elseif($invoice.getValue("paymentstatus") == "error")
+                            	[[Payment Error]]
+                                 #ifnotnull($invoice.paymentstatusreason)
+                                    <div class="billinginvoiceerror">$invoice.paymentstatusreason</div>
+                                #end
+                            #else
+                                #set($sentstatus = $mediaarchive.getCachedData("invoicesentstatus", $invoice.getValue("invoicesentstatus")))
+                                $!context.getText($sentstatus)  
+                                #if ($invoice.getValue("invoicesentstatus") == "error")
+                                        #ifnotnull($invoice.invoicesentstatusreason)
+                                            <div class="billinginvoiceerror">$invoice.invoicesentstatusreason</div>
+                                        #end
+                                #end
                             #end
                          </td>
                          <td>
                             <a href="${projectlink}/services/previewinvoice.html?invoiceid=${invoice.id}&collectionid=$collectionid"
                                      
-                                     class="btn btn-xs btn-secondary emdialog"
+                                     class="btn btn-xs btn-secondary emdialog mb-1"
                                       data-hidefooter="true">[[View]]</a>
-                             
-                             #if ($invoice.getValue("paymentstatus") == "invoiced" || $invoice.getValue("paymentstatus") == "autopayfailed" || $invoice.getValue("paymentstatus") == "error")
+                             #if ($invoice.getValue("invoicesentstatus") == "sent")
                                  <a
                                      href="${projectlink}/services/paynow.html?invoiceid=${invoice.id}&collectionid=$collectionid"
-                                     class="btn btn-xs btn-primary">
+                                     class="btn btn-xs btn-primary mb-1">
                                      [[Pay Now]]</a>
   
 							 #end
 							 
 	                       	 #if( $canviewsettings )
-                                 #if ($invoice.getValue("paymentstatus") == "pending" ||$invoice.getValue("paymentstatus") == "invoiced")
+                                 #if ($invoice.getValue("paymentstatus") != "paid" && $invoice.getValue("invoicesentstatus") != "canceled")
                              	  <a
                                   href="${projectlink}/services/cancelinvoice.html?collectionid=${collectionid}&id=${invoice.id}&oemaxlevel=1"
-                                  class="ajax btn btn-xs btn-danger" data-targetdiv="collectivebilling">[[Cancel]]</a>
+                                  class="ajax btn btn-xs btn-danger mb-1" data-targetdiv="collectivebilling">[[Cancel]]</a>
                             	  #end
                             	  <a
                                      href="/find/views/settings/lists/datamanager/edit/edit.html?id=$invoice.id&searchtype=collectiveinvoice"
-                                     class="btn btn-xs btn-secondary"
+                                     class="btn btn-xs btn-secondary mb-1"
                                      target="_blank">
                                      <i class="fa fa-database"></i>
                                  </a>
