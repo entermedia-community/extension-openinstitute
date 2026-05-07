@@ -101,7 +101,7 @@
   </property>
 
 
-  <property id="projectstatus" filter="true" index="true" stored="true" editable="true" type="list" viewtype="list" datatype="list" multilanguage="true">
+  <property id="projectstatus" filter="true" index="true" stored="true" editable="true" type="list" viewtype="list" datatype="list">
     <name>
       <language id="en"><![CDATA[Status]]></language>
     </name>

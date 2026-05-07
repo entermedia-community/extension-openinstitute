@@ -1,12 +1,8 @@
 #set( $target = "resolve#eid($goal.id)")
 #set($value = $mediaarchive.getCachedData("projectstatus",$goal.projectstatus))
-<div id="$target" >
+<div id="$target" class="d-flex flex-column align-items-end">
 	#if($value)
-		#if($value == "Completed")
-			<a class="btn btn-xs btn-success" style="color:white">[[Completed]]</a>
-		#else
-			<div>#text($value)</div>
-		#end
+		<div class="badge text-bg-secondary mb-2">#text($value)</div>
 	#end
 	
 	#if($goal.projectstatus != "completed" && $goal.projectstatus != "closed")
