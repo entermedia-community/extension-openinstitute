@@ -2,7 +2,7 @@
 
 #set($collectionid = $context.getRequestParameter("collectionid"))
 
-<div id="roleeditor${task.id}" class="d-flex flex-wrap">
+<div id="roleeditor${task.id}" class="d-flex flex-wrap rolelist">
 	#foreach( $role in $rolesarray )
 		
 		#set($link = "${communityhome}/project/goals/priorities/index.html?collectionid=$!collectionid&keyword=$val")
@@ -10,13 +10,12 @@
 		#set($collectiveuser = $mediaarchive.getCachedData("user",$role.roleuserid))
 
 		<div class="btn-group mb-2 me-2 
-			#if( $task.taskstatus != "3" )
-				#if( $selectedcollectiverole == $collectiverole.id)
+				#if( $selectedcollectiverole == $collectiverole.id && $task.taskstatus != "3")
 					roleselected
-				#elseif( $!role.roleuserid == $user.id )
+				#elseif( $role.roleuserid == $user.id )
 					rolemyself
-				#end
-			#end" role="group">
+					#if($task.taskstatus == "3") completed #end
+				#end" role="group">
 			<a href="#if($caneditcollection)${communityhome}/project/goals/task/editrole/editrole.html#end"
 				title="#text($collectiverole)"
 			 	data-taskid="$task.id" 
@@ -30,7 +29,7 @@
 					- #text($collectiveuser)
 				#end
 			 	#ifnotnull($role.name)
-			  	#esc($!role.name)
+			  	#esc($!role.name) 
 			 	#end
 			</a>
 			 

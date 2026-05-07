@@ -705,19 +705,31 @@ ul.projectgoals {
 	border-color: #d47272 !important;
 	background-color: #bb4747 !important;
 }
+.rolemyself .btn-point,
+.rolemyself .btn-point:hover {
+	color: #fff !important;
+	border-color: #bb4747 !important;
+	background-color: #d47272 !important;
+}
+
+.rolemyself.completed .btn-role,
+.rolemyself.completed .btn-role:hover {
+	color: #fff !important;
+	border-color: #65ca58 !important;
+	background-color: #57af4c !important;
+}
+.rolemyself.completed .btn-point,
+.rolemyself.completed .btn-point:hover {
+	color: #fff !important;
+	border-color: #57af4c !important;
+	background-color: #65ca58 !important;
+}
 
 .roleselected .btn-role,
 .roleselected .btn-role:hover {
 	color: #fff !important;
 	border-color: #eeba1e !important;
 	background-color: #a08b01 !important;
-}
-
-.rolemyself .btn-point,
-.rolemyself .btn-point:hover {
-	color: #fff !important;
-	border-color: #bb4747 !important;
-	background-color: #d47272 !important;
 }
 
 .roleselected .btn-point,
