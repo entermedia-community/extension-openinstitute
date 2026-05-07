@@ -162,7 +162,7 @@ a.primary:hover .fa-solid {
 	cursor: default;
 }
 table {
-  color: inherit;
+	color: inherit;
 }
 .table {
 	--bs-table-striped-bg: #e8f1ed;
@@ -465,6 +465,9 @@ table {
 }
 .sidebar-box a {
 	color: #0c223b;
+}
+.sidebar-box-header a {
+	color: #ffffff !important;
 }
 .sidebar-box a:hover {
 	color: #000;
