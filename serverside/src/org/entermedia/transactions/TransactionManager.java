@@ -18,37 +18,37 @@ public class TransactionManager implements CatalogEnabled
 	protected String fieldCatalogId;
 	protected MediaArchive fieldMediaArchive;
 	protected ModuleManager fieldModuleManager;
-	protected DecimalFormat df = new DecimalFormat("#.00"); 
+	protected DecimalFormat df = new DecimalFormat("#.00");
 
 	public String getCombinedTotalIncome(String inCollectionId, String currency)
 	{
-		if( inCollectionId == null)
+		if (inCollectionId == null)
 		{
 			return "0";
 		}
 		double total = getTransactionTotal(inCollectionId);
 		double other = getOtherDonationTotal(inCollectionId);
 		double combined = total + other;
-		return formatCurrency(combined,currency);
+		return formatCurrency(combined, currency);
 	}
-	
+
 	private String formatCurrency(double inCombined, String inCurrency)
 	{
 		double combined = inCombined;
-		//Convert to local currency
-		if( inCurrency == null || inCurrency.equals("1") )
+		// Convert to local currency
+		if (inCurrency == null || inCurrency.equals("1"))
 		{
-			
+
 		}
 		else
 		{
-			MultiValued currencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", inCurrency);
+			MultiValued currencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", inCurrency);
 			double extchange = currencyType.getFloat("exchangetousd");
-			
+
 			combined = combined * extchange;
-			
+
 		}
-		return df.format(combined); //TODO Handle Qs
+		return df.format(combined); // TODO Handle Qs
 	}
 
 	private double getOtherDonationTotal(String inCollectionId)
@@ -61,26 +61,26 @@ public class TransactionManager implements CatalogEnabled
 		{
 			MultiValued real = (MultiValued) invoiceSearcher.loadData(it);
 			String type = real.get("currencytype");
-			if( type == null ||  type.equals("1"))
+			if (type == null || type.equals("1"))
 			{
 				amount = amount + real.getFloat("total");
 			}
 			else
 			{
-				MultiValued othercurrencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", type);
+				MultiValued othercurrencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", type);
 				double extchange = othercurrencyType.getFloat("exchangetousd");
-				//Convert to dollars first
+				// Convert to dollars first
 				double inusd = real.getFloat("total") / extchange;
 				amount = amount + inusd;
 			}
-			
+
 		}
 		return amount;
 	}
 
 	public double getTransactionTotal(String inCollectionId)
 	{
-		if( inCollectionId == null)
+		if (inCollectionId == null)
 		{
 			return 0D;
 		}
@@ -95,28 +95,28 @@ public class TransactionManager implements CatalogEnabled
 			try
 			{
 				String type = real.get("currencytype");
-				if( type == null ||  type.equals("1"))
+				if (type == null || type.equals("1"))
 				{
 					amount = amount + real.getFloat("totalprice");
 				}
 				else
 				{
-					MultiValued othercurrencyType = (MultiValued)getMediaArchive().getCachedData("currencytype", type);
+					MultiValued othercurrencyType = (MultiValued) getMediaArchive().getCachedData("currencytype", type);
 					double extchange = othercurrencyType.getFloat("exchangetousd");
-					//Convert to dollars first
+					// Convert to dollars first
 					double inusd = real.getFloat("totalprice") / extchange;
 					amount = amount + inusd;
 				}
-				
+
 			}
 			catch (Exception e)
 			{
 				log.error("Can't retrieve/parse invoice " + real.get("name") + " amount", e);
 			}
 		}
-		
+
 		return amount;
-		
+
 	}
 
 	public String getCatalogId()
@@ -128,11 +128,12 @@ public class TransactionManager implements CatalogEnabled
 	{
 		fieldCatalogId = inCatalogId;
 	}
+
 	public MediaArchive getMediaArchive()
 	{
 		if (fieldMediaArchive == null)
 		{
-			fieldMediaArchive = (MediaArchive)getModuleManager().getBean(getCatalogId(), "mediaArchive");
+			fieldMediaArchive = (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
 		}
 		return fieldMediaArchive;
 	}

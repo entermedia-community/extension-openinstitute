@@ -28,8 +28,7 @@ public class InvoiceManager implements CatalogEnabled
 	protected String fieldCatalogId;
 	protected MediaArchive fieldMediaArchive;
 	protected ModuleManager fieldModuleManager;
-	protected DecimalFormat df = new DecimalFormat("#.00"); 
-
+	protected DecimalFormat df = new DecimalFormat("#.00");
 
 	public int getUnpaidInvoiceNumber(String inCollectionId)
 	{
@@ -59,7 +58,7 @@ public class InvoiceManager implements CatalogEnabled
 	{
 		int res = 0;
 		Collection<Data> clientinvoices = getMediaArchive().query("clientinvoice").match("status", InvoiceStatus.CANCELED).exact("librarycollection", inCollectionId).search();
-		
+
 		if (clientinvoices != null)
 		{
 			res = clientinvoices.size();
@@ -79,8 +78,6 @@ public class InvoiceManager implements CatalogEnabled
 		return res;
 	}
 
-
-	
 	public String getAccountBalance(String inCollectionId)
 	{
 		Searcher invoiceSearcher = getMediaArchive().getSearcher("clientinvoice");
@@ -93,7 +90,7 @@ public class InvoiceManager implements CatalogEnabled
 
 			try
 			{
-				amount += (double)real.getValue("amount");
+				amount += (double) real.getValue("amount");
 			}
 			catch (Exception e)
 			{
@@ -112,11 +109,12 @@ public class InvoiceManager implements CatalogEnabled
 	{
 		fieldCatalogId = inCatalogId;
 	}
+
 	public MediaArchive getMediaArchive()
 	{
 		if (fieldMediaArchive == null)
 		{
-			fieldMediaArchive = (MediaArchive)getModuleManager().getBean(getCatalogId(), "mediaArchive");
+			fieldMediaArchive = (MediaArchive) getModuleManager().getBean(getCatalogId(), "mediaArchive");
 		}
 		return fieldMediaArchive;
 	}
@@ -139,137 +137,135 @@ public class InvoiceManager implements CatalogEnabled
 	protected void saveNewInvoiceForStore(MediaArchive mediaArchive, MultiValued invoice, MultiValued product)
 	{
 		int days = calculateDays(invoice);
-		
+
 		double price = product.getDouble("productprice");
-		
-		//Daily?
+
+		// Daily?
 		double totalcost = price * days;
 
 		Map map = new HashMap();
-		map.put("productid",product.getId());
-		map.put("productquantity",days);
-		map.put("productprice", totalcost );
-		
+		map.put("productid", product.getId());
+		map.put("productquantity", days);
+		map.put("productprice", totalcost);
+
 		List products = new ArrayList(1);
 		products.add(map);
 		invoice.setValue("productlist", products);
-		invoice.setValue("totalprice",totalcost);
-		if( invoice.getValue("currencytype") != null)
+		invoice.setValue("totalprice", totalcost);
+		if (invoice.getValue("currencytype") != null)
 		{
-			invoice.setValue("currencytype",product.get("currencytype"));
+			invoice.setValue("currencytype", product.get("currencytype"));
 		}
-		//Grab email from user who ordered the product
+		// Grab email from user who ordered the product
 		User sentto = mediaArchive.getUser(invoice.get("forcustomer"));
 		User sentto2 = mediaArchive.getUser(invoice.get("owner"));
 		StringBuffer to = new StringBuffer();
-		if( sentto != null && sentto.getEmail() != null)
+		if (sentto != null && sentto.getEmail() != null)
 		{
 			to.append(sentto.getEmail());
 		}
-		if( sentto != sentto2 && sentto2 != null && sentto2.getEmail() != null)
+		if (sentto != sentto2 && sentto2 != null && sentto2.getEmail() != null)
 		{
-			if(sentto != null && sentto.getEmail() != null)
+			if (sentto != null && sentto.getEmail() != null)
 			{
 				to.append(",");
 			}
 			to.append(sentto2.getEmail());
 		}
-		if( to.length() > 0)
+		if (to.length() > 0)
 		{
-			invoice.setValue("sentto",to.toString()); //Collective admin plus the users
+			invoice.setValue("sentto", to.toString()); // Collective admin plus the users
 		}
-		invoice.setValue("paymentstatus","sendinvoice");
-		
+		invoice.setValue("paymentstatus", "sendinvoice");
+
 		mediaArchive.saveData("collectiveinvoice", invoice);
 		mediaArchive.fireSharedMediaEvent("billing/sendinvoices");
-		
+
 	}
 
 	public int calculateDays(MultiValued invoice)
 	{
 		Date startdate = invoice.getDate("duedate");
-		if( startdate == null)
+		if (startdate == null)
 		{
 			startdate = invoice.getDate("startdate");
 		}
 		Date enddate = invoice.getDate("enddate");
 		long noOfDaysBetween = ChronoUnit.DAYS.between(startdate.toInstant(), enddate.toInstant());
 
-		return (int)Math.ceil(noOfDaysBetween);
+		return (int) Math.ceil(noOfDaysBetween);
 	}
-	
-	
-	//TODO: Move this to InvoiceManager
-	
-	public HitTracker getInvoiceFromMonth(String status, int year, int month) 
+
+	// TODO: Move this to InvoiceManager
+
+	public HitTracker getInvoiceFromMonth(String status, int year, int month)
 	{
-		Calendar start = month == 0 ? new GregorianCalendar(year, 0, 1) :  new GregorianCalendar(year, month - 1, 1);
-		
-		//Calendar end = month == 0 ? new GregorianCalendar(year, 11, 31) : new GregorianCalendar(year, month, 1);
-		//end.add(Calendar.DAY_OF_YEAR, -1);
-		
+		Calendar start = month == 0 ? new GregorianCalendar(year, 0, 1) : new GregorianCalendar(year, month - 1, 1);
+
+		// Calendar end = month == 0 ? new GregorianCalendar(year, 11, 31) : new
+		// GregorianCalendar(year, month, 1);
+		// end.add(Calendar.DAY_OF_YEAR, -1);
+
 		Calendar end = month == 0 ? new GregorianCalendar(year, 11, 31) : new GregorianCalendar(year, month, 1);
-		//fix 31th
+		// fix 31th
 		int days = end.getActualMaximum(Calendar.DAY_OF_MONTH);
 		end.set(Calendar.DAY_OF_MONTH, days);
 		end.set(Calendar.MINUTE, 59);
 		end.set(Calendar.HOUR_OF_DAY, 23);
 		end.set(Calendar.SECOND, 59);
-		
-		HitTracker invoice = getMediaArchive().query("collectiveinvoice")
-				.exact("paymentstatus", status)
-				.between("duedate", start.getTime(), end.getTime()) 
-				.sort("duedateDown").search();
+
+		HitTracker invoice = getMediaArchive().query("collectiveinvoice").exact("paymentstatus", status).between("duedate", start.getTime(), end.getTime()).sort("duedateDown").search();
 		return invoice;
 	}
-	//TODO: Move this to InvoiceManager
-	
+	// TODO: Move this to InvoiceManager
+
 	public Data getInvoiceById(String invoiceId)
 	{
 		Data invoice = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveinvoice", invoiceId);
 		return invoice;
 	}
-	
-	//TODO: Move this to InvoiceManager
+
+	// TODO: Move this to InvoiceManager
 
 	public ArrayList getInvoiceProductList(String invoiceId)
 	{
 		Data invoice = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveinvoice", invoiceId);
-		if (invoice == null) {
+		if (invoice == null)
+		{
 			return null;
 		}
-		ArrayList products = (ArrayList)invoice.getValue("productlist");
+		ArrayList products = (ArrayList) invoice.getValue("productlist");
 		return products;
 	}
-	//TODO: Move this to InvoiceManager
-	
+	// TODO: Move this to InvoiceManager
+
 	/*
-	public String getProductName (String productId) {
-		Data product = getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
-		if (product == null) {
-			return null;
-		}
-		String name = (String) product.getValue("name");
-		return name;
-	}
-	*/
-	
-	public MultiValued getProductById (String productId) {
-		MultiValued product = (MultiValued)getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveproduct", productId);
-		if (product == null) {
+	 * public String getProductName (String productId) { Data product =
+	 * getMediaArchive().getSearcherManager().getData(getCatalogId(), "collectiveproduct", productId);
+	 * if (product == null) { return null; } String name = (String) product.getValue("name"); return
+	 * name; }
+	 */
+
+	public MultiValued getProductById(String productId)
+	{
+		MultiValued product = (MultiValued) getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "collectiveproduct", productId);
+		if (product == null)
+		{
 			return null;
 		}
 		return product;
 	}
-	
-	public Data getWorkspaceById (String workspaceId) {
-		Data workspace = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "librarycollection", workspaceId);		
-		if (workspace == null) {
+
+	public Data getWorkspaceById(String workspaceId)
+	{
+		Data workspace = getMediaArchive().getSearcherManager().getCachedData(getCatalogId(), "librarycollection", workspaceId);
+		if (workspace == null)
+		{
 			return null;
 		}
 		return workspace;
 	}
-	
+
 	public Date getEndDate(MultiValued product)
 	{
 		Calendar endbilldate = Calendar.getInstance();
@@ -277,7 +273,7 @@ public class InvoiceManager implements CatalogEnabled
 		endbilldate.setTime(nextBillOn);
 		if (product.getInt("recurringperiod") == 0)
 		{
-			//Daily endbilldate is nextbillon
+			// Daily endbilldate is nextbillon
 		}
 		if (product.getInt("recurringperiod") == 1)
 		{
@@ -286,8 +282,5 @@ public class InvoiceManager implements CatalogEnabled
 
 		return endbilldate.getTime();
 	}
-	
-
-	
 
 }

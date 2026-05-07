@@ -7,5 +7,5 @@ public class TotalSummary
 	Data fieldCurrencyType;
 	Data fieldDataType;
 	long fieldTotal;
-	
+
 }

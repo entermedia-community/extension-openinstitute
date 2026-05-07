@@ -9,7 +9,7 @@ public class TransactionModule extends BaseMediaModule
 	{
 		String catalogid = inReq.findPathValue("catalogid");
 		TransactionManager manager = (TransactionManager) getModuleManager().getBean(catalogid, "transactionManager");
-	
+
 		inReq.putPageValue("transactionManager", manager);
 	}
 }
