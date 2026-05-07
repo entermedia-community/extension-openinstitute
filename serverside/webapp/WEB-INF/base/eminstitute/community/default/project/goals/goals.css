@@ -382,11 +382,11 @@ ul.projectgoals {
 }
 
 .goaltaskrow {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 .goaltaskbox {
 	background-color: #ffffff;
-	color:#111;
+	color: #111;
 	padding: 6px;
 	border-radius: 6px;
 	align-items: start;
@@ -399,8 +399,8 @@ ul.projectgoals {
 	color: #757575;
 }
 
-.goaltaskrow > div {
-	margin: 0 4px 2px;
+.goaltaskrow .goaltaskbox {
+	border: 1px solid #efefef;
 }
 
 .goaltaskrow .taskdetails {
@@ -454,11 +454,35 @@ ul.projectgoals {
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 }
-
-.goal-details-pre {
-	white-space: pre-line;
+.goalrow {
+	background-color: #ffffff;
 }
-
+.goallevel3 {
+	border: 1px solid #4bacff;
+	background: #f1edff;
+}
+.goallevel3 .border-bottom,
+.goallevel3 .border-top {
+	border-color: #bee1ff !important;
+}
+.goallevel2 {
+	border: 1px solid #ffc509;
+	background: #fff8e0 !important;
+}
+.goallevel2 .border-bottom,
+.goallevel2 .border-top {
+	border-color: #ffe599 !important;
+}
+.goallevel1 {
+	border: 1px solid #cecece;
+	background: #f2f2f2;
+}
+.duedate {
+	color: #fff;
+	background-color: #ffc509;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
 .goal-details {
 	margin-bottom: 10px;
 	overflow: hidden;
@@ -490,23 +514,29 @@ ul.projectgoals {
 }
 
 .goalstatusclosed {
-	background: #d8d8d8;
+	border: 1px solid #68ff78 !important;
+	background: #f4fef0 !important;
 }
-
+.goalstatusclosed .border-bottom,
+.goalstatusclosed .border-top {
+	border-color: #c9ffcf !important;
+}
 .goalstatus1,
 .goalstatus1:hover {
-	background: #edf08b;
+	border-color: #edf08b !important;
+	background: #ffffff;
 }
 
 .goalstatus2,
 .goalstatus2:hover {
-	background: #f8d5d5;
+	border-color: #f8d5d5 !important;
+	background: #ffffff;
 }
 
 .goalstatus3,
 .goalstatus3:hover {
-	background: #02c9a72e;
-	padding: 0.5rem;
+	border-color: #68ff78 !important;
+	background: #ffffff;
 }
 
 .goalstatusactive {
@@ -653,23 +683,58 @@ ul.projectgoals {
 		transform: rotate(-15deg);
 	}
 }
-
-.rolemyself {
-	background-color: #da0000 !important;
+.btn-role {
+	font-size: 0.9rem;
+}
+.btn-role,
+.btn-point,
+.btn-role:hover,
+.btn-point:hover {
+	color: #444 !important;
+	border-color: #cfcfcf !important;
+	background-color: #cfcfcf !important;
+}
+.btn-role:hover,
+.btn-point:hover {
+	opacity: 0.8;
 }
 
-.roleselected {
+.rolemyself .btn-role,
+.rolemyself .btn-role:hover {
+	color: #fff !important;
+	border-color: #d47272 !important;
+	background-color: #bb4747 !important;
+}
+
+.roleselected .btn-role,
+.roleselected .btn-role:hover {
+	color: #fff !important;
+	border-color: #eeba1e !important;
 	background-color: #a08b01 !important;
 }
 
+.rolemyself .btn-point,
+.rolemyself .btn-point:hover {
+	color: #fff !important;
+	border-color: #bb4747 !important;
+	background-color: #d47272 !important;
+}
+
+.roleselected .btn-point,
+.roleselected .btn-point:hover {
+	color: #fff !important;
+	border-color: #a08b01 !important;
+	background-color: #eeba1e !important;
+}
 
 table.goalstable tbody td {
 	align-content: start;
 	padding: 1rem 0.75rem;
 }
 .goalstable .goal-description {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5; /* Limits the text to 3 lines */
-  overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	line-clamp: 5; /* Limits the text to 3 lines */
+	-webkit-line-clamp: 5; /* Limits the text to 3 lines */
+	overflow: hidden;
 }
