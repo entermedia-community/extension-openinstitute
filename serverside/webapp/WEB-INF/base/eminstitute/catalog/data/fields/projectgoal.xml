@@ -147,7 +147,7 @@
   </property>
 
 
-  <property id="ticketnumber" editable="false" index="true" stored="true" datatype="number" viewtype="autoincrement" indextype="not_analyzed">
+  <property id="ticketnumber" editable="false" index="true" stored="true" datatype="number" autoincrement="true" indextype="not_analyzed">
     <name>
       <language id="en"><![CDATA[Ticket Number]]></language>
     </name>
