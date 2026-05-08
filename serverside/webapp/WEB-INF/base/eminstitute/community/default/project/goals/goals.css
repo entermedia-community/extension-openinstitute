@@ -467,6 +467,11 @@ ul.projectgoals {
 .goalstatuscompleted .border-top {
 	border-color: #9fffaa !important;
 }
+.goalstatuscompleted .goaltaskbox {
+	background: #ddffdd !important;
+	border-color: #9fffaa !important;
+	box-shadow: none;
+}
 .taskgoaledit {
 	padding: 10px 10px 20px;
 	margin-bottom: 10px;
