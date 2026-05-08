@@ -13,8 +13,6 @@
 #set( $target = "$!{container}tasklist#eid($goal.id)")
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
 
-#set($lasttaskid = $context.getRequestParameter("lasttaskid"))
-
 <div id="goalrow#eid(${goal.id})">
 	<div id="$target" class="goaltaskcontainer pt-3">
 
@@ -46,7 +44,7 @@
 
 			#set($collectionid = $goal.collectionid)
 
-			<div class="goaltaskrow px-3 goaltask${task.taskstatus} #if($task.taskstatus == '3' && $task.id != $lasttaskid) d-none #end"">
+			<div class="goaltaskrow px-3 goaltask${task.taskstatus}">
 				<div id="taskrow#eid(${task.id})" class="goaltaskbox goalstatus${task.taskstatus}">
 					<div>$!tree</div>
 				
@@ -125,29 +123,26 @@
 					</div>
 					
 					<div class="d-flex">
-						#if($goal.projectstatus != "completed" && $goal.projectstatus != "closed")
-							#if($user && $caneditgoal)
-								#if($task.taskstatus != "3")
-									<div id="rolepicker${task.id}" class="pe-2">
-										<a class="btn btn-sm btn-accent ml-1 addroletolist ajax" data-targetdivinner="rolepicker${task.id}" 
-										data-collectionid = "$!collectionid"
-										data-taskid="$task.id" href="${communityhome}/project/goals/task/pickrole.html">
-										<i class="fa fa-user-plus me-1"></i> [[Assign Role]]</a>
-									</div>
-									<div>
-										<a href="${communityhome}/project/goals/task/tasksave.html?goalid=$goal.id" 
-											data-targetdiv="$target" 
-											data-oemaxlevel="1"
-											data-taskid="$task.id"
-											data-lasttaskid="$task.id"
-											data-taskstatus="3"
-											class="btn btn-sm btn-cta ajax">
-											<i class="fas fa-check me-1"></i> [[Resolve]]
-										</a>
-									</div>
-								#end
+						#if($user && $caneditgoal)
+							#if($task.taskstatus != "3")
+								<div id="rolepicker${task.id}" class="pe-2">
+									<a class="btn btn-sm btn-accent ml-1 addroletolist ajax" data-targetdivinner="rolepicker${task.id}" 
+									data-collectionid = "$!collectionid"
+									data-taskid="$task.id" href="${communityhome}/project/goals/task/pickrole.html">
+									<i class="fa fa-user-plus me-1"></i> [[Assign Role]]</a>
+								</div>
+								<div>
+									<a href="${communityhome}/project/goals/task/tasksave.html?goalid=$goal.id" 
+										data-targetdiv="$target" 
+										data-oemaxlevel="1"
+										data-taskid="$task.id"
+										data-taskstatus="3"
+										class="btn btn-sm btn-cta ajax">
+										<i class="fas fa-check me-1"></i> [[Resolve]]
+									</a>
+								</div>
 							#end
-						#end		
+						#end
 					</div>
 
 				</div>
@@ -155,15 +150,9 @@
 		#end
 
 		#if($tasks.size() == 0)
-			<div class="nogoaltask bg-white mx-3 mb-3 rounded px-3 py-4 text-center text-muted" style="border: 1px solid #efefef;">
+			<div class="bg-white mx-3 mb-3 rounded px-3 py-4 text-center text-muted" style="border: 1px solid #efefef;">
 				[[No tasks added yet.]]
 			</div>
-		#else
-			#if(!$haspendingtasks)
-				<div class="nogoaltask bg-white mx-3 mb-3 rounded px-3 py-4 text-center text-muted" style="border: 1px solid #efefef;">
-					[[No pending tasks.]]
-				</div>
-			#end
 		#end
 
 		#if($goal.projectstatus != "completed" && $goal.projectstatus != "closed")

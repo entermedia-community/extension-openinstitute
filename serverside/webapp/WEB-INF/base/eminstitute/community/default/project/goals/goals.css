@@ -447,6 +447,10 @@ ul.projectgoals {
 	border-color: #68ff78 !important;
 	background: #ffffff;
 }
+.goaltask3 .goalstatus3 {
+	background-color: #ddffdd;
+	box-shadow: none;
+}
 .goalstatusactive {
 	background: #fdffd2;
 }
@@ -454,11 +458,13 @@ ul.projectgoals {
 .goalstatuscritical:hover {
 	background-color: beige !important;
 }
-.goallevel1.goalstatuscompleted {
-	background: #ddffdd;
+
+.goalstatuscompleted {
+	background: #ddffdd !important;
+	border-color: #9fffaa !important;
 }
-.goallevel1.goalstatuscompleted .border-bottom,
-.goallevel1.goalstatuscompleted .border-top {
+.goalstatuscompleted .border-bottom,
+.goalstatuscompleted .border-top {
 	border-color: #9fffaa !important;
 }
 .taskgoaledit {
@@ -630,18 +636,6 @@ table.goalstable tbody td {
 	line-clamp: 5; /* Limits the text to 3 lines */
 	-webkit-line-clamp: 5; /* Limits the text to 3 lines */
 	overflow: hidden;
-}
-.goaltask3 {
-	animation: hideWithFlash 2s ease-in-out forwards;
-}
-@keyframes hideWithFlash {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		display: none;
-	}
 }
 .taskrole {
 	position: relative;

@@ -39,21 +39,13 @@ $context.putPageValue("searcher",$searcher)
 	class ="ajaxform autocloseform showwaiting autoreloadsource" 
 	id="saveproject" 
 	method="post" 
-	
-	
 	#if($newgoal == "true")
-		##New Goal
 		action="${communityhome}/project/goals/${goalfolder}/goalsavenew.html" 	
 		data-targetdiv="$!{targetdiv}"
 	#else
-		#if($goalfolder=="agent")
-			##action="$!{communityhome}/users/tasks/saveandsearch.html?ticketlevel=${data.ticketlevel}"
+		#if($goalfolder=="agent" || $goalfolder=="chat")
 			action="$!{communityhome}/project/goals/priorities/goalsearchrowsave.html"
 			data-targetdiv="$!{targetdiv}"
-		#elseif($goalfolder=="chat")
-			action="$!{communityhome}/project/goals/priorities/goalsave.html" 
-			data-targetdiv="editgoaldialog"
-			data-ajaxreloadtargets="$!{targetdiv}"
 		#elseif($goalfolder=="agentcalendar")
 			action="/users/tasks/goalsave.html"  
 			data-targetdiv="$!{targetdiv}"
@@ -61,10 +53,8 @@ $context.putPageValue("searcher",$searcher)
 			action="$!{communityhome}/project/goals/${goalfolder}/goalsave.html" 
 			data-targetdiv="$!{targetdiv}"
 		#end
-	
 	#end
 >
-
 
 #if($collectionid)
 	<input type="hidden" name="collectionid" value="$!collectionid" /> 
