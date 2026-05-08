@@ -6,27 +6,38 @@
 		</div>
 	#end
 	#if($caneditcollection)
-		<div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom">
-			<a href="${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=agent&targetdiv=goalrow${goal.id}" 
-				title="[[Edit Goal]]" 
-				class="emdialog goal-title lead"
-				data-hidefooter="true"
-				data-width="900">
-				#if( $goal.ticketnumber )
-					<b class="me-1"style="font-family: monospace;">#${goal.ticketnumber}</b>
-				#else
-					<i class="fa fa-caret-right"></i>
-				#end
-				<span>$goal.name</span>
-			</a>
-			<a href="${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=agent&targetdiv=goalrow${goal.id}" 
-				title="[[Edit Goal]]" 
-				class="emdialog goal-title text-primary"
-				style="width: 24px;"
-				data-hidefooter="true"
-				data-width="900">
-				<I class="bi bi-pencil-square"></I>
-			</a>
+		<div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom gap-2">
+			<div class="flex-grow-1">
+				<a href="${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=agent&targetdiv=goalrow${goal.id}" 
+					title="[[Edit Goal]]" 
+					class="emdialog"
+					data-hidefooter="true"
+					data-width="900">
+					#if( $goal.ticketnumber )
+						<b class="me-1"style="font-family: monospace;">#${goal.ticketnumber}</b>
+					#else
+						<i class="fa fa-caret-right"></i>
+					#end
+					<span>$goal.name</span>
+				</a>
+			</div>
+			<div class="d-flex align-items-center justify-content-between" style="min-width: 42px;">
+				<a href="${communityhome}/project/goals/editgoalpanel.html?id=${goal.id}&collectionid=$goal.collectionid&goalfolder=agent&targetdiv=goalrow${goal.id}" 
+					title="[[Edit Goal]]" 
+					class="emdialog text-primary me-2"
+					data-hidefooter="true"
+					data-width="900">
+					<i class="bi bi-pencil-square"></i>
+				</a>
+				<a href="${communityhome}/project/goals/goaldelete.html?id=$goal.id" 
+					data-targetdiv="$target" 
+					data-confirm="Sure you want to delete?"
+					data-oemaxlevel="1"
+					data-goalid="$goal.id"
+					class="ajax text-danger">
+					<i class="bi bi-trash"></i>
+				</a>
+			</div>
 		</div>
 	#end
 
