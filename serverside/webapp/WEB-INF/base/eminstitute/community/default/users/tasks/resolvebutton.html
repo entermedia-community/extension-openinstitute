@@ -5,16 +5,13 @@
 		<div class="badge text-bg-secondary mb-2">#text($value)</div>
 	#end
 	
-	#if($goal.projectstatus != "completed" && $goal.projectstatus != "closed")
-	
-		<a href="${communitylink}/users/tasks/resolvegoal.html?goalid=$goal.id" 
-			data-targetdiv="$target" 
-			data-oemaxlevel="1"
-			title="[[Resolve Ticket]]"
-			class="ajax btn btn-sm btn-success" 
-			 ><i class="fas fa-check"></i> [[Resolve All]]
-		</a>
-	#end
+	<a href="${communitylink}/users/tasks/resolvegoal.html?goalid=$goal.id" 
+		data-targetdiv="$target" 
+		data-oemaxlevel="1"
+		title="[[Resolve Ticket]]"
+		class="ajax btn btn-sm btn-success">
+		<i class="fas fa-check"></i> [[Resolve All]]
+	</a>
 </div>
 
  

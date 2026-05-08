@@ -548,10 +548,22 @@ ul.projectgoals {
 	background-color: beige !important;
 }
 
+.goallevel1 {
+	background: #fffcdd;
+}
+
+.goallevel1.goalstatuscompleted {
+	background: #ddffdd;
+}
+.goallevel1.goalstatuscompleted .border-bottom,
+.goallevel1.goalstatuscompleted .border-top {
+	border-color: #9fffaa !important;
+}
+
 .taskgoaledit {
 	padding: 10px 10px 20px;
 	margin-bottom: 10px;
-	background-color: #d5d5d5;
+	background-color: #ffffff;
 }
 
 .taskgoaledit #textarea {
@@ -749,4 +761,17 @@ table.goalstable tbody td {
 	line-clamp: 5; /* Limits the text to 3 lines */
 	-webkit-line-clamp: 5; /* Limits the text to 3 lines */
 	overflow: hidden;
+}
+
+.goaltask3 {
+	animation: hideWithFlash 2s ease-in-out forwards;
+}
+@keyframes hideWithFlash {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+	}
 }

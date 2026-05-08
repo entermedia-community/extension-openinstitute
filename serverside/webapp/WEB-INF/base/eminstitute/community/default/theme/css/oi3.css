@@ -880,14 +880,6 @@ img.cat-thumb {
 	filter: brightness(0.8);
 }
 
-.goallevel1 {
-	background: #fffcdd;
-}
-
-.goallevel1.goalstatuscompleted {
-	background: #ddffdd;
-}
-
 .taskgoaledit select {
 	min-width: 300px;
 }

@@ -1945,6 +1945,7 @@ textarea.form-control {
 }
 .emwidget-chatterbox {
 	height: calc(100vh - 275px) !important;
+	min-height: 600px;
 }
 .chatterbox-messages-readonly {
 	height: calc(100% - 48px) !important;

@@ -239,6 +239,7 @@ body {
 	background: var(--themed-btn-cta) !important;
 	font-size: 0.85rem !important;
 	font-weight: 500;
+	border: none;
 }
 .btn-cta i {
 	color: var(--themed-btn-cta-text) !important;
