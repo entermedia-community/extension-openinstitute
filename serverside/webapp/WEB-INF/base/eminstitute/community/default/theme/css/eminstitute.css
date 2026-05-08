@@ -1940,7 +1940,9 @@ textarea.form-control {
 .ajaxloginbox .text-contrast {
 	color: #444444;
 }
-
+.chatterbox-messages:has(.resultspositions) {
+	padding-top: 40px;
+}
 .emwidget-chatterbox {
 	height: calc(100vh - 275px) !important;
 }
@@ -1948,7 +1950,7 @@ textarea.form-control {
 	height: calc(100% - 48px) !important;
 }
 .chatterbox-messages {
-	height: calc(100% - 188px) !important;
+	height: calc(100% - 150px) !important;
 }
 
 table.table-striped tr.table-row-subtotals:first-of-type td {
