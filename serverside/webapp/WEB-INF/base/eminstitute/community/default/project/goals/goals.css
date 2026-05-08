@@ -371,6 +371,10 @@ ul.projectgoals {
 }
 .goalrow {
 	background-color: #ffffff;
+	margin-bottom: 1.5rem;
+}
+.goalrow:only-child {
+	margin-bottom: 0;
 }
 .goallevel3 {
 	border: 1px solid #4bacff;
