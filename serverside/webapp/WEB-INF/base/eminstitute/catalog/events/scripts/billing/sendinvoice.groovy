@@ -51,7 +51,7 @@ private void findPendingInvoices(MediaArchive mediaArchive, Searcher invoiceSear
 	
 	if (pendingNotificationInvoices.size()>0)
 	{
-		log.info("Sending Notification for " + pendingNotificationInvoices.size() + " invoices");
+		log.info("Sending " + pendingNotificationInvoices.size() + " invoices");
 		for (Data invoice: pendingNotificationInvoices)
 		{
 			sendInvoiceNotifications(mediaArchive, invoiceSearcher, invoice);
@@ -136,8 +136,8 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 		invoiceSearcher.saveData(invoice);
 		return;
 	}
-	List<String> emaillist = Arrays.asList(emails.split(","));
-
+	List<String> emaillist = emails.split(",").collect{ it?.trim() }.findAll{ it != null && it != "" } as List<String>;
+	
 	Boolean sent = false;
 	if (emaillist.size()>0) 
 	{
@@ -163,17 +163,22 @@ private void invoiceContactIterate(MediaArchive mediaArchive, Searcher invoiceSe
 			log.error("Error sending invoice to addresses: ${errorEmails}");
 		}
 		if (sent) {
-			//send Copy to bookkeeper@entermediadb.org
-			String ccinvoices = mediaArchive.getCatalogSettingValue("invoice_cc_email");
-			if (ccinvoices != null) {
-				sendinvoiceEmail(mediaArchive, ccinvoices, invoice, librarycol, iteratorType);
-			}
 			
 			Calendar today = Calendar.getInstance();
 			invoice.setValue("sentto", emails);
 			invoice.setValue("sentdate", today.getTime());
 			invoice.setValue("invoicesentstatus", "sent");
 			invoice.setValue(iteratorType, "true");
+
+			//send Copy to bookkeeper@entermediadb.org
+			String ccinvoices = mediaArchive.getCatalogSettingValue("invoice_cc_email");
+			if (ccinvoices != null) {
+				ccinvoices = ccinvoices.trim();
+				if(!emaillist.contains(ccinvoices)) {
+					log.info("Sending copy of invoice to invoice_cc_email: "+ccinvoices + " List: " + emaillist);
+					sendinvoiceEmail(mediaArchive, ccinvoices, invoice, librarycol, iteratorType);
+				}
+			}
 			
 			if (!invoice.get("paymentstatus").equals("paid")) { 
 				invoice.setValue("paymentstatus", "pending"); //Ready to Pay
@@ -216,7 +221,7 @@ private void invoiceNotifyProject(MediaArchive mediaArchive, Searcher invoiceSea
 		return;
 	}
 	
-	List<String> emaillist = Arrays.asList(emails.split(","));
+	List<String> emaillist = emails.split(",").collect{ it?.trim() }.findAll{ it != null && it != "" } as List<String>;
 
 	StringBuffer errorEmails = new StringBuffer();
 	if (emaillist.size()>0)
@@ -305,7 +310,7 @@ private void sendinvoiceEmail(MediaArchive mediaArchive, String contact, Data in
 					subject = "[${project}] " + invoice.getName();
 				}
 				else {
-					subject = "[${project}] ${invoicemonth} Invoice";
+					subject = "[${project}] Invoice #${invoicenumber}";
 				}
 			}
 
