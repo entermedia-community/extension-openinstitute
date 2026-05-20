@@ -1,6 +1,6 @@
 :root {
-	--deep: #344700;
-	--deep-soft: #445d00;
+	--deep: #000547;
+	--deep-soft: #00105d;
 	--sand: #f8f4ea;
 	--paper: #fffdf8;
 	--mint: #dceee6;
@@ -14,11 +14,11 @@
 	--radius-lg: 24px;
 	--radius-md: 18px;
 	--container: min(1600px, calc(100vw - 2rem));
-	--panel: #ecf8f1;
+	--panel: #ecf0f8;
 	--accent: #f5bf53;
 	--accent-soft: #f4a971;
 	--user: #ffffff;
-	--bot: #47bb78;
+	--bot: #475abb;
 	--msg-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
 }
 
@@ -61,10 +61,12 @@ h2 {
 	display: none !important;
 } */
 
-.bg-white  h1, .bg-white h2, .bg-white h3, .bg-white p {
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white p {
 	color: var(--deep) !important;
-	
-}	
+}
 
 .page-shell {
 	overflow: clip;
