@@ -127,7 +127,7 @@ private void generateRecurringInvoices(MediaArchive mediaArchive, Searcher produ
 			invoice.setValue("productlist", items);
 			invoice.setValue("currencytype",  product.getValue("currencytype"));
 			invoice.setValue("invoicesentstatus", "sendinvoice");
-			invloice.setValue("paymentstatus", "pending");
+			invoice.setValue("paymentstatus", "pending");
 			invoice.setValue("isautopaid", product.getValue("isautopaid"));
 			invoice.setValue("collectionid", product.getValue("collectionid"));
 			invoice.setValue("owner", product.getValue("owner"));
