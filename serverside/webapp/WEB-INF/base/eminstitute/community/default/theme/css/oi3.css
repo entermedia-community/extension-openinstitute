@@ -1099,9 +1099,8 @@ img.cat-thumb {
 .community-layout .sidebar-right {
 	width: 300px;
 	min-height: 100%;
-	padding: 0 0.5rem 1rem 1rem;
 	margin: 1rem 0;
-	padding: 1rem 0.5rem 1rem 1rem;
+	padding: 0.5rem;
 	background-color: #ffffff;
 	position: relative;
 }
