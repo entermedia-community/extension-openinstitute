@@ -13,7 +13,7 @@
 #set( $target = "$!{container}tasklist#eid($goal.id)")
 #set( $onlyopen = $context.getRequestParameter("onlyopen"))
 
-<div id="goalrow#eid(${goal.id})">
+<div id="goalrow${goal.id}-inner" class="d-flex flex-column">
 	<div id="$target" class="goaltaskcontainer pt-3">
 
 		#set($caneditgoal = false)

@@ -28,7 +28,7 @@
 	<a href="$goallink" title="$goal.name" class="emdialog editgoalshow">[[Goal link]]</a>	
 #end
 	
-#set( $hits = $mediaarchive.query("projectgoal").orgroup("collectionid",$collectionid).orgroup("projectstatus","open|critical").enduser(true).sort("ticketlevelDown").sort("creationdateDown").search() )
+#set( $hits = $mediaarchive.query("projectgoal").orgroup("collectionid",$collectionid).orgroup("projectstatus","open|inprogress|critical").enduser(true).sort("ticketlevelDown").sort("creationdateDown").search() )
 
 #foreach($goal in $hits)
 	#set( $goal = $mediaarchive.getSearcher("projectgoal").loadData($goal))

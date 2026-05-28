@@ -60,8 +60,17 @@
   <link rel="stylesheet" href="${communityhome}/theme/css/desktop-library.css" />
   <link rel="stylesheet" href="${communityhome}/theme/css/newsite.css" />
 </head>
+#set( $showusersidebar = $userprofile.get("showsidebar"))
 
-<body #if($desktop) class="desktop" #end>
+#if ($showusersidebar != "true") 
+	#set( $showusersidebar = "false") 
+#end
+<body 
+  #if($user && $showusersidebar == "true")  
+    class="offcanvas-open #if($desktop) desktop #end"
+  #else
+    #if($desktop) class="desktop" #end
+  #end>
   #if($desktop)
     
     $pages.include("${apphome}/components/desktop/loading.html")
