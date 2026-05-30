@@ -3,7 +3,6 @@ import org.entermediadb.asset.util.Row
 import org.openedit.data.*
 import org.openedit.*
 import org.openedit.data.*
-
 class CsvImporter extends BaseImporter
 {
 	public String collectionid;
