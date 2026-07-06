@@ -17,7 +17,8 @@
     <property name="webapp" location="${basedir}/webapp"/>
 	<property name="webinf" location="${webapp}/WEB-INF"/>
 	<property name="branch" value="em11_" />
-				<property name="majorversion" value="11" />
+	<property name="majorversion" value="11" />
+	<property name="remotehome" value="https://dev.entermediadb.org/jenkins/job" />
 
 	<!-- 
 		========================================================================
@@ -49,7 +50,7 @@
 	<target name="update-dependencies" depends="clean">
 	    <mkdir dir="${build}"/>
 	    <mkdir dir="${wardir}/WEB-INF/" />
-		<get dest="${build}/install.xml" src="http://dev.entermediadb.org/jenkins/job/em11_entermedia-server/lastSuccessfulBuild/artifact/deploy/install.xml"/>
+		<get dest="${build}/install.xml" src="${remotehome}/main_entermedia-server/lastSuccessfulBuild/artifact/deploy/install.xml"/>
 			<ant antfile="${build}/install.xml" inheritAll="false" dir="${wardir}/WEB-INF/" target="default"/> 
 
 	</target>
