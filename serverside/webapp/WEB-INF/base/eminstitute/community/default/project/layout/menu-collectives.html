@@ -18,7 +18,7 @@
 		#set($menu_chat = $content.isPropertyTrue("menu_chat",true))
 		#if($menu_chat)
 		<li class="nav-item #if($collectivesection == "community") active #end">
-			<a class="nav-link" href="${projectlink}/chat/index.html" title="[[Chat]]">[[Chat]]</a>
+			<a id="project-chat-link" class="nav-link" href="${projectlink}/chat/index.html" title="[[Chat]]">[[Chat]]</a>
 		</li>
 		#end
 		
@@ -102,7 +102,7 @@
 				#set($menu_chat = $content.isPropertyTrue("menu_chat",true))
 				#if($menu_chat)
 				<li class="#if($collectivesection == "community") active #end">
-					<a class="nav-link" href="${projectlink}/chat/index.html">[[Chat]]</a>
+					<a id="project-chat-link" class="nav-link" href="${projectlink}/chat/index.html">[[Chat]]</a>
 				</li>
 				#end
 				
