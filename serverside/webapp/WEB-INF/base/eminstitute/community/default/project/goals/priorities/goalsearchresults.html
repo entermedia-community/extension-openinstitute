@@ -6,20 +6,31 @@
 			<strong class="me-3">[[Open]]: $totalopen</strong>
 			<strong class="me-3">[[Closed]]: $totalclosed</strong>
 		</div>
-		<a class="btn btn-accent emdialog me-3" 
-			title="[[New Goal]]"
-			data-width="900"
-			data-hidefooter="true"
-			style="margin-left: 10px;"
-			href="${projectlink}/goals/editgoalpanel.html?newgoal=true&categoryid=$!selectedcat.getId()&goalfolder=priorities&userlikes=$user.id&targetdiv=goalresultsdiv">
-			<i class="fas fa-plus"></i> [[New Goal]]
-		</a>
+		<div>
+		
+		<a class="btn btn-secondary ajax me-3" 
+					title="[[Completed Goals]]"
+					data-targetdiv="goalsearchresults"
+					data-oemaxlevel="1"
+					style="margin-left: 10px;"
+					href="/users/tasks/report.html?collectionid=$!collectionid&goaltrackerstaff=*">
+					<i class="fas fa-file"></i> [[Completed Goals]]
+			</a>
+			<a class="btn btn-accent emdialog me-3" 
+						title="[[New Goal]]"
+						data-width="900"
+						data-hidefooter="true"
+						style="margin-left: 10px;"
+						href="${projectlink}/goals/editgoalpanel.html?newgoal=true&categoryid=$!selectedcat.getId()&goalfolder=priorities&userlikes=$user.id&targetdiv=goalresultsdiv">
+						<i class="fas fa-plus"></i> [[New Goal]]
+					</a>
+			</div>
 	</div>
 </div>
 
 <hr style="border-color: #cfcfcf;">
 
-<div class="d-flex flex-column">
+<div id="goalsearchresults" class="d-flex flex-column">
 #set( $goalfolder = $content.goalfolder)
 #set( $opengoalid = $context.getRequestParameter("opengoalid"))
 #if( $opengoalid )
