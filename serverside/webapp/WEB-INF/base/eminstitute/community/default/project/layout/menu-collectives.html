@@ -24,9 +24,11 @@
 		
 		#set($menu_referrals = $content.isPropertyTrue("menu_referrals",true))
 		#if($menu_referrals)
-		<li class="nav-item #if($collectivesection == "referrals") active #end">
-			<a class="nav-link" href="${projectlink}/services/linktracker/index.html?collectionid=${librarycol.getId()}">[[Referrals]]</a>
-		</li>
+			#if( $caneditcollection)
+			<li class="nav-item #if($collectivesection == "referrals") active #end">
+				<a class="nav-link" href="${projectlink}/services/linktracker/index.html?collectionid=${librarycol.getId()}">[[Referrals]]</a>
+			</li>
+			#end
 		#end
 		
 		#set($menu_goals = $content.isPropertyTrue("menu_goals",true))
